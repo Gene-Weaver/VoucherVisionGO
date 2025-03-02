@@ -1,0 +1,5 @@
+steps:
+- name: 'bash'
+  args: ['echo', 'Hello world!']
+options:
+  logging: CLOUD_LOGGING_ONLY
