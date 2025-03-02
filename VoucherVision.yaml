@@ -1,0 +1,121 @@
+leafmachine:
+  # options = {
+  #           0: "Use original images for transcriptions",
+  #           1: "Use LeafMachine2 label collage for transcriptions",
+  #           2: "Use specimen collage for transcriptions"
+  #       }
+  use_RGB_label_images: 1
+
+  # See class ModelMaps: in the /vouchervision/model_maps.py file for all options. 
+  # Use the name verbatim
+  # Most popular LLMs are:
+  #       'Gemini 2.0 Pro'
+  #       'Gemini 2.0 Flash'
+  #       'Gemini 1.5 Pro'
+  #       'Gemini 1.5 Flash'
+  #       'Gemini 1.5 Flash 8B'
+  LLM_version: Gemini 2.0 Flash
+
+
+  project:
+    run_name: test
+    dir_output: D:\D_Desktop\temp_50_DELETE
+    
+    dir_images_local: D:\D_Desktop\temp_50
+    OCR_option:
+    - Gemini-2.0-Flash
+    - Gemini-1.5-Pro
+    
+    batch_size: 50000
+    
+    catalog_numerical_only: false
+    delete_all_temps: false
+    delete_temps_keep_VVE: false
+    do_use_florence: false
+    do_use_trOCR: false
+    double_OCR: false
+    image_location: local
+    num_workers: 8
+    pdf_conversion_dpi: 100
+    prefix_removal: ''
+    prompt_version: SLTPvM_default.yaml
+    specimen_rotate: false
+    suffix_removal: ''
+    tool_GEO: false
+    tool_WFO: false
+    tool_wikipedia: false
+
+    OCR_GPT_4o_mini_resolution: high
+    OCR_option_llava: llava-v1.6-mistral-7b
+    OCR_option_llava_bit: full
+    build_new_embeddings_database: false
+    continue_run_from_partial_xlsx: ''
+    delete_temps_keep_VVE: false
+    embeddings_database_name: ''
+    florence_model_path: microsoft/Florence-2-large
+    path_to_domain_knowledge_xlsx: ''
+    qwen_model_path: Qwen/Qwen2-VL-7B-Instruct
+    trOCR_model_path: microsoft/trocr-large-handwritten
+    use_domain_knowledge: false
+
+  archival_component_detector:
+    detector_iteration: PREP_final
+    detector_type: Archival_Detector
+    detector_version: PREP_final
+    detector_weights: best.pt
+    do_save_prediction_overlay_images: true
+    ignore_objects_for_overlay: []
+    minimum_confidence_threshold: 0.5
+  cropped_components:
+    binarize_labels: false
+    binarize_labels_skeletonize: false
+    do_save_cropped_annotations: true
+    save_cropped_annotations:
+    - label
+    - barcode
+    save_per_annotation_class: true
+    save_per_image: false
+  data:
+    do_apply_conversion_factor: false
+    include_darwin_core_data_from_combined_file: false
+    save_individual_csv_files_landmarks: false
+    save_individual_csv_files_measurements: false
+    save_individual_csv_files_rulers: false
+    save_individual_efd_files: false
+    save_json_measurements: false
+    save_json_rulers: false
+  do:
+    check_for_corrupt_images_make_vertical: true
+    check_for_illegal_filenames: true
+    skip_vertical: false
+  do_create_OCR_helper_image: true
+  logging:
+    log_level: null
+  modules:
+    specimen_crop: true
+  overlay:
+    alpha_transparency_archival: 0.3
+    alpha_transparency_plant: 0
+    alpha_transparency_seg_partial_leaf: 0.3
+    alpha_transparency_seg_whole_leaf: 0.4
+    ignore_archival_detections_classes: []
+    ignore_landmark_classes: []
+    ignore_plant_detections_classes:
+    - leaf_whole
+    - specimen
+    line_width_archival: 12
+    line_width_efd: 12
+    line_width_plant: 12
+    line_width_seg: 12
+    overlay_background_color: black
+    overlay_dpi: 300
+    save_overlay_to_jpgs: true
+    save_overlay_to_pdf: false
+    show_archival_detections: true
+    show_landmarks: true
+    show_plant_detections: true
+    show_segmentations: true
+  print:
+    optional_warnings: true
+    verbose: true
+  

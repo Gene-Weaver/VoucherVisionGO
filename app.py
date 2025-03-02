@@ -80,7 +80,9 @@ class VoucherVisionProcessor:
         self.cfg = load_custom_cfg(self.config_file)
         
         self.Dirs = Dir_Structure(self.cfg)
-        self.logger = start_logging(self.Dirs, self.cfg)
+        # self.logger = start_logging(self.Dirs, self.cfg)
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
         self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
         self.Project = Project_Info(self.cfg, self.logger, self.dir_home, self.Dirs)
 
