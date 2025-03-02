@@ -3,6 +3,10 @@ import sys
 import json
 import argparse
 import requests
+import glob
+import csv
+import tempfile
+import pandas as pd
 
 def process_image(server_url, image_path, engines=None, prompt=None):
     """
@@ -26,7 +30,6 @@ def process_image(server_url, image_path, engines=None, prompt=None):
             raise Exception(f"Failed to download image from URL: {response.status_code}")
         
         # Save to a temp file
-        import tempfile
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
             temp_file_path = temp_file.name
             temp_file.write(response.content)
@@ -101,37 +104,224 @@ def print_results_summary(results):
     print("\nVoucherVision JSON:")
     print(json.dumps(vv_results, indent=2, sort_keys=False))
 
+def get_output_filename(input_path, output_dir=None):
+    """
+    Generate an output filename based on the input file path
+    
+    Args:
+        input_path (str): Path to the input file
+        output_dir (str): Directory to save the output file (optional)
+        
+    Returns:
+        str: Path to the output file
+    """
+    # Extract the base filename without extension
+    if input_path.startswith(('http://', 'https://')):
+        # For URLs, use the last part of the URL as the filename
+        base_name = os.path.basename(input_path).split('?')[0]  # Remove query params if any
+    else:
+        base_name = os.path.basename(input_path)
+    
+    # Replace the extension with .json
+    name_without_ext = os.path.splitext(base_name)[0]
+    output_filename = f"{name_without_ext}.json"
+    
+    # If output directory is specified, join it with the filename
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        return os.path.join(output_dir, output_filename)
+    
+    return output_filename
+
+def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose):
+    """
+    Process a single image file and save the results
+    
+    Args:
+        server_url (str): URL of the VoucherVision API server
+        image_path (str): Path to the image file or URL
+        engines (list): List of OCR engine options to use
+        prompt (str): Custom prompt file to use
+        output_dir (str): Directory to save output files
+        verbose (bool): Whether to print verbose output
+        
+    Returns:
+        dict: The processing results
+    """
+    try:
+        # Process the image
+        results = process_image(server_url, image_path, engines, prompt)
+        
+        # Generate output filename
+        output_file = get_output_filename(image_path, output_dir)
+        
+        # Print summary of results if verbose is enabled
+        if verbose:
+            print_results_summary(results)
+        else:
+            print(f"Processed: {image_path}")
+        
+        # Save the results
+        with open(output_file, 'w') as f:
+            json.dump(results, f, indent=2, sort_keys=False)
+        
+        print(f"Results saved to: {output_file}")
+        return results
+    
+    except Exception as e:
+        print(f"Error processing {image_path}: {e}")
+        return None
+
+def read_file_list(list_file):
+    """
+    Read a list of file paths or URLs from a file
+    
+    Args:
+        list_file (str): Path to the file containing the list
+        
+    Returns:
+        list: List of file paths or URLs
+    """
+    file_paths = []
+    
+    # Check file extension
+    ext = os.path.splitext(list_file)[1].lower()
+    
+    if ext == '.csv':
+        # Handle CSV file
+        with open(list_file, 'r', newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                if row and row[0].strip():  # Skip empty rows
+                    file_paths.append(row[0].strip())
+    else:
+        # Handle text file (one path per line)
+        with open(list_file, 'r') as f:
+            for line in f:
+                line = line.strip()
+                if line:  # Skip empty lines
+                    file_paths.append(line)
+    
+    return file_paths
+
+def save_results_to_csv(results_list, output_dir):
+    """
+    Save a list of VoucherVision results to a CSV file
+    
+    Args:
+        results_list (list): List of dictionaries containing the results
+        output_dir (str): Directory to save the CSV file
+    """
+    if not results_list:
+        print("No results to save to CSV")
+        return
+    
+    # Extract vvgo_json from each result
+    vvgo_data = [result.get('vvgo_json', {}) for result in results_list if result and 'vvgo_json' in result]
+    
+    if not vvgo_data:
+        print("No VoucherVision JSON data found in results")
+        return
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(vvgo_data)
+    
+    # Save to CSV
+    csv_path = os.path.join(output_dir, 'results.csv')
+    df.to_csv(csv_path, index=False)
+    print(f"\nCombined results saved to CSV: {csv_path}")
+    print(f"Total records: {len(df)}")
+    
+    # Print column names for verification
+    if not df.empty:
+        print(f"CSV columns: {', '.join(df.columns.tolist())}")
+    
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='VoucherVisionGO Client')
     parser.add_argument('--server', required=True, 
                         help='URL of the VoucherVision API server (e.g., http://localhost:8080)')
-    parser.add_argument('--image', required=True, 
-                        help='Path to the image file or URL of the image to process')
+    
+    # Create a mutually exclusive group for input sources
+    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument('--image', 
+                             help='Path to a single image file or URL to process')
+    input_group.add_argument('--directory',
+                             help='Path to a directory containing images to process')
+    input_group.add_argument('--file-list',
+                             help='Path to a file containing a list of image paths or URLs (one per line or CSV)')
+    
     parser.add_argument('--engines', nargs='+', default=["gemini-1.5-pro", "gemini-2.0-flash"],
                         help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
     parser.add_argument('--prompt', default="SLTPvM_default.yaml",
                         help='Custom prompt file to use (default: SLTPvM_default.yaml)')
-    parser.add_argument('--output', 
-                        help='Path to save the output JSON results (optional)')
+    parser.add_argument('--output-dir', required=True,
+                        help='Directory to save the output JSON results')
     parser.add_argument('--verbose', action='store_true',
                         help='Print all output to console')
+    parser.add_argument('--save-to-csv', action='store_true',
+                        help='Save all vvgo_json results to a CSV file in the output directory')
     
     args = parser.parse_args()
     
+    # Create output directory if it doesn't exist
+    os.makedirs(args.output_dir, exist_ok=True)
+    
     try:
-        # Process the image
-        results = process_image(args.server, args.image, args.engines, args.prompt)
+        # To store all results if save-to-csv is enabled
+        all_results = []
         
-        # Print summary of results if verbose is enabled
-        if args.verbose:
-            print_results_summary(results)
+        # Process based on the input type
+        if args.image:
+            # Single image
+            result = process_image_file(args.server, args.image, args.engines, args.prompt, args.output_dir, args.verbose)
+            if result and args.save_to_csv:
+                all_results.append(result)
         
-        # Save the full results to a file if requested
-        if args.output:
-            with open(args.output, 'w') as f:
-                json.dump(results, f, indent=2, sort_keys=False)
-            print(f"\nFull results saved to: {args.output}")
+        elif args.directory:
+            # Directory of images
+            if not os.path.isdir(args.directory):
+                raise ValueError(f"Directory not found: {args.directory}")
+            
+            # Get all image files in the directory
+            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
+            image_files = []
+            
+            for ext in image_extensions:
+                image_files.extend(glob.glob(os.path.join(args.directory, f"*{ext}")))
+                image_files.extend(glob.glob(os.path.join(args.directory, f"*{ext.upper()}")))
+            
+            if not image_files:
+                print(f"No image files found in {args.directory}")
+                return
+            
+            print(f"Found {len(image_files)} image files to process")
+            
+            # Process each image
+            for image_file in image_files:
+                result = process_image_file(args.server, image_file, args.engines, args.prompt, args.output_dir, args.verbose)
+                if result and args.save_to_csv:
+                    all_results.append(result)
+        
+        elif args.file_list:
+            # List of image paths or URLs from a file
+            file_paths = read_file_list(args.file_list)
+            
+            if not file_paths:
+                print(f"No file paths found in {args.file_list}")
+                return
+            
+            print(f"Found {len(file_paths)} paths to process")
+            
+            # Process each file
+            for file_path in file_paths:
+                result = process_image_file(args.server, file_path, args.engines, args.prompt, args.output_dir, args.verbose)
+                if result and args.save_to_csv:
+                    all_results.append(result)
+        
+        # Save to CSV if requested
+        if args.save_to_csv:
+            save_results_to_csv(all_results, args.output_dir)
 
     except Exception as e:
         print(f"Error: {e}")
@@ -140,6 +330,23 @@ def main():
 if __name__ == "__main__":
     main()
 
-    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "D:/Dropbox/VoucherVision/demo/demo_images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output results.json --verbose
-    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output results.json --verbose
-    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output results.json --verbose --prompt "SLTPvM_default_chromosome.yaml"
+# Usage examples:
+# Single image:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image" --verbose
+
+# URL image:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_url" --verbose
+
+# Directory of images:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory "./demo/images" --output-dir "./demo/results_dir_images" --verbose
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_csv" --verbose --prompt "SLTPvM_default_chromosome.yaml"
+
+# List of files:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/csv/file_list.csv --output-dir "./demo/results_file_list_csv" --verbose
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/txt/file_list.txt --output-dir "./demo/results_file_list_txt" --verbose
+
+# Custom prompt:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_image_custom_prompt" --verbose --prompt "SLTPvM_default_chromosome.yaml"
+
+# Save results to CSV:
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory ./demo/images --output-dir "./demo/results_dir_images_save_to_csv" --save-to-csv

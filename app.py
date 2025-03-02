@@ -250,9 +250,12 @@ def process_image():
     
     # Get engine options from request if specified
     engine_options = request.form.getlist('engines') or None
+
+    # Get prompt from request if specified, otherwise None (use default)
+    prompt = request.form.get('prompt') or None
     
     # Process the image using the initialized processor
-    results, status_code = app.config['processor'].process_image_request(file, engine_options)
+    results, status_code = app.config['processor'].process_image_request(file, engine_options, prompt)
     
     return jsonify(results), status_code
 
