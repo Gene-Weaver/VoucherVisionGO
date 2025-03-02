@@ -1,6 +1,7 @@
 steps:
 - name: 'bash'
   args: ['echo', 'Hello world!']
-serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${SERVICE_ACCOUNT_EMAIL}'
+serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${_SERVICE_ACCOUNT_EMAIL}'
+logsBucket: 'gs://${_BUCKET}'
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: GCS_ONLY
