@@ -12,16 +12,21 @@ logger = logging.getLogger(__name__)
 # Setup paths and imports
 import sys
 project_root = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, project_root)
-
+# Ensure project root is in sys.path (for package resolution)
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+# Add the `vouchervision_main` directory
 submodule_path = os.path.join(project_root, "vouchervision_main")
-sys.path.insert(0, submodule_path)
-
+if submodule_path not in sys.path:
+    sys.path.insert(0, submodule_path)
+# Add `vouchervision` directory so internal module imports work
 vouchervision_path = os.path.join(submodule_path, "vouchervision")
-sys.path.insert(0, vouchervision_path)
-
+if vouchervision_path not in sys.path:
+    sys.path.insert(0, vouchervision_path)
+# Ensure `OCR_Gemini.py` can find `OCR_resize_for_VLMs.py`
 component_detector_path = os.path.join(vouchervision_path, "component_detector")
-sys.path.insert(0, component_detector_path)
+if component_detector_path not in sys.path:
+    sys.path.insert(0, component_detector_path)
 
 # Import VoucherVision modules
 try:
