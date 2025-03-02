@@ -1,37 +1,7 @@
 steps:
-  # Build the container image using the Dockerfile
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}', '.']
-
-  # Push the container image to Container Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}']
-
-  # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: gcloud
-    args:
-      - 'run'
-      - 'deploy'
-      - 'vouchervision-api'
-      - '--image'
-      - 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}'
-      - '--region'
-      - 'us-central1'
-      - '--platform'
-      - 'managed'
-      - '--allow-unauthenticated'
-      - '--set-env-vars'
-
-# Store images in Google Container Registry
-images:
-  - 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}'
-
-# Service account and logging configuration
+- name: 'bash'
+  args: ['echo', 'Hello world!']
 serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${_SERVICE_ACCOUNT_EMAIL}'
 logsBucket: 'gs://${_BUCKET}'
 options:
   logging: GCS_ONLY
-
-# Specify a timeout for the build process
-timeout: '1800s'
