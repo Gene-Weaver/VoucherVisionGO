@@ -23,6 +23,7 @@ RUN chmod +x ./entrypoint.sh
 # Environment variables
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
+
 # Set PYTHONPATH to include the root and vouchervision_main
 ENV PYTHONPATH="/:/vouchervision_main"
 
