@@ -69,9 +69,39 @@ def process_image(server_url, image_path, engines=None):
         # Close the file
         files['file'].close()
 
+def print_results_summary(results):
+    """
+    Print a summary of the VoucherVision processing results
+    
+    Args:
+        results (dict): The processing results from the server
+    """
+    print("\n----- RESULTS SUMMARY -----")
+    
+    # Print OCR summary
+    print("\nOCR Info:")
+    for engine in results['ocr_results']:
+        if engine != "OCR":  # Skip the combined OCR text
+            print(f"  {engine}:")
+            print(f"    Tokens: {results['ocr_results'][engine].get('tokens_in', 0)} in, "
+                  f"{results['ocr_results'][engine].get('tokens_out', 0)} out")
+            print(f"    Cost: ${results['ocr_results'][engine].get('total_cost', 0):.6f}")
+    
+    print("\nOCR:")
+    print(results['ocr_results']["OCR"])
+
+    # Updated to use tokens_LLM instead of tokens
+    llm_tokens = results.get('tokens_LLM', {'input': 0, 'output': 0})
+    print(f"\nLLM Tokens: {llm_tokens['input']} in, {llm_tokens['output']} out")
+    
+    # Print VoucherVision summary
+    vv_results = results.get('vvgo_json', {})
+    print("\nVoucherVision JSON:")
+    print(json.dumps(vv_results, indent=2))
+
 def main():
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description='VoucherVision Client')
+    parser = argparse.ArgumentParser(description='VoucherVisionGO Client')
     parser.add_argument('--server', required=True, 
                         help='URL of the VoucherVision API server (e.g., http://localhost:8080)')
     parser.add_argument('--image', required=True, 
@@ -80,6 +110,8 @@ def main():
                         help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
     parser.add_argument('--output', 
                         help='Path to save the output JSON results (optional)')
+    parser.add_argument('--verbose', action='store_true',
+                        help='Print all output to console')
     
     args = parser.parse_args()
     
@@ -87,49 +119,16 @@ def main():
         # Process the image
         results = process_image(args.server, args.image, args.engines)
         
-        # Print a summary of the results
-        print("\n----- RESULTS SUMMARY -----")
-        
-        # Print OCR summary
-        print("\nOCR Results:")
-        for engine in results['ocr_results']:
-            if engine != "OCR":  # Skip the combined OCR text
-                print(f"  {engine}:")
-                print(f"    Tokens: {results['ocr_results'][engine].get('tokens_in', 0)} in, "
-                      f"{results['ocr_results'][engine].get('tokens_out', 0)} out")
-                print(f"    Cost: ${results['ocr_results'][engine].get('total_cost', 0):.6f}")
-        
-        # Print VoucherVision summary (just a few key fields)
-        vv_results = results.get('vouchervision_results', {})
-        print("\nVoucherVision Results:")
-        
-        # Try to extract some key information if available
-        scientific_name = vv_results.get('scientificName', 'Not identified')
-        print(f"  Scientific Name: {scientific_name}")
-        
-        family = vv_results.get('family', 'Not identified')
-        print(f"  Family: {family}")
-        
-        collection = vv_results.get('collectionCode', 'Not identified')
-        print(f"  Collection: {collection}")
-        
-        catalog_number = vv_results.get('catalogNumber', 'Not identified')
-        print(f"  Catalog Number: {catalog_number}")
-        
-        print(f"\nTotal Tokens: {results['tokens']['input']} in, {results['tokens']['output']} out")
+        # Print summary of results if verbose is enabled
+        if args.verbose:
+            print_results_summary(results)
         
         # Save the full results to a file if requested
         if args.output:
             with open(args.output, 'w') as f:
                 json.dump(results, f, indent=2)
             print(f"\nFull results saved to: {args.output}")
-        else:
-            # Ask if the user wants to see the full details
-            choice = input("\nShow full details? (y/n): ")
-            if choice.lower() == 'y':
-                print("\n----- FULL RESULTS -----")
-                pprint(results)
-        
+
     except Exception as e:
         print(f"Error: {e}")
         sys.exit(1)

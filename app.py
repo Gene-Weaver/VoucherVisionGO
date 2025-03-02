@@ -79,15 +79,12 @@ class VoucherVisionProcessor:
         # Load configuration
         self.cfg = load_custom_cfg(self.config_file)
         
-        self.Dirs = Dir_Structure(self.cfg)
-        # self.logger = start_logging(self.Dirs, self.cfg)
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
         self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
-        self.Project = Project_Info(self.cfg, self.logger, self.dir_home, self.Dirs)
 
         self.Voucher_Vision = VoucherVision(
-            self.cfg, self.logger, self.dir_home, None, self.Project, self.Dirs, 
+            self.cfg, self.logger, self.dir_home, None, None, None, 
             is_hf=False, skip_API_keys=True
         )
 
@@ -195,8 +192,8 @@ class VoucherVisionProcessor:
             # Combine results
             results = {
                 "ocr_results": ocr_results,
-                "vouchervision_results": vv_results,
-                "tokens": {
+                "vvgo_json": vv_results,
+                "tokens_LLM": {
                     "input": tokens_in,
                     "output": tokens_out
                 }
