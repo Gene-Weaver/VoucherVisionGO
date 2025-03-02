@@ -43,103 +43,189 @@ except:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
 
-app = Flask(__name__)
+class VoucherVisionProcessor:
+    """
+    Class to handle VoucherVision processing with initialization done once.
+    """
+    def __init__(self):
+        # Configuration
+        self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
+        self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+        
+        # Get API key for Gemini
+        self.api_key = self._get_api_key()
+        
+        # Initialize OCR engines 
+        self.ocr_engines = {}
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash"]:
+            self.ocr_engines[model_name] = OCRGeminiProVision(
+                self.api_key, 
+                model_name=model_name, 
+                max_output_tokens=1024, 
+                temperature=0.5, 
+                top_p=0.3, 
+                top_k=3, 
+                seed=123456, 
+                do_resize_img=False
+            )
+        
+        # Initialize VoucherVision components
+        self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
+        
+        # Validate config file exists
+        if not os.path.exists(self.config_file):
+            raise FileNotFoundError(f"Configuration file not found at {self.config_file}")
 
-# Configuration
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
-MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+        # Load configuration
+        self.cfg = load_custom_cfg(self.config_file)
+        
+        self.Dirs = Dir_Structure(self.cfg)
+        self.logger = start_logging(self.Dirs, self.cfg)
+        self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
+        self.Project = Project_Info(self.cfg, self.logger, self.dir_home, self.Dirs)
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        self.Voucher_Vision = VoucherVision(
+            self.cfg, self.logger, self.dir_home, None, self.Project, self.Dirs, 
+            is_hf=False, skip_API_keys=True
+        )
 
-def get_api_key():
-    """Get API key from environment variable"""
-    api_key = os.environ.get("API_KEY")
-    if not api_key:
-        raise ValueError("API_KEY environment variable not set")
-    return api_key
-
-def perform_ocr(file_path, engine_options):
-    """Perform OCR on the provided image"""
-    api_key = get_api_key()
-    
-    ocr_packet = {}
-    ocr_packet["OCR"] = ""
-    
-    for ocr_opt in engine_options:
-        ocr_packet[ocr_opt] = {}
-
-        OCR_Engine = OCRGeminiProVision(
-            api_key, 
-            model_name=ocr_opt, 
-            max_output_tokens=1024, 
-            temperature=0.5, 
-            top_p=0.3, 
-            top_k=3, 
-            seed=123456, 
-            do_resize_img=False
+        self.Voucher_Vision.initialize_token_counters()
+        self.Voucher_Vision.path_custom_prompts = os.path.join(
+            self.dir_home, 'custom_prompts', 
+            self.cfg['leafmachine']['project']['prompt_version']
         )
         
-        response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path)
+        # Initialize LLM model handler
+        self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
+        self.Voucher_Vision.setup_JSON_dict_structure()
         
-        ocr_packet[ocr_opt]["ocr_text"] = response
-        ocr_packet[ocr_opt]["cost_in"] = cost_in
-        ocr_packet[ocr_opt]["cost_out"] = cost_out
-        ocr_packet[ocr_opt]["total_cost"] = total_cost
-        ocr_packet[ocr_opt]["rates_in"] = rates_in
-        ocr_packet[ocr_opt]["rates_out"] = rates_out
-        ocr_packet[ocr_opt]["tokens_in"] = tokens_in
-        ocr_packet[ocr_opt]["tokens_out"] = tokens_out
-
-        ocr_packet["OCR"] += f"\n{ocr_opt} OCR:\n{response}"
-
-    return ocr_packet
-
-def process_voucher_vision(ocr_text):
-    """Process the OCR text with VoucherVision"""
-    config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
+        self.llm_model = GoogleGeminiHandler(
+            self.cfg, self.logger, self.model_name, self.Voucher_Vision.JSON_dict_structure, 
+            config_vals_for_permutation=None, exit_early_for_JSON=True
+        )
     
-    # Validate config file exists
-    if not os.path.exists(config_file):
-        raise FileNotFoundError(f"Configuration file not found at {config_file}")
-
-    # Load configuration
-    cfg = load_custom_cfg(config_file)
+    def _get_api_key(self):
+        """Get API key from environment variable"""
+        api_key = os.environ.get("API_KEY")
+        if not api_key:
+            raise ValueError("API_KEY environment variable not set")
+        return api_key
     
-    Dirs = Dir_Structure(cfg)
-    logger = start_logging(Dirs, cfg)
-    dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
-    Project = Project_Info(cfg, logger, dir_home, Dirs)
+    def allowed_file(self, filename):
+        """Check if file has allowed extension"""
+        return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
+    
+    def perform_ocr(self, file_path, engine_options):
+        """Perform OCR on the provided image"""
+        ocr_packet = {}
+        ocr_packet["OCR"] = ""
+        
+        for ocr_opt in engine_options:
+            ocr_packet[ocr_opt] = {}
+            
+            # Use pre-initialized OCR engine if available, or create a new one
+            if ocr_opt not in self.ocr_engines:
+                self.ocr_engines[ocr_opt] = OCRGeminiProVision(
+                    self.api_key, 
+                    model_name=ocr_opt, 
+                    max_output_tokens=1024, 
+                    temperature=0.5, 
+                    top_p=0.3, 
+                    top_k=3, 
+                    seed=123456, 
+                    do_resize_img=False
+                )
+            
+            OCR_Engine = self.ocr_engines[ocr_opt]
+            response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path)
+            
+            ocr_packet[ocr_opt]["ocr_text"] = response
+            ocr_packet[ocr_opt]["cost_in"] = cost_in
+            ocr_packet[ocr_opt]["cost_out"] = cost_out
+            ocr_packet[ocr_opt]["total_cost"] = total_cost
+            ocr_packet[ocr_opt]["rates_in"] = rates_in
+            ocr_packet[ocr_opt]["rates_out"] = rates_out
+            ocr_packet[ocr_opt]["tokens_in"] = tokens_in
+            ocr_packet[ocr_opt]["tokens_out"] = tokens_out
 
-    Voucher_Vision = VoucherVision(
-        cfg, logger, dir_home, None, Project, Dirs, 
-        is_hf=False, skip_API_keys=True
-    )
+            ocr_packet["OCR"] += f"\n{ocr_opt} OCR:\n{response}"
 
-    Voucher_Vision.initialize_token_counters()
-    Voucher_Vision.path_custom_prompts = os.path.join(
-        dir_home, 'custom_prompts', 
-        cfg['leafmachine']['project']['prompt_version']
-    )
+        return ocr_packet
+    
+    def process_voucher_vision(self, ocr_text):
+        """Process the OCR text with VoucherVision"""
+        # Update OCR text for processing
+        self.Voucher_Vision.OCR = ocr_text
+        prompt = self.Voucher_Vision.setup_prompt()
+        
+        # Call the LLM to process the OCR text (using pre-initialized model)
+        response_candidate, nt_in, nt_out, _, _, _ = self.llm_model.call_llm_api_GoogleGemini(
+            prompt, json_report=None, paths=None
+        )
 
-    # Set OCR text and prepare for processing
-    Voucher_Vision.OCR = ocr_text
-    prompt = Voucher_Vision.setup_prompt()
-    Voucher_Vision.setup_JSON_dict_structure()
-    model_name = ModelMaps.get_API_name(Voucher_Vision.model_name)
+        return response_candidate, nt_in, nt_out
+    
+    def process_image_request(self, file, engine_options=None):
+        """Process an image from a request file"""
+        # Check if the file is valid
+        if file.filename == '':
+            return {'error': 'No file selected'}, 400
+        
+        if not self.allowed_file(file.filename):
+            return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
+        
+        # Save uploaded file to a temporary location
+        temp_dir = tempfile.mkdtemp()
+        file_path = os.path.join(temp_dir, secure_filename(file.filename))
+        file.save(file_path)
+        
+        try:
+            # Get engine options (default to gemini models if not specified)
+            if not engine_options:
+                engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+            
+            # Perform OCR
+            ocr_results = self.perform_ocr(file_path, engine_options)
+            
+            # Process with VoucherVision
+            vv_results, tokens_in, tokens_out = self.process_voucher_vision(ocr_results["OCR"])
+            
+            # Combine results
+            results = {
+                "ocr_results": ocr_results,
+                "vouchervision_results": vv_results,
+                "tokens": {
+                    "input": tokens_in,
+                    "output": tokens_out
+                }
+            }
+            
+            return results, 200
+        
+        except Exception as e:
+            self.logger.exception("Error processing request")
+            return {'error': str(e)}, 500
+        
+        finally:
+            # Clean up the temporary file
+            try:
+                os.remove(file_path)
+                os.rmdir(temp_dir)
+            except:
+                pass
 
-    llm_model = GoogleGeminiHandler(
-        cfg, logger, model_name, Voucher_Vision.JSON_dict_structure, 
-        config_vals_for_permutation=None, exit_early_for_JSON=True
-    )
 
-    # Call the LLM to process the OCR text
-    response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
-        prompt, json_report=None, paths=None
-    )
+# Initialize Flask app
+app = Flask(__name__)
 
-    return response_candidate, nt_in, nt_out
+# Initialize processor once at startup
+try:
+    processor = VoucherVisionProcessor()
+    app.config['processor'] = processor
+    logger.info("VoucherVision processor initialized successfully")
+except Exception as e:
+    logger.error(f"Failed to initialize VoucherVision processor: {str(e)}")
+    raise
 
 @app.route('/process', methods=['POST'])
 def process_image():
@@ -150,51 +236,13 @@ def process_image():
     
     file = request.files['file']
     
-    # Check if the file is valid
-    if file.filename == '':
-        return jsonify({'error': 'No file selected'}), 400
+    # Get engine options from request if specified
+    engine_options = request.form.getlist('engines') or None
     
-    if not allowed_file(file.filename):
-        return jsonify({'error': f'File type not allowed. Supported types: {", ".join(ALLOWED_EXTENSIONS)}'}), 400
+    # Process the image using the initialized processor
+    results, status_code = app.config['processor'].process_image_request(file, engine_options)
     
-    # Save uploaded file to a temporary location
-    temp_dir = tempfile.mkdtemp()
-    file_path = os.path.join(temp_dir, secure_filename(file.filename))
-    file.save(file_path)
-    
-    try:
-        # Get engine options (default to gemini models if not specified)
-        engine_options = request.form.getlist('engines') or ["gemini-1.5-pro", "gemini-2.0-flash"]
-        
-        # Perform OCR
-        ocr_results = perform_ocr(file_path, engine_options)
-        
-        # Process with VoucherVision
-        vv_results, tokens_in, tokens_out = process_voucher_vision(ocr_results["OCR"])
-        
-        # Combine results
-        results = {
-            "ocr_results": ocr_results,
-            "vouchervision_results": vv_results,
-            "tokens": {
-                "input": tokens_in,
-                "output": tokens_out
-            }
-        }
-        
-        return jsonify(results), 200
-    
-    except Exception as e:
-        logger.exception("Error processing request")
-        return jsonify({'error': str(e)}), 500
-    
-    finally:
-        # Clean up the temporary file
-        try:
-            os.remove(file_path)
-            os.rmdir(temp_dir)
-        except:
-            pass
+    return jsonify(results), status_code
 
 @app.route('/health', methods=['GET'])
 def health_check():
