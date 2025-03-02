@@ -1,7 +1,6 @@
 steps:
   # Build the container image with no cache
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--no-cache', '-t', 'gcr.io/${PROJECT_ID}/vouchervision-go:${COMMIT_SHA}', '.']
     args: ['build', '--no-cache', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}', '.']
 
   # Push the container image to Container Registry
