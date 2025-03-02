@@ -1,5 +1,6 @@
 steps:
 - name: 'bash'
   args: ['echo', 'Hello world!']
+serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${SERVICE_ACCOUNT_EMAIL}'
 options:
   logging: CLOUD_LOGGING_ONLY
