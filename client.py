@@ -5,7 +5,7 @@ import argparse
 import requests
 from pprint import pprint
 
-def process_image(server_url, image_path, engines=None):
+def process_image(server_url, image_path, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
     
@@ -13,6 +13,7 @@ def process_image(server_url, image_path, engines=None):
         server_url (str): URL of the VoucherVision API server
         image_path (str): Path to the image file or URL of the image
         engines (list): List of OCR engine options to use
+        prompt (str): Custom prompt file to use
         
     Returns:
         dict: The processed results from the server
@@ -32,7 +33,7 @@ def process_image(server_url, image_path, engines=None):
             temp_file.write(response.content)
         
         try:
-            return process_image(server_url, temp_file_path, engines)
+            return process_image(server_url, temp_file_path, engines, prompt)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -43,10 +44,12 @@ def process_image(server_url, image_path, engines=None):
     # Prepare the multipart form data
     files = {'file': open(image_path, 'rb')}
     
-    # Add engine options if provided
+    # Add engine options and prompt if provided
     data = {}
     if engines:
-        data = {'engines': engines}
+        data['engines'] = engines
+    if prompt:
+        data['prompt'] = prompt
     
     try:
         # Send the request
@@ -97,7 +100,7 @@ def print_results_summary(results):
     # Print VoucherVision summary
     vv_results = results.get('vvgo_json', {})
     print("\nVoucherVision JSON:")
-    print(json.dumps(vv_results, indent=2))
+    print(json.dumps(vv_results, indent=2, sort_keys=False))
 
 def main():
     # Parse command line arguments
@@ -108,6 +111,8 @@ def main():
                         help='Path to the image file or URL of the image to process')
     parser.add_argument('--engines', nargs='+', default=["gemini-1.5-pro", "gemini-2.0-flash"],
                         help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
+    parser.add_argument('--prompt', default="SLTPvM_default.yaml",
+                        help='Custom prompt file to use (default: SLTPvM_default.yaml)')
     parser.add_argument('--output', 
                         help='Path to save the output JSON results (optional)')
     parser.add_argument('--verbose', action='store_true',
@@ -117,7 +122,7 @@ def main():
     
     try:
         # Process the image
-        results = process_image(args.server, args.image, args.engines)
+        results = process_image(args.server, args.image, args.engines, args.prompt)
         
         # Print summary of results if verbose is enabled
         if args.verbose:
@@ -126,7 +131,7 @@ def main():
         # Save the full results to a file if requested
         if args.output:
             with open(args.output, 'w') as f:
-                json.dump(results, f, indent=2)
+                json.dump(results, f, indent=2, sort_keys=False)
             print(f"\nFull results saved to: {args.output}")
 
     except Exception as e:
@@ -135,3 +140,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "D:/Dropbox/VoucherVision/demo/demo_images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output results.json --verbose
+    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output results.json --verbose

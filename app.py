@@ -89,11 +89,10 @@ class VoucherVisionProcessor:
         )
 
         self.Voucher_Vision.initialize_token_counters()
-        self.Voucher_Vision.path_custom_prompts = os.path.join(
-            self.dir_home, 'custom_prompts', 
-            self.cfg['leafmachine']['project']['prompt_version']
-        )
-        
+        # Default prompt file
+        self.default_prompt = "SLTPvM_default.yaml"
+        self.custom_prompts_dir = os.path.join(self.dir_home, 'custom_prompts')
+
         # Initialize LLM model handler
         self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
         self.Voucher_Vision.setup_JSON_dict_structure()
@@ -164,7 +163,7 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out
     
-    def process_image_request(self, file, engine_options=None):
+    def process_image_request(self, file, engine_options=None, prompt=None):
         """Process an image from a request file"""
         # Check if the file is valid
         if file.filename == '':
@@ -182,6 +181,14 @@ class VoucherVisionProcessor:
             # Get engine options (default to gemini models if not specified)
             if not engine_options:
                 engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+            
+            # Set the prompt path
+            prompt_file = prompt if prompt else self.default_prompt
+            self.Voucher_Vision.path_custom_prompts = os.path.join(
+                self.custom_prompts_dir, prompt_file
+            )
+            self.logger.info(f"Using prompt file: {self.Voucher_Vision.path_custom_prompts}")
+            
             
             # Perform OCR
             ocr_results = self.perform_ocr(file_path, engine_options)
