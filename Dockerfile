@@ -1,7 +1,7 @@
 # Use Python 3.12 as the base image
 FROM python:3.12-slim
 
-# Set workdir to root directory
+# Set workdir to root directory 
 WORKDIR /
 
 # Copy requirements first for better caching
