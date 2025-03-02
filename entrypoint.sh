@@ -2,13 +2,12 @@
 
 # Debug information
 echo "Current directory: $(pwd)"
-echo "Listing root directory:"
-ls -la /
-echo "Checking for vouchervision_main:"
-ls -la /vouchervision_main 2>/dev/null || echo "vouchervision_main not found"
+echo "Listing directory contents:"
+ls -la
 echo "Python path: $PYTHONPATH"
-echo "Checking Python import paths:"
-python3 -c "import sys; print(sys.path)"
+
+# Debug vouchervision import
+python3 -c "import sys; print(sys.path); import os; print(os.listdir('/app')); print(os.listdir('/app/vouchervision_main') if os.path.exists('/app/vouchervision_main') else 'Not found')"
 
 # Start Gunicorn server
 exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 app:app

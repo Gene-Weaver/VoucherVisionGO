@@ -25,14 +25,16 @@ RUN if [ ! -d "/vouchervision_main" ]; then \
 # Create symbolic links to ensure Python can find the modules both ways
 RUN ln -sf /vouchervision_main/vouchervision /vouchervision || echo "Could not create symlink to vouchervision"
 
+# Create symbolic links for modules
+RUN ln -sf /app/vouchervision_main/vouchervision /app/vouchervision
+
 # Make sure the entrypoint script is executable
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Environment variables
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
-ENV PYTHONPATH="/:/vouchervision_main:/app"
+ENV PYTHONPATH="/app:/app/vouchervision_main"
 
 # Run the application
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
