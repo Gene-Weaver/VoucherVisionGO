@@ -3,7 +3,6 @@ import sys
 import json
 import argparse
 import requests
-from pprint import pprint
 
 def process_image(server_url, image_path, engines=None, prompt=None):
     """

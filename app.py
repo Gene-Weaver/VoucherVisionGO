@@ -189,9 +189,9 @@ class VoucherVisionProcessor:
                 engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
             
             # Set the prompt path
-            prompt_file = prompt if prompt else self.default_prompt
+            self.default_prompt = prompt if prompt else self.default_prompt
             self.Voucher_Vision.path_custom_prompts = os.path.join(
-                self.custom_prompts_dir, prompt_file
+                self.custom_prompts_dir, self.default_prompt
             )
             self.logger.info(f"Using prompt file: {self.Voucher_Vision.path_custom_prompts}")
             
