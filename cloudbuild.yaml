@@ -22,7 +22,6 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      - '--set-env-vars'
 
 # Store images in Artifact Registry
 images:
