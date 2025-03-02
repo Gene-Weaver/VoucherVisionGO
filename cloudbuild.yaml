@@ -20,7 +20,6 @@ steps:
       - 'us-central1'
       - '--platform'
       - 'managed'
-      - '--allow-unauthenticated'
       - '--set-env-vars'
 
 # Store images in Google Container Registry
