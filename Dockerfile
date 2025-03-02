@@ -1,5 +1,5 @@
-# Use Python 3.9 as the base image (to match the error log Python version)
-FROM python:3.9-slim
+# Use Python 3.12 as the base image (to match the error log Python version)
+FROM python:3.12-slim
 
 # Set workdir to root directory 
 WORKDIR /app
