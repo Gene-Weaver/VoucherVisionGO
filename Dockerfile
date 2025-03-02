@@ -1,5 +1,5 @@
-# Use Python 3.9 as the base image
-FROM python:3.9-slim
+# Use Python 3.12 as the base image
+FROM python:3.12-slim
 
 WORKDIR /app
 
