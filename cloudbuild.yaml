@@ -1,11 +1,11 @@
 steps:
   # Build the container image with no cache
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '--no-cache', '-t', 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}', '.']
+    args: ['build', '--no-cache', '-t', 'gcr.io/${PROJECT_ID}/vouchervision-go:${COMMIT_SHA}', '.']
 
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}']
+    args: ['push', 'gcr.io/${PROJECT_ID}/vouchervision-go:${COMMIT_SHA}']
 
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -13,9 +13,9 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'vouchervision-api'
+      - 'vouchervision-go'
       - '--image'
-      - 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}'
+      - 'gcr.io/${PROJECT_ID}/vouchervision-go:${COMMIT_SHA}'
       - '--region'
       - 'us-central1'
       - '--platform'
@@ -26,7 +26,7 @@ steps:
 
 # Store images in Google Container Registry
 images:
-  - 'gcr.io/${PROJECT_ID}/vouchervision-api:${COMMIT_SHA}'
+  - 'gcr.io/${PROJECT_ID}/vouchervision-go:${COMMIT_SHA}'
 
 # Service account and logging configuration
 serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${_SERVICE_ACCOUNT_EMAIL}'
