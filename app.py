@@ -93,6 +93,12 @@ class VoucherVisionProcessor:
         self.default_prompt = "SLTPvM_default.yaml"
         self.custom_prompts_dir = os.path.join(self.dir_home, 'custom_prompts')
 
+        self.Voucher_Vision.path_custom_prompts = os.path.join(
+            self.dir_home, 
+            'custom_prompts', 
+            self.default_prompt
+        )
+
         # Initialize LLM model handler
         self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
         self.Voucher_Vision.setup_JSON_dict_structure()

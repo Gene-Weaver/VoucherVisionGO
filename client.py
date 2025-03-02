@@ -143,3 +143,4 @@ if __name__ == "__main__":
 
     # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "D:/Dropbox/VoucherVision/demo/demo_images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output results.json --verbose
     # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output results.json --verbose
+    # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output results.json --verbose --prompt "SLTPvM_default_chromosome.yaml"
