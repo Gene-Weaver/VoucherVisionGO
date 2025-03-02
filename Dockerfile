@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Set workdir to root directory 
-WORKDIR /
+WORKDIR /app
 
 # Copy requirements first for better caching
 COPY requirements.txt .
