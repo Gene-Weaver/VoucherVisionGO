@@ -1,64 +1,66 @@
 steps:
-  # Step 1: Check if we need to rebuild dependencies
-  - name: 'gcr.io/cloud-builders/gcloud'
-    id: check-rebuild
+  # Step 1: Check if we need to rebuild dependencies and store the result
+  - name: 'gcr.io/cloud-builders/git'
+    id: check-changes
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        if [ -n "$(git diff --name-only $COMMIT_SHA~1 $COMMIT_SHA | grep -E 'requirements.txt|Dockerfile|entrypoint.sh')" ]; then
-          echo "REBUILD_REQUIRED=true" > /workspace/rebuild.env
+        # Default to false for first build where we can't diff
+        DEPS_CHANGED="false"
+        # Check if we can access previous commit
+        if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
+          # Check if dependency files changed between this commit and the previous one
+          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh'; then
+            DEPS_CHANGED="true"
+          fi
         else
-          echo "REBUILD_REQUIRED=false" > /workspace/rebuild.env
+          # First commit or shallow clone - rebuild required
+          DEPS_CHANGED="true"
         fi
-        cat /workspace/rebuild.env
+        # Store the result as a build artifact
+        echo $DEPS_CHANGED > /workspace/deps_changed.txt
+        echo "Dependencies changed: $DEPS_CHANGED"
 
-  # Step 2a: Build the container image from scratch if dependencies changed
+  # Step 2: Pull the latest image to use as cache
   - name: 'gcr.io/cloud-builders/docker'
-    id: full-rebuild
+    id: pull-cache
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        source /workspace/rebuild.env
-        if [ "$REBUILD_REQUIRED" = "true" ]; then
+        # Try to pull the latest image to use as cache, ignore errors if it doesn't exist
+        docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
+
+  # Step 3: Build with appropriate caching strategy based on whether deps changed
+  - name: 'gcr.io/cloud-builders/docker'
+    id: build
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        DEPS_CHANGED=$(cat /workspace/deps_changed.txt)
+        if [ "$DEPS_CHANGED" = "true" ]; then
           echo "Rebuilding container from scratch..."
           docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
         else
-          echo "Skipping full rebuild"
-        fi
-
-  # Step 2b: Use previous image as cache and just update code if only code changed
-  - name: 'gcr.io/cloud-builders/docker'
-    id: incremental-rebuild
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        source /workspace/rebuild.env
-        if [ "$REBUILD_REQUIRED" = "false" ]; then
           echo "Performing incremental build..."
-          # Pull the latest image to use as cache
-          docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
-          # Build using the cache
           docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
-        else
-          echo "Skipping incremental rebuild"
         fi
 
-  # Step 3: Push the container image to Artifact Registry
+  # Step 4: Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}']
 
-  # Step 4: Tag the image as latest
+  # Step 5: Tag the image as latest
   - name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest']
   
-  # Step 5: Push the latest tag
+  # Step 6: Push the latest tag
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest']
 
-  # Step 6: Deploy container image to Cloud Run
+  # Step 7: Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
