@@ -24,18 +24,18 @@
   },
   "tokens_LLM": {
     "input": 2113,
-    "output": 445
+    "output": 451
   },
   "vvgo_json": {
-    "additionalText": "Eastern kentucky university\nherbarium\n060934\nekY\nIk\nGalax aphylla",
+    "additionalText": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\nEKY\nIK\n3 1234\nGalax aphylla",
     "catalogNumber": "10039611",
     "chromosomeCount": "",
-    "collectedBy": "R. Hannan & L. R. Phillippe 2022",
+    "collectedBy": "R. Hannan & L. R. Phillippe",
     "collectionDate": "1979-05-31",
     "collectionDateEnd": "",
-    "collectorNumber": "3 1234",
-    "continent": "North america",
-    "country": "United states",
+    "collectorNumber": "2022",
+    "continent": "North America",
+    "country": "United States",
     "county": "Letcher County",
     "cultivated": "",
     "decimalLatitude": "",

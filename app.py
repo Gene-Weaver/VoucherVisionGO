@@ -1,12 +1,11 @@
 import os
 import sys
-import json
 import tempfile
 import threading
 from flask import Flask, request, jsonify
 import logging
 from werkzeug.utils import secure_filename
-import queue
+from flask import json as flask_json
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -309,6 +308,15 @@ class VoucherVisionProcessor:
 
 # Initialize Flask app
 app = Flask(__name__)
+
+# Create a custom encoder that preserves order
+class OrderedJsonEncoder(flask_json.JSONEncoder):
+    def __init__(self, **kwargs):
+        kwargs['sort_keys'] = False
+        super(OrderedJsonEncoder, self).__init__(**kwargs)
+
+# Set the encoder immediately after creating the Flask app
+app.json_encoder = OrderedJsonEncoder
 
 # Initialize processor once at startup
 try:
