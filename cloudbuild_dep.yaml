@@ -1,0 +1,40 @@
+steps:
+  # Build the container image with no cache
+  - name: 'gcr.io/cloud-builders/docker'
+    # args: ['build', '--no-cache', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}', '.']
+
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'vouchervision-go'
+      - '--image'
+      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}'
+      - '--region'
+      - 'us-central1'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+# Store images in Artifact Registry
+images:
+  - 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}'
+
+# Service account and logging configuration
+serviceAccount: 'projects/${PROJECT_ID}/serviceAccounts/${_SERVICE_ACCOUNT_EMAIL}'
+logsBucket: 'gs://${_BUCKET}'
+options:
+  logging: GCS_ONLY
+
+# Define substitution variables
+substitutions:
+  _API_KEY: '' # Will be provided during deployment
+  _SERVICE_ACCOUNT_EMAIL: '' # Service account email
+  _BUCKET: '' # Logs bucket name
