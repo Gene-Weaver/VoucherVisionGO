@@ -1,6 +1,6 @@
 {
   "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\n\n*Galax urceolata* (Poir.) Brummitt (handwritten)\n\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality { Region Road to Wavah Bald, North Carolina\n{ Habitat Edge of woods\nDate 8-22-62 No. 602\nCollector A. Armstrong\n\nDiapensia Family p.1156 (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ninches\ncm\nDENVER BOTANIC\nGARDENS\ncopyright reserved\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\nGalax urceolata (Poiri) Brummitt\nDIA\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nRoad to Wavah Bald,\nLocality\nRegion North Carolina\nHabitat Edge of woods\nDate 8-22-62\nCollector\nNo. 602\nA. Armstrong\nDENVER BOTANIC GARDENS KHD00041594\nDiapensia Family P-1186\n\n\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n\n",
+    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\n\n*Galax urceolata* (Poir.) Brummitt (handwritten)\n\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality { Region Road to Wavah Bald, North Carolina\n{ Habitat Edge of woods\nDate 8-22-62 No. 602\nCollector A. Armstrong\n\nDiapensia Family p.1156 (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ninches\ncm\nDENVER BOTANIC GARDENS\ncopyright reserved\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\nGalax urceolata (Poiri) Brummitt\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nRoad to Wavah Bald,\nLocality\nRegion North Carolina\nHabitat Edge of woods\nDate 8-22-62\nCollector A. Armstrong\nNo. 602\nDiapensia Family\n\n\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n\n",
     "gemini-1.5-pro": {
       "cost_in": 0.00077875,
       "cost_out": 0.00062,
@@ -13,21 +13,21 @@
     },
     "gemini-2.0-flash": {
       "cost_in": 0.0006815,
-      "cost_out": 6.199999999999999e-05,
-      "ocr_text": "inches\ncm\nDENVER BOTANIC\nGARDENS\ncopyright reserved\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\nGalax urceolata (Poiri) Brummitt\nDIA\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nRoad to Wavah Bald,\nLocality\nRegion North Carolina\nHabitat Edge of woods\nDate 8-22-62\nCollector\nNo. 602\nA. Armstrong\nDENVER BOTANIC GARDENS KHD00041594\nDiapensia Family P-1186\n\n\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n\n",
+      "cost_out": 5.08e-05,
+      "ocr_text": "inches\ncm\nDENVER BOTANIC GARDENS\ncopyright reserved\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n24248\nGalax urceolata (Poiri) Brummitt\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nRoad to Wavah Bald,\nLocality\nRegion North Carolina\nHabitat Edge of woods\nDate 8-22-62\nCollector A. Armstrong\nNo. 602\nDiapensia Family\n\n\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n\n",
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 155,
-      "total_cost": 0.0007435
+      "tokens_out": 127,
+      "total_cost": 0.0007323
     }
   },
   "tokens_LLM": {
-    "input": 2092,
-    "output": 458
+    "input": 2069,
+    "output": 423
   },
   "vvgo_json": {
-    "additionalText": "Galax urceolata (poiri) brummitt\ndiapensia family p-1186\nGalax aphylla l.\ngalax urceolata (poir.) brummitt\n\ndiapensia family p.1156\n\ncommon name wandflower, beetleweed",
+    "additionalText": "Kathryn kalmbach herbarium\ndenver botanic gardens\ncommon name wandflower, beetleweed\ndiapensia family",
     "catalogNumber": "24248",
     "collectedBy": "A. Armstrong",
     "collectionDate": "1962-08-22",

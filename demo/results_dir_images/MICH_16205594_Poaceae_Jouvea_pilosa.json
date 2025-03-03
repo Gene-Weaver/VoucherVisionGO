@@ -1,10 +1,10 @@
 {
   "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nRANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\n*Distichlis spicata* (L.) Greene\n\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding ground.\nIn open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of *Crataeva tapia* (3-4 m tall).\nPorous soil.\n\nCHRISTOPHER DAVIDSON 2060  29 April 1973\n\n*Jouvea pilosa* (Presl) Scribn. *(Handwritten)*\n\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\nUniversity of Michigan Herbarium\n1122841\nMICH\n\n\n*Crataeva Tapia*\n*Jouvea pilosa*\n\n\ngemini-2.0-flash OCR:\nRANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\nDistichlis spicata (L.) Greene\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding\nground.\nIn open, level to slightly sloping areas\nfavored by the terns for nesting, near the\nbeach; surrounded by low forest consisting\nalmost entirely of Crataeva tapia (3-4 m tall),\nPorous soil.\nCHRISTOPHER DAVIDSON 2060\n29 April 1973\nIpomoea pilosa (Presl) Scribn.\nMICH\nUniversity of Michigan Herbarium\n1122841\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\n\nDistichlis spicata\nCrataeva tapia\nJonvea pilosa\n\n",
+    "OCR": "\ngemini-1.5-pro OCR:\nRANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\n*Distichlis spicata* (L.) Greene\n\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding ground.\nIn open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of *Crataeva tapia* (3-4 m tall).\nPorous soil.\n\nCHRISTOPHER DAVIDSON 2060  29 April 1973\n\n*Jouvea pilosa* (Presl) Scribn. *(handwritten)*\n\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\nUniversity of Michigan Herbarium\n1122841\nMICH\n\n\n*Crataeva Tapia*\n*Jouvea pilosa*\n\n\ngemini-2.0-flash OCR:\nRANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\nDistichlis spicata (L.) Greene\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding\nground.\nIn open, level to slightly sloping areas\nfavored by the terns for nesting, near the\nbeach; surrounded by low forest consisting\nalmost entirely of Crataeva tapia (3-4 m tall),\nPorous soil.\nCHRISTOPHER DAVIDSON 2060\n29 April 1973\nIpomoea pilosa (Presl) Scribn.\nMICH\nUniversity of Michigan Herbarium\n1122841\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\n\nDistichlis spicata\nCrataeva tapia\nJonvea pilosa\n\n",
     "gemini-1.5-pro": {
       "cost_in": 0.00077875,
       "cost_out": 0.000965,
-      "ocr_text": "RANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\n*Distichlis spicata* (L.) Greene\n\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding ground.\nIn open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of *Crataeva tapia* (3-4 m tall).\nPorous soil.\n\nCHRISTOPHER DAVIDSON 2060  29 April 1973\n\n*Jouvea pilosa* (Presl) Scribn. *(Handwritten)*\n\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\nUniversity of Michigan Herbarium\n1122841\nMICH\n\n\n*Crataeva Tapia*\n*Jouvea pilosa*\n\n",
+      "ocr_text": "RANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\n*Distichlis spicata* (L.) Greene\n\nNayarit: Isabel Island, E of Tres Marias Is.\nVolcanic islet--cormorant and tern breeding ground.\nIn open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of *Crataeva tapia* (3-4 m tall).\nPorous soil.\n\nCHRISTOPHER DAVIDSON 2060  29 April 1973\n\n*Jouvea pilosa* (Presl) Scribn. *(handwritten)*\n\ncopyright reserved cm\nDEC 1 8 1975\n1 122841\n\nUniversity of Michigan Herbarium\n1122841\nMICH\n\n\n*Crataeva Tapia*\n*Jouvea pilosa*\n\n",
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
@@ -24,10 +24,10 @@
   },
   "tokens_LLM": {
     "input": 2185,
-    "output": 485
+    "output": 502
   },
   "vvgo_json": {
-    "additionalText": "Plants of mexico\nCopyright reserved cm\nDec 1 8 1975\nMich\nCrataeva tapia\nJonvea pilosa",
+    "additionalText": "Rancho santa ana botanic garden\nPlants of mexico\nCopyright reserved cm\nDec 1 8 1975\nMich\nUniversity of michigan herbarium\nCrataeva tapia\nJonvea pilosa",
     "catalogNumber": "1122841",
     "collectedBy": "Christopher Davidson",
     "collectionDate": "1973-04-29",
@@ -50,8 +50,8 @@
     "locality": "Isabel Island, E of Tres Marias Is.",
     "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Distichlis spicata (l.) Greene",
-    "scientificNameAuthorship": "(l.) Greene",
+    "scientificName": "Distichlis spicata (L.) Greene",
+    "scientificNameAuthorship": "(L.) Greene",
     "specificEpithet": "spicata",
     "specimenDescription": "Volcanic islet--cormorant and tern breeding ground.",
     "stateProvince": "Nayarit",

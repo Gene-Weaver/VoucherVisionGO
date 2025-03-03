@@ -23,17 +23,17 @@
     }
   },
   "tokens_LLM": {
-    "input": 2161,
-    "output": 505
+    "input": 2204,
+    "output": 497
   },
   "vvgo_json": {
-    "additionalText": "MICH\nDEC 1 8 1975\nRANCHO SANTA ANA BOTANIC GARDEN\nPLANTS OF MEXICO\nCrataeva Tapia",
+    "additionalText": "MICH\nDEC 1 8 1975\nRancho santa ana botanic garden\nPlants of mexico\nDistichlis spicata (l.) greene\nCrataeva tapia\ncm\ncopyright reserved",
     "catalogNumber": "1122841",
     "collectedBy": "Christopher Davidson",
     "collectionDate": "1973-04-29",
     "collectionDateEnd": "",
     "collectorNumber": "2060",
-    "continent": "North America",
+    "continent": "North america",
     "country": "Mexico",
     "county": "",
     "cultivated": "",
@@ -41,13 +41,13 @@
     "decimalLongitude": "",
     "elevationUnits": "",
     "genus": "Jouvea",
-    "habitat": "In open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of Crataeva tapia (3-4 m tall), Porous soil.",
-    "identificationHistory": "Gouinia pilosa (Presl) Scribn. (handwritten), Distichlis spicata (L.) Greene",
+    "habitat": "In open, level to slightly sloping areas favored by the terns for nesting, near the beach; surrounded by low forest consisting almost entirely of crataeva tapia (3-4 m tall), Porous soil.",
+    "identificationHistory": "",
     "identifiedBy": "",
     "identifiedConfidence": "",
     "identifiedDate": "",
     "identifiedRemarks": "",
-    "locality": "Isabel Island, E of Tres Marias Is. Volcanic islet--cormorant and tern breeding ground.",
+    "locality": "Isabel Island, e of tres marias is. Volcanic islet--cormorant and tern breeding ground.",
     "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
     "scientificName": "Jouvea pilosa",

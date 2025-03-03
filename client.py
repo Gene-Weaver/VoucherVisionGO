@@ -339,11 +339,23 @@ def main():
             # Get all image files in the directory
             image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
             image_files = []
-            
+
             for ext in image_extensions:
+                # Just use the lowercase extension - Windows is case-insensitive anyway
                 image_files.extend(glob.glob(os.path.join(args.directory, f"*{ext}")))
-                image_files.extend(glob.glob(os.path.join(args.directory, f"*{ext.upper()}")))
-            
+
+            # Remove duplicates using lowercase comparison
+            seen = set()
+            unique_files = []
+            for file in image_files:
+                lowercase_path = file.lower()
+                if lowercase_path not in seen:
+                    seen.add(lowercase_path)
+                    unique_files.append(file)
+
+            image_files = unique_files
+            print(f"Found {len(image_files)} unique image files to process")
+
             if not image_files:
                 print(f"No image files found in {args.directory}")
                 return

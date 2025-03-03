@@ -1,15 +1,15 @@
 {
   "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\n\n1962\n\n*Galax urceolata* (Poir.) Brummitt\n\nHerbarium of James Montgomery       DIA\n\nRamsey Cove Forest\n\n*Galax aphylla* L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963\nSevier Co.?\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt, Ramsey Cove Forest\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ninches\n10\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3 4\ncopyright reserved\n5 6 78\n9 10\n1962\nGalax urceolata (Poir.) Brummitt\nHerbarium of James Montgomery\nDIA\nRamsey Cove Forest\nGalax aphylla L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963.\nLOCALITY\nDATE\nSevier Co.?\n171\nDENVER BOTANIC GARDENS KHD00041593\n\n\nGalax urceolata\nGalax aphylla\n\n",
+    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\n\n1962\n\n(Handwritten) *Galax urceolata* (Poir.) Brummitt\n\nHerbarium of James Montgomery       DIA\n\nRamsey Cove Forest\n\n*Galax aphylla* L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963\nSevier Co.? (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ninches\n10\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3 4\ncopyright reserved\n5 6 78\n9 10\n1962\nGalax urceolata (Poir.) Brummitt\nHerbarium of James Montgomery\nDIA\nRamsey Cove Forest\nGalax aphylla L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963.\nLOCALITY\nDATE\nSevier Co.?\n171\nDENVER BOTANIC GARDENS KHD00041593\n\n\nGalax urceolata\nGalax aphylla\n\n",
     "gemini-1.5-pro": {
       "cost_in": 0.00077875,
-      "cost_out": 0.00062,
-      "ocr_text": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\n\n1962\n\n*Galax urceolata* (Poir.) Brummitt\n\nHerbarium of James Montgomery       DIA\n\nRamsey Cove Forest\n\n*Galax aphylla* L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963\nSevier Co.?\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt, Ramsey Cove Forest\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_out": 0.0005600000000000001,
+      "ocr_text": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\n\n1962\n\n(Handwritten) *Galax urceolata* (Poir.) Brummitt\n\nHerbarium of James Montgomery       DIA\n\nRamsey Cove Forest\n\n*Galax aphylla* L.\nGreat Smoky Mtns. Nat. Park,\nTenn.\nAug. 2, 1963\nSevier Co.? (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 124,
-      "total_cost": 0.00139875
+      "tokens_out": 112,
+      "total_cost": 0.00133875
     },
     "gemini-2.0-flash": {
       "cost_in": 0.0006815,
@@ -23,16 +23,16 @@
     }
   },
   "tokens_LLM": {
-    "input": 2104,
-    "output": 407
+    "input": 2088,
+    "output": 449
   },
   "vvgo_json": {
-    "additionalText": "DIA\nGalax urceolata\nGalax aphylla",
+    "additionalText": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n30608\n1962\nGalax aphylla L.\nGalax urceolata\nGalax aphylla",
     "catalogNumber": "KHD00041593",
     "collectedBy": "James Montgomery",
     "collectionDate": "1963-08-02",
     "collectionDateEnd": "",
-    "collectorNumber": "",
+    "collectorNumber": "171",
     "continent": "North America",
     "country": "United States",
     "county": "Sevier Co.",
@@ -42,12 +42,12 @@
     "elevationUnits": "",
     "genus": "Galax",
     "habitat": "Ramsey Cove Forest",
-    "identificationHistory": "Galax aphylla L.",
+    "identificationHistory": "",
     "identifiedBy": "",
     "identifiedConfidence": "",
     "identifiedDate": "",
     "identifiedRemarks": "",
-    "locality": "Great Smoky Mtns. Nat. Park",
+    "locality": "Great Smoky Mtns. Nat. Park,",
     "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
     "scientificName": "Galax urceolata (Poir.) Brummitt",
@@ -55,7 +55,7 @@
     "specificEpithet": "urceolata",
     "specimenDescription": "",
     "stateProvince": "Tenn.",
-    "verbatimCollectionDate": "Aug. 2, 1963",
+    "verbatimCollectionDate": "Aug. 2, 1963.",
     "verbatimCoordinates": ""
   }
 }

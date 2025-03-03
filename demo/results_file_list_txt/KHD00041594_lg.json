@@ -24,10 +24,10 @@
   },
   "tokens_LLM": {
     "input": 2092,
-    "output": 470
+    "output": 465
   },
   "vvgo_json": {
-    "additionalText": "Kathryn kalmbach herbarium\ndenver botanic gardens\ngalax urceolata (poiri) brummitt\ndiapsensia family p-1186\ndenver botanic gardens khd00041594\ngalax aphylla l.\ngalax urceolata (poir.) brummitt",
+    "additionalText": "Kathryn kalmbach herbarium\ndenver botanic gardens\ngalax urceolata (poiri) brummitt\ncommon name wandflower, beetleweed\ndiapensia family p-1186\ngalax aphylla l.\ngalax urceolata (poir.) brummitt",
     "catalogNumber": "24248",
     "collectedBy": "A. Armstrong",
     "collectionDate": "1962-08-22",
