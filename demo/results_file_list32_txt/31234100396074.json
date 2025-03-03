@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n049157\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, ridge slope ca. 0.4 mi north of Knobby Rock. Dry oak-heath forest.\n\nNO.: 370\nDATE: 05/29/1993\nCOLL.: Bryce D. Fields\nIDEN.: Bryce D. Fields\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nEASTERN\nKENTUCKY\n049157\nHERBARIUM\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, ridge slope ca. 0.4 mi north of Knobby Rock. Dry oak-heath forest.\nNO.: 370\nDATE: 05/29/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005399999999999999,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n049157\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, ridge slope ca. 0.4 mi north of Knobby Rock. Dry oak-heath forest.\n\nNO.: 370\nDATE: 05/29/1993\nCOLL.: Bryce D. Fields\nIDEN.: Bryce D. Fields\n\n\n*Galax aphylla*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108,
+      "total_cost": 0.00131875
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "ocr_text": "UNIVERSITY\nEASTERN\nKENTUCKY\n049157\nHERBARIUM\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, ridge slope ca. 0.4 mi north of Knobby Rock. Dry oak-heath forest.\nNO.: 370\nDATE: 05/29/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123,
+      "total_cost": 0.0007306999999999999
+    }
+  },
+  "tokens_LLM": {
+    "input": 2069,
+    "output": 426
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern kentucky university\nherbarium\n\nFlora of blanton forest",
+    "catalogNumber": "049157",
+    "chromosomeCount": "",
+    "collectedBy": "Bryce D. Fields",
+    "collectionDate": "1993-05-29",
+    "collectionDateEnd": "",
+    "collectorNumber": "370",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Harlan County",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Dry oak-heath forest.",
+    "identificationHistory": "",
+    "identifiedBy": "Bryce D. Fields",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Blanton Forest, ridge slope ca. 0.4 mi north of knobby rock.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "05/29/1993",
+    "verbatimCoordinates": ""
+  }
+}

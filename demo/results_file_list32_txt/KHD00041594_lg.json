@@ -23,18 +23,19 @@
     }
   },
   "tokens_LLM": {
-    "input": 2092,
-    "output": 416
+    "input": 2135,
+    "output": 456
   },
   "vvgo_json": {
-    "additionalText": "Galax urceolata (poir.) brummitt\ndiapensia family p-1186",
+    "additionalText": "Kathryn kalmbach herbarium\nDenver botanic gardens\nDiapensia family p-1186\nGalax urceolata (poiri) brummitt\nDenver botanic gardens khd00041594\ninches\ncm\nCopyright reserved",
     "catalogNumber": "24248",
+    "chromosomeCount": "",
     "collectedBy": "A. Armstrong",
     "collectionDate": "1962-08-22",
     "collectionDateEnd": "",
     "collectorNumber": "602",
-    "continent": "North america",
-    "country": "United states",
+    "continent": "North America",
+    "country": "United States",
     "county": "",
     "cultivated": "",
     "decimalLatitude": "",
@@ -50,11 +51,11 @@
     "locality": "Road to wavah bald, region north carolina",
     "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla l.",
+    "scientificName": "Galax aphylla L.",
     "scientificNameAuthorship": "L.",
     "specificEpithet": "aphylla",
     "specimenDescription": "",
-    "stateProvince": "North carolina",
+    "stateProvince": "North Carolina",
     "verbatimCollectionDate": "8-22-62",
     "verbatimCoordinates": ""
   }

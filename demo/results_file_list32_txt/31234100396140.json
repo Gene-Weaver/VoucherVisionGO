@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n045368\nHERBARIUM\n\nEastern Kentucky University Herbarium\n\n*Diapensiaceae* IK\n\nHerbarium of Memphis State University\nPike Co.\nFLORA OF KENTUCKY\n\n*Galax aphylla* L.\nUnpaved road up side of Pine Mountain at Ash\nCamp, Lower third of the slope. Mixed woods.\nNW exposure.\nCUMBERLAND PLATEAU PROVINCE.\n\nElizabeth M. Browne 10019\nEdward T. Browne, Jr.                      16 May 1965\n\n\nHandwritten text: *Diapensiaceae*, IK\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\n045368\nHERBARIUM\nINCH\nOPTIRECTILINEAR\u00ae\n3 1234 10039614 0\nHerbarium of Memphis State University\nPike Co.\nFLORA OF KENTUCKY\nGalax aphylla L.\nUnpaved road up side of Pine Mountain at Ash\nCamp. Lower third of thr slope. Mixed woods.\nNW exposure.\nCUMBERLAND PLATEAU PROVINCE.\nElizabeth M. Browne 10019\nEdward T. Browne, Jr.\n16 May 1965\n\u0e1e\u0e27\nU.S.A.\nDiapensiaceae\nK\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n045368\nHERBARIUM\n\nEastern Kentucky University Herbarium\n\n*Diapensiaceae* IK\n\nHerbarium of Memphis State University\nPike Co.\nFLORA OF KENTUCKY\n\n*Galax aphylla* L.\nUnpaved road up side of Pine Mountain at Ash\nCamp, Lower third of the slope. Mixed woods.\nNW exposure.\nCUMBERLAND PLATEAU PROVINCE.\n\nElizabeth M. Browne 10019\nEdward T. Browne, Jr.                      16 May 1965\n\n\nHandwritten text: *Diapensiaceae*, IK\n\n\n*Galax aphylla*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138,
+      "total_cost": 0.0014687500000000002
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n045368\nHERBARIUM\nINCH\nOPTIRECTILINEAR\u00ae\n3 1234 10039614 0\nHerbarium of Memphis State University\nPike Co.\nFLORA OF KENTUCKY\nGalax aphylla L.\nUnpaved road up side of Pine Mountain at Ash\nCamp. Lower third of thr slope. Mixed woods.\nNW exposure.\nCUMBERLAND PLATEAU PROVINCE.\nElizabeth M. Browne 10019\nEdward T. Browne, Jr.\n16 May 1965\n\u0e1e\u0e27\nU.S.A.\nDiapensiaceae\nK\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153,
+      "total_cost": 0.0007427
+    }
+  },
+  "tokens_LLM": {
+    "input": 2130,
+    "output": 480
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern kentucky university herbarium\n\nherbarium of memphis state university\nflora of kentucky\n\nDiapensiaceae\n\ngalax aphylla",
+    "catalogNumber": "045368",
+    "chromosomeCount": "",
+    "collectedBy": "Elizabeth M. Browne, Edward T. Browne, Jr.",
+    "collectionDate": "1965-05-16",
+    "collectionDateEnd": "",
+    "collectorNumber": "10019",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Pike co.",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Unpaved road up side of pine mountain at ash camp, lower third of thr slope. mixed woods. nw exposure.",
+    "identificationHistory": "",
+    "identifiedBy": "IK",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Unpaved road up side of pine mountain at ash camp, lower third of the slope. mixed woods. nw exposure. cumberland plateau province.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "16 May 1965",
+    "verbatimCoordinates": ""
+  }
+}

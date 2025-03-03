@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n029022\n\nKentucky\n\nDiapensiaceae\n*Galax aphylla* L.\n\nLaurel County: Growing in rich woods on west side of forest road #195\noff Ky. 192 ca. 0.3 miles north of Ky. 192 along trail paralleling small\ncreek.\n\nRandy Lee Mears 93-68                      3 July 1993\n\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nINCH\nOPTIRECTILINEAR\nKentucky\nDiapensiaceae\nGalax aphylla L.\nLaurel County: Growing in rich woods on west side of forest road #195\noff Ky. 192 ca. 0.3 miles north of Ky. 192 along trail paralleling small\ncreek.\nRandy Lee Mears 93-68\n3 July 1993\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\nEastern Kentucky University Herbarium\n3 1234 10039610 8\nU.S.A.\nKENTUCKY\nSTERN\nEAS\n029032\nHERDARIUM\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.000645,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n029022\n\nKentucky\n\nDiapensiaceae\n*Galax aphylla* L.\n\nLaurel County: Growing in rich woods on west side of forest road #195\noff Ky. 192 ca. 0.3 miles north of Ky. 192 along trail paralleling small\ncreek.\n\nRandy Lee Mears 93-68                      3 July 1993\n\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\n\n*Galax aphylla* L.\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129,
+      "total_cost": 0.00142375
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.64e-05,
+      "ocr_text": "INCH\nOPTIRECTILINEAR\nKentucky\nDiapensiaceae\nGalax aphylla L.\nLaurel County: Growing in rich woods on west side of forest road #195\noff Ky. 192 ca. 0.3 miles north of Ky. 192 along trail paralleling small\ncreek.\nRandy Lee Mears 93-68\n3 July 1993\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\nEastern Kentucky University Herbarium\n3 1234 10039610 8\nU.S.A.\nKENTUCKY\nSTERN\nEAS\n029032\nHERDARIUM\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 166,
+      "total_cost": 0.0007479
+    }
+  },
+  "tokens_LLM": {
+    "input": 2121,
+    "output": 489
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern Kentucky University Herbarium\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n3 1234 10039610 8\nU.S.A.\nKENTUCKY\nSTERN\nEAS\n029032\nHERDARIUM\nINCH\nOPTIRECTILINEAR",
+    "catalogNumber": "029022",
+    "chromosomeCount": "",
+    "collectedBy": "Randy Lee Mears",
+    "collectionDate": "1993-07-03",
+    "collectionDateEnd": "",
+    "collectorNumber": "93-68",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Laurel County",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Growing in rich woods",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "On west side of forest road #195 off Ky. 192 ca. 0.3 miles north of Ky. 192 along trail paralleling small creek.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "3 July 1993",
+    "verbatimCoordinates": ""
+  }
+}

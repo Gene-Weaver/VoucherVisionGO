@@ -23,12 +23,13 @@
     }
   },
   "tokens_LLM": {
-    "input": 2090,
-    "output": 452
+    "input": 2133,
+    "output": 463
   },
   "vvgo_json": {
-    "additionalText": "SOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED\nBrownwood, TX. 76801\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nDiapensiaceae\n3600 feet",
+    "additionalText": "cm\ncopyright reserved\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED 15999\nBrownwood, TX. 76801\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nDiapensiaceae",
     "catalogNumber": "HPC00014443",
+    "chromosomeCount": "",
     "collectedBy": "Patricia Avery",
     "collectionDate": "1969-06-23",
     "collectionDateEnd": "",
@@ -50,7 +51,7 @@
     "locality": "Sims Lake",
     "maximumElevationInMeters": "",
     "minimumElevationInMeters": "1097",
-    "scientificName": "Galax aphylla L.",
+    "scientificName": "Galax aphylla",
     "scientificNameAuthorship": "L.",
     "specificEpithet": "aphylla",
     "specimenDescription": "",

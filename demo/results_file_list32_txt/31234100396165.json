@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\n063984\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, Kentucky 40475 U.S.A.\nPlants of Buncombe County, North Carolina\n\nGalax aphylla L.\n\nDiapensiaceae\n\nRed oak-red maple forest on low slopes of Mt.\nPisgah, (elev ca. 4,200 ft); SW of Asheville, NC.\n\nT. J. Weckman                      #8247\nSeptember 20, 2003\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\n063984\nEAST\nTERN\nINCH\nOPTIRECTILINEAR\nSL\nU.S.A.\nEKY Herbarium of Eastern Kentucky University\nRichmond, Kentucky 40475 U.S.A.\nPlants of Buncombe County, North Carolina\nGalax aphylla L.\nDiapensiaceae\nRed oak-red maple forest on low slopes of Mt.\nPisgah, (elev ca. 4,200 ft); SW of Asheville, NC.\nT. J. Weckman\n#8247\nSeptember 20, 2003\nIK\nEastern Kentucky University Herbarium\n3 1234 10039616 5\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005949999999999999,
+      "ocr_text": "063984\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, Kentucky 40475 U.S.A.\nPlants of Buncombe County, North Carolina\n\nGalax aphylla L.\n\nDiapensiaceae\n\nRed oak-red maple forest on low slopes of Mt.\nPisgah, (elev ca. 4,200 ft); SW of Asheville, NC.\n\nT. J. Weckman                      #8247\nSeptember 20, 2003\n\n\n*Galax aphylla* L.\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 119,
+      "total_cost": 0.00137375
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.6e-05,
+      "ocr_text": "UNIVERSITY\n063984\nEAST\nTERN\nINCH\nOPTIRECTILINEAR\nSL\nU.S.A.\nEKY Herbarium of Eastern Kentucky University\nRichmond, Kentucky 40475 U.S.A.\nPlants of Buncombe County, North Carolina\nGalax aphylla L.\nDiapensiaceae\nRed oak-red maple forest on low slopes of Mt.\nPisgah, (elev ca. 4,200 ft); SW of Asheville, NC.\nT. J. Weckman\n#8247\nSeptember 20, 2003\nIK\nEastern Kentucky University Herbarium\n3 1234 10039616 5\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165,
+      "total_cost": 0.0007475
+    }
+  },
+  "tokens_LLM": {
+    "input": 2099,
+    "output": 466
+  },
+  "vvgo_json": {
+    "additionalText": "Eky herbarium of eastern kentucky university\nRichmond, kentucky 40475 u.s.a.\nPlants of buncombe county, north carolina\n(elev ca. 4,200 ft)\neastern kentucky university herbarium",
+    "catalogNumber": "063984",
+    "chromosomeCount": "",
+    "collectedBy": "T. j. Weckman",
+    "collectionDate": "2003-09-20",
+    "collectionDateEnd": "",
+    "collectorNumber": "8247",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Buncombe county",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "ft",
+    "genus": "Galax",
+    "habitat": "Red oak-red maple forest on low slopes of mt. pisgah",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Sw of asheville, nc.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "1280",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "North carolina",
+    "verbatimCollectionDate": "September 20, 2003",
+    "verbatimCoordinates": ""
+  }
+}

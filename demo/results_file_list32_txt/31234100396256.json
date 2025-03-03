@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n067906\n\nEastern Kentucky University Herbarium\n3 1234 10039625 6\n\nFlora of Kentucky\nMcCreary County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt.\n\nStephens Tract, Cumberland Falls State\nResort Park. Upland woods.\n\nR.L. Jones 9068\n7 May 1999\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n067906\nFlora of Kentucky\nMcCreary County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt.\nStephens Tract, Cumberland Falls State\nResort Park. Upland woods.\nR.L. Jones 9068\n7 May 1999\nINCH\nOPTIRECTILINEAR\nCM\nU.S.A.\n3 1234 10039625 6\nK\n\n\nGalax urceolata\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005449999999999999,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n067906\n\nEastern Kentucky University Herbarium\n3 1234 10039625 6\n\nFlora of Kentucky\nMcCreary County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt.\n\nStephens Tract, Cumberland Falls State\nResort Park. Upland woods.\n\nR.L. Jones 9068\n7 May 1999\n\n\n*Galax urceolata*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 109,
+      "total_cost": 0.00132375
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n067906\nFlora of Kentucky\nMcCreary County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt.\nStephens Tract, Cumberland Falls State\nResort Park. Upland woods.\nR.L. Jones 9068\n7 May 1999\nINCH\nOPTIRECTILINEAR\nCM\nU.S.A.\n3 1234 10039625 6\nK\n\n\nGalax urceolata\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119,
+      "total_cost": 0.0007291000000000001
+    }
+  },
+  "tokens_LLM": {
+    "input": 2064,
+    "output": 440
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern kentucky university herbarium\n3 1234 10039625 6\nInch\nOptirectilinear\nCm\nK",
+    "catalogNumber": "067906",
+    "chromosomeCount": "",
+    "collectedBy": "R.l. jones",
+    "collectionDate": "1999-05-07",
+    "collectionDateEnd": "",
+    "collectorNumber": "9068",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Mccreary county",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Upland woods.",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Stephens tract, cumberland falls state resort park.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax urceolata (Poir.) Brummitt.",
+    "scientificNameAuthorship": "(Poir.) Brummitt.",
+    "specificEpithet": "urceolata",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "7 May 1999",
+    "verbatimCoordinates": ""
+  }
+}

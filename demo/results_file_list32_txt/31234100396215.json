@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n033250\n\nEastern Kentucky University Herbarium\n3 1234 10039621 5\n\nHerbarium of Eastern Kentucky University\nRichmond, KY, USA 40475\n\n*Galax aphylla* L.\n\nPine\u2014Oak\u2014Heath Community on xeric south facing ridge, below Pisgah Inn el\n5000'\nTransylvania Co., NC                                                     9/4/93\ncoll. by: D. Collinsworth\ncoll. no.: 173 (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTE\nTERM\nKENTUCKY\n033250\nHERBARIUM\nNIVERSIT\nINCH\nOPTIRECTILINEAR\u00ae\nEastern Kentucky University Herbarium\n3 1234 10039621 5\nHerbarium of Eastern Kentucky University\nRichmond, KY, USA 40475\nGalax aphylla L.\nPine-Oak-Heath Community on xeric south facing ridge, below Pisgah Inn el\n5000'\nTransylvania Co., NC\ncoll. by: D. Collinsworth\ncoll. no.: 173\n9/4/93\nIK\nU.S.A.\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n033250\n\nEastern Kentucky University Herbarium\n3 1234 10039621 5\n\nHerbarium of Eastern Kentucky University\nRichmond, KY, USA 40475\n\n*Galax aphylla* L.\n\nPine\u2014Oak\u2014Heath Community on xeric south facing ridge, below Pisgah Inn el\n5000'\nTransylvania Co., NC                                                     9/4/93\ncoll. by: D. Collinsworth\ncoll. no.: 173 (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136,
+      "total_cost": 0.00145875
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.0400000000000004e-05,
+      "ocr_text": "EASTE\nTERM\nKENTUCKY\n033250\nHERBARIUM\nNIVERSIT\nINCH\nOPTIRECTILINEAR\u00ae\nEastern Kentucky University Herbarium\n3 1234 10039621 5\nHerbarium of Eastern Kentucky University\nRichmond, KY, USA 40475\nGalax aphylla L.\nPine-Oak-Heath Community on xeric south facing ridge, below Pisgah Inn el\n5000'\nTransylvania Co., NC\ncoll. by: D. Collinsworth\ncoll. no.: 173\n9/4/93\nIK\nU.S.A.\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151,
+      "total_cost": 0.0007419
+    }
+  },
+  "tokens_LLM": {
+    "input": 2106,
+    "output": 459
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern kentucky university\nHerbarium\nEastern kentucky university herbarium\n3 1234 10039621 5\nHerbarium of eastern kentucky university\nRichmond, ky, usa 40475\nIk",
+    "catalogNumber": "033250",
+    "chromosomeCount": "",
+    "collectedBy": "D. Collinsworth",
+    "collectionDate": "1993-09-04",
+    "collectionDateEnd": "",
+    "collectorNumber": "173",
+    "continent": "North America",
+    "country": "Usa",
+    "county": "Transylvania co.",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "ft",
+    "genus": "Galax",
+    "habitat": "Pine\u2014oak\u2014heath community on xeric south facing ridge, below pisgah inn",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Below pisgah inn el 5000'",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "1524",
+    "scientificName": "Galax aphylla",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Nc",
+    "verbatimCollectionDate": "9/4/93",
+    "verbatimCoordinates": ""
+  }
+}

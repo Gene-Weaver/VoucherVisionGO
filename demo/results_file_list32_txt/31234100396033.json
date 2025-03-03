@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n8032\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039603 3\n\nVASCULAR PLANTS OF KENTUCKY\nBell County\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron and oak-pine communities along\nHoneymoon Falls Trail; Pine Mountain State Park. Near\nPineville, KY.\n\nTimothy J. Weckman\n#2331\nHannah M. Weckman, Judith E. Rozeman\nFebruary 10, 1996\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nIK\nEASTERN\nHERBARIUM\nKENTUCKY UNI\n8032\nIVERSITY\nEastern Kentucky University Herbarium\n3 1234 10039603 3\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27\nU.S.A.\nVASCULAR PLANTS OF KENTUCKY\nBell County\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron and oak-pine communities along\nHoneymoon Falls Trail; Pine Mountain State Park. Near\nPineville, KY.\nTimothy J. Weckman\nHannah M. Weckman, Judith E. Rozeman\nFebruary 10, 1996\n#2331\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n8032\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039603 3\n\nVASCULAR PLANTS OF KENTUCKY\nBell County\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron and oak-pine communities along\nHoneymoon Falls Trail; Pine Mountain State Park. Near\nPineville, KY.\n\nTimothy J. Weckman\n#2331\nHannah M. Weckman, Judith E. Rozeman\nFebruary 10, 1996\n\n\n*Galax aphylla*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138,
+      "total_cost": 0.0014687500000000002
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.240000000000001e-05,
+      "ocr_text": "IK\nEASTERN\nHERBARIUM\nKENTUCKY UNI\n8032\nIVERSITY\nEastern Kentucky University Herbarium\n3 1234 10039603 3\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27\nU.S.A.\nVASCULAR PLANTS OF KENTUCKY\nBell County\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron and oak-pine communities along\nHoneymoon Falls Trail; Pine Mountain State Park. Near\nPineville, KY.\nTimothy J. Weckman\nHannah M. Weckman, Judith E. Rozeman\nFebruary 10, 1996\n#2331\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156,
+      "total_cost": 0.0007439
+    }
+  },
+  "tokens_LLM": {
+    "input": 2143,
+    "output": 470
+  },
+  "vvgo_json": {
+    "additionalText": "eastern kentucky university\nherbarium\n8032\nEastern Kentucky University Herbarium\nVASCULAR PLANTS OF KENTUCKY\nGalax aphylla",
+    "catalogNumber": "3 1234 10039603 3",
+    "chromosomeCount": "",
+    "collectedBy": "Timothy J. Weckman, Hannah M. Weckman, Judith E. Rozeman",
+    "collectionDate": "1996-02-10",
+    "collectionDateEnd": "",
+    "collectorNumber": "2331",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Bell county",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Hemlock-rhododendron and oak-pine communities along Honeymoon Falls Trail; Pine Mountain State Park.",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Near Pineville, ky.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "February 10, 1996",
+    "verbatimCoordinates": ""
+  }
+}

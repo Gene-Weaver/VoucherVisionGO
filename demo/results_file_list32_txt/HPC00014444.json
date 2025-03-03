@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\ncm\ncopyright reserved\n\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\n\nHoward Payne University Herbarium\nHPC00014444\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* (L.)\n\nLocation: Rocky woodland, Beech Mtn., Avery\nCo., N.C.\nElevation: 4,000 ft.\n\nDate5-4-72\nCollected by David W. Richardson No.\n\n(Handwritten) 235\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED 16000\nBrownwood, TX. 76801\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\nHoward Payne University Herbarium\nHPC00014444\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nGalax aphylla (L.)\nLocation: Rocky woodland, Beech Mtn., Avery\nCo., N.C.\nElevation: 4,000 ft.\nDate5-4-72\nCollected by David W. Richardsen No.\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED\n16000\nBrownwood, TX. 76801\n235\n\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "ocr_text": "cm\ncopyright reserved\n\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\n\nHoward Payne University Herbarium\nHPC00014444\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* (L.)\n\nLocation: Rocky woodland, Beech Mtn., Avery\nCo., N.C.\nElevation: 4,000 ft.\n\nDate5-4-72\nCollected by David W. Richardson No.\n\n(Handwritten) 235\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED 16000\nBrownwood, TX. 76801\n\n\n*Galax aphylla*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156,
+      "total_cost": 0.00155875
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\nHoward Payne University Herbarium\nHPC00014444\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nGalax aphylla (L.)\nLocation: Rocky woodland, Beech Mtn., Avery\nCo., N.C.\nElevation: 4,000 ft.\nDate5-4-72\nCollected by David W. Richardsen No.\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED\n16000\nBrownwood, TX. 76801\n235\n\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171,
+      "total_cost": 0.0007499
+    }
+  },
+  "tokens_LLM": {
+    "input": 2153,
+    "output": 477
+  },
+  "vvgo_json": {
+    "additionalText": "cm\ncopyright reserved\nSOUTH PLAINS COLLEGE\nSPLT\nLEVELLAND, TEXAS USA\nHoward Payne University Herbarium\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nHOWARD PAYNE UNIVERSITY\nHerbarium\nHPC\nENTERED 16000\nBrownwood, TX. 76801",
+    "catalogNumber": "HPC00014444",
+    "chromosomeCount": "",
+    "collectedBy": "David W. Richardsen, David W. Richardson",
+    "collectionDate": "1972-05-04",
+    "collectionDateEnd": "",
+    "collectorNumber": "235",
+    "continent": "North America",
+    "country": "United States",
+    "county": "Avery",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "ft",
+    "genus": "Galax",
+    "habitat": "Rocky woodland",
+    "identificationHistory": "",
+    "identifiedBy": "",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Beech Mtn.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "1219",
+    "scientificName": "Galax aphylla (L.)",
+    "scientificNameAuthorship": "(L.)",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "North Carolina",
+    "verbatimCollectionDate": "5-4-72",
+    "verbatimCoordinates": ""
+  }
+}

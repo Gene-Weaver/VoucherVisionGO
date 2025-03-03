@@ -1,0 +1,62 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n049158\nHERBARIUM\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, along ATV trail on E side of Kentennia Bog.\n\nNO.: 503\nDATE: 06/26/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039606 6\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nIK\nEASTERN KENTUCKY\n049158\nHERBARIUM\nUNIVERSITY\nINCH\nOPTIRECTILINEAR\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, along ATV trail on E side of Kentennia Bog.\n3 1234 10039606 6\nNO.: 503\nDATE: 06/26/1993\nCOLL:\nBryce D. Fields\nIDEN:\nBryce D. Fields\n\u0e1e\u0e27\nU.S.A.\n\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n049158\nHERBARIUM\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, along ATV trail on E side of Kentennia Bog.\n\nNO.: 503\nDATE: 06/26/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039606 6\n\n\n*Galax aphylla*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124,
+      "total_cost": 0.00139875
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 5.400000000000001e-05,
+      "ocr_text": "IK\nEASTERN KENTUCKY\n049158\nHERBARIUM\nUNIVERSITY\nINCH\nOPTIRECTILINEAR\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, along ATV trail on E side of Kentennia Bog.\n3 1234 10039606 6\nNO.: 503\nDATE: 06/26/1993\nCOLL:\nBryce D. Fields\nIDEN:\nBryce D. Fields\n\u0e1e\u0e27\nU.S.A.\n\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135,
+      "total_cost": 0.0007355
+    }
+  },
+  "tokens_LLM": {
+    "input": 2090,
+    "output": 459
+  },
+  "vvgo_json": {
+    "additionalText": "Eastern kentucky university herbarium\nFlora of blanton forest\nIK\n3 1234 10039606 6\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27",
+    "catalogNumber": "049158",
+    "chromosomeCount": "",
+    "collectedBy": "Bryce D. Fields",
+    "collectionDate": "1993-06-26",
+    "collectionDateEnd": "",
+    "collectorNumber": "503",
+    "continent": "North america",
+    "country": "Usa",
+    "county": "Harlan county",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "Blanton Forest, along atv trail on e side of kentennia bog.",
+    "identificationHistory": "",
+    "identifiedBy": "Bryce D. Fields",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "Blanton forest, along atv trail on e side of kentennia bog.",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Kentucky",
+    "verbatimCollectionDate": "06/26/1993",
+    "verbatimCoordinates": ""
+  }
+}
