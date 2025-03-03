@@ -63,6 +63,8 @@ def process_image(server_url, image_path, engines=None, prompt=None):
         
         # Check if the request was successful
         if response.status_code == 200:
+            print("Raw response from server:")
+            print(response.text[:1000]) 
             return json.loads(response.text, object_pairs_hook=OrderedDict)
         else:
             error_msg = f"Error: {response.status_code}"
