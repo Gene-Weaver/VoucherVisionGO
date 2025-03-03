@@ -1,15 +1,10 @@
-# Use Python 3.12 as the base image
+# Use Python 3.12 as the base image (to match the error log Python version)
 FROM python:3.12-slim
-
-# Set environment variables early to ensure they're in a stable layer
-ENV PORT=8080 \
-    PYTHONUNBUFFERED=1 \
-    PYTHONPATH="/app:/app/vouchervision_main"
 
 # Set workdir to root directory 
 WORKDIR /app
 
-# Install system dependencies - keep in a single layer to reduce image size
+# Install system dependencies including OpenCV dependencies
 RUN apt-get update && apt-get install -y \
     git \
     procps \
@@ -18,34 +13,43 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxrender1 \
     libxext6 \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy only requirements first for better layer caching
+# Copy requirements first for better caching
 COPY requirements.txt .
-
-# Install Python dependencies (will be cached if requirements.txt doesn't change)
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy git-related files for submodule handling
-COPY .gitmodules* ./ 
-COPY .git* ./
+# Install git and debugging tools
+RUN apt-get update && apt-get install -y git procps
 
-# Clone submodules if needed - this runs only if the git files change
-RUN if [ -f .gitmodules ]; then \
-        git submodule update --init --recursive || echo "Could not update submodules"; \
-    fi
-
-# Now copy the application code (this layer changes most frequently)
-# First, copy entrypoint to ensure it's executable before other files
-COPY entrypoint.sh .
-RUN chmod +x /app/entrypoint.sh
-
-# Copy the rest of the application code
+# Copy application code
 COPY . .
 
-# Create symbolic links for modules (only if needed and after code is copied)
-RUN ln -sf /app/vouchervision_main/vouchervision /app/vouchervision || echo "Could not create symlink - check if directories exist"
+# Check if vouchervision_main exists, if not clone it
+RUN if [ ! -d "/vouchervision_main" ]; then \
+        echo "vouchervision_main directory not found, attempting to clone"; \
+        if [ -f .gitmodules ]; then \
+            git submodule update --init --recursive; \
+        fi; \
+    fi
+
+# Initialize and update the submodule
+RUN git submodule update --init --recursive
+
+# Create symbolic links to ensure Python can find the modules both ways
+RUN ln -sf /vouchervision_main/vouchervision /vouchervision || echo "Could not create symlink to vouchervision"
+
+# Create symbolic links for modules
+RUN ln -sf /app/vouchervision_main/vouchervision /app/vouchervision
+
+# Make sure the entrypoint script is executable
+RUN chmod +x /app/entrypoint.sh
+
+# Environment variables
+ENV PORT=8080
+ENV PYTHONUNBUFFERED=1
+# ENV PYTHONPATH="/app:/app/vouchervision_main"
+ENV PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision"
 
 # Run the application
 ENTRYPOINT ["/app/entrypoint.sh"]
