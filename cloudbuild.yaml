@@ -7,20 +7,20 @@ steps:
       - '-c'
       - |
         # Default to false for first build where we can't diff
-        DEPS_CHANGED="false"
+        _DEPS_CHANGED="false"
         # Check if we can access previous commit
         if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
           # Check if dependency files changed between this commit and the previous one
           if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh'; then
-            DEPS_CHANGED="true"
+            _DEPS_CHANGED="true"
           fi
         else
           # First commit or shallow clone - rebuild required
-          DEPS_CHANGED="true"
+          _DEPS_CHANGED="true"
         fi
         # Store the result as a build artifact
-        echo $DEPS_CHANGED > /workspace/deps_changed.txt
-        echo "Dependencies changed: $DEPS_CHANGED"
+        echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
+        echo "Dependencies changed: $_DEPS_CHANGED"
 
   # Step 2: Pull the latest image to use as cache
   - name: 'gcr.io/cloud-builders/docker'
@@ -39,8 +39,8 @@ steps:
     args:
       - '-c'
       - |
-        DEPS_CHANGED=$(cat /workspace/deps_changed.txt)
-        if [ "$DEPS_CHANGED" = "true" ]; then
+        _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
+        if [ "$_DEPS_CHANGED" = "true" ]; then
           echo "Rebuilding container from scratch..."
           docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
         else
