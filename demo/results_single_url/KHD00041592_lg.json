@@ -1,0 +1,61 @@
+{
+  "ocr_results": {
+    "OCR": "\ngemini-1.5-pro OCR:\ninches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747 (handwritten)\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nOriginal label (handwritten)\nDENVER BOTANIC GARDENS KHD00041592\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\ninches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+    "gemini-1.5-pro": {
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009600000000000001,
+      "ocr_text": "inches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747 (handwritten)\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nOriginal label (handwritten)\nDENVER BOTANIC GARDENS KHD00041592\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 192,
+      "total_cost": 0.00173875
+    },
+    "gemini-2.0-flash": {
+      "cost_in": 0.0006815,
+      "cost_out": 7.68e-05,
+      "ocr_text": "inches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 192,
+      "total_cost": 0.0007583000000000001
+    }
+  },
+  "tokens_LLM": {
+    "input": 2197,
+    "output": 514
+  },
+  "vvgo_json": {
+    "additionalText": "inches\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18 228\nHerbarium Specimen\nCommon Name Wandflower, Beetleweed\nRemarks\n#1747 (handwritten)\n(Poir.) Brummitt\n7/1997 (handwritten)\nWandflower, Beetleweed DIA\nOriginal label (handwritten)\nDENVER BOTANIC GARDENS\nGalax aphylla\nGalax urceolata\n2\n3\ncm\ncopyright reserved",
+    "catalogNumber": "KHD00041592",
+    "collectedBy": "A. Armstrong",
+    "collectionDate": "1964-08-26",
+    "collectionDateEnd": "",
+    "collectorNumber": "1747",
+    "continent": "North America",
+    "country": "United States",
+    "county": "",
+    "cultivated": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "elevationUnits": "",
+    "genus": "Galax",
+    "habitat": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt, J. Wingate 1997",
+    "identifiedBy": "Ditto",
+    "identifiedConfidence": "",
+    "identifiedDate": "",
+    "identifiedRemarks": "",
+    "locality": "High Knob, Virginia",
+    "maximumElevationInMeters": "",
+    "minimumElevationInMeters": "",
+    "scientificName": "Galax aphylla L.",
+    "scientificNameAuthorship": "L.",
+    "specificEpithet": "aphylla",
+    "specimenDescription": "",
+    "stateProvince": "Virginia",
+    "verbatimCollectionDate": "8-26-64",
+    "verbatimCoordinates": ""
+  }
+}

@@ -1,16 +1,18 @@
 import os
+import sys
 import json
 import tempfile
+import threading
 from flask import Flask, request, jsonify
 import logging
 from werkzeug.utils import secure_filename
+import queue
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Setup paths and imports
-import sys
 project_root = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, project_root)
 
@@ -43,20 +45,55 @@ except:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
 
+class RequestThrottler:
+    """
+    Class to handle throttling of concurrent requests
+    """
+    def __init__(self, max_concurrent=4):
+        self.semaphore = threading.Semaphore(max_concurrent)
+        self.active_count = 0
+        self.lock = threading.Lock()
+        self.max_concurrent = max_concurrent
+        
+    def acquire(self):
+        """Acquire a slot for processing"""
+        acquired = self.semaphore.acquire(blocking=False)
+        if acquired:
+            with self.lock:
+                self.active_count += 1
+                logger.info(f"Request acquired. Active requests: {self.active_count}/{self.max_concurrent}")
+        return acquired
+        
+    def release(self):
+        """Release a processing slot"""
+        self.semaphore.release()
+        with self.lock:
+            self.active_count -= 1
+            logger.info(f"Request completed. Active requests: {self.active_count}/{self.max_concurrent}")
+    
+    def get_active_count(self):
+        """Get the current count of active requests"""
+        with self.lock:
+            return self.active_count
+        
 class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self):
+    def __init__(self, max_concurrent=4):
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+        
+        # Initialize request throttler
+        self.throttler = RequestThrottler(max_concurrent)
         
         # Get API key for Gemini
         self.api_key = self._get_api_key()
         
         # Initialize OCR engines 
         self.ocr_engines = {}
+        self.ocr_engines_lock = threading.Lock()
         for model_name in ["gemini-1.5-pro", "gemini-2.0-flash"]:
             self.ocr_engines[model_name] = OCRGeminiProVision(
                 self.api_key, 
@@ -107,6 +144,9 @@ class VoucherVisionProcessor:
             self.cfg, self.logger, self.model_name, self.Voucher_Vision.JSON_dict_structure, 
             config_vals_for_permutation=None, exit_early_for_JSON=True
         )
+
+        # Thread-local storage for handling per-request VoucherVision instances
+        self.thread_local = threading.local()
     
     def _get_api_key(self):
         """Get API key from environment variable"""
@@ -127,20 +167,24 @@ class VoucherVisionProcessor:
         for ocr_opt in engine_options:
             ocr_packet[ocr_opt] = {}
             
-            # Use pre-initialized OCR engine if available, or create a new one
-            if ocr_opt not in self.ocr_engines:
-                self.ocr_engines[ocr_opt] = OCRGeminiProVision(
-                    self.api_key, 
-                    model_name=ocr_opt, 
-                    max_output_tokens=1024, 
-                    temperature=0.5, 
-                    top_p=0.3, 
-                    top_k=3, 
-                    seed=123456, 
-                    do_resize_img=False
-                )
+            # Thread-safe access to OCR engines
+            with self.ocr_engines_lock:
+                # Use pre-initialized OCR engine if available, or create a new one
+                if ocr_opt not in self.ocr_engines:
+                    self.ocr_engines[ocr_opt] = OCRGeminiProVision(
+                        self.api_key, 
+                        model_name=ocr_opt, 
+                        max_output_tokens=1024, 
+                        temperature=0.5, 
+                        top_p=0.3, 
+                        top_k=3, 
+                        seed=123456, 
+                        do_resize_img=False
+                    )
+                
+                OCR_Engine = self.ocr_engines[ocr_opt]
             
-            OCR_Engine = self.ocr_engines[ocr_opt]
+            # Execute OCR (this API call can run concurrently)
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path)
             
             ocr_packet[ocr_opt]["ocr_text"] = response
@@ -156,75 +200,108 @@ class VoucherVisionProcessor:
 
         return ocr_packet
     
-    def process_voucher_vision(self, ocr_text):
-        """Process the OCR text with VoucherVision"""
-        # Update OCR text for processing
-        self.Voucher_Vision.OCR = ocr_text
-        prompt = self.Voucher_Vision.setup_prompt()
+    def get_thread_local_vv(self, prompt):
+        """Get or create a thread-local VoucherVision instance with the specified prompt"""
+        if not hasattr(self.thread_local, 'vv') or self.thread_local.prompt != prompt:
+            # Clone the base VoucherVision object for this thread
+            self.thread_local.vv = VoucherVision(
+                self.cfg, self.logger, self.dir_home, None, None, None, 
+                is_hf=False, skip_API_keys=True
+            )
+            self.thread_local.vv.initialize_token_counters()
+            
+            # Set the custom prompt path
+            self.thread_local.vv.path_custom_prompts = os.path.join(
+                self.custom_prompts_dir,
+                prompt
+            )
+            self.thread_local.vv.setup_JSON_dict_structure()
+            self.thread_local.prompt = prompt
+            
+            # Create a thread-local LLM model handler
+            self.thread_local.llm_model = GoogleGeminiHandler(
+                self.cfg, self.logger, self.model_name, self.thread_local.vv.JSON_dict_structure, 
+                config_vals_for_permutation=None, exit_early_for_JSON=True
+            )
         
-        # Call the LLM to process the OCR text (using pre-initialized model)
-        response_candidate, nt_in, nt_out, _, _, _ = self.llm_model.call_llm_api_GoogleGemini(
-            prompt, json_report=None, paths=None
+        return self.thread_local.vv, self.thread_local.llm_model
+    
+    def process_voucher_vision(self, ocr_text, prompt):
+        """Process the OCR text with VoucherVision using a thread-local instance"""
+        # Get thread-local VoucherVision instance with the correct prompt
+        vv, llm_model = self.get_thread_local_vv(prompt)
+        
+        # Update OCR text for processing
+        vv.OCR = ocr_text
+        prompt_text = vv.setup_prompt()
+        
+        # Call the LLM to process the OCR text
+        response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
+            prompt_text, json_report=None, paths=None
         )
 
         return response_candidate, nt_in, nt_out
     
     def process_image_request(self, file, engine_options=None, prompt=None):
         """Process an image from a request file"""
-        # Check if the file is valid
-        if file.filename == '':
-            return {'error': 'No file selected'}, 400
-        
-        if not self.allowed_file(file.filename):
-            return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
-        
-        # Save uploaded file to a temporary location
-        temp_dir = tempfile.mkdtemp()
-        file_path = os.path.join(temp_dir, secure_filename(file.filename))
-        file.save(file_path)
-        
+        # Check if we can accept this request based on throttling
+        if not self.throttler.acquire():
+            return {'error': 'Server is at maximum capacity. Please try again later.'}, 429
+            
         try:
-            # Get engine options (default to gemini models if not specified)
-            if not engine_options:
-                engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+            # Check if the file is valid
+            if file.filename == '':
+                return {'error': 'No file selected'}, 400
             
-            # Set the prompt path
-            self.default_prompt = prompt if prompt else self.default_prompt
-            self.Voucher_Vision.path_custom_prompts = os.path.join(
-                self.custom_prompts_dir, self.default_prompt
-            )
-            self.logger.info(f"Using prompt file: {self.Voucher_Vision.path_custom_prompts}")
+            if not self.allowed_file(file.filename):
+                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
             
+            # Save uploaded file to a temporary location
+            temp_dir = tempfile.mkdtemp()
+            file_path = os.path.join(temp_dir, secure_filename(file.filename))
+            file.save(file_path)
             
-            # Perform OCR
-            ocr_results = self.perform_ocr(file_path, engine_options)
-            
-            # Process with VoucherVision
-            vv_results, tokens_in, tokens_out = self.process_voucher_vision(ocr_results["OCR"])
-            
-            # Combine results
-            results = {
-                "ocr_results": ocr_results,
-                "vvgo_json": vv_results,
-                "tokens_LLM": {
-                    "input": tokens_in,
-                    "output": tokens_out
-                }
-            }
-            
-            return results, 200
-        
-        except Exception as e:
-            self.logger.exception("Error processing request")
-            return {'error': str(e)}, 500
-        
-        finally:
-            # Clean up the temporary file
             try:
-                os.remove(file_path)
-                os.rmdir(temp_dir)
-            except:
-                pass
+                # Get engine options (default to gemini models if not specified)
+                if not engine_options:
+                    engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+                
+                # Use default prompt if none specified
+                current_prompt = prompt if prompt else self.default_prompt
+                logger.info(f"Using prompt file: {current_prompt}")
+                
+                # Perform OCR
+                ocr_results = self.perform_ocr(file_path, engine_options)
+                
+                # Process with VoucherVision
+                vv_results, tokens_in, tokens_out = self.process_voucher_vision(ocr_results["OCR"], current_prompt)
+                
+                # Combine results
+                results = {
+                    "ocr_results": ocr_results,
+                    "vvgo_json": vv_results,
+                    "tokens_LLM": {
+                        "input": tokens_in,
+                        "output": tokens_out
+                    }
+                }
+                
+                return results, 200
+            
+            except Exception as e:
+                self.logger.exception("Error processing request")
+                return {'error': str(e)}, 500
+            
+            finally:
+                # Clean up the temporary file
+                try:
+                    os.remove(file_path)
+                    os.rmdir(temp_dir)
+                except:
+                    pass
+        finally:
+            # Release the throttling semaphore
+            self.throttler.release()
 
 
 # Initialize Flask app
@@ -262,9 +339,18 @@ def process_image():
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
-    return jsonify({'status': 'ok'}), 200
+    # Get the active request count from the processor
+    active_requests = app.config['processor'].throttler.get_active_count()
+    max_requests = app.config['processor'].throttler.max_concurrent
+    
+    return jsonify({
+        'status': 'ok',
+        'active_requests': active_requests,
+        'max_concurrent_requests': max_requests,
+        'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
+    }), 200
 
 if __name__ == '__main__':
     # Get port from environment variable or default to 8080
     port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)

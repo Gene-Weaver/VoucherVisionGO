@@ -37,7 +37,6 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--image", f"{self.base_dir}/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg",
                     "--output-dir", f"{self.base_dir}/results_single_image",
-                    "--verbose"
                 ]
             },
             {
@@ -48,7 +47,18 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--image", "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",
                     "--output-dir", f"{self.base_dir}/results_single_url",
-                    "--verbose"
+                ]
+            },
+            {
+                "name": "custom_prompt",
+                "description": "Process an image with a custom prompt",
+                "cmd": [
+                    "python", "client.py",
+                    "--server", self.server_url,
+                    "--image", "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",
+                    "--output-dir", f"{self.base_dir}/results_single_image_custom_prompt",
+                    "--verbose",
+                    "--prompt", "SLTPvM_default_chromosome.yaml"
                 ]
             },
             {
@@ -59,7 +69,6 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--directory", f"{self.base_dir}/images",
                     "--output-dir", f"{self.base_dir}/results_dir_images",
-                    "--verbose"
                 ]
             },
             {
@@ -83,7 +92,6 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--file-list", f"{self.base_dir}/csv/file_list.csv",
                     "--output-dir", f"{self.base_dir}/results_file_list_csv",
-                    "--verbose"
                 ]
             },
             {
@@ -94,19 +102,6 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--file-list", f"{self.base_dir}/txt/file_list.txt",
                     "--output-dir", f"{self.base_dir}/results_file_list_txt",
-                    "--verbose"
-                ]
-            },
-            {
-                "name": "custom_prompt",
-                "description": "Process an image with a custom prompt",
-                "cmd": [
-                    "python", "client.py",
-                    "--server", self.server_url,
-                    "--image", "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",
-                    "--output-dir", f"{self.base_dir}/results_single_image_custom_prompt",
-                    "--verbose",
-                    "--prompt", "SLTPvM_default_chromosome.yaml"
                 ]
             },
             {
@@ -179,14 +174,93 @@ class VoucherVisionTester:
             
             success = result.returncode == 0
             
+            # Special case for custom_prompt test - check for chromosomeCount in JSON
+            if success and 'custom_prompt' in test['name']:
+                try:
+                    import json
+                    from io import StringIO
+                    
+                    # Try to parse the stdout to find JSON data
+                    output = result.stdout
+                    json_data = None
+                    
+                    # Find the JSON output in the stdout
+                    if "VoucherVision JSON:" in output:
+                        json_start = output.find("VoucherVision JSON:") + len("VoucherVision JSON:")
+                        json_text = output[json_start:].strip()
+                        
+                        # Try to parse the JSON
+                        try:
+                            json_data = json.loads(json_text)
+                        except json.JSONDecodeError:
+                            # If direct parsing fails, try to find JSON between specific delimiters
+                            import re
+                            json_pattern = re.compile(r'\{.*\}', re.DOTALL)
+                            match = json_pattern.search(json_text)
+                            if match:
+                                try:
+                                    json_data = json.loads(match.group(0))
+                                except:
+                                    pass
+                    
+                    # If we couldn't find JSON in stdout, try checking the output JSON file
+                    if not json_data:
+                        # Find the output directory from test command
+                        output_dir = next((arg for i, arg in enumerate(test['cmd']) if arg == '--output-dir' and i + 1 < len(test['cmd'])), None)
+                        if output_dir:
+                            output_dir_index = test['cmd'].index('--output-dir') + 1
+                            output_dir = test['cmd'][output_dir_index]
+                            
+                            # Extract the image filename or URL
+                            image_path = next((arg for i, arg in enumerate(test['cmd']) if arg == '--image' and i + 1 < len(test['cmd'])), None)
+                            if image_path:
+                                image_index = test['cmd'].index('--image') + 1
+                                image_path = test['cmd'][image_index]
+                                
+                                # Get the output filename
+                                from os.path import basename, splitext, join
+                                if image_path.startswith(('http://', 'https://')):
+                                    # For URLs, use the last part of the URL as the filename
+                                    base_name = basename(image_path.split('?')[0])  # Remove query params if any
+                                else:
+                                    base_name = basename(image_path)
+                                
+                                name_without_ext = splitext(base_name)[0]
+                                json_file_path = join(output_dir, f"{name_without_ext}.json")
+                                
+                                # Try to read and parse the JSON file
+                                if os.path.exists(json_file_path):
+                                    try:
+                                        with open(json_file_path, 'r') as f:
+                                            file_data = json.load(f)
+                                            if 'vvgo_json' in file_data:
+                                                json_data = file_data['vvgo_json']
+                                    except:
+                                        pass
+                    
+                    # Check if the required key exists
+                    if json_data:
+                        if 'chromosomeCount' not in json_data:
+                            success = False
+                            print("❌ Test 'custom_prompt' failed validation: 'chromosomeCount' key not found in JSON output")
+                        else:
+                            print(f"✅ Validation passed: Found 'chromosomeCount' key with value: {json_data['chromosomeCount']}")
+                    else:
+                        success = False
+                        print("❌ Test 'custom_prompt' failed validation: Could not parse JSON output")
+                
+                except Exception as e:
+                    print(f"❌ Error validating custom_prompt test: {str(e)}")
+                    success = False
+            
             # Print test result
             end_time = time.time()
             duration = end_time - start_time
             
             if success:
-                print(f"\n✅ Test '{test['name']}' PASSED in {duration:.2f} seconds")
+                print(f"✅ Test '{test['name']}' PASSED in {duration:.2f} seconds")
             else:
-                print(f"\n❌ Test '{test['name']}' FAILED in {duration:.2f} seconds")
+                print(f"❌ Test '{test['name']}' FAILED in {duration:.2f} seconds")
                 print(f"Return code: {result.returncode}")
             
             return {
@@ -197,7 +271,7 @@ class VoucherVisionTester:
             }
             
         except Exception as e:
-            print(f"\n❌ Error running test '{test['name']}':")
+            print(f"❌ Error running test '{test['name']}':")
             print(str(e))
             return {
                 "name": test['name'],
