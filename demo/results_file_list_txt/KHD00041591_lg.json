@@ -1,6 +1,6 @@
 {
   "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U.\nDET.\nJuly 20, 1934\n\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\ninches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft eles.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\nHandwritten text:\nJ.K.LI.\nJuly 20, 1934\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U.\nDET.\nJuly 20, 1934\n\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\ninches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\n. 1206. Galax aphylla L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft elev.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\n\n\nGalax urceolata\nGalax aphylla\n\n",
     "gemini-1.5-pro": {
       "cost_in": 0.00077875,
       "cost_out": 0.00067,
@@ -13,21 +13,21 @@
     },
     "gemini-2.0-flash": {
       "cost_in": 0.0006815,
-      "cost_out": 7.28e-05,
-      "ocr_text": "inches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft eles.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\nHandwritten text:\nJ.K.LI.\nJuly 20, 1934\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_out": 6.84e-05,
+      "ocr_text": "inches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\n. 1206. Galax aphylla L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft elev.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\n\n\nGalax urceolata\nGalax aphylla\n\n",
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 182,
-      "total_cost": 0.0007543000000000001
+      "tokens_out": 171,
+      "total_cost": 0.0007499000000000001
     }
   },
   "tokens_LLM": {
-    "input": 2117,
-    "output": 532
+    "input": 2111,
+    "output": 519
   },
   "vvgo_json": {
-    "additionalText": "Kathryn kalmbach herbarium\nDenver botanic gardens\n1725\nPolemoniaceae\nDiapensiaceae J. K. Underwood Herbarium\nGalax aphylla L.\n5800 ft. elev.\nDET.\nGalax urceolata\nGalax aphylla\ninches\ncm\n4 gardens 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\nJ.K.LI.\nJuly 20, 1934\nHandwritten text\nDenver botanic gardens",
+    "additionalText": "Kathryn kalmbach herbarium\nDenver botanic gardens\n1725\nFlora of tennessee\nPolemoniaceae\nDiapensiaceae J. K. Underwood herbarium\nGalax aphylla L.\n5800 ft. elev.\nDet.\nGalax urceolata\nGalax aphylla\ninches\nDenver botanic\nCm\ngardens 0 1 2 3\n4\n5 6 7 8 9 10\nCopyright reserved",
     "catalogNumber": "KHD00041591",
     "collectedBy": "J.K.U.",
     "collectionDate": "1934-07-20",
@@ -39,7 +39,7 @@
     "cultivated": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "ft",
+    "elevationUnits": "m",
     "genus": "Galax",
     "habitat": "Hemlock woods",
     "identificationHistory": "Galax aphylla",

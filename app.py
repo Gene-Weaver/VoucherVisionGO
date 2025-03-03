@@ -49,7 +49,7 @@ class RequestThrottler:
     """
     Class to handle throttling of concurrent requests
     """
-    def __init__(self, max_concurrent=4):
+    def __init__(self, max_concurrent=32): # TODO switch to 8?
         self.semaphore = threading.Semaphore(max_concurrent)
         self.active_count = 0
         self.lock = threading.Lock()
@@ -80,7 +80,7 @@ class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self, max_concurrent=4):
+    def __init__(self, max_concurrent=32): # TODO ##########
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
@@ -202,7 +202,8 @@ class VoucherVisionProcessor:
     
     def get_thread_local_vv(self, prompt):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
-        if not hasattr(self.thread_local, 'vv') or self.thread_local.prompt != prompt:
+        # Always create a new instance when a prompt is explicitly specified
+        if prompt != self.default_prompt or not hasattr(self.thread_local, 'vv'):
             # Clone the base VoucherVision object for this thread
             self.thread_local.vv = VoucherVision(
                 self.cfg, self.logger, self.dir_home, None, None, None, 
@@ -223,6 +224,8 @@ class VoucherVisionProcessor:
                 self.cfg, self.logger, self.model_name, self.thread_local.vv.JSON_dict_structure, 
                 config_vals_for_permutation=None, exit_early_for_JSON=True
             )
+            
+            self.logger.info(f"Created new thread-local VV instance with prompt: {prompt}")
         
         return self.thread_local.vv, self.thread_local.llm_model
     

@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import time
 import argparse
 import requests
 import glob
@@ -315,10 +316,13 @@ def main():
     args = parser.parse_args()
     
     # Ensure max_workers is no more than 4
-    max_workers = min(args.max_workers, 4)
+    max_workers = min(args.max_workers, 32)
     
     # Create output directory if it doesn't exist
     os.makedirs(args.output_dir, exist_ok=True)
+
+    # Start timing
+    start_time = time.time()
     
     try:
         # To store all results if save-to-csv is enabled
@@ -408,6 +412,14 @@ def main():
         print(f"Error: {e}")
         sys.exit(1)
 
+    # End timing and report
+    end_time = time.time()
+    elapsed_seconds = end_time - start_time
+    minutes, seconds = divmod(elapsed_seconds, 60)
+    print(f"\n{'-' * 40}")
+    print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
+    print(f"{'-' * 40}")
+
 if __name__ == "__main__":
     main()
 
@@ -423,8 +435,8 @@ if __name__ == "__main__":
 # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_csv" --verbose --prompt "SLTPvM_default_chromosome.yaml" --max-workers 4
 
 # List of files:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/csv/file_list.csv --output-dir "./demo/results_file_list_csv" --verbose --max-workers 2
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/txt/file_list.txt --output-dir "./demo/results_file_list_txt" --verbose --max-workers 4
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/csv/file_list.csv" --output-dir "./demo/results_file_list_csv" --verbose --max-workers 2
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/txt/file_list.txt" --output-dir "./demo/results_file_list_txt" --verbose --max-workers 4
 
 # Custom prompt:
 # python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_image_custom_prompt" --verbose --prompt "SLTPvM_default_chromosome.yaml"
