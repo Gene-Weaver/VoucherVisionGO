@@ -25,27 +25,23 @@ jobs:
           path: client-repo
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      - name: Copy client.py and update README
+      - name: Copy client.py and update README sync information
         run: |
           # Copy the client file
           cp source-repo/client.py client-repo/
           
-          # Create/update the README with latest sync information
-          cat > client-repo/README.md << EOF
-          # VoucherVisionGO Client
-
-          This repository contains only the client component of [VoucherVisionGO](https://github.com/Gene-Weaver/VoucherVisionGO).
-
-          ## About
-          
-          The client.py file is automatically synchronized from the main VoucherVisionGO repository.
-          
-          Last synchronized: $(date)
-          
-          ## Usage
-          
-          Please refer to the [main repository](https://github.com/Gene-Weaver/VoucherVisionGO) for complete documentation.
-          EOF
+          # Only update the sync timestamp in the README
+          if [ -f client-repo/README.md ]; then
+            # Use sed to replace or add the sync timestamp line
+            grep -q "Last synchronized:" client-repo/README.md
+            if [ $? -eq 0 ]; then
+              # Replace existing timestamp line
+              sed -i "s/Last synchronized:.*$/Last synchronized: $(date)/" client-repo/README.md
+            else
+              # Add timestamp after the "About" section
+              sed -i "/## About/,/^$/s/^\(.*it is automatically synchronized.*\)$/\1\n\nLast synchronized: $(date)/" client-repo/README.md
+            fi
+          fi
           
           # Commit and push changes
           cd client-repo
