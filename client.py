@@ -24,19 +24,17 @@ class OrderedDictJSONEncoder(json.JSONEncoder):
             return '{' + ','.join(f'"{k}":{self.encode(v)}' for k, v in obj.items()) + '}'
         return super().encode(obj)
     
-def ordereddict_to_json(ordereddict_data):
+def ordereddict_to_json(ordereddict_data, output_type="json"):
     """
-    Convert an OrderedDict to a JSON string
+    Convert an OrderedDict to JSON
     
     Args:
         ordereddict_data: The OrderedDict to convert
+        output_type: "json" (string) or "dict" (Python dictionary)
         
     Returns:
-        A JSON string representation of the data
+        Either a JSON string or Python dictionary based on output_type
     """
-    # Convert OrderedDict to a regular dictionary first (optional but cleaner)
-    # This step is optional as json.dumps can handle OrderedDict directly
-    
     def convert_to_dict(obj):
         if isinstance(obj, OrderedDict):
             return {k: convert_to_dict(v) for k, v in obj.items()}
@@ -47,8 +45,10 @@ def ordereddict_to_json(ordereddict_data):
     
     regular_dict = convert_to_dict(ordereddict_data)
     
-    # Convert to JSON with pretty formatting
-    return json.dumps(regular_dict, indent=4)
+    if output_type.lower() == "dict":
+        return regular_dict
+    else:  # Default to JSON string
+        return json.dumps(regular_dict, indent=4)
     
 def process_image(server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
     """
