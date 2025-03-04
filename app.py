@@ -321,7 +321,8 @@ class VoucherVisionProcessor:
                             "output": tokens_out
                         }
                     }
-                
+                logger.warning(vv_results)
+                logger.warning(results)
                 return results, 200
             
             except Exception as e:
