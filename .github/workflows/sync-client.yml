@@ -6,7 +6,8 @@ on:
       - main
     paths:
       - 'client.py'
-      - '/demo'
+      - 'list_prompts.py'
+      - 'demo/**'
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
@@ -34,24 +35,53 @@ jobs:
           echo "=== CLIENT REPOSITORY ==="
           ls -la client-repo/
           echo ""
-          echo "=== CHECKING FOR client.py ==="
-          if [ -f source-repo/client.py ]; then
-            echo "client.py found in source repository"
+          echo "=== CHECKING FOR FILES TO SYNC ==="
+          for file in "client.py" "list_prompts.py"; do
+            if [ -f "source-repo/$file" ]; then
+              echo "$file found in source repository"
+            else
+              echo "$file NOT found in source repository"
+              find source-repo -name "$file" | xargs -I{} echo "Found at: {}"
+            fi
+          done
+          
+          if [ -d "source-repo/demo" ]; then
+            echo "demo directory found in source repository"
+            ls -la source-repo/demo/
           else
-            echo "client.py NOT found in source repository"
-            find source-repo -name "client.py" | xargs -I{} echo "Found at: {}"
+            echo "demo directory NOT found in source repository"
+            find source-repo -name "demo" -type d | xargs -I{} echo "Found at: {}"
           fi
 
-      - name: Copy client.py and update README sync information
+      - name: Copy files and update README sync information
         run: |
-          # Copy the client file with error checking
-          if [ ! -f source-repo/client.py ]; then
+          # Ensure destination directories exist
+          mkdir -p client-repo/demo
+          
+          # Copy client.py
+          if [ -f source-repo/client.py ]; then
+            echo "Copying client.py to client repository..."
+            cp -v source-repo/client.py client-repo/
+          else
             echo "ERROR: client.py not found in source repository"
             exit 1
           fi
           
-          echo "Copying client.py to client repository..."
-          cp -v source-repo/client.py client-repo/
+          # Copy list_prompts.py
+          if [ -f source-repo/list_prompts.py ]; then
+            echo "Copying list_prompts.py to client repository..."
+            cp -v source-repo/list_prompts.py client-repo/
+          else
+            echo "WARNING: list_prompts.py not found in source repository"
+          fi
+          
+          # Copy demo directory recursively
+          if [ -d source-repo/demo ]; then
+            echo "Copying demo directory to client repository..."
+            cp -rv source-repo/demo/* client-repo/demo/
+          else
+            echo "WARNING: demo directory not found in source repository"
+          fi
           
           # Check if README.md exists
           if [ ! -f client-repo/README.md ]; then
@@ -74,14 +104,16 @@ jobs:
           cd client-repo
           git config user.name "VoucherVision Bot"
           git config user.email "bot@github.com"
-          git add client.py README.md
+          
+          # Add all the synced files
+          git add client.py list_prompts.py demo/ README.md
           
           # Check if there are changes
           if git diff --cached --quiet; then
             echo "No changes detected in files"
           else 
             echo "Changes detected, committing..."
-            git commit -m "Sync client.py from VoucherVisionGO repository [$(date)]"
+            git commit -m "Sync client.py, list_prompts.py, and demo folder from VoucherVisionGO repository [$(date)]"
             echo "Pushing changes..."
             git push || { echo "Push failed. Check token permissions"; exit 1; }
           fi

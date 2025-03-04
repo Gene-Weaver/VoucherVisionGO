@@ -620,19 +620,86 @@ def prompts_ui():
         .details-btn { padding: 6px 12px; background-color: #3498db; color: white; border: none; 
                      border-radius: 4px; cursor: pointer; }
         .details-btn:hover { background-color: #2980b9; }
-        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; 
-               overflow: auto; background-color: rgba(0,0,0,0.4); }
-        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; 
-                        width: 80%; max-height: 80%; overflow: auto; }
-        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .close:hover { color: black; }
-        pre { background-color: #f8f8f8; padding: 10px; border-radius: 4px; overflow-x: auto; 
-            white-space: pre-wrap; word-wrap: break-word; }
-        .section-title { color: #2c3e50; margin-top: 15px; }
+        
+        #detailsPanel {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none; /* Hidden by default */
+            position: relative;
+            overflow: auto;
+            max-height: 500px;
+        }
+        
+        .panel-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .panel-close:hover {
+            color: black;
+        }
+        
+        pre { 
+            background-color: #f8f8f8; 
+            padding: 10px; 
+            border-radius: 4px; 
+            overflow-x: auto; 
+            white-space: pre-wrap; 
+            word-wrap: break-word;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .section-title { 
+            color: #2c3e50; 
+            margin-top: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .metadata-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        
+        .metadata-table td {
+            padding: 5px 10px;
+            border: none;
+        }
+        
+        .metadata-table tr td:first-child {
+            font-weight: bold;
+            width: 120px;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            transition: background-color 0.5s ease;
+        }
     </style>
 </head>
 <body>
     <h1>VoucherVision Prompt Templates</h1>
+    
+    <!-- Details panel that stays above the table -->
+    <div id="detailsPanel">
+        <span class="panel-close" id="closePanel">&times;</span>
+        <h2 id="detailsTitle">Prompt Details</h2>
+        <div id="promptDetails">
+            <!-- Prompt details will be loaded here -->
+        </div>
+    </div>
+    
     <div id="loading">Loading prompts...</div>
     <table class="prompt-table" id="promptTable" style="display:none;">
         <thead>
@@ -652,16 +719,6 @@ def prompts_ui():
         </tbody>
     </table>
     
-    <div id="promptModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle">Prompt Details</h2>
-            <div id="promptDetails">
-                <!-- Prompt details will be loaded here -->
-            </div>
-        </div>
-    </div>
-    
     <script>
         // Fetch and display the prompt list
         fetch('/prompts')
@@ -675,6 +732,7 @@ def prompts_ui():
                     
                     data.prompts.forEach((prompt, index) => {
                         const row = document.createElement('tr');
+                        row.id = `prompt-row-${index}`;
                         
                         row.innerHTML = `
                             <td>${index + 1}</td>
@@ -684,7 +742,7 @@ def prompts_ui():
                             <td>${prompt.version}</td>
                             <td>${prompt.author}</td>
                             <td>${prompt.institution}</td>
-                            <td><button class="details-btn" data-filename="${prompt.filename}">View Details</button></td>
+                            <td><button class="details-btn" data-filename="${prompt.filename}" data-row-id="${row.id}">View Details</button></td>
                         `;
                         
                         promptList.appendChild(row);
@@ -694,7 +752,8 @@ def prompts_ui():
                     document.querySelectorAll('.details-btn').forEach(button => {
                         button.addEventListener('click', () => {
                             const filename = button.getAttribute('data-filename');
-                            loadPromptDetails(filename);
+                            const rowId = button.getAttribute('data-row-id');
+                            loadPromptDetails(filename, rowId);
                         });
                     });
                 } else {
@@ -706,23 +765,51 @@ def prompts_ui():
                 document.getElementById('loading').textContent = 'Error loading prompts: ' + error.message;
             });
         
+        // Function to remove highlight from all rows
+        function removeAllHighlights() {
+            document.querySelectorAll('tr.highlight').forEach(row => {
+                row.classList.remove('highlight');
+            });
+        }
+        
         // Load prompt details
-        function loadPromptDetails(filename) {
+        function loadPromptDetails(filename, rowId) {
+            // Highlight the selected row
+            removeAllHighlights();
+            const selectedRow = document.getElementById(rowId);
+            if (selectedRow) {
+                selectedRow.classList.add('highlight');
+                
+                // Scroll to the row if not visible
+                if (!isElementInViewport(selectedRow)) {
+                    selectedRow.scrollIntoView({behavior: 'smooth', block: 'center'});
+                }
+            }
+            
+            // Show loading in the panel
+            const detailsPanel = document.getElementById('detailsPanel');
+            detailsPanel.style.display = 'block';
+            document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
+            document.getElementById('promptDetails').innerHTML = '<p>Loading prompt details...</p>';
+            
+            // Scroll to top to show the panel
+            window.scrollTo({top: 0, behavior: 'smooth'});
+            
             fetch(`/prompts?prompt=${filename}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
                         const prompt = data.prompt;
-                        document.getElementById('modalTitle').textContent = `Prompt: ${filename}`;
+                        document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
                         
                         let detailsHTML = `
-                            <h3>Metadata</h3>
-                            <table>
-                                <tr><td><strong>Name:</strong></td><td>${data.prompt.name || filename}</td></tr>
-                                <tr><td><strong>Description:</strong></td><td>${data.prompt.description || 'No description'}</td></tr>
-                                <tr><td><strong>Version:</strong></td><td>${data.prompt.version || 'Unknown'}</td></tr>
-                                <tr><td><strong>Author:</strong></td><td>${data.prompt.author || 'Unknown'}</td></tr>
-                                <tr><td><strong>Institution:</strong></td><td>${data.prompt.institution || 'Unknown'}</td></tr>
+                            <h3 class="section-title">Metadata</h3>
+                            <table class="metadata-table">
+                                <tr><td>Name:</td><td>${data.prompt.name || filename}</td></tr>
+                                <tr><td>Description:</td><td>${data.prompt.description || 'No description'}</td></tr>
+                                <tr><td>Version:</td><td>${data.prompt.version || 'Unknown'}</td></tr>
+                                <tr><td>Author:</td><td>${data.prompt.author || 'Unknown'}</td></tr>
+                                <tr><td>Institution:</td><td>${data.prompt.institution || 'Unknown'}</td></tr>
                             </table>
                         `;
                         
@@ -736,7 +823,7 @@ def prompts_ui():
                             // Add priority sections first
                             prioritySections.forEach(sectionKey => {
                                 if (sections[sectionKey]) {
-                                    const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
+                                    const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                                     detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
                                     detailsHTML += `<pre>${sections[sectionKey]}</pre>`;
                                     delete sections[sectionKey]; // Remove from object so we don't display twice
@@ -746,7 +833,7 @@ def prompts_ui():
                             // Add remaining sections
                             for (const [key, value] of Object.entries(sections)) {
                                 if (key !== 'raw_content') {  // Skip raw content
-                                    const sectionTitle = key.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
+                                    const sectionTitle = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
                                     detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
                                     
                                     if (typeof value === 'object') {
@@ -763,28 +850,32 @@ def prompts_ui():
                         }
                         
                         document.getElementById('promptDetails').innerHTML = detailsHTML;
-                        document.getElementById('promptModal').style.display = 'block';
                     } else {
-                        alert('Error: ' + data.message);
+                        document.getElementById('promptDetails').innerHTML = `<div class="error">Error: ${data.message}</div>`;
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching prompt details:', error);
-                    alert('Error loading prompt details: ' + error.message);
+                    document.getElementById('promptDetails').innerHTML = `<div class="error">Error loading details: ${error.message}</div>`;
                 });
         }
         
-        // Close the modal when clicking the close button
-        document.querySelector('.close').addEventListener('click', () => {
-            document.getElementById('promptModal').style.display = 'none';
+        // Close the details panel
+        document.getElementById('closePanel').addEventListener('click', () => {
+            document.getElementById('detailsPanel').style.display = 'none';
+            removeAllHighlights();
         });
         
-        // Close the modal when clicking outside the content
-        window.addEventListener('click', (event) => {
-            if (event.target === document.getElementById('promptModal')) {
-                document.getElementById('promptModal').style.display = 'none';
-            }
-        });
+        // Helper function to check if an element is in the viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
     </script>
 </body>
 </html>
