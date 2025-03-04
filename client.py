@@ -50,7 +50,7 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
     else:  # Default to JSON string
         return json.dumps(regular_dict, indent=4)
     
-def process_image(server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
+def process_image(fname, server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
     
@@ -63,12 +63,6 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
     Returns:
         dict: The processed results from the server
     """
-    # Generate output filename
-    output_file = get_output_filename(image_path, output_dir)
-    fname = os.path.basename(output_file).split(".")[0]
-    # print(output_file)
-    # print(fname)
-    
     # Check if the image path is a URL or a local file
     if image_path.startswith(('http://', 'https://')):
         # For URL-based images, download them first or let the server handle it
@@ -84,7 +78,7 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
             temp_file.write(response.content)
         
         try:
-            return process_image(server_url, temp_file_path, output_dir, verbose, engines, prompt)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -151,10 +145,10 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
     """
     output_file = get_output_filename(image_path, output_dir)
     fname = os.path.basename(output_file).split(".")[0]
-    
+
     try:
         # Process the image
-        results = process_image(server_url, image_path, output_dir, verbose, engines, prompt)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt)
 
         # Print summary of results if verbose is enabled
         if verbose:
