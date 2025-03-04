@@ -10,6 +10,8 @@ import tempfile
 import pandas as pd
 import concurrent.futures
 from collections import OrderedDict
+from termcolor import colored
+from tabulate import tabulate
 
 class OrderedDictJSONEncoder(json.JSONEncoder):
     def encode(self, obj):
@@ -114,10 +116,11 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         
         # Generate output filename
         output_file = get_output_filename(image_path, output_dir)
+        fname = os.path.basename(output_file).split(".")[0]
         
         # Print summary of results if verbose is enabled
         if verbose:
-            print_results_summary(results)
+            print_results_summary(results, fname)
         else:
             print(f"Processed: {image_path}")
         
@@ -180,35 +183,138 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
     
     return results
 
-def print_results_summary(results):
+def print_results_summary(results, fname, n_size=80, n_indent=2):
     """
-    Print a summary of the VoucherVision processing results
+    Print a summary of the VoucherVision processing results with enhanced formatting.
+    Dynamically determines fields from the JSON structure.
     
     Args:
         results (dict): The processing results from the server
     """
-    print("\n----- RESULTS SUMMARY -----")
+    from termcolor import colored
+    from tabulate import tabulate
+    import json
     
-    # Print OCR summary
-    print("\nOCR Info:")
-    for engine in results['ocr_results']:
-        if engine != "OCR":  # Skip the combined OCR text
-            print(f"  {engine}:")
-            print(f"    Tokens: {results['ocr_results'][engine].get('tokens_in', 0)} in, "
-                  f"{results['ocr_results'][engine].get('tokens_out', 0)} out")
-            print(f"    Cost: ${results['ocr_results'][engine].get('total_cost', 0):.6f}")
+    print("\n" + "="*n_size)
+    print("VOUCHERVISION RESULTS SUMMARY", colored(f"{fname}", 'green', attrs=['bold']))
+    print("="*n_size)
     
-    print("\nOCR:")
-    print(results['ocr_results']["OCR"])
-
-    # Updated to use tokens_LLM instead of tokens
-    llm_tokens = results.get('tokens_LLM', {'input': 0, 'output': 0})
-    print(f"\nLLM Tokens: {llm_tokens['input']} in, {llm_tokens['output']} out")
+    # Print top-level sections one by one
+    for section_name, section_data in results.items():
+        print("\n" + colored(f"{section_name.upper()}:", 'cyan', attrs=['bold']))
+        print("-" * n_size)
+        
+        if section_name == 'ocr_results':
+            # Handle OCR results specially
+            # Print engine summary table
+            ocr_table = []
+            total_cost = 0
+            
+            for engine, engine_data in section_data.items():
+                if engine != "OCR":  # Handle the OCR text separately
+                    tokens_in = engine_data.get('tokens_in', 0)
+                    tokens_out = engine_data.get('tokens_out', 0)
+                    cost = engine_data.get('total_cost', 0)
+                    total_cost += cost
+                    
+                    ocr_table.append([
+                        engine,
+                        f"{tokens_in:,}",
+                        f"{tokens_out:,}",
+                        f"${cost:.6f}"
+                    ])
+            
+            # Add total row if we have engine data
+            if ocr_table:
+                ocr_table.append([
+                    colored("TOTAL", attrs=['bold']),
+                    "",
+                    "",
+                    colored(f"${total_cost:.6f}", attrs=['bold'])
+                ])
+                
+                print(tabulate(ocr_table, 
+                              headers=['Engine', 'Tokens In', 'Tokens Out', 'Cost'],
+                              tablefmt='grid'))
+            
+            # Print the OCR text
+            if "OCR" in section_data:
+                print("\n" + colored("OCR TEXT:", 'magenta'))
+                print(section_data["OCR"])
+        
+        elif section_name == 'tokens_LLM':
+            # Enhanced handling for tokens_LLM that now includes model, cost_in, and cost_out
+            llm_table = []
+            
+            # Check if we have the enhanced structure or the basic one
+            if isinstance(section_data, dict) and 'model' in section_data:
+                # Enhanced structure with all fields
+                model = section_data.get('model', '')
+                tokens_in = section_data.get('input', 0)
+                tokens_out = section_data.get('output', 0)
+                cost_in = section_data.get('cost_in', 0)
+                cost_out = section_data.get('cost_out', 0)
+                total_cost = cost_in + cost_out
+                
+                # Add a row with all the data
+                llm_table.append([
+                    model,
+                    f"{tokens_in:,}",
+                    f"{tokens_out:,}",
+                    f"${cost_in:.6f}",
+                    f"${cost_out:.6f}",
+                    colored(f"${total_cost:.6f}", 'yellow', attrs=['bold'])
+                ])
+                
+                # Print the enhanced table with all fields
+                print(tabulate(llm_table, 
+                      headers=['Model', 'Tokens In', 'Tokens Out', 'Cost In', 'Cost Out', 'Total Cost'],
+                      tablefmt='grid'))
+            else:
+                # Basic structure with just input and output tokens
+                llm_table.append([
+                    f"{section_data.get('input', 0):,}", 
+                    f"{section_data.get('output', 0):,}"
+                ])
+                
+                # Print the basic table
+                print(tabulate(llm_table, 
+                      headers=['Tokens In', 'Tokens Out'],
+                      tablefmt='simple'))
+        
+        elif section_name == 'vvgo_json':
+            # Format the extracted JSON data
+            if isinstance(section_data, dict):
+                # Create a table for all top-level fields
+                json_table = []
+                
+                for field, value in section_data.items():
+                    # Format the value
+                    if value == "":
+                        formatted_value = colored("(empty)", 'dark_grey')
+                    elif isinstance(value, (dict, list)):
+                        # For nested structures, show a placeholder
+                        formatted_value = colored(f"({type(value).__name__})", 'blue')
+                    else:
+                        formatted_value = str(value)
+                    
+                    json_table.append([field, formatted_value])
+                
+                # Print the table
+                if json_table:
+                    print(tabulate(json_table, tablefmt='simple'))
+            else:
+                # If not a dict, just print the data
+                print(json.dumps(section_data, indent=n_indent, sort_keys=False, cls=OrderedDictJSONEncoder))
+        
+        else:
+            # Generic handler for any other sections
+            try:
+                print(json.dumps(section_data, indent=n_indent, sort_keys=False, cls=OrderedDictJSONEncoder))
+            except:
+                print(str(section_data))
     
-    # Print VoucherVision summary
-    vv_results = results.get('vvgo_json', {})
-    print("\nVoucherVision JSON:")
-    print(json.dumps(vv_results, indent=2, sort_keys=False))
+    print("\n" + "="*n_size)
 
 def get_output_filename(input_path, output_dir=None):
     """

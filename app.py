@@ -35,6 +35,7 @@ try:
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
+    from vouchervision_main.vouchervision.general_utils import calculate_cost
 except:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
     from vouchervision.directory_structure_VV import Dir_Structure # type: ignore
@@ -44,12 +45,13 @@ except:
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
+    from vouchervision.general_utils import calculate_cost # type: ignore
 
 class RequestThrottler:
     """
     Class to handle throttling of concurrent requests
     """
-    def __init__(self, max_concurrent=32): # TODO switch to 8?
+    def __init__(self, max_concurrent=32): 
         self.semaphore = threading.Semaphore(max_concurrent)
         self.active_count = 0
         self.lock = threading.Lock()
@@ -80,10 +82,11 @@ class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self, max_concurrent=32): # TODO ##########
+    def __init__(self, max_concurrent=32, LLM_name_cost='GEMINI_2_0_FLASH'): 
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+        self.LLM_name_cost = LLM_name_cost
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
@@ -243,7 +246,9 @@ class VoucherVisionProcessor:
             prompt_text, json_report=None, paths=None
         )
         logger.info(f"response_candidate\n{response_candidate}")
-        return response_candidate, nt_in, nt_out
+        cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(self.LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
+
+        return response_candidate, nt_in, nt_out, cost_in, cost_out
     
     def process_image_request(self, file, engine_options=None, prompt=None):
         """Process an image from a request file"""
@@ -277,7 +282,7 @@ class VoucherVisionProcessor:
                 ocr_results = self.perform_ocr(file_path, engine_options)
                 
                 # Process with VoucherVision
-                vv_results, tokens_in, tokens_out = self.process_voucher_vision(ocr_results["OCR"], current_prompt)
+                vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr_results["OCR"], current_prompt)
                 
                 # Combine results
                 # results = {
@@ -289,12 +294,18 @@ class VoucherVisionProcessor:
                 #     }
                 # }
                 # Combine results
+                if "GEMINI" in self.LLM_name_cost:
+                    model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
+
                 results = OrderedDict([
                     ("ocr_results", ocr_results),
                     ("vvgo_json", vv_results),
                     ("tokens_LLM", OrderedDict([
+                        ("model", model_print),
                         ("input", tokens_in),
-                        ("output", tokens_out)
+                        ("output", tokens_out),
+                        ("cost_in", cost_in),
+                        ("cost_out", cost_out),
                     ]))
                 ])
                 
