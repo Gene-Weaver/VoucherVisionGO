@@ -524,13 +524,13 @@ def extract_prompt_info(prompt_file):
 
 def extract_prompt_details(prompt_file):
     """
-    Extract detailed content from a prompt file
+    Extract detailed content from a prompt file without hardcoding field names
     
     Args:
         prompt_file (Path): Path to the prompt file
         
     Returns:
-        dict: Dictionary with sections of the prompt
+        dict: Dictionary with all parsed content
     """
     try:
         with open(prompt_file, 'r', encoding='utf-8') as f:
@@ -538,60 +538,22 @@ def extract_prompt_details(prompt_file):
         
         # Initialize details dictionary
         details = {
-            'raw_content': content,
-            'sections': {}
+            'raw_content': content
         }
         
-        # Try YAML parsing first
+        # Try YAML parsing
         try:
             data = yaml.safe_load(content)
             
             if isinstance(data, dict):
-                # Store all sections from the YAML
-                details['sections'] = data
+                # Successful YAML parsing - store the parsed structure
+                details['parsed_data'] = data
             else:
-                # Fallback to manual parsing
-                raise ValueError("YAML parsing didn't produce a dictionary")
+                logger.warning(f"YAML parsing produced non-dictionary: {type(data)}")
                 
-        except Exception:
-            # Manual parsing for non-YAML format
-            prompt_sections = {
-                'SYSTEM_PROMPT': 'system_prompt',
-                'USER_PROMPT': 'user_prompt',
-                'EXAMPLES': 'examples',
-                'FIELDS': 'fields'
-            }
-            
-            # Try to find prompt sections
-            lines = content.split('\n')
-            current_section = None
-            section_content = []
-            
-            for line in lines:
-                # Check if this line starts a new section
-                for section_key, section_name in prompt_sections.items():
-                    if line.strip().startswith(section_key):
-                        # Save the previous section if there was one
-                        if current_section and section_content:
-                            details['sections'][current_section] = '\n'.join(section_content)
-                        
-                        # Start new section
-                        current_section = section_name
-                        section_content = []
-                        break
-                else:
-                    # Skip metadata lines
-                    if line.strip().startswith(('PROMPT_AUTHOR:', 'PROMPT_AUTHOR_INSTITUTION:', 
-                                            'PROMPT_NAME:', 'PROMPT_VERSION:', 'PROMPT_DESCRIPTION:')):
-                        continue
-                    
-                    # If we're in a section, add this line to its content
-                    if current_section:
-                        section_content.append(line)
-            
-            # Save the last section
-            if current_section and section_content:
-                details['sections'][current_section] = '\n'.join(section_content)
+        except Exception as e:
+            logger.warning(f"YAML parsing failed: {e}")
+            details['parse_error'] = str(e)
         
         return details
     
@@ -631,7 +593,7 @@ def prompts_ui():
             display: none; /* Hidden by default */
             position: relative;
             overflow: auto;
-            max-height: 500px;
+            max-height: 80vh;
         }
         
         .panel-close {
@@ -659,32 +621,42 @@ def prompts_ui():
             line-height: 1.4;
         }
         
-        .section-title { 
-            color: #2c3e50; 
-            margin-top: 15px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .metadata-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-        }
-        
-        .metadata-table td {
-            padding: 5px 10px;
-            border: none;
-        }
-        
-        .metadata-table tr td:first-child {
-            font-weight: bold;
-            width: 120px;
-        }
-        
         .highlight {
             background-color: #fffacd;
             transition: background-color 0.5s ease;
+        }
+        
+        /* JSON formatting */
+        .json-key { color: #881391; }
+        .json-string { color: #0b7500; }
+        .json-number { color: #1A01CC; }
+        .json-boolean { color: #1A01CC; }
+        .json-null { color: #1A01CC; }
+        
+        /* Styling for the hierarchical display */
+        .tree-view {
+            font-family: monospace;
+            line-height: 1.5;
+        }
+        .tree-key {
+            color: #333;
+            font-weight: bold;
+        }
+        .tree-value {
+            color: #0b7500;
+        }
+        .tree-object, .tree-array {
+            margin-left: 20px;
+            border-left: 1px dashed #ccc;
+            padding-left: 10px;
+        }
+        .tree-toggle {
+            cursor: pointer;
+            user-select: none;
+            color: #3498db;
+        }
+        .tree-toggle:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -706,11 +678,6 @@ def prompts_ui():
             <tr>
                 <th>#</th>
                 <th>Filename</th>
-                <th>Name</th>
-                <th class="description">Description</th>
-                <th>Version</th>
-                <th>Author</th>
-                <th>Institution</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -720,6 +687,49 @@ def prompts_ui():
     </table>
     
     <script>
+        // Function to render hierarchical data
+        function renderHierarchical(data, level = 0) {
+            if (data === null) return '<span class="tree-value">null</span>';
+            if (typeof data !== 'object') {
+                if (typeof data === 'string') {
+                    return `<span class="tree-value">"${data}"</span>`;
+                }
+                return `<span class="tree-value">${data}</span>`;
+            }
+            
+            let html = '';
+            
+            if (Array.isArray(data)) {
+                html += '<div class="tree-array">';
+                data.forEach((item, index) => {
+                    html += `<div>[${index}]: ${renderHierarchical(item, level + 1)}</div>`;
+                });
+                html += '</div>';
+            } else {
+                html += '<div class="tree-object">';
+                Object.keys(data).forEach(key => {
+                    const value = data[key];
+                    const isComplex = value !== null && typeof value === 'object';
+                    
+                    html += '<div>';
+                    if (isComplex) {
+                        const id = `tree-${level}-${key.replace(/[^a-z0-9]/gi, '')}`;
+                        html += `<span class="tree-toggle" data-target="${id}">+</span> `;
+                        html += `<span class="tree-key">${key}:</span> `;
+                        html += `<div id="${id}" style="display: none;">`;
+                        html += renderHierarchical(value, level + 1);
+                        html += '</div>';
+                    } else {
+                        html += `<span class="tree-key">${key}:</span> ${renderHierarchical(value, level + 1)}`;
+                    }
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+            
+            return html;
+        }
+
         // Fetch and display the prompt list
         fetch('/prompts')
             .then(response => response.json())
@@ -737,11 +747,6 @@ def prompts_ui():
                         row.innerHTML = `
                             <td>${index + 1}</td>
                             <td>${prompt.filename}</td>
-                            <td>${prompt.name}</td>
-                            <td class="description">${prompt.description}</td>
-                            <td>${prompt.version}</td>
-                            <td>${prompt.author}</td>
-                            <td>${prompt.institution}</td>
                             <td><button class="details-btn" data-filename="${prompt.filename}" data-row-id="${row.id}">View Details</button></td>
                         `;
                         
@@ -779,11 +784,6 @@ def prompts_ui():
             const selectedRow = document.getElementById(rowId);
             if (selectedRow) {
                 selectedRow.classList.add('highlight');
-                
-                // Scroll to the row if not visible
-                if (!isElementInViewport(selectedRow)) {
-                    selectedRow.scrollIntoView({behavior: 'smooth', block: 'center'});
-                }
             }
             
             // Show loading in the panel
@@ -802,54 +802,47 @@ def prompts_ui():
                         const prompt = data.prompt;
                         document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
                         
-                        let detailsHTML = `
-                            <h3 class="section-title">Metadata</h3>
-                            <table class="metadata-table">
-                                <tr><td>Name:</td><td>${data.prompt.name || filename}</td></tr>
-                                <tr><td>Description:</td><td>${data.prompt.description || 'No description'}</td></tr>
-                                <tr><td>Version:</td><td>${data.prompt.version || 'Unknown'}</td></tr>
-                                <tr><td>Author:</td><td>${data.prompt.author || 'Unknown'}</td></tr>
-                                <tr><td>Institution:</td><td>${data.prompt.institution || 'Unknown'}</td></tr>
-                            </table>
-                        `;
+                        let detailsHTML = '';
                         
-                        // Add sections
-                        if (prompt.details && prompt.details.sections) {
-                            const sections = prompt.details.sections;
+                        // Display hierarchical view of parsed data if available
+                        if (prompt.details && prompt.details.parsed_data) {
+                            detailsHTML += '<h3>Prompt Structure</h3>';
+                            detailsHTML += '<div class="tree-view">';
+                            detailsHTML += renderHierarchical(prompt.details.parsed_data);
+                            detailsHTML += '</div>';
                             
-                            // Common section names to display first and with specific formatting
-                            const prioritySections = ['system_prompt', 'user_prompt', 'examples', 'fields'];
-                            
-                            // Add priority sections first
-                            prioritySections.forEach(sectionKey => {
-                                if (sections[sectionKey]) {
-                                    const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                                    detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
-                                    detailsHTML += `<pre>${sections[sectionKey]}</pre>`;
-                                    delete sections[sectionKey]; // Remove from object so we don't display twice
-                                }
-                            });
-                            
-                            // Add remaining sections
-                            for (const [key, value] of Object.entries(sections)) {
-                                if (key !== 'raw_content') {  // Skip raw content
-                                    const sectionTitle = key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                                    detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
-                                    
-                                    if (typeof value === 'object') {
-                                        detailsHTML += `<pre>${JSON.stringify(value, null, 2)}</pre>`;
-                                    } else {
-                                        detailsHTML += `<pre>${value}</pre>`;
-                                    }
-                                }
-                            }
-                        } else if (prompt.details && prompt.details.raw_content) {
-                            // Fallback to raw content
-                            detailsHTML += `<h3 class="section-title">Raw Content</h3>`;
+                            // Add raw content as alternative view
+                            detailsHTML += '<h3>Raw Content</h3>';
                             detailsHTML += `<pre>${prompt.details.raw_content}</pre>`;
+                        } else {
+                            // Just show raw content if parsing failed
+                            detailsHTML += '<h3>Raw Content</h3>';
+                            detailsHTML += `<pre>${prompt.details.raw_content}</pre>`;
+                            
+                            // Show parse error if any
+                            if (prompt.details.parse_error) {
+                                detailsHTML += '<h3>Parse Error</h3>';
+                                detailsHTML += `<div style="color: red;">${prompt.details.parse_error}</div>`;
+                            }
                         }
                         
                         document.getElementById('promptDetails').innerHTML = detailsHTML;
+                        
+                        // Add event listeners for tree toggles
+                        document.querySelectorAll('.tree-toggle').forEach(toggle => {
+                            toggle.addEventListener('click', function() {
+                                const targetId = this.getAttribute('data-target');
+                                const targetElement = document.getElementById(targetId);
+                                
+                                if (targetElement.style.display === 'none') {
+                                    targetElement.style.display = 'block';
+                                    this.textContent = '-';
+                                } else {
+                                    targetElement.style.display = 'none';
+                                    this.textContent = '+';
+                                }
+                            });
+                        });
                     } else {
                         document.getElementById('promptDetails').innerHTML = `<div class="error">Error: ${data.message}</div>`;
                     }
@@ -865,17 +858,6 @@ def prompts_ui():
             document.getElementById('detailsPanel').style.display = 'none';
             removeAllHighlights();
         });
-        
-        // Helper function to check if an element is in the viewport
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
     </script>
 </body>
 </html>
