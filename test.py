@@ -24,6 +24,7 @@ class VoucherVisionTester:
         os.makedirs(f"{self.base_dir}/results/dir_images_custom_prompt_save_to_csv", exist_ok=True)
         os.makedirs(f"{self.base_dir}/results/file_list_csv", exist_ok=True)
         os.makedirs(f"{self.base_dir}/results/file_list_txt", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/file_list_long_txt", exist_ok=True)
         os.makedirs(f"{self.base_dir}/results/single_image_custom_prompt", exist_ok=True)
         os.makedirs(f"{self.base_dir}/results/dir_images_save_to_csv", exist_ok=True)
         
@@ -102,6 +103,17 @@ class VoucherVisionTester:
                     "--server", self.server_url,
                     "--file-list", f"{self.base_dir}/txt/file_list.txt",
                     "--output-dir", f"{self.base_dir}/results/file_list_txt",
+                ]
+            },
+            {
+                "name": "file_list_long_txt",
+                "description": "Process a list of images from a text file",
+                "cmd": [
+                    "python", "client.py",
+                    "--server", self.server_url,
+                    "--file-list", f"{self.base_dir}/txt/file_list_long_txt.txt",
+                    "--output-dir", f"{self.base_dir}/results/file_list_long_txt",
+                    "--save-to-csv",
                 ]
             },
             {
@@ -233,8 +245,8 @@ class VoucherVisionTester:
                                     try:
                                         with open(json_file_path, 'r') as f:
                                             file_data = json.load(f)
-                                            if 'vvgo_json' in file_data:
-                                                json_data = file_data['vvgo_json']
+                                            if 'formatted_json' in file_data:
+                                                json_data = file_data['formatted_json']
                                     except:
                                         pass
                     
