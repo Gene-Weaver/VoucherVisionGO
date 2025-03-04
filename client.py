@@ -63,9 +63,16 @@ def process_image(server_url, image_path, engines=None, prompt=None):
         
         # Check if the request was successful
         if response.status_code == 200:
-            print("Raw response from server:")
-            print(response.text) 
-            return json.loads(response.text, object_pairs_hook=OrderedDict)
+            results = json.loads(response.text, object_pairs_hook=OrderedDict)
+            # If vvgo_json is a string that contains JSON, parse it with OrderedDict
+            if 'vvgo_json' in results and isinstance(results['vvgo_json'], str):
+                try:
+                    # Try to parse it as JSON with order preserved
+                    results['vvgo_json'] = json.loads(results['vvgo_json'], object_pairs_hook=OrderedDict)
+                except json.JSONDecodeError:
+                    # Not valid JSON, leave as string
+                    pass
+            return results
         else:
             error_msg = f"Error: {response.status_code}"
             try:
