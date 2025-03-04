@@ -1,0 +1,56 @@
+name: Sync VoucherVisionGO Client
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'client.py'
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  sync-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout VoucherVisionGO repository
+        uses: actions/checkout@v3
+        with:
+          path: source-repo
+          fetch-depth: 1
+
+      - name: Checkout client-only repository
+        uses: actions/checkout@v3
+        with:
+          repository: Gene-Weaver/VoucherVisionGO-client
+          path: client-repo
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Copy client.py and update README
+        run: |
+          # Copy the client file
+          cp source-repo/client.py client-repo/
+          
+          # Create/update the README with latest sync information
+          cat > client-repo/README.md << EOF
+          # VoucherVisionGO Client
+
+          This repository contains only the client component of [VoucherVisionGO](https://github.com/Gene-Weaver/VoucherVisionGO).
+
+          ## About
+          
+          The client.py file is automatically synchronized from the main VoucherVisionGO repository.
+          
+          Last synchronized: $(date)
+          
+          ## Usage
+          
+          Please refer to the [main repository](https://github.com/Gene-Weaver/VoucherVisionGO) for complete documentation.
+          EOF
+          
+          # Commit and push changes
+          cd client-repo
+          git config user.name "VoucherVision Bot"
+          git config user.email "bot@github.com"
+          git add client.py README.md
+          git diff --staged --quiet || git commit -m "Sync client.py from VoucherVisionGO repository [$(date)]"
+          git push

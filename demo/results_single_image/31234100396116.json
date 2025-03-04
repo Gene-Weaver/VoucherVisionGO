@@ -1,44 +1,44 @@
 {
-  "filename": "tmpz9r92j60.jpg",
+  "filename": "31234100396116",
   "ocr_info": {
     "gemini-1.5-pro": {
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\n\nKentucky\nLetcher County\nDiapensiaceae\n*Galax aphylla* auct. non L.\nAbove falls.\n\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\n\nR. Hannan & L. R.\nPhillippe 2022                                      May 31, 1979\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039611 6\n\n\n*Galax aphylla*\n\n",
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\n\nKentucky\nLetcher County\nDiapensiaceae\n*Galax aphylla* auct. non L.\nAbove falls.\n\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\n\nR. Hannan & L. R.\nPhillippe 2022                               May 31, 1979\n\nEastern Kentucky University Herbarium\nIK 3 1234 10039611 6\n\n\n*Galax aphylla*\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.00062,
-      "total_cost": 0.00139875,
+      "cost_out": 0.000615,
+      "total_cost": 0.0013937500000000002,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 124
+      "tokens_out": 123
     },
     "gemini-2.0-flash": {
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\nKentucky\nEKY\nLetcher County\nDiapensiaceae\nGalax aphylla auct. non L.\nAbove falls.\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\nR. Hannnan & L. R.\nPhillippe 2022\nMay. 31, 1979\nIK\n3 1234 10039611 6\n\n\nGalax aphylla\n\n",
+      "ocr_text": "EASTERN\nKENTUCKY\nUNIVERSITY\nHERBARIUM\n060934\nINCH\nOPTIRECTILINEAR\nU.S.A.\nKentucky\nEKY\nLetcher County\nDiapensiaceae\nGalax aphylla auct. non L.\nAbove falls.\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\nR. Hannnan & L. R.\nPhillippe 2022\nMay. 31, 1979\nIK\n3 1234 10039611 6\nEastern Kentucky University Herbarium\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
-      "cost_out": 4.6800000000000006e-05,
-      "total_cost": 0.0007283000000000001,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 117
+      "tokens_out": 142
     }
   },
   "parsing_info": {
     "model": "gemini-2-0-flash",
-    "input": 2113,
-    "output": 452,
-    "cost_in": 0.00021129999999999999,
-    "cost_out": 0.0001808
+    "input": 2136,
+    "output": 438,
+    "cost_in": 0.0002136,
+    "cost_out": 0.00017520000000000003
   },
-  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\n\nKentucky\nLetcher County\nDiapensiaceae\n*Galax aphylla* auct. non L.\nAbove falls.\n\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\n\nR. Hannan & L. R.\nPhillippe 2022                                      May 31, 1979\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039611 6\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\nKentucky\nEKY\nLetcher County\nDiapensiaceae\nGalax aphylla auct. non L.\nAbove falls.\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\nR. Hannnan & L. R.\nPhillippe 2022\nMay. 31, 1979\nIK\n3 1234 10039611 6\n\n\nGalax aphylla\n\n",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n060934\n\nKentucky\nLetcher County\nDiapensiaceae\n*Galax aphylla* auct. non L.\nAbove falls.\n\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\n\nR. Hannan & L. R.\nPhillippe 2022                               May 31, 1979\n\nEastern Kentucky University Herbarium\nIK 3 1234 10039611 6\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEASTERN\nKENTUCKY\nUNIVERSITY\nHERBARIUM\n060934\nINCH\nOPTIRECTILINEAR\nU.S.A.\nKentucky\nEKY\nLetcher County\nDiapensiaceae\nGalax aphylla auct. non L.\nAbove falls.\nWhitesburg Q.; Bad Branch. 1.5 miles NE\nof Eolia.\nR. Hannnan & L. R.\nPhillippe 2022\nMay. 31, 1979\nIK\n3 1234 10039611 6\nEastern Kentucky University Herbarium\n\n\nGalax aphylla\n\n",
   "formatted_json": {
     "catalogNumber": "060934",
-    "scientificName": "Galax aphylla auct. non L.",
+    "scientificName": "Galax aphylla",
     "genus": "Galax",
     "specificEpithet": "aphylla",
     "scientificNameAuthorship": "auct. non L.",
-    "collectedBy": "R. Hannan & L. R. Phillippe 2022",
-    "collectorNumber": "",
-    "identifiedBy": "IK",
+    "collectedBy": "R. Hannan & L. R. Phillippe",
+    "collectorNumber": "2022",
+    "identifiedBy": "",
     "identifiedDate": "",
     "identifiedConfidence": "",
     "identifiedRemarks": "",
@@ -52,9 +52,9 @@
     "specimenDescription": "",
     "cultivated": "",
     "continent": "North america",
-    "country": "United states",
+    "country": "Usa",
     "stateProvince": "Kentucky",
-    "county": "Letcher county",
+    "county": "Letcher County",
     "locality": "Whitesburg Q.; Bad Branch. 1.5 miles NE of Eolia.",
     "verbatimCoordinates": "",
     "decimalLatitude": "",
@@ -62,6 +62,6 @@
     "minimumElevationInMeters": "",
     "maximumElevationInMeters": "",
     "elevationUnits": "",
-    "additionalText": "Eastern kentucky university\nherbarium\nEKY\n3 1234 10039611 6\nGalax aphylla"
+    "additionalText": "Eastern Kentucky University Herbarium\nIK 3 1234 10039611 6\nEky"
   }
 }
