@@ -24,6 +24,32 @@ class OrderedDictJSONEncoder(json.JSONEncoder):
             return '{' + ','.join(f'"{k}":{self.encode(v)}' for k, v in obj.items()) + '}'
         return super().encode(obj)
     
+def ordereddict_to_json(ordereddict_data):
+    """
+    Convert an OrderedDict to a JSON string
+    
+    Args:
+        ordereddict_data: The OrderedDict to convert
+        
+    Returns:
+        A JSON string representation of the data
+    """
+    # Convert OrderedDict to a regular dictionary first (optional but cleaner)
+    # This step is optional as json.dumps can handle OrderedDict directly
+    
+    def convert_to_dict(obj):
+        if isinstance(obj, OrderedDict):
+            return {k: convert_to_dict(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [convert_to_dict(v) for v in obj]
+        else:
+            return obj
+    
+    regular_dict = convert_to_dict(ordereddict_data)
+    
+    # Convert to JSON with pretty formatting
+    return json.dumps(regular_dict, indent=4)
+    
 def process_image(server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
