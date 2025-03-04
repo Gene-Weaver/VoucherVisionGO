@@ -52,7 +52,7 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
             temp_file.write(response.content)
         
         try:
-            return process_image(server_url, temp_file_path, verbose, engines, prompt)
+            return process_image(server_url, temp_file_path, output_dir, verbose, engines, prompt)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -81,9 +81,6 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
             results = json.loads(response.text, object_pairs_hook=OrderedDict)
             # If formatted_json is a string that contains JSON, parse it with OrderedDict
             if 'formatted_json' in results and isinstance(results['formatted_json'], str):
-                output_file = get_output_filename(image_path, output_dir)
-                fname = os.path.basename(output_file).split(".")[0]
-                results['filename'] = fname
                 try:
                     # Try to parse it as JSON with order preserved
                     results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
@@ -122,10 +119,13 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
     try:
         # Process the image
         results = process_image(server_url, image_path, output_dir, verbose, engines, prompt)
-        
+
         # Generate output filename
         output_file = get_output_filename(image_path, output_dir)
         fname = os.path.basename(output_file).split(".")[0]
+        print(output_file)
+        print(fname)
+        results['filename'] = fname
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -414,22 +414,23 @@ def save_results_to_csv(results_list, output_dir):
     
     for i, result in enumerate(results_list):
         # Debug info for the first few results
-        if i < 2:
-            print(f"\nDebug - Result keys: {list(result.keys() if result else [])}")
+        # if i < 2:
+            # print(f"\nDebug - Result keys: {list(result.keys() if result else [])}")
         
         # Skip if result is empty
         if not result:
             continue
             
         # Get the filename directly from the result
-        filename = result.get('filename', '')
-        if not filename:
-            # Fallback methods if filename is not directly available
-            if 'source_file' in result:
-                filename = os.path.splitext(os.path.basename(result['source_file']))[0]
-            else:
-                # Use index as last resort
-                filename = f"file_{i+1}"
+        # filename = "" #result.get('filename', '')
+        # if not filename:
+        # Fallback methods if filename is not directly available
+        # print(result)
+        if 'filename' in result:
+            filename = os.path.splitext(os.path.basename(result['filename']))[0]
+        else:
+            # Use index as last resort
+            filename = f"file_{i+1}"
                 
         # Get the JSON data (try formatted_json first, then vvgo_json)
         json_data = None
@@ -489,7 +490,7 @@ def save_results_to_csv(results_list, output_dir):
     # Save to CSV
     csv_path = os.path.join(output_dir, 'results.csv')
     df.to_csv(csv_path, index=False)
-    print(f"\nCombined results saved to CSV: {csv_path}")
+    print(f"Combined results saved to CSV: {csv_path}")
     print(f"Total records processed: {len(df)}")
     
     # Print column names for verification
