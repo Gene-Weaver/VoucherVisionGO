@@ -63,6 +63,12 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
     Returns:
         dict: The processed results from the server
     """
+    # Generate output filename
+    output_file = get_output_filename(image_path, output_dir)
+    fname = os.path.basename(output_file).split(".")[0]
+    # print(output_file)
+    # print(fname)
+    
     # Check if the image path is a URL or a local file
     if image_path.startswith(('http://', 'https://')):
         # For URL-based images, download them first or let the server handle it
@@ -113,6 +119,7 @@ def process_image(server_url, image_path, output_dir, verbose=False, engines=Non
                 except json.JSONDecodeError:
                     # Not valid JSON, leave as string
                     pass
+            results['filename'] = fname ## Add in the filename
             return results
         else:
             error_msg = f"Error: {response.status_code}"
@@ -142,16 +149,12 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
     Returns:
         dict: The processing results
     """
+    output_file = get_output_filename(image_path, output_dir)
+    fname = os.path.basename(output_file).split(".")[0]
+    
     try:
         # Process the image
         results = process_image(server_url, image_path, output_dir, verbose, engines, prompt)
-
-        # Generate output filename
-        output_file = get_output_filename(image_path, output_dir)
-        fname = os.path.basename(output_file).split(".")[0]
-        print(output_file)
-        print(fname)
-        results['filename'] = fname
 
         # Print summary of results if verbose is enabled
         if verbose:
