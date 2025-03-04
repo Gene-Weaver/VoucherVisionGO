@@ -279,14 +279,48 @@ class VoucherVisionProcessor:
                 vv_results, tokens_in, tokens_out = self.process_voucher_vision(ocr_results["OCR"], current_prompt)
                 
                 # Combine results
-                results = {
-                    "ocr_results": ocr_results,
-                    "vvgo_json": vv_results,
-                    "tokens_LLM": {
-                        "input": tokens_in,
-                        "output": tokens_out
+                # results = {
+                #     "ocr_results": ocr_results,
+                #     "vvgo_json": vv_results,
+                #     "tokens_LLM": {
+                #         "input": tokens_in,
+                #         "output": tokens_out
+                #     }
+                # }
+                if isinstance(vv_results, str):
+                    try:
+                        # Just to validate it's JSON, but don't use the parsed result
+                        json.loads(vv_results)
+                        # Keep as string
+                        results = {
+                            "ocr_results": ocr_results,
+                            "vvgo_json": vv_results,  # Keep as string
+                            "tokens_LLM": {
+                                "input": tokens_in,
+                                "output": tokens_out
+                            }
+                        }
+                    except json.JSONDecodeError:
+                        # Not valid JSON, convert to dict
+                        logger.warning("vv_results is not valid JSON, treating as string")
+                        results = {
+                            "ocr_results": ocr_results,
+                            "vvgo_json": vv_results,
+                            "tokens_LLM": {
+                                "input": tokens_in,
+                                "output": tokens_out
+                            }
+                        }
+                else:
+                    # It's already a dictionary or other object
+                    results = {
+                        "ocr_results": ocr_results,
+                        "vvgo_json": vv_results,
+                        "tokens_LLM": {
+                            "input": tokens_in,
+                            "output": tokens_out
+                        }
                     }
-                }
                 
                 return results, 200
             
