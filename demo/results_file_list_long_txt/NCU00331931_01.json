@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nat Chapel Hill\nUniversity of North Carolina\ncopyright reserved\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331931\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\n\n*Galax aphylla* L.\nUpriver about \u215c mi. from mouth of Patterson's Cr. On very steep hillside\nunder *Kalmia*, with *Epigaea* and *Asarum*.\n\n258\n5/8/55\nCollector: Peggy-Ann Kessler\n\n86563 (handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF\nNORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331931\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\nGalax aphylla L.\nUpriver about mi. from mouth of Pat-\nterson's Cr. On very steep hillside\nunder Kalmia, with Epigaea and Asarum.\n258\nCollector: Peggy-Ann Kessler\n5/8/55\n\n\nGalax aphylla\nEpigaea\nAsarum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6800000000000006e-05,
+      "total_cost": 0.0007283000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 117
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2140,
+    "output": 462,
+    "cost_in": 0.000214,
+    "cost_out": 0.00018480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nat Chapel Hill\nUniversity of North Carolina\ncopyright reserved\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331931\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\n\n*Galax aphylla* L.\nUpriver about \u215c mi. from mouth of Patterson's Cr. On very steep hillside\nunder *Kalmia*, with *Epigaea* and *Asarum*.\n\n258\n5/8/55\nCollector: Peggy-Ann Kessler\n\n86563 (handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nOF\nNORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331931\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\nGalax aphylla L.\nUpriver about mi. from mouth of Pat-\nterson's Cr. On very steep hillside\nunder Kalmia, with Epigaea and Asarum.\n258\nCollector: Peggy-Ann Kessler\n5/8/55\n\n\nGalax aphylla\nEpigaea\nAsarum\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331931",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Peggy-Ann Kessler",
+    "collectorNumber": "258",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/8/55",
+    "collectionDate": "1955-05-08",
+    "collectionDateEnd": "",
+    "habitat": "On very steep hillside under Kalmia, with Epigaea and Asarum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Lee co.",
+    "locality": "Upriver about \u215c mi. from mouth of patterson's cr.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NcU\nat chapel hill\nuniversity of north carolina\ncopyright reserved\nuniversity of north carolina herbarium\nflora of deep river basin\n86563 (handwritten)\ngalax aphylla\nepigaea\nasarum"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Black\n3/Color\nWhite\nMagenta\nRed\nYellow\nGreen\nCyan\nBlue\nCentimeters\nTIFFEN Color Control Patches\n\u00a9 The Tiffen Company 2007\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672743\n\nFLORA OF THE CORROTOMAN\nRIVER WATERSHED\nLancaster County, Virginia\n\n28 June 1994\n\n*Galax urceolata* (Poiret) Brummitt\n\nCommon with *Stewartia ovata*, *Kalmia*, and *Pinus virginiana* on northwest slope on eastside of John's\nCreek, just north of Merry Point Ferry Landing.\n\nCollector: Troy Weldy\nNo: 671\nwith Anne Messick\n\nHerbarium of the College of William & Mary\nWilliamsburg, VA 23187\n\nNCU00436136\n\n\n*Galax urceolata*\n*Stewartia ovata*\n*Kalmia*\n*Pinus virginiana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00134,
+      "total_cost": 0.00211875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 268
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Centimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00436136\nof North Carolina ar\nUniver\nHERBARIUM\nNCU\n672743\nFLORA OF THE CORROTOMAN\nRIVER WATERSHED\nLancaster County, Virginia\nGalax urceolata (Poiret) Brummitt\n28 June 1994\nCommon with Stewartia ovata, Kalmia, and Pinus\nvirginiana on northwest slope on eastside of John's\nCreek, just north of Merry Point Ferry Landing.\nCollector: Troy Weldy\nNo: 671\nwith Anne Messick\nHerbarium of the College of William & Mary\nWilliamsburg, VA 23187\n\n\nGalax urceolata\nStewartia ovata\nKalmia\nPinus virginiana\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.560000000000001e-05,
+      "total_cost": 0.0007671,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 214
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2357,
+    "output": 568,
+    "cost_in": 0.00023570000000000004,
+    "cost_out": 0.00022720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBlack\n3/Color\nWhite\nMagenta\nRed\nYellow\nGreen\nCyan\nBlue\nCentimeters\nTIFFEN Color Control Patches\n\u00a9 The Tiffen Company 2007\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672743\n\nFLORA OF THE CORROTOMAN\nRIVER WATERSHED\nLancaster County, Virginia\n\n28 June 1994\n\n*Galax urceolata* (Poiret) Brummitt\n\nCommon with *Stewartia ovata*, *Kalmia*, and *Pinus virginiana* on northwest slope on eastside of John's\nCreek, just north of Merry Point Ferry Landing.\n\nCollector: Troy Weldy\nNo: 671\nwith Anne Messick\n\nHerbarium of the College of William & Mary\nWilliamsburg, VA 23187\n\nNCU00436136\n\n\n*Galax urceolata*\n*Stewartia ovata*\n*Kalmia*\n*Pinus virginiana*\n\n\ngemini-2.0-flash OCR:\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00436136\nof North Carolina ar\nUniver\nHERBARIUM\nNCU\n672743\nFLORA OF THE CORROTOMAN\nRIVER WATERSHED\nLancaster County, Virginia\nGalax urceolata (Poiret) Brummitt\n28 June 1994\nCommon with Stewartia ovata, Kalmia, and Pinus\nvirginiana on northwest slope on eastside of John's\nCreek, just north of Merry Point Ferry Landing.\nCollector: Troy Weldy\nNo: 671\nwith Anne Messick\nHerbarium of the College of William & Mary\nWilliamsburg, VA 23187\n\n\nGalax urceolata\nStewartia ovata\nKalmia\nPinus virginiana\n\n",
+  "formatted_json": {
+    "catalogNumber": "672743",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Troy Weldy, Anne Messick",
+    "collectorNumber": "671",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "28 June 1994",
+    "collectionDate": "1994-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Common with Stewartia ovata, Kalmia, and Pinus virginiana on northwest slope on eastside of John's Creek, just north of Merry Point Ferry Landing.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Lancaster County",
+    "locality": "Eastside of john's creek, just north of merry point ferry landing.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at chapel hill\nherbarium\nncu\nflora of the corrotoman\nriver watershed\nherbarium of the college of william & mary\nwilliamsburg, va 23187\nncu00436136\nblack\n3/color\nwhite\nmagenta\nred\nyellow\ngreen\ncyan\nblue\ncentimeters\ntiffen color control patches\n\u00a9 the tiffen company 2007\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19"
+  }
+}

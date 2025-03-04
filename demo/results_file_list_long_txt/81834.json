@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n81834\nWILLIAM & MARY\nWILD\n\nFLORA OF THE COLLEGE WOODS\nHERBARIUM OF THE COLLEGE OF WILLIAM AND MARY\nWilliamsburg, Virginia\n\nCity of Williamsburg, Virginia\n*Galax urceolata* (Poir.) Brummitt\n\n6x3m patch on bank of Dead Dog Gulch (head of Blunt Point\nravine). With *Medeola virginiana*, under *Ilex opaca* and\n*Vaccinium* sp.\n37 16.026 N, 76 44.171 W\n\nCaitlin D. Cyrus # 309 (handwritten)\nwith Trevor A Sleight, Aamir H Akbarali, Tram H Phung\n\nColl. Date: 6/11/2014\n\nDet.:Caitlin D. Cyrus, 1/6/2015\n\n\n*Galax urceolata*\n*Medeola virginiana*\n*Ilex opaca*\n*Vaccinium* sp.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001155,
+      "total_cost": 0.00193375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 231
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm 10 20\n30\n40\nNO. 305 ME\n16ths\n50\n2\n60 70 80\n3\nGENERAL\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nCHARTERED 1693\nCOLLEGE OF\n81834\nWILLIAM & MARY\nWILD\nFLORA OF THE COLLEGE WOODS\nHERBARIUM OF THE COLLEGE OF WILLIAM AND MARY\nWilliamsburg, Virginia\nCity of Williamsburg, Virginia\nGalax urceolata (Poir.) Brummitt\n6x3m patch on bank of Dead Dog Gulch (head of Blunt Point\nravine). With Medeola virginiana, under Ilex opaca and\nVaccinium sp.\n37 16.026 N, 76 44.171 W\nCaitlin D. Cyrus #. 309\nwith Trevor A Sleight, Aamir H Akbarali, Tram H Phung\nColl. Date: 6/11/2014\nDet.:Caitlin D. Cyrus, 1/6/2015\n\n\nGalax urceolata\nMedeola virginiana\nIlex opaca\nVaccinium\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011760000000000001,
+      "total_cost": 0.0007991000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 294
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2406,
+    "output": 614,
+    "cost_in": 0.00024060000000000002,
+    "cost_out": 0.0002456
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n81834\nWILLIAM & MARY\nWILD\n\nFLORA OF THE COLLEGE WOODS\nHERBARIUM OF THE COLLEGE OF WILLIAM AND MARY\nWilliamsburg, Virginia\n\nCity of Williamsburg, Virginia\n*Galax urceolata* (Poir.) Brummitt\n\n6x3m patch on bank of Dead Dog Gulch (head of Blunt Point\nravine). With *Medeola virginiana*, under *Ilex opaca* and\n*Vaccinium* sp.\n37 16.026 N, 76 44.171 W\n\nCaitlin D. Cyrus # 309 (handwritten)\nwith Trevor A Sleight, Aamir H Akbarali, Tram H Phung\n\nColl. Date: 6/11/2014\n\nDet.:Caitlin D. Cyrus, 1/6/2015\n\n\n*Galax urceolata*\n*Medeola virginiana*\n*Ilex opaca*\n*Vaccinium* sp.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm 10 20\n30\n40\nNO. 305 ME\n16ths\n50\n2\n60 70 80\n3\nGENERAL\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nCHARTERED 1693\nCOLLEGE OF\n81834\nWILLIAM & MARY\nWILD\nFLORA OF THE COLLEGE WOODS\nHERBARIUM OF THE COLLEGE OF WILLIAM AND MARY\nWilliamsburg, Virginia\nCity of Williamsburg, Virginia\nGalax urceolata (Poir.) Brummitt\n6x3m patch on bank of Dead Dog Gulch (head of Blunt Point\nravine). With Medeola virginiana, under Ilex opaca and\nVaccinium sp.\n37 16.026 N, 76 44.171 W\nCaitlin D. Cyrus #. 309\nwith Trevor A Sleight, Aamir H Akbarali, Tram H Phung\nColl. Date: 6/11/2014\nDet.:Caitlin D. Cyrus, 1/6/2015\n\n\nGalax urceolata\nMedeola virginiana\nIlex opaca\nVaccinium\n\n",
+  "formatted_json": {
+    "catalogNumber": "81834",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Caitlin D. Cyrus, Trevor A Sleight, Aamir H Akbarali, Tram H Phung",
+    "collectorNumber": "309",
+    "identifiedBy": "Caitlin D. Cyrus",
+    "identifiedDate": "2015-01-06",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/11/2014",
+    "collectionDate": "2014-06-11",
+    "collectionDateEnd": "",
+    "habitat": "6x3m patch on bank of dead dog gulch (head of blunt point ravine). with Medeola virginiana, under Ilex opaca and Vaccinium sp.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "City of williamsburg",
+    "locality": "City of williamsburg, virginia",
+    "verbatimCoordinates": "37 16.026 N, 76 44.171 W",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nchartered 1693\ncollege of\nwilliam & mary\nwild\nflora of the college woods\nherbarium of the college of william and mary\n\nGalax urceolata\nMedeola virginiana\nIlex opaca\nVaccinium sp.\nmm 10 20\n30\n40\nno. 305 me\n16ths\n50\n2\n60 70 80\n3\ngeneral\n90 100 110 120 130 140 150\n4\n6\nmade\n5\nstainless steel"
+  }
+}

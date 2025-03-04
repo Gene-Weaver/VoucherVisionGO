@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03086\n\nEast Carolina University\nHerbarium\nECUH0005384\n\nEAST CAROLINA COLLEGE HERBARIUM\n\nPitt County\n*Galax aphylla* L.\nNorth Facing BLUFF, 10 MILES FROM\nGREENVILLE, N.C. on FARMVILLE, N.C.\nHighway.\nMay 10, 1956\nRobert F. Williams\n25-(Handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005399999999999999,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03086\nEast Carolina University\nHerbarlum\nECUH0005384\nRG\nB\nA 1\n2\n3\n4\n5\n9\nTIFFEN Gray Scale\nW\nG\nK\nThe Tiffen Company, 2007\nC\nM\nM\n10 9 8\n11 12 13 14 15\nB 17 18 19\nInches\n5\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nEAST CAROLINA COLLEGE HERBARIUM\nPitt County\nGalax aphylla Li.\nNorth Facing BLUFF, 10 MILES FROM\nGREENVILLE, n.C. on FARMVILLe, n.C.\nHighway.\nMay 10,1956\nRobert F. WILLIAMS\n25\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.000108,
+      "total_cost": 0.0007895,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 270
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2256,
+    "output": 588,
+    "cost_in": 0.00022560000000000004,
+    "cost_out": 0.0002352
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03086\n\nEast Carolina University\nHerbarium\nECUH0005384\n\nEAST CAROLINA COLLEGE HERBARIUM\n\nPitt County\n*Galax aphylla* L.\nNorth Facing BLUFF, 10 MILES FROM\nGREENVILLE, N.C. on FARMVILLE, N.C.\nHighway.\nMay 10, 1956\nRobert F. Williams\n25-(Handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03086\nEast Carolina University\nHerbarlum\nECUH0005384\nRG\nB\nA 1\n2\n3\n4\n5\n9\nTIFFEN Gray Scale\nW\nG\nK\nThe Tiffen Company, 2007\nC\nM\nM\n10 9 8\n11 12 13 14 15\nB 17 18 19\nInches\n5\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nEAST CAROLINA COLLEGE HERBARIUM\nPitt County\nGalax aphylla Li.\nNorth Facing BLUFF, 10 MILES FROM\nGREENVILLE, n.C. on FARMVILLe, n.C.\nHighway.\nMay 10,1956\nRobert F. WILLIAMS\n25\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ECUH0005384",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert F. Williams",
+    "collectorNumber": "25",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 10, 1956",
+    "collectionDate": "1956-05-10",
+    "collectionDateEnd": "",
+    "habitat": "North facing bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.C.",
+    "county": "Pitt County",
+    "locality": "10 miles from greenville, n.c. on farmville, n.c. highway.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of\nEast Carolina University\n03086\nEast Carolina University\nHerbarlum\nRG\nB\nA 1\n2\n3\n4\n5\n9\nTIFFEN Gray Scale\nW\nG\nK\nThe Tiffen Company, 2007\nC\nM\nM\n10 9 8\n11 12 13 14 15\nB 17 18 19\nInches\n5\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nEast Carolina College Herbarium"
+  }
+}

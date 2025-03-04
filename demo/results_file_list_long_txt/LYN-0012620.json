@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012620\n\nLYNCHBURG COLLEGE\n48340\nHERBARIUM\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\n\nnear Hermosa, Pittsylvania Co.\nFairly common on steep, N-facing,\nhemlock bluff on Bannister River 1.3\nmi. SSW of Hermosa.\n(Mt. Airy Quad.) el. 400-460 ft.\n\nCharles E. Stevens\nNo. 18,994 Sep. 7, 1984\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brum., near Hermosa, Pittsylvania Co., Fairly common on steep, N-facing, hemlock bluff on Bannister River 1.3 mi. SSW of Hermosa. (Mt. Airy Quad.) el. 400-460 ft., Sep. 7, 1984\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011350000000000002,
+      "total_cost": 0.00191375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 227
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012620\nLYNCHBURG\nCOLLEGE\n48340\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Hermosa, Pittsylvania Co.\nFairly common on steep, N-facing,\nhemlock bluff on Bannister River 1.3\nmi. SSW of Hermosa.\nCharles E. Stevens\nNo. 18,994\nSep. 7, 1984\n---\n\nSalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.0400000000000005e-05,
+      "total_cost": 0.0007319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2227,
+    "output": 497,
+    "cost_in": 0.0002227,
+    "cost_out": 0.00019880000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012620\n\nLYNCHBURG COLLEGE\n48340\nHERBARIUM\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\n\nnear Hermosa, Pittsylvania Co.\nFairly common on steep, N-facing,\nhemlock bluff on Bannister River 1.3\nmi. SSW of Hermosa.\n(Mt. Airy Quad.) el. 400-460 ft.\n\nCharles E. Stevens\nNo. 18,994 Sep. 7, 1984\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brum., near Hermosa, Pittsylvania Co., Fairly common on steep, N-facing, hemlock bluff on Bannister River 1.3 mi. SSW of Hermosa. (Mt. Airy Quad.) el. 400-460 ft., Sep. 7, 1984\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012620\nLYNCHBURG\nCOLLEGE\n48340\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Hermosa, Pittsylvania Co.\nFairly common on steep, N-facing,\nhemlock bluff on Bannister River 1.3\nmi. SSW of Hermosa.\nCharles E. Stevens\nNo. 18,994\nSep. 7, 1984\n---\n\nSalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012620",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "18,994",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sep. 7, 1984",
+    "collectionDate": "1984-09-07",
+    "collectionDateEnd": "",
+    "habitat": "Fairly common on steep, n-facing, hemlock bluff on bannister river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania co.",
+    "locality": "Near hermosa, pittsylvania co. fairly common on steep, n-facing, hemlock bluff on bannister river 1.3 mi. ssw of hermosa. (mt. airy quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "122",
+    "maximumElevationInMeters": "140",
+    "elevationUnits": "ft",
+    "additionalText": "Ramsey-freer herbarium\nlynchburg college\nlynchburg college\nherbarium\nflora of virginia\nsalax urceolata"
+  }
+}

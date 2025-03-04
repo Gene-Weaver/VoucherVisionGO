@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "R. K. GODFREY HERBARIUM\n214120\nFLORIDA STATE UNIVERSITY\nGift ex Stetson University\n\nR. K. Godfrey Herbarium (FSU)\n*000179903*\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. Synonym)\nThis is an update of the species name to make it consistent with the Flora of\nthe Southern and Mid-Atlantic States (Working Draft of 21 May 2015) by\nAlan S. Weakley and other resources. It is not meant to reflect verification\nof the previous identification.\nNathaniel Pak and Katelin D. Pearson\nMarch 1, 2018\n\nCON UNIVERSITY\nHERBARIUM\nNo. _4020_\nDE LAND, FLORIDA\n\nHerbarium of STETSON UNIVERSITY\nDeLand, Florida\nPLANTS OF FLORIDA North Carolina\nDate: 6-8-59\nCounty Buncombe\nGalax aphylla L.\nWandflower, Beetleweed.\n\nFls. wh., plant very common in deep woods.\nCamp Rockmont, 4 mi. w. of Black Mountain, N. C.\n\nCollected by: Elmer C. Prichard\nNo. 1176\nDet. by: ECP\n\nHandwritten Text: 4020\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0015049999999999998,
+      "total_cost": 0.00228375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 301
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "R. K. GODFREY HERBARIUM\n\n214120\nFLORIDA STATE UNIVERSITY\nGift ex Stetson University\n\nR. K. Godfrey Herbarium (FSU)\n*000179903*\n\nUNIVERSITY\nHERBARIUM\nNo. 4020\nDE LAND, FLORIO\n\nHerbarium of STETSON UNIVERSITY\nDeLand, Florida\nPLANTS OF North Carolina\nCounty Buncombe\nDate: 6-8-59\nGalax aphylla L.\nWandflower, Beetleweed.\nFls. wh., plant very common in deep woods.\nCamp Rockmont, 4 mi. w. of Black Mountain, N. C.\n\nCollected by: Elmer C. Prichard\nNo. 1176\nDet. by: ECP\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. Synonym)\nThis is an update of the species name to make it consistent with the Flora of\nthe Southern and Mid-Atlantic States (Working Draft of 21 May 2015) by\nAlan S. Weakley and other resources. It is not meant to reflect verification\nof the previous identification.\nNathaniel Pak and Katelin D. Pearson\nMarch 1, 2018\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011599999999999999,
+      "total_cost": 0.0007975,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 290
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2472,
+    "output": 641,
+    "cost_in": 0.0002472,
+    "cost_out": 0.0002564
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nR. K. GODFREY HERBARIUM\n214120\nFLORIDA STATE UNIVERSITY\nGift ex Stetson University\n\nR. K. Godfrey Herbarium (FSU)\n*000179903*\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. Synonym)\nThis is an update of the species name to make it consistent with the Flora of\nthe Southern and Mid-Atlantic States (Working Draft of 21 May 2015) by\nAlan S. Weakley and other resources. It is not meant to reflect verification\nof the previous identification.\nNathaniel Pak and Katelin D. Pearson\nMarch 1, 2018\n\nCON UNIVERSITY\nHERBARIUM\nNo. _4020_\nDE LAND, FLORIDA\n\nHerbarium of STETSON UNIVERSITY\nDeLand, Florida\nPLANTS OF FLORIDA North Carolina\nDate: 6-8-59\nCounty Buncombe\nGalax aphylla L.\nWandflower, Beetleweed.\n\nFls. wh., plant very common in deep woods.\nCamp Rockmont, 4 mi. w. of Black Mountain, N. C.\n\nCollected by: Elmer C. Prichard\nNo. 1176\nDet. by: ECP\n\nHandwritten Text: 4020\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nR. K. GODFREY HERBARIUM\n\n214120\nFLORIDA STATE UNIVERSITY\nGift ex Stetson University\n\nR. K. Godfrey Herbarium (FSU)\n*000179903*\n\nUNIVERSITY\nHERBARIUM\nNo. 4020\nDE LAND, FLORIO\n\nHerbarium of STETSON UNIVERSITY\nDeLand, Florida\nPLANTS OF North Carolina\nCounty Buncombe\nDate: 6-8-59\nGalax aphylla L.\nWandflower, Beetleweed.\nFls. wh., plant very common in deep woods.\nCamp Rockmont, 4 mi. w. of Black Mountain, N. C.\n\nCollected by: Elmer C. Prichard\nNo. 1176\nDet. by: ECP\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. Synonym)\nThis is an update of the species name to make it consistent with the Flora of\nthe Southern and Mid-Atlantic States (Working Draft of 21 May 2015) by\nAlan S. Weakley and other resources. It is not meant to reflect verification\nof the previous identification.\nNathaniel Pak and Katelin D. Pearson\nMarch 1, 2018\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "214120",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Elmer C. Prichard",
+    "collectorNumber": "1176",
+    "identifiedBy": "Nathaniel Pak and Katelin D. Pearson",
+    "identifiedDate": "2018-03-01",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "This is an update of the species name to make it consistent with the Flora of the Southern and Mid-Atlantic States (Working Draft of 21 May 2015) by Alan S. Weakley and other resources. It is not meant to reflect verification of the previous identification.",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "6-8-59",
+    "collectionDate": "1959-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Fls. wh., plant very common in deep woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe",
+    "locality": "Camp Rockmont, 4 mi. w. of Black Mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "R. K. GODFREY HERBARIUM\nFLORIDA STATE UNIVERSITY\nGift ex Stetson University\nR. K. Godfrey Herbarium (FSU)\n000179903\nUNIVERSITY\nHERBARIUM\nNo. 4020\nDE LAND, FLORIO\nHerbarium of STETSON UNIVERSITY\nDeLand, Florida\nPLANTS OF\nDate\nGalax aphylla L.\nWandflower, Beetleweed.\nCollected by Elmer C. Prichard\nDet. by ECP\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

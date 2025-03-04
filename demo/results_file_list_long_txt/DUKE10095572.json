@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n\nPOISONED\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095572\n22143\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000805,
+      "total_cost": 0.0015837499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\nDUKE UNIVERSITY HERBARIUM\nDUKE10095572\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n22143\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.52e-05,
+      "total_cost": 0.0007467000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 163
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 514,
+    "cost_in": 0.0002212,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY\nHERBARIUM\n\nPOISONED\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095572\n22143\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\nDUKE UNIVERSITY HERBARIUM\nDUKE10095572\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n22143\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095572",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Sr. Margaret Potts, R. C. E.",
+    "collectorNumber": "300",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 12, 1933.",
+    "collectionDate": "1933-08-12",
+    "collectionDateEnd": "",
+    "habitat": "Upper banks of the French Broad River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Henderson County",
+    "locality": "Mt. St. Louis",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "POISONED\n22143\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nGalax urceolata\nGalax aphylla\nDuke\ncopyright reserved"
+  }
+}

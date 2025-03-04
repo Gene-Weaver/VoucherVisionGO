@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU00080572\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\n\n*Galax aphylla* L.\n\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\n\nMiklos Treiber 460  8 May 1975\nGuy Nesom\nPlants of the Southeastern United States\n\nx-rite colorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nNCU\n460630\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007499999999999999,
+      "total_cost": 0.00152875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 150
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080572\nUniversity of North Carolina\nat Chapel Hill\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\nGalax aphylla L.\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\nMiklos Treiber 460\nGuy Nesom\n8 May 1975\nPlants of the Southeastern United States\nx-rite\ncolorchecker\nY OF NORTH CAROLIN\nUNIVE\n460630\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 479,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU00080572\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\n\n*Galax aphylla* L.\n\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\n\nMiklos Treiber 460  8 May 1975\nGuy Nesom\nPlants of the Southeastern United States\n\nx-rite colorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nNCU\n460630\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080572\nUniversity of North Carolina\nat Chapel Hill\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\nGalax aphylla L.\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\nMiklos Treiber 460\nGuy Nesom\n8 May 1975\nPlants of the Southeastern United States\nx-rite\ncolorchecker\nY OF NORTH CAROLIN\nUNIVE\n460630\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080572",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Miklos Treiber, Guy Nesom",
+    "collectorNumber": "460",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8 May 1975",
+    "collectionDate": "1975-05-08",
+    "collectionDateEnd": "",
+    "habitat": "In beech-mixed hardwoods community. Steep slopes along borders of kehukee swamp and its tributaries, off co. rd. 125, 2 miles n of palmyra. kehukee swamp location",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Halifax county",
+    "locality": "Off co. rd. 125, 2 miles n of palmyra. kehukee swamp location",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of the southeastern united states\nx-rite\ncolorchecker"
+  }
+}

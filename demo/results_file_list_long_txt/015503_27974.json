@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015503\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.) Brummitt\n\nAvery Co., NC.\nFound in forest near Grandfather Mountain.\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27974 (handwritten)\n\nBen Monroe                                                                     9/13/2003\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\nGalax, beetleweed\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000765,
+      "total_cost": 0.00154375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015503\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C\nNo. 27974\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nAvery Co., NC.\nFound in forest near Granfather Mountain.\nBen Monroe\nGalax, beetleweed\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n9/13/2003\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.400000000000001e-05,
+      "total_cost": 0.0007555000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 185
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2209,
+    "output": 495,
+    "cost_in": 0.0002209,
+    "cost_out": 0.00019800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015503\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.) Brummitt\n\nAvery Co., NC.\nFound in forest near Grandfather Mountain.\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27974 (handwritten)\n\nBen Monroe                                                                     9/13/2003\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\nGalax, beetleweed\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015503\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C\nNo. 27974\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nAvery Co., NC.\nFound in forest near Granfather Mountain.\nBen Monroe\nGalax, beetleweed\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n9/13/2003\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015503",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Ben Monroe",
+    "collectorNumber": "27974",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9/13/2003",
+    "collectionDate": "2003-09-13",
+    "collectionDateEnd": "",
+    "habitat": "Found in forest near Grandfather Mountain",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.s.a.",
+    "stateProvince": "North Carolina",
+    "county": "Avery Co.",
+    "locality": "Avery Co., Nc. Found in forest near grandfather mountain.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Living\nCultures\nAppalachian state university herbarium\nHerbarium\nAppalachian state\nUniversity\nBoone, n. c.\nGalax, beetleweed\nAppalachian state university herbarium\n[boon]\nBoone, north carolina, u.s.a. 28608\ninches\nMetric 1\nCarolina\nBurlington, nc 272151-800-334-5551\npreserved\nMaterials"
+  }
+}

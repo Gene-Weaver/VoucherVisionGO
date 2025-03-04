@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087816\n\nUNIVERSITY OF LOUISVILLE\nDAVIES HERBARIUM\n1798\n\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nGEORGIA\nNo. G-7 (Handwritten)\nSci. Name *GALAX APHYLLA* L.\nCom. Name Beetleweed (very scattered)\nHabitat Wooded trail around lake\nLocality State Park in the Chattahoochee National Park.\nColl. Charles R. Gunn Date 6.5.55 (Handwritten)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087816\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nTIFFEN Gray Scale\nDAVIES HERRARIUM\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nGEORGIA\nNo.\nG-7\nSci. Name GALAX APHYLLA L.\nCom. Name Beetleweed\nHabitat Wooded trail around lake\n(very scattered)\nPicnic area of Fort Mountain\nLocalitystate Park in the Chattahoo-\nchee National Park\nCollcharles R. Gunn Date 6.5.55\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2226,
+    "output": 472,
+    "cost_in": 0.00022260000000000002,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087816\n\nUNIVERSITY OF LOUISVILLE\nDAVIES HERBARIUM\n1798\n\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nGEORGIA\nNo. G-7 (Handwritten)\nSci. Name *GALAX APHYLLA* L.\nCom. Name Beetleweed (very scattered)\nHabitat Wooded trail around lake\nLocality State Park in the Chattahoochee National Park.\nColl. Charles R. Gunn Date 6.5.55 (Handwritten)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087816\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nTIFFEN Gray Scale\nDAVIES HERRARIUM\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nGEORGIA\nNo.\nG-7\nSci. Name GALAX APHYLLA L.\nCom. Name Beetleweed\nHabitat Wooded trail around lake\n(very scattered)\nPicnic area of Fort Mountain\nLocalitystate Park in the Chattahoo-\nchee National Park\nCollcharles R. Gunn Date 6.5.55\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087816",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles R. Gunn",
+    "collectorNumber": "G-7",
+    "identifiedBy": "Mason Brock, Austin Peay State University (APSC)",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "6.5.55",
+    "collectionDate": "1955-05-06",
+    "collectionDateEnd": "",
+    "habitat": "Wooded trail around lake",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Very scattered",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "",
+    "locality": "Picnic area of Fort Mountain state Park in the Chattahoochee National Park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nUNIVERSITY OF LOUISVILLE\nDAVIES HERBARIUM\nCom. Name Beetleweed"
+  }
+}

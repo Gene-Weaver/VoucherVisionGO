@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n\ncopyright reserved\n\n16113\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042868\n\n(Handwritten) 37 *Galax urceolata*  \"Galax\"\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name *Galax aphylla* L\nCommon Name GALAX\nLocality JOCASSEE Co. OCONEE\nHabitat UPPER PIEDMONT PINE/HARDWOOD FOREST\nCollector ALDRIDGE No. 159 Date 10-28-71\nAcc. No. Identified By ECA\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000985,
+      "total_cost": 0.00176375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 197
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "urceolata\n37 GALAX\n\"GALAX\n0\ncm\n1 2\n3\n4\n5\n6\n7 8 9 10\nCLEMS\ncopyright reserved\n0\nGalax urceolata (Poir.) Brummmitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name GALAX\nAPHYLLA\nL\nCommon Name GALAX\nLocality JOCASSEE\nCO. OCONEE\nHabitat UPPER PIEDMONT PINE/HARDWOOD FOREST\nCollector ALDRIDGE\nNo. 159\nDate 10-28-71\nIdentified By\nECA\n16113\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042868\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.72e-05,
+      "total_cost": 0.0007687,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 218
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2321,
+    "output": 547,
+    "cost_in": 0.00023210000000000003,
+    "cost_out": 0.0002188
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n\ncopyright reserved\n\n16113\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042868\n\n(Handwritten) 37 *Galax urceolata*  \"Galax\"\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name *Galax aphylla* L\nCommon Name GALAX\nLocality JOCASSEE Co. OCONEE\nHabitat UPPER PIEDMONT PINE/HARDWOOD FOREST\nCollector ALDRIDGE No. 159 Date 10-28-71\nAcc. No. Identified By ECA\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nurceolata\n37 GALAX\n\"GALAX\n0\ncm\n1 2\n3\n4\n5\n6\n7 8 9 10\nCLEMS\ncopyright reserved\n0\nGalax urceolata (Poir.) Brummmitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name GALAX\nAPHYLLA\nL\nCommon Name GALAX\nLocality JOCASSEE\nCO. OCONEE\nHabitat UPPER PIEDMONT PINE/HARDWOOD FOREST\nCollector ALDRIDGE\nNo. 159\nDate 10-28-71\nIdentified By\nECA\n16113\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042868\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042868",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Aldridge",
+    "collectorNumber": "159",
+    "identifiedBy": "Eca",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10-28-71",
+    "collectionDate": "1971-10-28",
+    "collectionDateEnd": "",
+    "habitat": "Upper piedmont pine/hardwood forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Oconee",
+    "locality": "Jocassee co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "clems\ncopyright reserved\n16113\nclemson\nuniversity\nherbarium\nclemson university herbarium\n37 galax urceolata  galax\njohn f. townsend 1996\nclemson university herbarium (clems)\nherbarium of clemson university\ndepartment of botany and bacteriology\nclemson, south carolina 29631\nscientific name galax aphylla l\ncommon name galax\ndate\nacc. no.\ngalax aphylla\nurceolata\ngalax\naphylla\nl\n"
+  }
+}

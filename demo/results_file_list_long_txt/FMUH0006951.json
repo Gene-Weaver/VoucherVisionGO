@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "4114\nFrancis Marion University Herbarium\nFMUH0006951\n\nFMUH\n\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n4114\n\n313012002\nFlora of South Carolina\nFrancis Marion University Herbarium\n\nDarlington County\n\n*Galax urceolata* (Poiret) Brummitt\n(Weakley Concept, May 2015)\n\nAt Kalmia Gardens, 1624 West Carolina Ave, Hartsville, SC. 29550.\n34\u00b0 21' 58.4\" 80\u00b007' 01.6\"\n\nColl.- Gerald W. Long & George Sawyer  Date- 3/30/2002\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000865,
+      "total_cost": 0.0016437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "4114\nFrancis Marion University Herbarium\nFMUH0006951\nFMUH\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n4114\n313012002\nFlora of South Carolina\nFrancis Marion University Herbarium\nDarlington County\nGalax urceolata (Poiret) Brummitt\n(Weakley Concept, May 2015)\nAt Kalmia Gardens, 1624 West Carolina Ave, Hartsville, SC. 29550.\n34\u00b0 21' 58.4\" 80\u00b007' 01.6\"\nColl.- Gerald W. Long & George Sawyer Date- 3/30/2002\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007487,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 509,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n4114\nFrancis Marion University Herbarium\nFMUH0006951\n\nFMUH\n\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n4114\n\n313012002\nFlora of South Carolina\nFrancis Marion University Herbarium\n\nDarlington County\n\n*Galax urceolata* (Poiret) Brummitt\n(Weakley Concept, May 2015)\n\nAt Kalmia Gardens, 1624 West Carolina Ave, Hartsville, SC. 29550.\n34\u00b0 21' 58.4\" 80\u00b007' 01.6\"\n\nColl.- Gerald W. Long & George Sawyer  Date- 3/30/2002\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n4114\nFrancis Marion University Herbarium\nFMUH0006951\nFMUH\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n4114\n313012002\nFlora of South Carolina\nFrancis Marion University Herbarium\nDarlington County\nGalax urceolata (Poiret) Brummitt\n(Weakley Concept, May 2015)\nAt Kalmia Gardens, 1624 West Carolina Ave, Hartsville, SC. 29550.\n34\u00b0 21' 58.4\" 80\u00b007' 01.6\"\nColl.- Gerald W. Long & George Sawyer Date- 3/30/2002\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FMUH0006951",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Gerald W. Long, George Sawyer",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "(Weakley Concept, May 2015)",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3/30/2002",
+    "collectionDate": "2002-03-30",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Darlington County",
+    "locality": "At Kalmia Gardens, 1624 West Carolina Ave, Hartsville, Sc. 29550.",
+    "verbatimCoordinates": "34\u00b0 21' 58.4 80\u00b007' 01.6",
+    "decimalLatitude": "34.36622",
+    "decimalLongitude": "-80.11672",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Francis Marion University Herbarium\nFMUH\nFrancis Marion University\nHerbarium\n4114\n313012002\nFlora of South Carolina\nFrancis Marion University Herbarium\nGalax urceolata"
+  }
+}

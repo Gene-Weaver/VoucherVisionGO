@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BOON015477\n\nAppalachian State University Herbarium\n\n147 (handwritten)\n\nAppalachian State University\nBoone, N. C.\nNo. 8132\n\nHerbarium of\nWESTERN PIEDMONT COMMUNITY COLLEGE\nVascular Flora of Steels Creek Drainage\nBurke Co., North Carolina\n\n*Galax aphylla* L.\nEdge of woods along banks of access\nroad 5 mi. N. of optimist Elevation 1500'\nPark.\nDate 6-6-71\nCollected by....Ruby D. Harbison No. 1192\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000695,
+      "total_cost": 0.00147375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 139
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015477\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nPRESERVED\nMATERIALS\nAppat\nBoone, N. C\nHerbarium of\nWESTERN PIEDMONT COMMUNITY COLLEGE\nVascular Flora of Steels Creek Drainage\nBurke Co., North Carolina\nGalax aphylla L.\nEdge of woods along banks of access\nroad 5 mi. N.of optimis Elevation 1500'\nPark.\nCollected by Ruby D. Harbison\nDate 6-6-71\nNo. 1192\n147\n--- Handwritten Text ---\nty\nLate\nNo 8132\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.360000000000001e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 468,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBOON015477\n\nAppalachian State University Herbarium\n\n147 (handwritten)\n\nAppalachian State University\nBoone, N. C.\nNo. 8132\n\nHerbarium of\nWESTERN PIEDMONT COMMUNITY COLLEGE\nVascular Flora of Steels Creek Drainage\nBurke Co., North Carolina\n\n*Galax aphylla* L.\nEdge of woods along banks of access\nroad 5 mi. N. of optimist Elevation 1500'\nPark.\nDate 6-6-71\nCollected by....Ruby D. Harbison No. 1192\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015477\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nPRESERVED\nMATERIALS\nAppat\nBoone, N. C\nHerbarium of\nWESTERN PIEDMONT COMMUNITY COLLEGE\nVascular Flora of Steels Creek Drainage\nBurke Co., North Carolina\nGalax aphylla L.\nEdge of woods along banks of access\nroad 5 mi. N.of optimis Elevation 1500'\nPark.\nCollected by Ruby D. Harbison\nDate 6-6-71\nNo. 1192\n147\n--- Handwritten Text ---\nty\nLate\nNo 8132\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015477",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Ruby D. Harbison",
+    "collectorNumber": "1192",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-6-71",
+    "collectionDate": "1971-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Edge of woods along banks of access road",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Burke co.",
+    "locality": "5 mi. n. of optimist park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "457",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Appalachian state university herbarium\n147 (handwritten)\nAppalachian state university\nBoone, n. c.\nNo. 8132\nHerbarium of\nWestern piedmont community college\nVascular flora of steels creek drainage\nElevation 1500'"
+  }
+}

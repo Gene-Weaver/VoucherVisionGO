@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\n037921\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\n\nEX COKER COLLEGE\n1986\nHERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n*Sensu Weakley 2015* (handwritten)\nAnnotated by: Charles L. Kimmel\nJanuary 2016. M.S. Thesis. North Carolina State University (NCSC), Raleigh, N.C.\n\nPLANTS OF\nWILLIAM B. UMSTEAD STATE PARK\nWake County, North Carolina\n\nGalax aphylla L.\n\nKalmia bluff on Crabtree Creek\njust west of Haleys Branch\n\nGeorge P. Sawyer Jr. 2137\nwith Harry E. Ahles\n15 November 1964\n\nUniversity of South Carolina Herbarium\nUSCH0081761\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001025,
+      "total_cost": 0.00180375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 205
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\n037921\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\nEXAMINED FOR: THE GUIDE TO THE VASCULAR FLORA OF WILLIAM B. UMSTEAD STATE PARK\nGalax urceolata (Poir.) Brummitt\nAnnotated by: Charles L. Kimmel Sensu Weakley 2015\nJanuary 2016. M.S. Thesis. North Carolina State University (NCSC), Raleigh, N.C.\nPLANTS OF\nWILLIAM B. UMSTEAD STATE PARK\nWake County, North Carolina\nGalax aphylla L.\nKalmia bluff on Crabtree Creek\njust west of Haleys Branch\nGeorge P. Sawyer Jr. 2137\nwith Harry E. Ahles\n15 November 1964\nEX COKER\nCOLLEGE\n1986\nHERBARIUM\nUniversity of South Carolina Herbarium\nUSCH0081761\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.72e-05,
+      "total_cost": 0.0007787,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 243
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2333,
+    "output": 619,
+    "cost_in": 0.0002333,
+    "cost_out": 0.0002476
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\n037921\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\n\nEX COKER COLLEGE\n1986\nHERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n*Sensu Weakley 2015* (handwritten)\nAnnotated by: Charles L. Kimmel\nJanuary 2016. M.S. Thesis. North Carolina State University (NCSC), Raleigh, N.C.\n\nPLANTS OF\nWILLIAM B. UMSTEAD STATE PARK\nWake County, North Carolina\n\nGalax aphylla L.\n\nKalmia bluff on Crabtree Creek\njust west of Haleys Branch\n\nGeorge P. Sawyer Jr. 2137\nwith Harry E. Ahles\n15 November 1964\n\nUniversity of South Carolina Herbarium\nUSCH0081761\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUSCH\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\n037921\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\nEXAMINED FOR: THE GUIDE TO THE VASCULAR FLORA OF WILLIAM B. UMSTEAD STATE PARK\nGalax urceolata (Poir.) Brummitt\nAnnotated by: Charles L. Kimmel Sensu Weakley 2015\nJanuary 2016. M.S. Thesis. North Carolina State University (NCSC), Raleigh, N.C.\nPLANTS OF\nWILLIAM B. UMSTEAD STATE PARK\nWake County, North Carolina\nGalax aphylla L.\nKalmia bluff on Crabtree Creek\njust west of Haleys Branch\nGeorge P. Sawyer Jr. 2137\nwith Harry E. Ahles\n15 November 1964\nEX COKER\nCOLLEGE\n1986\nHERBARIUM\nUniversity of South Carolina Herbarium\nUSCH0081761\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "037921",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "George P. Sawyer Jr., Harry E. Ahles",
+    "collectorNumber": "2137",
+    "identifiedBy": "Charles L. Kimmel",
+    "identifiedDate": "2016-01-00",
+    "identifiedConfidence": "Sensu",
+    "identifiedRemarks": "M.s. thesis. North Carolina State University (ncsc), Raleigh, n.c.",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "15 November 1964",
+    "collectionDate": "1964-11-15",
+    "collectionDateEnd": "",
+    "habitat": "Kalmia bluff on Crabtree Creek just west of Haleys Branch",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wake County",
+    "locality": "William B. Umstead State Park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\ncopyright reserved\nUniversity of South Carolina\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\nEX COKER COLLEGE\n1986\nHERBARIUM\nWeakley 2015\nPLANTS OF\nUniversity of South Carolina Herbarium\nUSCH0081761\nGalax urceolata\nGalax aphylla\ncm\n1 2 3 4 5 6 7 8 9 10\nEXAMINED FOR THE GUIDE TO THE VASCULAR FLORA OF WILLIAM B. UMSTEAD STATE PARK\nEX COKER\nCOLLEGE\nHERBARIUM\nUniversity of South Carolina Herbarium\nUSCH0081761"
+  }
+}

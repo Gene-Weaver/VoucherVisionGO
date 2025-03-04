@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\n297801\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTRANSYLVANIA COUNTY: along state hwy. 215 about 1 mile\nsouth of its intersection with the Blue Ridge Parkway.\nAlong the road, seepy cliff faces and rich oak\nforest with heath understory on very steep slopes.\nElevation about 4000-4500 feet.\n\nVery common in woods and along road. Leaves very\nshiny, the older ones leathery. Flowers white, borne\non erect stalks.\n\nCharlotte M. Taylor #1569                      12 June 1982\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001045,
+      "total_cost": 0.00182375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 209
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nUNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n297801\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTRANSYLVANIA COUNTY: along state hwy. 215 about 1 mile\nsouth of its intersection with the Blue Ridge Park-\nway. Along the road, seepy cliff faces and rich oak\nforest with heath understory on very steep slopes.\nElevation about 4000-4500 feet.\nVery common in woods and along road. Leaves very\nshiny, the older ones leathery. Flowers white, borne\non erect stalks.\nCharlotte M. Taylor #1569\n12 June 1982\nDUKE UNIVERSITY HERBARIUM\nDUKE 10095595\ncm\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.559999999999999e-05,
+      "total_cost": 0.0007771,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 239
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2336,
+    "output": 596,
+    "cost_in": 0.0002336,
+    "cost_out": 0.0002384
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\n297801\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTRANSYLVANIA COUNTY: along state hwy. 215 about 1 mile\nsouth of its intersection with the Blue Ridge Parkway.\nAlong the road, seepy cliff faces and rich oak\nforest with heath understory on very steep slopes.\nElevation about 4000-4500 feet.\n\nVery common in woods and along road. Leaves very\nshiny, the older ones leathery. Flowers white, borne\non erect stalks.\n\nCharlotte M. Taylor #1569                      12 June 1982\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nUNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n297801\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTRANSYLVANIA COUNTY: along state hwy. 215 about 1 mile\nsouth of its intersection with the Blue Ridge Park-\nway. Along the road, seepy cliff faces and rich oak\nforest with heath understory on very steep slopes.\nElevation about 4000-4500 feet.\nVery common in woods and along road. Leaves very\nshiny, the older ones leathery. Flowers white, borne\non erect stalks.\nCharlotte M. Taylor #1569\n12 June 1982\nDUKE UNIVERSITY HERBARIUM\nDUKE 10095595\ncm\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "297801",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charlotte M. Taylor",
+    "collectorNumber": "1569",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "12 June 1982",
+    "collectionDate": "1982-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Along the road, seepy cliff faces and rich oak forest with heath understory on very steep slopes.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Very common in woods and along road. Leaves very shiny, the older ones leathery. Flowers white, borne on erect stalks.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Transylvania County",
+    "locality": "Along state hwy. 215 about 1 mile south of its intersection with the Blue Ridge Parkway.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "1372",
+    "elevationUnits": "ft",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nElevation about 4000-4500 feet.\nDUKE UNIVERSITY\nHERBARIUM\nDUKE 10095595\ncm\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

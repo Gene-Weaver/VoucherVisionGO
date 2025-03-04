@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n075110\n\nClaude E. Phillips Herbarium\nDelaware State University\n\nPLANTS OF\nNorth Carolina\n\nNumber 23\nCollector JR\nDate 14-V-56\n\nPrimulaceae\n*Galax aphylla* L.\nBeetleweed\n\nRoute 129, near Topton, N *(Handwritten)*\n\n*Joseph Rhoads* *(Handwritten)*\n\nDelaware State University\nDOV0087154\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.00140375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n075110\nClaude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1\n2\n3\n4\n5\n6\n7 8\n9 10\ncopyright reserved\nPLANTS OF\nNorth Carolina\nNumber 23\nCollector JR\nDate 14-V-56\nPrimulaceae\nGalax aphylla L.\nBeetleweed\nRoute 129, near Topton, N\nJoseph Rhoads\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007306999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2133,
+    "output": 436,
+    "cost_in": 0.0002133,
+    "cost_out": 0.0001744
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n075110\n\nClaude E. Phillips Herbarium\nDelaware State University\n\nPLANTS OF\nNorth Carolina\n\nNumber 23\nCollector JR\nDate 14-V-56\n\nPrimulaceae\n*Galax aphylla* L.\nBeetleweed\n\nRoute 129, near Topton, N *(Handwritten)*\n\n*Joseph Rhoads* *(Handwritten)*\n\nDelaware State University\nDOV0087154\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n075110\nClaude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1\n2\n3\n4\n5\n6\n7 8\n9 10\ncopyright reserved\nPLANTS OF\nNorth Carolina\nNumber 23\nCollector JR\nDate 14-V-56\nPrimulaceae\nGalax aphylla L.\nBeetleweed\nRoute 129, near Topton, N\nJoseph Rhoads\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "075110",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "JR",
+    "collectorNumber": "23",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "14-V-56",
+    "collectionDate": "1956-05-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Beetleweed",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Route 129, near Topton, N",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Claude e. phillips herbarium\ndelaware state university, dover\nclaude e. phillips herbarium\ndelaware state university\nplants of\njoseph rhoads"
+  }
+}

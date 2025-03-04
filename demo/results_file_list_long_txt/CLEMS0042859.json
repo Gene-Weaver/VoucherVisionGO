@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n39932\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042859\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/1991\n\nOCONEE County: Hill property, W side West Village\nCreek, NW side Old Rocky Gap Road. Mountain Rest.\nElev. 1700 ft. Blue Ridge province. Fruit green;\nlocally frequent evergreen herb, colonial.\nNorth-facing slope at creek branch.\n\nSteven R. Hill 22608                      1 September 1991\n\nHandwritten text: *Galax urceolata* (Poir) Brummitt\nHandwritten number: 87\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001115,
+      "total_cost": 0.00189375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 223
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10 CLEMS\ncm\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042859\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/1991\nOCONEE County: Hill property, W side West Village\nCreek, NW side Old Rocky Gap Road. Mountain Rest.\nElev. 1700 ft. Blue Ridge province. Fruit green;\nlocally frequent evergreen herb, colonial.\nNorth-facing slope at creek branch.\nSteven R. Hill 22608\n1 September 1991\n\n\nGalax urceolata\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.760000000000002e-05,
+      "total_cost": 0.0007691,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 219
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2321,
+    "output": 584,
+    "cost_in": 0.00023210000000000003,
+    "cost_out": 0.0002336
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n39932\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042859\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/1991\n\nOCONEE County: Hill property, W side West Village\nCreek, NW side Old Rocky Gap Road. Mountain Rest.\nElev. 1700 ft. Blue Ridge province. Fruit green;\nlocally frequent evergreen herb, colonial.\nNorth-facing slope at creek branch.\n\nSteven R. Hill 22608                      1 September 1991\n\nHandwritten text: *Galax urceolata* (Poir) Brummitt\nHandwritten number: 87\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10 CLEMS\ncm\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042859\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/1991\nOCONEE County: Hill property, W side West Village\nCreek, NW side Old Rocky Gap Road. Mountain Rest.\nElev. 1700 ft. Blue Ridge province. Fruit green;\nlocally frequent evergreen herb, colonial.\nNorth-facing slope at creek branch.\nSteven R. Hill 22608\n1 September 1991\n\n\nGalax urceolata\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042859",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Steven R. Hill",
+    "collectorNumber": "22608",
+    "identifiedBy": "S.R.Hill",
+    "identifiedDate": "1991-09-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 September 1991",
+    "collectionDate": "1991-09-01",
+    "collectionDateEnd": "",
+    "habitat": "North-facing slope at creek branch.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Fruit green; locally frequent evergreen herb, colonial.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.S.A.",
+    "stateProvince": "South Carolina",
+    "county": "OCONEE",
+    "locality": "Hill property, W side West Village Creek, NW side Old Rocky Gap Road. Mountain Rest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "518",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "CLEMS\n39932\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nDiapensiaceae\nElev. 1700 ft. Blue Ridge province.\nHandwritten text Galax urceolata (Poir) Brummitt\nHandwritten number 87\n0 1 2 3 4 5 6 7 8 9 10 CLEMS\ncm\ncopyright reserved"
+  }
+}

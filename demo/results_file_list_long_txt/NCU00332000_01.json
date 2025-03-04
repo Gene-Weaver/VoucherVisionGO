@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332000\n\nDiapensiaceae *(handwritten)*\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPlants of Chapel Hill, N. C.\n\n*Galax aphylla* L. *(handwritten)*\nOn steep hill or small mountain *(handwritten)*\nnear Hally Springs, Wake Co. N.C. *(handwritten)*\nAbundant *(handwritten)*\nNo.\nDate 6/25/33 *(handwritten)*\nColl. H.R. Totten *(handwritten)*\nJ.G. Harbison *(handwritten)*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n22501\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "total_cost": 0.00155875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "mm\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nMSCCPPE0411\nxrite\ncolorchecker\nOF NORTH\nCAROLINA\nHERBARIUM\nUNIV\n22501\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332000\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPlants of Chapel Hill, N. C.\nGalax aphylla L.\nOn steep hill or small mountain.\nnear Holly Springs, Wake Co. N.C.\nAbundant\nNo.\nDate 6/25/33\nColl. H. R. Totten\nJ.G. Harbison\nDespensaceae\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.48e-05,
+      "total_cost": 0.0007563,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 416,
+    "cost_in": 0.0002232,
+    "cost_out": 0.0001664
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332000\n\nDiapensiaceae *(handwritten)*\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPlants of Chapel Hill, N. C.\n\n*Galax aphylla* L. *(handwritten)*\nOn steep hill or small mountain *(handwritten)*\nnear Hally Springs, Wake Co. N.C. *(handwritten)*\nAbundant *(handwritten)*\nNo.\nDate 6/25/33 *(handwritten)*\nColl. H.R. Totten *(handwritten)*\nJ.G. Harbison *(handwritten)*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n22501\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nMSCCPPE0411\nxrite\ncolorchecker\nOF NORTH\nCAROLINA\nHERBARIUM\nUNIV\n22501\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332000\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPlants of Chapel Hill, N. C.\nGalax aphylla L.\nOn steep hill or small mountain.\nnear Holly Springs, Wake Co. N.C.\nAbundant\nNo.\nDate 6/25/33\nColl. H. R. Totten\nJ.G. Harbison\nDespensaceae\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332000",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "H.R. Totten, J.G. Harbison",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/25/33",
+    "collectionDate": "1933-06-25",
+    "collectionDateEnd": "",
+    "habitat": "On steep hill or small mountain",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Abundant",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "N.c.",
+    "county": "Wake co.",
+    "locality": "Plants of chapel hill, n. c. near holly springs",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n22501\ndiapensiaceae"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\n\n049987\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025724\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE              County\n\n*GALAX APHYLLA* L.\n\nFairly common in places along W\nside of Slickem Cr at edge of shady\nwoods, about 0.5 mi upstream from\nSC 11, SE of Caesar's Head and W\nof Cleveland.\n\nJohn B. Nelson 7731          22 May 1989\nwith S. Greeter, E. Fox\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009099999999999999,
+      "total_cost": 0.00168875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved University of South Carolina\n049987\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE County\nGALAX APHYLLA L.\nFairly common in places along W\nside of Slickem Cr at edge of shady\nwoods, about 0.5 mi upstream from\nSC 11, SE of Caesar's Head and W\nof Cleveland.\nJohn B. Nelson 7731 22 May 1989\nwith S. Greeter, E. Fox\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.4e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2226,
+    "output": 468,
+    "cost_in": 0.00022260000000000002,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\n\n049987\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025724\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE              County\n\n*GALAX APHYLLA* L.\n\nFairly common in places along W\nside of Slickem Cr at edge of shady\nwoods, about 0.5 mi upstream from\nSC 11, SE of Caesar's Head and W\nof Cleveland.\n\nJohn B. Nelson 7731          22 May 1989\nwith S. Greeter, E. Fox\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved University of South Carolina\n049987\nUNIVERSITY OF\nSOUTH CAROLINA\nHERBARIUM\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE County\nGALAX APHYLLA L.\nFairly common in places along W\nside of Slickem Cr at edge of shady\nwoods, about 0.5 mi upstream from\nSC 11, SE of Caesar's Head and W\nof Cleveland.\nJohn B. Nelson 7731 22 May 1989\nwith S. Greeter, E. Fox\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "049987",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "John B. Nelson, S. Greeter, E. Fox",
+    "collectorNumber": "7731",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 May 1989",
+    "collectionDate": "1989-05-22",
+    "collectionDateEnd": "",
+    "habitat": "Fairly common in places along w side of slickem cr at edge of shady woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Greenville",
+    "locality": "About 0.5 mi upstream from sc 11, se of caesar's head and w of cleveland.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\ncm\ncopyright reserved\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0025724\nUniversity of South Carolina Herbarium"
+  }
+}

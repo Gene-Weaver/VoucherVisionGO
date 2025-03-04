@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n87345\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059499\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\n\nnear Centenary, Buckingham Co.\n100's of plants on N-facing *Kalmia*\nbluff & on ledges of low phyllite cliffs\non Little Georgia Creek \u00bd mi. W of\nRte. # 679 bridge. el. 320-350 ft.\n(Diana Wills Quad.)\n\nCharles E. Stevens\nMay 4, 1989\nNo. 20,893\n\n235 *(handwritten)*\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000865,
+      "total_cost": 0.0016437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n87345\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nnear Centenary, Buckingham Co-\n100's of plants on N-facing Kalmia\nbluff & on ledges of low phyllite cliffs\non Little Seorgia Creek t\u00bd mi. W of\nRte. #679 badge.\n(Diana Wills Quad.)\nCharles E. Stevens\nNo. 20,893\nel. 320-350 ft.\nMay 4, 1989\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059499\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.6e-05,
+      "total_cost": 0.0007475,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 510,
+    "cost_in": 0.0002198,
+    "cost_out": 0.00020400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n87345\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059499\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\n\nnear Centenary, Buckingham Co.\n100's of plants on N-facing *Kalmia*\nbluff & on ledges of low phyllite cliffs\non Little Georgia Creek \u00bd mi. W of\nRte. # 679 bridge. el. 320-350 ft.\n(Diana Wills Quad.)\n\nCharles E. Stevens\nMay 4, 1989\nNo. 20,893\n\n235 *(handwritten)*\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n87345\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nnear Centenary, Buckingham Co-\n100's of plants on N-facing Kalmia\nbluff & on ledges of low phyllite cliffs\non Little Seorgia Creek t\u00bd mi. W of\nRte. #679 badge.\n(Diana Wills Quad.)\nCharles E. Stevens\nNo. 20,893\nel. 320-350 ft.\nMay 4, 1989\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059499\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "87345",
+    "scientificName": "Galax urceolata (Poiret) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "20,893",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 4, 1989",
+    "collectionDate": "1989-05-04",
+    "collectionDateEnd": "",
+    "habitat": "100's of plants on n-facing kalmia bluff & on ledges of low phyllite cliffs",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Buckingham County",
+    "locality": "Near centenary, buckingham co. on little georgia creek \u00bd mi. w of rte. # 679 bridge. (diana wills quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "98",
+    "maximumElevationInMeters": "107",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059499\nFlora of Virginia\nel. 320-350 ft.\n235 (handwritten)"
+  }
+}

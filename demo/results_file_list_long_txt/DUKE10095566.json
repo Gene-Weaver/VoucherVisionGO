@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\n\nDUKE10095566\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n\n42790\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGaston County\n\nGalax aphylla L.\nSmall patches in\nrock shaded areas\n\nNear summit of\nKINGS MT.\n\nH.J.Oosting Oct.17,1937  1640\nNo.\n\n\nHandwritten text:\n* H.J.Oosting\n* Oct.17,1937\n* KINGS MT.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008950000000000001,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDuke\nUNIVERSITY\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGaston County\nDUKE10095566\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\nSmall patches in\nrock shaded areas\nNear summit of\nKINGS MT.\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nH.J.Oosting\nOct.17,1937\n42790\nNo. 1640\n\n\nGalax urceolata\nGalax aphylla\n\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.080000000000001e-05,
+      "total_cost": 0.0007423,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 152
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 532,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00021280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\n\nDUKE10095566\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n\n42790\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGaston County\n\nGalax aphylla L.\nSmall patches in\nrock shaded areas\n\nNear summit of\nKINGS MT.\n\nH.J.Oosting Oct.17,1937  1640\nNo.\n\n\nHandwritten text:\n* H.J.Oosting\n* Oct.17,1937\n* KINGS MT.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDuke\nUNIVERSITY\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGaston County\nDUKE10095566\nGalax aphylla L.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\nSmall patches in\nrock shaded areas\nNear summit of\nKINGS MT.\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nH.J.Oosting\nOct.17,1937\n42790\nNo. 1640\n\n\nGalax urceolata\nGalax aphylla\n\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095566",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H.J.Oosting",
+    "collectorNumber": "1640",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "I.",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Oct.17,1937",
+    "collectionDate": "1937-10-17",
+    "collectionDateEnd": "",
+    "habitat": "Small patches in rock shaded areas",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Gaston County",
+    "locality": "Near summit of KINGS MT.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\ndet. Duke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n42790\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nNo.\nHandwritten text\n H.J.Oosting\n Oct.17,1937\n KINGS MT.\nGalax urceolata\nGalax aphylla"
+  }
+}

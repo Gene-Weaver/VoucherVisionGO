@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082908\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n*Galax aphylla* L.\n\nSteep, rocky, nw. facing bank of Neuse R.,\n2 mi. below Wilson's Mill Br., n. of Smithfield,\nJohnston Co., N.C.\n\nWilliam B. Fox\nBert Whitford\n#1297\nNov. 8, 1947\n\n11453\n\n*(Handwritten Text)*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "11453\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082908\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\nGalax aphylla L.\nSteep, rocky, n.w.- facing bank of Neuse R.,\n2 mi. below Wilson Mill Br., n. of Smithfield,\nJohnston Co., N.C.\nWilliam B. Fox\nBert Whitford\n#1297\nNov. 8, 1947\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4800000000000005e-05,
+      "total_cost": 0.0007263,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 112
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2110,
+    "output": 461,
+    "cost_in": 0.000211,
+    "cost_out": 0.0001844
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082908\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n*Galax aphylla* L.\n\nSteep, rocky, nw. facing bank of Neuse R.,\n2 mi. below Wilson's Mill Br., n. of Smithfield,\nJohnston Co., N.C.\n\nWilliam B. Fox\nBert Whitford\n#1297\nNov. 8, 1947\n\n11453\n\n*(Handwritten Text)*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n11453\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082908\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\nGalax aphylla L.\nSteep, rocky, n.w.- facing bank of Neuse R.,\n2 mi. below Wilson Mill Br., n. of Smithfield,\nJohnston Co., N.C.\nWilliam B. Fox\nBert Whitford\n#1297\nNov. 8, 1947\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082908",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "William B. Fox, Bert Whitford",
+    "collectorNumber": "1297",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Nov. 8, 1947",
+    "collectionDate": "1947-11-08",
+    "collectionDateEnd": "",
+    "habitat": "Steep, rocky, nw. facing bank of Neuse R.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N.c.",
+    "county": "Johnston co.",
+    "locality": "2 mi. below wilson's mill br., n. of smithfield",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North Carolina State University\nHerbarium (ncsc)\nHerbarium\nNorth Carolina State College\n11453\n(Handwritten Text)\nGalax aphylla"
+  }
+}

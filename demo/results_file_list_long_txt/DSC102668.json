@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DELTA STATE UNIVERSITY\nDSC102668\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAlleghany County\n\nDiapensiaceae\n*Galax aphylla* L. Determined by H. E. Ahles\n\nBog, near NC. 18, 2 miles e. of Edmonds\n\nA. E. Radford 38181\nJuly 31, 1958\n\nCollected for the \"Flora of the Carolinas\"\n\nHerbarium Specimen\nScientific Name: *Galax aphylla* L. (handwritten)\nCommon Name: \nLocality: Bog, near NC 18 2miles e. of Edmonds (handwritten)\nDate: July 31, 1958 (handwritten)\nCollector: A. E. Radford (handwritten)\nIdentified by: H.E. Ahles (handwritten)\nRemarks:\n\nCCM: GENERAL BIOLOGICAL, INC.\n8200 SOUTH HOYNE AVENUE \u2022 CHICAGO, ILL. 60620\nMADE IN UNITED STATES OF AMERICA\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001165,
+      "total_cost": 0.00194375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 233
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "STATE UNNEASIY\nDSC\nDELTA STATE UNIVERSITY\nDSC102668\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAlleghany County\nDiapensiaceae\nGalax aphylla L.\nDetermined by H. E. Ahles\nBog, near NC. 18, 2 miles e. of Edmonds\nA. E. Radford 38181\nJuly 31, 1958\nCollected for the \"Flora of the Carolinas\"\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name\nLocality Bog, near NC. 18 2 miles e, of Edmond\nDate July 31, 1958\nCollector.\nA.E. Radford\nIdentified by N.E. Ahles\nRemarks.\nCCM: GENERAL BIOLOGICAL, INC.\n8200 SOUTH HOYNE AVENUE \u2022 CHICAGO, ILL. 60620\nMADE IN UNITED STATES OF AMERICA\n\n\nGalax aphylla L.\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.840000000000001e-05,
+      "total_cost": 0.0007699,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 221
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2345,
+    "output": 558,
+    "cost_in": 0.0002345,
+    "cost_out": 0.0002232
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDELTA STATE UNIVERSITY\nDSC102668\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAlleghany County\n\nDiapensiaceae\n*Galax aphylla* L. Determined by H. E. Ahles\n\nBog, near NC. 18, 2 miles e. of Edmonds\n\nA. E. Radford 38181\nJuly 31, 1958\n\nCollected for the \"Flora of the Carolinas\"\n\nHerbarium Specimen\nScientific Name: *Galax aphylla* L. (handwritten)\nCommon Name: \nLocality: Bog, near NC 18 2miles e. of Edmonds (handwritten)\nDate: July 31, 1958 (handwritten)\nCollector: A. E. Radford (handwritten)\nIdentified by: H.E. Ahles (handwritten)\nRemarks:\n\nCCM: GENERAL BIOLOGICAL, INC.\n8200 SOUTH HOYNE AVENUE \u2022 CHICAGO, ILL. 60620\nMADE IN UNITED STATES OF AMERICA\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSTATE UNNEASIY\nDSC\nDELTA STATE UNIVERSITY\nDSC102668\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAlleghany County\nDiapensiaceae\nGalax aphylla L.\nDetermined by H. E. Ahles\nBog, near NC. 18, 2 miles e. of Edmonds\nA. E. Radford 38181\nJuly 31, 1958\nCollected for the \"Flora of the Carolinas\"\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name\nLocality Bog, near NC. 18 2 miles e, of Edmond\nDate July 31, 1958\nCollector.\nA.E. Radford\nIdentified by N.E. Ahles\nRemarks.\nCCM: GENERAL BIOLOGICAL, INC.\n8200 SOUTH HOYNE AVENUE \u2022 CHICAGO, ILL. 60620\nMADE IN UNITED STATES OF AMERICA\n\n\nGalax aphylla L.\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "DSC102668",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "38181",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 31, 1958",
+    "collectionDate": "1958-07-31",
+    "collectionDateEnd": "",
+    "habitat": "Bog",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Alleghany county",
+    "locality": "Bog, near nc. 18, 2 miles e. of edmonds",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Delta state university\nHerbarium of the university of north carolina\nCollected for the flora of the carolinas\nHerbarium specimen\nScientific name Galax aphylla l. (handwritten)\nCommon name\nLocality bog, near nc 18 2miles e. of edmonds (handwritten)\nDate july 31, 1958 (handwritten)\nCollector a. e. radford (handwritten)\nIdentified by h.e. ahles (handwritten)\nRemarks\nccm general biological, inc.\n8200 south hoyne avenue \u2022 chicago, ill. 60620\nMade in united states of america"
+  }
+}

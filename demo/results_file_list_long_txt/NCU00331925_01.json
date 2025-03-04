@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nPLANTS OF WESTERN NORTH CAROLINA\n\n*Galax aphylla* L.\nOn Pinnacle Mt. 5000 ft\nMcDowell Co.\n\nNo. 93/ Donald C. Peattie, Collector. July 10 1921\n\n(Handwritten text: *Galax aphylla*, On Pinnacle Mt., McDowell Co., 93/)\n66651\nNCU00331925\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000505,
+      "total_cost": 0.0012837500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 101
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPC00411\ncm\nUniversity of North Carolina\nNCU\nERSITY OF NORTH CAROLINA\nHERBARUM\nUNIV\n66651\nPLANTS OF WESTERN NORTH CAROLINA\nGalax aphylla L.\nIn Pinnacle Mt. 5000 ft.\nMcDowell Co.\nNo. 931 Donald C. Peattie, Collector.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331925\n\nHandwritten text:\nvoceal\nJuly 10 1921\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2108,
+    "output": 452,
+    "cost_in": 0.00021080000000000003,
+    "cost_out": 0.0001808
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nPLANTS OF WESTERN NORTH CAROLINA\n\n*Galax aphylla* L.\nOn Pinnacle Mt. 5000 ft\nMcDowell Co.\n\nNo. 93/ Donald C. Peattie, Collector. July 10 1921\n\n(Handwritten text: *Galax aphylla*, On Pinnacle Mt., McDowell Co., 93/)\n66651\nNCU00331925\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPC00411\ncm\nUniversity of North Carolina\nNCU\nERSITY OF NORTH CAROLINA\nHERBARUM\nUNIV\n66651\nPLANTS OF WESTERN NORTH CAROLINA\nGalax aphylla L.\nIn Pinnacle Mt. 5000 ft.\nMcDowell Co.\nNo. 931 Donald C. Peattie, Collector.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331925\n\nHandwritten text:\nvoceal\nJuly 10 1921\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "66651",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Donald C. Peattie",
+    "collectorNumber": "931",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 10 1921",
+    "collectionDate": "1921-07-10",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "McDowell Co.",
+    "locality": "On Pinnacle Mt. 5000 ft",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1524",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "NCU\nPLANTS OF WESTERN NORTH CAROLINA\n\n(Handwritten text Galax aphylla, On Pinnacle Mt., McDowell Co., 93/)\nNCU00331925\n\nHandwritten text\nvoceal"
+  }
+}

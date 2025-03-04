@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095581\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPOISONED\nDUKE UNIVERSITY\nHERBARIUM\n25584\n\nMacon County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nMoist rock crevices below Dry\nFalls, Cullasaja River, Macon Co.\nH.J. Oosting  June 24,1934\nNo. 34426\n\nHandwritten Text:\nH.J. Oosting\nJune 24,1934\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000885,
+      "total_cost": 0.00166375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 177
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095581\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n25584\nDuke\ncopyright reserved UNIVERSITY\nMacon County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nMoist rock crevices below Dry\nFalls, Cullasaja River, Macon Co.\nH.J.Oosting\nJune 24,1934\nNo. 34426\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.32e-05,
+      "total_cost": 0.0007447,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 158
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2225,
+    "output": 526,
+    "cost_in": 0.00022250000000000001,
+    "cost_out": 0.00021040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095581\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPOISONED\nDUKE UNIVERSITY\nHERBARIUM\n25584\n\nMacon County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nMoist rock crevices below Dry\nFalls, Cullasaja River, Macon Co.\nH.J. Oosting  June 24,1934\nNo. 34426\n\nHandwritten Text:\nH.J. Oosting\nJune 24,1934\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095581\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n25584\nDuke\ncopyright reserved UNIVERSITY\nMacon County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nMoist rock crevices below Dry\nFalls, Cullasaja River, Macon Co.\nH.J.Oosting\nJune 24,1934\nNo. 34426\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095581",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H.J. Oosting",
+    "collectorNumber": "34426",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 24,1934",
+    "collectionDate": "1934-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Moist rock crevices",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "Below Dry Falls, Cullasaja River, Macon Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nPOISONED\nDUKE UNIVERSITY\nHERBARIUM\n25584\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

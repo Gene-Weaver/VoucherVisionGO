@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\nWest Virginia University (WVA)\nWVA-V-0010670\n\n118185\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\n234\nPLANTS OF VIRGINIA\n\n*Galax aphylla* L.\n\nSteep shale ledges in openly wooded ravine of\nPartridge Creek, just above jct. county roads\n622 & 624, Stapleton, Amherst Co.\n\nG. B. Rossbach &\nLeonard Uttal\n7387\n3/25/67\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\n(handwritten: volume of 488 \u03bc\u00b2)\nGuy L. Nesom, 1975\n\n\n*Galax aphylla* L.\n*Galax urceolata* (Poir.) Brummitt\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.00178375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC 1 SYSTEM 2\n11\n12\n13\n14\ncopyright reserved\nU. S.\nINCHES\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit.\nn = 6 , based on average guard cell area\nvolume of 488 \u03bc2\nGuy L. Nesom, 1975\n118185\nWest Virginia University (WVA)\nWVA-V-0010670\n234\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nPLANTS OF VIRGINIA\nGalax aphylla L.\nSteep shale ledges in openly wooded ravine of\nPartridge Creek, just above jct. county roads\n622 & 624, Stapleton, Amherst Co.\nG. B. Rossbach &\nLeonard Uttal\n7387\n3/25/67\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.52e-05,
+      "total_cost": 0.0007667,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 213
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2291,
+    "output": 594,
+    "cost_in": 0.0002291,
+    "cost_out": 0.00023760000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\nWest Virginia University (WVA)\nWVA-V-0010670\n\n118185\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\n234\nPLANTS OF VIRGINIA\n\n*Galax aphylla* L.\n\nSteep shale ledges in openly wooded ravine of\nPartridge Creek, just above jct. county roads\n622 & 624, Stapleton, Amherst Co.\n\nG. B. Rossbach &\nLeonard Uttal\n7387\n3/25/67\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\n(handwritten: volume of 488 \u03bc\u00b2)\nGuy L. Nesom, 1975\n\n\n*Galax aphylla* L.\n*Galax urceolata* (Poir.) Brummitt\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC 1 SYSTEM 2\n11\n12\n13\n14\ncopyright reserved\nU. S.\nINCHES\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit.\nn = 6 , based on average guard cell area\nvolume of 488 \u03bc2\nGuy L. Nesom, 1975\n118185\nWest Virginia University (WVA)\nWVA-V-0010670\n234\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nPLANTS OF VIRGINIA\nGalax aphylla L.\nSteep shale ledges in openly wooded ravine of\nPartridge Creek, just above jct. county roads\n622 & 624, Stapleton, Amherst Co.\nG. B. Rossbach &\nLeonard Uttal\n7387\n3/25/67\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "118185",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. B. Rossbach, Leonard Uttal",
+    "collectorNumber": "7387",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "3/25/67",
+    "collectionDate": "1967-03-25",
+    "collectionDateEnd": "",
+    "habitat": "Steep shale ledges in openly wooded ravine",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 488 \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Amherst Co.",
+    "locality": "Of Partridge Creek, just above jct. county roads 622 & 624, Stapleton",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WVA Morgantown\nWest Virginia University (WVA)\nWVA-V-0010670\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n234\nPLANTS OF VIRGINIA\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit.\nWest Virginia University (WVA)\nWVA-V-0010670\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nPLANTS OF VIRGINIA\nMETRIC 1 SYSTEM 2\n11\n12\n13\n14\ncopyright reserved\nU. S.\nINCHES"
+  }
+}

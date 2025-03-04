@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015775\n\nPlants of: Appalachian Trail, northeast Tennessee and adjacent North Carolina\nEast Tennessee State University, Johnson City, TN\n\nDiapensiaceae                                          *Galax urceolata* (Poir.) Brummitt\nCounty:: Carter                                      Date:: 5 June                      19 94\nSite:                                                   7.5' Quad:\nPond Mtn Wilderness, 321 access trail beside Laurel Fork, 100 ft west of junction with\nAT; elev about 2150 ft; rhododendron and mtn laurel common; boulders and bedrock\noutcrops common\n\nExp.:                                                   Elev.:                                 Phenology:\nCommDescr.:\n\nCollector: James T. Donaldson                        No.: 1355\nDET: jtd                                               TES?:\nETSU#:                                                 type: Dicots\n\nJohn C. Warden Herbarium\nETSU #17-0689 ETSU\n\n(Handwritten: \"J\")\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001165,
+      "total_cost": 0.0019437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 233
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015775\nPlants of: Appalachian Trail, northeast Tennessee and adjacent North Carolina\nEast Tennessee State University, Johnson City, TN\nDiapensiaceae\nGalax urceolata (Poir.) Brummet\nCounty:: Carter Date:: 5 June 19 94\nSite: 7.5' Quad:\nPond Mtn Wilderness, 321 access trail beside Laurel Fork, 100 ft west of junction with\nAT; elev about 2150 ft; rhododendron and min laurel common; boulders and bedrock\noutcrops common\nExp.: Elev.: Phenology:\nCommDescr.:\nCollector: James T. Donaldson No.: 1355\nDET: jtd type: Dicots\nETSU#:\nJohn C. Warden Herbarium\nETSU #17-0689 ETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\njtd\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.32e-05,
+      "total_cost": 0.0007647000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 208
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2314,
+    "output": 543,
+    "cost_in": 0.00023140000000000001,
+    "cost_out": 0.0002172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015775\n\nPlants of: Appalachian Trail, northeast Tennessee and adjacent North Carolina\nEast Tennessee State University, Johnson City, TN\n\nDiapensiaceae                                          *Galax urceolata* (Poir.) Brummitt\nCounty:: Carter                                      Date:: 5 June                      19 94\nSite:                                                   7.5' Quad:\nPond Mtn Wilderness, 321 access trail beside Laurel Fork, 100 ft west of junction with\nAT; elev about 2150 ft; rhododendron and mtn laurel common; boulders and bedrock\noutcrops common\n\nExp.:                                                   Elev.:                                 Phenology:\nCommDescr.:\n\nCollector: James T. Donaldson                        No.: 1355\nDET: jtd                                               TES?:\nETSU#:                                                 type: Dicots\n\nJohn C. Warden Herbarium\nETSU #17-0689 ETSU\n\n(Handwritten: \"J\")\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015775\nPlants of: Appalachian Trail, northeast Tennessee and adjacent North Carolina\nEast Tennessee State University, Johnson City, TN\nDiapensiaceae\nGalax urceolata (Poir.) Brummet\nCounty:: Carter Date:: 5 June 19 94\nSite: 7.5' Quad:\nPond Mtn Wilderness, 321 access trail beside Laurel Fork, 100 ft west of junction with\nAT; elev about 2150 ft; rhododendron and min laurel common; boulders and bedrock\noutcrops common\nExp.: Elev.: Phenology:\nCommDescr.:\nCollector: James T. Donaldson No.: 1355\nDET: jtd type: Dicots\nETSU#:\nJohn C. Warden Herbarium\nETSU #17-0689 ETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\njtd\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015775",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "James T. Donaldson",
+    "collectorNumber": "1355",
+    "identifiedBy": "jtd",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 June 19 94",
+    "collectionDate": "1994-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Rhododendron and mtn laurel common; boulders and bedrock outcrops common",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Carter",
+    "locality": "Pond Mtn Wilderness, 321 access trail beside Laurel Fork, 100 ft west of junction with AT; elev about 2150 ft",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "655",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "East Tennessee State University\nPlants of Appalachian Trail, northeast Tennessee and adjacent North Carolina\nEast Tennessee State University, Johnson City, TN\nDiapensiaceae\nSite 7.5' Quad\nExp.\nCommDescr.\nDET type Dicots\nETSU#\nJohn C. Warden Herbarium\nETSU #17-0689 ETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium\njtd"
+  }
+}

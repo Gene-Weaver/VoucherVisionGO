@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nDUKE 10095624\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n53424\n\nFlora of Georgia\nDUKE UNIVERSITY HERBARIUM\nWhite Co.\n\nGalax aphylla L.\nDeep woods\nVida Lovett\nDet. H.J.Costing\nLessanee Creek, 2mi.\nfrom Cleveland\n6/8/38\nNo.\n\nHandwritten Text: Lessanee Creek, 2mi. from Cleveland,  6/8/38\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008250000000000001,
+      "total_cost": 0.00160375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n53424\nFlora of Georgia\nDUKE UNIVERSITY HERBARIUM\nWhite Co.\nGalax aphylla L.\nDeep woods\nVida Lovett\nDet. H.J.Oosting\nLessanee Creek, 2mi.\nfrom Cleveland\n6/8/38\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.1200000000000004e-05,
+      "total_cost": 0.0007327,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 128
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2190,
+    "output": 493,
+    "cost_in": 0.000219,
+    "cost_out": 0.0001972
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nDUKE 10095624\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n53424\n\nFlora of Georgia\nDUKE UNIVERSITY HERBARIUM\nWhite Co.\n\nGalax aphylla L.\nDeep woods\nVida Lovett\nDet. H.J.Costing\nLessanee Creek, 2mi.\nfrom Cleveland\n6/8/38\nNo.\n\nHandwritten Text: Lessanee Creek, 2mi. from Cleveland,  6/8/38\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n53424\nFlora of Georgia\nDUKE UNIVERSITY HERBARIUM\nWhite Co.\nGalax aphylla L.\nDeep woods\nVida Lovett\nDet. H.J.Oosting\nLessanee Creek, 2mi.\nfrom Cleveland\n6/8/38\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE 10095624",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Vida Lovett",
+    "collectorNumber": "No.",
+    "identifiedBy": "R.L. Wilbur, H.J. Oosting",
+    "identifiedDate": "2001-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "6/8/38",
+    "collectionDate": "1938-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Deep woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "White Co.",
+    "locality": "Lessanee Creek, 2mi. from Cleveland",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke\nUNIVERSITY\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n53424\nFlora of Georgia\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla"
+  }
+}

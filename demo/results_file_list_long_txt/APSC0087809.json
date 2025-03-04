@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087809\n74 (handwritten)\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\n\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\n\n*Galax aphylla* L.\nPineville, Ky. Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\n\nCol. Raymond Athey No. 3055 Date 6-4-75 (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000575,
+      "total_cost": 0.0013537500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 115
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087809\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\nContimetres TIFFEN Color Control Patches\nTIFFEN Gray Scale\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\nGalax aphylla L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\nCol. Raymond Athey\nNo. 3055\nDate 6-4-75\n14\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "total_cost": 0.0007291,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2112,
+    "output": 472,
+    "cost_in": 0.00021120000000000004,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087809\n74 (handwritten)\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\n\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\n\n*Galax aphylla* L.\nPineville, Ky. Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\n\nCol. Raymond Athey No. 3055 Date 6-4-75 (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087809\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\nContimetres TIFFEN Color Control Patches\nTIFFEN Gray Scale\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\nGalax aphylla L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\nCol. Raymond Athey\nNo. 3055\nDate 6-4-75\n14\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087809",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Raymond Athey",
+    "collectorNumber": "3055",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-4-75",
+    "collectionDate": "1975-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Dry open woods on rock hotel trail in pine mountain state park.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Bell",
+    "locality": "Pineville, ky.; dry open woods on rock hotel trail in pine mountain state park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin peay state university\nHerbarium (apsc)\n74 (handwritten)\nHerbarium\nWestern ky. university\n8895\nContimetres tiffen color control patches\nTiffen gray scale\nVascular flora of kentucky\n14"
+  }
+}

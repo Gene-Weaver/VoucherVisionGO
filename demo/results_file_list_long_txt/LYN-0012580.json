@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012580\n\nLYNCHBURG COLLEGE\n36952\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nBuffalo Creek Nature Area\nPLANTS OF VIRGINIA\n\nNo. 279\n*Galax aphylla* L.                                      Campbell\n                                                        COUNTY        Diapensiaceae\n\nSpecimen collected on hemlock rock face.\nAlso common in acid soils of hollows and\non other rock outcrops.\n\nCollectors: Robert A.S. Wright                      August 20, '84\n             Gwynn W. Ramsey\n             \nLYN\n0   1   2   3   4   5   6   7   8   9   10 Lynchburg\ncm                                                    College\ncopyright reserved\n\n\nHandwritten Text: 279, '84\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009199999999999999,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012580\nLYNCHBURG COLLEGE\n36952\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nBuffalo Creek Nature Area\nPLANTS OF VIRGINIA\nNo.\n279\nCOUNTY\nCampbell\nGalax aphylla L.\nDiapensiaceae\nSpecimen collected on hemlock rock face.\nAlso common in acid soils of hollows and\non other rock outcrops.\nCollectors\nRobert A.S. Wright August 20, 84\nGwynn W. Ramsey\n1\n2\n3\n4\n5 6 7 8 9 10 Lynchburg\ncm\nCollege\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.240000000000001e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2255,
+    "output": 516,
+    "cost_in": 0.0002255,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012580\n\nLYNCHBURG COLLEGE\n36952\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nBuffalo Creek Nature Area\nPLANTS OF VIRGINIA\n\nNo. 279\n*Galax aphylla* L.                                      Campbell\n                                                        COUNTY        Diapensiaceae\n\nSpecimen collected on hemlock rock face.\nAlso common in acid soils of hollows and\non other rock outcrops.\n\nCollectors: Robert A.S. Wright                      August 20, '84\n             Gwynn W. Ramsey\n             \nLYN\n0   1   2   3   4   5   6   7   8   9   10 Lynchburg\ncm                                                    College\ncopyright reserved\n\n\nHandwritten Text: 279, '84\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012580\nLYNCHBURG COLLEGE\n36952\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nBuffalo Creek Nature Area\nPLANTS OF VIRGINIA\nNo.\n279\nCOUNTY\nCampbell\nGalax aphylla L.\nDiapensiaceae\nSpecimen collected on hemlock rock face.\nAlso common in acid soils of hollows and\non other rock outcrops.\nCollectors\nRobert A.S. Wright August 20, 84\nGwynn W. Ramsey\n1\n2\n3\n4\n5 6 7 8 9 10 Lynchburg\ncm\nCollege\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012580",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert A.S. Wright, Gwynn W. Ramsey",
+    "collectorNumber": "279",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 20, '84",
+    "collectionDate": "1984-08-20",
+    "collectionDateEnd": "",
+    "habitat": "Specimen collected on hemlock rock face. Also common in acid soils of hollows and on other rock outcrops.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Campbell",
+    "locality": "Buffalo Creek Nature Area",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\n36952\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nLYN\n0 1 2 3 4 5 6 7 8 9 10 Lynchburg\ncm College\ncopyright reserved\nHandwritten Text 279, '84"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665371\n\nGift to NCU from the University of North Carolina - Greensboro 2018\n\nNCU00389103\n\nXVII-513.\n\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\n\nNO.\nFLORA OF Stokes COUNTY\nMoore's Knob (handwritten)\n\n*Galax aphylla* (handwritten)\nDiapensiaceae (handwritten)\n\nDATE 5/14/32 (handwritten)\nCOLLECTOR\nP. Moser (handwritten)\n\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue     Cyan     Green   Yellow  Red      Magenta White   3/Color Black\nInches\nCentimetres\n\n*Galax aphylla*\n*Diapensiaceae*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665371\nGift to NCU from the University of North Carolina - Greensboro 2018\nXVII-513.\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nNO.\nFLORA OF COUNTY\nMoore's Knob\nGalax aphylla\nDiapensiaceae\nDATE\n5/14/32\nCOLLECTOR\nP. Moser\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.0400000000000006e-05,
+      "total_cost": 0.0007218999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 101
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 452,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.0001808
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665371\n\nGift to NCU from the University of North Carolina - Greensboro 2018\n\nNCU00389103\n\nXVII-513.\n\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\n\nNO.\nFLORA OF Stokes COUNTY\nMoore's Knob (handwritten)\n\n*Galax aphylla* (handwritten)\nDiapensiaceae (handwritten)\n\nDATE 5/14/32 (handwritten)\nCOLLECTOR\nP. Moser (handwritten)\n\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue     Cyan     Green   Yellow  Red      Magenta White   3/Color Black\nInches\nCentimetres\n\n*Galax aphylla*\n*Diapensiaceae*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665371\nGift to NCU from the University of North Carolina - Greensboro 2018\nXVII-513.\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nNO.\nFLORA OF COUNTY\nMoore's Knob\nGalax aphylla\nDiapensiaceae\nDATE\n5/14/32\nCOLLECTOR\nP. Moser\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "665371",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "P. Moser",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/14/32",
+    "collectionDate": "1932-05-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Stokes county",
+    "locality": "Moore's knob",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at chapel hill\nherbarium\nNCU\ngift to NCU from the university of north carolina - greensboro 2018\nNCU00389103\nxvii-513.\nherbarium of\nthe north carolina college for women\nno.\nflora of"
+  }
+}

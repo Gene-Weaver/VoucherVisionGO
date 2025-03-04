@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "ROBERT F. HOOVER\nHERBARIUM\nCalifornia Polytechnic\nState University\nSan Luis Obispo\n\nCAL POLY\nSAN LUIS OBISPO\n\n026447\n\nRobert F. Hoover Herbarium - OBI\nCalifornia Polytechnic State University\nOBI142248\n\nHERBARIUM OF THE OHIO STATE UNIVERSITY\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* L. (Diapensiaceae)\n\nJACKSON CO.: Whitewater Falls. ca. 5 mi.\nS of Oakland. Deep, densely wooded gorge.\nFlowers white. Common on steep hillsides.\n\nMarvin Roberts and\nDavid Keil No. 7347 29 May 1971\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.00153875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ROBERT F. HOOVER\nHERBARIUM\nCalifornia Polytechnic\nState University\nSan Luis Obispo\nCAL POLY\nSAN LUIS OBISPO\nHERBARIUM OF THE OHIO STATE UNIVERSITY\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\n(Diapensiaceae)\nJACKSON CO.: Whitewater Falls. ca. 5 mi.\nS of Oakland. Deep, densely wooded gorge.\nFlowers white. Common on steep hillsides.\nMarvin Roberts and\nDavid Keil\nNo. 7347 29 May 1971\n026447\nRobert F. Hoover Herbarium - OBI\nCalifornia Polytechnic State University\nOBI142248\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 507,
+    "cost_in": 0.0002204,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nROBERT F. HOOVER\nHERBARIUM\nCalifornia Polytechnic\nState University\nSan Luis Obispo\n\nCAL POLY\nSAN LUIS OBISPO\n\n026447\n\nRobert F. Hoover Herbarium - OBI\nCalifornia Polytechnic State University\nOBI142248\n\nHERBARIUM OF THE OHIO STATE UNIVERSITY\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* L. (Diapensiaceae)\n\nJACKSON CO.: Whitewater Falls. ca. 5 mi.\nS of Oakland. Deep, densely wooded gorge.\nFlowers white. Common on steep hillsides.\n\nMarvin Roberts and\nDavid Keil No. 7347 29 May 1971\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nROBERT F. HOOVER\nHERBARIUM\nCalifornia Polytechnic\nState University\nSan Luis Obispo\nCAL POLY\nSAN LUIS OBISPO\nHERBARIUM OF THE OHIO STATE UNIVERSITY\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\n(Diapensiaceae)\nJACKSON CO.: Whitewater Falls. ca. 5 mi.\nS of Oakland. Deep, densely wooded gorge.\nFlowers white. Common on steep hillsides.\nMarvin Roberts and\nDavid Keil\nNo. 7347 29 May 1971\n026447\nRobert F. Hoover Herbarium - OBI\nCalifornia Polytechnic State University\nOBI142248\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "026447",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Marvin Roberts and, David Keil",
+    "collectorNumber": "7347",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 May 1971",
+    "collectionDate": "1971-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Deep, densely wooded gorge. Flowers white. Common on steep hillsides.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson Co.",
+    "locality": "Whitewater Falls. ca. 5 mi. S of Oakland.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "ROBERT F. HOOVER\nHERBARIUM\nCalifornia Polytechnic\nState University\nSan Luis Obispo\nCAL POLY\nSAN LUIS OBISPO\nRobert F. Hoover Herbarium - OBI\nCalifornia Polytechnic State University\nOBI142248\nHERBARIUM OF THE OHIO STATE UNIVERSITY\nPLANTS OF NORTH CAROLINA\n(Diapensiaceae)\n\nGalax aphylla"
+  }
+}

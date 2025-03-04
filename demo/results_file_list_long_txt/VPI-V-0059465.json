@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n98031\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059465\n\nFlora of Virginia\nWise County\n\n*Galax urceolata* (Poiret) Brummitt\n\nClone-like patches in medium-aged hardwoods\ndominated by red maple and chestnut oak, often near\n*Rhododendron maximum*. Moderate S-facing slope on Big\nRidge, a spur off Pine Mountain. Off St. Rt. 630 NE of\nHwy 23 and ca. 4.5 km NNE of Pound, Va. El. ca.\n2100ft.\n\nColl.: T.F. Wieboldt\nColl. No. 10,472\nDate: 5 July 2000\nDet. TFW\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009649999999999999,
+      "total_cost": 0.00174375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 193
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "-THE HERBARIUM OF-\n98031\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nWise County\nGalax urceolata (Poiret) Brummitt\nClone-like patches in medium-aged hardwoods\ndominated by red maple and chestnut oak, often near\nRhododendron maximum. Moderate S-facing slope on Big\nRidge, a spur off Pine Mountain. Off St. Rt. 630 NE of\nHwy 23 and ca. 4.5 km NNE of Pound, Va. El. ca.\n2100ft.\nColl.: T.F. Wieboldt\nDate: 5 July 2000\nColl. No. 10,472\nDet. TFW\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059465\n\n\nGalax urceolata\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.800000000000001e-05,
+      "total_cost": 0.0007595,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 195
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 515,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.00020600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n98031\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059465\n\nFlora of Virginia\nWise County\n\n*Galax urceolata* (Poiret) Brummitt\n\nClone-like patches in medium-aged hardwoods\ndominated by red maple and chestnut oak, often near\n*Rhododendron maximum*. Moderate S-facing slope on Big\nRidge, a spur off Pine Mountain. Off St. Rt. 630 NE of\nHwy 23 and ca. 4.5 km NNE of Pound, Va. El. ca.\n2100ft.\n\nColl.: T.F. Wieboldt\nColl. No. 10,472\nDate: 5 July 2000\nDet. TFW\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n-THE HERBARIUM OF-\n98031\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nWise County\nGalax urceolata (Poiret) Brummitt\nClone-like patches in medium-aged hardwoods\ndominated by red maple and chestnut oak, often near\nRhododendron maximum. Moderate S-facing slope on Big\nRidge, a spur off Pine Mountain. Off St. Rt. 630 NE of\nHwy 23 and ca. 4.5 km NNE of Pound, Va. El. ca.\n2100ft.\nColl.: T.F. Wieboldt\nDate: 5 July 2000\nColl. No. 10,472\nDet. TFW\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059465\n\n\nGalax urceolata\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "98031",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T.f. Wieboldt",
+    "collectorNumber": "10,472",
+    "identifiedBy": "TFW",
+    "identifiedDate": "2000-07-05",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 July 2000",
+    "collectionDate": "2000-07-05",
+    "collectionDateEnd": "",
+    "habitat": "Clone-like patches in medium-aged hardwoods dominated by red maple and chestnut oak, often near Rhododendron maximum. Moderate S-facing slope on Big Ridge, a spur off Pine Mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Wise county",
+    "locality": "Off st. rt. 630 ne of hwy 23 and ca. 4.5 km nne of pound, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "640",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0059465\nFlora of virginia\nDet. tfw"
+  }
+}

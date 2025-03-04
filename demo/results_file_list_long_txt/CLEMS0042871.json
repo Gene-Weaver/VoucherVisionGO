@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name _Galax aphylla_ (L.)\nCommon Name _Galax_\nLocality Burrels Ford Co. Oconee, SC\nHabitat Decid. Forrest\nCollector Hutto, D.R. No. 108 Date 28 SEP 71\nAcc. No. Identified By Hutto, D.R.\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\n_Galax urceolata_ (Poir.) Brummitt *(handwritten)*\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008250000000000001,
+      "total_cost": 0.00160375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "S\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name Galax aphylla (L.)\nCommon Name Galax\nLocality Burrels Ford co. Oconce, Sc\nHabitat Decid. Forrest\nCollector Hutto, D.R. No. 108 Date 28 SEP 21\nAcc. No.\nIdentified By Hutto, D.R.\nClemson University Herbarium\nCLEMS0042871\n16115\nCLEMSON\nUNIVERSITY\nHERBARIUM\nGalax urceolata (Poir.) Brommitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.12e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 542,
+    "cost_in": 0.0002268,
+    "cost_out": 0.00021679999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name _Galax aphylla_ (L.)\nCommon Name _Galax_\nLocality Burrels Ford Co. Oconee, SC\nHabitat Decid. Forrest\nCollector Hutto, D.R. No. 108 Date 28 SEP 71\nAcc. No. Identified By Hutto, D.R.\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\n_Galax urceolata_ (Poir.) Brummitt *(handwritten)*\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nS\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name Galax aphylla (L.)\nCommon Name Galax\nLocality Burrels Ford co. Oconce, Sc\nHabitat Decid. Forrest\nCollector Hutto, D.R. No. 108 Date 28 SEP 21\nAcc. No.\nIdentified By Hutto, D.R.\nClemson University Herbarium\nCLEMS0042871\n16115\nCLEMSON\nUNIVERSITY\nHERBARIUM\nGalax urceolata (Poir.) Brommitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042871",
+    "scientificName": "Galax aphylla (l.)",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(l.)",
+    "collectedBy": "Hutto, D.r.",
+    "collectorNumber": "108",
+    "identifiedBy": "Hutto, D.r., John f. townsend",
+    "identifiedDate": "1996",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (poir.) brummitt",
+    "verbatimCollectionDate": "28 sep 21",
+    "collectionDate": "1971-09-28",
+    "collectionDateEnd": "",
+    "habitat": "Decid. forrest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Sc",
+    "county": "Oconee",
+    "locality": "Burrels ford co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Clems\nherbarium of clemson university\ndepartment of botany and bacteriology\nclemson, south carolina 29631\ncommon name galax\nacc. no.\nclemson\nuniversity\nherbarium\ngalax urceolata (poir.) brommitt\nclemson university herbarium (clems)\n\ngalax aphylla\ngalax urceolata\ncopyright reserved\n1 2 3 4 5 6 7 8 9 10"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170897\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 (?), based on average guard cell area\nvolume of 564\u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF TENNESSEE\nFrank Galyon\nA.J. Sharp 29809\nKnox COUNTY  25 October 1961\n\n*Galax aphylla* L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n\n\nHandwritten Text:\n25 October 1961\n*Galax aphylla* L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170897\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 (?), based on average guard cell\nGuy L. Nesom, 1975\nPLANTS OF\nTENNESSEE\nFrank Galyon\nA.J. Sharp\nKnox\nGalax aphylla L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n29809\n25 October 1961\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2200,
+    "output": 464,
+    "cost_in": 0.00022000000000000003,
+    "cost_out": 0.0001856
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170897\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 (?), based on average guard cell area\nvolume of 564\u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF TENNESSEE\nFrank Galyon\nA.J. Sharp 29809\nKnox COUNTY  25 October 1961\n\n*Galax aphylla* L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n\n\nHandwritten Text:\n25 October 1961\n*Galax aphylla* L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170897\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 (?), based on average guard cell\nGuy L. Nesom, 1975\nPLANTS OF\nTENNESSEE\nFrank Galyon\nA.J. Sharp\nKnox\nGalax aphylla L.\nSteep north slope near\nlookout tower on Sharps Ridge.\n29809\n25 October 1961\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170897",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frank Galyon, A.J. Sharp",
+    "collectorNumber": "29809",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "?",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 October 1961",
+    "collectionDate": "1961-10-25",
+    "collectionDateEnd": "",
+    "habitat": "Steep north slope near lookout tower on Sharps Ridge.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 564\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Knox",
+    "locality": "Knox County",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF"
+  }
+}

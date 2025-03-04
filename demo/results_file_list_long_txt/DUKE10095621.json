@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n375901\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095621\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct., non L.)\n\ndet. R.L. Wilbur I 2001 (Handwritten)\nDuke University Herbarium\n\nFlora of Georgia  Rabun County\nWarwoman Wildlife Management Area\n\nGalax urceolata (Poir.) Brummitt\n\n7/10 mile north of fork of 153 and 153 A.\nQuad 36                               Elevation 2200'\nWith: *Rhododendron* sp., *Liriodendron tulipifera*, *Acer rubrum*, *Quercus* sp.\nCollected with: E. Heil and W. Heil\n\nMilsted 120\nUniversity of Georgia Herbarium                 6/3/95\n                                                Athens, Georgia\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010899999999999998,
+      "total_cost": 0.00186875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 218
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n375901\nDUKE UNIVERSITY HERBARIUM\nDUKE10095621\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of Georgia Rabun County\nWarwoman Wildlife Management Area\nGalax urceolata (Poir.) Brummit\n7/10 mile north of fork of 153 and 153 \u0391.\nQuad 36\nElevation 2200'\nWith: Rhododendron sp., Liriodendron tulipifera, Acer\nrubrum, Quercus sp.\nCollected with: E.Heil and W. Heil\nMilsted 120\nUniversity of Georgia Herbarium\n6/3/95\nAthens, Georgia\n\n\nGalax urceolata\nLiriodendron tulipifera\nAcer rubrum\nQuercus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.24e-05,
+      "total_cost": 0.0007639000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 206
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2323,
+    "output": 619,
+    "cost_in": 0.0002323,
+    "cost_out": 0.0002476
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n375901\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095621\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct., non L.)\n\ndet. R.L. Wilbur I 2001 (Handwritten)\nDuke University Herbarium\n\nFlora of Georgia  Rabun County\nWarwoman Wildlife Management Area\n\nGalax urceolata (Poir.) Brummitt\n\n7/10 mile north of fork of 153 and 153 A.\nQuad 36                               Elevation 2200'\nWith: *Rhododendron* sp., *Liriodendron tulipifera*, *Acer rubrum*, *Quercus* sp.\nCollected with: E. Heil and W. Heil\n\nMilsted 120\nUniversity of Georgia Herbarium                 6/3/95\n                                                Athens, Georgia\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\n375901\nDUKE UNIVERSITY HERBARIUM\nDUKE10095621\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of Georgia Rabun County\nWarwoman Wildlife Management Area\nGalax urceolata (Poir.) Brummit\n7/10 mile north of fork of 153 and 153 \u0391.\nQuad 36\nElevation 2200'\nWith: Rhododendron sp., Liriodendron tulipifera, Acer\nrubrum, Quercus sp.\nCollected with: E.Heil and W. Heil\nMilsted 120\nUniversity of Georgia Herbarium\n6/3/95\nAthens, Georgia\n\n\nGalax urceolata\nLiriodendron tulipifera\nAcer rubrum\nQuercus\n\n",
+  "formatted_json": {
+    "catalogNumber": "375901",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Milsted, E. Heil, W. Heil",
+    "collectorNumber": "120",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/3/95",
+    "collectionDate": "1995-06-03",
+    "collectionDateEnd": "",
+    "habitat": "With Rhododendron sp., Liriodendron tulipifera, Acer rubrum, Quercus sp.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun County",
+    "locality": "7/10 mile north of fork of 153 and 153 A., Warwoman Wildlife Management Area",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Duke\nUNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\nDUKE UNIVERSITY HERBARIUM\nDUKE10095621\n(Galax aphylla auct., non L.)\nDuke University Herbarium\nFlora of Georgia\nQuad 36\nCollected with E.Heil and W. Heil\nUniversity of Georgia Herbarium Athens, Georgia\nGalax urceolata\nGalax aphylla\nDUKE UNIVERSITY\nHERBARIUM\nGalax urceolata\n(Galax aphylla auct. non L.)\nUniversity of Georgia Herbarium\nAthens, Georgia\nLiriodendron tulipifera\nAcer rubrum\nQuercus"
+  }
+}

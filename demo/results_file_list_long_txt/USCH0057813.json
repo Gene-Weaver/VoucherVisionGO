@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\nA.C. Moore Herbarium\nUniversity of South Carolina\n125716\n\nUniversity of South Carolina Herbarium\nUSCH0057813\nmounted January 2020\n\nDetermined by Keith A. Bradley, 2019\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n*GALAX URCEOLATA* (Poir.) Brumm.\nDiapensiaceae\n\nCHESTERFIELD COUNTY: High Rock near Black Creek;\nCompartment 16, Carolina Sandhills National Wildlife Refuge.\nRandy S. Mejeur 1023 13 VIII 1998\n\nA. C. Moore Herbarium (USCH)\nUniversity of South Carolina\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000865,
+      "total_cost": 0.0016437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\nUSCH\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\nA.C. Moore Herbarium\nUniversity of South Carolina\n125716\nDetermined by Keith A. Bradley, 2019\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brumm.\nDiapensiaceae\nCHESTERFIELD COUNTY: High Rock near Black Creek;\nCompartment 16, Carolina Sandhills National Wildlife Refuge.\nRandy S. Mejeur 1023\n13 VIII 1998\nmounted January 2020\nA. C. Moore Herbarium (USCH)\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0057813\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.64e-05,
+      "total_cost": 0.0007578999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 191
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2220,
+    "output": 512,
+    "cost_in": 0.00022200000000000003,
+    "cost_out": 0.0002048
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\nA.C. Moore Herbarium\nUniversity of South Carolina\n125716\n\nUniversity of South Carolina Herbarium\nUSCH0057813\nmounted January 2020\n\nDetermined by Keith A. Bradley, 2019\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n*GALAX URCEOLATA* (Poir.) Brumm.\nDiapensiaceae\n\nCHESTERFIELD COUNTY: High Rock near Black Creek;\nCompartment 16, Carolina Sandhills National Wildlife Refuge.\nRandy S. Mejeur 1023 13 VIII 1998\n\nA. C. Moore Herbarium (USCH)\nUniversity of South Carolina\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\ncm\nUSCH\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\nA.C. Moore Herbarium\nUniversity of South Carolina\n125716\nDetermined by Keith A. Bradley, 2019\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brumm.\nDiapensiaceae\nCHESTERFIELD COUNTY: High Rock near Black Creek;\nCompartment 16, Carolina Sandhills National Wildlife Refuge.\nRandy S. Mejeur 1023\n13 VIII 1998\nmounted January 2020\nA. C. Moore Herbarium (USCH)\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0057813\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0057813",
+    "scientificName": "Galax urceolata (Poir.) Brumm.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brumm.",
+    "collectedBy": "Randy S. Mejeur",
+    "collectorNumber": "1023",
+    "identifiedBy": "Keith A. Bradley",
+    "identifiedDate": "2019",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 VIII 1998",
+    "collectionDate": "1998-08-13",
+    "collectionDateEnd": "",
+    "habitat": "High rock near black creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "South carolina",
+    "county": "Chesterfield county",
+    "locality": "Compartment 16, carolina sandhills national wildlife refuge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Copyright reserved university of south carolina\nA.c. moore herbarium\nUniversity of south carolina\n125716\nUniversity of south carolina herbarium\nmounted january 2020\nA. c. moore herbarium (usch)\nUniversity of south carolina\n1 2 3 4 5 6 7 8 9 10\n0\ncm"
+  }
+}

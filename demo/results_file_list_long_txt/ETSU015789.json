@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015789\n\nETSU Herbarium\nNo. 3287 7464\n\nFLORA OF EAST TENNESSEE\nEAST TENNESSEE STATE COLLEGE\n\nScientific Name *Galax aphylla* L.\nCommon Name wand flower\nWhere Found Hoss Cove, Wash. Co., TN\nDate May 20, 1954\nCollector Betty Jo Sams\n\n(Handwritten text: *Galax aphylla*, wand flower, Hoss Cove Wash. Co., TN, May 20, 1954, Betty Jo Sams)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000665,
+      "total_cost": 0.0014437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015789\nETSU Herbarium\nNo. 3287.\n7464\nFLORA OF EAST TENNESSEE\nEAST TENNESSEE STATE COLLEGE\nScientific Name.\nGalax aphylla\nL.\nCommon Name.\nwand flower.\nWhere Found.\nHoss Cove Wash. Co., TN\nDate\nMay 20, 1954\nCollector.\nBetty Jo SAMS\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.56e-05,
+      "total_cost": 0.0007371000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 139
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2156,
+    "output": 465,
+    "cost_in": 0.0002156,
+    "cost_out": 0.00018600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015789\n\nETSU Herbarium\nNo. 3287 7464\n\nFLORA OF EAST TENNESSEE\nEAST TENNESSEE STATE COLLEGE\n\nScientific Name *Galax aphylla* L.\nCommon Name wand flower\nWhere Found Hoss Cove, Wash. Co., TN\nDate May 20, 1954\nCollector Betty Jo Sams\n\n(Handwritten text: *Galax aphylla*, wand flower, Hoss Cove Wash. Co., TN, May 20, 1954, Betty Jo Sams)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015789\nETSU Herbarium\nNo. 3287.\n7464\nFLORA OF EAST TENNESSEE\nEAST TENNESSEE STATE COLLEGE\nScientific Name.\nGalax aphylla\nL.\nCommon Name.\nwand flower.\nWhere Found.\nHoss Cove Wash. Co., TN\nDate\nMay 20, 1954\nCollector.\nBetty Jo SAMS\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015789",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Betty Jo Sams",
+    "collectorNumber": "3287",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 20, 1954",
+    "collectionDate": "1954-05-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Washington County",
+    "locality": "Hoss Cove, Wash. Co., TN",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "7464\nFlora of east Tennessee\nEast Tennessee State College\nCommon name wand flower\n(Handwritten text Galax aphylla, wand flower, Hoss Cove Wash. Co., TN, May 20, 1954, Betty Jo Sams)\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n049156\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, along Boy Scout trail on ridge just below Sand Cave.\n\nNO.: 300\nCOLL.: Bryce D. Fields\nDATE: 05/22/1993\nIDEN.: Bryce D. Fields\n\nEastern Kentucky University Herbarium\n3 1234 10039608 2\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "W KENTUCKY U\nEASTERN\n049156\nHERBARIUM\nRSITY\nINCH\nOPTIRECTILINEAR\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, along Boy Scout trail on ridge just below Sand Cave.\nEastern Kentucky University Herbarium\n3 1234 10039608 2\nNO.: 300\nDATE: 05/22/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\u0e1e\u0e27\nU.S.A.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2132,
+    "output": 470,
+    "cost_in": 0.00021320000000000003,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n049156\n\nFlora Of Blanton Forest\nKentucky\nHarlan County\n\nDiapensiaceae\n*Galax aphylla* L.\n\nBlanton Forest, along Boy Scout trail on ridge just below Sand Cave.\n\nNO.: 300\nCOLL.: Bryce D. Fields\nDATE: 05/22/1993\nIDEN.: Bryce D. Fields\n\nEastern Kentucky University Herbarium\n3 1234 10039608 2\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nW KENTUCKY U\nEASTERN\n049156\nHERBARIUM\nRSITY\nINCH\nOPTIRECTILINEAR\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nGalax aphylla L.\nBlanton Forest, along Boy Scout trail on ridge just below Sand Cave.\nEastern Kentucky University Herbarium\n3 1234 10039608 2\nNO.: 300\nDATE: 05/22/1993\nCOLL: Bryce D. Fields\nIDEN: Bryce D. Fields\n\u0e1e\u0e27\nU.S.A.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "049156",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Bryce D. Fields",
+    "collectorNumber": "300",
+    "identifiedBy": "Bryce D. Fields",
+    "identifiedDate": "1993-05-22",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "05/22/1993",
+    "collectionDate": "1993-05-22",
+    "collectionDateEnd": "",
+    "habitat": "Blanton Forest, along Boy Scout trail on ridge just below Sand Cave.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Kentucky",
+    "county": "Harlan County",
+    "locality": "Blanton Forest, along Boy Scout trail on ridge just below Sand Cave.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Eastern Kentucky University\nHerbarium\nFlora Of Blanton Forest\nKentucky\nHarlan County\nDiapensiaceae\nEastern Kentucky University Herbarium\n3 1234 10039608 2"
+  }
+}

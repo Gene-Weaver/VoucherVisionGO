@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042862\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax aphylla* L.\nDet. S.R. Hill 10/87 Diapensiaceae\n\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\n\nSteven R. Hill 18071 7 June 1987\n\nHerbarium, Clemson University (CLEMS)\nClemson, South Carolina, U.S.A.\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011849999999999999,
+      "total_cost": 0.0019637500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 237
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\n27264\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042862\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax aphylla L.\nDet. S.R.Hill 10/87\nDiapensiaceae\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\nSteven R. Hill 18071\n7 June 1987\nHerbarium, Clemson University (CLEMS)\nClemson, South Carolina, U.S.A.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001012,
+      "total_cost": 0.0007827000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 253
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2372,
+    "output": 569,
+    "cost_in": 0.00023720000000000002,
+    "cost_out": 0.0002276
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042862\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax aphylla* L.\nDet. S.R. Hill 10/87 Diapensiaceae\n\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\n\nSteven R. Hill 18071 7 June 1987\n\nHerbarium, Clemson University (CLEMS)\nClemson, South Carolina, U.S.A.\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\n27264\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042862\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax aphylla L.\nDet. S.R.Hill 10/87\nDiapensiaceae\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\nSteven R. Hill 18071\n7 June 1987\nHerbarium, Clemson University (CLEMS)\nClemson, South Carolina, U.S.A.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042862",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Steven R. Hill",
+    "collectorNumber": "18071",
+    "identifiedBy": "S.R. Hill",
+    "identifiedDate": "1987-10-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. Det. S.R. Hill 10/87",
+    "verbatimCollectionDate": "7 June 1987",
+    "collectionDate": "1987-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Margin of oak/hickory/mountain laurel woodland.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white; occasional to frequent evergreen herb.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "South Carolina",
+    "county": "Oconee County",
+    "locality": "Sumter National Forest. Rte. 107, 0.4 mi S of Cherry Hill Recreation Area sign. 3.6 mi S of Fish Hatchery Road.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "copyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nDiapensiaceae\nHerbarium, Clemson University (CLEMS)\nClemson, South Carolina, U.S.A."
+  }
+}

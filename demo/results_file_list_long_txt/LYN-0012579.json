@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012579\n\nLYNCHBURG COLLEGE\n33437\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCampbell COUNTY\n\nNO. 115\nDiapensiaceae\n*Galax aphylla* (L.)\n\nGrowing on moist mossy bank of\nstream 200 yds. behind pond off\nrt. 677, 1/2 mile N.E. of rt.\n670, at the base of Jack Mt.\n\nCOLLECTORS T. Van Drunen  Sept. 7, 1970\n\n(Handwritten text: *Galax aphylla*, T. Van Drunen, Sept. 7)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012579\nLINCHBURG\nCOLLEG\n33437\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCampbel COUNTY\nNO. 113\nDiapensiaceae\nGalax aphylla (L.)\nGrowing on moist mossy bank of\nstream 200vds. behind pond off\nrt. 677, 1/2 mile N.E. of rt.\n670, at the base of Jack Mt.\nT.Van Drunen\nSent. 7 1979\nCOLLECTORS\n1\n2 3\n4\ncm\n5 6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n--- Handwritten Text ---\nSent. 7 1979\nT.Van Drunen\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.120000000000001e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2258,
+    "output": 500,
+    "cost_in": 0.0002258,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012579\n\nLYNCHBURG COLLEGE\n33437\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCampbell COUNTY\n\nNO. 115\nDiapensiaceae\n*Galax aphylla* (L.)\n\nGrowing on moist mossy bank of\nstream 200 yds. behind pond off\nrt. 677, 1/2 mile N.E. of rt.\n670, at the base of Jack Mt.\n\nCOLLECTORS T. Van Drunen  Sept. 7, 1970\n\n(Handwritten text: *Galax aphylla*, T. Van Drunen, Sept. 7)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012579\nLINCHBURG\nCOLLEG\n33437\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCampbel COUNTY\nNO. 113\nDiapensiaceae\nGalax aphylla (L.)\nGrowing on moist mossy bank of\nstream 200vds. behind pond off\nrt. 677, 1/2 mile N.E. of rt.\n670, at the base of Jack Mt.\nT.Van Drunen\nSent. 7 1979\nCOLLECTORS\n1\n2 3\n4\ncm\n5 6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n--- Handwritten Text ---\nSent. 7 1979\nT.Van Drunen\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012579",
+    "scientificName": "Galax aphylla (l.)",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(L.)",
+    "collectedBy": "T. Van Drunen",
+    "collectorNumber": "115",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 7, 1970",
+    "collectionDate": "1970-09-07",
+    "collectionDateEnd": "",
+    "habitat": "Growing on moist mossy bank of stream 200 yds. behind pond off rt. 677, 1/2 mile n.e. of rt. 670, at the base of jack mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Campbell county",
+    "locality": "200 yds. behind pond off rt. 677, 1/2 mile n.e. of rt. 670, at the base of jack mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer herbarium\nLynchburg college\nLynchburg college herbarium\nPlants of virginia\nDiapensiaceae"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Canon\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095622\n\nDUKE UNIVERSITY\nHERBARIUM\n134780\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF GEORGIA\nCounty: Rabun\n\nGalax aphylla L.\n\nMoist rocky soil in bushes on summit\nof Black Rock Mt.\n\nColl. D.S. Correll\nDet.                                Date 8/21-22/1936\n                                     No. 6619\n\n\nHandwritten Text:\nRabun\n8/21-22/1936\n6619\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009100000000000001,
+      "total_cost": 0.00168875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF GEORGIA\nCounty: Rabun\nGalax aphylla L.\nMoist rocky soil in bushes on summit\nof Black Rock Mt.\nColl. D. S. Correll\nDet.\nDate\nNo.\n8/21-22/1936\n6619\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "total_cost": 0.0007291000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2179,
+    "output": 477,
+    "cost_in": 0.0002179,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCanon\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095622\n\nDUKE UNIVERSITY\nHERBARIUM\n134780\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF GEORGIA\nCounty: Rabun\n\nGalax aphylla L.\n\nMoist rocky soil in bushes on summit\nof Black Rock Mt.\n\nColl. D.S. Correll\nDet.                                Date 8/21-22/1936\n                                     No. 6619\n\n\nHandwritten Text:\nRabun\n8/21-22/1936\n6619\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF GEORGIA\nCounty: Rabun\nGalax aphylla L.\nMoist rocky soil in bushes on summit\nof Black Rock Mt.\nColl. D. S. Correll\nDet.\nDate\nNo.\n8/21-22/1936\n6619\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095622",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "D.S. Correll",
+    "collectorNumber": "6619",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "8/21-22/1936",
+    "collectionDate": "1936-08-21",
+    "collectionDateEnd": "1936-08-22",
+    "habitat": "Moist rocky soil in bushes on summit of Black Rock Mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun",
+    "locality": "Summit of Black Rock Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\nGalax aphylla auct. non L.\nDuke University Herbarium\nPLANTS OF GEORGIA"
+  }
+}

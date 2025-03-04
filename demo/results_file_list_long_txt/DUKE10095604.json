@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke UNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095604\n\nDUKE UNIVERSITY\nHERBARIUM\n\n53805\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCounty: WILKES\n\n*Galax aphylla* L.\nOn rocky stream bank in dry upland\nwoods near Maple Springs School.\n\n(with G.W. McDowell)\n\nColl. D.S. Correll\nDet.                                      Date 5/28/1939\n                                           No. 10948\n\n\nHandwritten Text: WILKES, 5/28/1939, 10948\n\n*Galax urceolata\n*Galax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000965,
+      "total_cost": 0.00174375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 193
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCounty: WILKES\nGalax aphylla L.\nOn rocky stream bank in dry upland\nwoods near Maple Springs School.\n(with G.W.McDowell)\nColl. D. S. Correll\nDate 5/28/1939\nNo. 10948\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.0400000000000005e-05,
+      "total_cost": 0.0007319000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2203,
+    "output": 534,
+    "cost_in": 0.00022030000000000002,
+    "cost_out": 0.0002136
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke UNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095604\n\nDUKE UNIVERSITY\nHERBARIUM\n\n53805\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCounty: WILKES\n\n*Galax aphylla* L.\nOn rocky stream bank in dry upland\nwoods near Maple Springs School.\n\n(with G.W. McDowell)\n\nColl. D.S. Correll\nDet.                                      Date 5/28/1939\n                                           No. 10948\n\n\nHandwritten Text: WILKES, 5/28/1939, 10948\n\n*Galax urceolata\n*Galax aphylla\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCounty: WILKES\nGalax aphylla L.\nOn rocky stream bank in dry upland\nwoods near Maple Springs School.\n(with G.W.McDowell)\nColl. D. S. Correll\nDate 5/28/1939\nNo. 10948\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095604",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "D.S. Correll, G.W. McDowell",
+    "collectorNumber": "10948",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/28/1939",
+    "collectionDate": "1939-05-28",
+    "collectionDateEnd": "",
+    "habitat": "On rocky stream bank in dry upland woods near Maple Springs School.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wilkes",
+    "locality": "On rocky stream bank in dry upland woods near Maple Springs School.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\n53805\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nDet.\nDate\nHandwritten Text WILKES, 5/28/1939, 10948\nGalax urceolata\nGalax aphylla\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BOTANICAL RESEARCH INSTITUTE OF TEXAS\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88750\n\nIMAGED\n15 NOV 2019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of 42\nGuy L. Nesom, 1975\n\nFLORA OF CHATTOOGA RIVER GORGE\nJackson County, North Carolina                      May 28, 1968\n\n*Galax aphylla* L.\n\nPath along west bank of the Chattooga River,\nwest of Timber Ridge. Level, mesic hemlock\nforest at elevation 2900 feet.\n\nDavid M. DuMond, No. 1002\nHerbarium, North Carolina State University\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516621\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011899999999999999,
+      "total_cost": 0.00196875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 238
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88750\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nFLORA OF CHATTOOGA RIVER GORGE\nJackson County, North Carolina\nGALAX APHYLLA L.\nMay 28, 1968\nPath along west bank of the Chattooga River,\nwest of Timber Ridge. Level, mesic hemlock\nforest at elevation 2900 feet.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516621\nDavid M. DuMond, No. 1002\nHerbarium, North Carolina State University\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.44e-05,
+      "total_cost": 0.0007759,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 236
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2372,
+    "output": 604,
+    "cost_in": 0.00023720000000000002,
+    "cost_out": 0.00024160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBOTANICAL RESEARCH INSTITUTE OF TEXAS\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88750\n\nIMAGED\n15 NOV 2019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of 42\nGuy L. Nesom, 1975\n\nFLORA OF CHATTOOGA RIVER GORGE\nJackson County, North Carolina                      May 28, 1968\n\n*Galax aphylla* L.\n\nPath along west bank of the Chattooga River,\nwest of Timber Ridge. Level, mesic hemlock\nforest at elevation 2900 feet.\n\nDavid M. DuMond, No. 1002\nHerbarium, North Carolina State University\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516621\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88750\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nFLORA OF CHATTOOGA RIVER GORGE\nJackson County, North Carolina\nGALAX APHYLLA L.\nMay 28, 1968\nPath along west bank of the Chattooga River,\nwest of Timber Ridge. Level, mesic hemlock\nforest at elevation 2900 feet.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516621\nDavid M. DuMond, No. 1002\nHerbarium, North Carolina State University\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516621",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "David M. DuMond",
+    "collectorNumber": "1002",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "May 28, 1968",
+    "collectionDate": "1968-05-28",
+    "collectionDateEnd": "",
+    "habitat": "Path along west bank of the Chattooga River, west of Timber Ridge. Level, mesic hemlock forest",
+    "chromosomeCount": "",
+    "guardCell": "n = , based on average guard cell volume of 42",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson County",
+    "locality": "Flora of Chattooga River Gorge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "884",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "BOTANICAL RESEARCH INSTITUTE OF TEXAS\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88750\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHerbarium, North Carolina State University\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT.\nGalax urceolata\nGalax aphylla\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved"
+  }
+}

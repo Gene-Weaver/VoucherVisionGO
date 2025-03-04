@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\nGalax aphylla L.\nDETERMINED BY KRS\nCLYDE F. REED\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area.\nGuy L. Nesom, 1975\n\nWEST VIRGINIA 118186\nHERBARIUM\nUNIVERSITY\nWest Virginia University (WVA)\nWVA-V-0010671\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach 2642 6/18/61\n\n\nHandwritten text: *Galax aphylla* L., KRS\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001055,
+      "total_cost": 0.0018337500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 211
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC 1 SYSTEM 21\n3\n7\n10\n11\n12\n13\ncopyright reserved\nU. S. A.\nINCHES\nION\nLABEL\nGalax aphylla L.\nDETERMINED BY\nCLYDE F. REED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume of482 \u03bc2\nGuy L. Nesom, 1975\nWest Virginia University (WVA)\nWVA-V-0010671\nPLANTS OF VIRGINIA\nGalax aphylla L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach\n2642\n6/18/61\n\nDrapen\nGalax aphylla L.\n1965\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.6e-05,
+      "total_cost": 0.0007775,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 240
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2346,
+    "output": 598,
+    "cost_in": 0.0002346,
+    "cost_out": 0.00023920000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\nGalax aphylla L.\nDETERMINED BY KRS\nCLYDE F. REED\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area.\nGuy L. Nesom, 1975\n\nWEST VIRGINIA 118186\nHERBARIUM\nUNIVERSITY\nWest Virginia University (WVA)\nWVA-V-0010671\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach 2642 6/18/61\n\n\nHandwritten text: *Galax aphylla* L., KRS\n\nGalax aphylla\nGalax urceolata\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC 1 SYSTEM 21\n3\n7\n10\n11\n12\n13\ncopyright reserved\nU. S. A.\nINCHES\nION\nLABEL\nGalax aphylla L.\nDETERMINED BY\nCLYDE F. REED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume of482 \u03bc2\nGuy L. Nesom, 1975\nWest Virginia University (WVA)\nWVA-V-0010671\nPLANTS OF VIRGINIA\nGalax aphylla L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach\n2642\n6/18/61\n\nDrapen\nGalax aphylla L.\n1965\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVA-V-0010671",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. B. Rossbach",
+    "collectorNumber": "2642",
+    "identifiedBy": "Clyde F. Reed, Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt, Guy L. Nesom, 1975",
+    "verbatimCollectionDate": "6/18/61",
+    "collectionDate": "1961-06-18",
+    "collectionDateEnd": "",
+    "habitat": "Thin humus & sandstone-clay soil, woods of oaks, white pine (at one time also chestnut)",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Carroll Co.",
+    "locality": "Blue Ridge Nat. Parkway, near Piper's Gap, se. of Galax, sw. Carroll Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WVA Morgantown\nDetermined by krs\nHerbarium of the university of north carolina\nWest virginia university (wva)\nPlants of virginia\nHandwritten text galax aphylla l., krs\ngalax aphylla\ngalax urceolata\nmetric 1 system 21\nvolume of482 \u03bc2\ndrapen\ngalax aphylla l.\n1965\ncopyright reserved\nu. s. a.\ninches\nion\nlabel"
+  }
+}

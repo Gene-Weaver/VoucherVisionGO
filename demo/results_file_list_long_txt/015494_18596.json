@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nPRESERVED\nMATERIALS\n\nBOON015494\n\nof Tennessee\nBlount County\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N.C.\nNo. 18,596 (handwritten)\n\nF: Diapensiaceae\n\n*Galax urceolata* (Poir.) Brummitt\n\n35\u00b037'81\"N\n83\u00b057'14\"W\nRoad side at 1.7 miles South on Montvale Rd, past Camp Montvale\nintersection. NW facing slope of Chelhowee Mountain.\n\nColl. Anna Maleszyk\nNo 022\n\nDate June 5th, 1997\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008199999999999999,
+      "total_cost": 0.00159875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015494\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nof Tennessee\nBlount County\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 18,596\nF: Diapensiaceae\nGalax urceolata (Poir.) Brummit\n35\u00b037'81\"N\n83\u00b057\u203214\u2033W\nRoad side at 1.7 miles South on Montvale Rd, past Camp Montvale\nintersection. NW facing slope of Chelhowee Mountain.\nColl. Anna Maleszyk\nNo 022\nDate June 5th, 1997\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.04e-05,
+      "total_cost": 0.0007619,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 201
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2227,
+    "output": 556,
+    "cost_in": 0.0002227,
+    "cost_out": 0.00022239999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nPRESERVED\nMATERIALS\n\nBOON015494\n\nof Tennessee\nBlount County\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N.C.\nNo. 18,596 (handwritten)\n\nF: Diapensiaceae\n\n*Galax urceolata* (Poir.) Brummitt\n\n35\u00b037'81\"N\n83\u00b057'14\"W\nRoad side at 1.7 miles South on Montvale Rd, past Camp Montvale\nintersection. NW facing slope of Chelhowee Mountain.\n\nColl. Anna Maleszyk\nNo 022\n\nDate June 5th, 1997\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015494\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nof Tennessee\nBlount County\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 18,596\nF: Diapensiaceae\nGalax urceolata (Poir.) Brummit\n35\u00b037'81\"N\n83\u00b057\u203214\u2033W\nRoad side at 1.7 miles South on Montvale Rd, past Camp Montvale\nintersection. NW facing slope of Chelhowee Mountain.\nColl. Anna Maleszyk\nNo 022\nDate June 5th, 1997\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015494",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Anna Maleszyk",
+    "collectorNumber": "022",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 5th, 1997",
+    "collectionDate": "1997-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Road side at 1.7 miles south on montvale rd, past camp montvale intersection. nw facing slope of chelhowee mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Blount county",
+    "locality": "Road side at 1.7 miles south on montvale rd, past camp montvale intersection. nw facing slope of chelhowee mountain.",
+    "verbatimCoordinates": "35\u00b037'81N\n83\u00b057\u203214\u2033W",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Living\nCultures\nPreserved\nMaterials\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 18,596\nF Diapensiaceae\nAppalachian State University Herbarium\nCarolina\nBurlington, Nc 27215 1-800-334-5551\nof Tennessee\nHerbarium\nInches\nMetric"
+  }
+}

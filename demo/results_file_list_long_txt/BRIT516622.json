@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BOTANICAL\nRESEARCH\nINSTITUTE OF\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT. TEXAS\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516622\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nJohnston Co.\n\n*Galax aphylla* L. Determined by H. E. Ahles\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n12975\nOak-hickory forest, Moccasin Creek, 4\nmiles south of Middlesex\nA. E. Radford 21796 Apr. 29, 1957\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001205,
+      "total_cost": 0.0019837500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 241
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nCamera Trax.com\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516622\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nJohnston Co.\nGalax aphylla L. Determined by H. E. Ahles\nOak-hickory forest, Moccasin Creek, 4\nmiles south of Middlesex\nA. E. Radford\n21796\nApr. 29, 1957\nCollected for the \"Flora of the Carolinas\"\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n12975\n24ColorCard\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.8e-05,
+      "total_cost": 0.0007795,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 245
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2389,
+    "output": 598,
+    "cost_in": 0.0002389,
+    "cost_out": 0.00023920000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBOTANICAL\nRESEARCH\nINSTITUTE OF\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT. TEXAS\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516622\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nJohnston Co.\n\n*Galax aphylla* L. Determined by H. E. Ahles\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n12975\nOak-hickory forest, Moccasin Creek, 4\nmiles south of Middlesex\nA. E. Radford 21796 Apr. 29, 1957\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nCamera Trax.com\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516622\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nJohnston Co.\nGalax aphylla L. Determined by H. E. Ahles\nOak-hickory forest, Moccasin Creek, 4\nmiles south of Middlesex\nA. E. Radford\n21796\nApr. 29, 1957\nCollected for the \"Flora of the Carolinas\"\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n12975\n24ColorCard\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516622",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "21796",
+    "identifiedBy": "Guy L. Nesom, H. E. Ahles",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. Determined by H. E. Ahles",
+    "verbatimCollectionDate": "Apr. 29, 1957",
+    "collectionDate": "1957-04-29",
+    "collectionDateEnd": "",
+    "habitat": "Oak-hickory forest",
+    "chromosomeCount": "n =",
+    "guardCell": "n = , based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Johnston Co.",
+    "locality": "Moccasin Creek, 4 miles south of Middlesex",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "BOTANICAL\nRESEARCH\nINSTITUTE OF\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n12975\nCollected for the Flora of the Carolinas\n24ColorCard"
+  }
+}

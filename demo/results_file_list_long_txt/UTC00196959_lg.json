@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "IN UTC\nSYMBIOTA\n\nDiapensiaceae\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: Virginia: Montgomery County\n\n*Galax urceolata* (Poiret) Brummitt\n\nAcid duff under white pine and mixed\noak canopy. Near top of small N-facing\nslope. Adjacent to Little River at the\nRt. 8 bridge about 4 miles S of Riner,\nVirginia.\n\nColl: T.F. Wieboldt\nDate: 26 June 1986\nNo: 6128\nDet: TFW\n\nINTERMOUNTAIN HERBARIUM\n196959\nUTAH STATE UNIVERSITY\n\nUTC 00196959\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008249999999999999,
+      "total_cost": 0.0016037500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1\n2\n3\n4\n1 2 3 4\n5\n6\n7\n8\n9\n10\n11\n12\nIN UTC\nSYMBIOTA\nINTERMOUNTAIN HERBAR\n196959\nUTAH STATE UNIVERSITY\nDiapensiaceae\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Montgomery County\n\nGalax urceolata (Poiret) Brummitt\nAcid duff under white pine and mixed\noak canopy. Near top of small N-facing\nslope. Adjacent to Little River at the\nRt. 8 bridge about 4 miles S of Riner,\nVirginia.\nColl: T.F. Wieboldt\nDate: 26 June 1986\nNo: 6128\nDet: TFW\nUTC 00196959\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.88e-05,
+      "total_cost": 0.0007603,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 197
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2240,
+    "output": 469,
+    "cost_in": 0.000224,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nIN UTC\nSYMBIOTA\n\nDiapensiaceae\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: Virginia: Montgomery County\n\n*Galax urceolata* (Poiret) Brummitt\n\nAcid duff under white pine and mixed\noak canopy. Near top of small N-facing\nslope. Adjacent to Little River at the\nRt. 8 bridge about 4 miles S of Riner,\nVirginia.\n\nColl: T.F. Wieboldt\nDate: 26 June 1986\nNo: 6128\nDet: TFW\n\nINTERMOUNTAIN HERBARIUM\n196959\nUTAH STATE UNIVERSITY\n\nUTC 00196959\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\n1\n2\n3\n4\n1 2 3 4\n5\n6\n7\n8\n9\n10\n11\n12\nIN UTC\nSYMBIOTA\nINTERMOUNTAIN HERBAR\n196959\nUTAH STATE UNIVERSITY\nDiapensiaceae\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Montgomery County\n\nGalax urceolata (Poiret) Brummitt\nAcid duff under white pine and mixed\noak canopy. Near top of small N-facing\nslope. Adjacent to Little River at the\nRt. 8 bridge about 4 miles S of Riner,\nVirginia.\nColl: T.F. Wieboldt\nDate: 26 June 1986\nNo: 6128\nDet: TFW\nUTC 00196959\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "UTC 00196959",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T.f. Wieboldt",
+    "collectorNumber": "6128",
+    "identifiedBy": "Tfw",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 June 1986",
+    "collectionDate": "1986-06-26",
+    "collectionDateEnd": "",
+    "habitat": "Acid duff under white pine and mixed oak canopy. Near top of small n-facing slope. Adjacent to little river at the rt. 8 bridge",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Montgomery county",
+    "locality": "About 4 miles s of riner, virginia.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "In utc\nsymbiota\nvirginia polytechnic institute and state\nuniversity herbarium\nflora of virginia"
+  }
+}

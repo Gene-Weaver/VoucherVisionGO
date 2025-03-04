@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011951\n\n*(Handwritten) Diap*\n\nPlants of ALABAMA, U.S.A.\n*Galax urceolata* (Poir.) Brummitt\n\nCLEBURNE CO.: ca. 13 air mi S of Anniston, Cheaha\nState Park, campground.\n\nLightly shaded, moist soil near streamlet through\n*Quercus-Nyssa sylvatica-Pinus* woods, streamlet with\nsphagnous seepages in places; frequent.\n\nRobert F.C. Naczi 5472                      23 May 1996\ncopyright reserved\n\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008900000000000001,
+      "total_cost": 0.00166875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 178
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011951\nPlants of ALABAMA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nCLEBURNE CO.: ca. 13 air mi S of Anniston, Cheaha\nState Park, campground.\nLightly shaded, moist soil near streamlet through\nQuercus-Nyssa sylvatica-Pinus woods, streamlet with\nspahgnous seepages in places; frequent.\nRobert F.C. Naczi 5472\n23 May 1996\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\nDiap\ncopyright reserved\n\n\nGalax urceolata\nQuercus-Nyssa sylvatica\nPinus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2246,
+    "output": 493,
+    "cost_in": 0.00022460000000000004,
+    "cost_out": 0.0001972
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011951\n\n*(Handwritten) Diap*\n\nPlants of ALABAMA, U.S.A.\n*Galax urceolata* (Poir.) Brummitt\n\nCLEBURNE CO.: ca. 13 air mi S of Anniston, Cheaha\nState Park, campground.\n\nLightly shaded, moist soil near streamlet through\n*Quercus-Nyssa sylvatica-Pinus* woods, streamlet with\nsphagnous seepages in places; frequent.\n\nRobert F.C. Naczi 5472                      23 May 1996\ncopyright reserved\n\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011951\nPlants of ALABAMA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nCLEBURNE CO.: ca. 13 air mi S of Anniston, Cheaha\nState Park, campground.\nLightly shaded, moist soil near streamlet through\nQuercus-Nyssa sylvatica-Pinus woods, streamlet with\nspahgnous seepages in places; frequent.\nRobert F.C. Naczi 5472\n23 May 1996\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\nDiap\ncopyright reserved\n\n\nGalax urceolata\nQuercus-Nyssa sylvatica\nPinus\n\n",
+  "formatted_json": {
+    "catalogNumber": "3 1973 000011951",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert F.C. Naczi",
+    "collectorNumber": "5472",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 May 1996",
+    "collectionDate": "1996-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Lightly shaded, moist soil near streamlet through Quercus-Nyssa sylvatica-Pinus woods, streamlet with spahgnous seepages in places; frequent.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Alabama",
+    "county": "Cleburne co.",
+    "locality": "Ca. 13 air mi s of anniston, cheaha state park, campground.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northern kentucky university\nherbarium\nnku herbarium (knk)\ndiap\ncopyright reserved\nnku\nnorthern\nkentucky\nuniversity"
+  }
+}

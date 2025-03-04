@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n165443\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nWALKER COUNTY, GEORGIA\n*Galax urceolata* (Poiret) Brummitt\n\nSW corner of county. Along East Fork\nLittle River. Laurel thicket.\n\nw/ Nancy C. Coile\nSamuel B. Jones 24408  21 August 1984\n\nThe University of Georgia                     Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\nHandwritten Text:\n* \"9 November 2005\"\n* \"w\" before \"/ Nancy C. Coile\"\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000775,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n165443\nGalax urceolata (Poiret) Brummitt\nw/ Nancy C. Coile\nSamuel B. Jones 24408 21 August 1984\nThe University of Georgia\nAthens, GA, U.S.A.\nIMAGED 2013\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nWALKER COUNTY, GEORGIA\nSW corner of county. Along East Fork\nLittle River. Laurel thicket.\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2154,
+    "output": 488,
+    "cost_in": 0.00021540000000000003,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n165443\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nWALKER COUNTY, GEORGIA\n*Galax urceolata* (Poiret) Brummitt\n\nSW corner of county. Along East Fork\nLittle River. Laurel thicket.\n\nw/ Nancy C. Coile\nSamuel B. Jones 24408  21 August 1984\n\nThe University of Georgia                     Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\nHandwritten Text:\n* \"9 November 2005\"\n* \"w\" before \"/ Nancy C. Coile\"\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n165443\nGalax urceolata (Poiret) Brummitt\nw/ Nancy C. Coile\nSamuel B. Jones 24408 21 August 1984\nThe University of Georgia\nAthens, GA, U.S.A.\nIMAGED 2013\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nWALKER COUNTY, GEORGIA\nSW corner of county. Along East Fork\nLittle River. Laurel thicket.\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "165443",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Samuel B. Jones, Nancy C. Coile",
+    "collectorNumber": "24408",
+    "identifiedBy": "",
+    "identifiedDate": "2005-11-09",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 August 1984",
+    "collectionDate": "1984-08-21",
+    "collectionDateEnd": "",
+    "habitat": "Laurel thicket.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Walker county",
+    "locality": "Sw corner of county. Along east fork little river.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\nspecimen examined for\ngeorgia atlas project\nthe university of georgia athens, ga, u.s.a.\nimaged 2013\nhandwritten text\n 9 november 2005\n w before / nancy c. coile"
+  }
+}

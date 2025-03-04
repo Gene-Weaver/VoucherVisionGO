@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "H. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nEx Herbarium of the University of North Carolina\n\nGalax aphylla L.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nDet. T. A. Atkinson          Date June 8, 1977\n\nHandwritten Text: Hill\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00044,
+      "total_cost": 0.00121875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 88
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Inches\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00237333\nEx Herbarium of the University of North Carolina\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nDet. T. A. Atkinson\nDate June 8, 1977\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2143,
+    "output": 557,
+    "cost_in": 0.0002143,
+    "cost_out": 0.0002228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nEx Herbarium of the University of North Carolina\n\nGalax aphylla L.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nDet. T. A. Atkinson          Date June 8, 1977\n\nHandwritten Text: Hill\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00237333\nEx Herbarium of the University of North Carolina\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nDet. T. A. Atkinson\nDate June 8, 1977\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00237333",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. R. Totten",
+    "collectorNumber": "",
+    "identifiedBy": "T. A. Atkinson",
+    "identifiedDate": "1977-06-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "H. R. Totten\nTeaching Collection\nUNC-Chapel Hill\nEx Herbarium of the University of North Carolina\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nDet. T. A. Atkinson Date June 8, 1977\nHandwritten Text Hill\nGalax urceolata\nGalax aphylla\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nGalax aphylla L.\n"
+  }
+}

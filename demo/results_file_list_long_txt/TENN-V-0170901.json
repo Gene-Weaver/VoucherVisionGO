@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170901\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\nFrom The Personal Collection\nof Dr. R. Dale Thomas\n\nFlora of TENNESSEE                      County: MONROE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nCherokee National Forest. Moist woods along small stream.\nBeside county road 525 at Tenn. 165 west of Indian Boundary\nCampground.\n\nCollector: R. Dale Thomas with Barbara G. Thomas\nNo.:173,786                               Date: 23 May 2004\n\n\n0    1   2   3   4   5   6   7   8   9   10\ncm.\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009599999999999999,
+      "total_cost": 0.00173875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 192
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF TH\nNo.\n6277\nUNIVERSITY OF TENNESSEE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170901\nFrom The Personal Collection\nof Dr. R. Dale Thomas\nFlora of TENNESSEE\nCounty: MONROE\nGALAX URCEOLATA (Poir.) Barummitt\nCherokee National Forest. Moist woods along small stream.\nBeside county road 525 at Tenn. 165 west of Indian Boundary\nCampground.\nCollector: R. Dale Thomas with Barbara G. Thomas\nNo.:173,786\n0\ncm\n1\n2\n3\n4\n5\nDate: 23 May 2004\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.52e-05,
+      "total_cost": 0.0007567,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2256,
+    "output": 477,
+    "cost_in": 0.00022560000000000004,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170901\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\nFrom The Personal Collection\nof Dr. R. Dale Thomas\n\nFlora of TENNESSEE                      County: MONROE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nCherokee National Forest. Moist woods along small stream.\nBeside county road 525 at Tenn. 165 west of Indian Boundary\nCampground.\n\nCollector: R. Dale Thomas with Barbara G. Thomas\nNo.:173,786                               Date: 23 May 2004\n\n\n0    1   2   3   4   5   6   7   8   9   10\ncm.\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF TH\nNo.\n6277\nUNIVERSITY OF TENNESSEE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170901\nFrom The Personal Collection\nof Dr. R. Dale Thomas\nFlora of TENNESSEE\nCounty: MONROE\nGALAX URCEOLATA (Poir.) Barummitt\nCherokee National Forest. Moist woods along small stream.\nBeside county road 525 at Tenn. 165 west of Indian Boundary\nCampground.\nCollector: R. Dale Thomas with Barbara G. Thomas\nNo.:173,786\n0\ncm\n1\n2\n3\n4\n5\nDate: 23 May 2004\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170901",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Dale Thomas with Barbara G. Thomas",
+    "collectorNumber": "173,786",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 May 2004",
+    "collectionDate": "2004-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Moist woods along small stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Monroe",
+    "locality": "Cherokee National Forest. Beside county road 525 at Tenn. 165 west of Indian Boundary Campground.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF THE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nUNIVERSITY OF TENNESSEE\nFrom The Personal Collection\nof Dr. R. Dale Thomas\nFlora of TENNESSEE\nNo. 6277\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

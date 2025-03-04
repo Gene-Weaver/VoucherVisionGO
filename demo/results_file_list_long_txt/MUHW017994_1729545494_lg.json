@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nWest Virginia 25701 U.S.A\n\nMUHW017994\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nFlora of West Virginia\nWyoming County\n\nNo. 51\n\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00068,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nWest Virginia 25701. USA\n\nMarshall University Herbarium\nMUHW017994\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nNo. 51\nFlora of West Virginia\nWyoming County\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2147,
+    "output": 483,
+    "cost_in": 0.00021470000000000001,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nWest Virginia 25701 U.S.A\n\nMUHW017994\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nFlora of West Virginia\nWyoming County\n\nNo. 51\n\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nWest Virginia 25701. USA\n\nMarshall University Herbarium\nMUHW017994\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nNo. 51\nFlora of West Virginia\nWyoming County\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017994",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Edsel Ray Lafferty",
+    "collectorNumber": "51",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 12, 1969",
+    "collectionDate": "1969-07-12",
+    "collectionDateEnd": "",
+    "habitat": "In rather dry soil of a wooded ridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "West Virginia",
+    "county": "Wyoming County",
+    "locality": "Pineville, on a high ridge on Kentucky side.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nWest Virginia 25701. USA\n\nFlora of West Virginia\n\nMarshall University Herbarium\n\nGalax urceolata\nGalax aphylla"
+  }
+}

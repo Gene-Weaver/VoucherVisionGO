@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nDiapensiaceae\n= Galax urceolata\n\nTowns County\nFLORA OF GEORGIA\n\nGalax aphylla L.\nTray Mtn., Ga. On cliff by road going down\nfrom top of mtn. At edge of woods.\n\n(Handwritten Text)\nw/ John Tanner + David Humphrey\nMartha Muir 197 30 April 1977\n\nUNIV. of GEORGIA\nHERBARIUM\n229910\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\nDiapensiaceae\n= Galax urceolata\nTowns County\nFLORA OF GEORGIA\nUNIV. OF GEORGIA\nHERBARIUM\n229910\nGalax aphylla L.\nTray Mtn., Ga. On cliff by road going down\nfrom top of mtn. At edge of woods.\nw/ John Tanner + David Humphrey\nMartha Muir\n30 April 1977\nIMAGED 2013\n\nHandwritten text:\n9 November 2005\n197\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.160000000000001e-05,
+      "total_cost": 0.0007331,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 129
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2157,
+    "output": 479,
+    "cost_in": 0.0002157,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nDiapensiaceae\n= Galax urceolata\n\nTowns County\nFLORA OF GEORGIA\n\nGalax aphylla L.\nTray Mtn., Ga. On cliff by road going down\nfrom top of mtn. At edge of woods.\n\n(Handwritten Text)\nw/ John Tanner + David Humphrey\nMartha Muir 197 30 April 1977\n\nUNIV. of GEORGIA\nHERBARIUM\n229910\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\nDiapensiaceae\n= Galax urceolata\nTowns County\nFLORA OF GEORGIA\nUNIV. OF GEORGIA\nHERBARIUM\n229910\nGalax aphylla L.\nTray Mtn., Ga. On cliff by road going down\nfrom top of mtn. At edge of woods.\nw/ John Tanner + David Humphrey\nMartha Muir\n30 April 1977\nIMAGED 2013\n\nHandwritten text:\n9 November 2005\n197\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "229910",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Martha Muir, John Tanner, David Humphrey",
+    "collectorNumber": "197",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "30 April 1977",
+    "collectionDate": "1977-04-30",
+    "collectionDateEnd": "",
+    "habitat": "On cliff by road going down from top of mtn. at edge of woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Towns County",
+    "locality": "Tray Mtn., Ga.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\nGeorgia atlas project\nDiapensiaceae\n= Galax urceolata\nFlora of georgia\nUniv. of georgia\nHerbarium\nImaged 2013\nHandwritten text\n9 November 2005\nGalax aphylla L.\nGalax aphylla"
+  }
+}

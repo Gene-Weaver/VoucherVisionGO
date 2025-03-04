@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n\nClemson University Herbarium\nCLEMS0042877\n\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name: *Galax aphylla* L.\nCommon Name: Galax\nLocality: *Issac Dam - East* Co. *Aiken*\nHabitat: *Mixed Forest - Pine + Hardwood*\nCollector: *John Floyd Jr.* No. 265 Date: 10/5/71\nAcc. No. __________ Identified By ____\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008700000000000001,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16125\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042877\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name Galax aphylla L.\nCommon Name\nLocality 75A9 Dam Fast Co. Pickens\nHabitat Mixed Forest - Pine + Hardwood\nCollector John Floyd, Jr No. 265 Date 10/5/71\nAcc. No. Identified By\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.72e-05,
+      "total_cost": 0.0007587000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 193
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2260,
+    "output": 440,
+    "cost_in": 0.000226,
+    "cost_out": 0.00017600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n\nClemson University Herbarium\nCLEMS0042877\n\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\n\nScientific Name: *Galax aphylla* L.\nCommon Name: Galax\nLocality: *Issac Dam - East* Co. *Aiken*\nHabitat: *Mixed Forest - Pine + Hardwood*\nCollector: *John Floyd Jr.* No. 265 Date: 10/5/71\nAcc. No. __________ Identified By ____\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16125\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042877\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY AND BACTERIOLOGY\nCLEMSON, SOUTH CAROLINA 29631\nScientific Name Galax aphylla L.\nCommon Name\nLocality 75A9 Dam Fast Co. Pickens\nHabitat Mixed Forest - Pine + Hardwood\nCollector John Floyd, Jr No. 265 Date 10/5/71\nAcc. No. Identified By\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042877",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "John Floyd Jr.",
+    "collectorNumber": "265",
+    "identifiedBy": "John F. Townsend",
+    "identifiedDate": "1996-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "10/5/71",
+    "collectionDate": "1971-10-05",
+    "collectionDateEnd": "",
+    "habitat": "Mixed forest - pine + hardwood",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Aiken",
+    "locality": "Issac dam - east",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Scientific name galax aphylla l.\nAcc. no. __________"
+  }
+}

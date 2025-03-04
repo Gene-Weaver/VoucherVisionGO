@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n5441\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM Diapensiaceae\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Henderson\n\n*Galax aphylla* L.\n\nMesic, clay roadside under *Leucothoe*\nalong road to Camp Green Cove, 0.2 mi.\nfrom steel bridge; Tuxedo.\n\nT. L. Mellichamp #729 June 15, 1970\n\n\nHandwritten Text: *Diapensiaceae*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008950000000000001,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT\n5441\nHERBARIUM\nGalax urceolata (Poir.) Brummit\nn =\nvolume of\nGuy L. Nesom, 1975\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Henderson\nGalax aphylla L.\nMesic, clay roadside under Leucothoe\nalong road to Camp Green Cove, 0.2 mi.\nfrom steel bridge; Tuxedo.\nT.L. Mellichamp #729 June 15, 1970\n\nDiapensiaceae\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2217,
+    "output": 564,
+    "cost_in": 0.0002217,
+    "cost_out": 0.00022560000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n5441\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM Diapensiaceae\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Henderson\n\n*Galax aphylla* L.\n\nMesic, clay roadside under *Leucothoe*\nalong road to Camp Green Cove, 0.2 mi.\nfrom steel bridge; Tuxedo.\n\nT. L. Mellichamp #729 June 15, 1970\n\n\nHandwritten Text: *Diapensiaceae*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA AT\n5441\nHERBARIUM\nGalax urceolata (Poir.) Brummit\nn =\nvolume of\nGuy L. Nesom, 1975\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Henderson\nGalax aphylla L.\nMesic, clay roadside under Leucothoe\nalong road to Camp Green Cove, 0.2 mi.\nfrom steel bridge; Tuxedo.\nT.L. Mellichamp #729 June 15, 1970\n\nDiapensiaceae\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "5441",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "T. L. Mellichamp",
+    "collectorNumber": "729",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 15, 1970",
+    "collectionDate": "1970-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Mesic, clay roadside under Leucothoe along road to Camp Green Cove, 0.2 mi. from steel bridge; Tuxedo.",
+    "chromosomeCount": "n =",
+    "guardCell": "n = , based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Henderson",
+    "locality": "Along road to Camp Green Cove, 0.2 mi. from steel bridge; Tuxedo.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nGalax aphylla L.\nHandwritten Text Diapensiaceae\nGalax urceolata\nGalax aphylla\nDiapensiaceae"
+  }
+}

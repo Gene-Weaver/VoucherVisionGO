@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026111\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nnear Parrott,\nPulaski Co., Va.\nJune 13, 1972\nRocky bluff of\nNew River at Walker\nMtn.\n1750 ft\nC & Steens #5207\n\n\nHandwritten Text:\n*Galax aphylla* L.\nnear Parrott,\nPulaski Co., Va.\nJune 13, 1972\nRocky bluff of\nNew River at Walker\nMtn.\n1750 ft\nC & Steens #5207\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009350000000000001,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FARM-0026111\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nGuy L. Nesom, 1975\nName Galax aphylla L.\nLocality near Parrott,\nPulaski Co., Va.\nAltitude 1750 ft.\nDate June 13, 1972\nHabitat Rocky bluff of\nNew River at Walker\nhitu.\nCollected by C & Steens #5207\nIdentified by U\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.7600000000000004e-05,
+      "total_cost": 0.0007391000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 144
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2215,
+    "output": 458,
+    "cost_in": 0.00022150000000000002,
+    "cost_out": 0.0001832
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026111\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nnear Parrott,\nPulaski Co., Va.\nJune 13, 1972\nRocky bluff of\nNew River at Walker\nMtn.\n1750 ft\nC & Steens #5207\n\n\nHandwritten Text:\n*Galax aphylla* L.\nnear Parrott,\nPulaski Co., Va.\nJune 13, 1972\nRocky bluff of\nNew River at Walker\nMtn.\n1750 ft\nC & Steens #5207\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nFARM-0026111\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nGuy L. Nesom, 1975\nName Galax aphylla L.\nLocality near Parrott,\nPulaski Co., Va.\nAltitude 1750 ft.\nDate June 13, 1972\nHabitat Rocky bluff of\nNew River at Walker\nhitu.\nCollected by C & Steens #5207\nIdentified by U\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026111",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C & Steens",
+    "collectorNumber": "5207",
+    "identifiedBy": "U Harvill-Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 13, 1972",
+    "collectionDate": "1972-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Rocky bluff of New River at Walker",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Va.",
+    "county": "Pulaski Co.",
+    "locality": "near Parrott",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "533",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Guy L. Nesom, 1975\nMtn.\nHerbarium\n"
+  }
+}

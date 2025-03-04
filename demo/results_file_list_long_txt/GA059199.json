@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183915\n\nTOWNS COUNTY, GEORGIA\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt\n\nTray Mountain, Mossy Cove, north-facing\nboulderfield. 34\u00b048\u203215\u2033N, 83\u00b040\u203257\u2033W.\nLarge population among big boulders on\nwestern edge of boulderfield at 4400 feet,\nnearly at ridgeline. Very few in flower.\n\nLinda G. Chafin 590\nThe University of Georgia        5 June 1987\nAthens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009149999999999999,
+      "total_cost": 0.00169375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 183
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183915\nTOWNS COUNTY, GEORGIA\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummit\nTray Mountain, Mossy Cove, north-facing\nboulderfield. 34\u00b048\u203215\u2033N, 83\u00b040\u203257\u2033W.\nLarge population among big boulders on\nwestern edge of boulderfield at 4400 feet,\nnearly at ridgeline. Very few in flower.\nLinda G. Chafin 590\nThe University of Georgia\n5 June 1987\nAthens, GA, U.S.A.\nIMAGED 2013\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.960000000000001e-05,
+      "total_cost": 0.0007511,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 174
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2238,
+    "output": 509,
+    "cost_in": 0.00022380000000000002,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183915\n\nTOWNS COUNTY, GEORGIA\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt\n\nTray Mountain, Mossy Cove, north-facing\nboulderfield. 34\u00b048\u203215\u2033N, 83\u00b040\u203257\u2033W.\nLarge population among big boulders on\nwestern edge of boulderfield at 4400 feet,\nnearly at ridgeline. Very few in flower.\n\nLinda G. Chafin 590\nThe University of Georgia        5 June 1987\nAthens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183915\nTOWNS COUNTY, GEORGIA\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummit\nTray Mountain, Mossy Cove, north-facing\nboulderfield. 34\u00b048\u203215\u2033N, 83\u00b040\u203257\u2033W.\nLarge population among big boulders on\nwestern edge of boulderfield at 4400 feet,\nnearly at ridgeline. Very few in flower.\nLinda G. Chafin 590\nThe University of Georgia\n5 June 1987\nAthens, GA, U.S.A.\nIMAGED 2013\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "183915",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poiret) brummitt",
+    "collectedBy": "Linda g. chafin",
+    "collectorNumber": "590",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 june 1987",
+    "collectionDate": "1987-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Tray mountain, mossy cove, north-facing boulderfield. large population among big boulders on western edge of boulderfield, nearly at ridgeline. very few in flower.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Towns county",
+    "locality": "Tray mountain, mossy cove, north-facing boulderfield.",
+    "verbatimCoordinates": "34\u00b048\u203215\u2033n, 83\u00b040\u203257\u2033w",
+    "decimalLatitude": "34.804166666666665",
+    "decimalLongitude": "-83.6825",
+    "minimumElevationInMeters": "1341",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Specimen examined for\ngeorgia atlas project\n9 november 2005\nuniversity\nof georgia\nherbarium\nimaged 2013"
+  }
+}

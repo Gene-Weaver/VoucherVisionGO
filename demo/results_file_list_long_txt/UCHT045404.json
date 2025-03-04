@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT045404\n\nUCHT\n\nHerbarium of the University of Tennessee at Chattanooga\n\nFlora of North Carolina\nVerified by Joey Shaw\n\n2018-06-12\n\n*Galax urceolata* (Poir.) Brummitt\n\nUS, North Carolina, Macon County, Cashiers.\nChattooga River Trail near Iron Bridge, mesic,\nboulder-filled, *Rhododendron maximum* dominant\nforest beside river.\n\nCollected by: Joey Shaw, John Shelton, Alaina\nKrakowiak, Jade Harry, Megon Stepaniuk with\n2018 UTC Field Botany Class\n\nField Number: 41-518\nDetermined by: Carina Houck\nGPS: 35.01872, -83.12572 \u00b1 16.687m, Elevation: 735m\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001105,
+      "total_cost": 0.00188375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 221
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT045404\nUCHT\nHerbarium of the University of Tennessee at Chattanooga\nFlora of North Carolina\nVerified by Joey Shaw\n2018-06-12\nGalax urceolata (Poir.) Brummitt\nUS, North Carolina, Macon County, Cashiers.\nChattooga River Trail near Iron Bridge, mesic,\nboulder-filled, Rhododendron maximum dominant\nforest beside river.\nCollected by: Joey Shaw, John Shelton, Alaina\nKrakowiak, Jade Harry, Megon Stepaniuk with\n2018 UTC Field Botany Class\nField Number: 41-518\nDetermined by: Carina Houck\nGPS: 35.01872, -83.12572 \u00b1 16.687m, Elevation:\n735m\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.56e-05,
+      "total_cost": 0.0007771,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 239
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2320,
+    "output": 537,
+    "cost_in": 0.000232,
+    "cost_out": 0.00021480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT045404\n\nUCHT\n\nHerbarium of the University of Tennessee at Chattanooga\n\nFlora of North Carolina\nVerified by Joey Shaw\n\n2018-06-12\n\n*Galax urceolata* (Poir.) Brummitt\n\nUS, North Carolina, Macon County, Cashiers.\nChattooga River Trail near Iron Bridge, mesic,\nboulder-filled, *Rhododendron maximum* dominant\nforest beside river.\n\nCollected by: Joey Shaw, John Shelton, Alaina\nKrakowiak, Jade Harry, Megon Stepaniuk with\n2018 UTC Field Botany Class\n\nField Number: 41-518\nDetermined by: Carina Houck\nGPS: 35.01872, -83.12572 \u00b1 16.687m, Elevation: 735m\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT045404\nUCHT\nHerbarium of the University of Tennessee at Chattanooga\nFlora of North Carolina\nVerified by Joey Shaw\n2018-06-12\nGalax urceolata (Poir.) Brummitt\nUS, North Carolina, Macon County, Cashiers.\nChattooga River Trail near Iron Bridge, mesic,\nboulder-filled, Rhododendron maximum dominant\nforest beside river.\nCollected by: Joey Shaw, John Shelton, Alaina\nKrakowiak, Jade Harry, Megon Stepaniuk with\n2018 UTC Field Botany Class\nField Number: 41-518\nDetermined by: Carina Houck\nGPS: 35.01872, -83.12572 \u00b1 16.687m, Elevation:\n735m\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT045404",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Joey Shaw, John Shelton, Alaina Krakowiak, Jade Harry, Megon Stepaniuk",
+    "collectorNumber": "41-518",
+    "identifiedBy": "Carina Houck",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Verified by Joey Shaw 2018-06-12",
+    "verbatimCollectionDate": "",
+    "collectionDate": "2018-00-00",
+    "collectionDateEnd": "",
+    "habitat": "Mesic, boulder-filled, rhododendron maximum dominant forest beside river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Us",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "Chattooga river trail near iron bridge, cashiers.",
+    "verbatimCoordinates": "GPS 35.01872, -83.12572 \u00b1 16.687m, Elevation 735m",
+    "decimalLatitude": "35.01872",
+    "decimalLongitude": "-83.12572",
+    "minimumElevationInMeters": "735",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "University of tennessee\nat chattanooga\nUCHT\nHerbarium of the university of tennessee at chattanooga\nFlora of north carolina\n2018 UTC field botany class\nSERNEC digitization project - tennessee herbarium consortium"
+  }
+}

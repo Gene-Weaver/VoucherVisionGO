@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026158\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brummit\n\nJames River below Mallorys Creek, Buckingham Co.\n\nColony, with *Polypodium* virg. under\n*Rhododendron catawbiense*, on N-facing\nphyllite cliff in hardwoods on James River\nca. 1 mi. below mouth of Mallorys Creek.\n(Shipman Quad.) el. 400 ft.\n\nCharles E. Stevens Aug. 10, 1993\nNo. 23,820\n\n\nHandwritten text identified with italics.\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00071,
+      "total_cost": 0.00148875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 142
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026158\nFlora of Virginia\nGalax urceolata (Poir.) Brummit\nJames River below Mallorys Creek, Buchungham Co.\nColony, with Polypodium ving. under\nRhododendron catawbrense, on N-facing\nphyllite cliff in harduroods on James River\nca. I mi. below mouth of Mallorys Creek.\n(Shipman Quad.)\nel. 400 A.\nCharles E. Stevens\nNo. 23,820\nAng. 10, 1993\n0 1 2 3\n4\n5\n6\n7\n8 9 10\ncm\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nPolypodium ving.\nRhododendron catawbrense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2227,
+    "output": 491,
+    "cost_in": 0.0002227,
+    "cost_out": 0.0001964
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026158\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brummit\n\nJames River below Mallorys Creek, Buckingham Co.\n\nColony, with *Polypodium* virg. under\n*Rhododendron catawbiense*, on N-facing\nphyllite cliff in hardwoods on James River\nca. 1 mi. below mouth of Mallorys Creek.\n(Shipman Quad.) el. 400 ft.\n\nCharles E. Stevens Aug. 10, 1993\nNo. 23,820\n\n\nHandwritten text identified with italics.\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026158\nFlora of Virginia\nGalax urceolata (Poir.) Brummit\nJames River below Mallorys Creek, Buchungham Co.\nColony, with Polypodium ving. under\nRhododendron catawbrense, on N-facing\nphyllite cliff in harduroods on James River\nca. I mi. below mouth of Mallorys Creek.\n(Shipman Quad.)\nel. 400 A.\nCharles E. Stevens\nNo. 23,820\nAng. 10, 1993\n0 1 2 3\n4\n5\n6\n7\n8 9 10\ncm\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nPolypodium ving.\nRhododendron catawbrense\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026158",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "23,820",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 10, 1993",
+    "collectionDate": "1993-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Colony, with Polypodium ving. under Rhododendron catawbrense, on n-facing phyllite cliff in harduroods on James River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Buckingham Co.",
+    "locality": "James River below Mallorys Creek, ca. 1 mi. below mouth of Mallorys Creek. (Shipman Quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "122",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Flora of Virginia\nHarvill-Stevens Herbarium\nLongwood University\nHarvill-Stevens\nHerbarium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n\nVOUCHER, NOT FOR EXCHANGE\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042875\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend \nClemson University Herbarium (CLEMS) 1996\n\nA FLORISTIC STUDY OF LAKE ISSAQUEENA,\nPICKENS COUNTY, S. C.\nby William Anne Barnes Pamplin\n\n*Galax aphylla* L. - *Galax*\nFound at the east dam. *(Handwritten)*\n\nNo. 140 *(Handwritten)*\nDate 9/11/69 *(Handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CLEMS\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nVOUCHER, NOT FOR EXCHANGE\n16124\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042875\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nA FLORISTIC STUDY OF LAKE ISSAQUEENA,\nPICKENS COUNTY, S. C.\nby William Anne Barnes Pamplin\nGalax aphylla L. Galax\nFound at the east dam.\nNo.\n140\nDate 9/11/69\n\nHandwritten text:\nDiapem\n14.0\n9/11/69\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.6e-05,
+      "total_cost": 0.0007575000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 190
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2244,
+    "output": 464,
+    "cost_in": 0.0002244,
+    "cost_out": 0.0001856
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n\nVOUCHER, NOT FOR EXCHANGE\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042875\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend \nClemson University Herbarium (CLEMS) 1996\n\nA FLORISTIC STUDY OF LAKE ISSAQUEENA,\nPICKENS COUNTY, S. C.\nby William Anne Barnes Pamplin\n\n*Galax aphylla* L. - *Galax*\nFound at the east dam. *(Handwritten)*\n\nNo. 140 *(Handwritten)*\nDate 9/11/69 *(Handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCLEMS\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nVOUCHER, NOT FOR EXCHANGE\n16124\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042875\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nA FLORISTIC STUDY OF LAKE ISSAQUEENA,\nPICKENS COUNTY, S. C.\nby William Anne Barnes Pamplin\nGalax aphylla L. Galax\nFound at the east dam.\nNo.\n140\nDate 9/11/69\n\nHandwritten text:\nDiapem\n14.0\n9/11/69\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042875",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "William Anne Barnes Pamplin",
+    "collectorNumber": "140",
+    "identifiedBy": "John F. Townsend",
+    "identifiedDate": "1996",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "9/11/69",
+    "collectionDate": "1969-09-11",
+    "collectionDateEnd": "",
+    "habitat": "Found at the east dam.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "S. c.",
+    "county": "Pickens county",
+    "locality": "A floristic study of lake issaqueena.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "voucher, not for exchange\nclemson\nuniversity\nherbarium\nclemson university herbarium\ngalax\nhandwritten text\ndiapem"
+  }
+}

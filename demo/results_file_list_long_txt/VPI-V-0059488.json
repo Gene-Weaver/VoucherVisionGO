@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n20821\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n*Galax urceolata* (Poir.) Brummitt\ndate: 1976 determined by: E. J. UTTAL\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059488\n\nFlora of Virginia\n*Galax aphylla* L.\nnear Wilburn, Lunenburg Co.\nel. 300 ft.\n\n(Handwritten text begins here)\nIn *Kalmia* stands on steep,\nrocky, N-facing bluffs of North\nMeherrin R. near its mouth.\nApr. 26, 1975\nCharles E. Stevens No. 10,174\nDet. \" B-Davenport\n(Handwritten text ends here)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.0017837500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n20821\nVirginia Polytechnic Institute\nand State University\nMETRIC\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Brummit\ndate:\ndetermined by:\nFlora of Virginia\nGalax aphylla L.\nnear Wilburn, Lunenburg Co.\nel. 300 ft.\nIn Kalmia stands on steep,\nrocky, N-facing bluffs of north\nMeherrin R. near its mouth.\nApr. 26, 1975\nCharles E. Stevens\nDet. \"\nNo. 10,174\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059488\n\nHandwritten text:\nC. J. UTTAL\n1976\n& B. Davenport\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.68e-05,
+      "total_cost": 0.0007583000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 192
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 528,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n20821\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n*Galax urceolata* (Poir.) Brummitt\ndate: 1976 determined by: E. J. UTTAL\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059488\n\nFlora of Virginia\n*Galax aphylla* L.\nnear Wilburn, Lunenburg Co.\nel. 300 ft.\n\n(Handwritten text begins here)\nIn *Kalmia* stands on steep,\nrocky, N-facing bluffs of North\nMeherrin R. near its mouth.\nApr. 26, 1975\nCharles E. Stevens No. 10,174\nDet. \" B-Davenport\n(Handwritten text ends here)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n20821\nVirginia Polytechnic Institute\nand State University\nMETRIC\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Brummit\ndate:\ndetermined by:\nFlora of Virginia\nGalax aphylla L.\nnear Wilburn, Lunenburg Co.\nel. 300 ft.\nIn Kalmia stands on steep,\nrocky, N-facing bluffs of north\nMeherrin R. near its mouth.\nApr. 26, 1975\nCharles E. Stevens\nDet. \"\nNo. 10,174\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059488\n\nHandwritten text:\nC. J. UTTAL\n1976\n& B. Davenport\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059488",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "10,174",
+    "identifiedBy": "E. J. Uttal, B. Davenport",
+    "identifiedDate": "1976-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Apr. 26, 1975",
+    "collectionDate": "1975-04-26",
+    "collectionDateEnd": "",
+    "habitat": "In Kalmia stands on steep, rocky, N-facing bluffs of North Meherrin R. near its mouth.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Lunenburg Co.",
+    "locality": "Near Wilburn",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "91",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "THE HERBARIUM OF\n20821\nVirginia Polytechnic Institute\nand State University\nVirginia Polytechnic Institute and State University\nHERBARIUM\nMassey Herbarium\nVirginia Polytechnic Institute\nFlora of Virginia\nel. 300 ft.\nDet.\nHandwritten text\nGalax aphylla\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n336522\nHERBARIUM\n\nPLANTS OF TENNESSEE\nDIAPENSIACEAE\n*Galax aphylla* L.\n\nMonroe Co. Hwy 165, ca 8 mi E of Tellico\nPlains. Cherokee National Forest.\nHardwoods.\n\nF. Sundell 9824\n15 MAY 1991\nwith S. Barnes, S. McDougald, J. Pagan\n\nEXCHANGE SPECIMEN FROM\nUAM\nDistributed by University of Arkansas at Monticello Herbarium\n\nNLU0134426\nUniversity of Louisiana at Monroe\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007,
+      "total_cost": 0.0014787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 140
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVER\n336522\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134426\nKodak Gray Scale\nPLANTS OF TENNESSEE\nDIAPENISCEAE\nGalax aphylla L.\nMonroe Co. Hwy 165, ca 8 mi E of Tellico\nPlains. Cherokee National Forest.\nHardwoods.\nE. Sundell 9824\n15 MAY 1991\nwith S. Barnes, S. McDougald, J. Pagan\nDistributed by University of Arkansas at Monticello Herbarium\nEXCHANGE SPECIMEN FROM\nUAM\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.72e-05,
+      "total_cost": 0.0007387,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2171,
+    "output": 490,
+    "cost_in": 0.00021710000000000002,
+    "cost_out": 0.000196
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n336522\nHERBARIUM\n\nPLANTS OF TENNESSEE\nDIAPENSIACEAE\n*Galax aphylla* L.\n\nMonroe Co. Hwy 165, ca 8 mi E of Tellico\nPlains. Cherokee National Forest.\nHardwoods.\n\nF. Sundell 9824\n15 MAY 1991\nwith S. Barnes, S. McDougald, J. Pagan\n\nEXCHANGE SPECIMEN FROM\nUAM\nDistributed by University of Arkansas at Monticello Herbarium\n\nNLU0134426\nUniversity of Louisiana at Monroe\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVER\n336522\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134426\nKodak Gray Scale\nPLANTS OF TENNESSEE\nDIAPENISCEAE\nGalax aphylla L.\nMonroe Co. Hwy 165, ca 8 mi E of Tellico\nPlains. Cherokee National Forest.\nHardwoods.\nE. Sundell 9824\n15 MAY 1991\nwith S. Barnes, S. McDougald, J. Pagan\nDistributed by University of Arkansas at Monticello Herbarium\nEXCHANGE SPECIMEN FROM\nUAM\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "336522",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "E. Sundell, S. Barnes, S. McDougald, J. Pagan",
+    "collectorNumber": "9824",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "15 MAY 1991",
+    "collectionDate": "1991-05-15",
+    "collectionDateEnd": "",
+    "habitat": "Hardwoods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Monroe Co.",
+    "locality": "Hwy 165, ca 8 mi E of Tellico Plains. Cherokee National Forest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVER\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134426\nKodak Gray Scale\nPLANTS OF TENNESSEE\nDIAPENISCEAE\nDistributed by University of Arkansas at Monticello Herbarium\nEXCHANGE SPECIMEN FROM\nUAM"
+  }
+}

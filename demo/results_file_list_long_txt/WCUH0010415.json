@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "19960\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nTennessee\nBlount County  DIAPENSIACEAE\n\nGalax aphylla L.\n(Galax)\n\nMixed deciduous woods east of 336 S (.6\nmi. from Sixmile, TN near Montvale\nSprings). Elevation 1,125 ft. Flowers\nyoung, mature at base of raceme.\n\nJ. H. Rock 96                      14 May 1987\n\n20 (handwritten)\nWCUH0010415\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010415\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nTennessee\nBlount County DIAPENSIACEAE\nGalax aphylla L.\n(Galax)\nMixed deciduous woods east of 336 S (.6\nmi. from Sixmile, TN near Montvale\nSprings). Elevation 1,125 ft. Flowers\nyoung, mature at base of raceme.\nJ. H. Rock 96\n14 May 1987\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nPRESERVED\nMATERIAL\n20\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.48e-05,
+      "total_cost": 0.0007663000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 212
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2267,
+    "output": 568,
+    "cost_in": 0.0002267,
+    "cost_out": 0.00022720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n19960\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nTennessee\nBlount County  DIAPENSIACEAE\n\nGalax aphylla L.\n(Galax)\n\nMixed deciduous woods east of 336 S (.6\nmi. from Sixmile, TN near Montvale\nSprings). Elevation 1,125 ft. Flowers\nyoung, mature at base of raceme.\n\nJ. H. Rock 96                      14 May 1987\n\n20 (handwritten)\nWCUH0010415\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010415\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nTennessee\nBlount County DIAPENSIACEAE\nGalax aphylla L.\n(Galax)\nMixed deciduous woods east of 336 S (.6\nmi. from Sixmile, TN near Montvale\nSprings). Elevation 1,125 ft. Flowers\nyoung, mature at base of raceme.\nJ. H. Rock 96\n14 May 1987\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nPRESERVED\nMATERIAL\n20\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010415",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "Urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "J. H. Rock",
+    "collectorNumber": "96",
+    "identifiedBy": "A. S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "14 May 1987",
+    "collectionDate": "1987-05-14",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous woods",
+    "chromosomeCount": "20",
+    "guardCell": "",
+    "specimenDescription": "Flowers young, mature at base of raceme.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Blount county",
+    "locality": "East of 336 s (.6 mi. from sixmile, tn near montvale springs)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "343",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Per a.s. weakley, flora of the southern and mid-atlantic\nstates, working draft of 8 march 2010\nherbarium of western carolina university\ndiapensiaceae\n(galax)\nelevation 1,125 ft.\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\ninches\nliving\ncultures\nmetric 1\npreserved\nmaterial\ngalax urceolata\ngalax aphylla"
+  }
+}

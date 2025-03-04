@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039974\n\n= *G. urceolata* (Poiret) Brummitt '95 (handwritten)\n\nGEORGE MASON UNIVERSITY HERBARIUM\nVIRGINIA\nGILES COUNTY\nDIAPENSIACEAE\n\n*Galax aphylla* L.\n\nMt. Lake Biological Station\n\nSharon Reilly                      Aug. 1936\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030694\ncm\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005149999999999999,
+      "total_cost": 0.00129375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 103
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039974\n= G. urceolata (Poiret) Brumm.\nGEORGE MASON UNIVERSITY HERBARIUM\nVIRGINIA\nGILES COUNTY\nDIAPENSIACEAE\nGalax aphylla L.\nMt. Lake Biological Station\nSharon Reilly\nAug. 1936\nTB '95\n\n\nG. urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.12e-05,
+      "total_cost": 0.0007127,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 78
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2078,
+    "output": 446,
+    "cost_in": 0.0002078,
+    "cost_out": 0.0001784
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039974\n\n= *G. urceolata* (Poiret) Brummitt '95 (handwritten)\n\nGEORGE MASON UNIVERSITY HERBARIUM\nVIRGINIA\nGILES COUNTY\nDIAPENSIACEAE\n\n*Galax aphylla* L.\n\nMt. Lake Biological Station\n\nSharon Reilly                      Aug. 1936\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030694\ncm\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n039974\n= G. urceolata (Poiret) Brumm.\nGEORGE MASON UNIVERSITY HERBARIUM\nVIRGINIA\nGILES COUNTY\nDIAPENSIACEAE\nGalax aphylla L.\nMt. Lake Biological Station\nSharon Reilly\nAug. 1936\nTB '95\n\n\nG. urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "039974",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Sharon Reilly",
+    "collectorNumber": "",
+    "identifiedBy": "Brummitt",
+    "identifiedDate": "'95",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "= G. urceolata (poiret) brumm.",
+    "verbatimCollectionDate": "Aug. 1936",
+    "collectionDate": "1936-08-00",
+    "collectionDateEnd": "0000-00-00",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles County",
+    "locality": "Mt. Lake Biological Station",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "George mason university herbarium\nTb '95\nG. urceolata\nTed r. bradley herbarium\nGeorge mason university\nGmuf-0030694\nCm\nGalax aphylla"
+  }
+}

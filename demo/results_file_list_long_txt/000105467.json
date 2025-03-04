@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "R. K. Godfrey Herbarium (FSU)\n*000105467*\n\nHERBARIUM\n94209\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nHaywood Co.: Fines Creek near\njunction with Pigeon River about 7.5 miles\nnorth of the town of Cove Creek. Steep\nslope above stream.\n\nCommon. Petals and filaments white;\nanthers golden yellow.\n\nR. L. WILBUR NO. 7058                      11 June 1964\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\n94209\nFLORIDA STATE UNIVERSITY\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nHaywood Co.: Fines Creek near\njunction with Pigeon River about 7.5 miles\nnorth of the town of Cove Creek. Steep\nslope above stream.\nCommon. Petals and filaments white;\nanthers golden yellow.\nR. L. WILBUR NO. 7058\n11 June 1964\nR. K. Godfrey Herbarium (FSU)\n*0 0 0 1 0 5 4 6 7 *\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.120000000000001e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2259,
+    "output": 509,
+    "cost_in": 0.00022590000000000002,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nR. K. Godfrey Herbarium (FSU)\n*000105467*\n\nHERBARIUM\n94209\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nHaywood Co.: Fines Creek near\njunction with Pigeon River about 7.5 miles\nnorth of the town of Cove Creek. Steep\nslope above stream.\n\nCommon. Petals and filaments white;\nanthers golden yellow.\n\nR. L. WILBUR NO. 7058                      11 June 1964\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\n94209\nFLORIDA STATE UNIVERSITY\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nHaywood Co.: Fines Creek near\njunction with Pigeon River about 7.5 miles\nnorth of the town of Cove Creek. Steep\nslope above stream.\nCommon. Petals and filaments white;\nanthers golden yellow.\nR. L. WILBUR NO. 7058\n11 June 1964\nR. K. Godfrey Herbarium (FSU)\n*0 0 0 1 0 5 4 6 7 *\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "000105467",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "R. L. Wilbur",
+    "collectorNumber": "7058",
+    "identifiedBy": "M. A. Garland",
+    "identifiedDate": "1985-12-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "11 June 1964",
+    "collectionDate": "1964-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Steep slope above stream.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Common. Petals and filaments white; anthers golden yellow.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Haywood Co.",
+    "locality": "Fines Creek near junction with Pigeon River about 7.5 miles north of the town of Cove Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "R. K. Godfrey Herbarium (FSU)\nHERBARIUM\n94209\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY"
+  }
+}

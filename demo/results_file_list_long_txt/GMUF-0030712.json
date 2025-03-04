@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039978\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nIsle of Wight County                                         October 2, 1994\n\n*Galax urceolata* (Poir.) Brummitt\n\nUnder beech-mixed hardwoods on steep, north-facing\nslope along the Blackwater River. 1.4 mi. north of jct.\nRtes. 614 and 603, 3.1 miles SSW of Zuni. Abundant.\n\nGary P. Fleming\nwith Allen Belden                                                No. 10010\n\nGMUF-0030712\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000765,
+      "total_cost": 0.00154375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039978\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nIsle of Wight County October 2, 1994\nGalax urceolata (Poir.) Brumm.\nUnder beech-mixed hardwoods on steep, north-facing\nslope along the Blackwater River, 1.4 mi. north of jct.\nRtes. 614 and 603, 3.1 miles SSW of Zuni. Abundant.\nGary P. Fleming No. 10010\nwith Allen Belden\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.440000000000001e-05,
+      "total_cost": 0.0007359,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 136
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2170,
+    "output": 472,
+    "cost_in": 0.00021700000000000002,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039978\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nIsle of Wight County                                         October 2, 1994\n\n*Galax urceolata* (Poir.) Brummitt\n\nUnder beech-mixed hardwoods on steep, north-facing\nslope along the Blackwater River. 1.4 mi. north of jct.\nRtes. 614 and 603, 3.1 miles SSW of Zuni. Abundant.\n\nGary P. Fleming\nwith Allen Belden                                                No. 10010\n\nGMUF-0030712\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n039978\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nIsle of Wight County October 2, 1994\nGalax urceolata (Poir.) Brumm.\nUnder beech-mixed hardwoods on steep, north-facing\nslope along the Blackwater River, 1.4 mi. north of jct.\nRtes. 614 and 603, 3.1 miles SSW of Zuni. Abundant.\nGary P. Fleming No. 10010\nwith Allen Belden\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "039978",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Gary P. Fleming, Allen Belden",
+    "collectorNumber": "10010",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "October 2, 1994",
+    "collectionDate": "1994-10-02",
+    "collectionDateEnd": "",
+    "habitat": "Under beech-mixed hardwoods on steep, north-facing slope along the Blackwater River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Isle of Wight County",
+    "locality": "1.4 mi. north of jct. Rtes. 614 and 603, 3.1 miles SSW of Zuni. Abundant.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF GEORGE MASON UNIVERSITY\nGMUF\nTed R. Bradley\nHerbarium"
+  }
+}

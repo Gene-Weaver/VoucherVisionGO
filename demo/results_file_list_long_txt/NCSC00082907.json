@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082907\n\nPOISONED\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\nJACKSON COUNTY\n*Galax aphylla* L.\nopen wood\nSoco Gap\n07684\nMary Caughey # 502  June 23, 1937\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n*Handwritten Text: JACKSON COUNTY, Galax aphylla L., open wood, Soco Gap, Mary Caughey # 502 June 23,1937*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000685,
+      "total_cost": 0.00146375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 137
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082907\nR\nG\nB\nW\nG\nTIFFEN Gray Scale\nK\nM\nC\nY\nM\nBlack\n3/Color\nWhite\nMagenta\nRed\nYellow\nGreen\nCyan\nBlue\nTIFFEN\u00ae Color Control Patches\nPOISONED\n07684\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nJACKSON COUNTY\nGalax aphylla L.\nopen wood\nSoco Gap\nMary Caughey # 502 June 23,1937\n--- Handwritten Text ---\nopen wood\nSoco Gap\nMary Caughey # 502 June 23,1937\n--- End Handwritten Text ---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 433,
+    "cost_in": 0.0002188,
+    "cost_out": 0.0001732
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082907\n\nPOISONED\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\nJACKSON COUNTY\n*Galax aphylla* L.\nopen wood\nSoco Gap\n07684\nMary Caughey # 502  June 23, 1937\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n*Handwritten Text: JACKSON COUNTY, Galax aphylla L., open wood, Soco Gap, Mary Caughey # 502 June 23,1937*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082907\nR\nG\nB\nW\nG\nTIFFEN Gray Scale\nK\nM\nC\nY\nM\nBlack\n3/Color\nWhite\nMagenta\nRed\nYellow\nGreen\nCyan\nBlue\nTIFFEN\u00ae Color Control Patches\nPOISONED\n07684\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nJACKSON COUNTY\nGalax aphylla L.\nopen wood\nSoco Gap\nMary Caughey # 502 June 23,1937\n--- Handwritten Text ---\nopen wood\nSoco Gap\nMary Caughey # 502 June 23,1937\n--- End Handwritten Text ---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082907",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Mary Caughey",
+    "collectorNumber": "502",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 23, 1937",
+    "collectionDate": "1937-06-23",
+    "collectionDateEnd": "",
+    "habitat": "Open wood",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Soco gap",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university herbarium (ncsc)\npoisoned\nflora of north carolina\nduke university herbarium\nherbarium\nnorth carolina state college"
+  }
+}

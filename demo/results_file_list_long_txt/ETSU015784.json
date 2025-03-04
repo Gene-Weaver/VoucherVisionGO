@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nJohn C. Warden Herbarium\nETSU #09-0524\nETSU\nETSU015784\n\nGalax urceolata\nGalax, Beetlewood\n*G. aphylla* L., Galax\nDIAPENSIACEAE\n\nUnicoi County, Tennessee\nAppalachian Trail below Beauty Spot close-to\nParking lot\n\nAcid mixed hardwood forest\nElevation approx. 3000\n\nRhizomatous, stemless, evergreen perennial\nWith flowering stalks. Leaves basal, circular\nTo ovate heart shaped at base.\n\nCollected by: Leslie Smith May 16th, 2006 *(handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000815,
+      "total_cost": 0.0015937500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "John C. Warden Herbarium\nETSU #09-0524\nETSU\nEAST TENNESSEE STATE UNIVERSITY\nETSU015784\nGalax urceolata\nGalax, Beetlewood\nG. aphylla L., Galax\nDIAPENSIACEAE\nUnicoi County, Tennessee\nAppalachian Trail below Beauty Spot close-to\nParking lot.\nAcid mixed hardwood forest\nElevation approx. 3000\nRhizomatous, stemless, evergreen perennial\nWith flowering stalks. Leaves basal, circular\nTo ovate heart shaped at base.\nCollected by: Leslie Smith May 16th, 2006\n\n12\n\n\nGalax urceolata\nG. aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2210,
+    "output": 544,
+    "cost_in": 0.00022100000000000003,
+    "cost_out": 0.0002176
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nJohn C. Warden Herbarium\nETSU #09-0524\nETSU\nETSU015784\n\nGalax urceolata\nGalax, Beetlewood\n*G. aphylla* L., Galax\nDIAPENSIACEAE\n\nUnicoi County, Tennessee\nAppalachian Trail below Beauty Spot close-to\nParking lot\n\nAcid mixed hardwood forest\nElevation approx. 3000\n\nRhizomatous, stemless, evergreen perennial\nWith flowering stalks. Leaves basal, circular\nTo ovate heart shaped at base.\n\nCollected by: Leslie Smith May 16th, 2006 *(handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nJohn C. Warden Herbarium\nETSU #09-0524\nETSU\nEAST TENNESSEE STATE UNIVERSITY\nETSU015784\nGalax urceolata\nGalax, Beetlewood\nG. aphylla L., Galax\nDIAPENSIACEAE\nUnicoi County, Tennessee\nAppalachian Trail below Beauty Spot close-to\nParking lot.\nAcid mixed hardwood forest\nElevation approx. 3000\nRhizomatous, stemless, evergreen perennial\nWith flowering stalks. Leaves basal, circular\nTo ovate heart shaped at base.\nCollected by: Leslie Smith May 16th, 2006\n\n12\n\n\nGalax urceolata\nG. aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015784",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Leslie Smith",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata\nG. aphylla L.",
+    "verbatimCollectionDate": "May 16th, 2006",
+    "collectionDate": "2006-05-16",
+    "collectionDateEnd": "0000-00-00",
+    "habitat": "Acid mixed hardwood forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Rhizomatous, stemless, evergreen perennial\nWith flowering stalks. Leaves basal, circular\nTo ovate heart shaped at base.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi County",
+    "locality": "Appalachian Trail below Beauty Spot close-to\nParking lot.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "914",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "EAST TENNESSEE STATE UNIVERSITY\nJohn C. Warden Herbarium\nETSU #09-0524\nETSU\nGalax, Beetlewood\nG. aphylla L., Galax\nDIAPENSIACEAE\nElevation approx. 3000\nCollected by Leslie Smith May 16th, 2006 (handwritten)\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax urceolata\n12"
+  }
+}

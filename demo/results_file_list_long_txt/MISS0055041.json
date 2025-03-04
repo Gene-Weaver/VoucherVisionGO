@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055041\n\nHERBARIUM OF THE\n22980\nUNIVERSITY OF MISSISSIPPI\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                                     5/19/67\nPlants of the Southeastern United States\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000575,
+      "total_cost": 0.00135375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 115
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055041\nHERBARIUM OF THE\n22980\nUNIVERSITY OF MISSISSIPPI\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\nInches\nMagenta\nWhite\n3/Color\nBlack\nContimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nA 1\n2 3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nW G\nR\nG\nB\nTIFFEN Gray Scale\nK\nC\nY\nM\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.960000000000001e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2213,
+    "output": 570,
+    "cost_in": 0.0002213,
+    "cost_out": 0.000228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055041\n\nHERBARIUM OF THE\n22980\nUNIVERSITY OF MISSISSIPPI\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                                     5/19/67\nPlants of the Southeastern United States\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055041\nHERBARIUM OF THE\n22980\nUNIVERSITY OF MISSISSIPPI\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\nInches\nMagenta\nWhite\n3/Color\nBlack\nContimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nA 1\n2 3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nW G\nR\nG\nB\nTIFFEN Gray Scale\nK\nC\nY\nM\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MISS 0055041",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Warren Wilson College Forest Area 7",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Plants of the Southeastern United States",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe County",
+    "locality": "Warren Wilson College Forest Area 7. Elevation 2200'.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "UNIVERSITY OF MISSISSIPPI HERBARIUM\nHERBARIUM OF THE\n22980\nUNIVERSITY OF MISSISSIPPI\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nInches\nMagenta\nWhite\n3/Color\nBlack\nContimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nA 1\n2 3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nW G\nR\nG\nB\nTIFFEN Gray Scale\nK\nC\nY\nM"
+  }
+}

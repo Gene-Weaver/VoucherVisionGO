@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170903\n\n6277\n\nFLORA TENNESSIENSIS\nJ. P. Gillespie\nC. C. Laing Monroe COUNTY\n1884 J. Sharp Sept. 18 1954\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 440 \u03bc\u00b2\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nAlong river in Tellico River\nGorge.\n\n\nHandwritten Text: 1884, 1954\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.00161375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170903\nFLORA TENNESSIENSIS\nJ. P. Gillespie\nC. C. Laing Monroe\nJ. Sharp Sept. 18 54\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nAlong river in Tellico River\nGorge.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 510,
+    "cost_in": 0.000218,
+    "cost_out": 0.00020400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170903\n\n6277\n\nFLORA TENNESSIENSIS\nJ. P. Gillespie\nC. C. Laing Monroe COUNTY\n1884 J. Sharp Sept. 18 1954\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 440 \u03bc\u00b2\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nAlong river in Tellico River\nGorge.\n\n\nHandwritten Text: 1884, 1954\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170903\nFLORA TENNESSIENSIS\nJ. P. Gillespie\nC. C. Laing Monroe\nJ. Sharp Sept. 18 54\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nAlong river in Tellico River\nGorge.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170903",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "J. P. Gillespie, C. C. Laing, J. Sharp",
+    "collectorNumber": "1884",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 18 54",
+    "collectionDate": "1954-09-18",
+    "collectionDateEnd": "",
+    "habitat": "Along river in Tellico River Gorge.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Monroe",
+    "locality": "Along river in Tellico River Gorge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "FLORA TENNESSIENSIS\nGalax aphylla L.\nGalax urceolata\nGalax aphylla\nUNIVERSITY OF TENNESSEE KNOXVILLE\n6277\nGalax aphylla L.\nMonroe COUNTY\n54"
+  }
+}

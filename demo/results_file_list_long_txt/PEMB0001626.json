@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of NC at Pembroke Herbarium\nPEMB 0001626\n\nTHE UNIVERSITY OF NORTH CAROLINA\nPEMB\nHERBARIUM\nPEMBROKE\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00058,
+      "total_cost": 0.0013587500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 116
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of NC at Pembroke Herbarium\nPEMB 0001626\nOF NORTH CAROLINA\nERSITY\nUNIVE\nPEMB\nHERBARIUM\nPEMBROKE\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2153,
+    "output": 500,
+    "cost_in": 0.0002153,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of NC at Pembroke Herbarium\nPEMB 0001626\n\nTHE UNIVERSITY OF NORTH CAROLINA\nPEMB\nHERBARIUM\nPEMBROKE\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUniversity of NC at Pembroke Herbarium\nPEMB 0001626\nOF NORTH CAROLINA\nERSITY\nUNIVE\nPEMB\nHERBARIUM\nPEMBROKE\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "PEMB 0001626",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Warren Wilson College Forest Area 7",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe County",
+    "locality": "Warren Wilson College Forest Area 7. Elevation 2200'.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of NC at Pembroke Herbarium\nTHE UNIVERSITY OF NORTH CAROLINA\nPEMB\nHERBARIUM\nPEMBROKE\nHerbarium of the University of North Carolina\nPlants of the Southeastern United States\nHandwritten Text 2200'\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007"
+  }
+}

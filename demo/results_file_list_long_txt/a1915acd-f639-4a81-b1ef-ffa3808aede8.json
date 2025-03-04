@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275425\n\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 1 June 2021\n\nGATES COUNTY: Merchant Millhopper State Park,\nLassiter Trail right past the main pond. Elev. 13 \u2013 15 m.\nCo-occurring species include *Ilex opaca*, *Hexastylis minor*,\nand *Fagus grandifolia*. Surrounded by lots of leaf debris.\nNo old flowers. Mostly new leaves. Very patchy\npopulations.\n\nLat. 36.43689902 Long. -76.69245902 Datum: WGS84\ncoll. Michelle Gaynor # 55 1 June 2021 *(handwritten)*\n\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG268 (Pop 19).\n\n*Galax urceolata*\n*Ilex opaca*\n*Hexastylis minor*\n*Fagus grandifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0016099999999999999,
+      "total_cost": 0.00238875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 322
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "2\n7\nINCH\n4\n3\n5\n\u30e9\nU.S.A.\n9\nFLAS\nGAINESVILLE-\nUNIVERSITY OF FLORIDA\nHERBARIUM\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275425\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor\n7 Sept 2022\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Forida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 1 June 2021\nGATES COUNTY: Merchant Millhopper State Park,\nLassiter Trail right past the main pond. Elev. 13-15 m.\nCo-occurring species include Ilex opaca, Hexastylis minor,\nand Fagus grandifolia. Surrounded by lots of leaf debris.\nNo old flowers. Mostly new leaves. Very patchy\npopulations.\nLat. 36.43689902 Long. -76.69245902 Datum: WGS84\ncoll. Michelle Gaynor # 55 1 June 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG268 (Pop 19).\n\n\nGalax urceolata\nIlex opaca\nHexastylis minor\nFagus grandifolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.000134,
+      "total_cost": 0.0008155,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 335
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2498,
+    "output": 636,
+    "cost_in": 0.0002498,
+    "cost_out": 0.0002544
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275425\n\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 1 June 2021\n\nGATES COUNTY: Merchant Millhopper State Park,\nLassiter Trail right past the main pond. Elev. 13 \u2013 15 m.\nCo-occurring species include *Ilex opaca*, *Hexastylis minor*,\nand *Fagus grandifolia*. Surrounded by lots of leaf debris.\nNo old flowers. Mostly new leaves. Very patchy\npopulations.\n\nLat. 36.43689902 Long. -76.69245902 Datum: WGS84\ncoll. Michelle Gaynor # 55 1 June 2021 *(handwritten)*\n\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG268 (Pop 19).\n\n*Galax urceolata*\n*Ilex opaca*\n*Hexastylis minor*\n*Fagus grandifolia*\n\n\ngemini-2.0-flash OCR:\n2\n7\nINCH\n4\n3\n5\n\u30e9\nU.S.A.\n9\nFLAS\nGAINESVILLE-\nUNIVERSITY OF FLORIDA\nHERBARIUM\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275425\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor\n7 Sept 2022\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Forida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 1 June 2021\nGATES COUNTY: Merchant Millhopper State Park,\nLassiter Trail right past the main pond. Elev. 13-15 m.\nCo-occurring species include Ilex opaca, Hexastylis minor,\nand Fagus grandifolia. Surrounded by lots of leaf debris.\nNo old flowers. Mostly new leaves. Very patchy\npopulations.\nLat. 36.43689902 Long. -76.69245902 Datum: WGS84\ncoll. Michelle Gaynor # 55 1 June 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG268 (Pop 19).\n\n\nGalax urceolata\nIlex opaca\nHexastylis minor\nFagus grandifolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "275425",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Michelle Gaynor",
+    "collectorNumber": "55",
+    "identifiedBy": "Michelle Gaynor",
+    "identifiedDate": "2021-06-01",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 June 2021",
+    "collectionDate": "2021-06-01",
+    "collectionDateEnd": "",
+    "habitat": "Co-occurring species include Ilex opaca, Hexastylis minor, and Fagus grandifolia. Surrounded by lots of leaf debris. No old flowers. Mostly new leaves. Very patchy populations.",
+    "chromosomeCount": "Ploidy level inferred via flow cytometry Tetraploid.",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "North Carolina",
+    "county": "Gates County",
+    "locality": "Merchant Millhopper State Park, Lassiter Trail right past the main pond.",
+    "verbatimCoordinates": "Lat. 36.43689902 Long. -76.69245902 Datum WGS84",
+    "decimalLatitude": "36.43689902",
+    "decimalLongitude": "-76.69245902",
+    "minimumElevationInMeters": "13",
+    "maximumElevationInMeters": "15",
+    "elevationUnits": "m",
+    "additionalText": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n7 Sept 2022\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG268 (Pop 19).\nGalax urceolata\nIlex opaca\nHexastylis minor\nFagus grandifolia"
+  }
+}

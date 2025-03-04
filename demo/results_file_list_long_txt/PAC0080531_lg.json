@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Penn State\nHerbarium\n\ncm\ncopyright reserved\n\nPAC\nIMAGED\n\nPenn State University\nHerbarium (PAC)\n\nPennsylvania\nState University\nHerbarium\n59910\n\nThe Herbarium of the Pennsylvania State College\nPLANTS OF NORTH CAROLINA\nAlleghany County\n\n*Galax aphylla* L.\n\nW.F.Westerfeld 6161 (handwritten)\nroadside in woods\nin Blue Ridge Mountains,\n4 mi. W. of LOW GAP.\nAugust 29, 1952.\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "total_cost": 0.0013987499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Pennsylvania\nState University\nHerbarium\n59910\nPenn State\nHerbarium\n0\ncm\n1 2 3 4\n5\n6\nPAC\nIMAGED\nPenn State University\nHerbarlum (PAC)\nPAC0080531\n8 9\n10\n7\ncopyright reserved\nThe Herbarium of the Pennsylvania State College\nPLANTS OF NORTH CAROLINA\nAlleghany County\nGalax aphylla\nW.F.Westerfeld 6161\n\u096e.\nroadside in woods\nin Blue Ridge Mountains,\n4 m. w. of LOW GAP.\nAugust 29, 1952.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.92e-05,
+      "total_cost": 0.0007407,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 148
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2151,
+    "output": 495,
+    "cost_in": 0.00021510000000000002,
+    "cost_out": 0.00019800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nPenn State\nHerbarium\n\ncm\ncopyright reserved\n\nPAC\nIMAGED\n\nPenn State University\nHerbarium (PAC)\n\nPennsylvania\nState University\nHerbarium\n59910\n\nThe Herbarium of the Pennsylvania State College\nPLANTS OF NORTH CAROLINA\nAlleghany County\n\n*Galax aphylla* L.\n\nW.F.Westerfeld 6161 (handwritten)\nroadside in woods\nin Blue Ridge Mountains,\n4 mi. W. of LOW GAP.\nAugust 29, 1952.\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nPennsylvania\nState University\nHerbarium\n59910\nPenn State\nHerbarium\n0\ncm\n1 2 3 4\n5\n6\nPAC\nIMAGED\nPenn State University\nHerbarlum (PAC)\nPAC0080531\n8 9\n10\n7\ncopyright reserved\nThe Herbarium of the Pennsylvania State College\nPLANTS OF NORTH CAROLINA\nAlleghany County\nGalax aphylla\nW.F.Westerfeld 6161\n\u096e.\nroadside in woods\nin Blue Ridge Mountains,\n4 m. w. of LOW GAP.\nAugust 29, 1952.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "59910",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W.F.Westerfeld",
+    "collectorNumber": "6161",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 29, 1952.",
+    "collectionDate": "1952-08-29",
+    "collectionDateEnd": "",
+    "habitat": "Roadside in woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Alleghany County",
+    "locality": "In blue ridge mountains, 4 mi. w. of low gap.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Penn State\nHerbarium\ncm\ncopyright reserved\nPAC\nIMAGED\nPenn State University\nHerbarium (PAC)\nPennsylvania\nState University\nHerbarium\nThe Herbarium of the Pennsylvania State College\nPLANTS OF NORTH CAROLINA\nAlleghany County\nGalax aphylla L.\nPAC0080531\nHerbarlum (PAC)\n1 2 3 4 5 6 7 8 9 10"
+  }
+}

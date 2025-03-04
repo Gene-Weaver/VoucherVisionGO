@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095618\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n90391\n\nFlora of South Carolina\nDUKE UNIVERSITY HERBARIUM\nPickens County\n\n*Galax aphylla* L.\nin Kalmia-                      Table Rock\nRhododendron thicket      east top\nmoist\n\n*Leland Rodgers* Sept. 13, 1941        No. 369\nHandwritten text is italicized.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008150000000000001,
+      "total_cost": 0.00159375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "--- OCR Start ---\nDuke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095618\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\ndet. R.L. Wilbur I. 2001\nHERBARIUM\nFlora of South Carolina\nDUKE UNIVERSITY HERBARIUM\nPickens County\nGalax aphylla L.\nJable Rock\nin Kalmia-\nRhododendron thichet last top\nmoist\nDuke University Herbarium\n90391\nLeland Rodgers Sept. 13, 1941\nNo.\n369\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.440000000000001e-05,
+      "total_cost": 0.0007459000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 161
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2219,
+    "output": 513,
+    "cost_in": 0.00022190000000000003,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095618\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n90391\n\nFlora of South Carolina\nDUKE UNIVERSITY HERBARIUM\nPickens County\n\n*Galax aphylla* L.\nin Kalmia-                      Table Rock\nRhododendron thicket      east top\nmoist\n\n*Leland Rodgers* Sept. 13, 1941        No. 369\nHandwritten text is italicized.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n--- OCR Start ---\nDuke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095618\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\ndet. R.L. Wilbur I. 2001\nHERBARIUM\nFlora of South Carolina\nDUKE UNIVERSITY HERBARIUM\nPickens County\nGalax aphylla L.\nJable Rock\nin Kalmia-\nRhododendron thichet last top\nmoist\nDuke University Herbarium\n90391\nLeland Rodgers Sept. 13, 1941\nNo.\n369\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095618",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Leland Rodgers",
+    "collectorNumber": "369",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "Sept. 13, 1941",
+    "collectionDate": "1941-09-13",
+    "collectionDateEnd": "",
+    "habitat": "In kalmia-rhododendron thicket east top moist",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Pickens County",
+    "locality": "Table rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\nFlora of South Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nJable Rock\nlast top\nDuke University Herbarium"
+  }
+}

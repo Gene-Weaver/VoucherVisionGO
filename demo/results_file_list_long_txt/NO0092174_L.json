@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n\nSyn. Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database. Oct. 2011.\n\nFLORA OF ROAN MT., N. C.\n\nGalax aphylla, L.\nAlt. 4,000 ft.\n\nLegit J. W. CHICKERING, JR.\nJuly 1, 1880.\n\nTULANE\nUNIVERSITY\nHERBARIUM\nNO 0092174\n6277 (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00071,
+      "total_cost": 0.0014887499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 142
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\nSyn. = Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nFLORA OF ROAN MT., N. C.\nGalax aphylla, L.\nAlt. 4,000 ft.\nLegit J. W. CHICKERING, JR.\nJuly 1, 1880.\nTULANE\nUNIVERSITY\nHERBARIUM\n\u039d\u039f 0092174\n6277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2166,
+    "output": 449,
+    "cost_in": 0.0002166,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n\nSyn. Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database. Oct. 2011.\n\nFLORA OF ROAN MT., N. C.\n\nGalax aphylla, L.\nAlt. 4,000 ft.\n\nLegit J. W. CHICKERING, JR.\nJuly 1, 1880.\n\nTULANE\nUNIVERSITY\nHERBARIUM\nNO 0092174\n6277 (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\nSyn. = Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nFLORA OF ROAN MT., N. C.\nGalax aphylla, L.\nAlt. 4,000 ft.\nLegit J. W. CHICKERING, JR.\nJuly 1, 1880.\nTULANE\nUNIVERSITY\nHERBARIUM\n\u039d\u039f 0092174\n6277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092174",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. W. Chickering, Jr.",
+    "collectorNumber": "6277",
+    "identifiedBy": "",
+    "identifiedDate": "2011-10-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "July 1, 1880",
+    "collectionDate": "1880-07-01",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "",
+    "locality": "Flora of Roan Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Syn. Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database. "
+  }
+}

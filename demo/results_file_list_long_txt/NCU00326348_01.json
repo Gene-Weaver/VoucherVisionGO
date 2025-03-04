@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326348\n\n*Galax aphylla* - E\nHypomtsashico\nNC Cliff 3100'\nAug. 17 - Phillips\n\n(Handwritten text identified with *)\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66643\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00038500000000000003,
+      "total_cost": 0.00116375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 77
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "xrite\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nUniversity of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\nTO NCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326348\nOF NORTH\nHERBARIUM\nCAROLINA\n66643\nGalax aphylla - E\nNipombashico\nNC cour\nalt 3500\nAug hunting\n\n\nGalax aphylla\nNipombashico\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2093,
+    "output": 441,
+    "cost_in": 0.0002093,
+    "cost_out": 0.0001764
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326348\n\n*Galax aphylla* - E\nHypomtsashico\nNC Cliff 3100'\nAug. 17 - Phillips\n\n(Handwritten text identified with *)\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66643\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nxrite\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nUniversity of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\nTO NCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326348\nOF NORTH\nHERBARIUM\nCAROLINA\n66643\nGalax aphylla - E\nNipombashico\nNC cour\nalt 3500\nAug hunting\n\n\nGalax aphylla\nNipombashico\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326348",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "E",
+    "collectedBy": "Phillips",
+    "collectorNumber": "66643",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 17",
+    "collectionDate": "0000-08-17",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Nc cliff",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of north carolina herbarium\nHypomtsashico\nAug hunting\nUniversity of north carolina at chapel hill\nxrite\ncolorchecker\nto ncu\nnipombashico\nalt 3500\nnipombashico"
+  }
+}

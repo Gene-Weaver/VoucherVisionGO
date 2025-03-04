@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10736\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM18981\n\nNP\nGSM\nBot.\n\n6/22/16\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF THE GREAT SMOKY MOUNTAINS NATIONAL PARK\n\nCOLLECTOR(S)  H. M. JENNISON     NO. 3787\n6/4 1937\nLOC. Cataloochee Dist. Haywood Co.\n\n*Galax aphylla*, L.\nIn acid leaf mould & sandy soil.\nHorse Pen Ridge.\n@ about 3750'\ndet. *HMJ.*\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab 1979-1980  *MB*\n\n\nHandwritten text: *MB*, *HMJ.*\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011550000000000002,
+      "total_cost": 0.0019337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 231
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10736\nCAT. NO.\nGRSM8981\nNP\nGSM\nBot.\n6/22/16jb\nGalax urceolata(Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\nCOLLECTOR (S)\n6/4 1937\n3787\nNO.\nLoc. Cataloochee Dist. Haywood Co.\nGalax aphylla, L\nIn acid leaf mould & sandy soil.\nHorse Pen Ridge.\n@ about 3750'\ndet.\nHM.J.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\n\n\nGalax urceolata\nGalax Aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.84e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2302,
+    "output": 527,
+    "cost_in": 0.00023019999999999998,
+    "cost_out": 0.00021080000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10736\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM18981\n\nNP\nGSM\nBot.\n\n6/22/16\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF THE GREAT SMOKY MOUNTAINS NATIONAL PARK\n\nCOLLECTOR(S)  H. M. JENNISON     NO. 3787\n6/4 1937\nLOC. Cataloochee Dist. Haywood Co.\n\n*Galax aphylla*, L.\nIn acid leaf mould & sandy soil.\nHorse Pen Ridge.\n@ about 3750'\ndet. *HMJ.*\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab 1979-1980  *MB*\n\n\nHandwritten text: *MB*, *HMJ.*\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10736\nCAT. NO.\nGRSM8981\nNP\nGSM\nBot.\n6/22/16jb\nGalax urceolata(Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\nCOLLECTOR (S)\n6/4 1937\n3787\nNO.\nLoc. Cataloochee Dist. Haywood Co.\nGalax aphylla, L\nIn acid leaf mould & sandy soil.\nHorse Pen Ridge.\n@ about 3750'\ndet.\nHM.J.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\n\n\nGalax urceolata\nGalax Aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GRSM8981",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "3787",
+    "identifiedBy": "HMJ",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "6/4 1937",
+    "collectionDate": "1937-06-04",
+    "collectionDateEnd": "",
+    "habitat": "In acid leaf mould & sandy soil.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Haywood Co.",
+    "locality": "Cataloochee Dist. Horse Pen Ridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1143",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10736\nNP\nGSM\nBot.\n6/22/16jb\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\nGalax Aphylla\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "The New York Botanical Garden\n01393108\n264\nUS\nThe New York Botanical Garden\n\nDiapensiaceae\n\n*Galax urceolata* (Poir.) Brummitt\n\nUnited States of America. Tennessee. Carter Co. Atop\nthe ridge, National Forest road 56, northeast of \nElizabethton.\n36.457393\u00b0, -82.100768\u00b0\nUnder *Quercus*, *Carya*, and *Pinus virginiana* forest.\n\n08 Jul 2021\nM. C. Pace 1138\n\nNYdb\n(Handwritten: \"NYdb\")\n\n*Galax urceolata*\n*Quercus*\n*Carya*\n*Pinus virginiana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008349999999999999,
+      "total_cost": 0.0016137500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE NEW YORK\nBOTANICAL GARDEN copyright reserved\n0cm 1 2 3 4 5 6 7 8 9 10\n264\nUS\nThe New York Botanical Garden\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nUnited States of America. Tennessee. Carter Co. Atop\nthe ridge, National Forest road 56, northeast of\nElizabethton.\n36.457393\u00b0, -82.100768\u00b0\nUnder Quercus, Carya, and Pinus virginiana forest.\n08 Jul 2021\nM. C. Pace 1138\nNYdb\nNEW YORK\nBOTANICAL\nGARDEN\nNEW YORK BOTANICAL GARDEN\n01393108\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2211,
+    "output": 560,
+    "cost_in": 0.0002211,
+    "cost_out": 0.000224
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nThe New York Botanical Garden\n01393108\n264\nUS\nThe New York Botanical Garden\n\nDiapensiaceae\n\n*Galax urceolata* (Poir.) Brummitt\n\nUnited States of America. Tennessee. Carter Co. Atop\nthe ridge, National Forest road 56, northeast of \nElizabethton.\n36.457393\u00b0, -82.100768\u00b0\nUnder *Quercus*, *Carya*, and *Pinus virginiana* forest.\n\n08 Jul 2021\nM. C. Pace 1138\n\nNYdb\n(Handwritten: \"NYdb\")\n\n*Galax urceolata*\n*Quercus*\n*Carya*\n*Pinus virginiana*\n\n\ngemini-2.0-flash OCR:\nTHE NEW YORK\nBOTANICAL GARDEN copyright reserved\n0cm 1 2 3 4 5 6 7 8 9 10\n264\nUS\nThe New York Botanical Garden\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nUnited States of America. Tennessee. Carter Co. Atop\nthe ridge, National Forest road 56, northeast of\nElizabethton.\n36.457393\u00b0, -82.100768\u00b0\nUnder Quercus, Carya, and Pinus virginiana forest.\n08 Jul 2021\nM. C. Pace 1138\nNYdb\nNEW YORK\nBOTANICAL\nGARDEN\nNEW YORK BOTANICAL GARDEN\n01393108\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "01393108",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "M. C. Pace",
+    "collectorNumber": "1138",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "08 Jul 2021",
+    "collectionDate": "2021-07-08",
+    "collectionDateEnd": "",
+    "habitat": "Under Quercus, Carya, and Pinus virginiana forest.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states of america",
+    "stateProvince": "Tennessee",
+    "county": "Carter co.",
+    "locality": "Atop the ridge, National Forest road 56, northeast of Elizabethton.",
+    "verbatimCoordinates": "36.457393\u00b0, -82.100768\u00b0",
+    "decimalLatitude": "36.457393",
+    "decimalLongitude": "-82.100768",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "264\nUs\nThe New York Botanical Garden\nDiapensiaceae\nNYdb\n(Handwritten NYdb)\nGalax urceolata\nQuercus\nCarya\nPinus virginiana\nTHE NEW YORK\nBOTANICAL GARDEN copyright reserved\n0cm 1 2 3 4 5 6 7 8 9 10\nNEW YORK\nBOTANICAL\nGARDEN\nNEW YORK BOTANICAL GARDEN"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n438601\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\n\n*Galax aphylla* L.\n\nCove and ravine at the end of the U.S. Forest\nService Road along Buck Creek, just east of\nPerry Gap (north of US 64).\n*Betula lenta* community. Upper slopes.\n\nD. E. Boufford 14142 12 June 1974\nL. Schram, D. Wickland & E. Wood\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n*Betula lenta*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009499999999999999,
+      "total_cost": 0.0017287499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n438601\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\nGalax aphylla L.\nCove and ravine at the end of the U.S. Forest\nService Road along Buck Creek, just east of\nPerry Gap (north of US 64).\nBetula lenta community. Upper slopes.\nD. E. Boufford 14142 12 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\nBetula lenta\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2267,
+    "output": 557,
+    "cost_in": 0.0002267,
+    "cost_out": 0.0002228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n438601\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\n\n*Galax aphylla* L.\n\nCove and ravine at the end of the U.S. Forest\nService Road along Buck Creek, just east of\nPerry Gap (north of US 64).\n*Betula lenta* community. Upper slopes.\n\nD. E. Boufford 14142 12 June 1974\nL. Schram, D. Wickland & E. Wood\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n*Betula lenta*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n438601\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\nGalax aphylla L.\nCove and ravine at the end of the U.S. Forest\nService Road along Buck Creek, just east of\nPerry Gap (north of US 64).\nBetula lenta community. Upper slopes.\nD. E. Boufford 14142 12 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\nBetula lenta\n\n",
+  "formatted_json": {
+    "catalogNumber": "438601",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, L. Schram, D. Wickland & E. Wood",
+    "collectorNumber": "14142",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12 June 1974",
+    "collectionDate": "1974-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Cove and ravine at the end of the U.S. Forest Service Road along Buck Creek, just east of Perry Gap (north of US 64). Betula lenta community. Upper slopes.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Clay county",
+    "locality": "Cove and ravine at the end of the U.S. Forest Service Road along Buck Creek, just east of Perry Gap (north of US 64).",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nHerbarium of the university of north carolina\nVoucher for north carolina natural areas\nStudy. May 15-june 30, 1974. For community\ndata see natural areas file in herbarium.\nHerbarium of the university of north carolina\nnorth carolina\nClay county\nPlants of the southeastern united states"
+  }
+}

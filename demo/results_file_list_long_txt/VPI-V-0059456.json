@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059456\n\n8566\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nGalax.\nMontg.Co., Va. Dry woods.\nJune 5, 1909.                      F.S.H. (Handwritten)\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007,
+      "total_cost": 0.0014787499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 140
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059456\nMETRIC\n2\n3\n8566\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGalax aphylla L.\nGalax.\nMontg.Co., Va. Dry woods.\nJune 5,1909.\nF.S.H.\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.36e-05,
+      "total_cost": 0.0007351,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 134
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2162,
+    "output": 539,
+    "cost_in": 0.0002162,
+    "cost_out": 0.0002156
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059456\n\n8566\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\n*Galax aphylla* L.\nGalax.\nMontg.Co., Va. Dry woods.\nJune 5, 1909.                      F.S.H. (Handwritten)\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059456\nMETRIC\n2\n3\n8566\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGalax aphylla L.\nGalax.\nMontg.Co., Va. Dry woods.\nJune 5,1909.\nF.S.H.\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059456",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "F.S.H.",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 5, 1909.",
+    "collectionDate": "1909-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Dry woods.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Va.",
+    "county": "Montg.Co.",
+    "locality": "Montg.Co., Va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\n\n8566\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nGuy L. Nesom, 1975\n\nGalax aphylla L.\nGalax.\nJune 5, 1909. F.S.H. (Handwritten)\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n\nGalax urceolata\nGalax aphylla\nMETRIC\n2\n3\n8566"
+  }
+}

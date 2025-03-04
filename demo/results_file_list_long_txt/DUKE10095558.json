@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke UNIVERSITY\nHERBARIUM\n22928\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095558\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nBuncombe County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nHardwoods Fenrings Knob 2800 ft.\nBent Creek Forest Stat.\nJ. R. Jester\ndet.H.J.Costing June 15, 1938\nNo.\n\nHandwritten text: J. R. Jester, det.H.J.Costing\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000875,
+      "total_cost": 0.00165375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 175
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n22928\nDUKE UNIVERSITY HERBARIUM\nDUKE10095558\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nBuncombe County\nFlora of North Carolina\nGalax aphylla L.\nHardwoods\nFenrings Knob 3800 ft.\nBent Creek Forest Stat.\nJ.R.Jester\nJune 15,1938\ndet.H.J.Costing\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2213,
+    "output": 524,
+    "cost_in": 0.0002213,
+    "cost_out": 0.00020960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke UNIVERSITY\nHERBARIUM\n22928\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095558\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nBuncombe County\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nHardwoods Fenrings Knob 2800 ft.\nBent Creek Forest Stat.\nJ. R. Jester\ndet.H.J.Costing June 15, 1938\nNo.\n\nHandwritten text: J. R. Jester, det.H.J.Costing\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\n22928\nDUKE UNIVERSITY HERBARIUM\nDUKE10095558\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nBuncombe County\nFlora of North Carolina\nGalax aphylla L.\nHardwoods\nFenrings Knob 3800 ft.\nBent Creek Forest Stat.\nJ.R.Jester\nJune 15,1938\ndet.H.J.Costing\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095558",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. R. Jester",
+    "collectorNumber": "",
+    "identifiedBy": "R.L. Wilbur, H.J.Costing",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "H.J.Costing June 15, 1938: Galax aphylla",
+    "verbatimCollectionDate": "June 15,1938",
+    "collectionDate": "1938-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Hardwoods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe",
+    "locality": "Fenrings Knob Bent Creek Forest Stat.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "853",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "DUKE UNIVERSITY\nHERBARIUM\n22928\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nFlora of North Carolina\nGalax aphylla L.\nNo.\nGalax urceolata\nGalax aphylla\ncopyright reserved\nGalax aphylla"
+  }
+}

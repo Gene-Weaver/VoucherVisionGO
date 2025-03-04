@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010425\n\nN.C.\n11343\nWESTERN CAROLINA COLLEGE\n\nGalax urceolata (Poir.) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nGraham County\n\n*Galax aphylla* L.\n\nOpen deciduous woods. Very numerous. Elev.\napprox. 2400 ft.\n\n004\nLarry Tucker\n17 April 1971\nCollections from Joyce Kilmer Memorial Forest\n\nDiapensiaceae 19 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008250000000000001,
+      "total_cost": 0.00160375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nN.C.\nWESTERN CAROLINA COLLEGE\n11343\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nMETRIC\nINCHES\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010425\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nGraham County\nGalax aphylla L.\nOpen deciduous woods. Very numerous. Elev.\napprox. 2400 ft.\n004\nLarry Tucker\n17 April 1971\nCollections from Joyce Kilmer Memorial Forest\nDiapensiaceae 19\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.16e-05,
+      "total_cost": 0.0007631000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 204
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2256,
+    "output": 503,
+    "cost_in": 0.00022560000000000004,
+    "cost_out": 0.0002012
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010425\n\nN.C.\n11343\nWESTERN CAROLINA COLLEGE\n\nGalax urceolata (Poir.) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nGraham County\n\n*Galax aphylla* L.\n\nOpen deciduous woods. Very numerous. Elev.\napprox. 2400 ft.\n\n004\nLarry Tucker\n17 April 1971\nCollections from Joyce Kilmer Memorial Forest\n\nDiapensiaceae 19 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nN.C.\nWESTERN CAROLINA COLLEGE\n11343\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nMETRIC\nINCHES\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010425\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nGraham County\nGalax aphylla L.\nOpen deciduous woods. Very numerous. Elev.\napprox. 2400 ft.\n004\nLarry Tucker\n17 April 1971\nCollections from Joyce Kilmer Memorial Forest\nDiapensiaceae 19\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010425",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Larry Tucker",
+    "collectorNumber": "004",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "17 April 1971",
+    "collectionDate": "1971-04-17",
+    "collectionDateEnd": "",
+    "habitat": "Open deciduous woods. Very numerous.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Graham County",
+    "locality": "Collections from Joyce Kilmer Memorial Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "732",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "N.C.\n11343\nWESTERN CAROLINA COLLEGE\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nElev.\napprox. 2400 ft.\nDiapensiaceae 19"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\n23609\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\n\n*Galax aphylla* L.\nAbundant along edge of wooded slope.\nBeaver pond ca. 9 mi. SSE of Borden Springs; W\u00bd sec.\n13, T14S, R11E.\n\nCounty: CLEBURNE\nDate: 1 Jul 1979\nRobert R. Haynes No. 7341\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.00156875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\n23609\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\nGalax aphylla L.\nAbundant along edge of wooded slope.\nBeaver pond ca. 9 mi. SSE of Borden Springs; W\u00bd sec.\n13, T14S, R11E.\nCounty: CLEBURNE\nDate: 1 Jul 1979\nRobert R. Haynes, No. 7341\nUNA00013976\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.440000000000001e-05,
+      "total_cost": 0.0007459000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 161
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 483,
+    "cost_in": 0.0002204,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\n23609\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\n\n*Galax aphylla* L.\nAbundant along edge of wooded slope.\nBeaver pond ca. 9 mi. SSE of Borden Springs; W\u00bd sec.\n13, T14S, R11E.\n\nCounty: CLEBURNE\nDate: 1 Jul 1979\nRobert R. Haynes No. 7341\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\n23609\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\nGalax aphylla L.\nAbundant along edge of wooded slope.\nBeaver pond ca. 9 mi. SSE of Borden Springs; W\u00bd sec.\n13, T14S, R11E.\nCounty: CLEBURNE\nDate: 1 Jul 1979\nRobert R. Haynes, No. 7341\nUNA00013976\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UNA00013976",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert R. Haynes",
+    "collectorNumber": "7341",
+    "identifiedBy": "Robert R. Haynes",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "1 Jul 1979",
+    "collectionDate": "1979-07-01",
+    "collectionDateEnd": "",
+    "habitat": "Abundant along edge of wooded slope.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Cleburne",
+    "locality": "Beaver pond ca. 9 mi. Sse of Borden Springs; W\u00bd sec. 13, T14S, R11E.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nUniversity of alabama\n23609\nHerbarium of the university of alabama\nPlants of alabama"
+  }
+}

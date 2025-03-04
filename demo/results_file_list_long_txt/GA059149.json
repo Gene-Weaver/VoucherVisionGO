@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n*Galax aphylla L.\n\nRocky wooded\nravine\nAbout 3 miles east of\nHollywood,\nHabersham Co.\n\nJoseph H. Pyron\nRogers McVaugh 1289 Nov. 21, 1936\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007700000000000001,
+      "total_cost": 0.00154875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n13185\nUNIVERSITY OF GEORGIA\nGA059149\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky wooded\nravine\nAbout 3 miles east of\nHollywood,\nHabersham Co.\nJoseph H. Pyron\nRogers McVaugh 1289 Nov. 21, 1936\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2237,
+    "output": 540,
+    "cost_in": 0.0002237,
+    "cost_out": 0.00021600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n*Galax aphylla L.\n\nRocky wooded\nravine\nAbout 3 miles east of\nHollywood,\nHabersham Co.\n\nJoseph H. Pyron\nRogers McVaugh 1289 Nov. 21, 1936\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n13185\nUNIVERSITY OF GEORGIA\nGA059149\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky wooded\nravine\nAbout 3 miles east of\nHollywood,\nHabersham Co.\nJoseph H. Pyron\nRogers McVaugh 1289 Nov. 21, 1936\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059149",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Joseph H. Pyron, Rogers McVaugh",
+    "collectorNumber": "1289",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Nov. 21, 1936",
+    "collectionDate": "1936-11-21",
+    "collectionDateEnd": "",
+    "habitat": "Rocky wooded ravine",
+    "chromosomeCount": "n =",
+    "guardCell": "n = , based on average guard cell area volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Habersham Co.",
+    "locality": "About 3 miles east of Hollywood",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n13185\nUNIVERSITY OF GEORGIA\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nIMAGED 2013\nGalax urceolata\nGalax aphylla"
+  }
+}

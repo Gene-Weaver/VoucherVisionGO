@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TIFFEN\u00ae Color Control Patches\n\u00a9 The Tiffen Company, 2007\nBlue Cyan Green Yellow Red Magenta White 3/Color Black\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n675254\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00443061\n\nUniversity of North Carolina at Chapel Hill\nHerbarium (NCU) DIAPENSIACEAE\n\nPLANTS OF WESTERN NORTH CAROLINA.\nCOLLECTED NEAR COLUMBUS, POLK COUNTY,\nBY E. C. TOWNSEND\n\n*Galax aphylla* L.\nPiney Mountain. May 18, 1897.\n\nHandwritten text: *Piney Mountain.*\n\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007800000000000001,
+      "total_cost": 0.00155875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "hes\n1\n2\n3\n4\n5\n6\n7\n18\n19\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nntimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nof North Carolina a\nersity\nUnivers\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00443061\nHERBARIUM\nNCU\nChapel Hill\n675254\nUniversity of North Carolina at Chapel Hill\nHerbarium (NCU) DIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nPiney Mountain: 35.210114 lat. -82.255115 lang.\nCarol Ann MCCORMICK 29 Nov 2021\nPLANTS OF WESTERN NORTH CAROLINA.\nCOLLECTED NEAR COLUMBUS, POLK COUNTY,\nBY E. C. TOWNSEND\nGalax aphylla\nL.\nPiney Mountain.\nMay 18, 1897.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010960000000000001,
+      "total_cost": 0.0007911000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 274
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2308,
+    "output": 542,
+    "cost_in": 0.00023080000000000003,
+    "cost_out": 0.00021679999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTIFFEN\u00ae Color Control Patches\n\u00a9 The Tiffen Company, 2007\nBlue Cyan Green Yellow Red Magenta White 3/Color Black\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n675254\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00443061\n\nUniversity of North Carolina at Chapel Hill\nHerbarium (NCU) DIAPENSIACEAE\n\nPLANTS OF WESTERN NORTH CAROLINA.\nCOLLECTED NEAR COLUMBUS, POLK COUNTY,\nBY E. C. TOWNSEND\n\n*Galax aphylla* L.\nPiney Mountain. May 18, 1897.\n\nHandwritten text: *Piney Mountain.*\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nhes\n1\n2\n3\n4\n5\n6\n7\n18\n19\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nntimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nof North Carolina a\nersity\nUnivers\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00443061\nHERBARIUM\nNCU\nChapel Hill\n675254\nUniversity of North Carolina at Chapel Hill\nHerbarium (NCU) DIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nPiney Mountain: 35.210114 lat. -82.255115 lang.\nCarol Ann MCCORMICK 29 Nov 2021\nPLANTS OF WESTERN NORTH CAROLINA.\nCOLLECTED NEAR COLUMBUS, POLK COUNTY,\nBY E. C. TOWNSEND\nGalax aphylla\nL.\nPiney Mountain.\nMay 18, 1897.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "675254",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "E. C. Townsend",
+    "collectorNumber": "",
+    "identifiedBy": "Carol Ann Mccormick",
+    "identifiedDate": "2021-11-29",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata",
+    "verbatimCollectionDate": "May 18, 1897.",
+    "collectionDate": "1897-05-18",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Polk County",
+    "locality": "Piney Mountain. Collected near Columbus.",
+    "verbatimCoordinates": "35.210114 lat. -82.255115 lang.",
+    "decimalLatitude": "35.210114",
+    "decimalLongitude": "-82.255115",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "TIFFEN\u00ae Color Control Patches\n\u00a9 The Tiffen Company, 2007\nBlue Cyan Green Yellow Red Magenta White 3/Color Black\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00443061\nUniversity of North Carolina at Chapel Hill\nHerbarium (NCU) DIAPENSIACEAE\nPLANTS OF WESTERN NORTH CAROLINA.\nHandwritten text Piney Mountain."
+  }
+}

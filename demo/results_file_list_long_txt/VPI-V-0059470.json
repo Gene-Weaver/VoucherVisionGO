@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n69072\nVirginia Polytechnic Institute\nand State University\n\n*Galax aphylla* L. (handwritten)\n\nnear Norwood, (handwritten)\nNelson Co., Va. (handwritten)\n\nApr. 15, 1973\nScores of plants on steep N-facing *Rhododendron catawbiense* bluff on Tye River \u00bd mi. W of Norwood. (Found by Tom Wieboldt) (handwritten)\n\n450 ft. (handwritten)\nC. E. Stevens #6493 (handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006599999999999999,
+      "total_cost": 0.0014387500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 132
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n69072\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\nName\nGalax aphylla L.\nFamily\nLocality\nnear horwood,\nNelson Co., Va.\nDate Apr. 15, 1973\nHabitat Scores of plants on\nsteep N-facing Rhododendron\ncatawbiense bluff on Tye\nRiver \u00bd mi. W of horwood.\nAltitude\n450 ft.\nCollected by\nC.E. Stevens #6493\nIdentified by\nlu\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059470\n(Found by Tom Wieboldt)\n\n\nGalax aphylla\nRhododendron catawbiense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.68e-05,
+      "total_cost": 0.0007483,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2186,
+    "output": 425,
+    "cost_in": 0.0002186,
+    "cost_out": 0.00017
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n69072\nVirginia Polytechnic Institute\nand State University\n\n*Galax aphylla* L. (handwritten)\n\nnear Norwood, (handwritten)\nNelson Co., Va. (handwritten)\n\nApr. 15, 1973\nScores of plants on steep N-facing *Rhododendron catawbiense* bluff on Tye River \u00bd mi. W of Norwood. (Found by Tom Wieboldt) (handwritten)\n\n450 ft. (handwritten)\nC. E. Stevens #6493 (handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n69072\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\nName\nGalax aphylla L.\nFamily\nLocality\nnear horwood,\nNelson Co., Va.\nDate Apr. 15, 1973\nHabitat Scores of plants on\nsteep N-facing Rhododendron\ncatawbiense bluff on Tye\nRiver \u00bd mi. W of horwood.\nAltitude\n450 ft.\nCollected by\nC.E. Stevens #6493\nIdentified by\nlu\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059470\n(Found by Tom Wieboldt)\n\n\nGalax aphylla\nRhododendron catawbiense\n\n",
+  "formatted_json": {
+    "catalogNumber": "69072",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. E. Stevens",
+    "collectorNumber": "6493",
+    "identifiedBy": "lu",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 15, 1973",
+    "collectionDate": "1973-04-15",
+    "collectionDateEnd": "",
+    "habitat": "Scores of plants on steep n-facing rhododendron catawbiense bluff on tye river \u00bd mi. w of horwood.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "Va.",
+    "stateProvince": "Va.",
+    "county": "Nelson co.",
+    "locality": "Near horwood,",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "137",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "(found by tom wieboldt)"
+  }
+}

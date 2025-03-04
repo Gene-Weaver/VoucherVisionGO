@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n62795\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060070\n\n*(Poir.)*\n*Galax urceolata* (Burmann) det. Pittillo, 1976\n\nFlora of Virginia\n*Galax aphylla* L.\nnear Tipers, Northumberland Co.\nLocally common on N-facing\n*Kalmia* bluffs on S side Balls\nCreek down to high tide mark.\n\nMay 15, 1976\n\nCharles E. Stevens\nDet.\nNo. 12,454\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008200000000000001,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n62795\nVirginia Polytechnic Institute\nand State University\nGalax urceolata\nFlora of Virginia\nGalax aphylla L.\nnear Tipers, Northumberland Co.\nLocally common on N-facing\nKalmia bluffs on S side Balls\nCreek down to high tide mark.\nMay 15, 1976\nCharles E. Stevens No. 12,454\nDet.\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060070\n(Poir)\nBrunnit det. Afettal, 1976\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.7600000000000004e-05,
+      "total_cost": 0.0007391000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 144
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2186,
+    "output": 505,
+    "cost_in": 0.0002186,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n62795\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060070\n\n*(Poir.)*\n*Galax urceolata* (Burmann) det. Pittillo, 1976\n\nFlora of Virginia\n*Galax aphylla* L.\nnear Tipers, Northumberland Co.\nLocally common on N-facing\n*Kalmia* bluffs on S side Balls\nCreek down to high tide mark.\n\nMay 15, 1976\n\nCharles E. Stevens\nDet.\nNo. 12,454\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n62795\nVirginia Polytechnic Institute\nand State University\nGalax urceolata\nFlora of Virginia\nGalax aphylla L.\nnear Tipers, Northumberland Co.\nLocally common on N-facing\nKalmia bluffs on S side Balls\nCreek down to high tide mark.\nMay 15, 1976\nCharles E. Stevens No. 12,454\nDet.\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060070\n(Poir)\nBrunnit det. Afettal, 1976\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "62795",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Burmann)",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "12,454",
+    "identifiedBy": "Pittillo, Afettal",
+    "identifiedDate": "1976-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Pittillo, 1976: Galax urceolata",
+    "verbatimCollectionDate": "May 15, 1976",
+    "collectionDate": "1976-05-15",
+    "collectionDateEnd": "",
+    "habitat": "Locally common on n-facing kalmia bluffs on s side balls creek down to high tide mark.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Northumberland Co.",
+    "locality": "Near tipers, Northumberland co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060070\n(Poir.)\nFlora of Virginia\nGalax aphylla L.\nDet.\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012616\n\n14664\n\nGalax aphylla L.\nJune 22, 1963\nS. Pittsylvania Co.\nrich northern Exposures\ncommon\n\n(Handwritten text) Country club woods\nin city limit of Danville\n355\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2 (not measured)\nGuy L. Nesom, 1975 chromosome counts from this population\n2n=12\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\n\nNO. 14664\nGalax aphylla L.\nRich northern exposures, Country Club\nwoods in city of Danville.\n\nCOLLECTORS W. Hathaway June 22, 1963\ncopyright reserved\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010949999999999998,
+      "total_cost": 0.0018737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 219
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012616\nLYNCHBURG\nCOLLEGE\n14664\nARIUM\n14664\nGalax aphylla L.\nJune 22, 1963\nS. Pitsylvania Co.\nrich horthern exposures\ncommon\nCountry club woods\nin city limit of Danville\n355\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\n, based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nNO.14664\nGalax aphylla L.\nRich northern exposures, Country Club\nwoods in city of Danville.\nCOLLECTORS\nW. Hathaway\nJune 22, 1963\n1\n2\n3\n4\n5 6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.72e-05,
+      "total_cost": 0.0007787,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 243
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2356,
+    "output": 528,
+    "cost_in": 0.0002356,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012616\n\n14664\n\nGalax aphylla L.\nJune 22, 1963\nS. Pittsylvania Co.\nrich northern Exposures\ncommon\n\n(Handwritten text) Country club woods\nin city limit of Danville\n355\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2 (not measured)\nGuy L. Nesom, 1975 chromosome counts from this population\n2n=12\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\n\nNO. 14664\nGalax aphylla L.\nRich northern exposures, Country Club\nwoods in city of Danville.\n\nCOLLECTORS W. Hathaway June 22, 1963\ncopyright reserved\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012616\nLYNCHBURG\nCOLLEGE\n14664\nARIUM\n14664\nGalax aphylla L.\nJune 22, 1963\nS. Pitsylvania Co.\nrich horthern exposures\ncommon\nCountry club woods\nin city limit of Danville\n355\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\n, based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nNO.14664\nGalax aphylla L.\nRich northern exposures, Country Club\nwoods in city of Danville.\nCOLLECTORS\nW. Hathaway\nJune 22, 1963\n1\n2\n3\n4\n5 6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012616",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W. Hathaway",
+    "collectorNumber": "14664",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Chromosome counts from this population 2n=12",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "June 22, 1963",
+    "collectionDate": "1963-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Rich northern exposures",
+    "chromosomeCount": "2n=12",
+    "guardCell": "n =, based on average guard cell area volume of \u03bc\u00b2",
+    "specimenDescription": "Common",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania",
+    "locality": "Country club woods in city limit of Danville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nS. Pittsylvania Co.\n(Handwritten text) in city limit of Danville\n355\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n(Poir.)\nBrummitt\nLynchburg\nCollege\nARIUM\nLynchburg\nCollege\ncm\ncopyright reserved"
+  }
+}

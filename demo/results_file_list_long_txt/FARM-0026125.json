@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nGalax urceolata (Poir.) Brummit\nn = 12\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*(Handwritten)*\nGalax aphylla L.\nMoutain between steep slopes\nnear Gays Creek Mountain\nSury Co.\nNov 10, 1968\nCollected by: AM/Harvill 21098\nDetermined by: C. Leroy Arrison\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n0 1 2 3 4 5 6 7 8 9 10\ncm\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000725,
+      "total_cost": 0.00150375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 145
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026125\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell anea\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nCalax aphylla hi\nMavine between steep slopers\nnin Gays Greek maluica-\nSury Wr\nNow 10, 1968\nCollected by: a m/tarvill 21098\nDetermined by: C Hewy Freuson.\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2175,
+    "output": 465,
+    "cost_in": 0.0002175,
+    "cost_out": 0.00018600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nGalax urceolata (Poir.) Brummit\nn = 12\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*(Handwritten)*\nGalax aphylla L.\nMoutain between steep slopes\nnear Gays Creek Mountain\nSury Co.\nNov 10, 1968\nCollected by: AM/Harvill 21098\nDetermined by: C. Leroy Arrison\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n0 1 2 3 4 5 6 7 8 9 10\ncm\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026125\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell anea\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nCalax aphylla hi\nMavine between steep slopers\nnin Gays Greek maluica-\nSury Wr\nNow 10, 1968\nCollected by: a m/tarvill 21098\nDetermined by: C Hewy Freuson.\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026125",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A m/harvill",
+    "collectorNumber": "21098",
+    "identifiedBy": "C Hewy Freuson",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Nov 10, 1968",
+    "collectionDate": "1968-11-10",
+    "collectionDateEnd": "",
+    "habitat": "Mavine between steep slopers",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell anea",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Sury Co.",
+    "locality": "Nin Gays Greek maluica-",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nGuy L. Nesom, 1975\nFlora virginica"
+  }
+}

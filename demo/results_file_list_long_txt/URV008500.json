@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\n\nUNIVERSITY OF RICHMOND HERBARIUM 1941\nFLORA OF VIRGINIA\n\nSCIENTIFIC NAME: *Galax aphylla* L. (handwritten)\nCOMMON NAME: *Galax* (handwritten)\nLOCALITY: *Ridgecrest, N.C.* (handwritten)\nHABITAT: *Rich Woods* (handwritten)\nCOLLECTOR: *R. H. Ferndl Jr.* (handwritten)\nDATE: *11/23/31* (handwritten)\nABUNDANCE:\n\n2251\n\nURV University of Richmond Herbarium\nURV 008500\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00083,
+      "total_cost": 0.0016087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 166
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\nUNIVERSITY OF RICHMOND HERBARIUM 1941\nFLORA OF VIRGINIA\nSCIENTIFIC NAME\nCOMMON NAME\nLOCALITY\nHABITAT\nCOLLECTOR\nABUNDANCE\nURV University of Richmond Herbarium\nURV 008500\nIsalas aphylla\nSalas\nRidgecrest, n.C\nRich Woodo\nR. H. Ferrell fr.\n7/25/31.\n2251\n0 1 2 3 4 5 6 7 8 9 10\ncm\nURV\ncopyright reserved\n--- Handwritten Text ---\nIsalas aphylla\nSalas\nRidgecrest, n.C\nRich Woodo\nR. H. Ferrell fr.\n7/25/31.\n--- End Handwritten Text ---\n\nGalax urceolata\nIsalas aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.440000000000002e-05,
+      "total_cost": 0.0007659,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 211
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 511,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\n\nUNIVERSITY OF RICHMOND HERBARIUM 1941\nFLORA OF VIRGINIA\n\nSCIENTIFIC NAME: *Galax aphylla* L. (handwritten)\nCOMMON NAME: *Galax* (handwritten)\nLOCALITY: *Ridgecrest, N.C.* (handwritten)\nHABITAT: *Rich Woods* (handwritten)\nCOLLECTOR: *R. H. Ferndl Jr.* (handwritten)\nDATE: *11/23/31* (handwritten)\nABUNDANCE:\n\n2251\n\nURV University of Richmond Herbarium\nURV 008500\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\nUNIVERSITY OF RICHMOND HERBARIUM 1941\nFLORA OF VIRGINIA\nSCIENTIFIC NAME\nCOMMON NAME\nLOCALITY\nHABITAT\nCOLLECTOR\nABUNDANCE\nURV University of Richmond Herbarium\nURV 008500\nIsalas aphylla\nSalas\nRidgecrest, n.C\nRich Woodo\nR. H. Ferrell fr.\n7/25/31.\n2251\n0 1 2 3 4 5 6 7 8 9 10\ncm\nURV\ncopyright reserved\n--- Handwritten Text ---\nIsalas aphylla\nSalas\nRidgecrest, n.C\nRich Woodo\nR. H. Ferrell fr.\n7/25/31.\n--- End Handwritten Text ---\n\nGalax urceolata\nIsalas aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "URV 008500",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "R. H. Ferrell Jr.",
+    "collectorNumber": "2251",
+    "identifiedBy": "W. John Hayden",
+    "identifiedDate": "1983-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/25/31.",
+    "collectionDate": "1931-07-25",
+    "collectionDateEnd": "",
+    "habitat": "Rich Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.C",
+    "county": "",
+    "locality": "Ridgecrest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF RICHMOND HERBARIUM 1941\nFLORA OF VIRGINIA\nCOMMON NAME\nABUNDANCE\nURV University of Richmond Herbarium\nIsalas aphylla\nSalas\n0 1 2 3 4 5 6 7 8 9 10\ncm\nURV\ncopyright reserved\nGalax urceolata\nIsalas aphylla"
+  }
+}

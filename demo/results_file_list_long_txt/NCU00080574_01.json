@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nMSCCPPCC0411\nx-rite colorchecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080574\n\nHERBARIUM OF CHARLES FOSTER BATCHELDER\n\n*Galax aphylla* L.\n\nJunaluska Mountain, North Carolina\n(Haywood County)\nJuly 1, 1917\n\nOn rocks in open oak woods *(handwritten)*\nColl. C. F. Batchelder\n5124\n376928\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005849999999999999,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080574\nx-rite\ncolorchecker\nHERBARIUM OF CHARLES FOSTER BATCHELDER\nGalax aphylla L.\nJunaluska Mountain, North Carolina\nJuly 1, 1917\nOu rocks in open oak woods\nColl. C. F. Batchelder\n5124\nNORTH\nCAROLINA\nHERBARIUM\nUNIVERSITY\n376928\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.160000000000001e-05,
+      "total_cost": 0.0007231,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 104
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2108,
+    "output": 439,
+    "cost_in": 0.00021080000000000003,
+    "cost_out": 0.0001756
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nMSCCPPCC0411\nx-rite colorchecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080574\n\nHERBARIUM OF CHARLES FOSTER BATCHELDER\n\n*Galax aphylla* L.\n\nJunaluska Mountain, North Carolina\n(Haywood County)\nJuly 1, 1917\n\nOn rocks in open oak woods *(handwritten)*\nColl. C. F. Batchelder\n5124\n376928\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080574\nx-rite\ncolorchecker\nHERBARIUM OF CHARLES FOSTER BATCHELDER\nGalax aphylla L.\nJunaluska Mountain, North Carolina\nJuly 1, 1917\nOu rocks in open oak woods\nColl. C. F. Batchelder\n5124\nNORTH\nCAROLINA\nHERBARIUM\nUNIVERSITY\n376928\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080574",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. F. Batchelder",
+    "collectorNumber": "5124",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 1, 1917",
+    "collectionDate": "1917-07-01",
+    "collectionDateEnd": "",
+    "habitat": "On rocks in open oak woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Haywood",
+    "locality": "Junaluska mountain, north carolina",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "MSCCPPCC0411\nx-rite colorchecker\nUniversity of north carolina herbarium\nHerbarium of charles foster batchelder\n376928"
+  }
+}

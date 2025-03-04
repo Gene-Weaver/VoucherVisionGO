@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CONV\n\nConverse College Herbarium\nCONV0002303\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(s) H. M. JENNISON NO. 2386\nVic. Upper Indian Cr.\nLOC. Swain Co., N. C. 9/28 1936 (handwritten)\n\n*Galax aphylla*, L.\n\nIn woods loam on N. facing slope.\n@ about 3000'. (handwritten)\n\nConverse College\n000663\nHerbarium\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "COME CONV\nMETRIC\nConverse College Herbarium\nCONV0002303\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\n2386\nNO.\nCOLLECTOR(S)\nvic. Upper Indian Cr.\nLOC.\nSwain Co., N. C.\n4/281936\nGalax aphylla, L.\nConverse College\n000662\nHerbarium\nIn woods loam on N. facing slope.\n@ about 3000'.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.080000000000001e-05,
+      "total_cost": 0.0007323,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 127
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2127,
+    "output": 426,
+    "cost_in": 0.00021270000000000002,
+    "cost_out": 0.00017040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCONV\n\nConverse College Herbarium\nCONV0002303\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(s) H. M. JENNISON NO. 2386\nVic. Upper Indian Cr.\nLOC. Swain Co., N. C. 9/28 1936 (handwritten)\n\n*Galax aphylla*, L.\n\nIn woods loam on N. facing slope.\n@ about 3000'. (handwritten)\n\nConverse College\n000663\nHerbarium\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCOME CONV\nMETRIC\nConverse College Herbarium\nCONV0002303\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\n2386\nNO.\nCOLLECTOR(S)\nvic. Upper Indian Cr.\nLOC.\nSwain Co., N. C.\n4/281936\nGalax aphylla, L.\nConverse College\n000662\nHerbarium\nIn woods loam on N. facing slope.\n@ about 3000'.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CONV0002303",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "2386",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9/28 1936",
+    "collectionDate": "1936-09-28",
+    "collectionDateEnd": "",
+    "habitat": "In woods loam on n. facing slope.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "N. c.",
+    "county": "Swain co.",
+    "locality": "Vic. upper indian cr.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "914",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Flora of the great smoky mountains\nnational park\nconverse college\nherbarium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015791\n\n! J. Donaldson June 2011 (Handwritten)\nPLANTS OF BUFFALO MOUNTAIN, EAST TENNESSEE\n\n*Galax urceolata*\nDiapensiaceae\n\nWashington County, TN\nBuffalo Mountain, 5070 High Ridge Rd. approx. \u00bd mile up\nthe Service Road on the right side. This plant is abundant\nthroughout the park and prefers moist or dry woodlands on\nacidic soils.\n2300 ft.\n\nStemless, evergreen perennial with flowering stalks 18-24 in.\ntall. Leaves are basal, 2-6 in. wide, circular to ovate. Flowers\nare white, and numerous in a tall raceme or spike.\n\nReference: Wildflowers of TN p. 132\nRyan N. Dixon                      5/25/11\n#10\n\nJohn C. Warden Herbarium\nETSU #13-0222\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001085,
+      "total_cost": 0.00186375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 217
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015791\n!J. Donaldson June 2011\nPLANTS OF BUFFALO MOUNTAIN, EAST TENNESSEE\nGalax urceolata\nDiapensiaceae\nWashington County, TN\nBuffalo Mountain, 5070 High Ridge Rd. approx. 1\u00bd mile up\nthe Service Road on the right side. This plant is abundant\nthroughout the park and prefers moist or dry woodlands on\nacidic soils.\n2300 ft.\nStemless, evergreen perennial with flowering stalks 18-24 in.\ntall. Leaves are basal, 2-6 in. wide, circular to ovate. Flowers\nare white, and numerous in a tall raceme or spike.\nReference: Wildflowers of TN p. 132\nRyan N. Dixon\n#10\n5/25/11\nJohn C. Warden Herbarium\nETSU #13-0222\nETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n---\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.08e-05,
+      "total_cost": 0.0007723000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 227
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2325,
+    "output": 557,
+    "cost_in": 0.00023249999999999999,
+    "cost_out": 0.0002228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015791\n\n! J. Donaldson June 2011 (Handwritten)\nPLANTS OF BUFFALO MOUNTAIN, EAST TENNESSEE\n\n*Galax urceolata*\nDiapensiaceae\n\nWashington County, TN\nBuffalo Mountain, 5070 High Ridge Rd. approx. \u00bd mile up\nthe Service Road on the right side. This plant is abundant\nthroughout the park and prefers moist or dry woodlands on\nacidic soils.\n2300 ft.\n\nStemless, evergreen perennial with flowering stalks 18-24 in.\ntall. Leaves are basal, 2-6 in. wide, circular to ovate. Flowers\nare white, and numerous in a tall raceme or spike.\n\nReference: Wildflowers of TN p. 132\nRyan N. Dixon                      5/25/11\n#10\n\nJohn C. Warden Herbarium\nETSU #13-0222\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015791\n!J. Donaldson June 2011\nPLANTS OF BUFFALO MOUNTAIN, EAST TENNESSEE\nGalax urceolata\nDiapensiaceae\nWashington County, TN\nBuffalo Mountain, 5070 High Ridge Rd. approx. 1\u00bd mile up\nthe Service Road on the right side. This plant is abundant\nthroughout the park and prefers moist or dry woodlands on\nacidic soils.\n2300 ft.\nStemless, evergreen perennial with flowering stalks 18-24 in.\ntall. Leaves are basal, 2-6 in. wide, circular to ovate. Flowers\nare white, and numerous in a tall raceme or spike.\nReference: Wildflowers of TN p. 132\nRyan N. Dixon\n#10\n5/25/11\nJohn C. Warden Herbarium\nETSU #13-0222\nETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n---\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015791",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "",
+    "collectorNumber": "10",
+    "identifiedBy": "Ryan N. Dixon",
+    "identifiedDate": "2011-05-25",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "J. Donaldson June 2011",
+    "verbatimCollectionDate": "",
+    "collectionDate": "0000-00-00",
+    "collectionDateEnd": "",
+    "habitat": "This plant is abundant throughout the park and prefers moist or dry woodlands on acidic soils.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Stemless, evergreen perennial with flowering stalks 18-24 in. tall. Leaves are basal, 2-6 in. wide, circular to ovate. Flowers are white, and numerous in a tall raceme or spike.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Washington County",
+    "locality": "Buffalo Mountain, 5070 High Ridge Rd. approx. \u00bd mile up the Service Road on the right side.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "701",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "EAST TENNESSEE STATE UNIVERSITY\nPLANTS OF BUFFALO MOUNTAIN, EAST TENNESSEE\nDiapensiaceae\n2300 ft.\nReference Wildflowers of TN p. 132\nJohn C. Warden Herbarium\nETSU #13-0222\nETSU\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087809\n(Handwritten \"14\")\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\n\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\n\nHerbarium\nDepartment of Biology\n\nGALAX APHYLLA L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nColl.: Raymond Athey No. 3055 Date: 6-4-75\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008,
+      "total_cost": 0.00157875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 160
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087809\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\nGALAX APHYLLA L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nColl.: Raymond Athey\nNo. 3055\nDate: 6-4-75\ntg\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8e-05,
+      "total_cost": 0.0007395000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 145
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2185,
+    "output": 491,
+    "cost_in": 0.0002185,
+    "cost_out": 0.0001964
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087809\n(Handwritten \"14\")\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\n\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\n\nHerbarium\nDepartment of Biology\n\nGALAX APHYLLA L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nColl.: Raymond Athey No. 3055 Date: 6-4-75\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087809\nHERBARIUM\nWESTERN KY. UNIVERSITY\n8895\nVASCULAR FLORA OF KENTUCKY\nCounty: Bell\nGALAX APHYLLA L.\nPineville, Ky.; Dry open woods on Rock Hotel\nTrail in Pine Mountain State Park.\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nColl.: Raymond Athey\nNo. 3055\nDate: 6-4-75\ntg\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087809",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Raymond Athey",
+    "collectorNumber": "3055",
+    "identifiedBy": "Mason Brock, Austin Peay State University (APSC)",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "6-4-75",
+    "collectionDate": "1975-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Dry open woods on rock hotel trail in pine mountain state park.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "Bell",
+    "locality": "Pineville, Ky.; dry open woods on rock hotel trail in pine mountain state park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\n(Handwritten 14)\nHerbarium\nWestern Ky. University\n8895\nVascular flora of Kentucky\nDepartment of biology\ntg"
+  }
+}

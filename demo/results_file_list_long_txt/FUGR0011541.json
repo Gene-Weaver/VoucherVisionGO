@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011541\n5798\n\nFURMAN UNIVERSITY HERBARIUM\nNAME: *Galax aphylla* (L.)\nGalax\nOconee\n\nDATE May 2, 1931 COLLECTOR: C. W. Petty\nFAMILY: DIAPENSIACEAE (Diapensia F.)\n\n\n*Handwritten text*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00044,
+      "total_cost": 0.00121875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 88
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011541\nINCHES\nFURMAN\nMETRIC 1\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5798\nFURMAN UNIVERSITY HERBARIUM\nNAME: Galax aphylla (L.)\nGalax\nOconee\nDATE May 2,1931 COLLECTOR: C. W. Petty\nFAMILY: DIAPENSIACEAE (Diapensia F.)\n\n\nGalax aphylla\nDiapensia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.52e-05,
+      "total_cost": 0.0007267,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 113
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2090,
+    "output": 450,
+    "cost_in": 0.00020899999999999998,
+    "cost_out": 0.00018
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFurman University Herbarium\nFUGR0011541\n5798\n\nFURMAN UNIVERSITY HERBARIUM\nNAME: *Galax aphylla* (L.)\nGalax\nOconee\n\nDATE May 2, 1931 COLLECTOR: C. W. Petty\nFAMILY: DIAPENSIACEAE (Diapensia F.)\n\n\n*Handwritten text*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nFurman University Herbarium\nFUGR0011541\nINCHES\nFURMAN\nMETRIC 1\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5798\nFURMAN UNIVERSITY HERBARIUM\nNAME: Galax aphylla (L.)\nGalax\nOconee\nDATE May 2,1931 COLLECTOR: C. W. Petty\nFAMILY: DIAPENSIACEAE (Diapensia F.)\n\n\nGalax aphylla\nDiapensia\n\n",
+  "formatted_json": {
+    "catalogNumber": "FUGR0011541",
+    "scientificName": "Galax aphylla (l.)",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(l.)",
+    "collectedBy": "C. w. petty",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 2, 1931",
+    "collectionDate": "1931-05-02",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "South carolina",
+    "stateProvince": "",
+    "county": "Oconee",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Furman University Herbarium\n5798\nFurman University Herbarium\nFamily diapensiaceae (diapensia f.)\nGalax aphylla\nDiapensia\n3300 poinsett highway\nGreenville, south carolina 29613"
+  }
+}

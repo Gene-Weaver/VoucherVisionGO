@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015488\n\nHERBARIUM\nAppalachian State\nTeachers College\nNo. 654\n\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\n\nFamily Diapensiaceae\nName *Galax aphylla* (L.)\nHabitat Moist Woodland\nCone Estate\nLocality Watauga County                      Elev. 3500\nCollector W. L. Mayberry                     Date 6-21-55 No.\n\n147 (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008199999999999999,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 1\n21\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015488\n6\nPRESERVED\nMATERIALS\n9\n110\n11 12 1/3 1/4 115\nCAROLINA\nBurlington, NC 27215-1-800-334-5551\n61\n7\n8\nHERBARIUM\nAppalachian State\u2122\nTeachers College\nNo. 654\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\nFamily Diapensiaceae\nName Galax aphylla (L.)\nHabitat Moist Woodland\nCone Estate\nLocality Watauga County\nElev. 3500\nCollector W. L. Mayberry\nDat6-21-55 No..\n147\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8e-05,
+      "total_cost": 0.0007615,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 200
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2231,
+    "output": 503,
+    "cost_in": 0.0002231,
+    "cost_out": 0.0002012
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015488\n\nHERBARIUM\nAppalachian State\nTeachers College\nNo. 654\n\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\n\nFamily Diapensiaceae\nName *Galax aphylla* (L.)\nHabitat Moist Woodland\nCone Estate\nLocality Watauga County                      Elev. 3500\nCollector W. L. Mayberry                     Date 6-21-55 No.\n\n147 (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 1\n21\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015488\n6\nPRESERVED\nMATERIALS\n9\n110\n11 12 1/3 1/4 115\nCAROLINA\nBurlington, NC 27215-1-800-334-5551\n61\n7\n8\nHERBARIUM\nAppalachian State\u2122\nTeachers College\nNo. 654\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\nFamily Diapensiaceae\nName Galax aphylla (L.)\nHabitat Moist Woodland\nCone Estate\nLocality Watauga County\nElev. 3500\nCollector W. L. Mayberry\nDat6-21-55 No..\n147\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015488",
+    "scientificName": "Galax aphylla (l.)",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(l.)",
+    "collectedBy": "W. l. mayberry",
+    "collectorNumber": "147",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-21-55",
+    "collectionDate": "1955-06-21",
+    "collectionDateEnd": "",
+    "habitat": "Moist woodland",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Watauga county",
+    "locality": "Cone estate",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Living\ncultures\npreserved\nmaterials\ncarolina\nburlington, nc 27215 1-800-334-5551\nappalachian state university herbarium\nherbarium\nappalachian state\nteachers college\nno. 654\nherbarium appalachian state teachers college\nboone, n. c.\nfamily diapensiaceae\nname galax aphylla (l.)\nelev. 3500"
+  }
+}

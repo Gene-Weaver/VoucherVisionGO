@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax aphylla Colts-foot.\nHighlands, N. C.\n\nHERBARIUM OF THE UNIVERSITY OF COLORADO\n*Galax aphylla* Colt's foot. (handwritten)\n\n32494\nHERBARIUM\nUNIVERSITY OF\nCOLORADO\n\nFrom Highlands, N. C., 1901. Gift of Mrs. William Duane.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00041000000000000005,
+      "total_cost": 0.0011887500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 82
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC SYSTEM 21\n3\n4\n5\n6\nINCHES\n7\nsl\n\u0623\u0648\nilo\nBAUSCH & LOMB OPTICAL CO.\nROCHESTER, N. Y., U. S. A.\n31\n12\n113\n14\n15\n6\nUniversity of Colorado Herbarium (COLO)\n02049997\nGalax aphylla - Colts-foot.\nHighlands, N. C.\nHERBARIUM OF THE UNIVERSITY OF COLORADO\nGalax aphylla colt's foot.\n32494\nHERBARIUM\nUNIVERSITY OF\nCOLORADO\nFrom Highlands, N. C., 1901. Gift of Mrs. William Duane.\n\n\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.680000000000001e-05,
+      "total_cost": 0.0007483000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2129,
+    "output": 407,
+    "cost_in": 0.0002129,
+    "cost_out": 0.00016280000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax aphylla Colts-foot.\nHighlands, N. C.\n\nHERBARIUM OF THE UNIVERSITY OF COLORADO\n*Galax aphylla* Colt's foot. (handwritten)\n\n32494\nHERBARIUM\nUNIVERSITY OF\nCOLORADO\n\nFrom Highlands, N. C., 1901. Gift of Mrs. William Duane.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMETRIC SYSTEM 21\n3\n4\n5\n6\nINCHES\n7\nsl\n\u0623\u0648\nilo\nBAUSCH & LOMB OPTICAL CO.\nROCHESTER, N. Y., U. S. A.\n31\n12\n113\n14\n15\n6\nUniversity of Colorado Herbarium (COLO)\n02049997\nGalax aphylla - Colts-foot.\nHighlands, N. C.\nHERBARIUM OF THE UNIVERSITY OF COLORADO\nGalax aphylla colt's foot.\n32494\nHERBARIUM\nUNIVERSITY OF\nCOLORADO\nFrom Highlands, N. C., 1901. Gift of Mrs. William Duane.\n\n\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "02049997",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Mrs. William Duane",
+    "collectorNumber": "32494",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1901",
+    "collectionDate": "1901-00-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Colts-foot.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "",
+    "locality": "Highlands, N. C.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of Colorado Herbarium (COLO)\nGalax aphylla colt's foot.\nFrom Highlands, N. C. Gift of Mrs. William Duane.\n"
+  }
+}

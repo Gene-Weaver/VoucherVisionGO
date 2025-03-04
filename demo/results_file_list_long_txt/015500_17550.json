@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nPRESERVED\nMATERIALS\n\nBOON015500\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.) Brummitt\n[Galax]\n\nAshe County: Jefferson; Mount Jefferson State Natural Area and environs,\nS.R. 1152 (elevation ca. 3500 \u2013 4683 ft). Growing along margins of\nRhododendron Trail. Grid # G6, High Elevation Red Oak Forest\ncommunity. Frequent, native perennial.\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 17550 (handwritten)\n\nDerick B. Poindexter 05-582                      8 June 2005\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010500000000000002,
+      "total_cost": 0.00182875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 210
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015500\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 272151-800-334-5551\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\n[Galax]\nAshe County: Jefferson; Mount Jefferson State Natural Area and environs,\nS.R. 1152 (elevation ca. 3500-4683 ft). Growing along margins of\nRhododendron Trail. Grid # G6, High Elevation Red Oak Forest\ncommunity. Frequent, native perennial.\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 17550\nDerick B. Poindexter\n8 June 2005\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.6e-05,
+      "total_cost": 0.0007775,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 240
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2318,
+    "output": 552,
+    "cost_in": 0.00023180000000000002,
+    "cost_out": 0.0002208
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nPRESERVED\nMATERIALS\n\nBOON015500\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.) Brummitt\n[Galax]\n\nAshe County: Jefferson; Mount Jefferson State Natural Area and environs,\nS.R. 1152 (elevation ca. 3500 \u2013 4683 ft). Growing along margins of\nRhododendron Trail. Grid # G6, High Elevation Red Oak Forest\ncommunity. Frequent, native perennial.\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 17550 (handwritten)\n\nDerick B. Poindexter 05-582                      8 June 2005\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015500\nPRESERVED\nMATERIALS\nCAROLINA\nBurlington, NC 272151-800-334-5551\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\n[Galax]\nAshe County: Jefferson; Mount Jefferson State Natural Area and environs,\nS.R. 1152 (elevation ca. 3500-4683 ft). Growing along margins of\nRhododendron Trail. Grid # G6, High Elevation Red Oak Forest\ncommunity. Frequent, native perennial.\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 17550\nDerick B. Poindexter\n8 June 2005\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015500",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Derick B. Poindexter",
+    "collectorNumber": "05-582",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8 June 2005",
+    "collectionDate": "2005-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Growing along margins of rhododendron trail. Grid # g6, high elevation red oak forest community. Frequent, native perennial.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Ashe county",
+    "locality": "Jefferson; mount jefferson state natural area and environs, s.r. 1152 (elevation ca. 3500 \u2013 4683 ft).",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "1428",
+    "elevationUnits": "ft",
+    "additionalText": "Living\ncultures\npreserved\nmaterials\nappalachian state\nuniversity\nboone, n. c.\nno. 17550\nappalachian state university herbarium [boon]\nboone, north carolina, u.s.a. 28608\ncarolina\nburlington, nc 272151-800-334-5551\ninches\nmetric 1"
+  }
+}

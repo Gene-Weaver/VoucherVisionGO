@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52163\nHERBARIUM\n\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nRockbridge COUNTY\n\nNO. 5537\n*Galax aphylla* L.\n\nTaylors Hollow 4 mi. south of Vesuvius,\nRt. 608; rich soil, foot of cliff.\n\nApr. 8, 1967\nCOLLECTORS\nR. S. Freer.\n\nUniversity of Louisiana at Monroe\nNLU0134124\nExchange Specimen From *Lynchburg College* (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00066,
+      "total_cost": 0.00143875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 132
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52163\nHERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nRockbridge\nCOUNTY\nNO. 5537\nGalax aphylla L.\nTaylors Hollow 4 mi. south of Vesuvius,\nRt. 608; rich soil, foot of cliff.\nCOLLECTORS\nR. S. Freer.\nApr. 8, 1967\nUniversity of Louisiana at Monroe\nNLU0134124\nExchange Specimen From Lynchburg College\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8400000000000004e-05,
+      "total_cost": 0.0007299,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 121
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2141,
+    "output": 456,
+    "cost_in": 0.00021410000000000003,
+    "cost_out": 0.00018240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52163\nHERBARIUM\n\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nRockbridge COUNTY\n\nNO. 5537\n*Galax aphylla* L.\n\nTaylors Hollow 4 mi. south of Vesuvius,\nRt. 608; rich soil, foot of cliff.\n\nApr. 8, 1967\nCOLLECTORS\nR. S. Freer.\n\nUniversity of Louisiana at Monroe\nNLU0134124\nExchange Specimen From *Lynchburg College* (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52163\nHERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nRockbridge\nCOUNTY\nNO. 5537\nGalax aphylla L.\nTaylors Hollow 4 mi. south of Vesuvius,\nRt. 608; rich soil, foot of cliff.\nCOLLECTORS\nR. S. Freer.\nApr. 8, 1967\nUniversity of Louisiana at Monroe\nNLU0134124\nExchange Specimen From Lynchburg College\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "52163",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. S. Freer",
+    "collectorNumber": "5537",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 8, 1967",
+    "collectionDate": "1967-04-08",
+    "collectionDateEnd": "",
+    "habitat": "Rich soil, foot of cliff.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Rockbridge",
+    "locality": "Taylors hollow 4 mi. south of vesuvius, rt. 608",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nherbarium\nplants of virginia, central blue ridge\ncounty\nuniversity of louisiana at monroe\nnlu0134124\nexchange specimen from lynchburg college"
+  }
+}

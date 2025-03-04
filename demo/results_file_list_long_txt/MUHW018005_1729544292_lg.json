@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701. U.S.A.\n\nMarshall University Herbarium\nMUHW018005\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)                 2024\n\nUNIVERSITY OF CINCINNATI\nDEPARTMENT OF BOTANY\n\n*Galax aphylla* L.\n\nFAMILY Diapensiaceae\n\nDATE Oct. 2, 1937  COLLECTOR Dorothy Parker\n\nLOCALITY Brenau College Campus, Gainesville, Ga. (handwritten)\n\nHABITAT steep slopes in woods (handwritten)\n\nForm 914-Bot.-5M-1-35\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00085,
+      "total_cost": 0.0016287499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 170
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "M/M\nINCHES\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington West Virginia 25701. U.S.A\nMarshall University Herbarium\nMUHW018005\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nUNIVERSITY OF CINCINNATI\nDEPARTMENT OF BOTANY\nGalax aphylla L.\nFAMILY Diapensiaceae\nDATE Oct.2,1937 COLLECTOR Dorothy Parker\nLOCALITY Brenau College Campus, Gainesville, Ga.\nHABITAT steep slopes in woods\nForm 914-Bot.-5M-1-35\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 480,
+    "cost_in": 0.0002221,
+    "cost_out": 0.000192
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701. U.S.A.\n\nMarshall University Herbarium\nMUHW018005\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)                 2024\n\nUNIVERSITY OF CINCINNATI\nDEPARTMENT OF BOTANY\n\n*Galax aphylla* L.\n\nFAMILY Diapensiaceae\n\nDATE Oct. 2, 1937  COLLECTOR Dorothy Parker\n\nLOCALITY Brenau College Campus, Gainesville, Ga. (handwritten)\n\nHABITAT steep slopes in woods (handwritten)\n\nForm 914-Bot.-5M-1-35\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nM/M\nINCHES\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington West Virginia 25701. U.S.A\nMarshall University Herbarium\nMUHW018005\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nUNIVERSITY OF CINCINNATI\nDEPARTMENT OF BOTANY\nGalax aphylla L.\nFAMILY Diapensiaceae\nDATE Oct.2,1937 COLLECTOR Dorothy Parker\nLOCALITY Brenau College Campus, Gainesville, Ga.\nHABITAT steep slopes in woods\nForm 914-Bot.-5M-1-35\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW018005",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Dorothy Parker",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle L. Gaynor",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Oct. 2, 1937",
+    "collectionDate": "1937-10-02",
+    "collectionDateEnd": "",
+    "habitat": "Steep slopes in woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "",
+    "locality": "Brenau College Campus, Gainesville, Ga.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701. U.S.A.\nUNIVERSITY OF CINCINNATI\nDEPARTMENT OF BOTANY\nFAMILY Diapensiaceae\nForm 914-Bot.-5M-1-35"
+  }
+}

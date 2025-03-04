@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059507\n\n882\nVirginia Polytechnic Institute\nDepartment of Biology\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 45\u00b5l\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMontgomery Co.\nFLORA OF VIRGINIA\nHerbarium Virginia Polytechnic Institute\nMontgomery County\n*Galax aphylla* L.\nPrices Mountain, common\nCollector *A.B. Massey* Date 6-19-25\n(Handwritten text: *A.B. Massey*, *Montgomery Co.*, *Galax aphylla* L., Prices Mountain, common)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.0017237499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nFLORA OF VIRGINIA\nHerbarium Virginia Polytechnic Institute\nMontgomery County\nGalax aphylla L.\nPrices mountain, common\nCollector\nABMorsey\nDate 6-19-27\nMontgomery Co.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.3200000000000007e-05,
+      "total_cost": 0.0007247,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 108
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2214,
+    "output": 521,
+    "cost_in": 0.0002214,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059507\n\n882\nVirginia Polytechnic Institute\nDepartment of Biology\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 45\u00b5l\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMontgomery Co.\nFLORA OF VIRGINIA\nHerbarium Virginia Polytechnic Institute\nMontgomery County\n*Galax aphylla* L.\nPrices Mountain, common\nCollector *A.B. Massey* Date 6-19-25\n(Handwritten text: *A.B. Massey*, *Montgomery Co.*, *Galax aphylla* L., Prices Mountain, common)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nFLORA OF VIRGINIA\nHerbarium Virginia Polytechnic Institute\nMontgomery County\nGalax aphylla L.\nPrices mountain, common\nCollector\nABMorsey\nDate 6-19-27\nMontgomery Co.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059507",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A.B. Massey",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-19-25",
+    "collectionDate": "1925-06-19",
+    "collectionDateEnd": "",
+    "habitat": "Prices Mountain, common",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 45\u00b5l",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Montgomery",
+    "locality": "Prices Mountain, common",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\n882\nVirginia Polytechnic Institute\nDepartment of Biology\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nFLORA OF VIRGINIA\nHerbarium Virginia Polytechnic Institute\nGalax aphylla L.\nDate 6-19-27\nMontgomery Co.\nGalax aphylla"
+  }
+}

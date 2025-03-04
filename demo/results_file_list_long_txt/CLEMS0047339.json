@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n91534\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb next to road.\n\nMACON CO.: North side of lake at Highlands Biological Station; East of \ndowntown Highlands. 35\u00b003.3'N, 83\u00b011.3'W.\n\n14 July 2007                                                     Charles N. Horn #17742\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.00146875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5\ncm\n6 7 8 9 10\ncopyright reserved\nCLEMS\n91534\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0047339\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensaceae\nCommon herb next to road.\nMACON CO.: North side of lake at Highlands Biological Station; East of\ndowntown Highlands. 35\u00b003.3'N, 83\u00b011.3'W.\n14 July 2007\nCharles N. Horn #17742\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 516,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n91534\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb next to road.\n\nMACON CO.: North side of lake at Highlands Biological Station; East of \ndowntown Highlands. 35\u00b003.3'N, 83\u00b011.3'W.\n\n14 July 2007                                                     Charles N. Horn #17742\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5\ncm\n6 7 8 9 10\ncopyright reserved\nCLEMS\n91534\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0047339\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensaceae\nCommon herb next to road.\nMACON CO.: North side of lake at Highlands Biological Station; East of\ndowntown Highlands. 35\u00b003.3'N, 83\u00b011.3'W.\n14 July 2007\nCharles N. Horn #17742\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0047339",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "17742",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "14 July 2007",
+    "collectionDate": "2007-07-14",
+    "collectionDateEnd": "",
+    "habitat": "Common herb next to road.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Macon co.",
+    "locality": "North side of lake at highlands biological station; east of downtown highlands. 35\u00b003.3'n, 83\u00b011.3'w.",
+    "verbatimCoordinates": "35\u00b003.3'N, 83\u00b011.3'W.",
+    "decimalLatitude": "35.055",
+    "decimalLongitude": "-83.188333",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "91534\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax urceolata"
+  }
+}

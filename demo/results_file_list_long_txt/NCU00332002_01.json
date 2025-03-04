@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\n\nHERBARIUM\nAppalachian State\nTeachers College\nNo. 657\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332002\n\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\n\nFamily Diapensiaceae\nName *Galax aphylla* L.\nHabitat loamy soil\n\nLocality Watauga Co., N.C. Elev. 3500\nCollector Earp: Isenhour-Meredith Date 8-4-53 No. \u2026\n\n(Handwritten text: *Galax aphylla*, loamy, Watauga, Earp: Isenhour-Meredith)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.0015237500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nNCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nUniversity of North Carolina Herbarium\nHerbarium\nAppalachian State\nBoone N.C\n124\nNORTH\nERSITY OF\nCAROLINA\nHERBARIUM\n86570\nHERBARIUM.\nAppalachian State\nTeachers College.\nNo. 657\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332002\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\nFamily Diapensiaceae\nName Galax aphylla L.\nHabitat loamy soil\nLocality Watauga Co., N.C.\nElev. 3500\nCollector Earp- Isenhour-Meredith Date 8-4-53 No.\nMADE BY THE GENERAL BIOLOGICAL SUPPLY HOUSE, INo., 761\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.6e-05,
+      "total_cost": 0.0007675,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 215
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2253,
+    "output": 486,
+    "cost_in": 0.0002253,
+    "cost_out": 0.0001944
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\n\nHERBARIUM\nAppalachian State\nTeachers College\nNo. 657\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332002\n\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\n\nFamily Diapensiaceae\nName *Galax aphylla* L.\nHabitat loamy soil\n\nLocality Watauga Co., N.C. Elev. 3500\nCollector Earp: Isenhour-Meredith Date 8-4-53 No. \u2026\n\n(Handwritten text: *Galax aphylla*, loamy, Watauga, Earp: Isenhour-Meredith)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nNCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nUniversity of North Carolina Herbarium\nHerbarium\nAppalachian State\nBoone N.C\n124\nNORTH\nERSITY OF\nCAROLINA\nHERBARIUM\n86570\nHERBARIUM.\nAppalachian State\nTeachers College.\nNo. 657\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332002\nHerbarium Appalachian State Teachers College\nBOONE, N. C.\nFamily Diapensiaceae\nName Galax aphylla L.\nHabitat loamy soil\nLocality Watauga Co., N.C.\nElev. 3500\nCollector Earp- Isenhour-Meredith Date 8-4-53 No.\nMADE BY THE GENERAL BIOLOGICAL SUPPLY HOUSE, INo., 761\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332002",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Earp Isenhour-Meredith",
+    "collectorNumber": "\u2026",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8-4-53",
+    "collectionDate": "1953-08-04",
+    "collectionDateEnd": "",
+    "habitat": "Loamy soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Watauga county",
+    "locality": "Watauga co., n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Herbarium\nAppalachian state\nTeachers college.\nNo. 657\nUniversity of north carolina herbarium\nHerbarium appalachian state teachers college\nBoone, n. c.\nFamily diapensiaceae\nName galax aphylla l.\nElev. 3500\nMade by the general biological supply house, ino., 761"
+  }
+}

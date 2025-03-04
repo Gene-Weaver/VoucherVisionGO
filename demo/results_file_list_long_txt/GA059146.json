@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "29169\nUNIV. OF GEORGIA\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\n\nNo.: 4557                                       June 8, 1947\nGeol. Prov.: Blue Ridge                      Dawson County\n                                                      2200 ft. Elev.\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00084,
+      "total_cost": 0.00161875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 168
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY OF GEORGIA\n29169\nUNIV. OF GEORGIA\nP\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\nGA059146\nInches\n1\n2\n3\n4\n5\n6\n7\n8\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001152,
+      "total_cost": 0.0007967,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 288
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2331,
+    "output": 505,
+    "cost_in": 0.00023310000000000003,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n29169\nUNIV. OF GEORGIA\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\n\nNo.: 4557                                       June 8, 1947\nGeol. Prov.: Blue Ridge                      Dawson County\n                                                      2200 ft. Elev.\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY OF GEORGIA\n29169\nUNIV. OF GEORGIA\nP\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\nGA059146\nInches\n1\n2\n3\n4\n5\n6\n7\n8\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "29169",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Arthur Cronquist",
+    "collectorNumber": "4557",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 8, 1947",
+    "collectionDate": "1947-06-08",
+    "collectionDateEnd": "",
+    "habitat": "In open & shaded places just above amicolola falls. Flowers white. Common.",
+    "chromosomeCount": "n =",
+    "guardCell": "Based on average guard cell volume of \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dawson County",
+    "locality": "In open & shaded places just above Amicolola Falls.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Univ. of georgia\nHerbarium of the university of north carolina\nPlants of georgia\nUniversity of georgia\nGeol. prov. blue ridge\nSpecimen examined for\nGeorgia atlas project\n9 november 2005\nimaged 2013"
+  }
+}

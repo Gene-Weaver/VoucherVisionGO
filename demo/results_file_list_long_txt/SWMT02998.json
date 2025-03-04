@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "RHODES COLLEGE\nSWMT02998\nHERBARIUM OF\nSOUTHWESTERN AT MEMPHIS\nSWMT\n\n235\nFlora of North Carolina\nJOHN H. DAVIS, JR.\n*Galax aphylla*                      Galaceae\nScientific Name\n*Galax* (handwritten)\nCommon Name\nHabitat                           Montreat, N. C. (handwritten)\nDate                             June, 1937 (handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005,
+      "total_cost": 0.0012787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 100
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "RHODES COLLEGE\nSWMT02998\nHERBARIUM OF\nSOUTHWESTERN AT MEMPHIS\nSWMT\nFlora of North Carolina\nJOHN H. DAVIS, JR.\nGalaceae\nScientific Name\nGalax aphylla\nCommon Name\nGalx\nHabitat\nMontreat, N. C.\nJune, 1937\nDate.\n235\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.4000000000000007e-05,
+      "total_cost": 0.0007155,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 85
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2086,
+    "output": 439,
+    "cost_in": 0.00020860000000000003,
+    "cost_out": 0.0001756
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRHODES COLLEGE\nSWMT02998\nHERBARIUM OF\nSOUTHWESTERN AT MEMPHIS\nSWMT\n\n235\nFlora of North Carolina\nJOHN H. DAVIS, JR.\n*Galax aphylla*                      Galaceae\nScientific Name\n*Galax* (handwritten)\nCommon Name\nHabitat                           Montreat, N. C. (handwritten)\nDate                             June, 1937 (handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRHODES COLLEGE\nSWMT02998\nHERBARIUM OF\nSOUTHWESTERN AT MEMPHIS\nSWMT\nFlora of North Carolina\nJOHN H. DAVIS, JR.\nGalaceae\nScientific Name\nGalax aphylla\nCommon Name\nGalx\nHabitat\nMontreat, N. C.\nJune, 1937\nDate.\n235\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "SWMT02998",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "John h. Davis, jr.",
+    "collectorNumber": "235",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June, 1937",
+    "collectionDate": "1937-06-00",
+    "collectionDateEnd": "",
+    "habitat": "Montreat, n. c.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Montreat, n. c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Rhodes college\nHerbarium of\nSouthwestern at memphis\nSwmt\nFlora of north carolina\nGalaceae\nCommon name\nGalx\nDate.\n\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102105\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326369\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nCherokee County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nOak-hickory forest, 1.7 miles sw.\nof Murphy on U.S. 64.\n\nA. E. Radford  11659                May 27, 1956\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF NORTH\nHERBARIUM\nCAROLINA\n102105\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326369\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nCherokee County\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, 1.7 miles Sw.\nof Murphy on U.S. 64\nA. E. Radford 11659\nMay 27, 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2149,
+    "output": 467,
+    "cost_in": 0.0002149,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102105\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326369\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nCherokee County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nOak-hickory forest, 1.7 miles sw.\nof Murphy on U.S. 64.\n\nA. E. Radford  11659                May 27, 1956\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nOF NORTH\nHERBARIUM\nCAROLINA\n102105\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326369\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nCherokee County\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, 1.7 miles Sw.\nof Murphy on U.S. 64\nA. E. Radford 11659\nMay 27, 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326369",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "11659",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 27, 1956",
+    "collectionDate": "1956-05-27",
+    "collectionDateEnd": "",
+    "habitat": "Oak-hickory forest, 1.7 miles sw. of Murphy on u.s. 64",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Cherokee county",
+    "locality": "1.7 miles sw. of Murphy on u.s. 64",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nherbarium\n102105\nherbarium of the university of north carolina\ncollected for the flora of the carolinas"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059474\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 463\u00b5\u00b2\nGuy L. Nesom, 1975\n\nHerbarium, Virginia Polytechnic Institute\nSOUTHWESTERN VIRGINIA\nMontgomery County\n\n*Galax aphylla* L.\nAlong ridge-road on Brush Mountain in\nrocky sandy soil\n11-81 A. B. Massey\nJ. P. Newman\n5-29, 1936\n\nHerbarium\nBiology Department 26,553\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00085,
+      "total_cost": 0.0016287499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 170
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Herbarium\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of463u2\nGuy L. Nesom, 1975\nHerbarium, Virginia Polytechnic Institute\nSOUTHWESTERN VIRGINIA\nMontgomery County\nGalax aphylla L.\nAlong ridge-road on Bruch Mountain in\nrocky randy soil\nA. B. Massey\nJ.P. Newman\n5-29,1936\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059474\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.720000000000001e-05,
+      "total_cost": 0.0007387000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2222,
+    "output": 505,
+    "cost_in": 0.0002222,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059474\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 463\u00b5\u00b2\nGuy L. Nesom, 1975\n\nHerbarium, Virginia Polytechnic Institute\nSOUTHWESTERN VIRGINIA\nMontgomery County\n\n*Galax aphylla* L.\nAlong ridge-road on Brush Mountain in\nrocky sandy soil\n11-81 A. B. Massey\nJ. P. Newman\n5-29, 1936\n\nHerbarium\nBiology Department 26,553\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHerbarium\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of463u2\nGuy L. Nesom, 1975\nHerbarium, Virginia Polytechnic Institute\nSOUTHWESTERN VIRGINIA\nMontgomery County\nGalax aphylla L.\nAlong ridge-road on Bruch Mountain in\nrocky randy soil\nA. B. Massey\nJ.P. Newman\n5-29,1936\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059474\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vpi-v-0059474",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poir.) brummit",
+    "collectedBy": "A. b. massey, j. p. newman",
+    "collectorNumber": "11-81",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-29, 1936",
+    "collectionDate": "1936-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Along ridge-road on brush mountain in rocky sandy soil",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 463\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Montgomery county",
+    "locality": "Southwestern virginia",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey herbarium\nVirginia polytechnic institute\nHerbarium of the university of north carolina\nHerbarium\nBiology department 26,553\nVirginia polytechnic institute\nGalax aphylla l.\nGalax urceolata\nGalax aphylla"
+  }
+}

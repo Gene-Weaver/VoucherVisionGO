@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MSCCPPE0411\nMSCCPPCC0411\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n466285\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332702\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nCity of Newport News\n*Galax aphylla* L.                                                               11 June 1973\n\nSteep bank of ravine under red maple, mountain\nlaurel, oak, and beech. Behind trailer court\non Madison Rd., Fort Eustis.\n\nPhyllis K. Appler\nwith G.W. Hall                                                                      No. 672\n\n*(Handwritten Text)*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPP\u00c90411\nMSCCPPCC0411\ncm\ncopyright reserved\nUniversity of\nat Cha\nNCL\nx-rite\ncolorchecker\nNORTH\nERSITY OF\nCAROLINA\nHERBARIUM\nUNI\n466285\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332702\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nCity of Newport News 11 June 1973\nGalax aphylla L.\nSteep bank of ravine under red maple, mountain\nlaurel, oak, and beech. Behind trailer court\non Madison Rd., Fort Eustis.\nPhyllis K. Appler\nNo. 672\nCollector: with G.W. Hall\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.04e-05,
+      "total_cost": 0.0007519,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 176
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 517,
+    "cost_in": 0.0002232,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMSCCPPE0411\nMSCCPPCC0411\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n466285\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332702\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nCity of Newport News\n*Galax aphylla* L.                                                               11 June 1973\n\nSteep bank of ravine under red maple, mountain\nlaurel, oak, and beech. Behind trailer court\non Madison Rd., Fort Eustis.\n\nPhyllis K. Appler\nwith G.W. Hall                                                                      No. 672\n\n*(Handwritten Text)*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPP\u00c90411\nMSCCPPCC0411\ncm\ncopyright reserved\nUniversity of\nat Cha\nNCL\nx-rite\ncolorchecker\nNORTH\nERSITY OF\nCAROLINA\nHERBARIUM\nUNI\n466285\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332702\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nCity of Newport News 11 June 1973\nGalax aphylla L.\nSteep bank of ravine under red maple, mountain\nlaurel, oak, and beech. Behind trailer court\non Madison Rd., Fort Eustis.\nPhyllis K. Appler\nNo. 672\nCollector: with G.W. Hall\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332702",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Phyllis K. Appler, G.W. Hall",
+    "collectorNumber": "672",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 June 1973",
+    "collectionDate": "1973-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Steep bank of ravine under red maple, mountain laurel, oak, and beech.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "City of newport news",
+    "locality": "Behind trailer court on Madison Rd., Fort Eustis.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "MSCCPPE0411\nMSCCPPCC0411\nUniversity of\nat Cha\nNCL\nx-rite\ncolorchecker\nNORTH\nERSITY OF\nCAROLINA\nHERBARIUM\nUNI\n466285\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nCollector"
+  }
+}

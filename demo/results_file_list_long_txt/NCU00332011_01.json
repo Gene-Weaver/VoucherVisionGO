@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\nCopyright reserved\n\nMSCCPPCC0411\nmm\nx-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332011\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n3\n\n*Galax aphylla* L.\nWilkes Co. - 6 mi. Wilkesboro\n\nNo. ______ Date Oct. 13, 1929 Coll. Velma Mathews\n                                       Rebecca Ward\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n66649\n\nHandwritten text: *Galax aphylla* L., Wilkes Co. - 6 mi. Wilkesboro, Oct. 13, 1929, Velma Mathews, Rebecca Ward\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00087,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8\ncm\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nmm\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332011\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nWilkes Co.-6 mi. Wilkeshoro\nNo.\nDate Oct. 13,1929 Coll. Velma Mathews\nRebecca Ward\nOF NORTH\nHERBARIUM\nCAROLINA\n66649\nHandwritten text:\nVelma Mathews\nRebecca Ward\nOct. 13,1929\nGalax aphylla L.\nWilkes Co.-6 mi. Wilkeshoro\n3\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.16e-05,
+      "total_cost": 0.0007531,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 179
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2245,
+    "output": 564,
+    "cost_in": 0.0002245,
+    "cost_out": 0.00022560000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\nCopyright reserved\n\nMSCCPPCC0411\nmm\nx-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332011\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n3\n\n*Galax aphylla* L.\nWilkes Co. - 6 mi. Wilkesboro\n\nNo. ______ Date Oct. 13, 1929 Coll. Velma Mathews\n                                       Rebecca Ward\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n66649\n\nHandwritten text: *Galax aphylla* L., Wilkes Co. - 6 mi. Wilkesboro, Oct. 13, 1929, Velma Mathews, Rebecca Ward\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8\ncm\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nmm\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332011\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nWilkes Co.-6 mi. Wilkeshoro\nNo.\nDate Oct. 13,1929 Coll. Velma Mathews\nRebecca Ward\nOF NORTH\nHERBARIUM\nCAROLINA\n66649\nHandwritten text:\nVelma Mathews\nRebecca Ward\nOct. 13,1929\nGalax aphylla L.\nWilkes Co.-6 mi. Wilkeshoro\n3\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332011",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Velma Mathews, Rebecca Ward",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Oct. 13, 1929",
+    "collectionDate": "1929-10-13",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wilkes Co.",
+    "locality": "6 mi. Wilkesboro",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NCU\nUniversity of North Carolina\nat Chapel Hill\nCopyright reserved\nMSCCPPCC0411\nmm\nx-rite\nColorChecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n3\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n66649\nHandwritten text Galax aphylla L., Wilkes Co. - 6 mi. Wilkesboro, Oct. 13, 1929, Velma Mathews, Rebecca Ward\n0 1 2 3 4 5 6 7 8\ncm\n9 10\ncopyright reserved\nmm\nx-rite\ncolorchecker\nOF NORTH\nCAROLINA\nHandwritten text"
+  }
+}

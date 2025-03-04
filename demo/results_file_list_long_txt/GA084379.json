@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n263423\n\nGA ATLAS PROJECT:\n*Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff June 2013\n\nPLANTS OF GEORGIA 235\n\n*Galax aphylla* L.\n[Diapensiaceae]\n\nHABERSHAM CO.: Turnerville: Panther Creek Trail\noff Historic US 441. N34\u00b0 41.33 W083\u00b0 24.325.\nRhododendron understory. Clumping upright herb.\nAbundant. Cordate leaves, single scapeose flower\nspikes.\n\nColl. Cody Mullins Luedtke 45 8 April 2012\n\nIMAGED 2014\n\nUNIVERSITY OF GEORGIA\nSpecimen Examined for\nGeorgia Atlas Project\n30 July 2013\nGA084379\n(Handwritten \"30 JULY 2013\")\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00113,
+      "total_cost": 0.00190875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 226
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n263423\n\nGA ATLAS PROJECT:\n= Galax urceolata (Poir) Brummit\nGA Herbarium staff June 2013\n235\nPLANTS OF GEORGIA\nGalax aphylla L.\n[Diapensiaceae]\n\nHABERSHAM CO.: Turnerville: Panther Creek Trail\noff Historic US 441. N34\u00b0 41.33 W083\u00b0 24.325.\nRhododendron understory. Clumping upright herb.\nAbundant. Cordate leaves, single scapeose flower\nspikes.\nColl. Cody Mullins Luedtke 45 8 April 2012\n\nIMAGED 2014\nSpecimen Examined for\nGeorgia Atlas Project\n30 July 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2281,
+    "output": 526,
+    "cost_in": 0.00022810000000000001,
+    "cost_out": 0.00021040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n263423\n\nGA ATLAS PROJECT:\n*Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff June 2013\n\nPLANTS OF GEORGIA 235\n\n*Galax aphylla* L.\n[Diapensiaceae]\n\nHABERSHAM CO.: Turnerville: Panther Creek Trail\noff Historic US 441. N34\u00b0 41.33 W083\u00b0 24.325.\nRhododendron understory. Clumping upright herb.\nAbundant. Cordate leaves, single scapeose flower\nspikes.\n\nColl. Cody Mullins Luedtke 45 8 April 2012\n\nIMAGED 2014\n\nUNIVERSITY OF GEORGIA\nSpecimen Examined for\nGeorgia Atlas Project\n30 July 2013\nGA084379\n(Handwritten \"30 JULY 2013\")\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n263423\n\nGA ATLAS PROJECT:\n= Galax urceolata (Poir) Brummit\nGA Herbarium staff June 2013\n235\nPLANTS OF GEORGIA\nGalax aphylla L.\n[Diapensiaceae]\n\nHABERSHAM CO.: Turnerville: Panther Creek Trail\noff Historic US 441. N34\u00b0 41.33 W083\u00b0 24.325.\nRhododendron understory. Clumping upright herb.\nAbundant. Cordate leaves, single scapeose flower\nspikes.\nColl. Cody Mullins Luedtke 45 8 April 2012\n\nIMAGED 2014\nSpecimen Examined for\nGeorgia Atlas Project\n30 July 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "263423",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Cody Mullins Luedtke",
+    "collectorNumber": "45",
+    "identifiedBy": "Ga herbarium staff",
+    "identifiedDate": "2013-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (poir.) brummit",
+    "verbatimCollectionDate": "8 April 2012",
+    "collectionDate": "2012-04-08",
+    "collectionDateEnd": "",
+    "habitat": "Rhododendron understory. clumping upright herb. abundant. cordate leaves, single scapeose flower spikes.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Habersham co.",
+    "locality": "Turnerville panther creek trail off historic us 441. n34\u00b0 41.33 w083\u00b0 24.325.",
+    "verbatimCoordinates": "N34\u00b0 41.33 W083\u00b0 24.325",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ga atlas project\nPlants of georgia\nImaged 2014\nUniversity of georgia\nSpecimen examined for\nGeorgia atlas project\n30 july 2013\nGa084379\n(handwritten 30 july 2013)"
+  }
+}

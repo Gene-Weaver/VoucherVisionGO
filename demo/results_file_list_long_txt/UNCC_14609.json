@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT\n14609\nHERBARIUM\nCHARLOTTE\n\n*JFM 10/16/2012* (handwritten)\n*Galax urceolata* (Poiret) Brummitt (handwritten)\n\nHERBARIUM\nDiapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Burke\n\n*Galax aphylla* L.\n\nWoods area of the Virgil Hildebran Farm\nAltitude 1100 ft.\n\nS. Lail\n12 April, 1974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000665,
+      "total_cost": 0.00144375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV\nOF NORTH CAROLINA AT CHARLOTTE\n14609\nHERBARIUM\nJFM\n10/16/2012\nGalax urceolata (Poiret)\nBrommitt\nHERBARIUM Diapensiaceae\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Burke\nGalax aphylla L.\nWoods area of the Virgil Hildebran Farm\nAltitude 1100 ft.\nS. Lail 12 April, 1974\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "total_cost": 0.0007291000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2152,
+    "output": 467,
+    "cost_in": 0.0002152,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT\n14609\nHERBARIUM\nCHARLOTTE\n\n*JFM 10/16/2012* (handwritten)\n*Galax urceolata* (Poiret) Brummitt (handwritten)\n\nHERBARIUM\nDiapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Burke\n\n*Galax aphylla* L.\n\nWoods area of the Virgil Hildebran Farm\nAltitude 1100 ft.\n\nS. Lail\n12 April, 1974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIV\nOF NORTH CAROLINA AT CHARLOTTE\n14609\nHERBARIUM\nJFM\n10/16/2012\nGalax urceolata (Poiret)\nBrommitt\nHERBARIUM Diapensiaceae\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Burke\nGalax aphylla L.\nWoods area of the Virgil Hildebran Farm\nAltitude 1100 ft.\nS. Lail 12 April, 1974\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "14609",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "S. Lail",
+    "collectorNumber": "",
+    "identifiedBy": "Jfm",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "12 April, 1974",
+    "collectionDate": "1974-04-12",
+    "collectionDateEnd": "",
+    "habitat": "Woods area of the virgil hildebran farm",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Burke",
+    "locality": "Woods area of the virgil hildebran farm",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "335",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of north carolina at charlotte\nHerbarium\nHerbarium diapensiaceae\nPlants of north carolina\nGalax urceolata\nGalax aphylla"
+  }
+}

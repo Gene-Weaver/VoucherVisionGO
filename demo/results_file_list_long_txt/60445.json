@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n60445\nWILLIAM & MARY\nWILD\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nDepartment of Biology\nWilliamsburg, Virginia 23185\nVIRGINIA\n\nIsle of Wight County\nMay 17, 1989\n\n*Galax urceolata* (Poiret) Brummitt\n\nLocally abundant on crest of hill along south\nside of Rattlesnake Swamp near St. Rt. 625\nbridge, c. 3/10 mi. W of intersection with St.\nRt. 681, ca. 1.5 mi. NE of Raynor\n\nCollector: Gregory M. Plunkett #227\n\nHandwritten Text: 681, ca. 1.5 mi. NE of Raynor\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000955,
+      "total_cost": 0.00173375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 191
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm l\n10\n20\n30\nNO. 305 ME\n40 50\n16ths\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\n120\nMADE IN US\n5\nCHARTERED 1693\n130 140 150\nINLESS STEEL\n6\nCOLLEGE OF\n60445\nWILLIAM & MARY\nWILD\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nDepartment of Biology\nWilliamsburg, Virginia 23185\nVIRGINIA\nIsle of Wight County\nMay 17, 1989\nGalax urceolata (Poiret) Brummitt\nLocally abundant on crest of hill along south\nside of Rattlesnake Swamp near St. Rt. 625\nbridge, c. 3/10 mi. W of intersection with St.\nRt. 681, ca. 1.5 mi. Ne of Raynor\nCollector: Gregory M. Plunkett #227\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001004,
+      "total_cost": 0.0007819000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 251
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2321,
+    "output": 504,
+    "cost_in": 0.00023210000000000003,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n60445\nWILLIAM & MARY\nWILD\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nDepartment of Biology\nWilliamsburg, Virginia 23185\nVIRGINIA\n\nIsle of Wight County\nMay 17, 1989\n\n*Galax urceolata* (Poiret) Brummitt\n\nLocally abundant on crest of hill along south\nside of Rattlesnake Swamp near St. Rt. 625\nbridge, c. 3/10 mi. W of intersection with St.\nRt. 681, ca. 1.5 mi. NE of Raynor\n\nCollector: Gregory M. Plunkett #227\n\nHandwritten Text: 681, ca. 1.5 mi. NE of Raynor\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm l\n10\n20\n30\nNO. 305 ME\n40 50\n16ths\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\n120\nMADE IN US\n5\nCHARTERED 1693\n130 140 150\nINLESS STEEL\n6\nCOLLEGE OF\n60445\nWILLIAM & MARY\nWILD\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nDepartment of Biology\nWilliamsburg, Virginia 23185\nVIRGINIA\nIsle of Wight County\nMay 17, 1989\nGalax urceolata (Poiret) Brummitt\nLocally abundant on crest of hill along south\nside of Rattlesnake Swamp near St. Rt. 625\nbridge, c. 3/10 mi. W of intersection with St.\nRt. 681, ca. 1.5 mi. Ne of Raynor\nCollector: Gregory M. Plunkett #227\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "60445",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Gregory M. Plunkett",
+    "collectorNumber": "227",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 17, 1989",
+    "collectionDate": "1989-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Locally abundant on crest of hill along south side of Rattlesnake Swamp near St. Rt. 625 bridge",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Isle of Wight County",
+    "locality": "C. 3/10 mi. W of intersection with St. Rt. 681, ca. 1.5 mi. Ne of Raynor",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nChartered 1693\nCollege of\nWilliam & mary\nWild\nHerbarium of the college of\nWilliam and mary\nDepartment of biology\nWilliamsburg, Virginia 23185\nVirginia"
+  }
+}

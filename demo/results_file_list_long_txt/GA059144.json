@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n168285\n\nSpecimen Examined for\nGeorgia Atlas Project\n\n9 November 2005 (handwritten)\n\nHARALSON COUNTY, GEORGIA\n\n*Galax urceolata* (Poir.) Brummet\n\nSteep slopes along Beach Creek in area\nknown locally as Devil's Kitchen. Off GA\n120 NW of Bremen. In dry, rocky soil.\nAbundant on slopes of ravine.\n\nwith N. Coile, S. Sherman, H. Currie,\nJ. Allison and E. Lynes\n\nM. O. Moore 639                      25 April 1986\nThe University of Georgia                 Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000865,
+      "total_cost": 0.0016437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n168285\n6277\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHARALSON COUNTY, GEORGIA\nGalax urceolata (Poir.) Brummet\nSteep slopes along Beach Creek in area\nknown locally as Devil's Kitchen. Off GA\n120 NW of Bremen. In dry, rocky soil.\nAbundant on slopes of ravine.\nwith N. Coile, S. Sherman, H. Currie,\nJ. Allison and E. Lynes\nM. 0. Moore 639\nThe University of Georgia\n25 April 1986\nAthens. GA, U.S.A.\nIMAGED 2013\n---\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.879999999999999e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2218,
+    "output": 484,
+    "cost_in": 0.0002218,
+    "cost_out": 0.00019360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n168285\n\nSpecimen Examined for\nGeorgia Atlas Project\n\n9 November 2005 (handwritten)\n\nHARALSON COUNTY, GEORGIA\n\n*Galax urceolata* (Poir.) Brummet\n\nSteep slopes along Beach Creek in area\nknown locally as Devil's Kitchen. Off GA\n120 NW of Bremen. In dry, rocky soil.\nAbundant on slopes of ravine.\n\nwith N. Coile, S. Sherman, H. Currie,\nJ. Allison and E. Lynes\n\nM. O. Moore 639                      25 April 1986\nThe University of Georgia                 Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n168285\n6277\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHARALSON COUNTY, GEORGIA\nGalax urceolata (Poir.) Brummet\nSteep slopes along Beach Creek in area\nknown locally as Devil's Kitchen. Off GA\n120 NW of Bremen. In dry, rocky soil.\nAbundant on slopes of ravine.\nwith N. Coile, S. Sherman, H. Currie,\nJ. Allison and E. Lynes\nM. 0. Moore 639\nThe University of Georgia\n25 April 1986\nAthens. GA, U.S.A.\nIMAGED 2013\n---\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "168285",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummet",
+    "collectedBy": "M. O. Moore, N. Coile, S. Sherman, H. Currie, J. Allison, E. Lynes",
+    "collectorNumber": "639",
+    "identifiedBy": "",
+    "identifiedDate": "2005-11-09",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 April 1986",
+    "collectionDate": "1986-04-25",
+    "collectionDateEnd": "",
+    "habitat": "Steep slopes along beach creek in area known locally as devil's kitchen. in dry, rocky soil. abundant on slopes of ravine.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Georgia",
+    "county": "Haralson county",
+    "locality": "Off ga 120 nw of bremen.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\n6277\nspecimen examined for\ngeorgia atlas project\nimaged 2013"
+  }
+}

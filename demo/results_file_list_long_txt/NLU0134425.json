@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n362930\nHERBARIUM\n\nExchange Specimen From:\nTENN\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nBlount County\n\n*Galax urceolata* (Poir.) Brummitt\n\nBlockhouse Quad (1966) Steep roadside bank on north facing slope of\nChilhowee Mtn., 1.6 miles south of int. of Camp Montvale YMCA road & hwy.\n336. (35\u00b037'53\"N / 83\u00b057'10\"W) (elev. 2000 ft.)\n\nNO. 93-6\n4 June 93\nColl. Chris Bullington\nDr. Eugene Wofford\n\n\nHandwritten Text:  \"Exchange Specimen From:\" and \"TENN\"\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00095,
+      "total_cost": 0.0017287500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n362930\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134425\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nKodak, 2007 TM: Kodak\nBlack\nExchange Specimen From:\nTENN\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennesse\nBlount County\nGalax urceolata (Poir.) Brummit\nBlockhouse Quad (1966) Steep roadside bank on north facing slope of\nChilhowee Mtn.; 1.6 miles south of int. of Camp Montvale YMCA road & hwy.\n336. (35\u00b037'53\"N/83\u00b0 57' 10\"W) (elev. 2000 ft.)\nNO. 93-6\nColl. Chris Bullington\n4 June 93\nDr. Eugene Wofford\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.84e-05,
+      "total_cost": 0.0007799,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 246
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2303,
+    "output": 510,
+    "cost_in": 0.00023030000000000001,
+    "cost_out": 0.00020400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n362930\nHERBARIUM\n\nExchange Specimen From:\nTENN\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nBlount County\n\n*Galax urceolata* (Poir.) Brummitt\n\nBlockhouse Quad (1966) Steep roadside bank on north facing slope of\nChilhowee Mtn., 1.6 miles south of int. of Camp Montvale YMCA road & hwy.\n336. (35\u00b037'53\"N / 83\u00b057'10\"W) (elev. 2000 ft.)\n\nNO. 93-6\n4 June 93\nColl. Chris Bullington\nDr. Eugene Wofford\n\n\nHandwritten Text:  \"Exchange Specimen From:\" and \"TENN\"\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n362930\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134425\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nKodak, 2007 TM: Kodak\nBlack\nExchange Specimen From:\nTENN\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennesse\nBlount County\nGalax urceolata (Poir.) Brummit\nBlockhouse Quad (1966) Steep roadside bank on north facing slope of\nChilhowee Mtn.; 1.6 miles south of int. of Camp Montvale YMCA road & hwy.\n336. (35\u00b037'53\"N/83\u00b0 57' 10\"W) (elev. 2000 ft.)\nNO. 93-6\nColl. Chris Bullington\n4 June 93\nDr. Eugene Wofford\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "362930",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Chris Bullington",
+    "collectorNumber": "93-6",
+    "identifiedBy": "Eugene Wofford",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4 June 93",
+    "collectionDate": "1993-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Steep roadside bank on north facing slope of Chilhowee Mtn.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Blount County",
+    "locality": "Blockhouse quad (1966) 1.6 miles south of int. of Camp Montvale YMCA road & hwy. 336.",
+    "verbatimCoordinates": "35\u00b037'53N / 83\u00b057'10W",
+    "decimalLatitude": "35.631389",
+    "decimalLongitude": "-83.952778",
+    "minimumElevationInMeters": "610",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Northeast louisiana university\nHerbarium\nUniversity of louisiana at monroe\nNl00134425\nExchange specimen from\nTenn\nHerbarium of the university of tennessee\nPlants of tennesse"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n16122\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042883\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA Diapensiaceae\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA\n\n*Galax aphylla* L.\nLocated along wooded path, east side of\nIsaqueena Dam, Lake Isaqueena. Hilly,\nshaded.\n\nCollector Jeanette & Doeller No. 26 Date 4/June/1980 (Handwritten)\nCounty Pickens (Handwritten)\nIdentified By JAD (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009350000000000001,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16122\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042883\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA Diapensiaceae\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA\nGalax aphylla L.\nLocated along wooded path, east side of\nIsaqueena Dam, Lake Isaqueena. Hilly,\nshaded.\nCollector Jeannette E. Doeller No. 26 Date 4/June\n1980\nCounty Pickens Identified By Jab\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.8e-05,
+      "total_cost": 0.0007595,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 195
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2283,
+    "output": 557,
+    "cost_in": 0.0002283,
+    "cost_out": 0.0002228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n16122\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042883\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA Diapensiaceae\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA\n\n*Galax aphylla* L.\nLocated along wooded path, east side of\nIsaqueena Dam, Lake Isaqueena. Hilly,\nshaded.\n\nCollector Jeanette & Doeller No. 26 Date 4/June/1980 (Handwritten)\nCounty Pickens (Handwritten)\nIdentified By JAD (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16122\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042883\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA Diapensiaceae\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA\nGalax aphylla L.\nLocated along wooded path, east side of\nIsaqueena Dam, Lake Isaqueena. Hilly,\nshaded.\nCollector Jeannette E. Doeller No. 26 Date 4/June\n1980\nCounty Pickens Identified By Jab\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042883",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Jeanette E. Doeller",
+    "collectorNumber": "26",
+    "identifiedBy": "Jad",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "4/June/1980",
+    "collectionDate": "1980-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Located along wooded path, east side of Isaqueena Dam, Lake Isaqueena. Hilly, shaded.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Pickens",
+    "locality": "Located along wooded path, east side of Isaqueena Dam, Lake Isaqueena.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "CLEMS\n16122\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA Diapensiaceae\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA\nGalax aphylla L.\n1980\nGalax urceolata\nGalax aphylla"
+  }
+}

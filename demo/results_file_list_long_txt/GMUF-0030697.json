@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039971\n\n= *G. urceolata* (Poiret) Brummitt. TB '95\n\nPlants of Virginia\nFloyd-Patrick Cos.                      7 July 1950\n*Galax aphylla* L.\n\n1 mi. N of Mabry Mill; Skyline Drive\nRocky wooded slope\n\nBernard Mikula 6198\n\n\nHandwritten text:\n*G. urceolata* (Poiret) Brummitt. TB '95\n*Galax aphylla* L.\n\n\n\n\n*G. urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000615,
+      "total_cost": 0.00139375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 123
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039971\n= G. urceolata (Poiret) Brumm.\nPlants of Virginia\nFloyd-Patrick Cos. 7 July 1950\nGalax aphylla he\n1 mi. N of Mabry Mill; Skyline Drive\nRocky wooded slope\nBernard Mikula 6198\nGMUF\nTed R. Bradley Herbarium\nTB 95\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.48e-05,
+      "total_cost": 0.0007163,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 87
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2107,
+    "output": 455,
+    "cost_in": 0.0002107,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039971\n\n= *G. urceolata* (Poiret) Brummitt. TB '95\n\nPlants of Virginia\nFloyd-Patrick Cos.                      7 July 1950\n*Galax aphylla* L.\n\n1 mi. N of Mabry Mill; Skyline Drive\nRocky wooded slope\n\nBernard Mikula 6198\n\n\nHandwritten text:\n*G. urceolata* (Poiret) Brummitt. TB '95\n*Galax aphylla* L.\n\n\n\n\n*G. urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n039971\n= G. urceolata (Poiret) Brumm.\nPlants of Virginia\nFloyd-Patrick Cos. 7 July 1950\nGalax aphylla he\n1 mi. N of Mabry Mill; Skyline Drive\nRocky wooded slope\nBernard Mikula 6198\nGMUF\nTed R. Bradley Herbarium\nTB 95\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "039971",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Bernard Mikula",
+    "collectorNumber": "6198",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "G. urceolata (Poiret) Brummitt. TB '95",
+    "verbatimCollectionDate": "7 July 1950",
+    "collectionDate": "1950-07-07",
+    "collectionDateEnd": "",
+    "habitat": "Rocky wooded slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Floyd-Patrick Cos.",
+    "locality": "1 mi. n of mabry mill; skyline drive",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "= G. urceolata (Poiret) Brumm. \ngmuf\nted r. bradley herbarium\ntb 95"
+  }
+}

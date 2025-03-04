@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Converse College\n002640\nHerbarium\n\nConverse College Herbarium\nCONV0002308\n\nBlount Co., Tenn. (handwritten)\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nA. J. Sharp 340\nH.M. Jennison NO.\nAndy McCully Ridge Aug. 30 1934 (handwritten)\n\n*Galax aphylla* L.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005149999999999999,
+      "total_cost": 0.00129375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 103
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Konverse College Herbarium\nCONV\nConverse College Herbarium\nCONV0002308\nBlount Co., Tenn.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nA. J. Sharp\nHM JENNISON\n340\nNOS\nAug. 30 193 4\nAndy McCully Ridge\nGalax aphylla L.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.48e-05,
+      "total_cost": 0.0007163,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 87
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2069,
+    "output": 420,
+    "cost_in": 0.00020690000000000001,
+    "cost_out": 0.00016800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nConverse College\n002640\nHerbarium\n\nConverse College Herbarium\nCONV0002308\n\nBlount Co., Tenn. (handwritten)\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nA. J. Sharp 340\nH.M. Jennison NO.\nAndy McCully Ridge Aug. 30 1934 (handwritten)\n\n*Galax aphylla* L.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nKonverse College Herbarium\nCONV\nConverse College Herbarium\nCONV0002308\nBlount Co., Tenn.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nA. J. Sharp\nHM JENNISON\n340\nNOS\nAug. 30 193 4\nAndy McCully Ridge\nGalax aphylla L.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CONV0002308",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. J. Sharp, H.M. Jennison",
+    "collectorNumber": "340",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 30 1934",
+    "collectionDate": "1934-08-30",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tenn.",
+    "county": "Blount co.",
+    "locality": "Andy mccully ridge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Converse college\nHerbarium\nFlora of the great smoky mountains\nnational park\nnos"
+  }
+}

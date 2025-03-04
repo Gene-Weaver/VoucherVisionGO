@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n3429\nHERBARIUM\n\nI Fm\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nDiapensiaceae *(handwritten)*\n\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of N. Carolina\nCounty Henderson\n\n*Galax aphylla* L.\nWoods, Alexander apple orchard, off N.C.1708.\n\nL. Mellichamp #90 Sept. 7, 1968\n24ColorCard CameraTrax.com\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008300000000000001,
+      "total_cost": 0.0016087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 166
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV\nOF NORTH CAROLINA AT CHARLOTTE\n3429\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n24ColorCard Camera Trax.com\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\n, based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of N. Carolina\nCounty\nHenderson\nGalax aphylla L.\nWoods, Alexander apple orchard, off N.C.1708.\nL. Mellichamp #90\nSept. 7, 1968\n\nHandwritten text:\nI Fm\nDiapensiaceae\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.16e-05,
+      "total_cost": 0.0007631000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 204
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 570,
+    "cost_in": 0.0002268,
+    "cost_out": 0.000228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n3429\nHERBARIUM\n\nI Fm\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nDiapensiaceae *(handwritten)*\n\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of N. Carolina\nCounty Henderson\n\n*Galax aphylla* L.\nWoods, Alexander apple orchard, off N.C.1708.\n\nL. Mellichamp #90 Sept. 7, 1968\n24ColorCard CameraTrax.com\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIV\nOF NORTH CAROLINA AT CHARLOTTE\n3429\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n24ColorCard Camera Trax.com\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\n, based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of N. Carolina\nCounty\nHenderson\nGalax aphylla L.\nWoods, Alexander apple orchard, off N.C.1708.\nL. Mellichamp #90\nSept. 7, 1968\n\nHandwritten text:\nI Fm\nDiapensiaceae\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "3429",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "L. Mellichamp",
+    "collectorNumber": "90",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 7, 1968",
+    "collectionDate": "1968-09-07",
+    "collectionDateEnd": "",
+    "habitat": "Woods, Alexander apple orchard, off N.C.1708.",
+    "chromosomeCount": "n =",
+    "guardCell": "n =, based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N. Carolina",
+    "county": "Henderson",
+    "locality": "Woods, Alexander apple orchard, off N.C.1708.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "I Fm\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nDiapensiaceae\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of N. Carolina\n24ColorCard CameraTrax.com\nGalax aphylla L.\nGalax urceolata\nGalax aphylla\nUNIV\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n24ColorCard Camera Trax.com\nHandwritten text"
+  }
+}

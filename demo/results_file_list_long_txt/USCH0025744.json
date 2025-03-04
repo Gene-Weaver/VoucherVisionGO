@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "copyright reserved\nUSCH\nUniversity of South Carolina\n\nUniversity of South Carolina Herbarium\nUSCH0025744\n\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFLORA OF North Carolina\nTransylvania County\n\n*Galax aphylla* L.\n\nNear summit of Devils Courthouse, beneath\n*Lyonia*, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975 No.\n(handwritten)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "total_cost": 0.0013987499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025744\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania County\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975No.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2140,
+    "output": 469,
+    "cost_in": 0.000214,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\nUniversity of South Carolina Herbarium\nUSCH0025744\n\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFLORA OF North Carolina\nTransylvania County\n\n*Galax aphylla* L.\n\nNear summit of Devils Courthouse, beneath\n*Lyonia*, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975 No.\n(handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0\n1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025744\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania County\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975No.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025744",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J.b. nelson",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 25, 1975",
+    "collectionDate": "1975-07-25",
+    "collectionDateEnd": "",
+    "habitat": "Near summit of devils courthouse, beneath lyonia, etc. blue ridge parkway.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Transylvania county",
+    "locality": "Near summit of devils courthouse, beneath lyonia, etc. blue ridge parkway.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Copyright reserved\nusch\nUniversity of south carolina\n\nUniversity of south carolina herbarium\n\n002678\nherbarium\nuniversity of\nsouth carolina\nusch\nUniversity of south carolina herbarium"
+  }
+}

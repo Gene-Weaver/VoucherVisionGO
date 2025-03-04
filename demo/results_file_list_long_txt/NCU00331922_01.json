@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n151114\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331922\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMontgomery Co.\n\n*Galax aphylla* L.\n\nMixed deciduous forest, near Barnes Creek,\n1.8 miles east of Ophir.\n\nA. E. Radford 43080  May 24, 1960\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text: *May 24,*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000705,
+      "total_cost": 0.0014837499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 141
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n151114\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331922\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMontgomery Co.\nGalax aphylla L.\nMixed deciduous forest, near Barnes Creek,\n1.8 miles east of Ophir.\nA. E. Radford\nMay 24, 1960\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2800000000000004e-05,
+      "total_cost": 0.0007243,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 107
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2141,
+    "output": 472,
+    "cost_in": 0.00021410000000000003,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n151114\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331922\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMontgomery Co.\n\n*Galax aphylla* L.\n\nMixed deciduous forest, near Barnes Creek,\n1.8 miles east of Ophir.\n\nA. E. Radford 43080  May 24, 1960\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text: *May 24,*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n151114\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331922\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMontgomery Co.\nGalax aphylla L.\nMixed deciduous forest, near Barnes Creek,\n1.8 miles east of Ophir.\nA. E. Radford\nMay 24, 1960\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331922",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "43080",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 24, 1960",
+    "collectionDate": "1960-05-24",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous forest, near Barnes Creek, 1.8 miles east of Ophir.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Montgomery co.",
+    "locality": "Near barnes creek, 1.8 miles east of ophir.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nat chapel hill\nuniversity of north carolina\nherbarium\n151114\nherbarium of the university of north carolina\ncollected for the flora of the carolinas"
+  }
+}

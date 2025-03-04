@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\n\nGloucester County                                                     5 April 1971\n*Galax aphylla* L.\nClay Bank, south side of Jones Creek.\n\n7428\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nCollector: Mary Hyde Berg                      No. s.n.\n\n\nHandwritten Text: *Galax aphylla* L., Clay Bank, south side of Jones Creek, !\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "total_cost": 0.0013987499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n16ths\n30 40 50\n305 ME\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\nMADE US\nCHARTERED 1693\n120 130 140 150\n6\n5\nAINLESS\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\nGloucester County\n5 April 1971\n7428\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nGalax aphylla L.\nClay Bank, south side of Jones Creek.\nCollector: Mary Hyde Berg\nNo. s.n.\n!\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.120000000000001e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 567,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0002268
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\n\nGloucester County                                                     5 April 1971\n*Galax aphylla* L.\nClay Bank, south side of Jones Creek.\n\n7428\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nCollector: Mary Hyde Berg                      No. s.n.\n\n\nHandwritten Text: *Galax aphylla* L., Clay Bank, south side of Jones Creek, !\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n16ths\n30 40 50\n305 ME\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\nMADE US\nCHARTERED 1693\n120 130 140 150\n6\n5\nAINLESS\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\nGloucester County\n5 April 1971\n7428\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nGalax aphylla L.\nClay Bank, south side of Jones Creek.\nCollector: Mary Hyde Berg\nNo. s.n.\n!\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "7428",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Mary Hyde Berg",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "!",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 April 1971",
+    "collectionDate": "1971-04-05",
+    "collectionDateEnd": "",
+    "habitat": "Clay Bank, south side of Jones Creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Gloucester County",
+    "locality": "Clay Bank, south side of Jones Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nHandwritten Text Galax aphylla L., Clay Bank, south side of Jones Creek,\nWILLIAM & MARY\nmm\n10\n20\n16ths\n30 40 50\n305 ME\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\nMADE US\nCHARTERED 1693\n120 130 140 150\n6\n5\nAINLESS\nGalax aphylla"
+  }
+}

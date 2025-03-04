@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n68274\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059501\n\n*Galax urceolata* (Poir.) Brummitt\n\nFlora of Virginia\nKing William County, Va.\n\n*Galax aphylla* L.\nSteep dry N-facing ravine slope.\nUnder *Kalmia*. Mouth of side\nravine 6/10 mi. N of upper end of\nCohoke millpond along a prong of\nCohoke Mill Creek & 1\u00bd mi. N of\nCohoke, Va.\nDate: 3 April 1977          Elevation: 25'\nThomas F. Wieboldt          No. 2743\nC.E. Stevens\n\n\nHandwritten text is denoted with asterisks.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000995,
+      "total_cost": 0.00177375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 199
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n68274\nVirginia Polytechnic Institute\nand State University\nGalax urceolata (Poir) Brummit\nFlora of Virginia\nKing William County, Va.\nGalax aphylla L.\nSteep dry N-facing ravine slope.\nUnder Kalmia. Mouth of side\nravine 6/10 mi. N of upper end of\nCohoke millpond along a prong of\nCohoke mill Creek & 1/2 mi. N of\nCohoke, Va.\nDate: 3 April 1977 Elevation: 25'\nThomas F. Wieboldt No. 2743\nC. E. Stevens\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059501\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2262,
+    "output": 504,
+    "cost_in": 0.00022620000000000002,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n68274\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059501\n\n*Galax urceolata* (Poir.) Brummitt\n\nFlora of Virginia\nKing William County, Va.\n\n*Galax aphylla* L.\nSteep dry N-facing ravine slope.\nUnder *Kalmia*. Mouth of side\nravine 6/10 mi. N of upper end of\nCohoke millpond along a prong of\nCohoke Mill Creek & 1\u00bd mi. N of\nCohoke, Va.\nDate: 3 April 1977          Elevation: 25'\nThomas F. Wieboldt          No. 2743\nC.E. Stevens\n\n\nHandwritten text is denoted with asterisks.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n68274\nVirginia Polytechnic Institute\nand State University\nGalax urceolata (Poir) Brummit\nFlora of Virginia\nKing William County, Va.\nGalax aphylla L.\nSteep dry N-facing ravine slope.\nUnder Kalmia. Mouth of side\nravine 6/10 mi. N of upper end of\nCohoke millpond along a prong of\nCohoke mill Creek & 1/2 mi. N of\nCohoke, Va.\nDate: 3 April 1977 Elevation: 25'\nThomas F. Wieboldt No. 2743\nC. E. Stevens\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059501\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "68274",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Thomas F. Wieboldt, C.E. Stevens",
+    "collectorNumber": "2743",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Date 3 April 1977",
+    "collectionDate": "1977-04-03",
+    "collectionDateEnd": "",
+    "habitat": "Steep dry n-facing ravine slope. Under kalmia.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "King William County",
+    "locality": "Mouth of side ravine 6/10 mi. n of upper end of cohoke millpond along a prong of cohoke mill creek & 1/2 mi. n of cohoke, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "8",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0059501"
+  }
+}

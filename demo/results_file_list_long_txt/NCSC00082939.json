@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082939\n\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\n\nCounty: Wyoming\nWest Virginia\n\n*GALAX APHYLLA* L.\n\nAssociated with *Citrus sinensis* and\n*C. paradisi*.\n\nHabitat: resistant white substratum,\nconsistency of plastic.\nElevation: 31,000 ft.\n\nColl: A.W. Cooper (3/12/71) #2,765,666\u2153 *(handwritten)*\n\n*Galax aphylla*\n*Citrus sinensis*\n*C. paradisi*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00072,
+      "total_cost": 0.00149875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 144
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082939\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\nCounty: Wyoming\nWest Virginia\nGalax aphylla L.\nAssociated with Citrus sinensis and\nC. paradisi.\nHabitat: resistant white substratum,\nconsistency of plastic.\nElevation: 31,000 ft.\nColl: A. W. Cooper (3/12/71) #2,765,666\u00bd\nYellow\nMagenta\nWhite\n3/Color\nBlack\nRed\nCentimetres TIFFEN\u00ae Color Control Patches\nInches\nBlue\nCyan\nGreen\nA 1 2 3\n4\n5\nTIFFEN\u00ae Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\n\n\nGalax aphylla\nCitrus sinensis\nC. paradisi\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.84e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2209,
+    "output": 542,
+    "cost_in": 0.0002209,
+    "cost_out": 0.00021679999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082939\n\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\n\nCounty: Wyoming\nWest Virginia\n\n*GALAX APHYLLA* L.\n\nAssociated with *Citrus sinensis* and\n*C. paradisi*.\n\nHabitat: resistant white substratum,\nconsistency of plastic.\nElevation: 31,000 ft.\n\nColl: A.W. Cooper (3/12/71) #2,765,666\u2153 *(handwritten)*\n\n*Galax aphylla*\n*Citrus sinensis*\n*C. paradisi*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082939\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\nCounty: Wyoming\nWest Virginia\nGalax aphylla L.\nAssociated with Citrus sinensis and\nC. paradisi.\nHabitat: resistant white substratum,\nconsistency of plastic.\nElevation: 31,000 ft.\nColl: A. W. Cooper (3/12/71) #2,765,666\u00bd\nYellow\nMagenta\nWhite\n3/Color\nBlack\nRed\nCentimetres TIFFEN\u00ae Color Control Patches\nInches\nBlue\nCyan\nGreen\nA 1 2 3\n4\n5\nTIFFEN\u00ae Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\n\n\nGalax aphylla\nCitrus sinensis\nC. paradisi\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082939",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A.W. Cooper",
+    "collectorNumber": "2,765,666\u00bd",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3/12/71",
+    "collectionDate": "1971-03-12",
+    "collectionDateEnd": "",
+    "habitat": "Resistant white substratum, consistency of plastic.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Yellow\nMagenta\nWhite\nBlack\nRed\nBlue\nCyan\nGreen",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "West Virginia",
+    "county": "Wyoming",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "9449",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\nAssociated with Citrus sinensis and\nC. paradisi.\nElevation 31,000 ft.\n3/Color\nCentimetres TIFFEN\u00ae Color Control Patches\nInches\nA 1 2 3\n4\n5\nTIFFEN\u00ae Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nGalax aphylla\nCitrus sinensis\nC. paradisi"
+  }
+}

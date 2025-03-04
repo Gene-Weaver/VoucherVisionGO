@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n375863\nHERBARIUM\n\nAMERICAN FLORA\n\n*Galax urceolata* Brum.\n\nTennessee, Unicoi Co., Erwin\nIn acid *Rhododendron* *Vaccinium* woods on\nUnaka Mt. at 1900 m alt.\nCorolla white.\n\n02 July 1994                                      94017\nJohn A. Churchill, M.D.\n\nExchange Specimen From:\n*J.A.C.* (Handwritten)\n\nNLU0134431\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00066,
+      "total_cost": 0.0014387500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 132
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "375863\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nAMERICAN FLORA\nGalax urceolata Brum.\nTennessee, Unicoi Co., Erwin\nIn acid Rhododendron vaccinium woods on\nUnaka Mt. at 1900 m alt.\nCorolla white.\n02 july 1994\n94017\nJohn A. Churchill, M.D.\nExchange Specimen From:\nJ.A.C.\n\n\nGalax urceolata\nRhododendron vaccinium\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.36e-05,
+      "total_cost": 0.0007451000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 159
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2165,
+    "output": 449,
+    "cost_in": 0.0002165,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n375863\nHERBARIUM\n\nAMERICAN FLORA\n\n*Galax urceolata* Brum.\n\nTennessee, Unicoi Co., Erwin\nIn acid *Rhododendron* *Vaccinium* woods on\nUnaka Mt. at 1900 m alt.\nCorolla white.\n\n02 July 1994                                      94017\nJohn A. Churchill, M.D.\n\nExchange Specimen From:\n*J.A.C.* (Handwritten)\n\nNLU0134431\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n375863\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nAMERICAN FLORA\nGalax urceolata Brum.\nTennessee, Unicoi Co., Erwin\nIn acid Rhododendron vaccinium woods on\nUnaka Mt. at 1900 m alt.\nCorolla white.\n02 july 1994\n94017\nJohn A. Churchill, M.D.\nExchange Specimen From:\nJ.A.C.\n\n\nGalax urceolata\nRhododendron vaccinium\n\n",
+  "formatted_json": {
+    "catalogNumber": "375863",
+    "scientificName": "Galax urceolata Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "Brum.",
+    "collectedBy": "John A. Churchill, M.D.",
+    "collectorNumber": "94017",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "02 July 1994",
+    "collectionDate": "1994-07-02",
+    "collectionDateEnd": "",
+    "habitat": "In acid Rhododendron vaccinium woods on Unaka Mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Corolla white.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi Co.",
+    "locality": "Erwin",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1900",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nAMERICAN FLORA\nExchange Specimen From\nJ.A.C.\nNLU0134431"
+  }
+}

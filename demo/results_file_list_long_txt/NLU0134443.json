@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n378607\nHERBARIUM\n\nPlants of South Carolina\n\n*Galax aphylla* L.\nDiapensiaceae\n\nStumphouse Mountain Tunnel, Oconee County, SC.\nCounty Rd 226, on east side of SC 28. About 5 miles\ndue northwest of town of Walhalla.\n\nCollector: Karen N. Smith\nDate: 9/19/94\n\nExchange Specimen From:\nCLEMS (handwritten)\n\nUniversity of Louisiana at Monroe\nNL00134443\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000665,
+      "total_cost": 0.0014437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n378607\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134443\nExchange Specimen From:\nCLEMS\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nPlants of South Carolina\nGalax aphylla L.\nDiapensiaceae\nStumphouse Mountain Tunnel, Oconee County, SC.\nCounty Rd 226, on east side of SC 28. About 5 miles\ndue northwest of town of Walhalla.\nCollector: Karen N. Smith\nDate: 9/19/94\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.280000000000001e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2163,
+    "output": 457,
+    "cost_in": 0.0002163,
+    "cost_out": 0.0001828
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n378607\nHERBARIUM\n\nPlants of South Carolina\n\n*Galax aphylla* L.\nDiapensiaceae\n\nStumphouse Mountain Tunnel, Oconee County, SC.\nCounty Rd 226, on east side of SC 28. About 5 miles\ndue northwest of town of Walhalla.\n\nCollector: Karen N. Smith\nDate: 9/19/94\n\nExchange Specimen From:\nCLEMS (handwritten)\n\nUniversity of Louisiana at Monroe\nNL00134443\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n378607\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134443\nExchange Specimen From:\nCLEMS\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nPlants of South Carolina\nGalax aphylla L.\nDiapensiaceae\nStumphouse Mountain Tunnel, Oconee County, SC.\nCounty Rd 226, on east side of SC 28. About 5 miles\ndue northwest of town of Walhalla.\nCollector: Karen N. Smith\nDate: 9/19/94\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "378607",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Karen N. Smith",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9/19/94",
+    "collectionDate": "1994-09-19",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Oconee County",
+    "locality": "Stumphouse mountain tunnel, oconee county, sc. county rd 226, on east side of sc 28. about 5 miles due northwest of town of walhalla.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nherbarium\nplants of south carolina\nuniversity of louisiana at monroe\nnl00134443\nexchange specimen from\nclems"
+  }
+}

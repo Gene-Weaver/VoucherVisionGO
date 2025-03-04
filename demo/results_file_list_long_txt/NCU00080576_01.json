@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080576\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66652\n\nNORTH CAROLINA\nHenderson Co.\n\n*Galax aphylla* L.\n\nBowman's Bluff, N.C.\n8 miles S. W. of Hendersonville.\n\nJ.S. Holmes                      June 15th.\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005499999999999999,
+      "total_cost": 0.00132875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 110
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080576\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66652\nx-rite\ncolorchecker\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHenderson Co.\nGalax aphylla L.\nBowman's Bluff, N.C.\n8 miles S. W. of Hendersonville.\nJ.S. Holmes\nJune 15th.\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5e-05,
+      "total_cost": 0.0007314999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 125
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2130,
+    "output": 459,
+    "cost_in": 0.000213,
+    "cost_out": 0.00018360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080576\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66652\n\nNORTH CAROLINA\nHenderson Co.\n\n*Galax aphylla* L.\n\nBowman's Bluff, N.C.\n8 miles S. W. of Hendersonville.\n\nJ.S. Holmes                      June 15th.\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080576\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66652\nx-rite\ncolorchecker\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHenderson Co.\nGalax aphylla L.\nBowman's Bluff, N.C.\n8 miles S. W. of Hendersonville.\nJ.S. Holmes\nJune 15th.\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080576",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J.s. Holmes",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 15th.",
+    "collectionDate": "0000-06-15",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson co.",
+    "locality": "Bowman's bluff, n.c. 8 miles s. w. of hendersonville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nat chapel hill\nuniversity of north carolina herbarium\nuniversity of north\ncarolina\nx-rite\ncolorchecker\nherbarium of the university of north carolina\nplants of the southeastern united states"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE V-141919\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\nBertie Co.: Common in rich hardwoods\nwest of the Chowan River on Rt. 17.\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095557\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nR. L. WILBUR NO. 6209       15 June 1957\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007700000000000001,
+      "total_cost": 0.00154875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE V-141919\nDuke\nUNIVERSITY\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095557\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nGalax aphylla L.\nBertie Co.: Common in rich hardwoods\nwest of the Chowan River on Rt. 17.\nR. L. WILBUR NO. 6209 15 June 1957\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.32e-05,
+      "total_cost": 0.0007447,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 158
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 527,
+    "cost_in": 0.0002205,
+    "cost_out": 0.00021080000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE V-141919\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\nBertie Co.: Common in rich hardwoods\nwest of the Chowan River on Rt. 17.\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095557\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nR. L. WILBUR NO. 6209       15 June 1957\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE V-141919\nDuke\nUNIVERSITY\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095557\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nGalax aphylla L.\nBertie Co.: Common in rich hardwoods\nwest of the Chowan River on Rt. 17.\nR. L. WILBUR NO. 6209 15 June 1957\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095557",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. L. Wilbur",
+    "collectorNumber": "6209",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "15 June 1957",
+    "collectionDate": "1957-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Common in rich hardwoods west of the Chowan River on Rt. 17.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Bertie Co.",
+    "locality": "West of the Chowan River on Rt. 17.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE V-141919\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nDUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nGalax aphylla L.\n\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060067\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 1/2 , based on average guard cell area\nvolume of 626\u00b5\u00b2\nGuy L. Nesom, 1975 Aug of 3 plants\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n(Handwritten) Pittsylvania County\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Near Chatham Hill pond\n(Handwritten) Moses\nA. B. Massey Date 9/4/41\n\nHerbarium 26,541\nBiology Department\nVirginia Polytechnic Institute\n124\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009,
+      "total_cost": 0.00167875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 180
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060067\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPittsylvania County\nGalax aphylla L.\nNear Chatham thill ponk\nHerbarium\nBiology Department 28,541\nVirginia Polytechnic Institute\nMoses\nA. B. Massey\nDate 9/4/41\n\n\nGalax urceolata\nBalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.72e-05,
+      "total_cost": 0.0007387,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 544,
+    "cost_in": 0.0002232,
+    "cost_out": 0.0002176
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060067\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 1/2 , based on average guard cell area\nvolume of 626\u00b5\u00b2\nGuy L. Nesom, 1975 Aug of 3 plants\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n(Handwritten) Pittsylvania County\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Near Chatham Hill pond\n(Handwritten) Moses\nA. B. Massey Date 9/4/41\n\nHerbarium 26,541\nBiology Department\nVirginia Polytechnic Institute\n124\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060067\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPittsylvania County\nGalax aphylla L.\nNear Chatham thill ponk\nHerbarium\nBiology Department 28,541\nVirginia Polytechnic Institute\nMoses\nA. B. Massey\nDate 9/4/41\n\n\nGalax urceolata\nBalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0060067",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. B. Massey",
+    "collectorNumber": "Moses",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "9/4/41",
+    "collectionDate": "1941-09-04",
+    "collectionDateEnd": "",
+    "habitat": "Near Chatham Hill pond",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania County",
+    "locality": "Near Chatham Hill pond",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nn = 1/2 , based on average guard cell area\nvolume of 626\u00b5\u00b2\nAug of 3 plants\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nDate\nHerbarium 26,541\nBiology Department\nVirginia Polytechnic Institute\n124\nBalax aphylla"
+  }
+}

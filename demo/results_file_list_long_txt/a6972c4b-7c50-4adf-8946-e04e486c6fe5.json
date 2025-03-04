@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GAINESVILLE\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275421\n\n235\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\n\nSURRY COUNTY: Pilot Mountain State Park, Jomeokee\nTrail. Elev. 673 m. Growing on moss (likely *Hypnum imponens*). \nSurrounded by *Kalmia latifolia*, Ericaceae spp.,\n*Gaultheria procumbens*, and red maple saplings.\nFlowering with the top of the spike in bud.\nLat. 36.34061996 Long. -80.47826302 Datum: WGS84\n\ncoll. Michelle Gaynor # 51                      31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG227 (Pop 16).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor                                7 Sept 2022\n\n\nHandwritten Text:  #51\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0015500000000000002,
+      "total_cost": 0.00232875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 310
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INC NCH\nGAINESVILLE\nFLAS\nUNIVERSITY OF FLORIDA\nHERBARIUM\nU.S.A.\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275421\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSURRY COUNTY: Pilot Mountain State Park, Jomeokee\nTrail. Elev. 673 m. Growing on moss (likely Hypnum\nimponens). Surrounded by Kalmia latifolia, Ericaceae spp.,\nGaultheria procumbens, and red maple saplings.\nFlowering with the top of the spike in bud.\nLat. 36.34061996 Long. -80.47826302 Datum: WGS84\ncoll. Michelle Gaynor # 51 31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG227 (Pop 16).\n\n\nGalax urceolata\nHypnum imponens\nKalmia latifolia\nGaultheria procumbens\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001268,
+      "total_cost": 0.0008083000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 317
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2474,
+    "output": 630,
+    "cost_in": 0.0002474,
+    "cost_out": 0.000252
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGAINESVILLE\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275421\n\n235\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\n\nSURRY COUNTY: Pilot Mountain State Park, Jomeokee\nTrail. Elev. 673 m. Growing on moss (likely *Hypnum imponens*). \nSurrounded by *Kalmia latifolia*, Ericaceae spp.,\n*Gaultheria procumbens*, and red maple saplings.\nFlowering with the top of the spike in bud.\nLat. 36.34061996 Long. -80.47826302 Datum: WGS84\n\ncoll. Michelle Gaynor # 51                      31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG227 (Pop 16).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor                                7 Sept 2022\n\n\nHandwritten Text:  #51\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINC NCH\nGAINESVILLE\nFLAS\nUNIVERSITY OF FLORIDA\nHERBARIUM\nU.S.A.\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275421\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSURRY COUNTY: Pilot Mountain State Park, Jomeokee\nTrail. Elev. 673 m. Growing on moss (likely Hypnum\nimponens). Surrounded by Kalmia latifolia, Ericaceae spp.,\nGaultheria procumbens, and red maple saplings.\nFlowering with the top of the spike in bud.\nLat. 36.34061996 Long. -80.47826302 Datum: WGS84\ncoll. Michelle Gaynor # 51 31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG227 (Pop 16).\n\n\nGalax urceolata\nHypnum imponens\nKalmia latifolia\nGaultheria procumbens\n\n",
+  "formatted_json": {
+    "catalogNumber": "275421",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Michelle Gaynor",
+    "collectorNumber": "51",
+    "identifiedBy": "Michelle Gaynor",
+    "identifiedDate": "2021-05-31",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "31 May 2021",
+    "collectionDate": "2021-05-31",
+    "collectionDateEnd": "",
+    "habitat": "Growing on moss (likely Hypnum imponens). Surrounded by Kalmia latifolia, Ericaceae spp., Gaultheria procumbens, and red maple saplings.",
+    "chromosomeCount": "Ploidy level inferred via flow cytometry Tetraploid.",
+    "guardCell": "",
+    "specimenDescription": "Flowering with the top of the spike in bud.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Surry county",
+    "locality": "Pilot mountain state park, jomeokee trail. elev. 673 m.",
+    "verbatimCoordinates": "Lat. 36.34061996 Long. -80.47826302 Datum WGS84",
+    "decimalLatitude": "36.34061996",
+    "decimalLongitude": "-80.47826302",
+    "minimumElevationInMeters": "673",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "University of florida herbarium\nFlorida museum of natural history\nUniversity of florida herbarium (flas), gainesville, florida, usa\nPlants of north carolina\nnorth carolina division of parks and recreation, scientific\nresearch and collecting permit, 2021_0524.\nCorresponds to genetic sample mlg227 (pop 16).\nMichelle l. gaynor 7 sept 2022\nhandwritten text #51\ngalax urceolata\nhypnum imponens\nkalmia latifolia\ngaultheria procumbens"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975 avg of 2 plants\n\nHerbarium of The University of Georgia\nBARTOW COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nAmong rocks on open wooded slopes on W\nside of creek about 2 3/4 mi. S of Alla-\ntoona Dam. Near \"elbow bend\" in Allatoona\nCreek. Elevation about 800 ft.\n\nWilbur H. Duncan 8156 25 April 1948\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nIMAGED 2013\n\nHandwritten text:\n*elbow bend*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00097,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\narg of 2 plants\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n28043\nHerbarium of The University of Georgia\nBARTOW COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nAmong rocks on open wooded slopes on W\nside of creek about 2 3/4 mi. S of Alla-\ntoona Dam. Near \"elbow bend\" in Allatoona\nCreek. Elevation about 800 ft.\nUNIVERSITY OF GEORGIA\nGA059167\nWilbur H. Duncan 8156\n25 April 1948\nInches\n2\n3\n4\n5\n6\n17\n8\n2\n3\n4\n5\n6\n7\n8\n9\n10 11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite 3/Color\nBlack\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00012560000000000002,
+      "total_cost": 0.0008071,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 314
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2387,
+    "output": 667,
+    "cost_in": 0.0002387,
+    "cost_out": 0.0002668
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975 avg of 2 plants\n\nHerbarium of The University of Georgia\nBARTOW COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nAmong rocks on open wooded slopes on W\nside of creek about 2 3/4 mi. S of Alla-\ntoona Dam. Near \"elbow bend\" in Allatoona\nCreek. Elevation about 800 ft.\n\nWilbur H. Duncan 8156 25 April 1948\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nIMAGED 2013\n\nHandwritten text:\n*elbow bend*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\narg of 2 plants\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n28043\nHerbarium of The University of Georgia\nBARTOW COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nAmong rocks on open wooded slopes on W\nside of creek about 2 3/4 mi. S of Alla-\ntoona Dam. Near \"elbow bend\" in Allatoona\nCreek. Elevation about 800 ft.\nUNIVERSITY OF GEORGIA\nGA059167\nWilbur H. Duncan 8156\n25 April 1948\nInches\n2\n3\n4\n5\n6\n17\n8\n2\n3\n4\n5\n6\n7\n8\n9\n10 11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite 3/Color\nBlack\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059167",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Wilbur H. Duncan",
+    "collectorNumber": "8156",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "2005-11-09",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 April 1948",
+    "collectionDate": "1948-04-25",
+    "collectionDateEnd": "",
+    "habitat": "Among rocks on open wooded slopes on w side of creek about 2 3/4 mi. s of allatoona dam",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Bartow County",
+    "locality": "Near elbow bend in allatoona creek",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "244",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of the university of north carolina\ngalax urceolata (poir.) brummit\narg of 2 plants\nuniv. of georgia\nherbarium\npoisoned\n28043\nherbarium of the university of georgia\nflora of georgia\nelevation about 800 ft.\nuniversity of georgia\n25 april 1948\ninches\n2\n3\n4\n5\n6\n17\n8\n2\n3\n4\n5\n6\n7\n8\n9\n10 11\n12\n13\n14\n15\n16\n17\n18\n19\ncentimetres tiffen\u00ae color control patches\nthe tiffen company, 2007\nimaged 2013\nblue\ncyan\ngreen\nyellow\nred\nmagenta\nwhite 3/color\nblack\nspecimen examined for\ngeorgia atlas project\n9 november 2005\ngalax urceolata\ngalax aphylla"
+  }
+}

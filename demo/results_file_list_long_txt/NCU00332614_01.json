@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\n\nMSCCPPCC0411\nx-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332614\n\nW. W. Ashe Herbarium\nOF\nThe University of North Carolina\n\nPLANTS OF COCKE COUNTY, TENNESSEE.\nCOLLECTED NEAR LEMON'S GAP.\n\n*Galax aphylla* L. *(handwritten)*\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n66669\n\nNo. 826  THOS. H. KEARNEY, JR. Sept 3 1897 *(handwritten)*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00088,
+      "total_cost": 0.0016587500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 176
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9\ncm\ncopyright reserved\nUniversity of North Carolina\nNCU\nat Chapel Hill\nat Chapel Hill\nUniversity of North Carolina\nxrite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332614\nW. W. ASHE HERBARIUM\nOF\nTHE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF COCKE COUNTY, TENNESSEE.\nCOLLECTED NEAR LEMON'S GAP.\nGalax aphylla L.\nNo. 826 THOS. H. KEARNEY, JR.\nSept 3.\n1897.\nMSCCPPCC0411\nSCCPPPE0411\nUNIVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n66669\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2243,
+    "output": 437,
+    "cost_in": 0.00022430000000000003,
+    "cost_out": 0.00017480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\n\nMSCCPPCC0411\nx-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332614\n\nW. W. Ashe Herbarium\nOF\nThe University of North Carolina\n\nPLANTS OF COCKE COUNTY, TENNESSEE.\nCOLLECTED NEAR LEMON'S GAP.\n\n*Galax aphylla* L. *(handwritten)*\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n66669\n\nNo. 826  THOS. H. KEARNEY, JR. Sept 3 1897 *(handwritten)*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9\ncm\ncopyright reserved\nUniversity of North Carolina\nNCU\nat Chapel Hill\nat Chapel Hill\nUniversity of North Carolina\nxrite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332614\nW. W. ASHE HERBARIUM\nOF\nTHE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF COCKE COUNTY, TENNESSEE.\nCOLLECTED NEAR LEMON'S GAP.\nGalax aphylla L.\nNo. 826 THOS. H. KEARNEY, JR.\nSept 3.\n1897.\nMSCCPPCC0411\nSCCPPPE0411\nUNIVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n66669\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332614",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Thos. H. Kearney, Jr.",
+    "collectorNumber": "826",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept 3 1897",
+    "collectionDate": "1897-09-03",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Cocke County",
+    "locality": "Collected near lemon's gap.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NCU\nUniversity of North Carolina\nat Chapel Hill\nW. W. Ashe Herbarium\nOf\nThe University of North Carolina\nUniversity of North\nCarolina\nHerbarium"
+  }
+}

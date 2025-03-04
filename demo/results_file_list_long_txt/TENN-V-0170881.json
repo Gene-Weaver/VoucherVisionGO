@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170881\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nGuy L. Nesom, 1975\n\nNo. 6377\nHERBARIUM OF THE\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nBlount COUNTY\n\nNO. 32755\n*Galax aphylla* L.\n\nLoc. \u2013 South facing slope on dry sandy soil under\n*Pinus virginiana* near Montvale Springs\n*white flowers*\n\nCOLLECTORS\nMay 1, 1964\nR. Dale Thomas\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nHandwritten Text: *white flowers*, South, 4 (after 196)\n\n*Galax urceolata*\n*Galax aphylla*\n*Pinus virginiana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000985,
+      "total_cost": 0.00176375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 197
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170881\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\nNo.\n6277\nFLORA TENNESSEENSIS\nBlount COUNTY\nNO. 32755\nGalax aphylla L.\nLoc. South facing slope on dry sandy soil under\nPinus virginiana near Montvale Springs\nCOLLECTORS\nMay 1, 196 4\nR. Dale Thomas\n\n\nGalax urceolata\nGalax aphylla\nPinus virginiana\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.720000000000001e-05,
+      "total_cost": 0.0007387000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 516,
+    "cost_in": 0.0002234,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170881\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nGuy L. Nesom, 1975\n\nNo. 6377\nHERBARIUM OF THE\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nBlount COUNTY\n\nNO. 32755\n*Galax aphylla* L.\n\nLoc. \u2013 South facing slope on dry sandy soil under\n*Pinus virginiana* near Montvale Springs\n*white flowers*\n\nCOLLECTORS\nMay 1, 1964\nR. Dale Thomas\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nHandwritten Text: *white flowers*, South, 4 (after 196)\n\n*Galax urceolata*\n*Galax aphylla*\n*Pinus virginiana*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170881\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\nNo.\n6277\nFLORA TENNESSEENSIS\nBlount COUNTY\nNO. 32755\nGalax aphylla L.\nLoc. South facing slope on dry sandy soil under\nPinus virginiana near Montvale Springs\nCOLLECTORS\nMay 1, 196 4\nR. Dale Thomas\n\n\nGalax urceolata\nGalax aphylla\nPinus virginiana\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170881",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "6277",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 1, 1964",
+    "collectionDate": "1964-05-01",
+    "collectionDateEnd": "",
+    "habitat": "South facing slope on dry sandy soil under Pinus virginiana near Montvale Springs",
+    "chromosomeCount": "n = 6",
+    "guardCell": "",
+    "specimenDescription": "White flowers",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Blount",
+    "locality": "South facing slope on dry sandy soil under Pinus virginiana near Montvale Springs",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA TENNEESSENSIS\nNO. 32755\nGalax aphylla L.\nCOLLECTORS\nGalax urceolata\nGalax aphylla\nPinus virginiana"
+  }
+}

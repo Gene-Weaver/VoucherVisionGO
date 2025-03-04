@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170895\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 460 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE \nNO.\n\nANTEERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\n\nFLORA TENNESSIENSIS\nNO. 1576\nJOHNSON COUNTY\nCOLLECTOR\nJKU & AJS\nJune 17, 1934 (handwritten)\n\n*Galax aphylla* L.\nShady Valley (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170895\nHERBARIUM OF THE\nNO.\nERSITY\nANTEERS REMOVED\nFOR U. T. POLLEN\nTHFARENCE COLLECTION\nFLORA TENNESSIENSIS\nNO.1576\nJOHNSON COUNTY\nCOLLECTOR,\nJKU & AJS\nJune 17 1934\nGalax aphylla L.\nShady Valley\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n\u0648\nbased on average guard cell area\nvolume of 460 \u03bc2\nGuy L. Nesom, 1975\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.960000000000001e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 521,
+    "cost_in": 0.0002268,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170895\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 460 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE \nNO.\n\nANTEERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\n\nFLORA TENNESSIENSIS\nNO. 1576\nJOHNSON COUNTY\nCOLLECTOR\nJKU & AJS\nJune 17, 1934 (handwritten)\n\n*Galax aphylla* L.\nShady Valley (handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170895\nHERBARIUM OF THE\nNO.\nERSITY\nANTEERS REMOVED\nFOR U. T. POLLEN\nTHFARENCE COLLECTION\nFLORA TENNESSIENSIS\nNO.1576\nJOHNSON COUNTY\nCOLLECTOR,\nJKU & AJS\nJune 17 1934\nGalax aphylla L.\nShady Valley\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n\u0648\nbased on average guard cell area\nvolume of 460 \u03bc2\nGuy L. Nesom, 1975\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170895",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "JKU & AJS",
+    "collectorNumber": "1576",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 17, 1934",
+    "collectionDate": "1934-06-17",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 460 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Johnson County",
+    "locality": "Shady Valley",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM OF THE \nANTEERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\nFLORA TENNESSIENSIS\nGalax aphylla L.\nGalax urceolata\nGalax aphylla\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n91709\n\nClemson University Herbarium\nCLEMS0065620\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon near summit of ridge.\n\nGREENVILLE CO.: Mountain slope above Co. rt. 42, 2.0 mi E of jct. with\nCo. rt. 17. SE of North Saluda Reservoir. Ca. 11 mi N of Traveler's Rest.\nAbout 1500 feet elevation.\n\n13 June 2000                                with Doug Rayner\n                                           Charles N. Horn #13206\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000905,
+      "total_cost": 0.0016837500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 181
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\nCLEMS\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\n91709\nClemson University Herbarium\nCLEMS0065620\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon near summit of ridge.\nGREENVILLE CO.: Mountain slope above Co rt 42, 2.0 mi E of jet with\nCo. rt 17. SE of North Saluda Reservoir. Ca. 11 mi N of Traveler's Rest.\nAbout 1500 feet elevation.\n13 June 2000\nwith Doug Rayner\nCharles N. Horn #13206\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2250,
+    "output": 547,
+    "cost_in": 0.000225,
+    "cost_out": 0.0002188
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n91709\n\nClemson University Herbarium\nCLEMS0065620\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon near summit of ridge.\n\nGREENVILLE CO.: Mountain slope above Co. rt. 42, 2.0 mi E of jct. with\nCo. rt. 17. SE of North Saluda Reservoir. Ca. 11 mi N of Traveler's Rest.\nAbout 1500 feet elevation.\n\n13 June 2000                                with Doug Rayner\n                                           Charles N. Horn #13206\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCLEMS\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\n91709\nClemson University Herbarium\nCLEMS0065620\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon near summit of ridge.\nGREENVILLE CO.: Mountain slope above Co rt 42, 2.0 mi E of jet with\nCo. rt 17. SE of North Saluda Reservoir. Ca. 11 mi N of Traveler's Rest.\nAbout 1500 feet elevation.\n13 June 2000\nwith Doug Rayner\nCharles N. Horn #13206\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "91709",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn, Doug Rayner",
+    "collectorNumber": "13206",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 June 2000",
+    "collectionDate": "2000-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Common near summit of ridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "South carolina",
+    "county": "Greenville",
+    "locality": "Mountain slope above co rt 42, 2.0 mi e of jet with co rt 17. Se of north saluda reservoir. Ca. 11 mi n of traveler's rest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "457",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "clems\ncopyright reserved\nclemson\nuniversity\nherbarium\nclemson university herbarium\nclems0065620\nherbarium of newberry college (nbyc)\nplants of south carolina, usa\ndiapensiaceae\nabout 1500 feet elevation.\ngalax urceolata\n0 1 2 3 4 5 6 7 8 9 10\ncm"
+  }
+}

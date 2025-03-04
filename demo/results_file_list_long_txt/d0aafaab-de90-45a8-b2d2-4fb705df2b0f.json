@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL EXPERIMENT STATION\n\n51618\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicalola\nFalls. Flowers white. Common.\n\nNo.: 4557                                         June 8, 1947\nGeol. Prov.: Blue Ridge                      Dawson County\n                                                              2200 ft. Elev.\n\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS                     September 2006\n\nHandwritten text: *6277*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.00157375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY\nFLORIDA\nGAINESVILLE\n51618\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS\nSeptember 2006\n6277\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.24e-05,
+      "total_cost": 0.0007339,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 131
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2170,
+    "output": 448,
+    "cost_in": 0.00021700000000000002,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL EXPERIMENT STATION\n\n51618\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicalola\nFalls. Flowers white. Common.\n\nNo.: 4557                                         June 8, 1947\nGeol. Prov.: Blue Ridge                      Dawson County\n                                                              2200 ft. Elev.\n\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS                     September 2006\n\nHandwritten text: *6277*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nUNIVERSITY\nFLORIDA\nGAINESVILLE\n51618\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS\nSeptember 2006\n6277\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "51618",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Arthur Cronquist",
+    "collectorNumber": "4557",
+    "identifiedBy": "Barbara S. Carlsward",
+    "identifiedDate": "2006-09-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Stamens sampled for assembling the tree of life project.",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 8, 1947",
+    "collectionDate": "1947-06-08",
+    "collectionDateEnd": "",
+    "habitat": "In open & shaded places just above Amicalola Falls. Flowers white. Common.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dawson County",
+    "locality": "Geol. Prov. Blue Ridge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Plants of Georgia\nUniversity of Georgia\nHandwritten text 6277"
+  }
+}

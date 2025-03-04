@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0134768\n\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\n*Galax aphylla* L.\n\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\n\nDET.:R.Kral\n\n(Handwritten text: *22 Jun 1993*, *R.Kral 82619*, and *R.Kral*)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007549999999999999,
+      "total_cost": 0.0015337500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0134768\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\nGalax aphylla L.\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\nDEt.:R.Kral\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.520000000000001e-05,
+      "total_cost": 0.0007267,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 113
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2119,
+    "output": 477,
+    "cost_in": 0.0002119,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0134768\n\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\n*Galax aphylla* L.\n\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\n\nDET.:R.Kral\n\n(Handwritten text: *22 Jun 1993*, *R.Kral 82619*, and *R.Kral*)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0134768\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\nGalax aphylla L.\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\nDEt.:R.Kral\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0134768",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "82619",
+    "identifiedBy": "R. Kral",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 Jun 1993",
+    "collectionDate": "1993-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Woods over sandstone, along small creek by where crossed by county 11 ca. 1-2 mi. N of AL 68, toward E face of escarpment E of Collinsville.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Cherokee co.",
+    "locality": "By where crossed by county 11 ca. 1-2 mi. N of AL 68, toward E face of escarpment E of Collinsville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\n"
+  }
+}

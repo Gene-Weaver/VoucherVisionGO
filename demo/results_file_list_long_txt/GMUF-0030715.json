@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039975\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nBotetourt County                                             August 10, 1992\n\n*Galax urceolata* (Poir.) Brumm.\n\nDry, oak-pine-heath scrub on formerly burned slope\nalong Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap\non the Blue Ridge, 3.0 miles ESE of Troutville; elev.\n2300 ft. Common.\n\nGary P. Fleming                                               No. 7133\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030715\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007549999999999999,
+      "total_cost": 0.00153375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ted R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030715\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nBotetourt County August 10, 1992\nGalax urceolata (Poir.) Brumm.\nDry, oak-pine-heath scrub on formerly burned slope\nalong Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap\non the Blue Ridge, 3.0 miles ESE of Troutville; elev.\n2300 ft. Common.\nGary P. Fleming No. 7133\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\n039975\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.28e-05,
+      "total_cost": 0.0007543000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 182
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2203,
+    "output": 534,
+    "cost_in": 0.00022030000000000002,
+    "cost_out": 0.0002136
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039975\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nBotetourt County                                             August 10, 1992\n\n*Galax urceolata* (Poir.) Brumm.\n\nDry, oak-pine-heath scrub on formerly burned slope\nalong Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap\non the Blue Ridge, 3.0 miles ESE of Troutville; elev.\n2300 ft. Common.\n\nGary P. Fleming                                               No. 7133\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030715\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030715\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nBotetourt County August 10, 1992\nGalax urceolata (Poir.) Brumm.\nDry, oak-pine-heath scrub on formerly burned slope\nalong Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap\non the Blue Ridge, 3.0 miles ESE of Troutville; elev.\n2300 ft. Common.\nGary P. Fleming No. 7133\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\n039975\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "039975",
+    "scientificName": "Galax urceolata (Poir.) Brumm.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brumm.",
+    "collectedBy": "Gary P. Fleming",
+    "collectorNumber": "7133",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 10, 1992",
+    "collectionDate": "1992-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Dry, oak-pine-heath scrub on formerly burned slope along Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap on the Blue Ridge, 3.0 miles ESE of Troutville",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Common.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Botetourt County",
+    "locality": "Along salt pond road, ca. 0.5 mi. nnw of curry gap on the blue ridge, 3.0 miles ese of troutville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "701",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Ted r. bradley herbarium\ngeorge mason university\ngmuf-0030715\nherbarium of george mason university\nvirginia\ncopyright reserved\ngmuf\nted r. bradley\nherbarium"
+  }
+}

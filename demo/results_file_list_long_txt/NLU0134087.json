@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n288382\nHERBARIUM\n\nPLANTS OF ALABAMA\nCoosa County\n\n*Galax aphylla* L.\n\n2.5 miles southeast of Weogufka. (T23N, R17E\nNW\u00bc, Sec 14).\n\nWet area near stream; plants common along\nupland stream.\n\nEXCHANGE SPECIMEN FROM\n*AuA* (handwritten)\n\nA.L. Webb 144 19 October 1980\nCOLLECTED AND DISTRIBUTED THROUGH AUBURN UNIVERSITY\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000665,
+      "total_cost": 0.0014437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ORTHEAST LOUISIANA UNIVERSITY\n288382\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nPLANTS OF ALABAMA\nCoosa County\nGalax aphylla L.\n2.5 miles southeast of Weogufka. ( T23N, R17E\nNW, Sec 14).\nWet area near stream: plants common along\nupland stream.\nEXCHANGE SPECIMEN FROM\nA.L. Webb 144 19 October 1980\nCOLLECTED AND DISTRIBUTED THROUGH AUBURN UNIVERSITY\nUniversity of Louisiana at Monroe\nNLU0134087\nAUA\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.48e-05,
+      "total_cost": 0.0007563,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2183,
+    "output": 508,
+    "cost_in": 0.00021830000000000002,
+    "cost_out": 0.0002032
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n288382\nHERBARIUM\n\nPLANTS OF ALABAMA\nCoosa County\n\n*Galax aphylla* L.\n\n2.5 miles southeast of Weogufka. (T23N, R17E\nNW\u00bc, Sec 14).\n\nWet area near stream; plants common along\nupland stream.\n\nEXCHANGE SPECIMEN FROM\n*AuA* (handwritten)\n\nA.L. Webb 144 19 October 1980\nCOLLECTED AND DISTRIBUTED THROUGH AUBURN UNIVERSITY\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nORTHEAST LOUISIANA UNIVERSITY\n288382\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nPLANTS OF ALABAMA\nCoosa County\nGalax aphylla L.\n2.5 miles southeast of Weogufka. ( T23N, R17E\nNW, Sec 14).\nWet area near stream: plants common along\nupland stream.\nEXCHANGE SPECIMEN FROM\nA.L. Webb 144 19 October 1980\nCOLLECTED AND DISTRIBUTED THROUGH AUBURN UNIVERSITY\nUniversity of Louisiana at Monroe\nNLU0134087\nAUA\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "288382",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A.l. Webb",
+    "collectorNumber": "144",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "19 October 1980",
+    "collectionDate": "1980-10-19",
+    "collectionDateEnd": "",
+    "habitat": "Wet area near stream; plants common along upland stream.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Coosa County",
+    "locality": "2.5 miles southeast of Weogufka. (T23N, R17E NW\u00bc, Sec 14).",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast Louisiana University\nHerbarium\nPlants of Alabama\nExchange specimen from\nAuA\ncollected and distributed through Auburn University\nUniversity of Louisiana at Monroe\nNLU0134087\nAUA\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19"
+  }
+}

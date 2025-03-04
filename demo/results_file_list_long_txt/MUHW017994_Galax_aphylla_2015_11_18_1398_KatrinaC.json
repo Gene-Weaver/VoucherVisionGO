@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "M/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\n\nMarshall University Herbarium\nMUHW017994\n\nNo. 51       Flora of West Virginia\n                Wyoming County\n\n*Galax aphylla* L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty\n(handwritten)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000585,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "M/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarlum\nMUHW017994\nNo. 51\nFlora of West Virginia\nWyoming County\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\nBy Edsel Ray Lafferty\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2800000000000004e-05,
+      "total_cost": 0.0007243,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 107
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2101,
+    "output": 458,
+    "cost_in": 0.0002101,
+    "cost_out": 0.0001832
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nM/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\n\nMarshall University Herbarium\nMUHW017994\n\nNo. 51       Flora of West Virginia\n                Wyoming County\n\n*Galax aphylla* L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\n\nBy Edsel Ray Lafferty\n(handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nM/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarlum\nMUHW017994\nNo. 51\nFlora of West Virginia\nWyoming County\nGalax aphylla L.\nJuly 12, 1969\nPineville, on a high ridge on Kentucky side.\nIn rather dry soil of a wooded ridge.\nBy Edsel Ray Lafferty\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017994",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Edsel Ray Lafferty",
+    "collectorNumber": "51",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 12, 1969",
+    "collectionDate": "1969-07-12",
+    "collectionDateEnd": "",
+    "habitat": "In rather dry soil of a wooded ridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "West Virginia",
+    "county": "Wyoming County",
+    "locality": "Pineville, on a high ridge on Kentucky side.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "M/M\nInches\nGrobet - vigor 35.500\nMade in u.s.a.\nMarshall university herbarium\nFlora of west virginia\nBy edsel ray lafferty\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039981\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nGrayson County                                                     June 20, 1995\n\n*Galax urceolata* (Poir.) Brummitt\n\nAt SW edge of The Glades. Hummocks of damp pitch\npine-red maple forest on mafic flats along a small stream\n0.4 mi. ESE of Big Spring Church, 1.7 miles west of Low\nGap; elev. 2620 ft. Locally common.\n\nGary P. Fleming\nwith Bill Moorhead                                                     No. 10595\n\nGMUF-0030709\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007350000000000001,
+      "total_cost": 0.0015137500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 147
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039981\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nGrayson County June 20, 1995\nGalax urceolata (Poir.) Brumm.\nAt SW edge of The Glades. Hummocks of damp pitch\npine-red maple forest on mafic flats along a small stream\n0.4 mi. ESE of Big Spring Church, 1.7 miles west of Low\nGap; elev. 2620 ft. Locally common.\nGary P. Fleming No. 10595\nwith Bill Moorhead\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.7199999999999994e-05,
+      "total_cost": 0.0007387,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2171,
+    "output": 467,
+    "cost_in": 0.00021710000000000002,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039981\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nGrayson County                                                     June 20, 1995\n\n*Galax urceolata* (Poir.) Brummitt\n\nAt SW edge of The Glades. Hummocks of damp pitch\npine-red maple forest on mafic flats along a small stream\n0.4 mi. ESE of Big Spring Church, 1.7 miles west of Low\nGap; elev. 2620 ft. Locally common.\n\nGary P. Fleming\nwith Bill Moorhead                                                     No. 10595\n\nGMUF-0030709\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n039981\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nGrayson County June 20, 1995\nGalax urceolata (Poir.) Brumm.\nAt SW edge of The Glades. Hummocks of damp pitch\npine-red maple forest on mafic flats along a small stream\n0.4 mi. ESE of Big Spring Church, 1.7 miles west of Low\nGap; elev. 2620 ft. Locally common.\nGary P. Fleming No. 10595\nwith Bill Moorhead\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "039981",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Gary P. Fleming, Bill Moorhead",
+    "collectorNumber": "10595",
+    "identifiedBy": "Ted R. Bradley",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 20, 1995",
+    "collectionDate": "1995-06-20",
+    "collectionDateEnd": "",
+    "habitat": "At sw edge of the glades. hummocks of damp pitch pine-red maple forest on mafic flats along a small stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Grayson County",
+    "locality": "0.4 mi. ese of big spring church, 1.7 miles west of low gap; elev. 2620 ft. locally common.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "799",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of george mason university"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF WEST GEORGIA\nWGC03422\n\nCarroll County\n\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nSmall evergreen plant growing under a large \nbeech tree in a small ravine off Victory \nroad near the church on Jim Crowell property.\n\nDexter Byrd No. 104. April 25, 1976\n\nIMAGED 2015\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00047499999999999994,
+      "total_cost": 0.00125375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 95
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF WEST GEORGIA\nWGC03422\nCarroll County\nFLORA OF GEORGIA\nGalax aphylla L.\nSmall evergreen plant growing under a large\nbeech tree in a small ravine off Victory\nroad near the church on Jim Crowell property.\nDexter Byrd No. 104. April 25, 1976\ninches\n2\n3\n5\n6\n7\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12 13\n14\n15 16 17 18 19\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White 3/Color\nBlack\n8\nIMAGED 2015\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.400000000000001e-05,
+      "total_cost": 0.0007555000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 185
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2163,
+    "output": 435,
+    "cost_in": 0.0002163,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF WEST GEORGIA\nWGC03422\n\nCarroll County\n\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nSmall evergreen plant growing under a large \nbeech tree in a small ravine off Victory \nroad near the church on Jim Crowell property.\n\nDexter Byrd No. 104. April 25, 1976\n\nIMAGED 2015\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF WEST GEORGIA\nWGC03422\nCarroll County\nFLORA OF GEORGIA\nGalax aphylla L.\nSmall evergreen plant growing under a large\nbeech tree in a small ravine off Victory\nroad near the church on Jim Crowell property.\nDexter Byrd No. 104. April 25, 1976\ninches\n2\n3\n5\n6\n7\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12 13\n14\n15 16 17 18 19\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White 3/Color\nBlack\n8\nIMAGED 2015\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wgc03422",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dexter Byrd",
+    "collectorNumber": "104",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 25, 1976",
+    "collectionDate": "1976-04-25",
+    "collectionDateEnd": "",
+    "habitat": "Small evergreen plant growing under a large beech tree in a small ravine off victory road near the church on jim crowell property.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Carroll county",
+    "locality": "Off victory road near the church on jim crowell property.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of west georgia\nimaged 2015\n"
+  }
+}

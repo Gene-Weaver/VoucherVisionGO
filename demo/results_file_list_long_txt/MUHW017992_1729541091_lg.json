@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 126 Galax aphylla L.\nLocality Camp Creek State Park\nCamp Creek Road\nHabitat Floodplain\nState W. Va. County Mercer\nCollector Bob & Lori Date June 22, 1983\nBishop\nDet. Bob Bishop & Bernie Brumfield\n\nDiapensiaceae (134) *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ERSITATIS MAR\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nINCHES\nMarshall University Herbarium\nMUHW017992\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 126 Galax aphylla L.\nLocality Camp Creek State Park\nCamp Creek Road\nHabitat Floodplain\nState W. Va.\nCounty Mercer\nCollector Bob & Lori\nDate June 22, 1983\nBishop\nDet. Bob Bishop & Bernie Brumfield\nDiapensiaceae 134\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.439999999999999e-05,
+      "total_cost": 0.0007559000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 186
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 550,
+    "cost_in": 0.0002234,
+    "cost_out": 0.00022000000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 126 Galax aphylla L.\nLocality Camp Creek State Park\nCamp Creek Road\nHabitat Floodplain\nState W. Va. County Mercer\nCollector Bob & Lori Date June 22, 1983\nBishop\nDet. Bob Bishop & Bernie Brumfield\n\nDiapensiaceae (134) *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nERSITATIS MAR\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nINCHES\nMarshall University Herbarium\nMUHW017992\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 126 Galax aphylla L.\nLocality Camp Creek State Park\nCamp Creek Road\nHabitat Floodplain\nState W. Va.\nCounty Mercer\nCollector Bob & Lori\nDate June 22, 1983\nBishop\nDet. Bob Bishop & Bernie Brumfield\nDiapensiaceae 134\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017992",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Bob & Lori Bishop",
+    "collectorNumber": "126",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. det. Bob Bishop & Bernie Brumfield",
+    "verbatimCollectionDate": "June 22, 1983",
+    "collectionDate": "1983-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Floodplain",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.s.a.",
+    "stateProvince": "W. Va.",
+    "county": "Mercer",
+    "locality": "Camp Creek State Park Camp Creek Road",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nDiapensiaceae (134) (handwritten)\n\nMarshall University Herbarium\n\n\nDiapensiaceae 134\nERSITATIS MAR\nHuntington, West Virginia 25701, U.S.A.\nINCHES\n"
+  }
+}

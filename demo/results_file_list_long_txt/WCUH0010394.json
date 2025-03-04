@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nN.C.\n4192\nWESTERN CAROLINA COLLEGE\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\nGalax aphylla L.\n\nwest roadside, shady, rich, damp soil. Co. 1157, 10\nmi. from Cullowhee Post Office. Elongated inflores-\ncence stalk, leafless. Leaves basal from rhizome and\nshortate, fibrous roots. Small white flower. Cn.\nGalax.\n\nTommy L. Sheddan       30                      24 June 1965\n\n(Handwritten text: Tommy L. Sheddan, 30, 24 June 1965)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001025,
+      "total_cost": 0.00180375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 205
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010394\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nwest roadside, shady, rich, damp soil. Co. 1157, 10\nmi. from Cullowhee Post Office. Elongated inflores-\ncence stalk, leafless. Leaves basal from rhizone and\nshordate, fibrous roots. Small white flower. Cn.\nGalax.\nTommy L. Sheddan 30\n24 June 1965\nHERBARIUM Of\nN.C.\n4192\nCOLLEGE\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.24e-05,
+      "total_cost": 0.0007739000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 231
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2329,
+    "output": 610,
+    "cost_in": 0.0002329,
+    "cost_out": 0.000244
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nN.C.\n4192\nWESTERN CAROLINA COLLEGE\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\nGalax aphylla L.\n\nwest roadside, shady, rich, damp soil. Co. 1157, 10\nmi. from Cullowhee Post Office. Elongated inflores-\ncence stalk, leafless. Leaves basal from rhizome and\nshortate, fibrous roots. Small white flower. Cn.\nGalax.\n\nTommy L. Sheddan       30                      24 June 1965\n\n(Handwritten text: Tommy L. Sheddan, 30, 24 June 1965)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010394\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nwest roadside, shady, rich, damp soil. Co. 1157, 10\nmi. from Cullowhee Post Office. Elongated inflores-\ncence stalk, leafless. Leaves basal from rhizone and\nshordate, fibrous roots. Small white flower. Cn.\nGalax.\nTommy L. Sheddan 30\n24 June 1965\nHERBARIUM Of\nN.C.\n4192\nCOLLEGE\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010394",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Tommy L. Sheddan",
+    "collectorNumber": "30",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "24 June 1965",
+    "collectionDate": "1965-06-24",
+    "collectionDateEnd": "",
+    "habitat": "West roadside, shady, rich, damp soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Elongated inflorescence stalk, leafless. Leaves basal from rhizome and shortate, fibrous roots. Small white flower. Cn. Galax.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson County",
+    "locality": "Co. 1157, 10 mi. from Cullowhee Post Office.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF\nN.C.\n4192\nWESTERN CAROLINA COLLEGE\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nHERBARIUM Of\nN.C.\n4192\nCOLLEGE\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES"
+  }
+}

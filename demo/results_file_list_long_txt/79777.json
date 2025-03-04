@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nVIRGINIA\n\nFLORA OF THE SOUTHEAST\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\n\nJames City County May 28, 2013\n*Galax urceolata* (Poiret) Brummitt\nLocally common in dry leaf litter on the\nsouthern shore of Little Creek Reservoir\nat the intersection of Forge Road and\nLakeview Drive in Toano\nCorolla White\nCollector: Patrick Baldwin No 8035\n\nHandwritten Text: 28\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00063,
+      "total_cost": 0.0014087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 126
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm 10\n20\n30\nNO. 305 ME\n40\n16ths\n50 60 70 80\n2\n3\n90\nGENERAL\n100 110 120\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nVIRGINIA\nFLORA OF THE SOUTHEAST\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nJames City County\nMay 29, 2013\nGalax urceolata (Poiret) Brummitt\nLocally common in dry leaf litter on the\nsouthern shore of Little Creek Reservoir\nat the intersection of Forge Road and\nLakeview Drive in Toano\nCorolla\nCollector: Patrick Baldwin\nWhite\nNo8035\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.96e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2220,
+    "output": 469,
+    "cost_in": 0.00022200000000000003,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nVIRGINIA\n\nFLORA OF THE SOUTHEAST\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\n\nJames City County May 28, 2013\n*Galax urceolata* (Poiret) Brummitt\nLocally common in dry leaf litter on the\nsouthern shore of Little Creek Reservoir\nat the intersection of Forge Road and\nLakeview Drive in Toano\nCorolla White\nCollector: Patrick Baldwin No 8035\n\nHandwritten Text: 28\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm 10\n20\n30\nNO. 305 ME\n40\n16ths\n50 60 70 80\n2\n3\n90\nGENERAL\n100 110 120\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nVIRGINIA\nFLORA OF THE SOUTHEAST\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nJames City County\nMay 29, 2013\nGalax urceolata (Poiret) Brummitt\nLocally common in dry leaf litter on the\nsouthern shore of Little Creek Reservoir\nat the intersection of Forge Road and\nLakeview Drive in Toano\nCorolla\nCollector: Patrick Baldwin\nWhite\nNo8035\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "Urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Patrick Baldwin",
+    "collectorNumber": "8035",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 28, 2013",
+    "collectionDate": "2013-05-28",
+    "collectionDateEnd": "",
+    "habitat": "Locally common in dry leaf litter on the southern shore of little creek reservoir at the intersection of forge road and lakeview drive in toano",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Corolla white",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "James city county",
+    "locality": "Little creek reservoir at the intersection of forge road and lakeview drive in toano",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nchartered 1693\n\nflora of the southeast\nherbarium of the college of\nwilliam and mary\nwilliamsburg, virginia\nhandwritten text 28"
+  }
+}

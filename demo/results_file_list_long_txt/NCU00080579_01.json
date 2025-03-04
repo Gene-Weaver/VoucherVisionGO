@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n454933\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\n3.5 miles east of Main Street in Highlands on\nUS 64, then south ca. 0.4 miles to the east\nside of Ammons Br. Virgin forest of *Tsuga\ncanadensis* & *T. caroliniana*.\n\nD. E. Boufford 14672 24 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\nNCU00080579\n\n\n*Galax aphylla* L.\n*Tsuga canadensis*\n*T. caroliniana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001065,
+      "total_cost": 0.0018437500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 213
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nat Chapel Hill\nUniversity of North Carolina\nERSIT\nOF NORTH\nHERBARIUM\n\u0399\u039d\u03a0\nCAROLINA\n454933\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080579\nHerbarium of the University of North Carolina\nGalax aphylla L.\nNORTH CAROLINA\nMacon County\n3.5 miles east of Main Street in Highlands on\nUS 64, then south ca. 0.4 miles to the east\nside of Ammons Br. Virgin forest of Tsuga\ncanadensis & T. caroliniana.\nD. E. Boufford 14672\n24 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\nTsuga canadensis\nTsuga caroliniana\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010200000000000001,
+      "total_cost": 0.0007835000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 255
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2349,
+    "output": 493,
+    "cost_in": 0.00023490000000000002,
+    "cost_out": 0.0001972
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n454933\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\n3.5 miles east of Main Street in Highlands on\nUS 64, then south ca. 0.4 miles to the east\nside of Ammons Br. Virgin forest of *Tsuga\ncanadensis* & *T. caroliniana*.\n\nD. E. Boufford 14672 24 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\nNCU00080579\n\n\n*Galax aphylla* L.\n*Tsuga canadensis*\n*T. caroliniana*\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nat Chapel Hill\nUniversity of North Carolina\nERSIT\nOF NORTH\nHERBARIUM\n\u0399\u039d\u03a0\nCAROLINA\n454933\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080579\nHerbarium of the University of North Carolina\nGalax aphylla L.\nNORTH CAROLINA\nMacon County\n3.5 miles east of Main Street in Highlands on\nUS 64, then south ca. 0.4 miles to the east\nside of Ammons Br. Virgin forest of Tsuga\ncanadensis & T. caroliniana.\nD. E. Boufford 14672\n24 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\nTsuga canadensis\nTsuga caroliniana\n\n",
+  "formatted_json": {
+    "catalogNumber": "454933",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, L. Schram, D. Wickland & E. Wood",
+    "collectorNumber": "14672",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 June 1974",
+    "collectionDate": "1974-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Virgin forest of Tsuga canadensis & T. caroliniana.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "3.5 miles east of main street in highlands on us 64, then south ca. 0.4 miles to the east side of ammons br.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Voucher for north carolina natural areas\nstudy. May 15-june 30, 1974. For community\ndata see natural areas file in herbarium.\nPlants of the southeastern united states"
+  }
+}

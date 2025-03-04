@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "APPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON002924\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27313 (handwritten)\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt                      Galax\n\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R. 1264 Hidden Valley Rd. Game Land access parking lot. Growing along the ridge and summit northeast of the large central rock outcrop in shallow rocky soil. High Elevation Rocky Summit Community - Northern Red Oak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact. GPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\n\nAndrew Jenkins 609                                         7/22/2010\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00133,
+      "total_cost": 0.00210875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 266
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "APPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON002924\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C\nNo. 27313\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nGalax\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\nAndrew Jenkins 609\n7/22/2010\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00012159999999999999,
+      "total_cost": 0.0008031,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 304
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2405,
+    "output": 537,
+    "cost_in": 0.00024050000000000002,
+    "cost_out": 0.00021480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON002924\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27313 (handwritten)\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt                      Galax\n\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R. 1264 Hidden Valley Rd. Game Land access parking lot. Growing along the ridge and summit northeast of the large central rock outcrop in shallow rocky soil. High Elevation Rocky Summit Community - Northern Red Oak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact. GPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\n\nAndrew Jenkins 609                                         7/22/2010\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON002924\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C\nNo. 27313\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nGalax\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\nAndrew Jenkins 609\n7/22/2010\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON002924",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poiret) brummit",
+    "collectedBy": "Andrew Jenkins",
+    "collectorNumber": "609",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/22/2010",
+    "collectionDate": "2010-07-22",
+    "collectionDateEnd": "",
+    "habitat": "Growing along the ridge and summit northeast of the large central rock outcrop in shallow rocky soil. High elevation rocky summit community - northern red oak forest ecotone.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "North carolina",
+    "county": "Ashe county",
+    "locality": "Three top mountain game land preserve. Creston; s.r. 1264 hidden valley rd. game land access parking lot. Location 36 25 02.5 n 81 35 21.7 w. site exact. gps datum wgs84.",
+    "verbatimCoordinates": "36 25 02.5 N 81 35 21.7 W",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1524",
+    "maximumElevationInMeters": "1530",
+    "elevationUnits": "m",
+    "additionalText": "Appalachian state university herbarium\nHerbarim\nAppalachian state university boone, n. c\nNo. 27313\nDiapensiaceae"
+  }
+}

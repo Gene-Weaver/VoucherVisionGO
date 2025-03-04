@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n510774\n\nNORTH CAROLINA\nAshe County\n\n*Galax aphylla* L.\n\nWooded edge of Long Hope Water Falls.\n\nJ. Kenneth Moore #2509 10 August 1969\nA floristic study of Long Hope Creek Valley\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00037999999999999997,
+      "total_cost": 0.00115875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 76
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n510774\nNORTH CAROLINA\nAshe County\nGalax aphylla L.\nWooded edge of Long Hope Water Falls.\nJ. Kenneth Moore #2509\n10 August 1969\nA floristic study of Long Hope Creek Valley\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 2.88e-05,
+      "total_cost": 0.0007103000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 72
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2036,
+    "output": 419,
+    "cost_in": 0.00020360000000000002,
+    "cost_out": 0.0001676
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n510774\n\nNORTH CAROLINA\nAshe County\n\n*Galax aphylla* L.\n\nWooded edge of Long Hope Water Falls.\n\nJ. Kenneth Moore #2509 10 August 1969\nA floristic study of Long Hope Creek Valley\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n510774\nNORTH CAROLINA\nAshe County\nGalax aphylla L.\nWooded edge of Long Hope Water Falls.\nJ. Kenneth Moore #2509\n10 August 1969\nA floristic study of Long Hope Creek Valley\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "510774",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. Kenneth Moore",
+    "collectorNumber": "2509",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 August 1969",
+    "collectionDate": "1969-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Wooded edge of long hope water falls.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Ashe county",
+    "locality": "Wooded edge of long hope water falls.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\na floristic study of long hope creek valley"
+  }
+}

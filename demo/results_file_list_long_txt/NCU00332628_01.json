@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nNCU\n\n0 cm\n1 2 3 4 5 6 7 8 9 10\nCopyright reserved\n\nUNIVERSITY OF\nNORTH\nCAROLINA\nHERBARIUM\n326816\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332628\n\nHerbarium of the University of North Carolina\n\nVIRGINIA\nCarroll County\n\n*Galax aphylla* L. (handwritten)\n\n2.9 mi. N.W. of Jct. Co. 782 & U.S. 52 on\nU.S. 52 (N.W. of Hillsville)\n\nFred C. James #8118 (handwritten) July 28, 1967\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001015,
+      "total_cost": 0.00179375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 203
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\nNCU\nat Chapel Hill\nUniversity of North Carolina\ncopyright reserved\ncm\n1 2 3 4 5 6 7 8 9 10\nOF\nNORTH\nCAROLINA\nHERBARIUM\nUNI\n326816\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332628\nHerbarium of the University of North Carolina\nVIRGINIA\nCarrol County\nGalax aphylla L.\n2.9 mi. N.W. of Jct. Co. 782 & U.S. 52 on\nU.S. 52 (N.W. of Hillsville)\nFred C. James #8118\nJuly 28, 1967\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.72e-05,
+      "total_cost": 0.0007587,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 193
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2270,
+    "output": 518,
+    "cost_in": 0.000227,
+    "cost_out": 0.00020720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nNCU\n\n0 cm\n1 2 3 4 5 6 7 8 9 10\nCopyright reserved\n\nUNIVERSITY OF\nNORTH\nCAROLINA\nHERBARIUM\n326816\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332628\n\nHerbarium of the University of North Carolina\n\nVIRGINIA\nCarroll County\n\n*Galax aphylla* L. (handwritten)\n\n2.9 mi. N.W. of Jct. Co. 782 & U.S. 52 on\nU.S. 52 (N.W. of Hillsville)\n\nFred C. James #8118 (handwritten) July 28, 1967\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\nNCU\nat Chapel Hill\nUniversity of North Carolina\ncopyright reserved\ncm\n1 2 3 4 5 6 7 8 9 10\nOF\nNORTH\nCAROLINA\nHERBARIUM\nUNI\n326816\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332628\nHerbarium of the University of North Carolina\nVIRGINIA\nCarrol County\nGalax aphylla L.\n2.9 mi. N.W. of Jct. Co. 782 & U.S. 52 on\nU.S. 52 (N.W. of Hillsville)\nFred C. James #8118\nJuly 28, 1967\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332628",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Fred C. James",
+    "collectorNumber": "8118",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 28, 1967",
+    "collectionDate": "1967-07-28",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Carroll County",
+    "locality": "2.9 mi. N.W. of Jct. Co. 782 & U.S. 52 on U.S. 52 (N.W. of Hillsville)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\nUniversity of North Carolina\nat Chapel Hill\nNCU\n0 cm\n1 2 3 4 5 6 7 8 9 10\nCopyright reserved\nUniversity of\nNorth\nCarolina\nHerbarium\n326816\nUniversity of North Carolina Herbarium\nHerbarium of the University of North Carolina\nPlants of the Southeastern United States"
+  }
+}

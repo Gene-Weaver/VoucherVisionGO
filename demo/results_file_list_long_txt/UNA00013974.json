@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNA\n23607\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\nPLANTS OF ALABAMA\n\nCommon on rocks along edge of creek\nLower Odum Scout Trail at falls; Talladega National\nForest; SE\u00bc Sec. 18, T19S, R8E; ca. 7 mi. due NW of\nLineville\n\nCounty: CLAY\nDate: 16 Oct 1982\nRobert R. Haynes, No. 8687\n\nUNA00013974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNA\nThe University\nof Alabama\nHerbarium\n23607\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\nGalax aphylla L.\nCommon on rocks along edge of creek\nLower Odum Scout Trail at falls; Talledaga National\nForest; SE\u00bc Sec. 18, T19S, R8E; ca. 7 mi. due NW of\nLineville\nCounty: CLAY\nDate: 16 Oct 1982\nRobert R. Haynes, No. 8687\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013974\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.479999999999999e-05,
+      "total_cost": 0.0007563000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2241,
+    "output": 520,
+    "cost_in": 0.0002241,
+    "cost_out": 0.000208
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNA\n23607\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\nPLANTS OF ALABAMA\n\nCommon on rocks along edge of creek\nLower Odum Scout Trail at falls; Talladega National\nForest; SE\u00bc Sec. 18, T19S, R8E; ca. 7 mi. due NW of\nLineville\n\nCounty: CLAY\nDate: 16 Oct 1982\nRobert R. Haynes, No. 8687\n\nUNA00013974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNA\nThe University\nof Alabama\nHerbarium\n23607\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nPLANTS OF ALABAMA\nGalax aphylla L.\nCommon on rocks along edge of creek\nLower Odum Scout Trail at falls; Talledaga National\nForest; SE\u00bc Sec. 18, T19S, R8E; ca. 7 mi. due NW of\nLineville\nCounty: CLAY\nDate: 16 Oct 1982\nRobert R. Haynes, No. 8687\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013974\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "23607",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert R. Haynes",
+    "collectorNumber": "8687",
+    "identifiedBy": "Robert R. Haynes",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "16 Oct 1982",
+    "collectionDate": "1982-10-16",
+    "collectionDateEnd": "",
+    "habitat": "Common on rocks along edge of creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Clay",
+    "locality": "Lower Odum Scout Trail at falls; Talledaga National Forest; SE\u00bc Sec. 18, T19S, R8E; ca. 7 mi. due NW of Lineville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNA\nThe University\nof Alabama\nHerbarium\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA\nGalax aphylla L.\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013974\nGalax urceolata\nGalax aphylla"
+  }
+}

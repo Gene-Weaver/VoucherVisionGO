@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082935\n\nPOISONED\n19413\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\nFlora of Virginia\n\n*Galax aphylla* L.\nLarge colonies in dense woods, Blue Ridge\nParkway near Galax, Carroll Co., Virginia.\nAugust 28, 1947\n\nHAROLD N. MOLDENKE, COLLECTOR       No. 19253\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005549999999999999,
+      "total_cost": 0.00133375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 111
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarlum (NCSC)\nNCSC00082935\nA 1\n2\n3\n4\n5\n6\nM 8\n9\n10\n11 12 13 14 15\nB 17 18 19\nPOISONED\n19413\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nRG\nB\nW\nG\nK\nC\nM\nInches\n6\n1\n2\n3\n5\n6\n8\n6\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nFlora of Virginia\nGalax aphylla L.\nLarge colonies in dense woods, Blue Ridge\nParkway near Galax, Carroll Co., Virginia.\nAugust 28, 1947\nHAROLD N. MOLDENKE, COLLECTOR\nNo. 19253\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011040000000000001,
+      "total_cost": 0.0007919,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 276
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2253,
+    "output": 554,
+    "cost_in": 0.0002253,
+    "cost_out": 0.00022160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082935\n\nPOISONED\n19413\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\nFlora of Virginia\n\n*Galax aphylla* L.\nLarge colonies in dense woods, Blue Ridge\nParkway near Galax, Carroll Co., Virginia.\nAugust 28, 1947\n\nHAROLD N. MOLDENKE, COLLECTOR       No. 19253\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarlum (NCSC)\nNCSC00082935\nA 1\n2\n3\n4\n5\n6\nM 8\n9\n10\n11 12 13 14 15\nB 17 18 19\nPOISONED\n19413\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nRG\nB\nW\nG\nK\nC\nM\nInches\n6\n1\n2\n3\n5\n6\n8\n6\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nFlora of Virginia\nGalax aphylla L.\nLarge colonies in dense woods, Blue Ridge\nParkway near Galax, Carroll Co., Virginia.\nAugust 28, 1947\nHAROLD N. MOLDENKE, COLLECTOR\nNo. 19253\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082935",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harold n. moldenke",
+    "collectorNumber": "19253",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 28, 1947",
+    "collectionDate": "1947-08-28",
+    "collectionDateEnd": "",
+    "habitat": "Large colonies in dense woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Carroll co.",
+    "locality": "Blue ridge parkway near galax",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\nPoisoned\nHerbarium\nNorth carolina state college\nTiffen gray scale\nThe tiffen company, 2007\nRg\nB\nW\nG\nK\nC\nM\nInches\n6\n1\n2\n3\n5\n6\n8\n6\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres tiffen\u00ae color control patches\nThe tiffen company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/color\nBlack\nFlora of virginia\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nSOUTHERN APPALACHIAN FLORA Botetourt\nA. B. SEYMOUR, 1891.\nCo.\n\nGalax aphylla L.\nBlue Ridge, Va., July 22, 1891.\nNo. 91 7 22. 3\n\nDUKE UNIVERSITY\nHERBARIUM\n115279\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095607\n\nHandwritten text:\nstomates c\n23/1 mmg\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000845,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "stomates c\n23/1 long\nDUKE UNIVERSITY\nHERBARIUM\n115279\nDUKE UNIVERSITY HERBARIUM\nDUKE10095607\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nSOUTHERN APPALACHIAN FLORA Botetourt\nA. B. SEYMOUR, 1891.\nCa\nCITATION\nNo. 19a\nGalax aphylla L.\nBlue Ridge, Va., July 22, 1891.\nNo. 91 7 22.36\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.12e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2224,
+    "output": 497,
+    "cost_in": 0.00022239999999999998,
+    "cost_out": 0.00019880000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nSOUTHERN APPALACHIAN FLORA Botetourt\nA. B. SEYMOUR, 1891.\nCo.\n\nGalax aphylla L.\nBlue Ridge, Va., July 22, 1891.\nNo. 91 7 22. 3\n\nDUKE UNIVERSITY\nHERBARIUM\n115279\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095607\n\nHandwritten text:\nstomates c\n23/1 mmg\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nstomates c\n23/1 long\nDUKE UNIVERSITY\nHERBARIUM\n115279\nDUKE UNIVERSITY HERBARIUM\nDUKE10095607\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nSOUTHERN APPALACHIAN FLORA Botetourt\nA. B. SEYMOUR, 1891.\nCa\nCITATION\nNo. 19a\nGalax aphylla L.\nBlue Ridge, Va., July 22, 1891.\nNo. 91 7 22.36\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "115279",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. B. Seymour",
+    "collectorNumber": "91 7 22. 3",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 22, 1891",
+    "collectionDate": "1891-07-22",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "Stomates c 23/1 long",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Va.",
+    "county": "Botetourt Co.",
+    "locality": "Blue Ridge, Va., July 22, 1891.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "(Galax aphylla auct. non L.)\nDuke University Herbarium\nSouthern appalachian flora\nGalax aphylla L.\nDuke university herbarium\nduke10095607\nGalax urceolata\nGalax aphylla"
+  }
+}

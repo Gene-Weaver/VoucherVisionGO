@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nAccession #\n673402\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\nTaxon: *Galax urceolata*\n\nLocation: lat. 36.041684, long. -79.009908\n+/- 65 m\nLaurel Bluffs Trail, Eno River State Park,\nWolf Pleasant Green Rd N of Laurel Bridge Rd,\nS side of Eno River. *Kalmia latifolia* - *Rhododendron catawbiense* slope.\n\nCollectors: Carol Ann McCormick and Mark Peifer\nDate Collected: 26 December 2020\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nHandwritten text: NCU Accession # 673402\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Rhododendron catawbiense*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001065,
+      "total_cost": 0.00184375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 213
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Neu\nAccession#\n673402\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata\nLocation: lat. 36.041684, long. -79.009908\n+1-65m\nLaurel Bluffs Trail, Eno River State Park,\nWof Pleasant Green Rd, N of Laurel Bridge Rd,\nS side of Eno River. Kalmia latifolia - Rhodo.\ndendron catawbiense slope.\nCollectors: Carol Ann McCormick and Mark Peifer\nDate Collected: 26 December 2020\nHERBARIUM\nNCU\n673402\n\n\nGalax urceolata\nKalmia latifolia\nRhododendron catawbiense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.16e-05,
+      "total_cost": 0.0007531,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 179
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2263,
+    "output": 479,
+    "cost_in": 0.0002263,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nAccession #\n673402\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\nTaxon: *Galax urceolata*\n\nLocation: lat. 36.041684, long. -79.009908\n+/- 65 m\nLaurel Bluffs Trail, Eno River State Park,\nWolf Pleasant Green Rd N of Laurel Bridge Rd,\nS side of Eno River. *Kalmia latifolia* - *Rhododendron catawbiense* slope.\n\nCollectors: Carol Ann McCormick and Mark Peifer\nDate Collected: 26 December 2020\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nHandwritten text: NCU Accession # 673402\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Rhododendron catawbiense*\n\n\ngemini-2.0-flash OCR:\nNeu\nAccession#\n673402\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata\nLocation: lat. 36.041684, long. -79.009908\n+1-65m\nLaurel Bluffs Trail, Eno River State Park,\nWof Pleasant Green Rd, N of Laurel Bridge Rd,\nS side of Eno River. Kalmia latifolia - Rhodo.\ndendron catawbiense slope.\nCollectors: Carol Ann McCormick and Mark Peifer\nDate Collected: 26 December 2020\nHERBARIUM\nNCU\n673402\n\n\nGalax urceolata\nKalmia latifolia\nRhododendron catawbiense\n\n",
+  "formatted_json": {
+    "catalogNumber": "673402",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Carol Ann McCormick and Mark Peifer",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 December 2020",
+    "collectionDate": "2020-12-26",
+    "collectionDateEnd": "",
+    "habitat": "Kalmia latifolia - Rhododendron catawbiense slope.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States of America",
+    "stateProvince": "North Carolina",
+    "county": "Orange",
+    "locality": "Laurel Bluffs Trail, Eno River State Park, Wolf Pleasant Green Rd N of Laurel Bridge Rd, S side of Eno River.",
+    "verbatimCoordinates": "lat. 36.041684, long. -79.009908",
+    "decimalLatitude": "36.041684",
+    "decimalLongitude": "-79.009908",
+    "minimumElevationInMeters": "65",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Flora of the Southeastern United States of America\nHandwritten text NCU Accession # 673402"
+  }
+}

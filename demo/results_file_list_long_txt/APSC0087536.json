@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087536\n\nHERBARIUM\nWESTERN KY UNIVERSITY\n21342\n\nWKU\nDiapensiaceae\nKentucky\nLetcher County\n\n*Galax urceolata* (Poir.) Brummitt\n\nWhitesburg Q.; Bad Branch, vicinity of the top of\nthe falls.\n\nMax E. Medley\n01366-79\n\nJul. 26, 1979\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000565,
+      "total_cost": 0.0013437500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 113
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087536\nHERBARIUM\nWESTERN KY UNIVERSITY\n21342\nInches\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue Cyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\nR\nG\nB\nTIFFEN Gray Scale\nThe Tiffen Compan\nW\nG\nK\nC\nY\nM\nWKU\nKentucky\nDiapensiaceae\nLetcher County\nGalax urceolata (Poir.) Brummitt\nWhitesburg Q.; Bad Branch, vicinity of the top of\nthe falls.\nMax E. Medley\n01366-79\nJul. 26, 1979\nSH\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 472,
+    "cost_in": 0.000218,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087536\n\nHERBARIUM\nWESTERN KY UNIVERSITY\n21342\n\nWKU\nDiapensiaceae\nKentucky\nLetcher County\n\n*Galax urceolata* (Poir.) Brummitt\n\nWhitesburg Q.; Bad Branch, vicinity of the top of\nthe falls.\n\nMax E. Medley\n01366-79\n\nJul. 26, 1979\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087536\nHERBARIUM\nWESTERN KY UNIVERSITY\n21342\nInches\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue Cyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\nR\nG\nB\nTIFFEN Gray Scale\nThe Tiffen Compan\nW\nG\nK\nC\nY\nM\nWKU\nKentucky\nDiapensiaceae\nLetcher County\nGalax urceolata (Poir.) Brummitt\nWhitesburg Q.; Bad Branch, vicinity of the top of\nthe falls.\nMax E. Medley\n01366-79\nJul. 26, 1979\nSH\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087536",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Max E. Medley",
+    "collectorNumber": "01366-79",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Jul. 26, 1979",
+    "collectionDate": "1979-07-26",
+    "collectionDateEnd": "",
+    "habitat": "Whitesburg Q.; Bad Branch, vicinity of the top of the falls.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "Letcher County",
+    "locality": "Whitesburg Q.; Bad Branch, vicinity of the top of the falls.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nHERBARIUM\nWESTERN KY UNIVERSITY\n21342\nWKU\nDiapensiaceae"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012606\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of 2\nGuy L. Nesom, 1975\n(Handwritten) not measured\n\nLYNCHBURG COLLEGE\n4554\nHERBARIUM\n\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\n\nNO. 4554\n*Galax aphylla* L.\nAt the top of a bluff above the James River\nat Tyree.\n\nCOLLECTORS\nJuly 8, 19_66_ (Handwritten '66')\nG. W. Ramsey, Ruskin S. Freer, W. F. Ruska,\nW. Thacker.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00097,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012606\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of\nGuy L. Nesom, 1975\nnot measured\nLYNCHBURG\nCOLLEGE\n4554\nHERBARIUM\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\nNO. 4554\nGalax aphylla L.\nAt the top of a bluff above the James River\nat Tyree.\nCOLLECTORS\nJuly 8,\n1966\nG. W. Ramsey, Ruskin S. Freer, W. F. Ruska,\nW. Thacker.\n1\n2 3\n4\n5\ncm\n6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.12e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2301,
+    "output": 534,
+    "cost_in": 0.0002301,
+    "cost_out": 0.0002136
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012606\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of 2\nGuy L. Nesom, 1975\n(Handwritten) not measured\n\nLYNCHBURG COLLEGE\n4554\nHERBARIUM\n\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\n\nNO. 4554\n*Galax aphylla* L.\nAt the top of a bluff above the James River\nat Tyree.\n\nCOLLECTORS\nJuly 8, 19_66_ (Handwritten '66')\nG. W. Ramsey, Ruskin S. Freer, W. F. Ruska,\nW. Thacker.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012606\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of\nGuy L. Nesom, 1975\nnot measured\nLYNCHBURG\nCOLLEGE\n4554\nHERBARIUM\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\nNO. 4554\nGalax aphylla L.\nAt the top of a bluff above the James River\nat Tyree.\nCOLLECTORS\nJuly 8,\n1966\nG. W. Ramsey, Ruskin S. Freer, W. F. Ruska,\nW. Thacker.\n1\n2 3\n4\n5\ncm\n6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012606",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "G. W. Ramsey, Ruskin S. Freer, W. F. Ruska, W. Thacker",
+    "collectorNumber": "4554",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Not measured",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 8, 19_66_",
+    "collectionDate": "1966-07-08",
+    "collectionDateEnd": "",
+    "habitat": "At the top of a bluff above the James River at Tyree.",
+    "chromosomeCount": "n =",
+    "guardCell": "Based on average guard cell area volume of",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Campbell County",
+    "locality": "At the top of a bluff above the James River at Tyree.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nLYNCHBURG COLLEGE\nHERBARIUM\nPLANTS OF VIRGINIA PIEDMONT\nNO. 4554\nCOLLECTORS\nLynchburg College copyright reserved"
+  }
+}

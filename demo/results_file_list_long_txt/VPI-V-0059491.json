@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n85980\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059491\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear Stokesville, Augusta Co.\n\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp Thay Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia* & *Menziesia* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.)                                          el. 1650 ft.\nCharles E. Stevens                                          May 1, 1982\nNo. 17,983\n\n*Handwritten Text:*\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp Thay Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia* & *Menziesia* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.)                                          el. 1650 ft.\nCharles E. Stevens                                          May 1, 1982\nNo. 17,983\n23\n\n*Galax urceolata*\n*Pinus strobus*\n*Tsuga*\n*Acer rubrum*\n*Gaultheria*\n*Epigaea*\n*Kalmia*\n*Menziesia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00181,
+      "total_cost": 0.00258875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 362
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n85980\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mil. along\nS bank of North River ca. 3/4 mi. SW of\nCamp May Flather. With Gaultheria, Epigaea,\nKalmia & Menziesia under Pinus strobus, Tsuga\n& Acer rubrum.\n(Stokesville Quad.)\nCharles E. Stevens\nNo. 17,983\nel. 1650 ft.\nMay 1, 1982\n\n\nFalas urceolata\nEpigaea\nPinus strobus\nTsuga\nAcer rubrum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.560000000000001e-05,
+      "total_cost": 0.0007471,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2391,
+    "output": 530,
+    "cost_in": 0.0002391,
+    "cost_out": 0.000212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n85980\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059491\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear Stokesville, Augusta Co.\n\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp Thay Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia* & *Menziesia* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.)                                          el. 1650 ft.\nCharles E. Stevens                                          May 1, 1982\nNo. 17,983\n\n*Handwritten Text:*\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp Thay Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia* & *Menziesia* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.)                                          el. 1650 ft.\nCharles E. Stevens                                          May 1, 1982\nNo. 17,983\n23\n\n*Galax urceolata*\n*Pinus strobus*\n*Tsuga*\n*Acer rubrum*\n*Gaultheria*\n*Epigaea*\n*Kalmia*\n*Menziesia*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n85980\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mil. along\nS bank of North River ca. 3/4 mi. SW of\nCamp May Flather. With Gaultheria, Epigaea,\nKalmia & Menziesia under Pinus strobus, Tsuga\n& Acer rubrum.\n(Stokesville Quad.)\nCharles E. Stevens\nNo. 17,983\nel. 1650 ft.\nMay 1, 1982\n\n\nFalas urceolata\nEpigaea\nPinus strobus\nTsuga\nAcer rubrum\n\n",
+  "formatted_json": {
+    "catalogNumber": "85980",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "17,983",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 1, 1982",
+    "collectionDate": "1982-05-01",
+    "collectionDateEnd": "",
+    "habitat": "With Gaultheria, Epigaea, Kalmia & Menziesia under Pinus strobus, Tsuga & Acer rubrum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Augusta County",
+    "locality": "Near Stokesville, Augusta Co. Scattered colonies for .7 mi. along S bank of North River ca. 3/4 mi. SW of Camp Thay Flather. (Stokesville Quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "503",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "THE HERBARIUM OF\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059491\nFlora of Virginia\nel. 1650 ft.\nFalas urceolata\nEpigaea\nPinus strobus\nTsuga\nAcer rubrum"
+  }
+}

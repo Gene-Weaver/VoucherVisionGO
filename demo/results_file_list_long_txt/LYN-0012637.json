@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsay-Freer Herbarium\nLynchburg College\nLYN-0012637\n\nLYNCHBURG COLLEGE\n25289\nHERBAR\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nRoanoke  COUNTY\n\nNO. 25289\n*Galax aphylla* L.\nNature trail on Blue Ridge Parkway\nat the Roanoke River.\n\nG.W. Ramsey July 7, '78\nand family\n\n(Handwritten) *Blue Ridge Parkway*\n(Handwritten) BLRF14450\n\nLYN\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012637\nLYNCHBURG\nCOLLEGE\n25289\nHERBAR\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nRoanoke\nCOUNTY\nNO. 25289\nGalax aphylla L.\nNature trail on Blue Ridge Parkway\nat the Roanoke River.\nCOLLECTORS\nG.W. Ramsey July 7, 78\nand family\nBlue Ridge Parkway\nLYN\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10 Lynchburg\nCollege\ncm\ncopyright reserved\nBLRF-14150\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 462,
+    "cost_in": 0.000218,
+    "cost_out": 0.00018480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsay-Freer Herbarium\nLynchburg College\nLYN-0012637\n\nLYNCHBURG COLLEGE\n25289\nHERBAR\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nRoanoke  COUNTY\n\nNO. 25289\n*Galax aphylla* L.\nNature trail on Blue Ridge Parkway\nat the Roanoke River.\n\nG.W. Ramsey July 7, '78\nand family\n\n(Handwritten) *Blue Ridge Parkway*\n(Handwritten) BLRF14450\n\nLYN\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012637\nLYNCHBURG\nCOLLEGE\n25289\nHERBAR\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nRoanoke\nCOUNTY\nNO. 25289\nGalax aphylla L.\nNature trail on Blue Ridge Parkway\nat the Roanoke River.\nCOLLECTORS\nG.W. Ramsey July 7, 78\nand family\nBlue Ridge Parkway\nLYN\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10 Lynchburg\nCollege\ncm\ncopyright reserved\nBLRF-14150\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012637",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G.w. Ramsey, family",
+    "collectorNumber": "25289",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 7, '78",
+    "collectionDate": "1978-07-07",
+    "collectionDateEnd": "",
+    "habitat": "Nature trail on blue ridge parkway at the roanoke river.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Roanoke",
+    "locality": "Nature trail on blue ridge parkway at the roanoke river.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsay-freer herbarium\nLynchburg college\nLynchburg college\nHerbar\nLynchburg college herbarium\nPlants of virginia\nBlue ridge parkway\nBlrf-14150"
+  }
+}

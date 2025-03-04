@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n87381\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059498\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\n\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\n*Gaultheria* & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad.) el. 3000 ft.\n\nCharles E. Stevens\nNo. 19,815 July 5, 1986\n\n235 (handwritten)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00077,
+      "total_cost": 0.0015487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n87381\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\nGaultheria & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad) el. 3000 ft.\nCharles E. Stevens\nNo. 19,815\nJuly 5, 1986\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059498\n\nHandwritten text:\nGalax urceolata (Poiret) Brum.\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\nGaultheria & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad) el. 3000 ft.\nCharles E. Stevens\nNo. 19,815\nJuly 5, 1986\n\n\nSmilax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.680000000000001e-05,
+      "total_cost": 0.0007783,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 242
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 518,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n87381\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059498\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\n\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\n*Gaultheria* & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad.) el. 3000 ft.\n\nCharles E. Stevens\nNo. 19,815 July 5, 1986\n\n235 (handwritten)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n87381\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\nGaultheria & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad) el. 3000 ft.\nCharles E. Stevens\nNo. 19,815\nJuly 5, 1986\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059498\n\nHandwritten text:\nGalax urceolata (Poiret) Brum.\nTrine Bank Creek, Augusta Co.\nColony of ca. 30 plants with\nGaultheria & heaths in mixed hardwoods\nby trail @ head of Trine Bank Creek.\n(Big Levels Quad) el. 3000 ft.\nCharles E. Stevens\nNo. 19,815\nJuly 5, 1986\n\n\nSmilax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "87381",
+    "scientificName": "Galax urceolata (Poiret) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "19,815",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 5, 1986",
+    "collectionDate": "1986-07-05",
+    "collectionDateEnd": "",
+    "habitat": "Colony of ca. 30 plants with Gaultheria & heaths in mixed hardwoods by trail @ head of Trine Bank Creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Augusta co.",
+    "locality": "Trine Bank Creek, Augusta Co. (Big Levels Quad)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "914",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0059498\nFlora of virginia\nel. 3000 ft.\n235 (handwritten)\nsmilax urceolata\nmetric\nhandwritten text\nsmilax urceolata"
+  }
+}

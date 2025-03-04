@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "3779\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n\nFMUH\n\nFMUH0004039\n\nFlora of Tennessee\nFrancis Marion University Herbarium\n\nCarter County\n\n*Galax aphylla* L.\nBack of Hump Mt.\nColl. Martin Taylor with Travis Knowles\nDate- 10/22/2000\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00042,
+      "total_cost": 0.0011987500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 84
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Francis Marion University Herbarium\nFMUH0004039\nMETRIC\n5\n10\n3779\nFRANCIS MARION UNIVERSITY\nHERBARIUM\nFMUH\nFlora of Tennessee\nFrancis Marion University Herbarium\nCarter County\nGalax aphylla L.\nBack of Hump Mt.\nColl. Martin Taylor with Travis Knowles\nDate- 10/22/2000\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.68e-05,
+      "total_cost": 0.0007183000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 92
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2066,
+    "output": 424,
+    "cost_in": 0.00020660000000000003,
+    "cost_out": 0.0001696
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n3779\nFRANCIS MARION UNIVERSITY\nHERBARIUM\n\nFMUH\n\nFMUH0004039\n\nFlora of Tennessee\nFrancis Marion University Herbarium\n\nCarter County\n\n*Galax aphylla* L.\nBack of Hump Mt.\nColl. Martin Taylor with Travis Knowles\nDate- 10/22/2000\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFrancis Marion University Herbarium\nFMUH0004039\nMETRIC\n5\n10\n3779\nFRANCIS MARION UNIVERSITY\nHERBARIUM\nFMUH\nFlora of Tennessee\nFrancis Marion University Herbarium\nCarter County\nGalax aphylla L.\nBack of Hump Mt.\nColl. Martin Taylor with Travis Knowles\nDate- 10/22/2000\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FMUH0004039",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Martin Taylor, Travis Knowles",
+    "collectorNumber": "3779",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10/22/2000",
+    "collectionDate": "2000-10-22",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "no",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Carter County",
+    "locality": "Back of hump mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Francis Marion University Herbarium\nFMUH\nFlora of Tennessee\nFrancis Marion University Herbarium\nMETRIC\n5\n10\nFRANCIS MARION UNIVERSITY\nHERBARIUM"
+  }
+}

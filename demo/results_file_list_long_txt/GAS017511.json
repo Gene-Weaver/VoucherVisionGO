@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "001364\n\nPLANTS OF NORTH CAROLINA\nJackson County\nCherokee Indian Reservation\n\n*Galax aphylla* L.\n\nAlong trail to Soco Falls, growing under\nlaurel and rhododendron.\nElevation 4200 feet.\n\nKay Mouzon 48                      17 June 56\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00037999999999999997,
+      "total_cost": 0.00115875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 76
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Georgia Southern University Herbarium\nGAS017511\n001364\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nPLANTS OF NORTH CAROLINA\nJackson County\nCherokee Indian Reservation\nGalax aphylla L.\nAlong trail to Soco Falls, growing under\nlaurel and rhododendron.\nElevation 4200 feet.\nKay Mouzon 48\n17 June 56\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4000000000000006e-05,
+      "total_cost": 0.0007255,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 110
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2069,
+    "output": 461,
+    "cost_in": 0.00020690000000000001,
+    "cost_out": 0.0001844
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n001364\n\nPLANTS OF NORTH CAROLINA\nJackson County\nCherokee Indian Reservation\n\n*Galax aphylla* L.\n\nAlong trail to Soco Falls, growing under\nlaurel and rhododendron.\nElevation 4200 feet.\n\nKay Mouzon 48                      17 June 56\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nGeorgia Southern University Herbarium\nGAS017511\n001364\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nPLANTS OF NORTH CAROLINA\nJackson County\nCherokee Indian Reservation\nGalax aphylla L.\nAlong trail to Soco Falls, growing under\nlaurel and rhododendron.\nElevation 4200 feet.\nKay Mouzon 48\n17 June 56\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "001364",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Kay Mouzon",
+    "collectorNumber": "48",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 June 56",
+    "collectionDate": "1956-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Along trail to soco falls, growing under laurel and rhododendron.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Cherokee indian reservation. along trail to soco falls, growing under laurel and rhododendron.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1280",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Plants of north carolina\ngas017511\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9"
+  }
+}

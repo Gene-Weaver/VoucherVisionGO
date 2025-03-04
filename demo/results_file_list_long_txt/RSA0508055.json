@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\n264092\nPOMONA COLLEGE\n\n6277\n\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN\n*Galax aphylla* L.\n\nChromosomes: 2n = 12\nState *North Carolina* County *Mitchell*\n*Spruce Pine* (handwritten)\n\nJ. T. Baldwin, Jr. No. 731 Date *June* 29, 1940 (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000575,
+      "total_cost": 0.0013537500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 115
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508055\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncopyright reserved\nHERBARIUM OF\n264092\nPOMONA COLLEGE\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\n6277\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\nChromosomes: 2n = 12\nState Nooth Caroliing County Mitchell\nSpruce Pine\nJ. T. Baldwin, Jr. No. 731 Date\nJune 29, 1940\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.0400000000000004e-05,
+      "total_cost": 0.0007419,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2154,
+    "output": 426,
+    "cost_in": 0.00021540000000000003,
+    "cost_out": 0.00017040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n264092\nPOMONA COLLEGE\n\n6277\n\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN\n*Galax aphylla* L.\n\nChromosomes: 2n = 12\nState *North Carolina* County *Mitchell*\n*Spruce Pine* (handwritten)\n\nJ. T. Baldwin, Jr. No. 731 Date *June* 29, 1940 (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508055\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncopyright reserved\nHERBARIUM OF\n264092\nPOMONA COLLEGE\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\n6277\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\nChromosomes: 2n = 12\nState Nooth Caroliing County Mitchell\nSpruce Pine\nJ. T. Baldwin, Jr. No. 731 Date\nJune 29, 1940\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "264092",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. T. Baldwin, Jr.",
+    "collectorNumber": "731",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 29, 1940",
+    "collectionDate": "1940-06-29",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "Chromosomes 2n = 12",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Mitchell",
+    "locality": "Spruce pine",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of\nPomo College\nSmithsonian institution\nFrom the united states national herbarium\nUniversity of michigan"
+  }
+}

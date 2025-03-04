@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095625\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n32511\n\nWEST VIRGINIA\nDuke University Herbarium\nMERCER COUNTY\n\nGalax aphylla L.\nDry soil in open woods, Brush Creek Fall s.\nJuly 17, 1935.\n\nW.R.Boggess\nNo. 254\n\n\nHandwritten Text:\n32511\nW.R.Boggess\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE 10095625\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n32511\nDuke\nUNIVERSITY\nWEST VIRGINIA\nDuke University Herbarium\nMERCER COUNTY\nGalax aphylla L.\nDry soil in open woods, Brush Creek Fall s.\nJuly 17, 1935.\nW.R.Boggess\n254\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.720000000000001e-05,
+      "total_cost": 0.0007387000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2185,
+    "output": 503,
+    "cost_in": 0.0002185,
+    "cost_out": 0.0002012
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095625\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n32511\n\nWEST VIRGINIA\nDuke University Herbarium\nMERCER COUNTY\n\nGalax aphylla L.\nDry soil in open woods, Brush Creek Fall s.\nJuly 17, 1935.\n\nW.R.Boggess\nNo. 254\n\n\nHandwritten Text:\n32511\nW.R.Boggess\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE 10095625\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n32511\nDuke\nUNIVERSITY\nWEST VIRGINIA\nDuke University Herbarium\nMERCER COUNTY\nGalax aphylla L.\nDry soil in open woods, Brush Creek Fall s.\nJuly 17, 1935.\nW.R.Boggess\n254\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095625",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "W.R.Boggess",
+    "collectorNumber": "254",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "July 17, 1935.",
+    "collectionDate": "1935-07-17",
+    "collectionDateEnd": "",
+    "habitat": "Dry soil in open woods, Brush Creek Fall s.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "West Virginia",
+    "county": "Mercer County",
+    "locality": "Brush Creek Fall s.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n32511\nDuke\nUNIVERSITY\nDuke University Herbarium\nNo.\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "031562\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)        2024\n\nSOUTH CAROLINA\nCherokee Co.\n\n*Galax aphylla*\nGrowing on rocky north\nfacing ridge with *Kalmia* and\n*Epigaea repens*, Silver Mine Ridge\nColl: G. Newberry R. Powell No. 3803\nLocation: Cherokee Falls  Date:June 6, 1984\n\nUniversity of South Carolina Herbarium\nUSCH0025728\n\nHandwritten Text:\nCR\nDUPLICATE\n\n*Galax urceolata*\n*Galax aphylla*\n*Kalmia*\n*Epigaea repens*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009099999999999999,
+      "total_cost": 0.0016887499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSOUTH CAROLINA\nCherokee Co.\nGalax aphylla\nGrowing on rocky north\nfacing ridge with Kalmia andri\nEpigaea repens, Silver Mine Ridge\nColl: G. Newberry R. Powell No. 3803\nLocation: Cherokee Falls Date: June 6, 1984\n031562\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nCR\nDUPLICATE\nUniversity of South Carolina Herbarium\nUSCH0025728\n\n\nGalax urceolata\nGalax aphylla\nEpigaea repens\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.360000000000001e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2259,
+    "output": 524,
+    "cost_in": 0.00022590000000000002,
+    "cost_out": 0.00020960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n031562\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)        2024\n\nSOUTH CAROLINA\nCherokee Co.\n\n*Galax aphylla*\nGrowing on rocky north\nfacing ridge with *Kalmia* and\n*Epigaea repens*, Silver Mine Ridge\nColl: G. Newberry R. Powell No. 3803\nLocation: Cherokee Falls  Date:June 6, 1984\n\nUniversity of South Carolina Herbarium\nUSCH0025728\n\nHandwritten Text:\nCR\nDUPLICATE\n\n*Galax urceolata*\n*Galax aphylla*\n*Kalmia*\n*Epigaea repens*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSOUTH CAROLINA\nCherokee Co.\nGalax aphylla\nGrowing on rocky north\nfacing ridge with Kalmia andri\nEpigaea repens, Silver Mine Ridge\nColl: G. Newberry R. Powell No. 3803\nLocation: Cherokee Falls Date: June 6, 1984\n031562\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nCR\nDUPLICATE\nUniversity of South Carolina Herbarium\nUSCH0025728\n\n\nGalax urceolata\nGalax aphylla\nEpigaea repens\n\n",
+  "formatted_json": {
+    "catalogNumber": "031562",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "G. Newberry, R. Powell",
+    "collectorNumber": "3803",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 6, 1984",
+    "collectionDate": "1984-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Growing on rocky north facing ridge with Kalmia and Epigaea repens, Silver Mine Ridge",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Cherokee Co.",
+    "locality": "Location Cherokee Falls",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\ncopyright reserved\nUSCH\nUniversity of South Carolina\nSOUTH CAROLINA\nUniversity of South Carolina Herbarium\nUSCH0025728\nCR\nDUPLICATE\nGalax aphylla\nGalax urceolata\nGalax aphylla\nKalmia\nEpigaea repens"
+  }
+}

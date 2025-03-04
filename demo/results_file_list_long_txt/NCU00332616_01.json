@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n243662\n\nPlants of Eastern Tennessee\nJune 14, 1930 No. ____\nStanley A. Cain, University of Tennessee\n\nName _Galax aphylla_ L. (handwritten)\nLocality _Sevier Co._ (handwritten)\nNotes:\n_Tower Hill_ (handwritten)\n\nEX UNIV. OF TENN.\n\nNCU00332616\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "total_cost": 0.00139875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n243662\nPlants of Eastern Tennessee\nJune 14, 1930\nNo.\nStanley A. Cain, University of Tennessee\nName Galax aphylla L.\nLocality Sevier Co.\nNotes:\nTower Hill\nNCU00332616\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nEX UNIV. OF TENN.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.8e-05,
+      "total_cost": 0.0007195000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 95
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2106,
+    "output": 425,
+    "cost_in": 0.0002106,
+    "cost_out": 0.00017
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n243662\n\nPlants of Eastern Tennessee\nJune 14, 1930 No. ____\nStanley A. Cain, University of Tennessee\n\nName _Galax aphylla_ L. (handwritten)\nLocality _Sevier Co._ (handwritten)\nNotes:\n_Tower Hill_ (handwritten)\n\nEX UNIV. OF TENN.\n\nNCU00332616\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n243662\nPlants of Eastern Tennessee\nJune 14, 1930\nNo.\nStanley A. Cain, University of Tennessee\nName Galax aphylla L.\nLocality Sevier Co.\nNotes:\nTower Hill\nNCU00332616\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nEX UNIV. OF TENN.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332616",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Stanley A. Cain, University of Tennessee",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 14, 1930",
+    "collectionDate": "1930-06-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sevier Co.",
+    "locality": "Tower Hill",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nPlants of Eastern Tennessee\nEX UNIV. OF TENN.\nUniversity of North Carolina Herbarium"
+  }
+}

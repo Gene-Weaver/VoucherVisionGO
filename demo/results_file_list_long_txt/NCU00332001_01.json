@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332001\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nSteep north facing bluff on\nDutchman Creek about 3 miles\nsoutheast of Swift Creek Church,\nWake County, NC.\nApril 17, 1950.          H.R. Totten\n\n(Handwritten text identified with *)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00049,
+      "total_cost": 0.0012687500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 98
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "copyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\nDiapensiaceae\n48742\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332001\nHerbarium of the University of North Carolina\nGalax aphylla L.\nSteep north facing bluff on\nDutchman Creek about 3 miles\nSoutheast of Swift Creek Church,\nWake County, NC\nApril 17, 1950.\nH.R. Totten\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.0400000000000005e-05,
+      "total_cost": 0.0007319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2113,
+    "output": 426,
+    "cost_in": 0.00021129999999999999,
+    "cost_out": 0.00017040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332001\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nSteep north facing bluff on\nDutchman Creek about 3 miles\nsoutheast of Swift Creek Church,\nWake County, NC.\nApril 17, 1950.          H.R. Totten\n\n(Handwritten text identified with *)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\nDiapensiaceae\n48742\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332001\nHerbarium of the University of North Carolina\nGalax aphylla L.\nSteep north facing bluff on\nDutchman Creek about 3 miles\nSoutheast of Swift Creek Church,\nWake County, NC\nApril 17, 1950.\nH.R. Totten\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332001",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "H.r. totten",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 17, 1950.",
+    "collectionDate": "1950-04-17",
+    "collectionDateEnd": "",
+    "habitat": "Steep north facing bluff on dutchman creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Nc",
+    "county": "Wake county",
+    "locality": "About 3 miles southeast of swift creek church, wake county, nc",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\ncopyright reserved\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?), based on average guard cell area\nGuy L. Nesom, 1975\n118189\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nANNOTATION LABEL\n*Galax aphylla* L. *(handwritten)*\nDETERMINED BY\n1965\nCLYDE F. REED\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nWilliam B. Fox *(handwritten)*\nAug 24, 1940 *(handwritten)*\nOn Ramsey Cascades *(handwritten)*\nTrail, Sevier Co., Tenn. *(handwritten)*\n*Galax aphylla* L. *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00095,
+      "total_cost": 0.00172875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC SYSTEM\nINCHES\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010674\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6(?), based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM\nUNIVERSITY\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nWilliam B. Fox\nAug. 24, 1940\nOn Ramsey Cascades\nTrail, Sevier Co., Tenn.\nGalax aphylla L.\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.96e-05,
+      "total_cost": 0.0007511,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 174
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 511,
+    "cost_in": 0.0002268,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\ncopyright reserved\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?), based on average guard cell area\nGuy L. Nesom, 1975\n118189\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nANNOTATION LABEL\n*Galax aphylla* L. *(handwritten)*\nDETERMINED BY\n1965\nCLYDE F. REED\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nWilliam B. Fox *(handwritten)*\nAug 24, 1940 *(handwritten)*\nOn Ramsey Cascades *(handwritten)*\nTrail, Sevier Co., Tenn. *(handwritten)*\n*Galax aphylla* L. *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC SYSTEM\nINCHES\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010674\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6(?), based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM\nUNIVERSITY\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nWilliam B. Fox\nAug. 24, 1940\nOn Ramsey Cascades\nTrail, Sevier Co., Tenn.\nGalax aphylla L.\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wva-v-0010674",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "William B. Fox",
+    "collectorNumber": "",
+    "identifiedBy": "Clyde F. Reed, Guy L. Nesom",
+    "identifiedDate": "1965",
+    "identifiedConfidence": "?",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. determined by Clyde F. Reed in 1965",
+    "verbatimCollectionDate": "Aug 24, 1940",
+    "collectionDate": "1940-08-24",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6(?)",
+    "guardCell": "Based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sevier Co.",
+    "locality": "On Ramsey Cascades Trail, Sevier Co., Tenn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\nCopyright reserved\nHerbarium of the university of north carolina\nHerbarium\nUniversity\nFlora of the great smoky mountains\nNational park\nAnnotation label\nGalax aphylla l.\nMetric system\nInches"
+  }
+}

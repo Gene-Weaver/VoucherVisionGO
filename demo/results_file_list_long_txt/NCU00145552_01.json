@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n625774\n\nExamined/Annotated following the Taxonomic concept of\nA.S. Weakley (2008) for:\nTHE VASCULAR FLORA OF THREE TOP MOUNTAIN GAME LAND\nPRESERVE, ASHE COUNTY, NC\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt                                       Galax\n\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\n\nAndrew Jenkins 609                                                        7/22/2010 (handwritten)\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\nNCU0014552\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0015850000000000003,
+      "total_cost": 0.0023637500000000004,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 317
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nOF NORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00145552\nExamined/Annotated following the Taxonomic concept of\nA.S. Weakley (2008) for:\nTHE VASCULAR FLORA OF THREE TOP MOUNTAIN GAME LAND\nPRESERVE, ASHE COUNTY, NC\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nGalax\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\nAndrew Jenkins 609\n7/22/2010\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001264,
+      "total_cost": 0.0008079000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 316
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2468,
+    "output": 532,
+    "cost_in": 0.00024680000000000004,
+    "cost_out": 0.00021280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n625774\n\nExamined/Annotated following the Taxonomic concept of\nA.S. Weakley (2008) for:\nTHE VASCULAR FLORA OF THREE TOP MOUNTAIN GAME LAND\nPRESERVE, ASHE COUNTY, NC\n\nNorth Carolina\n\nDIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt                                       Galax\n\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\n\nAndrew Jenkins 609                                                        7/22/2010 (handwritten)\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\nNCU0014552\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nOF NORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00145552\nExamined/Annotated following the Taxonomic concept of\nA.S. Weakley (2008) for:\nTHE VASCULAR FLORA OF THREE TOP MOUNTAIN GAME LAND\nPRESERVE, ASHE COUNTY, NC\nNorth Carolina\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nGalax\nThree Top Mountain Game Land Preserve. Ashe County: Creston; S.R.\n1264 Hidden Valley Rd. Game Land access parking lot. Growing along\nthe ridge and summit northeast of the large central rock outcrop in shallow\nrocky soil. High Elevation Rocky Summit Community - Northern Red\nOak Forest ecotone. Location: 36 25 02.5 N 81 35 21.7 W. Site: exact.\nGPS Datum: WGS84. Elevation: 1,524 m (5000 ft) - 1530 m (5020 ft)\nAndrew Jenkins 609\n7/22/2010\nAPPALACHIAN STATE UNIVERSITY HERBARIUM [BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00145552",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Andrew Jenkins",
+    "collectorNumber": "609",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/22/2010",
+    "collectionDate": "2010-07-22",
+    "collectionDateEnd": "",
+    "habitat": "Growing along the ridge and summit northeast of the large central rock outcrop in shallow rocky soil. High elevation rocky summit community - northern red oak forest ecotone",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.s.a.",
+    "stateProvince": "North Carolina",
+    "county": "Ashe County",
+    "locality": "Three top mountain game land preserve. Ashe county creston; s.r. 1264 hidden valley rd. game land access parking lot",
+    "verbatimCoordinates": "Location 36 25 02.5 N 81 35 21.7 W",
+    "decimalLatitude": "36.417361",
+    "decimalLongitude": "-81.589361",
+    "minimumElevationInMeters": "1524",
+    "maximumElevationInMeters": "1530",
+    "elevationUnits": "m",
+    "additionalText": "Examined/annotated following the taxonomic concept of a.s. weakley (2008) for the vascular flora of three top mountain game land preserve, ashe county, nc. Site exact. Gps datum wgs84."
+  }
+}

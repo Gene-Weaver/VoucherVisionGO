@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n10374\n\nNewberry College Herbarium\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\n\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                      5/19/67\nPlants of the Southeastern United States\n\n10632\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00051,
+      "total_cost": 0.00128875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 102
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\nHERBARIUM\n10374\nNewberry College Herbarium\nNBYC004556\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n10632\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4e-05,
+      "total_cost": 0.0007215,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 100
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2098,
+    "output": 451,
+    "cost_in": 0.0002098,
+    "cost_out": 0.00018040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n10374\n\nNewberry College Herbarium\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\n\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                      5/19/67\nPlants of the Southeastern United States\n\n10632\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNEWBERRY\nCOLLEGE\nHERBARIUM\n10374\nNewberry College Herbarium\nNBYC004556\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n10632\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "10374",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "10632",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe county",
+    "locality": "Warren wilson college forest area 7.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Newberry\nCollege\nNewberry\nCollege\nHerbarium\nNewberry College Herbarium\nNBYC004556\nHerbarium of the University of North Carolina\nPlants of the southeastern united states\nelevation\n2200'."
+  }
+}

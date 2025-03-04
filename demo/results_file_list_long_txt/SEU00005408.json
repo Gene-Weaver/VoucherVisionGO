@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nST. EDWARD'S UNIVERSITY\nAustin, Texas\n\nGEORGIA\n\n*Galax aphylla* L.\nRabun Co.: Rabun Bald\nElev. 4400 ft.\nDaniel Lynch\n6744\nSept. 3, 1947\n\n00005408\nSt. Edward's University - Austin Texas\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00057,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nST. EDWARD'S\nUNIVERSITY\nST. EDWARD'S UNIVERSITY\nAustin, Texas\nGEORGIA\nGalax aphylla L.\nRabun Co.: Rabun Bald\nElev. 4400 ft.\nDaniel Lynch\n6744\nSept. 3, 1947\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.88e-05,
+      "total_cost": 0.0007203,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 97
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2086,
+    "output": 435,
+    "cost_in": 0.00020860000000000003,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nST. EDWARD'S UNIVERSITY\nAustin, Texas\n\nGEORGIA\n\n*Galax aphylla* L.\nRabun Co.: Rabun Bald\nElev. 4400 ft.\nDaniel Lynch\n6744\nSept. 3, 1947\n\n00005408\nSt. Edward's University - Austin Texas\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nST. EDWARD'S\nUNIVERSITY\nST. EDWARD'S UNIVERSITY\nAustin, Texas\nGEORGIA\nGalax aphylla L.\nRabun Co.: Rabun Bald\nElev. 4400 ft.\nDaniel Lynch\n6744\nSept. 3, 1947\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "00005408",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Daniel Lynch",
+    "collectorNumber": "6744",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 3, 1947",
+    "collectionDate": "1947-09-03",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun Co.",
+    "locality": "Rabun Bald",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1341",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nSt. Edward's university\nAustin, Texas\nElev. 4400 ft.\nSt. Edward's university - austin texas"
+  }
+}

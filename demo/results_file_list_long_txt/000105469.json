@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\n59298\nFLORIDA STATE UNIVERSITY\n\nR. K. Godfrey Herbarium (FSU)\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nSOUTHERN APPALACHIAN FLORA.\nCITATION  A. B. SEYMOUR, 1891.\nNo. 19\n*Galax aphylla* L.\n\nCumberland Mts., Norton, Va., July 27, 1891.\nNo. 91 7 27.34\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007350000000000001,
+      "total_cost": 0.0015137500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 147
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\n59298\nFLORIDA STATE UNIVERSITY\nR. K. Godfrey Herbarium (FSU)\n*000105469*\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nSOUTHERN APPALACHIAN FLORA.\nA. B. SEYMOUR, 1891.\nNo. 19\nCITATION\nGalax aphylla L.\nCumberland Mts., Norton, Va., July 27, 1891.\nNo. 91 7 27.34\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.08e-05,
+      "total_cost": 0.0007423,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 152
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 473,
+    "cost_in": 0.000218,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\n59298\nFLORIDA STATE UNIVERSITY\n\nR. K. Godfrey Herbarium (FSU)\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nSOUTHERN APPALACHIAN FLORA.\nCITATION  A. B. SEYMOUR, 1891.\nNo. 19\n*Galax aphylla* L.\n\nCumberland Mts., Norton, Va., July 27, 1891.\nNo. 91 7 27.34\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\n59298\nFLORIDA STATE UNIVERSITY\nR. K. Godfrey Herbarium (FSU)\n*000105469*\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nSOUTHERN APPALACHIAN FLORA.\nA. B. SEYMOUR, 1891.\nNo. 19\nCITATION\nGalax aphylla L.\nCumberland Mts., Norton, Va., July 27, 1891.\nNo. 91 7 27.34\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "59298",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "A. B. Seymour",
+    "collectorNumber": "19",
+    "identifiedBy": "M. A. Garland",
+    "identifiedDate": "1985-12-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 27, 1891",
+    "collectionDate": "1891-07-27",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Va.",
+    "county": "",
+    "locality": "Cumberland Mts., Norton",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nFLORIDA STATE UNIVERSITY\nR. K. Godfrey Herbarium (FSU)\n000105469\nFlorida State University Herbarium\nSOUTHERN APPALACHIAN FLORA.\nCITATION"
+  }
+}

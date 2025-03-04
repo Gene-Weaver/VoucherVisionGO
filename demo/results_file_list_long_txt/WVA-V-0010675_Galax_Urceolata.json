@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\n118190\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 12(?), based on average guard cell area\nvolume of 597\u03bc\u00b2\nGuy L. Nesom, 1975\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY                                     CLYDE F. REED\n\nNORTH CAROLINA STATE COLLEGE\n643\n*Galax aphylla* L.\nHabitat: Hardwood forest--river bluff\nLocality: Near Apex, in Wake Co., N.C.\nCollector: R. K. Godfrey                      May 23, 1937\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC SYSTEM\ncopyright reserved\nU. S. A.\nINCHES\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nWest Virginia University (WVA)\nWVA-V-0010675\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=12(?), based on average guard cell area\nGuy L. Nesom, 1975\nANNOTATION LABEL\nGalax aphylla L.\nDETERMINED BY\n1965\nNORTH CAROLINA STATE COLLEGE\n643\nGalax aphylla\nL.\nHabitat: Hardwood forest--river bluff\nLocality: Near Apex, in Wake Co., N.C.\nCollector: R. K. Godfrey\nMay 23, 1937\nCLYDE F. REED\n---\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.84e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 511,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\n118190\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 12(?), based on average guard cell area\nvolume of 597\u03bc\u00b2\nGuy L. Nesom, 1975\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY                                     CLYDE F. REED\n\nNORTH CAROLINA STATE COLLEGE\n643\n*Galax aphylla* L.\nHabitat: Hardwood forest--river bluff\nLocality: Near Apex, in Wake Co., N.C.\nCollector: R. K. Godfrey                      May 23, 1937\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC SYSTEM\ncopyright reserved\nU. S. A.\nINCHES\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nWest Virginia University (WVA)\nWVA-V-0010675\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=12(?), based on average guard cell area\nGuy L. Nesom, 1975\nANNOTATION LABEL\nGalax aphylla L.\nDETERMINED BY\n1965\nNORTH CAROLINA STATE COLLEGE\n643\nGalax aphylla\nL.\nHabitat: Hardwood forest--river bluff\nLocality: Near Apex, in Wake Co., N.C.\nCollector: R. K. Godfrey\nMay 23, 1937\nCLYDE F. REED\n---\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wva-v-0010675",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. K. Godfrey",
+    "collectorNumber": "643",
+    "identifiedBy": "Guy L. Nesom, Clyde F. Reed",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "?",
+    "identifiedRemarks": "",
+    "identificationHistory": "1965, Galax aphylla L., Clyde F. Reed",
+    "verbatimCollectionDate": "May 23, 1937",
+    "collectionDate": "1937-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Hardwood forest--river bluff",
+    "chromosomeCount": "n=12(?)",
+    "guardCell": "n = 12(?), based on average guard cell area volume of 597\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "North carolina",
+    "county": "Wake co.",
+    "locality": "Near apex, in wake co., n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\nMetric system\nCopyright reserved\nU. S. A.\nInches\nWest virginia\nHerbarium\nUniversity\nWest virginia university (wva)"
+  }
+}

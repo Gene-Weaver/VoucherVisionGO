@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "305581\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE\n\n*GALAX APHYLLA* L.\nCounty: SEVIER\n\nBank beside Walden Creek Road, 0.7 miles east of Blount\nCounty Line east of Walland; Chilhowee Mountain.\n\nCollector: R. Dale Thomas\nNo.: 109,576\nDate: 28 April 1989\n\nNLU0134427\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00058,
+      "total_cost": 0.0013587500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 116
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "BVERSITY\nOR PREAST LOMSTAN\n305581\nHERBARIUM\nKodak Gray Scale\nA 1\n2 3\n4\n5\n6\nM 8 9 10 11 12\n13 14 15\nB 17 18 19\nKodak Color Control Patches\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nGALAX APHYLLA L.\nCounty: SEVIER\nBank beside Walden Creek Road, 0.7 miles east of Blount\nCounty Line east of Walland; Chilhowee Mountain.\nCollector: R. Dale Thomas\nNo.: 109,576\nDate: 28 April 1989\nNLU0134427\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.960000000000001e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 458,
+    "cost_in": 0.0002188,
+    "cost_out": 0.0001832
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n305581\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE\n\n*GALAX APHYLLA* L.\nCounty: SEVIER\n\nBank beside Walden Creek Road, 0.7 miles east of Blount\nCounty Line east of Walland; Chilhowee Mountain.\n\nCollector: R. Dale Thomas\nNo.: 109,576\nDate: 28 April 1989\n\nNLU0134427\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nBVERSITY\nOR PREAST LOMSTAN\n305581\nHERBARIUM\nKodak Gray Scale\nA 1\n2 3\n4\n5\n6\nM 8 9 10 11 12\n13 14 15\nB 17 18 19\nKodak Color Control Patches\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nGALAX APHYLLA L.\nCounty: SEVIER\nBank beside Walden Creek Road, 0.7 miles east of Blount\nCounty Line east of Walland; Chilhowee Mountain.\nCollector: R. Dale Thomas\nNo.: 109,576\nDate: 28 April 1989\nNLU0134427\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "305581",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "109,576",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "28 April 1989",
+    "collectionDate": "1989-04-28",
+    "collectionDateEnd": "",
+    "habitat": "Bank beside Walden Creek Road, 0.7 miles east of Blount County Line east of Walland; Chilhowee Mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Sevier",
+    "locality": "Bank beside Walden Creek Road, 0.7 miles east of Blount County Line east of Walland; Chilhowee Mountain.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nNortheast louisiana university, monroe\nFlora of tennessee"
+  }
+}

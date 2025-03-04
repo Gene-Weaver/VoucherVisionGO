@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 11372\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                                                               2021\n\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL - EXPERIMENT STATION\n11372\n\nUNIVERSITY of FLORIDA\nHERBARIUM\nAGRICULTURAL EXPERIMENT STATION\n\n*Galax aphylla* L.\nHab.\nLoc. Blowing Rock Mountain, N. C.\nColl. J.K. Small & A. A. Heller                      Date June 22, 1891\nDet.                                                              No.\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)                      6 May 2024\n\nHandwritten Text: \"x\" (bottom left corner)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00113,
+      "total_cost": 0.00190875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 226
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 11372\nU.S.A.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL\n- EXPERIMENT\n11372\nUNIVERSITY of FLORIDA\nHERBARIUM\nAGRICULTURAL EXPERIMENT STATION\nGalax aphylla, L.\nHab.\nLoc. Blowing Rock Mountain, N. C.\nColl. J.K. Small & A. A. Heller\nDate June 22, 1891\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.32e-05,
+      "total_cost": 0.0007647000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 208
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2319,
+    "output": 541,
+    "cost_in": 0.0002319,
+    "cost_out": 0.00021640000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 11372\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                                                               2021\n\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL - EXPERIMENT STATION\n11372\n\nUNIVERSITY of FLORIDA\nHERBARIUM\nAGRICULTURAL EXPERIMENT STATION\n\n*Galax aphylla* L.\nHab.\nLoc. Blowing Rock Mountain, N. C.\nColl. J.K. Small & A. A. Heller                      Date June 22, 1891\nDet.                                                              No.\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)                      6 May 2024\n\nHandwritten Text: \"x\" (bottom left corner)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 11372\nU.S.A.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL\n- EXPERIMENT\n11372\nUNIVERSITY of FLORIDA\nHERBARIUM\nAGRICULTURAL EXPERIMENT STATION\nGalax aphylla, L.\nHab.\nLoc. Blowing Rock Mountain, N. C.\nColl. J.K. Small & A. A. Heller\nDate June 22, 1891\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "11372",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.k. Small, A. a. Heller",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle l. Gaynor (flas)",
+    "identifiedDate": "2024-05-06",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "June 22, 1891",
+    "collectionDate": "1891-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Hab.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N. c.",
+    "county": "",
+    "locality": "Blowing rock mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of florida herbarium\nflorida museum of natural history\nflas 11372\nexamined in connection with the assembling the tree\nof life project (nsf grant ef-0431266)\nwalter s. judd (flas) 2021\nherbarium\nuniversity\n-of-\nflorida\n-at-\ngainesville\nagricultural - experiment station\n11372\nuniversity of florida\nherbarium\nagricultural experiment station\nno.\nhandwritten text x (bottom left corner)"
+  }
+}

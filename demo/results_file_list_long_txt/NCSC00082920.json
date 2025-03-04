@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082920\n\nHERBARIUM\nNCSC\n70207\nNORTH CAROLINA STATE UNIVERSITY\n\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF\n\nCounty: Wake\nDiapensiaceae\n*Galax aphylla* L.\nCommon Name: Galax\n\nCollected: High wooded bluff overlooking\nstream at Hemlocks south of\nCary.\n\nCollected by C. J. DeLoach and P. D. Dukes\nNo. 20                                      21 April 1961\n\n\nHandwritten Text: C.J. DeLoach, P. D. Dukes\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007549999999999999,
+      "total_cost": 0.0015337500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082920\nHERBARIUM\nNCSC\n70207\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF\nCounty: Wake\nDiapensiaceae\nGalax aphylla I.\nCommon Name: Galax\nCollected: High wooded bluff overlooking\nstream at Hemlocks south of\nCary.\nCollected by C. J. DeLoach and P. D. Dukes\nNo. 20\n21 April 1961\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.9600000000000006e-05,
+      "total_cost": 0.0007310999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 124
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2162,
+    "output": 482,
+    "cost_in": 0.0002162,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082920\n\nHERBARIUM\nNCSC\n70207\nNORTH CAROLINA STATE UNIVERSITY\n\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF\n\nCounty: Wake\nDiapensiaceae\n*Galax aphylla* L.\nCommon Name: Galax\n\nCollected: High wooded bluff overlooking\nstream at Hemlocks south of\nCary.\n\nCollected by C. J. DeLoach and P. D. Dukes\nNo. 20                                      21 April 1961\n\n\nHandwritten Text: C.J. DeLoach, P. D. Dukes\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082920\nHERBARIUM\nNCSC\n70207\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF\nCounty: Wake\nDiapensiaceae\nGalax aphylla I.\nCommon Name: Galax\nCollected: High wooded bluff overlooking\nstream at Hemlocks south of\nCary.\nCollected by C. J. DeLoach and P. D. Dukes\nNo. 20\n21 April 1961\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082920",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. J. DeLoach, P. D. Dukes",
+    "collectorNumber": "20",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 April 1961",
+    "collectionDate": "1961-04-21",
+    "collectionDateEnd": "",
+    "habitat": "High wooded bluff overlooking stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wake",
+    "locality": "South of Cary at Hemlocks",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHERBARIUM\nNCSC\n70207\nNORTH CAROLINA STATE UNIVERSITY\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF\nDiapensiaceae\nCommon Name Galax\nC.J. DeLoach, P. D. Dukes"
+  }
+}

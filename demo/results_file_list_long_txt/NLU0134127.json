@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n231893\nHERBARIUM\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nMiddlesex County\n*Galax urceolata* (Poiret) Brummitt\n24 June 1981\n\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\n\nCollector: Gretchen North        No. 360\n\nNL00134127\nExchange Specimen from\n**(Handwritten) WILLI**\nUniversity of Louisiana at Monroe\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008,
+      "total_cost": 0.0015787500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 160
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n231893\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNL00134127\nExchange Specimen From\nWILLI\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nMiddlesex County\n24 June 1981\nGalax urceolata (Poiret) Brummitt\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\nCollector: Gretchen North\nNo. 360\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.16e-05,
+      "total_cost": 0.0007731000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 229
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2273,
+    "output": 517,
+    "cost_in": 0.0002273,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n231893\nHERBARIUM\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nMiddlesex County\n*Galax urceolata* (Poiret) Brummitt\n24 June 1981\n\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\n\nCollector: Gretchen North        No. 360\n\nNL00134127\nExchange Specimen from\n**(Handwritten) WILLI**\nUniversity of Louisiana at Monroe\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n231893\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNL00134127\nExchange Specimen From\nWILLI\nKodak Gray Scale\nA 1\n2\n3\n4\n5\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nMiddlesex County\n24 June 1981\nGalax urceolata (Poiret) Brummitt\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\nCollector: Gretchen North\nNo. 360\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "231893",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Gretchen North",
+    "collectorNumber": "360",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 June 1981",
+    "collectionDate": "1981-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Locally common on wooded slope just s of stream on w side of va rt. 630, ca. 0.3 mi. s of jct. with va rt. 33, w of wilton.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Middlesex County",
+    "locality": "Just s of stream on w side of va rt. 630, ca. 0.3 mi. s of jct. with va rt. 33, w of wilton.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university herbarium\nHerbarium of the college of william and mary\nWilliamsburg, virginia\nnl00134127\nExchange specimen from\nwilli\nUniversity of louisiana at monroe"
+  }
+}

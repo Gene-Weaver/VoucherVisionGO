@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU026918\n\nPLANTS OF TENNESSEE\nEAST TENNESSEE STATE UNIVERSITY HERBARIUM\nFLORA OF THE HOLSTON ARMY AMMUNITION PLANT\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nHawkins Co., Holston Army Ammunition Plant; near\nridge of Holston River Mtn. on Bays Mtn.; along Indian\nPipes Tr. and Bear Run Tr. on HAAP property\n\nFrosty Levy, Elaine Walker 191074\n5-Oct-2019\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000705,
+      "total_cost": 0.0014837500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 141
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU026918\nPLANTS OF TENNESSEE\nEAST TENNESSEE STATE UNIVERSITY HERBARIUM\nFLORA OF THE HOLSTON ARMY AMMUNITION PLANT\nGalax urceolata (Poir.) Brummitt\nDiapeniaceae\nHawkins Co., Holston Army Ammunition Plant; near\nridge of Holston River Mtn. on Bays Mtn.; along Indian\nPipes Tr. and Bear Run Tr. on HAAP property\nFrosty Levy, Elaine Walker 191074\n5-Oct-2019\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 468,
+    "cost_in": 0.0002188,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU026918\n\nPLANTS OF TENNESSEE\nEAST TENNESSEE STATE UNIVERSITY HERBARIUM\nFLORA OF THE HOLSTON ARMY AMMUNITION PLANT\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nHawkins Co., Holston Army Ammunition Plant; near\nridge of Holston River Mtn. on Bays Mtn.; along Indian\nPipes Tr. and Bear Run Tr. on HAAP property\n\nFrosty Levy, Elaine Walker 191074\n5-Oct-2019\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU026918\nPLANTS OF TENNESSEE\nEAST TENNESSEE STATE UNIVERSITY HERBARIUM\nFLORA OF THE HOLSTON ARMY AMMUNITION PLANT\nGalax urceolata (Poir.) Brummitt\nDiapeniaceae\nHawkins Co., Holston Army Ammunition Plant; near\nridge of Holston River Mtn. on Bays Mtn.; along Indian\nPipes Tr. and Bear Run Tr. on HAAP property\nFrosty Levy, Elaine Walker 191074\n5-Oct-2019\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU026918",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frosty Levy, Elaine Walker",
+    "collectorNumber": "191074",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-Oct-2019",
+    "collectionDate": "2019-10-05",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Hawkins Co.",
+    "locality": "Holston Army Ammunition Plant; near ridge of Holston River Mtn. on Bays Mtn.; along Indian Pipes Tr. and Bear Run Tr. on HAAP property",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of Tennessee\nEast Tennessee State University Herbarium\nFlora of the Holston Army Ammunition Plant\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

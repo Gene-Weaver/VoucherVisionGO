@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n235982\nHERBARIUM\n\nHerbarium of Jacksonville State University\nFLORA OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\n\nCALHOUN COUNTY. N. of Rabbittown off\nco. rd. 55; off unimproved road in\nTalladega National Forest (FS 558?);\nT14S, R10E, sect. 6. Clay of hillside\nand bluff along creek.\n\nExchange Specimen From:  R. D. Whetstone 11320 (Handwritten)\nJSU                                      C. M. Davis                     15 June 1982\nNLU0134089\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.0016137500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n235982\nHERBARIUM\n\nNLU0134089\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nExchange Specimen From:\nJSU\nHerbarium of Jacksonville State University\nFLORA OF ALABAMA\nGalax urceolata (Poir.) Brummitt\nCALHOUN COUNTY. N. of Rabbittown off\nco. rd. 55; off unimproved road in\nTalladega National Forest (FS 558?);\nT14S, R10E, sect. 6. Clay of hillside\nand bluff along creek.\nR. D. Whetstone\nC. M. Davis\n15 June 1982\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.319999999999999e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2233,
+    "output": 538,
+    "cost_in": 0.00022330000000000003,
+    "cost_out": 0.0002152
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n235982\nHERBARIUM\n\nHerbarium of Jacksonville State University\nFLORA OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\n\nCALHOUN COUNTY. N. of Rabbittown off\nco. rd. 55; off unimproved road in\nTalladega National Forest (FS 558?);\nT14S, R10E, sect. 6. Clay of hillside\nand bluff along creek.\n\nExchange Specimen From:  R. D. Whetstone 11320 (Handwritten)\nJSU                                      C. M. Davis                     15 June 1982\nNLU0134089\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n235982\nHERBARIUM\n\nNLU0134089\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nExchange Specimen From:\nJSU\nHerbarium of Jacksonville State University\nFLORA OF ALABAMA\nGalax urceolata (Poir.) Brummitt\nCALHOUN COUNTY. N. of Rabbittown off\nco. rd. 55; off unimproved road in\nTalladega National Forest (FS 558?);\nT14S, R10E, sect. 6. Clay of hillside\nand bluff along creek.\nR. D. Whetstone\nC. M. Davis\n15 June 1982\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "235982",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. D. Whetstone, C. M. Davis",
+    "collectorNumber": "11320",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "15 June 1982",
+    "collectionDate": "1982-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Clay of hillside and bluff along creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Calhoun County",
+    "locality": "N. of Rabbittown off co. rd. 55; off unimproved road in Talladega National Forest (FS 558?); T14S, R10E, sect. 6.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHerbarium of Jacksonville State University\nFLORA OF ALABAMA\nExchange Specimen From\nJSU\nNLU0134089\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack"
+  }
+}

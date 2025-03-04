@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n88517\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059497\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\nHorseshoe Bend, Buckingham Co.\nA small population of several dozen plants\n(all sterile?) on both banks of a small wooded\n(oak-beech-*Kalmia*) branch 1.7 mi. S of Scottsville,\n1 mi. W of Rte. 20 & above W-facing bluffs\nof James River.                                el. 340 ft.\n(Scottsville Quad.)                      May 1, 1991\n\n**(Handwritten Text)**\nCharles E. Stevens\nNo. 22,038\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.0017087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n88517\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nHorseshoe Bend, Buckingham Co.\nA small population of several dozen plants\n(all strile?) on both banks of a smalled wooded\nbranch 1.7 mi. S of Scottsville,\n\u2022I mi. W of Rte. 20 & above W-facing bluffs\nof James River.\n(Scottsville Quad)\nCharles E. Stevens\nNo. 22,038\nel. 340 pt.\nmay 1, 1991\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059497\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2224,
+    "output": 527,
+    "cost_in": 0.00022239999999999998,
+    "cost_out": 0.00021080000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n88517\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059497\n\nFlora of Virginia\n*Galax urceolata* (Poiret) Brum.\nHorseshoe Bend, Buckingham Co.\nA small population of several dozen plants\n(all sterile?) on both banks of a small wooded\n(oak-beech-*Kalmia*) branch 1.7 mi. S of Scottsville,\n1 mi. W of Rte. 20 & above W-facing bluffs\nof James River.                                el. 340 ft.\n(Scottsville Quad.)                      May 1, 1991\n\n**(Handwritten Text)**\nCharles E. Stevens\nNo. 22,038\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n88517\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax urceolata (Poiret) Brum.\nHorseshoe Bend, Buckingham Co.\nA small population of several dozen plants\n(all strile?) on both banks of a smalled wooded\nbranch 1.7 mi. S of Scottsville,\n\u2022I mi. W of Rte. 20 & above W-facing bluffs\nof James River.\n(Scottsville Quad)\nCharles E. Stevens\nNo. 22,038\nel. 340 pt.\nmay 1, 1991\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059497\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "88517",
+    "scientificName": "Galax urceolata (Poiret) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "22,038",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 1, 1991",
+    "collectionDate": "1991-05-01",
+    "collectionDateEnd": "",
+    "habitat": "A small population of several dozen plants (all sterile?) on both banks of a small wooded (oak-beech-Kalmia) branch",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Buckingham Co.",
+    "locality": "Horseshoe Bend, 1.7 mi. S of Scottsville, 1 mi. W of Rte. 20 & above W-facing bluffs of James River. (Scottsville Quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "104",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059497\nFlora of Virginia\nel. 340 pt.\nGalax urceolata"
+  }
+}

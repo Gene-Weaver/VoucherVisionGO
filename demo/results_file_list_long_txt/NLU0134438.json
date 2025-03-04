@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n173545\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: TENNESSEE\nCounty: COCKE\n\n*Galax aphylla* L.\n\nWoods on each side of U.S. 25E just south of\nCherokee Lake at Roadside park north of Newport.\n\nCollector: R. Dale Thomas, et al.\nNo: 70822\nDate: 21 April 1980\n\nUniversity of Louisiana at Monroe\nNL00134438\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006749999999999999,
+      "total_cost": 0.00145375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 135
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n174545\nHERBARIUM\nA 1\n2\n3\n4\n5\n6\nM 8 9 10 11 12\n13 14 15\nB 17 18 19\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF: TENNESSEE County: COCKE\nGalax aphylla L.\nWoods on each side of U.S. 25E just south of\nCherokee Lake at Roadside park north of Newport.\nCollector: R. Dale Thomas, et. al.\nNo.: 70822 Date: 21 April 1980\nUniversity of Louisiana at Monroe\nNL00134438\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.16e-05,
+      "total_cost": 0.0007531,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 179
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2174,
+    "output": 528,
+    "cost_in": 0.00021740000000000003,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n173545\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: TENNESSEE\nCounty: COCKE\n\n*Galax aphylla* L.\n\nWoods on each side of U.S. 25E just south of\nCherokee Lake at Roadside park north of Newport.\n\nCollector: R. Dale Thomas, et al.\nNo: 70822\nDate: 21 April 1980\n\nUniversity of Louisiana at Monroe\nNL00134438\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n174545\nHERBARIUM\nA 1\n2\n3\n4\n5\n6\nM 8 9 10 11 12\n13 14 15\nB 17 18 19\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF: TENNESSEE County: COCKE\nGalax aphylla L.\nWoods on each side of U.S. 25E just south of\nCherokee Lake at Roadside park north of Newport.\nCollector: R. Dale Thomas, et. al.\nNo.: 70822 Date: 21 April 1980\nUniversity of Louisiana at Monroe\nNL00134438\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "174545",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas, et al.",
+    "collectorNumber": "70822",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 April 1980",
+    "collectionDate": "1980-04-21",
+    "collectionDateEnd": "",
+    "habitat": "Woods on each side of u.s. 25e just south of cherokee lake at roadside park north of newport.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Cocke",
+    "locality": "Woods on each side of U.S. 25E just south of Cherokee Lake at Roadside park north of Newport.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF TENNESSEE\nUniversity of Louisiana at Monroe\nNL00134438\nA 1\n2\n3\n4\n5\n6\nM 8 9 10 11 12\n13 14 15\nB 17 18 19"
+  }
+}

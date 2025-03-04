@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF\nSOUTH FLORIDA\n104090\nHERBARIUM\n\nHerbarium of The University of Georgia  235\nMERIWETHER COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\n2.6 mi via air ESE of Warm Springs on\nroad along Cooler Branch, Pine Mt. Abundant.\nRocky soil, mixed woods, large colony.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Vince Coffey\n\nSamuel B. Jones     21750     13 April 1972\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006,
+      "total_cost": 0.00137875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 120
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF\nSOUTH FLORIDA\n104090\nHERBARIUM\nUSF\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\n2.6 mi via air ESE of Warm Springs on\nroad along Cooler Branch, Pine Mt. Abundant.\nRocky soil, mixed woods, large colony.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Vince Coffey\nSamuel B. Jones\n21750\n13 April 1972\n235\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6800000000000006e-05,
+      "total_cost": 0.0007283000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 117
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2140,
+    "output": 463,
+    "cost_in": 0.000214,
+    "cost_out": 0.0001852
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF\nSOUTH FLORIDA\n104090\nHERBARIUM\n\nHerbarium of The University of Georgia  235\nMERIWETHER COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\n2.6 mi via air ESE of Warm Springs on\nroad along Cooler Branch, Pine Mt. Abundant.\nRocky soil, mixed woods, large colony.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Vince Coffey\n\nSamuel B. Jones     21750     13 April 1972\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF\nSOUTH FLORIDA\n104090\nHERBARIUM\nUSF\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\n2.6 mi via air ESE of Warm Springs on\nroad along Cooler Branch, Pine Mt. Abundant.\nRocky soil, mixed woods, large colony.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Vince Coffey\nSamuel B. Jones\n21750\n13 April 1972\n235\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "104090",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Samuel B. Jones, Vince Coffey",
+    "collectorNumber": "21750",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 April 1972",
+    "collectionDate": "1972-04-13",
+    "collectionDateEnd": "",
+    "habitat": "Rocky soil, mixed woods, large colony.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Meriwether County",
+    "locality": "2.6 mi via air ESE of Warm Springs on road along Cooler Branch, Pine Mt. Abundant.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of\nSouth Florida\nHERBARIUM\nHerbarium of The University of Georgia 235\nFLORA OF GEORGIA\nCOLLECTED FOR PINE MOUNTAIN FLORA\nUSF"
+  }
+}

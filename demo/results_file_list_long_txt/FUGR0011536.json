@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011536\n\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n\n5757\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Pickens\n\n*Galax aphylla* L.\n\nHardwood forest near Eastatoe River about\n2 miles north of Rocky Bottom.\n\nCollector C. Leland Rodgers\nGeorge Shiflet Jr.\n69081\nDate 6-18-69\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00061,
+      "total_cost": 0.00138875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 122
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011536\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5757\nHerbarium of Furman University\nGreenville, South Carolina\nCounty Pickens\nGalax aphylla L.\nHardwood forest near Eastatoe River about\n2 miles north of Rocky Bottom.\nC. Leland Rodgers\nCollector George Shiflet Jr.\nDate 6-18-69\n69081\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.64e-05,
+      "total_cost": 0.0007279000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 116
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2109,
+    "output": 477,
+    "cost_in": 0.00021090000000000003,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFurman University Herbarium\nFUGR0011536\n\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n\n5757\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Pickens\n\n*Galax aphylla* L.\n\nHardwood forest near Eastatoe River about\n2 miles north of Rocky Bottom.\n\nCollector C. Leland Rodgers\nGeorge Shiflet Jr.\n69081\nDate 6-18-69\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFurman University Herbarium\nFUGR0011536\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5757\nHerbarium of Furman University\nGreenville, South Carolina\nCounty Pickens\nGalax aphylla L.\nHardwood forest near Eastatoe River about\n2 miles north of Rocky Bottom.\nC. Leland Rodgers\nCollector George Shiflet Jr.\nDate 6-18-69\n69081\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FUGR0011536",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. Leland Rodgers, George Shiflet Jr.",
+    "collectorNumber": "69081",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-18-69",
+    "collectionDate": "1969-06-18",
+    "collectionDateEnd": "",
+    "habitat": "Hardwood forest near eastatoe river about 2 miles north of rocky bottom.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Pickens",
+    "locality": "Hardwood forest near Eastatoe River about 2 miles north of Rocky Bottom.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Furman University Herbarium\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5757\nHerbarium of Furman University\nGreenville, South Carolina\nGalax aphylla"
+  }
+}

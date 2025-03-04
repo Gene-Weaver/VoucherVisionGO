@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087813\n\n10 (Handwritten)\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\n\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\n\nCOUNTY: Burke\n\nPLANTS OF North Carolina\n\n*GALAX APHYLLA* L.\n\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\n\nSallie Potter no. 93 August 18, 1971\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006599999999999999,
+      "total_cost": 0.0014387500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 132
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087813\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\nCOUNTY: Burke\nPLANTS OF North Carolina\nGalax aphylla L.\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\nSallie Potter no. 93 August 18, 1971\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "total_cost": 0.0007291,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2135,
+    "output": 489,
+    "cost_in": 0.00021350000000000004,
+    "cost_out": 0.00019559999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087813\n\n10 (Handwritten)\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\n\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\n\nCOUNTY: Burke\n\nPLANTS OF North Carolina\n\n*GALAX APHYLLA* L.\n\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\n\nSallie Potter no. 93 August 18, 1971\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087813\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\nCOUNTY: Burke\nPLANTS OF North Carolina\nGalax aphylla L.\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\nSallie Potter no. 93 August 18, 1971\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087813",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Sallie Potter",
+    "collectorNumber": "93",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 18, 1971",
+    "collectionDate": "1971-08-18",
+    "collectionDateEnd": "",
+    "habitat": "Rock overhang over Linville River at Linville Falls in the Pisgah National Forest off old NC Rt. 105 (Kislter Memorial Highway).",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Burke",
+    "locality": "Linville Falls in the Pisgah National Forest off old NC Rt. 105 (Kislter Memorial Highway).",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\n10 (Handwritten)"
+  }
+}

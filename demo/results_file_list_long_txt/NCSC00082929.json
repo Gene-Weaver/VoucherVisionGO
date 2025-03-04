@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082929\n\nHERBARIUM\nNCSC\n76698\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium, North Carolina State University\nFLORA OF STONE MT. STATE PARK, N. C.\nCounty: Alleghany Wilkes\n\n*Galax urceolata* (Poir.) Brummitt\n\nGrowing on the bank of the East\nProng of the Roaring River about\n\u00bd mile from the main entrance to \nthe Park.  Elevation about 1600\nfeet.\n\nJohn B. Taggart, No. 217 June 7, 1972\n\nHandwritten Text: \u00bd\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082929\nA\nR\nG\nB\nM\nW\nG\nK\nC\nY\nM\nB\nHERBARIUM\nNCSC\n76698\nNORTH CAROLINA STATE UNIVERSITY\nHerbarium, North Carolina State University\nFLORA OF STONE MT. STATE PARK, N. C.\nCounty: Alleghany Wilkes\nGalax urceolata (Poir.) Brummit\nGrowing on the bank of the East\nProng of the Roaring River about\nmile from the main entrance to\nthe Park. Elevation about 1600\nfeet.\nJohn B. Taggart, No. 217\nJune 7, 1972\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 496,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082929\n\nHERBARIUM\nNCSC\n76698\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium, North Carolina State University\nFLORA OF STONE MT. STATE PARK, N. C.\nCounty: Alleghany Wilkes\n\n*Galax urceolata* (Poir.) Brummitt\n\nGrowing on the bank of the East\nProng of the Roaring River about\n\u00bd mile from the main entrance to \nthe Park.  Elevation about 1600\nfeet.\n\nJohn B. Taggart, No. 217 June 7, 1972\n\nHandwritten Text: \u00bd\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082929\nA\nR\nG\nB\nM\nW\nG\nK\nC\nY\nM\nB\nHERBARIUM\nNCSC\n76698\nNORTH CAROLINA STATE UNIVERSITY\nHerbarium, North Carolina State University\nFLORA OF STONE MT. STATE PARK, N. C.\nCounty: Alleghany Wilkes\nGalax urceolata (Poir.) Brummit\nGrowing on the bank of the East\nProng of the Roaring River about\nmile from the main entrance to\nthe Park. Elevation about 1600\nfeet.\nJohn B. Taggart, No. 217\nJune 7, 1972\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082929",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "John B. Taggart",
+    "collectorNumber": "217",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 7, 1972",
+    "collectionDate": "1972-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Growing on the bank of the East\nProng of the Roaring River about\n\u00bd mile from the main entrance to \nthe Park.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Alleghany Wilkes",
+    "locality": "Flora of Stone Mt. State Park, N. C.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "488",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHERBARIUM\nNCSC\n76698\nNORTH CAROLINA STATE UNIVERSITY\nHerbarium, North Carolina State University\nElevation about 1600\nfeet.\nHandwritten Text \u00bd"
+  }
+}

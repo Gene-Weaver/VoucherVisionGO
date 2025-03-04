@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10741\n\n6/12/19/6\n*Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nMOUNTAINS\nCAT. NO.\nGSM8987\nGREAT SMOKY\nNATIONAL\nPARK\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980 *MB (handwritten)*\n\nNP\nGSM\nBot.\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nS. L. Wallace 1524\nCOLLECTOR(S) H. M. JENNISON NO.\nLOC. JUN 20 1935\n193\nCades Cove, Blount Co., Tenn. *handwritten)*\n*Galax aphylla*, L.\n\n0   1   2   3   4   5   6   7   8   9   10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00126,
+      "total_cost": 0.00203875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 252
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10741\nMOUNTAINS\nCAT. NO.\nGREAT SMOKY\nNATIONAL\nPARK\n6/22/66\nGalax urceolata (Poir.) Brummitt\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\nNP\nGSM\nBot.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nS. L. Wallace\n1524\nNO\nH. M. JENNISON\nJUN 20 1935\nCades Cove, Blount Co., Tenn.\nGalax aphylla, L.\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.28e-05,
+      "total_cost": 0.0007543000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 182
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2338,
+    "output": 540,
+    "cost_in": 0.0002338,
+    "cost_out": 0.00021600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10741\n\n6/12/19/6\n*Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nMOUNTAINS\nCAT. NO.\nGSM8987\nGREAT SMOKY\nNATIONAL\nPARK\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980 *MB (handwritten)*\n\nNP\nGSM\nBot.\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nS. L. Wallace 1524\nCOLLECTOR(S) H. M. JENNISON NO.\nLOC. JUN 20 1935\n193\nCades Cove, Blount Co., Tenn. *handwritten)*\n*Galax aphylla*, L.\n\n0   1   2   3   4   5   6   7   8   9   10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10741\nMOUNTAINS\nCAT. NO.\nGREAT SMOKY\nNATIONAL\nPARK\n6/22/66\nGalax urceolata (Poir.) Brummitt\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\nNP\nGSM\nBot.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nS. L. Wallace\n1524\nNO\nH. M. JENNISON\nJUN 20 1935\nCades Cove, Blount Co., Tenn.\nGalax aphylla, L.\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GSMNP10741",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "1524",
+    "identifiedBy": "S. L. Wallace",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "JUN 20 1935",
+    "collectionDate": "1935-06-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tenn.",
+    "county": "Blount Co.",
+    "locality": "Cades Cove",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nMOUNTAINS\nCAT. NO.\nGSM8987\nGREAT SMOKY\nNATIONAL\nPARK\n6/22/66\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nMB\nNP\nGSM\nBot.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

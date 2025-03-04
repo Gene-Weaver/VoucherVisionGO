@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPOISONED (handwritten)\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095570\n\nDUKE UNIVERSITY\nHERBARIUM\n21128\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nTop of True Love Mt., Haywood Co.\nscarce, rocky open places.\nH.F. Williams\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000695,
+      "total_cost": 0.00147375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 139
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095570\nDuke\nUNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n21128\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nTop of True Love Mt., Haywood Co.\nscarce, rocky open places.\nH.F.Williams\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4000000000000005e-05,
+      "total_cost": 0.0007355,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2168,
+    "output": 465,
+    "cost_in": 0.00021679999999999998,
+    "cost_out": 0.00018600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPOISONED (handwritten)\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095570\n\nDUKE UNIVERSITY\nHERBARIUM\n21128\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nTop of True Love Mt., Haywood Co.\nscarce, rocky open places.\nH.F. Williams\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095570\nDuke\nUNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n21128\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nTop of True Love Mt., Haywood Co.\nscarce, rocky open places.\nH.F.Williams\nNo.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095570",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H.f. Williams",
+    "collectorNumber": "No.",
+    "identifiedBy": "R.l. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "",
+    "collectionDate": "0000-00-00",
+    "collectionDateEnd": "0000-00-00",
+    "habitat": "Scarce, rocky open places.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Haywood co.",
+    "locality": "Top of true love mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke university herbarium\nPoisoned (handwritten)\nDuke university\nHerbarium\n21128\nFlora of north carolina"
+  }
+}

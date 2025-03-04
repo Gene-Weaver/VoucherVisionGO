@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "11339\n\nEAST TENNESSEE STATE UNIVERSITY\nETSU015793\n\nFamily: Diapensiaceae (J. Donaldson) 9/92\nGenus: *Galax*\nSpecies: *aphylla*\nCommon Name: Galax Beetleweed\nLocality: Unaka\nHabitat: Open Woods\nDate: 6-30-52\nCollector: *Dot SANS*\n\n\n*Handwritten Text*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000485,
+      "total_cost": 0.0012637500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 97
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "11339\nEAST TENNESSEE STATE UNIVERSITY\nETSU015793\nDiaspensiaceae (J. Donaldson)\nFamily Primulaceae\nGenus Galax l.\nSpecies aphylla l.\nCommon Name Galax Beetleweed\nLocality Unaka\nHabitat Open Woods.\nDate 6-30-52\nCollector Dot SANS\n9/92\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax\naphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.9200000000000004e-05,
+      "total_cost": 0.0007207,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 98
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2076,
+    "output": 435,
+    "cost_in": 0.00020760000000000003,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n11339\n\nEAST TENNESSEE STATE UNIVERSITY\nETSU015793\n\nFamily: Diapensiaceae (J. Donaldson) 9/92\nGenus: *Galax*\nSpecies: *aphylla*\nCommon Name: Galax Beetleweed\nLocality: Unaka\nHabitat: Open Woods\nDate: 6-30-52\nCollector: *Dot SANS*\n\n\n*Handwritten Text*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n11339\nEAST TENNESSEE STATE UNIVERSITY\nETSU015793\nDiaspensiaceae (J. Donaldson)\nFamily Primulaceae\nGenus Galax l.\nSpecies aphylla l.\nCommon Name Galax Beetleweed\nLocality Unaka\nHabitat Open Woods.\nDate 6-30-52\nCollector Dot SANS\n9/92\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax\naphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "11339",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "l.",
+    "collectedBy": "Dot sans",
+    "collectorNumber": "",
+    "identifiedBy": "J. donaldson",
+    "identifiedDate": "1992-09-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-30-52",
+    "collectionDate": "1952-06-30",
+    "collectionDateEnd": "",
+    "habitat": "Open woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Unaka",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "East tennessee state university\nETSU015793\ndiaspensiaceae\nfamily primulaceae\ncommon name galax beetleweed\nsernec digitization project - tennessee herbarium consortium"
+  }
+}

@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nINCH\nOPTIRECTILINEAR\u00ae\nCM\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046047\n\nIK\nEastern Kentucky University Herbarium\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\n\nPlants of Harlan County, Kentucky\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\n\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCH\nOPTIRECTILINEAR\u00ae\nU.S.A.\nKENTUCKY\n046047\nVERSITY\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\nPlants of Harlan County, Kentucky\nGalax aphylla L.\nDiapensiaceae\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\nIK\nEastern Kentucky University Herbarium\n3 1234 10039605 8\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "INCH\nOPTIRECTILINEAR\u00ae\nCM\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046047\n\nIK\nEastern Kentucky University Herbarium\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\n\nPlants of Harlan County, Kentucky\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\n\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\n*Galax aphylla*\n\n",
       "cost_in": 0.00077875,
       "cost_out": 0.00077,
-      "ocr_text": "INCH\nOPTIRECTILINEAR\u00ae\nCM\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046047\n\nIK\nEastern Kentucky University Herbarium\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\n\nPlants of Harlan County, Kentucky\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\n\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\n*Galax aphylla*\n\n",
+      "total_cost": 0.00154875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 154,
-      "total_cost": 0.00154875
+      "tokens_out": 154
     },
     "gemini-2.0-flash": {
+      "ocr_text": "INCH\nOPTIRECTILINEAR\u00ae\nU.S.A.\nKENTUCKY\n046047\nVERSITY\nHERBARIUM\nIK\nEastern Kentucky University Herbarium\n3 1234 10039605 8\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\nPlants of Harlan County, Kentucky\nGalax aphylla L.\nDiapensiaceae\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
       "cost_out": 6.960000000000001e-05,
-      "ocr_text": "INCH\nOPTIRECTILINEAR\u00ae\nU.S.A.\nKENTUCKY\n046047\nVERSITY\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\nPlants of Harlan County, Kentucky\nGalax aphylla L.\nDiapensiaceae\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\nIK\nEastern Kentucky University Herbarium\n3 1234 10039605 8\n\n\nGalax aphylla\n\n",
+      "total_cost": 0.0007511,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 174,
-      "total_cost": 0.0007511
+      "tokens_out": 174
     }
   },
-  "tokens_LLM": {
-    "input": 2161,
-    "output": 540
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 536,
+    "cost_in": 0.0002204,
+    "cost_out": 0.0002144
   },
-  "vvgo_json": {
-    "additionalText": "Inch\noptirectilinear\u00ae\ncm\neastern kentucky university\nherbarium\neastern kentucky university herbarium\neky herbarium of eastern kentucky university\nrichmond, ky 40475 u.s.a.\nplants of harlan county, kentucky\ndiapensiaceae\nik\ngalax aphylla\n3 1234 10039605 8\nik\nversity",
+  "ocr": "\ngemini-1.5-pro OCR:\nINCH\nOPTIRECTILINEAR\u00ae\nCM\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046047\n\nIK\nEastern Kentucky University Herbarium\n\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\n\nPlants of Harlan County, Kentucky\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\n\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCH\nOPTIRECTILINEAR\u00ae\nU.S.A.\nKENTUCKY\n046047\nVERSITY\nHERBARIUM\nIK\nEastern Kentucky University Herbarium\n3 1234 10039605 8\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\nPlants of Harlan County, Kentucky\nGalax aphylla L.\nDiapensiaceae\nHemlock dominated low terrace, riparian woods and\nadjacent unimproved roadside; Hemlock Branch Road,\nMedlin tract addition to Martin's Fork of Cumberland\nWild River.\nTimothy J. Weckman\nJudith E. Weckman\nAugust 9, 1999\n#5296\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
     "catalogNumber": "046047",
-    "chromosomeCount": "",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
     "collectedBy": "Timothy J. Weckman, Judith E. Weckman",
+    "collectorNumber": "5296",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 9, 1999",
     "collectionDate": "1999-08-09",
     "collectionDateEnd": "",
-    "collectorNumber": "5296",
-    "continent": "North America",
-    "country": "Usa",
-    "county": "Harlan County",
+    "habitat": "Hemlock dominated low terrace, riparian woods and adjacent unimproved roadside; Hemlock Branch Road, Medlin tract addition to Martin's Fork of Cumberland Wild River.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "North America",
+    "country": "U.s.a.",
+    "stateProvince": "Kentucky",
+    "county": "Harlan County",
+    "locality": "Hemlock Branch Road, Medlin tract addition to Martin's Fork of Cumberland Wild River.",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "Hemlock dominated low terrace, riparian woods and adjacent unimproved roadside; Hemlock Branch Road, Medlin tract addition to Martin's Fork of Cumberland Wild River.",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Hemlock Branch Road, Medlin tract addition to Martin's Fork of Cumberland Wild River.",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla L.",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "Kentucky",
-    "verbatimCollectionDate": "August 9, 1999",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "INCH\nOPTIRECTILINEAR\u00ae\nCM\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\nIK\nEastern Kentucky University Herbarium\nEKY Herbarium of Eastern Kentucky University\nRichmond, KY 40475 U.S.A.\nPlants of Harlan County, Kentucky\nGalax aphylla\nDiapensiaceae\nGalax aphylla"
   }
 }

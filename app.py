@@ -251,7 +251,7 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
     
-    def process_image_request(self, file, engine_options=None, prompt=None):
+    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], prompt=None):
         """Process an image from a request file"""
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
@@ -272,12 +272,14 @@ class VoucherVisionProcessor:
             
             try:
                 # Get engine options (default to gemini models if not specified)
-                if not engine_options:
+                if engine_options is None:
                     engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
                 logger.info(f"Using prompt file: {current_prompt}")
+                logger.info(f"file_path: {file_path}")
+                logger.info(f"engine_options: {engine_options}")
                 
                 # Perform OCR
                 ocr_info, ocr = self.perform_ocr(file_path, engine_options)
@@ -369,7 +371,7 @@ def process_image():
     prompt = request.form.get('prompt') or None
     
     # Process the image using the initialized processor
-    results, status_code = app.config['processor'].process_image_request(file, engine_options, prompt)
+    results, status_code = app.config['processor'].process_image_request(file=file, engine_options=engine_options, prompt=prompt)
     
     # return jsonify(results), status_code
     return json.dumps(results, cls=OrderedJsonEncoder), status_code, {'Content-Type': 'application/json'}

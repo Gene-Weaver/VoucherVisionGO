@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665369\n\nGift to NCU from the University of North Carolina - Greensboro 2018\n\nXVII-513.\nHERBARIUM OF Edward Jarret\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nFLORA OF GUILFORD COUNTY\n*Diapensiaceae*\n*Galax aphylla*\n*Galax*\nPiedmont Springs\n\nDATE 5/14/32\nCOLLECTOR\nL. Jarrett\n\n\nHandwritten Text:\n*Edward Jarrett*\n*L. Jarrett*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00064,
+      "total_cost": 0.00141875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 128
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina at Chapel\nHERBARIUM\nNCU\n665369\nGift to NCU from the University of North Carolina - Greensboro 2018\nXVII-513.\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nNO.\nFLORA OF GUILFORD COUNTY-\nPiedmont Springs\nDiapensiaceae\nGalax aphylla\nGalax\nDATE 5/14/32\nCOLLECTOR\n\nHandwritten text:\nLaura Jarrett\nL. Jarrett\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.520000000000001e-05,
+      "total_cost": 0.0007267,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 113
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2139,
+    "output": 487,
+    "cost_in": 0.0002139,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n665369\n\nGift to NCU from the University of North Carolina - Greensboro 2018\n\nXVII-513.\nHERBARIUM OF Edward Jarret\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nFLORA OF GUILFORD COUNTY\n*Diapensiaceae*\n*Galax aphylla*\n*Galax*\nPiedmont Springs\n\nDATE 5/14/32\nCOLLECTOR\nL. Jarrett\n\n\nHandwritten Text:\n*Edward Jarrett*\n*L. Jarrett*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina at Chapel\nHERBARIUM\nNCU\n665369\nGift to NCU from the University of North Carolina - Greensboro 2018\nXVII-513.\nHERBARIUM OF\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nNO.\nFLORA OF GUILFORD COUNTY-\nPiedmont Springs\nDiapensiaceae\nGalax aphylla\nGalax\nDATE 5/14/32\nCOLLECTOR\n\nHandwritten text:\nLaura Jarrett\nL. Jarrett\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "665369",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "L. Jarrett, Laura Jarrett",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/14/32",
+    "collectionDate": "1932-05-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Guilford County",
+    "locality": "Piedmont Springs",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina at Chapel Hill\nHERBARIUM\nNCU\nGift to NCU from the University of North Carolina - Greensboro 2018\nXVII-513.\nHERBARIUM OF Edward Jarret\nTHE NORTH CAROLINA COLLEGE FOR WOMEN\nFLORA OF GUILFORD COUNTY-\nDiapensiaceae\nGalax\nHandwritten text\nEdward Jarrett\nL. Jarrett\nGalax aphylla"
+  }
+}

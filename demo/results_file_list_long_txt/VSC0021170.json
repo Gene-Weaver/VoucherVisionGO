@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nVALDOSTA STATE\nCOLLEGE\n\n19953 (handwritten)\n\nCURTISS,\nNORTH AMERICAN PLANTS, No. 1743\n\n*Galax aphylla*, L.\n\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\n\nLegit A. H. Curtiss. June.\n\nVSC 0021170\nValdosta State University Herbarium\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00052,
+      "total_cost": 0.00129875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 104
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "inches\ncm\nKodak Color Control Patches\nKodak Gray Scale\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n19953\nCURTISS,\nNORTH AMERICAN PLANTS,\nNo. 1743\nGalax aphylla, L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS.\nJune.\n\nValdosta State University Herbarium\nVSC 0021170\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.520000000000001e-05,
+      "total_cost": 0.0007267,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 113
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2105,
+    "output": 426,
+    "cost_in": 0.00021050000000000002,
+    "cost_out": 0.00017040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n\n19953 (handwritten)\n\nCURTISS,\nNORTH AMERICAN PLANTS, No. 1743\n\n*Galax aphylla*, L.\n\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\n\nLegit A. H. Curtiss. June.\n\nVSC 0021170\nValdosta State University Herbarium\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\ninches\ncm\nKodak Color Control Patches\nKodak Gray Scale\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n19953\nCURTISS,\nNORTH AMERICAN PLANTS,\nNo. 1743\nGalax aphylla, L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS.\nJune.\n\nValdosta State University Herbarium\nVSC 0021170\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vsc 0021170",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. H. Curtiss",
+    "collectorNumber": "1743",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June.",
+    "collectionDate": "0000-06-00",
+    "collectionDateEnd": "0000-06-00",
+    "habitat": "Rocky woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Chilhowee mts.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "762",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Herbarium\nValdosta state\nCollege\n19953\nCurtiss,\nNorth american plants\nLegit a. H. Curtiss.\nValdosta state university herbarium"
+  }
+}

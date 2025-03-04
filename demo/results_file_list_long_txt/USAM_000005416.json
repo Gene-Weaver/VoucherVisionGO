@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of South Alabama (USAM)\nUSAM000005416\n\nPLANTS OF ALABAMA\n\nDeKalb Co.: 29 Aug 1969  R.Kral 36517\n\n*Galax aphylla* L.\n\nIn shaded cracks in granite, De Soto\nState Park, e. of Ft. Payne, below\npicnic area.\n\nDet: R. Kral\n\nHandwritten Text:\n* R.Kral 36517\n* R. Kral\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Inches\nCentimetres\nKODAK Gray Scale\nUniversity of South Alabama (USAM)\nUSAM000005416\nPLANTS OF ALABAMA\nDeKalb Co.: 29 Aug 1969 R.Kral 36517\nGalax aphylla L.\nIn shaded cracks in granite, De Soto\nState Park, e. of Ft. Payne, below\npicnic area.\nDet: R. Kral\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2000000000000004e-05,
+      "total_cost": 0.0007235,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 105
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2089,
+    "output": 418,
+    "cost_in": 0.00020890000000000004,
+    "cost_out": 0.00016720000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of South Alabama (USAM)\nUSAM000005416\n\nPLANTS OF ALABAMA\n\nDeKalb Co.: 29 Aug 1969  R.Kral 36517\n\n*Galax aphylla* L.\n\nIn shaded cracks in granite, De Soto\nState Park, e. of Ft. Payne, below\npicnic area.\n\nDet: R. Kral\n\nHandwritten Text:\n* R.Kral 36517\n* R. Kral\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nInches\nCentimetres\nKODAK Gray Scale\nUniversity of South Alabama (USAM)\nUSAM000005416\nPLANTS OF ALABAMA\nDeKalb Co.: 29 Aug 1969 R.Kral 36517\nGalax aphylla L.\nIn shaded cracks in granite, De Soto\nState Park, e. of Ft. Payne, below\npicnic area.\nDet: R. Kral\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USAM000005416",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "36517",
+    "identifiedBy": "R. Kral",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 Aug 1969",
+    "collectionDate": "1969-08-29",
+    "collectionDateEnd": "",
+    "habitat": "In shaded cracks in granite",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Dekalb co.",
+    "locality": "De soto state park, e. of ft. payne, below picnic area.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of alabama"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n168594\n\nPLANTS OF: VIRGINIA       COUNTY: BOTETOURT\n\n*Galax urceolata* (Poir.) Brummitt\n\nSteep N-facing shale slope along Va 43 3.2 mi\nS of jct with U.S. 11 at Buchanan, Jefferson\nNational Forest. Under pines. Flowers white,\nanthers orange; leaves yellowish. Common.\n\nMark A. Garland 348          30 May 1985\nHERBARIUM OF FLORIDA STATE UNIVERSITY\n\nImaged 2016\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.00146875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n169594\n6277\nUNIVERSITY OF GEORGIA\nGA202469\nPLANTS OF: VIRGINIA\nCOUNTY: BOTETOURT\nGalax urceolata (Poir.) Brummitt\nSteep N-facing shale slope along Va 43 3.2 mi\nS of jct with U.S. 11 at Buchanan, Jefferson\nNational Forest. Under pines. Flowers white,\nanthers orange; leaves yellowish. Common.\nMark A. Garland 348\n30 May 1985\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nImaged 2016\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0004751,
+      "cost_out": 6.04e-05,
+      "total_cost": 0.0005355000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 4751,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2167,
+    "output": 509,
+    "cost_in": 0.0002167,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n168594\n\nPLANTS OF: VIRGINIA       COUNTY: BOTETOURT\n\n*Galax urceolata* (Poir.) Brummitt\n\nSteep N-facing shale slope along Va 43 3.2 mi\nS of jct with U.S. 11 at Buchanan, Jefferson\nNational Forest. Under pines. Flowers white,\nanthers orange; leaves yellowish. Common.\n\nMark A. Garland 348          30 May 1985\nHERBARIUM OF FLORIDA STATE UNIVERSITY\n\nImaged 2016\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n169594\n6277\nUNIVERSITY OF GEORGIA\nGA202469\nPLANTS OF: VIRGINIA\nCOUNTY: BOTETOURT\nGalax urceolata (Poir.) Brummitt\nSteep N-facing shale slope along Va 43 3.2 mi\nS of jct with U.S. 11 at Buchanan, Jefferson\nNational Forest. Under pines. Flowers white,\nanthers orange; leaves yellowish. Common.\nMark A. Garland 348\n30 May 1985\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nImaged 2016\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "168594",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Mark A. Garland",
+    "collectorNumber": "348",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "30 May 1985",
+    "collectionDate": "1985-05-30",
+    "collectionDateEnd": "",
+    "habitat": "Steep n-facing shale slope along va 43 3.2 mi s of jct with u.s. 11 at buchanan, jefferson national forest. under pines.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white, anthers orange; leaves yellowish. common.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Botetourt",
+    "locality": "Steep n-facing shale slope along va 43 3.2 mi s of jct with u.s. 11 at buchanan, jefferson national forest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\nPlants of virginia county botetourt\nHerbarium of florida state university\nimaged 2016"
+  }
+}

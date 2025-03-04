@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "U OF S. CAROLINA\nHERBARIUM\nUPSTATE\n\nNORTH CAROLINA - Polk County\nGalax aphylla\n\nevergreen herb\nat top of White Oak\nMountain near\nLookout into\nGreen River Valley\n\nDate: June 4, 1993\nLocation: White Oak Mountain, Columbus area\nCollector: G. Newberry\nNO. 11783\n\n146 DIAPENSIACEAE (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00049,
+      "total_cost": 0.0012687500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 98
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UPST TE\nUSCS\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\nNORTH CAROLINA - Polk County\nGalax aphylla\nevergreen herb\nat top of White Oak\nMountain near\nLookout into\nGreen River Valley\nDate: June 4, 1993\nLocation: White Oak Mountain, Columbus area\nCollector: G. Newberry\nNo.11783\n146 DIA PENSIACERE\nUniversity of South Carolina Upstate\nUSCS0008534\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.5600000000000004e-05,
+      "total_cost": 0.0007271000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 114
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2100,
+    "output": 414,
+    "cost_in": 0.00021,
+    "cost_out": 0.00016560000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\n\nNORTH CAROLINA - Polk County\nGalax aphylla\n\nevergreen herb\nat top of White Oak\nMountain near\nLookout into\nGreen River Valley\n\nDate: June 4, 1993\nLocation: White Oak Mountain, Columbus area\nCollector: G. Newberry\nNO. 11783\n\n146 DIAPENSIACEAE (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUPST TE\nUSCS\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\nNORTH CAROLINA - Polk County\nGalax aphylla\nevergreen herb\nat top of White Oak\nMountain near\nLookout into\nGreen River Valley\nDate: June 4, 1993\nLocation: White Oak Mountain, Columbus area\nCollector: G. Newberry\nNo.11783\n146 DIA PENSIACERE\nUniversity of South Carolina Upstate\nUSCS0008534\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCS0008534",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "G. Newberry",
+    "collectorNumber": "11783",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 4, 1993",
+    "collectionDate": "1993-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Evergreen herb at top of white oak mountain near lookout into green river valley",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Polk county",
+    "locality": "White oak mountain, columbus area",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "U of s. carolina\nherbarium\nupstate\n146 diapensiaceae"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23611\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport\n1981\n\nHERBARIUM GEOLOG. SURVEY ALA.\n\n*(Handwritten Text Starts Here)*\n*Galax aphylla* L.\nLittle River, Int.leg. 2\nnear waterfall.\nJuly 31, 1896\n2300'.\nCollector: C. Mohr & A. Ruth\n*(Handwritten Text Ends Here)*\n\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013970\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.00172375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23611\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nHERBARIUM GEOLOG. SURVEY ALA.\nGalax aphylla L.\nThe wa-haw Int. leg. 2300'.\nnear waterfall.\nJuly 31\n1896\nC Mohr & Ed Smith\nCollector:\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013970\n\n\nGalax urceolata\nGalax aphylla\nGalase aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.76e-05,
+      "total_cost": 0.0007491,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 169
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2253,
+    "output": 527,
+    "cost_in": 0.0002253,
+    "cost_out": 0.00021080000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23611\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport\n1981\n\nHERBARIUM GEOLOG. SURVEY ALA.\n\n*(Handwritten Text Starts Here)*\n*Galax aphylla* L.\nLittle River, Int.leg. 2\nnear waterfall.\nJuly 31, 1896\n2300'.\nCollector: C. Mohr & A. Ruth\n*(Handwritten Text Ends Here)*\n\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013970\n\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23611\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nHERBARIUM GEOLOG. SURVEY ALA.\nGalax aphylla L.\nThe wa-haw Int. leg. 2300'.\nnear waterfall.\nJuly 31\n1896\nC Mohr & Ed Smith\nCollector:\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013970\n\n\nGalax urceolata\nGalax aphylla\nGalase aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "23611",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. Mohr, A. Ruth, Ed Smith",
+    "collectorNumber": "2",
+    "identifiedBy": "L. J. Davenport",
+    "identifiedDate": "1981",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt det. Robert R. Haynes, 2001",
+    "verbatimCollectionDate": "July 31, 1896",
+    "collectionDate": "1896-07-31",
+    "collectionDateEnd": "",
+    "habitat": "Near waterfall",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "",
+    "locality": "Little River, Int.leg. near waterfall.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "701",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n=\nHerbarium of the University of Alabama\nHERBARIUM GEOLOG. SURVEY ALA.\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013970\nGalax urceolata\nGalax aphylla\nThe wa-haw Galase aphylla"
+  }
+}

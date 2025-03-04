@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170899\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\n6277\n\nFLORA TENNESSIENSIS\nNO. 4233                                      KNOX COUNTY\nCOLLECTOR  *MBWilson*                      7-28-35\n*Galax aphylla* L.\n\nEast- central Knox County,\nbetween French Broad River\nand Hwy. 9.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00068,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170899\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nbased on average guard cell area\nGuy L. Nesom, 1975\n6277\nFLORA TENNESSIENSIS\nNO.4233\nKNOX COUNTY\nCOLLECTOR. MBWilson\n7-28-35193\nGalax aphylla L.\nEast- central Knox County,\nbetween French Broad River\nand Hwy. 9.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.36e-05,
+      "total_cost": 0.0007351,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 134
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2159,
+    "output": 469,
+    "cost_in": 0.0002159,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170899\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\n6277\n\nFLORA TENNESSIENSIS\nNO. 4233                                      KNOX COUNTY\nCOLLECTOR  *MBWilson*                      7-28-35\n*Galax aphylla* L.\n\nEast- central Knox County,\nbetween French Broad River\nand Hwy. 9.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170899\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nbased on average guard cell area\nGuy L. Nesom, 1975\n6277\nFLORA TENNESSIENSIS\nNO.4233\nKNOX COUNTY\nCOLLECTOR. MBWilson\n7-28-35193\nGalax aphylla L.\nEast- central Knox County,\nbetween French Broad River\nand Hwy. 9.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170899",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "MBWilson",
+    "collectorNumber": "4233",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "7-28-35",
+    "collectionDate": "1935-07-28",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "Based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Knox County",
+    "locality": "East- central Knox County, between French Broad River and Hwy. 9.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA TENNESSIENSIS\nNO."
+  }
+}

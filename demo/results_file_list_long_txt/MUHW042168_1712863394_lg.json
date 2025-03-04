@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMUHW042168\n\nScientific Name: *Galax urceolata*\nCommon Name: Galax\nCounty: Mercer\nLocation: CR 663-120/2 Peeled Chestnut Rd. Bramwell, WV\n37\u00b0 20' 11.5\"\n081\u00b0 21' 36.4\" el. 2745'\n\nDate: August 1, 2018\nHabitat: *woodland, ridgetop* (handwritten)\n\nCollected By: Kevin Campbell, Walker, WV\nColl. Number: KC07056\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008449999999999999,
+      "total_cost": 0.0016237500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ERSITATIS\nHERBARIUM\nMARSHALL UNIVERSITY\nheatington, West Virginia 25701, USA\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW042168\nScientific Name: Galax urceolata\nCommon Name: Galax\nCounty: Mercer\nLocation: CR 663-120/2 Peeled Chestnut Rd. Bramwell, WV\n37\u00b0 20' 11.5\"\n081\u00b0 21' 36.4\" el. 2745'\nDate: August 1, 2018\nHabitat: woodland, ridgetop\nCollected By: Kevin Campbell, Walker, WV\nColl. Number: KC07056\n*\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.560000000000001e-05,
+      "total_cost": 0.0007571,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 189
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2195,
+    "output": 480,
+    "cost_in": 0.0002195,
+    "cost_out": 0.000192
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMUHW042168\n\nScientific Name: *Galax urceolata*\nCommon Name: Galax\nCounty: Mercer\nLocation: CR 663-120/2 Peeled Chestnut Rd. Bramwell, WV\n37\u00b0 20' 11.5\"\n081\u00b0 21' 36.4\" el. 2745'\n\nDate: August 1, 2018\nHabitat: *woodland, ridgetop* (handwritten)\n\nCollected By: Kevin Campbell, Walker, WV\nColl. Number: KC07056\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nERSITATIS\nHERBARIUM\nMARSHALL UNIVERSITY\nheatington, West Virginia 25701, USA\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW042168\nScientific Name: Galax urceolata\nCommon Name: Galax\nCounty: Mercer\nLocation: CR 663-120/2 Peeled Chestnut Rd. Bramwell, WV\n37\u00b0 20' 11.5\"\n081\u00b0 21' 36.4\" el. 2745'\nDate: August 1, 2018\nHabitat: woodland, ridgetop\nCollected By: Kevin Campbell, Walker, WV\nColl. Number: KC07056\n*\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW042168",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Kevin Campbell, Walker, WV",
+    "collectorNumber": "KC07056",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 1, 2018",
+    "collectionDate": "2018-08-01",
+    "collectionDateEnd": "",
+    "habitat": "Woodland, ridgetop",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "West virginia",
+    "county": "Mercer",
+    "locality": "CR 663-120/2 peeled chestnut rd. bramwell, wv",
+    "verbatimCoordinates": "37\u00b0 20' 11.5\n081\u00b0 21' 36.4",
+    "decimalLatitude": "37.336527777777776",
+    "decimalLongitude": "-81.36011111111112",
+    "minimumElevationInMeters": "836",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium\nMarshall university\nHuntington, west virginia 25701, u.s.a.\nMarshall university herbarium"
+  }
+}

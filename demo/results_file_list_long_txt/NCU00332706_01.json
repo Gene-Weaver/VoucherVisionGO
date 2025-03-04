@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\ncm\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nUniversity of North Carolina\nat Chapel Hill\nNCU\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n308695\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332706\n\nPLANTS OF VIRGINIA\nPatrick COUNTY\nPIEDMONT\n\nNO. 6788\n*Galax aphylla* L.\n\nMoist bank of Smith River near bridge on Co.\nRd. 704, 2.75 miles from intersection of Co.\nRd. 704 and Hwy. 40 growing beneath *Rhododendron maximum*.\n\nCOLLECTORS\nJune 24, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Wagner,\nKevin Ramsey.\n\n\nHandwritten Text: 6788, 67\n\n*Galax aphylla*\n*Rhododendron maximum*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00122,
+      "total_cost": 0.00199875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 244
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332706\nPLANTS OF VIRGINIA\nPatrick COUNTY\nPIEDMONT\nNO. 6788\nGalax aphylla L.\nMoist bank of Smith River near bridge on Co.\nRd. 704 2.75 miles from intersection of Co.\nRd. 704 and Hwy. 40 growing beneath Rhododendron maximum.\nCOLLECTORS\nJune 24, 19 67\nG. W. Ramsey, W. F. Ruska, G. S.Waggner,\nKevin Ramsey.\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2260,
+    "output": 599,
+    "cost_in": 0.000226,
+    "cost_out": 0.00023960000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\ncm\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nUniversity of North Carolina\nat Chapel Hill\nNCU\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n308695\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332706\n\nPLANTS OF VIRGINIA\nPatrick COUNTY\nPIEDMONT\n\nNO. 6788\n*Galax aphylla* L.\n\nMoist bank of Smith River near bridge on Co.\nRd. 704, 2.75 miles from intersection of Co.\nRd. 704 and Hwy. 40 growing beneath *Rhododendron maximum*.\n\nCOLLECTORS\nJune 24, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Wagner,\nKevin Ramsey.\n\n\nHandwritten Text: 6788, 67\n\n*Galax aphylla*\n*Rhododendron maximum*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332706\nPLANTS OF VIRGINIA\nPatrick COUNTY\nPIEDMONT\nNO. 6788\nGalax aphylla L.\nMoist bank of Smith River near bridge on Co.\nRd. 704 2.75 miles from intersection of Co.\nRd. 704 and Hwy. 40 growing beneath Rhododendron maximum.\nCOLLECTORS\nJune 24, 19 67\nG. W. Ramsey, W. F. Ruska, G. S.Waggner,\nKevin Ramsey.\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332706",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. W. Ramsey, W. F. Ruska, G. S. Wagner, Kevin Ramsey",
+    "collectorNumber": "6788",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 24, 1967",
+    "collectionDate": "1967-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Moist bank of smith river near bridge on co. rd. 704 growing beneath rhododendron maximum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Patrick county",
+    "locality": "Moist bank of smith river near bridge on co. rd. 704, 2.75 miles from intersection of co. rd. 704 and hwy. 40 growing beneath rhododendron maximum.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nplants of virginia\npiedmont\ngemini-1.5-pro ocr\nx-rite\ncolorchecker\nmsccpppe0411\nmsccppcc0411\nmm\ncm\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nuniversity of north carolina\nat chapel hill\n\nuniversity of north\ncarolina\nherbarium\n\nuniversity of north carolina herbarium\nno.\nhandwritten text 6788, 67\ngemini-2.0-flash ocr\ng. s.waggner"
+  }
+}

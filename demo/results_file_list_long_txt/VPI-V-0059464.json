@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n68314\nVirginia Polytechnic Institute\nand State University\n\n*G. urceolata (Poir.) Brum.* (handwritten)\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Craig county\n\n*Galax aphylla*\n\nPotts Mountain\nWoods; stream banks\n\nDate: 5/20/80             No: 29\nColl: H. Whitney        Det: H. Whitney\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059464\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00065,
+      "total_cost": 0.0014287500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n68314\nVirginia Polytechnic Institute\nand State University\nG. urceolata (Poir.) Brum.\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Craig county\nGalax aphylla\nPotts Mountain\nWoods; stream banks\nDate: 5/20/80 No: 29\nColl: H. Whitney Det: H. Whitney\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059464\n\n\nGalax aphylla\nurceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2145,
+    "output": 461,
+    "cost_in": 0.00021450000000000004,
+    "cost_out": 0.0001844
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n68314\nVirginia Polytechnic Institute\nand State University\n\n*G. urceolata (Poir.) Brum.* (handwritten)\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Craig county\n\n*Galax aphylla*\n\nPotts Mountain\nWoods; stream banks\n\nDate: 5/20/80             No: 29\nColl: H. Whitney        Det: H. Whitney\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059464\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n68314\nVirginia Polytechnic Institute\nand State University\nG. urceolata (Poir.) Brum.\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia: Craig county\nGalax aphylla\nPotts Mountain\nWoods; stream banks\nDate: 5/20/80 No: 29\nColl: H. Whitney Det: H. Whitney\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059464\n\n\nGalax aphylla\nurceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "68314",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "H. Whitney",
+    "collectorNumber": "29",
+    "identifiedBy": "H. Whitney",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "G. urceolata (Poir.) Brum.",
+    "verbatimCollectionDate": "5/20/80",
+    "collectionDate": "1980-05-20",
+    "collectionDateEnd": "",
+    "habitat": "Woods; stream banks",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Craig county",
+    "locality": "Potts mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand state university\nVirginia polytechnic institute and state\nuniversity herbarium\nFlora of virginia\nMassey herbarium\nVirginia Polytechnic Institute\nVpi-v-0059464\nurceolata"
+  }
+}

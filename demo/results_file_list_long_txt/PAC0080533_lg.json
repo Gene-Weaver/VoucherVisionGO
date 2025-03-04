@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Penn State\nHerbarium\n\ncm\ncopyright reserved\n\nPAC\nIMAGED\n\nPenn State University\nHerbarium (PAC)\nPAC0080533\n\n59912\nPennsylvania\nState University\nHerbarium\n\nHERBARIUM\n13978\nUNIVERSITY OF PENNSYLVANIA\n\nFrom Herbarium of University of Pennsylvania.\n*Galax aphylla*, Linn.\nIn North Carolina, Blowing Rock\nCollected. June 20, 1889.\nBy. Kathleen Carter.\n\nObs.\n\n*(Handwritten)*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "59912\nPennsylvania\nState University\nHerbarium\nPenn State\nHerbarium\n0\ncm\n1 2 3\n4\n5\n6\n7\ncopyright reserved\n8 9 10\nPAC\nIMAGED\nPenn State University\nHerbarium (PAC)\nPAC0080533\nEx\nHERBARIUM\n13978\nUNIVERSITY OF PENNSYLVANIA\nFrom Herbarium of University of Pennsylvania.\nGalax aphylla, Linn.\nin North Carolina, Blowing Rock\nJune 20, 1889\nKathleen Carter\nCollected.\nBy\nObs.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2152,
+    "output": 445,
+    "cost_in": 0.0002152,
+    "cost_out": 0.000178
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nPenn State\nHerbarium\n\ncm\ncopyright reserved\n\nPAC\nIMAGED\n\nPenn State University\nHerbarium (PAC)\nPAC0080533\n\n59912\nPennsylvania\nState University\nHerbarium\n\nHERBARIUM\n13978\nUNIVERSITY OF PENNSYLVANIA\n\nFrom Herbarium of University of Pennsylvania.\n*Galax aphylla*, Linn.\nIn North Carolina, Blowing Rock\nCollected. June 20, 1889.\nBy. Kathleen Carter.\n\nObs.\n\n*(Handwritten)*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n59912\nPennsylvania\nState University\nHerbarium\nPenn State\nHerbarium\n0\ncm\n1 2 3\n4\n5\n6\n7\ncopyright reserved\n8 9 10\nPAC\nIMAGED\nPenn State University\nHerbarium (PAC)\nPAC0080533\nEx\nHERBARIUM\n13978\nUNIVERSITY OF PENNSYLVANIA\nFrom Herbarium of University of Pennsylvania.\nGalax aphylla, Linn.\nin North Carolina, Blowing Rock\nJune 20, 1889\nKathleen Carter\nCollected.\nBy\nObs.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "PAC0080533",
+    "scientificName": "Galax aphylla Linn.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "Linn.",
+    "collectedBy": "Kathleen Carter",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 20, 1889",
+    "collectionDate": "1889-06-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "In north carolina, blowing rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Penn state\nHerbarium\ncm\ncopyright reserved\nPAC\nIMAGED\nPenn state university\nHerbarium (pac)\n59912\nPennsylvania\nState university\nHerbarium\nHERBARIUM\n13978\nUniversity of pennsylvania\nFrom herbarium of university of pennsylvania.\nObs."
+  }
+}

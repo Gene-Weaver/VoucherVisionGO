@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026100\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 530\u03bc\u00b2\nGuy L. Nesom, 1975\n\nFlora of Virginia\n\n*Galax aphylla* L.\nnear Mount Athos,\nNE Campbell Co.\nel. 600 ft.\n\n(Handwritten text begins)\nRocky oak ridge by\nJames R.\nAug. 2, 1975\n(Handwritten text ends)\n\nCharles E. Stevens\nDet.\nNo. 11,255\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.00170875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nFlora of Virginia\nGalax aphylla L.\nnear Mount Athos,\nNE Campbell Co.\nel. 600 ft.\nRocky oak ridge by\nJames R.\nAug. 2, 1975\nCharles E. Stevens\nDet.\nNo. 11, 255\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4800000000000005e-05,
+      "total_cost": 0.0007263,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 112
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 507,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026100\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 530\u03bc\u00b2\nGuy L. Nesom, 1975\n\nFlora of Virginia\n\n*Galax aphylla* L.\nnear Mount Athos,\nNE Campbell Co.\nel. 600 ft.\n\n(Handwritten text begins)\nRocky oak ridge by\nJames R.\nAug. 2, 1975\n(Handwritten text ends)\n\nCharles E. Stevens\nDet.\nNo. 11,255\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nFlora of Virginia\nGalax aphylla L.\nnear Mount Athos,\nNE Campbell Co.\nel. 600 ft.\nRocky oak ridge by\nJames R.\nAug. 2, 1975\nCharles E. Stevens\nDet.\nNo. 11, 255\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026100",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "James R.",
+    "collectorNumber": "11,255",
+    "identifiedBy": "Guy L. Nesom, Charles E. Stevens",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 2, 1975",
+    "collectionDate": "1975-08-02",
+    "collectionDateEnd": "",
+    "habitat": "Rocky oak ridge",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 530\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Campbell Co.",
+    "locality": "Near mount athos, ne campbell co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "183",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFlora of Virginia\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\nGalax aphylla L."
+  }
+}

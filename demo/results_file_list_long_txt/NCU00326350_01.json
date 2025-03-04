@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPC00411\nmm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326350\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAvery County\n\n*Galax aphylla* L.\n\nupland woods border, 0.6 mile northeast of \nAvery-Mitchell Co. line on US. 19E\n43416 June 17, 1958\n\nHarry E. Ahles\nwith J. A. Duke\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000715,
+      "total_cost": 0.0014937499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPC00411\ncm\nOF\nNORTH\nCAROLINA\nHERBARIUM\n116792\nNCU00326350\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAvery County\nGalax aphylla L.\nupland woods border, 0.6 mile northeast of\nAvery-Mitchell Co. line on US. 19E\nHarry E. Ahles\n43416\nJune 17, 1958\nwith J. A. Duke\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007402999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 478,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.0001912
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPC00411\nmm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326350\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAvery County\n\n*Galax aphylla* L.\n\nupland woods border, 0.6 mile northeast of \nAvery-Mitchell Co. line on US. 19E\n43416 June 17, 1958\n\nHarry E. Ahles\nwith J. A. Duke\n\nCollected for the \"Flora of the Carolinas\"\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPC00411\ncm\nOF\nNORTH\nCAROLINA\nHERBARIUM\n116792\nNCU00326350\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAvery County\nGalax aphylla L.\nupland woods border, 0.6 mile northeast of\nAvery-Mitchell Co. line on US. 19E\nHarry E. Ahles\n43416\nJune 17, 1958\nwith J. A. Duke\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326350",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harry E. Ahles, J. A. Duke",
+    "collectorNumber": "43416",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 17, 1958",
+    "collectionDate": "1958-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Upland woods border",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Avery county",
+    "locality": "0.6 mile northeast of Avery-mitchell co. line on us. 19e",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "X-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPC00411\nmm\nUniversity of north carolina herbarium\nHerbarium of the university of north carolina\ncollected for the flora of the carolinas\ncm\nof"
+  }
+}

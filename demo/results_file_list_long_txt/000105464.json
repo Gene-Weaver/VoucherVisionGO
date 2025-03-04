@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "R. K. Godfrey Herbarium (FSU)\n\nHERBARIUM\n125524\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nHERBARIUM OF FLORIDA STATE UNIVERSITY, TALLAHASSEE\nPLANTS OF: VIRGINIA       COUNTY: GILES\n\n*GALAX APHYLLA* L.\n\nS and W border of Mountain Lake\nBio. Station Prop., pine-oak-\nhemlock woodland with abundant\nferns, fls white\n\nDATE: 12 June 1970\nCOLLECTED BY: R. L. Lazor\nNO. 4202\nDET. RLL\n\nHandwritten Text: None\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009,
+      "total_cost": 0.00167875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 180
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "R. K. Godfrey Herbarium (FSU)\nHERBARIUM\n125524\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nHERBARIUM OF FLORIDA STATE UNIVERSITY, TALLAHASSEE\nPLANTS OF: VIRGINIA COUNTY: GILES\nGALAX APHYLLA L.\nS and W border of Mountain Lake\nBio. Station Prop., pine-oak-\nhemlock woodland with abundant\nferns, fls white\n12 June 1970\nDATE:\nCOLLECTED BY: R. L. Lazor\nNO. 4202 DET. RLL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.599999999999999e-05,
+      "total_cost": 0.0007475000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2238,
+    "output": 500,
+    "cost_in": 0.00022380000000000002,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nR. K. Godfrey Herbarium (FSU)\n\nHERBARIUM\n125524\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\n\nHERBARIUM OF FLORIDA STATE UNIVERSITY, TALLAHASSEE\nPLANTS OF: VIRGINIA       COUNTY: GILES\n\n*GALAX APHYLLA* L.\n\nS and W border of Mountain Lake\nBio. Station Prop., pine-oak-\nhemlock woodland with abundant\nferns, fls white\n\nDATE: 12 June 1970\nCOLLECTED BY: R. L. Lazor\nNO. 4202\nDET. RLL\n\nHandwritten Text: None\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nR. K. Godfrey Herbarium (FSU)\nHERBARIUM\n125524\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nHERBARIUM OF FLORIDA STATE UNIVERSITY, TALLAHASSEE\nPLANTS OF: VIRGINIA COUNTY: GILES\nGALAX APHYLLA L.\nS and W border of Mountain Lake\nBio. Station Prop., pine-oak-\nhemlock woodland with abundant\nferns, fls white\n12 June 1970\nDATE:\nCOLLECTED BY: R. L. Lazor\nNO. 4202 DET. RLL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "125524",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "R. L. Lazor",
+    "collectorNumber": "4202",
+    "identifiedBy": "M. A. Garland, RLL",
+    "identifiedDate": "1985-12-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "12 June 1970",
+    "collectionDate": "1970-06-12",
+    "collectionDateEnd": "",
+    "habitat": "S and W border of Mountain Lake Bio. Station Prop., pine-oak-hemlock woodland with abundant ferns, fls white",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles",
+    "locality": "S and W border of Mountain Lake Bio. Station Prop.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "R. K. Godfrey Herbarium (FSU)\nFlorida State University Herbarium\nHERBARIUM OF FLORIDA STATE UNIVERSITY, TALLAHASSEE\nPLANTS OF VIRGINIA"
+  }
+}

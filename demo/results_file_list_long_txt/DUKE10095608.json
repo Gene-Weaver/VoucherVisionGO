@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke University\nHerbarium\n379971\n\nPLANTS OF VIRGINIA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nFloyd County: W on Route 799 from Blue Ridge Parkway, then right on Hog Mountain Road and continue after end of state maintenance where road becomes rocky.\n\nDixie Soo #485                      6 July 1998\n\nDUKE10095608\n(Handwritten: #485)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000575,
+      "total_cost": 0.00135375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 115
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\n379971\nPLANTS OF VIRGINIA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nFloyd County: W on Route 799 from Blue Ridge Park-\nway, then right on Hog Mountain Road and continue\nafter end of state maintenance where road becomes\nrocky.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095608\nDixie Soo #485\n6 July 1998\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.520000000000001e-05,
+      "total_cost": 0.0007267,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 113
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2103,
+    "output": 482,
+    "cost_in": 0.0002103,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke University\nHerbarium\n379971\n\nPLANTS OF VIRGINIA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nFloyd County: W on Route 799 from Blue Ridge Parkway, then right on Hog Mountain Road and continue after end of state maintenance where road becomes rocky.\n\nDixie Soo #485                      6 July 1998\n\nDUKE10095608\n(Handwritten: #485)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\n379971\nPLANTS OF VIRGINIA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nFloyd County: W on Route 799 from Blue Ridge Park-\nway, then right on Hog Mountain Road and continue\nafter end of state maintenance where road becomes\nrocky.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095608\nDixie Soo #485\n6 July 1998\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "379971",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dixie Soo",
+    "collectorNumber": "485",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6 July 1998",
+    "collectionDate": "1998-07-06",
+    "collectionDateEnd": "",
+    "habitat": "W on route 799 from blue ridge parkway, then right on hog mountain road and continue after end of state maintenance where road becomes rocky.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Floyd county",
+    "locality": "W on route 799 from blue ridge parkway, then right on hog mountain road and continue after end of state maintenance where road becomes rocky.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke university herbarium\nPlants of virginia\nCollected for the herbarium of\nduke university\nDuke university herbarium\nduke10095608\nGalax aphylla"
+  }
+}

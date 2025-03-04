@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012628\n\nRAMSEY - FREER\n56275\nHERBARIUM\n\nFlora of\n**Virginia**\nRockbridge County\n\nNo. 56275\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n*Galax*\n\nOn the Belfast Creek Trail between Rt. 781 and the Devil's Marble Yard in the James River Face\nWilderness. Central Blue Ridge Mountains. Snowden Quad.\n\nColl.: Gwynn Ramsey, Charles Leys, Rick Marks       Det. G. W. Ramsey\nDate: August 13, 1982                                      Elev. 318-701 m\n                                                               1000-2200 ft.\n\nJAMES RIVER\nFACE WILDERNESS\n\nRamsey-Freer Herbarium (LYN)\nLYNCHBURG COLLEGE, LYNCHBURG, VA 24501\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001105,
+      "total_cost": 0.00188375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 221
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012628\n56275\nHERBARIUM\nFlora of\nVirginia\nRockbridge County\nNo. 56275\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nGalax\nOn theBelfast Creek Trail between Rt. 781 and the Devil's Marble Yard in the James River Face\nWilderness, Central Blue Ridge Mountains. Snowden Quad.\nColl.: Gwynn Ramsey, Charles Leys, Rick Marks\nDet. G. W.Ramsey\nDate: August 13, 1982\nElev. 318-701M\n1000-2200Ft.\nRamsey-Freer Herbarium (LYN)\nLYNCHBURG COLLEGE, LYNCHBURG, VA 24501\nJAMES RIVER\nFACE WILDERNESS\nLynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.48e-05,
+      "total_cost": 0.0007663,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 212
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2306,
+    "output": 554,
+    "cost_in": 0.0002306,
+    "cost_out": 0.00022160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012628\n\nRAMSEY - FREER\n56275\nHERBARIUM\n\nFlora of\n**Virginia**\nRockbridge County\n\nNo. 56275\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n*Galax*\n\nOn the Belfast Creek Trail between Rt. 781 and the Devil's Marble Yard in the James River Face\nWilderness. Central Blue Ridge Mountains. Snowden Quad.\n\nColl.: Gwynn Ramsey, Charles Leys, Rick Marks       Det. G. W. Ramsey\nDate: August 13, 1982                                      Elev. 318-701 m\n                                                               1000-2200 ft.\n\nJAMES RIVER\nFACE WILDERNESS\n\nRamsey-Freer Herbarium (LYN)\nLYNCHBURG COLLEGE, LYNCHBURG, VA 24501\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012628\n56275\nHERBARIUM\nFlora of\nVirginia\nRockbridge County\nNo. 56275\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nGalax\nOn theBelfast Creek Trail between Rt. 781 and the Devil's Marble Yard in the James River Face\nWilderness, Central Blue Ridge Mountains. Snowden Quad.\nColl.: Gwynn Ramsey, Charles Leys, Rick Marks\nDet. G. W.Ramsey\nDate: August 13, 1982\nElev. 318-701M\n1000-2200Ft.\nRamsey-Freer Herbarium (LYN)\nLYNCHBURG COLLEGE, LYNCHBURG, VA 24501\nJAMES RIVER\nFACE WILDERNESS\nLynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012628",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Gwynn Ramsey, Charles Leys, Rick Marks",
+    "collectorNumber": "56275",
+    "identifiedBy": "G. W. Ramsey",
+    "identifiedDate": "1982-08-13",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 13, 1982",
+    "collectionDate": "1982-08-13",
+    "collectionDateEnd": "",
+    "habitat": "On the belfast creek trail between rt. 781 and the devil's marble yard in the james river face wilderness. central blue ridge mountains. snowden quad.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Rockbridge county",
+    "locality": "On the Belfast Creek Trail between Rt. 781 and the Devil's Marble Yard in the James River Face Wilderness. Central Blue Ridge Mountains. Snowden Quad.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "318",
+    "maximumElevationInMeters": "701",
+    "elevationUnits": "m",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nHERBARIUM\nFlora of\nJAMES RIVER\nFACE WILDERNESS\nRamsey-Freer Herbarium (LYN)\nLYNCHBURG COLLEGE, LYNCHBURG, VA 24501\nLynchburg\nCollege\ncopyright reserved"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "JESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569933\n\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nWayne County\n\n*Galax aphylla* L.\n\nMixed woodland along stream in Cliffs of\nNeuse State Park ca. 3 miles west-northwest of Seven Springs off CoRd 1742.\n\nCOLLECTOR Robert M. Downs NO. 13499\nMrs. James R. Downs\nDET R. M. Downs                    DATE May 14, 1973\n\nGIFT FROM\nN. CAROLINA STATE UNIV.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008149999999999999,
+      "total_cost": 0.00159375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "JESUP HERBARIUN\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nOF NORTH\nHERBARIUM\nNCU\n569933\nCarolina\nNCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPCC0411\nGIFT FROM\nN.CAROLINA STATE UNIV.\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nWayne County\nGalax aphylla L.\nMixed woodland along stream in Cliffs of\nNeuse State Park ca. 3 miles west-north-\nwest of Seven Springs off CoRd 1742.\nCOLLECTOR Robert M. Downs NO. 13499\nDET R. M. Downs\nDATE May 14, 1973\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2246,
+    "output": 526,
+    "cost_in": 0.00022460000000000004,
+    "cost_out": 0.00021040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nJESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569933\n\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nWayne County\n\n*Galax aphylla* L.\n\nMixed woodland along stream in Cliffs of\nNeuse State Park ca. 3 miles west-northwest of Seven Springs off CoRd 1742.\n\nCOLLECTOR Robert M. Downs NO. 13499\nMrs. James R. Downs\nDET R. M. Downs                    DATE May 14, 1973\n\nGIFT FROM\nN. CAROLINA STATE UNIV.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nJESUP HERBARIUN\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nOF NORTH\nHERBARIUM\nNCU\n569933\nCarolina\nNCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPCC0411\nGIFT FROM\nN.CAROLINA STATE UNIV.\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nWayne County\nGalax aphylla L.\nMixed woodland along stream in Cliffs of\nNeuse State Park ca. 3 miles west-north-\nwest of Seven Springs off CoRd 1742.\nCOLLECTOR Robert M. Downs NO. 13499\nDET R. M. Downs\nDATE May 14, 1973\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "569933",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert M. Downs, Mrs. James R. Downs",
+    "collectorNumber": "13499",
+    "identifiedBy": "R. M. Downs",
+    "identifiedDate": "1973-05-14",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 14, 1973",
+    "collectionDate": "1973-05-14",
+    "collectionDateEnd": "",
+    "habitat": "Mixed woodland along stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wayne county",
+    "locality": "Cliffs of neuse state park ca. 3 miles west-northwest of seven springs off cord 1742.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Jesup herbarium\n1977\nGift to ncu 2002\ndartmouth college\nuniversity of north carolina\nherbarium\nncu\nJesup herbarium of dartmouth college\nplants of north carolina\nGift from\nn. carolina state univ.\nNorth Carolina\nNCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPCC0411\nGIFT FROM\nN.CAROLINA STATE UNIV."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nVALDOSTA STATE\nCOLLEGE\n00366\n\nName *Galax aphylla*\nNo.\nLocality {Region Near station - Va.\n{Habitat Roadside\nDate 7/15/38 (handwritten)\nCollector M.E. Carter (handwritten)\nVSC 0021168\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00040500000000000003,
+      "total_cost": 0.0011837500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 81
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax aphylla\nRoad side\n7/15/38\nM.E. Carter\nNear station -Va.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 1.2e-05,
+      "total_cost": 0.0006935,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 30
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 1994,
+    "output": 409,
+    "cost_in": 0.00019940000000000002,
+    "cost_out": 0.00016360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n00366\n\nName *Galax aphylla*\nNo.\nLocality {Region Near station - Va.\n{Habitat Roadside\nDate 7/15/38 (handwritten)\nCollector M.E. Carter (handwritten)\nVSC 0021168\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax aphylla\nRoad side\n7/15/38\nM.E. Carter\nNear station -Va.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vsc 0021168",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "M.e. carter",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/15/38",
+    "collectionDate": "1938-07-15",
+    "collectionDateEnd": "",
+    "habitat": "Road side",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "",
+    "locality": "Near station -va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nValdosta state\nCollege\n00366\nName galax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nOLD DOMINION UNIVERSITY HERBARIUM\nNorfolk, Virginia 23508\n\nVIRGINIA                                      ISLE OF WIGHT COUNTY\n*Galax aphylla* L.\n\nAbundant on steep sandy banks paralleling small stream\nwhich crosses rd 630 1.0 mile north of jct with 611.\n\nL. J. Musselman                      5056                2 May 1977\nD. W. Sampson\nS. Hetrick\n\n35791 *(handwritten)*\nCOLLEGE OF\nWILLIAM & MARY\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000695,
+      "total_cost": 0.0014737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 139
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n2\n60 70 80\n90 100 110 120\n16ths\n3\nGENERAL\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nOLD DOMINION UNIVERSITY HERBARIUM\nNorfolk, Virginia 23508\nVIRGINIA\nGalax aphylla L.\nISLE OF WIGHT COUNTY\nOLLEGE\n35791\nWILLIATY & MARY\nAbundant on steep sandy banks paralleling small stream\nwhich crosses rd 630 1.0 mile north of jct with 611.\nL. J. Musselman\nD. W. Sampson\nS. Hetrick\n5056\n2 May 1977\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.240000000000001e-05,
+      "total_cost": 0.0007639000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 206
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 492,
+    "cost_in": 0.0002212,
+    "cost_out": 0.0001968
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nOLD DOMINION UNIVERSITY HERBARIUM\nNorfolk, Virginia 23508\n\nVIRGINIA                                      ISLE OF WIGHT COUNTY\n*Galax aphylla* L.\n\nAbundant on steep sandy banks paralleling small stream\nwhich crosses rd 630 1.0 mile north of jct with 611.\n\nL. J. Musselman                      5056                2 May 1977\nD. W. Sampson\nS. Hetrick\n\n35791 *(handwritten)*\nCOLLEGE OF\nWILLIAM & MARY\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n2\n60 70 80\n90 100 110 120\n16ths\n3\nGENERAL\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nOLD DOMINION UNIVERSITY HERBARIUM\nNorfolk, Virginia 23508\nVIRGINIA\nGalax aphylla L.\nISLE OF WIGHT COUNTY\nOLLEGE\n35791\nWILLIATY & MARY\nAbundant on steep sandy banks paralleling small stream\nwhich crosses rd 630 1.0 mile north of jct with 611.\nL. J. Musselman\nD. W. Sampson\nS. Hetrick\n5056\n2 May 1977\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "35791",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "L. j. Musselman, D. w. Sampson, S. Hetrick",
+    "collectorNumber": "5056",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 May 1977",
+    "collectionDate": "1977-05-02",
+    "collectionDateEnd": "",
+    "habitat": "Abundant on steep sandy banks paralleling small stream which crosses rd 630 1.0 mile north of jct with 611.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Isle of wight county",
+    "locality": "Rd 630 1.0 mile north of jct with 611.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nOLD DOMINION UNIVERSITY HERBARIUM\nNorfolk, Virginia 23508\nVIRGINIA\nCOLLEGE OF\nWILLIAM & MARY"
+  }
+}

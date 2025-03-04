@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 51618\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          6 May 2024\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                                    2021\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS                     September 2006\n\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL EXPERIMENT STATION\n\n51618\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557                                               June 8, 1947\nGeol. Prov.: Blue Ridge                             Dawson County\n                                                                    2200 ft. Elev.\n\nHandwritten text: *6277*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012900000000000001,
+      "total_cost": 0.0020687500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 258
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "2\nU.S.A.\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 51618\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nAGRICULTURAL EXPERIMENT STATION\nGAINESVILLE\n51618\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS\nSeptember 2006\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.92e-05,
+      "total_cost": 0.0007807000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 248
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2378,
+    "output": 535,
+    "cost_in": 0.0002378,
+    "cost_out": 0.000214
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 51618\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          6 May 2024\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                                    2021\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS                     September 2006\n\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nGAINESVILLE\nAGRICULTURAL EXPERIMENT STATION\n\n51618\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557                                               June 8, 1947\nGeol. Prov.: Blue Ridge                             Dawson County\n                                                                    2200 ft. Elev.\n\nHandwritten text: *6277*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n2\nU.S.A.\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 51618\nHERBARIUM\nUNIVERSITY\n-OF-\nFLORIDA\n-AT-\nAGRICULTURAL EXPERIMENT STATION\nGAINESVILLE\n51618\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS\nSeptember 2006\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common.\nNo.: 4557\nGeol. Prov.: Blue Ridge\nJune 8, 1947\nDawson County\n2200 ft. Elev.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "51618",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Arthur Cronquist",
+    "collectorNumber": "4557",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-05-06",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 8, 1947",
+    "collectionDate": "1947-06-08",
+    "collectionDateEnd": "",
+    "habitat": "In open & shaded places just above Amicolola Falls. Flowers white. Common.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Dawson County",
+    "locality": "Geol. Prov. Blue Ridge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of Florida Herbarium\nFlorida Museum of Natural History\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS) 2021\nStamens sampled for Assembling the Tree of Life project.\nBarbara S. Carlsward, FLAS September 2006\nUniversity of Georgia\nHandwritten text 6277"
+  }
+}

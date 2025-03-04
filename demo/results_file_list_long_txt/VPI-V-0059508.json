@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 69\u03bc^2\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department 26552\nVirginia Polytechnic Institute\n\nPLANTS OF SOUTHEASTERN VIRGINIA.\nCOLLECTED ABOUT SUFFOLK, NANSEMOND COUNTY,\nBY A. ARTHUR HELLER, JUNE 8-13, 1893.\n\n*928. Galax aphylla* L. *(handwritten)*\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059508\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.00161375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ColorCard\nMETRIC\n1\n2\n3\n4\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059508\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarlum\nBiology Department\nVirginia Polytechnic Institute\nPLANTS OF SOUTHEASTERN VIRGINIA.\nCOLLECTED ABOUT SUFFOLK, NANSEMOND COUNTY,\nBY A. ARTHUR HELLER, JUNE 8-13, 1893.\nGalax aphylla L.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.0400000000000004e-05,
+      "total_cost": 0.0007419,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2226,
+    "output": 458,
+    "cost_in": 0.00022260000000000002,
+    "cost_out": 0.0001832
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 69\u03bc^2\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department 26552\nVirginia Polytechnic Institute\n\nPLANTS OF SOUTHEASTERN VIRGINIA.\nCOLLECTED ABOUT SUFFOLK, NANSEMOND COUNTY,\nBY A. ARTHUR HELLER, JUNE 8-13, 1893.\n\n*928. Galax aphylla* L. *(handwritten)*\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059508\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nColorCard\nMETRIC\n1\n2\n3\n4\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059508\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarlum\nBiology Department\nVirginia Polytechnic Institute\nPLANTS OF SOUTHEASTERN VIRGINIA.\nCOLLECTED ABOUT SUFFOLK, NANSEMOND COUNTY,\nBY A. ARTHUR HELLER, JUNE 8-13, 1893.\nGalax aphylla L.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059508",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. Arthur Heller",
+    "collectorNumber": "928",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "JUNE 8-13, 1893",
+    "collectionDate": "1893-06-08",
+    "collectionDateEnd": "1893-06-13",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 69\u03bc^2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Nansemond county",
+    "locality": "Collected about suffolk",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Colorcard\nMetric\n1\n2\n3\n4"
+  }
+}

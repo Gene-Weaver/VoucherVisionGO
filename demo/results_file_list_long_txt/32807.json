@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nSurry County\n*Galax aphylla* L.\n14 July 1974\nDense local colony on N-facing ravine slope above\ncypress swamp in common mouth of \"triplet ravines\";\nabout 0.7 mi. S of outflow canal; VEPCO Surry\nNuclear Power Station (vicinity of), Gravel Neck,\nE of Surry.\n\nCollector: Donna M. E. Ware No. 5508\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006900000000000001,
+      "total_cost": 0.00146875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm 10\n20\n30\n40\n50\nNO. 305 ME\n16ths\n2\n60 70 80\n3\nGENERAL\nCHARTERED 1693\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nSurry County\nGalax aphylla L.\n14 July 1974\nDense local colony on N-facing ravine slope above\ncypress swamp in common mouth of \"triplet ravines\",\nabout 0.7 mi. S of outflow canal; VEPCO Surry\nNuclear Power Station (vicinity of), Gravel Neck,\nE of Surry.\nCollector:\nDonna M. E. Ware\nNo.\n5508\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.72e-05,
+      "total_cost": 0.0007687,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 218
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2231,
+    "output": 460,
+    "cost_in": 0.0002231,
+    "cost_out": 0.00018400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nSurry County\n*Galax aphylla* L.\n14 July 1974\nDense local colony on N-facing ravine slope above\ncypress swamp in common mouth of \"triplet ravines\";\nabout 0.7 mi. S of outflow canal; VEPCO Surry\nNuclear Power Station (vicinity of), Gravel Neck,\nE of Surry.\n\nCollector: Donna M. E. Ware No. 5508\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm 10\n20\n30\n40\n50\nNO. 305 ME\n16ths\n2\n60 70 80\n3\nGENERAL\nCHARTERED 1693\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nSurry County\nGalax aphylla L.\n14 July 1974\nDense local colony on N-facing ravine slope above\ncypress swamp in common mouth of \"triplet ravines\",\nabout 0.7 mi. S of outflow canal; VEPCO Surry\nNuclear Power Station (vicinity of), Gravel Neck,\nE of Surry.\nCollector:\nDonna M. E. Ware\nNo.\n5508\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax aphylla l.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Donna m. e. ware",
+    "collectorNumber": "5508",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "14 July 1974",
+    "collectionDate": "1974-07-14",
+    "collectionDateEnd": "",
+    "habitat": "Dense local colony on n-facing ravine slope above cypress swamp in common mouth of triplet ravines",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Surry county",
+    "locality": "About 0.7 mi. s of outflow canal; vepco surry nuclear power station (vicinity of), gravel neck, e of surry.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nchartered 1693\nherbarium of the college of\nwilliam and mary\nwilliamsburg, virginia"
+  }
+}

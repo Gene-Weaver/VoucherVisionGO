@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "23616\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013967\n\nFLORA OF ALABAMA\n*Galax aphylla* L.\nGrowing at the base of a large boulder\nin Bucks pocket\n\n(Handwritten) *7/29/49*\n\nJackson Co.\nCOLLECTED BY A. M. Harvill & C. B. Segars (112)\nDETERMINED BY C. B. S.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007650000000000002,
+      "total_cost": 0.0015437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "23616\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013967\nFLORA OF ALABAMA\nGalax aphylla L.\nGrowing at the base of a large boulder\nin Bucks pocket\n7/29/49\nA.M. Harvill & C.B.Segars (112)\nC.B.S.\nJackson Co.\nCOLLECTED BY\nDETERMINED BY\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2177,
+    "output": 471,
+    "cost_in": 0.00021770000000000003,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n23616\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013967\n\nFLORA OF ALABAMA\n*Galax aphylla* L.\nGrowing at the base of a large boulder\nin Bucks pocket\n\n(Handwritten) *7/29/49*\n\nJackson Co.\nCOLLECTED BY A. M. Harvill & C. B. Segars (112)\nDETERMINED BY C. B. S.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n23616\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013967\nFLORA OF ALABAMA\nGalax aphylla L.\nGrowing at the base of a large boulder\nin Bucks pocket\n7/29/49\nA.M. Harvill & C.B.Segars (112)\nC.B.S.\nJackson Co.\nCOLLECTED BY\nDETERMINED BY\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "23616",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. M. Harvill, C. B. Segars",
+    "collectorNumber": "112",
+    "identifiedBy": "Robert R. Haynes, C. B. S.",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "7/29/49",
+    "collectionDate": "1949-07-29",
+    "collectionDateEnd": "",
+    "habitat": "Growing at the base of a large boulder in bucks pocket",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Jackson Co.",
+    "locality": "Bucks pocket",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the university of alabama\nUniversity of alabama herbarium\nUNA00013967\nFlora of alabama"
+  }
+}

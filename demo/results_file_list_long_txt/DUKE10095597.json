@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095597\n\nDUKE UNIVERSITY\nHERBARIUM\n161836\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTransylvania Co.:  Bearwallow gorge,\ncollected in a moist wooded area at about\n2100 feet.\n\nTom B. Mowbray                      June 8, 1963 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.00153875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095597\nDuke\nUNIVERSITY\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTransylvania Co.: Bearwallow gorge,\ncollected in a moist wooded area at about\n2100 feet.\nDUKE UNIVERSITY\nHERBARIUM\n161836.\nTom B. Mowbray\nJune 8, 1963\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.36e-05,
+      "total_cost": 0.0007451000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 159
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 470,
+    "cost_in": 0.0002204,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095597\n\nDUKE UNIVERSITY\nHERBARIUM\n161836\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTransylvania Co.:  Bearwallow gorge,\ncollected in a moist wooded area at about\n2100 feet.\n\nTom B. Mowbray                      June 8, 1963 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095597\nDuke\nUNIVERSITY\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTransylvania Co.: Bearwallow gorge,\ncollected in a moist wooded area at about\n2100 feet.\nDUKE UNIVERSITY\nHERBARIUM\n161836.\nTom B. Mowbray\nJune 8, 1963\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095597",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Tom B. Mowbray",
+    "collectorNumber": "",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 8, 1963",
+    "collectionDate": "1963-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Collected in a moist wooded area",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Transylvania Co.",
+    "locality": "Bearwallow gorge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "640",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Duke University Herbarium\n\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082934\n\nHERBARIUM\nNCSC\n100700\nNORTH CAROLINA STATE UNIVERSITY\n\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\n\nVIRGINIA\nIsle of Wight County\nBlackwater Ecologic Preserve\n\n*Galax aphylla* L.\n\nNorth of SR #614, 4.5 mi. S\nof Zuni. Growing on a hill 100 ft.\nabove the flood plain of the \nBlackwater River in deep shade.\n\nJ. Patrick Megonigal #61 1 June 1984\n\nHandwritten Text: #614, #61\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.0016137500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082934\nHERBARIUM\nNCSC\n100700\nCAROLINA STATE\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\nVIRGINIA\nIsle of Wight County\nBlackwater Ecologic Preserve\nGalax aphylla L.\nNorth of SR #614, 4.5 mls. S\nof Zuni. Growing on a hill 100 ft.\nabove the flood plain of the\nBlackwater River in deep shade.\nJ. Patrick Megonigal #6 1 June 1984\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007402999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 477,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082934\n\nHERBARIUM\nNCSC\n100700\nNORTH CAROLINA STATE UNIVERSITY\n\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\n\nVIRGINIA\nIsle of Wight County\nBlackwater Ecologic Preserve\n\n*Galax aphylla* L.\n\nNorth of SR #614, 4.5 mi. S\nof Zuni. Growing on a hill 100 ft.\nabove the flood plain of the \nBlackwater River in deep shade.\n\nJ. Patrick Megonigal #61 1 June 1984\n\nHandwritten Text: #614, #61\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082934\nHERBARIUM\nNCSC\n100700\nCAROLINA STATE\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\nVIRGINIA\nIsle of Wight County\nBlackwater Ecologic Preserve\nGalax aphylla L.\nNorth of SR #614, 4.5 mls. S\nof Zuni. Growing on a hill 100 ft.\nabove the flood plain of the\nBlackwater River in deep shade.\nJ. Patrick Megonigal #6 1 June 1984\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082934",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. Patrick Megonigal",
+    "collectorNumber": "61",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 June 1984",
+    "collectionDate": "1984-06-01",
+    "collectionDateEnd": "",
+    "habitat": "Growing on a hill 100 ft. above the flood plain of the blackwater river in deep shade.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Isle of wight county",
+    "locality": "North of sr #614, 4.5 mi. s of zuni. blackwater ecologic preserve",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\nHerbarium\nNcsc\n100700\nNorth carolina state university\nHerbarium\nOld dominion university\nNorfolk, virginia 23508\nVirginia\nHandwritten text #614, #61"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060074\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 495 \u03bc\u00b2\nGuy L. Nesom, 1975 Avg of 2 plants\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n*(Handwritten)* Patrick County\n*(Handwritten)* *Galax aphylla* L.\n*(Handwritten)* Blue Ridge Parkway\n*(Handwritten)* Rocky Knob, stream bank\n\n*(Handwritten)* 36,536\nBiology Department\nVirginia Polytechnic Institute\n*(Handwritten)* A. B. Massey\n*(Handwritten)* C. K. Dale\n*(Handwritten)* Date 5-11-146\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001,
+      "total_cost": 0.00177875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 200
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Card\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cellarea\nvolume of 495 \u03bc\u00b2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCounty\nGalax aphylla, L.\nBlue Ridge Parkway\nRocky Knob, stream bank\nA. B. Massey\nC.K. Dale\nDate\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060074\n\nAvg of 2 plants\nPatrick\n5-11-146\n\n28,536\nBiology Department\nVirginia Polytechnic Institute\n--- Handwritten Text ---\nGalax aphylla, L.\nBlue Ridge Parkway\nRocky Knob, stream bank\nA. B. Massey\nC.K. Dale\nDate 5-11-146\n--- End Handwritten Text ---\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.72e-05,
+      "total_cost": 0.0007687,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 218
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2319,
+    "output": 511,
+    "cost_in": 0.0002319,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060074\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 495 \u03bc\u00b2\nGuy L. Nesom, 1975 Avg of 2 plants\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n*(Handwritten)* Patrick County\n*(Handwritten)* *Galax aphylla* L.\n*(Handwritten)* Blue Ridge Parkway\n*(Handwritten)* Rocky Knob, stream bank\n\n*(Handwritten)* 36,536\nBiology Department\nVirginia Polytechnic Institute\n*(Handwritten)* A. B. Massey\n*(Handwritten)* C. K. Dale\n*(Handwritten)* Date 5-11-146\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCard\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cellarea\nvolume of 495 \u03bc\u00b2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCounty\nGalax aphylla, L.\nBlue Ridge Parkway\nRocky Knob, stream bank\nA. B. Massey\nC.K. Dale\nDate\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060074\n\nAvg of 2 plants\nPatrick\n5-11-146\n\n28,536\nBiology Department\nVirginia Polytechnic Institute\n--- Handwritten Text ---\nGalax aphylla, L.\nBlue Ridge Parkway\nRocky Knob, stream bank\nA. B. Massey\nC.K. Dale\nDate 5-11-146\n--- End Handwritten Text ---\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0060074",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. B. Massey, C. K. Dale",
+    "collectorNumber": "36,536",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "5-11-146",
+    "collectionDate": "1946-11-05",
+    "collectionDateEnd": "",
+    "habitat": "Stream bank",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 495 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Patrick",
+    "locality": "Blue ridge parkway, rocky knob",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nAvg of 2 plants\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nBiology Department\nVirginia Polytechnic Institute"
+  }
+}

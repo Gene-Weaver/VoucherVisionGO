@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nSTATE\nNo. 2173\nCOLLEGE OF ARKANSAS\n\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016776\n\nFLORA TENNESSIENSIS\nNO.\nCOUNTY\nA. Morrison\nCOLLECTOR S. A. Cain\n10-11- 1936\n*Galax aphylla* L.\n\nBelow Trillium Gap, Great Smoky\nMts. Nat'l Park\nAlt. 3200' (handwritten)\n\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName *Galax aphylla* L.\nLocality Below Trillium Gap, Great Smoky\nMts. Nat'l Park\nHabitat Alt. 3200'\nDate 10-11-36\nNo. 2173\nColl. Morrison & Cain\nDet. Morrison\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009699999999999999,
+      "total_cost": 0.0017487499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nNo. 2173\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016776\nCM\nFLORA TENNESSIENSIS\nNO. A. Morrison COUNTY\nCOLLECTOR, S. A. Cain 10-11-1936\nGalax aphylla L.\nBelow Trillum Gap, Great Smoky\nMts. Nat'l Park\nAlt. 32001\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName Galax aphylla L.\nLocality Below Trillum Gap, Great Smoky\nMts. Nat'l Park\nHabitat Alt 32001\nDate 10-11-36 Coll. Morrison & Cain\nNo. 2173 Det. Morrison\nhandwritten text:\n124-3-1\n3\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.760000000000002e-05,
+      "total_cost": 0.0007591,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2276,
+    "output": 500,
+    "cost_in": 0.0002276,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nSTATE\nNo. 2173\nCOLLEGE OF ARKANSAS\n\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016776\n\nFLORA TENNESSIENSIS\nNO.\nCOUNTY\nA. Morrison\nCOLLECTOR S. A. Cain\n10-11- 1936\n*Galax aphylla* L.\n\nBelow Trillium Gap, Great Smoky\nMts. Nat'l Park\nAlt. 3200' (handwritten)\n\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName *Galax aphylla* L.\nLocality Below Trillium Gap, Great Smoky\nMts. Nat'l Park\nHabitat Alt. 3200'\nDate 10-11-36\nNo. 2173\nColl. Morrison & Cain\nDet. Morrison\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nNo. 2173\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016776\nCM\nFLORA TENNESSIENSIS\nNO. A. Morrison COUNTY\nCOLLECTOR, S. A. Cain 10-11-1936\nGalax aphylla L.\nBelow Trillum Gap, Great Smoky\nMts. Nat'l Park\nAlt. 32001\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName Galax aphylla L.\nLocality Below Trillum Gap, Great Smoky\nMts. Nat'l Park\nHabitat Alt 32001\nDate 10-11-36 Coll. Morrison & Cain\nNo. 2173 Det. Morrison\nhandwritten text:\n124-3-1\n3\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCA016776",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. Morrison, S. A. Cain",
+    "collectorNumber": "",
+    "identifiedBy": "Morrison",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10-11- 1936",
+    "collectionDate": "1936-10-11",
+    "collectionDateEnd": "",
+    "habitat": "Alt. 3200'",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Below Trillium Gap, Great Smoky Mts. Nat'l Park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "975",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM OF\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nCM\nFLORA TENNESSIENSIS\nNO.\nCOUNTY\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName\nLocality\nDate\nColl.\nNo. 2173\nhandwritten text\n124-3-1\n3"
+  }
+}

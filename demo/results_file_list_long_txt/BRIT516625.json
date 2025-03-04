@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\ncopyright reserved\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB\n85229\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nIMAGED\n15 NOV 2019\n\nPLANTS OF VIRGINIA    PIEDMONT\nBedford  COUNTY\nNO. 7778\n*Galax aphylla* L.\n\nShaded ravine of woods near Otter River on\nHwy. 24, near intersection with Co. Rd. 709,\nelev. approx. 580 ft.\n\nCOLLECTORS  July 12, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516625\n\nHandwritten text: 67\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012,
+      "total_cost": 0.00197875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 240
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB\n85229\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516625\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc 2\nGuy L. Nesom, 1975\nNO. 7778\nPLANTS OF VIRGINIA PIEDMONT\nBedford\nGalax aphylla L.\nCOUNTY\nShaded ravine of woods near Otter River on\nHwy. 24 near intersection with Co. Rd. 709,\nelev. approx. 580 ft.\nCOLLECTORS\nJuly 12, 19 67\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.44e-05,
+      "total_cost": 0.0007759,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 236
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2363,
+    "output": 620,
+    "cost_in": 0.00023630000000000002,
+    "cost_out": 0.000248
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\ncopyright reserved\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB\n85229\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nIMAGED\n15 NOV 2019\n\nPLANTS OF VIRGINIA    PIEDMONT\nBedford  COUNTY\nNO. 7778\n*Galax aphylla* L.\n\nShaded ravine of woods near Otter River on\nHwy. 24, near intersection with Co. Rd. 709,\nelev. approx. 580 ft.\n\nCOLLECTORS  July 12, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516625\n\nHandwritten text: 67\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB\n85229\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516625\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc 2\nGuy L. Nesom, 1975\nNO. 7778\nPLANTS OF VIRGINIA PIEDMONT\nBedford\nGalax aphylla L.\nCOUNTY\nShaded ravine of woods near Otter River on\nHwy. 24 near intersection with Co. Rd. 709,\nelev. approx. 580 ft.\nCOLLECTORS\nJuly 12, 19 67\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516625",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "G. W. Ramsey, W. F. Ruska, G. S. Waggoner",
+    "collectorNumber": "7778",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 12, 1967",
+    "collectionDate": "1967-07-12",
+    "collectionDateEnd": "",
+    "habitat": "Shaded ravine of woods near Otter River",
+    "chromosomeCount": "n =",
+    "guardCell": "n = , based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bedford",
+    "locality": "On Hwy. 24, near intersection with Co. Rd. 709, elev. approx. 580 ft.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "177",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "BOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB\n85229\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nIMAGED\n15 NOV 2019\nPLANTS OF VIRGINIA PIEDMONT\nGalax aphylla L.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nHandwritten text 67\nGalax urceolata\nGalax aphylla\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nIMAGED\n15 NOV 2019"
+  }
+}

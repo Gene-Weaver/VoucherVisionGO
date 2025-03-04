@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\nPOISONED\n17886\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n#33184 *Galax aphylla* L.\nUnder Hemlock Stand\n5. of Cary, Wake Co.\nJuly 2, 1933 *N.J. Oosting*\nNo.\n\n*Handwritten text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006900000000000001,
+      "total_cost": 0.00146875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n#33184\nGalax aphylla L.\nUnder Hemlock Stand\nS. of Cary. Wake Co\nJuly 2, 1933 N.J. Costing\nDUKE UNIVERSITY HERBARIUM\n17886\nDUKE10095602\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.56e-05,
+      "total_cost": 0.0007371000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 139
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2165,
+    "output": 483,
+    "cost_in": 0.0002165,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\nPOISONED\n17886\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n#33184 *Galax aphylla* L.\nUnder Hemlock Stand\n5. of Cary, Wake Co.\nJuly 2, 1933 *N.J. Oosting*\nNo.\n\n*Handwritten text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n#33184\nGalax aphylla L.\nUnder Hemlock Stand\nS. of Cary. Wake Co\nJuly 2, 1933 N.J. Costing\nDUKE UNIVERSITY HERBARIUM\n17886\nDUKE10095602\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "17886",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "N.j. Oosting",
+    "collectorNumber": "33184",
+    "identifiedBy": "R.l. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 2, 1933",
+    "collectionDate": "1933-07-02",
+    "collectionDateEnd": "",
+    "habitat": "Under hemlock stand",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake co",
+    "locality": "S. of cary",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "(Galax aphylla auct. non L.)\nduke university herbarium\npoisoned\nflora of north carolina\nduke university herbarium\nduke university herbarium\nduke10095602\ngalax aphylla"
+  }
+}

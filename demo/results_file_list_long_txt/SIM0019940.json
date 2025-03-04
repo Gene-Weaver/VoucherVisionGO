@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "STATEN ISLAND\nMUSEUM\n\nM.A.M. IMAGED\nStaten Island Museum\nSIM0019940\nP.III-33-1\n\nHERBARIUM OF WM. T. DAVIS.\n\n*Galax aphylla* L.\n\nNear Top of Pilot Balsam Mt.\nHaywood Co. N. C.\nJune 22, 1920\nCOLLECTOR, W.T.D.\n\nHandwritten text: *Galax aphylla* L., Near Top of Pilot Balsam Mt., Haywood Co. N. C., June 22, 1920, W.T.D.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007300000000000001,
+      "total_cost": 0.0015087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 146
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "STATEN ISLAND\nMUSEUM\n0\ncm\n1\n2\n3\n4\n5\n6\n7 8\n9 10\ncopyright reserved\nM.A.M. IMAGED\nStaten Island Museum\nSIM0019940\nP.II-33-1\nHERBARIUM OF WM. T. DAVIS.\nGalax aphylla, L.\nNear top of Plotto Balsam Mt.\nHaywood Co. N. C.\nW.T.D.\nJune 22, 1920\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.0400000000000005e-05,
+      "total_cost": 0.0007319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2138,
+    "output": 477,
+    "cost_in": 0.00021380000000000002,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSTATEN ISLAND\nMUSEUM\n\nM.A.M. IMAGED\nStaten Island Museum\nSIM0019940\nP.III-33-1\n\nHERBARIUM OF WM. T. DAVIS.\n\n*Galax aphylla* L.\n\nNear Top of Pilot Balsam Mt.\nHaywood Co. N. C.\nJune 22, 1920\nCOLLECTOR, W.T.D.\n\nHandwritten text: *Galax aphylla* L., Near Top of Pilot Balsam Mt., Haywood Co. N. C., June 22, 1920, W.T.D.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSTATEN ISLAND\nMUSEUM\n0\ncm\n1\n2\n3\n4\n5\n6\n7 8\n9 10\ncopyright reserved\nM.A.M. IMAGED\nStaten Island Museum\nSIM0019940\nP.II-33-1\nHERBARIUM OF WM. T. DAVIS.\nGalax aphylla, L.\nNear top of Plotto Balsam Mt.\nHaywood Co. N. C.\nW.T.D.\nJune 22, 1920\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "SIM0019940",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W.T.D.",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 22, 1920",
+    "collectionDate": "1920-06-22",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N. C.",
+    "county": "Haywood Co.",
+    "locality": "Near Top of Pilot Balsam Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "STATEN ISLAND\nMUSEUM\nM.A.M. IMAGED\nStaten Island Museum\nP.III-33-1\nHERBARIUM OF WM. T. DAVIS.\nHandwritten text Galax aphylla L., Near Top of Pilot Balsam Mt., Haywood Co. N. C., June 22, 1920, W.T.D.\nGalax aphylla\ncopyright reserved\nP.II-33-1"
+  }
+}

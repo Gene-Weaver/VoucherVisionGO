@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\nMUHW017998\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\nAcid soil in open woods,\nSalt Pond Mt. near Lake.\n17/June/39          #768\nColl. F.A.Gilbert, L.G.Williams\n\nHandwritten Text: #768\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ERSITATIS MAG\nHERBARIUM\nMARSHALL UNIVERSITY\nAxatington, West Virginia 25701. U.S.A\nINCHES\nMarshall University Herbarium\nMUHW017998\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nAcid soil in oper woods,\nSalt Pond Mt.near Lako.\n17/June/39\nColl. F.A.Gilbert, L.G.Williams\n#768\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 482,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\nMUHW017998\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\nAcid soil in open woods,\nSalt Pond Mt. near Lake.\n17/June/39          #768\nColl. F.A.Gilbert, L.G.Williams\n\nHandwritten Text: #768\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nERSITATIS MAG\nHERBARIUM\nMARSHALL UNIVERSITY\nAxatington, West Virginia 25701. U.S.A\nINCHES\nMarshall University Herbarium\nMUHW017998\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nAcid soil in oper woods,\nSalt Pond Mt.near Lako.\n17/June/39\nColl. F.A.Gilbert, L.G.Williams\n#768\n--- OCR End ---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017998",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "F.a.gilbert, L.g.williams",
+    "collectorNumber": "768",
+    "identifiedBy": "Michelle l. gaynor (flas)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "17/June/39",
+    "collectionDate": "1939-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Acid soil in open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "Salt pond mt. near lake.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nMarshall university\nHuntington, west virginia 25701, u.s.a.\nMarshall university herbarium\nHerbarium of marshall college\nFlora of virginia\nHandwritten text #768"
+  }
+}

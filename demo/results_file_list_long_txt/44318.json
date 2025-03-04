@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nMiddlesex County\n24 June 1981\n*Galax urceolata* (Poiret) Brummitt\n\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\n\nCollector: Gretchen North\nNo. 360\n\n44318 *(Handwritten)*\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006850000000000001,
+      "total_cost": 0.0014637500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 137
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\n90 100 110\n120\n130 140 150\nNO. 305 ME\n2\n16ths\n3\nGENERAL 4\nMADE US\n5\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nMiddlesex County\n24 June 1981\nGalax urceolata (Poiret) Brummitt\nLocally common on wooded slope just S of stream\non W side of VA Rt, 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\nCollector: Gretchen North\nNo. 360\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.04e-05,
+      "total_cost": 0.0007619,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 201
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 512,
+    "cost_in": 0.0002212,
+    "cost_out": 0.0002048
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nMiddlesex County\n24 June 1981\n*Galax urceolata* (Poiret) Brummitt\n\nLocally common on wooded slope just S of stream\non W side of VA Rt. 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\n\nCollector: Gretchen North\nNo. 360\n\n44318 *(Handwritten)*\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\n90 100 110\n120\n130 140 150\nNO. 305 ME\n2\n16ths\n3\nGENERAL 4\nMADE US\n5\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nMiddlesex County\n24 June 1981\nGalax urceolata (Poiret) Brummitt\nLocally common on wooded slope just S of stream\non W side of VA Rt, 630, ca. 0.3 mi. S of jct.\nwith VA Rt. 33, W of Wilton.\nCollector: Gretchen North\nNo. 360\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "44318",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Gretchen North",
+    "collectorNumber": "360",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 June 1981",
+    "collectionDate": "1981-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Locally common on wooded slope just S of stream on W side of VA Rt. 630, ca. 0.3 mi. S of jct. with VA Rt. 33, W of Wilton.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "no",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Middlesex County",
+    "locality": "Just S of stream on W side of VA Rt. 630, ca. 0.3 mi. S of jct. with VA Rt. 33, W of Wilton.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nChartered 1693\nHerbarium of the college of\nWilliam and mary\nWilliamsburg, Virginia\nVirginia\nGalax urceolata\nNo. 305 me\nGeneral made us"
+  }
+}

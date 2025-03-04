@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n322351\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla\n\nNorthampton County: on steep bluffs of Meherrin\nRiver with *Kalmia latifolia*. About 1 mile down\nriver of Route 1339.\n\nFrosty Levy #s.n.\nwith Tom Weiboldt                                       9 September 1988\n\nDUKE10095584\n\n*Handwritten text*\n\n*Galax urceolata*\n*Galax aphylla*\n*Kalmia latifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00087,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERRARIUM\n322351\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla\nNorthampton County: on steep bluffs of Meherrin\nRiver with Kalmia latifolia. About 1 mile down\nriver of Route 1339.\nFrosty Levy #s.n.\nwith Tom Weiboldt\n9 September 1988\nDUKE UNIVERSITY HERBARIUM\nDUKE10095584\n0\ncm\n-Duke\ncopyright reserved UNIVERSITY\n\n\nGalax urceolata\nGalax aphylla\nKalmia latifolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2247,
+    "output": 453,
+    "cost_in": 0.0002247,
+    "cost_out": 0.0001812
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY\nHERBARIUM\n322351\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla\n\nNorthampton County: on steep bluffs of Meherrin\nRiver with *Kalmia latifolia*. About 1 mile down\nriver of Route 1339.\n\nFrosty Levy #s.n.\nwith Tom Weiboldt                                       9 September 1988\n\nDUKE10095584\n\n*Handwritten text*\n\n*Galax urceolata*\n*Galax aphylla*\n*Kalmia latifolia*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERRARIUM\n322351\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla\nNorthampton County: on steep bluffs of Meherrin\nRiver with Kalmia latifolia. About 1 mile down\nriver of Route 1339.\nFrosty Levy #s.n.\nwith Tom Weiboldt\n9 September 1988\nDUKE UNIVERSITY HERBARIUM\nDUKE10095584\n0\ncm\n-Duke\ncopyright reserved UNIVERSITY\n\n\nGalax urceolata\nGalax aphylla\nKalmia latifolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "322351",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frosty Levy, Tom Weiboldt",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 September 1988",
+    "collectionDate": "1988-09-09",
+    "collectionDateEnd": "",
+    "habitat": "On steep bluffs of meherrin river with kalmia latifolia",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Northampton county",
+    "locality": "About 1 mile down river of route 1339",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Galax aphylla auct. non l."
+  }
+}

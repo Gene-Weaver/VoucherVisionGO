@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Marshall University Herbarium\nMUHW018001\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\n38\nFLORA OF KENTUCKY\nFIRST CENTURY\n\n*Galax aphylla* L.\nLow ground cover usually on\nwooded slopes in shade.\nCumberland Falls, Whitley Co.\nSept. 10, 1940.\nFrank T. McFarland, coll.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00058,
+      "total_cost": 0.00135875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 116
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "M/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW018001\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n38\nFLORA OF KENTUCKY\nFIRST CENTURY\nGalax aphylla L.\nLow ground cover usually on\nwooded slopes in shade.\nCumberland Falls, Whitley Co.\nSept. 10, 1940.\nFrank T. McFarland, coll.\n2024\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.560000000000001e-05,
+      "total_cost": 0.0007371000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 139
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2144,
+    "output": 475,
+    "cost_in": 0.0002144,
+    "cost_out": 0.00019
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMarshall University Herbarium\nMUHW018001\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\n38\nFLORA OF KENTUCKY\nFIRST CENTURY\n\n*Galax aphylla* L.\nLow ground cover usually on\nwooded slopes in shade.\nCumberland Falls, Whitley Co.\nSept. 10, 1940.\nFrank T. McFarland, coll.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nM/M\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW018001\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n38\nFLORA OF KENTUCKY\nFIRST CENTURY\nGalax aphylla L.\nLow ground cover usually on\nwooded slopes in shade.\nCumberland Falls, Whitley Co.\nSept. 10, 1940.\nFrank T. McFarland, coll.\n2024\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW018001",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frank T. McFarland",
+    "collectorNumber": "38",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 10, 1940.",
+    "collectionDate": "1940-09-10",
+    "collectionDateEnd": "",
+    "habitat": "Low ground cover usually on wooded slopes in shade.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "Whitley Co.",
+    "locality": "Cumberland Falls",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Marshall University Herbarium\nFLORA OF KENTUCKY\nFIRST CENTURY\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087816\n\nUNIVERSITY OF LOUISVILLE\n1798\nDAVIES HERBARIUM\n9974\n\nGEORGIA\nNo. G-7\nSci. Name *GALAX APHYLLA* L.\nCom. Name Beetleweed (very scattered)\nHabitat Wooded trail around lake.\nPicnic area of Fort Mountain\nLocality State Park in the Chattahoochee\nNational Park\n\nColl. Charles R. Gunn Date 6.5.55\n\nHandwritten Text: *G-7*, *GALAX APHYLLA*, *Charles R. Gunn*, *6.5.55*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "total_cost": 0.00155875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087816\nDAVIES HERBARIUM\n9974\nGEORGIA\nNo. G-7\nSci. Name GALAX APHYLLA L.\nCom. Name Beetleweed\nHabitat Wooded trail around lake\nPicnic area of Fort Mountain\nLocalitystate Park in the Chattahoo-\nchee National Park\nColl. Charles R. Gunn Date 6.5.55\n(very scattered)\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4800000000000005e-05,
+      "total_cost": 0.0007263,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 112
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2151,
+    "output": 476,
+    "cost_in": 0.00021510000000000002,
+    "cost_out": 0.00019040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087816\n\nUNIVERSITY OF LOUISVILLE\n1798\nDAVIES HERBARIUM\n9974\n\nGEORGIA\nNo. G-7\nSci. Name *GALAX APHYLLA* L.\nCom. Name Beetleweed (very scattered)\nHabitat Wooded trail around lake.\nPicnic area of Fort Mountain\nLocality State Park in the Chattahoochee\nNational Park\n\nColl. Charles R. Gunn Date 6.5.55\n\nHandwritten Text: *G-7*, *GALAX APHYLLA*, *Charles R. Gunn*, *6.5.55*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087816\nDAVIES HERBARIUM\n9974\nGEORGIA\nNo. G-7\nSci. Name GALAX APHYLLA L.\nCom. Name Beetleweed\nHabitat Wooded trail around lake\nPicnic area of Fort Mountain\nLocalitystate Park in the Chattahoo-\nchee National Park\nColl. Charles R. Gunn Date 6.5.55\n(very scattered)\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087816",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles R. Gunn",
+    "collectorNumber": "G-7",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6.5.55",
+    "collectionDate": "1955-05-06",
+    "collectionDateEnd": "",
+    "habitat": "Wooded trail around lake",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "",
+    "locality": "Picnic area of fort mountain state park in the chattahoochee national park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin peay state university\nHerbarium (apsc)\nuniversity of louisville\n1798\ndavies herbarium\n9974\nno. com. name beetleweed (very scattered)\nhandwritten text g-7, galax aphylla, charles r. gunn, 6.5.55"
+  }
+}

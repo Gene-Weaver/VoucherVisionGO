@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "copyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 108209\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516615\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u00b5\u00b2\nGuy L. Nesom, 1975\nDiapensiaceae\n\nNo. 186\nCOMMON NAME\nSCIENTIFIC NAME *Galax aphylla* L. (O.K.U.S.)\nREGION Mount Berry, Georgia, Floyd Co. (handwritten)\nLOCALITY\nHABITAT Mountain ravine (handwritten)\n8816 DATE April 22, 1938 (handwritten)\nCOLLECTOR Harold C. Jones (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010299999999999999,
+      "total_cost": 0.0018087499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 206
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 108209\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn\nbased on average guard cell\nvolume of\nGuy L. Nesom, 1975\nCOMMON NAME\nNo. 186\nSCIENTIFIC NAME Galax aphylla L. [O.K.U.S.]\nREGION Mount Berry, Georgia, Floyd Co.\nLOCALITY\nHABITAT Mountain ravine\n8816 DATE April 22, 1938\nCOLLECTOR Harold C. Jones\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516615\narmeriaceae\nCamera Trax.com\n24ColorCard\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.120000000000001e-05,
+      "total_cost": 0.0007727000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 228
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2316,
+    "output": 511,
+    "cost_in": 0.0002316,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 108209\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516615\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u00b5\u00b2\nGuy L. Nesom, 1975\nDiapensiaceae\n\nNo. 186\nCOMMON NAME\nSCIENTIFIC NAME *Galax aphylla* L. (O.K.U.S.)\nREGION Mount Berry, Georgia, Floyd Co. (handwritten)\nLOCALITY\nHABITAT Mountain ravine (handwritten)\n8816 DATE April 22, 1938 (handwritten)\nCOLLECTOR Harold C. Jones (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 108209\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn\nbased on average guard cell\nvolume of\nGuy L. Nesom, 1975\nCOMMON NAME\nNo. 186\nSCIENTIFIC NAME Galax aphylla L. [O.K.U.S.]\nREGION Mount Berry, Georgia, Floyd Co.\nLOCALITY\nHABITAT Mountain ravine\n8816 DATE April 22, 1938\nCOLLECTOR Harold C. Jones\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516615\narmeriaceae\nCamera Trax.com\n24ColorCard\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VDB 108209",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Harold C. Jones",
+    "collectorNumber": "8816",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 22, 1938",
+    "collectionDate": "1938-04-22",
+    "collectionDateEnd": "",
+    "habitat": "Mountain ravine",
+    "chromosomeCount": "n =",
+    "guardCell": "n =, based on average guard cell volume of \u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Floyd co.",
+    "locality": "Mount berry, Georgia, Floyd co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "copyright reserved\nBotanical research institute of texas\nBRIT516615\nHerbarium of the university of north carolina\nCommon name\nScientific name Galax aphylla l. [o.k.u.s.]\nImaged\n15 nov 2019\nBotanical research institute\nof texas\nArmeriaceae\ncamera trax.com\n24colorcard"
+  }
+}

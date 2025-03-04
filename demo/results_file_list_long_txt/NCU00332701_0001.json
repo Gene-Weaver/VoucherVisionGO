@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n291976\n\nFlorida Museum of Natural History\n(FLAS)\n*Galax urceolata* (Poir.) Brummitt\nMichelle L. Gaynor                                      2024\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332701\n\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\n\nFlora of: VIRGINIA                      County: MONTGOMERY\n\n*Galax aphylla* L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\n\nColl: K. A. Nicely                     No.: 1171\nDate: June 12, 1966                Det: K. A. Nicely\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2e-06,
+      "total_cost": 0.0006867,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 13
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2086,
+    "output": 504,
+    "cost_in": 0.00020860000000000003,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n291976\n\nFlorida Museum of Natural History\n(FLAS)\n*Galax urceolata* (Poir.) Brummitt\nMichelle L. Gaynor                                      2024\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332701\n\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\n\nFlora of: VIRGINIA                      County: MONTGOMERY\n\n*Galax aphylla* L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\n\nColl: K. A. Nicely                     No.: 1171\nDate: June 12, 1966                Det: K. A. Nicely\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "291976",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "K. A. Nicely",
+    "collectorNumber": "1171",
+    "identifiedBy": "K. A. Nicely",
+    "identifiedDate": "1966-06-12",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 12, 1966",
+    "collectionDate": "1966-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Deciduous woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Montgomery",
+    "locality": "On Price Mt., s. of blacksburg, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nFlorida museum of natural history\n(flas)\nMichelle l. gaynor                                      2024\nUniversity of north carolina herbarium\nNcu00332701\nHerbarium of\nWestern kentucky university\nBiology department\nFlora of virginia\nGalax aphylla l.\nGalax urceolata\nGalax aphylla"
+  }
+}

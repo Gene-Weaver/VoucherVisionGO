@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla\n\nWake Co.: \"Hemlock Bluff\" about 5 miles\nsouth of Cary on the Cary-Holly Springs\nroad.\n\nDexter Hess\nVOUCHER for M.S. Thesis\n1951-1952\n\nHandwritten Text: 263\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00067,
+      "total_cost": 0.00144875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 134
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla\nWake Co.: \"Hemlock Bluff\" about 5 miles\nsouth of Cary on the Cary-Holly Springs\nroad.\nDexter Hess\nVOUCHER for M.S. Thesis\n1951-1952\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.880000000000001e-05,
+      "total_cost": 0.0007303000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 122
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2155,
+    "output": 492,
+    "cost_in": 0.00021549999999999998,
+    "cost_out": 0.0001968
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla\n\nWake Co.: \"Hemlock Bluff\" about 5 miles\nsouth of Cary on the Cary-Holly Springs\nroad.\n\nDexter Hess\nVOUCHER for M.S. Thesis\n1951-1952\n\nHandwritten Text: 263\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla\nWake Co.: \"Hemlock Bluff\" about 5 miles\nsouth of Cary on the Cary-Holly Springs\nroad.\nDexter Hess\nVOUCHER for M.S. Thesis\n1951-1952\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax urceolata (poir.) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Dexter Hess",
+    "collectorNumber": "",
+    "identifiedBy": "R.l. wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "1951-1952",
+    "collectionDate": "1951-00-00",
+    "collectionDateEnd": "1952-00-00",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Voucher for m.s. thesis",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake co.",
+    "locality": "Hemlock bluff about 5 miles south of cary on the cary-holly springs road.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "(Galax aphylla auct. non l.)\nduke university herbarium\nplants of north carolina\ndistributed by the herbarium of\nduke university\ngalax aphylla\nhandwritten text 263\ngalax urceolata\ngalax aphylla"
+  }
+}

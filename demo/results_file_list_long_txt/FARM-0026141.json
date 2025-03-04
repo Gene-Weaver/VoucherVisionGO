@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026141\n\nFlora of Virginia\n*Dalea urceolata* (Poir.) Brum.\n\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp May Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia*, & *Thengieria* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.) el. 1650 ft.\nCharles E. Stevens May 1, 1982\nDet. \"\nNo. 17,983\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*(Handwritten text)*\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.0017087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Jalas urceolata (Poir.) Brum.\nnear Stokesville, Angusta Co.\nScattered colonies for .7 mi. along\nS bank of horth River ca. 34 mi. SW of\nCamp hay Flather. With Gaultheria, Epigaea,\nKalmia & thengieria under Pinus strobus, Tsuga\nAcer vakum.\n(Stokesville Quad.)\nCharles E. Stevens\nDet.\nel.1650 ft.\nmay 1, 1982\nNo. 17,983\n\n\nGalax urceolata\nGaultheria\nEpigaea\nKalmia\nPinus strobus\nTsuga\nAcer rubrum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.000000000000001e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2223,
+    "output": 517,
+    "cost_in": 0.00022230000000000004,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026141\n\nFlora of Virginia\n*Dalea urceolata* (Poir.) Brum.\n\nnear Stokesville, Augusta Co.\nScattered colonies for .7 mi. along\nS bank of North River ca. 3/4 mi. SW of\nCamp May Flather. With *Gaultheria*, *Epigaea*,\n*Kalmia*, & *Thengieria* under *Pinus strobus*, *Tsuga*\n& *Acer rubrum*.\n(Stokesville Quad.) el. 1650 ft.\nCharles E. Stevens May 1, 1982\nDet. \"\nNo. 17,983\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*(Handwritten text)*\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nJalas urceolata (Poir.) Brum.\nnear Stokesville, Angusta Co.\nScattered colonies for .7 mi. along\nS bank of horth River ca. 34 mi. SW of\nCamp hay Flather. With Gaultheria, Epigaea,\nKalmia & thengieria under Pinus strobus, Tsuga\nAcer vakum.\n(Stokesville Quad.)\nCharles E. Stevens\nDet.\nel.1650 ft.\nmay 1, 1982\nNo. 17,983\n\n\nGalax urceolata\nGaultheria\nEpigaea\nKalmia\nPinus strobus\nTsuga\nAcer rubrum\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026141",
+    "scientificName": "Dalea urceolata",
+    "genus": "Dalea",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "17,983",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "1982-05-01",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 1, 1982",
+    "collectionDate": "1982-05-01",
+    "collectionDateEnd": "",
+    "habitat": "With Gaultheria, Epigaea, Kalmia & Thengieria under Pinus strobus, Tsuga & Acer rubrum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Augusta Co.",
+    "locality": "Near Stokesville, scattered colonies for .7 mi. along S bank of North River ca. 3/4 mi. SW of Camp May Flather.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "503",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nFlora of Virginia\n(Stokesville Quad.)\nHarvill-Stevens\nHerbarium\ncopyright reserved\nGalax urceolata"
+  }
+}

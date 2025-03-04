@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n71723\nVirginia Polytechnic Institute\nand State University\n\nFlora of Virginia\n\nMiddlesex County, Va.\n*Galax aphylla* L.\nAbrupt N-facing ravine slope\nback of the Rappahannock River\nat Bayport. Extreme N corner\nof the county.\nAbout 3 mi. N of Jamaica, Va.\nDate: 1 Nov. 1978       Elevation: 50'\nThomas F. Wieboldt        No. 3332\nC.E. Stevens\n\n\n*Handwritten text is italicized.*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006699999999999999,
+      "total_cost": 0.0014487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 134
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n71723\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nMiddlesex County, Va.\nGalax aphylla L.\nAbrupt N-facing ravine slope\nback of the Rappahannock River\nat Bayport. Extreme N corner\nof the county.\nAbout 3 mi. N of Jamaica, Va.\nDate: 11 Nov. 1978\nThomas F. Wieboldt\nC.E. Stevens\nElevation: 50'\nNo. 3332\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007306999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2130,
+    "output": 451,
+    "cost_in": 0.000213,
+    "cost_out": 0.00018040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n71723\nVirginia Polytechnic Institute\nand State University\n\nFlora of Virginia\n\nMiddlesex County, Va.\n*Galax aphylla* L.\nAbrupt N-facing ravine slope\nback of the Rappahannock River\nat Bayport. Extreme N corner\nof the county.\nAbout 3 mi. N of Jamaica, Va.\nDate: 1 Nov. 1978       Elevation: 50'\nThomas F. Wieboldt        No. 3332\nC.E. Stevens\n\n\n*Handwritten text is italicized.*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n71723\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nMiddlesex County, Va.\nGalax aphylla L.\nAbrupt N-facing ravine slope\nback of the Rappahannock River\nat Bayport. Extreme N corner\nof the county.\nAbout 3 mi. N of Jamaica, Va.\nDate: 11 Nov. 1978\nThomas F. Wieboldt\nC.E. Stevens\nElevation: 50'\nNo. 3332\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "71723",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Thomas F. Wieboldt, C.E. Stevens",
+    "collectorNumber": "3332",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 Nov. 1978",
+    "collectionDate": "1978-11-11",
+    "collectionDateEnd": "",
+    "habitat": "Abrupt n-facing ravine slope back of the rappahannock river at bayport.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Middlesex county",
+    "locality": "Extreme n corner of the county. about 3 mi. n of jamaica, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "15",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nFlora of virginia"
+  }
+}

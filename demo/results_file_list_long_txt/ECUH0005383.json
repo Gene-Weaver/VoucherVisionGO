@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "East Carolina University\nHerbarium\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n\n005167\n\nPLANTS OF THE COASTAL PLAINS\nBertie County, North Carolina\n*Galax* *aphylla*\nDIAPENSIACEAE \"galax\"\n\n76\u00b045'40\"W 36\u00b002'30\"N(East bank of Salmon\nCreek on north side of US17)\nNorth-facing slope, beech dominant\n\nCollected 21 October 1989 by D. Barnes and\nJ. Bellis 89-10-21-M-4\n(Handwritten Text)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007300000000000001,
+      "total_cost": 0.0015087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 146
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\nECUH0005383\nEast Carolina University\nHerbarium\n005167\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nPLANTS OF THE COASTAL PLAINS\nBertie County, North Carolina\nGalax aphylla\nDIAPENSIACEAE \"galax\"\nL.\n76\u00b045'40\"W 36\u00b002'30\"N (East bank of Salmon\nCreek on north side of US17)\nNorth-facing slope, beech dominant\nCollected 21 October 1989 by D. Barnes and\nJ. Bellis 89-10-21-M-4\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.28e-05,
+      "total_cost": 0.0007543000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 182
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 470,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEast Carolina University\nHerbarium\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n\n005167\n\nPLANTS OF THE COASTAL PLAINS\nBertie County, North Carolina\n*Galax* *aphylla*\nDIAPENSIACEAE \"galax\"\n\n76\u00b045'40\"W 36\u00b002'30\"N(East bank of Salmon\nCreek on north side of US17)\nNorth-facing slope, beech dominant\n\nCollected 21 October 1989 by D. Barnes and\nJ. Bellis 89-10-21-M-4\n(Handwritten Text)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\nECUH0005383\nEast Carolina University\nHerbarium\n005167\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nPLANTS OF THE COASTAL PLAINS\nBertie County, North Carolina\nGalax aphylla\nDIAPENSIACEAE \"galax\"\nL.\n76\u00b045'40\"W 36\u00b002'30\"N (East bank of Salmon\nCreek on north side of US17)\nNorth-facing slope, beech dominant\nCollected 21 October 1989 by D. Barnes and\nJ. Bellis 89-10-21-M-4\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "005167",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. Barnes and J. Bellis",
+    "collectorNumber": "89-10-21-M-4",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 October 1989",
+    "collectionDate": "1989-10-21",
+    "collectionDateEnd": "",
+    "habitat": "North-facing slope, beech dominant",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "North Carolina",
+    "stateProvince": "North Carolina",
+    "county": "Bertie County",
+    "locality": "East bank of Salmon Creek on north side of US17",
+    "verbatimCoordinates": "76\u00b045'40W 36\u00b002'30N",
+    "decimalLatitude": "36.04166666666667",
+    "decimalLongitude": "-76.7611111111111",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of the coastal plains\nDiapensiaceae galax\nEast Carolina University\nHerbarium\nHerbarium of\nEast Carolina University"
+  }
+}

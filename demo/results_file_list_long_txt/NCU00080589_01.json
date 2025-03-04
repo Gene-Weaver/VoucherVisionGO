@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n455019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nSwain County\n\n*Galax aphylla* L.\n\nNantahala Gorge on the Nantahala River, US 19\nwest of Lauada and east of Nantahala. South\nside of highway. Dry slope under Rhododendrons.\n\nD. E. Boufford 13703  26 May 1974\nL. Schram, D. Wickland & E. Wood\n\nPlants of the Southeastern United States\n\nNCU00080589\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00094,
+      "total_cost": 0.00171875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 188
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nIDN\nat Chapel Hill\nUniversity of North Carolina\nNORTH\nHERBARIUM\nCAROLINA\n455019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080589\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nSwain County\nGalax aphylla L.\nNantahala Gorge on the Nantahala River, US 19\nwest of Lauada and east of Nantahala. South\nside of highway. Dry slope under Rhododendrons.\nD. E. Boufford 13703 26 May 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.8e-05,
+      "total_cost": 0.0007695,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 220
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2302,
+    "output": 558,
+    "cost_in": 0.00023019999999999998,
+    "cost_out": 0.0002232
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n455019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nSwain County\n\n*Galax aphylla* L.\n\nNantahala Gorge on the Nantahala River, US 19\nwest of Lauada and east of Nantahala. South\nside of highway. Dry slope under Rhododendrons.\n\nD. E. Boufford 13703  26 May 1974\nL. Schram, D. Wickland & E. Wood\n\nPlants of the Southeastern United States\n\nNCU00080589\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nIDN\nat Chapel Hill\nUniversity of North Carolina\nNORTH\nHERBARIUM\nCAROLINA\n455019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080589\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nSwain County\nGalax aphylla L.\nNantahala Gorge on the Nantahala River, US 19\nwest of Lauada and east of Nantahala. South\nside of highway. Dry slope under Rhododendrons.\nD. E. Boufford 13703 26 May 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "455019",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, L. Schram, D. Wickland & E. Wood",
+    "collectorNumber": "13703",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 May 1974",
+    "collectionDate": "1974-05-26",
+    "collectionDateEnd": "1974-06-30",
+    "habitat": "Dry slope under rhododendrons",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Plants of the southeastern united states",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Swain county",
+    "locality": "Nantahala gorge on the nantahala river, us 19 west of lauada and east of nantahala. South side of highway",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nHerbarium\nHerbarium of the university of north carolina\nVoucher for north carolina natural areas\nStudy. May 15-June 30, 1974. For community\ndata see natural areas file in herbarium.\nHerbarium of the university of north carolina\nncu00080589\nUniversity of north carolina herbarium\nmsccpppe0411\nmsccppcc0411\nidn\nat chapel hill"
+  }
+}

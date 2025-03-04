@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n258686\nHERBARIUM\n\nExchange Specimen From\nODY\n\nNLU0134130\n\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\n\nVIRGINIA\nIsle of Wight County\n*Galax aphylla* L.\n\nBlackwater Ecologic Preserve;\nOn SR 614, 4.5 m S of Zuni.\nPerennial herb along steep\nbank overlooking Blackwater\nRiver.\nShady moist slope.\n\nRebecca D. Bray 84-27\n5/28/84\n\n*Handwritten text: ODY*\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.00152375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n258686\nHERBARIUM\nExchange Specimen From\nODY\nNL00134130\nA 1\n2\n3\n4\n56 M 8\n9\n10 11 12\n13 14 15\nB 17 18 19\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\nVIRGINIA\nIsle of Wight County\nGalax aphylla L.\nBlackwater Ecologic Preserve;\nOn SR 614, 4.5 m S of Zuni.\nPerennial herb along steep\nbank overlooking Blackwater\nRiver.\nShady moist slope.\nRebecca D. Bray 84-27\n5/28/84\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.520000000000001e-05,
+      "total_cost": 0.0007666999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 213
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2240,
+    "output": 468,
+    "cost_in": 0.000224,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n258686\nHERBARIUM\n\nExchange Specimen From\nODY\n\nNLU0134130\n\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\n\nVIRGINIA\nIsle of Wight County\n*Galax aphylla* L.\n\nBlackwater Ecologic Preserve;\nOn SR 614, 4.5 m S of Zuni.\nPerennial herb along steep\nbank overlooking Blackwater\nRiver.\nShady moist slope.\n\nRebecca D. Bray 84-27\n5/28/84\n\n*Handwritten text: ODY*\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n258686\nHERBARIUM\nExchange Specimen From\nODY\nNL00134130\nA 1\n2\n3\n4\n56 M 8\n9\n10 11 12\n13 14 15\nB 17 18 19\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23508\nVIRGINIA\nIsle of Wight County\nGalax aphylla L.\nBlackwater Ecologic Preserve;\nOn SR 614, 4.5 m S of Zuni.\nPerennial herb along steep\nbank overlooking Blackwater\nRiver.\nShady moist slope.\nRebecca D. Bray 84-27\n5/28/84\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "258686",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Rebecca D. Bray",
+    "collectorNumber": "84-27",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/28/84",
+    "collectionDate": "1984-05-28",
+    "collectionDateEnd": "",
+    "habitat": "Shady moist slope.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Perennial herb along steep bank overlooking Blackwater River.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Isle of wight county",
+    "locality": "Blackwater ecologic preserve; on sr 614, 4.5 m s of zuni.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nHerbarium\nExchange specimen from\nOdy\nNlu0134130\nHerbarium\nOld dominion university\nNorfolk, virginia 23508\nHandwritten text ody"
+  }
+}

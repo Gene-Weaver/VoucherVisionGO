@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\n\nEast Carolina University\nHerbarium\nECUH0005389\n\n03089\n\n196-3-1\nPLANTS OF NORTH CAROLINA\nBrunswick Co.\n\n*Galax urceolata* (Poiret) Brummitt\n\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, *Q. alba* or *Fagus* dominant.\n\nC. B. McDonald 1350\nJ. C. Murphy\n(Handwritten: XXXMmon)\nJune 3, 1978\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000865,
+      "total_cost": 0.0016437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03089\nEast Carolina University\nHerbarium\nECUH0005389\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nPLANTS OF NORTH CAROLINA\nBrunswick Co.\nGalax urceolata (Poiret) Brummitt\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, Q. alba or Fagus dominant.\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\nXXXMmon [Handwritten]\n\n\nGalax urceolata\nQ. alba\nFagus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.92e-05,
+      "total_cost": 0.0007607,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 198
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2272,
+    "output": 523,
+    "cost_in": 0.00022720000000000002,
+    "cost_out": 0.00020920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n\nEast Carolina University\nHerbarium\nECUH0005389\n\n03089\n\n196-3-1\nPLANTS OF NORTH CAROLINA\nBrunswick Co.\n\n*Galax urceolata* (Poiret) Brummitt\n\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, *Q. alba* or *Fagus* dominant.\n\nC. B. McDonald 1350\nJ. C. Murphy\n(Handwritten: XXXMmon)\nJune 3, 1978\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03089\nEast Carolina University\nHerbarium\nECUH0005389\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nPLANTS OF NORTH CAROLINA\nBrunswick Co.\nGalax urceolata (Poiret) Brummitt\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, Q. alba or Fagus dominant.\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\nXXXMmon [Handwritten]\n\n\nGalax urceolata\nQ. alba\nFagus\n\n",
+  "formatted_json": {
+    "catalogNumber": "ECUH0005389",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poiret) brummitt",
+    "collectedBy": "C. B. Mcdonald, J. C. Murphy",
+    "collectorNumber": "1350",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 3, 1978",
+    "collectionDate": "1978-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Bryant mill ck., a tributary of cape fear r. in extreme n.e. corner of co. usgs acme quadrangle. 20 - 30 % creek slope. soil sandy loam, occasional limestone outcrops. canopy mixed hardwood, q. alba or fagus dominant.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Brunswick co.",
+    "locality": "Bryant mill ck., a tributary of cape fear r. in extreme n.e. corner of co. usgs acme quadrangle.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "03089\n196-3-1\n(handwritten xxxmmon)\nq. alba\nfagus"
+  }
+}

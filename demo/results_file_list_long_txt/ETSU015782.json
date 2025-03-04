@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015782\n\nETSU Herbarium\nNo 13,403 (handwritten)\n\nPlants of Tennessee\n\nDIAPENSIACEAE\n\n*Galax aphylla* L.\n\nSullivan Co. 5-16-85. Ben Begley. (handwritten)\n\nWarrior's Path State Park. (handwritten)\n\n*Galax*. (handwritten)\n\nDet:\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005,
+      "total_cost": 0.0012787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 100
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015782\nETSU Herbarium\nNo.\n13.403\nPlants of Tennessee\nDIAPENSIACEAE\nGalax aphylla L.\nSullivan Co. 5-16-85. Ben Begley.\nWarrior's Path State Park.\nGalax.\nDet:\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6800000000000006e-05,
+      "total_cost": 0.0007283000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 117
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2095,
+    "output": 435,
+    "cost_in": 0.00020950000000000002,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015782\n\nETSU Herbarium\nNo 13,403 (handwritten)\n\nPlants of Tennessee\n\nDIAPENSIACEAE\n\n*Galax aphylla* L.\n\nSullivan Co. 5-16-85. Ben Begley. (handwritten)\n\nWarrior's Path State Park. (handwritten)\n\n*Galax*. (handwritten)\n\nDet:\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015782\nETSU Herbarium\nNo.\n13.403\nPlants of Tennessee\nDIAPENSIACEAE\nGalax aphylla L.\nSullivan Co. 5-16-85. Ben Begley.\nWarrior's Path State Park.\nGalax.\nDet:\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015782",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Ben Begley",
+    "collectorNumber": "13,403",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-16-85",
+    "collectionDate": "1985-05-16",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sullivan Co.",
+    "locality": "Warrior's path state park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "East tennessee state university\nETSU Herbarium\nPlants of tennessee\nDIAPENSIACEAE\nGalax.\nDet\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

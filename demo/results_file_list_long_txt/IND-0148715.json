@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "IND\ncopyright reserved\n\n4336\nDiapensiaceae\n\n(handwritten)\n\nIND-0148715\n149782\nHERBARIUM OF\nINDIANA UNIVERSITY\n\nFlora of North Carolina\nBuncombe Co.\n\n*Galax aphylla* L.\n\nHardwood forest (Poplar, oaks, red maple)\nin vicinity of old stable, east side of\nMontreat below Buck Gap (elev. 3000').\nVII/5/1977\nP. E. Rothrock 1248\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006500000000000001,
+      "total_cost": 0.00142875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5\ncm\n6 7 8 9 10\nIND\ncopyright reserved\n4336\nDiapensiaceae\nIND-0148715\n149782\nHERBARIUM OF\nINDIANA UNIVERSITY\nFlora of North Carolina\nBuncombe Co.\nGalax aphylla L.\nHardwood forest (Poplar, oaks, red maple)\nin vicinity of old stable, east side of\nMontreat below Buck Gap (elev. 3000').\nV11/5/1977\nP. E. Rothrock 1248\nDIAPEN\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2144,
+    "output": 474,
+    "cost_in": 0.0002144,
+    "cost_out": 0.0001896
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nIND\ncopyright reserved\n\n4336\nDiapensiaceae\n\n(handwritten)\n\nIND-0148715\n149782\nHERBARIUM OF\nINDIANA UNIVERSITY\n\nFlora of North Carolina\nBuncombe Co.\n\n*Galax aphylla* L.\n\nHardwood forest (Poplar, oaks, red maple)\nin vicinity of old stable, east side of\nMontreat below Buck Gap (elev. 3000').\nVII/5/1977\nP. E. Rothrock 1248\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5\ncm\n6 7 8 9 10\nIND\ncopyright reserved\n4336\nDiapensiaceae\nIND-0148715\n149782\nHERBARIUM OF\nINDIANA UNIVERSITY\nFlora of North Carolina\nBuncombe Co.\nGalax aphylla L.\nHardwood forest (Poplar, oaks, red maple)\nin vicinity of old stable, east side of\nMontreat below Buck Gap (elev. 3000').\nV11/5/1977\nP. E. Rothrock 1248\nDIAPEN\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "149782",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "P. E. Rothrock",
+    "collectorNumber": "1248",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "VII/5/1977",
+    "collectionDate": "1977-07-05",
+    "collectionDateEnd": "",
+    "habitat": "Hardwood forest (poplar, oaks, red maple) in vicinity of old stable, east side of Montreat below Buck Gap",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe co.",
+    "locality": "East side of montreat below buck gap (elev. 3000')",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "914",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Ind\ncopyright reserved\n4336\nDiapensiaceae\nInd-0148715\nHerbarium of\nIndiana university\nFlora of north carolina\nDiapen"
+  }
+}

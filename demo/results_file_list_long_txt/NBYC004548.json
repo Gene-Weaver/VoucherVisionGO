@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n20783\n\nNewberry College Herbarium\n\nNBYC004548\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon on steep slope under beech trees. All material vegetative.\n\nFAIRFIELD CO.: Roadside at creek and steep slope in hardwood forest\non SC 34; ca. 3 mi east of Ridgeway. Ca. 12 mi SE of Winnsboro.\n34\u00b017.1'N, 80\u00b054.3'W.\n\n26 June 2012                                                     Charles N. Horn #20088\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000895,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC 1\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n20783\nNewberry College Herbarium\nNBYC004548\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nCommon on steep slope under beech trees. All material vegetative.\nFAIRFIELD CO.: Roadside at creek and steep slope in hardwood forest\non SC 34; ca. 3 mi east of Ridgeway. Ca. 12 mi SE of Winnsboro.\n34\u00b017.1'N, 80\u00b054.3'W.\n26 June 2012\nCharles N. Horn #20088\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2245,
+    "output": 504,
+    "cost_in": 0.0002245,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n20783\n\nNewberry College Herbarium\n\nNBYC004548\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon on steep slope under beech trees. All material vegetative.\n\nFAIRFIELD CO.: Roadside at creek and steep slope in hardwood forest\non SC 34; ca. 3 mi east of Ridgeway. Ca. 12 mi SE of Winnsboro.\n34\u00b017.1'N, 80\u00b054.3'W.\n\n26 June 2012                                                     Charles N. Horn #20088\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMETRIC 1\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n20783\nNewberry College Herbarium\nNBYC004548\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nCommon on steep slope under beech trees. All material vegetative.\nFAIRFIELD CO.: Roadside at creek and steep slope in hardwood forest\non SC 34; ca. 3 mi east of Ridgeway. Ca. 12 mi SE of Winnsboro.\n34\u00b017.1'N, 80\u00b054.3'W.\n26 June 2012\nCharles N. Horn #20088\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NBYC004548",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "20088",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 June 2012",
+    "collectionDate": "2012-06-26",
+    "collectionDateEnd": "",
+    "habitat": "Common on steep slope under beech trees. All material vegetative.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "South Carolina",
+    "county": "Fairfield Co.",
+    "locality": "Roadside at creek and steep slope in hardwood forest on Sc 34; ca. 3 mi east of Ridgeway. Ca. 12 mi Se of Winnsboro.",
+    "verbatimCoordinates": "34\u00b017.1'N, 80\u00b054.3'W.",
+    "decimalLatitude": "34.285",
+    "decimalLongitude": "-80.905",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Newberry\nCollege\nNewberry\nCollege\nHerbarium\n20783\nNewberry College Herbarium\nHerbarium of Newberry College (NBYC)\nPlants of South Carolina, Usa"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "060448\nIK\n\nKentucky\nMcCreary County\n\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry upland woods.\n\nSawyer Q.; Cold Spring North of Sawyer.\nCold Spring leads to Lake Cumberland.\nElevation 800\u20131100'.\n\nR. Hannan & L. R. Phillippe 1308 Apr. 19, 1979\n\nEKY\n3 1234 10039613 2\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00061,
+      "total_cost": 0.00138875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 122
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "IK\nINCH\nOPTIRECTILINEAR\nNIVERSITY\n060448\nN\nLLOL 68\nERN K\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry upland woods.\nEKY\nSawyer Q.; Cold Spring North of Sawyer.\nCold Spring leads to Lake Cumberland.\nElevation 800-1100'.\nR. Hannnan & L. R.\nPhillippe 1308\nApr. 19, 1979\nEastern Kentucky University Herbarium\n3 1234 10039613 2\nU.S.A.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.280000000000001e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2132,
+    "output": 456,
+    "cost_in": 0.00021320000000000003,
+    "cost_out": 0.00018240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n060448\nIK\n\nKentucky\nMcCreary County\n\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry upland woods.\n\nSawyer Q.; Cold Spring North of Sawyer.\nCold Spring leads to Lake Cumberland.\nElevation 800\u20131100'.\n\nR. Hannan & L. R. Phillippe 1308 Apr. 19, 1979\n\nEKY\n3 1234 10039613 2\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nIK\nINCH\nOPTIRECTILINEAR\nNIVERSITY\n060448\nN\nLLOL 68\nERN K\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry upland woods.\nEKY\nSawyer Q.; Cold Spring North of Sawyer.\nCold Spring leads to Lake Cumberland.\nElevation 800-1100'.\nR. Hannnan & L. R.\nPhillippe 1308\nApr. 19, 1979\nEastern Kentucky University Herbarium\n3 1234 10039613 2\nU.S.A.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "060448",
+    "scientificName": "Galax aphylla auct. non L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "auct. non L.",
+    "collectedBy": "R. Hannan & L. R. Phillippe",
+    "collectorNumber": "1308",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 19, 1979",
+    "collectionDate": "1979-04-19",
+    "collectionDateEnd": "",
+    "habitat": "Dry upland woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Kentucky",
+    "county": "Mccreary county",
+    "locality": "Sawyer q.; cold spring north of sawyer. cold spring leads to lake cumberland.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "244",
+    "maximumElevationInMeters": "335",
+    "elevationUnits": "ft",
+    "additionalText": "Ik\neky\n3 1234 10039613 2\ninchn\noptirectilinear\nniversity"
+  }
+}

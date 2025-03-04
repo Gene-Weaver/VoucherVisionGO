@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170883\n\nANTHERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\n\nHERBARIUM OF THE\nNO.\n6227\n\nUNIVERSITY OF TENNESSEE\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nGIFT\nOF\nBONNIE HUDSON\n\nFLORA TENNESSIENSIS\nBLOUNT COUNTY\n5-5-29  193\nCOLLECTOR, Bonnie Hudson\n\n*Galax aphylla* L.\nSunshine\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008650000000000001,
+      "total_cost": 0.00164375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170883\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGIFT\nOF\nBONNIEHUDSON\nANTHERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\nHERBARIUM OF THE\nNO.\nFLORA TENNESSIENSIS\nNO.\nBLOUNT COUNTY\nCOLLECTOR, Bonnie Hudson\n5-5-29 193_\nGalax aphylla L.\nSunshine\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.92e-05,
+      "total_cost": 0.0007407000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 148
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2236,
+    "output": 486,
+    "cost_in": 0.00022360000000000001,
+    "cost_out": 0.0001944
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170883\n\nANTHERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\n\nHERBARIUM OF THE\nNO.\n6227\n\nUNIVERSITY OF TENNESSEE\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nGIFT\nOF\nBONNIE HUDSON\n\nFLORA TENNESSIENSIS\nBLOUNT COUNTY\n5-5-29  193\nCOLLECTOR, Bonnie Hudson\n\n*Galax aphylla* L.\nSunshine\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170883\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGIFT\nOF\nBONNIEHUDSON\nANTHERS REMOVED\nFOR U. T. POLLEN\nREFERENCE COLLECTION\nHERBARIUM OF THE\nNO.\nFLORA TENNESSIENSIS\nNO.\nBLOUNT COUNTY\nCOLLECTOR, Bonnie Hudson\n5-5-29 193_\nGalax aphylla L.\nSunshine\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170883",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Bonnie Hudson",
+    "collectorNumber": "193",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-5-29",
+    "collectionDate": "1929-05-05",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area",
+    "specimenDescription": "Anthers removed for u. t. pollen reference collection",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Blount County",
+    "locality": "Sunshine",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of Tennessee Knoxville\nHerbarium of the University of North Carolina\nGift of Bonnie Hudson\nFlora Tennesiensis\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

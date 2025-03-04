@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\n007504\nALBION COLLEGE\n\nHERBARIUM OF ALBION COLLEGE\nALBION, MICHIGAN, U.S.A.\n\n*Galax aphylla* L.\nDIAPENSIACEAE\n\nHabitat Rich, moist woodland area in mountain hardwoods.\nLocality Bluff Mountain, west of West Jefferson, Ashe County, North Carolina.\n\nCollector Lyn Loveless (handwritten)\nNo. #56 (handwritten)\nDate June 25, 1970\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000565,
+      "total_cost": 0.0013437500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 113
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\n007504\nALBION COLLEGE\nHERBARIUM OF ALBION COLLEGE\nALBION, MICHIGAN, U. S. A.\nGalax aphylla L.\nDIAPENSIACEAE\nHabitat Rich, moist woodland area in mountain\nhardwoods.\nLocality Bluff Mountain, west of West Jefferson,\nAshe County, North Carolina.\nCollector Lyn Loveless\nDate June 25, 1970\n#56\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.08e-05,
+      "total_cost": 0.0007222999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 102
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2116,
+    "output": 437,
+    "cost_in": 0.0002116,
+    "cost_out": 0.00017480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n007504\nALBION COLLEGE\n\nHERBARIUM OF ALBION COLLEGE\nALBION, MICHIGAN, U.S.A.\n\n*Galax aphylla* L.\nDIAPENSIACEAE\n\nHabitat Rich, moist woodland area in mountain hardwoods.\nLocality Bluff Mountain, west of West Jefferson, Ashe County, North Carolina.\n\nCollector Lyn Loveless (handwritten)\nNo. #56 (handwritten)\nDate June 25, 1970\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\n007504\nALBION COLLEGE\nHERBARIUM OF ALBION COLLEGE\nALBION, MICHIGAN, U. S. A.\nGalax aphylla L.\nDIAPENSIACEAE\nHabitat Rich, moist woodland area in mountain\nhardwoods.\nLocality Bluff Mountain, west of West Jefferson,\nAshe County, North Carolina.\nCollector Lyn Loveless\nDate June 25, 1970\n#56\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "007504",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Lyn Loveless",
+    "collectorNumber": "#56",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 25, 1970",
+    "collectionDate": "1970-06-25",
+    "collectionDateEnd": "",
+    "habitat": "Rich, moist woodland area in mountain hardwoods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "North carolina",
+    "county": "Ashe county",
+    "locality": "Bluff mountain, west of west jefferson.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of\nalbion college\nherbarium of albion college\nalbion, michigan, u. s. a."
+  }
+}

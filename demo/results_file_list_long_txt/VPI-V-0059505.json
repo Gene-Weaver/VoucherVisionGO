@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "56689\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059505\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: VIRGINIA: Rockbridge County\n*Galax aphylla* L.\nNatural Bridge\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 519 \u03bc\u00b2\nGuy L. Nesom, 1975\nDate: 13 Sept. 1907 No:\nColl: Bayard Long Det: L.J.Uttal, 1974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008700000000000001,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "56689\nHerbarium\nBiology Department\nhepania Polytechnic Institute\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: VIRGINIA: Rockbridge County\nGalax aphylla L.\nNatural Bridge\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 519 \u03bc2\nGuy L. Nesom, 1975\nDate: 13 Sept. 1907\nColl: Bayard Long\nNo:\nDet: L.J.Uttal, 1974\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059505\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.48e-05,
+      "total_cost": 0.0007463000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 162
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 518,
+    "cost_in": 0.0002232,
+    "cost_out": 0.00020720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n56689\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059505\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: VIRGINIA: Rockbridge County\n*Galax aphylla* L.\nNatural Bridge\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 519 \u03bc\u00b2\nGuy L. Nesom, 1975\nDate: 13 Sept. 1907 No:\nColl: Bayard Long Det: L.J.Uttal, 1974\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n56689\nHerbarium\nBiology Department\nhepania Polytechnic Institute\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: VIRGINIA: Rockbridge County\nGalax aphylla L.\nNatural Bridge\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 519 \u03bc2\nGuy L. Nesom, 1975\nDate: 13 Sept. 1907\nColl: Bayard Long\nNo:\nDet: L.J.Uttal, 1974\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059505\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "56689",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Bayard Long",
+    "collectorNumber": "",
+    "identifiedBy": "L.J.Uttal",
+    "identifiedDate": "1974-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Guy L. Nesom, 1975",
+    "verbatimCollectionDate": "13 Sept. 1907",
+    "collectionDate": "1907-09-13",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 519 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "Virginia",
+    "stateProvince": "VIRGINIA",
+    "county": "Rockbridge County",
+    "locality": "Natural Bridge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nBiology Department\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059505\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nDet\nGalax aphylla\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Flora of Virginia\n\n*Galax urceolata* (Poir.) Brummitt\nnear Lawrenceville, Brunswick Co.\n\nForming dense growths among schist\noutcrops on steep, N-facing Kalmia bluff\non Meherrin River 2 mi. W of Gholson\nBridge (rte. #715).  el. 200 ft.\n(Powellton Quad.)  June 11, 1977\n\nCharles E. Stevens\nDet.                                           No. 14,438\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt, near Lawrenceville, Brunswick Co., Forming dense growths among schist outcrops on steep, N-facing Kalmia bluff on Meherrin River 2 mi. W of Gholson Bridge (rte. #715). el. 200 ft. (Powellton Quad.), June 11, 1977\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00103,
+      "total_cost": 0.00180875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 206
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026136\nFlora of Virginia\nGalax urceolata (Poir.) Brummitt\nnear Lawrenceville, Brunswick Co.\nForming dense growths among schist\noutcrops on steep, N-facing Kalmia bluff\non Meherrin River .2 mi. W of Gholson\nBridge (rte. #715). el. 200 ft.\n(Powellton Quad.)\nJune 11, 1977\nCharles E. Stevens\nDet.\nNo. 14,438\n1\n0 1\n2 3\n4\n5\ncm\n6 7 8 9 10\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.000000000000001e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 466,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.0001864
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brummitt\nnear Lawrenceville, Brunswick Co.\n\nForming dense growths among schist\noutcrops on steep, N-facing Kalmia bluff\non Meherrin River 2 mi. W of Gholson\nBridge (rte. #715).  el. 200 ft.\n(Powellton Quad.)  June 11, 1977\n\nCharles E. Stevens\nDet.                                           No. 14,438\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt, near Lawrenceville, Brunswick Co., Forming dense growths among schist outcrops on steep, N-facing Kalmia bluff on Meherrin River 2 mi. W of Gholson Bridge (rte. #715). el. 200 ft. (Powellton Quad.), June 11, 1977\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026136\nFlora of Virginia\nGalax urceolata (Poir.) Brummitt\nnear Lawrenceville, Brunswick Co.\nForming dense growths among schist\noutcrops on steep, N-facing Kalmia bluff\non Meherrin River .2 mi. W of Gholson\nBridge (rte. #715). el. 200 ft.\n(Powellton Quad.)\nJune 11, 1977\nCharles E. Stevens\nDet.\nNo. 14,438\n1\n0 1\n2 3\n4\n5\ncm\n6 7 8 9 10\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026136",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "14,438",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 11, 1977",
+    "collectionDate": "1977-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Forming dense growths among schist outcrops on steep, n-facing kalmia bluff on meherrin river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Brunswick Co.",
+    "locality": "Near Lawrenceville, 2 mi. w of gholson bridge (rte. #715)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "61",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Powellton quad.\nCopyright reserved\nHarvill-stevens herbarium"
+  }
+}

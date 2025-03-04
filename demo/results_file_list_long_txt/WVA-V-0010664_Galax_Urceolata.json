@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010664\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975 not measured\n\nANNOTATION LABEL\n*Galax aphylla* L. *(handwritten)*\nDETERMINED BY 1965 CLYDE F. REED\n\n118179\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nUNIVERSITY OF GEORGIA HERBARIUM\n*Galax aphylla* L. *(handwritten)*\n*Tallulah Falls, Ga.* *(handwritten)*\n*June 11-13, 1910.* *(handwritten)*\nNo. E/430 *R* *(handwritten)*\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010299999999999999,
+      "total_cost": 0.0018087499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 206
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010664\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA HERBARIUM\nGalax aphylla, L.\nTalulah Falls, Ga.\nJune 11-13, 1910.\nNo. 1430\nLorgh.\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2255,
+    "output": 541,
+    "cost_in": 0.0002255,
+    "cost_out": 0.00021640000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010664\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975 not measured\n\nANNOTATION LABEL\n*Galax aphylla* L. *(handwritten)*\nDETERMINED BY 1965 CLYDE F. REED\n\n118179\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nUNIVERSITY OF GEORGIA HERBARIUM\n*Galax aphylla* L. *(handwritten)*\n*Tallulah Falls, Ga.* *(handwritten)*\n*June 11-13, 1910.* *(handwritten)*\nNo. E/430 *R* *(handwritten)*\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010664\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA HERBARIUM\nGalax aphylla, L.\nTalulah Falls, Ga.\nJune 11-13, 1910.\nNo. 1430\nLorgh.\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVA-V-0010664",
+    "scientificName": "Galax urceolata (poir.) brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "",
+    "collectorNumber": "E/430 R",
+    "identifiedBy": "Clyde f. reed, guy l. nesom",
+    "identifiedDate": "1965",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l., 1965, clyde f. reed",
+    "verbatimCollectionDate": "June 11-13, 1910.",
+    "collectionDate": "1910-06-11",
+    "collectionDateEnd": "1910-06-13",
+    "habitat": "",
+    "chromosomeCount": "n =",
+    "guardCell": "n =, based on average guard cell area volume of \u03bc\u00b2 not measured",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "West virginia, georgia",
+    "county": "",
+    "locality": "Talulah falls, ga.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\ncopyright reserved\nwest virginia university (wva)\nherbarium of the university of north carolina\nannotation label\nherbarium\nuniversity\nuniversity of georgia herbarium\nlorgh.\ngalax aphylla\ngalax urceolata\ngalax aphylla"
+  }
+}

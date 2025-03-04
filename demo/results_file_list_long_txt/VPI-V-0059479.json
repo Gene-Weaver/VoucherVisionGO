@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "54429\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059479\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE UNIVERSITY\nHERBARIUM\nState: Virginia                      Co. Craig\n*Galax aphylla* L.\n\nIn rich woods on clay loam, along Va. 617, 0.7\nmile S. of highway equipment depot.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 532\u00b5\u00b2\nGuy L. Nesom, 1975\n\nDate: 13 June 1972\nColl: L. J. UTTAL (handwritten)\nNo: 8801\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000995,
+      "total_cost": 0.00177375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 199
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "54429\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059479\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE UNIVERSITY\nHERBARIUM\nVirginia\nCraig\nState:\nCo.\nGalax aphylla L.\nIn rich woods on clay loam, along Va. 617, 0.7\nmile S. of highway equipment depot.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 532 \u03bc2\nGuy L. Nesom, 1975\nbased on average guard cell area\nDate: 13 June 1972\nColl: L.J. Uttal\n8801\nNo:\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.52e-05,
+      "total_cost": 0.0007567000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2269,
+    "output": 524,
+    "cost_in": 0.00022690000000000004,
+    "cost_out": 0.00020960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n54429\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059479\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE UNIVERSITY\nHERBARIUM\nState: Virginia                      Co. Craig\n*Galax aphylla* L.\n\nIn rich woods on clay loam, along Va. 617, 0.7\nmile S. of highway equipment depot.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 532\u00b5\u00b2\nGuy L. Nesom, 1975\n\nDate: 13 June 1972\nColl: L. J. UTTAL (handwritten)\nNo: 8801\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n54429\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059479\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE UNIVERSITY\nHERBARIUM\nVirginia\nCraig\nState:\nCo.\nGalax aphylla L.\nIn rich woods on clay loam, along Va. 617, 0.7\nmile S. of highway equipment depot.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 532 \u03bc2\nGuy L. Nesom, 1975\nbased on average guard cell area\nDate: 13 June 1972\nColl: L.J. Uttal\n8801\nNo:\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "54429",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "L. J. Uttal",
+    "collectorNumber": "8801",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "13 June 1972",
+    "collectionDate": "1972-06-13",
+    "collectionDateEnd": "",
+    "habitat": "In rich woods on clay loam, along va. 617, 0.7 mile s. of highway equipment depot.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 532\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Craig",
+    "locality": "Along va. 617, 0.7 mile s. of highway equipment depot.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nBiology department\nVirginia polytechnic institute\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0059479\nVirginia polytechnic institute and state university\nHerbarium\ngalax aphylla\ngalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "2481\n\nIMAGED\n20 OCT 2020\n\nELM FORK NATURAL HERITAGE MUSEUM\nB.B. HARRIS HERBARIUM\n00003724\n\nBIOLOGY DEPARTMENT\nNORTH TEXAS STATE TEACHERS COLLEGE\n\nName: *Galax aphylla* L. (handwritten)\nLocality: South Carolina (handwritten)\nHabitat: Dry soil Mountains (handwritten)\nDate: 9-5-30 (handwritten)\nCollected by B. B. HARRIS (handwritten)\nRemarks\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005949999999999999,
+      "total_cost": 0.00137375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 119
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ES\nCamera Trax.com\n24ColorCard\n2481\nIMAGED\n20 OCT 2020\nELM FORK NATURAL HERITAGE MUSEUM\nB.B. HARRIS HERBARIUM\n00003724\nBIOLOGY DEPARTMENT\nNORTH TEXAS STATE TEACHERS COLLEGE\nName Galax aphylla L.\nLocality South Carolina\nHabitat Dry soil Mountains\nRemarks.\nDate 9-5-30\nCollected by B. B. HARRIS\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2000000000000004e-05,
+      "total_cost": 0.0007235,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 105
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2125,
+    "output": 424,
+    "cost_in": 0.00021250000000000002,
+    "cost_out": 0.0001696
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n2481\n\nIMAGED\n20 OCT 2020\n\nELM FORK NATURAL HERITAGE MUSEUM\nB.B. HARRIS HERBARIUM\n00003724\n\nBIOLOGY DEPARTMENT\nNORTH TEXAS STATE TEACHERS COLLEGE\n\nName: *Galax aphylla* L. (handwritten)\nLocality: South Carolina (handwritten)\nHabitat: Dry soil Mountains (handwritten)\nDate: 9-5-30 (handwritten)\nCollected by B. B. HARRIS (handwritten)\nRemarks\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nES\nCamera Trax.com\n24ColorCard\n2481\nIMAGED\n20 OCT 2020\nELM FORK NATURAL HERITAGE MUSEUM\nB.B. HARRIS HERBARIUM\n00003724\nBIOLOGY DEPARTMENT\nNORTH TEXAS STATE TEACHERS COLLEGE\nName Galax aphylla L.\nLocality South Carolina\nHabitat Dry soil Mountains\nRemarks.\nDate 9-5-30\nCollected by B. B. HARRIS\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "00003724",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "B. B. Harris",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9-5-30",
+    "collectionDate": "1930-05-09",
+    "collectionDateEnd": "",
+    "habitat": "Dry soil mountains",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South carolina",
+    "county": "",
+    "locality": "South carolina",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "2481\nimaged\n20 oct 2020\nelm fork natural heritage museum\nb.b. harris herbarium\nbiology department\nnorth texas state teachers college\nremarks"
+  }
+}

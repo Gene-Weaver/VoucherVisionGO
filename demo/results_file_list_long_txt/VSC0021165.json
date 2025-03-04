@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "VSC 0021165\n\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n\n08258 (handwritten)\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\n\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00051,
+      "total_cost": 0.00128875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 102
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Kodak Gray Scale\nA\n1\n2\n3\n4\n5\n8\n5\n9\n7\n10\n11\n12\n13\n14\n15\n16\n17\n18 19\n6\nYellow\nKodak, 2007 TM: Kodak\nRed Magenta White\n3/Color\nBlack\nKodak Color Control Patches\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\nCyan Green\nKodak, 2007 TM: Kodak\nBlue\nM\n8 9 10 11 12 13 14 15\nB 17 18 19\n9\nCYM\nCOLLEGE\nVALDOSTA STATE\nHERBARIUM\n08258\nBuncombe County\nNORTH CAROLINA\nHerbarium of the University of North Carolina\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\nPlants of the Southeastern United States\n5/19/67\nValdosta State University Herbarium\nVSC 0021165\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010680000000000002,
+      "total_cost": 0.0007883,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 267
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2247,
+    "output": 433,
+    "cost_in": 0.0002247,
+    "cost_out": 0.0001732
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nVSC 0021165\n\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n\n08258 (handwritten)\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\n\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nKodak Gray Scale\nA\n1\n2\n3\n4\n5\n8\n5\n9\n7\n10\n11\n12\n13\n14\n15\n16\n17\n18 19\n6\nYellow\nKodak, 2007 TM: Kodak\nRed Magenta White\n3/Color\nBlack\nKodak Color Control Patches\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\nCyan Green\nKodak, 2007 TM: Kodak\nBlue\nM\n8 9 10 11 12 13 14 15\nB 17 18 19\n9\nCYM\nCOLLEGE\nVALDOSTA STATE\nHERBARIUM\n08258\nBuncombe County\nNORTH CAROLINA\nHerbarium of the University of North Carolina\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\nPlants of the Southeastern United States\n5/19/67\nValdosta State University Herbarium\nVSC 0021165\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vsc 0021165",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. c. dunton",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Warren wilson college forest area 7",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe county",
+    "locality": "Elevation 2200'.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of the university of north carolina\nPlants of the southeastern united states\nValdosta state university herbarium"
+  }
+}

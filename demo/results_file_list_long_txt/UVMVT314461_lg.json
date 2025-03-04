@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "cm\ncopyright reserved\nVT\nHerbarium\nof\nSteven R. Hill\n(srh)\n\n010296\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R. Hill 9/90\n\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\n\nSteven R. Hill 21494                                      18 May 1990\n\nImage Date\nAUG 11 2022\nPringle Herbarium\nUniversity of Vermont\nUVMVT314461\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00099,
+      "total_cost": 0.0017687500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 198
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nVT\nHerbarium\nof\nSteven R. Hill\n(srh)\n010296\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\nSteven R. Hill 21494\n18 May 1990\nImage Date\nAUG 11 2022\nPringle Herbarium\nUVMVT314461\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.48e-05,
+      "total_cost": 0.0007663,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 212
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 531,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.0002124
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\ncm\ncopyright reserved\nVT\nHerbarium\nof\nSteven R. Hill\n(srh)\n\n010296\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R. Hill 9/90\n\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\n\nSteven R. Hill 21494                                      18 May 1990\n\nImage Date\nAUG 11 2022\nPringle Herbarium\nUniversity of Vermont\nUVMVT314461\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nVT\nHerbarium\nof\nSteven R. Hill\n(srh)\n010296\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\nSteven R. Hill 21494\n18 May 1990\nImage Date\nAUG 11 2022\nPringle Herbarium\nUVMVT314461\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "010296",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Steven R. Hill",
+    "collectorNumber": "21494",
+    "identifiedBy": "S.R. Hill",
+    "identifiedDate": "1990-09-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "18 May 1990",
+    "collectionDate": "1990-05-18",
+    "collectionDateEnd": "",
+    "habitat": "N facing slopes, N property boundary.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white. Rather common evergreen perennial.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "South carolina",
+    "county": "Oconee",
+    "locality": "Hill property, 1 mi sw of mountain rest lake, w side west village creek. nw side old rocky gap road, mountain rest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "549",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "cm\ncopyright reserved\nvt\nherbarium\nof\nSteven r. hill\n(srh)\nplants of south carolina, u.s.a.\ndiapensiaceae\nelev. ca. 1800 ft.\nimage date\naug 11 2022\npringle herbarium\nuniversity of vermont\nuvmvt314461"
+  }
+}

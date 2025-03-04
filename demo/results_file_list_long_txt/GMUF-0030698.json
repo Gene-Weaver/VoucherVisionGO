@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "034503\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nDICKENSON COUNTY\nDIAPENSIACEAE\n\n*Galax urceolata* (Poiret) Brummitt\n\nn. side of rte. 637, ca. 0.8 mi. s. of Va.\n63, nw. of Clinchco\n\nwith Eric Forbes\nTed Bradley 31667 June 10, 2001\n\nGMUF-0030698\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "034503\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nDICKENSON COUNTY\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nn. side of rte. 637, ca. 0.8 mi. s. of Va.\n63, nw. of Clinchco\nwith Eric Forbes\nTed Bradley\n31667\nJune 10, 2001\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.5600000000000004e-05,
+      "total_cost": 0.0007271000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 114
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2126,
+    "output": 466,
+    "cost_in": 0.0002126,
+    "cost_out": 0.0001864
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n034503\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nDICKENSON COUNTY\nDIAPENSIACEAE\n\n*Galax urceolata* (Poiret) Brummitt\n\nn. side of rte. 637, ca. 0.8 mi. s. of Va.\n63, nw. of Clinchco\n\nwith Eric Forbes\nTed Bradley 31667 June 10, 2001\n\nGMUF-0030698\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n034503\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nDICKENSON COUNTY\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nn. side of rte. 637, ca. 0.8 mi. s. of Va.\n63, nw. of Clinchco\nwith Eric Forbes\nTed Bradley\n31667\nJune 10, 2001\nGMUF\nTed R. Bradley\nHerbarium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "034503",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Ted Bradley, Eric Forbes",
+    "collectorNumber": "31667",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 10, 2001",
+    "collectionDate": "2001-06-10",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Dickenson County",
+    "locality": "N. side of rte. 637, ca. 0.8 mi. s. of va. 63, nw. of clinchco",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of george mason university\nGmuf-0030698\nted r. bradley herbarium\ngeorge mason university"
+  }
+}

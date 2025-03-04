@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n396748 (handwritten)\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\nFodderstack Mountain, southeast of Highlands\nand east of Satulah Mountain. Heath bald,\nrock outcrop and pitch pine (*Pinus rigida*)\nwoods.\n\nD. E. Boufford 14636 23 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\nNCU00080580\n\n\n*Galax aphylla*\n*Pinus rigida*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00096,
+      "total_cost": 0.0017387499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 192
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080580\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\nGalax aphylla L.\nFodderstack Mountain, southeast of Highlands\nand east of Satulah Mountain. Heath bald,\nrock outcrop and pitch pine (Pinus rigida)\nwoods.\nD. E. Boufford 14636\n23 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\nUNIVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n396748\n\n\nGalax aphylla\nPinus rigida\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.120000000000001e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2286,
+    "output": 544,
+    "cost_in": 0.0002286,
+    "cost_out": 0.0002176
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n396748 (handwritten)\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\nFodderstack Mountain, southeast of Highlands\nand east of Satulah Mountain. Heath bald,\nrock outcrop and pitch pine (*Pinus rigida*)\nwoods.\n\nD. E. Boufford 14636 23 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\nNCU00080580\n\n\n*Galax aphylla*\n*Pinus rigida*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080580\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\nGalax aphylla L.\nFodderstack Mountain, southeast of Highlands\nand east of Satulah Mountain. Heath bald,\nrock outcrop and pitch pine (Pinus rigida)\nwoods.\nD. E. Boufford 14636\n23 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\nUNIVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n396748\n\n\nGalax aphylla\nPinus rigida\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080580",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, L. Schram, D. Wickland & E. Wood",
+    "collectorNumber": "14636",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 June 1974",
+    "collectionDate": "1974-06-23",
+    "collectionDateEnd": "",
+    "habitat": "Heath bald, rock outcrop and pitch pine (Pinus rigida) woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "Fodderstack Mountain, southeast of Highlands and east of Satulah Mountain.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nUNIVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n396748"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "11825\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = _______, based on average guard cell area\nvolume of \u03bc2 not measured\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nRoanoke                                      County\n*Galax aphylla*, L.\nNorth slope Fort Lewis Mountain\n\n*Grace A. Smyth*\nDate Sept. 21, 1953\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00068,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "24ColorCard\nMETRIC 1\n2\n3\n4\n6\n124\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n11825\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nRoanoke\nCounty\nGalax aphylla, L,\nnorth shopp Fort Lewis Mountain\nGrace A. Smyth\nDate Sept. 21,1953\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059457\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.52e-05,
+      "total_cost": 0.0007467000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 163
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2206,
+    "output": 477,
+    "cost_in": 0.00022060000000000002,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n11825\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = _______, based on average guard cell area\nvolume of \u03bc2 not measured\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nRoanoke                                      County\n*Galax aphylla*, L.\nNorth slope Fort Lewis Mountain\n\n*Grace A. Smyth*\nDate Sept. 21, 1953\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n24ColorCard\nMETRIC 1\n2\n3\n4\n6\n124\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n11825\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nRoanoke\nCounty\nGalax aphylla, L,\nnorth shopp Fort Lewis Mountain\nGrace A. Smyth\nDate Sept. 21,1953\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059457\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "11825",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Grace A. Smyth",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 21, 1953",
+    "collectionDate": "1953-09-21",
+    "collectionDateEnd": "",
+    "habitat": "North slope Fort Lewis Mountain",
+    "chromosomeCount": "n = _______",
+    "guardCell": "Based on average guard cell area volume of \u03bc2 not measured",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Roanoke",
+    "locality": "North slope Fort Lewis Mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the university of north carolina\nFlora of virginia\nHerbarium of the virginia polytechnic institute\nBiology department\nVirginia polytechnic institute\nGalax aphylla, L."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n073436\nHERBARIUM\n\nIK\n\nFLORA OF KENTUCKY\nFlora of Pine Mountain\nBell County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nKentucky Ridge State Forest: Golden site\nNorth-facing slope of Pine Mountain. Steep sub-xeric deciduous forest\nbelow ridge\n\nAmy V. McIntosh #742\nOther Collectors: Ron Jones, Jacob Stewart\n1 May 2005\n\nThesis voucher\nEKY\n\nEastern Kentucky University Herbarium\n3 1234 10039623 1\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007,
+      "total_cost": 0.00147875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 140
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EASTERN\nKENTUCKY\n073436\nHERBARIUM\nEastern Kentucky University Herbarium\n3 1234 10039623 1\nN\nERSITY\nINCH\nOPTIRECTILINEAR\n8\n\u03b5\n\u0e1e\u0e27\nIK\nU.S.A.\nDiapensiaceae\nFLORA OF KENTUCKY\nFlora of Pine Mountain\nBell County\nGalax urceolata (Poir.) Brummitt\nKentucky Ridge State Forest: Golden site\nNorth-facing slope of Pine Mountain. Steep sub-xeric deciduous forest\nbelow ridge\nAmy V. McIntosh #742\nOther Collectors: Ron Jones, Jacob Stewart\n1 May 2005\nThesis voucher\nEKY\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.6e-05,
+      "total_cost": 0.0007475,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 442,
+    "cost_in": 0.0002188,
+    "cost_out": 0.00017680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n073436\nHERBARIUM\n\nIK\n\nFLORA OF KENTUCKY\nFlora of Pine Mountain\nBell County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nKentucky Ridge State Forest: Golden site\nNorth-facing slope of Pine Mountain. Steep sub-xeric deciduous forest\nbelow ridge\n\nAmy V. McIntosh #742\nOther Collectors: Ron Jones, Jacob Stewart\n1 May 2005\n\nThesis voucher\nEKY\n\nEastern Kentucky University Herbarium\n3 1234 10039623 1\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEASTERN\nKENTUCKY\n073436\nHERBARIUM\nEastern Kentucky University Herbarium\n3 1234 10039623 1\nN\nERSITY\nINCH\nOPTIRECTILINEAR\n8\n\u03b5\n\u0e1e\u0e27\nIK\nU.S.A.\nDiapensiaceae\nFLORA OF KENTUCKY\nFlora of Pine Mountain\nBell County\nGalax urceolata (Poir.) Brummitt\nKentucky Ridge State Forest: Golden site\nNorth-facing slope of Pine Mountain. Steep sub-xeric deciduous forest\nbelow ridge\nAmy V. McIntosh #742\nOther Collectors: Ron Jones, Jacob Stewart\n1 May 2005\nThesis voucher\nEKY\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "073436",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Amy V. Mcintosh, Ron Jones, Jacob Stewart",
+    "collectorNumber": "742",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 May 2005",
+    "collectionDate": "2005-05-01",
+    "collectionDateEnd": "",
+    "habitat": "North-facing slope of pine mountain. Steep sub-xeric deciduous forest below ridge",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Kentucky",
+    "county": "Bell county",
+    "locality": "Kentucky ridge state forest golden site",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Eastern kentucky university\nherbarium\nIk\nFlora of pine mountain\nthesis voucher\neky\nEastern kentucky university herbarium"
+  }
+}

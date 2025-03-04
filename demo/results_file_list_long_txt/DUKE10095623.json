@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095623\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n\n35239 (handwritten)\n\nThe University of Georgia Herbarium\nGalax aphylla L.\nTallulah Falls, Ga.\nJ.H.Miller June 1923\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.00140375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095623\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nThe University of Georgia Herbarium\nGalax aphylla L.\nTallulah Falls, Ga.\nJ.H.Miller June 1923\nNo.\nRabun Co\nJu39\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2139,
+    "output": 448,
+    "cost_in": 0.0002139,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095623\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n\n35239 (handwritten)\n\nThe University of Georgia Herbarium\nGalax aphylla L.\nTallulah Falls, Ga.\nJ.H.Miller June 1923\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095623\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nThe University of Georgia Herbarium\nGalax aphylla L.\nTallulah Falls, Ga.\nJ.H.Miller June 1923\nNo.\nRabun Co\nJu39\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095623",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.H. Miller",
+    "collectorNumber": "35239",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 1923",
+    "collectionDate": "1923-06-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Ga.",
+    "county": "Rabun Co",
+    "locality": "Tallulah Falls",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "(Galax aphylla auct. non L.)\nDuke University Herbarium\nThe University of Georgia Herbarium"
+  }
+}

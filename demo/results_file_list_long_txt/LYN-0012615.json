@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012615\n\nLYNCHBURG\n6788\nCOLLEGE\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 473 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\nCOUNTY\nNO. *798*\n\n*Monotropa uniflora* L.\n\nCOLLECTORS *June 21, 1971*\n*Kevin Ramsey, N. F. Radke, G. S. Waggoner*\n\n\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.00157375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012615\nLYNCHBURG\n6788\nCOLLEGE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of 473 \u03bc2\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA\nCOUNTY\nCOLLECTORS\nJune 21, 19 67\nKovin Ramsey\n\n\nGalax urceolata\nO-la aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.08e-05,
+      "total_cost": 0.0007323,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 127
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2184,
+    "output": 515,
+    "cost_in": 0.00021840000000000002,
+    "cost_out": 0.00020600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012615\n\nLYNCHBURG\n6788\nCOLLEGE\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 473 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\nCOUNTY\nNO. *798*\n\n*Monotropa uniflora* L.\n\nCOLLECTORS *June 21, 1971*\n*Kevin Ramsey, N. F. Radke, G. S. Waggoner*\n\n\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012615\nLYNCHBURG\n6788\nCOLLEGE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of 473 \u03bc2\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA\nCOUNTY\nCOLLECTORS\nJune 21, 19 67\nKovin Ramsey\n\n\nGalax urceolata\nO-la aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012615",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Kevin Ramsey, N. F. Radke, G. S. Waggoner",
+    "collectorNumber": "798",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 21, 1971",
+    "collectionDate": "1971-06-21",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 473 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG\n6788\nCOLLEGE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF VIRGINIA\nCOUNTY\nCOLLECTORS\nMonotropa uniflora L.\nGalax urceolata\nO-la aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nUNIVERSITY\nHERBARIUM\nCAROLINA\n288857\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332627\nPLANTS OF VIRGINIA\nPIEDMONT\nCampbell\nCOUNTY\nNO.4098\n*Galax aphylla* L.\n\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\n\nCOLLECTORS\nG. W. Ramsey\nJune 13, 19 66\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.0014687500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\ncm\ncopyright reserved\nNORTH\nHERBARIUM\nUNIVERSITY\nCAROLINA\n288857\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332627\nPLANTS OF VIRGINIA\nCampbell COUNTY PIEDMONT\nNO 4098\nGalax aphylla L.\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\nCOLLECTORS\nG.W. Ramsey\nJune 13, 1966\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.160000000000001e-05,
+      "total_cost": 0.0007331,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 129
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2157,
+    "output": 483,
+    "cost_in": 0.0002157,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nUNIVERSITY\nHERBARIUM\nCAROLINA\n288857\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332627\nPLANTS OF VIRGINIA\nPIEDMONT\nCampbell\nCOUNTY\nNO.4098\n*Galax aphylla* L.\n\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\n\nCOLLECTORS\nG. W. Ramsey\nJune 13, 19 66\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nMSCCPPCC0411\ncm\ncopyright reserved\nNORTH\nHERBARIUM\nUNIVERSITY\nCAROLINA\n288857\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332627\nPLANTS OF VIRGINIA\nCampbell COUNTY PIEDMONT\nNO 4098\nGalax aphylla L.\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\nCOLLECTORS\nG.W. Ramsey\nJune 13, 1966\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332627",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. W. Ramsey",
+    "collectorNumber": "4098",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 13, 19 66",
+    "collectionDate": "1966-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Shaded creek bank near origin of upper middle Tomahawk Cr. near Sleepy Hollow Rd. in Rainbow Forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Campbell",
+    "locality": "Tomahawk Cr. near Sleepy Hollow Rd. in Rainbow Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "MSCCPPPE0411\nMSCCPPCC0411\nUNIVERSITY\nHERBARIUM\nCAROLINA\n288857\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nPLANTS OF VIRGINIA\nPIEDMONT\nHandwritten Text Galax aphylla\ncm\ncopyright reserved\nNORTH\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "RSA0508064\nHERBARIUM OF\n339423\nPOMONA COLLEGE\n\nPLANTS of VIRGINIA\nFloyd County - Patrick Co. boundary\n*Galax aphylla* L.\nLocality Rocky Knob, Blue Ridge Parkway.\nOccurrence Common locally on mossy shrubby\nbanks under trees in dry oak woods\non slopes of broken mica schist.\n\nDate Sept. 1, 1951  Alt. _______ m\nColl. F. R. Fosberg No. 33569\nRemarks Rhizomes prostrate, plants colonial;\nleaves glossy, scapes erect.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006749999999999999,
+      "total_cost": 0.00145375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 135
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508064\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM OF\n339423\nPOMONA COLLEGE\nPLANTS of VIRGINIA\nFloyd County - Patrick Co. boundary\nGalax aphylla L.\nLocality Rocky Knob, Blue Ridge Parkway.\nOccurrence Common locally on mossy shrubby\nbanks under trees in dry oak woods\non slopes of broken mica schist.\nDate Sept. 1, 1951 Alt. m\nColl. F. R. Fosberg No. 33569\nRemarks Rhizomes prostrate, plants colonial;\nleaves glossy, scapes erect.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 496,
+    "cost_in": 0.0002204,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRSA0508064\nHERBARIUM OF\n339423\nPOMONA COLLEGE\n\nPLANTS of VIRGINIA\nFloyd County - Patrick Co. boundary\n*Galax aphylla* L.\nLocality Rocky Knob, Blue Ridge Parkway.\nOccurrence Common locally on mossy shrubby\nbanks under trees in dry oak woods\non slopes of broken mica schist.\n\nDate Sept. 1, 1951  Alt. _______ m\nColl. F. R. Fosberg No. 33569\nRemarks Rhizomes prostrate, plants colonial;\nleaves glossy, scapes erect.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508064\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM OF\n339423\nPOMONA COLLEGE\nPLANTS of VIRGINIA\nFloyd County - Patrick Co. boundary\nGalax aphylla L.\nLocality Rocky Knob, Blue Ridge Parkway.\nOccurrence Common locally on mossy shrubby\nbanks under trees in dry oak woods\non slopes of broken mica schist.\nDate Sept. 1, 1951 Alt. m\nColl. F. R. Fosberg No. 33569\nRemarks Rhizomes prostrate, plants colonial;\nleaves glossy, scapes erect.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508064",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "F. R. Fosberg",
+    "collectorNumber": "33569",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 1, 1951",
+    "collectionDate": "1951-09-01",
+    "collectionDateEnd": "",
+    "habitat": "Common locally on mossy shrubby banks under trees in dry oak woods on slopes of broken mica schist.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Rhizomes prostrate, plants colonial; leaves glossy, scapes erect.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "Virginia",
+    "county": "Floyd County - Patrick Co.",
+    "locality": "Rocky Knob, Blue Ridge Parkway.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF\nPOMONA COLLEGE\nPLANTS of VIRGINIA\nAlt. m\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved"
+  }
+}

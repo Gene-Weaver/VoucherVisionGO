@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn=1/2, based on average guard cell area\nvolume of 675\u00b5\u00b2\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\n52482\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSteep, wooded hillside, north-northwest\nfacing and overlooking Chestatee R.,\n10 miles W27\u00b0N of Gainesville.\nElevation 925 feet.\nPIEDMONT PROVINCE\n\nWilliam P. Adams\nWilbur H. Duncan 18338        26 March, 1955\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001035,
+      "total_cost": 0.00181375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 207
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep, wooded hillside, north-northwest\nfacing and overlooking Chestatee R.,\n10 miles W27\u00b0N of Gainesville.\nElevation 925 feet.\nPIEDMONT PROVINCE\nWilliam P. Adams\nWilbur H. Duncan 18338\n26 March, 1955\nGA059174\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.76e-05,
+      "total_cost": 0.0007491,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 169
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2262,
+    "output": 516,
+    "cost_in": 0.00022620000000000002,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn=1/2, based on average guard cell area\nvolume of 675\u00b5\u00b2\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\n52482\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSteep, wooded hillside, north-northwest\nfacing and overlooking Chestatee R.,\n10 miles W27\u00b0N of Gainesville.\nElevation 925 feet.\nPIEDMONT PROVINCE\n\nWilliam P. Adams\nWilbur H. Duncan 18338        26 March, 1955\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep, wooded hillside, north-northwest\nfacing and overlooking Chestatee R.,\n10 miles W27\u00b0N of Gainesville.\nElevation 925 feet.\nPIEDMONT PROVINCE\nWilliam P. Adams\nWilbur H. Duncan 18338\n26 March, 1955\nGA059174\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059174",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "William P. Adams, Wilbur H. Duncan",
+    "collectorNumber": "18338",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "26 March, 1955",
+    "collectionDate": "1955-03-26",
+    "collectionDateEnd": "",
+    "habitat": "Steep, wooded hillside, north-northwest facing and overlooking Chestatee R.",
+    "chromosomeCount": "n=1/2",
+    "guardCell": "based on average guard cell area volume of 675\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Hall County",
+    "locality": "10 miles W27\u00b0N of Gainesville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "282",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nHerbarium of The University of Georgia\nFLORA OF GEORGIA\n\nPIEDMONT PROVINCE\n\nIMAGED 2013"
+  }
+}

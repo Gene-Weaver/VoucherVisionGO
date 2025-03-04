@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087818\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\n\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\n\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, Ky.\nSeptember 12, 1978\n\nUNIVERSITY OF LOUISVILLE\n1798\nDAVIES HERBARIUM\n25824\n\nHandwritten Text: Bledsoe, Ky.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013599999999999999,
+      "total_cost": 0.00213875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 272
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087818\nTIFFEN\u00ae Color Control Patches\nTIFFEN Gray Scale\nDAVIES HERBARIUM\n25824\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, ky\nSeptember 12, 19 78\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010440000000000002,
+      "total_cost": 0.0007859000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 261
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2378,
+    "output": 640,
+    "cost_in": 0.0002378,
+    "cost_out": 0.00025600000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087818\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\n\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\n\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, Ky.\nSeptember 12, 1978\n\nUNIVERSITY OF LOUISVILLE\n1798\nDAVIES HERBARIUM\n25824\n\nHandwritten Text: Bledsoe, Ky.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087818\nTIFFEN\u00ae Color Control Patches\nTIFFEN Gray Scale\nDAVIES HERBARIUM\n25824\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, ky\nSeptember 12, 19 78\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087818",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Rich Hannan, Loy R. Phillippe",
+    "collectorNumber": "KEP-01-003-00130",
+    "identifiedBy": "Mason Brock",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "September 12, 1978",
+    "collectionDate": "1978-09-12",
+    "collectionDateEnd": "",
+    "habitat": "Rich woods along edge of cliff on Pine Mt. (s.e. facing slope)",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "Harlan County",
+    "locality": "2.2 miles north of junction of US 421 and Ky. 413 on US 421. Kentenia State Forest. Topo. Quad. 3683-83",
+    "verbatimCoordinates": "Lat. 36\u00b0 53' 57 Long. 83\u00b0 18' 54",
+    "decimalLatitude": "36.899166666666665",
+    "decimalLongitude": "-83.315",
+    "minimumElevationInMeters": "792",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nDet. Mason Brock, Austin Peay State University (APSC)\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nElev. about\n2600'\nBledsoe, Ky.\nUNIVERSITY OF LOUISVILLE\n1798\nDAVIES HERBARIUM\n25824\nHandwritten Text Bledsoe, Ky.\nGalax urceolata\nGalax aphylla\nTIFFEN\u00ae Color Control Patches\nTIFFEN Gray Scale"
+  }
+}

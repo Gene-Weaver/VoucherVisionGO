@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23612\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport                                                               1981\n\nHERBARIUM of Chas. Mohr, Mobile, Ala.\n\n*Galax aphylla* L.\nChe-aw-hew Mts. Clay Co. near Waldo\nPike Co. along roadsides S. of Brundidge.\n\n(Handwritten text)\nAug. July 31.                                                                      1896\nCollector: C. Mohr & E.A. Smith\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009100000000000001,
+      "total_cost": 0.00168875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23612\nUNA\nThe University\nof Alabama\nHerbarium\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013971\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nHERBARIUM of Chas. Mohr, Mobile, Ala.\nGalax aphylla L.\nChe. Ope- w-hew. Mts. Clay near Walli\nfall.\nAceg July 31.\n1896\nCollector: C.Mohrd Ect Smith\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2261,
+    "output": 511,
+    "cost_in": 0.00022610000000000002,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23612\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport                                                               1981\n\nHERBARIUM of Chas. Mohr, Mobile, Ala.\n\n*Galax aphylla* L.\nChe-aw-hew Mts. Clay Co. near Waldo\nPike Co. along roadsides S. of Brundidge.\n\n(Handwritten text)\nAug. July 31.                                                                      1896\nCollector: C. Mohr & E.A. Smith\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23612\nUNA\nThe University\nof Alabama\nHerbarium\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013971\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nHERBARIUM of Chas. Mohr, Mobile, Ala.\nGalax aphylla L.\nChe. Ope- w-hew. Mts. Clay near Walli\nfall.\nAceg July 31.\n1896\nCollector: C.Mohrd Ect Smith\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "23612",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C. Mohr, E.A. Smith",
+    "collectorNumber": "",
+    "identifiedBy": "Robert R. Haynes, L. J. Davenport",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. det. L. J. Davenport 1981",
+    "verbatimCollectionDate": "Aug. July 31.",
+    "collectionDate": "1896-07-31",
+    "collectionDateEnd": "",
+    "habitat": "Along roadsides s. of brundidge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Clay, Pike",
+    "locality": "Che-aw-hew Mts. Clay Co. near Waldo",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Una\nThe university\nof Alabama\nUna00013971\nHerbarium of chas. mohr, mobile, ala.\nChe. ope- w-hew. mts. clay near walli\nFall.\nAceg"
+  }
+}

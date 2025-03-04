@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n\n52161\n\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNLU0134070\n\nExchange Specimen From\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\n*Galax aphylla* L.\n\nRich deciduous woods near Boone\n\nNo.\nDate 7/2/69 (handwritten)\nCollected by Jim Gardener (handwritten)\nDetermined by\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00054,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52161\nHERBARIUM\n\nExchange Specimen From\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\nGalax aphylla L.\n\nRich deciduous woods near Boone\n\nNo.\nCollected by\nDetermined by\nDate 7/2/69\nJim Gardener\n\nUniversity of Louisiana at Monroe\nNLU0134070\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.8e-05,
+      "total_cost": 0.0007195000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 95
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2098,
+    "output": 434,
+    "cost_in": 0.0002098,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n\n52161\n\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNLU0134070\n\nExchange Specimen From\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\n*Galax aphylla* L.\n\nRich deciduous woods near Boone\n\nNo.\nDate 7/2/69 (handwritten)\nCollected by Jim Gardener (handwritten)\nDetermined by\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52161\nHERBARIUM\n\nExchange Specimen From\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\nGalax aphylla L.\n\nRich deciduous woods near Boone\n\nNo.\nCollected by\nDetermined by\nDate 7/2/69\nJim Gardener\n\nUniversity of Louisiana at Monroe\nNLU0134070\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NLU0134070",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jim Gardener",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/2/69",
+    "collectionDate": "1969-07-02",
+    "collectionDateEnd": "",
+    "habitat": "Rich deciduous woods near Boone",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Watauga county",
+    "locality": "Near boone",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\n52161\nHerbarium\nUniversity of louisiana at monroe\nExchange specimen from\nAppalachian state university herbarium\nPlants of north carolina"
+  }
+}

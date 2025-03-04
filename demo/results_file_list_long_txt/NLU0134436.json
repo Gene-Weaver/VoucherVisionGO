@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52164\nHERBARIUM\n\nFLORA TENNESSEENSIS\nBlount COUNTY\nChilhowee Mountain\n\nNO.\n*Galax aphylla* L.\nGrowing on the roots of windblown tree in wooded\nswamp northeast of Look Rock Campground.\nElev. 2460 ft.\n\nCOLLECTORS\nR. Dale Thomas\nSept. 18, 1965\n\n\nHandwritten Text: R. Dale Thomas\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000535,
+      "total_cost": 0.00131375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 107
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "AST LOUISIANA UNIVERSITY\n52164\nHERBARIUM\nKodak Gray Scale\nKodak Color Control Patches\nFLORA TENNESSEENSIS\nBlount\nCOUNTY\nChilhowee Mountain\nGalax aphylla L.\nGrowing on the roots of windblown tree in wooded\nswamp northeast of Look Rock Campground.\nElev. 2460 ft.\nCOLLECTORS\nR. Dale Thomas\nSept. 18, 1965\nUniversity of Louisiana at Monroe\nNLU0134436\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.720000000000001e-05,
+      "total_cost": 0.0007287000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 118
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2115,
+    "output": 448,
+    "cost_in": 0.00021150000000000002,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52164\nHERBARIUM\n\nFLORA TENNESSEENSIS\nBlount COUNTY\nChilhowee Mountain\n\nNO.\n*Galax aphylla* L.\nGrowing on the roots of windblown tree in wooded\nswamp northeast of Look Rock Campground.\nElev. 2460 ft.\n\nCOLLECTORS\nR. Dale Thomas\nSept. 18, 1965\n\n\nHandwritten Text: R. Dale Thomas\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAST LOUISIANA UNIVERSITY\n52164\nHERBARIUM\nKodak Gray Scale\nKodak Color Control Patches\nFLORA TENNESSEENSIS\nBlount\nCOUNTY\nChilhowee Mountain\nGalax aphylla L.\nGrowing on the roots of windblown tree in wooded\nswamp northeast of Look Rock Campground.\nElev. 2460 ft.\nCOLLECTORS\nR. Dale Thomas\nSept. 18, 1965\nUniversity of Louisiana at Monroe\nNLU0134436\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "52164",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 18, 1965",
+    "collectionDate": "1965-09-18",
+    "collectionDateEnd": "",
+    "habitat": "Growing on the roots of windblown tree in wooded swamp northeast of Look Rock Campground.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Blount",
+    "locality": "Chilhowee mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "750",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Northeast louisiana university\nHerbarium\nFlora tennesseensis\nElev. 2460 ft.\nUniversity of louisiana at monroe\nNlu0134436"
+  }
+}

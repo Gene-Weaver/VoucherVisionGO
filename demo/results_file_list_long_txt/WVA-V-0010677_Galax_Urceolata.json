@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\nWest Virginia University (WVA)\nWVA-V-0010677\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 432\u00b5\u00b2\nGuy L. Nesom, 1975\n\n118193\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY CLYDE F. REED\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n*Galax aphylla* L.\nWoodscoil near top of Fruelove Mtn.\nLake Junaluska, Haywood Co.\n\n(Handwritten Text)\nJune 12, '54\nNo. 34189\n*G. aphylla* (Handwritten Text)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00108,
+      "total_cost": 0.00185875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 216
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC 1 SYSTEM 2\n111\n12\n13\ncopyright reserved\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010677\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nGuy L. Nesom, 1975\n118193\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\u0391\u039d\u039d\u039f\u03a4\u0391TION LABEL\nGalax aphylla L.\nDETERMINED BY\n1965\nCLYDE F. REED\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nWoodscoil near top of Frue Love Tuk.\nLake Jumalucka, aralywood 20\nGhosting\nJune 12,49 34\nNo. 34189\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.64e-05,
+      "total_cost": 0.0007679000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 216
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2324,
+    "output": 512,
+    "cost_in": 0.0002324,
+    "cost_out": 0.0002048
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\nWest Virginia University (WVA)\nWVA-V-0010677\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 432\u00b5\u00b2\nGuy L. Nesom, 1975\n\n118193\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY CLYDE F. REED\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n*Galax aphylla* L.\nWoodscoil near top of Fruelove Mtn.\nLake Junaluska, Haywood Co.\n\n(Handwritten Text)\nJune 12, '54\nNo. 34189\n*G. aphylla* (Handwritten Text)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC 1 SYSTEM 2\n111\n12\n13\ncopyright reserved\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010677\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nGuy L. Nesom, 1975\n118193\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\u0391\u039d\u039d\u039f\u03a4\u0391TION LABEL\nGalax aphylla L.\nDETERMINED BY\n1965\nCLYDE F. REED\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nWoodscoil near top of Frue Love Tuk.\nLake Jumalucka, aralywood 20\nGhosting\nJune 12,49 34\nNo. 34189\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVA-V-0010677",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "",
+    "collectorNumber": "34189",
+    "identifiedBy": "Guy L. Nesom, Clyde F. Reed",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. 1965 Clyde F. Reed",
+    "verbatimCollectionDate": "June 12, '54",
+    "collectionDate": "1954-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Woodscoil near top of Fruelove Mtn.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 432\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "West Virginia",
+    "county": "Haywood Co.",
+    "locality": "Lake Junaluska",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\nWest Virginia University (wva)\nHerbarium of the university of north carolina\nWest Virginia\nHerbarium\nUniversity\nAnnotation label\nFlora of north carolina\nDuke university herbarium"
+  }
+}

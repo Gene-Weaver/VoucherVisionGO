@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nCAROLINA\u2122\nBurlington, NC 27215 * 1-800-334-5551\n\nPRESERVED\nMATERIALS\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015482\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 24640 (handwritten)\n\nNorth Carolina\nDIAPENSIACEAE\n*Galax aphylla* L.\nBeetleweed\n\nMacon County. Highlands, NC. Found on right side of trail of Sunset\nRock in shade beneath *Rhododendron maximum*, 1/4 mile on the trail.\n\nRachel Chandler Power A07\nSeptember, 2011\n\n\n*Galax aphylla*\n*Rhododendron maximum*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008950000000000001,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015482\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nPRESERVED\nMATERIALS\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 24640\nNorth Carolina\nDIAPENSIACEAE\nGalax aphylla L.\nBeetleweed\nMacon County. Highlands, NC. Found on right side of trail of Sunset\nRock in shade beneath Rhododendron maximum, 1/4 mile on the trail.\nRachel Chandler Power A07\nSeptember, 2011\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "total_cost": 0.0007499000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2226,
+    "output": 536,
+    "cost_in": 0.00022260000000000002,
+    "cost_out": 0.0002144
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nCAROLINA\u2122\nBurlington, NC 27215 * 1-800-334-5551\n\nPRESERVED\nMATERIALS\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015482\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 24640 (handwritten)\n\nNorth Carolina\nDIAPENSIACEAE\n*Galax aphylla* L.\nBeetleweed\n\nMacon County. Highlands, NC. Found on right side of trail of Sunset\nRock in shade beneath *Rhododendron maximum*, 1/4 mile on the trail.\n\nRachel Chandler Power A07\nSeptember, 2011\n\n\n*Galax aphylla*\n*Rhododendron maximum*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015482\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nPRESERVED\nMATERIALS\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 24640\nNorth Carolina\nDIAPENSIACEAE\nGalax aphylla L.\nBeetleweed\nMacon County. Highlands, NC. Found on right side of trail of Sunset\nRock in shade beneath Rhododendron maximum, 1/4 mile on the trail.\nRachel Chandler Power A07\nSeptember, 2011\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015482",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Rachel Chandler Power",
+    "collectorNumber": "A07",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "September, 2011",
+    "collectionDate": "2011-09-00",
+    "collectionDateEnd": "",
+    "habitat": "Found on right side of trail of Sunset Rock in shade beneath Rhododendron maximum, 1/4 mile on the trail.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Beetleweed",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "Highlands, nc. found on right side of trail of sunset rock in shade beneath rhododendron maximum, 1/4 mile on the trail.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Living\nCultures\nCarolina\u2122\nBurlington, nc 27215  1-800-334-5551\nPreserved\nMaterials\nAppalachian state university herbarium\nHerbarium\nAppalachian state\nUniversity\nBoone, n. c.\nNo. 24640\nDiapensiaceae\nGalax aphylla\nRhododendron maximum"
+  }
+}

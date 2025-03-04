@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UPSTATE\nUSCS\nUniversity of South Carolina Upstate\n\nHERBARIUM\nUSC-SPARTANBURG\n\nNORTH CAROLINA - Henderson Co.\nDIAPENSIACEAE\n*Galax aphylla*\n\n*G. urceolata*\nAt entrance of\nCove Creek Hiking\nTrail, growing\nalong bank of stream\n\nLocation: Pisgah National\nForest\nDate:\nMay 25, 1977\n\nUniversity of South Carolina Upstate\nColl: Gillian Newberry\nNo. 138\nUSCS0008533\n\n146 (handwritten)\n146\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00068,
+      "total_cost": 0.0014587500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UPSTATE\nUSCS\nUniversity of South Carolina Upstate\n\nHERBARIUM\nUSC-SPARTANBURG\nNORTH CAROLINA - Henderson Co.\nDIAPENSIACEAE\nGALAX APHYLLA\nAt entrance of\nCove Creek Hiking\nTrail, growing\nalong bank of stream\n\nLocation: Pisgah National Date:\nForest May 25, 1977\nColl: Gillian Newberry No. 138\nUniversity of South Carolina Upstate\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.08e-05,
+      "total_cost": 0.0007222999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 102
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2127,
+    "output": 460,
+    "cost_in": 0.00021270000000000002,
+    "cost_out": 0.00018400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUPSTATE\nUSCS\nUniversity of South Carolina Upstate\n\nHERBARIUM\nUSC-SPARTANBURG\n\nNORTH CAROLINA - Henderson Co.\nDIAPENSIACEAE\n*Galax aphylla*\n\n*G. urceolata*\nAt entrance of\nCove Creek Hiking\nTrail, growing\nalong bank of stream\n\nLocation: Pisgah National\nForest\nDate:\nMay 25, 1977\n\nUniversity of South Carolina Upstate\nColl: Gillian Newberry\nNo. 138\nUSCS0008533\n\n146 (handwritten)\n146\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUPSTATE\nUSCS\nUniversity of South Carolina Upstate\n\nHERBARIUM\nUSC-SPARTANBURG\nNORTH CAROLINA - Henderson Co.\nDIAPENSIACEAE\nGALAX APHYLLA\nAt entrance of\nCove Creek Hiking\nTrail, growing\nalong bank of stream\n\nLocation: Pisgah National Date:\nForest May 25, 1977\nColl: Gillian Newberry No. 138\nUniversity of South Carolina Upstate\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCS0008533",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Gillian Newberry",
+    "collectorNumber": "138",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 25, 1977",
+    "collectionDate": "1977-05-25",
+    "collectionDateEnd": "",
+    "habitat": "At entrance of Cove Creek Hiking Trail, growing along bank of stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson co.",
+    "locality": "Location pisgah national forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Upstate\nUSCS\nUniversity of South Carolina Upstate\nHerbarium\nUSC-Spartanburg\nDIAPENSIACEAE\nG. urceolata\nUniversity of South Carolina Upstate\n146 (handwritten)\n146"
+  }
+}

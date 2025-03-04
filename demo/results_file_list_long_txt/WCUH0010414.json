@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NC\n28819\nCAROLINA UNIVERSITY\n\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n\n2430\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010414\n\nForm 767\n(Revised Apr., 1928)\n= *G. urceolata* (Poiret) Brummitt\n*Galax urceolata*\n\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\n\nCollector's No. 111 Date of collection 6-9-32\nBotanical name *Galax aphylla* DIAPENSIACEAE\nCommon name Galax\nState NC County Transyl. Forest Pisgah\nExact locality Eagle Mtn trail 1 mile from Davidson R.\nAltitude 2800 feet. Slope mod. N Soil moist loam\n(Steepness and direction) (Sec., T., and R., Thompson Meadow) (Deep clay loam, shallow\ncoarse gravel, etc.)\nType PC Timber browse-weed Use Light\n(Woodland, timber, park, etc.) (Weed, browse, grass) (Density in tenths)\n*Gaylussacia*, ferns\n(Principal associated plants in order of abundance)\nDistribution open woods Abundance common\n(Where generally found) (Overgrazing, close, moderate, light)\nForage value deer winter\n(Palatability) (Grazed by C., H., S., and G.) (Season grazed)\n\nOther data (Usual size of plant) (Flowering period) (Period of seed dissemination) (Other notes)\nCollector's name E.E.Ripper\nGOVERNMENT PRINTING OFFICE 8-1561\n\n\nHandwritten text:\n= *G. urceolata* (Poiret) Brummitt\n*Galax urceolata*\nEagle Mtn trail 1 mile from Davidson R.\nmod. N\nPC Timber browse-weed\n*Gaylussacia*, ferns\nopen woods\ndeer\nE.E.Ripper\n\n*Galax aphylla*\n*Gaylussacia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00229,
+      "total_cost": 0.00306875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 458
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "U. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n2430\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010414\nForm 767\n(Revised Apr., 1928)\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\nCollector's No.\n111\nBotanical name\nCommon name\nState NC\nDate of collection\n6-9-32\nGalax aphylla DIAPENSIACEAE\nGalax\nCounty Transyl. Forest Pisgah.\nExact locality Kagle Mtn trail mile from Davidson R.\nAltitude 2800 feet. Slope mod N Soil moist loam\nType PC Timber browse-weed\nGaylussacia, ferns\nDistribution open woods.\nForage value\nUse light\nAbundance common\ndeer\nwinter\nOther data\nCollector's name E.E.Ripper.\n28819\nCAROLINA\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC 11\nG. urceolata (Poiret) Bummitt\n\n\nGalax aphylla\nGaylussacia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011720000000000002,
+      "total_cost": 0.0007987000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 293
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2656,
+    "output": 785,
+    "cost_in": 0.0002656,
+    "cost_out": 0.00031400000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNC\n28819\nCAROLINA UNIVERSITY\n\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n\n2430\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010414\n\nForm 767\n(Revised Apr., 1928)\n= *G. urceolata* (Poiret) Brummitt\n*Galax urceolata*\n\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\n\nCollector's No. 111 Date of collection 6-9-32\nBotanical name *Galax aphylla* DIAPENSIACEAE\nCommon name Galax\nState NC County Transyl. Forest Pisgah\nExact locality Eagle Mtn trail 1 mile from Davidson R.\nAltitude 2800 feet. Slope mod. N Soil moist loam\n(Steepness and direction) (Sec., T., and R., Thompson Meadow) (Deep clay loam, shallow\ncoarse gravel, etc.)\nType PC Timber browse-weed Use Light\n(Woodland, timber, park, etc.) (Weed, browse, grass) (Density in tenths)\n*Gaylussacia*, ferns\n(Principal associated plants in order of abundance)\nDistribution open woods Abundance common\n(Where generally found) (Overgrazing, close, moderate, light)\nForage value deer winter\n(Palatability) (Grazed by C., H., S., and G.) (Season grazed)\n\nOther data (Usual size of plant) (Flowering period) (Period of seed dissemination) (Other notes)\nCollector's name E.E.Ripper\nGOVERNMENT PRINTING OFFICE 8-1561\n\n\nHandwritten text:\n= *G. urceolata* (Poiret) Brummitt\n*Galax urceolata*\nEagle Mtn trail 1 mile from Davidson R.\nmod. N\nPC Timber browse-weed\n*Gaylussacia*, ferns\nopen woods\ndeer\nE.E.Ripper\n\n*Galax aphylla*\n*Gaylussacia*\n\n\ngemini-2.0-flash OCR:\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n2430\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010414\nForm 767\n(Revised Apr., 1928)\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\nCollector's No.\n111\nBotanical name\nCommon name\nState NC\nDate of collection\n6-9-32\nGalax aphylla DIAPENSIACEAE\nGalax\nCounty Transyl. Forest Pisgah.\nExact locality Kagle Mtn trail mile from Davidson R.\nAltitude 2800 feet. Slope mod N Soil moist loam\nType PC Timber browse-weed\nGaylussacia, ferns\nDistribution open woods.\nForage value\nUse light\nAbundance common\ndeer\nwinter\nOther data\nCollector's name E.E.Ripper.\n28819\nCAROLINA\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC 11\nG. urceolata (Poiret) Bummitt\n\n\nGalax aphylla\nGaylussacia\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010414",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "E.e.ripper",
+    "collectorNumber": "111",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "= G. urceolata (poiret) brummitt",
+    "verbatimCollectionDate": "6-9-32",
+    "collectionDate": "1932-06-09",
+    "collectionDateEnd": "",
+    "habitat": "Open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Nc",
+    "county": "Transyl",
+    "locality": "Eagle mtn trail 1 mile from davidson r.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "853",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Carolina university\nu. s. forest service herbarium\n1720 peachtree road. n. w.\natlanta, georgia 30309\n2430\nwestern carolina u. herbarium\nform 767\n(revised apr., 1928)\nherbarium of the forest service\nu. s. department of agriculture\nbotanical name galax aphylla diapensiaceae\ncommon name galax\nstate nc county transyl. forest pisgah\nexact locality eagle mtn trail 1 mile from davidson r.\naltitude 2800 feet. slope mod n soil moist loam\n(steepness and direction) (sec., t., and r., thompson meadow) (deep clay loam, shallow\ncoarse gravel, etc.)\ntype pc timber browse-weed use light\n(woodland, timber, park, etc.) (weed, browse, grass) (density in tenths)\ngaylussacia, ferns\n(principal associated plants in order of abundance)\ndistribution open woods abundance common\n(where generally found) (overgrazing, close, moderate, light)\nforage value deer winter\n(palatability) (grazed by c., h., s., and g.) (season grazed)\nother data\ncollector's name e.e.ripper\ngovernment printing office 8-1561\n28819\ncarolina\npreserved\nmaterial\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\nliving\ncultures\ninches\nmetric 11\ng. urceolata (poiret) bummitt\ngalax aphylla\ngaylussacia"
+  }
+}

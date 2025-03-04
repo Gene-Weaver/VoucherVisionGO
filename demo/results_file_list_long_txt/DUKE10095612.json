@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF VIRGINIA\nPatrick County\n\nGalax aphylla L.\nMoist soil. Shaded rock crevices on the\n\"Pinnacles of Dan\", about 4\u00bd mi. s.w. of\nMEADOWS of DAN.\n\nColl. E. Felton Jones #2567\nDet. E.F.J. Oct.14,1950\n\n135350\n\nDUKE UNIVERSITY\nHERBARIUM\nDUKE10095612\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00084,
+      "total_cost": 0.00161875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 168
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF VIRGINIA\nPatrick County\nGalax aphylla L.\nMoist soil. Shaded rock crevices on the\n\"Pinnacles of Dan\", about 4\u00bd mi. s.w. of\nMEADOWS of DAN.\nColl. E. Felton Jones #2567\nDet. E.F.J. Oct.14,1950\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4e-05,
+      "total_cost": 0.0007355,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 543,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0002172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF VIRGINIA\nPatrick County\n\nGalax aphylla L.\nMoist soil. Shaded rock crevices on the\n\"Pinnacles of Dan\", about 4\u00bd mi. s.w. of\nMEADOWS of DAN.\n\nColl. E. Felton Jones #2567\nDet. E.F.J. Oct.14,1950\n\n135350\n\nDUKE UNIVERSITY\nHERBARIUM\nDUKE10095612\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF VIRGINIA\nPatrick County\nGalax aphylla L.\nMoist soil. Shaded rock crevices on the\n\"Pinnacles of Dan\", about 4\u00bd mi. s.w. of\nMEADOWS of DAN.\nColl. E. Felton Jones #2567\nDet. E.F.J. Oct.14,1950\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "135350",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "E. Felton Jones",
+    "collectorNumber": "2567",
+    "identifiedBy": "R.L. Wilbur, E.F.J.",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. Det. E.F.J. Oct.14,1950",
+    "verbatimCollectionDate": "Oct.14,1950",
+    "collectionDate": "1950-10-14",
+    "collectionDateEnd": "",
+    "habitat": "Moist soil. Shaded rock crevices",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Patrick County",
+    "locality": "On the Pinnacles of Dan, about 4\u00bd mi. s.w. of Meadows of Dan.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke\nUNIVERSITY\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF VIRGINIA\nGalax aphylla L.\nDUKE UNIVERSITY\nHERBARIUM\nDUKE10095612\nGalax urceolata\nGalax aphylla"
+  }
+}

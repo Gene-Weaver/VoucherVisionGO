@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n308431\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332621\n\nPLANTS OF VIRGINIA\nBedford COUNTY       PIEDMONT\n\nNO. 7778\n*Galax aphylla* L.\n\nShaded ravine of woods near Otter River on Hwy.\n24 near intersection with Co. Rd. 70 9, elev.\napprox. 580 ft.\n\nCOLLECTORS\nJuly 12, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nHandwritten Text: *70 9*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.0016137500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nONCU\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n308431\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332621\nPLANTS OF VIRGINIA\nBedford COUNTY\nPIEDMONT\nNO. 7778\nGalax aphylla L.\nShaded ravine of woods near Otter River on Hwy.\n24 near intersection with Co. Rd. 70 9, elev.\napprox. 580 ft.\nCOLLECTORS\nJuly 12, 67\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.280000000000001e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 482,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n308431\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332621\n\nPLANTS OF VIRGINIA\nBedford COUNTY       PIEDMONT\n\nNO. 7778\n*Galax aphylla* L.\n\nShaded ravine of woods near Otter River on Hwy.\n24 near intersection with Co. Rd. 70 9, elev.\napprox. 580 ft.\n\nCOLLECTORS\nJuly 12, 1967\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nHandwritten Text: *70 9*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nONCU\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n308431\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332621\nPLANTS OF VIRGINIA\nBedford COUNTY\nPIEDMONT\nNO. 7778\nGalax aphylla L.\nShaded ravine of woods near Otter River on Hwy.\n24 near intersection with Co. Rd. 70 9, elev.\napprox. 580 ft.\nCOLLECTORS\nJuly 12, 67\nG. W. Ramsey, W. F. Ruska, G. S. Waggoner.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332621",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. W. Ramsey, W. F. Ruska, G. S. Waggoner",
+    "collectorNumber": "7778",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 12, 1967",
+    "collectionDate": "1967-07-12",
+    "collectionDateEnd": "",
+    "habitat": "Shaded ravine of woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Bedford",
+    "locality": "Near otter river on hwy. 24 near intersection with co. rd. 70 9",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "177",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of north carolina\nat chapel hill\n\nUniversity of north carolina herbarium\n308431\nPlants of virginia\npiedmont\nelev. approx. 580 ft.\n\ngalax aphylla"
+  }
+}

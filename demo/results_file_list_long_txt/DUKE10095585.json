@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095585\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n104033\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nNash County\nGalax aphylla L.\nNorth facing river bluff,\nSapony Cr., 2 mi. so. of Nashville\nColl. H.L. Blomquist, #13276, July 7, 1942\n(Handwritten: 104033)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008200000000000001,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095585\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n104033\nFORM 403 5M 3-40\n-Duke\ncopyright reserved UNIVERSITY\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nNash\nGalax aphylla L.\nCounty\nNorth facing river bluff,\nSapony Cr., 2 mi. so.of Nashville\nCollgH. L. Blomquist, #13276, July 7, 1942\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.96e-05,
+      "total_cost": 0.0007511,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 174
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 455,
+    "cost_in": 0.0002221,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095585\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n104033\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nNash County\nGalax aphylla L.\nNorth facing river bluff,\nSapony Cr., 2 mi. so. of Nashville\nColl. H.L. Blomquist, #13276, July 7, 1942\n(Handwritten: 104033)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095585\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nDUKE UNIVERSITY\nHERBARIUM\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n104033\nFORM 403 5M 3-40\n-Duke\ncopyright reserved UNIVERSITY\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nNash\nGalax aphylla L.\nCounty\nNorth facing river bluff,\nSapony Cr., 2 mi. so.of Nashville\nCollgH. L. Blomquist, #13276, July 7, 1942\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095585",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H.L. Blomquist",
+    "collectorNumber": "13276",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "July 7, 1942",
+    "collectionDate": "1942-07-07",
+    "collectionDateEnd": "",
+    "habitat": "North facing river bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Nash",
+    "locality": "Sapony Cr., 2 mi. so. of Nashville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke University Herbarium\nFLORA OF NORTH CAROLINA"
+  }
+}

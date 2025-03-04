@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU024740\n\nETSU John C. Warden Herbarium\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\n! J. T. Donaldson\nOct 2018 *(handwritten)*\n\nTN, Unicoi County\nCherokee Nat. Forest, Unaka Mountain, Unaka Mtn\nRd. 4.2 miles from Indian Grave Gap (Rt. 395), 43\nmeters from road on Appalachian Trail. Northern\nhardwood & spruce community with mountain\nlaurel & rhododendron patches. On slope above\ntrail; richly black & moist soil; partial sun.\nRidgeline; 4619 ft. elevation\n(36.1272577, -82.3082128) +/- 10 meters accuracy\nLarge local population; 50 cm tall; seed bearing\nGuide to the Vascular Plants of TN\n\nMarilyn J. Permenter\n2018-09-22\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001165,
+      "total_cost": 0.0019437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 233
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU024740\nETSU John C. Warden Herbarium\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nTN, Unicoi County\nCherokee Nat. Forest, Unaka Mountain, Unaka Mtn\nRd. 4.2 miles from Indian Grave Gap (Rt. 395), 43\nmeters from road on Appalachian Trail. Northern\nhardwood & spruce community with mountain\nlaurel & rhododendron patches. On slope above\ntrail; richly black & moist soil; partial sun.\nRidgeline; 4619 ft. elevation\n(36.1272577, -82.3082128) +/- 10 meters accuracy\nLarge local population; 50 cm tall; seed bearing\nGuide to the Vascular Plants of TN\nMarilyn J. Permenter\n2018-09-22\n! J T Donaldson\nOct 2018\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.920000000000001e-05,
+      "total_cost": 0.0007707,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 223
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2336,
+    "output": 558,
+    "cost_in": 0.0002336,
+    "cost_out": 0.0002232
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU024740\n\nETSU John C. Warden Herbarium\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\n! J. T. Donaldson\nOct 2018 *(handwritten)*\n\nTN, Unicoi County\nCherokee Nat. Forest, Unaka Mountain, Unaka Mtn\nRd. 4.2 miles from Indian Grave Gap (Rt. 395), 43\nmeters from road on Appalachian Trail. Northern\nhardwood & spruce community with mountain\nlaurel & rhododendron patches. On slope above\ntrail; richly black & moist soil; partial sun.\nRidgeline; 4619 ft. elevation\n(36.1272577, -82.3082128) +/- 10 meters accuracy\nLarge local population; 50 cm tall; seed bearing\nGuide to the Vascular Plants of TN\n\nMarilyn J. Permenter\n2018-09-22\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU024740\nETSU John C. Warden Herbarium\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nTN, Unicoi County\nCherokee Nat. Forest, Unaka Mountain, Unaka Mtn\nRd. 4.2 miles from Indian Grave Gap (Rt. 395), 43\nmeters from road on Appalachian Trail. Northern\nhardwood & spruce community with mountain\nlaurel & rhododendron patches. On slope above\ntrail; richly black & moist soil; partial sun.\nRidgeline; 4619 ft. elevation\n(36.1272577, -82.3082128) +/- 10 meters accuracy\nLarge local population; 50 cm tall; seed bearing\nGuide to the Vascular Plants of TN\nMarilyn J. Permenter\n2018-09-22\n! J T Donaldson\nOct 2018\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU024740",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Marilyn J. Permenter",
+    "collectorNumber": "",
+    "identifiedBy": "J. T. Donaldson",
+    "identifiedDate": "2018-10-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2018-09-22",
+    "collectionDate": "2018-09-22",
+    "collectionDateEnd": "",
+    "habitat": "Northern hardwood & spruce community with mountain laurel & rhododendron patches. On slope above trail; richly black & moist soil; partial sun.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Large local population; 50 cm tall; seed bearing",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "TN",
+    "county": "Unicoi County",
+    "locality": "Cherokee Nat. Forest, Unaka Mountain, Unaka Mtn Rd. 4.2 miles from Indian Grave Gap (Rt. 395), 43 meters from road on Appalachian Trail. Ridgeline",
+    "verbatimCoordinates": "(36.1272577, -82.3082128) +/- 10 meters accuracy",
+    "decimalLatitude": "36.1272577",
+    "decimalLongitude": "-82.3082128",
+    "minimumElevationInMeters": "1408",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "EAST TENNESSEE STATE UNIVERSITY\nETSU John C. Warden Herbarium\nDiapensiaceae\nGuide to the Vascular Plants of TN"
+  }
+}

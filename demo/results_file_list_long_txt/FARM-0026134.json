@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026134\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*(Handwritten Text Starts Here)*\n*Galax aphylla* L.\nWooded slope on Merry\nPoint.\nLancaster Co.,  April 26, 1967\nCollected by: A. M. Harvill 16172\n*(Handwritten Text Ends Here)*\n\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00084,
+      "total_cost": 0.00161875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 168
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026134\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nGalax aphylla L.\nWooded slope on Merry\nPoint.\nLancaster Co., May 26, 1967\nCollected by: A. McHarvill 16172\nDetermined by:\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.599999999999999e-05,
+      "total_cost": 0.0007475000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 496,
+    "cost_in": 0.0002232,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026134\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*(Handwritten Text Starts Here)*\n*Galax aphylla* L.\nWooded slope on Merry\nPoint.\nLancaster Co.,  April 26, 1967\nCollected by: A. M. Harvill 16172\n*(Handwritten Text Ends Here)*\n\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026134\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nGalax aphylla L.\nWooded slope on Merry\nPoint.\nLancaster Co., May 26, 1967\nCollected by: A. McHarvill 16172\nDetermined by:\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026134",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. M. Harvill",
+    "collectorNumber": "16172",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "April 26, 1967",
+    "collectionDate": "1967-04-26",
+    "collectionDateEnd": "",
+    "habitat": "Wooded slope on merry point.",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Lancaster county",
+    "locality": "Wooded slope on merry point.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHerbarium of the university of north carolina\nFlora virginica\nDetermined by\nFARM\nHarvill-Stevens\nHerbarium\nCopyright reserved"
+  }
+}

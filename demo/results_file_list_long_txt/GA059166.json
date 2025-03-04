@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n262610\n\nGA ATLAS PROJECT:\n\n= *Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff June 2012\n\nFlora of Georgia\nChattahoochee National Forest, White Co.\n\n49. *Galax aphylla* L. - DIAPENSIACEAE\n\nGalax:\nLow growing herbaceous plant with erect flower\nstalk (brown at the top and green at the bottom).\nFound growing along trail in densely wooded forest.\nChattahoochee National Forest, White County,\nGeorgia.\n\nKatie Larkins 22 July 2000\n\nSpecimen Examined for \u2713\nGeorgia Atlas Project\n16 June 2012 (handwritten)\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009350000000000001,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n16 June 2012\n\u2022GA.\nUniversity\nof Georgia\nHerbarium\n262610\nGA ATLAS PROJECT:\nGalax urceolata (Poir.) Brummitt\nGA Herbarium staff\nJune 2012\nFlora of Georgia\nChattahoochee National Forest, White Co.\n49. Galax aphylla L. - DIAPENSIACEAE\nGalax:\nLow growing herbaceous plant with erect flower\nstalk (brown at the top and green at the bottom).\nFound growing along trail in densely wooded forest.\nChattahoochie National Forest, White County,\nGeorgia.\nKatie Larkins\n22 July 2000\nUNIVERSITY OF GEORGIA\nGA059166\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.12e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 483,
+    "cost_in": 0.0002268,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n262610\n\nGA ATLAS PROJECT:\n\n= *Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff June 2012\n\nFlora of Georgia\nChattahoochee National Forest, White Co.\n\n49. *Galax aphylla* L. - DIAPENSIACEAE\n\nGalax:\nLow growing herbaceous plant with erect flower\nstalk (brown at the top and green at the bottom).\nFound growing along trail in densely wooded forest.\nChattahoochee National Forest, White County,\nGeorgia.\n\nKatie Larkins 22 July 2000\n\nSpecimen Examined for \u2713\nGeorgia Atlas Project\n16 June 2012 (handwritten)\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n16 June 2012\n\u2022GA.\nUniversity\nof Georgia\nHerbarium\n262610\nGA ATLAS PROJECT:\nGalax urceolata (Poir.) Brummitt\nGA Herbarium staff\nJune 2012\nFlora of Georgia\nChattahoochee National Forest, White Co.\n49. Galax aphylla L. - DIAPENSIACEAE\nGalax:\nLow growing herbaceous plant with erect flower\nstalk (brown at the top and green at the bottom).\nFound growing along trail in densely wooded forest.\nChattahoochie National Forest, White County,\nGeorgia.\nKatie Larkins\n22 July 2000\nUNIVERSITY OF GEORGIA\nGA059166\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "262610",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Katie Larkins",
+    "collectorNumber": "",
+    "identifiedBy": "Ga herbarium staff",
+    "identifiedDate": "2012-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.:",
+    "verbatimCollectionDate": "22 July 2000",
+    "collectionDate": "2000-07-22",
+    "collectionDateEnd": "",
+    "habitat": "Found growing along trail in densely wooded forest.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Low growing herbaceous plant with erect flower stalk (brown at the top and green at the bottom).",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "White County",
+    "locality": "Chattahoochee national forest, white co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ga atlas project\nFlora of georgia\nSpecimen examined for \u2713\nGeorgia atlas project\n16 june 2012\nimaged 2013"
+  }
+}

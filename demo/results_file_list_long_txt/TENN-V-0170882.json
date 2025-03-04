@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170882\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nBlount COUNTY\nChilhowee Mountain\n\nNO.\n*Galax aphylla* L.\n\nLoc. - N slope of mtn. near Montvale Springs.\nElev. - 2000 ft.\n\nCOLLECTORS\n25 Mar. 1961 _(handwritten)_\nR. Dale Thomas\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.00170875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170882\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM\nOF THE\nUNIVERSITY OF TENNESSEE\nFLORA TENNESSEENSIS\nBlount COUNTY\nNO.\nChilhowee Mountain\nGalax aphylla L.\nLoc. - N slope of mtn. near Montvale Springs.\nElev. - 2000 ft.\nCOLLECTORS\nR. Dale Thomas\n25 Mar. 1961\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007487000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2252,
+    "output": 500,
+    "cost_in": 0.00022520000000000003,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170882\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nBlount COUNTY\nChilhowee Mountain\n\nNO.\n*Galax aphylla* L.\n\nLoc. - N slope of mtn. near Montvale Springs.\nElev. - 2000 ft.\n\nCOLLECTORS\n25 Mar. 1961 _(handwritten)_\nR. Dale Thomas\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170882\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM\nOF THE\nUNIVERSITY OF TENNESSEE\nFLORA TENNESSEENSIS\nBlount COUNTY\nNO.\nChilhowee Mountain\nGalax aphylla L.\nLoc. - N slope of mtn. near Montvale Springs.\nElev. - 2000 ft.\nCOLLECTORS\nR. Dale Thomas\n25 Mar. 1961\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170882",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "6277",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 Mar. 1961",
+    "collectionDate": "1961-03-25",
+    "collectionDateEnd": "",
+    "habitat": "N slope of mtn. near Montvale Springs.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Blount",
+    "locality": "Chilhowee Mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "610",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM OF THE\nUNIVERSITY OF TENNESSEE\nFLORA TENNEESSENSIS\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax aphylla\nUNIVERSITY OF TENNESSEE KNOXVILLE"
+  }
+}

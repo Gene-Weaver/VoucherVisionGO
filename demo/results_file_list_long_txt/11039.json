@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\n11039\n(handwritten)\n\nBland County\n*Galax aphylla* L.\n13 June 1972\n\nDry compacted soil of a wood road; crest of\na ridge leading off of Hogback about \u00bc mi.\nWNW of Kimberling.\n\nCollector: Thomas F. Wieboldt\nNo. 984\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000585,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n16ths\n1\nNO. 305 ME\n2\n60 70 80\n3\nCHARTERED 1693\n90 100\n4\nGENERAL\n110 120 130 140 150\n5\n6\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nBland County\nGalax aphylla L.\n13 June 1972\nDry compacted soil of a wood road; crest of\na ridge leading off of Hogback about 4 mi.\nWNW of Kimberling.\nCollector: Thomas F. Wieboldt\nNo. 984\n11039\nHERBARIUM, COLLEGE\nWILLIAM & MARY\nOF\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.960000000000001e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2189,
+    "output": 500,
+    "cost_in": 0.0002189,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\n11039\n(handwritten)\n\nBland County\n*Galax aphylla* L.\n13 June 1972\n\nDry compacted soil of a wood road; crest of\na ridge leading off of Hogback about \u00bc mi.\nWNW of Kimberling.\n\nCollector: Thomas F. Wieboldt\nNo. 984\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n16ths\n1\nNO. 305 ME\n2\n60 70 80\n3\nCHARTERED 1693\n90 100\n4\nGENERAL\n110 120 130 140 150\n5\n6\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nBland County\nGalax aphylla L.\n13 June 1972\nDry compacted soil of a wood road; crest of\na ridge leading off of Hogback about 4 mi.\nWNW of Kimberling.\nCollector: Thomas F. Wieboldt\nNo. 984\n11039\nHERBARIUM, COLLEGE\nWILLIAM & MARY\nOF\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "11039",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Thomas F. Wieboldt",
+    "collectorNumber": "984",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 June 1972",
+    "collectionDate": "1972-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Dry compacted soil of a wood road; crest of a ridge leading off of Hogback about \u00bc mi. WNW of Kimberling.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bland County",
+    "locality": "Dry compacted soil of a wood road; crest of a ridge leading off of Hogback about \u00bc mi. WNW of Kimberling.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nHERBARIUM, COLLEGE\nWILLIAM & MARY\nOF"
+  }
+}

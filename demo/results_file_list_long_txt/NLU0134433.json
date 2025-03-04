@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n395682\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE                      County: MONROE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nCherokee National Forest. Woods at end of\nUSFS 384C at Miller Cemetery southeast of\nTenn. 165 and Tellico Plains; Sec. 22.\n\nCollector: R. Dale Thomas with B. Ray Thomas\nNo.: 153,679                      Date: 22 April 1997\n\nNL00134433\nUniversity of Louisiana at Monroe\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000775,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TY\nST LOUISIANA\nNORTHEAST\nUNIU\n395682\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134433\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nKodak, 2007 TM: Kodak\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: MONROE\nGALAX URCEOLATA (Poir.) Brummitt\nCherokee National Forest. Woods at end of\nUSFS 384C at Miller Cemetery southeast of\nTenn. 165 and Tellico Plains; Sec. 22.\nCollector: R. Dale Thomas with B. Ray Thomas\nNo.: 153,679\nDate: 22 April 1997\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.6e-05,
+      "total_cost": 0.0007675,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 215
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2243,
+    "output": 557,
+    "cost_in": 0.00022430000000000003,
+    "cost_out": 0.0002228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n395682\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE                      County: MONROE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nCherokee National Forest. Woods at end of\nUSFS 384C at Miller Cemetery southeast of\nTenn. 165 and Tellico Plains; Sec. 22.\n\nCollector: R. Dale Thomas with B. Ray Thomas\nNo.: 153,679                      Date: 22 April 1997\n\nNL00134433\nUniversity of Louisiana at Monroe\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTY\nST LOUISIANA\nNORTHEAST\nUNIU\n395682\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134433\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nKodak, 2007 TM: Kodak\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: MONROE\nGALAX URCEOLATA (Poir.) Brummitt\nCherokee National Forest. Woods at end of\nUSFS 384C at Miller Cemetery southeast of\nTenn. 165 and Tellico Plains; Sec. 22.\nCollector: R. Dale Thomas with B. Ray Thomas\nNo.: 153,679\nDate: 22 April 1997\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "395682",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Dale Thomas, B. Ray Thomas",
+    "collectorNumber": "153,679",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 April 1997",
+    "collectionDate": "1997-04-22",
+    "collectionDateEnd": "",
+    "habitat": "Woods at end of USFS 384C at Miller Cemetery southeast of Tenn. 165 and Tellico Plains; Sec. 22.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Monroe",
+    "locality": "Cherokee national forest. Woods at end of usfs 384c at miller cemetery southeast of tenn. 165 and tellico plains; sec. 22.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nHerbarium\nHerbarium\nnortheast louisiana university, monroe\nFlora of tennessee\nUniversity of louisiana at monroe\nNL00134433\nKodak gray scale\nCYM\nKodak color control patches\nKodak, 2007 tm kodak\nKodak, 2007 tm kodak\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/color\nBlack"
+  }
+}

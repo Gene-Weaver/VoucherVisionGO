@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n75707\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059468\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: _Virginia_  Carroll Co.\n\n*Galax urceolata* (Poir.) Brummitt.\n\nOak-rhododendron woods on steep, rocky\nmountainside between Reed Island\nCreek and # 751.\n\nColl: M. L. Smyth       No: 5261\nDate: 7/17/1979        Det: MLS\n\n236 (handwritten)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00077,
+      "total_cost": 0.0015487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n75707\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n13\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia Carroll Co.\nGalax urceolata (Poir.) Brummit.\nOak-rhododendron woods on steep, rocky\nmountainside between Reed Island\nCreek and # 751.\nColl: M.L. Smyth\nDate: 7/17/1979\nNo: 5261\nDet: MLS\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059468\n236\n--- Handwritten Text ---\nMLS\n---\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.48e-05,
+      "total_cost": 0.0007463000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 162
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2196,
+    "output": 483,
+    "cost_in": 0.00021960000000000003,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n75707\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059468\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: _Virginia_  Carroll Co.\n\n*Galax urceolata* (Poir.) Brummitt.\n\nOak-rhododendron woods on steep, rocky\nmountainside between Reed Island\nCreek and # 751.\n\nColl: M. L. Smyth       No: 5261\nDate: 7/17/1979        Det: MLS\n\n236 (handwritten)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n75707\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n13\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: Virginia Carroll Co.\nGalax urceolata (Poir.) Brummit.\nOak-rhododendron woods on steep, rocky\nmountainside between Reed Island\nCreek and # 751.\nColl: M.L. Smyth\nDate: 7/17/1979\nNo: 5261\nDet: MLS\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059468\n236\n--- Handwritten Text ---\nMLS\n---\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "75707",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt.",
+    "collectedBy": "M. L. Smyth",
+    "collectorNumber": "5261",
+    "identifiedBy": "MLS",
+    "identifiedDate": "1979-07-17",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7/17/1979",
+    "collectionDate": "1979-07-17",
+    "collectionDateEnd": "",
+    "habitat": "Oak-rhododendron woods on steep, rocky mountainside between Reed Island Creek and # 751.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Carroll Co.",
+    "locality": "Between Reed Island Creek and # 751.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059468\nVirginia Polytechnic Institute and state university herbarium\nFlora of Virginia\n236"
+  }
+}

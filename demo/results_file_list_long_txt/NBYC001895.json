@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21745\n\nNewberry College Herbarium\nNBYC001895\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF GEORGIA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon ground cover under *Rhododendron* and *Kalmia*. Flowers white.\n\nTOWNS CO.: Near summit of Tray Mountain along Appalachian Trail.\nParking at end of Forest Service Road 79. 34\u00b048.01'N, 83\u00b040.99'W.\nElevation 4,430 feet.\n\n9 June 2015                                with Beth Williamson\nCharles N. Horn #20818\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000895,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC 1\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21745\nNewberry College Herbarlum\nNBYC001895\nHerbarium of Newberry College (NBYC)\nPLANTS OF GEORGIA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensaceae\nCommon ground cover under Rhododendron and Kalmia. Flowers white.\nTOWNS CO.: Near summit of Tray Mountain along Appalachian Trail.\nParking at end of Forest Service Road 79. 34\u00b048.01'N 83\u00b040.99'W.\nElevation 4,430 feet.\n9 June 2015\nwith Beth Williamson\nCharles N. Horn #20818\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2240,
+    "output": 516,
+    "cost_in": 0.000224,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21745\n\nNewberry College Herbarium\nNBYC001895\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF GEORGIA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon ground cover under *Rhododendron* and *Kalmia*. Flowers white.\n\nTOWNS CO.: Near summit of Tray Mountain along Appalachian Trail.\nParking at end of Forest Service Road 79. 34\u00b048.01'N, 83\u00b040.99'W.\nElevation 4,430 feet.\n\n9 June 2015                                with Beth Williamson\nCharles N. Horn #20818\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMETRIC 1\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21745\nNewberry College Herbarlum\nNBYC001895\nHerbarium of Newberry College (NBYC)\nPLANTS OF GEORGIA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensaceae\nCommon ground cover under Rhododendron and Kalmia. Flowers white.\nTOWNS CO.: Near summit of Tray Mountain along Appalachian Trail.\nParking at end of Forest Service Road 79. 34\u00b048.01'N 83\u00b040.99'W.\nElevation 4,430 feet.\n9 June 2015\nwith Beth Williamson\nCharles N. Horn #20818\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "21745",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn, Beth Williamson",
+    "collectorNumber": "20818",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 June 2015",
+    "collectionDate": "2015-06-09",
+    "collectionDateEnd": "",
+    "habitat": "Common ground cover under Rhododendron and Kalmia. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Towns Co.",
+    "locality": "Near summit of Tray Mountain along Appalachian Trail. Parking at end of Forest Service Road 79.",
+    "verbatimCoordinates": "34\u00b048.01'N, 83\u00b040.99'W",
+    "decimalLatitude": "34.800167",
+    "decimalLongitude": "-83.683167",
+    "minimumElevationInMeters": "1350",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Newberry\nCollege\nNewberry\nCollege\nNewberry College Herbarium\nNBYC001895\nHerbarium of Newberry College (NBYC)\nPlants of Georgia, Usa\nElevation 4,430 feet.\nGalax urceolata\nMetric 1"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026140\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nSuffolk, Nansemond Co.\n\nCommon along N-facing bluff of \nLake Kilby in oak-pine-heath-\nmixed hardwoods.  (most plants\nsterile.)\n(Suffolk Quad.) Aug. 22, 1980\n\nCharles E. Stevens\nDet.                                         No. 16,421\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brum., Suffolk, Nansemond Co., Common along N-facing bluff of Lake Kilby in oak-pine-heath-mixed hardwoods. (most plants sterile.), (Suffolk Quad.), Aug. 22, 1980.\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00088,
+      "total_cost": 0.00165875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 176
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Flora of Virginia\nGalax urceolata (Poir.) Brum.\nSuffolk, Nansemond Co.\nCommon along N-facing bluff of\nLake Kilby in oak-pine-heath-\nmixed hardwoods. most plants\nsterile.\n(Suffolk Quad.) Aug. 22, 1980\nCharles E. Stevens\nNo. 16,421\nDet.\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.08e-05,
+      "total_cost": 0.0007222999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 102
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2155,
+    "output": 468,
+    "cost_in": 0.00021549999999999998,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026140\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nSuffolk, Nansemond Co.\n\nCommon along N-facing bluff of \nLake Kilby in oak-pine-heath-\nmixed hardwoods.  (most plants\nsterile.)\n(Suffolk Quad.) Aug. 22, 1980\n\nCharles E. Stevens\nDet.                                         No. 16,421\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brum., Suffolk, Nansemond Co., Common along N-facing bluff of Lake Kilby in oak-pine-heath-mixed hardwoods. (most plants sterile.), (Suffolk Quad.), Aug. 22, 1980.\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nSuffolk, Nansemond Co.\nCommon along N-facing bluff of\nLake Kilby in oak-pine-heath-\nmixed hardwoods. most plants\nsterile.\n(Suffolk Quad.) Aug. 22, 1980\nCharles E. Stevens\nNo. 16,421\nDet.\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026140",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "16,421",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 22, 1980",
+    "collectionDate": "1980-08-22",
+    "collectionDateEnd": "",
+    "habitat": "Common along n-facing bluff of lake kilby in oak-pine-heath-mixed hardwoods. most plants sterile.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Nansemond co.",
+    "locality": "Suffolk, Nansemond co., common along n-facing bluff of lake kilby in oak-pine-heath-mixed hardwoods.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora of Virginia\n(Suffolk Quad.)"
+  }
+}

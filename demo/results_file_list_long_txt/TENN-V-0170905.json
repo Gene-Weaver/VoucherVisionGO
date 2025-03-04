@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170905\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSEENSIS\nPolk  COUNTY\n\n*Galax aphylla* L.\nWoods along Cherokee Nat. Forest Rd.\nabout 8 miles SE of Reliance.\n\n23 Oct. 1971\nCOLLECTORS  _(&det.)_\nFrank Bowers\n\nHERBARIUM OF THE\nNo.\n68277\nUNIVERSITY OF TENNESSEE\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNEESENSIS\nPolk\nCOUNTY\nGalax aphylla L.\nWoods along Cherokee Nat. Forest Rd.\nabout 8 miles SE of Reliance.\nCOLLECTORS\n23 Oct.1971\nFrank Bowers\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170905\nHERBARIUM\nNo.\nOF THE\n26277\nUNIVERSITY OF TENNESSEE\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8399999999999997e-05,
+      "total_cost": 0.0007399,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 146
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 469,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170905\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSEENSIS\nPolk  COUNTY\n\n*Galax aphylla* L.\nWoods along Cherokee Nat. Forest Rd.\nabout 8 miles SE of Reliance.\n\n23 Oct. 1971\nCOLLECTORS  _(&det.)_\nFrank Bowers\n\nHERBARIUM OF THE\nNo.\n68277\nUNIVERSITY OF TENNESSEE\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNEESENSIS\nPolk\nCOUNTY\nGalax aphylla L.\nWoods along Cherokee Nat. Forest Rd.\nabout 8 miles SE of Reliance.\nCOLLECTORS\n23 Oct.1971\nFrank Bowers\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170905\nHERBARIUM\nNo.\nOF THE\n26277\nUNIVERSITY OF TENNESSEE\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170905",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frank Bowers",
+    "collectorNumber": "68277",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 Oct. 1971",
+    "collectionDate": "1971-10-23",
+    "collectionDateEnd": "",
+    "habitat": "Woods along Cherokee Nat. Forest Rd. about 8 miles se of reliance.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Polk",
+    "locality": "Woods along cherokee nat. forest rd. about 8 miles se of reliance.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora tennesseensis\nGalax aphylla l.\nGalax aphylla"
+  }
+}

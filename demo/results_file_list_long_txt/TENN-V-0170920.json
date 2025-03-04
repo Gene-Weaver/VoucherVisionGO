@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170920\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 457\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR V. W. Sims\nCOUNTY Unicoi\nNO. 21b  July 7 ? 19\n\n*(Handwritten) Galax aphylla L.*\n\nBanks on top of Unaka Mountain,\nvery abundant\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007300000000000001,
+      "total_cost": 0.0015087499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 146
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170920\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR, V. W. Sims\nNO. 21b\nGalax aphylla L.\nBanks on top of Unaka Mountain,\nvery abundant\nUnicoi\nJuly 7.\nCOUNTY\n?\n19\nHandwritten text:\nGalax aphylla L.\nJuly 7. ?\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.92e-05,
+      "total_cost": 0.0007407000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 148
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 506,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.00020240000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170920\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 457\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR V. W. Sims\nCOUNTY Unicoi\nNO. 21b  July 7 ? 19\n\n*(Handwritten) Galax aphylla L.*\n\nBanks on top of Unaka Mountain,\nvery abundant\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170920\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR, V. W. Sims\nNO. 21b\nGalax aphylla L.\nBanks on top of Unaka Mountain,\nvery abundant\nUnicoi\nJuly 7.\nCOUNTY\n?\n19\nHandwritten text:\nGalax aphylla L.\nJuly 7. ?\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170920",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "V. W. Sims",
+    "collectorNumber": "21b",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 7 ?",
+    "collectionDate": "0000-07-07",
+    "collectionDateEnd": "",
+    "habitat": "Banks on top of Unaka Mountain, very abundant",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 457\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi",
+    "locality": "Unaka Mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA TENNESSIENSIS\nCOUNTY\n?\n19\nHandwritten text\nGalax aphylla L.\nJuly 7. ?"
+  }
+}

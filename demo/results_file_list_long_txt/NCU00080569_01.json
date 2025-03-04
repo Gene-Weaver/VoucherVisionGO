@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n552756\n\nTHE HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA, Cherokee Co.\n\n*Galax aphylla* L.\n\nGranny Squirrel Gap, approx. 4 mi. east of Andrews,\non bank of road through rich, sandy mixed hardwood\nforest along Radder Creek above waterfall.\nElevation approx. 2,500 feet.\n\nChuck McCartney 1016                      17 June, 1989\nDIA*** (Handwritten)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00062,
+      "total_cost": 0.0013987499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 124
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n552756\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080569\nmm\ncolorchecker\nTHE HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA, Cherokee Co.\nGalax aphylla L.\nGranny Squirrel Gap, approx. 4 mi. east of Andrews,\non bank of road through rich, sandy mixed hardwood\nforest along Radder Creek above waterfall.\nElevation approx. 2,500 feet.\nChuck McCartney 1016\n17 June, 1989\nDIA\n***\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2154,
+    "output": 465,
+    "cost_in": 0.00021540000000000003,
+    "cost_out": 0.00018600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n552756\n\nTHE HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA, Cherokee Co.\n\n*Galax aphylla* L.\n\nGranny Squirrel Gap, approx. 4 mi. east of Andrews,\non bank of road through rich, sandy mixed hardwood\nforest along Radder Creek above waterfall.\nElevation approx. 2,500 feet.\n\nChuck McCartney 1016                      17 June, 1989\nDIA*** (Handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n552756\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080569\nmm\ncolorchecker\nTHE HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA, Cherokee Co.\nGalax aphylla L.\nGranny Squirrel Gap, approx. 4 mi. east of Andrews,\non bank of road through rich, sandy mixed hardwood\nforest along Radder Creek above waterfall.\nElevation approx. 2,500 feet.\nChuck McCartney 1016\n17 June, 1989\nDIA\n***\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "552756",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Chuck Mccartney",
+    "collectorNumber": "1016",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 June, 1989",
+    "collectionDate": "1989-06-17",
+    "collectionDateEnd": "",
+    "habitat": "On bank of road through rich, sandy mixed hardwood forest along radder creek above waterfall.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Cherokee co.",
+    "locality": "Granny squirrel gap, approx. 4 mi. east of andrews.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "762",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "University of north carolina\nherbarium\nNCU\nthe herbarium of the university of north carolina\nDIA\n\nNCU00080569\nmm\ncolorchecker"
+  }
+}

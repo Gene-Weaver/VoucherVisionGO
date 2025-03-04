@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n\nx-rite\ncolorchecker\n\nMSCCPPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332019\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nOconee County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nOak-hickory forest, Near S.C. 107, 7\nmiles west of Jocassee\n\nA. E. Radford         17825                 Sept. 2, 1956\n\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n86565\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPP\u00c90411\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPCC0411\n0 1 2 3\ncm\ncopyright reserved\n4 5 6 7 8 9 10\nUniversity of North Carolina\nat Chapel Hill\nNCU\nOF NORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332019\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nOconee County\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, Near S.C. 107, 7\nmiles west of Jocassee\nA. E. Radford\n17825\nSept. 2, 1956\nCollected for the \"Flora of the Carolinas\"\n86565\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.16e-05,
+      "total_cost": 0.0007631000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 204
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2246,
+    "output": 488,
+    "cost_in": 0.00022460000000000004,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n\nx-rite\ncolorchecker\n\nMSCCPPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332019\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nOconee County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nOak-hickory forest, Near S.C. 107, 7\nmiles west of Jocassee\n\nA. E. Radford         17825                 Sept. 2, 1956\n\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n86565\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPP\u00c90411\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPCC0411\n0 1 2 3\ncm\ncopyright reserved\n4 5 6 7 8 9 10\nUniversity of North Carolina\nat Chapel Hill\nNCU\nOF NORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332019\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nOconee County\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, Near S.C. 107, 7\nmiles west of Jocassee\nA. E. Radford\n17825\nSept. 2, 1956\nCollected for the \"Flora of the Carolinas\"\n86565\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332019",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "17825",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 2, 1956",
+    "collectionDate": "1956-09-02",
+    "collectionDateEnd": "",
+    "habitat": "Oak-hickory forest, near s.c. 107, 7 miles west of jocassee",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Oconee county",
+    "locality": "Near s.c. 107, 7 miles west of jocassee",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "ncu\nmsccpppcc0411\nUniversity of north carolina at chapel hill\nx-rite\ncolorchecker\nUniversity of north carolina\nat chapel hill\nCollected for the flora of the carolinas\n86565"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082936\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n45187\n\nHERBARIUM OF ROBERT T. CLAUSEN\nFLORA OF SOUTH CAROLINA Pickens COUNTY\nPLANTS COLLECTED DURING 1938 BY\nROBERT T. CLAUSEN AND HAROLD TRAPIDO\n\nNo. 3639                                      ALT. 3300 FEET\n*Galax aphylla* L.\nMoist granite ledges near summit\nof Sassafras Mt.\nSept. 16\n\n(Handwritten text: *Galax aphylla* L., Moist granite ledges near summit of Sassafras Mt., Sept. 16)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008049999999999999,
+      "total_cost": 0.00158375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarlum (NCSC)\nNCSC00082936\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n45187\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nHERBARIUM OF ROBERT T. CLAUSEN\nFLORA OF SOUTH CAROLINA\nPickens COUNTY\nPLANTS COLLECTED DURING 1938 BY\nROBERT T. CLAUSEN AND HAROLD TRAPIDO\nNo. 3639\nALT. 3300 FEET\nGalax aphylla L.\nMoist granite ledges near summit\nof Sassafras Mt.\nsept, 16\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.520000000000001e-05,
+      "total_cost": 0.0007467000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 163
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2224,
+    "output": 535,
+    "cost_in": 0.00022239999999999998,
+    "cost_out": 0.000214
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082936\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n45187\n\nHERBARIUM OF ROBERT T. CLAUSEN\nFLORA OF SOUTH CAROLINA Pickens COUNTY\nPLANTS COLLECTED DURING 1938 BY\nROBERT T. CLAUSEN AND HAROLD TRAPIDO\n\nNo. 3639                                      ALT. 3300 FEET\n*Galax aphylla* L.\nMoist granite ledges near summit\nof Sassafras Mt.\nSept. 16\n\n(Handwritten text: *Galax aphylla* L., Moist granite ledges near summit of Sassafras Mt., Sept. 16)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarlum (NCSC)\nNCSC00082936\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n45187\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nHERBARIUM OF ROBERT T. CLAUSEN\nFLORA OF SOUTH CAROLINA\nPickens COUNTY\nPLANTS COLLECTED DURING 1938 BY\nROBERT T. CLAUSEN AND HAROLD TRAPIDO\nNo. 3639\nALT. 3300 FEET\nGalax aphylla L.\nMoist granite ledges near summit\nof Sassafras Mt.\nsept, 16\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082936",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert T. Clausen, Harold Trapido",
+    "collectorNumber": "3639",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 16",
+    "collectionDate": "1938-09-16",
+    "collectionDateEnd": "",
+    "habitat": "Moist granite ledges near summit of Sassafras Mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Pickens",
+    "locality": "Summit of Sassafras Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1006",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n45187\nHERBARIUM OF ROBERT T. CLAUSEN\nFLORA OF SOUTH CAROLINA\nPLANTS COLLECTED DURING 1938 BY\nROBERT T. CLAUSEN AND HAROLD TRAPIDO\nALT. 3300 FEET\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\n"
+  }
+}

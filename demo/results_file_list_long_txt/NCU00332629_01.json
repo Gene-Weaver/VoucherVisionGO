@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n316723\n\nNCU00332629\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\n\nCraig                                         County\n*Galax aphylla* L.\n\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nForest Svce. Rd. 604.1. Abundant.\n\nWoods, stream banks.\n\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\n\n\nHandwritten Text:\nCraig\n*Galax aphylla* L.\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nAbundant\nWoods, stream banks\nL. J. Uttal 6240\n7 June 1968\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00102,
+      "total_cost": 0.00179875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 204
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "8\n7\n10\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPP000411\nmm\n1 2 3 4 5 6 7 8\n6\ncopyright reserve\n10\nUniversity of North Carolina\nNCU\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332629\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nCraig\nCounty\nGalax aphylla L.\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nForest Svce. Rd. 60/4.1. Abundant.\nWoods, stream banks.\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\ncm\n0\nRTH CAROLINA\nOF\nHERBARIUM\nERSITY\nMIN\n316723\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.080000000000001e-05,
+      "total_cost": 0.0007723000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 227
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2304,
+    "output": 479,
+    "cost_in": 0.00023040000000000002,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n316723\n\nNCU00332629\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\n\nCraig                                         County\n*Galax aphylla* L.\n\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nForest Svce. Rd. 604.1. Abundant.\n\nWoods, stream banks.\n\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\n\n\nHandwritten Text:\nCraig\n*Galax aphylla* L.\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nAbundant\nWoods, stream banks\nL. J. Uttal 6240\n7 June 1968\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n8\n7\n10\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPP000411\nmm\n1 2 3 4 5 6 7 8\n6\ncopyright reserve\n10\nUniversity of North Carolina\nNCU\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332629\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nCraig\nCounty\nGalax aphylla L.\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 311\nForest Svce. Rd. 60/4.1. Abundant.\nWoods, stream banks.\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\ncm\n0\nRTH CAROLINA\nOF\nHERBARIUM\nERSITY\nMIN\n316723\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "316723",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "L. J. Uttal",
+    "collectorNumber": "6240",
+    "identifiedBy": "L. J. Uttal",
+    "identifiedDate": "1968-06-07",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 June 1968",
+    "collectionDate": "1968-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Woods, stream banks.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Abundant",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Craig",
+    "locality": "E. slope of potts mtn. 0.4 mi. n. of rt. 311 forest svce. rd. 604.1.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nherbarium\nnc00332629\nflora of virginia\nherbarium of the virginia polytechnic institute\nbiology department\niversity of north carolina\nat chapel hill"
+  }
+}

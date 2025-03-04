@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082926\n\nNORTH CAROLINA\nSTATE MUSEUM\n2469\n\nHERBARIUM\nNCSC\n81280\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of\nN.C. State Museum\nNo. 12364 RMD\n\nTechnical Name _Galax aphylla_ L. (handwritten)\nCommon Name Galax (handwritten)\nFamily Diapensiaceae (handwritten)\nLocality N.C. Wilkes Co., 2mi NWof N.Wilkesboro (handwritten)\nAltitude On Reddies River. (handwritten)\nDate 15 September 1971 (handwritten)\nHabitat Rich woodland. (handwritten)\nCollected by R.M. Downs with W.P.Smith (handwritten)\nIdentified by R.M. Downs (handwritten)\n\nMcCourt Labels, Bradford, Pa.\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010500000000000002,
+      "total_cost": 0.00182875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 210
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082926\nNORTH CAROLINA\nSTATE MUSEUM\n2469\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nHERBARIUM\nNCSC\n81280\nCAROLINA STATE UNIVERSITY\nHerbarium of\nN.C. State Museum\nNo. 12364 RMD\nTechnical Name Galax aphylla L.\nCommon Name Golax\nFamily Diapensiaceae\nLocality N.C. Wilkes Co, 2mi NW of N.Wilkesboro\nAltitude On Reddies River,\nCollected by R.M. Downs with P. Smith\nIdentified by R.M. Downs\nDate 15 September 1971\nHabitat Rich woodland.\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.04e-05,
+      "total_cost": 0.0007519,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 176
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2261,
+    "output": 534,
+    "cost_in": 0.00022610000000000002,
+    "cost_out": 0.0002136
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082926\n\nNORTH CAROLINA\nSTATE MUSEUM\n2469\n\nHERBARIUM\nNCSC\n81280\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of\nN.C. State Museum\nNo. 12364 RMD\n\nTechnical Name _Galax aphylla_ L. (handwritten)\nCommon Name Galax (handwritten)\nFamily Diapensiaceae (handwritten)\nLocality N.C. Wilkes Co., 2mi NWof N.Wilkesboro (handwritten)\nAltitude On Reddies River. (handwritten)\nDate 15 September 1971 (handwritten)\nHabitat Rich woodland. (handwritten)\nCollected by R.M. Downs with W.P.Smith (handwritten)\nIdentified by R.M. Downs (handwritten)\n\nMcCourt Labels, Bradford, Pa.\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082926\nNORTH CAROLINA\nSTATE MUSEUM\n2469\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nHERBARIUM\nNCSC\n81280\nCAROLINA STATE UNIVERSITY\nHerbarium of\nN.C. State Museum\nNo. 12364 RMD\nTechnical Name Galax aphylla L.\nCommon Name Golax\nFamily Diapensiaceae\nLocality N.C. Wilkes Co, 2mi NW of N.Wilkesboro\nAltitude On Reddies River,\nCollected by R.M. Downs with P. Smith\nIdentified by R.M. Downs\nDate 15 September 1971\nHabitat Rich woodland.\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082926",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R.M. Downs with W.P.Smith",
+    "collectorNumber": "12364 RMD",
+    "identifiedBy": "R.M. Downs",
+    "identifiedDate": "1971-09-15",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "15 September 1971",
+    "collectionDate": "1971-09-15",
+    "collectionDateEnd": "",
+    "habitat": "Rich woodland.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wilkes County",
+    "locality": "N.C. Wilkes Co., 2mi Nw of N.Wilkesboro on Reddies River.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nNORTH CAROLINA\nSTATE MUSEUM\n2469\nHERBARIUM\nNCSC\n81280\nNORTH CAROLINA STATE UNIVERSITY\nHerbarium of\nN.C. State Museum\nTechnical Name \nCommon Name Golax\nFamily Diapensiaceae\nAltitude\nMcCourt Labels, Bradford, Pa.\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nCAROLINA STATE UNIVERSITY"
+  }
+}

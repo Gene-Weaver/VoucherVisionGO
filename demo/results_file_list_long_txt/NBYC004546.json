@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n21334\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb on south-facing slope below lookout platform. Flowers white.\n\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8 mi from jct with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94' N, 82\u00b046.63' W. Elevation 3550 feet.\n\n12 June 2013                                         Charles N. Horn #20422\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.0017087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21334\nNewberry College Herbarium\nNBYC004546\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon herb on south-facing slope below lookout platform. Flowers\nwhite.\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8\nmi from jet with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N,\n82\u00b046.63'W. Elevation 3550 feet.\n12 June 2013\nCharles N. Horn #20422\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2253,
+    "output": 539,
+    "cost_in": 0.0002253,
+    "cost_out": 0.0002156
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n21334\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb on south-facing slope below lookout platform. Flowers white.\n\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8 mi from jct with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94' N, 82\u00b046.63' W. Elevation 3550 feet.\n\n12 June 2013                                         Charles N. Horn #20422\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMETRIC\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21334\nNewberry College Herbarium\nNBYC004546\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon herb on south-facing slope below lookout platform. Flowers\nwhite.\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8\nmi from jet with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N,\n82\u00b046.63'W. Elevation 3550 feet.\n12 June 2013\nCharles N. Horn #20422\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "21334",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "20422",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12 June 2013",
+    "collectionDate": "2013-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Common herb on south-facing slope below lookout platform. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "South Carolina",
+    "county": "Pickens Co.",
+    "locality": "At summit of Sassafras Mountain; end of Co. rt 199, 4.8 mi from jct with US 178. Ca. 13 mi N of Pickens.",
+    "verbatimCoordinates": "35\u00b003.94' N, 82\u00b046.63' W",
+    "decimalLatitude": "35.065666666666664",
+    "decimalLongitude": "-82.77716666666667",
+    "minimumElevationInMeters": "1082",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "NEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\nNewberry College Herbarium\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nElevation 3550 feet.\nGalax urceolata"
+  }
+}

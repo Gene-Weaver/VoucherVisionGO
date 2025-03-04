@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011537\n\n16422\n\nIVES HERBARIUM OF FURMAN UNIVERSITY\nGreenville, South Carolina\n\nCounty: Jackson                    State: North Carolina\nFamily: Diapensiaceae\n\n*Galax aphylla* L.\n(Galax)\n\nRocky area on edge of woods,\nCounty Road 1157.\n\nColl. by: Dana Mayer                Coll. no: 049\nDate: 6-3-1976\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000585,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Furman University Herbarlum\nFUGR0011537\nINCHES\nMETRIC\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n16422\nIVES HERBARIUM OF FURMAN UNIVERSITY\nGreenville, South Carolina\nCounty Jackson State North Carolina\nFamily Diapensiaceae\nGalax aphylla L.\nRocky area on edge of woods,\nCounty Road 1157.\nColl by Dana Mayer\nColl no 049\nDate 6-3-1976\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.1200000000000004e-05,
+      "total_cost": 0.0007327,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 128
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2112,
+    "output": 486,
+    "cost_in": 0.00021120000000000004,
+    "cost_out": 0.0001944
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFurman University Herbarium\nFUGR0011537\n\n16422\n\nIVES HERBARIUM OF FURMAN UNIVERSITY\nGreenville, South Carolina\n\nCounty: Jackson                    State: North Carolina\nFamily: Diapensiaceae\n\n*Galax aphylla* L.\n(Galax)\n\nRocky area on edge of woods,\nCounty Road 1157.\n\nColl. by: Dana Mayer                Coll. no: 049\nDate: 6-3-1976\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFurman University Herbarlum\nFUGR0011537\nINCHES\nMETRIC\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n16422\nIVES HERBARIUM OF FURMAN UNIVERSITY\nGreenville, South Carolina\nCounty Jackson State North Carolina\nFamily Diapensiaceae\nGalax aphylla L.\nRocky area on edge of woods,\nCounty Road 1157.\nColl by Dana Mayer\nColl no 049\nDate 6-3-1976\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FUGR0011537",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dana Mayer",
+    "collectorNumber": "049",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-3-1976",
+    "collectionDate": "1976-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Rocky area on edge of woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson",
+    "locality": "County Road 1157.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Furman University Herbarium\n16422\nIves Herbarium of Furman University\nGreenville, South Carolina\nFamily Diapensiaceae\n(Galax)\n\nGalax aphylla L.\n\nFurman University Herbarlum\nInches\nMetric\nFurman\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n\nGalax aphylla"
+  }
+}

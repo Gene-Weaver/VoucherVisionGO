@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BAUSCH & LOMB OPTICAL CO.\nROCHESTER. N. Y., U. S. A.\n\nUniversity of Colorado Herbarium (COLO)\n02049971\n\nUNIVERSITY OF COLORADO\n106499\nHERBARIUM\n\nFROM THE HERBARIUM OF BOHUMIL SHIMEK\nDONATED BY THE STATE UNIVERSITY OF IOWA\n\nPLANTS OF TENNESSEE\nNo. 885\n*Galax aphylla* L.\nRich Mt.\nBlount County\n\nW. A. ANDERSON\n*May 20, 1928*\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000685,
+      "total_cost": 0.0014637499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 137
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC SYSTEM 2\n3\n4\n5\n6\nINCHES\nBAUSCH & LOMB OPTICAL CO.\nROCHESTER. N. Y., U. S. A.\nUniversity of Colorado Herbarium (COLO)\n02049971\nUNIVERSITY OF COLORADO\n106499\nHERBARIUM\nFROM THE HERBARIUM OF BOHUMIL SHIMEK\nDONATED BY THE STATE UNIVERSITY OF IOWA\nPLANTS OF TENNESSEE\nNo. 885\nGalax aphylla L.\nRich Mt.\nBlount County\nW. A. ANDERSON\nMay 20, 1928.\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.9600000000000005e-05,
+      "total_cost": 0.0007411,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 149
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 473,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBAUSCH & LOMB OPTICAL CO.\nROCHESTER. N. Y., U. S. A.\n\nUniversity of Colorado Herbarium (COLO)\n02049971\n\nUNIVERSITY OF COLORADO\n106499\nHERBARIUM\n\nFROM THE HERBARIUM OF BOHUMIL SHIMEK\nDONATED BY THE STATE UNIVERSITY OF IOWA\n\nPLANTS OF TENNESSEE\nNo. 885\n*Galax aphylla* L.\nRich Mt.\nBlount County\n\nW. A. ANDERSON\n*May 20, 1928*\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMETRIC SYSTEM 2\n3\n4\n5\n6\nINCHES\nBAUSCH & LOMB OPTICAL CO.\nROCHESTER. N. Y., U. S. A.\nUniversity of Colorado Herbarium (COLO)\n02049971\nUNIVERSITY OF COLORADO\n106499\nHERBARIUM\nFROM THE HERBARIUM OF BOHUMIL SHIMEK\nDONATED BY THE STATE UNIVERSITY OF IOWA\nPLANTS OF TENNESSEE\nNo. 885\nGalax aphylla L.\nRich Mt.\nBlount County\nW. A. ANDERSON\nMay 20, 1928.\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "02049971",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W. A. Anderson",
+    "collectorNumber": "885",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 20, 1928",
+    "collectionDate": "1928-05-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Blount County",
+    "locality": "Rich Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "BAUSCH & LOMB OPTICAL CO.\nROCHESTER. N. Y., U. S. A.\nUniversity of Colorado Herbarium (COLO)\nUNIVERSITY OF COLORADO\n106499\nHERBARIUM\nFROM THE HERBARIUM OF BOHUMIL SHIMEK\nDONATED BY THE STATE UNIVERSITY OF IOWA\nPLANTS OF TENNESSEE"
+  }
+}

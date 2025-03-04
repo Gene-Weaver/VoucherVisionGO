@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015499\n\nNorth Carolina\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. *27678 (handwritten)\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.)\nGalax\n\nNear Watauga Boone. Woods by Winkler's Creek Winkler's Meadow\nRd. Trailside beneath rhododendron thicket, Rich Cove Forest Location:\n36\u00b011'57.95\" N, 81\u00b040'18.32\"W. Datum: WGS84. Elevation: 3200 feet.\nDicot Perennial Subshrub, Forb/Herb\n\nChristopher Waddell 1. With Carlie\nBodder                                                               6/17/2013\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00117,
+      "total_cost": 0.00194875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 234
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015499\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nNorth Carolina\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27678\nDIAPENSIACEAE\nGalax urceolata (Poir.)\nGalax\nNear. Watauga Boone. Woods by Winkler's Creek Winkler's Meadow\nRd. Trailside beneath rhododendron thicket, Rich Cove Forest Location:\n36\u00b011'57.95\" N, 81\u00b040'18.32\"W. Datum: WGS84. Elevation: 3200 feet.\nDicot Perennial Subshrub, Forb/Herb\nChristopher Waddell 1. With Carlie\nBodder\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOONE, NORTH CAROLINA, U.S.\u0391. 28608\n6/17/2013\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001048,
+      "total_cost": 0.0007863,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 262
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2356,
+    "output": 570,
+    "cost_in": 0.0002356,
+    "cost_out": 0.000228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015499\n\nNorth Carolina\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. *27678 (handwritten)\n\nDIAPENSIACEAE\n*Galax urceolata* (Poir.)\nGalax\n\nNear Watauga Boone. Woods by Winkler's Creek Winkler's Meadow\nRd. Trailside beneath rhododendron thicket, Rich Cove Forest Location:\n36\u00b011'57.95\" N, 81\u00b040'18.32\"W. Datum: WGS84. Elevation: 3200 feet.\nDicot Perennial Subshrub, Forb/Herb\n\nChristopher Waddell 1. With Carlie\nBodder                                                               6/17/2013\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\n[BOON]\nBOONE, NORTH CAROLINA, U.S.A. 28608\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015499\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nNorth Carolina\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27678\nDIAPENSIACEAE\nGalax urceolata (Poir.)\nGalax\nNear. Watauga Boone. Woods by Winkler's Creek Winkler's Meadow\nRd. Trailside beneath rhododendron thicket, Rich Cove Forest Location:\n36\u00b011'57.95\" N, 81\u00b040'18.32\"W. Datum: WGS84. Elevation: 3200 feet.\nDicot Perennial Subshrub, Forb/Herb\nChristopher Waddell 1. With Carlie\nBodder\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOONE, NORTH CAROLINA, U.S.\u0391. 28608\n6/17/2013\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015499",
+    "scientificName": "Galax urceolata (Poir.)",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.)",
+    "collectedBy": "Christopher Waddell 1. With Carlie Bodder",
+    "collectorNumber": "27678",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/17/2013",
+    "collectionDate": "2013-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Woods by winkler's creek winkler's meadow rd. trailside beneath rhododendron thicket, rich cove forest location",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Dicot perennial subshrub, forb/herb",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "North carolina",
+    "county": "Watauga",
+    "locality": "Near watauga boone.",
+    "verbatimCoordinates": "36\u00b011'57.95 N, 81\u00b040'18.32W",
+    "decimalLatitude": "36.1994305",
+    "decimalLongitude": "-81.6717556",
+    "minimumElevationInMeters": "975",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Living\nCultures\nAppalachian state university herbarium\nHerbarium\nAppalachian state\nUniversity\nBoone, n. c.\nDiapensiaceae\nGalax urceolata\nDatum wgs84. Elevation 3200 feet.\nAppalachian state university herbarium\nBoone, north carolina, u.s.a. 28608\nGalax urceolata"
+  }
+}

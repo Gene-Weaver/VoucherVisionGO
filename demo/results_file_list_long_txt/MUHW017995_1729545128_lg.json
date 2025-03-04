@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 107 *Galax aphylla* L.\nLocality Off US 19, on edge of wooded area behind Woodrow Wilson High School. Beckley. *(handwritten)*\nHabitat On edge of closed oak-maple forest with *Pinus* and *Quercus* spp. *(handwritten)*\nState W.Va. County Raleigh\nCollector Mike Zeto Date 8 Oct. 1977\nDet. Mike Zeto\n\nDiapensiaceae 134 *(handwritten)*\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001045,
+      "total_cost": 0.00182375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 209
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "M/M\nINCHES\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW017995\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 107 Galax aphylla L.\nOff US 19, on edge of wooded\nLocality area behind Woodrow Wilson\nHigh School. Beckley.\nHabitat On edge of closed oak-maple\nforest with Pinus and Quercus spp.\nState W.Va. County Raleigh\nCollector Mike Zeto Date 8 Oct. 1977\nDiapensiaceae 134\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nDet. Mike Zeto\n\n\nGalax aphylla\nGalax urceolata\nPinus\nQuercus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.2e-05,
+      "total_cost": 0.0007735000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 230
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2319,
+    "output": 490,
+    "cost_in": 0.0002319,
+    "cost_out": 0.000196
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 107 *Galax aphylla* L.\nLocality Off US 19, on edge of wooded area behind Woodrow Wilson High School. Beckley. *(handwritten)*\nHabitat On edge of closed oak-maple forest with *Pinus* and *Quercus* spp. *(handwritten)*\nState W.Va. County Raleigh\nCollector Mike Zeto Date 8 Oct. 1977\nDet. Mike Zeto\n\nDiapensiaceae 134 *(handwritten)*\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nM/M\nINCHES\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW017995\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 107 Galax aphylla L.\nOff US 19, on edge of wooded\nLocality area behind Woodrow Wilson\nHigh School. Beckley.\nHabitat On edge of closed oak-maple\nforest with Pinus and Quercus spp.\nState W.Va. County Raleigh\nCollector Mike Zeto Date 8 Oct. 1977\nDiapensiaceae 134\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nDet. Mike Zeto\n\n\nGalax aphylla\nGalax urceolata\nPinus\nQuercus\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017995",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Mike Zeto",
+    "collectorNumber": "107",
+    "identifiedBy": "Michelle L. Gaynor",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, Mike Zeto, 1977",
+    "verbatimCollectionDate": "8 Oct. 1977",
+    "collectionDate": "1977-10-08",
+    "collectionDateEnd": "",
+    "habitat": "On edge of closed oak-maple forest with Pinus and Quercus spp.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.S.A.",
+    "stateProvince": "W.Va.",
+    "county": "Raleigh",
+    "locality": "Off US 19, on edge of wooded area behind Woodrow Wilson High School. Beckley.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarium\nDiapensiaceae 134"
+  }
+}

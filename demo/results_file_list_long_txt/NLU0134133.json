@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n391062\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNL00134133\n\nExchange Specimen From:\n(Handwritten: WILLI)\n\nDetermined by A. M. Harvill, Jr.; 1975\nPlants of Virginia\n\nFloyd Co.\n10 August 1949\n*Galax urceolata* (Poiret) Brummitt\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.00140375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n391062\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134133\nDetermined by A.M. Harvill, Jr.; 1975\nPlants of Virginia\nFloyd Co.\n10 August 1949\nGalax urceolata (Poiret) Brummitt\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\nKodak Gray Scale\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA 1\n2\n3\n4\n5\n6\nM 8\n9\n10 11 12\n13 14 15\nB 17 18 19\nWILLI\n---\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.6e-05,
+      "total_cost": 0.0007575,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 190
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2189,
+    "output": 478,
+    "cost_in": 0.0002189,
+    "cost_out": 0.0001912
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n391062\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNL00134133\n\nExchange Specimen From:\n(Handwritten: WILLI)\n\nDetermined by A. M. Harvill, Jr.; 1975\nPlants of Virginia\n\nFloyd Co.\n10 August 1949\n*Galax urceolata* (Poiret) Brummitt\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n391062\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134133\nDetermined by A.M. Harvill, Jr.; 1975\nPlants of Virginia\nFloyd Co.\n10 August 1949\nGalax urceolata (Poiret) Brummitt\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\nKodak Gray Scale\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA 1\n2\n3\n4\n5\n6\nM 8\n9\n10 11 12\n13 14 15\nB 17 18 19\nWILLI\n---\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "391062",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Bernard Mikula",
+    "collectorNumber": "3550",
+    "identifiedBy": "A. M. Harvill, Jr.",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 August 1949",
+    "collectionDate": "1949-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Ravine bank; along blue ridge parkway, w of vesta.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Floyd co.",
+    "locality": "W of vesta.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nherbarium\nUniversity of louisiana at monroe\nNL00134133\nExchange specimen from\n(Handwritten willi)\nPlants of virginia\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n32431\nHERBARIUM\n\nPLANTS OF NORTH CAROLINA\nBrunswick Co. Diapensiaceae\n\n*Galax urceolata* (Poiret) Brummitt\n\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, *Q. alba* or *Fagus* dominant.\n\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007299999999999999,
+      "total_cost": 0.00150875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 146
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\nGalax urceolata (Poiret) Brummitt\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, Q. alba or Fagus dominant.\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\n\n\nGalax urceolata\nQ. alba\nFagus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.76e-05,
+      "total_cost": 0.0007291000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 539,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.0002156
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n32431\nHERBARIUM\n\nPLANTS OF NORTH CAROLINA\nBrunswick Co. Diapensiaceae\n\n*Galax urceolata* (Poiret) Brummitt\n\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, *Q. alba* or *Fagus* dominant.\n\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\nGalax urceolata (Poiret) Brummitt\nBryant Mill Ck., a tributary of Cape Fear R.\nin extreme N.E. corner of Co. USGS Acme\nquadrangle. 20 - 30 % creek slope. Soil sandy\nloam, occasional limestone outcrops. Canopy\nmixed hardwood, Q. alba or Fagus dominant.\nC. B. McDonald 1350\nJ. C. Murphy\nJune 3, 1978\n\n\nGalax urceolata\nQ. alba\nFagus\n\n",
+  "formatted_json": {
+    "catalogNumber": "32431",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "C. B. McDonald, J. C. Murphy",
+    "collectorNumber": "1350",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 3, 1978",
+    "collectionDate": "1978-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Bryant Mill Ck., a tributary of Cape Fear R. in extreme N.E. corner of Co. USGS Acme quadrangle. 20 - 30 % creek slope. Soil sandy loam, occasional limestone outcrops. Canopy mixed hardwood, Q. alba or Fagus dominant.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Brunswick Co.",
+    "locality": "Bryant Mill Ck., a tributary of Cape Fear R. in extreme N.E. corner of Co. USGS Acme quadrangle.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte herbarium plants of north carolina diapensiaceae galax urceolata galax urceolata q. alba fagus"
+  }
+}

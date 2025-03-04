@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n85322\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNLU0134082\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: Kentucky                      County: Metcalfe\n\n*Galax aphylla* L.\n\nLimestone slope along creek with mixed hardwoods N\nof Ky 80, 4 miles W. of Adain Co. line.\n\nCollector: Paul Marx\nNo.: 855                                Date: 23 April 1973\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.0014037500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n85322\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134082\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF: Kentucky\nCounty: Metcalfe\nGalax aphylla L.\nLimestone slope along creek with mixed hardwoods N\nof Ky 80, 4 miles W. of Adoin Co. line.\nCollector: Paul Marx\nNo.: 855\nDate: 23 April 1973\n\nf\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2143,
+    "output": 473,
+    "cost_in": 0.0002143,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n85322\nHERBARIUM\n\nUniversity of Louisiana at Monroe\nNLU0134082\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: Kentucky                      County: Metcalfe\n\n*Galax aphylla* L.\n\nLimestone slope along creek with mixed hardwoods N\nof Ky 80, 4 miles W. of Adain Co. line.\n\nCollector: Paul Marx\nNo.: 855                                Date: 23 April 1973\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n85322\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134082\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF: Kentucky\nCounty: Metcalfe\nGalax aphylla L.\nLimestone slope along creek with mixed hardwoods N\nof Ky 80, 4 miles W. of Adoin Co. line.\nCollector: Paul Marx\nNo.: 855\nDate: 23 April 1973\n\nf\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NLU0134082",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Paul Marx",
+    "collectorNumber": "855",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 April 1973",
+    "collectionDate": "1973-04-23",
+    "collectionDateEnd": "",
+    "habitat": "Limestone slope along creek with mixed hardwoods N of Ky 80, 4 miles W. of Adain Co. line.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Metcalfe",
+    "locality": "N of Ky 80, 4 miles W. of Adain Co. line.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\n85322\nHERBARIUM\nUniversity of Louisiana at Monroe\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF"
+  }
+}

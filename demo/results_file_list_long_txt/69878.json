@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n69878\nWILLIAM & MARY\n\nPLANTS OF VIRGINIA\nJ. T. BALDWIN, JR.\nCOLLEGE OF WILLIAM AND MARY\n\nNAME _Galax aphylla_ L.  Confirm\nNUMBER 248\nDATE May 19  _M. L. Fernald_ (handwritten)\nBluff, College Creek, James City\nCounty. Has 24 somatic chromosomes.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000535,
+      "total_cost": 0.00131375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 107
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\nNO. 305 ME\n16ths\n2\n60 70 80\n3\n90\nGENERAL\n100 110 120\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nCOLLEGE OF\n69878\nWILLIAM & MART\nNAME\nPLANTS OF VIRGINIA\nJ. T. BALDWIN, JR.\nCOLLEGE OF WILLIAM AND MARY\nGalax aphylla L.\nNUMBER 248\nDATE\nMay 19\nConfirme\nM.L. Fernald\nBluff, College Creek, James City\nCounty. Has 24 somatic chromosomes.\n--- Handwritten Text ---\nM.L. Fernald\n--- End Handwritten Text ---\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.120000000000001e-05,
+      "total_cost": 0.0007627,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 203
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 517,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n69878\nWILLIAM & MARY\n\nPLANTS OF VIRGINIA\nJ. T. BALDWIN, JR.\nCOLLEGE OF WILLIAM AND MARY\n\nNAME _Galax aphylla_ L.  Confirm\nNUMBER 248\nDATE May 19  _M. L. Fernald_ (handwritten)\nBluff, College Creek, James City\nCounty. Has 24 somatic chromosomes.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\nNO. 305 ME\n16ths\n2\n60 70 80\n3\n90\nGENERAL\n100 110 120\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nCOLLEGE OF\n69878\nWILLIAM & MART\nNAME\nPLANTS OF VIRGINIA\nJ. T. BALDWIN, JR.\nCOLLEGE OF WILLIAM AND MARY\nGalax aphylla L.\nNUMBER 248\nDATE\nMay 19\nConfirme\nM.L. Fernald\nBluff, College Creek, James City\nCounty. Has 24 somatic chromosomes.\n--- Handwritten Text ---\nM.L. Fernald\n--- End Handwritten Text ---\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "69878",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. T. Baldwin, Jr.",
+    "collectorNumber": "248",
+    "identifiedBy": "M. L. Fernald",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 19",
+    "collectionDate": "0000-05-19",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "Has 24 somatic chromosomes.",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "James City",
+    "locality": "Bluff, College Creek",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\nWILLIAM & MARY\nPLANTS OF VIRGINIA\nCOLLEGE OF WILLIAM AND MARY\nConfirm\nGalax aphylla\nmm\n10\n20\n30\n40\n50\nNO. 305 ME\n16ths\n2\n60 70 80\n3\n90\nGENERAL\n100 110 120\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nWILLIAM & MART"
+  }
+}

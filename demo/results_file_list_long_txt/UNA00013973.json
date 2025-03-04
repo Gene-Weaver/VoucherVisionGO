@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23610\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport                                                     1981\n\nHERBARIUM GEOLOGICAL SURVEY\n\n*Galax aphylla* L. *(handwritten)*\nStat. et Habitat. Wet rocky dells. Near falls of *(handwritten)*\nMentone De Soto river Lookout Mt. *(handwritten)*\nCherokee & Mentone *(handwritten)*\nLegit. June 4, 1872 *(handwritten)*\nDistribut. OF ALABAMA.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23610\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013973\nHERBARIUM GEOLOGICAL SURVEY\nGalax aphylla Lin\nStat. et Habitat.\nWet rocky dells. Near fellsof\nMentors De Solo river Lookout Mr.\nCres rohelMentore June 4, 1872\nLegit.\nDistribut.\nOF ALABAMA.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.039999999999999e-05,
+      "total_cost": 0.0007519,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 176
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2273,
+    "output": 540,
+    "cost_in": 0.0002273,
+    "cost_out": 0.00021600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23610\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHerbarium of the University of Alabama\n*Galax aphylla* L.\ndet. L. J. Davenport                                                     1981\n\nHERBARIUM GEOLOGICAL SURVEY\n\n*Galax aphylla* L. *(handwritten)*\nStat. et Habitat. Wet rocky dells. Near falls of *(handwritten)*\nMentone De Soto river Lookout Mt. *(handwritten)*\nCherokee & Mentone *(handwritten)*\nLegit. June 4, 1872 *(handwritten)*\nDistribut. OF ALABAMA.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\n23610\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nHerbarium of the University of Alabama\nGalax aphylla L.\ndet. L. J. Davenport\n1981\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013973\nHERBARIUM GEOLOGICAL SURVEY\nGalax aphylla Lin\nStat. et Habitat.\nWet rocky dells. Near fellsof\nMentors De Solo river Lookout Mr.\nCres rohelMentore June 4, 1872\nLegit.\nDistribut.\nOF ALABAMA.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "23610",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "",
+    "collectorNumber": "",
+    "identifiedBy": "Robert R. Haynes",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. det. L. J. Davenport 1981",
+    "verbatimCollectionDate": "June 4, 1872",
+    "collectionDate": "1872-06-04",
+    "collectionDateEnd": "0000-00-00",
+    "habitat": "Wet rocky dells. Near falls of",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Cherokee",
+    "locality": "Mentone De Soto river Lookout Mt. Cherokee & Mentone",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nUNIVERSITY OF ALABAMA\nMOHR COLLECTION\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nHerbarium of the University of Alabama\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013973\nHERBARIUM GEOLOGICAL SURVEY\nGalax aphylla Lin\nLegit.\nDistribut.\nOF ALABAMA.\nGalax urceolata\nGalax aphylla"
+  }
+}

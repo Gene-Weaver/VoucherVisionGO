@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082916\n\n*Galax aphylla*\n\nRaleigh, NC\nhigh northward facing\nbank of Crabtree Cr.\nMay 20, 1922\nRalph Brumley\n\n07689\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n(Handwritten text identified with italics and an asterisk)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00045000000000000004,
+      "total_cost": 0.00122875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 90
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax aphylla\nRaleigh, NC\nhigh northward facing\nbank of Crabtree Cr.\nMay 20, 1922\nRalph Brumley\n07689\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082916\nThe Tiffen Company, 2007\nMagenta\nWhite\n3/Color\nBlack\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nA\nR\nG\nB\nTIFFEN\u00ae Gray Scale\nW\nG\nK\nC\nY\nM\nB\n\nHandwritten text:\nRalph Brumley\nhigh northward facing\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2132,
+    "output": 420,
+    "cost_in": 0.00021320000000000003,
+    "cost_out": 0.00016800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082916\n\n*Galax aphylla*\n\nRaleigh, NC\nhigh northward facing\nbank of Crabtree Cr.\nMay 20, 1922\nRalph Brumley\n\n07689\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n\n(Handwritten text identified with italics and an asterisk)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax aphylla\nRaleigh, NC\nhigh northward facing\nbank of Crabtree Cr.\nMay 20, 1922\nRalph Brumley\n07689\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082916\nThe Tiffen Company, 2007\nMagenta\nWhite\n3/Color\nBlack\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nA\nR\nG\nB\nTIFFEN\u00ae Gray Scale\nW\nG\nK\nC\nY\nM\nB\n\nHandwritten text:\nRalph Brumley\nhigh northward facing\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082916",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Ralph Brumley",
+    "collectorNumber": "07689",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 20, 1922",
+    "collectionDate": "1922-05-20",
+    "collectionDateEnd": "",
+    "habitat": "High northward facing bank of crabtree cr.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Nc",
+    "county": "",
+    "locality": "Raleigh, nc",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\n\nHerbarim\nnorth carolina state college\n\nhandwritten text\nRalph brumley\nhigh northward facing"
+  }
+}

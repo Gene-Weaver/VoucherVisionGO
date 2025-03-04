@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042891\n\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n*Galax urceolata* (Poir.) Brummitt\n\nPLANTS OF Jackson County, North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631\n\n*Galax aphylla* L.\nRocky woodlands\nPicnic area along county road 1178\n3 mi. W. of state Hwy 107\nFlower: white\n\nCollector Lisa A. Churchill No. 024\nDate 11 June 1980 Identified By LAC\n\nHandwritten Text:\nJackson\nLAC\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009350000000000001,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16129\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042891\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\nGalax urceolata (Poir.) Brummi H\nDIAS\nPLANTS OF Jackson County, North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631\nGalax aphylla L.\nRocky woodlands\nPicnic area along county road 1178\n3m1 W. of State Hwy 10%.\nFlower: white\nCollector Lisa A Churchill\nNo. 024\nDate 11 June 1980 Identified By LAC\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.24e-05,
+      "total_cost": 0.0007639000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 206
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2282,
+    "output": 533,
+    "cost_in": 0.00022820000000000002,
+    "cost_out": 0.00021320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042891\n\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n*Galax urceolata* (Poir.) Brummitt\n\nPLANTS OF Jackson County, North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631\n\n*Galax aphylla* L.\nRocky woodlands\nPicnic area along county road 1178\n3 mi. W. of state Hwy 107\nFlower: white\n\nCollector Lisa A. Churchill No. 024\nDate 11 June 1980 Identified By LAC\n\nHandwritten Text:\nJackson\nLAC\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\n16129\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042891\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\nGalax urceolata (Poir.) Brummi H\nDIAS\nPLANTS OF Jackson County, North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631\nGalax aphylla L.\nRocky woodlands\nPicnic area along county road 1178\n3m1 W. of State Hwy 10%.\nFlower: white\nCollector Lisa A Churchill\nNo. 024\nDate 11 June 1980 Identified By LAC\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042891",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Lisa A. Churchill",
+    "collectorNumber": "024",
+    "identifiedBy": "LAC",
+    "identifiedDate": "1980-06-11",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "11 June 1980",
+    "collectionDate": "1980-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Rocky woodlands",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flower white",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson",
+    "locality": "Picnic area along county road 1178 3 mi. W. of state Hwy 107",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "copyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\n\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\nDIAS\nPLANTS OF Jackson County, North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631\n\nHandwritten Text\nJackson\nLAC"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508056\n\nHERBARIUM POM\n297102\nPOMONA COLLEGE\n\nFLORA OF THE SOUTHERN UNITED STATES,\nCHIEFLY OF THE MTS. AND UPPER COUNTRY.\n\n*Galax aphylla* L. (handwritten)\n\nLocality,  ------- Mts. N.C. (handwritten)\nCollector, G. R. Vasey.\n1878.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005399999999999999,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508056\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n297102\nPOMONA COLLEGE\nFLORA OF THE SOUTHERN UNITED STATES,\nCHIEFLY OF THE MTS. AND UPPER COUNTRY.\nGalax aphylla L.\nLocality, Mt. Le\nCollector, G. R. VASEY, 1878.\n8.\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8400000000000004e-05,
+      "total_cost": 0.0007299,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 121
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2116,
+    "output": 483,
+    "cost_in": 0.0002116,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508056\n\nHERBARIUM POM\n297102\nPOMONA COLLEGE\n\nFLORA OF THE SOUTHERN UNITED STATES,\nCHIEFLY OF THE MTS. AND UPPER COUNTRY.\n\n*Galax aphylla* L. (handwritten)\n\nLocality,  ------- Mts. N.C. (handwritten)\nCollector, G. R. Vasey.\n1878.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508056\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n297102\nPOMONA COLLEGE\nFLORA OF THE SOUTHERN UNITED STATES,\nCHIEFLY OF THE MTS. AND UPPER COUNTRY.\nGalax aphylla L.\nLocality, Mt. Le\nCollector, G. R. VASEY, 1878.\n8.\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508056",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. R. Vasey",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1878.",
+    "collectionDate": "1878-00-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "",
+    "locality": "Mts. N.C.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "California Botanic Garden\nClaremont, CA Usa (rsa-pom)\nHerbarium pom\n297102\nPOMONA COLLEGE\nFlora of the southern united states,\nchiefly of the mts. and upper country.\nGalax aphylla l.\nLocality, mt. le\n8.\ncopyright reserved\n0\ncm\n1 2 3 4 5 6 7 8 9 10"
+  }
+}

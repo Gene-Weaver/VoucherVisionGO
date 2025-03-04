@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\n\nIMAGED\n15 NOV 2019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516623\n\n*poror* 1112 (handwritten)\n\nFlora of North Carolina\nMacon County\n*Galax aphylla* L.\n\nHighlands Lake Ravenel\nShady edge of woods\nNo. 787 June 7, 1944\nCatherine Keever\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00106,
+      "total_cost": 0.0018387499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 212
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nTEXAS\ncopyright reserved\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516623\n1112\nFlora of North Carolina\nMacon County\nGalax aphylla L.\nHighlands Lake Ravenel\nShady edge of woods\nNo. 787 June 7, 1944\nCatherine Keever\nhandwritten text:\nporor\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.2e-05,
+      "total_cost": 0.0007635000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 205
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2315,
+    "output": 575,
+    "cost_in": 0.0002315,
+    "cost_out": 0.00023
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\n\nIMAGED\n15 NOV 2019\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516623\n\n*poror* 1112 (handwritten)\n\nFlora of North Carolina\nMacon County\n*Galax aphylla* L.\n\nHighlands Lake Ravenel\nShady edge of woods\nNo. 787 June 7, 1944\nCatherine Keever\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nTEXAS\ncopyright reserved\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516623\n1112\nFlora of North Carolina\nMacon County\nGalax aphylla L.\nHighlands Lake Ravenel\nShady edge of woods\nNo. 787 June 7, 1944\nCatherine Keever\nhandwritten text:\nporor\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516623",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Catherine Keever",
+    "collectorNumber": "787",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 7, 1944",
+    "collectionDate": "1944-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Shady edge of woods",
+    "chromosomeCount": "n = , based on average guard cell volume of \u03bc\u00b2",
+    "guardCell": "n =",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "Highlands Lake Ravenel",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nVANDERBILT UNIVERSITY\nNASHVILLE, TENN.\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nporor 1112 (handwritten)\nFlora of North Carolina\nGalax aphylla\nGalax urceolata\ngemini-2.0-flash OCR\nhandwritten text\nporor"
+  }
+}

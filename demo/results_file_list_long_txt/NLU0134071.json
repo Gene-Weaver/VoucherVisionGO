@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52160\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA STATE COLLEGE, MONROE\n\nFlora of: North Carolina\nCounty: Madison\n*Galax aphylla* L.\nWoods atop 1st mtn. E. of Hot Springs along US 25 &\n70, Pisgah National Forest\n\nCollector: R. Dale Thomas\nNo.: 20935\nDate: 23 Aug. 1970\n\nUniversity of Louisiana at Monroe\nNLU0134071\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n52160\nHERBARIUM\nKodak Gray Scale\nA\nM\nB\nKodak Color Control Patches\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nUniversity of Louisiana at Monroe\nHERBARIUM OF\nNORTHEAST LOUISIANA STATE COLLEGE, MONROE\nFlora of: North Carolina\nCounty: Madison\nGalax aphylla L.\nWoods atop 1st mtn. E. of Hot Springs along US 25 &\n70, Pisgah National Forest\nCollector: R. Dale Thomas\nNo.: 20935\nDate: 23 Aug. 1970\nNLU0134071\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.4e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2175,
+    "output": 517,
+    "cost_in": 0.0002175,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52160\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA STATE COLLEGE, MONROE\n\nFlora of: North Carolina\nCounty: Madison\n*Galax aphylla* L.\nWoods atop 1st mtn. E. of Hot Springs along US 25 &\n70, Pisgah National Forest\n\nCollector: R. Dale Thomas\nNo.: 20935\nDate: 23 Aug. 1970\n\nUniversity of Louisiana at Monroe\nNLU0134071\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n52160\nHERBARIUM\nKodak Gray Scale\nA\nM\nB\nKodak Color Control Patches\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nUniversity of Louisiana at Monroe\nHERBARIUM OF\nNORTHEAST LOUISIANA STATE COLLEGE, MONROE\nFlora of: North Carolina\nCounty: Madison\nGalax aphylla L.\nWoods atop 1st mtn. E. of Hot Springs along US 25 &\n70, Pisgah National Forest\nCollector: R. Dale Thomas\nNo.: 20935\nDate: 23 Aug. 1970\nNLU0134071\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "52160",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "20935",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 Aug. 1970",
+    "collectionDate": "1970-08-23",
+    "collectionDateEnd": "",
+    "habitat": "Woods atop 1st mtn. e. of hot springs along us 25 & 70, pisgah national forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Madison",
+    "locality": "Woods atop 1st mtn. e. of hot springs along us 25 & 70, pisgah national forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nherbarium\nherbarium of\nnortheast louisiana state college, monroe\nuniversity of louisiana at monroe\nnlu0134071\nkodak gray scale\na\nm\nb\nkodak color control patches\ncyan\ngreen\nyellow\nred\nmagenta\nwhite\n3/color\nblack"
+  }
+}

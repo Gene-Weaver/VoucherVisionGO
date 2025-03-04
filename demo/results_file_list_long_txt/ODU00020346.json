@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\n\n*G. urceolata* (handwritten)\n\nThe New York Botanical Garden\nFlora of North America\n\nDiapensiaceae\n\n*Galax aphylla* L.\ndet. D. E. Atha, 2008\n\nUnited States of America. Virginia. Isle of Wight Co.\nSoutheast corner of the county on the Blackwater Ecological\nPreserve of Old Dominion University, part of the Zuni Pine\nBarrens Preserves along with Antioch Pines Natural Area\nPreserve, ca 5 miles south of the town of Zuni, NW of Route\n614, W of Horse Swamp, E of the Blackwater River.\n36.824973\u00b0, -76.856807\u00b0. ca 4 m. (Coordinates and\nelevation from hand-held gps and digital world map;\naccurate to within a range of ca 10 m). Upland floodplain of\nthe Blackwater River; very sandy alluvium.\n\nHerb, acaulescent; leaf blades lustrous; spikes erect; flowers\nwhite.\n\nSample preserved in silica gel at NY.\n\nDaniel Atha 6252 a                     25 May 2008\nNYdb\n\nODU00020346\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001495,
+      "total_cost": 0.0022737499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 299
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "RERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\nODU00020346\n= G. urceolata\nThe New York Botanical Garden\nFlora of North America\nDiapensiaceae\nGalax aphylla L.\ndet. D. E. Atha, 2008\nUnited States of America. Virginia. Isle of Wight Co.\nSoutheast corner of the county on the Blackwater Ecological\nPreserve of Old Dominion Univeristy, part of the Zuni Pine\nBarrens Preserves along with Antioch Pines Natural Area\nPreserve, ca 5 miles south of the town of Zuni, NW of Route\n614, W of Horse Swamp, E of the Blackwater River.\n36.824973\u00b0, -76.856807\u00b0. ca 4 m. (Coordinates and\nelevation from hand-held gps and digital world map;\naccurate to within a range of ca 10 m). Upland floodplain of\nthe Blackwater River; very sandy alluvium.\nHerb, acaulescent; leaf blades lustrous; spikes erect; flowers\nwhite.\nSample preserved in silica gel at NY.\nDaniel Atha 6252 a\n25 May 2008\nNYdb\n\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011880000000000001,
+      "total_cost": 0.0008003,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 297
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2485,
+    "output": 629,
+    "cost_in": 0.00024849999999999997,
+    "cost_out": 0.0002516
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\n\n*G. urceolata* (handwritten)\n\nThe New York Botanical Garden\nFlora of North America\n\nDiapensiaceae\n\n*Galax aphylla* L.\ndet. D. E. Atha, 2008\n\nUnited States of America. Virginia. Isle of Wight Co.\nSoutheast corner of the county on the Blackwater Ecological\nPreserve of Old Dominion University, part of the Zuni Pine\nBarrens Preserves along with Antioch Pines Natural Area\nPreserve, ca 5 miles south of the town of Zuni, NW of Route\n614, W of Horse Swamp, E of the Blackwater River.\n36.824973\u00b0, -76.856807\u00b0. ca 4 m. (Coordinates and\nelevation from hand-held gps and digital world map;\naccurate to within a range of ca 10 m). Upland floodplain of\nthe Blackwater River; very sandy alluvium.\n\nHerb, acaulescent; leaf blades lustrous; spikes erect; flowers\nwhite.\n\nSample preserved in silica gel at NY.\n\nDaniel Atha 6252 a                     25 May 2008\nNYdb\n\nODU00020346\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\nODU00020346\n= G. urceolata\nThe New York Botanical Garden\nFlora of North America\nDiapensiaceae\nGalax aphylla L.\ndet. D. E. Atha, 2008\nUnited States of America. Virginia. Isle of Wight Co.\nSoutheast corner of the county on the Blackwater Ecological\nPreserve of Old Dominion Univeristy, part of the Zuni Pine\nBarrens Preserves along with Antioch Pines Natural Area\nPreserve, ca 5 miles south of the town of Zuni, NW of Route\n614, W of Horse Swamp, E of the Blackwater River.\n36.824973\u00b0, -76.856807\u00b0. ca 4 m. (Coordinates and\nelevation from hand-held gps and digital world map;\naccurate to within a range of ca 10 m). Upland floodplain of\nthe Blackwater River; very sandy alluvium.\nHerb, acaulescent; leaf blades lustrous; spikes erect; flowers\nwhite.\nSample preserved in silica gel at NY.\nDaniel Atha 6252 a\n25 May 2008\nNYdb\n\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ODU00020346",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Daniel Atha",
+    "collectorNumber": "6252 a",
+    "identifiedBy": "D. E. Atha",
+    "identifiedDate": "2008",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "= G. urceolata",
+    "verbatimCollectionDate": "25 May 2008",
+    "collectionDate": "2008-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Upland floodplain of the blackwater river; very sandy alluvium.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Herb, acaulescent; leaf blades lustrous; spikes erect; flowers white.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states of america",
+    "stateProvince": "Virginia",
+    "county": "Isle of wight co.",
+    "locality": "Southeast corner of the county on the blackwater ecological preserve of old dominion university, part of the zuni pine barrens preserves along with antioch pines natural area preserve, ca 5 miles south of the town of zuni, nw of route 614, w of horse swamp, e of the blackwater river.",
+    "verbatimCoordinates": "36.824973\u00b0, -76.856807\u00b0",
+    "decimalLatitude": "36.824973",
+    "decimalLongitude": "-76.856807",
+    "minimumElevationInMeters": "4",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Herbarium\nDepartment of biological sciences\nOld dominion university\nNorfolk, virginia 23529-0266\nG. urceolata (handwritten)\nThe new york botanical garden\nFlora of north america\nDiapensiaceae\nca 4 m. (coordinates and\nelevation from hand-held gps and digital world map;\naccurate to within a range of ca 10 m).\nSample preserved in silica gel at ny.\nNYdb"
+  }
+}

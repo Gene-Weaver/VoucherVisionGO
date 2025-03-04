@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n139106\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: North Carolina      County: Craven\n\n*Galax aphylla* L.\n\nNeuse River Recreation Area, Croatan National\nForest, U.S. 70, south of New Bern, N.C.\n\nCollector: R. Dale Thomas , Bio. 451 Class\nNo.: 53034       Date: 10 June 1977\n\nNLU0134078\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006649999999999999,
+      "total_cost": 0.00144375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "RTHEAST LOUISIANA UNIVERSITY\n139106\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF:\nNorth Carolina\nCounty: Craven\nGalax aphylla L.\nNeuse River Recreation Area, Croatan National\nForest, U.S. 70, south of New Bern, N.C.\nCollector: R. Dale Thomas , Bio. 451 Class\nNo.: 53034\nDate: 10 June 1977\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8e-05,
+      "total_cost": 0.0007295,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 120
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2120,
+    "output": 457,
+    "cost_in": 0.000212,
+    "cost_out": 0.0001828
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n139106\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFLORA OF: North Carolina      County: Craven\n\n*Galax aphylla* L.\n\nNeuse River Recreation Area, Croatan National\nForest, U.S. 70, south of New Bern, N.C.\n\nCollector: R. Dale Thomas , Bio. 451 Class\nNo.: 53034       Date: 10 June 1977\n\nNLU0134078\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRTHEAST LOUISIANA UNIVERSITY\n139106\nHERBARIUM\n\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF:\nNorth Carolina\nCounty: Craven\nGalax aphylla L.\nNeuse River Recreation Area, Croatan National\nForest, U.S. 70, south of New Bern, N.C.\nCollector: R. Dale Thomas , Bio. 451 Class\nNo.: 53034\nDate: 10 June 1977\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "139106",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas, Bio. 451 Class",
+    "collectorNumber": "53034",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 June 1977",
+    "collectionDate": "1977-06-10",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Craven",
+    "locality": "Neuse River Recreation Area, Croatan National Forest, U.S. 70, south of New Bern, N.C.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHERBARIUM OF\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFLORA OF\nNLU0134078"
+  }
+}

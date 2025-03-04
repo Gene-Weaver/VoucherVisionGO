@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n67242\n\nFLORA OF NORTH CAROLINA\nHaywood County\n\n*Galax aphylla* L.\n\nFrequent, in mixed to rich soil along edge of white\npine/hardwood forest in filtered to full sun; 8-10\" tall;\n0.5 mi S of Hick's homestead along gravelly road\nedge, Cold Springs USGA 7.5' topo; 2.2 miles S of I-\n40 and N of Mt. Sterling, S of Forest Service Rd 288.\n\nScottie Edwards 92                                                     6 Oct 1991\n\nUniversity of South Carolina Herbarium\nUSCH0025740\n\nA.C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA - COLUMBIA\n\nHandwritten Text: 64\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.0017237500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\nUNIVERSITY OF SOUTH CAR\nHERBARIUM\nUSCH\nMOORE\n67242\nFLORA OF NORTH CAROLINA\nHaywood County\nGalax aphylla L.\nFrequent, in mixed to rich soil along edge of white\npine/hardwood forest in filtered to full sun; 8-10\" tall;\n0.5 mi S of Hick's homestead along gravelly road\nedge, Cold Springs USGA 7.5' topo; 2.2 miles S of I-\n40 and N of Mt. Sterling, S of Forest Service Rd 288.\nScottie Edwards 92\n6 Oct 1991\nA.C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA - COLUMBIA\nUniversity of South Carolina Herbarium\nUSCH0025740\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.72e-05,
+      "total_cost": 0.0007687,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 218
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2288,
+    "output": 514,
+    "cost_in": 0.00022880000000000003,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n67242\n\nFLORA OF NORTH CAROLINA\nHaywood County\n\n*Galax aphylla* L.\n\nFrequent, in mixed to rich soil along edge of white\npine/hardwood forest in filtered to full sun; 8-10\" tall;\n0.5 mi S of Hick's homestead along gravelly road\nedge, Cold Springs USGA 7.5' topo; 2.2 miles S of I-\n40 and N of Mt. Sterling, S of Forest Service Rd 288.\n\nScottie Edwards 92                                                     6 Oct 1991\n\nUniversity of South Carolina Herbarium\nUSCH0025740\n\nA.C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA - COLUMBIA\n\nHandwritten Text: 64\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\n1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\nUNIVERSITY OF SOUTH CAR\nHERBARIUM\nUSCH\nMOORE\n67242\nFLORA OF NORTH CAROLINA\nHaywood County\nGalax aphylla L.\nFrequent, in mixed to rich soil along edge of white\npine/hardwood forest in filtered to full sun; 8-10\" tall;\n0.5 mi S of Hick's homestead along gravelly road\nedge, Cold Springs USGA 7.5' topo; 2.2 miles S of I-\n40 and N of Mt. Sterling, S of Forest Service Rd 288.\nScottie Edwards 92\n6 Oct 1991\nA.C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA - COLUMBIA\nUniversity of South Carolina Herbarium\nUSCH0025740\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025740",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Scottie Edwards",
+    "collectorNumber": "92",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6 Oct 1991",
+    "collectionDate": "1991-10-06",
+    "collectionDateEnd": "",
+    "habitat": "Frequent, in mixed to rich soil along edge of white pine/hardwood forest in filtered to full sun",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "8-10 tall",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Haywood county",
+    "locality": "0.5 mi s of hick's homestead along gravelly road edge, cold springs usga 7.5' topo; 2.2 miles s of i-40 and n of mt. sterling, s of forest service rd 288.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Usch\ncopyright reserved\nuniversity of south carolina\nA.c. moore herbarium (usch)\nuniversity of south carolina - columbia\nuniversity of south carolina herbarium\nhandwritten text 64"
+  }
+}

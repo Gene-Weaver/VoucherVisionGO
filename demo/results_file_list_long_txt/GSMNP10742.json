@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10742\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGSM 89885\n\nNP\nGSM\nBot.\n\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(s) H. M. JENNISON No. 327\nJUN 6 1935\n'93\n\nCosby, Low Gap Trail, Cocke Co., Tenn.\n*Galax aphylla*, L.\n\nIn moist, rich humus in shade.\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab 1979-1980 *MB*(Handwritten)\n1982\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001035,
+      "total_cost": 0.00181375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 207
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10742\nMOUNTAINS NATIONAL\nCAT. NO.\nGSM 89885\nSMOKY\nPARK\nNP\nGSM\nBot.\n6/22/16/6\nGalax urceolata (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nCOLLECTOR(S) H. M. JENNISON NO.327\nJUN 6 1935\nCosby, Low Gap Trail, Cocke Co.,\nGalax aphylla, L.\nTenn.\nIn moist, rich humus in shade.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980\nMB\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.92e-05,
+      "total_cost": 0.0007607,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 198
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2288,
+    "output": 521,
+    "cost_in": 0.00022880000000000003,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10742\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGSM 89885\n\nNP\nGSM\nBot.\n\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(s) H. M. JENNISON No. 327\nJUN 6 1935\n'93\n\nCosby, Low Gap Trail, Cocke Co., Tenn.\n*Galax aphylla*, L.\n\nIn moist, rich humus in shade.\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association\nUplands Field Lab 1979-1980 *MB*(Handwritten)\n1982\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10742\nMOUNTAINS NATIONAL\nCAT. NO.\nGSM 89885\nSMOKY\nPARK\nNP\nGSM\nBot.\n6/22/16/6\nGalax urceolata (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nCOLLECTOR(S) H. M. JENNISON NO.327\nJUN 6 1935\nCosby, Low Gap Trail, Cocke Co.,\nGalax aphylla, L.\nTenn.\nIn moist, rich humus in shade.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980\nMB\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GSMNP10742",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "327",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "JUN 6 1935",
+    "collectionDate": "1935-06-06",
+    "collectionDateEnd": "",
+    "habitat": "In moist, rich humus in shade.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tenn.",
+    "county": "Cocke Co.",
+    "locality": "Cosby, Low Gap Trail",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSM 89885\nNP\nGSM\nBot.\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n'93\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab 1979-1980 MB(Handwritten)\n1982"
+  }
+}

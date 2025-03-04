@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n165444\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nCHATTOOGA COUNTY, GEORGIA\n*Galax urceolata* (Poiret) Brummitt\n\nNW corner of county. Gorge of East Fork Little\nRiver. Camp Juliette Low.\n\nw/ Nancy C. Coile\nSamuel B. Jones 24457  22 August 1984\n\nThe University of Georgia                     Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006699999999999999,
+      "total_cost": 0.00144875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 134
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIV. OF GEORGIA\nHERBARIUM\n165444\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nCHATTOOGA COUNTY, GEORGIA\nGalax urceolata (Poiret) Brummitt\nNW corner of county. Gorge of East Fork Little\nRiver. Camp Juliette Low.\nw/ Nancy C. Coile\nSamuel B. Jones 24457 22 August 1984\nThe University of Georgia\nAthens, GA, U.S.A.\nIMAGED 2013\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.04e-05,
+      "total_cost": 0.0007319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2143,
+    "output": 487,
+    "cost_in": 0.0002143,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n165444\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nCHATTOOGA COUNTY, GEORGIA\n*Galax urceolata* (Poiret) Brummitt\n\nNW corner of county. Gorge of East Fork Little\nRiver. Camp Juliette Low.\n\nw/ Nancy C. Coile\nSamuel B. Jones 24457  22 August 1984\n\nThe University of Georgia                     Athens, GA, U.S.A.\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIV. OF GEORGIA\nHERBARIUM\n165444\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nCHATTOOGA COUNTY, GEORGIA\nGalax urceolata (Poiret) Brummitt\nNW corner of county. Gorge of East Fork Little\nRiver. Camp Juliette Low.\nw/ Nancy C. Coile\nSamuel B. Jones 24457 22 August 1984\nThe University of Georgia\nAthens, GA, U.S.A.\nIMAGED 2013\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "165444",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Samuel B. Jones, Nancy C. Coile",
+    "collectorNumber": "24457",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 August 1984",
+    "collectionDate": "1984-08-22",
+    "collectionDateEnd": "",
+    "habitat": "Nw corner of county. gorge of east fork little river. camp juliette low.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Chattooga",
+    "locality": "Nw corner of county. gorge of east fork little river. camp juliette low.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\nspecimen examined for\ngeorgia atlas project\n9 november 2005\nthe university of georgia athens, ga, u.s.a.\nimaged 2013"
+  }
+}

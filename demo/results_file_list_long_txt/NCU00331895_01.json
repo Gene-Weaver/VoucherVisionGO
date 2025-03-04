@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nNCU\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331895\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nGranville County\n\n*Galax aphylla* L.\n\nwooded slopes of the Tar River, 3.7 miles north of\nWilton on the Dickerson Road, 5.7 miles south of\nDickerson.\nwith A. E. Radford\nHarry E. Ahles 11521 April 26, 1956\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text: *Harry E. Ahles*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000815,
+      "total_cost": 0.0015937500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nUniversity of North Carolina\nat Chapel Hill\ncm\nNCU\ncopyright reserved\nUNIVERSITY OF\nNORTH\nCAROLINA\nHERBARIUM\n86561\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331895\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nGranville County\nGalax aphylla L.\nwooded slopes of the Tar River, 3.7 miles north of\nWilton on the Dickerson Road, 5.7 miles south of\nDickerson.\nwith A. E. Radford\nHarry E. Ahles\nApril 26, 1956\nCollected for the \"Flora of the Carolinas\"\n11521\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2219,
+    "output": 459,
+    "cost_in": 0.00022190000000000003,
+    "cost_out": 0.00018360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nNCU\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331895\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nGranville County\n\n*Galax aphylla* L.\n\nwooded slopes of the Tar River, 3.7 miles north of\nWilton on the Dickerson Road, 5.7 miles south of\nDickerson.\nwith A. E. Radford\nHarry E. Ahles 11521 April 26, 1956\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text: *Harry E. Ahles*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nUniversity of North Carolina\nat Chapel Hill\ncm\nNCU\ncopyright reserved\nUNIVERSITY OF\nNORTH\nCAROLINA\nHERBARIUM\n86561\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331895\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nGranville County\nGalax aphylla L.\nwooded slopes of the Tar River, 3.7 miles north of\nWilton on the Dickerson Road, 5.7 miles south of\nDickerson.\nwith A. E. Radford\nHarry E. Ahles\nApril 26, 1956\nCollected for the \"Flora of the Carolinas\"\n11521\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331895",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harry E. Ahles, A. E. Radford",
+    "collectorNumber": "11521",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 26, 1956",
+    "collectionDate": "1956-04-26",
+    "collectionDateEnd": "",
+    "habitat": "Wooded slopes of the Tar River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "North Carolina",
+    "stateProvince": "North Carolina",
+    "county": "Granville County",
+    "locality": "3.7 miles north of Wilton on the Dickerson Road, 5.7 miles south of Dickerson.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nCollected for the Flora of the Carolinas"
+  }
+}

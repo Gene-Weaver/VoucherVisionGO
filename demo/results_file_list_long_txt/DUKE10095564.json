@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\nV- 134663\n\n*stomates c. 30 \u03bc long* (handwritten)\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFLORA OF NORTH AMERICA\nCollected by R. M. Schuster\n\nNo. A-3935 June 29 1951\nGalax aphylla L. (Diapensiaceae)\nCommon in acid soil along Blue Ridge\nParkway, just south of Mile 225,\nNorth Carolina.\n\nDet. by: R.M.S.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095564\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.00170875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\nV- 134663\nDuke\nUNIVERSITY\nstomates c. 30\u00b5 long\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFLORA OF NORTH AMERICA\nCollected by R. M. Schuster\nNo. A-3935\nGalax aphylla L.\nJune 29 51\n(Diapensiaceae)\nCommon in acid soil along Blue Ridge\nParkway, just south of Mile 225,\nNorth Carolina.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095564\nDet. by: R.M.S.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.36e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2244,
+    "output": 535,
+    "cost_in": 0.0002244,
+    "cost_out": 0.000214
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY\nHERBARIUM\nV- 134663\n\n*stomates c. 30 \u03bc long* (handwritten)\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFLORA OF NORTH AMERICA\nCollected by R. M. Schuster\n\nNo. A-3935 June 29 1951\nGalax aphylla L. (Diapensiaceae)\nCommon in acid soil along Blue Ridge\nParkway, just south of Mile 225,\nNorth Carolina.\n\nDet. by: R.M.S.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095564\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\nV- 134663\nDuke\nUNIVERSITY\nstomates c. 30\u00b5 long\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFLORA OF NORTH AMERICA\nCollected by R. M. Schuster\nNo. A-3935\nGalax aphylla L.\nJune 29 51\n(Diapensiaceae)\nCommon in acid soil along Blue Ridge\nParkway, just south of Mile 225,\nNorth Carolina.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095564\nDet. by: R.M.S.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095564",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. M. Schuster",
+    "collectorNumber": "A-3935",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. (Diapensiaceae) Det. by R.M.S.",
+    "verbatimCollectionDate": "June 29 51",
+    "collectionDate": "1951-06-29",
+    "collectionDateEnd": "",
+    "habitat": "Common in acid soil along Blue Ridge Parkway, just south of Mile 225.",
+    "chromosomeCount": "",
+    "guardCell": "stomates c. 30\u00b5 long",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Just south of Mile 225, North Carolina.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY\nHERBARIUM\nV- 134663\n\nDuke University Herbarium\nFLORA OF NORTH AMERICA\nGalax aphylla auct. non L.\nDUKE UNIVERSITY HERBARIUM\n\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

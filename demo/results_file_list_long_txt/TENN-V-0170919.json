@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170919\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 479 \u03bc2\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR, Charlotte Lyle                      Unicoi COUNTY\nNO. 19604                                       July 5 , 1955\n\n*Galax aphylla* L.\n\nNolichucky River Gorge, Unaka Springs;\nmoist woods toward Mine Flats\n\n\nHandwritten Text:\n1 (within the circular stamp)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008200000000000001,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170919\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNESSIENSIS\nCharlotte Lyle\nUnicoi\nJuly 5\n19604\nGalax aphylla L.\nNolichucky River Gorge, Unaka Springs;\nmoist woods toward Mine Flats\n--- Handwritten Text ---\n55\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.24e-05,
+      "total_cost": 0.0007339,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 131
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 487,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170919\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 479 \u03bc2\nGuy L. Nesom, 1975\n\nFLORA TENNESSIENSIS\nCOLLECTOR, Charlotte Lyle                      Unicoi COUNTY\nNO. 19604                                       July 5 , 1955\n\n*Galax aphylla* L.\n\nNolichucky River Gorge, Unaka Springs;\nmoist woods toward Mine Flats\n\n\nHandwritten Text:\n1 (within the circular stamp)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170919\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNESSIENSIS\nCharlotte Lyle\nUnicoi\nJuly 5\n19604\nGalax aphylla L.\nNolichucky River Gorge, Unaka Springs;\nmoist woods toward Mine Flats\n--- Handwritten Text ---\n55\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170919",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charlotte Lyle",
+    "collectorNumber": "19604",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 5 , 1955",
+    "collectionDate": "1955-07-05",
+    "collectionDateEnd": "",
+    "habitat": "Moist woods toward mine flats",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 479 \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi",
+    "locality": "Nolichucky river gorge, unaka springs",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora tennesseensis\ngalax aphylla l.\nuniversity of tennessee knoxville\nherbarium of the university of north carolina\n--- handwritten text ---"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n239711\n\nPLANTS OF NORTH CAROLINA\n\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nAlexander County: South face of Rocky\nFace Mtn. off County Road #1426, about 7\nmiles north of NC 90 in Hiddenite.\n\nChestnut oak woods.\n\nRobert Wyatt #528                      1 June 1974\nNorma Fowler and Catharine Keever\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095552\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008950000000000001,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n239711\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nAlexander County: South face of Rocky\nFace Mtn. off County Road #1426, about 7\nmiles north of NC 90 in Hiddenite.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nChestnut oak woods.\ndet. R.L. Wilbur I. 2001\nRobert Wyatt #528\n1 June 1974\nDuke University Herbarium\nNorma Fowler and Catharine Keever\nDUKE10095552\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2238,
+    "output": 501,
+    "cost_in": 0.00022380000000000002,
+    "cost_out": 0.00020040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n239711\n\nPLANTS OF NORTH CAROLINA\n\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nAlexander County: South face of Rocky\nFace Mtn. off County Road #1426, about 7\nmiles north of NC 90 in Hiddenite.\n\nChestnut oak woods.\n\nRobert Wyatt #528                      1 June 1974\nNorma Fowler and Catharine Keever\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095552\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\n239711\nPLANTS OF NORTH CAROLINA\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nAlexander County: South face of Rocky\nFace Mtn. off County Road #1426, about 7\nmiles north of NC 90 in Hiddenite.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\nChestnut oak woods.\ndet. R.L. Wilbur I. 2001\nRobert Wyatt #528\n1 June 1974\nDuke University Herbarium\nNorma Fowler and Catharine Keever\nDUKE10095552\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "239711",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert Wyatt, Norma Fowler, Catharine Keever",
+    "collectorNumber": "528",
+    "identifiedBy": "R.l. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt\nGalax aphylla auct. non L.",
+    "verbatimCollectionDate": "1 June 1974",
+    "collectionDate": "1974-06-01",
+    "collectionDateEnd": "",
+    "habitat": "Chestnut oak woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Alexander county",
+    "locality": "South face of rocky face mtn. off county road #1426, about 7 miles north of nc 90 in hiddenite.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke\nUniversity\nDuke University Herbarium\nPlants of north carolina\nCollected for the herbarium of\nDuke University\nDuke University Herbarium\nDUKE10095552"
+  }
+}

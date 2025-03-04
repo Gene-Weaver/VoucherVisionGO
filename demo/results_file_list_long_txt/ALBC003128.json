@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.0015887499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\n\n\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2171,
+    "output": 451,
+    "cost_in": 0.00021710000000000002,
+    "cost_out": 0.00018040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\n\n\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "002282",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Biltmore Collector, C. W. Fallass",
+    "collectorNumber": "1336b, 1510",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 10th, 1897, June 10 1897, June 10 1899",
+    "collectionDate": "1897-06-10",
+    "collectionDateEnd": "1899-06-10",
+    "habitat": "Open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina, Mich",
+    "county": "",
+    "locality": "Biltmore, Petoskey",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of Albion College\nAlbion College Herbarium (ALBC)\nALBC003128"
+  }
+}

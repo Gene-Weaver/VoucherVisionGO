@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\n\nSalem College Herbarium (SC)\nSC000004\n\nBIOLOGY DEPARTMENT\nSURRY COMMUNITY COLLEGE\n\nScientific Name *Galax urceolata*\nCommon Name Galax Beetleweed\nDivision Magnoliophyta\nFamily Diapensiaceae\nLocality Dobson, NC\nHabitat Woods\nCollector Beth Haymore 4/29/02 Date\n\n*Handwritten Text: Beth Haymore, 4/29/02*\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000535,
+      "total_cost": 0.00131375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 107
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\n37\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nNCU\nSalem College Herbarium (SC)\nSC000004\nBIOLOGY DEPARTMENT\nSURRY COMMUNITY COLLEGE\nScientific Name Galax urceolata\nCommon Name Galax Beetleweed\nDivision Magnoliophyta\nFamily Diapensiaceae\nLocality Dobson, NC\nHabitat Woods\nCollector Beth Haymore 4/29/02 Date\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.24e-05,
+      "total_cost": 0.0007239,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 106
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2116,
+    "output": 480,
+    "cost_in": 0.0002116,
+    "cost_out": 0.000192
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of North Carolina\nat Chapel Hill\n\nSalem College Herbarium (SC)\nSC000004\n\nBIOLOGY DEPARTMENT\nSURRY COMMUNITY COLLEGE\n\nScientific Name *Galax urceolata*\nCommon Name Galax Beetleweed\nDivision Magnoliophyta\nFamily Diapensiaceae\nLocality Dobson, NC\nHabitat Woods\nCollector Beth Haymore 4/29/02 Date\n\n*Handwritten Text: Beth Haymore, 4/29/02*\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\n37\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nNCU\nSalem College Herbarium (SC)\nSC000004\nBIOLOGY DEPARTMENT\nSURRY COMMUNITY COLLEGE\nScientific Name Galax urceolata\nCommon Name Galax Beetleweed\nDivision Magnoliophyta\nFamily Diapensiaceae\nLocality Dobson, NC\nHabitat Woods\nCollector Beth Haymore 4/29/02 Date\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "SC000004",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Beth Haymore",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/29/02",
+    "collectionDate": "2002-04-29",
+    "collectionDateEnd": "",
+    "habitat": "Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Nc",
+    "county": "",
+    "locality": "Dobson, nc",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nSalem College Herbarium (sc)\nBiology department\nSurry community college\nCommon name galax beetleweed\nDivision magnoliophyta\nFamily diapensiaceae\nDate\nHandwritten text beth haymore, 4/29/02\nmsccpppe0411\n37\nmsccppcc0411\nmm\nx-rite\ncolorchecker\nNcu"
+  }
+}

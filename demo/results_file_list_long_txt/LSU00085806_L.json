@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM 40167\nLOUISIANA STATE UNIVERSITY\nBATON ROUGE\n\nLSU00085806\n\nLOUISIANA STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\n130\n\nNeuse River Recreation Area. Croatan Nat. Forest\nU.S. 70 South of New Bern\n\nCounty: Craven\nColl: G. Landry, R. D. Thomas Date: 9 June 1977\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000565,
+      "total_cost": 0.00134375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 113
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM 40167\nLOUISIANA STATE UNIVERSITY\nBATON ROUGE\nLOUISIANA STATE UNIVERSITY HERBARIUM\nLSU00085806\nA\nM\nB\nLOUISIANA STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nNeuse River Recreation Area. Croatan Nat. Forest\nU.S. 70 South of New Bern\nCounty: Craven\nColl: G. Landry, R. D. Thomas Date: 9 June 1977\n130\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8400000000000004e-05,
+      "total_cost": 0.0007299,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 121
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2116,
+    "output": 441,
+    "cost_in": 0.0002116,
+    "cost_out": 0.0001764
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM 40167\nLOUISIANA STATE UNIVERSITY\nBATON ROUGE\n\nLSU00085806\n\nLOUISIANA STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\n130\n\nNeuse River Recreation Area. Croatan Nat. Forest\nU.S. 70 South of New Bern\n\nCounty: Craven\nColl: G. Landry, R. D. Thomas Date: 9 June 1977\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM 40167\nLOUISIANA STATE UNIVERSITY\nBATON ROUGE\nLOUISIANA STATE UNIVERSITY HERBARIUM\nLSU00085806\nA\nM\nB\nLOUISIANA STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nNeuse River Recreation Area. Croatan Nat. Forest\nU.S. 70 South of New Bern\nCounty: Craven\nColl: G. Landry, R. D. Thomas Date: 9 June 1977\n130\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LSU00085806",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. Landry, R. D. Thomas",
+    "collectorNumber": "130",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 June 1977",
+    "collectionDate": "1977-06-09",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Craven",
+    "locality": "Neuse River Recreation Area. Croatan Nat. Forest U.S. 70 South of New Bern",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM 40167\nLOUISIANA STATE UNIVERSITY\nBATON ROUGE\nLOUISIANA STATE UNIVERSITY HERBARIUM\nA\nM\nB\nLOUISIANA STATE UNIVERSITY HERBARIUM\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "1478\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUCHT\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033779\n\nFLORA OF _Iowa_ (handwritten)\nFamily Diapensiaceae (handwritten)\nScientific Name _Galax aphylla_ L. (handwritten)\n\nCommon Name\nLocality S.E. Mt. Nat. Park (handwritten)\nHabitat dense deciduous forest 2000\u2019 (handwritten)\nCollector _E.W. Westcott_ (handwritten) Date 10-6-69 (handwritten)\n1481\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007249999999999998,
+      "total_cost": 0.00150375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 145
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033779\n1478\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUCHT\nFLORA OF Jinn.\nFamily Diapensiaceae\nScientific Name Galax aphylla, L.\nCommon Name\nLocality I. J. M. Nat Park\nHabitat dense deciduous forest 2000'\nCollector E.W. Wescott\nDate 10-69\n1481\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla, L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.04e-05,
+      "total_cost": 0.0007419,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2192,
+    "output": 466,
+    "cost_in": 0.00021920000000000002,
+    "cost_out": 0.0001864
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n1478\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUCHT\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033779\n\nFLORA OF _Iowa_ (handwritten)\nFamily Diapensiaceae (handwritten)\nScientific Name _Galax aphylla_ L. (handwritten)\n\nCommon Name\nLocality S.E. Mt. Nat. Park (handwritten)\nHabitat dense deciduous forest 2000\u2019 (handwritten)\nCollector _E.W. Westcott_ (handwritten) Date 10-6-69 (handwritten)\n1481\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033779\n1478\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUCHT\nFLORA OF Jinn.\nFamily Diapensiaceae\nScientific Name Galax aphylla, L.\nCommon Name\nLocality I. J. M. Nat Park\nHabitat dense deciduous forest 2000'\nCollector E.W. Wescott\nDate 10-69\n1481\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla, L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT033779",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Diapensiaceae indet",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "E.W. Westcott",
+    "collectorNumber": "1481",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10-6-69",
+    "collectionDate": "1969-10-06",
+    "collectionDateEnd": "",
+    "habitat": "Dense deciduous forest 2000'",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "I. J. M. Nat Park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "610",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "1478\nBiology department herbarium\nSouthern missionary college\nUCHT\nUniversity of tennessee\nAt chattanooga\nFlora of jinn.\nCommon name\nSERNEC digitization project - tennessee herbarium consortium\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10"
+  }
+}

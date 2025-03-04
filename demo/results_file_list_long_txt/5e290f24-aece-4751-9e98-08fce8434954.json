@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FLAS\nHERBARIUM\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275430\n\nPloidy level inferred via flow cytometry: Diploid.\nMichelle L. Gaynor 7 Sept 2022\n\nSheet 1 of 2\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 2 June 2021\n\nGASTON COUNTY: Crowders Mountain State Park. Linwood Access. Backside Trail. Off the trail behind erosion fence. Elev. 387 m. On slope under *Kalmia latifolia*, *Acer* spp., *Smilax* spp., and *Quercus* spp. Spikelet completely flowering. New flowers towards tip of spikelet, old flowers towards bottom.\nLat. 35.23693001 Long. -81.27317498 Datum: WGS84\ncoll. Michelle Gaynor # 60 2 June 2021\n\nNorth Carolina Division of Parks and Recreation, Scientific Research and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG304 (Pop 22).\n\n\nHandwritten text: #60\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Acer* spp.\n*Smilax* spp.\n*Quercus* spp.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0016300000000000002,
+      "total_cost": 0.0024087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 326
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FLAS\nHERBARIUM\nFLAS 275430\nPloidy level inferred via flow cytometry: Diploid.\nMichelle L. Gaynor\n7 Sept 2022\nSheet / of 2\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 2 June 2021\nGASTON COUNTY: Crowders Mountain State Park.\nLinwood Access. Backside Trail. Off the trail behind\nerosion fence. Elev. 387 m. On slope under Kalmia\nlatifolia, Acer spp, Smilax spp., and Quercus spp. Spikelet\ncompletely flowering. New flowers towards tip of spikelet,\nold flowers towards bottom.\nLat. 35.23693001 Long. -81.27317498 Datum: WGS84\ncoll. Michelle Gaynor # 60 2 June 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG304 (Pop 22).\n\n\nGalax urceolata\nKalmia latifolia\nAcer spp\nSmilax spp\nQuercus spp\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001164,
+      "total_cost": 0.0007979,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 291
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2464,
+    "output": 638,
+    "cost_in": 0.0002464,
+    "cost_out": 0.0002552
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFLAS\nHERBARIUM\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275430\n\nPloidy level inferred via flow cytometry: Diploid.\nMichelle L. Gaynor 7 Sept 2022\n\nSheet 1 of 2\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 2 June 2021\n\nGASTON COUNTY: Crowders Mountain State Park. Linwood Access. Backside Trail. Off the trail behind erosion fence. Elev. 387 m. On slope under *Kalmia latifolia*, *Acer* spp., *Smilax* spp., and *Quercus* spp. Spikelet completely flowering. New flowers towards tip of spikelet, old flowers towards bottom.\nLat. 35.23693001 Long. -81.27317498 Datum: WGS84\ncoll. Michelle Gaynor # 60 2 June 2021\n\nNorth Carolina Division of Parks and Recreation, Scientific Research and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG304 (Pop 22).\n\n\nHandwritten text: #60\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Acer* spp.\n*Smilax* spp.\n*Quercus* spp.\n\n\ngemini-2.0-flash OCR:\nFLAS\nHERBARIUM\nFLAS 275430\nPloidy level inferred via flow cytometry: Diploid.\nMichelle L. Gaynor\n7 Sept 2022\nSheet / of 2\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 2 June 2021\nGASTON COUNTY: Crowders Mountain State Park.\nLinwood Access. Backside Trail. Off the trail behind\nerosion fence. Elev. 387 m. On slope under Kalmia\nlatifolia, Acer spp, Smilax spp., and Quercus spp. Spikelet\ncompletely flowering. New flowers towards tip of spikelet,\nold flowers towards bottom.\nLat. 35.23693001 Long. -81.27317498 Datum: WGS84\ncoll. Michelle Gaynor # 60 2 June 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG304 (Pop 22).\n\n\nGalax urceolata\nKalmia latifolia\nAcer spp\nSmilax spp\nQuercus spp\n\n",
+  "formatted_json": {
+    "catalogNumber": "275430",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Michelle Gaynor",
+    "collectorNumber": "60",
+    "identifiedBy": "Michelle Gaynor",
+    "identifiedDate": "2021-06-02",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 June 2021",
+    "collectionDate": "2021-06-02",
+    "collectionDateEnd": "",
+    "habitat": "On slope under Kalmia latifolia, Acer spp., Smilax spp., and Quercus spp. Spikelet completely flowering. New flowers towards tip of spikelet, old flowers towards bottom.",
+    "chromosomeCount": "Ploidy level inferred via flow cytometry Diploid.",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "North Carolina",
+    "county": "Gaston County",
+    "locality": "Crowders Mountain State Park. Linwood Access. Backside Trail. Off the trail behind erosion fence.",
+    "verbatimCoordinates": "Lat. 35.23693001 Long. -81.27317498 Datum WGS84",
+    "decimalLatitude": "35.23693001",
+    "decimalLongitude": "-81.27317498",
+    "minimumElevationInMeters": "387",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "FLAS\nHERBARIUM\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n7 Sept 2022\nSheet 1 of 2\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nNorth Carolina Division of Parks and Recreation, Scientific Research and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG304 (Pop 22).\nHandwritten text\nKalmia latifolia\nAcer spp.\nSmilax spp.\nQuercus spp."
+  }
+}

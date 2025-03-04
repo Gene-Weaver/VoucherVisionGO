@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TRANSFERRED TO\nRANCHO SANTA ANA\n471413\nBOTANIC GARDEN\n\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508053\n\nLOS ANGELES MUSEUM HERBARIUM\nA. No. 1953          H. No. 5895\nDiapensiaceae (Diapensia Family)\nName _Galax aphylla_ L.\nGalaxy. Beetle-weed.\nHabitat. In dry woods\nLocality. Pink Beds, North Carolina\nCol. Malcolm M. Rice No.\nDate\n\n\nHandwritten Text: Pink Beds, North Carolina\n\n*Galax aphilla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.0014687500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TRANSFERRED TO\nRANCHO SANTA ANA\n471413\nBOTANIC GARDEN\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508053\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nLOS ANGELES MUSEUM HERBARIUM\nA. No. 1953 H. No. 5895\nDiapensiaceae (Diapense Family)\nName Galax aphylla L.\nGalaxy. Beetle-weed.\nHabitat In dry woods\nLocality Pink Beds, North Carolina\nCol. Malcolm M.Rice No.\nDate\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.9600000000000005e-05,
+      "total_cost": 0.0007411,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 149
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2181,
+    "output": 468,
+    "cost_in": 0.00021810000000000004,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTRANSFERRED TO\nRANCHO SANTA ANA\n471413\nBOTANIC GARDEN\n\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508053\n\nLOS ANGELES MUSEUM HERBARIUM\nA. No. 1953          H. No. 5895\nDiapensiaceae (Diapensia Family)\nName _Galax aphylla_ L.\nGalaxy. Beetle-weed.\nHabitat. In dry woods\nLocality. Pink Beds, North Carolina\nCol. Malcolm M. Rice No.\nDate\n\n\nHandwritten Text: Pink Beds, North Carolina\n\n*Galax aphilla*\n\n\ngemini-2.0-flash OCR:\nTRANSFERRED TO\nRANCHO SANTA ANA\n471413\nBOTANIC GARDEN\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508053\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nLOS ANGELES MUSEUM HERBARIUM\nA. No. 1953 H. No. 5895\nDiapensiaceae (Diapense Family)\nName Galax aphylla L.\nGalaxy. Beetle-weed.\nHabitat In dry woods\nLocality Pink Beds, North Carolina\nCol. Malcolm M.Rice No.\nDate\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "471413",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Malcolm m. rice",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "In dry woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Pink beds, north carolina",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Transferred to\nrancho santa ana\nbotanic garden\ncalifornia botanic garden\nclaremont, ca usa (rsa-pom)\nrsa0508053\nlos angeles museum herbarium\na. no. 1953 h. no. 5895\ndiapensiaceae (diapensia family)\nname galax aphylla l.\ngalaxy. beetle-weed.\ndate"
+  }
+}

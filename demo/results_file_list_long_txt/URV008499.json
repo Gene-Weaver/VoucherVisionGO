@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LEWIS GINTER BOTANICAL GARDEN\nNORTH CAROLINA FLORA\n\n*Galax urceolata* (Poiret) Brummitt\n\nTransylvania Co.: Dirt road No. 140, off\nRoute 215 along Indian Creek. Rich moist\nforest with *Quercus*, *Liriodendron* and other\nhardwoods.\n\nS. M. Hayden s.n.\nOctober 1, 1985\n\nURV - University of Richmond Herbarium\nURV 008499\nURV\nUNIVERSITY OF RICHMOND\nHERBARIUM\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "URV-University of Richmond Herbarium\nURV 008499\nURV\nUNIVERSITY OF RICHMOND\nHERBARIUM\n0 1\ncm\nLEWIS GINTER BOTANICAL GARDEN\nNORTH CAROLINA FLORA\nGalax urceolata (Poiret) Brummit\nTransylvania Co.: Dirt road No. 140, off\nRoute 215 along Indian Creek. Rich moist\nforest with Quercus, Liriodendron and other\nhardwoods.\nS. M. Hayden s.n.\nOctober 1. 1985\nRICHMOND\n2\n3\n4\n5 6\n7\n8\n9 10\nURV\ncopyright reserved\n\n\nGalax urceolata\nQuercus\nLiriodendron\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.440000000000001e-05,
+      "total_cost": 0.0007459000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 161
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 479,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLEWIS GINTER BOTANICAL GARDEN\nNORTH CAROLINA FLORA\n\n*Galax urceolata* (Poiret) Brummitt\n\nTransylvania Co.: Dirt road No. 140, off\nRoute 215 along Indian Creek. Rich moist\nforest with *Quercus*, *Liriodendron* and other\nhardwoods.\n\nS. M. Hayden s.n.\nOctober 1, 1985\n\nURV - University of Richmond Herbarium\nURV 008499\nURV\nUNIVERSITY OF RICHMOND\nHERBARIUM\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nURV-University of Richmond Herbarium\nURV 008499\nURV\nUNIVERSITY OF RICHMOND\nHERBARIUM\n0 1\ncm\nLEWIS GINTER BOTANICAL GARDEN\nNORTH CAROLINA FLORA\nGalax urceolata (Poiret) Brummit\nTransylvania Co.: Dirt road No. 140, off\nRoute 215 along Indian Creek. Rich moist\nforest with Quercus, Liriodendron and other\nhardwoods.\nS. M. Hayden s.n.\nOctober 1. 1985\nRICHMOND\n2\n3\n4\n5 6\n7\n8\n9 10\nURV\ncopyright reserved\n\n\nGalax urceolata\nQuercus\nLiriodendron\n\n",
+  "formatted_json": {
+    "catalogNumber": "URV 008499",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "S. M. Hayden",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "October 1, 1985",
+    "collectionDate": "1985-10-01",
+    "collectionDateEnd": "",
+    "habitat": "Rich moist forest with Quercus, Liriodendron and other hardwoods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Transylvania Co.",
+    "locality": "Dirt road No. 140, off Route 215 along Indian Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "LEWIS GINTER BOTANICAL GARDEN\nNORTH CAROLINA FLORA\nURV - University of Richmond Herbarium\nURV\nUNIVERSITY OF RICHMOND\nHERBARIUM\ncopyright reserved"
+  }
+}

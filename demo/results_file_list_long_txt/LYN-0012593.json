@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012593\n\nLYNCHBURG COLLEGE\n48226\nHERBARIUM\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\nNorth Mtn., Alleghany Co.\n\nScattered from wooded stream\nbanks on N side to ridgest 2 mi.\nN of Blacks Gap.\nel. 2200-3200 ft.\n(Longdale Furnace Quad.)\n\nCharles E. Stevens\nSep. 3, 1983\nNo. 18,684\n\n(Handwritten text)\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007350000000000001,
+      "total_cost": 0.0015137500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 147
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012593\nLYNCHBURG\nCOLLEGE\n48226\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nNorth Intn., Alleghany Co.\nScattered from wooded stream\nbanks on N side to ridgecrest 2 mi.\nN of Blacks Jap.\nel. 2200-3200 ft.\n(Longdale Furnace Quad.)\nCharles E. Stevens\nSep. 3, 1983\nNo. 18,684\nLYN\n1\n2\n3\n4\n5\n6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nJalas urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.879999999999999e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2190,
+    "output": 524,
+    "cost_in": 0.000219,
+    "cost_out": 0.00020960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012593\n\nLYNCHBURG COLLEGE\n48226\nHERBARIUM\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\nNorth Mtn., Alleghany Co.\n\nScattered from wooded stream\nbanks on N side to ridgest 2 mi.\nN of Blacks Gap.\nel. 2200-3200 ft.\n(Longdale Furnace Quad.)\n\nCharles E. Stevens\nSep. 3, 1983\nNo. 18,684\n\n(Handwritten text)\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012593\nLYNCHBURG\nCOLLEGE\n48226\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nNorth Intn., Alleghany Co.\nScattered from wooded stream\nbanks on N side to ridgecrest 2 mi.\nN of Blacks Jap.\nel. 2200-3200 ft.\n(Longdale Furnace Quad.)\nCharles E. Stevens\nSep. 3, 1983\nNo. 18,684\nLYN\n1\n2\n3\n4\n5\n6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nJalas urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012593",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "18,684",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sep. 3, 1983",
+    "collectionDate": "1983-09-03",
+    "collectionDateEnd": "",
+    "habitat": "Scattered from wooded stream banks on n side to ridgecrest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Alleghany co.",
+    "locality": "North mtn., alleghany co., 2 mi. n of blacks gap. (longdale furnace quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "975",
+    "elevationUnits": "ft",
+    "additionalText": "Ramsey-freer herbarium\nlynchburg college\nlynchburg college\n48226\nherbarium\nflora of virginia\nlynchburg\ncollege\nlyn\n1\n2\n3\n4\n5\n6\n7\n8 9 10 lynchburg\ncollege\ncm\ncopyright reserved\njalas urceolata"
+  }
+}

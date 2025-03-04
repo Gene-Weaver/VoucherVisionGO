@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE\n4264\nUNIVERSITY OF MISSISSIPPI\n\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055038\n\nHerbarium of The University of Georgia\nRabun Co.\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nTallulah Point, rocky top of Gorge.\nS. B. Jones, Jr. 962 May 1962\n\n(Handwritten text: *Galax aphylla* L.)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00054,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE\n4264\nUNIVERSITY OF MISSISSIPPI\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055038\nA 1\n2\n3\n4\n5\n6\nR\nG\nB\nW G\nTIFFEN Gray Scale\nK\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\n8\n19\n811\n9\nC\nY\nM\nMagenta\nWhite\n3/Color\nBlack\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\nHerbarium of The University of Georgia\nRabun Co.\nFLORA OF GEORGIA\nGalax aphylla L.\nTalluah Point, rocky top of Gorge.\nS. B. Jones, Jr. 962 May 1962\n3\nRed\nYellow\nCentimetres TIFFEN Color Control Patches\n2\n5\n6\nInches\n2\n3\nBlue\nCyan\nGreen\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.760000000000001e-05,
+      "total_cost": 0.0007791,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 244
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2238,
+    "output": 478,
+    "cost_in": 0.00022380000000000002,
+    "cost_out": 0.0001912
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE\n4264\nUNIVERSITY OF MISSISSIPPI\n\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055038\n\nHerbarium of The University of Georgia\nRabun Co.\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nTallulah Point, rocky top of Gorge.\nS. B. Jones, Jr. 962 May 1962\n\n(Handwritten text: *Galax aphylla* L.)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE\n4264\nUNIVERSITY OF MISSISSIPPI\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nMISS 0055038\nA 1\n2\n3\n4\n5\n6\nR\nG\nB\nW G\nTIFFEN Gray Scale\nK\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\n8\n19\n811\n9\nC\nY\nM\nMagenta\nWhite\n3/Color\nBlack\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\nHerbarium of The University of Georgia\nRabun Co.\nFLORA OF GEORGIA\nGalax aphylla L.\nTalluah Point, rocky top of Gorge.\nS. B. Jones, Jr. 962 May 1962\n3\nRed\nYellow\nCentimetres TIFFEN Color Control Patches\n2\n5\n6\nInches\n2\n3\nBlue\nCyan\nGreen\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MISS 0055038",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "S. B. Jones, Jr.",
+    "collectorNumber": "962",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 1962",
+    "collectionDate": "1962-05-00",
+    "collectionDateEnd": "",
+    "habitat": "Rocky top of gorge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun Co.",
+    "locality": "Talluah Point",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF THE\n4264\nUNIVERSITY OF MISSISSIPPI\nUNIVERSITY OF MISSISSIPPI HERBARIUM\nHerbarium of The University of Georgia\nFLORA OF GEORGIA\n\nRed\nYellow\nBlue\nCyan\nGreen\nCentimetres TIFFEN Color Control Patches\nInches\nMagenta\nWhite\nBlack\n"
+  }
+}

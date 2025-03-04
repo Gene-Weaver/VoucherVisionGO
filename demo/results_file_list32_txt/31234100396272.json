@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n077422\nHERBARIUM\n\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17' 21.73\" N, 82\u00b0 17' 37.32\" W\n\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\n\nM.S. Thesis Voucher\nEKY\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n077422\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17 '21.73\" N, 82\u00b0 17' 37.32\" W\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\nM.S. Thesis Voucher\nEKY\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\nGalax urceolata\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n077422\nHERBARIUM\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17' 21.73\" N, 82\u00b0 17' 37.32\" W\n\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\n\nM.S. Thesis Voucher\nEKY\n\n\n*Galax urceolata*\n\n",
       "cost_in": 0.00077875,
       "cost_out": 0.00081,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n077422\nHERBARIUM\n\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17' 21.73\" N, 82\u00b0 17' 37.32\" W\n\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\n\nM.S. Thesis Voucher\nEKY\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\n*Galax urceolata*\n\n",
+      "total_cost": 0.00158875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 162,
-      "total_cost": 0.00158875
+      "tokens_out": 162
     },
     "gemini-2.0-flash": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n077422\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17 '21.73\" N, 82\u00b0 17' 37.32\" W\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\nM.S. Thesis Voucher\nEKY\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\nGalax urceolata\n\n",
       "cost_in": 0.0006815,
       "cost_out": 6.92e-05,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n077422\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17 '21.73\" N, 82\u00b0 17' 37.32\" W\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\nM.S. Thesis Voucher\nEKY\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\nGalax urceolata\n\n",
+      "total_cost": 0.0007507,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 173,
-      "total_cost": 0.0007507
+      "tokens_out": 173
     }
   },
-  "tokens_LLM": {
-    "input": 2150,
-    "output": 496
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 522,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.0002088
   },
-  "vvgo_json": {
-    "additionalText": "Eastern kentucky university\nHerbarium\n077422\nInch\nOptirectilinear\nFlora of Virginia\nBreaks interstate park\nEky\nIk\nEastern kentucky university herbarium\n3 1234 2",
-    "catalogNumber": "10039627",
-    "chromosomeCount": "",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n077422\nHERBARIUM\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17' 21.73\" N, 82\u00b0 17' 37.32\" W\n\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\n\nM.S. Thesis Voucher\nEKY\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n077422\nINCH\nOPTIRECTILINEAR\nU.S.A.\nFlora of Virginia\nBreaks Interstate Park\nDickenson County, VA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nLaurel Lake Trail\nIn vicinity of 37\u00b0 17 '21.73\" N, 82\u00b0 17' 37.32\" W\nJulie B. Clark & Ronald L. Jones\nCollection # 334\nDate: 19 June 2008\nM.S. Thesis Voucher\nEKY\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "077422",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
     "collectedBy": "Julie B. Clark & Ronald L. Jones",
+    "collectorNumber": "334",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "19 June 2008",
     "collectionDate": "2008-06-19",
     "collectionDateEnd": "",
-    "collectorNumber": "334",
-    "continent": "North america",
-    "country": "Usa",
-    "county": "Dickenson County",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Dickenson County",
+    "locality": "Laurel Lake Trail, in vicinity of 37\u00b0 17' 21.73 N, 82\u00b0 17' 37.32 W",
+    "verbatimCoordinates": "37\u00b0 17' 21.73 N, 82\u00b0 17' 37.32 W",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Laurel lake trail, in vicinity of 37\u00b0 17 '21.73 N, 82\u00b0 17' 37.32 W",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax urceolata",
-    "scientificNameAuthorship": "(Poir.) Brummitt",
-    "specificEpithet": "urceolata",
-    "specimenDescription": "M.s. thesis voucher",
-    "stateProvince": "Va",
-    "verbatimCollectionDate": "19 June 2008",
-    "verbatimCoordinates": "37\u00b0 17 '21.73 N, 82\u00b0 17' 37.32 W"
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\nIK\nEastern Kentucky University Herbarium\n3 1234 10039627 2\nFlora of Virginia\nBreaks Interstate Park\nDiapensiaceae\nM.S. Thesis Voucher\nEKY\nINCH\nOPTIRECTILINEAR"
   }
 }

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarlum (NCSC)\nNCSC00082915\n\n*Galax aphylla*\nRaleigh NC\nApril 25, 1922\nbanks of Crabtree Cr\nabove Lassiter's hill\nC&B Brinley Coll.\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n07690\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00042500000000000003,
+      "total_cost": 0.0012037500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 85
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Herbarlum (NCSC)\nNorth Carolina State University\nNCSC00082915\nGalax aphylla\nRaleigh NC\napril 25, 1922.\nbanks of Crabtree Cr\nabove Lassiter's hill\nC&Brinley, Coll,\nHERRARIUM\nNORTH CAROLINA STATE COLLEGE\n07690\nA\n1\n2\n3\n4\n5\n9\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nM\n8\n9\n10 11 12 13 14 15\nB 17 18 19\nInches\n5\n1\n2\n3\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.92e-05,
+      "total_cost": 0.0007807000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 248
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2200,
+    "output": 429,
+    "cost_in": 0.00022000000000000003,
+    "cost_out": 0.00017160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarlum (NCSC)\nNCSC00082915\n\n*Galax aphylla*\nRaleigh NC\nApril 25, 1922\nbanks of Crabtree Cr\nabove Lassiter's hill\nC&B Brinley Coll.\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n07690\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHerbarlum (NCSC)\nNorth Carolina State University\nNCSC00082915\nGalax aphylla\nRaleigh NC\napril 25, 1922.\nbanks of Crabtree Cr\nabove Lassiter's hill\nC&Brinley, Coll,\nHERRARIUM\nNORTH CAROLINA STATE COLLEGE\n07690\nA\n1\n2\n3\n4\n5\n9\nTIFFEN Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nM\n8\n9\n10 11 12 13 14 15\nB 17 18 19\nInches\n5\n1\n2\n3\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082915",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "C&b Brinley",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 25, 1922",
+    "collectionDate": "1922-04-25",
+    "collectionDateEnd": "",
+    "habitat": "Banks of crabtree cr above lassiter's hill",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake county",
+    "locality": "Raleigh nc",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nherbarlum (ncsc)\nherbarrium\nnorth carolina state college\n07690"
+  }
+}

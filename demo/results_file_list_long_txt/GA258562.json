@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GA\nUniversity of Georgia\nHerbarium\n273762\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummit\nDiapensiaceae\n\nCommon herb on south-facing slope below lookout platform. Flowers white.\n\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt. 199, 4.8 mi from jct. with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N, 82\u00b046.63'W. Elevation 3550 feet.\n\n12 June 2013                                                                     Charles N. Horn #20422\n\nImaged 2016\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000935,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n273762\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon herb on south-facing slope below lookout platform. Flowers\nwhite.\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8\nmi from jet with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N,\n82\u00b046.63'W. Elevation 3550 feet.\n12 June 2013\nCharles N. Horn #20422\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green\nYellow\nRed\nMagenta White\n3/Color\nBlack\nImaged 2016\n235\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.64e-05,
+      "total_cost": 0.0007679,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 216
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2261,
+    "output": 497,
+    "cost_in": 0.00022610000000000002,
+    "cost_out": 0.00019880000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGA\nUniversity of Georgia\nHerbarium\n273762\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummit\nDiapensiaceae\n\nCommon herb on south-facing slope below lookout platform. Flowers white.\n\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt. 199, 4.8 mi from jct. with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N, 82\u00b046.63'W. Elevation 3550 feet.\n\n12 June 2013                                                                     Charles N. Horn #20422\n\nImaged 2016\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n273762\nHerbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nGalax urceolata (Poiret) Brummit\nDiapensaceae\nCommon herb on south-facing slope below lookout platform. Flowers\nwhite.\nPICKENS CO.: At summit of Sassafras Mountain; end of Co. rt 199, 4.8\nmi from jet with US 178. Ca. 13 mi N of Pickens. 35\u00b003.94'N,\n82\u00b046.63'W. Elevation 3550 feet.\n12 June 2013\nCharles N. Horn #20422\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green\nYellow\nRed\nMagenta White\n3/Color\nBlack\nImaged 2016\n235\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "273762",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummit",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "20422",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12 June 2013",
+    "collectionDate": "2013-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Common herb on south-facing slope below lookout platform. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "South Carolina",
+    "county": "Pickens",
+    "locality": "At summit of Sassafras Mountain; end of Co. rt. 199, 4.8 mi from jct. with US 178. Ca. 13 mi N of Pickens.",
+    "verbatimCoordinates": "35\u00b003.94'N, 82\u00b046.63'W",
+    "decimalLatitude": "35.06567",
+    "decimalLongitude": "-82.77717",
+    "minimumElevationInMeters": "1082",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of Newberry College (NBYC)\nPLANTS OF SOUTH CAROLINA, USA\nImaged 2016"
+  }
+}

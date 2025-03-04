@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM (NLU)\n439972\nUNIVERSITY OF LOUISIANA\nMONROE\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nScott County\n*Galax aphylla* L.                                                    1 June 1978\n\nUnder *Kalmia* in open, sandy, rocky deciduous\nwoods along stream 0.1 mile N of the junction\nof Baker Branch and Little Stoney Creek at\nHanging Rock, N of Dungannon. Elev. 1460'\n\nExchange Specimen From:\nWILLT *(Handwritten)*\n\nCollector: Dwight E. Peake                                     No. 142\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.0015237500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM (NLU)\n439972\nUNIVERSITY OF LOUISIANA\nMONROE\nNLU0134131\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nScott County\n1 June 1978\nGalax aphylla L.\nUnder Kalmia in open, sandy, rocky deciduous\nwoods along stream 0.1 mile N of the junction\nof Baker Branch and Little Stoney Creek at\nHanging Rock, N of Dungannon. Elev. 1460'\nExchange Specimen From:\nWILLT\nCollector: Dwight E. Peake\nNo. 142\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007402999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2196,
+    "output": 503,
+    "cost_in": 0.00021960000000000003,
+    "cost_out": 0.0002012
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM (NLU)\n439972\nUNIVERSITY OF LOUISIANA\nMONROE\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nScott County\n*Galax aphylla* L.                                                    1 June 1978\n\nUnder *Kalmia* in open, sandy, rocky deciduous\nwoods along stream 0.1 mile N of the junction\nof Baker Branch and Little Stoney Creek at\nHanging Rock, N of Dungannon. Elev. 1460'\n\nExchange Specimen From:\nWILLT *(Handwritten)*\n\nCollector: Dwight E. Peake                                     No. 142\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM (NLU)\n439972\nUNIVERSITY OF LOUISIANA\nMONROE\nNLU0134131\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nScott County\n1 June 1978\nGalax aphylla L.\nUnder Kalmia in open, sandy, rocky deciduous\nwoods along stream 0.1 mile N of the junction\nof Baker Branch and Little Stoney Creek at\nHanging Rock, N of Dungannon. Elev. 1460'\nExchange Specimen From:\nWILLT\nCollector: Dwight E. Peake\nNo. 142\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "439972",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dwight E. Peake",
+    "collectorNumber": "142",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 June 1978",
+    "collectionDate": "1978-06-01",
+    "collectionDateEnd": "",
+    "habitat": "Under Kalmia in open, sandy, rocky deciduous woods along stream 0.1 mile n of the junction of baker branch and little stoney creek at hanging rock, n of dungannon",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Scott county",
+    "locality": "0.1 mile n of the junction of baker branch and little stoney creek at hanging rock, n of dungannon",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "445",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium (nlu)\nuniversity of louisiana\nmonroe\nnlu0134131\nherbarium of the college of\nwilliam and mary\nwilliamsburg, virginia\nvirginia\nexchange specimen from\nwillt"
+  }
+}

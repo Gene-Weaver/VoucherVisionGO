@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026112\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 508\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n*Galax aphylla* L.\nWest facing slope north\nof Bent Creek.\nAppomattox Co. June 13, 1969\n\nCollected by: A. M. Harvill 16569 (handwritten)\nDetermined by:\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00074,
+      "total_cost": 0.0015187500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 148
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026112\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla hi\nWest foe in slope north\nof Bent Cruch.\nAppomattox Co., June 13, 1969\nCollected by: a un Harvill 16569\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.720000000000001e-05,
+      "total_cost": 0.0007387000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2182,
+    "output": 522,
+    "cost_in": 0.0002182,
+    "cost_out": 0.0002088
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026112\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 508\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n*Galax aphylla* L.\nWest facing slope north\nof Bent Creek.\nAppomattox Co. June 13, 1969\n\nCollected by: A. M. Harvill 16569 (handwritten)\nDetermined by:\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026112\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla hi\nWest foe in slope north\nof Bent Cruch.\nAppomattox Co., June 13, 1969\nCollected by: a un Harvill 16569\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026112",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. M. Harvill",
+    "collectorNumber": "16569",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 13, 1969",
+    "collectionDate": "1969-06-13",
+    "collectionDateEnd": "",
+    "habitat": "West facing slope north of Bent Creek.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 508\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Appomattox co.",
+    "locality": "West facing slope north of Bent Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla hi\nDetermined by\nFARM\nHarvill-Stevens\nHerbarium\nGalax urceolata\nGalax aphylla"
+  }
+}

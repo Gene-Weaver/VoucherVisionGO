@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nAmherst  COUNTY\n\nNO. 44278                                      DIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt\nEast side of Peavine Pond on Peavine Mt.\n1900' . James River Gorge Study.\n\nCOLLECTORS G. W. Ramsey, Mo Stevens\n                    Doug Coleman,                   6/4/1990\n                    Charles Leys\n\nCOLLEGE OF\n61436\nWILLIAM & MARY\nWILL\n\n\nHandwritten Text: 1900'.\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.0015237500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\n61436\nWILLIAM & MARY\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nAmherst COUNTY\nNO. 44278\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummit\nEast side of Peavine Pond on Peavine Mt.\n1900'. James River Gorge Study.\nG.W. Ramsey, Mo Stevens\nCOLLECTORS Doug Coleman,\nCharles Leys\n6/4/19.90\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.16e-05,
+      "total_cost": 0.0007331,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 129
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2192,
+    "output": 487,
+    "cost_in": 0.00021920000000000002,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nAmherst  COUNTY\n\nNO. 44278                                      DIAPENSIACEAE\n*Galax urceolata* (Poiret) Brummitt\nEast side of Peavine Pond on Peavine Mt.\n1900' . James River Gorge Study.\n\nCOLLECTORS G. W. Ramsey, Mo Stevens\n                    Doug Coleman,                   6/4/1990\n                    Charles Leys\n\nCOLLEGE OF\n61436\nWILLIAM & MARY\nWILL\n\n\nHandwritten Text: 1900'.\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\n61436\nWILLIAM & MARY\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA, CENTRAL BLUE RIDGE\nAmherst COUNTY\nNO. 44278\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummit\nEast side of Peavine Pond on Peavine Mt.\n1900'. James River Gorge Study.\nG.W. Ramsey, Mo Stevens\nCOLLECTORS Doug Coleman,\nCharles Leys\n6/4/19.90\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "61436",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "G. W. Ramsey, Mo Stevens, Doug Coleman, Charles Leys",
+    "collectorNumber": "44278",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/4/19.90",
+    "collectionDate": "1990-06-04",
+    "collectionDateEnd": "",
+    "habitat": "East side of peavine pond on peavine mt. james river gorge study.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Amherst",
+    "locality": "East side of peavine pond on peavine mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "579",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "William & mary\nchartered 1693\nlynchburg college herbarium\nplants of virginia, central blue ridge\ndiapensiaceae\ncollege of\nwilliam & mary\nwill\nhandwritten text 1900'."
+  }
+}

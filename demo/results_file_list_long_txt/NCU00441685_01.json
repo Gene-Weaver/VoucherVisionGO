@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "**Image 1:**\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672843\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\n\nTaxon: *Galax urceolata* (Poiret) Brummitt\n\nLocation: Along Eno River at base of NW-facing rocky bluff of Piedmont monadnock, Occoneechee State Natural Area, SW of Hillsborough.\nLatitude 36.065 Longitude -79.120 +/- *10/100* (handwritten)\n\nCollector: Carol Ann McCormick & Mark Peifer s.n.\n\nDate Collected: 2 September 2018\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n*672843* (handwritten)\n\n\n**Image 2:**\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672844\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\n\nTaxon: *Galax urceolata* (Poir.) Brummitt\n\nLocation: New Hope Creek at Hollow Rock (also known as \"The Caves\"), E of SR1734 (Erwin Rd.)\nlat. 35.980 , long -79.006 +/- 20m\nCollector(s): Mark Peifer ; Carol Ann McCormick (handwritten)\n\nNotes: on ledge of sandstone rock outcrop (handwritten)\n\nDate Collected: 15 July 2018\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n*672844* (handwritten)\n\n\n*Galax urceolata*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.002105,
+      "total_cost": 0.00288375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 421
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672843\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00441686\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata (Poiret) Brummitt\nLocation: Along Eno River at base of NW-facing rocky bluff\nof Piedmont monadnock, Occoneechee State Natural Area,\nSW of Hillsborough.\nLatitude 36.065 Longitude -79.120 +/- 100\nCollector: Carol Ann McCormick & Mark Peifer s.n.\nDate Collected: 2 September 2018\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n672843\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672844\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata (Poir.) Brummitt\nLocation: New Hope Creek at Hollow Rock (also known\nas \"The Caves\"), E of SR1734 (Erwin Rd.)\nlat. 35.980, long -79.006 +1-20m\nCollector(s): Mark Peifer\nNotes: on ledge of sandstone rock outcrop\nDate Collected: 15 July 2018\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00441685\n\nNCU Accession#\n672844\n\n\nGalax urceolata\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00016360000000000002,
+      "total_cost": 0.0008451,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 409
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2653,
+    "output": 740,
+    "cost_in": 0.0002653,
+    "cost_out": 0.00029600000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n**Image 1:**\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672843\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\n\nTaxon: *Galax urceolata* (Poiret) Brummitt\n\nLocation: Along Eno River at base of NW-facing rocky bluff of Piedmont monadnock, Occoneechee State Natural Area, SW of Hillsborough.\nLatitude 36.065 Longitude -79.120 +/- *10/100* (handwritten)\n\nCollector: Carol Ann McCormick & Mark Peifer s.n.\n\nDate Collected: 2 September 2018\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n*672843* (handwritten)\n\n\n**Image 2:**\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672844\n\nFlora of the Southeastern United States of America\nState: North Carolina\nFamily: DIAPENSIACEAE\nCounty: Orange\n\nTaxon: *Galax urceolata* (Poir.) Brummitt\n\nLocation: New Hope Creek at Hollow Rock (also known as \"The Caves\"), E of SR1734 (Erwin Rd.)\nlat. 35.980 , long -79.006 +/- 20m\nCollector(s): Mark Peifer ; Carol Ann McCormick (handwritten)\n\nNotes: on ledge of sandstone rock outcrop (handwritten)\n\nDate Collected: 15 July 2018\n\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n*672844* (handwritten)\n\n\n*Galax urceolata*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672843\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00441686\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata (Poiret) Brummitt\nLocation: Along Eno River at base of NW-facing rocky bluff\nof Piedmont monadnock, Occoneechee State Natural Area,\nSW of Hillsborough.\nLatitude 36.065 Longitude -79.120 +/- 100\nCollector: Carol Ann McCormick & Mark Peifer s.n.\nDate Collected: 2 September 2018\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\n\nNCU Accession#\n672843\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n672844\nFlora of the Southeastern United States of America\nState: North Carolina Family: DIAPENSIACEAE\nCounty: Orange\nTaxon: Galax urceolata (Poir.) Brummitt\nLocation: New Hope Creek at Hollow Rock (also known\nas \"The Caves\"), E of SR1734 (Erwin Rd.)\nlat. 35.980, long -79.006 +1-20m\nCollector(s): Mark Peifer\nNotes: on ledge of sandstone rock outcrop\nDate Collected: 15 July 2018\nUniversity of North Carolina at Chapel Hill Herbarium (NCU)\nChapel Hill, North Carolina, United States of America\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00441685\n\nNCU Accession#\n672844\n\n\nGalax urceolata\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "672843",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Carol Ann Mccormick, Mark Peifer",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 September 2018",
+    "collectionDate": "2018-09-02",
+    "collectionDateEnd": "",
+    "habitat": "Along eno river at base of nw-facing rocky bluff of piedmont monadnock",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states of america",
+    "stateProvince": "North carolina",
+    "county": "Orange",
+    "locality": "Occoneechee state natural area, sw of hillsborough",
+    "verbatimCoordinates": "Latitude 36.065 Longitude -79.120 +/- 100",
+    "decimalLatitude": "36.065",
+    "decimalLongitude": "-79.120",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at chapel hill\nherbarium\nncu\nflora of the southeastern united states of america\nfamily diapensiaceae\nuniversity of north carolina at chapel hill herbarium (ncu)\nchapel hill, north carolina, united states of america\nncu accession#\n672843\nuniversity of north carolina herbarium\nncu00441686\nuniversity of north carolina at chapel hill\nherbarium\nncu\n672844\nflora of the southeastern united states of america\nstate north carolina family diapensiaceae\ncounty orange\ntaxon galax urceolata (poir.) brummitt\nlocation new hope creek at hollow rock (also known\nas the caves), e of sr1734 (erwin rd.)\nlat. 35.980, long -79.006 +1-20m\ncollector(s) mark peifer\nnotes on ledge of sandstone rock outcrop\ndate collected 15 july 2018\nuniversity of north carolina at chapel hill herbarium (ncu)\nchapel hill, north carolina, united states of america\nuniversity of north carolina herbarium\nncu00441685\nncu accession#\n672844\ngalax urceolata\ngalax urceolata"
+  }
+}

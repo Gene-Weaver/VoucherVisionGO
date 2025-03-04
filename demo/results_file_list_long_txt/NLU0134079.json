@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n286656\nHERBARIUM\n\nNLU0134079\nEX COKER COLLEGE\n1986\nHERBARIUM\nEXCHANGE SPECIMEN FROM\nUSCH\n\nHERBARIUM OF GEORGE P. SAWYER\nWake County, North Carolina\n\n*Galax aphylla* L.\nbluff on Crabtree Creek just west of\nWilliam B. Umstead State Park\n\nGeorge P. Sawyer Jr. 5 September 1964\n1737 with Harry Ahles\n(Handwritten: *Galax aphylla*, 1737)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000685,
+      "total_cost": 0.00146375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 137
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTH EAST LOUISIANA UNIVERSITY\n286656\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3 4\n5 6\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nEX COKER COLLEGE\n1986\nHERBARIUM\nNLU0134079\nEXCHANGE SPECIMEN FROM\nUSCH\nHERBARIUM OF GEORGE P. SAWYER\nWake County, North Carolina\nGalax aphylla L.\nbluff on Crabtree Creek just west of\nWilliam B. Umstead State Park\nGeorge P. Sawyer Jr. 5 September 1964\n1737 with Harry Ahles\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.92e-05,
+      "total_cost": 0.0007607,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 198
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2222,
+    "output": 474,
+    "cost_in": 0.0002222,
+    "cost_out": 0.0001896
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n286656\nHERBARIUM\n\nNLU0134079\nEX COKER COLLEGE\n1986\nHERBARIUM\nEXCHANGE SPECIMEN FROM\nUSCH\n\nHERBARIUM OF GEORGE P. SAWYER\nWake County, North Carolina\n\n*Galax aphylla* L.\nbluff on Crabtree Creek just west of\nWilliam B. Umstead State Park\n\nGeorge P. Sawyer Jr. 5 September 1964\n1737 with Harry Ahles\n(Handwritten: *Galax aphylla*, 1737)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNORTH EAST LOUISIANA UNIVERSITY\n286656\nHERBARIUM\nKodak Gray Scale\nA 1\n2\n3 4\n5 6\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nEX COKER COLLEGE\n1986\nHERBARIUM\nNLU0134079\nEXCHANGE SPECIMEN FROM\nUSCH\nHERBARIUM OF GEORGE P. SAWYER\nWake County, North Carolina\nGalax aphylla L.\nbluff on Crabtree Creek just west of\nWilliam B. Umstead State Park\nGeorge P. Sawyer Jr. 5 September 1964\n1737 with Harry Ahles\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "Nlu0134079",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "George P. Sawyer Jr., Harry Ahles",
+    "collectorNumber": "1737",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 September 1964",
+    "collectionDate": "1964-09-05",
+    "collectionDateEnd": "",
+    "habitat": "Bluff on crabtree creek just west of william b. umstead state park",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake county",
+    "locality": "Bluff on crabtree creek just west of william b. umstead state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\n286656\nHerbarium\nEx coker college\n1986\nHerbarium\nExchange specimen from\nUsch\nHerbarium of george p. sawyer\nGalax aphylla"
+  }
+}

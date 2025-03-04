@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012590\n\nLYNCHBURG COLLEGE\n33717\nHERBARIUM\n\nNo. 351\nPLANTS OF VIRGINIA\nDate: June 15, 1980\n\nCounty: Pulaski\nTaxon: *Galax aphylla* L.\n\nLocation: Gatewood Reservoir, off Route 710\nin western part of county\n\nHabitat: Dry woods near reservoir\n\nCollectors: William F. Ruska, Jr.\nCathy Cooper-Ruska\n\nDetermined By: William F. Ruska, Jr.\n\n\n*Handwritten text: Galax aphylla*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.00152375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "LYN\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012590\nLYNCHBURG\nCOLLEGE\n33717\nHERBARIUM\nPLANTS OF VIRGINIA\nNo. 351\nDate: June 15, 1980\nCounty: Pulaski\nTaxon: Galax aphylla L.\nLocation: Gatewood Reservoir, off Route 710\nin western part of county\nHabitat: Dry woods near reservoir\nCollectors: William F. Ruska, Jr.\nCathy Cooper-Ruska\nDetermined By: William F. Ruska, Jr.\n1\n2 3\n4\n5\ncm\n6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.680000000000001e-05,
+      "total_cost": 0.0007483,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2196,
+    "output": 467,
+    "cost_in": 0.00021960000000000003,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012590\n\nLYNCHBURG COLLEGE\n33717\nHERBARIUM\n\nNo. 351\nPLANTS OF VIRGINIA\nDate: June 15, 1980\n\nCounty: Pulaski\nTaxon: *Galax aphylla* L.\n\nLocation: Gatewood Reservoir, off Route 710\nin western part of county\n\nHabitat: Dry woods near reservoir\n\nCollectors: William F. Ruska, Jr.\nCathy Cooper-Ruska\n\nDetermined By: William F. Ruska, Jr.\n\n\n*Handwritten text: Galax aphylla*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nLYN\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012590\nLYNCHBURG\nCOLLEGE\n33717\nHERBARIUM\nPLANTS OF VIRGINIA\nNo. 351\nDate: June 15, 1980\nCounty: Pulaski\nTaxon: Galax aphylla L.\nLocation: Gatewood Reservoir, off Route 710\nin western part of county\nHabitat: Dry woods near reservoir\nCollectors: William F. Ruska, Jr.\nCathy Cooper-Ruska\nDetermined By: William F. Ruska, Jr.\n1\n2 3\n4\n5\ncm\n6 7 8 9 10 Lynchburg\nCollege\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012590",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "William F. Ruska, Jr., Cathy Cooper-Ruska",
+    "collectorNumber": "351",
+    "identifiedBy": "William F. Ruska, Jr.",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 15, 1980",
+    "collectionDate": "1980-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Dry woods near reservoir",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Pulaski",
+    "locality": "Gatewood Reservoir, off Route 710 in western part of county",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\nHERBARIUM\nPLANTS OF VIRGINIA\nLynchburg\nCollege\ncopyright reserved"
+  }
+}

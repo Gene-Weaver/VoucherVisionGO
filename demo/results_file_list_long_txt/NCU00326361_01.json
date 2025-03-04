@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH\nHERBARIUM\n245966\n\nHerbarium of the University of North Carolina\n\nNORTH CAROLINA\nBuncombe Co.: Swannanoa Mts., Buckeye Cove,\n2 mi. SW. of Swannanoa. Alt. 2700 ft.\n\n*Galax aphylla* L.\n\nIn woods of red maple, *Liriodendron*,\nchestnut oak, & *Rhododendron maximum*.\nAbundant.\n\nJean S. Harper\nFrancis Harper  4127. August 23, 1963.\n                                Harry E. Ahles, det.\n\nPlants of the Southeastern United States\n\nNCU00326361\n\nHandwritten text: *Jean S. Harper* and *Francis Harper*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00085,
+      "total_cost": 0.0016287500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 170
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\n245966.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe Co.: Swannanoa Mts., Buckeye Cove,\n2 mi. SW. of Swannanoa. Alt. 2700 ft.\nGalax aphylla L.\nIn woods of red maple, Liriodendron,\nchestnut oak, & Rhododendron maximum.\nAbundant.\nJean S. Harper) 4127. August 23, 1963.\nHarry E. Ahles, det.\nPlants of the Southeastern United States\n\n\nGalax aphylla\nLiriodendron\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 518,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00020720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH\nHERBARIUM\n245966\n\nHerbarium of the University of North Carolina\n\nNORTH CAROLINA\nBuncombe Co.: Swannanoa Mts., Buckeye Cove,\n2 mi. SW. of Swannanoa. Alt. 2700 ft.\n\n*Galax aphylla* L.\n\nIn woods of red maple, *Liriodendron*,\nchestnut oak, & *Rhododendron maximum*.\nAbundant.\n\nJean S. Harper\nFrancis Harper  4127. August 23, 1963.\n                                Harry E. Ahles, det.\n\nPlants of the Southeastern United States\n\nNCU00326361\n\nHandwritten text: *Jean S. Harper* and *Francis Harper*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\n245966.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe Co.: Swannanoa Mts., Buckeye Cove,\n2 mi. SW. of Swannanoa. Alt. 2700 ft.\nGalax aphylla L.\nIn woods of red maple, Liriodendron,\nchestnut oak, & Rhododendron maximum.\nAbundant.\nJean S. Harper) 4127. August 23, 1963.\nHarry E. Ahles, det.\nPlants of the Southeastern United States\n\n\nGalax aphylla\nLiriodendron\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "245966",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jean S. Harper, Francis Harper",
+    "collectorNumber": "4127",
+    "identifiedBy": "Harry E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 23, 1963",
+    "collectionDate": "1963-08-23",
+    "collectionDateEnd": "",
+    "habitat": "In woods of red maple, Liriodendron, chestnut oak, & Rhododendron maximum. Abundant.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe co.",
+    "locality": "Swannanoa mts., buckeye cove, 2 mi. sw. of swannanoa. alt. 2700 ft.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "823",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "University of north\nherbarium\nherbarium of the university of north carolina\nplants of the southeastern united states\nNCU00326361\nhandwritten text jean s. harper and francis harper\nliriodendron\nrhododendron maximum"
+  }
+}

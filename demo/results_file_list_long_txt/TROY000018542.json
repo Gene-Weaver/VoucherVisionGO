@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Troy University Herbarium\nTROY000018542\n\nTROY STATE UNIVERSITY\nTROY NO: 24104 (Handwritten)\n\nPLANTS OF ALABAMA\nCoosa County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nCoosa Wildlife Management Area, along Weogufka\nCreek, 100 yds. upstream from Horse Stomp\nCampground. With *Illicium floridanum* Ellis, *Cyrilla\nracemiflora* L., *Rhododendron arborescens* (Pursh)\nTorr., *R. canescens* (Michx.) Sweet and *R. minus*\nMichx.\n\n32\u00b0 55' 13\"N, 86\u00b0 24' 36\"W Mitchell Dam\nRon Miller 7 May 2007\nTroy University Herbarium (TROY)\n\n\n*Galax urceolata*\n*Illicium floridanum*\n*Cyrilla racemiflora*\n*Rhododendron arborescens*\n*Rhododendron canescens*\n*Rhododendron minus*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001245,
+      "total_cost": 0.00202375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 249
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Inches\nCentimetres\nKODAK Color Control Patches\nThe Tiffen Company, 2000\nKODAK Gray Scale\nThe Tiffen Company, 2000\nTroy University Herbarium\nTROY000018542\nPLANTS OF ALABAMA\nCoosa County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nCoosa Wildlife Management Area, along Weogufka\nCreek, 100 yrds. upstream from Horse Stomp\nCampground. With Illicium floridanum Ellis, Cyrilla\nracemiflora L. Rhododendron arborescens (Pursh)\nTorr. R. canescens (Michx.) Sweet and R. minus\nMichx..\n32\u00b0 55' 13\"N, 86\u00b0 24' 36\"W Mitchell Dam\nRon Miller 7 May 2007\nTroy University Herbarium (TROY)\nTROY STATE UNIVERSITY\nTROY NO: 24104\n\n\nGalax urceolata\nIllicium floridanum\nCyrilla racemiflora\nRhododendron arborescens\nR. canescens\nR. minus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010400000000000001,
+      "total_cost": 0.0007855,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 260
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2400,
+    "output": 632,
+    "cost_in": 0.00023999999999999998,
+    "cost_out": 0.0002528
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTroy University Herbarium\nTROY000018542\n\nTROY STATE UNIVERSITY\nTROY NO: 24104 (Handwritten)\n\nPLANTS OF ALABAMA\nCoosa County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nCoosa Wildlife Management Area, along Weogufka\nCreek, 100 yds. upstream from Horse Stomp\nCampground. With *Illicium floridanum* Ellis, *Cyrilla\nracemiflora* L., *Rhododendron arborescens* (Pursh)\nTorr., *R. canescens* (Michx.) Sweet and *R. minus*\nMichx.\n\n32\u00b0 55' 13\"N, 86\u00b0 24' 36\"W Mitchell Dam\nRon Miller 7 May 2007\nTroy University Herbarium (TROY)\n\n\n*Galax urceolata*\n*Illicium floridanum*\n*Cyrilla racemiflora*\n*Rhododendron arborescens*\n*Rhododendron canescens*\n*Rhododendron minus*\n\n\ngemini-2.0-flash OCR:\nInches\nCentimetres\nKODAK Color Control Patches\nThe Tiffen Company, 2000\nKODAK Gray Scale\nThe Tiffen Company, 2000\nTroy University Herbarium\nTROY000018542\nPLANTS OF ALABAMA\nCoosa County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nCoosa Wildlife Management Area, along Weogufka\nCreek, 100 yrds. upstream from Horse Stomp\nCampground. With Illicium floridanum Ellis, Cyrilla\nracemiflora L. Rhododendron arborescens (Pursh)\nTorr. R. canescens (Michx.) Sweet and R. minus\nMichx..\n32\u00b0 55' 13\"N, 86\u00b0 24' 36\"W Mitchell Dam\nRon Miller 7 May 2007\nTroy University Herbarium (TROY)\nTROY STATE UNIVERSITY\nTROY NO: 24104\n\n\nGalax urceolata\nIllicium floridanum\nCyrilla racemiflora\nRhododendron arborescens\nR. canescens\nR. minus\n\n",
+  "formatted_json": {
+    "catalogNumber": "TROY000018542",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Ron Miller",
+    "collectorNumber": "24104",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 May 2007",
+    "collectionDate": "2007-05-07",
+    "collectionDateEnd": "",
+    "habitat": "Along weogufka creek, 100 yrds. upstream from horse stomp campground. With illicium floridanum ellis, cyrilla racemiflora l. rhododendron arborescens (pursh) torr. r. canescens (michx.) sweet and r. minus michx.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Coosa County",
+    "locality": "Coosa wildlife management area, along weogufka creek, 100 yrds. upstream from horse stomp campground. mitchell dam",
+    "verbatimCoordinates": "32\u00b0 55' 13N, 86\u00b0 24' 36W",
+    "decimalLatitude": "32.92028",
+    "decimalLongitude": "-86.41",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Troy university herbarium\ntroy state university\nplants of alabama\ndiapensiaceae\ngalax urceolata\nllicium floridanum\ncyrilla racemiflora\nrhododendron arborescens\nr. canescens\nr. minus\ninches\ncentimetres\nkodak color control patches\nthe tiffen company, 2000\nkodak gray scale\nthe tiffen company, 2000"
+  }
+}

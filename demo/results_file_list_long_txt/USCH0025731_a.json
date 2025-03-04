@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\nmounted October 2024\n\n006545\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\n(Handwritten Text)\n*Galax aphylla* L\nGreenville\nwoods\n5 Mi above Paris Falls\nColl. W. Batson\n7C Bose                                Date June 1963\nCounty\nNo.\n\nUSCH0025731\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.00153875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\nUSCH\nmounted October 2024\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n006545\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGreenville County\nGalax aphylla L\nwoods\n5 mi above liver Falls\nColl. WT Batson\n7c Bose\nDate June 1963\nNo.\nUSCH0025731\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.400000000000001e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2201,
+    "output": 501,
+    "cost_in": 0.00022009999999999998,
+    "cost_out": 0.00020040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\nmounted October 2024\n\n006545\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\n(Handwritten Text)\n*Galax aphylla* L\nGreenville\nwoods\n5 Mi above Paris Falls\nColl. W. Batson\n7C Bose                                Date June 1963\nCounty\nNo.\n\nUSCH0025731\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved University of South Carolina\nUSCH\nmounted October 2024\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n006545\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGreenville County\nGalax aphylla L\nwoods\n5 mi above liver Falls\nColl. WT Batson\n7c Bose\nDate June 1963\nNo.\nUSCH0025731\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "006545",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "W. Batson, 7C Bose",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L",
+    "verbatimCollectionDate": "June 1963",
+    "collectionDate": "1963-06-00",
+    "collectionDateEnd": "",
+    "habitat": "Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Greenville County",
+    "locality": "5 mi above liver falls",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\ncopyright reserved\nUniversity of South Carolina\nmounted October 2024\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nNo.\nUSCH0025731\nGalax urceolata\nGalax aphylla"
+  }
+}

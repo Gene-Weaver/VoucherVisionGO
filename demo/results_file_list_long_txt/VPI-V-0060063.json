@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n76734\nVirginia Polytechnic Institute\nand State University\n\nFlora of Virginia\n\n*Galax aphylla* L.\nnear Cohoke, King William Co.\n\nSmallish colony in sandy soil\non steep, N-facing, Kalmia bluff\nby Cohoke Mill Creek\n\nApr. 3, 1977\n\nCharles E. Stevens        No. 14,174\nDet.                             with Tom Wieboldt\n\n\nHandwritten text: *Galax aphylla* L., near Cohoke, King William Co., Smallish colony in sandy soil, on steep, N-facing, Kalmia bluff, by Cohoke Mill Creek, Apr. 3, 1977\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008149999999999999,
+      "total_cost": 0.00159375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n76734\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax aphylla L.\nnear Cohoke, King William Co.\nSmallish colony in sandy soil\non steep, N-facing,\nby Cohoke thill Creek.\nApr. 3, 1977\nCharles E. Stevens\nDet.\nNo. 14,174\nwith Tom Wieboldt\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060063\n\nHandwritten text:\nKalia Bluff\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.440000000000001e-05,
+      "total_cost": 0.0007359,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 136
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2168,
+    "output": 453,
+    "cost_in": 0.00021679999999999998,
+    "cost_out": 0.0001812
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n76734\nVirginia Polytechnic Institute\nand State University\n\nFlora of Virginia\n\n*Galax aphylla* L.\nnear Cohoke, King William Co.\n\nSmallish colony in sandy soil\non steep, N-facing, Kalmia bluff\nby Cohoke Mill Creek\n\nApr. 3, 1977\n\nCharles E. Stevens        No. 14,174\nDet.                             with Tom Wieboldt\n\n\nHandwritten text: *Galax aphylla* L., near Cohoke, King William Co., Smallish colony in sandy soil, on steep, N-facing, Kalmia bluff, by Cohoke Mill Creek, Apr. 3, 1977\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n76734\nVirginia Polytechnic Institute\nand State University\nMETRIC\nFlora of Virginia\nGalax aphylla L.\nnear Cohoke, King William Co.\nSmallish colony in sandy soil\non steep, N-facing,\nby Cohoke thill Creek.\nApr. 3, 1977\nCharles E. Stevens\nDet.\nNo. 14,174\nwith Tom Wieboldt\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060063\n\nHandwritten text:\nKalia Bluff\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "76734",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "14,174",
+    "identifiedBy": "Tom Wieboldt",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 3, 1977",
+    "collectionDate": "1977-04-03",
+    "collectionDateEnd": "",
+    "habitat": "Smallish colony in sandy soil on steep, n-facing, kalmia bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "King William Co.",
+    "locality": "Near Cohoke, King William Co., by Cohoke Mill Creek",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora of Virginia\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060063\nHandwritten text\nKalia Bluff"
+  }
+}

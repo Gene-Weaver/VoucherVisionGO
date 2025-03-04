@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010418\n\nDiapensiaceae 19\n= *lanceolata* (Povet) Brummitt (handwritten)\n\nHerbarium of Western Carolina University\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\n\nBonas Defeat and Tuckasegee River Gorge. Rugged\nrocky gorge. Elevations 2600 to 3000ft. Shaded\nwoods above river.\n\nDan Pittillo and Jim Wallace 4123  17 May 1972\nHERBARIUM OF\nN.C.\n12010\nWESTERN CAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 1\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000975,
+      "total_cost": 0.00175375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 195
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nWESTERN CAROLINA COLLEGE\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010418\nDiapensiaceae 19\n= Giurceolata (Poirct) Brummitt\nHerbarium of Western Carolina University\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nBonas Defeat and Tuckaseegee River Gorge. Rugged\nrocky gorge. Elevations 2600 to 3000ft. Shaded\nwoods above river.\nDan Pittillo and Jim Wallace 4123\n17 May 1972\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 1\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.04e-05,
+      "total_cost": 0.0007519,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 176
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2275,
+    "output": 548,
+    "cost_in": 0.00022750000000000003,
+    "cost_out": 0.00021920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010418\n\nDiapensiaceae 19\n= *lanceolata* (Povet) Brummitt (handwritten)\n\nHerbarium of Western Carolina University\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\n\nBonas Defeat and Tuckasegee River Gorge. Rugged\nrocky gorge. Elevations 2600 to 3000ft. Shaded\nwoods above river.\n\nDan Pittillo and Jim Wallace 4123  17 May 1972\nHERBARIUM OF\nN.C.\n12010\nWESTERN CAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 1\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nWESTERN CAROLINA COLLEGE\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010418\nDiapensiaceae 19\n= Giurceolata (Poirct) Brummitt\nHerbarium of Western Carolina University\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nBonas Defeat and Tuckaseegee River Gorge. Rugged\nrocky gorge. Elevations 2600 to 3000ft. Shaded\nwoods above river.\nDan Pittillo and Jim Wallace 4123\n17 May 1972\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 1\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010418",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dan Pittillo and Jim Wallace",
+    "collectorNumber": "4123",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 May 1972",
+    "collectionDate": "1972-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Bonas defeat and tuckaseegee river gorge. rugged rocky gorge. shaded woods above river.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Bonas defeat and tuckasegee river gorge. rugged rocky gorge. elevations 2600 to 3000ft. shaded woods above river.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "792",
+    "maximumElevationInMeters": "914",
+    "elevationUnits": "m",
+    "additionalText": "Western carolina u. herbarium\nDiapensiaceae 19\n= lanceolata (povet) brummitt (handwritten)\nHerbarium of western carolina university\ngalax aphylla l.\n12010\nWestern carolina college\nCarolina biological supply company\nBurlington, nc 27215 & gladstone, or 97027\ninches\nMetric 1\nliving\ncultures\npreserved\nMaterial"
+  }
+}

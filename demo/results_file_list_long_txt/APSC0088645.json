@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0088645\n\nLetcher County, Kentucky\n\nDIAPENSIACEAE\n\n*Galax urceolata* (Poir.) Brummitt\nAlong trail in gorge. In woodlands.\n\nCollector(s): M. Medley, K. Thomas\nCollection Number: 14092-86\nJun 12, 1986\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000495,
+      "total_cost": 0.0012737500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 99
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0088645\nInches\nCentimetres TIFFEN Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nR\nG\nB\nW G\nK\nC\nY\nM\nAPAustin Peay\nState University\nLetcher County, Kentucky\nDIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nAlong trail in gorge. In woodlands.\nCollector(s): M. Medley, K. Thomas\nCollection Number: 14092-86\nJun 12, 1986\nBencher\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.08e-05,
+      "total_cost": 0.0007423,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 152
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2131,
+    "output": 441,
+    "cost_in": 0.00021310000000000003,
+    "cost_out": 0.0001764
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0088645\n\nLetcher County, Kentucky\n\nDIAPENSIACEAE\n\n*Galax urceolata* (Poir.) Brummitt\nAlong trail in gorge. In woodlands.\n\nCollector(s): M. Medley, K. Thomas\nCollection Number: 14092-86\nJun 12, 1986\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0088645\nInches\nCentimetres TIFFEN Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nR\nG\nB\nW G\nK\nC\nY\nM\nAPAustin Peay\nState University\nLetcher County, Kentucky\nDIAPENSIACEAE\nGalax urceolata (Poir.) Brummitt\nAlong trail in gorge. In woodlands.\nCollector(s): M. Medley, K. Thomas\nCollection Number: 14092-86\nJun 12, 1986\nBencher\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0088645",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "M. Medley, K. Thomas",
+    "collectorNumber": "14092-86",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Jun 12, 1986",
+    "collectionDate": "1986-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Along trail in gorge. In woodlands.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Letcher County",
+    "locality": "Along trail in gorge. In woodlands.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nBencher"
+  }
+}

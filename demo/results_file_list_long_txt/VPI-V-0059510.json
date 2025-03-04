@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059510\n\n8841\n\nSMITHSONIAN INSTITUTION\nFROM THE UNITED STATES NATIONAL HERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 454\u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n**(Handwritten Text):**\nWhili PEAKS OF OTTER 86\nBEDFORD CO. VA\nWooded Mt. SLOPE on rocks\nJULY 18 1906 Wm. Palmer\nUnder Kalmia\n& Lcoops\n*Galax aphylla*\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\nWILLIAM PALMER, Collector\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009649999999999999,
+      "total_cost": 0.00174375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 193
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059510\n8841\nDepartment of Biology\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6, based on average guard cell area\nvolume of 454\u03bc2\nGuy L. Nesom, 1975\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nSMITHSONIAN INSTITUTION\nFROM THE UNITED STATES NATIONAL HERBARIUM\nPEAKS OF OTTER\nBELFORD CO. VA\nWooded Mt. SLOPE on rocks\nJULY 18 1906 wm. Palmer\nUnder kalmia\nPLANTS OF VIRGINIA\nWILLIAM PALMER, Collector\n\nHandwritten text:\nWhili\n86\n26oop\nGalax aphylla\nGalat aphylla 2.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.999999999999999e-05,
+      "total_cost": 0.0007615,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 200
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2315,
+    "output": 548,
+    "cost_in": 0.0002315,
+    "cost_out": 0.00021920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059510\n\n8841\n\nSMITHSONIAN INSTITUTION\nFROM THE UNITED STATES NATIONAL HERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 454\u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n\n**(Handwritten Text):**\nWhili PEAKS OF OTTER 86\nBEDFORD CO. VA\nWooded Mt. SLOPE on rocks\nJULY 18 1906 Wm. Palmer\nUnder Kalmia\n& Lcoops\n*Galax aphylla*\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\nWILLIAM PALMER, Collector\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059510\n8841\nDepartment of Biology\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6, based on average guard cell area\nvolume of 454\u03bc2\nGuy L. Nesom, 1975\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nSMITHSONIAN INSTITUTION\nFROM THE UNITED STATES NATIONAL HERBARIUM\nPEAKS OF OTTER\nBELFORD CO. VA\nWooded Mt. SLOPE on rocks\nJULY 18 1906 wm. Palmer\nUnder kalmia\nPLANTS OF VIRGINIA\nWILLIAM PALMER, Collector\n\nHandwritten text:\nWhili\n86\n26oop\nGalax aphylla\nGalat aphylla 2.\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059510",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "William Palmer",
+    "collectorNumber": "86",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "JULY 18 1906",
+    "collectionDate": "1906-07-18",
+    "collectionDateEnd": "",
+    "habitat": "Wooded mt. slope on rocks, under kalmia",
+    "chromosomeCount": "n=6",
+    "guardCell": "n = 6, based on average guard cell area volume of 454\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Bedford co.",
+    "locality": "Peaks of otter",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey herbarium\nVirginia polytechnic institute\nSmithsonian institution\nFrom the united states national herbarium\nHerbarium of the university of north carolina\nHerbarium\nBiology department\nVirginia polytechnic institute\nPlants of virginia\nWilliam palmer, collector\nHandwritten text\nWhili\n26oop\nGalax aphylla\nGalat aphylla 2.\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

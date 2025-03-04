@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "H. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nBurke Co.\n\n*Galax aphylla* L.\nDiapensiaceae\n\nAlong trail to summit of Hawksbill Mtn.,\n4 miles almost due south of the town of\nJones Ridge.\nDebbie Qualls 1147 18 September 1981\n\nHandwritten Text: *Galax aphylla*, Hawksbill, Jones Ridge, Debbie Qualls, 1147\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "H. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nBurke Co.\nGalax aphylla L.\nDiapensiaceae\nAlong trail to summit of Hawksbill Mtn.,\n4 miles almost due south of the town of\nJones Ridge.\nDebbie Qualls\n1147\n18 September 1981\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.72e-05,
+      "total_cost": 0.0007187000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 93
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2110,
+    "output": 462,
+    "cost_in": 0.000211,
+    "cost_out": 0.00018480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nBurke Co.\n\n*Galax aphylla* L.\nDiapensiaceae\n\nAlong trail to summit of Hawksbill Mtn.,\n4 miles almost due south of the town of\nJones Ridge.\nDebbie Qualls 1147 18 September 1981\n\nHandwritten Text: *Galax aphylla*, Hawksbill, Jones Ridge, Debbie Qualls, 1147\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nBurke Co.\nGalax aphylla L.\nDiapensiaceae\nAlong trail to summit of Hawksbill Mtn.,\n4 miles almost due south of the town of\nJones Ridge.\nDebbie Qualls\n1147\n18 September 1981\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax aphylla l.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Debbie Qualls",
+    "collectorNumber": "1147",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "18 September 1981",
+    "collectionDate": "1981-09-18",
+    "collectionDateEnd": "",
+    "habitat": "Along trail to summit of hawksbill mtn.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Burke co.",
+    "locality": "4 miles almost due south of the town of jones ridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "H. r. totten\nTeaching collection\nUnc-chapel hill\n\nHerbarium\nDepartment of botany\nThe university of north carolina\nDiapensiaceae\nHandwritten text galax aphylla, hawksbill, jones ridge, debbie qualls, 1147\ngalax aphylla"
+  }
+}

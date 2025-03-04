@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n400804\nHERBARIUM\n\nHerbarium of Western Carolina College\nNorth Carolina\nTransylvania County\n\n*Galax aphylla* L.\n\nIn wooded area .5 mile up county road 1530.\nNumerous. Herb. Elevation 2500'.\n\nBarbara McCall 40  6/25/67\n\nUniversity of Louisiana at Monroe\nNLU0134055\n\n(Handwritten) Exchange Specimen From:\nWCU H\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00059,
+      "total_cost": 0.0013687500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 118
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNVERSITY\n400804\nHERBARIUM\nHerbarium of Western Carolina College\nNorth Carolina\nTransylvania County\nGalax aphylla L.\nIn wooded area .5 mile up county road 1530.\nNumerous. Herb. Elevation 2500'.\nBarbara McCall 40\nExchange Specimen From:\nWCU H\n6/25/67\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.7600000000000006e-05,
+      "total_cost": 0.0007191000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 94
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2092,
+    "output": 467,
+    "cost_in": 0.00020920000000000002,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n400804\nHERBARIUM\n\nHerbarium of Western Carolina College\nNorth Carolina\nTransylvania County\n\n*Galax aphylla* L.\n\nIn wooded area .5 mile up county road 1530.\nNumerous. Herb. Elevation 2500'.\n\nBarbara McCall 40  6/25/67\n\nUniversity of Louisiana at Monroe\nNLU0134055\n\n(Handwritten) Exchange Specimen From:\nWCU H\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNVERSITY\n400804\nHERBARIUM\nHerbarium of Western Carolina College\nNorth Carolina\nTransylvania County\nGalax aphylla L.\nIn wooded area .5 mile up county road 1530.\nNumerous. Herb. Elevation 2500'.\nBarbara McCall 40\nExchange Specimen From:\nWCU H\n6/25/67\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "400804",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Barbara McCall",
+    "collectorNumber": "40",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/25/67",
+    "collectionDate": "1967-06-25",
+    "collectionDateEnd": "",
+    "habitat": "In wooded area .5 mile up county road 1530. Numerous. Herb.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Transylvania County",
+    "locality": "In wooded area .5 mile up county road 1530.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "762",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHerbarium of Western Carolina College\nExchange Specimen From\nWCU H\nUniversity of Louisiana at Monroe\nNLU0134055\nHerb. Elevation 2500'."
+  }
+}

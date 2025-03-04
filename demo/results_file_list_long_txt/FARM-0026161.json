@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026161\n\nFlora of Virginia\n*Galax urceolata* (Poret) Brum.\n\nMare Run, Bath Co.\nScattered in rocky white pine - hardwoods\nby Mare Run & confluence with Panther\nRun (2.5 mi. SE of Warm Springs). Edge\nof known range here. el. 2020 ft.\n(Warm Springs Quad.)\nCharles E. Stevens\nNo. 25,951                                July 10, 1997\n\n\nHandwritten text: *Galax urceolata* (Poret) Brum., Mare Run, Bath Co., Scattered in rocky white..., by Mare Run & confluence with Panther Run (2.5 mi. SE of Warm Springs). Edge of known range here. el. 2020 ft., (Warm Springs Quad.), Charles E. Stevens, No. 25,951, July 10, 1997\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001055,
+      "total_cost": 0.0018337499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 211
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Porret) Brum.\nMare Run, Bath Co.\nScattered in rocky white pine- hardwoods\nby mare Run & confluence with Panther\nRun (2.5 mi. SE of warm Springs). Edge\nof known range here.\n(Warm Springs Quad.)\nCharles E. Stevens\nNo. 25,951\nel. 2020 H.\nJuly 10, 1997\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.04e-05,
+      "total_cost": 0.0007219,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 101
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2182,
+    "output": 460,
+    "cost_in": 0.0002182,
+    "cost_out": 0.00018400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026161\n\nFlora of Virginia\n*Galax urceolata* (Poret) Brum.\n\nMare Run, Bath Co.\nScattered in rocky white pine - hardwoods\nby Mare Run & confluence with Panther\nRun (2.5 mi. SE of Warm Springs). Edge\nof known range here. el. 2020 ft.\n(Warm Springs Quad.)\nCharles E. Stevens\nNo. 25,951                                July 10, 1997\n\n\nHandwritten text: *Galax urceolata* (Poret) Brum., Mare Run, Bath Co., Scattered in rocky white..., by Mare Run & confluence with Panther Run (2.5 mi. SE of Warm Springs). Edge of known range here. el. 2020 ft., (Warm Springs Quad.), Charles E. Stevens, No. 25,951, July 10, 1997\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Porret) Brum.\nMare Run, Bath Co.\nScattered in rocky white pine- hardwoods\nby mare Run & confluence with Panther\nRun (2.5 mi. SE of warm Springs). Edge\nof known range here.\n(Warm Springs Quad.)\nCharles E. Stevens\nNo. 25,951\nel. 2020 H.\nJuly 10, 1997\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026161",
+    "scientificName": "Galax urceolata (Poret) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poret) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "25,951",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 10, 1997",
+    "collectionDate": "1997-07-10",
+    "collectionDateEnd": "",
+    "habitat": "Scattered in rocky white pine - hardwoods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bath County",
+    "locality": "Mare Run, Bath Co. Scattered in rocky white pine - hardwoods by Mare Run & confluence with Panther Run (2.5 mi. SE of Warm Springs). Edge of known range here. (Warm Springs Quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "616",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "el. 2020 ft."
+  }
+}

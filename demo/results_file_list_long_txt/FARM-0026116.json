@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026116\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 501 \u03bc\u00b2\nGuy L. Nesom, 1975\nchromosome count from this population\n(2n=12)\n\n*Galax aphylla* L.\nApr. 15, 1973\nnear Horwood,\nNelson Co., Va.\nScores of plants on\nsteep N-facing *Rhododendron catawbiense* bluff on\nTye River \u00bd mi. W of\nHorwood.\n450 ft.\nC. E. Stevens #6493 (Found by\nTom Wieboldt)\n\n\nHandwritten Text:\n*Galax aphylla* L.\nnear Horwood,\nNelson Co., Va.\nApr. 15, 1973\nScores of plants on\nsteep N-facing *Rhododendron catawbiense* bluff on\nTye River \u00bd mi. W of\nHorwood.\n450 ft.\nC. E. Stevens #6493 (Found by\nTom Wieboldt)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013949999999999998,
+      "total_cost": 0.00217375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 279
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026116\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGalax aphylla L.\nApr. 15, 1973\nnear horwood,\nNelson Co., Va.\nScores of plants on\nsteep N-facing Rhododendron\ncatawbiense bluff on\n450 ft.\nTye Rive \u00bd mi. W of\nhorwood.\nC.E. Stroms #6493\nu\nFARM\nHarvill-Stevens\nHerbarium\n\nGalax aphylla L.\nTom Wieboldt\n\n\nGalax urceolata\nGalax aphylla\nRhododendron catawbiense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.36e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2346,
+    "output": 547,
+    "cost_in": 0.0002346,
+    "cost_out": 0.0002188
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026116\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 501 \u03bc\u00b2\nGuy L. Nesom, 1975\nchromosome count from this population\n(2n=12)\n\n*Galax aphylla* L.\nApr. 15, 1973\nnear Horwood,\nNelson Co., Va.\nScores of plants on\nsteep N-facing *Rhododendron catawbiense* bluff on\nTye River \u00bd mi. W of\nHorwood.\n450 ft.\nC. E. Stevens #6493 (Found by\nTom Wieboldt)\n\n\nHandwritten Text:\n*Galax aphylla* L.\nnear Horwood,\nNelson Co., Va.\nApr. 15, 1973\nScores of plants on\nsteep N-facing *Rhododendron catawbiense* bluff on\nTye River \u00bd mi. W of\nHorwood.\n450 ft.\nC. E. Stevens #6493 (Found by\nTom Wieboldt)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026116\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nGalax aphylla L.\nApr. 15, 1973\nnear horwood,\nNelson Co., Va.\nScores of plants on\nsteep N-facing Rhododendron\ncatawbiense bluff on\n450 ft.\nTye Rive \u00bd mi. W of\nhorwood.\nC.E. Stroms #6493\nu\nFARM\nHarvill-Stevens\nHerbarium\n\nGalax aphylla L.\nTom Wieboldt\n\n\nGalax urceolata\nGalax aphylla\nRhododendron catawbiense\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026116",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C. E. Stevens, Tom Wieboldt",
+    "collectorNumber": "6493",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Chromosome count from this population (2n=12)",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Apr. 15, 1973",
+    "collectionDate": "1973-04-15",
+    "collectionDateEnd": "",
+    "habitat": "Steep N-facing Rhododendron catawbiense bluff",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 501 \u03bc\u00b2",
+    "specimenDescription": "Scores of plants",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Va.",
+    "county": "Nelson Co.",
+    "locality": "Near Horwood, Tye River \u00bd mi. W of Horwood",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "137",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nHarvill-Stevens Herbarium\nLongwood University\nC.E. Stroms\nFARM\nHarvill-Stevens\nHerbarium\nRhododendron catawbiense"
+  }
+}

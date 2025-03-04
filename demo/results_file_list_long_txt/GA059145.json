@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "106763\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\nX 9 November 2005 (handwritten)\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 485 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSteep W-facing slopes, pine-laurel,\n3.6 mi W 22\u00b0S of Flowery Branch.\nElevation 1020 ft.\nPIEDMONT PROVINCE\n\nWilliam P. Adams 18926  21 June 1955\nWilbur H. Duncan\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00105,
+      "total_cost": 0.0018287499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 210
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep W-facing slopes, pine-laurel,\n3.6 mi W 22\u00b0S of Flowery Branch.\nElevation 1020 ft.\nPIEDMONT PROVINCE\nWilliam P. Adams\nWilbur H. Duncan\n106763\nUNIV. OF GEORGIA\nHERBARIUM\n18926\n21 June 1955\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.52e-05,
+      "total_cost": 0.0007567000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2279,
+    "output": 528,
+    "cost_in": 0.00022790000000000004,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n106763\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\nX 9 November 2005 (handwritten)\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 485 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSteep W-facing slopes, pine-laurel,\n3.6 mi W 22\u00b0S of Flowery Branch.\nElevation 1020 ft.\nPIEDMONT PROVINCE\n\nWilliam P. Adams 18926  21 June 1955\nWilbur H. Duncan\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep W-facing slopes, pine-laurel,\n3.6 mi W 22\u00b0S of Flowery Branch.\nElevation 1020 ft.\nPIEDMONT PROVINCE\nWilliam P. Adams\nWilbur H. Duncan\n106763\nUNIV. OF GEORGIA\nHERBARIUM\n18926\n21 June 1955\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "106763",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "William P. Adams, Wilbur H. Duncan",
+    "collectorNumber": "18926",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 June 1955",
+    "collectionDate": "1955-06-21",
+    "collectionDateEnd": "",
+    "habitat": "Steep w-facing slopes, pine-laurel",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 485 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Hall County",
+    "locality": "3.6 mi w 22\u00b0s of flowery branch.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "311",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Univ. of georgia herbarium\nSpecimen examined for\ngeorgia atlas project\n9 november 2005\nHerbarium of the university of north carolina\nHerbarium of the university of georgia\nFlora of georgia\nPiedmont province\nimaged 2013\ngalax aphylla l.\ngalax aphylla\n"
+  }
+}

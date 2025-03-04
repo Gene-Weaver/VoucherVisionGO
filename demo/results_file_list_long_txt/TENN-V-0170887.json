@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170887\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSEENSIS\nCocke County\n\n27670. *Galax aphylla* L.\n\nAlong Tenn. Route 107, in Mts.\nabove Del Rio.\n\nA. J. Sharp                      25 Sept. 1960\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n(handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.0015887499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARILim OF THA\nNo.\n6277\nUNIVERSITY OF TENNESSEE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170887\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNESSEENSIS\nCocke County\n27670. Galax aphylla L.\nAlong Tenn. Route 107, in Mts.\nabove Del Rio.\nA. J. Sharp\n25 Sept. 1960\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.560000000000001e-05,
+      "total_cost": 0.0007571000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 189
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2239,
+    "output": 511,
+    "cost_in": 0.00022390000000000002,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170887\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA TENNESSEENSIS\nCocke County\n\n27670. *Galax aphylla* L.\n\nAlong Tenn. Route 107, in Mts.\nabove Del Rio.\n\nA. J. Sharp                      25 Sept. 1960\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n(handwritten)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARILim OF THA\nNo.\n6277\nUNIVERSITY OF TENNESSEE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170887\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA TENNESSEENSIS\nCocke County\n27670. Galax aphylla L.\nAlong Tenn. Route 107, in Mts.\nabove Del Rio.\nA. J. Sharp\n25 Sept. 1960\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170887",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. J. Sharp",
+    "collectorNumber": "6277",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 Sept. 1960",
+    "collectionDate": "1960-09-25",
+    "collectionDateEnd": "",
+    "habitat": "Along tenn. route 107, in mts. above del rio.",
+    "chromosomeCount": "",
+    "guardCell": "N = 6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Cocke county",
+    "locality": "Along tenn. route 107, in mts. above del rio.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of tennessee knoxville\nHerbarium of the university of north carolina\nFlora tennesseensis\nGalax aphylla l.\nHerbarium of the\nUniversity of tennessee\nSernc digitization project - tennessee herbarium consortium\ngalax aphylla"
+  }
+}

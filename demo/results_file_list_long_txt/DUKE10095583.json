@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE 145162\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nMacon County\n\nGalax aphylla L.\n\nabundant on banks of Cullasaja River, \nGold Mine Road.\n\nW. B. Schofield (Handwritten)\nJune 11, 1958 (Handwritten)\n8550\n\nDUKE10095583\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000755,
+      "total_cost": 0.00153375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE\n145162\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nMacon County\nGalax aphylla L.\nabundant on banks of Cullasaja River,\nGold Mine Road.\nW. B. Schofield\nJune 11, 1958\n8550\nDUKE10095583\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.16e-05,
+      "total_cost": 0.0007331,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 129
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2163,
+    "output": 488,
+    "cost_in": 0.0002163,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE 145162\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nMacon County\n\nGalax aphylla L.\n\nabundant on banks of Cullasaja River, \nGold Mine Road.\n\nW. B. Schofield (Handwritten)\nJune 11, 1958 (Handwritten)\n8550\n\nDUKE10095583\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE\n145162\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nMacon County\nGalax aphylla L.\nabundant on banks of Cullasaja River,\nGold Mine Road.\nW. B. Schofield\nJune 11, 1958\n8550\nDUKE10095583\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "145162",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "W. B. Schofield",
+    "collectorNumber": "8550",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "June 11, 1958",
+    "collectionDate": "1958-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Abundant on banks of cullasaja river, gold mine road.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "Banks of cullasaja river, gold mine road.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke university herbarium\nPlants of north carolina\nduke10095583\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

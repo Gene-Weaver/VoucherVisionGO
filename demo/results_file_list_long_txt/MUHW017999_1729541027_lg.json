@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701\n\nMarshall University Herbarium\nMUHW017999\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\n\nNear Little Stony Brook.\nSalt Pond Mountain,\nColl.F.A.Gilbert, L.G.Williams\n16/June/39\n\n\nHandwritten Text: *Galax aphylla* L.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00072,
+      "total_cost": 0.0014987499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 144
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "SIGILLUM\nHERBARIUM\nMARSHALL UNIVERSITY\nuntington, West Virginia 25701\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW017999\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHerbarium of Marshall Collego\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nNear Little Stony Brook.\nSalt Pond Mountain,\nColl.F.A.Gilbert, L.G.Williams\n16/June/39\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2187,
+    "output": 482,
+    "cost_in": 0.00021870000000000003,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701\n\nMarshall University Herbarium\nMUHW017999\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\n\nNear Little Stony Brook.\nSalt Pond Mountain,\nColl.F.A.Gilbert, L.G.Williams\n16/June/39\n\n\nHandwritten Text: *Galax aphylla* L.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSIGILLUM\nHERBARIUM\nMARSHALL UNIVERSITY\nuntington, West Virginia 25701\nINCHES\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nMarshall University Herbarium\nMUHW017999\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHerbarium of Marshall Collego\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nNear Little Stony Brook.\nSalt Pond Mountain,\nColl.F.A.Gilbert, L.G.Williams\n16/June/39\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017999",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "F.a.gilbert, L.g.williams",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle l. gaynor (flas)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "16/June/39",
+    "collectionDate": "1939-06-16",
+    "collectionDateEnd": "",
+    "habitat": "Near little stony brook.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "Salt pond mountain,",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nMarshall university\nHuntington, west virginia 25701\nMarshall university herbarium\nHerbarium of marshall college\nFlora of virginia\nGalax aphylla l.\nGalax urceolata\nGalax aphylla"
+  }
+}

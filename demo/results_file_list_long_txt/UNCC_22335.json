@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n22335\nHERBARIUM\n\n*J.Sen 10/16/2012* (handwritten)\n\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\n\nHerbarium of Newberry College\nPLANTS OF NORTH CAROLINA\n\nGalax aphylla L.\n\nBUNCOMBE CO.: Lutheridge. US 25, 0.3 mi S of jct\nwith 25A. Between towns of Arden and Fletcher.\nAbundant along upland woodland trail.\n\n16 May 1989                                     Charles N. Horn # 3275\n24ColorCard CameraTrax.com\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\nMETRIC 1\n24ColorCard Camera Trax.com\nJ\n10/16/2012\nGalax urceolata (Boiret) Brummitt\nDiapensiaceae\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nBUNCOMBE CO.: Lutheridge. US 25, 0.3 mi S of jet\nwith 25A. Between towns of Arden and Fletcher.\nAbundant along upland woodland trail.\n16 May 1989\nCharles N. Horn # 3275\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.36e-05,
+      "total_cost": 0.0007351,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 134
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 487,
+    "cost_in": 0.0002188,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n22335\nHERBARIUM\n\n*J.Sen 10/16/2012* (handwritten)\n\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\n\nHerbarium of Newberry College\nPLANTS OF NORTH CAROLINA\n\nGalax aphylla L.\n\nBUNCOMBE CO.: Lutheridge. US 25, 0.3 mi S of jct\nwith 25A. Between towns of Arden and Fletcher.\nAbundant along upland woodland trail.\n\n16 May 1989                                     Charles N. Horn # 3275\n24ColorCard CameraTrax.com\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\nMETRIC 1\n24ColorCard Camera Trax.com\nJ\n10/16/2012\nGalax urceolata (Boiret) Brummitt\nDiapensiaceae\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nBUNCOMBE CO.: Lutheridge. US 25, 0.3 mi S of jet\nwith 25A. Between towns of Arden and Fletcher.\nAbundant along upland woodland trail.\n16 May 1989\nCharles N. Horn # 3275\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "22335",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "3275",
+    "identifiedBy": "J.Sen",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "16 May 1989",
+    "collectionDate": "1989-05-16",
+    "collectionDateEnd": "",
+    "habitat": "Abundant along upland woodland trail.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe Co.",
+    "locality": "Lutheridge. Us 25, 0.3 mi s of jct with 25a. Between towns of arden and fletcher.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte\nherbarium\nherbarium of newberry college\nplants of north carolina\n24colorcard camera trax.com"
+  }
+}

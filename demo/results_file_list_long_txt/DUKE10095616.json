@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF _South Carolina_ (handwritten)\n_Galax aphylla_ L. (handwritten)\n_Estatoe Creek west of_ (handwritten)\n_Rocky Bottom, Pickens County._ (handwritten)\n119366\n_R. L. Wilbur_ (handwritten)\n_June 2,1947_ (handwritten)\n1946\nDUKE UNIVERSITY HERBARIUM\nDUKE10095616\nDUKE UNIVERSITY\nHERBARIUM\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00088,
+      "total_cost": 0.0016587499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 176
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF South Carolina\nGalax aphylla L.\nEstatore Creek west of\nRocky Bottom, Pickens County.\nR. L. Wilbur\nJune 2,1947\n1946\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2000000000000004e-05,
+      "total_cost": 0.0007235,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 105
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 528,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF _South Carolina_ (handwritten)\n_Galax aphylla_ L. (handwritten)\n_Estatoe Creek west of_ (handwritten)\n_Rocky Bottom, Pickens County._ (handwritten)\n119366\n_R. L. Wilbur_ (handwritten)\n_June 2,1947_ (handwritten)\n1946\nDUKE UNIVERSITY HERBARIUM\nDUKE10095616\nDUKE UNIVERSITY\nHERBARIUM\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF South Carolina\nGalax aphylla L.\nEstatore Creek west of\nRocky Bottom, Pickens County.\nR. L. Wilbur\nJune 2,1947\n1946\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "119366",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. L. Wilbur",
+    "collectorNumber": "1946",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 2,1947",
+    "collectionDate": "1947-06-02",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Pickens County",
+    "locality": "Estatoe Creek west of Rocky Bottom, Pickens County.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke\nUniversity\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF South Carolina\nGalax aphylla L.\nDUKE UNIVERSITY HERBARIUM\nDUKE10095616\nDUKE UNIVERSITY\nHERBARIUM\nGalax urceolata\nGalax aphylla\nGalax urceolata\nGalax aphylla\nGalax aphylla"
+  }
+}

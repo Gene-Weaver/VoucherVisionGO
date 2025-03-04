@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "28291\nGalax urceolata (Poiret) Brummitt (handwritten)\nDavidson College Herbarium\nGalax aphylla L.\nBurke Co., N.C.\nBetween Hickory Municipal Airport and Rhodiss, northeast of the end of Co. Rd. 1649. Rocky wooded bluff of Catawba River. Flowers white.\nMay 31, 1972\nT. Daggy 6689\n12275\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005700000000000001,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n10\n12\n13\n14\n15\nJ\ud338/16/2012\nGalax urceolata (Poiret) Brummitt\nDiospensizceae\nDavidson College Herbarium\nGalax aphylla L.\nBurke Co., N.C.\nBetween Hickory Munincipal Airport and Rhodiss,\nnortheast of the end of Co.Rd.1649. Rocky\nwooded bluff of Catawba River. Flowers white.\nMay 31, 1972\nT. Daggy 6689\n12275\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.48e-05,
+      "total_cost": 0.0007463000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 162
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2157,
+    "output": 520,
+    "cost_in": 0.0002157,
+    "cost_out": 0.000208
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n28291\nGalax urceolata (Poiret) Brummitt (handwritten)\nDavidson College Herbarium\nGalax aphylla L.\nBurke Co., N.C.\nBetween Hickory Municipal Airport and Rhodiss, northeast of the end of Co. Rd. 1649. Rocky wooded bluff of Catawba River. Flowers white.\nMay 31, 1972\nT. Daggy 6689\n12275\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n10\n12\n13\n14\n15\nJ\ud338/16/2012\nGalax urceolata (Poiret) Brummitt\nDiospensizceae\nDavidson College Herbarium\nGalax aphylla L.\nBurke Co., N.C.\nBetween Hickory Munincipal Airport and Rhodiss,\nnortheast of the end of Co.Rd.1649. Rocky\nwooded bluff of Catawba River. Flowers white.\nMay 31, 1972\nT. Daggy 6689\n12275\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "12275",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T. Daggy",
+    "collectorNumber": "6689",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "May 31, 1972",
+    "collectionDate": "1972-05-31",
+    "collectionDateEnd": "",
+    "habitat": "Rocky wooded bluff of Catawba River. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.c.",
+    "county": "Burke Co.",
+    "locality": "Between Hickory Municipal Airport and Rhodiss, northeast of the end of Co. Rd. 1649.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "28291\nDavidson College Herbarium\nGalax aphylla L.\nUNIVERSITY\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n10\n12\n13\n14\n15\nJ\ud338/16/2012\nDiospensizceae\nDavidson College Herbarium"
+  }
+}

@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n042324\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039622 3\n\nDiapensiaceae (handwritten)\n\nFlora of Virginia\n\n*Galax aphylla* L.\n\nBlue Ridge Parkway mile 213, Smith\nCemetery, base of Fisher's Peak Mountain.\n\nJana Hawks 1  24 Oct. 1998 (handwritten \"1\")\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\n042324\nHERBARIUM\nEastern Kentucky University Herbarium\n3 1234 10039622 3\nDiapensiaceae\n\nFlora of Virginia\nGalax aphylla L.\nBlue Ridge Parkway mile 213, Smith\nCemetary, base of Fisher's Peak Mountain.\nJana Hawks 1 24 Oct. 1998\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n042324\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039622 3\n\nDiapensiaceae (handwritten)\n\nFlora of Virginia\n\n*Galax aphylla* L.\n\nBlue Ridge Parkway mile 213, Smith\nCemetery, base of Fisher's Peak Mountain.\n\nJana Hawks 1  24 Oct. 1998 (handwritten \"1\")\n\n\n*Galax aphylla* L.\n\n",
       "cost_in": 0.00077875,
       "cost_out": 0.000575,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n042324\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039622 3\n\nDiapensiaceae (handwritten)\n\nFlora of Virginia\n\n*Galax aphylla* L.\n\nBlue Ridge Parkway mile 213, Smith\nCemetery, base of Fisher's Peak Mountain.\n\nJana Hawks 1  24 Oct. 1998 (handwritten \"1\")\n\n\n*Galax aphylla* L.\n\n",
+      "total_cost": 0.00135375,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 115,
-      "total_cost": 0.00135375
+      "tokens_out": 115
     },
     "gemini-2.0-flash": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n042324\nHERBARIUM\nIK\n3 1234 10039622 3\nDiapensiaceae\nFlora of Virginia\nGalax aphylla L.\nBlue Ridge Parkway mile 213, Smith\nCemetary, base of Fisher's Peak Mountain.\nJana Hawks 1 24 Oct. 1998\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
-      "cost_out": 3.9200000000000004e-05,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n042324\nHERBARIUM\nEastern Kentucky University Herbarium\n3 1234 10039622 3\nDiapensiaceae\n\nFlora of Virginia\nGalax aphylla L.\nBlue Ridge Parkway mile 213, Smith\nCemetary, base of Fisher's Peak Mountain.\nJana Hawks 1 24 Oct. 1998\n\n\nGalax aphylla\n\n",
+      "cost_out": 3.7600000000000006e-05,
+      "total_cost": 0.0007191000000000001,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 98,
-      "total_cost": 0.0007207
+      "tokens_out": 94
     }
   },
-  "tokens_LLM": {
-    "input": 2040,
-    "output": 419
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2078,
+    "output": 434,
+    "cost_in": 0.0002078,
+    "cost_out": 0.0001736
   },
-  "vvgo_json": {
-    "additionalText": "Eastern Kentucky University Herbarium\n3 1234 10039622 3\nDiapensiaceae\nFlora of Virginia",
-    "catalogNumber": "042324",
-    "chromosomeCount": "",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n042324\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039622 3\n\nDiapensiaceae (handwritten)\n\nFlora of Virginia\n\n*Galax aphylla* L.\n\nBlue Ridge Parkway mile 213, Smith\nCemetery, base of Fisher's Peak Mountain.\n\nJana Hawks 1  24 Oct. 1998 (handwritten \"1\")\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\n042324\nHERBARIUM\nIK\n3 1234 10039622 3\nDiapensiaceae\nFlora of Virginia\nGalax aphylla L.\nBlue Ridge Parkway mile 213, Smith\nCemetary, base of Fisher's Peak Mountain.\nJana Hawks 1 24 Oct. 1998\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "3 1234 10039622 3",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
     "collectedBy": "Jana Hawks",
+    "collectorNumber": "1",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 Oct. 1998",
     "collectionDate": "1998-10-24",
     "collectionDateEnd": "",
-    "collectorNumber": "1",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
     "continent": "North America",
     "country": "United States",
+    "stateProvince": "Virginia",
     "county": "",
-    "cultivated": "",
+    "locality": "Blue Ridge Parkway mile 213, Smith Cemetery, base of Fisher's Peak Mountain.",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Blue Ridge Parkway mile 213, Smith Cemetary, base of Fisher's Peak Mountain.",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla L.",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "Virginia",
-    "verbatimCollectionDate": "24 Oct. 1998",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n042324\nIK\nEastern Kentucky University Herbarium\nDiapensiaceae"
   }
 }

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\n\nClaude T. Phillips\nHerbarium\nDOV\n062081\n\nPlants of NORTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nHARNETT CO.: ca. 3.5 mi SSW of Erwin, E of \nCape Fear River, deep ravine (\"Smith Grove\nRavine\") along perennial stream, 35\u00b016\u203229\u2033N,\n78\u00b040\u203245\u2033W (WGS 84).\n\nDry-mesic deciduous-pine forest on slope above\nstream; infrequent.\n\nRobert F. C. Naczi 11826                      17 May 2007\nBruce A. Sorrie, William A. McAvoy\n\n\nDelaware State University\nDOV0087152\n\n\n*Galx urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009699999999999999,
+      "total_cost": 0.0017487499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nPlants of NORTH CAROLINA, U.S.A.\nGalx urceolata (Poir.) Brummitt\nHARNETT CO.: ca. 3.5 mi SSW of Erwin, E of\nCape Fear River, deep ravine (\"Smith Grove\nRavine\") along perennial stream, 35\u00b016\u203229\u2033N,\n78\u00b040'45\"W (WGS 84).\nDry-mesic deciduous-pine forest on slope above\nstream; infrequent.\nRobert F. C. Naczi 11826 17 May 2007\nBruce A. Sorrie, William A. McAvoy\n\n\nGalx urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.44e-05,
+      "total_cost": 0.0007559000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 186
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2262,
+    "output": 607,
+    "cost_in": 0.00022620000000000002,
+    "cost_out": 0.00024280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nClaude E. Phillips Herbarium\nDelaware State University\n\nClaude T. Phillips\nHerbarium\nDOV\n062081\n\nPlants of NORTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nHARNETT CO.: ca. 3.5 mi SSW of Erwin, E of \nCape Fear River, deep ravine (\"Smith Grove\nRavine\") along perennial stream, 35\u00b016\u203229\u2033N,\n78\u00b040\u203245\u2033W (WGS 84).\n\nDry-mesic deciduous-pine forest on slope above\nstream; infrequent.\n\nRobert F. C. Naczi 11826                      17 May 2007\nBruce A. Sorrie, William A. McAvoy\n\n\nDelaware State University\nDOV0087152\n\n\n*Galx urceolata*\n\n\ngemini-2.0-flash OCR:\nClaude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nPlants of NORTH CAROLINA, U.S.A.\nGalx urceolata (Poir.) Brummitt\nHARNETT CO.: ca. 3.5 mi SSW of Erwin, E of\nCape Fear River, deep ravine (\"Smith Grove\nRavine\") along perennial stream, 35\u00b016\u203229\u2033N,\n78\u00b040'45\"W (WGS 84).\nDry-mesic deciduous-pine forest on slope above\nstream; infrequent.\nRobert F. C. Naczi 11826 17 May 2007\nBruce A. Sorrie, William A. McAvoy\n\n\nGalx urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "062081",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert F. C. Naczi, Bruce A. Sorrie, William A. McAvoy",
+    "collectorNumber": "11826",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 May 2007",
+    "collectionDate": "2007-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Dry-mesic deciduous-pine forest on slope above stream; infrequent.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Harnett co.",
+    "locality": "Ca. 3.5 mi ssw of erwin, e of cape fear river, deep ravine (smith grove ravine) along perennial stream, 35\u00b016\u203229\u2033n, 78\u00b040\u203245\u2033w (wgs 84).",
+    "verbatimCoordinates": "35\u00b016\u203229\u2033N, 78\u00b040\u203245\u2033W (WGS 84)",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Claude e. phillips herbarium\ndelaware state university\nclaude t. phillips\nherbarium\ndov\ndelaware state university\ndov0087152\ngalx urceolata\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nplants of north carolina, u.s.a.\ngalx urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095610\n\nstamates c. 23M long (handwritten)\n\nDuke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n32517\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nVIRGINIA\nDuke University Herbarium\nGILES COUNTY\n\nGalax aphylla L.\nCommon--on Bald Knob, Mountain Lake.\nJuly 23, 1935.\nW.R.Boggess\n231\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.00156875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE 10095610\nstamates c. 23Mlong\n0\ncm\nDuke\nUNIVERSITY\ncopyright reserved\nDUKE UNIVERSITY\nHERBARIUM\n32517\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nVIRGINIA\nDuke University Herbarium\nGILES COUNTY\nGalax aphylla L.\nCommon--on Bald Knob, Mountain Lake.\nJuly 23, 1935.\nW.R.Boggess\n231\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.319999999999999e-05,
+      "total_cost": 0.0007447,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 158
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 470,
+    "cost_in": 0.0002204,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095610\n\nstamates c. 23M long (handwritten)\n\nDuke\nUNIVERSITY\n\nDUKE UNIVERSITY\nHERBARIUM\n32517\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nVIRGINIA\nDuke University Herbarium\nGILES COUNTY\n\nGalax aphylla L.\nCommon--on Bald Knob, Mountain Lake.\nJuly 23, 1935.\nW.R.Boggess\n231\nNo.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE 10095610\nstamates c. 23Mlong\n0\ncm\nDuke\nUNIVERSITY\ncopyright reserved\nDUKE UNIVERSITY\nHERBARIUM\n32517\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nVIRGINIA\nDuke University Herbarium\nGILES COUNTY\nGalax aphylla L.\nCommon--on Bald Knob, Mountain Lake.\nJuly 23, 1935.\nW.R.Boggess\n231\nNo.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095610",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "W.r.boggess",
+    "collectorNumber": "231",
+    "identifiedBy": "R.l. wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 23, 1935.",
+    "collectionDate": "1935-07-23",
+    "collectionDateEnd": "",
+    "habitat": "Common--on bald knob, mountain lake.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "stamates c. 23M long",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "On bald knob, mountain lake.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke university herbarium\nDuke university herbarium\nNo.\nGalax urceolata\nGalax aphylla"
+  }
+}

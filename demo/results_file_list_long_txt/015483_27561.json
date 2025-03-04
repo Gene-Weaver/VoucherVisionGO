@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\nPRESERVED\nMATERIALS\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015483\n\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n\n2433\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27561\n\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\nForm 767\n(Revised Apr., 1928)\n\nCollector's No. 111 Date of collection 6-9-32\nBotanical name _Galax aphylla_ DIAPENSIACEAE\nCommon name Galax\nState NC County Transylvania Forest Pisgah\nExact locality Kagle Mtn. trail 1 mile from Davidson R.\nAltitude 2800 feet. Slope mod. N. Soil moist loam\n(coarse gravel, etc.) (Sec., T., and R., Thompson Meadow) (Steepness) (Deep clay loam, shallow)\nType [Handwritten: PC Timber browse-weed] (Woodland, timber, park, etc.) (Wood, browse, grassy) (Density in tenths) 8\n(Principal associated plants in order of abundance) _Gaylussacia_, ferns\nDistribution open woods (Where generally found) Abundance common (Overgrazing, close, moderate, light)\nForage value deer (Palatability) (Grazed by C., H., S., and G.) Use Light (Season grazed) winter\nOther data (Usual size of plant) (Flowering period) (Period of seed dissemination) (Other notes)\nCollector's name E. E. Ripper\nGOVERNMENT PRINTING OFFICE 8-1501\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0019649999999999997,
+      "total_cost": 0.0027437499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 393
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015483\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W\nATLANTA, GEORGIA 30309\n2433\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo.\n27561\nForm 767\n(Revised Apr., 1928)\nCollector's No.\nBotanical name\nCommon name.\nState\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\n111\nDate of collection.\n6-9-32\nGalax aphylla DIAPENSIACEAE\nGalax\nNC\nCounty Transyl Forest Pisgah\nExact locality Kagle Mtn trail mile from Davidson R.\nAltitude 2800 feet. Slope mod N Soil moist loam\nType Timber browse-weed\nCaylussacia, ferns\nDistribution open woods\nAbundance common\nForage value deer\nwinter\nOther data\nCollector's name E.E. Ripper\n\n\nGalax aphylla\nGaylussacia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011640000000000001,
+      "total_cost": 0.0007979,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 291
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2576,
+    "output": 574,
+    "cost_in": 0.00025760000000000003,
+    "cost_out": 0.0002296
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\nPRESERVED\nMATERIALS\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015483\n\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W.\nATLANTA, GEORGIA 30309\n\n2433\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 27561\n\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\nForm 767\n(Revised Apr., 1928)\n\nCollector's No. 111 Date of collection 6-9-32\nBotanical name _Galax aphylla_ DIAPENSIACEAE\nCommon name Galax\nState NC County Transylvania Forest Pisgah\nExact locality Kagle Mtn. trail 1 mile from Davidson R.\nAltitude 2800 feet. Slope mod. N. Soil moist loam\n(coarse gravel, etc.) (Sec., T., and R., Thompson Meadow) (Steepness) (Deep clay loam, shallow)\nType [Handwritten: PC Timber browse-weed] (Woodland, timber, park, etc.) (Wood, browse, grassy) (Density in tenths) 8\n(Principal associated plants in order of abundance) _Gaylussacia_, ferns\nDistribution open woods (Where generally found) Abundance common (Overgrazing, close, moderate, light)\nForage value deer (Palatability) (Grazed by C., H., S., and G.) Use Light (Season grazed) winter\nOther data (Usual size of plant) (Flowering period) (Period of seed dissemination) (Other notes)\nCollector's name E. E. Ripper\nGOVERNMENT PRINTING OFFICE 8-1501\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015483\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nU. S. FOREST SERVICE HERBARIUM\n1720 PEACHTREE ROAD. N. W\nATLANTA, GEORGIA 30309\n2433\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo.\n27561\nForm 767\n(Revised Apr., 1928)\nCollector's No.\nBotanical name\nCommon name.\nState\nHERBARIUM OF THE FOREST SERVICE\nU. S. DEPARTMENT OF AGRICULTURE\n111\nDate of collection.\n6-9-32\nGalax aphylla DIAPENSIACEAE\nGalax\nNC\nCounty Transyl Forest Pisgah\nExact locality Kagle Mtn trail mile from Davidson R.\nAltitude 2800 feet. Slope mod N Soil moist loam\nType Timber browse-weed\nCaylussacia, ferns\nDistribution open woods\nAbundance common\nForage value deer\nwinter\nOther data\nCollector's name E.E. Ripper\n\n\nGalax aphylla\nGaylussacia\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015483",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "E. E. Ripper",
+    "collectorNumber": "111",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-9-32",
+    "collectionDate": "1932-06-09",
+    "collectionDateEnd": "",
+    "habitat": "Moist loam",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Timber browse-weed",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Nc",
+    "county": "Transylvania",
+    "locality": "Kagle mtn. trail 1 mile from davidson r.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "853",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Living\ncultures\npreserved\nmaterials\nappalachian state university herbarium\nu. s. forest service herbarium\n1720 peachtree road. n. w\natlanta, georgia 30309\n2433\nherbarium\nappalachian state\nuniversity\nboone, n. c.\nno. 27561\nherbarium of the forest service\nu. s. department of agriculture\nform 767\n(revised apr., 1928)\nforest pisgah\naltitude 2800 feet. slope mod n soil\ntype\ncaylussacia, ferns\ndistribution open woods\nabundance common\nforage value deer\nwinter\nother data\ngalax aphylla\ngaylussacia"
+  }
+}

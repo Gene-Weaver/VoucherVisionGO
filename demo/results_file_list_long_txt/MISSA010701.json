@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MISSISSIPPI STATE UNIVERSITY HERBARIUM\nMISSA010701\n\nMississippi State\n33620\nUniversity Herbarium\n\nMISSISSIPPI STATE UNIVERSITY HERBARIUM [MISSA]\n*Galax aphylla* L.\ndet. Mark Fishbein\nJuly 2004\n\nGeorgia\nHaralson County\n\n*Tiarella cordifolia* L.\nSaxifragaceae\n\nAround lake, along deer path. Mullens Cabin, Hwy 100, N of\nTallapoosa, ca 1 mi from Polk co line.\n\nLat Lon (DD): 33.883 -85.30\nDeciduous woods, leaf litter. ca 344 m elev.\n\ncf. Not sure about Det. sv, 2004. w/ *Quercus velutina*, *Pinus echinata*, *Acer*,\n*Alnus*, *Carya*, *Tephrosia*, *Smilax*, *Sassafras*, *Pleopeltis polypodioides*, *Vaccinium*,\n*Asarum arifolium*.\n\nS. Vanderplank & M. Fishbein 02517-4 17 May 2002\nPullen Herbarium, U of Mississippi (MISS)\n\n\nHandwritten Text:\nMullens Cabin\n\n*Galax aphylla*\n*Tiarella cordifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00145,
+      "total_cost": 0.0022287500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 290
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MISSISSIPPI STATE UNIVERSITY HERBARIUM\nMISSA010701\nMississippi State\n33620\nUniversity Herbarium\nMISSISSIPPI STATE UNIVERSITY HERBARIUM [MISSA]\nGalax aphylla L.\ndet. Mark Fishbein\nJuly 2004\nGeorgia\nHaralson County\nTiarella cordifolia L.\nSaxifragaceae\nAround lake, along deer path. Mullens Cabin, Hwy 100, N of\nTallapoosa, ca 1 mi from Polk co line.\nLat Lon (DD): 33.883 -85.30\nDeciduous woods, leaf litter. ca 344 m elev.\nS. Vanderplank & M. Fishbein 02517-4\n17 May 2002\nPullen Herbarium, U of Misssissippi (MISS)\n\n\nGalax aphylla\nTiarella cordifolia\nQuercus velutina\nPinus echinata\nAsarum arifolium\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.520000000000001e-05,
+      "total_cost": 0.0007667,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 213
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2392,
+    "output": 627,
+    "cost_in": 0.00023920000000000001,
+    "cost_out": 0.00025079999999999997
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMISSISSIPPI STATE UNIVERSITY HERBARIUM\nMISSA010701\n\nMississippi State\n33620\nUniversity Herbarium\n\nMISSISSIPPI STATE UNIVERSITY HERBARIUM [MISSA]\n*Galax aphylla* L.\ndet. Mark Fishbein\nJuly 2004\n\nGeorgia\nHaralson County\n\n*Tiarella cordifolia* L.\nSaxifragaceae\n\nAround lake, along deer path. Mullens Cabin, Hwy 100, N of\nTallapoosa, ca 1 mi from Polk co line.\n\nLat Lon (DD): 33.883 -85.30\nDeciduous woods, leaf litter. ca 344 m elev.\n\ncf. Not sure about Det. sv, 2004. w/ *Quercus velutina*, *Pinus echinata*, *Acer*,\n*Alnus*, *Carya*, *Tephrosia*, *Smilax*, *Sassafras*, *Pleopeltis polypodioides*, *Vaccinium*,\n*Asarum arifolium*.\n\nS. Vanderplank & M. Fishbein 02517-4 17 May 2002\nPullen Herbarium, U of Mississippi (MISS)\n\n\nHandwritten Text:\nMullens Cabin\n\n*Galax aphylla*\n*Tiarella cordifolia*\n\n\ngemini-2.0-flash OCR:\nMISSISSIPPI STATE UNIVERSITY HERBARIUM\nMISSA010701\nMississippi State\n33620\nUniversity Herbarium\nMISSISSIPPI STATE UNIVERSITY HERBARIUM [MISSA]\nGalax aphylla L.\ndet. Mark Fishbein\nJuly 2004\nGeorgia\nHaralson County\nTiarella cordifolia L.\nSaxifragaceae\nAround lake, along deer path. Mullens Cabin, Hwy 100, N of\nTallapoosa, ca 1 mi from Polk co line.\nLat Lon (DD): 33.883 -85.30\nDeciduous woods, leaf litter. ca 344 m elev.\nS. Vanderplank & M. Fishbein 02517-4\n17 May 2002\nPullen Herbarium, U of Misssissippi (MISS)\n\n\nGalax aphylla\nTiarella cordifolia\nQuercus velutina\nPinus echinata\nAsarum arifolium\n\n",
+  "formatted_json": {
+    "catalogNumber": "MISSA010701",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "S. Vanderplank, M. Fishbein",
+    "collectorNumber": "02517-4",
+    "identifiedBy": "Mark Fishbein",
+    "identifiedDate": "2004-07-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 May 2002",
+    "collectionDate": "2002-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Deciduous woods, leaf litter.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Around lake, along deer path.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Haralson County",
+    "locality": "Mullens Cabin, Hwy 100, N of Tallapoosa, ca 1 mi from Polk co line.",
+    "verbatimCoordinates": "Lat Lon (DD) 33.883 -85.30",
+    "decimalLatitude": "33.883",
+    "decimalLongitude": "-85.30",
+    "minimumElevationInMeters": "344",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Mississippi State\nUniversity Herbarium\nMISSISSIPPI STATE UNIVERSITY HERBARIUM [MISSA]\nSaxifragaceae\nca elev.\ncf. Not sure about Det. sv, 2004. w/ Quercus velutina, Pinus echinata, Acer,\nAlnus, Carya, Tephrosia, Smilax, Sassafras, Pleopeltis polypodioides, Vaccinium,\nAsarum arifolium.\nPullen Herbarium, U of Mississippi (MISS)\nHandwritten Text\nMullens Cabin\nGalax aphylla\nTiarella cordifolia\nQuercus velutina\nPinus echinata\nAsarum arifolium"
+  }
+}

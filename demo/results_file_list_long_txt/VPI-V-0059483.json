@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n69175\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059483\n\nFLORA OF VIRGINIA\n\n*Galax aphylla* L.\nnear Clarkton, Halifax Co.\nel. 400 ft.\n\nHundreds of plants on steep N-facing\noak - *Kalmia* bluff of Staunton River\nca. 1 mi E of Clarkton\n\nCHARLES E. STEVENS       NO. 6626     May 5, 1973\nDET.\n\n(Handwritten text: *Galax aphylla* L., near Clarkton, Halifax Co., el. 400 ft., Hundreds of plants on steep N-facing oak - *Kalmia* bluff of Staunton River ca. 1 mi E of Clarkton)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009699999999999999,
+      "total_cost": 0.0017487499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n69175\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059483\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear Clarkton, Halifax Co.\nel. 400 ft.\nHundreds of plants on steep N-facing\noak-Kalmia bluff of Staunton River\nca. I mi E of Clarkton\nCHARLES E. STEVENS\nNO. 6626 May 5, 1973\nDET.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.080000000000001e-05,
+      "total_cost": 0.0007323,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 127
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2200,
+    "output": 461,
+    "cost_in": 0.00022000000000000003,
+    "cost_out": 0.0001844
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n69175\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059483\n\nFLORA OF VIRGINIA\n\n*Galax aphylla* L.\nnear Clarkton, Halifax Co.\nel. 400 ft.\n\nHundreds of plants on steep N-facing\noak - *Kalmia* bluff of Staunton River\nca. 1 mi E of Clarkton\n\nCHARLES E. STEVENS       NO. 6626     May 5, 1973\nDET.\n\n(Handwritten text: *Galax aphylla* L., near Clarkton, Halifax Co., el. 400 ft., Hundreds of plants on steep N-facing oak - *Kalmia* bluff of Staunton River ca. 1 mi E of Clarkton)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n69175\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059483\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear Clarkton, Halifax Co.\nel. 400 ft.\nHundreds of plants on steep N-facing\noak-Kalmia bluff of Staunton River\nca. I mi E of Clarkton\nCHARLES E. STEVENS\nNO. 6626 May 5, 1973\nDET.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "69175",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "6626",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 5, 1973",
+    "collectionDate": "1973-05-05",
+    "collectionDateEnd": "",
+    "habitat": "Hundreds of plants on steep N-facing oak - Kalmia bluff of Staunton River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Halifax Co.",
+    "locality": "Near Clarkton, ca. 1 mi E of Clarkton",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "122",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059483\nFlora of Virginia\nDet."
+  }
+}

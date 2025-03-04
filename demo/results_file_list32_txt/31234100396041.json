@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\n061288\n\nKentucky\nEKY\n\nBell County\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry rocky open woods.\n\nMiddlesboro North Q., Rocky Face above\nBartley's Lake.\n\nR. Hannan & L.R.\nPhillippe 2305\nJun. 14, 1979\n\nEastern Kentucky University Herbarium\nIK\n3 1234 10039604 1\n\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nIK\nEASTERN\nUNIVERSITY\n061288\nHERBARIUM\nEastern Kentucky University Herbarium\nKentucky\nBell County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry rocky open woods.\nMiddlesboro North Q. Rocky Face above\nBartley's Lake.\n3 1234 10039604 1\nR. Hannnan & L. R.\nPhillippe 2305\nJun. 14, 1979\nEKY\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\n061288\n\nKentucky\nEKY\n\nBell County\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry rocky open woods.\n\nMiddlesboro North Q., Rocky Face above\nBartley's Lake.\n\nR. Hannan & L.R.\nPhillippe 2305\nJun. 14, 1979\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039604 1\n\nGalax aphylla\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.0006150000000000001,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\n061288\n\nKentucky\nEKY\n\nBell County\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry rocky open woods.\n\nMiddlesboro North Q., Rocky Face above\nBartley's Lake.\n\nR. Hannan & L.R.\nPhillippe 2305\nJun. 14, 1979\n\nEastern Kentucky University Herbarium\nIK\n3 1234 10039604 1\n\n\nGalax aphylla\n\n",
+      "cost_out": 0.0006100000000000001,
+      "total_cost": 0.00138875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 123,
-      "total_cost": 0.0013937500000000002
+      "tokens_out": 122
     },
     "gemini-2.0-flash": {
+      "ocr_text": "IK\nEASTERN\nUNIVERSITY\n061288\nHERBARIUM\nEastern Kentucky University Herbarium\nKentucky\nBell County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry rocky open woods.\nEKY\nMiddlesboro North Q. Rocky Face above\nBartley's Lake.\n3 1234 10039604 1\nR. Hannnan & L. R.\nPhillippe 2305\nJun. 14, 1979\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
       "cost_out": 4.8400000000000004e-05,
-      "ocr_text": "IK\nEASTERN\nUNIVERSITY\n061288\nHERBARIUM\nEastern Kentucky University Herbarium\nKentucky\nBell County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry rocky open woods.\nMiddlesboro North Q. Rocky Face above\nBartley's Lake.\n3 1234 10039604 1\nR. Hannnan & L. R.\nPhillippe 2305\nJun. 14, 1979\nEKY\n\n\nGalax aphylla\n\n",
+      "total_cost": 0.0007299,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 121,
-      "total_cost": 0.0007299
+      "tokens_out": 121
     }
   },
-  "tokens_LLM": {
-    "input": 2070,
-    "output": 445
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2113,
+    "output": 434,
+    "cost_in": 0.00021129999999999999,
+    "cost_out": 0.0001736
   },
-  "vvgo_json": {
-    "additionalText": "eastern kentucky university herbarium\n061288\neky\neastern\nuniversity\nherbarium",
-    "catalogNumber": "3 1234 10039604 1",
-    "chromosomeCount": "",
-    "collectedBy": "R. Hannan, L.r. Phillippe",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\n061288\n\nKentucky\nEKY\n\nBell County\nDiapensiaceae\n*Galax aphylla* auct. non L.\n\nDry rocky open woods.\n\nMiddlesboro North Q., Rocky Face above\nBartley's Lake.\n\nR. Hannan & L.R.\nPhillippe 2305\nJun. 14, 1979\n\nIK\nEastern Kentucky University Herbarium\n3 1234 10039604 1\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nIK\nEASTERN\nUNIVERSITY\n061288\nHERBARIUM\nEastern Kentucky University Herbarium\nKentucky\nBell County\nDiapensiaceae\nGalax aphylla auct. non L.\nDry rocky open woods.\nEKY\nMiddlesboro North Q. Rocky Face above\nBartley's Lake.\n3 1234 10039604 1\nR. Hannnan & L. R.\nPhillippe 2305\nJun. 14, 1979\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "061288",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "auct. non L.",
+    "collectedBy": "R. Hannan & L.R. Phillippe",
+    "collectorNumber": "2305",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Jun. 14, 1979",
     "collectionDate": "1979-06-14",
     "collectionDateEnd": "",
-    "collectorNumber": "2305",
-    "continent": "North america",
-    "country": "Kentucky",
-    "county": "Bell county",
+    "habitat": "Dry rocky open woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "North America",
+    "country": "Kentucky",
+    "stateProvince": "Kentucky",
+    "county": "Bell County",
+    "locality": "Middlesboro North Q., Rocky Face above Bartley's Lake.",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "Dry rocky open woods.",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Middlesboro north q., rocky face above bartley's lake.",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla auct. non l.",
-    "scientificNameAuthorship": "auct. non l.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "Kentucky",
-    "verbatimCollectionDate": "Jun. 14, 1979",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "EKY\nEastern Kentucky University Herbarium\nIK\n3 1234 10039604 1"
   }
 }

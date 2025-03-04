@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NKU\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011947\n\nHERBARIUM OF NORTHERN KENTUCKY UNIVERSITY\nPLANTS OF KENTUCKY\n\n57462. *Galax aphylla*\nNot yet in flower; two last year infls \ncollected.\nAt base of rock outcrop\nIn woods.\nAlong Little Shepherd Trail between\nHiram and Harlan.\n\nCOUNTY: HARLAN\nDATE: 17 MAY 1994                       John W. Thieret\n\ncopyright reserved\nNKU\nNORTHERN KENTUCKY\nUNIVERSITY\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007199999999999999,
+      "total_cost": 0.00149875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 144
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u0661/\u0668\u0661\u0661/\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011947\ncm\nHERBARIUM OF NORTHERN KENTUCKY UNIVERSITY\nPLANTS OF KENTUCKY\n57462. Galax aphylla\nNot yet in flower; two last year infls\ncollected.\nAt base of rock outcrop\nIn woods.\nAlong Little Shepherd Trail between\nHiram and Harlan.\nCOUNTY: HARLAN\nDATE: 17 MAY 1994\nJohn W. Thieret\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007402999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2195,
+    "output": 455,
+    "cost_in": 0.0002195,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNKU\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011947\n\nHERBARIUM OF NORTHERN KENTUCKY UNIVERSITY\nPLANTS OF KENTUCKY\n\n57462. *Galax aphylla*\nNot yet in flower; two last year infls \ncollected.\nAt base of rock outcrop\nIn woods.\nAlong Little Shepherd Trail between\nHiram and Harlan.\n\nCOUNTY: HARLAN\nDATE: 17 MAY 1994                       John W. Thieret\n\ncopyright reserved\nNKU\nNORTHERN KENTUCKY\nUNIVERSITY\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u0661/\u0668\u0661\u0661/\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011947\ncm\nHERBARIUM OF NORTHERN KENTUCKY UNIVERSITY\nPLANTS OF KENTUCKY\n57462. Galax aphylla\nNot yet in flower; two last year infls\ncollected.\nAt base of rock outcrop\nIn woods.\nAlong Little Shepherd Trail between\nHiram and Harlan.\nCOUNTY: HARLAN\nDATE: 17 MAY 1994\nJohn W. Thieret\nNKU\nNORTHERN\nKENTUCKY\nUNIVERSITY\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "3 1973 000011947",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "John W. Thieret",
+    "collectorNumber": "57462",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 may 1994",
+    "collectionDate": "1994-05-17",
+    "collectionDateEnd": "",
+    "habitat": "At base of rock outcrop. In woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Not yet in flower; two last year infls collected.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Harlan",
+    "locality": "Along little shepherd trail between hiram and harlan.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Nku\nNorthern kentucky university\nHerbarium\nNku herbarium (knk)\nHerbarium of northern kentucky university\nPlants of kentucky\nCopyright reserved\nNku\nNorthern kentucky\nUniversity"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n561130\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: North Carolina: Northampton County\n\n*Galax urceolata* (Poir.) Brummitt\n\nMeherrin River. Steep, wooded, N-facing\nbluff 0.6 mile S of Branchs Bridge\nand about 4\u00bd miles E of Margaretts-\nville, N. Ca. Mostly around tree bases\nfrom middle to top of bluff.\nwith Ali Wieboldt, A.B. Davenport,\nand Frosty Levy\n\nColl: T.F. Wieboldt No: 6811\nDate: 9 Sept. 1988 Det: TFW\n\nHandwritten Text: DIA\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008249999999999999,
+      "total_cost": 0.0016037500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080585\ncolorchecker\nx-rite\nMSCCPP000411\nmm\nOF NORTH\nHERBARIUM\nNCU\n561130\nDIA\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: North Carolina: Northampton County\nGalax urceolata (Poir.) Brummitt\nMeherrin River. Steep, wooded, N-facing\nbluff 0.6 mile S of Branchs Bridge\nand about 4\u00bd miles E of Margaretts-\nville, N. Ca. Mostly around tree bases\nfrom middle to top of bluff.\nwith Ali Wieboldt, A.B. Davenport,\nand Frosty Levy\nColl: T.F. Wieboldt No: 6811\nDate: 9 Sept. 1988\nDet: TFW\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.48e-05,
+      "total_cost": 0.0007663,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 212
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2256,
+    "output": 510,
+    "cost_in": 0.00022560000000000004,
+    "cost_out": 0.00020400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n561130\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: North Carolina: Northampton County\n\n*Galax urceolata* (Poir.) Brummitt\n\nMeherrin River. Steep, wooded, N-facing\nbluff 0.6 mile S of Branchs Bridge\nand about 4\u00bd miles E of Margaretts-\nville, N. Ca. Mostly around tree bases\nfrom middle to top of bluff.\nwith Ali Wieboldt, A.B. Davenport,\nand Frosty Levy\n\nColl: T.F. Wieboldt No: 6811\nDate: 9 Sept. 1988 Det: TFW\n\nHandwritten Text: DIA\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080585\ncolorchecker\nx-rite\nMSCCPP000411\nmm\nOF NORTH\nHERBARIUM\nNCU\n561130\nDIA\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: North Carolina: Northampton County\nGalax urceolata (Poir.) Brummitt\nMeherrin River. Steep, wooded, N-facing\nbluff 0.6 mile S of Branchs Bridge\nand about 4\u00bd miles E of Margaretts-\nville, N. Ca. Mostly around tree bases\nfrom middle to top of bluff.\nwith Ali Wieboldt, A.B. Davenport,\nand Frosty Levy\nColl: T.F. Wieboldt No: 6811\nDate: 9 Sept. 1988\nDet: TFW\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "561130",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "T.F. Wieboldt, Ali Wieboldt, A.B. Davenport, and Frosty Levy",
+    "collectorNumber": "6811",
+    "identifiedBy": "TFW",
+    "identifiedDate": "1988-09-09",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 Sept. 1988",
+    "collectionDate": "1988-09-09",
+    "collectionDateEnd": "",
+    "habitat": "Steep, wooded, n-facing bluff. Mostly around tree bases from middle to top of bluff.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Northampton county",
+    "locality": "Meherrin river. 0.6 mile s of branchs bridge and about 4\u00bd miles e of margarettsville, n. ca.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nUniversity of North Carolina Herbarium\nNCU00080585\nVirginia Polytechnic Institute and State\nUniversity Herbarium\nHandwritten Text DIA"
+  }
+}

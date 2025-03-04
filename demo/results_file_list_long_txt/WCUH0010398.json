@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUHO010398\n\nAnn Parker 106                      18 June 1953\n\n*Galax aphylla* L.\nFound on bend of highway 7 above high\nfalls, plentiful. *(Handwritten)*\n\n*Galax urceolata* (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006500000000000001,
+      "total_cost": 0.0014287500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nWESTERN CAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\nINCHES\nMETRIC 1\nAnn Parker 106\n18 June 1953\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nFound on bend of \"ighway 7 above high\nfalls, plentiful.\nWCUHO010398\nWESTERN CAROLINA U. HERBARIUM\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2208,
+    "output": 509,
+    "cost_in": 0.0002208,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUHO010398\n\nAnn Parker 106                      18 June 1953\n\n*Galax aphylla* L.\nFound on bend of highway 7 above high\nfalls, plentiful. *(Handwritten)*\n\n*Galax urceolata* (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nWESTERN CAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\nINCHES\nMETRIC 1\nAnn Parker 106\n18 June 1953\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nFound on bend of \"ighway 7 above high\nfalls, plentiful.\nWCUHO010398\nWESTERN CAROLINA U. HERBARIUM\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuho010398",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "Urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Ann Parker",
+    "collectorNumber": "106",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Flora of the Southern and Mid-Atlantic States, Working Draft",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "18 June 1953",
+    "collectionDate": "1953-06-18",
+    "collectionDateEnd": "",
+    "habitat": "Found on bend of ighway 7 above high falls, plentiful.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Bend of highway 7 above high falls, plentiful.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Western carolina u. herbarium\nHerbarium of Western Carolina College\nCarolina biological supply company\nBurlington, nc 27215 & gladstone, or 97027\nliving\ncultures\npreserved\nmaterial\ninches\nmetric"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n439946\n\nHerbarium of the University of North Carolina\n\nGalax aphylla L.\nGEORGIA\nRabun County\n\nPatterson Gap Rd. (FS 32), 3.5 mi W of jct. of\nFS 32 & 92319.\n\nJ. R. Massey 3600\nH. Massey                                                     17 July 1973\n\nPlants of the Southeastern United States\n\nNCU00332607\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00061,
+      "total_cost": 0.00138875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 122
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF\nNORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY\n439946\nMSCCPPCC0411\nMSCCPPPE0411\nxrite\ncolorchecker\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\nGalax aphylla L.\nPatterson Gap Rd. (FS 32), 3.5 mi W of jct. of\nFS 32 & 92319.\nJ. R. Massey 3600\nH. Massey\n17 July 1973\nPlants of the Southeastern United States\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332607\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2154,
+    "output": 476,
+    "cost_in": 0.00021540000000000003,
+    "cost_out": 0.00019040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n439946\n\nHerbarium of the University of North Carolina\n\nGalax aphylla L.\nGEORGIA\nRabun County\n\nPatterson Gap Rd. (FS 32), 3.5 mi W of jct. of\nFS 32 & 92319.\n\nJ. R. Massey 3600\nH. Massey                                                     17 July 1973\n\nPlants of the Southeastern United States\n\nNCU00332607\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nOF\nNORTH\nHERBARIUM\nCAROLINA\nUNIVERSITY\n439946\nMSCCPPCC0411\nMSCCPPPE0411\nxrite\ncolorchecker\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\nGalax aphylla L.\nPatterson Gap Rd. (FS 32), 3.5 mi W of jct. of\nFS 32 & 92319.\nJ. R. Massey 3600\nH. Massey\n17 July 1973\nPlants of the Southeastern United States\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332607\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "439946",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. R. Massey, H. Massey",
+    "collectorNumber": "3600",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17 July 1973",
+    "collectionDate": "1973-07-17",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun County",
+    "locality": "Patterson Gap Rd. (FS 32), 3.5 mi W of jct. of FS 32 & 92319.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the University of North Carolina\nPlants of the Southeastern United States\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332607\nMSCCPPCC0411\nMSCCPPPE0411\nxrite\ncolorchecker"
+  }
+}

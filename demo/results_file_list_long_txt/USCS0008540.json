@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UPSHE\nUSCS\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\n146 DIAPENSIACEAE (handwritten)\n\nUniversity of South Carolina Upstate\nUSCS0008540\n\nSOUTH CAROLINA\nSPARTANBURG COUNTY\n\n*Galax aphylla*\n\nEvergreen herb on\nrock shelf on west\nbank of Lawson's Fork\nmidslope above sewer\nline. Growing in grove\nof *Kalmia* at north\nwest edge of *Hexastylis*\nPopulation on steepest\nportion of slope\n\nLOCATION: USC Upstate\nCampus- Palmetto\nTrail\n\nDATE: May 11, 2006\nCOLL G. Newberry\nNO: 15285\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.00158875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UPSTATE\nOF $. CAROLINA\nHERBARIUM\nUPSTATE\n146 DIAPENSIACEAE\nUniversity of South Carolina Upstate\nUSCS0008540\nSOUTH CAROLINA\nSPARTANBURG COUNTY\nGalax aphylla\nEvergreen herb on\nrock shelf on west\nbank of Lawson's Fork\nmidslope above sewer\nline. Growng in grove\nof Kalmia at north\nwest edge of Hexastylis\nPopulation on steepest\nportion of slope\nLOCATION: USCUpstate\nCampus- Palmetto\nTrail\nDATE: May 11, 2006\nCOLL G. Newberry\nNO: 15285\n\n\nGalax aphylla\nKalmia\nHexastylis\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2210,
+    "output": 514,
+    "cost_in": 0.00022100000000000003,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUPSHE\nUSCS\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\n146 DIAPENSIACEAE (handwritten)\n\nUniversity of South Carolina Upstate\nUSCS0008540\n\nSOUTH CAROLINA\nSPARTANBURG COUNTY\n\n*Galax aphylla*\n\nEvergreen herb on\nrock shelf on west\nbank of Lawson's Fork\nmidslope above sewer\nline. Growing in grove\nof *Kalmia* at north\nwest edge of *Hexastylis*\nPopulation on steepest\nportion of slope\n\nLOCATION: USC Upstate\nCampus- Palmetto\nTrail\n\nDATE: May 11, 2006\nCOLL G. Newberry\nNO: 15285\n\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nUPSTATE\nOF $. CAROLINA\nHERBARIUM\nUPSTATE\n146 DIAPENSIACEAE\nUniversity of South Carolina Upstate\nUSCS0008540\nSOUTH CAROLINA\nSPARTANBURG COUNTY\nGalax aphylla\nEvergreen herb on\nrock shelf on west\nbank of Lawson's Fork\nmidslope above sewer\nline. Growng in grove\nof Kalmia at north\nwest edge of Hexastylis\nPopulation on steepest\nportion of slope\nLOCATION: USCUpstate\nCampus- Palmetto\nTrail\nDATE: May 11, 2006\nCOLL G. Newberry\nNO: 15285\n\n\nGalax aphylla\nKalmia\nHexastylis\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCS0008540",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "G. Newberry",
+    "collectorNumber": "15285",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 11, 2006",
+    "collectionDate": "2006-05-11",
+    "collectionDateEnd": "",
+    "habitat": "Evergreen herb on rock shelf on west bank of Lawson's Fork midslope above sewer line. Growing in grove of Kalmia at north west edge of Hexastylis Population on steepest portion of slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Spartanburg county",
+    "locality": "Location usc upstate campus- palmetto trail",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UPSHE\nUSCS\nU OF S. CAROLINA\nHERBARIUM\nUPSTATE\n146 diapensiaceae (handwritten)\nUniversity of south carolina upstate\nSOUTH CAROLINA\nSPARTANBURG COUNTY\nGalax aphylla\nKalmia\nHexastylis"
+  }
+}

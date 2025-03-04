@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41384\n\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\n*Galax aphylla* L.\n\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\n\nAbundant along bluffs of river;\nleaves glossy-green; flowers white;\nroots reddish.\nRogers McVaugh, no. 9010        2 June 1948\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001125,
+      "total_cost": 0.0019037499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 225
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\n\u2611 Georgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nGuy L. Nesom, 1975\n\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nGalax aphylla L.\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\nAbundant along bluffs of river;\nleaves glossy-green; flowers white;\nroots reddish.\nRogers McVaugh, no. 9010\n2 June 1948\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41384\nUNIVERSITY OF GEORGIA\nGA059153\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.999999999999999e-05,
+      "total_cost": 0.0007715,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 225
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2355,
+    "output": 581,
+    "cost_in": 0.0002355,
+    "cost_out": 0.0002324
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41384\n\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\n*Galax aphylla* L.\n\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\n\nAbundant along bluffs of river;\nleaves glossy-green; flowers white;\nroots reddish.\nRogers McVaugh, no. 9010        2 June 1948\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\n\u2611 Georgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nGuy L. Nesom, 1975\n\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nGalax aphylla L.\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\nAbundant along bluffs of river;\nleaves glossy-green; flowers white;\nroots reddish.\nRogers McVaugh, no. 9010\n2 June 1948\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41384\nUNIVERSITY OF GEORGIA\nGA059153\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "41384",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Rogers McVaugh",
+    "collectorNumber": "9010",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 June 1948",
+    "collectionDate": "1948-06-02",
+    "collectionDateEnd": "",
+    "habitat": "Pine-oak-hickory woodlands, in sandy soil",
+    "chromosomeCount": "n =",
+    "guardCell": "n = , based on average guard cell area volume of \u03bc\u00b2",
+    "specimenDescription": "Abundant along bluffs of river; leaves glossy-green; flowers white; roots reddish.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dade",
+    "locality": "Summit of Lookout Mountain; near Little River about 1.5 miles east of west brow, above Sulphur Springs Station",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "600",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Specimen Examined for\n Georgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nGalax aphylla L.\nIMAGED 2013\nUNIVERSITY OF GEORGIA\nGA059153\nGalax urceolata\nGalax aphylla"
+  }
+}

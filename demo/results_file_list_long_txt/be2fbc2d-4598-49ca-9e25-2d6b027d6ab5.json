@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GAINESVILLE\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275415\n\n235\n\nPLANTS OF GEORGIA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 27 May 2021\n\nRABUN COUNTY: Chattahoochee National Forest: On\nRabun bald trail, about a mile in. Elev. 1295 m. Growing\nunder elm and oak trees. Flowers in bud. Sits on rock (no\nsoil sampled). Some new leaves and mostly old leaves\nwith black coloring.\n\nLat. 34.96061 Long. -83.30209 Datum: WGS84\n\ncoll. Michelle Gaynor # 45 27 May 2021\n\nU.S. Department of Agriculture Forest Services, Special\nUse Permit, CHA2115_20210526.\nCorresponds to genetic sample MLG014 (Pop 1).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nHandwritten Text:  None.\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013950000000000002,
+      "total_cost": 0.0021737500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 279
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "2\n7\n8\n4\nINCH\nGAINESVILLE\nFLAS\nHERBARIUM\nVERSITY OF FLORIDA-\n4\n3\n5\nU.S.A.\n9\n\u05d4\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275415\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF GEORGIA\nGalax urceolata (Poir.) Brummitt\nRABUN COUNTY: Chattahoochee National Forest: On\nRabun bald trail, about a mile in. Elev. 1295 m. Growing\nunder elm and oak trees. Flowers in bud. Sits on rock (no\nsoil sampled). Some new leaves and mostly old leaves\nwith black coloring.\nLat. 34.96061 Long. -83.30209 Datum: WGS84\ncoll. Michelle Gaynor # 45\n27 May 2021\nU.S. Department of Agriculture Forest Services, Special\nUse Permit, CHA2115_20210526.\nCorresponds to genetic sample MLG014 (Pop 1).\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor\n7 Sept 2022\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001184,
+      "total_cost": 0.0007999000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 296
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2410,
+    "output": 594,
+    "cost_in": 0.000241,
+    "cost_out": 0.00023760000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGAINESVILLE\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n\nFLAS 275415\n\n235\n\nPLANTS OF GEORGIA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 27 May 2021\n\nRABUN COUNTY: Chattahoochee National Forest: On\nRabun bald trail, about a mile in. Elev. 1295 m. Growing\nunder elm and oak trees. Flowers in bud. Sits on rock (no\nsoil sampled). Some new leaves and mostly old leaves\nwith black coloring.\n\nLat. 34.96061 Long. -83.30209 Datum: WGS84\n\ncoll. Michelle Gaynor # 45 27 May 2021\n\nU.S. Department of Agriculture Forest Services, Special\nUse Permit, CHA2115_20210526.\nCorresponds to genetic sample MLG014 (Pop 1).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nHandwritten Text:  None.\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n2\n7\n8\n4\nINCH\nGAINESVILLE\nFLAS\nHERBARIUM\nVERSITY OF FLORIDA-\n4\n3\n5\nU.S.A.\n9\n\u05d4\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275415\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF GEORGIA\nGalax urceolata (Poir.) Brummitt\nRABUN COUNTY: Chattahoochee National Forest: On\nRabun bald trail, about a mile in. Elev. 1295 m. Growing\nunder elm and oak trees. Flowers in bud. Sits on rock (no\nsoil sampled). Some new leaves and mostly old leaves\nwith black coloring.\nLat. 34.96061 Long. -83.30209 Datum: WGS84\ncoll. Michelle Gaynor # 45\n27 May 2021\nU.S. Department of Agriculture Forest Services, Special\nUse Permit, CHA2115_20210526.\nCorresponds to genetic sample MLG014 (Pop 1).\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor\n7 Sept 2022\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "275415",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Michelle Gaynor",
+    "collectorNumber": "45",
+    "identifiedBy": "Michelle Gaynor",
+    "identifiedDate": "2021-05-27",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "27 May 2021",
+    "collectionDate": "2021-05-27",
+    "collectionDateEnd": "",
+    "habitat": "Growing under elm and oak trees. Sits on rock (no soil sampled). Some new leaves and mostly old leaves with black coloring.",
+    "chromosomeCount": "Ploidy level inferred via flow cytometry Tetraploid.",
+    "guardCell": "",
+    "specimenDescription": "Flowers in bud.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Rabun County",
+    "locality": "Chattahoochee National Forest On Rabun bald trail, about a mile in.",
+    "verbatimCoordinates": "Lat. 34.96061 Long. -83.30209 Datum WGS84",
+    "decimalLatitude": "34.96061",
+    "decimalLongitude": "-83.30209",
+    "minimumElevationInMeters": "1295",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "GAINESVILLE\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\n235\nPLANTS OF GEORGIA\nU.S. Department of Agriculture Forest Services, Special\nUse Permit, CHA2115_20210526.\nCorresponds to genetic sample MLG014 (Pop 1).\nMichelle L. Gaynor 7 Sept 2022\nHandwritten Text  None.\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026110\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell \nGuy L. Nesom, 1975\n\nFlora of Virginia\n*Galax aphylla* L.\nBedford Co., across James from Snowden.\nel. 720 ft.\nCommon on rocky wooded\nN-facing bluffs.\nMay 15, 1975\n\nCharles E. Stevens No. 10,327\nDet. \"\n\n(Handwritten text)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026110\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFlora of Virginia\nGalax aphylla L.\nBedford Co., across James from\nSnowden.\nel 720 ft.\nCommon on rocky wooded\nN-facing bluffs.\nMay 15, 1975\nCharles E. Stevens\nNo. 10,327\nDet.\n\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2194,
+    "output": 482,
+    "cost_in": 0.00021940000000000002,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026110\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell \nGuy L. Nesom, 1975\n\nFlora of Virginia\n*Galax aphylla* L.\nBedford Co., across James from Snowden.\nel. 720 ft.\nCommon on rocky wooded\nN-facing bluffs.\nMay 15, 1975\n\nCharles E. Stevens No. 10,327\nDet. \"\n\n(Handwritten text)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026110\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFlora of Virginia\nGalax aphylla L.\nBedford Co., across James from\nSnowden.\nel 720 ft.\nCommon on rocky wooded\nN-facing bluffs.\nMay 15, 1975\nCharles E. Stevens\nNo. 10,327\nDet.\n\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026110",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "10,327",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "May 15, 1975",
+    "collectionDate": "1975-05-15",
+    "collectionDateEnd": "",
+    "habitat": "Common on rocky wooded N-facing bluffs.",
+    "chromosomeCount": "n = 6, based on average guard cell area",
+    "guardCell": "n = 6",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bedford Co.",
+    "locality": "Across James from Snowden.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFlora of Virginia\nDet.\nFARM"
+  }
+}

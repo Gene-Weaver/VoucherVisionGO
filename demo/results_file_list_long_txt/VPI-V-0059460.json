@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n66047\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059460\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: VIRGINIA, Floyd Co.\n*Galax urceolata* (Poir.)\nBrummitt\n\nFound along the southern\nslope of Buffalo Mt.\n\nDate: 4/10/76                      No: 6\nColl: C. Condit, R. Brooks\nJ. Hildreth (handwritten)\nDet:\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n66047\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: VIRGINIA, Floyd Co.\nGalax urceolata (Poir.)\nBrummit\nFound along the southern\nslope of Buffalo Mt.\nDate: 4/10/76\nNo: 6\nColl: J.Hildreth\nDet: C. Condit, R. Brooks\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059460\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 463,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.0001852
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n66047\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059460\n\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\n\nFlora of: VIRGINIA, Floyd Co.\n*Galax urceolata* (Poir.)\nBrummitt\n\nFound along the southern\nslope of Buffalo Mt.\n\nDate: 4/10/76                      No: 6\nColl: C. Condit, R. Brooks\nJ. Hildreth (handwritten)\nDet:\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n66047\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\nVIRGINIA POLYTECHNIC INSTITUTE AND STATE\nUNIVERSITY HERBARIUM\nFlora of: VIRGINIA, Floyd Co.\nGalax urceolata (Poir.)\nBrummit\nFound along the southern\nslope of Buffalo Mt.\nDate: 4/10/76\nNo: 6\nColl: J.Hildreth\nDet: C. Condit, R. Brooks\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059460\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "66047",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. Hildreth",
+    "collectorNumber": "6",
+    "identifiedBy": "C. Condit, R. Brooks",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/10/76",
+    "collectionDate": "1976-04-10",
+    "collectionDateEnd": "",
+    "habitat": "Found along the southern slope of Buffalo Mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Floyd Co.",
+    "locality": "Buffalo Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059460\nVirginia polytechnic institute and state\nuniversity herbarium\nFlora of Virginia"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\n\nColt's foot, beetleweed, galax:\nUSE: Root tea for kidney trouble; tea for nerves.\n\n*_= G. urceolata* (handwritten)\n\nOld Dominion University Herbarium (ODU)\nODU00020345\n\nHerbarium\nDepartment of Biological Sciences\nOld Dominion University\nNorfolk, Virginia 23529-0266\nMEDICINAL PLANTS OF\nTHE CHEROKEE\n\n*Galax aphylla* L.\nBig cove Rd. & Bunches Creek Rd.; shaded mountain top, high elevation, steep slope to cool riverbank. Qualla Boundary Reservation, N.C.\nJ.E. Noe\nM.U. Chiltoskey       23 May 1990\nMD-90-223\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001025,
+      "total_cost": 0.00180375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 205
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\nColt's foot, beetleweed, galax:\nUSE: Root tea for kidney trouble; tea for\nnerves.\n= G. urceolata\nHerbarium\nDepartment of Biological Sciences\nOld Dominion University\nNorfolk, Virginia 23529-0266\nMEDICINAL PLANTS OF\nTHE CHEROKEE\nGalax aphylla L.\nBig cove Rd. & Bunches Creek Rd.; shaded\nmountain top, high elevation, steep slope\nto cool riverbank. Qualla Boundary\nReservation, N.C.\nJ.E. Noe\nM.U. Chiltoskey\n23 May 1990\nMD-90-223\n\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.48e-05,
+      "total_cost": 0.0007563,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2275,
+    "output": 514,
+    "cost_in": 0.00022750000000000003,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\n\nColt's foot, beetleweed, galax:\nUSE: Root tea for kidney trouble; tea for nerves.\n\n*_= G. urceolata* (handwritten)\n\nOld Dominion University Herbarium (ODU)\nODU00020345\n\nHerbarium\nDepartment of Biological Sciences\nOld Dominion University\nNorfolk, Virginia 23529-0266\nMEDICINAL PLANTS OF\nTHE CHEROKEE\n\n*Galax aphylla* L.\nBig cove Rd. & Bunches Creek Rd.; shaded mountain top, high elevation, steep slope to cool riverbank. Qualla Boundary Reservation, N.C.\nJ.E. Noe\nM.U. Chiltoskey       23 May 1990\nMD-90-223\n\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nDEPARTMENT OF BIOLOGICAL SCIENCES\nOLD DOMINION UNIVERSITY\nNORFOLK, VIRGINIA 23529-0266\nColt's foot, beetleweed, galax:\nUSE: Root tea for kidney trouble; tea for\nnerves.\n= G. urceolata\nHerbarium\nDepartment of Biological Sciences\nOld Dominion University\nNorfolk, Virginia 23529-0266\nMEDICINAL PLANTS OF\nTHE CHEROKEE\nGalax aphylla L.\nBig cove Rd. & Bunches Creek Rd.; shaded\nmountain top, high elevation, steep slope\nto cool riverbank. Qualla Boundary\nReservation, N.C.\nJ.E. Noe\nM.U. Chiltoskey\n23 May 1990\nMD-90-223\n\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ODU00020345",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J.e. Noe, M.u. Chiltoskey",
+    "collectorNumber": "MD-90-223",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 May 1990",
+    "collectionDate": "1990-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Big cove rd. & bunches creek rd.; shaded mountain top, high elevation, steep slope to cool riverbank.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Qualla boundary reservation",
+    "locality": "Big cove rd. & bunches creek rd.; shaded mountain top, high elevation, steep slope to cool riverbank. qualla boundary reservation, n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium\nDepartment of biological sciences\nOld dominion university\nNorfolk, virginia 23529-0266\nColt's foot, beetleweed, galax\nUse root tea for kidney trouble; tea for\nnerves.\n= g. urceolata"
+  }
+}

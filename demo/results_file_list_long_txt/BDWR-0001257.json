@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BRIDGEWATER COLLEGE HERBARIUM\nBRIDGEWATER, VA. 22812\n\n*Handwritten text below:*\n*G*. *urceolata* (Poiret)\nBrunnitt\nE.B. Lickey 4 Dec 2017\n\nHerbarium of\nBridgewater College\nNo.\n\nTechnical Name *Galax aphylla* L.\nCommon Name\nFamily Diapensiaceae\nLocality 3800' Mt. Lake Bio. St\nPembroke, Va.\nDate June 29, 1971\nAltitude 3800'\nHabitat Woods\nCollected by *Jane Ailes*\nIdentified by *Giles Co.*\n\nMcCourt Labels, Bradford, Pa.\n\nBridgewater College Herbarium, Virginia\nBDWR-0001257\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000895,
+      "total_cost": 0.00167375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "BRIDGEWATER COLLEGE HERBARIUM\nBRIDGEWATER, VA. 22812\nHerbarium of\nNo.\nGalax aphylla L.\nDiapensiaceae\nJune 29, 971\nWoods\nJane Ailes\nGiles Co.\nCo. urceolata (Poiret)\nBrunnitt\nE.B. Liellen 4 Dec 2017\nBridgewater College Herbarium, Virginia\nBDWR-0001257\nBridgewater College\n3800 Mt. Lake Bio. St\nPembroke, va\n3800\n\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.5599999999999996e-05,
+      "total_cost": 0.0007371000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 139
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 473,
+    "cost_in": 0.0002205,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBRIDGEWATER COLLEGE HERBARIUM\nBRIDGEWATER, VA. 22812\n\n*Handwritten text below:*\n*G*. *urceolata* (Poiret)\nBrunnitt\nE.B. Lickey 4 Dec 2017\n\nHerbarium of\nBridgewater College\nNo.\n\nTechnical Name *Galax aphylla* L.\nCommon Name\nFamily Diapensiaceae\nLocality 3800' Mt. Lake Bio. St\nPembroke, Va.\nDate June 29, 1971\nAltitude 3800'\nHabitat Woods\nCollected by *Jane Ailes*\nIdentified by *Giles Co.*\n\nMcCourt Labels, Bradford, Pa.\n\nBridgewater College Herbarium, Virginia\nBDWR-0001257\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nBRIDGEWATER COLLEGE HERBARIUM\nBRIDGEWATER, VA. 22812\nHerbarium of\nNo.\nGalax aphylla L.\nDiapensiaceae\nJune 29, 971\nWoods\nJane Ailes\nGiles Co.\nCo. urceolata (Poiret)\nBrunnitt\nE.B. Liellen 4 Dec 2017\nBridgewater College Herbarium, Virginia\nBDWR-0001257\nBridgewater College\n3800 Mt. Lake Bio. St\nPembroke, va\n3800\n\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "BDWR-0001257",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jane Ailes",
+    "collectorNumber": "",
+    "identifiedBy": "Giles Co.",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "G. urceolata (Poiret) Brunnitt E.B. Lickey 4 Dec 2017",
+    "verbatimCollectionDate": "June 29, 1971",
+    "collectionDate": "1971-06-29",
+    "collectionDateEnd": "",
+    "habitat": "Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "",
+    "locality": "3800' Mt. Lake Bio. St Pembroke, Va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1158",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "BRIDGEWATER COLLEGE HERBARIUM\nBRIDGEWATER, VA. 22812\nHerbarium of\nBridgewater College\nNo.\nDiapensiaceae\n3800"
+  }
+}

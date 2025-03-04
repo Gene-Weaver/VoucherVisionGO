@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "20,565\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2 not measured\nGuy L. Nesom, 1975\n\n\u03a3\u03c7 (handwritten)\n\nHERBARIUM OF F. W. HUNNEWELL\nFLORA OF VIRGINIA\nFloyd COUNTY\n\n*Galax aphylla* L.\nunder rhododendrons\nBlue Ridge Parkway\nNo. 18,788\nCOLL. F.W.H.\nAug. 8 1947\n\n\nHerbarium 20,565\nBiology Department\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000805,
+      "total_cost": 0.0015837499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM OF F. W. HUNNEWELL\nFLORA OF VIRGINIA\nFloyd\nCOUNTY\nGalax aphylla L.\nunder rhododendrons\nBlue Ridge Parkway\nAug. 8 1947\n\nHerbarium 20,565\nBiology Department\nVirginia Polytechnic Institute\n--- Handwritten Text ---\n\u03a3\u03c7\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.160000000000001e-05,
+      "total_cost": 0.0007331,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 129
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 511,
+    "cost_in": 0.0002198,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n20,565\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell area\nvolume of \u03bc\u00b2 not measured\nGuy L. Nesom, 1975\n\n\u03a3\u03c7 (handwritten)\n\nHERBARIUM OF F. W. HUNNEWELL\nFLORA OF VIRGINIA\nFloyd COUNTY\n\n*Galax aphylla* L.\nunder rhododendrons\nBlue Ridge Parkway\nNo. 18,788\nCOLL. F.W.H.\nAug. 8 1947\n\n\nHerbarium 20,565\nBiology Department\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM OF F. W. HUNNEWELL\nFLORA OF VIRGINIA\nFloyd\nCOUNTY\nGalax aphylla L.\nunder rhododendrons\nBlue Ridge Parkway\nAug. 8 1947\n\nHerbarium 20,565\nBiology Department\nVirginia Polytechnic Institute\n--- Handwritten Text ---\n\u03a3\u03c7\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "20,565",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "F.w.h.",
+    "collectorNumber": "18,788",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 8 1947",
+    "collectionDate": "1947-08-08",
+    "collectionDateEnd": "",
+    "habitat": "Under rhododendrons",
+    "chromosomeCount": "n = , based on average guard cell area",
+    "guardCell": "n = , based on average guard cell area",
+    "specimenDescription": "Volume of \u03bc\u00b2 not measured",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Floyd",
+    "locality": "Blue ridge parkway",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the university of north carolina\n\u03a3\u03c7 (handwritten)\nHerbarium of f. w. hunnewell\nFlora of virginia\nGalax aphylla l.\nHerbarium\nBiology department\nVirginia polytechnic institute\nGalax urceolata\nGalax aphylla"
+  }
+}

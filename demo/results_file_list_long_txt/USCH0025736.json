@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\nUniversity of South Carolina\ncopyright reserved\n85522\nPLANTS OF THE CUMBERLAND PLATEAU\nMCCREARY COUNTY, KENTUCKY, U.S.A.\n\n*GALAX APHYLLA* L.\nDiapensiaceae\n\nFairly common and abundant on dry ground, along a dangerously steep S-facing slope, with *Kalmia latifolia*, *Vaccinium arboreum*, *Quercus alba*, *Q. prinoides*, *Danthonia*, *Galax aphylla*, *Amelanchier*, *Pinus echinata*; just S of camping area along trail basically overlooking N side of Cumberland River, Cumberland Falls State Resort Park, Daniel Boone National Forest; UTM coords. approx. 16 737697E 4080251 N; elev. 1000'.\n\nJohn B. Nelson 21967\nwith John E. Cely                                                                                                                                                                                                                                                        8 VII 2001 *(Handwritten)*\n\nA. C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA\n\nUniversity of South Carolina Herbarium\nUSCH0025736\n\n\n*Galax aphylla*\n*Kalmia latifolia*\n*Vaccinium arboreum*\n*Quercus alba*\n*Q. prinoides*\n*Pinus echinata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0014600000000000001,
+      "total_cost": 0.00223875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 292
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\n85522\nPLANTS OF THE CUMBERLAND PLATEAU\nMCCREARY COUNTY, KENTUCKY, U.S.A.\nGALAX APHYLLA L.\nDiapensiaceae\nFairly common and abundant on dry ground, along a\ndangerously steep S-facing slope, with Kalmia latifolia,\nVaccinium arboreum, Quercus alba, Q. prinoides,\nDanthonia, Galax aphylla, Amelanchier, Pinus echinata;\njust S of camping area along trail basically overlooking\nN side of Cumberland River, Cumberland Falls State\nResort Park, Daniel Boone National Forest; UTM\ncoords. approx. 16 737697E 4080251 N; elev. 1000'.\nJohn B. Nelson 21967\nwith John E. Cely\n8 VII 2001\nA. C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA\nUniversity of South Carolina Herbarium\nUSCH0025736\n\n\nKalmia latifolia\nVaccinium arboreum\nQuercus alba\nQ. prinoides\nDanthonia\nGalax aphylla\nAmelanchier\nPinus echinata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011960000000000002,
+      "total_cost": 0.0008011000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 299
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2480,
+    "output": 571,
+    "cost_in": 0.000248,
+    "cost_out": 0.00022840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\nUniversity of South Carolina\ncopyright reserved\n85522\nPLANTS OF THE CUMBERLAND PLATEAU\nMCCREARY COUNTY, KENTUCKY, U.S.A.\n\n*GALAX APHYLLA* L.\nDiapensiaceae\n\nFairly common and abundant on dry ground, along a dangerously steep S-facing slope, with *Kalmia latifolia*, *Vaccinium arboreum*, *Quercus alba*, *Q. prinoides*, *Danthonia*, *Galax aphylla*, *Amelanchier*, *Pinus echinata*; just S of camping area along trail basically overlooking N side of Cumberland River, Cumberland Falls State Resort Park, Daniel Boone National Forest; UTM coords. approx. 16 737697E 4080251 N; elev. 1000'.\n\nJohn B. Nelson 21967\nwith John E. Cely                                                                                                                                                                                                                                                        8 VII 2001 *(Handwritten)*\n\nA. C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA\n\nUniversity of South Carolina Herbarium\nUSCH0025736\n\n\n*Galax aphylla*\n*Kalmia latifolia*\n*Vaccinium arboreum*\n*Quercus alba*\n*Q. prinoides*\n*Pinus echinata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\n85522\nPLANTS OF THE CUMBERLAND PLATEAU\nMCCREARY COUNTY, KENTUCKY, U.S.A.\nGALAX APHYLLA L.\nDiapensiaceae\nFairly common and abundant on dry ground, along a\ndangerously steep S-facing slope, with Kalmia latifolia,\nVaccinium arboreum, Quercus alba, Q. prinoides,\nDanthonia, Galax aphylla, Amelanchier, Pinus echinata;\njust S of camping area along trail basically overlooking\nN side of Cumberland River, Cumberland Falls State\nResort Park, Daniel Boone National Forest; UTM\ncoords. approx. 16 737697E 4080251 N; elev. 1000'.\nJohn B. Nelson 21967\nwith John E. Cely\n8 VII 2001\nA. C. MOORE HERBARIUM (USCH)\nUNIVERSITY OF SOUTH CAROLINA\nUniversity of South Carolina Herbarium\nUSCH0025736\n\n\nKalmia latifolia\nVaccinium arboreum\nQuercus alba\nQ. prinoides\nDanthonia\nGalax aphylla\nAmelanchier\nPinus echinata\n\n",
+  "formatted_json": {
+    "catalogNumber": "85522",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "John B. Nelson, John E. Cely",
+    "collectorNumber": "21967",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8 VII 2001",
+    "collectionDate": "2001-07-08",
+    "collectionDateEnd": "",
+    "habitat": "Fairly common and abundant on dry ground, along a dangerously steep s-facing slope, with kalmia latifolia, vaccinium arboreum, quercus alba, q. prinoides, danthonia, galax aphylla, amelanchier, pinus echinata",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Kentucky",
+    "county": "Mccreary county",
+    "locality": "Just s of camping area along trail basically overlooking n side of cumberland river, cumberland falls state resort park, daniel boone national forest",
+    "verbatimCoordinates": "Utm coords. approx. 16 737697e 4080251 n",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "305",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Usch\nUniversity of south carolina\nCopyright reserved\nA. c. moore herbarium (usch)\nUniversity of south carolina\nUniversity of south carolina herbarium\nUsch0025736\nPlants of the cumberland plateau\nDiapensiaceae\nelev. 1000'."
+  }
+}

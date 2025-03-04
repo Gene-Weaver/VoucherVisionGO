@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102106\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326370\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\n\n*Galax aphylla* L.\n\nrich rocky woodland, Buck Creek on U.S. Rt.\n64; about two miles s.w. of Clay-Macon Co.\nline.\n\nwith A.E. Radford\nHarry E. Ahles 13642 June 2 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nHandwritten text: *13642*, *June 2 1956*\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008,
+      "total_cost": 0.0015787499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 160
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102106\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326370\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\nGalax aphylla L.\nrich rocky woodland, Buck Creek on U.S. Rt.\n64; about two miles s.w. of Clay-Macon Co.\nline.\nwith A E Radford\nHarry E. Ahles\nJune 2, 1956\nCollected for the \"Flora of the Carolinas\"\n13642\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.28e-05,
+      "total_cost": 0.0007343,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 132
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2166,
+    "output": 441,
+    "cost_in": 0.0002166,
+    "cost_out": 0.0001764
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102106\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326370\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\n\n*Galax aphylla* L.\n\nrich rocky woodland, Buck Creek on U.S. Rt.\n64; about two miles s.w. of Clay-Macon Co.\nline.\n\nwith A.E. Radford\nHarry E. Ahles 13642 June 2 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nHandwritten text: *13642*, *June 2 1956*\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n102106\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326370\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nClay County\nGalax aphylla L.\nrich rocky woodland, Buck Creek on U.S. Rt.\n64; about two miles s.w. of Clay-Macon Co.\nline.\nwith A E Radford\nHarry E. Ahles\nJune 2, 1956\nCollected for the \"Flora of the Carolinas\"\n13642\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326370",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harry E. Ahles, A E Radford",
+    "collectorNumber": "13642",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 2 1956",
+    "collectionDate": "1956-06-02",
+    "collectionDateEnd": "",
+    "habitat": "Rich rocky woodland, buck creek on u.s. rt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Clay county",
+    "locality": "About two miles s.w. of clay-macon co. line.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n102106\nCollected for the flora of the carolinas"
+  }
+}

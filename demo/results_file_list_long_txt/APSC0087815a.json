@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087815\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n2377\n\n3/2\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\n\nCounty: MONTGOMERY\n\nFlora of: VIRGINIA\n*Galax aphylla* L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\n\nColl: K.A. Nicely  No.: 1171\nDate: June 12, 1966  Det: K.A. Nicely\n\nHandwritten Text: 76\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "```text\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087815\nHERBARIUM\nWESTERN KY. UNIVERSITY\n2377\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\nFlora of:\nVIRGINIA\nCounty: MONTGOMERY\nGalax aphylla L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\nColl:\nK.A. Nicely\nNo.: 1171\nDate:\nJune 12, 1966\nDet: K.A. Nicely\n```\n\nHandwritten text:\n```text\nTw\n3/2\n```\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.560000000000001e-05,
+      "total_cost": 0.0007571000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 189
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2259,
+    "output": 496,
+    "cost_in": 0.00022590000000000002,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087815\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n2377\n\n3/2\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\n\nCounty: MONTGOMERY\n\nFlora of: VIRGINIA\n*Galax aphylla* L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\n\nColl: K.A. Nicely  No.: 1171\nDate: June 12, 1966  Det: K.A. Nicely\n\nHandwritten Text: 76\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n```text\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087815\nHERBARIUM\nWESTERN KY. UNIVERSITY\n2377\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHERBARIUM OF\nWESTERN KENTUCKY UNIVERSITY\nBIOLOGY DEPARTMENT\nFlora of:\nVIRGINIA\nCounty: MONTGOMERY\nGalax aphylla L.\nDeciduous woods on Price Mt., S. of\nBlacksburg, Va.\nColl:\nK.A. Nicely\nNo.: 1171\nDate:\nJune 12, 1966\nDet: K.A. Nicely\n```\n\nHandwritten text:\n```text\nTw\n3/2\n```\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087815",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "K.a. nicely",
+    "collectorNumber": "1171",
+    "identifiedBy": "Mason Brock, k.a. nicely",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla: k.a. nicely, 1966",
+    "verbatimCollectionDate": "June 12, 1966",
+    "collectionDate": "1966-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Deciduous woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Montgomery",
+    "locality": "On price mt., s. of Blacksburg, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin peay state university\nHerbarium (apsc)\nHerbarium\nWestern ky. university\n2377\nHerbarium of\nWestern kentucky university\nBiology department\nFlora of\nTw\n3/2\nhandwritten text\nHandwritten text 76"
+  }
+}

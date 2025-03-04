@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n499280\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax Co.\n\n*Galax aphylla* L.\n\nNorth-facing beech slopes about 1.55\nmiles E of US 301-NC 561 junction.\nAcidic sandy loam; *Kalmia* and *Epigaea*\npresent.\n\nJ. M. Lynch 051                      18 June 1979\nPlants of the Southeastern United States\n\nNCU00080571\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000635,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTH\nHERBARIUM\nIVERSITY OF\nUNIV\nCAROLINA\n499280\nMSCCPPPE0411\nMSCCPPCC0411\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax Co.\nGalax aphylla L.\nNorth-facing beech slopes about 1.55\nmiles E of US 301-NC 561 junction.\nAcidic sandy loam; Kalmia and Epigaea\npresent.\nJ. M. Lynch 051\n18 June 1979\nPlants of the Southeastern United States\nx-rite\ncolorchecker\nmm\n0 1 2 3 4 5\ncm\ncopyright reserved\n6 7 8 9 10\nrolina\nat Chapel Hill\nUniversity of North Carol\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080571\n\n\nGalax aphylla\nKalmia\nEpigaea\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.840000000000001e-05,
+      "total_cost": 0.0007699,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 221
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2220,
+    "output": 549,
+    "cost_in": 0.00022200000000000003,
+    "cost_out": 0.00021960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n499280\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax Co.\n\n*Galax aphylla* L.\n\nNorth-facing beech slopes about 1.55\nmiles E of US 301-NC 561 junction.\nAcidic sandy loam; *Kalmia* and *Epigaea*\npresent.\n\nJ. M. Lynch 051                      18 June 1979\nPlants of the Southeastern United States\n\nNCU00080571\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTH\nHERBARIUM\nIVERSITY OF\nUNIV\nCAROLINA\n499280\nMSCCPPPE0411\nMSCCPPCC0411\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax Co.\nGalax aphylla L.\nNorth-facing beech slopes about 1.55\nmiles E of US 301-NC 561 junction.\nAcidic sandy loam; Kalmia and Epigaea\npresent.\nJ. M. Lynch 051\n18 June 1979\nPlants of the Southeastern United States\nx-rite\ncolorchecker\nmm\n0 1 2 3 4 5\ncm\ncopyright reserved\n6 7 8 9 10\nrolina\nat Chapel Hill\nUniversity of North Carol\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080571\n\n\nGalax aphylla\nKalmia\nEpigaea\n\n",
+  "formatted_json": {
+    "catalogNumber": "499280",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. M. Lynch",
+    "collectorNumber": "051",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "18 June 1979",
+    "collectionDate": "1979-06-18",
+    "collectionDateEnd": "",
+    "habitat": "North-facing beech slopes about 1.55 miles e of us 301-nc 561 junction. Acidic sandy loam; kalmia and epigaea present.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Halifax co.",
+    "locality": "North-facing beech slopes about 1.55 miles e of us 301-nc 561 junction.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ncu\nherbarium of the university of north carolina\nnorth carolina\nplants of the southeastern united states\nncu00080571\nx-rite\ncolorchecker\nmm\n0 1 2 3 4 5\ncm\ncopyright reserved\n6 7 8 9 10\nrolina\nat chapel hill\nuniversity of north carolina\nuniversity of north carolina herbarium\nmsccpppe0411\nmsccppcc0411"
+  }
+}

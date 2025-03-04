@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU030441\n\n= *Galax urceolata*\n*Galax aphylla* L.\n*TN Greene* Co.\nCNF C209 stand 35\nclearcut\n*JT Donaldson 343*\n*20 July 1992*\n\nPlant Record\nCherokee National Forest\nTennessee\nFam: Diaspensiaceae\nGen/sp: *Galax aphylla* L\nauthor:\nCounty: Greene Date: 20 July 1992\nLocation: NRD, C209 335, clearcut\nCollector: Jamey Donaldson No.: 343\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008200000000000001,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU030441\nGalax aphylla L.\nTN Greeme Co.\nCNF C209 stand 35\nJT Donaldson 343\n20 July 1992\nPlant Record\nCherokee National Forest\nTennessee\nFam:: Diaspensiaceae\nGen/sn... Galax aphylla\nauthor:: L\nCounty:: Greene Date:: 20 July 1992\nLocation: NRD, C209 a35, clearcut\nCollector: Jamey Donaldson No.: 343\n\nHandwritten text:\n= Galax urceolata\nclearend\n20 July 1992\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2167,
+    "output": 518,
+    "cost_in": 0.0002167,
+    "cost_out": 0.00020720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU030441\n\n= *Galax urceolata*\n*Galax aphylla* L.\n*TN Greene* Co.\nCNF C209 stand 35\nclearcut\n*JT Donaldson 343*\n*20 July 1992*\n\nPlant Record\nCherokee National Forest\nTennessee\nFam: Diaspensiaceae\nGen/sp: *Galax aphylla* L\nauthor:\nCounty: Greene Date: 20 July 1992\nLocation: NRD, C209 335, clearcut\nCollector: Jamey Donaldson No.: 343\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU030441\nGalax aphylla L.\nTN Greeme Co.\nCNF C209 stand 35\nJT Donaldson 343\n20 July 1992\nPlant Record\nCherokee National Forest\nTennessee\nFam:: Diaspensiaceae\nGen/sn... Galax aphylla\nauthor:: L\nCounty:: Greene Date:: 20 July 1992\nLocation: NRD, C209 a35, clearcut\nCollector: Jamey Donaldson No.: 343\n\nHandwritten text:\n= Galax urceolata\nclearend\n20 July 1992\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU030441",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "JT Donaldson, Jamey Donaldson",
+    "collectorNumber": "343",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 July 1992",
+    "collectionDate": "1992-07-20",
+    "collectionDateEnd": "",
+    "habitat": "Clearcut",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Greene",
+    "locality": "NRD, C209 stand 35",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "= Galax urceolata\nTN Greene Co.\nCNF C209 stand 35\nPlant record\nCherokee national forest\nFam diaspensiaceae\nGen/sp galax aphylla\nauthor L\nCounty greene date 20 july 1992\nLocation nrd, c209 a35, clearcut\nCollector jamey donaldson no. 343\nhandwritten text\n= galax urceolata\nclearend\n20 july 1992\n---\ngalax aphylla"
+  }
+}

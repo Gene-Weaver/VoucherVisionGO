@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012623\n\nLYNCHBURG COLLEGE\n48227\nHERBARIUM\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear Sandy Level, Pittsylvania Co.\nCommon on steep, rocky, NW-facing,\nhardwoods-hemlock bluff on Pigg River 4\nmi. above Rte. 40 bridge. el. 650 ft.\n(Sandy Level Quad.)\nCharles E. Stevens\nAug. 24, 1985\nNo. 19,475\n\n\nHandwritten text: *Galax urceolata*, near Sandy Level, Pittsylvania Co., Common on steep, rocky, NW-facing, hardwoods-hemlock bluff on Pigg River 4 mi. above Rte. 40 bridge. el. 650 ft., (Sandy Level Quad.), Aug. 24, 1985.\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00111,
+      "total_cost": 0.0018887500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 222
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012623\nLYNCHBURG\nCOLLE\n48227\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Sandy Level, Pittsylvania Co.\nCommon on steep, rocky, NW-facing,\nhardwoods-hemlock bluff on Pigg River 4\nmi. above Rte. 40 bridge. el. 650 ft.\n(Sandy Level Quad.)\nCharles E. Stevens\nNo. 19,475\nAug. 24, 1985\nLYN\n1\n2\n3\n4\n5\n6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.000000000000001e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2261,
+    "output": 562,
+    "cost_in": 0.00022610000000000002,
+    "cost_out": 0.00022480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012623\n\nLYNCHBURG COLLEGE\n48227\nHERBARIUM\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear Sandy Level, Pittsylvania Co.\nCommon on steep, rocky, NW-facing,\nhardwoods-hemlock bluff on Pigg River 4\nmi. above Rte. 40 bridge. el. 650 ft.\n(Sandy Level Quad.)\nCharles E. Stevens\nAug. 24, 1985\nNo. 19,475\n\n\nHandwritten text: *Galax urceolata*, near Sandy Level, Pittsylvania Co., Common on steep, rocky, NW-facing, hardwoods-hemlock bluff on Pigg River 4 mi. above Rte. 40 bridge. el. 650 ft., (Sandy Level Quad.), Aug. 24, 1985.\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012623\nLYNCHBURG\nCOLLE\n48227\nHERBARIUM\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear Sandy Level, Pittsylvania Co.\nCommon on steep, rocky, NW-facing,\nhardwoods-hemlock bluff on Pigg River 4\nmi. above Rte. 40 bridge. el. 650 ft.\n(Sandy Level Quad.)\nCharles E. Stevens\nNo. 19,475\nAug. 24, 1985\nLYN\n1\n2\n3\n4\n5\n6\n7\n8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012623",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "19,475",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 24, 1985",
+    "collectionDate": "1985-08-24",
+    "collectionDateEnd": "",
+    "habitat": "Common on steep, rocky, nw-facing, hardwoods-hemlock bluff on pigg river 4 mi. above rte. 40 bridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania co.",
+    "locality": "Near sandy level",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "198",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Ramsey-freer herbarium\nLynchburg college\nLynchburg college\n48227\nHerbarium\nFlora of virginia\n(sandy level quad.)\nhandwritten text galax urceolata, near sandy level, pittsylvania co., common on steep, rocky, nw-facing, hardwoods-hemlock bluff on pigg river 4 mi. above rte. 40 bridge. el. 650 ft., (sandy level quad.), aug. 24, 1985.\ngalax urceolata\nlynchburg college\ncopyright reserved"
+  }
+}

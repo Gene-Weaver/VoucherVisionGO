@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "H. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nAlexander Co.\n\n*Galax aphylla* L.\n\ntrail up Hawksbill Mountain; 4 miles\nsouth of Jonas Ridge\nLinda A. Raubeson no. 61 9/10/82\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00047499999999999994,
+      "total_cost": 0.00125375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 95
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Inches\n3\n1\n2\n3\n4\n5\n9\n7\n8\n6\n10\n11\n12\n5\n13\n7\n14\n16 15\n17\n811\n19\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nGreen Cyan\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n8\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00237327\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nAlexander Co.\nGalax aphylla L.\ntrail up Hawksbill Mountain; 4 miles\nsouth of Jonas Ridge\nLinda A. Raubeson\nno. 61\n9/10/82\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8e-05,
+      "total_cost": 0.0007615,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 200
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2187,
+    "output": 439,
+    "cost_in": 0.00021870000000000003,
+    "cost_out": 0.0001756
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\n\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nAlexander Co.\n\n*Galax aphylla* L.\n\ntrail up Hawksbill Mountain; 4 miles\nsouth of Jonas Ridge\nLinda A. Raubeson no. 61 9/10/82\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nInches\n3\n1\n2\n3\n4\n5\n9\n7\n8\n6\n10\n11\n12\n5\n13\n7\n14\n16 15\n17\n811\n19\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nGreen Cyan\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n8\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00237327\nH. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nNORTH CAROLINA\nAlexander Co.\nGalax aphylla L.\ntrail up Hawksbill Mountain; 4 miles\nsouth of Jonas Ridge\nLinda A. Raubeson\nno. 61\n9/10/82\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00237327",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Linda A. Raubeson",
+    "collectorNumber": "61",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9/10/82",
+    "collectionDate": "1982-09-10",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "North Carolina",
+    "stateProvince": "North Carolina",
+    "county": "Alexander Co.",
+    "locality": "Trail up Hawksbill Mountain; 4 miles south of Jonas Ridge",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "H. R. TOTTEN\nTeaching Collection\nUNC-Chapel Hill\nHERBARIUM\nDepartment of Botany\nThe University of North Carolina\nGalax aphylla"
+  }
+}

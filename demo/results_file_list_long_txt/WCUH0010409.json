@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NC\n22227\nNORTH CAROLINA UNIVERSITY HERBARIUM\n\nHERBARIUM OF NORTH CAROLINA BOTANICAL GARDEN\nNORTH CAROLINA\nMACON COUNTY DIAPENSIACEAE\n*Galax* urceolata (Poiref) Brummitt\n(*Galax*)\n*G. aphylla*\n\nOlive Nature Preserve, 1.5 km (ca. 1 mi.) west\nof US 64 on Flat Mountain Road (SR 1544)\nElevation 1165m (3820 ft).\nNorthern Hardwoods. Flowers white.\n\nDan Pittillo\n11413\n26 June 1993\n\nJDP 11413 (handwritten)\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.00157375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "JDP 11413\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010409\nHERBARIUM\n22227\nCAROLINA UNIVERS\nHERBARIUM OF NORTH CAROLINA BOTANICAL GARDEN\nNORTH CAROLINA\nMACON COUNTY DIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\n(Galax)\nOlive Nature Preserve, 1.5 km (ca. 1 ml.) west\nof US 64 on Flat Mountain Road (SR 1544)\nElevation 1165m (3820 ft).\nNorthern Hardwoods. Flowers white.\nDan Pittillo\n11413\n26 June 1993\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nMETRIC\nHandwritten text:\nGaphylla\n19\nL\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.680000000000001e-05,
+      "total_cost": 0.0007683,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 217
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2255,
+    "output": 545,
+    "cost_in": 0.0002255,
+    "cost_out": 0.000218
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNC\n22227\nNORTH CAROLINA UNIVERSITY HERBARIUM\n\nHERBARIUM OF NORTH CAROLINA BOTANICAL GARDEN\nNORTH CAROLINA\nMACON COUNTY DIAPENSIACEAE\n*Galax* urceolata (Poiref) Brummitt\n(*Galax*)\n*G. aphylla*\n\nOlive Nature Preserve, 1.5 km (ca. 1 mi.) west\nof US 64 on Flat Mountain Road (SR 1544)\nElevation 1165m (3820 ft).\nNorthern Hardwoods. Flowers white.\n\nDan Pittillo\n11413\n26 June 1993\n\nJDP 11413 (handwritten)\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nJDP 11413\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010409\nHERBARIUM\n22227\nCAROLINA UNIVERS\nHERBARIUM OF NORTH CAROLINA BOTANICAL GARDEN\nNORTH CAROLINA\nMACON COUNTY DIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\n(Galax)\nOlive Nature Preserve, 1.5 km (ca. 1 ml.) west\nof US 64 on Flat Mountain Road (SR 1544)\nElevation 1165m (3820 ft).\nNorthern Hardwoods. Flowers white.\nDan Pittillo\n11413\n26 June 1993\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nMETRIC\nHandwritten text:\nGaphylla\n19\nL\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "22227",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Dan Pittillo",
+    "collectorNumber": "11413",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 June 1993",
+    "collectionDate": "1993-06-26",
+    "collectionDateEnd": "",
+    "habitat": "Northern Hardwoods. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "Olive Nature Preserve, 1.5 km (ca. 1 mi.) west of US 64 on Flat Mountain Road (SR 1544)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1165",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "North carolina university herbarium\nHerbarium of north carolina botanical garden\nDiapensiaceae\n(Galax)\nG. aphylla\nElevation 1165m (3820 ft).\nJdp 11413 (handwritten)\nWestern carolina u. herbarium\nWcuh0010409\nPreserved\nMaterial\nCarolina biological supply company\nBurlington, nc 27215 & gladstone, or 97027\nLiving\nCultures\nMetric\nHandwritten text\nGaphylla\n19\nl"
+  }
+}

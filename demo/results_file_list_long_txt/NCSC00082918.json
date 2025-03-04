@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082918\n\nHERBARIUM\nNCSC\n77449\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\n\nCounty: Wake\n\n*Galax aphylla* L.\nGrowing on the bluffs at Hemlock Bluffs, \nEast of Cary.\n\nRobert R. Currie-381   May 14, 1972\n\nHandwritten Text: *Wake*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00059,
+      "total_cost": 0.0013687500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 118
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082918\nA\n1\n2\n3\n4\n5\n6\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nHERBARIUM\nNCSC\n77449\nCAROLINA STATE UNIVERSIT\nTIFFEN Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nThe Tiffen Company, 2007\nInches\n5\n19\n1\n2\n3\n5\n6\n8\n6\n10\n11\n12\n13\n14\n15\n16\n17 18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nThe Tiffen Company, 2007\nWhite\n3/Color\nBlack\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\nCounty: Wake\nGalax aphylla L.\nGrowing on the bluffs at Hemlock Bluffs,\nEast of Cary.\nRobert R. Currie-381 May 14, 1972\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00011120000000000002,
+      "total_cost": 0.0007927,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 278
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2254,
+    "output": 471,
+    "cost_in": 0.0002254,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082918\n\nHERBARIUM\nNCSC\n77449\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\n\nCounty: Wake\n\n*Galax aphylla* L.\nGrowing on the bluffs at Hemlock Bluffs, \nEast of Cary.\n\nRobert R. Currie-381   May 14, 1972\n\nHandwritten Text: *Wake*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082918\nA\n1\n2\n3\n4\n5\n6\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\nHERBARIUM\nNCSC\n77449\nCAROLINA STATE UNIVERSIT\nTIFFEN Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nThe Tiffen Company, 2007\nInches\n5\n19\n1\n2\n3\n5\n6\n8\n6\n10\n11\n12\n13\n14\n15\n16\n17 18 19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nThe Tiffen Company, 2007\nWhite\n3/Color\nBlack\nHerbarium of North Carolina State University\nPLANTS OF NORTH CAROLINA\nCounty: Wake\nGalax aphylla L.\nGrowing on the bluffs at Hemlock Bluffs,\nEast of Cary.\nRobert R. Currie-381 May 14, 1972\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082918",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert R. Currie",
+    "collectorNumber": "381",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 14, 1972",
+    "collectionDate": "1972-05-14",
+    "collectionDateEnd": "",
+    "habitat": "Growing on the bluffs at hemlock bluffs, east of cary.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake",
+    "locality": "Wake county: growing on the bluffs at hemlock bluffs, east of cary.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nherbarium (ncsc)\nherbarium\nncsc\n77449\nnorth carolina state university\nherbarium of north carolina state university\nplants of north carolina\nhandwritten text wake"
+  }
+}

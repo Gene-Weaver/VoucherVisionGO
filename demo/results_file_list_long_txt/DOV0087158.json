@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100980\n\nPLANTS OF WESTERN NORTH CAROLINA,\nCOLLECTED IN A RAVINE 5 MILES W. OF BLOWING ROCK, WATAUGA CO.,\nJune 24, 1891,\nBy J. K. SMALL and A. A. HELLER.\n\n*(Handwritten) Galax aphylla, L.*\n\nDelaware State University\nDOV0087158\n\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\n*(Handwritten) Galax aphylla, Linnaeus*\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00091,
+      "total_cost": 0.0016887500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100980\nPLANTS OF WESTERN NORTH CAROLINA,\nCOLLECTED IN A RAVINE 5 MILES W. OF BLOWING ROCK, WATAUGA CO.,\nJune 24, 1891,\nBy J. K. SMALL and A. A. HELLER.\nDelaware State University\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\nGalax aphylla, L.\nGalax aphylla, Linnaeus\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.24e-05,
+      "total_cost": 0.0007339,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 131
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 448,
+    "cost_in": 0.0002221,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nClaude E. Phillips Herbarium\nDelaware State University\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\n\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100980\n\nPLANTS OF WESTERN NORTH CAROLINA,\nCOLLECTED IN A RAVINE 5 MILES W. OF BLOWING ROCK, WATAUGA CO.,\nJune 24, 1891,\nBy J. K. SMALL and A. A. HELLER.\n\n*(Handwritten) Galax aphylla, L.*\n\nDelaware State University\nDOV0087158\n\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\n*(Handwritten) Galax aphylla, Linnaeus*\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nClaude E. Phillips Herbarium\nDelaware State University\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100980\nPLANTS OF WESTERN NORTH CAROLINA,\nCOLLECTED IN A RAVINE 5 MILES W. OF BLOWING ROCK, WATAUGA CO.,\nJune 24, 1891,\nBy J. K. SMALL and A. A. HELLER.\nDelaware State University\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\nGalax aphylla, L.\nGalax aphylla, Linnaeus\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "100980",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. K. Small, A. A. Heller",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 24, 1891",
+    "collectionDate": "1891-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Collected in a ravine",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Watauga Co.",
+    "locality": "5 miles w. of blowing rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Claude E. Phillips Herbarium\nDelaware State University\nDelaware State University\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\nGalax aphylla"
+  }
+}

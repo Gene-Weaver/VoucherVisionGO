@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HUNT\ncopyright reserved\n\n003176\n\nHerbarium of Huntington College\nSerial No. 7395                                      Species No. 1737\nName *Galax aphylla*, L.\nCommon Name Wandflower\nHabitat At Cumberland Falls State Park\nCounty McCreary                                     State Kentucky\nDate Aug. 31, 1957\nCollected by Norlan C. Henderson\n\n*Galax urceolata* (Poir.) Brummitt\nNotes:                                                     F.C. Hobbs August 2017\n(Handwritten Text)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00068,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\nNotes:\n0\n1\n2\n3\n4\n5\n6\n7\n8 9 10\nHUNT\ncm\ncopyright reserved\n003176\nHerbarium of Huntington College\nSerial No.\n7395\nSpecies No.\n1737\nName\nGalax aphylla, L.\nCommon Name Wandflower\nHabitat At Cumberland Falls State Park\nF.C. Hobbs August 2017\nCounty\nMcCreary\nState\nKentucky\nDate Aug. 31, 1957.\nCollected by Norlan C. Henderson\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.960000000000001e-05,
+      "total_cost": 0.0007411000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 149
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2159,
+    "output": 484,
+    "cost_in": 0.0002159,
+    "cost_out": 0.00019360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHUNT\ncopyright reserved\n\n003176\n\nHerbarium of Huntington College\nSerial No. 7395                                      Species No. 1737\nName *Galax aphylla*, L.\nCommon Name Wandflower\nHabitat At Cumberland Falls State Park\nCounty McCreary                                     State Kentucky\nDate Aug. 31, 1957\nCollected by Norlan C. Henderson\n\n*Galax urceolata* (Poir.) Brummitt\nNotes:                                                     F.C. Hobbs August 2017\n(Handwritten Text)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\nNotes:\n0\n1\n2\n3\n4\n5\n6\n7\n8 9 10\nHUNT\ncm\ncopyright reserved\n003176\nHerbarium of Huntington College\nSerial No.\n7395\nSpecies No.\n1737\nName\nGalax aphylla, L.\nCommon Name Wandflower\nHabitat At Cumberland Falls State Park\nF.C. Hobbs August 2017\nCounty\nMcCreary\nState\nKentucky\nDate Aug. 31, 1957.\nCollected by Norlan C. Henderson\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "003176",
+    "scientificName": "Galax aphylla, L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Norlan C. Henderson",
+    "collectorNumber": "",
+    "identifiedBy": "F.c. Hobbs",
+    "identifiedDate": "2017-08-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt\nGalax aphylla",
+    "verbatimCollectionDate": "Aug. 31, 1957",
+    "collectionDate": "1957-08-31",
+    "collectionDateEnd": "",
+    "habitat": "At cumberland falls state park",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Mccreary",
+    "locality": "At cumberland falls state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Hunt\ncopyright reserved\nherbarium of huntington college\nserial no. 7395 species no. 1737\ncommon name wandflower\n\ngalax urceolata (poir.) brummitt\nnotes\ncm\n"
+  }
+}

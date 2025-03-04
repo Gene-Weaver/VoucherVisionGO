@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Penn State\nHerbarium\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n\nFORM 403\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nHenderson\nCounty\n\nPAC\nIMAGED\n\n*Galax aphylla* L.\n\nLocal coastal plain habitat at East Flat Rock.\nShady moist stream bank in edge of woods.\n\nR. B. Channell No. 2653.5 7-8 September 1954\nDetermined by H. L. Blomquist\n\n84806\nPennsylvania\nState University\nHerbarium\n\nPenn State University\nHerbarium (PAC)\nPAC0080535\n\n(Handwritten \"235\")\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00086,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nFORM 403\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nHenderson\nCounty\nPAC\nIMAGED\nGalax aphylla L.\nLocal coastal plain habitat at East Flat Rock.\nShady moist stream bank in edge of woods.\nR. B. Channell No. 2653.5 7-8 September 1954\nDetermined by H. L. Blomquist\n84806\nPennsylvania\nState University\nHerbarium\nPenn State University\nHerbarlum (PAC)\nPAC0080535\n235\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.32e-05,
+      "total_cost": 0.0007447,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 158
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2211,
+    "output": 502,
+    "cost_in": 0.0002211,
+    "cost_out": 0.0002008
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nPenn State\nHerbarium\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n\nFORM 403\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nHenderson\nCounty\n\nPAC\nIMAGED\n\n*Galax aphylla* L.\n\nLocal coastal plain habitat at East Flat Rock.\nShady moist stream bank in edge of woods.\n\nR. B. Channell No. 2653.5 7-8 September 1954\nDetermined by H. L. Blomquist\n\n84806\nPennsylvania\nState University\nHerbarium\n\nPenn State University\nHerbarium (PAC)\nPAC0080535\n\n(Handwritten \"235\")\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nFORM 403\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nHenderson\nCounty\nPAC\nIMAGED\nGalax aphylla L.\nLocal coastal plain habitat at East Flat Rock.\nShady moist stream bank in edge of woods.\nR. B. Channell No. 2653.5 7-8 September 1954\nDetermined by H. L. Blomquist\n84806\nPennsylvania\nState University\nHerbarium\nPenn State University\nHerbarlum (PAC)\nPAC0080535\n235\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "PAC0080535",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. B. Channell",
+    "collectorNumber": "2653.5",
+    "identifiedBy": "H. L. Blomquist",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7-8 September 1954",
+    "collectionDate": "1954-09-07",
+    "collectionDateEnd": "1954-09-08",
+    "habitat": "Local coastal plain habitat at east flat rock. Shady moist stream bank in edge of woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson county",
+    "locality": "East flat rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Penn state\nHerbarium\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nFORM 403\nDuke university herbarium\nPAC\nIMAGED\n84806\nPennsylvania\nState university\nHerbarium\nPenn state university\nHerbarlum (pac)\n235"
+  }
+}

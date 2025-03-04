@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n295050\nHERBARIUM\n\nGalax aphylla L.\ndet. M. Wayne Morris 1988\n\nNORTH CAROLINA. Buncombe Co.: Ne of Asheville,\nelev. ca. 3400 ft. W of Blue Ridge Parkway at\nmile marker 374.5 (Tanbark Tunnel). Up a\nravine to nw of tunnel by ca. \u00bc to \u00bd mi.\nUnder mixed hardwood-conifer forest, rich\nmesic slopes.\n\nJuly 29, 1987\nCharles T. Bryson 6821\n\nEXCHANGE SPECIMEN FROM\n*C.T.B.* (Handwritten)\n\nNL00134067\nUniversity of Louisiana at Monroe\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "LOUISIANA UNIVERSI\nTHEAST\n295050\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134067\ninches\n2\n3\n9\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n6\n5\n7\n8\n10\n11\n12\n13\n14\n15 16\n17\n18 19\n8\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nKodak, 2007 TM: Kodak\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n63\n74\nA 1\n2\n3\n4\n56\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\n7/8.\n1/4\n11/1\nEXCHANGE SPECIMEN FROM\nC.T. B.\ndet. M. Wayne Morris 1988\nGalax aphylla L.\nNORTH CAROLINA. Bomcombe Co. Ne of Asheville,\nelev. ca. 3400 ft. W of Blue Ridge Parkway at\nmile marker 374.5 (Tanbark Tunnel). Up a\nUnder mixed hardwood-conifer forest, rich\nravine to nw of tunnel by ca. to mi.\nmesic slopes.\nJuly 29, 1987\nCharles T. Bryson 6821\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00014120000000000002,
+      "total_cost": 0.0008227,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 353
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2369,
+    "output": 706,
+    "cost_in": 0.0002369,
+    "cost_out": 0.00028240000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n295050\nHERBARIUM\n\nGalax aphylla L.\ndet. M. Wayne Morris 1988\n\nNORTH CAROLINA. Buncombe Co.: Ne of Asheville,\nelev. ca. 3400 ft. W of Blue Ridge Parkway at\nmile marker 374.5 (Tanbark Tunnel). Up a\nravine to nw of tunnel by ca. \u00bc to \u00bd mi.\nUnder mixed hardwood-conifer forest, rich\nmesic slopes.\n\nJuly 29, 1987\nCharles T. Bryson 6821\n\nEXCHANGE SPECIMEN FROM\n*C.T.B.* (Handwritten)\n\nNL00134067\nUniversity of Louisiana at Monroe\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nLOUISIANA UNIVERSI\nTHEAST\n295050\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134067\ninches\n2\n3\n9\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n6\n5\n7\n8\n10\n11\n12\n13\n14\n15 16\n17\n18 19\n8\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nKodak, 2007 TM: Kodak\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n63\n74\nA 1\n2\n3\n4\n56\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\n7/8.\n1/4\n11/1\nEXCHANGE SPECIMEN FROM\nC.T. B.\ndet. M. Wayne Morris 1988\nGalax aphylla L.\nNORTH CAROLINA. Bomcombe Co. Ne of Asheville,\nelev. ca. 3400 ft. W of Blue Ridge Parkway at\nmile marker 374.5 (Tanbark Tunnel). Up a\nUnder mixed hardwood-conifer forest, rich\nravine to nw of tunnel by ca. to mi.\nmesic slopes.\nJuly 29, 1987\nCharles T. Bryson 6821\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "295050",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles T. Bryson",
+    "collectorNumber": "6821",
+    "identifiedBy": "M. Wayne Morris",
+    "identifiedDate": "1988",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 29, 1987",
+    "collectionDate": "1987-07-29",
+    "collectionDateEnd": "",
+    "habitat": "Under mixed hardwood-conifer forest, rich mesic slopes.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe Co.",
+    "locality": "Ne of Asheville, elev. ca. 3400 ft. W of Blue Ridge Parkway at mile marker 374.5 (Tanbark Tunnel). Up a ravine to nw of tunnel by ca. \u00bc to \u00bd mi.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1036",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nEXCHANGE SPECIMEN FROM\nC.T.B.\nNL00134067\nUniversity of Louisiana at Monroe\nGalax aphylla\nLOUISIANA UNIVERSI\nTHEAST\nHERBARIUM\nUniversity of Louisiana at Monroe\nNL00134067\ninches\n2\n3\n9\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n6\n5\n7\n8\n10\n11\n12\n13\n14\n15 16\n17\n18 19\n8\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nKodak, 2007 TM Kodak\nKodak, 2007 TM Kodak\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n63\n74\nA 1\n2\n3\n4\n56\nM 8\n9 10 11 12 13 14 15\nB 17 18 19\n7/8.\n1/4\n11/1\nGalax aphylla"
+  }
+}

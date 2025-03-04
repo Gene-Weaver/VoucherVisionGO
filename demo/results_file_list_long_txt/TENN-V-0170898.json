@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170898\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 44\u03bc<sup>2</sup>\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nKnox COUNTY\nNO. 40628\n\n*Galax aphylla* L.\n\nIdumea Road, moist bank of creek\nbetween Rutledge Road and House Mtn.\n\nCOLLECTORS  25 Feb. '68\nA. J. Sharp, Frank Bowers, Claudio\nDelgadillo\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000955,
+      "total_cost": 0.0017337499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 191
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170898\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSEE\nFLORA TENNESSEENSIS\nKnox COUNTY\nNO. 40628\nGalax aphylla L.\nIdumea Road, moist bank of creek\nbetween Rutledge Road and House Mtn.\nCOLLECTORS\n25 Feb. 196 8\nA. J. Sharp, Frank Bowers, Claudio\nDelgadillo\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.56e-05,
+      "total_cost": 0.0007471000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2263,
+    "output": 525,
+    "cost_in": 0.0002263,
+    "cost_out": 0.00021
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170898\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 44\u03bc<sup>2</sup>\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSEE\n\nFLORA TENNESSEENSIS\nKnox COUNTY\nNO. 40628\n\n*Galax aphylla* L.\n\nIdumea Road, moist bank of creek\nbetween Rutledge Road and House Mtn.\n\nCOLLECTORS  25 Feb. '68\nA. J. Sharp, Frank Bowers, Claudio\nDelgadillo\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170898\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSEE\nFLORA TENNESSEENSIS\nKnox COUNTY\nNO. 40628\nGalax aphylla L.\nIdumea Road, moist bank of creek\nbetween Rutledge Road and House Mtn.\nCOLLECTORS\n25 Feb. 196 8\nA. J. Sharp, Frank Bowers, Claudio\nDelgadillo\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170898",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. J. Sharp, Frank Bowers, Claudio Delgadillo",
+    "collectorNumber": "40628",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 Feb. '68",
+    "collectionDate": "1968-02-25",
+    "collectionDateEnd": "",
+    "habitat": "Moist bank of creek",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 44\u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "",
+    "stateProvince": "Tennessee",
+    "county": "Knox",
+    "locality": "Idumea Road, between Rutledge Road and House Mtn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF TENNESSEE KNOXVILLE\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nFLORA TENNESSEENSIS\nCOLLECTORS\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

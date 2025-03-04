@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FLAS\nHERBARIUM\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275422\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSTOKES COUNTY: Hanging Rock State Park, Hanging Rock trail. On slope covered in leaf debris under *Kalmia latifolia*. Surrounded by red maple, moss (spp. unknown), oak spp., and *Liriodendron tulipifera*. Flowering.\nLat. 36.39205 Long. -80.26511 Datum: WGS84\ncoll. Michelle Gaynor #52 31 May 2021\n\nNorth Carolina Division of Parks and Recreation, Scientific Research and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG244 (Pop 17).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nHandwritten text: #52\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Liriodendron tulipifera*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001385,
+      "total_cost": 0.00216375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 277
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FLAS 275422\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSTOKES COUNTY: Hanging Rock State Park, Hanging\nRock trail. On slope covered in leaf debris under Kalmia\nlatifolia. Surrounded by red maple, moss (spp. unknown),\noak spp., and Liriodendron tulipifera. Flowering.\nLat. 36.39205 Long. -80.26511 Datum: WGS84\ncoll. Michelle Gaynor # 52 31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG244 (Pop 17).\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nGalax urceolata\nKalmia latifolia\nLiriodendron tulipifera\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.84e-05,
+      "total_cost": 0.0007799,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 246
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2388,
+    "output": 609,
+    "cost_in": 0.0002388,
+    "cost_out": 0.00024359999999999999
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFLAS\nHERBARIUM\n\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 275422\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSTOKES COUNTY: Hanging Rock State Park, Hanging Rock trail. On slope covered in leaf debris under *Kalmia latifolia*. Surrounded by red maple, moss (spp. unknown), oak spp., and *Liriodendron tulipifera*. Flowering.\nLat. 36.39205 Long. -80.26511 Datum: WGS84\ncoll. Michelle Gaynor #52 31 May 2021\n\nNorth Carolina Division of Parks and Recreation, Scientific Research and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG244 (Pop 17).\n\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nHandwritten text: #52\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Liriodendron tulipifera*\n\n\ngemini-2.0-flash OCR:\nFLAS 275422\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\ndet. Michelle Gaynor, 31 May 2021\nSTOKES COUNTY: Hanging Rock State Park, Hanging\nRock trail. On slope covered in leaf debris under Kalmia\nlatifolia. Surrounded by red maple, moss (spp. unknown),\noak spp., and Liriodendron tulipifera. Flowering.\nLat. 36.39205 Long. -80.26511 Datum: WGS84\ncoll. Michelle Gaynor # 52 31 May 2021\nNorth Carolina Division of Parks and Recreation, Scientific\nResearch and Collecting Permit, 2021_0524.\nCorresponds to genetic sample MLG244 (Pop 17).\nPloidy level inferred via flow cytometry: Tetraploid.\nMichelle L. Gaynor 7 Sept 2022\n\n\nGalax urceolata\nKalmia latifolia\nLiriodendron tulipifera\n\n",
+  "formatted_json": {
+    "catalogNumber": "275422",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Michelle Gaynor",
+    "collectorNumber": "52",
+    "identifiedBy": "Michelle Gaynor",
+    "identifiedDate": "2021-05-31",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "31 May 2021",
+    "collectionDate": "2021-05-31",
+    "collectionDateEnd": "",
+    "habitat": "On slope covered in leaf debris under Kalmia latifolia. Surrounded by red maple, moss (spp. unknown), oak spp., and Liriodendron tulipifera. Flowering.",
+    "chromosomeCount": "Ploidy level inferred via flow cytometry tetraploid.",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Stokes county",
+    "locality": "Hanging rock state park, hanging rock trail.",
+    "verbatimCoordinates": "Lat. 36.39205 Long. -80.26511 Datum WGS84",
+    "decimalLatitude": "36.39205",
+    "decimalLongitude": "-80.26511",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "FLAS\nHerbarium\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPlants of north carolina\nNorth carolina division of parks and recreation, scientific research and collecting permit, 2021_0524.\nCorresponds to genetic sample mlg244 (pop 17).\nMichelle l. Gaynor 7 sept 2022\nHandwritten text\nKalmia latifolia\nLiriodendron tulipifera"
+  }
+}

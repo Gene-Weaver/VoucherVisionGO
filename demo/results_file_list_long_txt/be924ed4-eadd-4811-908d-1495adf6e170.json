@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 263098\n\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\nGAINESVILLE\n\n235\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nWILKES COUNTY:\nLat. 36.39767. Long. -81.03955. Datum: WGS84.\ncoll. Stein Servick # 120\nVoucher for: Servick, Stein et al. Population genetic variation, geographic structure, and multiple origins of autopolyploidy in *Galax urceolata*.\nAm J Bot. June 2015 102: 973-982; published ahead of print 12 June 2015. doi:10.3732/ajb.1400554\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011300000000000001,
+      "total_cost": 0.0019087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 226
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCH\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 263098\nGAINESVI\nFLAS\nHERBARIUM\nVIVERSITY OF FLOF\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nWILKES COUNTY:\nLat. 36.39767. Long. -81.03955. Datum: WGS84.\ncoll. Stein Servick # 120\nAm. J. Bot. June 2015 102:973-982, published ahead of print 12 June 2015, doi: 10.3732/ajb. 1400554.\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.92e-05,
+      "total_cost": 0.0007607,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 198
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2268,
+    "output": 612,
+    "cost_in": 0.0002268,
+    "cost_out": 0.00024480000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 263098\n\nFLAS\nHERBARIUM\nUNIVERSITY OF FLORIDA\nGAINESVILLE\n\n235\n\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nWILKES COUNTY:\nLat. 36.39767. Long. -81.03955. Datum: WGS84.\ncoll. Stein Servick # 120\nVoucher for: Servick, Stein et al. Population genetic variation, geographic structure, and multiple origins of autopolyploidy in *Galax urceolata*.\nAm J Bot. June 2015 102: 973-982; published ahead of print 12 June 2015. doi:10.3732/ajb.1400554\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nINCH\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 263098\nGAINESVI\nFLAS\nHERBARIUM\nVIVERSITY OF FLOF\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nWILKES COUNTY:\nLat. 36.39767. Long. -81.03955. Datum: WGS84.\ncoll. Stein Servick # 120\nAm. J. Bot. June 2015 102:973-982, published ahead of print 12 June 2015, doi: 10.3732/ajb. 1400554.\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "263098",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Stein Servick",
+    "collectorNumber": "120",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "North Carolina",
+    "county": "Wilkes County",
+    "locality": "Lat. 36.39767. Long. -81.03955. Datum WGS84.",
+    "verbatimCoordinates": "Lat. 36.39767. Long. -81.03955.",
+    "decimalLatitude": "36.39767",
+    "decimalLongitude": "-81.03955",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS\nFLAS\nHERBARIUM\nVIVERSITY OF FLOF\nGAINESVILLE\n235\nUniversity of Florida Herbarium (FLAS), Gainesville, Florida, USA\nPLANTS OF NORTH CAROLINA\nDiapensiaceae\nVoucher for Servick, Stein et al. Population genetic variation, geographic structure, and multiple origins of autopolyploidy in Galax urceolata.\nAm J Bot. June 2015 102 973-982; published ahead of print 12 June 2015. doi10.3732/ajb.1400554\nAm. J. Bot. June 2015 102973-982, published ahead of print 12 June 2015, doi 10.3732/ajb. 1400554.\nINCH"
+  }
+}

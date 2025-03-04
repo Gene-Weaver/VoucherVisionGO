@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "122350\n\nWESTVACO HERBARIUM\n\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: *Galax urceolata* AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax WESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois DATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chattooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: x FLOWER: FRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk. A common mountain ground cover.\n\n(Handwritten Text)\nSumter National\nForest, approx\n34, 968274\n83, 118613\n\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington                                      County\n*Galax aphylla* L.\nKalmia Gardens of Coker College\n\nColl. George P. Sawyer Date 8-8-75 No. 2689\nUSCH0025711\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001385,
+      "total_cost": 0.0021637500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 277
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nUSCH\nUniversity of South Carolina\nWESTVACO HERBARIUM\n122350\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: Galax urceolata AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax\nWESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois\nDATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFLOWER:\nFRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk A common mountain\nground cover.\nSumter National\nForest, approx\n34.968274\n-83.118613\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington\nGalax aphylla L.\nKalmia Gardens of Coker College\nCounty\nColl. George P. Sawyer Date 8-8-75\nNo. 2689\nUniversity of South Carolina Herbarium\n\u2605\nUSCH0025711\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001224,
+      "total_cost": 0.0008039,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 306
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2445,
+    "output": 627,
+    "cost_in": 0.00024450000000000003,
+    "cost_out": 0.00025079999999999997
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n122350\n\nWESTVACO HERBARIUM\n\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: *Galax urceolata* AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax WESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois DATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chattooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: x FLOWER: FRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk. A common mountain ground cover.\n\n(Handwritten Text)\nSumter National\nForest, approx\n34, 968274\n83, 118613\n\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington                                      County\n*Galax aphylla* L.\nKalmia Gardens of Coker College\n\nColl. George P. Sawyer Date 8-8-75 No. 2689\nUSCH0025711\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nUSCH\nUniversity of South Carolina\nWESTVACO HERBARIUM\n122350\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: Galax urceolata AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax\nWESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois\nDATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFLOWER:\nFRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk A common mountain\nground cover.\nSumter National\nForest, approx\n34.968274\n-83.118613\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington\nGalax aphylla L.\nKalmia Gardens of Coker College\nCounty\nColl. George P. Sawyer Date 8-8-75\nNo. 2689\nUniversity of South Carolina Herbarium\n\u2605\nUSCH0025711\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "122350",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "D. Bourgeois",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/24/93",
+    "collectionDate": "1993-04-24",
+    "collectionDateEnd": "",
+    "habitat": "Mountains of southeast",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Round waxy evergreen leaves, one per stalk. A common mountain ground cover.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Sc",
+    "county": "Oconee",
+    "locality": "Burrell's ford campground near chattooga river.",
+    "verbatimCoordinates": "approx\n34, 968274\n83, 118613",
+    "decimalLatitude": "34.968274",
+    "decimalLongitude": "-83.118613",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WESTVACO HERBARIUM\nFAMILY NAME DIAPENSIACEAE\nCOMMON NAME Galax WESTVACO CODE 6431\nPLANT HT 1 dm\nFOLIAGE x FLOWER FRUIT\nSumter national\nForest\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\nUniversity of south carolina herbarium\nFLORA OF SOUTH CAROLINA\nDarlington                                      County\nGalax aphylla L.\nKalmia gardens of coker college\nColl. George p. sawyer date 8-8-75 no. 2689\nUSCH0025711\nGalax urceolata\nGalax aphylla\nUniversity of south carolina\ncm\n1 2 3\n4\n5\n6\n7 8 9 10\ncopyright reserved"
+  }
+}

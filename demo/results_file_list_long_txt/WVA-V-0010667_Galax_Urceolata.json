@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 453 \u03bc\u00b2\nGuy L. Nesom, 1975 Aug. 9 2 plants\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965  CLYDE F. REED\nDETERMINED BY\n\n118182\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nWest Virginia University (WVA)\nWVA-V-0010667\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nHenderson County\n\n*Galax aphylla* L.\nDeep oak woods, Flat Rock\nK. H. Garren May 22, 1935\nNo. 248\n\nHandwritten Text:\n*Galax aphylla* L.\n1965\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010949999999999998,
+      "total_cost": 0.0018737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 219
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC 1 SYSTEM 2\n7\n10\n11\n12\n13\n14\ncopyright reserved\nU. S. A.\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010667\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 453 \u03bc2\nGuy L. Nesom, 1975\nANNOTATION LABEL\nGalax aphylla L.\n1965 CLYDE F. REED\n118182\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nHenderson County\nGalax aphylla L.\nDeep oak woods, Flat Rock\nK.H. Garren\nMay 22,1935\nNo. 248\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.44e-05,
+      "total_cost": 0.0007659,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 211
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2307,
+    "output": 542,
+    "cost_in": 0.00023070000000000002,
+    "cost_out": 0.00021679999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 453 \u03bc\u00b2\nGuy L. Nesom, 1975 Aug. 9 2 plants\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965  CLYDE F. REED\nDETERMINED BY\n\n118182\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nWest Virginia University (WVA)\nWVA-V-0010667\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nHenderson County\n\n*Galax aphylla* L.\nDeep oak woods, Flat Rock\nK. H. Garren May 22, 1935\nNo. 248\n\nHandwritten Text:\n*Galax aphylla* L.\n1965\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC 1 SYSTEM 2\n7\n10\n11\n12\n13\n14\ncopyright reserved\nU. S. A.\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010667\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 453 \u03bc2\nGuy L. Nesom, 1975\nANNOTATION LABEL\nGalax aphylla L.\n1965 CLYDE F. REED\n118182\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nHenderson County\nGalax aphylla L.\nDeep oak woods, Flat Rock\nK.H. Garren\nMay 22,1935\nNo. 248\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "118182",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "K. H. Garren",
+    "collectorNumber": "248",
+    "identifiedBy": "Clyde f. Reed",
+    "identifiedDate": "1965-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L., 1965, Clyde f. Reed",
+    "verbatimCollectionDate": "May 22, 1935",
+    "collectionDate": "1935-05-22",
+    "collectionDateEnd": "",
+    "habitat": "Deep oak woods, flat rock",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 453 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U. S. a.",
+    "stateProvince": "West Virginia",
+    "county": "Henderson county",
+    "locality": "Flat rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\nHerbarium of the university of north carolina\nguy l. nesom, 1975 aug. 9 2 plants\nAnnotation label\ndetermined by\nWest virginia\nherbarium\nuniversity\nWest virginia university (wva)\nWva-v-0010667\nFlora of north carolina\nduke university herbarium\nhandwritten text"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "YES, M.A.M.\nIMAGEDI\n\nHOWARD UNIVERSITY\n00006066\n\nHERBARIUM\n\nHERBARIUM Pearisburg, Va.\nOF HOWARD UNIVERSITY W. Va., S. quad\n\n*Galax aphylla* Wand flower.\nElev. ca. 4000' rich woodland, vic.\nBald Knob and Mt. Lake,\nHabitat: Mt. Lake Bio. Sta.,\nLocality Giles Co. Va.\nDate:\nColl. John P. Rier, det. H. D. Hammond *(handwritten)*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "YES, M.A.M.\nIMAGEDI\n0\n1 2\n3 4\n5 6\n7 8 9 10\ncm\ncopyright reserved\nHOWARD\nUNIVERSITY,\nHERBARIUM\nHERBARIUM Learisburg, Va.\nOF HOWARD UNIVERSITY\nGalax aphylla L.\nWand flower.\nElev. ca. 4000' rich woodland, vic.\nHabitat Bald Knob and mt. Lake,\nLocality mt. Lake Bio. Sta.,\nDate Giles Co., Va.,\nColl. John P. Rier, det. H.D. Hammond.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.360000000000001e-05,
+      "total_cost": 0.0007351,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 134
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2145,
+    "output": 431,
+    "cost_in": 0.00021450000000000004,
+    "cost_out": 0.00017240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nYES, M.A.M.\nIMAGEDI\n\nHOWARD UNIVERSITY\n00006066\n\nHERBARIUM\n\nHERBARIUM Pearisburg, Va.\nOF HOWARD UNIVERSITY W. Va., S. quad\n\n*Galax aphylla* Wand flower.\nElev. ca. 4000' rich woodland, vic.\nBald Knob and Mt. Lake,\nHabitat: Mt. Lake Bio. Sta.,\nLocality Giles Co. Va.\nDate:\nColl. John P. Rier, det. H. D. Hammond *(handwritten)*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nYES, M.A.M.\nIMAGEDI\n0\n1 2\n3 4\n5 6\n7 8 9 10\ncm\ncopyright reserved\nHOWARD\nUNIVERSITY,\nHERBARIUM\nHERBARIUM Learisburg, Va.\nOF HOWARD UNIVERSITY\nGalax aphylla L.\nWand flower.\nElev. ca. 4000' rich woodland, vic.\nHabitat Bald Knob and mt. Lake,\nLocality mt. Lake Bio. Sta.,\nDate Giles Co., Va.,\nColl. John P. Rier, det. H.D. Hammond.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "00006066",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "John P. Rier",
+    "collectorNumber": "",
+    "identifiedBy": "H. D. Hammond",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "Rich woodland, vic.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Wand flower.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Va.",
+    "county": "Giles Co.",
+    "locality": "Mt. Lake bio. sta., bald knob and mt. lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Yes, m.a.m.\nImagedi\nhoward university\nHerbarium Pearisburg, va.\nof howard university\ns. quad"
+  }
+}

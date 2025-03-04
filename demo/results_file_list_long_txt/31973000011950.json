@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011950\n\n(Handwritten) *Diapensi*\n\nPlants of ALABAMA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nCLEBURNE CO.: ca. 8 air mi SW of Heflin, along W\nside of route 431, 2.5 mi S of junction of routes 431\nand I-20.\n\nDry-mesic forest on slope above road; forest dominated\nby *Quercus*, *Pinus*, *Nyssa sylvatica*, *Acer rubrum*,\n*Cornus florida*; thick leaf litter; frequent.\n\nRobert F.C. Naczi 5478                      23 May 1996\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009699999999999999,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u0661/\u0661\u0661/\nTUORTHERN KENTUCKY LUNIVERSITY\nHERBARTUR\nNKU Herbarium (KNK)\n3 1973 000011950\nDiapensi\nPlants of ALABAMA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nCLEBURNE CO.: ca. 8 air mi SW of Heflin, along W\nside of route 431, 2.5 mi S of junction of routes 431\nand I-20.\nDry-mesic forest on slope above road; forest dominated\nby Quercus, Pinus, Nyssa sylvatica, Acer rubrum,\nCornus florida; thick leaf litter; frequent.\nRobert F.C. Naczi 5478\n23 May 1996\nNKU\n10\n12\n3\n4\n5\n6 7 8 9\n10\ncm\ncopyright reserved\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\nGalax urceolata\nQuercus\nPinus\nNyssa sylvatica\nAcer rubrum\nCornus florida\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.8e-05,
+      "total_cost": 0.0007795,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 245
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2319,
+    "output": 578,
+    "cost_in": 0.0002319,
+    "cost_out": 0.00023119999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011950\n\n(Handwritten) *Diapensi*\n\nPlants of ALABAMA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nCLEBURNE CO.: ca. 8 air mi SW of Heflin, along W\nside of route 431, 2.5 mi S of junction of routes 431\nand I-20.\n\nDry-mesic forest on slope above road; forest dominated\nby *Quercus*, *Pinus*, *Nyssa sylvatica*, *Acer rubrum*,\n*Cornus florida*; thick leaf litter; frequent.\n\nRobert F.C. Naczi 5478                      23 May 1996\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u0661/\u0661\u0661/\nTUORTHERN KENTUCKY LUNIVERSITY\nHERBARTUR\nNKU Herbarium (KNK)\n3 1973 000011950\nDiapensi\nPlants of ALABAMA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nCLEBURNE CO.: ca. 8 air mi SW of Heflin, along W\nside of route 431, 2.5 mi S of junction of routes 431\nand I-20.\nDry-mesic forest on slope above road; forest dominated\nby Quercus, Pinus, Nyssa sylvatica, Acer rubrum,\nCornus florida; thick leaf litter; frequent.\nRobert F.C. Naczi 5478\n23 May 1996\nNKU\n10\n12\n3\n4\n5\n6 7 8 9\n10\ncm\ncopyright reserved\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\nGalax urceolata\nQuercus\nPinus\nNyssa sylvatica\nAcer rubrum\nCornus florida\n\n",
+  "formatted_json": {
+    "catalogNumber": "3 1973 000011950",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert F.C. Naczi",
+    "collectorNumber": "5478",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 May 1996",
+    "collectionDate": "1996-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Dry-mesic forest on slope above road; forest dominated by Quercus, Pinus, Nyssa sylvatica, Acer rubrum, Cornus florida; thick leaf litter; frequent.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Alabama",
+    "county": "Cleburne co.",
+    "locality": "Ca. 8 air mi sw of heflin, along w side of route 431, 2.5 mi s of junction of routes 431 and i-20.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northern kentucky university\nHerbarium\nNku herbarium (knk)\n(handwritten) diapensi\nPlants of alabama, u.s.a.\nGalax urceolata\n\nGalax urceolata\nNku\nCopyright reserved\nnorthERN\nKentucky\nUNIVERSITY\nQuercus\nPinus\nNyssa sylvatica\nAcer rubrum\nCornus florida"
+  }
+}

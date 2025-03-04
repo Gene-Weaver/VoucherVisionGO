@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025744\n\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania                     County\n\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson  Date July 25, 1975 No.\n(Handwritten: \"R\")\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.0015737499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025744\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania County\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975 No.\n2024\nR\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.599999999999999e-05,
+      "total_cost": 0.0007475000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 485,
+    "cost_in": 0.0002212,
+    "cost_out": 0.00019400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n002678\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025744\n\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania                     County\n\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson  Date July 25, 1975 No.\n(Handwritten: \"R\")\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025744\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF North Carolina\nTransylvania County\nGalax aphylla L.\nNear summit of Devils Courthouse, beneath\nLyonia, etc. Blue Ridge Parkway.\nColl. J.B. Nelson Date July 25, 1975 No.\n2024\nR\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025744",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.B. Nelson",
+    "collectorNumber": "R",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 25, 1975",
+    "collectionDate": "1975-07-25",
+    "collectionDateEnd": "",
+    "habitat": "Near summit of Devils Courthouse, beneath Lyonia, etc. Blue Ridge Parkway.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Transylvania",
+    "locality": "Near summit of Devils Courthouse, beneath Lyonia, etc. Blue Ridge Parkway.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "copyright reserved\nUniversity of South Carolina\nUSCH\nUniversity of South Carolina Herbarium\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH"
+  }
+}

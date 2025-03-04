@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n16767\nHERBARIUM\n\nJFM\n10/16/2012 *(Handwritten)*\n*Galax urceolata* (Poiret) Brummitt *(Handwritten)*\n\nHERBARIUM\nof the\nDIAPENSIACEAE\n\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Rutherford\n\n*Galax aphylla* L.\nChimney Rock Prk. Roadside, ca. 1 mile\nfrom office, with mxd. heaths.\n\nE. Feil #516\nJ. F. Matthews\nJ. T. Soule\nJ. Reynolds\n5/25/83\n24ColorCard CameraTrax.com\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008199999999999999,
+      "total_cost": 0.00159875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "16767\nHERBARIUM\nMETRIC\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nJFM\n10/16/2012\nGalax urceolata (Poiret) Brummitt\nHERBARIUM\nDIAPENSIACEAE\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty\nRutherford\nGalax aphylla L.\nChimney Rock Prk. Roadside, ca. 1 mile\nfrom office, with mxd heaths.\nE. Feil #516\nJ. F. Matthews\nJ. T. Soule\nJ. Reynolds\n5/25/83\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2226,
+    "output": 504,
+    "cost_in": 0.00022260000000000002,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n16767\nHERBARIUM\n\nJFM\n10/16/2012 *(Handwritten)*\n*Galax urceolata* (Poiret) Brummitt *(Handwritten)*\n\nHERBARIUM\nof the\nDIAPENSIACEAE\n\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Rutherford\n\n*Galax aphylla* L.\nChimney Rock Prk. Roadside, ca. 1 mile\nfrom office, with mxd. heaths.\n\nE. Feil #516\nJ. F. Matthews\nJ. T. Soule\nJ. Reynolds\n5/25/83\n24ColorCard CameraTrax.com\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n16767\nHERBARIUM\nMETRIC\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nJFM\n10/16/2012\nGalax urceolata (Poiret) Brummitt\nHERBARIUM\nDIAPENSIACEAE\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty\nRutherford\nGalax aphylla L.\nChimney Rock Prk. Roadside, ca. 1 mile\nfrom office, with mxd heaths.\nE. Feil #516\nJ. F. Matthews\nJ. T. Soule\nJ. Reynolds\n5/25/83\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "16767",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "E. Feil, J. F. Matthews, J. T. Soule, J. Reynolds",
+    "collectorNumber": "516",
+    "identifiedBy": "Jfm",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/25/83",
+    "collectionDate": "1983-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Roadside, ca. 1 mile from office, with mxd. heaths.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Rutherford",
+    "locality": "Chimney Rock Prk.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina At Charlotte\nHerbarium\nHerbarium\nof the\nDiapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nGalax aphylla L.\n24colorcard Cameratrax.com\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n265020\n\nGA ATLAS PROJECT:\n= *Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff                      June 2013\n\nUniversity of Georgia Herbarium (GA), Athens, Georgia, USA\nPLANTS OF GEORGIA\n<Diapensiaceae> - 2 3 5\n*Galax aphylla*\n\nTOWNS COUNTY Chattahoochee National Forest:\nRoadside of Jacks Gap Road. Flower color: white.\ncoll. E.V. Richards s.n.                                Aug 2, 1970\nCommon name: galax\nex FSSR Herbarium, USDA, Atlanta, GA in 2009. Label retyped.\n\nex FSSR\nForest Service, USDA Herbarium\nAtlanta, GA ~ [2009]\nUNIVERSITY OF GEORGIA\nGA084717\n\nSpecimen Examined for\nGeorgia Atlas Project\n31 July 20/3 *(Handwritten)*\n\nIMAGED 2014\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012,
+      "total_cost": 0.00197875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 240
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n265020\nex FSSR\nForest Service, USDA Herbarium\nAtlanta, GA~[2009]\nUNIVERSITY OF GEORGIA\nGA084717\nGA ATLAS PROJECT:\n= Galax urceolata (Poir.) Brummitt\nGA Herbarium staff\nJune 2013\nUniversity of Georgia Herbarium (GA), Athens, Georgia, USA\nPLANTS OF GEORGIA\nGalax aphylla\nTOWNS COUNTY Chattahoochee National Forest:\nRoadside of Jacks Gap Road. Flower color: white.\ncoll. E.V. Richards s.n.\nCommon name: galax\nAug 2, 1970\nIMAGED 2014\nSpecimen Examined for\nGeorgia Atlas Project\n31 July 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.64e-05,
+      "total_cost": 0.0007579,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 191
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2309,
+    "output": 519,
+    "cost_in": 0.0002309,
+    "cost_out": 0.00020760000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n265020\n\nGA ATLAS PROJECT:\n= *Galax urceolata* (Poir.) Brummitt\nGA Herbarium staff                      June 2013\n\nUniversity of Georgia Herbarium (GA), Athens, Georgia, USA\nPLANTS OF GEORGIA\n<Diapensiaceae> - 2 3 5\n*Galax aphylla*\n\nTOWNS COUNTY Chattahoochee National Forest:\nRoadside of Jacks Gap Road. Flower color: white.\ncoll. E.V. Richards s.n.                                Aug 2, 1970\nCommon name: galax\nex FSSR Herbarium, USDA, Atlanta, GA in 2009. Label retyped.\n\nex FSSR\nForest Service, USDA Herbarium\nAtlanta, GA ~ [2009]\nUNIVERSITY OF GEORGIA\nGA084717\n\nSpecimen Examined for\nGeorgia Atlas Project\n31 July 20/3 *(Handwritten)*\n\nIMAGED 2014\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n265020\nex FSSR\nForest Service, USDA Herbarium\nAtlanta, GA~[2009]\nUNIVERSITY OF GEORGIA\nGA084717\nGA ATLAS PROJECT:\n= Galax urceolata (Poir.) Brummitt\nGA Herbarium staff\nJune 2013\nUniversity of Georgia Herbarium (GA), Athens, Georgia, USA\nPLANTS OF GEORGIA\nGalax aphylla\nTOWNS COUNTY Chattahoochee National Forest:\nRoadside of Jacks Gap Road. Flower color: white.\ncoll. E.V. Richards s.n.\nCommon name: galax\nAug 2, 1970\nIMAGED 2014\nSpecimen Examined for\nGeorgia Atlas Project\n31 July 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "265020",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "E.v. Richards",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "Ga herbarium staff",
+    "identifiedDate": "2013-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "Aug 2, 1970",
+    "collectionDate": "1970-08-02",
+    "collectionDateEnd": "",
+    "habitat": "Roadside of jacks gap road. flower color white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Common name galax",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Towns county",
+    "locality": "Chattahoochee national forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of georgia herbarium (ga), athens, georgia, usa\nPlants of georgia\nex fssr herbarium, usda, atlanta, ga in 2009. label retyped.\nex fssr\nForest service, usda herbarium\natlanta, ga\nUniversity of georgia\nGa atlas project\nSpecimen examined for\nGeorgia atlas project\nimaged 2014"
+  }
+}

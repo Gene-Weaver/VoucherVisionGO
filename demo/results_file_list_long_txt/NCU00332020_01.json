@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n162102\n\nHerbarium of the University of North Carolina\n\nSOUTH CAROLINA\nPickens County\n\n*Galax aphylla* L.\n\nrich wooded slope, 2.4 miles south of N.C.-\nS.C. State line on U.S. Rt. 178.\n\nwith C R Bell\nHarry E. Ahles 14273 June 8, 1956\nCollected for the \"Flora of the Carolinas\"\n\nNCU00332020\n\nHandwritten text: C R Bell, 14273, June 8, 1956\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007849999999999999,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nOF NORTH\nERSITY\nUN\nCAROLINA\n102102\nmm\nx-rite\ncolorchecker\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nPickens County\nGalax aphylla L.\nrich wooded slope, 2.4 miles south of N.C.-\nS. C. State line on U.S. Rt. 178.\nwith C R Bell\nHarry E. Ahles\n14273\nJune 8, 1956\nCollected for the \"Flora of the Carolinas\"\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332020\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 450,
+    "cost_in": 0.000218,
+    "cost_out": 0.00018
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n162102\n\nHerbarium of the University of North Carolina\n\nSOUTH CAROLINA\nPickens County\n\n*Galax aphylla* L.\n\nrich wooded slope, 2.4 miles south of N.C.-\nS.C. State line on U.S. Rt. 178.\n\nwith C R Bell\nHarry E. Ahles 14273 June 8, 1956\nCollected for the \"Flora of the Carolinas\"\n\nNCU00332020\n\nHandwritten text: C R Bell, 14273, June 8, 1956\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nOF NORTH\nERSITY\nUN\nCAROLINA\n102102\nmm\nx-rite\ncolorchecker\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nPickens County\nGalax aphylla L.\nrich wooded slope, 2.4 miles south of N.C.-\nS. C. State line on U.S. Rt. 178.\nwith C R Bell\nHarry E. Ahles\n14273\nJune 8, 1956\nCollected for the \"Flora of the Carolinas\"\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332020\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332020",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harry E. Ahles, C R Bell",
+    "collectorNumber": "14273",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 8, 1956",
+    "collectionDate": "1956-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Rich wooded slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Pickens county",
+    "locality": "2.4 miles south of N.c.-s.c. state line on u.s. rt. 178.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nUniversity of north carolina\nat chapel hill\nof north\nERSITY\nUN\nCAROLINA"
+  }
+}

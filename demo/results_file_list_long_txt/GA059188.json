@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nvolume of 48\u00b512\nGuy L. Nesom, 1975\n\nUNIVERSITY OF GEORGIA\nGA059188\n\nPOISONED\nUNIV. OF GEORGIA\nHERBARIUM\n16482\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n*Galax aphylla* L.\n\nmoist wooded hillside 9.5 miles west of\nDawsonville, Dawson Co.\n\nJoseph H. Pyron\nRogers McVaugh 2924  May 15, 1938\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00095,
+      "total_cost": 0.00172875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 based on average guard cell area\nvolume of 48212\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA\nGA059188\nPOISONED\nUNIV. OF GEORGIA\nHERBARIUM\n16482\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nmoist wooded hillside\n9.5 miles west of\nDawsonville, Dawson Co.\nJoseph H. Pyron\nRogers McVaugh\n2924\nMay 15, 1938\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.28e-05,
+      "total_cost": 0.0007543000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 182
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2270,
+    "output": 514,
+    "cost_in": 0.000227,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nvolume of 48\u00b512\nGuy L. Nesom, 1975\n\nUNIVERSITY OF GEORGIA\nGA059188\n\nPOISONED\nUNIV. OF GEORGIA\nHERBARIUM\n16482\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n*Galax aphylla* L.\n\nmoist wooded hillside 9.5 miles west of\nDawsonville, Dawson Co.\n\nJoseph H. Pyron\nRogers McVaugh 2924  May 15, 1938\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 based on average guard cell area\nvolume of 48212\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA\nGA059188\nPOISONED\nUNIV. OF GEORGIA\nHERBARIUM\n16482\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nmoist wooded hillside\n9.5 miles west of\nDawsonville, Dawson Co.\nJoseph H. Pyron\nRogers McVaugh\n2924\nMay 15, 1938\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059188",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Joseph H. Pyron, Rogers McVaugh",
+    "collectorNumber": "2924",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "May 15, 1938",
+    "collectionDate": "1938-05-15",
+    "collectionDateEnd": "",
+    "habitat": "Moist wooded hillside",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 based on average guard cell area volume of 48\u00b512",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dawson Co.",
+    "locality": "9.5 miles west of Dawsonville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\nGeorgia atlas project\n9 november 2005\nHerbarium of the university of north carolina\nPoisoned\nUniv. of georgia\nHerbarium\n16482\nHerbarium of the university of georgia\nFlora of georgia\nImaged 2013"
+  }
+}

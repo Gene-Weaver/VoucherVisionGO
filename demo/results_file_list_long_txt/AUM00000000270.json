@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Kodak Gray Scale\nA 1 2 3 4 5 6 M 8 9 10 11 12 13 14 15 B 17 18 19\n\u00a9 Kodak, 2007 TM: Kodak\n\nAuburn University at Montgomery\nAUM00000000270\n\nHerbarium of\nAUM\nNo. 104\n\nTechnical Name *Galax aphylla* L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality Talladega National Forest Date May 15, 1999\nAltitude\nHabitat Rocky woodland\nCollected by *Cheri Higgins*\nIdentified by *Cheri Higgins*\n\nMcCourt Label, Lewis Run, PA\n\n*Handwritten Text*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000885,
+      "total_cost": 0.0016637499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 177
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "9\n8\nL\n6\n5\n4\n3\n2\nO in\n0 cm 1\n2\n4\n00\n6\n\uc774\n27\n15\n13\n17\n18 19\n20 21\n22\n23\n24\nKodak Gray Scale\nC\nM\nA 1 2 3 4\n5\n6\nM8\n10 11 12 13 14 15\nKodak, 2007 TM: Kodak\nB 17 18 19\nHerbarium of\nNo. 104\nAUM\nTechnical Name Galax aphylla L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality Talladega National Forest Date May 15, 1999\nAltitude\nCollected by Cheri Higgins\nIdentified by Cheri Higgins\nHabitat Rocky woodland\nAuburn University at Montgomery\nAUM00000000270\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.960000000000001e-05,
+      "total_cost": 0.0007711,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 224
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2260,
+    "output": 573,
+    "cost_in": 0.000226,
+    "cost_out": 0.00022920000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nKodak Gray Scale\nA 1 2 3 4 5 6 M 8 9 10 11 12 13 14 15 B 17 18 19\n\u00a9 Kodak, 2007 TM: Kodak\n\nAuburn University at Montgomery\nAUM00000000270\n\nHerbarium of\nAUM\nNo. 104\n\nTechnical Name *Galax aphylla* L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality Talladega National Forest Date May 15, 1999\nAltitude\nHabitat Rocky woodland\nCollected by *Cheri Higgins*\nIdentified by *Cheri Higgins*\n\nMcCourt Label, Lewis Run, PA\n\n*Handwritten Text*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n9\n8\nL\n6\n5\n4\n3\n2\nO in\n0 cm 1\n2\n4\n00\n6\n\uc774\n27\n15\n13\n17\n18 19\n20 21\n22\n23\n24\nKodak Gray Scale\nC\nM\nA 1 2 3 4\n5\n6\nM8\n10 11 12 13 14 15\nKodak, 2007 TM: Kodak\nB 17 18 19\nHerbarium of\nNo. 104\nAUM\nTechnical Name Galax aphylla L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality Talladega National Forest Date May 15, 1999\nAltitude\nCollected by Cheri Higgins\nIdentified by Cheri Higgins\nHabitat Rocky woodland\nAuburn University at Montgomery\nAUM00000000270\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "AUM00000000270",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Cheri Higgins",
+    "collectorNumber": "104",
+    "identifiedBy": "Cheri Higgins",
+    "identifiedDate": "1999-05-15",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 15, 1999",
+    "collectionDate": "1999-05-15",
+    "collectionDateEnd": "",
+    "habitat": "Rocky woodland",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Talladega",
+    "locality": "Talladega national forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Kodak Gray Scale\nA 1 2 3 4 5 6 M 8 9 10 11 12 13 14 15 B 17 18 19\n\u00a9 Kodak, 2007 TM Kodak\nAuburn University at Montgomery\nHerbarium of\nAUM\nTechnical Name Galax aphylla L.\nCommon Name Galax\nFamily Diapensiaceae\nAltitude\nHandwritten Text\nGalax aphylla L.\n9\n8\nL\n6\n5\n4\n3\n2\nO in\n0 cm 1\n2\n4\n00\n6\n\uc774\n27\n15\n13\n17\n18 19\n20 21\n22\n23\n24"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "40968\nUNCC\n\n*Tfm*\n10/16/2012 (handwritten)\n*Galax urceolata* (Poir.) Brummitt (handwritten)\n\nHERBARIUM of T. LAWRENCE MELLICHAMP\nPlants of North Carolina\n\n*Galax aphylla* L.\n[Diapensiaceae]\n\nHENDERSON CO.: Common on dry to moist\nwooded slopes, often under *Rhododendron*\nand *Kalmia*; along dirt road around\nLake Summit at Tuxedo.\n\nT. L. Mellichamp No. 1688 11 June 1972\n\n0145\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.00156875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "KLENBURG\n40968\nAERBARTURA\nUNCC\nCOUNT\nMETRIC 1\n5\n6\nTM\n24ColorCard Camera Trax.com\n8\n6\n10\n11\n12\n0145\nJFM\n10/16/2012\nGalax urceolata (Poiret) Brummitt\nHERBARIUM of T. LAWRENCE MELLICHAMP\nPlants of North Carolina\nGalax aphylla L.\nHENDERSON CO.: Common on dry to moist\nwooded slopes, often under Rhododendron\nand Kalmia; along dirt road around\nLake Summit at Tuxedo.\nT. L. Mellichamp No. 1688 11 June 1972\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.96e-05,
+      "total_cost": 0.0007511,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 174
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2216,
+    "output": 545,
+    "cost_in": 0.00022160000000000002,
+    "cost_out": 0.000218
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n40968\nUNCC\n\n*Tfm*\n10/16/2012 (handwritten)\n*Galax urceolata* (Poir.) Brummitt (handwritten)\n\nHERBARIUM of T. LAWRENCE MELLICHAMP\nPlants of North Carolina\n\n*Galax aphylla* L.\n[Diapensiaceae]\n\nHENDERSON CO.: Common on dry to moist\nwooded slopes, often under *Rhododendron*\nand *Kalmia*; along dirt road around\nLake Summit at Tuxedo.\n\nT. L. Mellichamp No. 1688 11 June 1972\n\n0145\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nKLENBURG\n40968\nAERBARTURA\nUNCC\nCOUNT\nMETRIC 1\n5\n6\nTM\n24ColorCard Camera Trax.com\n8\n6\n10\n11\n12\n0145\nJFM\n10/16/2012\nGalax urceolata (Poiret) Brummitt\nHERBARIUM of T. LAWRENCE MELLICHAMP\nPlants of North Carolina\nGalax aphylla L.\nHENDERSON CO.: Common on dry to moist\nwooded slopes, often under Rhododendron\nand Kalmia; along dirt road around\nLake Summit at Tuxedo.\nT. L. Mellichamp No. 1688 11 June 1972\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "40968",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "T. L. Mellichamp",
+    "collectorNumber": "1688",
+    "identifiedBy": "",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "11 June 1972",
+    "collectionDate": "1972-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Common on dry to moist wooded slopes, often under Rhododendron and Kalmia; along dirt road around Lake Summit at Tuxedo.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Henderson",
+    "locality": "Lake Summit at Tuxedo",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNCC\nHERBARIUM of T. LAWRENCE MELLICHAMP\nPlants of North Carolina\nGalax aphylla L.\n[Diapensiaceae]\nKLENBURG\nAERBARTURA\nCOUNT\nMETRIC 1\n5\n6\nTM\n24ColorCard Camera Trax.com\n8\n6\n10\n11\n12\n0145\nJFM\nGalax aphylla\n"
+  }
+}

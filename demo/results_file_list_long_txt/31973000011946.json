@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011946\n\nPlants of KENTUCKY, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nHARLAN CO.: ca. 2.5 mi NW of Harlan, ca. 1 mi N\nof end of Shoemaker Lane, Blanton Forest State\nNature Preserve.\n\nDry-mesic deciduous forest high on rocky slope\nabove small stream; infrequent.\n\nRobert F.C. Naczi 6760                      26 June 1997\n\n\nHandwritten Text: \"6760\"\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00077,
+      "total_cost": 0.0015487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u0661/\u0668\u0661\u0661/\nMORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011946\nPlants of KENTUCKY, U.S.A.\nGalax urceolata (Poir.) Brummitt\nHARLAN CO.: ca. 2.5 mi NW of Harlan, ca. 1 mi N\nof end of Shoemaker Lane, Blanton Forest State\nNature Preserve.\nDry-mesic deciduous forest high on rocky slope\nabove small stream; infrequent.\nRobert F.C. Naczi 6760\n26 June 1997\nNKU\n0\n1\n2\n3\n4\n5\n6 7 8\n9 10\ncm\ncopyright reserved\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.52e-05,
+      "total_cost": 0.0007567,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 514,
+    "cost_in": 0.0002232,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\n\nNKU Herbarium (KNK)\n3 1973 000011946\n\nPlants of KENTUCKY, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\n\nHARLAN CO.: ca. 2.5 mi NW of Harlan, ca. 1 mi N\nof end of Shoemaker Lane, Blanton Forest State\nNature Preserve.\n\nDry-mesic deciduous forest high on rocky slope\nabove small stream; infrequent.\n\nRobert F.C. Naczi 6760                      26 June 1997\n\n\nHandwritten Text: \"6760\"\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u0661/\u0668\u0661\u0661/\nMORTHERN KENTUCKY UNIVERSITY\nHERBARIUM\nNKU Herbarium (KNK)\n3 1973 000011946\nPlants of KENTUCKY, U.S.A.\nGalax urceolata (Poir.) Brummitt\nHARLAN CO.: ca. 2.5 mi NW of Harlan, ca. 1 mi N\nof end of Shoemaker Lane, Blanton Forest State\nNature Preserve.\nDry-mesic deciduous forest high on rocky slope\nabove small stream; infrequent.\nRobert F.C. Naczi 6760\n26 June 1997\nNKU\n0\n1\n2\n3\n4\n5\n6 7 8\n9 10\ncm\ncopyright reserved\nNORTHERN\nKENTUCKY\nUNIVERSITY\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "3 1973 000011946",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert F.C. Naczi",
+    "collectorNumber": "6760",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "26 June 1997",
+    "collectionDate": "1997-06-26",
+    "collectionDateEnd": "",
+    "habitat": "Dry-mesic deciduous forest high on rocky slope above small stream; infrequent.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Kentucky",
+    "county": "Harlan co.",
+    "locality": "Ca. 2.5 mi nw of harlan, ca. 1 mi n of end of shoemaker lane, blanton forest state nature preserve.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northern kentucky university\nherbarium\nnku herbarium (knk)\nPlants of kentucky, u.s.a.\nhandwritten text 6760\nGalax urceolata\nNKU\ncopyright reserved\nNorthern\nKentucky\nUniversity"
+  }
+}

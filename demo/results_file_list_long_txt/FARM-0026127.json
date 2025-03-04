@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026127\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 1/2 , based on average guard cell area\nvolume of 680 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nVIRGINIA\nCharles City County\n416. *Galax aphylla* L.\n(Handwritten text)\nSteep north-facing bank\nMillers Creek\ntributary to Chickahominy R.\n2 July 1966\n(Handwritten text)\nH. K. SVENSON\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026127\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\nVIRGINIA\nCharles City County\n416. Galax aphylla L.\nH. K. SVENSON\nSteep north-facing bank\nMillers Creek\ntributary to Chickahominy R).\n2 July\n1966\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2211,
+    "output": 505,
+    "cost_in": 0.0002211,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026127\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 1/2 , based on average guard cell area\nvolume of 680 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nVIRGINIA\nCharles City County\n416. *Galax aphylla* L.\n(Handwritten text)\nSteep north-facing bank\nMillers Creek\ntributary to Chickahominy R.\n2 July 1966\n(Handwritten text)\nH. K. SVENSON\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026127\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\nVIRGINIA\nCharles City County\n416. Galax aphylla L.\nH. K. SVENSON\nSteep north-facing bank\nMillers Creek\ntributary to Chickahominy R).\n2 July\n1966\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026127",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "H. K. Svenson",
+    "collectorNumber": "416",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 July 1966",
+    "collectionDate": "1966-07-02",
+    "collectionDateEnd": "",
+    "habitat": "Steep north-facing bank",
+    "chromosomeCount": "n = 12 , based on average guard cell area",
+    "guardCell": "n = 12",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Charles City County",
+    "locality": "Millers Creek tributary to Chickahominy R.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\nGalax urceolata\nGalax aphylla"
+  }
+}

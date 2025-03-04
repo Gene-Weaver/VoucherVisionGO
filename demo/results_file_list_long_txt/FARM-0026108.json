@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nn = 6\nGalax urceolata (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*Galax aphylla L.* (handwritten)\n*Sphagnous shore of Pitts* (handwritten)\n*Pond on Pitts Mtn.* (handwritten)\n*Allegheny Co. April 8, 1966* (handwritten)\nCollected by: *A. M. Harvill 13659* (handwritten)\nDetermined by:\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000705,
+      "total_cost": 0.0014837500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 141
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata\nn = 6\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla h.\nSphagnous shore of Pitts\nPond on Pitts mt.\nAllegheny Co. April 8, 1966\nCollected by: A. M. Harvill 13659\nDetermined by:\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.6400000000000004e-05,
+      "total_cost": 0.0007179,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 91
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2124,
+    "output": 444,
+    "cost_in": 0.0002124,
+    "cost_out": 0.0001776
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nn = 6\nGalax urceolata (Poir.) Brummitt\n\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*Galax aphylla L.* (handwritten)\n*Sphagnous shore of Pitts* (handwritten)\n*Pond on Pitts Mtn.* (handwritten)\n*Allegheny Co. April 8, 1966* (handwritten)\nCollected by: *A. M. Harvill 13659* (handwritten)\nDetermined by:\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata\nn = 6\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla h.\nSphagnous shore of Pitts\nPond on Pitts mt.\nAllegheny Co. April 8, 1966\nCollected by: A. M. Harvill 13659\nDetermined by:\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. M. Harvill",
+    "collectorNumber": "13659",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "April 8, 1966",
+    "collectionDate": "1966-04-08",
+    "collectionDateEnd": "",
+    "habitat": "Sphagnous shore of pitts",
+    "chromosomeCount": "n = 6",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Allegheny co.",
+    "locality": "Pond on pitts mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora virginica\nFarm\nHarvill-stevens\nHerbarium\nCopyright reserved"
+  }
+}

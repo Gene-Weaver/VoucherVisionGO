@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012632\n\nLYNCHBURG COLLEGE\n23457\nHERBARIUM\n\nLYNCHBURG COLLEGE\nHERBARIUM\n\n*Galax aphylla* L.\nRUSKIN S. FREER\nGWYNN W. RAMSEY\nDEC 21 1966\nHerbarium of\nNo. 307\n\nName *Galax aphylla* L.\nName\nDiapensiaceae Amherst Co.\nCollected by Jack A. Rockwell\nIdentified by\nBlue Ridge Parkway\n134 - 3 - 1\nDate 10-10-65\nHabitat moist woods\nMcCourt Labels, Bradford, Pa.\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00082,
+      "total_cost": 0.00159875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012632\nLYNCHBURG\nCOLLEGE\n23457\nHERBARIUM\nLYNCHBURG COLLEGE\nHERBARIUM\nGalax aphylla L.\nRUSKIN S. FREER\nGWYNN W. RAMSEY\nDEC 21 1966\nHerbarium of\nNo.\nGalax aphylla L.\nGalax\nDiapensiaceae\nAmherst Co.\nMilonost 60.8 (left)\n10.10.65\nHabitat moist woods\nBlue Ridge Parkway\nCollected by\nJack A Rocasell\nIdentified by\n134-3-1\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.48e-05,
+      "total_cost": 0.0007563,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2254,
+    "output": 513,
+    "cost_in": 0.0002254,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012632\n\nLYNCHBURG COLLEGE\n23457\nHERBARIUM\n\nLYNCHBURG COLLEGE\nHERBARIUM\n\n*Galax aphylla* L.\nRUSKIN S. FREER\nGWYNN W. RAMSEY\nDEC 21 1966\nHerbarium of\nNo. 307\n\nName *Galax aphylla* L.\nName\nDiapensiaceae Amherst Co.\nCollected by Jack A. Rockwell\nIdentified by\nBlue Ridge Parkway\n134 - 3 - 1\nDate 10-10-65\nHabitat moist woods\nMcCourt Labels, Bradford, Pa.\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012632\nLYNCHBURG\nCOLLEGE\n23457\nHERBARIUM\nLYNCHBURG COLLEGE\nHERBARIUM\nGalax aphylla L.\nRUSKIN S. FREER\nGWYNN W. RAMSEY\nDEC 21 1966\nHerbarium of\nNo.\nGalax aphylla L.\nGalax\nDiapensiaceae\nAmherst Co.\nMilonost 60.8 (left)\n10.10.65\nHabitat moist woods\nBlue Ridge Parkway\nCollected by\nJack A Rocasell\nIdentified by\n134-3-1\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012632",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jack A. Rockwell",
+    "collectorNumber": "307",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10-10-65",
+    "collectionDate": "1965-10-10",
+    "collectionDateEnd": "",
+    "habitat": "Moist woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Amherst co.",
+    "locality": "Blue ridge parkway",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\n23457\nHERBARIUM\nLYNCHBURG COLLEGE\nHERBARIUM\nRUSKIN S. FREER\nGWYNN W. RAMSEY\nDEC 21 1966\nHerbarium of\nNo. 134 - 3 - 1\nMcCourt Labels, Bradford, Pa.\nMilonost 60.8 (left)\nLynchburg\nCollege\ncm\ncopyright reserved"
+  }
+}

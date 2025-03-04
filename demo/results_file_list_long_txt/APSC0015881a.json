@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0015881\n\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\nGalax aphylla L.\nWarren Wilson College Forest Area 7.  Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\n\nHandwritten Text:\n* 2200'.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00071,
+      "total_cost": 0.0014887499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 142
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0015881\nTIFFEN\u00ae Gray Scale\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\nPlants of the Southeastern United States\n\n5/19/67\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.28e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2196,
+    "output": 489,
+    "cost_in": 0.00021960000000000003,
+    "cost_out": 0.00019559999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0015881\n\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\nGalax aphylla L.\nWarren Wilson College Forest Area 7.  Elevation\n2200'.\n\nR. C. Dunton                                         5/19/67\nPlants of the Southeastern United States\n\n\nHandwritten Text:\n* 2200'.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0015881\nTIFFEN\u00ae Gray Scale\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\nPlants of the Southeastern United States\n\n5/19/67\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0015881",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "",
+    "identifiedBy": "Mason Brock",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Warren Wilson College Forest Area 7.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe County",
+    "locality": "Warren Wilson College Forest Area 7.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nDet. Mason Brock, Austin Peay State University (APSC)\nHerbarium of the University of North Carolina\nPlants of the Southeastern United States\nElevation\n2200'."
+  }
+}

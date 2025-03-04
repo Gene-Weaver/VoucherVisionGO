@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087810\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n16152\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nVASCULAR FLORA OF KENTUCKY\nCounty: McCreary\n\nHerbarium\nDepartment of Biology\n\n(Handwritten) Diapensiaceae\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Common along Forest Service Rd, just\n(Handwritten) off of Rt. 90, ca. 3 mi. past\n(Handwritten) Cumberland Falls Park.\n\nK. A. Nicely No. 6353\nDate: 10/10/88\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000935,
+      "total_cost": 0.00171375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 187
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087810\nHERBARICM\nWESTERN KY, UNIVERSITY\n16152\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nVASCULAR FLORA OF KENTUCKY\nCounty: McCreary\nHerbarium\nDepartment of Biology\nDiapensiaceae\nGalax aphylla L.\nCommon along Forest Service Rd, just\noff of Rt. 90, ca. 3 mi. past\nCumberland Falls Park.\nK. A. Nicely No. 6353\nDate: 10/10/88\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.76e-05,
+      "total_cost": 0.0007491,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 169
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2229,
+    "output": 544,
+    "cost_in": 0.00022290000000000002,
+    "cost_out": 0.0002176
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087810\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n16152\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nVASCULAR FLORA OF KENTUCKY\nCounty: McCreary\n\nHerbarium\nDepartment of Biology\n\n(Handwritten) Diapensiaceae\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Common along Forest Service Rd, just\n(Handwritten) off of Rt. 90, ca. 3 mi. past\n(Handwritten) Cumberland Falls Park.\n\nK. A. Nicely No. 6353\nDate: 10/10/88\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087810\nHERBARICM\nWESTERN KY, UNIVERSITY\n16152\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nVASCULAR FLORA OF KENTUCKY\nCounty: McCreary\nHerbarium\nDepartment of Biology\nDiapensiaceae\nGalax aphylla L.\nCommon along Forest Service Rd, just\noff of Rt. 90, ca. 3 mi. past\nCumberland Falls Park.\nK. A. Nicely No. 6353\nDate: 10/10/88\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087810",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "K. A. Nicely",
+    "collectorNumber": "6353",
+    "identifiedBy": "Mason Brock, Austin Peay State University (APSC)",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10/10/88",
+    "collectionDate": "1988-10-10",
+    "collectionDateEnd": "",
+    "habitat": "Common along forest service rd, just off of rt. 90, ca. 3 mi. past cumberland falls park.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "McCreary",
+    "locality": "Common along Forest Service Rd, just off of Rt. 90, ca. 3 mi. past Cumberland Falls Park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nHERBARIUM\nWESTERN KY. UNIVERSITY\n16152\nVASCULAR FLORA OF KENTUCKY\nHerbarium\nDepartment of Biology\nDiapensiaceae\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

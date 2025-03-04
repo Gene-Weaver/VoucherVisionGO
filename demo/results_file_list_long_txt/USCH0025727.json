@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\n031804\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025727\n\nPLANTS OF SOUTH CAROLINA\nSUMTER COUNTY\n\n*GALAX APHYLLA* L.\n\nNo fruiting stalks seen; small population on\nsteep dry bluff on S side of Tavern Creek,\nwhere many outcrops of Fuller's earth occur;\nbelow thick layer of *Kalmia latifolia*; about\n100 m E of Milford Plantation road; W side of\nManchester State Forest.\n\nJohn B. Nelson 4120\nwith S. Bennett, A. Rome        18 July 1985\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\nHandwritten text: \n* 4120\n* 18 July 1985\n\n*Galax aphylla*\n*Kalmia latifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00113,
+      "total_cost": 0.00190875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 226
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\n031804\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025727\nPLANTS OF SOUTH CAROLINA\nSUMTER COUNTY\nGalax aphylla L.\nNo fruiting stalks seen; small population on\nsteep dry bluff on S side of Tavern Creek,\nwhere many outcrops of Fuller's earth occur;\nbelow thick layer of Kalmia latifolia; about\n100 m E of Milford Plantation road; W side of\nManchester State Forest.\nJohn B. Nelson 4120 18 July 1985\nwith S. Bennett, A. Rome\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\nGalax aphylla\nKalmia latifolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.72e-05,
+      "total_cost": 0.0007587000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 193
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2313,
+    "output": 511,
+    "cost_in": 0.0002313,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\n031804\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025727\n\nPLANTS OF SOUTH CAROLINA\nSUMTER COUNTY\n\n*GALAX APHYLLA* L.\n\nNo fruiting stalks seen; small population on\nsteep dry bluff on S side of Tavern Creek,\nwhere many outcrops of Fuller's earth occur;\nbelow thick layer of *Kalmia latifolia*; about\n100 m E of Milford Plantation road; W side of\nManchester State Forest.\n\nJohn B. Nelson 4120\nwith S. Bennett, A. Rome        18 July 1985\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\nHandwritten text: \n* 4120\n* 18 July 1985\n\n*Galax aphylla*\n*Kalmia latifolia*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\n031804\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nUSCH0025727\nPLANTS OF SOUTH CAROLINA\nSUMTER COUNTY\nGalax aphylla L.\nNo fruiting stalks seen; small population on\nsteep dry bluff on S side of Tavern Creek,\nwhere many outcrops of Fuller's earth occur;\nbelow thick layer of Kalmia latifolia; about\n100 m E of Milford Plantation road; W side of\nManchester State Forest.\nJohn B. Nelson 4120 18 July 1985\nwith S. Bennett, A. Rome\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\nGalax aphylla\nKalmia latifolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025727",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "John B. Nelson, S. Bennett, A. Rome",
+    "collectorNumber": "4120",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "18 July 1985",
+    "collectionDate": "1985-07-18",
+    "collectionDateEnd": "",
+    "habitat": "Steep dry bluff on s side of tavern creek, where many outcrops of fuller's earth occur; below thick layer of kalmia latifolia",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "No fruiting stalks seen; small population",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Sumter County",
+    "locality": "About 100 m e of milford plantation road; w side of manchester state forest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\nUniversity of South Carolina\n031804\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nPLANTS OF SOUTH CAROLINA\nSOUTH CAROLINA HERITAGE TRUST PROGRAM"
+  }
+}

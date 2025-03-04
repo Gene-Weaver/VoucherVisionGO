@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF WISCONSIN-MADISON (WIS)\nv 0309050 WIS\n\nWIS\ncopyright reserved\n\nWISCONSIN\nSTATE\nHERBARIUM\n(WIS)\n\nHerbarium of KENNETH W. WOOD #155\nScientific Name: *Galax aphylla* L.\nDIAPENSIACEAE\nCommon Name: BEETLEWEED\nLocality: NORTH CAROLINA, SWAIN Co., 2 MI.\nS. OF WESSERON U. S. HWY. 19\nHabitat: RICH WOODS\nDate: 4 MAY 1964 Coll. K. W. W.\n\n\n*Handwritten text: Galax aphylla*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000755,
+      "total_cost": 0.00153375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF WISCONSIN-MADISON (WIS)\nv 0309050 WIS\n0\ncm\n1\n2\n34\n5\n6\n7 8 9\nWIS\ncopyright reserved\nWISCONSIN\nSTATE\nHERBARIUM\n(WIS)\nHerbarium of KENNETH W. WOOD\nScientific Name: GALAX APHYLLA L.\nDIAPENSIACEAE\nCommon Name: BEETLEWEED\n#155\nLocality: NORTH CAROLINA, SWAIN CO., 2 mi.\nS. OF WESSER ON U. S. Hwy. 19\nHabitat: RICH WOODS\nDate: 4 MAY 1964Coll. K. W. W.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.4e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2210,
+    "output": 457,
+    "cost_in": 0.00022100000000000003,
+    "cost_out": 0.0001828
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF WISCONSIN-MADISON (WIS)\nv 0309050 WIS\n\nWIS\ncopyright reserved\n\nWISCONSIN\nSTATE\nHERBARIUM\n(WIS)\n\nHerbarium of KENNETH W. WOOD #155\nScientific Name: *Galax aphylla* L.\nDIAPENSIACEAE\nCommon Name: BEETLEWEED\nLocality: NORTH CAROLINA, SWAIN Co., 2 MI.\nS. OF WESSERON U. S. HWY. 19\nHabitat: RICH WOODS\nDate: 4 MAY 1964 Coll. K. W. W.\n\n\n*Handwritten text: Galax aphylla*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF WISCONSIN-MADISON (WIS)\nv 0309050 WIS\n0\ncm\n1\n2\n34\n5\n6\n7 8 9\nWIS\ncopyright reserved\nWISCONSIN\nSTATE\nHERBARIUM\n(WIS)\nHerbarium of KENNETH W. WOOD\nScientific Name: GALAX APHYLLA L.\nDIAPENSIACEAE\nCommon Name: BEETLEWEED\n#155\nLocality: NORTH CAROLINA, SWAIN CO., 2 mi.\nS. OF WESSER ON U. S. Hwy. 19\nHabitat: RICH WOODS\nDate: 4 MAY 1964Coll. K. W. W.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0309050",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "K. W. W.",
+    "collectorNumber": "155",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4 MAY 1964",
+    "collectionDate": "1964-05-04",
+    "collectionDateEnd": "",
+    "habitat": "Rich woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Swain co.",
+    "locality": "2 mi. s. of wesser on u. s. hwy. 19",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of wisconsin-madison (wis)\nwis\ncopyright reserved\nwisconsin\nstate\nherbarium\n(wis)\nherbarium of kenneth w. wood\ncommon name beetleweed\ngalax aphylla"
+  }
+}

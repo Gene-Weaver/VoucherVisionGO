@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012631\n\nLYNCHBURG COLLEGE\nHERBARIUM\n23458\nHERBARIUM\n\nLYNCHBURG COLLEGE\nHERBARIUM\n*Galax aphylla* L.\n\nRUSKIN S. FREER                                       DEC 23 1966\nBLUE RIDGE PARKWAY HERBARIUM\n\nScientific Name: *Galax aphylla*\nCommon Name: Galax\nPerennial, white (handwritten)\nLocality: Region: Amherst Co. (handwritten)\n           Habitat: Streamside (handwritten)\nBlue Ridge Parkway (handwritten)\nDate: 6-7-61\nNo. 255\nCollector: Jack A. Rockwell (handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008449999999999999,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012631\nCOLLEGE\n23458\nHERBARIUM\nLYNCHBURG COLLEGE\nHERBARIUM\nGalax aphylla L.\nRUSKIN S. FREER\nDEC 23 1966\nScientific Name Galax aphylla\nCommon Name\nPerennial\nLocality Region Amherst Co.\nHabitat Streamside\nDate 6-7-61\nNo. 255\nCollector Jack A Rockwell\nBlue Ridge Parkway\nLYN\ncm\ncopyright reserved\n\n\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.08e-05,
+      "total_cost": 0.0007323,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 127
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2199,
+    "output": 429,
+    "cost_in": 0.0002199,
+    "cost_out": 0.00017160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012631\n\nLYNCHBURG COLLEGE\nHERBARIUM\n23458\nHERBARIUM\n\nLYNCHBURG COLLEGE\nHERBARIUM\n*Galax aphylla* L.\n\nRUSKIN S. FREER                                       DEC 23 1966\nBLUE RIDGE PARKWAY HERBARIUM\n\nScientific Name: *Galax aphylla*\nCommon Name: Galax\nPerennial, white (handwritten)\nLocality: Region: Amherst Co. (handwritten)\n           Habitat: Streamside (handwritten)\nBlue Ridge Parkway (handwritten)\nDate: 6-7-61\nNo. 255\nCollector: Jack A. Rockwell (handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012631\nCOLLEGE\n23458\nHERBARIUM\nLYNCHBURG COLLEGE\nHERBARIUM\nGalax aphylla L.\nRUSKIN S. FREER\nDEC 23 1966\nScientific Name Galax aphylla\nCommon Name\nPerennial\nLocality Region Amherst Co.\nHabitat Streamside\nDate 6-7-61\nNo. 255\nCollector Jack A Rockwell\nBlue Ridge Parkway\nLYN\ncm\ncopyright reserved\n\n\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012631",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jack A. Rockwell",
+    "collectorNumber": "255",
+    "identifiedBy": "Ruskin S. Freer",
+    "identifiedDate": "1966-12-23",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6-7-61",
+    "collectionDate": "1961-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Streamside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Perennial, white",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Amherst co.",
+    "locality": "Blue ridge parkway region amherst co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Lynchburg college\nLYN\ncm\ncopyright reserved"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011753\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFlora of Tennessee\nDUKE UNIVERSITY HERBARIUM\n\n(Handwritten) *Unicoi County*\n(Handwritten) *Galax aphylla* L.\n(Handwritten) *Woods*                       (Handwritten) *Near Beauty Spot*\n(Handwritten) *A. L. Price*                (Handwritten) 6/4/36\nNo. 716\n\nUSCH0025738\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008650000000000001,
+      "total_cost": 0.00164375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 173
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n011753\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nFlora of Tennessee\nDUKE UNIVERSITY HERBARIUM\nCluicoi County\nGalax aphylla L..\nWoods\nAL. Price\nNear Beautyshot\n6/4/36\nNo. 716\nUniversity of South Carolina Herbarium\nUSCH0025738\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 453,
+    "cost_in": 0.0002221,
+    "cost_out": 0.0001812
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011753\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFlora of Tennessee\nDUKE UNIVERSITY HERBARIUM\n\n(Handwritten) *Unicoi County*\n(Handwritten) *Galax aphylla* L.\n(Handwritten) *Woods*                       (Handwritten) *Near Beauty Spot*\n(Handwritten) *A. L. Price*                (Handwritten) 6/4/36\nNo. 716\n\nUSCH0025738\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUSCH\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n011753\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nFlora of Tennessee\nDUKE UNIVERSITY HERBARIUM\nCluicoi County\nGalax aphylla L..\nWoods\nAL. Price\nNear Beautyshot\n6/4/36\nNo. 716\nUniversity of South Carolina Herbarium\nUSCH0025738\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "011753",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. L. Price",
+    "collectorNumber": "716",
+    "identifiedBy": "Michelle L. Gaynor (flas)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "6/4/36",
+    "collectionDate": "1936-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi County",
+    "locality": "Near Beauty Spot",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "usch\ncopyright reserved\nUniversity of South Carolina\n\nUniversity of South Carolina Herbarium\n\nDuke University Herbarium\n\nusch0025738\n"
+  }
+}

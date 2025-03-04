@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke UNIVERSITY\nHERBARIUM\n200183\n\nPLANTS OF Virginia\n\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nRoanoke Co.: Blue Ridge about 8 miles\nsouth of Salem. Northwest facing slope\nbelow Blue Ridge Parkway about mile 130.\nElevation about 2300 ft.\nStand dominated by *Quercus prinus*, with\nscattered *Pinus strobus*, *P. pungens* and\n*latifolia*.\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDonald B. Zobel                                     July 9, 1965\n\nDUKE10095613\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00098,
+      "total_cost": 0.0017587500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 196
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n200183\nPLANTS OF\nVirginia\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nRoanoke Co.: Blue Ridge about 8 miles\nsouth of Salem. Northwest facing slope\nbelow Blue Ridge Parkway about mile 130.\nElevation about 2300 ft.\nStand dominated by Quercus prinus, with\nscattered Pinus strobus, P. pungens and\nlatifolia.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDonald B. Zobel\nJuly 9, 1965\nDUKE10095613\n\n\nGalax aphylla\nGalax urceolata\nQuercus prinus\nPinus strobus\nP. pungens\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.840000000000001e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2284,
+    "output": 555,
+    "cost_in": 0.00022840000000000002,
+    "cost_out": 0.00022200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke UNIVERSITY\nHERBARIUM\n200183\n\nPLANTS OF Virginia\n\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\n\n*Galax aphylla* L.\n\nRoanoke Co.: Blue Ridge about 8 miles\nsouth of Salem. Northwest facing slope\nbelow Blue Ridge Parkway about mile 130.\nElevation about 2300 ft.\nStand dominated by *Quercus prinus*, with\nscattered *Pinus strobus*, *P. pungens* and\n*latifolia*.\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDonald B. Zobel                                     July 9, 1965\n\nDUKE10095613\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\n200183\nPLANTS OF\nVirginia\nCOLLECTED FOR THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nRoanoke Co.: Blue Ridge about 8 miles\nsouth of Salem. Northwest facing slope\nbelow Blue Ridge Parkway about mile 130.\nElevation about 2300 ft.\nStand dominated by Quercus prinus, with\nscattered Pinus strobus, P. pungens and\nlatifolia.\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDonald B. Zobel\nJuly 9, 1965\nDUKE10095613\n\n\nGalax aphylla\nGalax urceolata\nQuercus prinus\nPinus strobus\nP. pungens\n\n",
+  "formatted_json": {
+    "catalogNumber": "200183",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Donald B. Zobel",
+    "collectorNumber": "",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.) det. R.L. Wilbur I. 2001",
+    "verbatimCollectionDate": "July 9, 1965",
+    "collectionDate": "1965-07-09",
+    "collectionDateEnd": "",
+    "habitat": "Stand dominated by Quercus prinus, with scattered Pinus strobus, P. pungens and latifolia.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Roanoke Co.",
+    "locality": "Blue Ridge about 8 miles south of Salem. Northwest facing slope below Blue Ridge Parkway about mile 130.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "701",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Duke University\nHerbarium\nPlants of Virginia\nCollected for the herbarium of\nDuke University\nElevation about 2300 ft.\nDuke University Herbarium\nDUKE10095613\nGalax aphylla\nGalax urceolata\nQuercus prinus\nPinus strobus\nP. pungens"
+  }
+}

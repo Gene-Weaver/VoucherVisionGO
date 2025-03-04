@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10731\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM 161858\n\nPlants of Tennessee\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nTennessee: Cocke County\n35.73956\u00b0 Latitude -83.23954\u00b0 Longitude 4360 Feet Elevation\nQuadrangle: Luftee Knob Cosby Watershed\nT. 10S, R. 76E, Sect. 4\nThe Great Smoky Mountains National Park. Along Snake Den Mountain, the Snake Den\nMountain Trail and below the Maddron Bald Trail. Coordinate Datum: WGS84/NAD83.\n\nOn southeast-facing (165\u00b0) slope in heath slick with *Acer rubrum*, *Amelanchier*, *Picea rubens*, *Pinus pungens*, *Clethra acuminata*, *Kalmia latifolia*, *Leucothoe recurva*,\n*Rhododendron catawbiense*, *Vaccinium* sp., etc.\n\n42819 Loy R. Phillippe, Grant Cunningham, Jenny Stratton, and Valerie Sivicek\n1 June 2011\n\nIllinois Natural History Survey (ILLS)\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0014950000000000002,
+      "total_cost": 0.00227375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 299
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10731\nMOUNTAINS\nCAT. NO.\nGRSM 16/858\nSMOKY\nGREAT\nNATIONAL\nPARK\nPlants of Tennessee\nDiapensiaceae\nGalax urceolata (Poir.) Brummit\nTennessee Cocke County\n35.73956 Latitude -83.23954\u00b0 Longitude 4360 Feet Elevation\nQuadrangle: Luftee Knob Cosby Watershed\nT. 10S, R. 76E, Sect. 4\nThe Great Smoky Mountains National Park. Along Snake Den Mountain, the Snake Den\nMountain Trail and below the Maddron Bald Trail. Coordinate Datum: WGS84/NAD83.\nOn southeast-facing (165\u00b0) slope in heath slick with Acer rubrum, Amelanchier, Picea\nrubens, Pinus pungens, Clethra acuminata, Kalmia latifolia, Leucothoe recurva,\nRhododendron catawbiense, Vaccinium sp., etc.\n42819 Loy R. Phillippe, Grant Cunningham, Jenny Stratton, and Valerie Sivicek\n1 June 2011\nIllinois Natural History Survey (ILLS)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nGalax urceolata\nAcer rubrum\nAmelanchier\nPicea rubens\nPinus pungens\nClethra acuminata\nKalmia latifolia\nLeucothoe recurva\nRhododendron catawbiense\nVaccinium\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001432,
+      "total_cost": 0.0008247,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 358
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2553,
+    "output": 616,
+    "cost_in": 0.0002553,
+    "cost_out": 0.0002464
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10731\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM 161858\n\nPlants of Tennessee\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nTennessee: Cocke County\n35.73956\u00b0 Latitude -83.23954\u00b0 Longitude 4360 Feet Elevation\nQuadrangle: Luftee Knob Cosby Watershed\nT. 10S, R. 76E, Sect. 4\nThe Great Smoky Mountains National Park. Along Snake Den Mountain, the Snake Den\nMountain Trail and below the Maddron Bald Trail. Coordinate Datum: WGS84/NAD83.\n\nOn southeast-facing (165\u00b0) slope in heath slick with *Acer rubrum*, *Amelanchier*, *Picea rubens*, *Pinus pungens*, *Clethra acuminata*, *Kalmia latifolia*, *Leucothoe recurva*,\n*Rhododendron catawbiense*, *Vaccinium* sp., etc.\n\n42819 Loy R. Phillippe, Grant Cunningham, Jenny Stratton, and Valerie Sivicek\n1 June 2011\n\nIllinois Natural History Survey (ILLS)\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10731\nMOUNTAINS\nCAT. NO.\nGRSM 16/858\nSMOKY\nGREAT\nNATIONAL\nPARK\nPlants of Tennessee\nDiapensiaceae\nGalax urceolata (Poir.) Brummit\nTennessee Cocke County\n35.73956 Latitude -83.23954\u00b0 Longitude 4360 Feet Elevation\nQuadrangle: Luftee Knob Cosby Watershed\nT. 10S, R. 76E, Sect. 4\nThe Great Smoky Mountains National Park. Along Snake Den Mountain, the Snake Den\nMountain Trail and below the Maddron Bald Trail. Coordinate Datum: WGS84/NAD83.\nOn southeast-facing (165\u00b0) slope in heath slick with Acer rubrum, Amelanchier, Picea\nrubens, Pinus pungens, Clethra acuminata, Kalmia latifolia, Leucothoe recurva,\nRhododendron catawbiense, Vaccinium sp., etc.\n42819 Loy R. Phillippe, Grant Cunningham, Jenny Stratton, and Valerie Sivicek\n1 June 2011\nIllinois Natural History Survey (ILLS)\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\nGalax urceolata\nAcer rubrum\nAmelanchier\nPicea rubens\nPinus pungens\nClethra acuminata\nKalmia latifolia\nLeucothoe recurva\nRhododendron catawbiense\nVaccinium\n\n",
+  "formatted_json": {
+    "catalogNumber": "GRSM 161858",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Loy R. Phillippe, Grant Cunningham, Jenny Stratton, and Valerie Sivicek",
+    "collectorNumber": "42819",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 June 2011",
+    "collectionDate": "2011-06-01",
+    "collectionDateEnd": "",
+    "habitat": "On southeast-facing (165\u00b0) slope in heath slick with Acer rubrum, Amelanchier, Picea rubens, Pinus pungens, Clethra acuminata, Kalmia latifolia, Leucothoe recurva, Rhododendron catawbiense, Vaccinium sp., etc.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Cocke County",
+    "locality": "The Great Smoky Mountains National Park. Along Snake Den Mountain, the Snake Den Mountain Trail and below the Maddron Bald Trail. Coordinate Datum WGS84/NAD83.",
+    "verbatimCoordinates": "35.73956\u00b0 Latitude -83.23954\u00b0 Longitude",
+    "decimalLatitude": "35.73956",
+    "decimalLongitude": "-83.23954",
+    "minimumElevationInMeters": "1329",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10731\nPlants of Tennessee\nDiapensiaceae\nQuadrangle Luftee Knob Cosby Watershed\nT. 10S, R. 76E, Sect. 4\nIllinois Natural History Survey (ILLS)\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

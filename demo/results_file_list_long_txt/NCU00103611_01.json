@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n539676\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummit\n\nDate 9 April 2008 County Stanly\n\nLocation Ravine above Jacobs Creek, west of\nMcNeill Road southwest of NC 24/27.\n\nHabitat Uncommon on steep slope facing west,\nunder *Carya glabra*, *Quercus montana*, *Q. rubra*, *Q.\nalba*, *Pinus echinata*, *Hamamelis virginiana*. Plants\nsmall.\n\nB.A. Sorrie 12080\n\n\n*Galax urceolata*\n*Carya glabra*\n*Quercus montana*\n*Quercus rubra*\n*Quercus alba*\n*Pinus echinata*\n*Hamamelis virginiana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00086,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n539676\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00103611\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummit\nDate 9 April 2008 County Stanly\nLocation Ravine above Jacobs Creek, west of\nMcNeill Road southwest of NC 24/27.\nHabitat Uncommon on steep slope facing west,\nunder Carya glabra, Quercus montana, Q. rubra, Q.\nalba, Pinus echinata, Hamamelis virginiana. Plants\nsmall.\nB.A. Sorrie 12080\nDiapensiaceae\n\n\nGalax urceolata\nCarya glabra\nQuercus montana\nQ. rubra\nQ. alba\nPinus echinata\nHamamelis virginiana\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.400000000000001e-05,
+      "total_cost": 0.0007555,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 185
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2260,
+    "output": 477,
+    "cost_in": 0.000226,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n539676\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummit\n\nDate 9 April 2008 County Stanly\n\nLocation Ravine above Jacobs Creek, west of\nMcNeill Road southwest of NC 24/27.\n\nHabitat Uncommon on steep slope facing west,\nunder *Carya glabra*, *Quercus montana*, *Q. rubra*, *Q.\nalba*, *Pinus echinata*, *Hamamelis virginiana*. Plants\nsmall.\n\nB.A. Sorrie 12080\n\n\n*Galax urceolata*\n*Carya glabra*\n*Quercus montana*\n*Quercus rubra*\n*Quercus alba*\n*Pinus echinata*\n*Hamamelis virginiana*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n539676\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00103611\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummit\nDate 9 April 2008 County Stanly\nLocation Ravine above Jacobs Creek, west of\nMcNeill Road southwest of NC 24/27.\nHabitat Uncommon on steep slope facing west,\nunder Carya glabra, Quercus montana, Q. rubra, Q.\nalba, Pinus echinata, Hamamelis virginiana. Plants\nsmall.\nB.A. Sorrie 12080\nDiapensiaceae\n\n\nGalax urceolata\nCarya glabra\nQuercus montana\nQ. rubra\nQ. alba\nPinus echinata\nHamamelis virginiana\n\n",
+  "formatted_json": {
+    "catalogNumber": "539676",
+    "scientificName": "Galax urceolata (Poiret) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummit",
+    "collectedBy": "B.A. Sorrie",
+    "collectorNumber": "12080",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 April 2008",
+    "collectionDate": "2008-04-09",
+    "collectionDateEnd": "",
+    "habitat": "Uncommon on steep slope facing west, under Carya glabra, Quercus montana, Q. rubra, Q. alba, Pinus echinata, Hamamelis virginiana. Plants small.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Plants small.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Stanly",
+    "locality": "Ravine above Jacobs Creek, west of McNeill Road southwest of Nc 24/27.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina flora\nDiapensiaceae\n"
+  }
+}

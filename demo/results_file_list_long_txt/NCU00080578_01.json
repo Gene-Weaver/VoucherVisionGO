@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nat Chapel Hill\nUniversity of North Carolina\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080578\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n467838\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\nRidge west of Cliffside Lake and east of\nLong Branch. Northwest of Highlands.\n35\u00b0 5' N. lat.; 83\u00b0 14' 30\" W. long. Elev.\n1270 meters. Thickets around rock outcrop.\nD. E. Boufford 16125 6 June 1975\nE. W. Wood\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011,
+      "total_cost": 0.0018787499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 220
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080578\nNORTH CAROLINA\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\nGalax aphylla L.\nRidge west of Cliffside Lake and east of\nLong Branch. Northwest of Highlands.\n35\u00b0 5' N. lat.; 83\u00b0 14' 30\" W. long. Elev.\n1270 meters. Thickets around rock outcrop.\nD. E. Boufford 16125\n6 June 1975\nE. W. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.64e-05,
+      "total_cost": 0.0007578999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 191
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2298,
+    "output": 554,
+    "cost_in": 0.00022980000000000003,
+    "cost_out": 0.00022160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nat Chapel Hill\nUniversity of North Carolina\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080578\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n467838\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\n\n*Galax aphylla* L.\n\nRidge west of Cliffside Lake and east of\nLong Branch. Northwest of Highlands.\n35\u00b0 5' N. lat.; 83\u00b0 14' 30\" W. long. Elev.\n1270 meters. Thickets around rock outcrop.\nD. E. Boufford 16125 6 June 1975\nE. W. Wood\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080578\nNORTH CAROLINA\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMacon County\nGalax aphylla L.\nRidge west of Cliffside Lake and east of\nLong Branch. Northwest of Highlands.\n35\u00b0 5' N. lat.; 83\u00b0 14' 30\" W. long. Elev.\n1270 meters. Thickets around rock outcrop.\nD. E. Boufford 16125\n6 June 1975\nE. W. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080578",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, E. W. Wood",
+    "collectorNumber": "16125",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6 June 1975",
+    "collectionDate": "1975-06-06",
+    "collectionDateEnd": "1975-08-01",
+    "habitat": "Thickets around rock outcrop",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "Ridge west of cliffside lake and east of long branch. Northwest of highlands.",
+    "verbatimCoordinates": "35\u00b0 5' N. lat.; 83\u00b0 14' 30 W. long.",
+    "decimalLatitude": "35.0833",
+    "decimalLongitude": "-83.2417",
+    "minimumElevationInMeters": "1270",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "University of north carolina\nat chapel hill\nUniversity of north carolina herbarium\nUniversity of north\ncarolina\nherbarium\nHerbarium of the university of north carolina\nVoucher for north carolina natural areas\nStudy. June 1-august 1, 1975. For community\ndata see natural areas file in herbarium.\nHerbarium of the university of north carolina\nPlants of the southeastern united states"
+  }
+}

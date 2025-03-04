@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011754\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025737\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nRocky bluff above\nriver                                      Whitehall, Clarke Co.\n\nJoseph H. Pyron        2575                April 17, 1938\nRogers McVaugh\n\n\nHandwritten text:\nRocky bluff above\nriver\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.00156875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\n0\n1 2 3 4\n5\n6\n7 8 9 10\ncm\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n011754\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n2024\nUniversity of South Carolina Herbarium\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky bluff above\nriver\nWhitehall, Clarke Co.\nUSCH0025737\nJoseph H. Pyron\nRogers McVaugh\n2575\nApril 17, 1938\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.68e-05,
+      "total_cost": 0.0007483000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2220,
+    "output": 479,
+    "cost_in": 0.00022200000000000003,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011754\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025737\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nRocky bluff above\nriver                                      Whitehall, Clarke Co.\n\nJoseph H. Pyron        2575                April 17, 1938\nRogers McVaugh\n\n\nHandwritten text:\nRocky bluff above\nriver\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUSCH\n0\n1 2 3 4\n5\n6\n7 8 9 10\ncm\ncopyright reserved University of South Carolina\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n011754\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n2024\nUniversity of South Carolina Herbarium\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky bluff above\nriver\nWhitehall, Clarke Co.\nUSCH0025737\nJoseph H. Pyron\nRogers McVaugh\n2575\nApril 17, 1938\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "011754",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Joseph H. Pyron, Rogers McVaugh",
+    "collectorNumber": "2575",
+    "identifiedBy": "Michelle L. Gaynor (flas)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "April 17, 1938",
+    "collectionDate": "1938-04-17",
+    "collectionDateEnd": "",
+    "habitat": "Rocky bluff above river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Clarke co.",
+    "locality": "Whitehall, Clarke co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Usch\ncopyright reserved\nUniversity of south carolina\nuniversity of south carolina herbarium\nusch\nusch0025737\nherbarium of the university of georgia\nflora of georgia"
+  }
+}

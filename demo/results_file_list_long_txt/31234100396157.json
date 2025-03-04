@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n037591\n\nIK\n\nEastern Kentucky University Herbarium\n\nVASCULAR PLANTS OF GEORGIA\nUnion County\n\n*Galax aphylla* L.\n\nDiapenaceae\n\nMixed 2nd growth oak-kalmia woods along the Appalachian\nTrail, ca .5 mi W of Neels Gap & Hwy 19. Elev. ca 3108 ft.\n\nT. J. Weckman\nH. M. Weckman, J. C. Weckman, J. B. Rozeman\nJuly 17, 1996\n#3095\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007099999999999999,
+      "total_cost": 0.00148875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 142
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "KENTUCKY UN\nTERN\nASTE\nRSITY\n\ud0dc\n037591\nHERBARIUM\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27\nU.S.A.\nVASCULAR PLANTS OF GEORGIA\nUnion County\nGalax aphylla L.\nDiapenaceae\nMixed 2nd growth oak-kalmia woods along the Appalachian\nTrail, ca .5 mi W of Neels Gap & Hwy 19. Elev. ca 3108 ft.\nT. J. Weckman\nH. M. Weckman, J. C. Weckman, J. B. Rozeman\nJuly 17, 1996\n#3095\nIK\nEastern Kentucky University Herbarium\n3 1234 10039615 7\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 480,
+    "cost_in": 0.0002198,
+    "cost_out": 0.000192
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n037591\n\nIK\n\nEastern Kentucky University Herbarium\n\nVASCULAR PLANTS OF GEORGIA\nUnion County\n\n*Galax aphylla* L.\n\nDiapenaceae\n\nMixed 2nd growth oak-kalmia woods along the Appalachian\nTrail, ca .5 mi W of Neels Gap & Hwy 19. Elev. ca 3108 ft.\n\nT. J. Weckman\nH. M. Weckman, J. C. Weckman, J. B. Rozeman\nJuly 17, 1996\n#3095\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nKENTUCKY UN\nTERN\nASTE\nRSITY\n\ud0dc\n037591\nHERBARIUM\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27\nU.S.A.\nVASCULAR PLANTS OF GEORGIA\nUnion County\nGalax aphylla L.\nDiapenaceae\nMixed 2nd growth oak-kalmia woods along the Appalachian\nTrail, ca .5 mi W of Neels Gap & Hwy 19. Elev. ca 3108 ft.\nT. J. Weckman\nH. M. Weckman, J. C. Weckman, J. B. Rozeman\nJuly 17, 1996\n#3095\nIK\nEastern Kentucky University Herbarium\n3 1234 10039615 7\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "037591",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "T. J. Weckman, H. M. Weckman, J. C. Weckman, J. B. Rozeman",
+    "collectorNumber": "#3095",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 17, 1996",
+    "collectionDate": "1996-07-17",
+    "collectionDateEnd": "",
+    "habitat": "Mixed 2nd growth oak-kalmia woods along the Appalachian Trail, ca .5 mi W of Neels Gap & Hwy 19.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Union County",
+    "locality": "Ca .5 mi W of Neels Gap & Hwy 19.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "947",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Eastern Kentucky University\nHerbarium\nIK\nEastern Kentucky University Herbarium\nINCH\nOPTIRECTILINEAR\n\u0e1e\u0e27"
+  }
+}

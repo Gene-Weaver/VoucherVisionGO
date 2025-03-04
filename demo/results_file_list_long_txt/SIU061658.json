@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "SOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\n51958\nDB\n\nSouthern Illinois University Herbarium\nSIU061658\n\nDiapensiaceae (handwritten)\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb 2023\n\nWI BOTANICAL COLLECTIONS OF\nDONALD R. WINDLER\n\nBurke Co., North Carolina\n*Galax aphylla* L.\nTable Rock Mt., 7 mi. NW of Town of\nTable Rock, National Forest Rd.,\nElev. 3909.\n\nColl. No.\nDate\n2093\n7 Oct. 1966\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000805,
+      "total_cost": 0.0015837499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "SOUTHERN\nILLINOIS\nHERBARIUM\nUNIVERSITY\n61958\nDB\nSouthern Illinois University Herbarlum\nSIU061658\nDiapensiaceae\nTU\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\nBOTANICAL COLLECTIONS OF\nDONALD R. WINDLER\nBurke Co., North Carolina\nGalax aphylla L.\nTable Rock Mt., 7 mi. NW of Town of\nTable Rock, National Forest Rd.,\nElev. 3909.\nColl. No.\nDate\n2093\n7 Oct. 1966\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 490,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.000196
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\n51958\nDB\n\nSouthern Illinois University Herbarium\nSIU061658\n\nDiapensiaceae (handwritten)\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb 2023\n\nWI BOTANICAL COLLECTIONS OF\nDONALD R. WINDLER\n\nBurke Co., North Carolina\n*Galax aphylla* L.\nTable Rock Mt., 7 mi. NW of Town of\nTable Rock, National Forest Rd.,\nElev. 3909.\n\nColl. No.\nDate\n2093\n7 Oct. 1966\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSOUTHERN\nILLINOIS\nHERBARIUM\nUNIVERSITY\n61958\nDB\nSouthern Illinois University Herbarlum\nSIU061658\nDiapensiaceae\nTU\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\nBOTANICAL COLLECTIONS OF\nDONALD R. WINDLER\nBurke Co., North Carolina\nGalax aphylla L.\nTable Rock Mt., 7 mi. NW of Town of\nTable Rock, National Forest Rd.,\nElev. 3909.\nColl. No.\nDate\n2093\n7 Oct. 1966\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "SIU061658",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Donald R. Windler",
+    "collectorNumber": "2093",
+    "identifiedBy": "Southern Illinois University (SIU)",
+    "identifiedDate": "2023-02-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "7 Oct. 1966",
+    "collectionDate": "1966-10-07",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Burke Co.",
+    "locality": "Table Rock Mt., 7 mi. Nw of town of table rock, national forest rd.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1191",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "SOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\n61958\nDB\nSouthern Illinois University Herbarlum\nDiapensiaceae\nGalax urceolata\nGalax aphylla"
+  }
+}

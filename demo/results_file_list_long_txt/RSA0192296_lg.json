@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\nRANCHO SANTA ANA\nBOTANIC\nGARDEN\nCLAREMONT\n\ncopyright reserved\n\nRancho Santa Ana Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0192296\n\nRANCHO SANTA ANA\nBOTANIC GARDEN\n\nN\u00ba 885955\n\nGeorgia Southern University Herbarium [GAS]\n\n*Galax aphylla*\nauct. non L.\n\nUnited States, Georgia, Rabun County. From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\n\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\n\nCollector: Drapalik, Don\nCollector Number: 3929\n05/23/1982\nDiapensiaceae\n\nSpecimen data entered into\nRSA-POM database\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012050000000000001,
+      "total_cost": 0.00198375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 241
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nRANCHO SANTA ANA\nBOTANIC\nGARDEN\nCLAREMONT\nRancho Santa Ana Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0192296\nRANCHO SANTA ANA\nBOTANIC GARDEN\n\u039d\u03a9 885955\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County, From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\nSpecimen data entered into\nRSA-POM database\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\n05/23/1982\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.520000000000001e-05,
+      "total_cost": 0.0007767,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 238
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2363,
+    "output": 559,
+    "cost_in": 0.00023630000000000002,
+    "cost_out": 0.00022360000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\nRANCHO SANTA ANA\nBOTANIC\nGARDEN\nCLAREMONT\n\ncopyright reserved\n\nRancho Santa Ana Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0192296\n\nRANCHO SANTA ANA\nBOTANIC GARDEN\n\nN\u00ba 885955\n\nGeorgia Southern University Herbarium [GAS]\n\n*Galax aphylla*\nauct. non L.\n\nUnited States, Georgia, Rabun County. From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\n\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\n\nCollector: Drapalik, Don\nCollector Number: 3929\n05/23/1982\nDiapensiaceae\n\nSpecimen data entered into\nRSA-POM database\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nRANCHO SANTA ANA\nBOTANIC\nGARDEN\nCLAREMONT\nRancho Santa Ana Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0192296\nRANCHO SANTA ANA\nBOTANIC GARDEN\n\u039d\u03a9 885955\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County, From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\nSpecimen data entered into\nRSA-POM database\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\n05/23/1982\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0192296",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "auct. non L.",
+    "collectedBy": "Drapalik, Don",
+    "collectorNumber": "3929",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "05/23/1982",
+    "collectionDate": "1982-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Sunny sloping west facing (east side of 441) hillside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Rabun County",
+    "locality": "From the junction of Tallulah River and US 441 in Tallulah Falls, ga go about 0.9 mi north, nw on 441. Sunny sloping west facing (east side of 441) hillside",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "cm\n1 2 3 4 5 6 7 8 9 10\nRancho santa ana\nbotanic\ngarden\nClaremont\ncopyright reserved\nRancho Santa Ana Botanic Garden\nClaremont, ca usa (rsa-pom)\nRancho santa ana\nbotanic garden\nN\u00ba 885955\nGeorgia Southern University Herbarium [gas]\nDiapensiaceae\nSpecimen data entered into\nrsa-pom database"
+  }
+}

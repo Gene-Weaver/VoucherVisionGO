@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n3879\n\nNewberry College Herbarium\nNBYC004557\n\nHerbarium of North Carolina State University\nFLORA OF THE PROPOSED SOUTH MT. STATE PARK\nBurke Co., N.C.\n*Galax aphylla* L.\nGalax\nsouthwest slope of Chestnut Knob\n\nLaverne Smith 192\n5-25-75\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000505,
+      "total_cost": 0.0012837500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 101
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n3879\nNewberry College Herbarlum\nNBYC004557\nHerbarium of North Carolina State University\nFLORA OF THE PROPOSED SOUTH MT. STATE PARK\nBurke Co., N. C.\nGalax aphylla L.\nGalax\nsouthwest slope of Chestnut Knob\nLaverne Smith\n5-25-75\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.68e-05,
+      "total_cost": 0.0007183000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 92
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2097,
+    "output": 431,
+    "cost_in": 0.0002097,
+    "cost_out": 0.00017240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n3879\n\nNewberry College Herbarium\nNBYC004557\n\nHerbarium of North Carolina State University\nFLORA OF THE PROPOSED SOUTH MT. STATE PARK\nBurke Co., N.C.\n*Galax aphylla* L.\nGalax\nsouthwest slope of Chestnut Knob\n\nLaverne Smith 192\n5-25-75\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n3879\nNewberry College Herbarlum\nNBYC004557\nHerbarium of North Carolina State University\nFLORA OF THE PROPOSED SOUTH MT. STATE PARK\nBurke Co., N. C.\nGalax aphylla L.\nGalax\nsouthwest slope of Chestnut Knob\nLaverne Smith\n5-25-75\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NBYC004557",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Laverne Smith",
+    "collectorNumber": "192",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-25-75",
+    "collectionDate": "1975-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Southwest slope of chestnut knob",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N. c.",
+    "county": "Burke co.",
+    "locality": "Flora of the proposed south mt. state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Newberry\ncollege\nNewberry\ncollege\nherbarium\n3879\nNewberry college herbarlum"
+  }
+}

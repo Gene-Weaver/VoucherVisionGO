@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE V- 140304\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095615\n\n*Galax aphylla* L.\ndet. H.E. Ahles 1964 (handwritten)\n\nDuke University Herbarium\nSouth Carolina, Oconee Cty.\nFLORA OF\n\nGalax\n\nBanks of east fork of Chattooga River at its\njunction with Cashier-Walhalla road, 1 mile\nsouth of N.C.-S.C. line.\n\nColl: T.Bannister(#178) & L.E. Anderson\nAug 18, 1949\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000955,
+      "total_cost": 0.0017337499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 191
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE V- 140304\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095615\nDuke\nUNIVERSITY\nGalax aphylla L\ndet. H.E. Ahles 1964\nDuke University Herbarium\nSouth Carolina, Oconee Cty.\nFLORA OF.\nGalax\nBanks of east fork of Chattooga River at its\njunction with Cashier-Walhalla road, 1 mile\nsouth of N.C.-S.C. line.\nColl: TTBannister (#178) & L.E. Anderson\nAug 18, 1949\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.8e-05,
+      "total_cost": 0.0007595,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 195
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2259,
+    "output": 564,
+    "cost_in": 0.00022590000000000002,
+    "cost_out": 0.00022560000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE V- 140304\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095615\n\n*Galax aphylla* L.\ndet. H.E. Ahles 1964 (handwritten)\n\nDuke University Herbarium\nSouth Carolina, Oconee Cty.\nFLORA OF\n\nGalax\n\nBanks of east fork of Chattooga River at its\njunction with Cashier-Walhalla road, 1 mile\nsouth of N.C.-S.C. line.\n\nColl: T.Bannister(#178) & L.E. Anderson\nAug 18, 1949\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE V- 140304\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDUKE10095615\nDuke\nUNIVERSITY\nGalax aphylla L\ndet. H.E. Ahles 1964\nDuke University Herbarium\nSouth Carolina, Oconee Cty.\nFLORA OF.\nGalax\nBanks of east fork of Chattooga River at its\njunction with Cashier-Walhalla road, 1 mile\nsouth of N.C.-S.C. line.\nColl: TTBannister (#178) & L.E. Anderson\nAug 18, 1949\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095615",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "T.Bannister, L.E. Anderson",
+    "collectorNumber": "178",
+    "identifiedBy": "R.L. Wilbur, H.E. Ahles",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. det. H.E. Ahles 1964",
+    "verbatimCollectionDate": "Aug 18, 1949",
+    "collectionDate": "1949-08-18",
+    "collectionDateEnd": "",
+    "habitat": "Banks of east fork of Chattooga River at its junction with Cashier-Walhalla road, 1 mile south of N.C.-S.C. line.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Oconee Cty.",
+    "locality": "Banks of east fork of Chattooga River at its junction with Cashier-Walhalla road, 1 mile south of N.C.-S.C. line.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE V- 140304\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDUKE UNIVERSITY HERBARIUM\nDuke\nUNIVERSITY\nFLORA OF.\nGalax aphylla"
+  }
+}

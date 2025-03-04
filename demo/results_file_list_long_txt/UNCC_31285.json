@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n31285\nHERBARIUM\n\n3Fm\n70/16/2012 Natural Heritage\nSurvey\n*Galax urceolata* (Poir.) Brummitt\n\nHERBARIUM\nof the Diapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\n\nCounty Gaston\n\n*Galax aphylla* L.\n\nW slope above small trib. to Long\nCreek, N of SR 1449, Mixed Hardwood\nNHS SITE # 82.\n\nJ. F. Matthews\nJ. Green\nJ. Lester                                          July 4, 1996\n\n\nHandwritten Text:\n3Fm\n70/16/2012\n*Galax urceolata* (Poir.) Brummitt\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009150000000000001,
+      "total_cost": 0.0016937500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 183
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "31285\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nNatural Heritage\nSurvey\nGalax urceolata (Poiret) Brususnitt\nHERBARIUM\nof the\nDiapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Gaston\nGalax aphylla L.\nW slope above small trib. to Long\nCreek, N of SR 1449, Mixed Hardwood\nJ.F. Matthews\nJ. Green\nJ. Lester\nJuly 4, 1996\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 507,
+    "cost_in": 0.0002232,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n31285\nHERBARIUM\n\n3Fm\n70/16/2012 Natural Heritage\nSurvey\n*Galax urceolata* (Poir.) Brummitt\n\nHERBARIUM\nof the Diapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\n\nCounty Gaston\n\n*Galax aphylla* L.\n\nW slope above small trib. to Long\nCreek, N of SR 1449, Mixed Hardwood\nNHS SITE # 82.\n\nJ. F. Matthews\nJ. Green\nJ. Lester                                          July 4, 1996\n\n\nHandwritten Text:\n3Fm\n70/16/2012\n*Galax urceolata* (Poir.) Brummitt\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n31285\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nNatural Heritage\nSurvey\nGalax urceolata (Poiret) Brususnitt\nHERBARIUM\nof the\nDiapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Gaston\nGalax aphylla L.\nW slope above small trib. to Long\nCreek, N of SR 1449, Mixed Hardwood\nJ.F. Matthews\nJ. Green\nJ. Lester\nJuly 4, 1996\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "31285",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. F. Matthews, J. Green, J. Lester",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 4, 1996",
+    "collectionDate": "1996-07-04",
+    "collectionDateEnd": "",
+    "habitat": "W slope above small trib. to Long Creek, N of SR 1449, Mixed Hardwood",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Gaston",
+    "locality": "W slope above small trib. to Long Creek, N of SR 1449, Mixed Hardwood NHS SITE # 82.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\nHERBARIUM\nNatural Heritage\nSurvey\nHERBARIUM\nof the Diapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nGalax aphylla L.\n"
+  }
+}

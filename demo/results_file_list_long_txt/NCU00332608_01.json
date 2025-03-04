@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "X-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\n\nHERBARIUM\nOF NORTH\nCAROLINA\n473147\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\n\n*Galax aphylla* L.\n\nRabun Bald. 34\u00b0 57' 56\" N. lat., 83\u00b0 18' 03\"\nW. long. Bald and coves on northwest side.\nElevation: 1160-1550 meters. Under heaths;\nbald.\nD. E. Boufford  17084   7-8 July 1975\nE. W. Wood\n\nPlants of the Southeastern United States\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332608\n\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012150000000000002,
+      "total_cost": 0.00199375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 243
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nmm\nOF NORTH\nHERBARIUM\nVERSITY\nCAROLINA\n473147\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\nGalax aphylla L.\nRabun Bald. 34\u00b0 57' 56\" N. lat., 83\u00b0 18' 03\"\nW. long. Bald and coves on northwest side.\nElevation: 1160-1550 meters. Under heaths;\nbald.\nD. E. Boufford 17084 7-8 July 1975\nE. W. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.560000000000001e-05,
+      "total_cost": 0.0007670999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 214
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2325,
+    "output": 578,
+    "cost_in": 0.00023249999999999999,
+    "cost_out": 0.00023119999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nX-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\n\nHERBARIUM\nOF NORTH\nCAROLINA\n473147\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\n\n*Galax aphylla* L.\n\nRabun Bald. 34\u00b0 57' 56\" N. lat., 83\u00b0 18' 03\"\nW. long. Bald and coves on northwest side.\nElevation: 1160-1550 meters. Under heaths;\nbald.\nD. E. Boufford  17084   7-8 July 1975\nE. W. Wood\n\nPlants of the Southeastern United States\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332608\n\n\nHandwritten Text: *Galax aphylla*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nOF NORTH\nHERBARIUM\nVERSITY\nCAROLINA\n473147\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. June 1-August 1, 1975. For community\ndata see Natural Areas file in Herbarium.\nHerbarium of the University of North Carolina\nGEORGIA\nRabun County\nGalax aphylla L.\nRabun Bald. 34\u00b0 57' 56\" N. lat., 83\u00b0 18' 03\"\nW. long. Bald and coves on northwest side.\nElevation: 1160-1550 meters. Under heaths;\nbald.\nD. E. Boufford 17084 7-8 July 1975\nE. W. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "473147",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, E. W. Wood",
+    "collectorNumber": "17084",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7-8 July 1975",
+    "collectionDate": "1975-07-07",
+    "collectionDateEnd": "1975-07-08",
+    "habitat": "Under heaths; bald",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Rabun County",
+    "locality": "Rabun bald. 34\u00b0 57' 56 n. lat., 83\u00b0 18' 03 w. long. bald and coves on northwest side.",
+    "verbatimCoordinates": "34\u00b0 57' 56 N. lat., 83\u00b0 18' 03 W. long.",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1160",
+    "maximumElevationInMeters": "1550",
+    "elevationUnits": "m",
+    "additionalText": "X-rite\ncolorchecker\nUniversity of north carolina\nat chapel hill\nHerbarium of the university of north carolina\nVoucher for north carolina natural areas\nStudy. June 1-august 1, 1975. For community\ndata see natural areas file in herbarium.\nPlants of the southeastern united states\nUniversity of north carolina herbarium\nNCU00332608\nhandwritten text Galax aphylla\nMSCCPPPE0411\nMSCCPPCC0411"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n325614 (handwritten)\n\nUniversity of North Carolina\nat Chapel Hill\nNCU00080565\n\nHerbarium of the University of North Carolina\n\nNORTH CAROLINA\nAshe County\n\n*Galax aphylla* L.\n\nBog and Fen area on Bluff Mt. at edge of mixed\nforest along extension of Co. Rd. 1139.\nApprox. elev. 4800 ft.\n\nB. F. Kowalczyk 39                      June 25, 1970\n\nPlants of the Southeastern United States\n2\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nmm\ncm\nUNIVERSITY OF NORTH\nHERBARIUM\n325614\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080565\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAshe County\nGalax aphylla L.\nBog and Fen area on Bluff Mt. at edge of mixed\nforest along extension of Co. Rd. 1139.\nApprox. elev. 4800 ft.\nB. F. Kowalczyk 39\nJune 25, 1970\nPlants of the Southeastern United States\n2\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.240000000000001e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 470,
+    "cost_in": 0.0002198,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n325614 (handwritten)\n\nUniversity of North Carolina\nat Chapel Hill\nNCU00080565\n\nHerbarium of the University of North Carolina\n\nNORTH CAROLINA\nAshe County\n\n*Galax aphylla* L.\n\nBog and Fen area on Bluff Mt. at edge of mixed\nforest along extension of Co. Rd. 1139.\nApprox. elev. 4800 ft.\n\nB. F. Kowalczyk 39                      June 25, 1970\n\nPlants of the Southeastern United States\n2\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nmm\ncm\nUNIVERSITY OF NORTH\nHERBARIUM\n325614\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080565\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nAshe County\nGalax aphylla L.\nBog and Fen area on Bluff Mt. at edge of mixed\nforest along extension of Co. Rd. 1139.\nApprox. elev. 4800 ft.\nB. F. Kowalczyk 39\nJune 25, 1970\nPlants of the Southeastern United States\n2\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080565",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "B. F. Kowalczyk",
+    "collectorNumber": "39",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 25, 1970",
+    "collectionDate": "1970-06-25",
+    "collectionDateEnd": "",
+    "habitat": "Bog and fen area on bluff mt. at edge of mixed forest along extension of co. rd. 1139.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Ashe county",
+    "locality": "Bluff mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1463",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "x-rite\ncolorchecker\nMSCCPPCC0411\nmm\nuniversity of north carolina\nherbarium\n325614\nuniversity of north carolina\nat chapel hill\nherbarium of the university of north carolina\nplants of the southeastern united states\n2"
+  }
+}

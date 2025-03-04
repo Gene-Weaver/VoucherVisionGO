@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0027552\n\nRemounted by: R. Harris 6/1/2004 (handwritten)\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Oconee S.C. (handwritten)\n\n*Galax aphylla* L.\n\nBad Creek Reservoir Area. Road-\nside embankments among *Rhododendron maximum*\nthickets.\n\nCollector C. L. Rodgers Date 5-29-1973\nJoe Green, Jr. 73253\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000715,
+      "total_cost": 0.0014937499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1\n2 3\n4\n5\n6 7 8 9 10\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0027552\nHerbarium of Furman University\nGreenville, South Carolina\nCounty Oconee\nGalax aphylla L.\nBad Creek Reservoir Area. Road-\nside embankments among Rhododendron\nmaximum thickets.\nCollector C. L. Rodgers Dat5-29-1973\nJoe Green, Jr. 73253\nRemounted by: R. Harris 6/1/2004\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 448,
+    "cost_in": 0.000218,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0027552\n\nRemounted by: R. Harris 6/1/2004 (handwritten)\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Oconee S.C. (handwritten)\n\n*Galax aphylla* L.\n\nBad Creek Reservoir Area. Road-\nside embankments among *Rhododendron maximum*\nthickets.\n\nCollector C. L. Rodgers Date 5-29-1973\nJoe Green, Jr. 73253\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1\n2 3\n4\n5\n6 7 8 9 10\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0027552\nHerbarium of Furman University\nGreenville, South Carolina\nCounty Oconee\nGalax aphylla L.\nBad Creek Reservoir Area. Road-\nside embankments among Rhododendron\nmaximum thickets.\nCollector C. L. Rodgers Dat5-29-1973\nJoe Green, Jr. 73253\nRemounted by: R. Harris 6/1/2004\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0027552",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. L. Rodgers, Joe Green, Jr.",
+    "collectorNumber": "73253",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-29-1973",
+    "collectionDate": "1973-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Roadside embankments among rhododendron maximum thickets.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Oconee",
+    "locality": "Bad Creek reservoir area.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Clemson University Herbarium\nRemounted by R. Harris 6/1/2004\nHerbarium of Furman University\nGreenville, South Carolina"
+  }
+}

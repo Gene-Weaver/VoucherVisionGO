@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BOON015485\n\nNorth Carolina\nMadison County\n*Galax aphylla* auct. non L.\nDiapensiaceae\nRoadside\n\nHwy 25 near Appalachian Trail\n\nEmily Gillespie 0040\n\nMay 23, 2002\n\n147 (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00038,
+      "total_cost": 0.00115875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 76
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 1\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nBOON015485\nNorth Carolina\nMadison County\nGalax aphylla auct. non L.\nDiapensiaceae\nRoadside\nHwy 25 near Appalachian Trail\nEmily Gillespie 0040\nPRESERVED\nMATERIALS\nBOON\nMay. 23, 2002\n147\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8400000000000004e-05,
+      "total_cost": 0.0007299,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 121
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2067,
+    "output": 435,
+    "cost_in": 0.00020669999999999998,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBOON015485\n\nNorth Carolina\nMadison County\n*Galax aphylla* auct. non L.\nDiapensiaceae\nRoadside\n\nHwy 25 near Appalachian Trail\n\nEmily Gillespie 0040\n\nMay 23, 2002\n\n147 (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 1\nCAROLINA\nBurlington, NC 27215 1-800-334-5551\nBOON015485\nNorth Carolina\nMadison County\nGalax aphylla auct. non L.\nDiapensiaceae\nRoadside\nHwy 25 near Appalachian Trail\nEmily Gillespie 0040\nPRESERVED\nMATERIALS\nBOON\nMay. 23, 2002\n147\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015485",
+    "scientificName": "Galax aphylla auct. non L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "auct. non L.",
+    "collectedBy": "Emily Gillespie",
+    "collectorNumber": "0040",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 23, 2002",
+    "collectionDate": "2002-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Roadside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Madison county",
+    "locality": "Hwy 25 near appalachian trail",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "147\ninches\nliving\ncultures\nmetric 1\ncarolina\nBurlington, nc 27215 1-800-334-5551\npreserved\nmaterials\nboon"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Converse College Herbarium\nCONV0002304\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\n6/4 1937 H. M. JENNISON  3787\nCataloochee Dist. Haywood Co. (Handwritten)\n\n*Galax aphylla*, L.\n\nIn acid leaf mould & sandy\nsoil. Horse Pen Ridge.\n\u24d0 about 3750' (Handwritten)\n\ndet. H.M.J. (Handwritten)\n\nConverse College\n000664\nHerbarium\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CONVERSE CONV\nMETRIC 11\nConverse College\n000664\nHerbarium\nConverse College Herbarium\nCONV0002304\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nCOLLECTOR (s) H. M. JENNISON\n6/4 1937\nNO. 3787\nLoc. Cataloochee Dist. Haywood Co.\nGalax aphylla, L.\nIn acid leaf mould & sandy\nsoil. Horse Pen Ridge.\nabout 3750'\ndet.\nH.M.J.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.400000000000001e-05,
+      "total_cost": 0.0007355,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2139,
+    "output": 431,
+    "cost_in": 0.0002139,
+    "cost_out": 0.00017240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nConverse College Herbarium\nCONV0002304\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\n6/4 1937 H. M. JENNISON  3787\nCataloochee Dist. Haywood Co. (Handwritten)\n\n*Galax aphylla*, L.\n\nIn acid leaf mould & sandy\nsoil. Horse Pen Ridge.\n\u24d0 about 3750' (Handwritten)\n\ndet. H.M.J. (Handwritten)\n\nConverse College\n000664\nHerbarium\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nCONVERSE CONV\nMETRIC 11\nConverse College\n000664\nHerbarium\nConverse College Herbarium\nCONV0002304\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nCOLLECTOR (s) H. M. JENNISON\n6/4 1937\nNO. 3787\nLoc. Cataloochee Dist. Haywood Co.\nGalax aphylla, L.\nIn acid leaf mould & sandy\nsoil. Horse Pen Ridge.\nabout 3750'\ndet.\nH.M.J.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CONV0002304",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "3787",
+    "identifiedBy": "H.M.J.",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/4 1937",
+    "collectionDate": "1937-06-04",
+    "collectionDateEnd": "",
+    "habitat": "In acid leaf mould & sandy soil.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Haywood co.",
+    "locality": "Cataloochee dist. horse pen ridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1143",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Flora of the great smoky mountains\nnational park\nconverse college herbarium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095555\nDUKE UNIVERSITY\nHERBARIUM\n029-8\n\n0\ncm\n2\nDuke\ncopyright reserved UNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nAshe Co.\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n*Galax aphylla* L.\nUnder rich Rhododendron\nthicket near White Top Mt.\nStation.\n\nDon Gregg 8/13/35  No. 3966\n(Handwritten text)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008150000000000001,
+      "total_cost": 0.00159375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095555\nDUKE UNIVERSITY\nHERBARIUM\n02958\nDuke\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of North Carolina\nSalaf aplrylla 2.\nUnder rich Rhododendron\nMicket near White Top Mt.\nStation.\nDon Grrell 8/13/35\nNo. 3966\n\n\nGalax urceolata\nGalax aphylla\nSalaf aplrylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 496,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095555\nDUKE UNIVERSITY\nHERBARIUM\n029-8\n\n0\ncm\n2\nDuke\ncopyright reserved UNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nAshe Co.\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n*Galax aphylla* L.\nUnder rich Rhododendron\nthicket near White Top Mt.\nStation.\n\nDon Gregg 8/13/35  No. 3966\n(Handwritten text)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095555\nDUKE UNIVERSITY\nHERBARIUM\n02958\nDuke\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of North Carolina\nSalaf aplrylla 2.\nUnder rich Rhododendron\nMicket near White Top Mt.\nStation.\nDon Grrell 8/13/35\nNo. 3966\n\n\nGalax urceolata\nGalax aphylla\nSalaf aplrylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095555",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Don Gregg",
+    "collectorNumber": "3966",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "8/13/35",
+    "collectionDate": "1935-08-13",
+    "collectionDateEnd": "",
+    "habitat": "Under rich rhododendron thicket near white top mt. station.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Ashe Co.",
+    "locality": "Under rich rhododendron thicket near white top mt. station.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY HERBARIUM\nDUKE UNIVERSITY\nHERBARIUM\n029-8\n0\ncm\n2\nDuke\ncopyright reserved UNIVERSITY\n(Handwritten text)\nSalaf aplrylla"
+  }
+}

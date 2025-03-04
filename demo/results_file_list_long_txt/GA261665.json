@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GA\nUniversity of Georgia\nHerbarium\n277513\n\n\u2713 = *Galax urceolata* (handwritten)\n\nPLANTS OF GEORGIA\n*Galax aphylla* (Poir.) Brummitt\n[Diapensiaceae] 235\n\nCLARKE CO.: State Botanical Garden along Orange Trail by Oconee River. Dry rocky river bank. Lat 22.898560\u00b0; Long -83.382178\u00b0. Tiny white flowers. Shiny dark green leaves.\n\nColl. Lauren V. Muller 3051 16 Apr 2017\n\nSpecimen Examined for\nGeorgia Atlas Project\n11 May 2018\n\nImaged 2018\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n277513\nSpecimen Examined for\nGeorgia Atlas Project\n11 May 2018\n\u2713 = Galax urceolata\nPLANTS OF GEORGIA\nGalax aphylla (Poir.) Brummitt\n[Diapensiaceae]\nCLARKE CO.: State Botanical Garden along Orange Trail by\nOconee River. Dry rocky river bank. Lat 22.898560\u00b0; Long -\n83.382178\u00b0. Tiny white flowers. Shiny dark green leaves.\nColl. Lauren V. Muller 16 Apr 2017\nImaged 2018\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2200,
+    "output": 485,
+    "cost_in": 0.00022000000000000003,
+    "cost_out": 0.00019400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGA\nUniversity of Georgia\nHerbarium\n277513\n\n\u2713 = *Galax urceolata* (handwritten)\n\nPLANTS OF GEORGIA\n*Galax aphylla* (Poir.) Brummitt\n[Diapensiaceae] 235\n\nCLARKE CO.: State Botanical Garden along Orange Trail by Oconee River. Dry rocky river bank. Lat 22.898560\u00b0; Long -83.382178\u00b0. Tiny white flowers. Shiny dark green leaves.\n\nColl. Lauren V. Muller 3051 16 Apr 2017\n\nSpecimen Examined for\nGeorgia Atlas Project\n11 May 2018\n\nImaged 2018\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n277513\nSpecimen Examined for\nGeorgia Atlas Project\n11 May 2018\n\u2713 = Galax urceolata\nPLANTS OF GEORGIA\nGalax aphylla (Poir.) Brummitt\n[Diapensiaceae]\nCLARKE CO.: State Botanical Garden along Orange Trail by\nOconee River. Dry rocky river bank. Lat 22.898560\u00b0; Long -\n83.382178\u00b0. Tiny white flowers. Shiny dark green leaves.\nColl. Lauren V. Muller 16 Apr 2017\nImaged 2018\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "277513",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Lauren V. Muller",
+    "collectorNumber": "3051",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "16 Apr 2017",
+    "collectionDate": "2017-04-16",
+    "collectionDateEnd": "",
+    "habitat": "Dry rocky river bank",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Tiny white flowers. Shiny dark green leaves.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Clarke",
+    "locality": "State botanical garden along orange trail by oconee river",
+    "verbatimCoordinates": "Lat 22.898560\u00b0; Long -83.382178\u00b0",
+    "decimalLatitude": "22.898560",
+    "decimalLongitude": "-83.382178",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of georgia\n[diapensiaceae]\nspecimen examined for\ngeorgia atlas project\n11 may 2018\nimaged 2018\ngalax urceolata\ngalax aphylla"
+  }
+}

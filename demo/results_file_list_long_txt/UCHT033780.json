@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UCHT\n\nBIOLOGY DEPARTMENT HERBARIUM\n5316\nSOUTHERN MISSIONARY COLLEGE\n\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033780\n\nFLORA OF Georgia\n\nFamily DIAPENSIACEAE\n\nScientific Name *Galax aphylla* L.\n\nCommon Name\n\nLocality Nimblewell Gap, Chattahoochee Nat.\nForest, Gilmer County. *(Handwritten)*\n\nHabitat Mixed deciduous forest *(Handwritten)*\n\nCollector D. F. Houck *(Handwritten)*\n#1099 *(Handwritten)*\n\nDate 14 July 1975 *(Handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "total_cost": 0.0015587499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UCHT\n5316\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033780\nFLORA OF Georgia\nFamily DIAPENSIACEAE\nScientific Name Galax aphylla L.\nCommon Name\nLocality Nimblewell Gap, Chattahoochee Nat.\nForest, Gilmer County.\nHabitat Mixed deciduous forest.\nCollector D. F. Houck\nDate 14 July 1975\n#1099\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.240000000000001e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 500,
+    "cost_in": 0.0002212,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUCHT\n\nBIOLOGY DEPARTMENT HERBARIUM\n5316\nSOUTHERN MISSIONARY COLLEGE\n\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033780\n\nFLORA OF Georgia\n\nFamily DIAPENSIACEAE\n\nScientific Name *Galax aphylla* L.\n\nCommon Name\n\nLocality Nimblewell Gap, Chattahoochee Nat.\nForest, Gilmer County. *(Handwritten)*\n\nHabitat Mixed deciduous forest *(Handwritten)*\n\nCollector D. F. Houck *(Handwritten)*\n#1099 *(Handwritten)*\n\nDate 14 July 1975 *(Handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUCHT\n5316\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033780\nFLORA OF Georgia\nFamily DIAPENSIACEAE\nScientific Name Galax aphylla L.\nCommon Name\nLocality Nimblewell Gap, Chattahoochee Nat.\nForest, Gilmer County.\nHabitat Mixed deciduous forest.\nCollector D. F. Houck\nDate 14 July 1975\n#1099\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT033780",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Diapensiaceae indet",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. F. Houck",
+    "collectorNumber": "1099",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "14 July 1975",
+    "collectionDate": "1975-07-14",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Gilmer County",
+    "locality": "Nimblewell Gap, Chattahoochee Nat. Forest, Gilmer County.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UCHT\n5316\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nFLORA OF Georgia\nFamily DIAPENSIACEAE\nScientific Name Galax aphylla L.\nCommon Name\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax aphylla"
+  }
+}

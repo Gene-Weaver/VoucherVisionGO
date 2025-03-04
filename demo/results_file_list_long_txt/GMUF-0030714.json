@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039976\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nBedford County                                                    May 20, 1992\n\n*Galax urceolata* (Poir.) Brummitt\n\nJames River Gorge. Oak-pine-heath scrub on formerly\nburned slope along south side of Matts Creek, 0.2 mi.\nwest of the river and 0.5 mi. west of Snowden; elev. 720\nft. Common.\n\nGary P. Fleming                                                     No. 6499\n\nGMUF-0030714\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000725,
+      "total_cost": 0.00150375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 145
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039976\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nBedford County May 20, 1992\nGalax urceolata (Poir.) Brumm.\nJames River Gorge. Oak-pine-heath scrub on formerly\nburned slope along south side of Matts Creek, 0.2 mi.\nwest of the river and 0.5 mi. west of Snowden; elev. 720\nft. Common.\nGary P. Fleming No. 6499\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030714\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.56e-05,
+      "total_cost": 0.0007371000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 139
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2161,
+    "output": 513,
+    "cost_in": 0.00021610000000000002,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039976\n\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\n\nBedford County                                                    May 20, 1992\n\n*Galax urceolata* (Poir.) Brummitt\n\nJames River Gorge. Oak-pine-heath scrub on formerly\nburned slope along south side of Matts Creek, 0.2 mi.\nwest of the river and 0.5 mi. west of Snowden; elev. 720\nft. Common.\n\nGary P. Fleming                                                     No. 6499\n\nGMUF-0030714\nTed R. Bradley Herbarium\nGeorge Mason University\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n039976\nHERBARIUM OF GEORGE MASON UNIVERSITY\nVIRGINIA\nBedford County May 20, 1992\nGalax urceolata (Poir.) Brumm.\nJames River Gorge. Oak-pine-heath scrub on formerly\nburned slope along south side of Matts Creek, 0.2 mi.\nwest of the river and 0.5 mi. west of Snowden; elev. 720\nft. Common.\nGary P. Fleming No. 6499\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030714\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "039976",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Gary P. Fleming",
+    "collectorNumber": "6499",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 20, 1992",
+    "collectionDate": "1992-05-20",
+    "collectionDateEnd": "",
+    "habitat": "James River Gorge. Oak-pine-heath scrub on formerly burned slope along south side of Matts Creek, 0.2 mi. west of the river and 0.5 mi. west of Snowden; elev. 720 ft. Common.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bedford County",
+    "locality": "James River Gorge. Oak-pine-heath scrub on formerly burned slope along south side of Matts Creek, 0.2 mi. west of the river and 0.5 mi. west of Snowden",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of George Mason University\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030714"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF WILLIAM & MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nBotetourt County                                   August 10, 1992\n\n*Galax urceolata* (Poir.) Brumm.\n\nDry, oak-pine-heath scrub on formerly burned slope along\nSalt Pond Road, ca. 0.5 mi. NNW of Curry Gap on the Blue\nRidge, 3.0 miles ESE of Troutville; elev. 2300 ft. Common.\n\nGary P. Fleming                                      No. 7133\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007149999999999999,
+      "total_cost": 0.00149375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\nNO. 305 ME\n16ths\n50 60 70 80\n2\n3\nGENERAL\nCHARTERED 1693\n90 100 110\n4\n120\nMADE US\n130\n5\n140 150\nLESS STEEL\n6\nHERBARIUM OF THE COLLEGE OF WILLIAM & MARY\nWilliamsburg, Virginia\nVIRGINIA\nBotetourt County\nAugust 10, 1992\nCOLLEGE OF\n58158\nWILLIAM & MARY\nGalax urceolata (Poir.) Brumm.\nDry, oak-pine-heath scrub on formerly burned slope along\nSalt Pond Road, ca. 0.5 mi. NNW of Curry Gapon the Blue\nRidge, 3.0 miles ESE of Troutville; elev. 2300 ft. Common.\nGary P. Fleming\nNo. 7133\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.32e-05,
+      "total_cost": 0.0007747,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 233
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2250,
+    "output": 513,
+    "cost_in": 0.000225,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF WILLIAM & MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nBotetourt County                                   August 10, 1992\n\n*Galax urceolata* (Poir.) Brumm.\n\nDry, oak-pine-heath scrub on formerly burned slope along\nSalt Pond Road, ca. 0.5 mi. NNW of Curry Gap on the Blue\nRidge, 3.0 miles ESE of Troutville; elev. 2300 ft. Common.\n\nGary P. Fleming                                      No. 7133\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\nNO. 305 ME\n16ths\n50 60 70 80\n2\n3\nGENERAL\nCHARTERED 1693\n90 100 110\n4\n120\nMADE US\n130\n5\n140 150\nLESS STEEL\n6\nHERBARIUM OF THE COLLEGE OF WILLIAM & MARY\nWilliamsburg, Virginia\nVIRGINIA\nBotetourt County\nAugust 10, 1992\nCOLLEGE OF\n58158\nWILLIAM & MARY\nGalax urceolata (Poir.) Brumm.\nDry, oak-pine-heath scrub on formerly burned slope along\nSalt Pond Road, ca. 0.5 mi. NNW of Curry Gapon the Blue\nRidge, 3.0 miles ESE of Troutville; elev. 2300 ft. Common.\nGary P. Fleming\nNo. 7133\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "58158",
+    "scientificName": "Galax urceolata (Poir.) Brumm.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brumm.",
+    "collectedBy": "Gary P. Fleming",
+    "collectorNumber": "7133",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 10, 1992",
+    "collectionDate": "1992-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Dry, oak-pine-heath scrub on formerly burned slope along Salt Pond Road, ca. 0.5 mi. NNW of Curry Gap on the Blue Ridge, 3.0 miles ESE of Troutville",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Common.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Botetourt County",
+    "locality": "Elev. 2300 ft.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "701",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF WILLIAM & MARY\nWilliamsburg, Virginia\nVIRGINIA\nGalax urceolata\nWILLIAM & MARY\nGENERAL\nCOLLEGE OF"
+  }
+}

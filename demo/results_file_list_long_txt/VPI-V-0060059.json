@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "4ColorCard\nTHE HERBARIUM OF\n98455\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060059\n\nVIRGINIA HIGHLANDS COMMUNITY COLLEGE\nHERBARIUM\n1409\nFLORA OF: Russell Co., Va.\n\nTECHNICAL NAME *Galax aphylla*\nCOMMON NAME Galax\nFAMILY Diapensiaceae\nLOCALITY Bear Town Mountain\nALTITUDE 4,650 feet\nCOLLECTED BY Becky Holbrook\nIDENTIFIED BY Becky Holbrook\nDATE April 16, 1977\nHABITAT Sandy Soil in oak-pine woods.\n\n*Handwritten Text: Galax aphylla*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00077,
+      "total_cost": 0.00154875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 154
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "4ColorCard\n-THE HERBARIUM OF-\n98455\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\n5\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060059\nVIRGINIA HIGHLANDS COMMUNITY COLLEGE\n1409\nHERBARIUM\nFLORA OF: Russell Co., Va.\nTECHNICAL NAME Galax aphylla\nCOMMON NAME\nFAMILY\nLOCALITY\nALTITUDE\nCOLLECTED BY:\nIDENTIFIED BY:\nDATE\nHABITAT\nGalax\nDiapensiaceae\nBear Town Mountain\n4,650 feet\nBecky Holbrook\nBecky Holbrook\nApril 16, 1977\nSandy Soil in oak-pine\nwoods.\nCOLL:\nDET:\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2237,
+    "output": 486,
+    "cost_in": 0.0002237,
+    "cost_out": 0.0001944
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n4ColorCard\nTHE HERBARIUM OF\n98455\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060059\n\nVIRGINIA HIGHLANDS COMMUNITY COLLEGE\nHERBARIUM\n1409\nFLORA OF: Russell Co., Va.\n\nTECHNICAL NAME *Galax aphylla*\nCOMMON NAME Galax\nFAMILY Diapensiaceae\nLOCALITY Bear Town Mountain\nALTITUDE 4,650 feet\nCOLLECTED BY Becky Holbrook\nIDENTIFIED BY Becky Holbrook\nDATE April 16, 1977\nHABITAT Sandy Soil in oak-pine woods.\n\n*Handwritten Text: Galax aphylla*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n4ColorCard\n-THE HERBARIUM OF-\n98455\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\n5\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060059\nVIRGINIA HIGHLANDS COMMUNITY COLLEGE\n1409\nHERBARIUM\nFLORA OF: Russell Co., Va.\nTECHNICAL NAME Galax aphylla\nCOMMON NAME\nFAMILY\nLOCALITY\nALTITUDE\nCOLLECTED BY:\nIDENTIFIED BY:\nDATE\nHABITAT\nGalax\nDiapensiaceae\nBear Town Mountain\n4,650 feet\nBecky Holbrook\nBecky Holbrook\nApril 16, 1977\nSandy Soil in oak-pine\nwoods.\nCOLL:\nDET:\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "98455",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Becky Holbrook",
+    "collectorNumber": "1409",
+    "identifiedBy": "Becky Holbrook",
+    "identifiedDate": "1977-04-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 16, 1977",
+    "collectionDate": "1977-04-16",
+    "collectionDateEnd": "",
+    "habitat": "Sandy soil in oak-pine woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Va.",
+    "county": "Russell co.",
+    "locality": "Bear town mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1417",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0060059\nVirginia highlands community college\nHerbarium\nFlora of\nTechnical name galax aphylla\nCommon name galax\nFamily diapensiaceae\nAltitude 4,650 feet"
+  }
+}

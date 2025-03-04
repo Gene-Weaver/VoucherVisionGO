@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Inches\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00427699\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n666077\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummitt\n\nDate 14 April 2018                      County Moore\n\nLocation South side Deep River, E of bridge at \nHigh Falls.\n\nHabitat Under *Kalmia latifolia* on rockledge\nslopes facing brownwater river. Common.\n\nB.A. Sorrie 13619\n\n*Handwritten text: 13619*\n\n*Galax urceolata*\n*Kalmia latifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000965,
+      "total_cost": 0.00174375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 193
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Inches\n2\n3\nT\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color Black\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00427699\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n666077\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummitt\nDate 14 April 2018\nCounty Moore\nLocation South side Deep River, E of bridge at\nHigh Falls.\nHabitat Under Kalmia latifolia on rockledge\nslopes facing brownwater river. Common.\nB.A. Sorrie 13619\n\n\nGalax urceolata\nKalmia latifolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.920000000000001e-05,
+      "total_cost": 0.0007707,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 223
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2300,
+    "output": 463,
+    "cost_in": 0.00023,
+    "cost_out": 0.0001852
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nInches\nCentimetres\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00427699\n\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n666077\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummitt\n\nDate 14 April 2018                      County Moore\n\nLocation South side Deep River, E of bridge at \nHigh Falls.\n\nHabitat Under *Kalmia latifolia* on rockledge\nslopes facing brownwater river. Common.\n\nB.A. Sorrie 13619\n\n*Handwritten text: 13619*\n\n*Galax urceolata*\n*Kalmia latifolia*\n\n\ngemini-2.0-flash OCR:\nInches\n2\n3\nT\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color Black\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00427699\nUniversity of North Carolina at Chapel Hill\nHERBARIUM\nNCU\n666077\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummitt\nDate 14 April 2018\nCounty Moore\nLocation South side Deep River, E of bridge at\nHigh Falls.\nHabitat Under Kalmia latifolia on rockledge\nslopes facing brownwater river. Common.\nB.A. Sorrie 13619\n\n\nGalax urceolata\nKalmia latifolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00427699",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "B.a. Sorrie",
+    "collectorNumber": "13619",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "14 April 2018",
+    "collectionDate": "2018-04-14",
+    "collectionDateEnd": "",
+    "habitat": "Under Kalmia latifolia on rockledge slopes facing brownwater river. Common.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Moore",
+    "locality": "South side deep river, e of bridge at high falls.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nUniversity of north carolina at chapel hill\nHerbarium\nNCU\n666077\nNorth carolina flora"
+  }
+}

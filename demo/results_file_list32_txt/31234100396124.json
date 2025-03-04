@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n048902\nHERBARIUM\n\nKentucky\nMcCreary County\nEKY\nDiapensiaceae\n*Galax aphylla* auct. non L.\nUpland woods along stream off hwy 90\n\nStephens Tract, Cumberland Falls\nState Resort Park\n\nRonald L. Jones 9216b       Oct. 18, 1999\nEastern Kentucky University Herbarium\n\nEK (handwritten)\n3 1234 10039612 4\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nKENTUCKY UN\nEASTERN\n048902\nHERBARIU\nERSITY\nINCH\nOPTIRECTILINEAR\u00ae\n8\n\u0e1e\u0e27\nU.S.A.\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nEKY\nUpland woods along stream off hwy 90\nStephens Tract, Cumberland Falls\nState Resort Park\nRonald L. Jones 9216b\nOct. 18, 1999\nEastern Kentucky University Herbarium\nIK\nEastern Kentucky University Herbarium\n3 1234 10039612 4\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n048902\nHERBARIUM\n\nKentucky\nMcCreary County\nEKY\n\nDiapensiaceae\n*Galax aphylla* auct. non L.\nUpland woods along stream off hwy 90\n\nStephens Tract, Cumberland Falls\nState Resort Park\n\nRonald L. Jones 9216b                            Oct. 18, 1999\nEastern Kentucky University Herbarium\n\n3 1234 10039612 4\nEK (handwritten)\nEastern Kentucky University Herbarium\n\n*Galax aphylla*\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.00062,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n048902\nHERBARIUM\n\nKentucky\nMcCreary County\nEKY\nDiapensiaceae\n*Galax aphylla* auct. non L.\nUpland woods along stream off hwy 90\n\nStephens Tract, Cumberland Falls\nState Resort Park\n\nRonald L. Jones 9216b       Oct. 18, 1999\nEastern Kentucky University Herbarium\n\nEK (handwritten)\n3 1234 10039612 4\n\n*Galax aphylla*\n\n",
+      "cost_out": 0.00065,
+      "total_cost": 0.0014287500000000001,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 124,
-      "total_cost": 0.00139875
+      "tokens_out": 130
     },
     "gemini-2.0-flash": {
+      "ocr_text": "KENTUCKY UN\nEASTERN\n048902\nHERBARIU\nERSITY\nINCH\nOPTIRECTILINEAR\u00ae\n8\n\u0e1e\u0e27\nU.S.A.\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nEKY\nUpland woods along stream off hwy 90\nStephens Tract, Cumberland Falls\nState Resort Park\nRonald L. Jones 9216b\nOct. 18, 1999\nEastern Kentucky University Herbarium\nIK\nEastern Kentucky University Herbarium\n3 1234 10039612 4\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
       "cost_out": 6e-05,
-      "ocr_text": "KENTUCKY UN\nEASTERN\n048902\nHERBARIU\nERSITY\nINCH\nOPTIRECTILINEAR\u00ae\n8\n\u0e1e\u0e27\nU.S.A.\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nEKY\nUpland woods along stream off hwy 90\nStephens Tract, Cumberland Falls\nState Resort Park\nRonald L. Jones 9216b\nOct. 18, 1999\nEastern Kentucky University Herbarium\nIK\nEastern Kentucky University Herbarium\n3 1234 10039612 4\n\n\nGalax aphylla\n\n",
+      "total_cost": 0.0007415,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 150,
-      "total_cost": 0.0007415
+      "tokens_out": 150
     }
   },
-  "tokens_LLM": {
-    "input": 2107,
-    "output": 445
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2157,
+    "output": 462,
+    "cost_in": 0.0002157,
+    "cost_out": 0.00018480000000000002
   },
-  "vvgo_json": {
-    "additionalText": "Eky\nEastern kentucky university herbarium\nek\n3 1234 10039612 4\nEastern kentucky university herbarium\nik",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n048902\nHERBARIUM\n\nKentucky\nMcCreary County\nEKY\n\nDiapensiaceae\n*Galax aphylla* auct. non L.\nUpland woods along stream off hwy 90\n\nStephens Tract, Cumberland Falls\nState Resort Park\n\nRonald L. Jones 9216b                            Oct. 18, 1999\nEastern Kentucky University Herbarium\n\n3 1234 10039612 4\nEK (handwritten)\nEastern Kentucky University Herbarium\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nKENTUCKY UN\nEASTERN\n048902\nHERBARIU\nERSITY\nINCH\nOPTIRECTILINEAR\u00ae\n8\n\u0e1e\u0e27\nU.S.A.\nKentucky\nMcCreary County\nDiapensiaceae\nGalax aphylla auct. non L.\nEKY\nUpland woods along stream off hwy 90\nStephens Tract, Cumberland Falls\nState Resort Park\nRonald L. Jones 9216b\nOct. 18, 1999\nEastern Kentucky University Herbarium\nIK\nEastern Kentucky University Herbarium\n3 1234 10039612 4\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
     "catalogNumber": "048902",
-    "chromosomeCount": "",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "auct. non L.",
     "collectedBy": "Ronald L. Jones",
+    "collectorNumber": "9216b",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Oct. 18, 1999",
     "collectionDate": "1999-10-18",
     "collectionDateEnd": "",
-    "collectorNumber": "9216b",
+    "habitat": "Upland woods along stream off hwy 90",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
     "continent": "North america",
     "country": "Kentucky",
+    "stateProvince": "Kentucky",
     "county": "Mccreary County",
-    "cultivated": "",
+    "locality": "Stephens Tract, Cumberland Falls State Resort Park",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "Upland woods along stream off hwy 90",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Stephens tract, cumberland falls state resort park",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla",
-    "scientificNameAuthorship": "auct. non L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "Kentucky",
-    "verbatimCollectionDate": "Oct. 18, 1999",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Eastern kentucky university herbarium\nEky\n3 1234 10039612 4\nek (handwritten)\nEastern kentucky university herbarium\nEastern kentucky university herbarium"
   }
 }

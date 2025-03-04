@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026139\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\n\nDouthat State Park, Bath Co.\n\n(Handwritten text begins here)\nMany plants on N slope in oak-heath\nabove Stony Run in vicinity of Stony\nRun Falls.\nca. 1900-2000 ft.\n(Healing Springs Quad.)\n(Handwritten text ends here)\n\nCharles E. Stevens\nDet. 11\nNo. 16,435\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00061,
+      "total_cost": 0.00138875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 122
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brun.\nDouthat State lark, Bath Co.\nTrang plants on N slope in oak-heath\nabove Story Run in vicinity of Story\nRun Falls. d. 1900-2000ft.\n(Healing Springs Quad)\nCharles E. Stevens\nNo. 16,435\nDet.\n|1\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.5199999999999995e-05,
+      "total_cost": 0.0007167,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 88
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2083,
+    "output": 428,
+    "cost_in": 0.00020830000000000002,
+    "cost_out": 0.00017120000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026139\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brum.\n\nDouthat State Park, Bath Co.\n\n(Handwritten text begins here)\nMany plants on N slope in oak-heath\nabove Stony Run in vicinity of Stony\nRun Falls.\nca. 1900-2000 ft.\n(Healing Springs Quad.)\n(Handwritten text ends here)\n\nCharles E. Stevens\nDet. 11\nNo. 16,435\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brun.\nDouthat State lark, Bath Co.\nTrang plants on N slope in oak-heath\nabove Story Run in vicinity of Story\nRun Falls. d. 1900-2000ft.\n(Healing Springs Quad)\nCharles E. Stevens\nNo. 16,435\nDet.\n|1\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026139",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "16,435",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "Many plants on n slope in oak-heath above story run in vicinity of story run falls",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Bath co.",
+    "locality": "Douthat state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "579",
+    "maximumElevationInMeters": "610",
+    "elevationUnits": "ft",
+    "additionalText": "Det. 11\n(Healing springs quad)"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n66380\nWILLIAM & MARY\n\nFlora of the College Woods\nCollege of William and Mary\nWilliamsburg, Virginia\n\n3 June 1989\n\n*Galax urceolata* (Poiret) Brummitt\n\nLocally abundant on bank of *Sphagnum*-rich portion\nof \"Swan Fork\" ravine and on adjacent N-facing slope,\nnear where \"Swan Fork\" crosses CCC trail about 0.2 mi.\nE of Strawberry Plains Rd; mixed oak woods. 1 of 2\noccurrences of *Galax* known in the College Woods as of\n1990.\nCollector: Virginia E. Crouch 247\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.00158875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nDiapens\n66380\nWILLIAM & MARY\nFlora of the College Woods\nCollege of William and Mary\nWilliamsburg, Virginia\nGalax urceolata (Poiret) Brummit\n3 June 1989\nLocally abundant on bank of Sphagnum-rich portion\nof \"Swan Fork\" ravine and on adjacent N-facing slope.\nnear where \"Swan Fork\" crosses CCC trail about 0.2 mi.\nE of Strawberry Plains Rd; mixed oak woods 1 of 2\noccurrences of Galax known in the College Woods as of\n1990\nCollector: Virginia E. Crouch\n247\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.48e-05,
+      "total_cost": 0.0007763,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 237
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 506,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020240000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n66380\nWILLIAM & MARY\n\nFlora of the College Woods\nCollege of William and Mary\nWilliamsburg, Virginia\n\n3 June 1989\n\n*Galax urceolata* (Poiret) Brummitt\n\nLocally abundant on bank of *Sphagnum*-rich portion\nof \"Swan Fork\" ravine and on adjacent N-facing slope,\nnear where \"Swan Fork\" crosses CCC trail about 0.2 mi.\nE of Strawberry Plains Rd; mixed oak woods. 1 of 2\noccurrences of *Galax* known in the College Woods as of\n1990.\nCollector: Virginia E. Crouch 247\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nSTAINLESS STEEL\nDiapens\n66380\nWILLIAM & MARY\nFlora of the College Woods\nCollege of William and Mary\nWilliamsburg, Virginia\nGalax urceolata (Poiret) Brummit\n3 June 1989\nLocally abundant on bank of Sphagnum-rich portion\nof \"Swan Fork\" ravine and on adjacent N-facing slope.\nnear where \"Swan Fork\" crosses CCC trail about 0.2 mi.\nE of Strawberry Plains Rd; mixed oak woods 1 of 2\noccurrences of Galax known in the College Woods as of\n1990\nCollector: Virginia E. Crouch\n247\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "66380",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Virginia E. Crouch",
+    "collectorNumber": "247",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3 June 1989",
+    "collectionDate": "1989-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Locally abundant on bank of Sphagnum-rich portion of Swan Fork ravine and on adjacent N-facing slope; mixed oak woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "",
+    "locality": "Near where Swan Fork crosses CCC trail about 0.2 mi. E of Strawberry Plains Rd; 1 of 2 occurrences of Galax known in the College Woods as of 1990.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\nWILLIAM & MARY\nFlora of the College Woods\nCollege of William and Mary\nWilliamsburg, Virginia\n\n\nGalax urceolata"
+  }
+}

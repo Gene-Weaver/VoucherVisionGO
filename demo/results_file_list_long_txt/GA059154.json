@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nUNIV. OF GEORGIA\nHERBARIUM\n\nPOISONED\n41060\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 437 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nCOBB COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nTributary of Rottenwood Creek off new\nMarietta Highway. Piedmont of Georgia.\n\nMcDowell M-104                      27 July 1946\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008700000000000001,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41060\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area.\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nCOBB COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nTributary of Rottenwood Creek off new\nMarietta Highway. Piedmont of Georgia.\nMcDowell M-104\n27 July 1946\nGA059154\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.36e-05,
+      "total_cost": 0.0007651000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 209
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2279,
+    "output": 585,
+    "cost_in": 0.00022790000000000004,
+    "cost_out": 0.00023400000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nUNIV. OF GEORGIA\nHERBARIUM\n\nPOISONED\n41060\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 437 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nCOBB COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nTributary of Rottenwood Creek off new\nMarietta Highway. Piedmont of Georgia.\n\nMcDowell M-104                      27 July 1946\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n41060\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area.\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nCOBB COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nTributary of Rottenwood Creek off new\nMarietta Highway. Piedmont of Georgia.\nMcDowell M-104\n27 July 1946\nGA059154\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "41060",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "McDowell",
+    "collectorNumber": "M-104",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "27 July 1946",
+    "collectionDate": "1946-07-27",
+    "collectionDateEnd": "",
+    "habitat": "Tributary of rottenwood creek off new marietta highway. piedmont of georgia.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area.",
+    "specimenDescription": "Based on average guard cell area volume of 437 \u03bc\u00b2",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Cobb county",
+    "locality": "Tributary of rottenwood creek off new marietta highway. piedmont of georgia.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\ngeorgia atlas project\n9 november 2005\nuniv. Of georgia\nherbarium\npoisoned\nherbarium of the university of north carolina\nherbarium of the university of georgia\ncobb county\nflora of georgia\nimaged 2013\nga059154\ninches\ncentimetres tiffen\u00ae color control patches\nthe tiffen company, 2007\nblue\ncyan\ngreen\nyellow\nred\nmagenta\nwhite\n3/color\nblack"
+  }
+}

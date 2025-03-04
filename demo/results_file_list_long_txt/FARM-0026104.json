@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026104\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?), based on average guard cell area\nvolume of 580 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\n\n*Galax aphylla* L.\nInc. Saw Gap, near Clifton Forge,\nAlleghany Co.\nel. 1880 ft.\n\nHemlock-hardwoods on Smith\nCreek Road ca. 1 mi. S of Bath\nCo. line.                                July 14, 1973\nCHARLES E. STEVENS                NO. 7310\nDET. _u_                            & B. Davenport\n\n(Handwritten text identified by italics)\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00099,
+      "total_cost": 0.00176875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 198
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026104\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6(?), based on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nGalax aphylla L.\nIn Saw Gap, near Clifton Forge,\nAlleghany Co.\nel. 1880 ft.\nHemlock-hardwoods on Smith\nCreek Rood ca. I mi. S of Bath\nCo. line. July 14, 1973\nCHARLES E. STEVENS\nNO. 7310\n& B. Davenport\nDET.\n\u0418\n0 1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.16e-05,
+      "total_cost": 0.0007631000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 204
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2302,
+    "output": 521,
+    "cost_in": 0.00023019999999999998,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026104\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?), based on average guard cell area\nvolume of 580 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\n\n*Galax aphylla* L.\nInc. Saw Gap, near Clifton Forge,\nAlleghany Co.\nel. 1880 ft.\n\nHemlock-hardwoods on Smith\nCreek Road ca. 1 mi. S of Bath\nCo. line.                                July 14, 1973\nCHARLES E. STEVENS                NO. 7310\nDET. _u_                            & B. Davenport\n\n(Handwritten text identified by italics)\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026104\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6(?), based on average guard cell area\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nGalax aphylla L.\nIn Saw Gap, near Clifton Forge,\nAlleghany Co.\nel. 1880 ft.\nHemlock-hardwoods on Smith\nCreek Rood ca. I mi. S of Bath\nCo. line. July 14, 1973\nCHARLES E. STEVENS\nNO. 7310\n& B. Davenport\nDET.\n\u0418\n0 1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026104",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles E. Stevens, B. Davenport",
+    "collectorNumber": "7310",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "?",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 14, 1973",
+    "collectionDate": "1973-07-14",
+    "collectionDateEnd": "",
+    "habitat": "Hemlock-hardwoods on Smith Creek Road",
+    "chromosomeCount": "n = 6(?)",
+    "guardCell": "based on average guard cell area volume of 580 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Alleghany Co.",
+    "locality": "In Saw Gap, near Clifton Forge,",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "573",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA OF VIRGINIA\nca. I mi. S of Bath\nCo. line.\nHarvill-Stevens Herbarium\nLongwood University\nel. 1880 ft.\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

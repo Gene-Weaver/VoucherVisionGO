@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011751\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025741\n\nUniversity of South Carolina Herbarium\nFLORA OF MCDOWELL County N.C.\n\n*Galax aphylla* L.\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\nColl.                               Date                      No.\nWm. FOGLE                           JUNE 28,1964           6\n\nHandwritten Text:\nWm. FOGLE\nJUNE 28,1964\n6\nMCDOWELL\nGALAX APHYLLA\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001135,
+      "total_cost": 0.0019137499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 227
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\n0\n1 2 3 4\n5\n6\n7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0025741\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n011751\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF\nMC DOWELL\nGALAX APHYLLA L.\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\nColl.\nDate\nNo.\nWm. FOGLE\nJUNE 28,1864\n6\nN.C.\nCounty\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.16e-05,
+      "total_cost": 0.0007531,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 179
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2297,
+    "output": 482,
+    "cost_in": 0.0002297,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\n011751\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025741\n\nUniversity of South Carolina Herbarium\nFLORA OF MCDOWELL County N.C.\n\n*Galax aphylla* L.\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\nColl.                               Date                      No.\nWm. FOGLE                           JUNE 28,1964           6\n\nHandwritten Text:\nWm. FOGLE\nJUNE 28,1964\n6\nMCDOWELL\nGALAX APHYLLA\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUSCH\n0\n1 2 3 4\n5\n6\n7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0025741\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\n011751\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF\nMC DOWELL\nGALAX APHYLLA L.\nOPEN WOODS\nMOUNTAINS AT GERTON, N.C.\nColl.\nDate\nNo.\nWm. FOGLE\nJUNE 28,1864\n6\nN.C.\nCounty\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "011751",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Wm. Fogle",
+    "collectorNumber": "6",
+    "identifiedBy": "Michelle L. Gaynor (Flas)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "June 28,1964",
+    "collectionDate": "1964-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "N.c.",
+    "county": "Mc dowell",
+    "locality": "Mountains at gerton, n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Copyright reserved university of south carolina\nuniversity of south carolina herbarium\nusch0025741\nuniversity of south carolina herbarium\nflora of\ngalax aphylla l.\ngalax urceolata\ngalax aphylla"
+  }
+}

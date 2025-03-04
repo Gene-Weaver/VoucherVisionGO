@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF\nSOUTH FLORIDA\n59981\nHERBARIUM\n\n23 (handwritten)\n\nPlant Southeastern United States 235\nLOUISIANA\nNORTH CAROLINA\nBuncombe Co.\n\n*Galax aphylla* L.\nRidgecrest.\nThick growth in mutilated *Rhododendron* for-\nest on banks of spring near old Kitazuma\nMt. Road off path from Florida Avenue. Ca.\n\u00bc mi. from Hwy. 70. Many plants seen but\nfew in bloom.\n\nMartha Gillon 23                      24 June 1964\nUSF 3 Herbarium\n0 in\n1\n2\n3\n4\n0 cm 1 2 3 4 5 6 7 8 9 10\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF\nSOUTH FLORIDA\n59981\nHERBARIUM\n23\nUSF\nHerbarium\nUSF\nUNIVERSITY OF\nSOUTH FLORIDA\nPlant\ncheastern United States\nLOUISIANA\nNORTH CAROLINA\nBuncombe Co.\nGalax aphylla L.\nRidgecrest.\nThick growth in mutilated Rhododendron for-\nest on banks of spring near old Kitazuma\nMt. Road off path from Florida Avenue. Ca.\n1\n4\nmi. from Hwy. %70. Many plants seen but\nfew in bloom.\nMartha Gillon 23\n24 June 1964\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.400000000000001e-05,
+      "total_cost": 0.0007355,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2216,
+    "output": 449,
+    "cost_in": 0.00022160000000000002,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF\nSOUTH FLORIDA\n59981\nHERBARIUM\n\n23 (handwritten)\n\nPlant Southeastern United States 235\nLOUISIANA\nNORTH CAROLINA\nBuncombe Co.\n\n*Galax aphylla* L.\nRidgecrest.\nThick growth in mutilated *Rhododendron* for-\nest on banks of spring near old Kitazuma\nMt. Road off path from Florida Avenue. Ca.\n\u00bc mi. from Hwy. 70. Many plants seen but\nfew in bloom.\n\nMartha Gillon 23                      24 June 1964\nUSF 3 Herbarium\n0 in\n1\n2\n3\n4\n0 cm 1 2 3 4 5 6 7 8 9 10\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF\nSOUTH FLORIDA\n59981\nHERBARIUM\n23\nUSF\nHerbarium\nUSF\nUNIVERSITY OF\nSOUTH FLORIDA\nPlant\ncheastern United States\nLOUISIANA\nNORTH CAROLINA\nBuncombe Co.\nGalax aphylla L.\nRidgecrest.\nThick growth in mutilated Rhododendron for-\nest on banks of spring near old Kitazuma\nMt. Road off path from Florida Avenue. Ca.\n1\n4\nmi. from Hwy. %70. Many plants seen but\nfew in bloom.\nMartha Gillon 23\n24 June 1964\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "59981",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Martha Gillon",
+    "collectorNumber": "23",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 June 1964",
+    "collectionDate": "1964-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Thick growth in mutilated Rhododendron forest on banks of spring near old Kitazuma Mt. Road off path from Florida Avenue.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Many plants seen but few in bloom.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United States",
+    "stateProvince": "North carolina",
+    "county": "Buncombe co.",
+    "locality": "Ridgecrest. Ca. \u00bc mi. from Hwy. 70.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of south florida\nHerbarium\nPlant southeastern united states"
+  }
+}

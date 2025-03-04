@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n\nSyn = Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\nTULANE\nUNIVERSITY\nHERBARIUM\n\nNO 0092172\n\n(Handwritten: 6277)\nEWAN HERBARIUM\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000845,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TIPPEN Gray Scale\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\nTULANE\nUNIVERSITY\nHERBARIUM\nEWAN HERBARIUM\n6277\n\u039d\u039f 0092172\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.36e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2251,
+    "output": 522,
+    "cost_in": 0.0002251,
+    "cost_out": 0.0002088
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\n\nGalax urceolata (Poir.) Brummitt\n\nSyn = Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\nTULANE\nUNIVERSITY\nHERBARIUM\n\nNO 0092172\n\n(Handwritten: 6277)\nEWAN HERBARIUM\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTIPPEN Gray Scale\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\nTULANE\nUNIVERSITY\nHERBARIUM\nEWAN HERBARIUM\n6277\n\u039d\u039f 0092172\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092172",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Sr. Margaret Potts, R. C. E.",
+    "collectorNumber": "300",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 12, 1933.",
+    "collectionDate": "1933-08-12",
+    "collectionDateEnd": "",
+    "habitat": "Upper banks of the french broad river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson county",
+    "locality": "Mt. st. louis",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Tulane university herbarium\nsyn = galax aphylla auct. non l.\nsynonymy from plants (usda) database, oct. 2011.\nplants of henderson county, north carolina\ndistributed by the catholic university of america\ngalax aphylla l.\ntulane\nuniversity\nherbarium\newan herbarium\n6277\ngalax urceolata\ngalax aphylla"
+  }
+}

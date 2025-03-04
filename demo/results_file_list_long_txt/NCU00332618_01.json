@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332618\n\nHerbarium of the University of North Carolina\n*Galax aphylla* L.\nDetermined by H. E. Ahles\n1963\n\nFLORA TENNESSIENSIS\nCOLLECTOR. V.W. Sims\nUnicoi COUNTY\nNO. 21 b\n7 July 19 35\n\nBanks on top of Unaka Mt. \u2013 very\nabundant. *(Handwritten)*\n\nEx Univ. of Tenn. Herbarium\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006649999999999999,
+      "total_cost": 0.00144375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\ncopyright reserved\ncm\n1 2 3 4 5 6 7 8 9 10\nUniversity of North Carolina\nONCU\nat Chapel Hill\nx-rite\ncolorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332618\nNORTH\nHERBARIUM\nSITY OF\nVERSI\nUNIVE\nCAROLINA\n240593\nHerbarium of the University of North Carolina\nGalax aphylla L.\nDetermined by H. E. Ahles\nFLORA TENNESSIENSIS\nCOLLECTOR. V.W. Sims\n21 b\nON\nUnicoi\n7 July\nCOUNTY\n1935\nBanks on top of Unaka Mt.\nabundant.\nEx Univ. of Tenn. Herbarium\n1963\nvery\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.44e-05,
+      "total_cost": 0.0007659,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 211
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2229,
+    "output": 463,
+    "cost_in": 0.00022290000000000002,
+    "cost_out": 0.0001852
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332618\n\nHerbarium of the University of North Carolina\n*Galax aphylla* L.\nDetermined by H. E. Ahles\n1963\n\nFLORA TENNESSIENSIS\nCOLLECTOR. V.W. Sims\nUnicoi COUNTY\nNO. 21 b\n7 July 19 35\n\nBanks on top of Unaka Mt. \u2013 very\nabundant. *(Handwritten)*\n\nEx Univ. of Tenn. Herbarium\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina\nat Chapel Hill\ncopyright reserved\ncm\n1 2 3 4 5 6 7 8 9 10\nUniversity of North Carolina\nONCU\nat Chapel Hill\nx-rite\ncolorchecker\nMSCCPPP\u00c90411\nMSCCPPCC0411\nmm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332618\nNORTH\nHERBARIUM\nSITY OF\nVERSI\nUNIVE\nCAROLINA\n240593\nHerbarium of the University of North Carolina\nGalax aphylla L.\nDetermined by H. E. Ahles\nFLORA TENNESSIENSIS\nCOLLECTOR. V.W. Sims\n21 b\nON\nUnicoi\n7 July\nCOUNTY\n1935\nBanks on top of Unaka Mt.\nabundant.\nEx Univ. of Tenn. Herbarium\n1963\nvery\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332618",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "V.W. Sims",
+    "collectorNumber": "21 b",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "1963",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 July 19 35",
+    "collectionDate": "1935-07-07",
+    "collectionDateEnd": "",
+    "habitat": "Banks on top of Unaka Mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Very abundant. (Handwritten)",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi",
+    "locality": "Banks on top of Unaka Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina\nat Chapel Hill\nUniversity of North Carolina Herbarium\nFlora tennesseensis\nEx Univ. of Tenn. Herbarium\ncopyright reserved\ncolorchecker\nx-rite"
+  }
+}

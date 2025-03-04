@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nUNIVERSITY OF ALABAMA\n23614\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nALABAMA PLANTS\n\n*Galax aphylla* L.\nDeKalb Co. Below sandstone cliffs\nin shaded gorge of Town Creek, on\nSand Mountain.\nCollected by Roland M. Harper #4019 5/9/46\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00059,
+      "total_cost": 0.00136875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 118
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "1\ncm\n2\n3\n4\n5\n6\n7\n8\n9\n10\nA\nUNA\nThe University\nof Alabama\nHerbarium\nHERBARIUM\nUNIVERSITY OF ALABAMA\n23614\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013977\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nALABAMA PLANTS\nGalax aphylla L.\nDeKalb Co. Below sandstone cliffs\nin shaded gorge of Town Creek, on\nSand Mountain.\nCollected by Roland M. Harper #4019 5/9/46\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.64e-05,
+      "total_cost": 0.0007479000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 166
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2185,
+    "output": 483,
+    "cost_in": 0.0002185,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nUNIVERSITY OF ALABAMA\n23614\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nALABAMA PLANTS\n\n*Galax aphylla* L.\nDeKalb Co. Below sandstone cliffs\nin shaded gorge of Town Creek, on\nSand Mountain.\nCollected by Roland M. Harper #4019 5/9/46\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n1\ncm\n2\n3\n4\n5\n6\n7\n8\n9\n10\nA\nUNA\nThe University\nof Alabama\nHerbarium\nHERBARIUM\nUNIVERSITY OF ALABAMA\n23614\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013977\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n= Galax urceolata (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\nALABAMA PLANTS\nGalax aphylla L.\nDeKalb Co. Below sandstone cliffs\nin shaded gorge of Town Creek, on\nSand Mountain.\nCollected by Roland M. Harper #4019 5/9/46\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "23614",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Roland M. Harper",
+    "collectorNumber": "4019",
+    "identifiedBy": "Robert R. Haynes",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/9/46",
+    "collectionDate": "1946-05-09",
+    "collectionDateEnd": "",
+    "habitat": "Below sandstone cliffs in shaded gorge of Town Creek, on Sand Mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "DeKalb Co.",
+    "locality": "Below sandstone cliffs in shaded gorge of Town Creek, on Sand Mountain.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNA\nThe University\nof Alabama\nHerbarium\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA00013977\nALABAMA PLANTS\nGalax aphylla L.\nGalax aphylla"
+  }
+}

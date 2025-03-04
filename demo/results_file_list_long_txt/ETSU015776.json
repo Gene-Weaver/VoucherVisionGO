@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015776\n\nETSU Herbarium\n9936\n\nPlants of Tennessee\n\nDIAPENSIACEAE\n*Galax aphylla* L.\n\nCarter Co., 29 May 1977. Garden 981.\nHolston Mt. Common in acid woods.\n\ngalax\nDet: John C. Warden\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000445,
+      "total_cost": 0.00122375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 89
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ETSU Herbarium\nEAST TENNESSEE STATE UNIVERSITY\nETSU015776\nPlants of Tennessee\nDIASPENSIACEAE\nGalax aphylla L.\nCarter Co., 29 May 1977. Jarden 981.\nHolston Mt. Common in acid woods.\nDet:\n0\n1\n2\n3\ncm\ngalax\nJohn C. Warden\n4\n5\n6\n7\n8\n9 10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6800000000000006e-05,
+      "total_cost": 0.0007283000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 117
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2087,
+    "output": 434,
+    "cost_in": 0.0002087,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015776\n\nETSU Herbarium\n9936\n\nPlants of Tennessee\n\nDIAPENSIACEAE\n*Galax aphylla* L.\n\nCarter Co., 29 May 1977. Garden 981.\nHolston Mt. Common in acid woods.\n\ngalax\nDet: John C. Warden\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nETSU Herbarium\nEAST TENNESSEE STATE UNIVERSITY\nETSU015776\nPlants of Tennessee\nDIASPENSIACEAE\nGalax aphylla L.\nCarter Co., 29 May 1977. Jarden 981.\nHolston Mt. Common in acid woods.\nDet:\n0\n1\n2\n3\ncm\ngalax\nJohn C. Warden\n4\n5\n6\n7\n8\n9 10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015776",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jarden",
+    "collectorNumber": "981",
+    "identifiedBy": "John C. Warden",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 May 1977",
+    "collectionDate": "1977-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Common in acid woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "galax",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Carter Co.",
+    "locality": "Holston Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "EAST TENNESSEE STATE UNIVERSITY\nETSU Herbarium\nPlants of Tennessee\nDIAPENSIACEAE\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

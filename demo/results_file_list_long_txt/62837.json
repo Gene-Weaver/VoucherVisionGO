@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n62837\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nCharles City County\n*Galax urceolata* (Poiret) Brummitt                      October 4, 1992\n\nAbundant in colony on gently sloping ridge above\nhead of stream/seep that feeds hardwood Swamp,\nscattered smaller colonies elsewhere along ridges;\nNorth of north terminus of Eagle's Nest Road in the\nChickahominy Wildlife Management Area.\n\nCollector: Mark D. Stoetzer                                      No. 39\n\n\nHandwritten text: *Galax urceolata*\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.0015687500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\n10\n20\n30 40\n16ths\n1\n50\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\n120\n130\n5\n140 150\n6\nCHARTERED 1693\nCOLLEGE OF\n62837\nWILLIAM & MART\nWILD\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nCharles City County October 4, 1992\nGalax urceolata (Poiret) Brummit\nAbundant in colony on gently sloping ridge above\nhead of stream/seep that feeds hardwood Swamp,\nscattered smaller colonies elsewhere along ridges;\nNorth of north terminus of Eagle's Nest Road in the\nChickahominy Wildlife Management Area.\nCollector: Mark D. Stoetzer\nNo. 39\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.520000000000001e-05,
+      "total_cost": 0.0007667,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 213
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2263,
+    "output": 492,
+    "cost_in": 0.0002263,
+    "cost_out": 0.0001968
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n62837\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nCharles City County\n*Galax urceolata* (Poiret) Brummitt                      October 4, 1992\n\nAbundant in colony on gently sloping ridge above\nhead of stream/seep that feeds hardwood Swamp,\nscattered smaller colonies elsewhere along ridges;\nNorth of north terminus of Eagle's Nest Road in the\nChickahominy Wildlife Management Area.\n\nCollector: Mark D. Stoetzer                                      No. 39\n\n\nHandwritten text: *Galax urceolata*\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\n10\n20\n30 40\n16ths\n1\n50\n2\n60 70 80\n3\n90\nGENERAL\n100 110\n4\n120\n130\n5\n140 150\n6\nCHARTERED 1693\nCOLLEGE OF\n62837\nWILLIAM & MART\nWILD\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nCharles City County October 4, 1992\nGalax urceolata (Poiret) Brummit\nAbundant in colony on gently sloping ridge above\nhead of stream/seep that feeds hardwood Swamp,\nscattered smaller colonies elsewhere along ridges;\nNorth of north terminus of Eagle's Nest Road in the\nChickahominy Wildlife Management Area.\nCollector: Mark D. Stoetzer\nNo. 39\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "62837",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Mark D. Stoetzer",
+    "collectorNumber": "39",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "October 4, 1992",
+    "collectionDate": "1992-10-04",
+    "collectionDateEnd": "",
+    "habitat": "Abundant in colony on gently sloping ridge above head of stream/seep that feeds hardwood Swamp, scattered smaller colonies elsewhere along ridges;",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Charles City County",
+    "locality": "North of north terminus of Eagle's Nest Road in the Chickahominy Wildlife Management Area.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\nWILLIAM & MART\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082894\n\nNORTH CAROLINA\nSTATE MUSEUM\n2216\n\nHERBARIUM\nNCSC\n81281\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of\nN.C. State Museum\nNo. 12125 RMD\n\nTechnical Name *Galax aphylla* L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality NC Ashe Co. 3 mi NE of Jefferson\non oct 221\nAltitude\nCollected by R.M. Downs with W.M. Palmer, A. Braswell\nIdentified by R.M. Downs C. Leibrandt, H. Blevin\nDate 30 June 1971\nHabitat Rich rocky woods\nMcCourt Labels, Bradford, Pa.\n\n*Handwritten Text*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.00172375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nNCSC\n81281\nCAROLINA STATE UNIV\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082894\nNORTH CAROLINA\nSTATE MUSEUM\n2216\nHerbarium of\nNo. 12125 RMD\nN.C. State Museum\nTechnical Name Galax aphylla L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality NC. Ashe Co. 3 mi NE of Jefferson\nAltitude\nDate 30 June 1971\nHabitat Rich rocky woods\nCollected by B.M. Downs with WM, Palmer, A. Braswell\nIdentified by R.M, Downs C. Leibrandt, H. Blevin\nMcCourt Labels, Bradford, Pa.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2246,
+    "output": 541,
+    "cost_in": 0.00022460000000000004,
+    "cost_out": 0.00021640000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082894\n\nNORTH CAROLINA\nSTATE MUSEUM\n2216\n\nHERBARIUM\nNCSC\n81281\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of\nN.C. State Museum\nNo. 12125 RMD\n\nTechnical Name *Galax aphylla* L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality NC Ashe Co. 3 mi NE of Jefferson\non oct 221\nAltitude\nCollected by R.M. Downs with W.M. Palmer, A. Braswell\nIdentified by R.M. Downs C. Leibrandt, H. Blevin\nDate 30 June 1971\nHabitat Rich rocky woods\nMcCourt Labels, Bradford, Pa.\n\n*Handwritten Text*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nNCSC\n81281\nCAROLINA STATE UNIV\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082894\nNORTH CAROLINA\nSTATE MUSEUM\n2216\nHerbarium of\nNo. 12125 RMD\nN.C. State Museum\nTechnical Name Galax aphylla L.\nCommon Name Galax\nFamily Diapensiaceae\nLocality NC. Ashe Co. 3 mi NE of Jefferson\nAltitude\nDate 30 June 1971\nHabitat Rich rocky woods\nCollected by B.M. Downs with WM, Palmer, A. Braswell\nIdentified by R.M, Downs C. Leibrandt, H. Blevin\nMcCourt Labels, Bradford, Pa.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082894",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R.M. Downs, W.M. Palmer, A. Braswell",
+    "collectorNumber": "12125 RMD",
+    "identifiedBy": "R.M. Downs, C. Leibrandt, H. Blevin",
+    "identifiedDate": "1971-06-30",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "30 June 1971",
+    "collectionDate": "1971-06-30",
+    "collectionDateEnd": "",
+    "habitat": "Rich rocky woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Ashe co.",
+    "locality": "3 mi ne of jefferson",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\nnorth carolina\nState museum\n2216\nHerbarium\nNCSC\n81281\nnorth carolina state university\nHerbarium of\nN.c. state museum\nTechnical name galax aphylla l.\nCommon name galax\nFamily diapensiaceae\nLocality nc\nAltitude\nmccourt labels, bradford, pa.\nhandwritten text\ngalax aphylla l."
+  }
+}

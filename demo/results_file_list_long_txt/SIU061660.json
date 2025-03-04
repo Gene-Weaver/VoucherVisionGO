@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "SOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\nDB\n\n61538\n\n(Handwritten) DiaPenisiaceae\n\nSouthern Illinois University Herbarium\nSIU061660\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n*Galax aphylla* L.\nNo. 14023\n\nHERBARIUM\nSOUTHERN ILLINOIS UNIVERSITY\nCarbondale, Illinois 62901, U.S.A.\n\nLocality Pine Mountain State Park\n\nHabitat Moist shaded rock in mountain\nwoods\nState Kentucky                      County Bell\nCollector R. H. Mohlenbrock    Date June 13, 1967\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000845,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "SOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\nDB\n61538\nDiapensiaceae\nSouthern Illinois University Herbarium\nSIU061660\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\nGalax aphylla L.\nNo.14023\nHERBARIUM\nSOUTHERN ILLINOIS UNIVERSITY\nCarbondale, Illinois 62901, U.S.A.\nLocality Pine Mountain State Park\nHabitat Moist shaded rock in mountain\nwoods\nState Kentucky County Bell\nCollector R.H. Mohlenbrock Date June 13, 1967\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.16e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2223,
+    "output": 495,
+    "cost_in": 0.00022230000000000004,
+    "cost_out": 0.00019800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\nDB\n\n61538\n\n(Handwritten) DiaPenisiaceae\n\nSouthern Illinois University Herbarium\nSIU061660\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n*Galax aphylla* L.\nNo. 14023\n\nHERBARIUM\nSOUTHERN ILLINOIS UNIVERSITY\nCarbondale, Illinois 62901, U.S.A.\n\nLocality Pine Mountain State Park\n\nHabitat Moist shaded rock in mountain\nwoods\nState Kentucky                      County Bell\nCollector R. H. Mohlenbrock    Date June 13, 1967\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSOUTHERN ILLINOIS\nHERBARIUM\nUNIVERSITY\nDB\n61538\nDiapensiaceae\nSouthern Illinois University Herbarium\nSIU061660\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\nGalax aphylla L.\nNo.14023\nHERBARIUM\nSOUTHERN ILLINOIS UNIVERSITY\nCarbondale, Illinois 62901, U.S.A.\nLocality Pine Mountain State Park\nHabitat Moist shaded rock in mountain\nwoods\nState Kentucky County Bell\nCollector R.H. Mohlenbrock Date June 13, 1967\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "61538",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. H. Mohlenbrock",
+    "collectorNumber": "14023",
+    "identifiedBy": "Southern Illinois University (Siu)",
+    "identifiedDate": "2023-02-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 13, 1967",
+    "collectionDate": "1967-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Moist shaded rock in mountain woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Kentucky",
+    "county": "Bell",
+    "locality": "Pine mountain state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Southern Illinois\nHerbarium\nUniversity\nDb\nDiapensiaceae\nSouthern Illinois University Herbarium\nSiu061660\nHerbarium\nSouthern Illinois University\nCarbondale, Illinois 62901, U.s.a.\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n29229\n\nHerbarium of The University of Georgia\nCHEROKEE COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\nCorolla white. Cliffs on S side of \nEtowah R. about 6 \u00bd mi. S 50\u2070 W of\nCanton.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of\nGuy L. Nesom, 1975\n\nWilbur H. Duncan 8356 13 June 1948\n\nIMAGED 2013\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009100000000000001,
+      "total_cost": 0.00168875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 182
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n29229\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of52\u00b52\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nCHEROKEE COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nCorolla white. Cliffs on S side of\nEtowah R. about 6 mi. S 50\u00b0 W of\nCanton.\nWilbur H. Duncan 8356\n13 June 1948\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2257,
+    "output": 523,
+    "cost_in": 0.0002257,
+    "cost_out": 0.00020920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n29229\n\nHerbarium of The University of Georgia\nCHEROKEE COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\nCorolla white. Cliffs on S side of \nEtowah R. about 6 \u00bd mi. S 50\u2070 W of\nCanton.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of\nGuy L. Nesom, 1975\n\nWilbur H. Duncan 8356 13 June 1948\n\nIMAGED 2013\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n29229\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of52\u00b52\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nCHEROKEE COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nCorolla white. Cliffs on S side of\nEtowah R. about 6 mi. S 50\u00b0 W of\nCanton.\nWilbur H. Duncan 8356\n13 June 1948\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "29229",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Wilbur H. Duncan",
+    "collectorNumber": "8356",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "13 June 1948",
+    "collectionDate": "1948-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Cliffs on s side of etowah r. about 6 \u00bd mi. s 50\u2070 w of canton.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of",
+    "specimenDescription": "Corolla white.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Cherokee County",
+    "locality": "About 6 \u00bd mi. s 50\u2070 w of canton.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\nGeorgia atlas project\n9 november 2005\nuniv. Of georgia\nherbarium\npoisoned\nherbarium of the university of north carolina\ngalax urceolata (poir.) brummit\nimaged 2013"
+  }
+}

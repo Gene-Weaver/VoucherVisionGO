@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "28297\n\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nGalax aphylla L.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54                          E.E. Brown, coll.\n\n4893\n\nHandwritten Text:\nJ. Fau. 16/2012\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00051,
+      "total_cost": 0.00128875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 102
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28297\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nJ 10/16/2012\nGalax urceolata (Poiret) Brummitt\nDiapensizcere\nGalax aphylla h.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54\nE.E. Brown, coll.\n24ColorCard Camera Trax.com\n4893\n---Handwritten Text---\nJ 10/16/2012\nGalax urceolata (Poiret) Brummitt\nDiapensizcere\nGalax aphylla h.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54\nE.E. Brown, coll.\n---End Handwritten Text---\n\n\nGalax urceolata\nDiapensia zcera\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.960000000000001e-05,
+      "total_cost": 0.0007811000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 249
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 450,
+    "cost_in": 0.0002234,
+    "cost_out": 0.00018
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n28297\n\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nGalax aphylla L.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54                          E.E. Brown, coll.\n\n4893\n\nHandwritten Text:\nJ. Fau. 16/2012\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28297\nHERBARIUM\nMETRIC 1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\nJ 10/16/2012\nGalax urceolata (Poiret) Brummitt\nDiapensizcere\nGalax aphylla h.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54\nE.E. Brown, coll.\n24ColorCard Camera Trax.com\n4893\n---Handwritten Text---\nJ 10/16/2012\nGalax urceolata (Poiret) Brummitt\nDiapensizcere\nGalax aphylla h.\n(Det. T. Daggy)\nPoinsette St. Pk., Sumter Co., S.C.\nIV-3-54\nE.E. Brown, coll.\n---End Handwritten Text---\n\n\nGalax urceolata\nDiapensia zcera\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "28297",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "E.e. brown",
+    "collectorNumber": "4893",
+    "identifiedBy": "T. Daggy",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "IV-3-54",
+    "collectionDate": "1954-04-03",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "S.c.",
+    "county": "Sumter co.",
+    "locality": "Poinsette st. pk.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Galax aphylla l.\nj. fau. 16/2012\ngalax urceolata\ndiapensia zcera\ngalax aphylla"
+  }
+}

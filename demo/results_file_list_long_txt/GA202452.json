@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF NORTH CAROLINA\n\nCounty: Alleghany-Surry line\n*Galax aphylla* L.\nRich, moist cove near Cumberland Knob\nPark picnic grounds\n\nCollected by William B. Fox and R. K. Godfrey\nNo. 2023 Oct. 3, 1948\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nbased on average guard cell area\nn = 12, volume of 630\u03bc\u00b2\nGuy L. Nesom, 1975\n\nUNIVERSITY OF GEORGIA\nGA202452\n\nImaged 2016\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009150000000000001,
+      "total_cost": 0.0016937500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 183
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF NORTH CAROLINA STATE COLI EGE, RALEIGH\nFLORA OF NORTH CAROLINA\nCounty: Alleghany-Surry line\nGalax aphylla L.\nRich, moist cove near Cumberland Knob\nPark picnic grounds\nCollected by William B. Fox and R. K. Godfrey\nNo.\n2023 Oct. 3, 1948\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA\nGA202452\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue Cyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nImaged 2016\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0004751,
+      "cost_out": 7.68e-05,
+      "total_cost": 0.0005519,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 4751,
+      "tokens_out": 192
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2286,
+    "output": 561,
+    "cost_in": 0.0002286,
+    "cost_out": 0.0002244
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF NORTH CAROLINA STATE COLLEGE, RALEIGH\nFLORA OF NORTH CAROLINA\n\nCounty: Alleghany-Surry line\n*Galax aphylla* L.\nRich, moist cove near Cumberland Knob\nPark picnic grounds\n\nCollected by William B. Fox and R. K. Godfrey\nNo. 2023 Oct. 3, 1948\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nbased on average guard cell area\nn = 12, volume of 630\u03bc\u00b2\nGuy L. Nesom, 1975\n\nUNIVERSITY OF GEORGIA\nGA202452\n\nImaged 2016\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF NORTH CAROLINA STATE COLI EGE, RALEIGH\nFLORA OF NORTH CAROLINA\nCounty: Alleghany-Surry line\nGalax aphylla L.\nRich, moist cove near Cumberland Knob\nPark picnic grounds\nCollected by William B. Fox and R. K. Godfrey\nNo.\n2023 Oct. 3, 1948\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA\nGA202452\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue Cyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nImaged 2016\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA202452",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "William B. Fox, R. K. Godfrey",
+    "collectorNumber": "2023",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "Oct. 3, 1948",
+    "collectionDate": "1948-10-03",
+    "collectionDateEnd": "",
+    "habitat": "Rich, moist cove near Cumberland Knob Park picnic grounds",
+    "chromosomeCount": "n = 12",
+    "guardCell": "based on average guard cell area, volume of 630\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Alleghany-Surry",
+    "locality": "Alleghany-Surry line, near Cumberland Knob Park picnic grounds",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF NORTH CAROLINA STATE COLI EGE, RALEIGH\nFLORA OF NORTH CAROLINA\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nUNIVERSITY OF GEORGIA\nInches\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue Cyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nImaged 2016"
+  }
+}

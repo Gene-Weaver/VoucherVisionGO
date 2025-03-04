@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046628\n\nEKY\nHerbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron dominated woods and \nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie \nValley and ca 8.5 miles east of Cherokee, NC.\n\nT. J. Weckman, J. C., H. M., J. E. Weckman, A. M. Vaughn #3591\nJuly 15, 1997\n\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\nHandwritten text: IK\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron dominated woods and\nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie\nValley and ca 8.5 miles east of Cherokee, NC.\nT. J. Weckman\n#3591\nJ. C., H. M., J. E. Weckman, A. M. Vaughn\nJuly 15, 1997\nIK\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\n\nEKY\nHerbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron dominated woods and \nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie \nValley and ca 8.5 miles east of Cherokee, NC.\n\nT. J. Weckman, J. C., H. M., J. E. Weckman, A. M. Vaughn #3591\nJuly 15, 1997\n\nEastern Kentucky University Herbarium\n3 1234 10039609 0\nIK (Handwritten)\n\n*Galax aphylla* L.\n\n",
       "cost_in": 0.00077875,
       "cost_out": 0.00102,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\nHERBARIUM\n046628\n\nEKY\nHerbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron dominated woods and \nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie \nValley and ca 8.5 miles east of Cherokee, NC.\n\nT. J. Weckman, J. C., H. M., J. E. Weckman, A. M. Vaughn #3591\nJuly 15, 1997\n\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\nHandwritten text: IK\n\n*Galax aphylla* L.\n\n",
+      "total_cost": 0.00179875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 204,
-      "total_cost": 0.00179875
+      "tokens_out": 204
     },
     "gemini-2.0-flash": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron dominated woods and\nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie\nValley and ca 8.5 miles east of Cherokee, NC.\nT. J. Weckman\n#3591\nJ. C., H. M., J. E. Weckman, A. M. Vaughn\nJuly 15, 1997\nIK\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
       "cost_out": 7.72e-05,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron dominated woods and\nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie\nValley and ca 8.5 miles east of Cherokee, NC.\nT. J. Weckman\n#3591\nJ. C., H. M., J. E. Weckman, A. M. Vaughn\nJuly 15, 1997\nIK\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\n\nGalax aphylla\n\n",
+      "total_cost": 0.0007587,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 193,
-      "total_cost": 0.0007587
+      "tokens_out": 193
     }
   },
-  "tokens_LLM": {
-    "input": 2221,
-    "output": 500
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 515,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020600000000000002
   },
-  "vvgo_json": {
-    "additionalText": "Eastern kentucky university\nherbarium\nEky\nHerbarium of eastern kentucky university, richmond, ky 40475 u.s.a.\nPlants of north carolina\nHandwritten text Ik",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\n\nEKY\nHerbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\n\n*Galax aphylla* L.\n\nDiapensiaceae\n\nHemlock-rhododendron dominated woods and \nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie \nValley and ca 8.5 miles east of Cherokee, NC.\n\nT. J. Weckman, J. C., H. M., J. E. Weckman, A. M. Vaughn #3591\nJuly 15, 1997\n\nEastern Kentucky University Herbarium\n3 1234 10039609 0\nIK (Handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY\n046628\nHERBARIUM\nEKY Herbarium of Eastern Kentucky University, Richmond, KY 40475 U.S.A.\nPLANTS OF NORTH CAROLINA\nJACKSON COUNTY\nGalax aphylla L.\nDiapensiaceae\nHemlock-rhododendron dominated woods and\nwoodland margins above Lost Cove Campground,\n1591 Hwy 19, ca. 6.5 miles west of Maggie\nValley and ca 8.5 miles east of Cherokee, NC.\nT. J. Weckman\n#3591\nJ. C., H. M., J. E. Weckman, A. M. Vaughn\nJuly 15, 1997\nIK\nEastern Kentucky University Herbarium\n3 1234 10039609 0\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
     "catalogNumber": "046628",
-    "chromosomeCount": "",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
     "collectedBy": "T. J. Weckman, J. C., H. M., J. E. Weckman, A. M. Vaughn",
+    "collectorNumber": "3591",
+    "identifiedBy": "IK",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 15, 1997",
     "collectionDate": "1997-07-15",
     "collectionDateEnd": "",
-    "collectorNumber": "3591",
-    "continent": "North America",
-    "country": "Usa",
-    "county": "Jackson county",
+    "habitat": "Hemlock-rhododendron dominated woods and woodland margins",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Above lost cove campground, 1591 hwy 19, ca. 6.5 miles west of maggie valley and ca 8.5 miles east of cherokee, nc.",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "Hemlock-rhododendron dominated woods and woodland margins above Lost Cove Campground",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "1591 Hwy 19, ca. 6.5 miles west of Maggie Valley and ca 8.5 miles east of Cherokee, Nc.",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "North carolina",
-    "verbatimCollectionDate": "July 15, 1997",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Eastern kentucky university herbarium\neky\nherbarium of eastern kentucky university, richmond, ky 40475 u.s.a.\nplants of north carolina\neastern kentucky university herbarium"
   }
 }

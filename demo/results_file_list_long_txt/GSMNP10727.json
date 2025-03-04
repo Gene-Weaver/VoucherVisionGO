@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10727\n\nPlants of Tennessee\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nTennessee: Sevier County\n35.64316 \u00b0 Latitude      -83.50849\u00b0 Longitude      2600 Ft. Elevation\nQuadrangle: Gatlinburg                 West Prong Little Pigeon Watershed\n\nT. 11S, R. 72E, Sect. 10\nGreat Smoky Mountains National Park. West side United States Highway 441 (Tennessee State Highway 71) on east-facing slope of Sugarland Mountain below the Chimney Picnic Area and west of Steep Branch. Coordinate datum: WGS84/NAD83.\nNortheast-facing (50\u00b0) rocky slope in mixed mesophytic forest with *Acer saccharum*, *Aesculus flava*, *Cladrastis kentukea*, *Fraxinus americana*, *Halesia tetraptera*, *Liriodendron tulipifera*, *Quercus rubra*, *Tilia americana*, *Tsuga canadensis*, *Cornus florida*, *Hamamelis virginiana*, *Hydrangea arborescens*, *Rhododendron maximum*, *Ostrya virginiana*, *Aristolochia macrophylla*, *Parthenocissus quinquefolia*, *Vitis vulpina*, *Panax quinquefolius*, etc. Evergreen perennial herb.\n\n41466 Loy R. Phillippe, Valerie Sivicek, and Jim Payne\n8 October 2008\n\nIllinois Natural History Survey (ILLS)\n\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM 113858\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00186,
+      "total_cost": 0.00263875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 372
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10727\nPlants of Tennessee\nDiapensiaceae\nGalax urceolata (Poir.) Brummit\nTennessee: Sevier County\n35.64316\n\u2022 Latitude\n-83.50849\u00b0 Longitude\n2600 Ft. Elevation\nQuadrangle: Gatlinburg\nT. 11S, R. 72E, Sect. 10\nWest Prong Little Pigeon Watershed\nGreat Smoky Mountains National Park. West side United States Highway 441 (Tennessee\nState Highway 71) on east-facing slope of Sugarland Mountain below the Chimney Picnic\nArea and west of Steep Branch. Coordinate datum: WGS84/NAD83.\nNortheast-facing (50\u00b0) rocky slope in mixed mesophytic forest with Acer saccharum,\nAesculus flava, Cladrastis kentukea, Fraxinus americana, Halesia tetraptera, Liriodendron\ntulipifera, Quercus rubra, Tilia americana, Tsuga canadensis, Cornus florida, Hamamelis\nvirginiana, Hydrangea arborescens, Rhododendron maximum, Ostrya virginiana,\nAristolochia macrophylla, Parthenocissus quinquefolia, Vitis vulpina, Panax quinquefolia,\netc. Evergreen perennial herb.\n41466 Loy R. Phillippe, Valerie Sivicek, and Jim Payne\n8 October 2008\nIllinois Natural History Survey (ILLS)\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGRSM 113858\n--- OCR End ---\n\nGalax urceolata\nAcer saccharum\nAesculus flava\nCladrastis kentukea\nFraxinus americana\nHalesia tetraptera\nLiriodendron tulipifera\nQuercus rubra\nTilia americana\nTsuga canadensis\nCornus florida\nHamamelis virginiana\nHydrangea arborescens\nRhododendron maximum\nOstrya virginiana\nAristolochia macrophylla\nParthenocissus quinquefolia\nVitis vulpina\nPanax quinquefolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00019160000000000002,
+      "total_cost": 0.0008731,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 479
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2804,
+    "output": 870,
+    "cost_in": 0.00028040000000000004,
+    "cost_out": 0.000348
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10727\n\nPlants of Tennessee\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nTennessee: Sevier County\n35.64316 \u00b0 Latitude      -83.50849\u00b0 Longitude      2600 Ft. Elevation\nQuadrangle: Gatlinburg                 West Prong Little Pigeon Watershed\n\nT. 11S, R. 72E, Sect. 10\nGreat Smoky Mountains National Park. West side United States Highway 441 (Tennessee State Highway 71) on east-facing slope of Sugarland Mountain below the Chimney Picnic Area and west of Steep Branch. Coordinate datum: WGS84/NAD83.\nNortheast-facing (50\u00b0) rocky slope in mixed mesophytic forest with *Acer saccharum*, *Aesculus flava*, *Cladrastis kentukea*, *Fraxinus americana*, *Halesia tetraptera*, *Liriodendron tulipifera*, *Quercus rubra*, *Tilia americana*, *Tsuga canadensis*, *Cornus florida*, *Hamamelis virginiana*, *Hydrangea arborescens*, *Rhododendron maximum*, *Ostrya virginiana*, *Aristolochia macrophylla*, *Parthenocissus quinquefolia*, *Vitis vulpina*, *Panax quinquefolius*, etc. Evergreen perennial herb.\n\n41466 Loy R. Phillippe, Valerie Sivicek, and Jim Payne\n8 October 2008\n\nIllinois Natural History Survey (ILLS)\n\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM 113858\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10727\nPlants of Tennessee\nDiapensiaceae\nGalax urceolata (Poir.) Brummit\nTennessee: Sevier County\n35.64316\n\u2022 Latitude\n-83.50849\u00b0 Longitude\n2600 Ft. Elevation\nQuadrangle: Gatlinburg\nT. 11S, R. 72E, Sect. 10\nWest Prong Little Pigeon Watershed\nGreat Smoky Mountains National Park. West side United States Highway 441 (Tennessee\nState Highway 71) on east-facing slope of Sugarland Mountain below the Chimney Picnic\nArea and west of Steep Branch. Coordinate datum: WGS84/NAD83.\nNortheast-facing (50\u00b0) rocky slope in mixed mesophytic forest with Acer saccharum,\nAesculus flava, Cladrastis kentukea, Fraxinus americana, Halesia tetraptera, Liriodendron\ntulipifera, Quercus rubra, Tilia americana, Tsuga canadensis, Cornus florida, Hamamelis\nvirginiana, Hydrangea arborescens, Rhododendron maximum, Ostrya virginiana,\nAristolochia macrophylla, Parthenocissus quinquefolia, Vitis vulpina, Panax quinquefolia,\netc. Evergreen perennial herb.\n41466 Loy R. Phillippe, Valerie Sivicek, and Jim Payne\n8 October 2008\nIllinois Natural History Survey (ILLS)\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGRSM 113858\n--- OCR End ---\n\nGalax urceolata\nAcer saccharum\nAesculus flava\nCladrastis kentukea\nFraxinus americana\nHalesia tetraptera\nLiriodendron tulipifera\nQuercus rubra\nTilia americana\nTsuga canadensis\nCornus florida\nHamamelis virginiana\nHydrangea arborescens\nRhododendron maximum\nOstrya virginiana\nAristolochia macrophylla\nParthenocissus quinquefolia\nVitis vulpina\nPanax quinquefolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "GSMNP10727",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Loy R. Phillippe, Valerie Sivicek, and Jim Payne",
+    "collectorNumber": "41466",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8 October 2008",
+    "collectionDate": "2008-10-08",
+    "collectionDateEnd": "",
+    "habitat": "Northeast-facing (50\u00b0) rocky slope in mixed mesophytic forest with Acer saccharum, Aesculus flava, Cladrastis kentukea, Fraxinus americana, Halesia tetraptera, Liriodendron tulipifera, Quercus rubra, Tilia americana, Tsuga canadensis, Cornus florida, Hamamelis virginiana, Hydrangea arborescens, Rhododendron maximum, Ostrya virginiana, Aristolochia macrophylla, Parthenocissus quinquefolia, Vitis vulpina, Panax quinquefolius, etc.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Evergreen perennial herb.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sevier County",
+    "locality": "Great Smoky Mountains National Park. West side United States Highway 441 (Tennessee State Highway 71) on east-facing slope of Sugarland Mountain below the Chimney Picnic Area and west of Steep Branch. Coordinate datum WGS84/NAD83.",
+    "verbatimCoordinates": "35.64316 \u00b0 Latitude      -83.50849\u00b0 Longitude",
+    "decimalLatitude": "35.64316",
+    "decimalLongitude": "-83.50849",
+    "minimumElevationInMeters": "792",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nPlants of Tennessee\nDiapensiaceae\nQuadrangle Gatlinburg                 West Prong Little Pigeon Watershed\nT. 11S, R. 72E, Sect. 10\nIllinois Natural History Survey (ILLS)\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nCAT. NO.\nGRSM 113858\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax urceolata\nAcer saccharum\nAesculus flava\nCladrastis kentukea\nFraxinus americana\nHalesia tetraptera\nLiriodendron tulipifera\nQuercus rubra\nTilia americana\nTsuga canadensis\nCornus florida\nHamamelis virginiana\nHydrangea arborescens\nRhododendron maximum\nOstrya virginiana\nAristolochia macrophylla\nParthenocissus quinquefolia\nVitis vulpina\nPanax quinquefolia"
+  }
+}

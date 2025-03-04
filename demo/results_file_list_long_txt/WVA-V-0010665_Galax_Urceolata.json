@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010665\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n*116180* (handwritten)\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\n\nHardwood slope, Rt. 52, just n. of N. C.\nboundary, Carroll Co.\n\nG. B. Rossbach 2165\n6/18/60\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00084,
+      "total_cost": 0.00161875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 168
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC 1 SYSTEM 21\n11\n12\n13\n14\ncopyright reserved\nJ. S.\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010665\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nGuy L. Nesom, 1975\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nPLANTS OF VIRGINIA\nGalax aphylla L.\nHardwood slope, Rt. 52, just n. of N. C.\nboundary, Carroll Co.\nG. B. Rossbach 2165\n6/18/60\nDiapene\n118180\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.439999999999999e-05,
+      "total_cost": 0.0007559000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 186
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 541,
+    "cost_in": 0.0002234,
+    "cost_out": 0.00021640000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010665\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n*116180* (handwritten)\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\n\nHardwood slope, Rt. 52, just n. of N. C.\nboundary, Carroll Co.\n\nG. B. Rossbach 2165\n6/18/60\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC 1 SYSTEM 21\n11\n12\n13\n14\ncopyright reserved\nJ. S.\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010665\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nGuy L. Nesom, 1975\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nPLANTS OF VIRGINIA\nGalax aphylla L.\nHardwood slope, Rt. 52, just n. of N. C.\nboundary, Carroll Co.\nG. B. Rossbach 2165\n6/18/60\nDiapene\n118180\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVA-V-0010665",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "G. B. Rossbach",
+    "collectorNumber": "2165",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/18/60",
+    "collectionDate": "1960-06-18",
+    "collectionDateEnd": "",
+    "habitat": "Hardwood slope, rt. 52, just n. of n. c. boundary",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Carroll co.",
+    "locality": "Just n. of n. c. boundary, carroll co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\ncopyright reserved\nwest virginia university (wva)\nherbarium of the university of north carolina\nwest virginia\nherbarium\nuniversity\nplants of virginia\ngalax aphylla l.\nGalax aphylla\nmetric 1 system 21\n11\n12\n13\n14\nj. s.\ninches\ndiapene\n118180"
+  }
+}

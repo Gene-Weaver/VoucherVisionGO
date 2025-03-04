@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010436\n\nGalax urceolata (Poirot) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\n\nGalax aphylla L.\n\nOutcrop: Wildcat Ridge Slope: Southeast\nElevation: 4000-4200 Am't. of cover:\nAssociation: Oak-Hickory\nHabitat: Gentle slope only at top, upper edge.\nLocality: Paved road (Macon Co. 1600) about 2 miles\nsouth of U.S. 64 at Cowee Gap.\n\nJames H. Horton 2500 Date: 17 June 1969\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\n\nHandwritten text: 2500, Am't., top.\n\nNC\n9257\nWESTERN CAROLINA COLLEGE\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012,
+      "total_cost": 0.00197875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 240
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010436\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\nGalax aphylla L.\nOutcrop: Wildcat Ridge\nSlope: Southeast\nElevation:4000-4200 Am't. of cover:\nAssociation: Oak-Hickory\nHabitat: Gentle slope only at top., upper edge.\nLocality: Paved road (Macon Co. 1600) about 2 miles\nsouth of U.S. 64 at Cowee Gap.\nJames H. Horton 2500\nDate: 17 June 1969\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\nAM HERBARIUM\nNC\n9257\nCOLLEGE\nWESTERN CAROLINA COL\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001064,
+      "total_cost": 0.0007879,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 266
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2375,
+    "output": 657,
+    "cost_in": 0.0002375,
+    "cost_out": 0.00026280000000000005
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010436\n\nGalax urceolata (Poirot) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\n\nGalax aphylla L.\n\nOutcrop: Wildcat Ridge Slope: Southeast\nElevation: 4000-4200 Am't. of cover:\nAssociation: Oak-Hickory\nHabitat: Gentle slope only at top, upper edge.\nLocality: Paved road (Macon Co. 1600) about 2 miles\nsouth of U.S. 64 at Cowee Gap.\n\nJames H. Horton 2500 Date: 17 June 1969\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\n\nHandwritten text: 2500, Am't., top.\n\nNC\n9257\nWESTERN CAROLINA COLLEGE\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010436\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\nGalax aphylla L.\nOutcrop: Wildcat Ridge\nSlope: Southeast\nElevation:4000-4200 Am't. of cover:\nAssociation: Oak-Hickory\nHabitat: Gentle slope only at top., upper edge.\nLocality: Paved road (Macon Co. 1600) about 2 miles\nsouth of U.S. 64 at Cowee Gap.\nJames H. Horton 2500\nDate: 17 June 1969\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\nAM HERBARIUM\nNC\n9257\nCOLLEGE\nWESTERN CAROLINA COL\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010436",
+    "scientificName": "Galax urceolata (Poirot) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poirot) Brummitt",
+    "collectedBy": "James H. Horton, J. Dan Pittillo",
+    "collectorNumber": "2500",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "17 June 1969",
+    "collectionDate": "1969-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Gentle slope only at top, upper edge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "Paved road (macon co. 1600) about 2 miles south of u.s. 64 at cowee gap.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "1280",
+    "elevationUnits": "ft",
+    "additionalText": "Western carolina u. herbarium\nper a.s. weakley, flora of the southern and mid-atlantic\nstates, working draft of 8 march 2010\nherbarium of western carolina university\n\ngalax aphylla l.\n\noutcrop wildcat ridge slope southeast\nelevation 4000-4200 am't. of cover\nassociation oak-hickory\n\nfloristics of southern appalachian rock outcrops\nhandwritten text am't., top.\nnc\n9257\nwestern carolina college\ngalax urceolata\ngalax aphylla\n\n\n\nam herbarium\nnc\ncollege\nwestern carolina col\npreserved\nmaterial\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\nliving\ncultures"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\n\n*Galax urceolata*\n\nDIAPENSIACEAE OF SOUTH CAROLINA\nOconee County\n\n*Galax aphylla* L.\n\nLocation: On the Foothills trail traveling North from Hwy. 107 about a quarter of a mile up the trail.\n\nHabitat: Found along a slope near the trail in a pine heath community.\n\nDescription: Perennial, rhizomatous, evergreen, acaulescent, sub-shrub, leaves glabrous, ovate, serrate margins, petioles 3-25 cm long, raceme inflorescence on a scape, petals white, stamens unite in a corona-like tube, fruit capsule, seeds reddish-brown.\n\nJames D. Sexton 11 October 2010\nPlant Taxonomy, BIOSC 407\n\n20 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000995,
+      "total_cost": 0.00177375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 199
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4\n5\n6 7 8 9 10\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042857\nGalax urceolata\nDIAPENSIACEAE OF SOUTH CAROLINA\nOconee County\nGalax aphylla L.\nLocation: On the Foothills trail traveling North from Hwy. 107 about a\nquarter of a mile up the trail.\nHabitat: Found along a slope near the trail in a pine heath community.\nDescription: Perennial, rhizomatous, evergreen, acaulescent, sub-\nshrub, leaves glabrous, ovate, serrate margins, petioles 3-25cm long,\nraceme inflorescence on a scape, petals white, stamens unite in a\ncorona-like tube, fruit capsule, seeds reddish-brown.\nJames D. Sexton\n11 October 2010\nPlant Taxonomy, BIOSC 407\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.96e-05,
+      "total_cost": 0.0007711,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 224
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2338,
+    "output": 511,
+    "cost_in": 0.0002338,
+    "cost_out": 0.00020439999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\n\n*Galax urceolata*\n\nDIAPENSIACEAE OF SOUTH CAROLINA\nOconee County\n\n*Galax aphylla* L.\n\nLocation: On the Foothills trail traveling North from Hwy. 107 about a quarter of a mile up the trail.\n\nHabitat: Found along a slope near the trail in a pine heath community.\n\nDescription: Perennial, rhizomatous, evergreen, acaulescent, sub-shrub, leaves glabrous, ovate, serrate margins, petioles 3-25 cm long, raceme inflorescence on a scape, petals white, stamens unite in a corona-like tube, fruit capsule, seeds reddish-brown.\n\nJames D. Sexton 11 October 2010\nPlant Taxonomy, BIOSC 407\n\n20 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4\n5\n6 7 8 9 10\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042857\nGalax urceolata\nDIAPENSIACEAE OF SOUTH CAROLINA\nOconee County\nGalax aphylla L.\nLocation: On the Foothills trail traveling North from Hwy. 107 about a\nquarter of a mile up the trail.\nHabitat: Found along a slope near the trail in a pine heath community.\nDescription: Perennial, rhizomatous, evergreen, acaulescent, sub-\nshrub, leaves glabrous, ovate, serrate margins, petioles 3-25cm long,\nraceme inflorescence on a scape, petals white, stamens unite in a\ncorona-like tube, fruit capsule, seeds reddish-brown.\nJames D. Sexton\n11 October 2010\nPlant Taxonomy, BIOSC 407\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042857",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "James d. sexton",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "11 October 2010",
+    "collectionDate": "2010-10-11",
+    "collectionDateEnd": "",
+    "habitat": "Found along a slope near the trail in a pine heath community.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Perennial, rhizomatous, evergreen, acaulescent, sub-shrub, leaves glabrous, ovate, serrate margins, petioles 3-25cm long, raceme inflorescence on a scape, petals white, stamens unite in a corona-like tube, fruit capsule, seeds reddish-brown.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Oconee county",
+    "locality": "On the foothills trail traveling north from hwy. 107 about a quarter of a mile up the trail.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Clemson university herbarium\nPlant taxonomy, biosc 407\n20 (handwritten)\ncopyright reserved"
+  }
+}

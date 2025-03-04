@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n260726\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE                      County: Blount\n\n*Galax aphylla* L.\n\nChestnut Oak woods near Murray Gap along road from\nMontvale Springs to Happy Valley; Chilhowee Mountain\nnear Look Rock.\n\nCollectors: R. Dale Thomas, Susan Hooks\n                 & Sherri Leslie\n\nNo.: 95663\nDate: 21 April 1986\n\nHandwritten Text: R.\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000635,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n260726\nHERBARIUM\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: Blount\nGalax aphylla L.\nChestnut Oak woods near Murray Gap along road from\nMontvale Springs to Happy Valley; Chilhowee Mountain\nnear Look Rook.\nCollectors: R. Dale Thomas, Susan Hooks\n& Sherri Leslie\nNo.: 95663\nDate: 21 April 1986\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.5600000000000004e-05,
+      "total_cost": 0.0007271000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 114
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2134,
+    "output": 466,
+    "cost_in": 0.0002134,
+    "cost_out": 0.0001864
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n260726\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE                      County: Blount\n\n*Galax aphylla* L.\n\nChestnut Oak woods near Murray Gap along road from\nMontvale Springs to Happy Valley; Chilhowee Mountain\nnear Look Rock.\n\nCollectors: R. Dale Thomas, Susan Hooks\n                 & Sherri Leslie\n\nNo.: 95663\nDate: 21 April 1986\n\nHandwritten Text: R.\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n260726\nHERBARIUM\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: Blount\nGalax aphylla L.\nChestnut Oak woods near Murray Gap along road from\nMontvale Springs to Happy Valley; Chilhowee Mountain\nnear Look Rook.\nCollectors: R. Dale Thomas, Susan Hooks\n& Sherri Leslie\nNo.: 95663\nDate: 21 April 1986\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "260726",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas, Susan Hooks, Sherri Leslie",
+    "collectorNumber": "95663",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 April 1986",
+    "collectionDate": "1986-04-21",
+    "collectionDateEnd": "",
+    "habitat": "Chestnut oak woods near Murray Gap along road from Montvale Springs to Happy Valley; Chilhowee Mountain near Look Rock.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Blount",
+    "locality": "Near Murray Gap along road from Montvale Springs to Happy Valley; Chilhowee Mountain near Look Rock.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nHerbarium\nNortheast louisiana university, monroe\nFlora of Tennessee\nHandwritten Text R."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "VSC 0021159\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n21860\nHerbarium of Valdosta State College\nFANNIN COUNTY\nFLORA OF GEORGIA\n*Galax aphylla* L.\nRocky, N-facing slope above the Toccoa River on\nAsker Road, 6.5 mi E of Blue Ridge.\n\nWayne R. Faircloth 7849                      19 October 1974\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005549999999999999,
+      "total_cost": 0.0013337499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 111
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Kodak Gray Scale\nA\n1\n2\n3\n4\n5 6 M\n8\nCYM\n08\nRed\nMagenta White\n3/Color\nBlack\ninches\n2\n3\n4\n5\n9\n7\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nYellow\nKodak Color Control Patches\nBlue\nB 17 18 19\n9 10 11 12 13 14 15\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\nHerbarium of Valdosta State College\nFANNIN COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky, N-facing slope above the Toccoa River on\nAsker Road, 6.5 mi E of Blue Ridge.\n21860\nWayne R. Faircloth 7849\n19 October 1974\nValdosta State University Herbarium\nVSC 0021159\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010320000000000001,
+      "total_cost": 0.0007846999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 258
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2236,
+    "output": 434,
+    "cost_in": 0.00022360000000000001,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nVSC 0021159\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n21860\nHerbarium of Valdosta State College\nFANNIN COUNTY\nFLORA OF GEORGIA\n*Galax aphylla* L.\nRocky, N-facing slope above the Toccoa River on\nAsker Road, 6.5 mi E of Blue Ridge.\n\nWayne R. Faircloth 7849                      19 October 1974\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nKodak Gray Scale\nA\n1\n2\n3\n4\n5 6 M\n8\nCYM\n08\nRed\nMagenta White\n3/Color\nBlack\ninches\n2\n3\n4\n5\n9\n7\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18 19\nYellow\nKodak Color Control Patches\nBlue\nB 17 18 19\n9 10 11 12 13 14 15\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\nHerbarium of Valdosta State College\nFANNIN COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nRocky, N-facing slope above the Toccoa River on\nAsker Road, 6.5 mi E of Blue Ridge.\n21860\nWayne R. Faircloth 7849\n19 October 1974\nValdosta State University Herbarium\nVSC 0021159\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VSC 0021159",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Wayne R. Faircloth",
+    "collectorNumber": "7849",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "19 October 1974",
+    "collectionDate": "1974-10-19",
+    "collectionDateEnd": "",
+    "habitat": "Rocky, n-facing slope above the toccoa river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Fannin county",
+    "locality": "On asker road, 6.5 mi e of blue ridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of valdosta state college\nValdosta state university herbarium"
+  }
+}

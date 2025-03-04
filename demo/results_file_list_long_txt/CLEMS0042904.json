@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042904\n\n(Handwritten) *Galax urceolata* (Poir.) Brummitt\n-Daniel 16 Oct 07\n\nPLANTS OF North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631 5,200\n\n(Handwritten) *Galax aphylla*\nDiapensiaceae\nopen rocky summit of Albert\nMtn. Nantahala Natl. Forest\n\nCollector (Handwritten) Kingeland, H.C. No.\nDate (Handwritten) 6/22/06 Identified By HCK\n(Handwritten) Macon Co\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008749999999999999,
+      "total_cost": 0.00165375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 175
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042904\nGalax urceolata (Poir.) Brummit\nPLANTS OF North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631 5,200'\nGalax aphylla\nDiapensiaceae\nopen rocky summit of Albert\nMtn. Nantahala Natl. Forest\nKingsland, H.C.\n6/22/06 Identified By ACK\nMacon Co.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.599999999999999e-05,
+      "total_cost": 0.0007475000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2236,
+    "output": 684,
+    "cost_in": 0.00022360000000000001,
+    "cost_out": 0.00027360000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042904\n\n(Handwritten) *Galax urceolata* (Poir.) Brummitt\n-Daniel 16 Oct 07\n\nPLANTS OF North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631 5,200\n\n(Handwritten) *Galax aphylla*\nDiapensiaceae\nopen rocky summit of Albert\nMtn. Nantahala Natl. Forest\n\nCollector (Handwritten) Kingeland, H.C. No.\nDate (Handwritten) 6/22/06 Identified By HCK\n(Handwritten) Macon Co\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042904\nGalax urceolata (Poir.) Brummit\nPLANTS OF North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631 5,200'\nGalax aphylla\nDiapensiaceae\nopen rocky summit of Albert\nMtn. Nantahala Natl. Forest\nKingsland, H.C.\n6/22/06 Identified By ACK\nMacon Co.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042904",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Kingsland, H.C.",
+    "collectorNumber": "",
+    "identifiedBy": "HCK",
+    "identifiedDate": "2007-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Daniel 16 Oct 07",
+    "verbatimCollectionDate": "6/22/06",
+    "collectionDate": "2006-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Open rocky summit of albert mtn. nantahala natl. forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon co.",
+    "locality": "Open rocky summit of albert mtn. nantahala natl. forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "CLEMS\ncopyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\n(Handwritten) Galax urceolata (Poir.) Brummitt\n-Daniel 16 Oct 07\nPLANTS OF North Carolina\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BOTANY\nCLEMSON, SOUTH CAROLINA 29631 5,200\n(Handwritten) Galax aphylla\nDiapensiaceae\nCollector (Handwritten) Kingeland, H.C. No.\nDate (Handwritten) 6/22/06 Identified By HCK\n(Handwritten) Macon Co\nGalax urceolata\n0 1 2 3 4 5 6 7 8 9 10\ncm\nGalax aphylla\nDiapensiaceae\nClemson University Herbarium\nGalax aphylla\nUNIVERSITY\nHERBARIUM\nCLEMSON, SOUTH CAROLINA 29631 5,200'"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\n\nFARM-0031878\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nHerbarium\nUniversity of Wisconsin\nRock County Campus\nJanesville, Wisconsin 53545\n*Galax aphylla* L.\n\nVIRGINIA: Plants of a mountain bog of southwestern\nVirginia.\n\n1. Shaded wet area with sphagnum along small\nstream in rhododendron thicket.\n2. Edge of small pond.\n3. Open flat area surrounded by *Tsuga canadensis*,\n*Rhododendron maximum*, *Magnolia fraseri*, etc.\n\nNorth of Virginia Forest Service trail at top of\nEast River Mountain, 1 mile east of state road\n662, Tazewell County. Elevation: ca. 3400 ft.\n\nLytton J. Musselman  28 July 1969\n2951 *(Handwritten)*\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Tsuga canadensis*\n*Rhododendron maximum*\n*Magnolia fraseri*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001405,
+      "total_cost": 0.00218375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 281
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0031878\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 544\u03bc2\nGuy L. Nesom, 1975\nHerbarium\nUniversity of Wisconsin\nRock County Campus\nJanesville, Wisconsin 53545\nGalax aphylla L.\nVIRGINIA: Plants of a mountain bog of southwestern\nVirginia.\n1. Shaded wet area with sphagnum along small\nstream in rhododendron thicket.\n2. Edge of small pond.\nOpen flat area surrounded by Tsuga cana-\ndensis, Rhododendron maximum, Magnolia fraseri, etc.\nNorth of Virginia Forest Service trail at top of\nEast River Mountain, 1 mile east of state road\n662, Tazewell County. Elevation: ca. 3400 ft.\nLytton J. Musselman\n2951\n28 July 1969\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\nDup\n\n\nGalax urceolata\nGalax aphylla\nTsuga canadensis\nRhododendron maximum\nMagnolia fraseri\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.000106,
+      "total_cost": 0.0007875,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 265
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2454,
+    "output": 628,
+    "cost_in": 0.0002454,
+    "cost_out": 0.0002512
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\n\nFARM-0031878\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nHerbarium\nUniversity of Wisconsin\nRock County Campus\nJanesville, Wisconsin 53545\n*Galax aphylla* L.\n\nVIRGINIA: Plants of a mountain bog of southwestern\nVirginia.\n\n1. Shaded wet area with sphagnum along small\nstream in rhododendron thicket.\n2. Edge of small pond.\n3. Open flat area surrounded by *Tsuga canadensis*,\n*Rhododendron maximum*, *Magnolia fraseri*, etc.\n\nNorth of Virginia Forest Service trail at top of\nEast River Mountain, 1 mile east of state road\n662, Tazewell County. Elevation: ca. 3400 ft.\n\nLytton J. Musselman  28 July 1969\n2951 *(Handwritten)*\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Tsuga canadensis*\n*Rhododendron maximum*\n*Magnolia fraseri*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0031878\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nvolume of 544\u03bc2\nGuy L. Nesom, 1975\nHerbarium\nUniversity of Wisconsin\nRock County Campus\nJanesville, Wisconsin 53545\nGalax aphylla L.\nVIRGINIA: Plants of a mountain bog of southwestern\nVirginia.\n1. Shaded wet area with sphagnum along small\nstream in rhododendron thicket.\n2. Edge of small pond.\nOpen flat area surrounded by Tsuga cana-\ndensis, Rhododendron maximum, Magnolia fraseri, etc.\nNorth of Virginia Forest Service trail at top of\nEast River Mountain, 1 mile east of state road\n662, Tazewell County. Elevation: ca. 3400 ft.\nLytton J. Musselman\n2951\n28 July 1969\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\nDup\n\n\nGalax urceolata\nGalax aphylla\nTsuga canadensis\nRhododendron maximum\nMagnolia fraseri\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0031878",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Lytton J. Musselman",
+    "collectorNumber": "2951",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "28 July 1969",
+    "collectionDate": "1969-07-28",
+    "collectionDateEnd": "",
+    "habitat": "1. Shaded wet area with sphagnum along small stream in rhododendron thicket. 2. Edge of small pond. 3. Open flat area surrounded by Tsuga canadensis, Rhododendron maximum, Magnolia fraseri, etc.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 based on average guard cell area",
+    "specimenDescription": "Plants of a mountain bog of southwestern Virginia.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Tazewell County",
+    "locality": "North of Virginia Forest Service trail at top of East River Mountain, 1 mile east of state road 662.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1036",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHerbarium\nUniversity of Wisconsin\nRock County Campus\nJanesville, Wisconsin 53545\nElevation ca. 3400 ft.\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\nGalax urceolata\nGalax aphylla\nTsuga canadensis\nRhododendron maximum\nMagnolia fraseri\nGalax aphylla L.\nDup"
+  }
+}

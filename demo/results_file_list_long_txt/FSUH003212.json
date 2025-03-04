@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\ncm\n0   1   2   3   4   5   6   7   8   9   10\ncopyright reserved\n\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\nHERBARIUM OF FROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\n*Galax aphylla* L.\nEdge of roadside cut, Shining Rock\nRd., Haywood Co.,\nNorth Carolina\n\nFranklin C. Lane 3585             June 19, 1965\n\nFrostburg State University Herbarium\nFSUH003212\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.00152375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\n0\n1\n2\n3\n4\n5\n6\n7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\nHERBARIUM OF FROSTBURG STATE COLLEGE\nFrostburg, Maryland\nGalax aphylla L.\nEdge of roadside cut, Shining Rock\nRd., Haywood Co..\nNorth Carolina\nFranklin C. Lane 3585\nJune 19. 1965\nFrostburg State University Herbarium\nFSUH003212\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2209,
+    "output": 485,
+    "cost_in": 0.0002209,
+    "cost_out": 0.00019400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\ncm\n0   1   2   3   4   5   6   7   8   9   10\ncopyright reserved\n\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\nHERBARIUM OF FROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\n*Galax aphylla* L.\nEdge of roadside cut, Shining Rock\nRd., Haywood Co.,\nNorth Carolina\n\nFranklin C. Lane 3585             June 19, 1965\n\nFrostburg State University Herbarium\nFSUH003212\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\n0\n1\n2\n3\n4\n5\n6\n7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\nHERBARIUM OF FROSTBURG STATE COLLEGE\nFrostburg, Maryland\nGalax aphylla L.\nEdge of roadside cut, Shining Rock\nRd., Haywood Co..\nNorth Carolina\nFranklin C. Lane 3585\nJune 19. 1965\nFrostburg State University Herbarium\nFSUH003212\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FSUH003212",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Franklin C. Lane",
+    "collectorNumber": "3585",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 19, 1965",
+    "collectionDate": "1965-06-19",
+    "collectionDateEnd": "",
+    "habitat": "Edge of roadside cut",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Haywood co.",
+    "locality": "Shining rock rd.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Frostburg Frostburg State University\nState university\nHerbarium (fsuh)\n0\n1\n2\n3\n4\n5\n6\n7 8 9 10\ncm\ncopyright reserved\nHerbarium\nFrostburg state college\nFrostburg, maryland\nHerbarium of frostburg state college\nFrostburg, maryland\nGalax aphylla"
+  }
+}

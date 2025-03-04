@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nNO 0092176\n\nTULANE UNIVERSITY HERBARIUM\n*Galax urceolata* (Poir.) Brummitt\nSyn. = *Galax aphylla* auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicalola\nFalls. Flowers white. Common. June 8, 1947\nNo: 4557\nGeol. Prov: Blue Ridge Dawson County\n2200 ft. Elev.\n\n\nHandwritten Text: *2200*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000845,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nNO 0092176\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common. June 8, 1947\nNo.: 4557\nGeol. Prov.: Blue Ridge\nDawson County\n2200 ft. Elev.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 496,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\nNO 0092176\n\nTULANE UNIVERSITY HERBARIUM\n*Galax urceolata* (Poir.) Brummitt\nSyn. = *Galax aphylla* auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\n\n*Galax aphylla* L.\nIn open & shaded places just above Amicalola\nFalls. Flowers white. Common. June 8, 1947\nNo: 4557\nGeol. Prov: Blue Ridge Dawson County\n2200 ft. Elev.\n\n\nHandwritten Text: *2200*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTULANE UNIVERSITY HERBARIUM\nNO 0092176\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPlants of Georgia\nArthur Cronquist\nUniversity of Georgia\nGalax aphylla L.\nIn open & shaded places just above Amicolola\nFalls. Flowers white. Common. June 8, 1947\nNo.: 4557\nGeol. Prov.: Blue Ridge\nDawson County\n2200 ft. Elev.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092176",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Arthur Cronquist",
+    "collectorNumber": "4557",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 8, 1947",
+    "collectionDate": "1947-06-08",
+    "collectionDateEnd": "",
+    "habitat": "In open & shaded places just above Amicolola Falls.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white. Common.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dawson County",
+    "locality": "Just above Amicalola Falls.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Synonymy from PLANTS (USDA) database, Oct. 2011.\nUniversity of Georgia\nGeol. Prov. Blue Ridge\nGalax aphylla\nGalax urceolata\nGalax aphylla L.\nSyn. = Galax aphylla auct. non L.\nHandwritten Text 2200"
+  }
+}

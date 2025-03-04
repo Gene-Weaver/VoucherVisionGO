@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015774\n\nPLANTS OF TENNESSEE\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nJohnson Co., Doe Mountain Recreation Area edge of \npine woods along Trail #2\nFrosty Levy, Elaine Walker 13040\n12-May-2013\n\nJohn C. Warden Herbarium\nETSU #16-2690\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00057,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015774\nPLANTS OF TENNESSEE\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nJohnson Co., Doe Mountain Recreation Area edge of\npine woods along Trail #2\nFrosty Levy, Elaine Walker 13040\n12-May-2013\nJohn C. Warden Herbarium\nETSU #16-2690\nETSU\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urcelolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.52e-05,
+      "total_cost": 0.0007367000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 138
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2137,
+    "output": 452,
+    "cost_in": 0.00021370000000000002,
+    "cost_out": 0.0001808
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015774\n\nPLANTS OF TENNESSEE\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nJohnson Co., Doe Mountain Recreation Area edge of \npine woods along Trail #2\nFrosty Levy, Elaine Walker 13040\n12-May-2013\n\nJohn C. Warden Herbarium\nETSU #16-2690\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015774\nPLANTS OF TENNESSEE\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nJohnson Co., Doe Mountain Recreation Area edge of\npine woods along Trail #2\nFrosty Levy, Elaine Walker 13040\n12-May-2013\nJohn C. Warden Herbarium\nETSU #16-2690\nETSU\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urcelolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015774",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Frosty Levy, Elaine Walker",
+    "collectorNumber": "13040",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12-May-2013",
+    "collectionDate": "2013-05-12",
+    "collectionDateEnd": "",
+    "habitat": "Edge of pine woods along trail #2",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Johnson Co.",
+    "locality": "Doe Mountain Recreation Area edge of pine woods along Trail #2",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of Tennessee\nJohn C. Warden Herbarium\nETSU #16-2690\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nETSU"
+  }
+}

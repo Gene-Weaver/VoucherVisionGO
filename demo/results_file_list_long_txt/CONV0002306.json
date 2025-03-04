@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CONV\nConverse College Herbarium\nCONV0002306\n\nConverse College\n002146\nHerbarium\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(S) H. M. JENNISON NO. 951\nSEP 25 1935\nLOC. Le Conte                          193\n\n*Galax aphylla*, L.\nIn well drained humus on\nshaded rocks. @ 4000' \u00b1\n\nHandwritten text: Le Conte, *Galax aphylla*, L., In well drained humus on shaded rocks. @ 4000' \u00b1\n\n\n*Galaxaphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000725,
+      "total_cost": 0.00150375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 145
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CONV\nConverse College Herbarium\nCONV0002306\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\n951\nSEP 25 1935\nLe Conte\nGalax aphylla, L.\nIn well drained humur on\nshaded rocks. @4000'\u00b1\nConverse College\n002146\nHerbarium\n\n\nGalaxaphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.92e-05,
+      "total_cost": 0.0007207,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 98
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2119,
+    "output": 411,
+    "cost_in": 0.0002119,
+    "cost_out": 0.0001644
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCONV\nConverse College Herbarium\nCONV0002306\n\nConverse College\n002146\nHerbarium\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nCOLLECTOR(S) H. M. JENNISON NO. 951\nSEP 25 1935\nLOC. Le Conte                          193\n\n*Galax aphylla*, L.\nIn well drained humus on\nshaded rocks. @ 4000' \u00b1\n\nHandwritten text: Le Conte, *Galax aphylla*, L., In well drained humus on shaded rocks. @ 4000' \u00b1\n\n\n*Galaxaphylla*\n\n\ngemini-2.0-flash OCR:\nCONV\nConverse College Herbarium\nCONV0002306\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\n951\nSEP 25 1935\nLe Conte\nGalax aphylla, L.\nIn well drained humur on\nshaded rocks. @4000'\u00b1\nConverse College\n002146\nHerbarium\n\n\nGalaxaphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CONV0002306",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "951",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "SEP 25 1935",
+    "collectionDate": "1935-09-25",
+    "collectionDateEnd": "",
+    "habitat": "In well drained humus on shaded rocks.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "",
+    "county": "",
+    "locality": "Le Conte",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "FLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK"
+  }
+}

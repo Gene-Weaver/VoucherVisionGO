@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA. June 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\n\n\nGalax aphylla\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.000805,
-      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA. June 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n",
+      "cost_out": 0.00081,
+      "total_cost": 0.0015887499999999999,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 161,
-      "total_cost": 0.00158375
+      "tokens_out": 162
     },
     "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\n\n\nGalax aphylla\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
       "cost_out": 0.0001072,
-      "ocr_text": "HERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\n\n\nGalax aphylla\nGalax aphylla\n\n",
+      "total_cost": 0.0007887,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 268,
-      "total_cost": 0.0007887
+      "tokens_out": 268
     }
   },
-  "tokens_LLM": {
-    "input": 2251,
-    "output": 592
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2294,
+    "output": 567,
+    "cost_in": 0.00022940000000000002,
+    "cost_out": 0.0002268
   },
-  "vvgo_json": {
-    "additionalText": "Herbarium of\nAlbion College\nBiltmore Herbarium.\nAlbion College Herbarium (ALBC)\nALBC003128\nNo/510\nHerbarium of C. W. Fallass.\nPetoskey, Mich.\nGalax aphylla L\nr.c.\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\nGalax aphylla",
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\n\nBILTMORE HERBARIUM.\nNo. 1336b.\n*Galax aphylla* L.\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\n\nAlbion College Herbarium (ALBC)\nALBC003128\n\n(Handwritten) No 1510\n(Handwritten) Herbarium of C. W. FALLASS\n(Handwritten) Petoskey, Mich.\n(Handwritten) *Galax aphylla* L\n(Handwritten) Biltmore Collector.\n(Handwritten) June 10 1897\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\n002282\nALBION COLLEGE\nBILTMORE HERBARIUM.\nNo. 1336b.\nGalax aphylla L.\nAlbion College Herbarium (ALBC)\nOpen woods, BILTMORE, NORTH CAROLINA.\nJune 10th, 1897.\nALBC003128\nNo/510\nHerbarium of C. W. FALLASS.\nPetoskey, Mich.\nGalax aphylla L\nBiltmore Collector.\nr.c.\nJune 10 1899\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\n\n\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
     "catalogNumber": "002282",
-    "chromosomeCount": "",
-    "collectedBy": "Biltmore Collector",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Biltmore Collector, C. W. Fallass",
+    "collectorNumber": "1336b, 1510",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 10th, 1897, June 10 1897, June 10 1899",
     "collectionDate": "1897-06-10",
-    "collectionDateEnd": "",
-    "collectorNumber": "1336b",
+    "collectionDateEnd": "1899-06-10",
+    "habitat": "Open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
     "continent": "North America",
     "country": "United States",
+    "stateProvince": "North Carolina, Mich",
     "county": "",
-    "cultivated": "",
+    "locality": "Biltmore, Petoskey",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "Open woods",
-    "identificationHistory": "",
-    "identifiedBy": "C. W. Fallass",
-    "identifiedConfidence": "",
-    "identifiedDate": "1899-06-10",
-    "identifiedRemarks": "",
-    "locality": "Biltmore",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "North Carolina",
-    "verbatimCollectionDate": "June 10th, 1897",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of albion college\nalbion college herbarium (albc)\nalbc003128\nbiltmore herbarium\nTIFFEN\u00ae Color Control Patches\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nR\nG\nB\nW\nG\nK\nC\nY\nM\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nA\n1\n2\n3\n4\n5\nM\n6\n9\n8\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nThe Tiffen Company, 2007\nInches\nCentimetres\nr.c."
   }
 }

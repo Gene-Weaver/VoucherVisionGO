@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nDiapensiaceae 134 (handwritten)\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 38 *Galax aphylla* L.\nLocality On Maxwell Hill area on Christopher Dr. 2 miles from Beckley.\nHabitat Crawling on forest floor, dry, forest dominated by *Pinus strobus*.\nState West Virginia. County Raleigh.\nCollector Juriah Md.Nor Date 4/7/80\nDet. Dr. Dan K. Evans.\n\n\n*Galax aphylla*\n*Pinus strobus*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00083,
+      "total_cost": 0.00160875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 166
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "VERSITATIS MARA\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarlum\nMUHW017991\nDiapensiaceae 134\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 38 Galax aphylla L.\nOn Maxwell Hill area on Christo-\nLocality pher Dr. 2 miles from Beckley.\nHabitat Crawling on forest floor, dry,\nforest dominated by Pinus strobus.\nState\nWest Virginia. County Raleigh.\nCollector Juriah Md. Nor Date 4/7/80\nDet.\nDr. Dan K. Evans.\n\n\nGalax aphylla\nPinus strobus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.120000000000001e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2214,
+    "output": 491,
+    "cost_in": 0.0002214,
+    "cost_out": 0.0001964
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nDiapensiaceae 134 (handwritten)\n\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nNo. 38 *Galax aphylla* L.\nLocality On Maxwell Hill area on Christopher Dr. 2 miles from Beckley.\nHabitat Crawling on forest floor, dry, forest dominated by *Pinus strobus*.\nState West Virginia. County Raleigh.\nCollector Juriah Md.Nor Date 4/7/80\nDet. Dr. Dan K. Evans.\n\n\n*Galax aphylla*\n*Pinus strobus*\n\n\ngemini-2.0-flash OCR:\nVERSITATIS MARA\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarlum\nMUHW017991\nDiapensiaceae 134\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nNo. 38 Galax aphylla L.\nOn Maxwell Hill area on Christo-\nLocality pher Dr. 2 miles from Beckley.\nHabitat Crawling on forest floor, dry,\nforest dominated by Pinus strobus.\nState\nWest Virginia. County Raleigh.\nCollector Juriah Md. Nor Date 4/7/80\nDet.\nDr. Dan K. Evans.\n\n\nGalax aphylla\nPinus strobus\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017991",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Juriah Md. Nor",
+    "collectorNumber": "38",
+    "identifiedBy": "Dr. Dan K. Evans",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/7/80",
+    "collectionDate": "1980-04-07",
+    "collectionDateEnd": "",
+    "habitat": "Crawling on forest floor, dry, forest dominated by Pinus strobus.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.S.A.",
+    "stateProvince": "West Virginia",
+    "county": "Raleigh",
+    "locality": "On Maxwell Hill area on Christopher Dr. 2 miles from Beckley.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarlum\nDiapensiaceae 134\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nPinus strobus"
+  }
+}

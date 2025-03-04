@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "28007\n\nFlora of North Carolina\n\n*Galax urceolata* (Poiret) Brummitt  DIAPENSIACEAE\n\nJackson County: East Fork of the Tuckasegee River, riverbanks at\n\"Eternity\" playwave, 1.3 mi up Shook Cove Road from Hwy 107.\nOne plant seen under trees along steep trail down to water. Flowers white.\n\nK.G. Mathews 364\nwith Greg Adkison                                                     11 Jun 2010\n\nWCUH0010423\nHandwritten Text: with Greg Adkison\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000695,
+      "total_cost": 0.0014737500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 139
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010423\nFlora of North Carolina\nGalax urceolata (Poiret) Brummitt DIAPENSIACEAE\nJackson County: East Fork of the Tuckaseegee River, riverbanks at\n\"Eternity\" playwave, 1.3 mi up Shook Cove Road from Hwy 107.\nOne plant seen under trees along steep trail down to water. Flowers\nwhite.\nK.G. Mathews 364\nwith Greg Adkison\n11 Jun 2010\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 11\nLIVING\nCULTURES\n28007\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 487,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n28007\n\nFlora of North Carolina\n\n*Galax urceolata* (Poiret) Brummitt  DIAPENSIACEAE\n\nJackson County: East Fork of the Tuckasegee River, riverbanks at\n\"Eternity\" playwave, 1.3 mi up Shook Cove Road from Hwy 107.\nOne plant seen under trees along steep trail down to water. Flowers white.\n\nK.G. Mathews 364\nwith Greg Adkison                                                     11 Jun 2010\n\nWCUH0010423\nHandwritten Text: with Greg Adkison\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010423\nFlora of North Carolina\nGalax urceolata (Poiret) Brummitt DIAPENSIACEAE\nJackson County: East Fork of the Tuckaseegee River, riverbanks at\n\"Eternity\" playwave, 1.3 mi up Shook Cove Road from Hwy 107.\nOne plant seen under trees along steep trail down to water. Flowers\nwhite.\nK.G. Mathews 364\nwith Greg Adkison\n11 Jun 2010\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nINCHES\nMETRIC 11\nLIVING\nCULTURES\n28007\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010423",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "K.g. Mathews, Greg Adkison",
+    "collectorNumber": "364",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 Jun 2010",
+    "collectionDate": "2010-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Riverbanks at eternity playwave",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "One plant seen under trees along steep trail down to water. Flowers white.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "East fork of the tuckasegee river, 1.3 mi up shook cove road from hwy 107.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Living\ncultures\n28007\npreserved\nmaterial\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\ninches\nmetric"
+  }
+}

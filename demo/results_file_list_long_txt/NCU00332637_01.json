@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n306083\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332637\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWooded sandy area below\nJoyners Bridge.\n\nIsle of Wight Co.\n\nJune 16, 1967\n\nCollected by: A M Harvill 16714\nDetermined by:\n\nHandwritten Text: A M Harvill\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "7\n6\n\u062f\n10\nat Chapel Hill\nUniversity of North Carolina\nxrite\ncolorchecker\n0\ncm\ncopyright reserved\n1 2 3 4 5 6 7 8 9\nNCU\nat Chapel Hill\nUniversity of North Carolina\nERSITY OF NOR\nUNIL\nHERBARIUM\n306083\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332637\nFLORA VIRGINICA\nGalax aphylla L.\nWooded sandy area below\nJoyners Bridge.\nIsle of Wight Co.\nJune 16, 1967\nCollected by: A M Harvill\n16714\nDetermined by:\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.440000000000001e-05,
+      "total_cost": 0.0007459000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 161
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2172,
+    "output": 533,
+    "cost_in": 0.0002172,
+    "cost_out": 0.00021320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n306083\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332637\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWooded sandy area below\nJoyners Bridge.\n\nIsle of Wight Co.\n\nJune 16, 1967\n\nCollected by: A M Harvill 16714\nDetermined by:\n\nHandwritten Text: A M Harvill\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n7\n6\n\u062f\n10\nat Chapel Hill\nUniversity of North Carolina\nxrite\ncolorchecker\n0\ncm\ncopyright reserved\n1 2 3 4 5 6 7 8 9\nNCU\nat Chapel Hill\nUniversity of North Carolina\nERSITY OF NOR\nUNIL\nHERBARIUM\n306083\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332637\nFLORA VIRGINICA\nGalax aphylla L.\nWooded sandy area below\nJoyners Bridge.\nIsle of Wight Co.\nJune 16, 1967\nCollected by: A M Harvill\n16714\nDetermined by:\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332637",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A M Harvill",
+    "collectorNumber": "16714",
+    "identifiedBy": "A M Harvill",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 16, 1967",
+    "collectionDate": "1967-06-16",
+    "collectionDateEnd": "",
+    "habitat": "Wooded sandy area below Joyners Bridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Isle of wight co.",
+    "locality": "Wooded sandy area below Joyners Bridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "X-rite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nuniversity of north carolina\nherbarium\n306083\nuniversity of north carolina herbarium\nflora virginica\nHandwritten Text A M Harvill\n\n7\n6\n\u062f\n10\nat chapel hill\nuniversity of north carolina\nxrite\ncolorchecker\n0\ncm\ncopyright reserved\n1 2 3 4 5 6 7 8 9\nncudetermine by"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508045\n\nRANCHO SANTA ANA\n139267\nBOTANIC GARDEN\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\n\n*Galax aphylla* L.\nUpriver about \u2154 mi. from mouth of Patterson's Cr. On very steep hillside\nunder *Kalmia*, with *Epigaea* and *Asarum*.\n\n258\nCollector: Peggy-Ann Kessler                      5/8/55\n\nHandwritten Text: \u2154\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508045\n0\ncm\n1\n2\n3\n4\n5\n6 7 8 9 10\ncopyright reserved\nRANCHO SANT: ANA\n139267\nBOTANIC GARDEN\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\nGalax aphylla L.\nUpriver about mi. from mouth of Pat-\nterson's Cr. On very steep hillside\nunder Kalmia, with Epigaea and Asarum.\n258\nCollector: Peggy-Ann Kessler\n5/8/55\n\n\nGalax aphylla\nEpigaea\nAsarum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2176,
+    "output": 487,
+    "cost_in": 0.0002176,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508045\n\nRANCHO SANTA ANA\n139267\nBOTANIC GARDEN\n\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\n\n*Galax aphylla* L.\nUpriver about \u2154 mi. from mouth of Patterson's Cr. On very steep hillside\nunder *Kalmia*, with *Epigaea* and *Asarum*.\n\n258\nCollector: Peggy-Ann Kessler                      5/8/55\n\nHandwritten Text: \u2154\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508045\n0\ncm\n1\n2\n3\n4\n5\n6 7 8 9 10\ncopyright reserved\nRANCHO SANT: ANA\n139267\nBOTANIC GARDEN\nFLORA OF DEEP RIVER BASIN\nLEE Co. N. C.\nGalax aphylla L.\nUpriver about mi. from mouth of Pat-\nterson's Cr. On very steep hillside\nunder Kalmia, with Epigaea and Asarum.\n258\nCollector: Peggy-Ann Kessler\n5/8/55\n\n\nGalax aphylla\nEpigaea\nAsarum\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508045",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Peggy-Ann Kessler",
+    "collectorNumber": "258",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/8/55",
+    "collectionDate": "1955-05-08",
+    "collectionDateEnd": "",
+    "habitat": "Upriver about \u2154 mi. from mouth of patterson's cr. on very steep hillside under kalmia, with epigaea and asarum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N. c.",
+    "county": "Lee co.",
+    "locality": "Upriver about \u2154 mi. from mouth of patterson's cr.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "California botanic garden\nclaremont, ca usa (rsa-pom)\nrancho sant ana\n139267\nbotanic garden\nflora of deep river basin\nhandwritten text \u2154\ngalax aphylla"
+  }
+}

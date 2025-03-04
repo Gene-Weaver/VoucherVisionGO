@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082938\n\nPLANTS OF ALABAMA\n\nDekalb Co.: 4 Jun 1969 R. Kral 34929\n*Galax aphylla* L.\nSandy wooded bluffs ca. 2 mi. e.\nMentone on Ala 117.\n\nDet: R. Kral\n(Handwritten Text: NCSC, 82623)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00055,
+      "total_cost": 0.00132875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 110
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082938\nHERBARIUM\nNCSC\n82623\nCAROLINA STATE UNIVERSITY\nPLANTS OF ALABAMA\nDekalb Co.: 4 Jun 1969 R.Kral34929\nGalax aphylla L.\nSandy wooded bluffs ca. 2 mi. e.\nMentone on Ala 117.\nDet: R. Kral\nTIFFEN Gray Scale\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nThe Tiffen Company, 2007\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0007383,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2119,
+    "output": 519,
+    "cost_in": 0.0002119,
+    "cost_out": 0.00020760000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082938\n\nPLANTS OF ALABAMA\n\nDekalb Co.: 4 Jun 1969 R. Kral 34929\n*Galax aphylla* L.\nSandy wooded bluffs ca. 2 mi. e.\nMentone on Ala 117.\n\nDet: R. Kral\n(Handwritten Text: NCSC, 82623)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082938\nHERBARIUM\nNCSC\n82623\nCAROLINA STATE UNIVERSITY\nPLANTS OF ALABAMA\nDekalb Co.: 4 Jun 1969 R.Kral34929\nGalax aphylla L.\nSandy wooded bluffs ca. 2 mi. e.\nMentone on Ala 117.\nDet: R. Kral\nTIFFEN Gray Scale\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nThe Tiffen Company, 2007\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082938",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "34929",
+    "identifiedBy": "R. Kral",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4 Jun 1969",
+    "collectionDate": "1969-06-04",
+    "collectionDateEnd": "",
+    "habitat": "Sandy wooded bluffs ca. 2 mi. e. Mentone on Ala 117.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Dekalb Co.",
+    "locality": "Sandy wooded bluffs ca. 2 mi. e. Mentone on Ala 117.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHERBARIUM\nNCSC\n82623\nCAROLINA STATE UNIVERSITY\nPLANTS OF ALABAMA\nDet R. Kral\n(Handwritten Text NCSC, 82623)\nTIFFEN Gray Scale\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nThe Tiffen Company, 2007"
+  }
+}

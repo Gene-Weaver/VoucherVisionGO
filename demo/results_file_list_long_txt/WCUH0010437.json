@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WCUH0010437\n\nGalax urceolata (Poir.) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\n\nGalax aphylla L.\n\nOutcrop: Little Green Mt. Slope: n. to w. & south\nElevation: 4000-4160' Amt of cover: facing gneiss\nAssociation:\nHabitat: edge, west\nLocality: About 3 miles w. of Cold Mt. Gap west of\nToxaway Lake on N.C. 281\n\nJames H. Horton 2885 Date: 7 June 1971\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\n\n9820\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000995,
+      "total_cost": 0.00177375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 199
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010437\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\nGalax aphylla L.\nOutcrop: Little Green Mt.\nSlope:\nn. to w.& south\nElevation: 4000-4160'\nAm't of cover:\nfacing gneiss\nAssociation:\nHabitat: edge, west\nLocality: About 3 miles w. of Cold Mt. Gap west of\nToxaway Lake on N.C. 281\nJames H. Horton\nJ. Dan Pittillo\n2885\nDate: 7 June 1971\nFloristics of Southern Appalachian Rock Outcrops\nN.C\nHERBARICA Co\nWESTERN CAROLINA CU\n9820\nOLLEG\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010520000000000001,
+      "total_cost": 0.0007867,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 263
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2336,
+    "output": 567,
+    "cost_in": 0.0002336,
+    "cost_out": 0.0002268
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWCUH0010437\n\nGalax urceolata (Poir.) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\n\nGalax aphylla L.\n\nOutcrop: Little Green Mt. Slope: n. to w. & south\nElevation: 4000-4160' Amt of cover: facing gneiss\nAssociation:\nHabitat: edge, west\nLocality: About 3 miles w. of Cold Mt. Gap west of\nToxaway Lake on N.C. 281\n\nJames H. Horton 2885 Date: 7 June 1971\nJ. Dan Pittillo\nFloristics of Southern Appalachian Rock Outcrops\n\n9820\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010437\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nJackson County\nGalax aphylla L.\nOutcrop: Little Green Mt.\nSlope:\nn. to w.& south\nElevation: 4000-4160'\nAm't of cover:\nfacing gneiss\nAssociation:\nHabitat: edge, west\nLocality: About 3 miles w. of Cold Mt. Gap west of\nToxaway Lake on N.C. 281\nJames H. Horton\nJ. Dan Pittillo\n2885\nDate: 7 June 1971\nFloristics of Southern Appalachian Rock Outcrops\nN.C\nHERBARICA Co\nWESTERN CAROLINA CU\n9820\nOLLEG\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010437",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "James H. Horton, J. Dan Pittillo",
+    "collectorNumber": "2885",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Flora of the southern and mid-atlantic states, working draft",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "7 June 1971",
+    "collectionDate": "1971-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Outcrop little green mt. Slope n. to w. & south edge, west",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "About 3 miles w. of cold mt. Gap west of toxaway lake on n.c. 281",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "1268",
+    "elevationUnits": "ft",
+    "additionalText": "Amt of cover facing gneiss\nAssociation\nFloristics of southern appalachian rock outcrops\n9820\nWestern carolina u. herbarium\nN.c\nHerbarica co\nWestern carolina cu\nOlleg\npreserved\nMaterial\nCarolina biological supply company\nBurlington, nc 27215 & gladstone, or 97027\nliving\ncultures"
+  }
+}

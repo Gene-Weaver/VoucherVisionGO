@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n49834\nWILLIAM & MARY\n\nCOLLEGE OF WILLIAM AND MARY\n841\nHERBARIUM\n\nName: *Galax asphylla* L.\nFamily: Diapensiaceae\nCommon name: Galax\nHabitat: Open woods\nLocality: Petersburg\nCollector: Helen Marshall\n\nHandwritten text: *!sme Ware '88*\n                    *5/9/42*\n                    *28*\n\n\n*Galax asphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005600000000000001,
+      "total_cost": 0.00133875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 112
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF WILLIAM AND MARY\n841\nHERBARIUM\nName: Galax aphylla L.\nFamily: Diapensiaceae\nCommon name: Galax\nHabitat: Open woods\nLocality: Petersburg\nCollector; Helen Marshall\n!sme Ware\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 2.8e-05,
+      "total_cost": 0.0007095000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 70
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2079,
+    "output": 424,
+    "cost_in": 0.0002079,
+    "cost_out": 0.0001696
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n49834\nWILLIAM & MARY\n\nCOLLEGE OF WILLIAM AND MARY\n841\nHERBARIUM\n\nName: *Galax asphylla* L.\nFamily: Diapensiaceae\nCommon name: Galax\nHabitat: Open woods\nLocality: Petersburg\nCollector: Helen Marshall\n\nHandwritten text: *!sme Ware '88*\n                    *5/9/42*\n                    *28*\n\n\n*Galax asphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF WILLIAM AND MARY\n841\nHERBARIUM\nName: Galax aphylla L.\nFamily: Diapensiaceae\nCommon name: Galax\nHabitat: Open woods\nLocality: Petersburg\nCollector; Helen Marshall\n!sme Ware\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "49834",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Helen Marshall",
+    "collectorNumber": "28",
+    "identifiedBy": "sme Ware",
+    "identifiedDate": "1942-05-09",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/9/42",
+    "collectionDate": "1942-05-09",
+    "collectionDateEnd": "",
+    "habitat": "Open woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "",
+    "county": "",
+    "locality": "Petersburg",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & Mary\nChartered 1693\nCollege of William and Mary\n841\nHerbarium\nFamily Diapensiaceae\nCommon name Galax\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPC00411\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\nNCU\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332009\n\n*Diapensiaceae* (handwritten)\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nShady bank of Ball's Mill road,\nabout \u00bc mile west of mill site,\nBrushy Mts., Wilkes Co., NC.\n\nJune 15, 1939                       Laurie M. Stewart\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n23586\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00086,
+      "total_cost": 0.0016387500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\n3 4 5 6 7 8 9 10\ncm\n0 1 2 3\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPC00411\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332009\nHerbarium of the University of North Carolina\nGalax aphylla L.\nShady bank of Ball's Mill road,\nabout mile west of mill site,\nBrushy Mts., Wilkes Co, NC.\nJune 15, 1939\nLaurie M. Stewart\n\n*Handwritten text:*\nDiapenstaceae\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 568,
+    "cost_in": 0.0002205,
+    "cost_out": 0.00022720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPC00411\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\nNCU\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332009\n\n*Diapensiaceae* (handwritten)\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nShady bank of Ball's Mill road,\nabout \u00bc mile west of mill site,\nBrushy Mts., Wilkes Co., NC.\n\nJune 15, 1939                       Laurie M. Stewart\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n23586\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\n3 4 5 6 7 8 9 10\ncm\n0 1 2 3\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPC00411\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332009\nHerbarium of the University of North Carolina\nGalax aphylla L.\nShady bank of Ball's Mill road,\nabout mile west of mill site,\nBrushy Mts., Wilkes Co, NC.\nJune 15, 1939\nLaurie M. Stewart\n\n*Handwritten text:*\nDiapenstaceae\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332009",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Laurie M. Stewart",
+    "collectorNumber": "23586",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 15, 1939",
+    "collectionDate": "1939-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Shady bank of Ball's Mill road",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Nc",
+    "county": "Wilkes Co",
+    "locality": "About \u00bc mile west of mill site, Brushy Mts.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "x-rite\ncolorchecker\nMSCCPPC00411\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\nNCU\nDiapensiaceae (handwritten)\nHerbarium of the University of North Carolina\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\nx-rite\ncolorchecker\n3 4 5 6 7 8 9 10\ncm\n0 1 2 3\ncopyright reserved\nNCU\nUniversity of North Carolina\nat Chapel Hill\nHandwritten text\nDiapenstaceae"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 (?), based on average guard cell area\nvolume of 552 \u03bc\u00b2\nGuy L. Nesom, 1975 duplicates clearly 2X\n\n118184\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\nAcid soil in open woods,\nSalt Pond Mt. near Lake.\n17/June/39 #768\nColl. F.A.Gilbert, L.G.Williams\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY CLYDE F. REED\n(Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000965,
+      "total_cost": 0.0017437499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 193
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010669\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6), based on average guard cell area\nvolume of 552 \u03bc2\nGuy L. Nesom, 1975\nduplicates clearly 2x\n118184\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nAcid soil in oper woods,\nSalt Pond Mt.near Lake.\n17/June/39\n#768\nColl. F.A.Gilbert, L.G.Williams\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2276,
+    "output": 533,
+    "cost_in": 0.0002276,
+    "cost_out": 0.00021320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 (?), based on average guard cell area\nvolume of 552 \u03bc\u00b2\nGuy L. Nesom, 1975 duplicates clearly 2X\n\n118184\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\n\n*Galax aphylla* L.\nAcid soil in open woods,\nSalt Pond Mt. near Lake.\n17/June/39 #768\nColl. F.A.Gilbert, L.G.Williams\n\nANNOTATION LABEL\n*Galax aphylla* L.\n1965\nDETERMINED BY CLYDE F. REED\n(Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\ncopyright reserved\nANNOTATION LABEL\nGalax aphylla L.\n1965\nCLYDE F. REED\nWest Virginia University (WVA)\nWVA-V-0010669\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6), based on average guard cell area\nvolume of 552 \u03bc2\nGuy L. Nesom, 1975\nduplicates clearly 2x\n118184\nHerbarium of Marshall College\nFLORA OF VIRGINIA\nGiles County\nGalax aphylla L.\nAcid soil in oper woods,\nSalt Pond Mt.near Lake.\n17/June/39\n#768\nColl. F.A.Gilbert, L.G.Williams\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "118184",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "F.a.gilbert, L.g.williams",
+    "collectorNumber": "768",
+    "identifiedBy": "Clyde f. reed, guy l. nesom",
+    "identifiedDate": "1965",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L., 1965, Clyde f. reed",
+    "verbatimCollectionDate": "17/June/39",
+    "collectionDate": "1939-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Acid soil in open woods",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 552 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "West virginia",
+    "county": "Giles county",
+    "locality": "Salt pond mt. near lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Wva morgantown\ncopyright reserved\nwest virginia university (wva)\nwva-v-0010669\nherbarium of marshall college\nduplicates clearly 2x\n\ngalax aphylla\ngalax urceolata\ngalax aphylla"
+  }
+}

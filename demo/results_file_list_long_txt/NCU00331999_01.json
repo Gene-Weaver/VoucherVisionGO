@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\nCopyright reserved\n\n10554\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331999\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nRocky wooded river bluff, 6 mi. N.W.\nof Raleigh, Wake Co., N.C.\n\nMay 16, 1938\n3993\nR.K. Godfrey\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005549999999999999,
+      "total_cost": 0.0013337499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 111
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Herbarium of the University of North Carolina\n\nGalax aphylla L.\n\nRocky wooded river bluff. 6 mi. N.W.\nof Raleigh, Wake Co., N.C.\n\nMay 16, 1938\n3993\nR.K. Godfrey\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 2.6000000000000002e-05,
+      "total_cost": 0.0007075,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 65
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2050,
+    "output": 432,
+    "cost_in": 0.00020500000000000002,
+    "cost_out": 0.0001728
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\nCopyright reserved\n\n10554\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331999\n\nHerbarium of the University of North Carolina\n\n*Galax aphylla* L.\n\nRocky wooded river bluff, 6 mi. N.W.\nof Raleigh, Wake Co., N.C.\n\nMay 16, 1938\n3993\nR.K. Godfrey\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHerbarium of the University of North Carolina\n\nGalax aphylla L.\n\nRocky wooded river bluff. 6 mi. N.W.\nof Raleigh, Wake Co., N.C.\n\nMay 16, 1938\n3993\nR.K. Godfrey\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331999",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R.k. Godfrey",
+    "collectorNumber": "3993",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 16, 1938",
+    "collectionDate": "1938-05-16",
+    "collectionDateEnd": "",
+    "habitat": "Rocky wooded river bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N.c.",
+    "county": "Wake co.",
+    "locality": "6 mi. n.w. of raleigh",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ncu\nUniversity of north carolina\nat chapel hill\nCopyright reserved\n\n10554\n\nUniversity of north carolina herbarium"
+  }
+}

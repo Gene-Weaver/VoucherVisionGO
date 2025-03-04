@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087813\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\n\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\n\nCOUNTY: Burke\n\nPLANTS OF North Carolina\n\n*GALAX APHYLLA* L.\n\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\n\nSallie Potter no. 93 August 18, 1971\n\n\nHandwritten text: *10*\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008449999999999999,
+      "total_cost": 0.0016237500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087813\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\nCOUNTY: Burke\nPLANTS OF North Carolina\nGALAX APHYLLA L.\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\nSallie Potter no. 93 August 18, 1971\n10\n\n\nGalax urceolata\nGALAX APHYLLA\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.560000000000001e-05,
+      "total_cost": 0.0007471,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2218,
+    "output": 530,
+    "cost_in": 0.0002218,
+    "cost_out": 0.000212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087813\n\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\n\n*Galax urceolata* (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\n\nCOUNTY: Burke\n\nPLANTS OF North Carolina\n\n*GALAX APHYLLA* L.\n\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\n\nSallie Potter no. 93 August 18, 1971\n\n\nHandwritten text: *10*\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087813\nHERBARIUM\nWESTERN KY. UNIVERSITY\n9870\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\nCOUNTY: Burke\nPLANTS OF North Carolina\nGALAX APHYLLA L.\nRock overhang over Linville River at Linville\nFalls in the Pisgah National Forest off old\nNC Rt. 105 (Kislter Memorial Highway).\nSallie Potter no. 93 August 18, 1971\n10\n\n\nGalax urceolata\nGALAX APHYLLA\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087813",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Sallie Potter",
+    "collectorNumber": "93",
+    "identifiedBy": "Mason Brock, Austin Peay State University (APSC)",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "August 18, 1971",
+    "collectionDate": "1971-08-18",
+    "collectionDateEnd": "",
+    "habitat": "Rock overhang over Linville River at Linville Falls in the Pisgah National Forest off old NC Rt. 105 (Kislter Memorial Highway).",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Burke",
+    "locality": "Linville Falls, Pisgah National Forest, off old NC Rt. 105 (Kistler Memorial Highway).",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nHERBARIUM\nWESTERN KY. UNIVERSITY\nHERBARIUM OF WESTERN KENTUCKY UNIVERSITY\nPLANTS OF North Carolina\nHandwritten text 10"
+  }
+}

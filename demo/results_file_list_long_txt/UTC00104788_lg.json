@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "IN UTC\nSYMBIOTA\n\n104788\n\nINTERMOUNTAIN HERBARIUM\nUTC 00104788\n\nHERBARIUM OF\nG. H. H. AND E. M. TATE.\n\nNO.\n*Galax aphylla* L.\nGalax; galaxy; beetle weed\nMountain between Paint and Newcastle\n\n*Handwritten text identified with asterisks.*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00045000000000000004,
+      "total_cost": 0.00122875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 90
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1\n2\n3\n4\n0 1 2 3\nIN UTC\nSYMBIOTA\n104788\nINTERMOUNTAIN HERBARIUM\nUTC 00104788\n4\n5\n6\n7\n8\n9\n10\n11\n12\nHERBARIUM OF\nG. H. H. AND E. M. TATE.\nNO.\nGalax aphylla L.\nGalax; galaxy; beetle weed\nMountain between Paint and Newcastle\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.64e-05,
+      "total_cost": 0.0007279000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 116
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2083,
+    "output": 399,
+    "cost_in": 0.00020830000000000002,
+    "cost_out": 0.0001596
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nIN UTC\nSYMBIOTA\n\n104788\n\nINTERMOUNTAIN HERBARIUM\nUTC 00104788\n\nHERBARIUM OF\nG. H. H. AND E. M. TATE.\n\nNO.\n*Galax aphylla* L.\nGalax; galaxy; beetle weed\nMountain between Paint and Newcastle\n\n*Handwritten text identified with asterisks.*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\n1\n2\n3\n4\n0 1 2 3\nIN UTC\nSYMBIOTA\n104788\nINTERMOUNTAIN HERBARIUM\nUTC 00104788\n4\n5\n6\n7\n8\n9\n10\n11\n12\nHERBARIUM OF\nG. H. H. AND E. M. TATE.\nNO.\nGalax aphylla L.\nGalax; galaxy; beetle weed\nMountain between Paint and Newcastle\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "00104788",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. H. H. and E. M. Tate",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Galax; galaxy; beetle weed",
+    "cultivated": "",
+    "continent": "",
+    "country": "",
+    "stateProvince": "",
+    "county": "",
+    "locality": "Mountain between paint and newcastle",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "IN UTC\nSYMBIOTA\nINTERMOUNTAIN HERBARIUM"
+  }
+}

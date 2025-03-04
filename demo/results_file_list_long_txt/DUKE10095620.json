@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0\ncm\nDuke\ncopyright reserved UNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095620\n\nDUKE UNIVERSITY\nHERBARIUM\n36252\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSandy soil, gorge of\nAmicalola Creek\n\nJoseph H. Pyron\nRogers McVaugh 446\n\n6 mi. west of\nDawsonville,\nDawson Co.\n\nMarch 8, 1936\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000845,
+      "total_cost": 0.00162375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 169
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095620\nDuke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n36252\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nSandy soil, gorge of\nAmicalola Creek\nJoseph H. Pyron\nRogers McVaugh 446\n6 mi. west of\nDawsonville,\nDawson Co.\nMarch 8, 1936\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.4e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 520,
+    "cost_in": 0.0002234,
+    "cost_out": 0.000208
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0\ncm\nDuke\ncopyright reserved UNIVERSITY\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095620\n\nDUKE UNIVERSITY\nHERBARIUM\n36252\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nSandy soil, gorge of\nAmicalola Creek\n\nJoseph H. Pyron\nRogers McVaugh 446\n\n6 mi. west of\nDawsonville,\nDawson Co.\n\nMarch 8, 1936\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095620\nDuke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n36252\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nSandy soil, gorge of\nAmicalola Creek\nJoseph H. Pyron\nRogers McVaugh 446\n6 mi. west of\nDawsonville,\nDawson Co.\nMarch 8, 1936\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095620",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Joseph H. Pyron, Rogers McVaugh",
+    "collectorNumber": "446",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "March 8, 1936",
+    "collectionDate": "1936-03-08",
+    "collectionDateEnd": "",
+    "habitat": "Sandy soil, gorge of Amicalola Creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dawson Co.",
+    "locality": "6 mi. west of Dawsonville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "cm\nDuke\ncopyright reserved UNIVERSITY\nDUKE UNIVERSITY\nHERBARIUM\n36252\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nHerbarium of the University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

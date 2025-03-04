@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 424 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\n*Galax aphylla* L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\n\nCommon under *Kalmia* on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\n\nMay 12, 1973\nCHARLES E. STEVENS  NO. 6757\nDET. \"\"\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007750000000000001,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026117\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\nMay 12, 1973\nCHARLES E. STEVENS NO. 6757\nDET.\n\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.599999999999999e-05,
+      "total_cost": 0.0007475000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 496,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 424 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\n*Galax aphylla* L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\n\nCommon under *Kalmia* on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\n\nMay 12, 1973\nCHARLES E. STEVENS  NO. 6757\nDET. \"\"\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026117\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\nMay 12, 1973\nCHARLES E. STEVENS NO. 6757\nDET.\n\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026117",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles e. Stevens",
+    "collectorNumber": "6757",
+    "identifiedBy": "Guy l. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "May 12, 1973",
+    "collectionDate": "1973-05-12",
+    "collectionDateEnd": "",
+    "habitat": "Common under kalmia on steep n-facing bluff of childrey creek below rte # 632 bridge.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 424 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Halifax co.",
+    "locality": "Near north halifax, halifax co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "122",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-stevens herbarium\nlongwood university\nDet.\nFARM\nHarvill-stevens\nHerbarium"
+  }
+}

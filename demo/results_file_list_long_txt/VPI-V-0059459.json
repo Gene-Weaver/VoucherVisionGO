@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059459\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn =  based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\n\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n\n144. *Galax aphylla* L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\n\nHerbarium 28,561 *(handwritten)*\nBiology Department\nVirginia Polytechnic Institute\nA. B. Massey No. 3921\nJuly 23, 1940\n74 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.00178375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059459\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\nA. B. Massey No. 3921\nJuly 23, 1940\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n28,561\n24\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.4e-05,
+      "total_cost": 0.0007555000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 185
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2283,
+    "output": 554,
+    "cost_in": 0.0002283,
+    "cost_out": 0.00022160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059459\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn =  based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\n\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n\n144. *Galax aphylla* L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\n\nHerbarium 28,561 *(handwritten)*\nBiology Department\nVirginia Polytechnic Institute\nA. B. Massey No. 3921\nJuly 23, 1940\n74 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059459\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\nA. B. Massey No. 3921\nJuly 23, 1940\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\n28,561\n24\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059459",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. B. Massey",
+    "collectorNumber": "3921",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 23, 1940",
+    "collectionDate": "1940-07-23",
+    "collectionDateEnd": "",
+    "habitat": "Common in sandstone soil, circa pH 4.5, broadleaf woodlands.",
+    "chromosomeCount": "n = ",
+    "guardCell": "based on average guard cell area volume of \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles County",
+    "locality": "Along Warspur Trail, Mt. Lake area, Giles County, Virginia.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nHerbarium 28,561 (handwritten)\nBiology Department\nVirginia Polytechnic Institute\n74 (handwritten)\nGalax aphylla"
+  }
+}

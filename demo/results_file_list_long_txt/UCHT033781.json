@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033781\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6173\nUCHT\n\nFLORA OF N. Carolina (handwritten)\n\nFamily Diapensiaceae\nScientific Name *Galax aphylla* L.\nCommon Name Galax\nLocality Near J. Kilmer Mem. Forest Graham Co. (handwritten)\nHabitat Mountain top forest (handwritten)\nCollector T. Andrade (handwritten)\nDate 9-26-82 (handwritten)\n\n51\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000645,
+      "total_cost": 0.00142375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033781\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6173\nUCHT\n\nFLORA OF N. Carolina\nFamily Diapensiaceae\nScientific Name Galax aphylla h.\nCommon Name Galax\nLocality Near J. Kilmer Mem. Forest Graham Co\nHabitat Mountain top forest\nCollector T. Andrade\nDate 9-26-82\n51\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2177,
+    "output": 450,
+    "cost_in": 0.00021770000000000003,
+    "cost_out": 0.00018
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033781\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6173\nUCHT\n\nFLORA OF N. Carolina (handwritten)\n\nFamily Diapensiaceae\nScientific Name *Galax aphylla* L.\nCommon Name Galax\nLocality Near J. Kilmer Mem. Forest Graham Co. (handwritten)\nHabitat Mountain top forest (handwritten)\nCollector T. Andrade (handwritten)\nDate 9-26-82 (handwritten)\n\n51\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033781\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6173\nUCHT\n\nFLORA OF N. Carolina\nFamily Diapensiaceae\nScientific Name Galax aphylla h.\nCommon Name Galax\nLocality Near J. Kilmer Mem. Forest Graham Co\nHabitat Mountain top forest\nCollector T. Andrade\nDate 9-26-82\n51\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT033781",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "T. Andrade",
+    "collectorNumber": "51",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9-26-82",
+    "collectionDate": "1982-09-26",
+    "collectionDateEnd": "",
+    "habitat": "Mountain top forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Graham co",
+    "locality": "Near j. Kilmer mem. Forest graham co",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of tennessee\nat chattanooga\nbiology department herbarium\nsouthern missionary college\n6173\nucht\nflora of n. Carolina\ncommon name galax\nsernec digitization project - tennessee herbarium consortium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\n48073\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985  determined by M. A. Garland\n\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nTallahassee\n\nPLANTS OF: KENTUCKY\n\nCOUNTY: Whitley                      June 10, 1959\n*Galax aphylla*, L.\n\nIn rocky woods, of the Cumberland Falls State\nPark\n\nCollected by: N.C.Henderson (Handwritten)\nNo.                                     Det NCH (Handwritten)\n\nR. K. Godfrey Herbarium (FSU)\n*000105466*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008200000000000001,
+      "total_cost": 0.0015987500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 164
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\n48053\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nTallahassee\nPLANTS OF: KENTUCKY\nCOUNTY: Whitley\nGalax aphylla, L.\nPark\nCollected by: N.C.Henderson\nNo.\nDet NCH\nJune 10, 1959\nIn rocky woods, of the Cumberland Falls State\nR. K. Godfrey Herbarium (FSU)\n* 0 0 0 1 0 5 4 6 6*\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 504,
+    "cost_in": 0.0002221,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\n48073\nFLORIDA STATE UNIVERSITY\n\nFlorida State University Herbarium\n*Galax urceolata* (Poiret) Brummitt\ndate December 1985  determined by M. A. Garland\n\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nTallahassee\n\nPLANTS OF: KENTUCKY\n\nCOUNTY: Whitley                      June 10, 1959\n*Galax aphylla*, L.\n\nIn rocky woods, of the Cumberland Falls State\nPark\n\nCollected by: N.C.Henderson (Handwritten)\nNo.                                     Det NCH (Handwritten)\n\nR. K. Godfrey Herbarium (FSU)\n*000105466*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\n48053\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nGalax urceolata (Poiret) Brummitt\ndate December 1985 determined by M. A. Garland\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nTallahassee\nPLANTS OF: KENTUCKY\nCOUNTY: Whitley\nGalax aphylla, L.\nPark\nCollected by: N.C.Henderson\nNo.\nDet NCH\nJune 10, 1959\nIn rocky woods, of the Cumberland Falls State\nR. K. Godfrey Herbarium (FSU)\n* 0 0 0 1 0 5 4 6 6*\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "000105466",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "N.C.Henderson",
+    "collectorNumber": "",
+    "identifiedBy": "M. A. Garland",
+    "identifiedDate": "1985-12-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 10, 1959",
+    "collectionDate": "1959-06-10",
+    "collectionDateEnd": "",
+    "habitat": "In rocky woods, of the Cumberland Falls State Park",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Whitley",
+    "locality": "Cumberland Falls State Park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\n48073\nFLORIDA STATE UNIVERSITY\nFlorida State University Herbarium\nHERBARIUM OF FLORIDA STATE UNIVERSITY\nTallahassee\nPLANTS OF KENTUCKY\nDet NCH\nR. K. Godfrey Herbarium (FSU)\nGalax aphylla\nGalax aphylla, L."
+  }
+}

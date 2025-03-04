@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USF\n3\nUSF\n4\nUNIVERSITY OF\nSOUTH FLORIDA\nHERBARIUM\n256504\n\n235\nPLANTS OF SOUTH CAROLINA\n\nPickens County\n\n*Galax aphylla* L.\n\nAbundant along trail on west side of Green Creek, in cove\nforest at base of south facing slopes of Table Rock\nMountain.\n\nSite is in Table Rock State Park, north of junction of SC-\n11 and SC-288 in northern Pickens Co.\n\nK.A. Boyle #95100707\nwith J.B. Nelson                                                     7 Oct 1995\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00075,
+      "total_cost": 0.0015287500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 150
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF\nSOUTH FLORIDA\nHERBARIUM\n256504\nPLANTS OF SOUTH CAROLINA\nPickens County\nGalax aphylla L.\nAbundant along trail on west side of Green Creek, in cove\nforest at base of south facing slopes of Table Rock\nMountain.\nSite is in Table Rock State Park, north of junction of SC-\n11 and SC-288 in northern Pickens Co.\nK.A. Boyle #95100707\nwith J.B. Nelson\n7 Oct 1995\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n235\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.400000000000001e-05,
+      "total_cost": 0.0007355,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 135
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2166,
+    "output": 469,
+    "cost_in": 0.0002166,
+    "cost_out": 0.0001876
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSF\n3\nUSF\n4\nUNIVERSITY OF\nSOUTH FLORIDA\nHERBARIUM\n256504\n\n235\nPLANTS OF SOUTH CAROLINA\n\nPickens County\n\n*Galax aphylla* L.\n\nAbundant along trail on west side of Green Creek, in cove\nforest at base of south facing slopes of Table Rock\nMountain.\n\nSite is in Table Rock State Park, north of junction of SC-\n11 and SC-288 in northern Pickens Co.\n\nK.A. Boyle #95100707\nwith J.B. Nelson                                                     7 Oct 1995\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF\nSOUTH FLORIDA\nHERBARIUM\n256504\nPLANTS OF SOUTH CAROLINA\nPickens County\nGalax aphylla L.\nAbundant along trail on west side of Green Creek, in cove\nforest at base of south facing slopes of Table Rock\nMountain.\nSite is in Table Rock State Park, north of junction of SC-\n11 and SC-288 in northern Pickens Co.\nK.A. Boyle #95100707\nwith J.B. Nelson\n7 Oct 1995\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n235\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "256504",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "K.a. Boyle, J.b. Nelson",
+    "collectorNumber": "95100707",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 Oct 1995",
+    "collectionDate": "1995-10-07",
+    "collectionDateEnd": "",
+    "habitat": "Abundant along trail on west side of green creek, in cove forest at base of south facing slopes of table rock mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Pickens county",
+    "locality": "Site is in table rock state park, north of junction of sc-11 and sc-288 in northern pickens co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Usf\n3\nusf\n4\nUniversity of\nsouth florida\nherbarium\n235\nsouth carolina heritage trust program"
+  }
+}

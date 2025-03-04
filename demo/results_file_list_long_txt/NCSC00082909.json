@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082909\n\nNORTH CAROLINA\nMacon Co.\n\n*Galax aphylla* L.\n\nSunset Rock, near Highlands. Along\ntrail to summit.\n\nJ. M. Lynch 460                      1 Aug. 1979\nNCSC\n103387\nNORTH CAROLINA STATE UNIVERSITY\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000465,
+      "total_cost": 0.00124375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 93
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082909\nR\nG\nB\nA\n1\n2\n3\n4\n5\n6\nW\nTIFFEN Gray Scale\nK\nM\n8\n9\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nC\nY\nM\nThe Tiffen Company, 2007\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nThe Tiffen Company, 2007\nMagenta\nRed\nWhite\n3/Color\nBlack\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nYellow\nGreen\nCyan\nNORTH CAROLINA\nMacon Co.\nGalax aphylla L.\nSunset Rock, near Highlands. Along\ntrail to summit.\nHERBARIUM\nNCSC\nSTATE UNIVERSITY\n103387\nCAROLINA\nJ. M. Lynch 460\n1 Aug. 1979\nInches\n1\n2\n3\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001008,
+      "total_cost": 0.0007823,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 252
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2204,
+    "output": 423,
+    "cost_in": 0.0002204,
+    "cost_out": 0.0001692
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082909\n\nNORTH CAROLINA\nMacon Co.\n\n*Galax aphylla* L.\n\nSunset Rock, near Highlands. Along\ntrail to summit.\n\nJ. M. Lynch 460                      1 Aug. 1979\nNCSC\n103387\nNORTH CAROLINA STATE UNIVERSITY\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082909\nR\nG\nB\nA\n1\n2\n3\n4\n5\n6\nW\nTIFFEN Gray Scale\nK\nM\n8\n9\n10\n11\n12\n13\n14\n15\nB\n17\n18\n19\nC\nY\nM\nThe Tiffen Company, 2007\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nThe Tiffen Company, 2007\nMagenta\nRed\nWhite\n3/Color\nBlack\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nYellow\nGreen\nCyan\nNORTH CAROLINA\nMacon Co.\nGalax aphylla L.\nSunset Rock, near Highlands. Along\ntrail to summit.\nHERBARIUM\nNCSC\nSTATE UNIVERSITY\n103387\nCAROLINA\nJ. M. Lynch 460\n1 Aug. 1979\nInches\n1\n2\n3\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082909",
+    "scientificName": "Galax aphylla l.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. M. Lynch",
+    "collectorNumber": "460",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1 Aug. 1979",
+    "collectionDate": "1979-08-01",
+    "collectionDateEnd": "",
+    "habitat": "Along trail to summit.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "North carolina",
+    "stateProvince": "North carolina",
+    "county": "Macon co.",
+    "locality": "Sunset rock, near highlands.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\nncsc\nnorth carolina state university"
+  }
+}

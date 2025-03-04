@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nNO 0092175\n\nTULANE UNIVERSITY HERBARIUM\n*Galax urceolata* (Poir.) Brummitt\nSyn. = *Galax aphylla* auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\n*Galax aphylla.*\nIn fruit.\nMontgomery Co., Va.,\nLeidy, July 1867.\n\n(Handwritten text identified with italics)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006000000000000001,
+      "total_cost": 0.00137875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 120
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\n\u039d\u039f 0092175\nTIFFEN Gray Scale\nInches\n2\n3\n5\n6\n7\n8\nR\nG\nB\nW\nG\nK\nC\nY\nM\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17 18 19\nCentimetres\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nThe Tiffen Company, 2007\nWhite\n3/Color\nBlack\nA\n1 2\n3\n4 5 6\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nGalax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nTULANE\nUNIVERSITY\nHERBARIUM\nGalax aphylla.\nIn fruit.\nMontgomery Co., va.\nLeidy, July 1867.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001136,
+      "total_cost": 0.0007951,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 284
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2287,
+    "output": 434,
+    "cost_in": 0.0002287,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\nNO 0092175\n\nTULANE UNIVERSITY HERBARIUM\n*Galax urceolata* (Poir.) Brummitt\nSyn. = *Galax aphylla* auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\n*Galax aphylla.*\nIn fruit.\nMontgomery Co., Va.,\nLeidy, July 1867.\n\n(Handwritten text identified with italics)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTULANE UNIVERSITY HERBARIUM\n\u039d\u039f 0092175\nTIFFEN Gray Scale\nInches\n2\n3\n5\n6\n7\n8\nR\nG\nB\nW\nG\nK\nC\nY\nM\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15 16\n17 18 19\nCentimetres\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta\nThe Tiffen Company, 2007\nWhite\n3/Color\nBlack\nA\n1 2\n3\n4 5 6\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nGalax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nTULANE\nUNIVERSITY\nHERBARIUM\nGalax aphylla.\nIn fruit.\nMontgomery Co., va.\nLeidy, July 1867.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092175",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Leidy",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 1867",
+    "collectionDate": "1867-07-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "In fruit.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Va.",
+    "county": "Montgomery Co.",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Syn. = Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nGalax aphylla."
+  }
+}

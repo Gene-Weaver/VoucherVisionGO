@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MICH\ncopyright reserved\n\nOCT 30 1981\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 19 Sept. 2024\n\nHERBARIUM OF THE GRAND RAPIDS\nPUBLIC MUSEUM\nDEPOSITED IN THE HERBARIUM OF THE UNIVERSITY OF MICHIGAN, 1974\n\nCatalogue Number: 45188\n\nIn 1867 the Grand Rapids Lyceum of Natural History merged with\nthe Grand Rapids Scientific Club to form the Kent Scientific\nInstitute. In 1902 the name was changed to Kent Scientific Museum,\nand in 1936 to Grand Rapids Public Museum. Catalogue numbers\nwere assigned to the botanical collections during the period when\nthe institution was known as the Kent Scientific Museum.\n\nIMAGED\nUniversity of Michigan Herbarium\n1509872\n*Diapensia* (handwritten)\n\nHerbarium of N. C. Agricultural Experiment Station\nNat. Order *Diapensiaceae* (handwritten)\nCommon Name\nHabitat *Mitc. Co.* (handwritten)\nCollector *J.K. Small* (handwritten)\nDate *June 6, '98* (handwritten) No.\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013900000000000002,
+      "total_cost": 0.00216875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 278
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1\n2 3 4\n5 6\n7 8 9 10\nMICH\ncopyright reserved\nOCT 30 1981\nVERSITY OF MICHIGAN\nTHE\nARTES SCIENTIA\n1817\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n19 Sept. 2024\nHERBARIUM OF THE GRAND RAPIDS\nPUBLIC MUSEUM\nDEPOSITED IN THE HERBARIUM OF THE UNIVERSITY OF MICHIGAN, 1974\nCatalogue Number:\n45188\nIn 1867 the Grand Rapids Lyceum of Natural History merged with\nthe Grand Rapids Scientific Club to form the Kent Scientific\nInstitute. In 1902 the name was changed to Kent Scientific Museum,\nand in 1936 to Grand Rapids Public Museum. Catalogue numbers\nwere assigned to the botanical collections during the period when\nthe institution was known as the Kent Scientific Museum.\nIMAGED\nUniversity of Michigan Herbarium\n1509872\nHerbarium of N. C. Agricultural Experiment Station\nNat. Order Diapensaceae\nScientific Name Galax aphylla L.\nCommon Name\nHabitat Mts. N.C.\nCollector\nDate June 1898 No\nDiapens\nB000232\n235\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00012200000000000001,
+      "total_cost": 0.0008035000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 305
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2460,
+    "output": 653,
+    "cost_in": 0.000246,
+    "cost_out": 0.0002612
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMICH\ncopyright reserved\n\nOCT 30 1981\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 19 Sept. 2024\n\nHERBARIUM OF THE GRAND RAPIDS\nPUBLIC MUSEUM\nDEPOSITED IN THE HERBARIUM OF THE UNIVERSITY OF MICHIGAN, 1974\n\nCatalogue Number: 45188\n\nIn 1867 the Grand Rapids Lyceum of Natural History merged with\nthe Grand Rapids Scientific Club to form the Kent Scientific\nInstitute. In 1902 the name was changed to Kent Scientific Museum,\nand in 1936 to Grand Rapids Public Museum. Catalogue numbers\nwere assigned to the botanical collections during the period when\nthe institution was known as the Kent Scientific Museum.\n\nIMAGED\nUniversity of Michigan Herbarium\n1509872\n*Diapensia* (handwritten)\n\nHerbarium of N. C. Agricultural Experiment Station\nNat. Order *Diapensiaceae* (handwritten)\nCommon Name\nHabitat *Mitc. Co.* (handwritten)\nCollector *J.K. Small* (handwritten)\nDate *June 6, '98* (handwritten) No.\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1\n2 3 4\n5 6\n7 8 9 10\nMICH\ncopyright reserved\nOCT 30 1981\nVERSITY OF MICHIGAN\nTHE\nARTES SCIENTIA\n1817\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n19 Sept. 2024\nHERBARIUM OF THE GRAND RAPIDS\nPUBLIC MUSEUM\nDEPOSITED IN THE HERBARIUM OF THE UNIVERSITY OF MICHIGAN, 1974\nCatalogue Number:\n45188\nIn 1867 the Grand Rapids Lyceum of Natural History merged with\nthe Grand Rapids Scientific Club to form the Kent Scientific\nInstitute. In 1902 the name was changed to Kent Scientific Museum,\nand in 1936 to Grand Rapids Public Museum. Catalogue numbers\nwere assigned to the botanical collections during the period when\nthe institution was known as the Kent Scientific Museum.\nIMAGED\nUniversity of Michigan Herbarium\n1509872\nHerbarium of N. C. Agricultural Experiment Station\nNat. Order Diapensaceae\nScientific Name Galax aphylla L.\nCommon Name\nHabitat Mts. N.C.\nCollector\nDate June 1898 No\nDiapens\nB000232\n235\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "45188",
+    "scientificName": "Galax urceolata (poir.) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.k. small",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle l. gaynor (flas)",
+    "identifiedDate": "2024-09-19",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "June 6, '98",
+    "collectionDate": "1898-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Mitc. co.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Nc",
+    "county": "",
+    "locality": "Mts. n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Mich\ncopyright reserved\noct 30 1981\nherbarium of the grand rapids\npublic museum\ndeposited in the herbarium of the university of michigan, 1974\nin 1867 the grand rapids lyceum of natural history merged with\nthe grand rapids scientific club to form the kent scientific\ninstitute. in 1902 the name was changed to kent scientific museum,\nand in 1936 to grand rapids public museum. catalogue numbers\nwere assigned to the botanical collections during the period when\nthe institution was known as the kent scientific museum.\nimaged\nuniversity of michigan herbarium\n1509872\ndiapensia\nherbarium of n. c. agricultural experiment station\nnat. order diapensiaceae\ncommon name\ngalax urceolata\ncm\n1 2 3 4 5 6 7 8 9 10\nversity of michigan\nthe\nartes scientia\n1817\ndiapens\nb000232\n235"
+  }
+}

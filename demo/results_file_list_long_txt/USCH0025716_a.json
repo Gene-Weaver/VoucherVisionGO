@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\n80178\n\nUniversity of South Carolina Herbarium\nUSCH0025716\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nPLANTS OF SOUTH CAROLINA\nLexington County\n\n*Galax aphylla* L.\n\n*Galax aphylla* and *Isotria verticillata* common along\nsandstone outcrops along the headwaters of Hunt\nBranch. From intersection of SC 6 and Lexington Co\n65 take former 0.2 miles NW. Walk NE 0.2 miles\nfollowing stream bed cutting a deep ravine.\nMountain laurel extremely dense and covering rocks\nand side slopes. *Galax* patches mainly confined to\nlong strips between rock outcrops and stream bed.\n33.8099N & 81.204W\n\nAB Pittman 10079907  07 Oct. 1999 _(handwritten)_\nA.R. Darr\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Isotria verticillata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001295,
+      "total_cost": 0.0020737499999999996,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 259
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nPLANTS OF SOUTH CAROLINA\nLexington County\nGalax aphylla L.\nGalax aphylla and Isotria verticillata common along\nsandstoe outcrops along the headwaters of Hunt\nBranch. From intersection of SC 6and Lexington Co\n65 take former 0.2 miles NW. Walk NE 0.2 miles\nfollowing stream bed cutting a deep ravine.\nMountain laurel extremely dense and covering rocks\nand side slopes. Galax patches mainly confined to\nlong strips between rock outcrops and stream bed.\n33.8099N & 81.204W\nAB Pittman 10079907 07 Oct. 1999\nA.R. Darr\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\nGalax urceolata\nGalax aphylla\nIsotria verticillata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.36e-05,
+      "total_cost": 0.0007651000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 209
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2358,
+    "output": 594,
+    "cost_in": 0.00023579999999999999,
+    "cost_out": 0.00023760000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\n80178\n\nUniversity of South Carolina Herbarium\nUSCH0025716\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nPLANTS OF SOUTH CAROLINA\nLexington County\n\n*Galax aphylla* L.\n\n*Galax aphylla* and *Isotria verticillata* common along\nsandstone outcrops along the headwaters of Hunt\nBranch. From intersection of SC 6 and Lexington Co\n65 take former 0.2 miles NW. Walk NE 0.2 miles\nfollowing stream bed cutting a deep ravine.\nMountain laurel extremely dense and covering rocks\nand side slopes. *Galax* patches mainly confined to\nlong strips between rock outcrops and stream bed.\n33.8099N & 81.204W\n\nAB Pittman 10079907  07 Oct. 1999 _(handwritten)_\nA.R. Darr\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Isotria verticillata*\n\n\ngemini-2.0-flash OCR:\nUSCH\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nPLANTS OF SOUTH CAROLINA\nLexington County\nGalax aphylla L.\nGalax aphylla and Isotria verticillata common along\nsandstoe outcrops along the headwaters of Hunt\nBranch. From intersection of SC 6and Lexington Co\n65 take former 0.2 miles NW. Walk NE 0.2 miles\nfollowing stream bed cutting a deep ravine.\nMountain laurel extremely dense and covering rocks\nand side slopes. Galax patches mainly confined to\nlong strips between rock outcrops and stream bed.\n33.8099N & 81.204W\nAB Pittman 10079907 07 Oct. 1999\nA.R. Darr\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n\nGalax urceolata\nGalax aphylla\nIsotria verticillata\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025716",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "AB Pittman, A.R. Darr",
+    "collectorNumber": "10079907",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "07 Oct. 1999",
+    "collectionDate": "1999-10-07",
+    "collectionDateEnd": "",
+    "habitat": "Galax aphylla and Isotria verticillata common along sandstone outcrops along the headwaters of Hunt Branch. Mountain laurel extremely dense and covering rocks and side slopes. Galax patches mainly confined to long strips between rock outcrops and stream bed.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Lexington County",
+    "locality": "From intersection of SC 6 and Lexington Co 65 take former 0.2 miles NW. Walk NE 0.2 miles following stream bed cutting a deep ravine.",
+    "verbatimCoordinates": "33.8099N & 81.204W",
+    "decimalLatitude": "33.8099",
+    "decimalLongitude": "-81.204",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\ncopyright reserved\nUniversity of South Carolina\n80178\nUniversity of South Carolina Herbarium\nPLANTS OF SOUTH CAROLINA\nGalax aphylla L.\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\nGalax urceolata\nGalax aphylla\nIsotria verticillata"
+  }
+}

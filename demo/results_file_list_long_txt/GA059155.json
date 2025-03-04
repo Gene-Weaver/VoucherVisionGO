@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "114271\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (Handwritten)\n\n= *G. urceolata* (Poir.) Brummitt\n\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nAbundant, under shade of Mt. Laurel.\nRocky soil of Pine Mt. ca 3.9 mi W of\nManchester and ca 2.8 mi S of Warm\nSprings at Manchester Water Supply Lake.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Fred Galle\nSamuel B. Jones        22128        12 June 1972\n\nIMAGED 2013\n\n\n*G. urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000895,
+      "total_cost": 0.0016737499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 179
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA059155\n114271\nUNIV. OF GEORGIA\nHERBARIUM\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nG. urceolata (Poir.) Brummitt\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nAbundant, under shade of Mt. Laurel.\nRocky soil of Pine Mt. ca 3.9 mi W of\nManchester and ca 2.8 mi S of Warm\nSprings at Manchester Water Supply Lake.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Fred Galle\nSamuel B. Jones\n22128\n12 June 1972\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\n---\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.88e-05,
+      "total_cost": 0.0007603,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 197
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2273,
+    "output": 507,
+    "cost_in": 0.0002273,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n114271\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (Handwritten)\n\n= *G. urceolata* (Poir.) Brummitt\n\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\nAbundant, under shade of Mt. Laurel.\nRocky soil of Pine Mt. ca 3.9 mi W of\nManchester and ca 2.8 mi S of Warm\nSprings at Manchester Water Supply Lake.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Fred Galle\nSamuel B. Jones        22128        12 June 1972\n\nIMAGED 2013\n\n\n*G. urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF GEORGIA\nGA059155\n114271\nUNIV. OF GEORGIA\nHERBARIUM\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nG. urceolata (Poir.) Brummitt\nHerbarium of The University of Georgia\nMERIWETHER COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nAbundant, under shade of Mt. Laurel.\nRocky soil of Pine Mt. ca 3.9 mi W of\nManchester and ca 2.8 mi S of Warm\nSprings at Manchester Water Supply Lake.\nCOLLECTED FOR PINE MOUNTAIN FLORA\nwith Fred Galle\nSamuel B. Jones\n22128\n12 June 1972\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nIMAGED 2013\n---\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "114271",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Samuel B. Jones, Fred Galle",
+    "collectorNumber": "22128",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12 June 1972",
+    "collectionDate": "1972-06-12",
+    "collectionDateEnd": "",
+    "habitat": "Abundant, under shade of mt. laurel. rocky soil of pine mt.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Meriwether county",
+    "locality": "Ca 3.9 mi w of manchester and ca 2.8 mi s of warm springs at manchester water supply lake.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\nspecimen examined for\ngeorgia atlas project\n9 november 2005\ncollected for pine mountain flora\nimaged 2013\ng. urceolata (poir.) brummitt\ntiffen\u00ae color control patches\nthe tiffen company, 2007\n---"
+  }
+}

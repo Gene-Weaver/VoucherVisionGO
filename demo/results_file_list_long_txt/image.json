@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HARVARD UNIVERSITY\nHERBARIA\n\nGalax urceolata (Poiret) Brummitt\nSee: Taxon. 21: 303-317. 1972.\n\nD. E. Boufford 15 January 2011\nHarvard University Herbaria\n\nNEW ENGLAND\nBOTANICAL CLUB\n\nEssex Co\n\n*Galax aphylla* L.\n\nTwo clumps in oak woods,\nSwampscott, Mass.\n\nMrs. M. E. Ward, Dec. 5, 1918\n\n\nHandwritten text: *Essex Co*, *Galax aphylla L.*, *Two clumps in oak woods, Swampscott, Mass.*, *Mrs. M.E. Ward, Dec. 5, 1918*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008900000000000001,
+      "total_cost": 0.0016687499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 178
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poiret) Brummitt\nSee: Taxon. 21: 303-317. 1972.\nD. E. Boufford 15 January 2011\nHarvard University Herbaria\nGalax aphylla L.\nTwo clumps in oak woods,\nSwampscott, Mass.\nMrs. M. E. Ward, Dec. 5, 1918\n--- Handwritten text ---\nEssex Co\n--- End handwritten text ---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.7600000000000005e-05,
+      "total_cost": 0.0007291000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 119
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 452,
+    "cost_in": 0.000218,
+    "cost_out": 0.0001808
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHARVARD UNIVERSITY\nHERBARIA\n\nGalax urceolata (Poiret) Brummitt\nSee: Taxon. 21: 303-317. 1972.\n\nD. E. Boufford 15 January 2011\nHarvard University Herbaria\n\nNEW ENGLAND\nBOTANICAL CLUB\n\nEssex Co\n\n*Galax aphylla* L.\n\nTwo clumps in oak woods,\nSwampscott, Mass.\n\nMrs. M. E. Ward, Dec. 5, 1918\n\n\nHandwritten text: *Essex Co*, *Galax aphylla L.*, *Two clumps in oak woods, Swampscott, Mass.*, *Mrs. M.E. Ward, Dec. 5, 1918*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poiret) Brummitt\nSee: Taxon. 21: 303-317. 1972.\nD. E. Boufford 15 January 2011\nHarvard University Herbaria\nGalax aphylla L.\nTwo clumps in oak woods,\nSwampscott, Mass.\nMrs. M. E. Ward, Dec. 5, 1918\n--- Handwritten text ---\nEssex Co\n--- End handwritten text ---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Mrs. M. e. ward",
+    "collectorNumber": "",
+    "identifiedBy": "D. e. boufford",
+    "identifiedDate": "2011-01-15",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "Dec. 5, 1918",
+    "collectionDate": "1918-12-05",
+    "collectionDateEnd": "",
+    "habitat": "Oak woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Two clumps",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Mass",
+    "county": "Essex co",
+    "locality": "Swampscott",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "See taxon. 21 303-317. 1972.\nharvard university\nherbaria\nnew england\nbotanical club\nharvard university herbaria"
+  }
+}

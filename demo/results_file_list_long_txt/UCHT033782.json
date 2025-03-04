@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "BIOLOGY DEPARTMENT HERBARIUM\nMONTPELIER MISSIONARY COLLEGE\n6309\n\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033782\n\nUCHT\n\nFLORA OF North Carolina (Graham Co.)\n\nFamily: Diapensiaceae\nScientific Name: *Galax aphylla* (L.)\nCommon Name: Galax\nLocality: Joyce Kilmer Nat. Forest\nHabitat: Rocky woodlands, mountain slope\nCollector: *K. Thompson* Date: 9-24-82\n          *B. Coston*\n\n\nHandwritten text is marked with asterisks (*).\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006749999999999999,
+      "total_cost": 0.00145375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 135
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "BIOLOGY DEPARTMENT HERBARIUM\n6309\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033782\nUCHT\nFLORA OF North Carolina (Graham Co.)\nFamily Diapensiaceae\nScientific Name Galax aphylla (L)\nCommon Name Galax\nLocality Joyce Kilmer Nat, Forest\nHabitat Rocky woodlands, mountain slope\nCollector K. Thompson\nDate 9-24-82\nB. Coston\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.08e-05,
+      "total_cost": 0.0007222999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 102
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2138,
+    "output": 437,
+    "cost_in": 0.00021380000000000002,
+    "cost_out": 0.00017480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBIOLOGY DEPARTMENT HERBARIUM\nMONTPELIER MISSIONARY COLLEGE\n6309\n\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033782\n\nUCHT\n\nFLORA OF North Carolina (Graham Co.)\n\nFamily: Diapensiaceae\nScientific Name: *Galax aphylla* (L.)\nCommon Name: Galax\nLocality: Joyce Kilmer Nat. Forest\nHabitat: Rocky woodlands, mountain slope\nCollector: *K. Thompson* Date: 9-24-82\n          *B. Coston*\n\n\nHandwritten text is marked with asterisks (*).\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nBIOLOGY DEPARTMENT HERBARIUM\n6309\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033782\nUCHT\nFLORA OF North Carolina (Graham Co.)\nFamily Diapensiaceae\nScientific Name Galax aphylla (L)\nCommon Name Galax\nLocality Joyce Kilmer Nat, Forest\nHabitat Rocky woodlands, mountain slope\nCollector K. Thompson\nDate 9-24-82\nB. Coston\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT033782",
+    "scientificName": "Galax aphylla",
+    "genus": "Diapensiaceae indet",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(L.)",
+    "collectedBy": "K. Thompson, B. Coston",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9-24-82",
+    "collectionDate": "1982-09-24",
+    "collectionDateEnd": "",
+    "habitat": "Rocky woodlands, mountain slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Graham Co.",
+    "locality": "Joyce Kilmer Nat. Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "BIOLOGY DEPARTMENT HERBARIUM\n6309\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT\nFLORA OF North Carolina (Graham Co.)\nCommon Name Galax"
+  }
+}

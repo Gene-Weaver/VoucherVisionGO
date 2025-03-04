@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\n\nURV - University of Richmond Herbarium\nURV 008502\nUR\nUNIVERSITY OF RICHMOND\nHERBARIUM\n\n#53 (handwritten)\nUNIVERSITY OF VIRGINIA\nMOUNTAIN LAKE BIOLOGICAL STATION\nHERBARIUM F Primulaceae\nGalax aphylla L.\nGalax (handwritten)\nGILES Co. (handwritten)\nE. of Bob's meadow (handwritten)\nEdge of woods (handwritten)\nS.M. Dahlstedt (handwritten)\n6/23/81 (handwritten)\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.0015887499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "#53\nGalax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\nURV University of Richmond Herbarium\nURV 008502\nUR\nUNIVERSITY OF RICHMOND\nHERBARIUM\nUNIVERSITY OF VIRGINIA\nMOUNTAIN LAKE BIOLOGICAL STATION\nHERBARIUM F Primulaceae\nGalax aphylla L.\nGalax\nGILES Co.\nE, of Bob's meadow\nEdge of woods\nSM. Dahlstedt\n6/23/81\n0\ncm\nRICHMOND\n1\n2\n3\n4\n5 6\n78\n9 10\nURV\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.28e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2229,
+    "output": 488,
+    "cost_in": 0.00022290000000000002,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\n\nURV - University of Richmond Herbarium\nURV 008502\nUR\nUNIVERSITY OF RICHMOND\nHERBARIUM\n\n#53 (handwritten)\nUNIVERSITY OF VIRGINIA\nMOUNTAIN LAKE BIOLOGICAL STATION\nHERBARIUM F Primulaceae\nGalax aphylla L.\nGalax (handwritten)\nGILES Co. (handwritten)\nE. of Bob's meadow (handwritten)\nEdge of woods (handwritten)\nS.M. Dahlstedt (handwritten)\n6/23/81 (handwritten)\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n#53\nGalax urceolata (Poiret) Brummitt\nDet.: W. John Hayden, June 1983\nURV University of Richmond Herbarium\nURV 008502\nUR\nUNIVERSITY OF RICHMOND\nHERBARIUM\nUNIVERSITY OF VIRGINIA\nMOUNTAIN LAKE BIOLOGICAL STATION\nHERBARIUM F Primulaceae\nGalax aphylla L.\nGalax\nGILES Co.\nE, of Bob's meadow\nEdge of woods\nSM. Dahlstedt\n6/23/81\n0\ncm\nRICHMOND\n1\n2\n3\n4\n5 6\n78\n9 10\nURV\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "008502",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "S.m. dahlstedt",
+    "collectorNumber": "53",
+    "identifiedBy": "W. John Hayden",
+    "identifiedDate": "1983-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "6/23/81",
+    "collectionDate": "1981-06-23",
+    "collectionDateEnd": "",
+    "habitat": "Edge of woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles co.",
+    "locality": "E. of bob's meadow",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Urv - university of richmond herbarium\nurv\nuniversity of richmond\nherbarium\nuniversity of virginia\nmountain lake biological station\nherbarium f primulaceae\ngalax aphylla l.\ngalax\nrichmond\ncopyright reserved"
+  }
+}

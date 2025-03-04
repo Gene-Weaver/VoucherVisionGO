@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n104525\nHERBARIUM\n\nExchange Specimen From\n\nHerbarium of DePauw University\nGreencastle, Indiana\n\n*Galax aphylla* L.\n\nSouth Carolina: Tamassee, near Tamassee\nD.A.R. School.\n\nOct. 1, 1932.\n\nColl. Tamassee School pupil       No.\n\nUniversity of Louisiana at Monroe\nNLUO134083\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000535,
+      "total_cost": 0.00131375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 107
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n104525\nHERBARIUM\nExchange Specimen From\n\nHerbarium of DePauw University\nGreencastle, Indiana\nGalax aphylla L.\nSouth Carolina: Tamassee, near Tamassee\nD.A.R. School.\nOct. 1, 1932.\nColl. Tamassee School pupil\nNo.\nUniversity of Louisiana at Monroe\nNLUO134083\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.1200000000000005e-05,
+      "total_cost": 0.0007227,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 103
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2088,
+    "output": 441,
+    "cost_in": 0.0002088,
+    "cost_out": 0.0001764
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n104525\nHERBARIUM\n\nExchange Specimen From\n\nHerbarium of DePauw University\nGreencastle, Indiana\n\n*Galax aphylla* L.\n\nSouth Carolina: Tamassee, near Tamassee\nD.A.R. School.\n\nOct. 1, 1932.\n\nColl. Tamassee School pupil       No.\n\nUniversity of Louisiana at Monroe\nNLUO134083\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n104525\nHERBARIUM\nExchange Specimen From\n\nHerbarium of DePauw University\nGreencastle, Indiana\nGalax aphylla L.\nSouth Carolina: Tamassee, near Tamassee\nD.A.R. School.\nOct. 1, 1932.\nColl. Tamassee School pupil\nNo.\nUniversity of Louisiana at Monroe\nNLUO134083\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "104525",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Tamassee School pupil",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Oct. 1, 1932.",
+    "collectionDate": "1932-10-01",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "",
+    "locality": "Tamassee, near tamassee d.a.r. school.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\nHerbarium\nExchange specimen from\nHerbarium of depauw university\nGreencastle, indiana\nUniversity of louisiana at monroe\nNluo134083\n"
+  }
+}

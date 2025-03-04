@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n\n18 July 2009 (handwritten)\n234211\n\nPLANTS OF GEORGIA\nVascular Flora of Grassy Mountain\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae                                                                   galax\n\nMURRAY Co.: Along Mill Cr. Rd., ~2.3 mi. from end of\npavement. 34.878N, 84.711W, elev. 1040ft. Dry oak-hickory slope\nforest with *Rhododendron minus*, *Kalmia latifolia*, *Chimaphila\nmaculata*, *Mitchella repens*. Common.\n\nColl. Jenny A. Moore 188\nWith: E. Kentner                                                               20 May 2000\n\nHerbarium of the University of Georgia [GA]\nAthens, Georgia, USA\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Rhododendron minus*\n*Kalmia latifolia*\n*Chimaphila maculata*\n*Mitchella repens*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00126,
+      "total_cost": 0.0020387499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 252
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\nUniversity\nof Georgia\nHerbarium\n234211\nPLANTS OF GEORGIA\nVascular Flora of Grassy Mountain\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\ngalax\nMURRAY CO.: Along Mill Cr. Rd., ~2.3 mi. from end of\npavement. 34.878N, 84.711W, elev. 1040ft. Dry oak-hickory slope\nforest with Rhododendrom minus, Kalmia latifolia, Chimophila\nmaculata, Mitchella repens. Common.\nColl. Jenny A. Moore 188\nWith: E. Kentner\n20 May 2000\nHerbarium of the University of Georgia [GA]\nAthens, Georgia, USA\nIMAGED 2013\nHandwritten text:\n18 July 2009\n6277\n\n\nGalax urceolata\nRhododendron minus\nKalmia latifolia\nChimophila maculata\nMitchella repens\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.28e-05,
+      "total_cost": 0.0007743000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 232
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2367,
+    "output": 579,
+    "cost_in": 0.00023670000000000003,
+    "cost_out": 0.0002316
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n\n18 July 2009 (handwritten)\n234211\n\nPLANTS OF GEORGIA\nVascular Flora of Grassy Mountain\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae                                                                   galax\n\nMURRAY Co.: Along Mill Cr. Rd., ~2.3 mi. from end of\npavement. 34.878N, 84.711W, elev. 1040ft. Dry oak-hickory slope\nforest with *Rhododendron minus*, *Kalmia latifolia*, *Chimaphila\nmaculata*, *Mitchella repens*. Common.\n\nColl. Jenny A. Moore 188\nWith: E. Kentner                                                               20 May 2000\n\nHerbarium of the University of Georgia [GA]\nAthens, Georgia, USA\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Rhododendron minus*\n*Kalmia latifolia*\n*Chimaphila maculata*\n*Mitchella repens*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\nUniversity\nof Georgia\nHerbarium\n234211\nPLANTS OF GEORGIA\nVascular Flora of Grassy Mountain\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\ngalax\nMURRAY CO.: Along Mill Cr. Rd., ~2.3 mi. from end of\npavement. 34.878N, 84.711W, elev. 1040ft. Dry oak-hickory slope\nforest with Rhododendrom minus, Kalmia latifolia, Chimophila\nmaculata, Mitchella repens. Common.\nColl. Jenny A. Moore 188\nWith: E. Kentner\n20 May 2000\nHerbarium of the University of Georgia [GA]\nAthens, Georgia, USA\nIMAGED 2013\nHandwritten text:\n18 July 2009\n6277\n\n\nGalax urceolata\nRhododendron minus\nKalmia latifolia\nChimophila maculata\nMitchella repens\n\n",
+  "formatted_json": {
+    "catalogNumber": "234211",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Jenny A. Moore, E. Kentner",
+    "collectorNumber": "188",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 May 2000",
+    "collectionDate": "2000-05-20",
+    "collectionDateEnd": "",
+    "habitat": "Dry oak-hickory slope forest with Rhododendron minus, Kalmia latifolia, Chimaphila maculata, Mitchella repens. Common.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "Georgia",
+    "county": "Murray",
+    "locality": "Along Mill Cr. Rd., ~2.3 mi. from end of pavement.",
+    "verbatimCoordinates": "34.878N, 84.711W",
+    "decimalLatitude": "34.878",
+    "decimalLongitude": "-84.711",
+    "minimumElevationInMeters": "317",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Specimen Examined for\nGeorgia Atlas Project\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\nPLANTS OF GEORGIA\nVascular Flora of Grassy Mountain\nHerbarium of the University of Georgia [GA]\nAthens, Georgia, USA\nIMAGED 2013\nHandwritten text\n18 July 2009\n6277\nGalax urceolata\nRhododendron minus\nKalmia latifolia\nChimophila maculata\nMitchella repens"
+  }
+}

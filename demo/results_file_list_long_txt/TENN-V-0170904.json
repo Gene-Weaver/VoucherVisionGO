@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170904\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 445\u03bc\u00b2\nGuy L. Nesom, 1975\n6277\n\nFLORA TENNESSIENSIS\nC.Laing A.J.Sharp J.Wells\nCOLLECTOR P.Hyppio\nMonroe  COUNTY\nNo. 19041\nMarch 17      55\n*Galax aphylla* L.\nNear Sixmile Creek\n\n**(Handwritten Text: P.Hyppio, Near Sixmile Creek)**\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009150000000000001,
+      "total_cost": 0.0016937500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 183
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170904\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\n6277\nFLORA TENNESSIENSIS\nC.Laing A.J.Sharp J. Wells\nP. Hyppio\nMonroe\nNo. 19041\nMarch 17\nGalax aphylla L.\nNear Sixmile Creek\n\nHandwritten text:\nNo.\nV\n1955\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 505,
+    "cost_in": 0.0002212,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170904\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 445\u03bc\u00b2\nGuy L. Nesom, 1975\n6277\n\nFLORA TENNESSIENSIS\nC.Laing A.J.Sharp J.Wells\nCOLLECTOR P.Hyppio\nMonroe  COUNTY\nNo. 19041\nMarch 17      55\n*Galax aphylla* L.\nNear Sixmile Creek\n\n**(Handwritten Text: P.Hyppio, Near Sixmile Creek)**\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170904\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\n6277\nFLORA TENNESSIENSIS\nC.Laing A.J.Sharp J. Wells\nP. Hyppio\nMonroe\nNo. 19041\nMarch 17\nGalax aphylla L.\nNear Sixmile Creek\n\nHandwritten text:\nNo.\nV\n1955\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170904",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C.laing, A.j.sharp, J. wells, P. hyppio",
+    "collectorNumber": "19041",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "March 17      55",
+    "collectionDate": "1955-03-17",
+    "collectionDateEnd": "",
+    "habitat": "Near sixmile creek",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area\nvolume of 445\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Monroe",
+    "locality": "Near sixmile creek",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of tennessee knoxville\nHerbarium of the university of north carolina\nFlora tennesseensis\nHandwritten text\nGalax urceolata\nGalax aphylla\nGalax aphylla l."
+  }
+}

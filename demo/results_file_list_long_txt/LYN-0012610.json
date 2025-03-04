@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012610\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\n\nCraig\n*Galax aphylla* L.                               County\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 31.\nForest Svce. Rd. 604.1. Abundant.\nWoods, stream banks.\n\ncoll. & det. L. J. Uttal 6240\n                                                  7 June 1968\nDate\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 48/\u03bc\u00b2\nGuy L. Nesom, 1975\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00097,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012610\nLYNCHBURG\n10684\nHERBARIUM\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nCraig\nGalax aphylla L.\nCounty\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 31\nForest Svce. Rd. 604.1. Abundant.\nWoods, stream banks.\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of48/ \u03bc\u00b2\nGuy L. Nesom, 1975\nLYN\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nLynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.24e-05,
+      "total_cost": 0.0007739000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 231
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2325,
+    "output": 528,
+    "cost_in": 0.00023249999999999999,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012610\n\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\n\nCraig\n*Galax aphylla* L.                               County\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 31.\nForest Svce. Rd. 604.1. Abundant.\nWoods, stream banks.\n\ncoll. & det. L. J. Uttal 6240\n                                                  7 June 1968\nDate\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 48/\u03bc\u00b2\nGuy L. Nesom, 1975\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012610\nLYNCHBURG\n10684\nHERBARIUM\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nCraig\nGalax aphylla L.\nCounty\nE. slope of Potts Mtn. 0.4 mi. N. of Rt. 31\nForest Svce. Rd. 604.1. Abundant.\nWoods, stream banks.\ncoll. & det. L. J. Uttal 6240\nDate 7 June 1968\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of48/ \u03bc\u00b2\nGuy L. Nesom, 1975\nLYN\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nLynchburg\nCollege\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012610",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "L. J. Uttal",
+    "collectorNumber": "6240",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "7 June 1968",
+    "collectionDate": "1968-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Woods, stream banks.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 48/\u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Craig",
+    "locality": "E. slope of Potts Mtn. 0.4 mi. N. of Rt. 31. Forest Svce. Rd. 604.1.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nFLORA OF VIRGINIA\nHerbarium of the Virginia Polytechnic Institute\nBiology Department\nAbundant.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nLynchburg College\ncopyright reserved"
+  }
+}

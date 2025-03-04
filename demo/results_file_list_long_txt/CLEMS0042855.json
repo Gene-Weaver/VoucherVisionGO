@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042855\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nGreenville Co.\n\nCommon in periphery of south facing cataract fen forest in cation rich main cataract fen seepage stream directly above Oil Camp Creek, located in Mountain Bridge Wilderness Area, east of Caesars Head State Park headquarters. USGS Cleveland 7.5' quad. Associated with *Liriodendron tulipifera*, *Rhododendron arborescens*, *Vaccinium arboreum*, *Parnassia grandifolia*, *Trautvetteria caroliniensis* var. *caroliniensis*, *Carex deflexa*, *Oxypolis rigidior*, etc.\n\nDavid T. Nestor 51                      22 May 2000\n\n\n*Galax urceolata*\n*Liriodendron tulipifera*\n*Rhododendron arborescens*\n*Vaccinium arboreum*\n*Parnassia grandifolia*\n*Trautvetteria caroliniensis* var. *caroliniensis*\n*Carex deflexa*\n*Oxypolis rigidior*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013000000000000002,
+      "total_cost": 0.00207875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 260
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042855\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nGreenville Co.\nCommon in periphery of south facing cataract fen forest in cation\nrich main cataract fen seepage stream directly above Oil Camp\nCreek, located in Mountain Bridge Wilderness Area, east of\nCaesars Head State Park headquarters. USGS Cleveland 7.5' quad.\nAssociated with Liriodendron tulipifera, Rhododendron\narborescens, Vaccinium arboreum, Parnassia grandifolia,\nTrautvetteria caroliniensis var. caroliniensis, Carex deflexa,\nOxypolis rigidior, etc.\nDavid T. Nestor 51\n22 May 2000\n\n\nGalax urceolata\nLiriodendron tulipifera\nRhododendron arborescens\nVaccinium arboreum\nParnassia grandifolia\nTrautvetteria caroliniensis\nCarex deflexa\nOxypolis rigidior\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.480000000000001e-05,
+      "total_cost": 0.0007763,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 237
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2450,
+    "output": 680,
+    "cost_in": 0.000245,
+    "cost_out": 0.00027200000000000005
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042855\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nGreenville Co.\n\nCommon in periphery of south facing cataract fen forest in cation rich main cataract fen seepage stream directly above Oil Camp Creek, located in Mountain Bridge Wilderness Area, east of Caesars Head State Park headquarters. USGS Cleveland 7.5' quad. Associated with *Liriodendron tulipifera*, *Rhododendron arborescens*, *Vaccinium arboreum*, *Parnassia grandifolia*, *Trautvetteria caroliniensis* var. *caroliniensis*, *Carex deflexa*, *Oxypolis rigidior*, etc.\n\nDavid T. Nestor 51                      22 May 2000\n\n\n*Galax urceolata*\n*Liriodendron tulipifera*\n*Rhododendron arborescens*\n*Vaccinium arboreum*\n*Parnassia grandifolia*\n*Trautvetteria caroliniensis* var. *caroliniensis*\n*Carex deflexa*\n*Oxypolis rigidior*\n\n\ngemini-2.0-flash OCR:\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042855\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nGreenville Co.\nCommon in periphery of south facing cataract fen forest in cation\nrich main cataract fen seepage stream directly above Oil Camp\nCreek, located in Mountain Bridge Wilderness Area, east of\nCaesars Head State Park headquarters. USGS Cleveland 7.5' quad.\nAssociated with Liriodendron tulipifera, Rhododendron\narborescens, Vaccinium arboreum, Parnassia grandifolia,\nTrautvetteria caroliniensis var. caroliniensis, Carex deflexa,\nOxypolis rigidior, etc.\nDavid T. Nestor 51\n22 May 2000\n\n\nGalax urceolata\nLiriodendron tulipifera\nRhododendron arborescens\nVaccinium arboreum\nParnassia grandifolia\nTrautvetteria caroliniensis\nCarex deflexa\nOxypolis rigidior\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042855",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "David T. Nestor",
+    "collectorNumber": "51",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 May 2000",
+    "collectionDate": "2000-05-22",
+    "collectionDateEnd": "",
+    "habitat": "Common in periphery of south facing cataract fen forest in cation rich main cataract fen seepage stream directly above Oil Camp Creek, located in Mountain Bridge Wilderness Area, east of Caesars Head State Park headquarters. Usgs Cleveland 7.5' quad. Associated with liriodendron tulipifera, rhododendron arborescens, vaccinium arboreum, parnassia grandifolia, trautvetteria caroliniensis var. caroliniensis, carex deflexa, oxypolis rigidior, etc.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "South Carolina",
+    "county": "Greenville Co.",
+    "locality": "Located in Mountain Bridge Wilderness Area, east of Caesars Head State Park headquarters. Usgs Cleveland 7.5' quad.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "CLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata\nLiriodendron tulipifera\nRhododendron arborescens\nVaccinium arboreum\nParnassia grandifolia\nTrautvetteria caroliniensis var. caroliniensis\nCarex deflexa\nOxypolis rigidior"
+  }
+}

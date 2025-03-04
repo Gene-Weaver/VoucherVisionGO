@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nNC\n22966\n\n*Galax urceolata*\n(Poir) Brummitt\n*Galax aphylla* L.\n\nN.W. corner Mecklenburg Co., N.C.\nV-29-59  T. Daggy\nBluff of Catawba R. Only one\nsmall colony found.\n\n(1083)\n4870\n\nHandwritten text: *Galax urceolata*, (Poir) Brummitt, Diapensiaceae 19, T. Daggy.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nN.C.\n22966\nCAROLINA UNIVE\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010410\nGalax urceolata\nGalax aphylla L.\nN.W. corner Mecklenburg Co., N.C.\nV-29-59 T. Daggy\nBluff of Catawba R. Only one\nsmall colony found.\n(1083)\n4870\nINCHES\nLIVING\nCULTURES\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nMETRIC 11\n21\n31\n19\n18\n16\nolt\nPRESERVED\nMATERIAL\n11\n113 12\n14\n115\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.6e-05,
+      "total_cost": 0.0007575000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 190
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2187,
+    "output": 553,
+    "cost_in": 0.00021870000000000003,
+    "cost_out": 0.0002212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nNC\n22966\n\n*Galax urceolata*\n(Poir) Brummitt\n*Galax aphylla* L.\n\nN.W. corner Mecklenburg Co., N.C.\nV-29-59  T. Daggy\nBluff of Catawba R. Only one\nsmall colony found.\n\n(1083)\n4870\n\nHandwritten text: *Galax urceolata*, (Poir) Brummitt, Diapensiaceae 19, T. Daggy.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nN.C.\n22966\nCAROLINA UNIVE\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010410\nGalax urceolata\nGalax aphylla L.\nN.W. corner Mecklenburg Co., N.C.\nV-29-59 T. Daggy\nBluff of Catawba R. Only one\nsmall colony found.\n(1083)\n4870\nINCHES\nLIVING\nCULTURES\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nMETRIC 11\n21\n31\n19\n18\n16\nolt\nPRESERVED\nMATERIAL\n11\n113 12\n14\n115\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "22966",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir) Brummitt",
+    "collectedBy": "T. Daggy",
+    "collectorNumber": "1083",
+    "identifiedBy": "T. Daggy",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "V-29-59",
+    "collectionDate": "1959-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Bluff of catawba r. only one small colony found.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Nc",
+    "county": "Mecklenburg co.",
+    "locality": "N.w. corner mecklenburg co., n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "galax aphylla l.\nhandwritten text galax urceolata, (poir) brummitt, diapensiaceae 19, t. daggy.\ngalax aphylla\nwesterN carolina u. herbarium\nwcuh0010410\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\n4870\ninches\nliving\ncultures\nmetric 11\n21\n31\n19\n18\n16\nolt\npreserved\nmaterial\n11\n113 12\n14\n115"
+  }
+}

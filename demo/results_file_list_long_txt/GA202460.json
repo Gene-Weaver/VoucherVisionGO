@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GA ATLAS PROJECT:\n= *Galax urceolata* (Poiret) Brummitt\nGA Herbarium staff July 2016\n\nUNIV. of GEORGIA\nHERBARIUM\n175117\n\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2016\n\n*G. urceolata* (handwritten)\n235 (handwritten)\n\nHARALSON COUNTY, GEORGIA\n*Galax aphylla* L.\n\nDevil's Kitchen. Along S bank of Beach\nCreek at bottom of trail. Very steep,\nrocky bluff. Glabrous herb; leaves\nevergreen. Petals 5, white. Locally\nabundant.\n\nDebora S. Lynes 89 26 April 1986\nThe University of Georgia Athens, GA, U.S.A.\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.00178375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GA ATLAS PROJECT:\nGalax urceolata (Poiret) Brummitt\nGA Herbarium staff\nJuly 2016\nUNIV. OF GEORGIA\nHERBARIUM\nG. urceolata\nHARALSON COUNTY, GEORGIA\nGalax aphylla L.\nDevil's Kitchen. Along S bank of Beach\nCreek at bottom of trail. Very steep,\nrocky bluff. Glabrous herb; leaves\nevergreen. Petals 5, white. Locally\nabundant.\nUNIVERSITY OF GEORGIA\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2016\n175117\nDebora S. Lynes 89\n26 April 1986\nGA202460\nThe University of Georgia\nAthens, GA, U.S.A.\nInches\n1\n2\n3\n6\n7\n8\n5\n6\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nImaged 2016\n235\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001108,
+      "total_cost": 0.0007923000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 277
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2358,
+    "output": 516,
+    "cost_in": 0.00023579999999999999,
+    "cost_out": 0.0002064
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGA ATLAS PROJECT:\n= *Galax urceolata* (Poiret) Brummitt\nGA Herbarium staff July 2016\n\nUNIV. of GEORGIA\nHERBARIUM\n175117\n\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2016\n\n*G. urceolata* (handwritten)\n235 (handwritten)\n\nHARALSON COUNTY, GEORGIA\n*Galax aphylla* L.\n\nDevil's Kitchen. Along S bank of Beach\nCreek at bottom of trail. Very steep,\nrocky bluff. Glabrous herb; leaves\nevergreen. Petals 5, white. Locally\nabundant.\n\nDebora S. Lynes 89 26 April 1986\nThe University of Georgia Athens, GA, U.S.A.\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGA ATLAS PROJECT:\nGalax urceolata (Poiret) Brummitt\nGA Herbarium staff\nJuly 2016\nUNIV. OF GEORGIA\nHERBARIUM\nG. urceolata\nHARALSON COUNTY, GEORGIA\nGalax aphylla L.\nDevil's Kitchen. Along S bank of Beach\nCreek at bottom of trail. Very steep,\nrocky bluff. Glabrous herb; leaves\nevergreen. Petals 5, white. Locally\nabundant.\nUNIVERSITY OF GEORGIA\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2016\n175117\nDebora S. Lynes 89\n26 April 1986\nGA202460\nThe University of Georgia\nAthens, GA, U.S.A.\nInches\n1\n2\n3\n6\n7\n8\n5\n6\n8\n9\n10\n11\n12\n13\n14\n15 16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nImaged 2016\n235\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "175117",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Debora S. Lynes",
+    "collectorNumber": "89",
+    "identifiedBy": "Ga herbarium staff",
+    "identifiedDate": "2016-07-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "26 April 1986",
+    "collectionDate": "1986-04-26",
+    "collectionDateEnd": "",
+    "habitat": "Along s bank of beach creek at bottom of trail. Very steep, rocky bluff.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Glabrous herb; leaves evergreen. Petals 5, white. Locally abundant.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.s.a.",
+    "stateProvince": "Georgia",
+    "county": "Haralson county",
+    "locality": "Devil's kitchen.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ga atlas project\nspecimen examined for\ngeorgia atlas project\n18 july 2016\ng. urceolata\ngalax aphylla l.\nthe university of georgia\nathens, ga, u.s.a.\nimaged 2016\n235"
+  }
+}

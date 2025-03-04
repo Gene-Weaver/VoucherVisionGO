@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WVA Morgantown\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010673\n118188 *(handwritten)*\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nHERBARIUM\nOF THE\nVIRGINIA POLYTECHNIC INSTITUTE\nBIOLOGY DEPARTMENT\n\nFlora of: Virginia\nCounty: Craig\n*Galax aphylla* L.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 435 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nUnder mixed deciduous woods of *Quercus*,\n*Liriodendron*, and *Oxydendron*; along Craig\nCo. Rt. 658 ca. 2.4 mi. northeast of\nintersection with Rt. 42.\nColl. K. A. Nicely No. 680 Date July 11, 1964\nDet. K. A. Nicely\nCraig *(handwritten)*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00122,
+      "total_cost": 0.00199875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 244
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WVA Morgantown\nMETRIC SYSTEM\ncopyright reserved\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010673\nWEST VIROINMA\nHERBARIUM\nUNIVERSITY\nHERBARIUM\nOF THE\nVIRGINIA POLYTECHNIC INSTITUTE\nBIOLOGY DEPARTMENT\nFlora of: Virginia\nCounty: Craig\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of 435 \u03bc2\nGuy L. Nesom, 1975\nUnder mixed deciduous woods of Quercus,\nLiriodendron, and Oxydendron; along Craig\nCo. Rt. 658 ca. 2.4 mi. northeast of\nintersection with Rt. 42.\nColl. K. A. Nicely No. 680\nDet. K. A. Nicely\nDate July 11, 1964\n---\n\nGalax aphylla\nGalax urceolata\nQuercus\nLiriodendron\nOxydendron\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.6e-05,
+      "total_cost": 0.0007775,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 240
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2389,
+    "output": 605,
+    "cost_in": 0.0002389,
+    "cost_out": 0.000242
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWVA Morgantown\ncopyright reserved\n\nWest Virginia University (WVA)\nWVA-V-0010673\n118188 *(handwritten)*\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\n\nHERBARIUM\nOF THE\nVIRGINIA POLYTECHNIC INSTITUTE\nBIOLOGY DEPARTMENT\n\nFlora of: Virginia\nCounty: Craig\n*Galax aphylla* L.\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 435 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nUnder mixed deciduous woods of *Quercus*,\n*Liriodendron*, and *Oxydendron*; along Craig\nCo. Rt. 658 ca. 2.4 mi. northeast of\nintersection with Rt. 42.\nColl. K. A. Nicely No. 680 Date July 11, 1964\nDet. K. A. Nicely\nCraig *(handwritten)*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWVA Morgantown\nMETRIC SYSTEM\ncopyright reserved\nINCHES\nWest Virginia University (WVA)\nWVA-V-0010673\nWEST VIROINMA\nHERBARIUM\nUNIVERSITY\nHERBARIUM\nOF THE\nVIRGINIA POLYTECHNIC INSTITUTE\nBIOLOGY DEPARTMENT\nFlora of: Virginia\nCounty: Craig\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nbased on average guard cell area\nvolume of 435 \u03bc2\nGuy L. Nesom, 1975\nUnder mixed deciduous woods of Quercus,\nLiriodendron, and Oxydendron; along Craig\nCo. Rt. 658 ca. 2.4 mi. northeast of\nintersection with Rt. 42.\nColl. K. A. Nicely No. 680\nDet. K. A. Nicely\nDate July 11, 1964\n---\n\nGalax aphylla\nGalax urceolata\nQuercus\nLiriodendron\nOxydendron\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVA-V-0010673",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "K. A. Nicely",
+    "collectorNumber": "680",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 11, 1964",
+    "collectionDate": "1964-07-11",
+    "collectionDateEnd": "",
+    "habitat": "Under mixed deciduous woods of Quercus, Liriodendron, and Oxydendron; along Craig Co. Rt. 658 ca. 2.4 mi. northeast of intersection with Rt. 42.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 435 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Craig",
+    "locality": "Craig Co. Rt. 658 ca. 2.4 mi. northeast of intersection with Rt. 42.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WVA Morgantown\ncopyright reserved\nWest Virginia University (WVA)\nWEST VIRGINIA\nHERBARIUM\nUNIVERSITY\nHERBARIUM\nOF THE\nVIRGINIA POLYTECHNIC INSTITUTE\nBIOLOGY DEPARTMENT\nFlora of Virginia\nGalax aphylla L.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nDet. K. A. Nicely\nGalax aphylla\nQuercus\nLiriodendron\nOxydendron"
+  }
+}

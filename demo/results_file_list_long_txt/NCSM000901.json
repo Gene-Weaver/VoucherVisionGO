@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina Museum of\nNatural Sciences Herbarium\nNCSM000901\n\nTHE NATURALIST CENTER\nNTRL\n001840\nNC STATE MUSEUM OF NATURAL SCIENCES\n\nPlants of North Carolina\n\n*Galax urceolata* (Poiret) Brummitt\n\nAlleghany Co.\n\nAcidic mixed oak-pine forest along the margin of\nacidic southern Appalachian bog, northern subtype,\nSkunk Cabbage Bog, 0.25 miles southeast of\ntermination of Skunk Cabbage Bog Rd. 0.2 miles\nsoutheast of intersection with Shawtown Rd.\n\nPatrick D. McMillan 3762\n10 July 1999\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000745,
+      "total_cost": 0.0015237500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 149
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina Museum of\nNatural Sciences Herbarium\nNCSM000901\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTHE NATURALIST CENTER\nNTRL\n001840\nMUSEUM OF NATURAL SCIENCES\nMC STATE\nPlants of North Carolina\nGalax urceolata (Poiret) Brummit\nAlleghany Co.\nAcidic mixed oak-pine forest along the margin of\nacidic southern Appalachian bog, northern subtype,\nSkunk Cabbage Bog, 0.25 miles southeast of\ntermination of Skunk Cabbage Bog Rd. 0.2 miles\nsoutheast of intersection with Shawtown Rd.\nPatrick D. McMillan 3762\n10 July 1999\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.6e-05,
+      "total_cost": 0.0007475,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 165
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2206,
+    "output": 471,
+    "cost_in": 0.00022060000000000002,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina Museum of\nNatural Sciences Herbarium\nNCSM000901\n\nTHE NATURALIST CENTER\nNTRL\n001840\nNC STATE MUSEUM OF NATURAL SCIENCES\n\nPlants of North Carolina\n\n*Galax urceolata* (Poiret) Brummitt\n\nAlleghany Co.\n\nAcidic mixed oak-pine forest along the margin of\nacidic southern Appalachian bog, northern subtype,\nSkunk Cabbage Bog, 0.25 miles southeast of\ntermination of Skunk Cabbage Bog Rd. 0.2 miles\nsoutheast of intersection with Shawtown Rd.\n\nPatrick D. McMillan 3762\n10 July 1999\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina Museum of\nNatural Sciences Herbarium\nNCSM000901\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nTHE NATURALIST CENTER\nNTRL\n001840\nMUSEUM OF NATURAL SCIENCES\nMC STATE\nPlants of North Carolina\nGalax urceolata (Poiret) Brummit\nAlleghany Co.\nAcidic mixed oak-pine forest along the margin of\nacidic southern Appalachian bog, northern subtype,\nSkunk Cabbage Bog, 0.25 miles southeast of\ntermination of Skunk Cabbage Bog Rd. 0.2 miles\nsoutheast of intersection with Shawtown Rd.\nPatrick D. McMillan 3762\n10 July 1999\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSM000901",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Patrick D. McMillan",
+    "collectorNumber": "3762",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 July 1999",
+    "collectionDate": "1999-07-10",
+    "collectionDateEnd": "",
+    "habitat": "Acidic mixed oak-pine forest along the margin of acidic southern Appalachian bog, northern subtype, Skunk Cabbage Bog",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Alleghany Co.",
+    "locality": "0.25 miles southeast of termination of Skunk Cabbage Bog Rd. 0.2 miles southeast of intersection with Shawtown Rd.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "THE NATURALIST CENTER\nNTRL\n001840\nNC STATE MUSEUM OF NATURAL SCIENCES"
+  }
+}

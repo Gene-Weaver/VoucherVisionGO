@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170908\n\nPLANTS OF TENNESSEE\nPolk County\n\nFlora of Big Frog Mountain\n\n*Galax urceolata* (Poir.) Brummitt\n\nrocky sub-mesic woods along Big Creek; elev.\n500 meters. Caney Creek Quad.\n\nCollectors\nZack E. Murrell No. 190\nB. E. Wofford Date: May 21, 1983\nA. Murray Evans\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\n\nHandwritten Text: 6277\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.00146875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170908\nPLANTS OF TENNESSEE\nPolk County\nFlora of Big Frog Mountain\nGalax urceolata (Poir.) Brummit.\nrocky sub-mesic woods along Big Creek; elev.\n500 meters. Caney Creek Quad.\nCollectors\nNo. 190\nZack E. Murrell\nB.E.Wofford\nDate: May 21,1983\nA. Murray Evans\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 471,
+    "cost_in": 0.0002205,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170908\n\nPLANTS OF TENNESSEE\nPolk County\n\nFlora of Big Frog Mountain\n\n*Galax urceolata* (Poir.) Brummitt\n\nrocky sub-mesic woods along Big Creek; elev.\n500 meters. Caney Creek Quad.\n\nCollectors\nZack E. Murrell No. 190\nB. E. Wofford Date: May 21, 1983\nA. Murray Evans\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\n\nHandwritten Text: 6277\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENNESSE\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170908\nPLANTS OF TENNESSEE\nPolk County\nFlora of Big Frog Mountain\nGalax urceolata (Poir.) Brummit.\nrocky sub-mesic woods along Big Creek; elev.\n500 meters. Caney Creek Quad.\nCollectors\nNo. 190\nZack E. Murrell\nB.E.Wofford\nDate: May 21,1983\nA. Murray Evans\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170908",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Zack E. Murrell, B. E. Wofford, A. Murray Evans",
+    "collectorNumber": "190",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 21, 1983",
+    "collectionDate": "1983-05-21",
+    "collectionDateEnd": "",
+    "habitat": "Rocky sub-mesic woods along big creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Polk county",
+    "locality": "Flora of big frog mountain; elev. 500 meters. caney creek quad.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "500",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Herbarium of the university of tennessee\nHandwritten text 6277\nSernc digitization project - tennessee herbarium consortium"
+  }
+}

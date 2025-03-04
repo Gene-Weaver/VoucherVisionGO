@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170902\n\nFLORA TENNESSIENSIS\n\nCOLLECTOR Jeffry L. Malter MONROE COUNTY\nNO. 53946 June 16, 1976\n\n*Galax aphylla* L.\n\nCitico Creek WSA, Cherokee NF.\nSite 29. Falls Branch Scenic Area.\nOn n slope on way to falls. Not\ncommon.\nWhite flowers.\n\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENN.\n(Handwritten)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE\n6277\nUNIVERSITY OF TENN.\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170902\nFLORA TENNESSIENSIS\nCOLLECTOR. Jeffry L. Malter MONROE COUNTY\n53946\nJune 16, 1976\nGalax aphylla L.\nCitico Creek WSA, Cherokee NF.\nSite 29. Falls Branch Scenic Area.\nOn n slope on way to falls. Not\ncommpn.\nWhite flowers.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.9600000000000006e-05,
+      "total_cost": 0.0007310999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 124
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2134,
+    "output": 430,
+    "cost_in": 0.0002134,
+    "cost_out": 0.000172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170902\n\nFLORA TENNESSIENSIS\n\nCOLLECTOR Jeffry L. Malter MONROE COUNTY\nNO. 53946 June 16, 1976\n\n*Galax aphylla* L.\n\nCitico Creek WSA, Cherokee NF.\nSite 29. Falls Branch Scenic Area.\nOn n slope on way to falls. Not\ncommon.\nWhite flowers.\n\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENN.\n(Handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE\n6277\nUNIVERSITY OF TENN.\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170902\nFLORA TENNESSIENSIS\nCOLLECTOR. Jeffry L. Malter MONROE COUNTY\n53946\nJune 16, 1976\nGalax aphylla L.\nCitico Creek WSA, Cherokee NF.\nSite 29. Falls Branch Scenic Area.\nOn n slope on way to falls. Not\ncommpn.\nWhite flowers.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170902",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Jeffry L. Malter",
+    "collectorNumber": "53946",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 16, 1976",
+    "collectionDate": "1976-06-16",
+    "collectionDateEnd": "",
+    "habitat": "On n slope on way to falls.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "White flowers.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Monroe County",
+    "locality": "Citico Creek WSA, Cherokee NF. Site 29. Falls Branch Scenic Area. Not common.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "FLORA TENNESSIENSIS\nHERBARIUM OF THE\nUNIVERSITY OF TENN."
+  }
+}

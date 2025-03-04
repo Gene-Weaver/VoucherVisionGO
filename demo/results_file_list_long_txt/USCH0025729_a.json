@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved University of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n003021\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nGREENVILLE                     County\n\n*Galax aphylla* L.\nBlythe Shoals, S.C.  Camp Parker Rd.\n\nColl. Evelyn Farrell    Date 4/75    No.\n\nUniversity of South Carolina Herbarium\nUSCH0025729\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007150000000000001,
+      "total_cost": 0.00149375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n003021\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE\nGalax aphylla L.\nCounty\nBlythe Shoals, S. C. Camp Parker Rd.\nColl. Evelyn Farrell Date 4/75\nNo.\nUniversity of South Carolina Herbarium\nUSCH0025729\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.400000000000001e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 492,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0001968
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved University of South Carolina\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n003021\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nGREENVILLE                     County\n\n*Galax aphylla* L.\nBlythe Shoals, S.C.  Camp Parker Rd.\n\nColl. Evelyn Farrell    Date 4/75    No.\n\nUniversity of South Carolina Herbarium\nUSCH0025729\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved University of South Carolina\nUSCH\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n003021\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGREENVILLE\nGalax aphylla L.\nCounty\nBlythe Shoals, S. C. Camp Parker Rd.\nColl. Evelyn Farrell Date 4/75\nNo.\nUniversity of South Carolina Herbarium\nUSCH0025729\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "003021",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Evelyn Farrell",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/75",
+    "collectionDate": "1975-04-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Greenville",
+    "locality": "Blythe Shoals, S. C. Camp Parker Rd.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "USCH\ncopyright reserved University of South Carolina\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nGalax aphylla L.\nUniversity of South Carolina Herbarium\nUSCH0025729\nGalax aphylla"
+  }
+}

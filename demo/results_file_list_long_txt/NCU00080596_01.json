@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n425092\n\nNCU00080596\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nAiken County\n\n*Galax aphylla* L.\nMixed deciduous woods along Horse Creek and\nSC 191, Vancluse.\nS. W. Leonard                          5088        October 9, 1971\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00052,
+      "total_cost": 0.00129875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 104
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA HERBARIUM\nNCU00080596\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n425092\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nAiken County\nGalax aphylla L.\nMixed deciduous woods along Horse Creek and\nSC 191, Vancluse.\nS. W. Leonard\n5088 October 9, 1971\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4000000000000006e-05,
+      "total_cost": 0.0007255,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 110
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2107,
+    "output": 434,
+    "cost_in": 0.0002107,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n425092\n\nNCU00080596\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nAiken County\n\n*Galax aphylla* L.\nMixed deciduous woods along Horse Creek and\nSC 191, Vancluse.\nS. W. Leonard                          5088        October 9, 1971\n\nPlants of the Southeastern United States\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nNORTH CAROLINA HERBARIUM\nNCU00080596\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n425092\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nAiken County\nGalax aphylla L.\nMixed deciduous woods along Horse Creek and\nSC 191, Vancluse.\nS. W. Leonard\n5088 October 9, 1971\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080596",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "S. W. Leonard",
+    "collectorNumber": "5088",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "October 9, 1971",
+    "collectionDate": "1971-10-09",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous woods along horse creek and sc 191, vancluse.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Aiken county",
+    "locality": "Mixed deciduous woods along horse creek and sc 191, vancluse.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n425092\nHerbarium of the university of north carolina\nPlants of the southeastern united states"
+  }
+}

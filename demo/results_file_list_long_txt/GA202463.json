@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity of Georgia\nHerbarium\n233695\n\n= *G. urceolata* (handwritten)\n\nFLORA OF NORTH CAROLINA\nBUNCOMBE COUNTY\nUniversity of Georgia\n\n*Galax aphylla* L.\n(Diapensiaceae)\n\nEdge of freshwater stream, north of Asheville, NC. Elevation approximately 3500 ft. Stream edge dominated by *Rhododendron* spp. thickets. Flowers white. Common.\n\nRebecca Pappert no. 21                                      July 1 2000\n\nImaged 2016\n\n\n*G. urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007049999999999999,
+      "total_cost": 0.0014837499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 141
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n233695\n-G.urceolata\nFLORA OF NORTH CAROLINA\nBUNCOMBE COUNTY\nUniversity of Georgia\nGalax aphylla L.\n(Diapensiaceae)\nEdge of freshwater stream, north of Asheville, NC. Elevation\napproximately 3500 ft. Stream edge dominated by\nRhododendron spp. thickets. Flowers white. Common.\nRebecca Pappert no. 21\nJuly 1 2000\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nImaged 2016\n\n\nGalax aphylla\nRhododendron spp.\n\n",
+      "cost_in": 0.0004751,
+      "cost_out": 5.84e-05,
+      "total_cost": 0.0005335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 4751,
+      "tokens_out": 146
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2171,
+    "output": 509,
+    "cost_in": 0.00021710000000000002,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity of Georgia\nHerbarium\n233695\n\n= *G. urceolata* (handwritten)\n\nFLORA OF NORTH CAROLINA\nBUNCOMBE COUNTY\nUniversity of Georgia\n\n*Galax aphylla* L.\n(Diapensiaceae)\n\nEdge of freshwater stream, north of Asheville, NC. Elevation approximately 3500 ft. Stream edge dominated by *Rhododendron* spp. thickets. Flowers white. Common.\n\nRebecca Pappert no. 21                                      July 1 2000\n\nImaged 2016\n\n\n*G. urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n233695\n-G.urceolata\nFLORA OF NORTH CAROLINA\nBUNCOMBE COUNTY\nUniversity of Georgia\nGalax aphylla L.\n(Diapensiaceae)\nEdge of freshwater stream, north of Asheville, NC. Elevation\napproximately 3500 ft. Stream edge dominated by\nRhododendron spp. thickets. Flowers white. Common.\nRebecca Pappert no. 21\nJuly 1 2000\nTIFFEN Color Control Patches\nThe Tiffen Company, 2007\nImaged 2016\n\n\nGalax aphylla\nRhododendron spp.\n\n",
+  "formatted_json": {
+    "catalogNumber": "233695",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Rebecca Pappert",
+    "collectorNumber": "21",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 1 2000",
+    "collectionDate": "2000-07-01",
+    "collectionDateEnd": "",
+    "habitat": "Edge of freshwater stream, north of Asheville, Nc. Stream edge dominated by Rhododendron spp. thickets.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white. Common.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe county",
+    "locality": "Edge of freshwater stream, north of Asheville, Nc",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of Georgia\nHerbarium\nG. urceolata (handwritten)\nFlora of north carolina\nUniversity of Georgia\n(Diapensiaceae)\nElevation approximately 3500 ft.\nImaged 2016\nG. urceolata\nRhododendron spp.\nThe tiffen company, 2007"
+  }
+}

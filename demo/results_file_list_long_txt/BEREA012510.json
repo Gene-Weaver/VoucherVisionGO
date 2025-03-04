@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "RALPH L. THOMPSON\nBEREA\nBEREA COLLEGE HERBARIUM\n\nBEREA COLLEGE\nBEREA\nHERBARIUM\n\nKentucky\n\nDiapensiaceae\n*Galax aphylla* L. (Galax)\n\nLaurel County: Rock Creek Gorge (RNA) and Uplands, F.S. 3195, 1.7 mi. SW of jct. KY 1193 and KY 192 off KY 3497, 17 mi. SW of London; 0.2 mi. F.S. 4175 Rock Creek Gorge side branch and clear-cut. Rockhouse recess community; Rare.\n\nRalph L. Thompson 89-992\nRonald L. Jones                                                              29 May 1989\n\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\nBEREA012510\n\n\n*Handwritten text: clear-cut*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001105,
+      "total_cost": 0.00188375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 221
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OPTIRECTILINEAR\nRALPH L. THOMPSON\nBEREA COLLEGE HERBARIUM\nBEREA\nBEREA COLLEGE\nBEREA\nHERBARIUM\nKentucky\nDiapensiaceae\nGalax aphylla L.\n(Galax)\nLaurel County: Rock Creek Gorge (RNA) and Uplands, F.S.\n3195, 1.7 mi. SW of jct. KY 1193 and KY 192 off KY 3497,\n17 mi. SW of London; 0.2 mi. F.S. 4175 Rock Creek\nGorge side branch and clear-cut. Rockhouse recess\ncommunity; Rare.\nRalph L. Thompson\nRonald L. Jones\n29 May 1989\nBEREA012510\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.32e-05,
+      "total_cost": 0.0007647,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 208
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2288,
+    "output": 522,
+    "cost_in": 0.00022880000000000003,
+    "cost_out": 0.0002088
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRALPH L. THOMPSON\nBEREA\nBEREA COLLEGE HERBARIUM\n\nBEREA COLLEGE\nBEREA\nHERBARIUM\n\nKentucky\n\nDiapensiaceae\n*Galax aphylla* L. (Galax)\n\nLaurel County: Rock Creek Gorge (RNA) and Uplands, F.S. 3195, 1.7 mi. SW of jct. KY 1193 and KY 192 off KY 3497, 17 mi. SW of London; 0.2 mi. F.S. 4175 Rock Creek Gorge side branch and clear-cut. Rockhouse recess community; Rare.\n\nRalph L. Thompson 89-992\nRonald L. Jones                                                              29 May 1989\n\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\nBEREA012510\n\n\n*Handwritten text: clear-cut*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nOPTIRECTILINEAR\nRALPH L. THOMPSON\nBEREA COLLEGE HERBARIUM\nBEREA\nBEREA COLLEGE\nBEREA\nHERBARIUM\nKentucky\nDiapensiaceae\nGalax aphylla L.\n(Galax)\nLaurel County: Rock Creek Gorge (RNA) and Uplands, F.S.\n3195, 1.7 mi. SW of jct. KY 1193 and KY 192 off KY 3497,\n17 mi. SW of London; 0.2 mi. F.S. 4175 Rock Creek\nGorge side branch and clear-cut. Rockhouse recess\ncommunity; Rare.\nRalph L. Thompson\nRonald L. Jones\n29 May 1989\nBEREA012510\nBEREA COLLEGE HERBARIUM\nBEREA, KENTUCKY, U.S.A.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BEREA012510",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Ralph L. Thompson, Ronald L. Jones",
+    "collectorNumber": "89-992",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 May 1989",
+    "collectionDate": "1989-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Rockhouse recess community; Rare.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "Kentucky",
+    "county": "Laurel county",
+    "locality": "Rock Creek Gorge (rna) and uplands, f.s. 3195, 1.7 mi. Sw of jct. ky 1193 and ky 192 off ky 3497, 17 mi. Sw of london; 0.2 mi. F.s. 4175 rock creek gorge side branch and clear-cut.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ralph l. thompson\nberea college herbarium\nberea college\nherbarium\n(galax)\nBerea college herbarium\nberea, kentucky, u.s.a.\nHandwritten text clear-cut"
+  }
+}

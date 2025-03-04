@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059487\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nvolume of 522 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\nTAZEWELL                               County\n*Galax aphylla* L.\n\nBurkes Garden, dry roadside\n\nR. L. Hoffman                           My 24, 1959\nA. B. Massey                             Date\n\nHerbarium\nBiology Department 36,554\nVirginia Polytechnic Institute\n24 _(handwritten)_\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "24\nCard\nHerbarium\nBiology Department 26,554\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059487\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume of522 \u03bc2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nTAZEWELL\nCounty\nGalax aphylla L.\nBurkes Garden, dry roadside\nR. L. Hoffman\nMy 24, 1959\nA. B. Massey\nDate\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.56e-05,
+      "total_cost": 0.0007471000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2240,
+    "output": 513,
+    "cost_in": 0.000224,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059487\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nvolume of 522 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\nTAZEWELL                               County\n*Galax aphylla* L.\n\nBurkes Garden, dry roadside\n\nR. L. Hoffman                           My 24, 1959\nA. B. Massey                             Date\n\nHerbarium\nBiology Department 36,554\nVirginia Polytechnic Institute\n24 _(handwritten)_\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n24\nCard\nHerbarium\nBiology Department 26,554\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059487\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume of522 \u03bc2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nTAZEWELL\nCounty\nGalax aphylla L.\nBurkes Garden, dry roadside\nR. L. Hoffman\nMy 24, 1959\nA. B. Massey\nDate\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059487",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. L. Hoffman, A. B. Massey",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "My 24, 1959",
+    "collectionDate": "1959-05-24",
+    "collectionDateEnd": "",
+    "habitat": "Burkes Garden, dry roadside",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 based on average guard cell area volume of 522 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Tazewell",
+    "locality": "Burkes Garden, dry roadside",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nDate\nHerbarium\nBiology Department 26,554\nVirginia Polytechnic Institute\nGalax aphylla L."
+  }
+}

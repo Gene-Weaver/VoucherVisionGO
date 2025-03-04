@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n467186\n\nName *Galax aphylla* L.\nFamily\nLocality Turner Mtn.,\nNW Appomattox Co., Va.\nDate May 2, 1970\nHabitat Many plants on\nacid wooded slope of\nTurner Mtn. by James\nRiver.\n\nAltitude 500 ft.\nCollected by C. E. Stevens #1743\nIdentified by\n\n(Handwritten text identified by *)*\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000525,
+      "total_cost": 0.00130375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 105
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n467186\nName Galax aphylla L.\nFamily\nLocality Tumer Titu.,\nNw Appomattot Co, Va.\nAltitude 500 ft.\nCollected by C.E. Stevens #1743\nIdentified by \"\nDate Thay 2, 1970\nHabitat Tmany plants on\nacid wooded slope of\nTumer Inter. by James\nRever.\nNCU00332620\nHandwritten text:\nGalax aphylla L.\nTumer Titu.,\nNw Appomattot Co, Va.\n500 ft.\nC.E. Stevens #1743\n\"\nThay 2, 1970\nTmany plants on\nacid wooded slope of\nTumer Inter. by James\nRever.\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.520000000000001e-05,
+      "total_cost": 0.0007567,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2162,
+    "output": 576,
+    "cost_in": 0.0002162,
+    "cost_out": 0.00023040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n467186\n\nName *Galax aphylla* L.\nFamily\nLocality Turner Mtn.,\nNW Appomattox Co., Va.\nDate May 2, 1970\nHabitat Many plants on\nacid wooded slope of\nTurner Mtn. by James\nRiver.\n\nAltitude 500 ft.\nCollected by C. E. Stevens #1743\nIdentified by\n\n(Handwritten text identified by *)*\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n467186\nName Galax aphylla L.\nFamily\nLocality Tumer Titu.,\nNw Appomattot Co, Va.\nAltitude 500 ft.\nCollected by C.E. Stevens #1743\nIdentified by \"\nDate Thay 2, 1970\nHabitat Tmany plants on\nacid wooded slope of\nTumer Inter. by James\nRever.\nNCU00332620\nHandwritten text:\nGalax aphylla L.\nTumer Titu.,\nNw Appomattot Co, Va.\n500 ft.\nC.E. Stevens #1743\n\"\nThay 2, 1970\nTmany plants on\nacid wooded slope of\nTumer Inter. by James\nRever.\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "467186",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C. E. Stevens",
+    "collectorNumber": "1743",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 2, 1970",
+    "collectionDate": "1970-05-02",
+    "collectionDateEnd": "",
+    "habitat": "Many plants on acid wooded slope of turner mtn. by james river.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Va.",
+    "county": "Appomattox co.",
+    "locality": "Turner mtn., nw appomattox co., va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "152",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Ncu\nname galax aphylla l.\nfamily\nlocality tumer titu.,\nnw appomattot co, va.\naltitude 500 ft.\nidentified by \ndate thay 2, 1970\nhabitat tmany plants on\nacid wooded slope of\ntumer inter. by james\nrever.\nncu00332620\nhandwritten text\ngalax aphylla l.\ntumer titu.,\nnw appomattot co, va.\n500 ft.\nc.e. stevens #1743\nthay 2, 1970\ntmany plants on\nacid wooded slope of\ntumer inter. by james\nrever.\ngalax aphylla"
+  }
+}

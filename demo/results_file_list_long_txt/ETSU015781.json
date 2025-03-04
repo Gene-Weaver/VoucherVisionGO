@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015781\n\n! J. Donaldson June 2010 (Handwritten)\nPLANTS OF NE TENNESSEE\nEast Tennessee State University Herbarium\n\nSpecies: *Galax urceolata*\nFamily: Diapensiaceae\nCounty: Sullivan\nCompartment: Bays Mountain Park (Kingsport, TN)\nPrecise locality: Azalea Trail\n\nHabitat: Semi-open, wooded area\nLatitude, longitude: approx. 1300\n\nJohn C. Warden Herbarium\nETSU #13-0117\nETSU\n\nCollected by: Christina Turbyfill\nCollection # 12        date: 5-31-10\n\n0   1   2   3   4   5   6   7   8   9   10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009699999999999999,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "! J. Donaldson\nJune 2010\nPLANTS OF NE TENNESSEE\nEast Tennessee State University Herbarium\nSpecies: Galax urceolata\nFamily: Family Diapensiaceae\nCounty: Sullivan\nCompartment: Bays Mountain Park (Kingsport, TN)\nPrecise locality: Azalea Trail\nHabitat: Semi-open, wooded area\nLatitude, longitude: approx. 1300\nJohn C. Warden Herbarium\nETSU #13-0117\nCollected by: Christina Turbyfill\nCollection # 12\ndate: 5-31-10\nEAST TENNESSEE STATE UNIVERSITY\nETSU015781\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.92e-05,
+      "total_cost": 0.0007407,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 148
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2224,
+    "output": 484,
+    "cost_in": 0.00022239999999999998,
+    "cost_out": 0.00019360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015781\n\n! J. Donaldson June 2010 (Handwritten)\nPLANTS OF NE TENNESSEE\nEast Tennessee State University Herbarium\n\nSpecies: *Galax urceolata*\nFamily: Diapensiaceae\nCounty: Sullivan\nCompartment: Bays Mountain Park (Kingsport, TN)\nPrecise locality: Azalea Trail\n\nHabitat: Semi-open, wooded area\nLatitude, longitude: approx. 1300\n\nJohn C. Warden Herbarium\nETSU #13-0117\nETSU\n\nCollected by: Christina Turbyfill\nCollection # 12        date: 5-31-10\n\n0   1   2   3   4   5   6   7   8   9   10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n! J. Donaldson\nJune 2010\nPLANTS OF NE TENNESSEE\nEast Tennessee State University Herbarium\nSpecies: Galax urceolata\nFamily: Family Diapensiaceae\nCounty: Sullivan\nCompartment: Bays Mountain Park (Kingsport, TN)\nPrecise locality: Azalea Trail\nHabitat: Semi-open, wooded area\nLatitude, longitude: approx. 1300\nJohn C. Warden Herbarium\nETSU #13-0117\nCollected by: Christina Turbyfill\nCollection # 12\ndate: 5-31-10\nEAST TENNESSEE STATE UNIVERSITY\nETSU015781\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015781",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Christina Turbyfill",
+    "collectorNumber": "12",
+    "identifiedBy": "J. Donaldson",
+    "identifiedDate": "2010-06-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-31-10",
+    "collectionDate": "2010-05-31",
+    "collectionDateEnd": "",
+    "habitat": "Semi-open, wooded area",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sullivan",
+    "locality": "Compartment Bays Mountain Park (kingsport, tn), precise locality azalea trail",
+    "verbatimCoordinates": "Latitude, longitude approx. 1300",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of ne tennessee\nEast tennessee state university herbarium\nJohn c. warden herbarium\netsu #13-0117\nsernec digitization project - tennessee herbarium consortium\neast tennessee state university\netsu"
+  }
+}

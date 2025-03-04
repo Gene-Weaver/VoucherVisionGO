@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28290\nHERBARIUM\n\n1/16/2012\n*Galax urceolata* (Poiret) Brummitt\nDIAPENSIACEAE\n\n*Galax aphylla* L.\nGalax\nPine Mt. St. Pk., Ky\nVI.9.54  T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\n\nHandwritten text:\n* 1/16/2012\n* *Galax urceolata* (Poiret) Brummitt\n* DIAPENSIACEAE\n* *Galax aphylla* L.\n* Galax\n* Pine Mt. St. Pk., Ky\n* VI.9.54 T. Daggy\n* Steep rocky woods. Near end\n* of blooming period.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.0017237499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28290\nHERBARIUM\n1/16/2012\nGalax urceolata (Poiret) Brummitt\nDIAPESIACEAE\nGalax aphylla L.\nGalax\nPine Mt. St. Pk., Ky\nV1.9.54 T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\nHandwritten text:\n1/16/2012\nGalax urceolata (Poiret) Brummitt\nDIAPESIACEAE\nGalax aphylla L.\nGalax\nPine Mt. St. Pk., Ky\nV1.9.54 T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.68e-05,
+      "total_cost": 0.0007483000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2275,
+    "output": 525,
+    "cost_in": 0.00022750000000000003,
+    "cost_out": 0.00021
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28290\nHERBARIUM\n\n1/16/2012\n*Galax urceolata* (Poiret) Brummitt\nDIAPENSIACEAE\n\n*Galax aphylla* L.\nGalax\nPine Mt. St. Pk., Ky\nVI.9.54  T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\n\nHandwritten text:\n* 1/16/2012\n* *Galax urceolata* (Poiret) Brummitt\n* DIAPENSIACEAE\n* *Galax aphylla* L.\n* Galax\n* Pine Mt. St. Pk., Ky\n* VI.9.54 T. Daggy\n* Steep rocky woods. Near end\n* of blooming period.\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28290\nHERBARIUM\n1/16/2012\nGalax urceolata (Poiret) Brummitt\nDIAPESIACEAE\nGalax aphylla L.\nGalax\nPine Mt. St. Pk., Ky\nV1.9.54 T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\nHandwritten text:\n1/16/2012\nGalax urceolata (Poiret) Brummitt\nDIAPESIACEAE\nGalax aphylla L.\nGalax\nPine Mt. St. Pk., Ky\nV1.9.54 T. Daggy\nSteep rocky woods. Near end\nof blooming period.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T. Daggy",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "VI.9.54",
+    "collectionDate": "1954-06-09",
+    "collectionDateEnd": "",
+    "habitat": "Steep rocky woods. Near end of blooming period.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Ky",
+    "county": "",
+    "locality": "Pine Mt. St. Pk.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte\n28290\nherbarium\n1/16/2012\ndiapensiaceae\ngalax aphylla l.\ngalax\nhandwritten text\n1/16/2012\ngalax urceolata (poiret) brummitt\ndiapesiaceae\ngalax aphylla l.\ngalax\npine mt. st. pk., ky\nv1.9.54 t. daggy\nsteep rocky woods. near end\nof blooming period.\ngalax urceolata\ngalax aphylla"
+  }
+}

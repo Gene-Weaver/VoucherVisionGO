@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n12382\nHERBARIUM\n\n24ColorCard\u2122 CameraTrax.com\n\n*JFM*\n10/16/2012\n*Galax urceolata (Poir.) Brummitt*\n\nDiapensiaceae\n\nHERBARIUM\nUniversity of North Carolina at Charlotte\n\nPlants of Tennessee\nCounty Carter\n\n*Galax aphylla* L.\n\nScattered in rich cove hardwoods on W-facing\nslope along Tn. 143, 0.8 mi. E of Heaton Creek\nRd., behind utility pole #72.\n\nJ.F. Matthews\nT.L. Mellichamp\nL.N. Hood  A.D.Mellichamp 28 June 1978\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008900000000000001,
+      "total_cost": 0.0016687499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 178
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n12382\nHERBARIUM\nTM\n24ColorCard CameraTrax.com\n10/16/2012\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of Tennessee\nCounty Carter\nGalax aphylla L.\nScattered in rich cove hardwoods on W-facing\nslope along Tn. 143, 0.8 mi. E of Heaton Creek\nRd. behind utility pole #72.\nJ.F.Matthews\nT.L.Mellichamp\nL.N.Hood A.D.Mellichamp 28 June 1978\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007487000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2235,
+    "output": 530,
+    "cost_in": 0.0002235,
+    "cost_out": 0.000212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n12382\nHERBARIUM\n\n24ColorCard\u2122 CameraTrax.com\n\n*JFM*\n10/16/2012\n*Galax urceolata (Poir.) Brummitt*\n\nDiapensiaceae\n\nHERBARIUM\nUniversity of North Carolina at Charlotte\n\nPlants of Tennessee\nCounty Carter\n\n*Galax aphylla* L.\n\nScattered in rich cove hardwoods on W-facing\nslope along Tn. 143, 0.8 mi. E of Heaton Creek\nRd., behind utility pole #72.\n\nJ.F. Matthews\nT.L. Mellichamp\nL.N. Hood  A.D.Mellichamp 28 June 1978\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n12382\nHERBARIUM\nTM\n24ColorCard CameraTrax.com\n10/16/2012\nGalax urceolata (Poir.) Brummit\nDiapensiaceae\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of Tennessee\nCounty Carter\nGalax aphylla L.\nScattered in rich cove hardwoods on W-facing\nslope along Tn. 143, 0.8 mi. E of Heaton Creek\nRd. behind utility pole #72.\nJ.F.Matthews\nT.L.Mellichamp\nL.N.Hood A.D.Mellichamp 28 June 1978\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "12382",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.f. matthews, T.l. mellichamp, L.n. hood, A.d. mellichamp",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "28 June 1978",
+    "collectionDate": "1978-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Scattered in rich cove hardwoods on w-facing slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Carter",
+    "locality": "Along tn. 143, 0.8 mi. e of heaton creek rd., behind utility pole #72.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte\nHerbarium\nColorcard cameratrax.com\nDiapensiaceae\nHerbarium\nOf the\nUniversity of north carolina at charlotte\nPlants of tennessee\nGalax aphylla l.\nGalax urceolata\nGalax aphylla"
+  }
+}

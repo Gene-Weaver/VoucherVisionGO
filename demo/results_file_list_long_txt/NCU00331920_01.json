@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nx-rite\ncolorchecker\nHERBARIUM\nof\nLane Barksdale\nFlora of North Carolina\n\n*Galax aphylla* L.\n\nCounty GUILFORD\nVicinity GREENSBORO, N.C.\nAltitude\nDate\nCOL. & IDENTIFIED:- JOSIE CAUSEY (handwritten)\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331920\n\n12836\nDiapensiaceae (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005399999999999999,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\nVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n12836\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nthapencracia\nHERBARIUM\nof\nLane Barksdale\nFlora of North Carolina\nGalax aphylla L.\nCounty GUILFORD\nVicinity GREENSBORO, N.C.\nAltitude\nDate\nCOL. IDENTIFIED:- JOSIE CAUSEY\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331920\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.560000000000001e-05,
+      "total_cost": 0.0007471,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2168,
+    "output": 435,
+    "cost_in": 0.00021679999999999998,
+    "cost_out": 0.000174
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nx-rite\ncolorchecker\nHERBARIUM\nof\nLane Barksdale\nFlora of North Carolina\n\n*Galax aphylla* L.\n\nCounty GUILFORD\nVicinity GREENSBORO, N.C.\nAltitude\nDate\nCOL. & IDENTIFIED:- JOSIE CAUSEY (handwritten)\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331920\n\n12836\nDiapensiaceae (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nx-rite\ncolorchecker\nMSCCPPCC0411\nmm\nVERSITY\nOF\nNORTH\nHERBARIUM\nCAROLINA\n12836\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nthapencracia\nHERBARIUM\nof\nLane Barksdale\nFlora of North Carolina\nGalax aphylla L.\nCounty GUILFORD\nVicinity GREENSBORO, N.C.\nAltitude\nDate\nCOL. IDENTIFIED:- JOSIE CAUSEY\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331920\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331920",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Josie Causey",
+    "collectorNumber": "12836",
+    "identifiedBy": "Josie Causey",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Guilford",
+    "locality": "Vicinity greensboro, n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "X-rite\ncolorchecker\nherbarium\nof\nlane barksdale\nflora of north carolina\naltitude\ndate\nuniversity of north carolina herbarium\ndiapensiaceae"
+  }
+}

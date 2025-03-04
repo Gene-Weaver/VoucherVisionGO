@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n118848\n\nPLANTS OF NORTH CAROLINA\nHENDERSON COUNTY\n\n*Galax aphylla* L. Determined by H. E. Ahles\n\nGrowing: in hardwoods on hillside\nHeight: about 2 feet\nColor: white\nAltitude: 2200 feet\nLocation: 5 miles north-east of Hendersonville, \u00bc mile west of U.S. 64\nDan Pittillo Number: 152\nDate: June 10, 1956\n\n(Handwritten text identified in italics)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006649999999999999,
+      "total_cost": 0.00144375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ITY OF\nORTH CAROLINA\nHERBARIUM\n\u03a4\u0399\u039d\u03a0\nPLANTS OF NORTH CAROLINA\nHENDERSON COUNTY\nGalax aphylla L. Determined by H. E. Ahles\nGrowing: in hardwoods on hillside\nHeight: about 2 feet\nColor: white\nAltitude: 2200 feet\nLocation: 5 miles north-east of Hon-\ndersonville, \u00bd mile west of U.S.64\nDan Pittillo Number: 152\nDate: June 10, 1956\ncopyright reserved\nat Chapel Hill\nUniversity of North Carolina\nNCU\nMSCCPPC00411\nMSCCPPPE0411\nx-rite\ncolorchecker\n`at Chapel Hill\nUniversity of North Carolina\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007486999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2180,
+    "output": 496,
+    "cost_in": 0.000218,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n118848\n\nPLANTS OF NORTH CAROLINA\nHENDERSON COUNTY\n\n*Galax aphylla* L. Determined by H. E. Ahles\n\nGrowing: in hardwoods on hillside\nHeight: about 2 feet\nColor: white\nAltitude: 2200 feet\nLocation: 5 miles north-east of Hendersonville, \u00bc mile west of U.S. 64\nDan Pittillo Number: 152\nDate: June 10, 1956\n\n(Handwritten text identified in italics)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nITY OF\nORTH CAROLINA\nHERBARIUM\n\u03a4\u0399\u039d\u03a0\nPLANTS OF NORTH CAROLINA\nHENDERSON COUNTY\nGalax aphylla L. Determined by H. E. Ahles\nGrowing: in hardwoods on hillside\nHeight: about 2 feet\nColor: white\nAltitude: 2200 feet\nLocation: 5 miles north-east of Hon-\ndersonville, \u00bd mile west of U.S.64\nDan Pittillo Number: 152\nDate: June 10, 1956\ncopyright reserved\nat Chapel Hill\nUniversity of North Carolina\nNCU\nMSCCPPC00411\nMSCCPPPE0411\nx-rite\ncolorchecker\n`at Chapel Hill\nUniversity of North Carolina\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "118848",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Dan Pittillo",
+    "collectorNumber": "152",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 10, 1956",
+    "collectionDate": "1956-06-10",
+    "collectionDateEnd": "",
+    "habitat": "Growing in hardwoods on hillside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Height about 2 feet\nColor white",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson county",
+    "locality": "Location 5 miles north-east of hendersonville, \u00bc mile west of u.s. 64",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Ncu\nUniversity of north carolina\nHerbarium\nPlants of north carolina\ncopyright reserved\nat chapel hill\nUniversity of north carolina\nNcu\nMSCCPPC00411\nMSCCPPPE0411\nx-rite\ncolorchecker\n`at chapel hill\nUniversity of north carolina"
+  }
+}

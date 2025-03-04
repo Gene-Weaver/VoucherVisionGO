@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 270542\n\nFLAS\nHERBARIUM\n\nPlants of Georgia\n235\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nUnited States, Georgia, White County, ca. 7.25 km\nNW of Helen, and 3.5 km W of Unicoi Turnpike (Hwy.\n17).\n34.75177N, -83.7874W\nElev: 508m.\nrich, mesic forest and sandy stream banks.\ncommon, rhizomatous herbs in heavy clay soils forming large\ncolonies; flowers white\nAssociated species: *Dichanthelium acuminatum*, *D. boscii*,\n*D. commutatum*, *D. dichotomum*, *D. microcarpon*, *Galax\nurceolata*, *Polygala polygama*, *Quercus alba*\n\nLucas C. Majure 5168\n31 May 2014\nWith: Mariela Pajuelo, Gabriel Majure, Spencer Arnault\n\n\n*Galax urceolata*\n*Dichanthelium acuminatum*\n*D. boscii*\n*D. commutatum*\n*D. dichotomum*\n*D. microcarpon*\n*Polygala polygama*\n*Quercus alba*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0015049999999999998,
+      "total_cost": 0.0022837499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 301
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "15\n5\n4\n3\n12\n9\n8\n6\n5\n3\n2\nINCH\n3\n2\n5\nU.S.A.\n9\nL\nEL\nLLOL 6\n8\n9\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 270582\nGAINESVILLE-\nFLAS\nUNIVERSITY OF FLORIDA\nHERBARIUM\nPlants of Georgia\n235\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nUnited States, Georgia, White County, ca. 7.25 km\nNW of Helen, and 3.5 km W of Unicoi Turnpike (Hwy.\n17).\n34.75177N, -83.7874W\nElev: 508m.\nrich, mesic forest and sandy steam banks.\ncommon, rhizomatous herbs in heavy clay soils forming large\ncolonies; flowers white\nAssociated species: Dichanthelium acuminatum, D. boscii,\nD. commutatum, D. dichotomum, D. microcarpon, Galax\nurceolata, Polygala polygama, Quercus alba\nLucas C. Majure 5168\n31 May 2014\nWith: Mariela Pajuelo, Gabriel Majure, Spencer Arnault\n\n\nGalax urceolata\nDichanthelium acuminatum\nD. boscii\nD. commutatum\nD. dichotomum\nD. microcarpon\nGalax urceolata\nPolygala polygama\nQuercus alba\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001372,
+      "total_cost": 0.0008187,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 343
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2538,
+    "output": 558,
+    "cost_in": 0.0002538,
+    "cost_out": 0.0002232
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 270542\n\nFLAS\nHERBARIUM\n\nPlants of Georgia\n235\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\n\nUnited States, Georgia, White County, ca. 7.25 km\nNW of Helen, and 3.5 km W of Unicoi Turnpike (Hwy.\n17).\n34.75177N, -83.7874W\nElev: 508m.\nrich, mesic forest and sandy stream banks.\ncommon, rhizomatous herbs in heavy clay soils forming large\ncolonies; flowers white\nAssociated species: *Dichanthelium acuminatum*, *D. boscii*,\n*D. commutatum*, *D. dichotomum*, *D. microcarpon*, *Galax\nurceolata*, *Polygala polygama*, *Quercus alba*\n\nLucas C. Majure 5168\n31 May 2014\nWith: Mariela Pajuelo, Gabriel Majure, Spencer Arnault\n\n\n*Galax urceolata*\n*Dichanthelium acuminatum*\n*D. boscii*\n*D. commutatum*\n*D. dichotomum*\n*D. microcarpon*\n*Polygala polygama*\n*Quercus alba*\n\n\ngemini-2.0-flash OCR:\n15\n5\n4\n3\n12\n9\n8\n6\n5\n3\n2\nINCH\n3\n2\n5\nU.S.A.\n9\nL\nEL\nLLOL 6\n8\n9\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 270582\nGAINESVILLE-\nFLAS\nUNIVERSITY OF FLORIDA\nHERBARIUM\nPlants of Georgia\n235\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nUnited States, Georgia, White County, ca. 7.25 km\nNW of Helen, and 3.5 km W of Unicoi Turnpike (Hwy.\n17).\n34.75177N, -83.7874W\nElev: 508m.\nrich, mesic forest and sandy steam banks.\ncommon, rhizomatous herbs in heavy clay soils forming large\ncolonies; flowers white\nAssociated species: Dichanthelium acuminatum, D. boscii,\nD. commutatum, D. dichotomum, D. microcarpon, Galax\nurceolata, Polygala polygama, Quercus alba\nLucas C. Majure 5168\n31 May 2014\nWith: Mariela Pajuelo, Gabriel Majure, Spencer Arnault\n\n\nGalax urceolata\nDichanthelium acuminatum\nD. boscii\nD. commutatum\nD. dichotomum\nD. microcarpon\nGalax urceolata\nPolygala polygama\nQuercus alba\n\n",
+  "formatted_json": {
+    "catalogNumber": "270542",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Lucas C. Majure",
+    "collectorNumber": "5168",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "31 May 2014",
+    "collectionDate": "2014-05-31",
+    "collectionDateEnd": "",
+    "habitat": "Rich, mesic forest and sandy stream banks.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Common, rhizomatous herbs in heavy clay soils forming large colonies; flowers white",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "White county",
+    "locality": "Ca. 7.25 km nw of helen, and 3.5 km w of unicoi turnpike (hwy. 17).",
+    "verbatimCoordinates": "34.75177n, -83.7874w",
+    "decimalLatitude": "34.75177",
+    "decimalLongitude": "-83.7874",
+    "minimumElevationInMeters": "508",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Plants of Georgia\nAssociated species Dichanthelium acuminatum, D. boscii,\nD. commutatum, D. dichotomum, D. microcarpon, Galax\nurceolata, Polygala polygama, Quercus alba\n\nWith Mariela Pajuelo, Gabriel Majure, Spencer Arnault"
+  }
+}

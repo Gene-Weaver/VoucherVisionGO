@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 19039\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                      2021\nGift of A. CUTHBERT\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)           6 May 2024\n\nHERBARIUM\nUNIVERSITY OF\nFLORIDA\n-AT-\nGAINESVILLE\n19039\n\n(Handwritten) Macon Co.\n(Handwritten) HERB. A. CUTHBERT.\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Highlands\n(Handwritten) North Carolina\n(Handwritten) Oct. 1-1897\n(Handwritten) 4000 ft. A. CUTHBERT.\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001065,
+      "total_cost": 0.00184375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 213
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "U.S.A.\nHERBARIUM\nUNIVERSITY\nFLORIDA\n-AT-\nGAINESVILLE\n19039\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 19039\nMacon Co.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nGift of A. CUTHBERT\nHERB. A. CUTHBERT.\nGalax aphylla S\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\n\nHandwritten text:\nHighlande\nNorth Carolina\n4000 fl.\nOct 1-1897\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.52e-05,
+      "total_cost": 0.0007567000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 188
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2271,
+    "output": 512,
+    "cost_in": 0.00022710000000000002,
+    "cost_out": 0.0002048
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 19039\n\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)                      2021\nGift of A. CUTHBERT\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)           6 May 2024\n\nHERBARIUM\nUNIVERSITY OF\nFLORIDA\n-AT-\nGAINESVILLE\n19039\n\n(Handwritten) Macon Co.\n(Handwritten) HERB. A. CUTHBERT.\n(Handwritten) *Galax aphylla* L.\n(Handwritten) Highlands\n(Handwritten) North Carolina\n(Handwritten) Oct. 1-1897\n(Handwritten) 4000 ft. A. CUTHBERT.\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nU.S.A.\nHERBARIUM\nUNIVERSITY\nFLORIDA\n-AT-\nGAINESVILLE\n19039\nUniversity of Florida Herbarium\nFlorida Museum of Natural History\nFLAS 19039\nMacon Co.\nExamined in connection with the Assembling the Tree\nof Life project (NSF grant EF-0431266)\nWalter S. Judd (FLAS)\n2021\nGift of A. CUTHBERT\nHERB. A. CUTHBERT.\nGalax aphylla S\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n6 May 2024\n\nHandwritten text:\nHighlande\nNorth Carolina\n4000 fl.\nOct 1-1897\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "19039",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. Cuthbert",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle L. Gaynor (flas)",
+    "identifiedDate": "2024-05-06",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Oct. 1-1897",
+    "collectionDate": "1897-10-01",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Macon co.",
+    "locality": "Highlands",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of florida herbarium\nFlorida museum of natural history\nFLAS 19039\nExamined in connection with the assembling the tree\nof life project (nsf grant ef-0431266)\nWalter s. Judd (flas)                      2021\nGift of a. Cuthbert\nHerb. a. Cuthbert.\nHerbarium\nUniversity of\nFlorida\n-at-\ngainesville\n4000 ft."
+  }
+}

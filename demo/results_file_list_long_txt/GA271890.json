@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285412\n\nGalax urceolata (Poiret) Brummit\n\nFound in White Co., GA on the top of Trey\nMtn. 10 yards north of the granite apex on\nthe left side of the Appalachian Trail. Shady,\nrocky, rich, dark soil. Inflorescence a\nraceme, corolla white, petals five.\n\nSeri Chapman no. 21 July 22, 2005\n\nSpecimen Examined for\nGeorgia Atlas Project\n3 Sept. 2019\n\nImaged 2019\n\n\nHandwritten Text:\n* Seri Chapman no. 21\n* 3 Sept. 2019\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008249999999999999,
+      "total_cost": 0.0016037500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285412\nGalax urceolata (Poiret) Brummit\nFound in White Co., GA on the top of Trey\nMtn, 10 yards north of the granite apex on\nthe left side of the Appalachian Trail. Shady,\nrocky, rich, dark soil. Inflorescence a\nraceme, corolla white, petals five.\nSeri Chapman no. 21 July 22, 2005\nSpecimen Examined for\nGeorgia Atlas Project\n3 sept. 2019\nImaged 2019\nDIAPENS-235\n--- Handwritten Text ---\n3 sept. 2019\nDIAPENS-235\n---\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 503,
+    "cost_in": 0.0002205,
+    "cost_out": 0.0002012
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285412\n\nGalax urceolata (Poiret) Brummit\n\nFound in White Co., GA on the top of Trey\nMtn. 10 yards north of the granite apex on\nthe left side of the Appalachian Trail. Shady,\nrocky, rich, dark soil. Inflorescence a\nraceme, corolla white, petals five.\n\nSeri Chapman no. 21 July 22, 2005\n\nSpecimen Examined for\nGeorgia Atlas Project\n3 Sept. 2019\n\nImaged 2019\n\n\nHandwritten Text:\n* Seri Chapman no. 21\n* 3 Sept. 2019\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285412\nGalax urceolata (Poiret) Brummit\nFound in White Co., GA on the top of Trey\nMtn, 10 yards north of the granite apex on\nthe left side of the Appalachian Trail. Shady,\nrocky, rich, dark soil. Inflorescence a\nraceme, corolla white, petals five.\nSeri Chapman no. 21 July 22, 2005\nSpecimen Examined for\nGeorgia Atlas Project\n3 sept. 2019\nImaged 2019\nDIAPENS-235\n--- Handwritten Text ---\n3 sept. 2019\nDIAPENS-235\n---\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "285412",
+    "scientificName": "Galax urceolata (Poiret) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummit",
+    "collectedBy": "Seri Chapman",
+    "collectorNumber": "21",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 22, 2005",
+    "collectionDate": "2005-07-22",
+    "collectionDateEnd": "",
+    "habitat": "Shady, rocky, rich, dark soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Inflorescence a raceme, corolla white, petals five.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Ga",
+    "county": "White county",
+    "locality": "Found in white co., ga on the top of trey mtn, 10 yards north of the granite apex on the left side of the appalachian trail.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\ngeorgia atlas project\n3 sept. 2019\nimaged 2019\ndiapens-235\n---\nhandwritten text ---\n3 sept. 2019\ndiapens-235"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n23 308 (handwritten)\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF ALABAMA, USA\n\n*Galax urceolata* (Poiret) Brimmitt\nDiapensiaceae\n\nAbundant herb in woodland. Flowers white.\n\nCLEBURNE CO.: Cheaha State Park; off of AL 281. Woodland, service road and powerline cut to north of park road. South of Anniston.\nElevation 2,250 feet. 33\u00b029.385'N, 85\u00b048.362'W.\n\n25 May 2017                                         Charles N. Horn #22901\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009,
+      "total_cost": 0.0016787500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 180
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n23308\nNewberry College Herbarlum\nHerbarium of Newberry College (NBYC)\nPLANTS OF ALABAMA, USA\nGalax urceolata (Poiret) Brimmitt\nDiapensiaceae\nAbundant herb in woodland. Flowers white.\nCLEBURNE CO.: Cheaha State Park; off of AL 281. Woodland,\nservice road and powerline cut to north of park road. South of Anniston.\nElevation 2,250 feet. 33\u00b029.385'N, 85\u00b048.362'W.\n25 May 2017\nCharles N. Horn #22901\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.000000000000001e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2228,
+    "output": 485,
+    "cost_in": 0.0002228,
+    "cost_out": 0.00019400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n23 308 (handwritten)\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF ALABAMA, USA\n\n*Galax urceolata* (Poiret) Brimmitt\nDiapensiaceae\n\nAbundant herb in woodland. Flowers white.\n\nCLEBURNE CO.: Cheaha State Park; off of AL 281. Woodland, service road and powerline cut to north of park road. South of Anniston.\nElevation 2,250 feet. 33\u00b029.385'N, 85\u00b048.362'W.\n\n25 May 2017                                         Charles N. Horn #22901\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nMETRIC\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n23308\nNewberry College Herbarlum\nHerbarium of Newberry College (NBYC)\nPLANTS OF ALABAMA, USA\nGalax urceolata (Poiret) Brimmitt\nDiapensiaceae\nAbundant herb in woodland. Flowers white.\nCLEBURNE CO.: Cheaha State Park; off of AL 281. Woodland,\nservice road and powerline cut to north of park road. South of Anniston.\nElevation 2,250 feet. 33\u00b029.385'N, 85\u00b048.362'W.\n25 May 2017\nCharles N. Horn #22901\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "23308",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brimmitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "22901",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "25 May 2017",
+    "collectionDate": "2017-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Abundant herb in woodland. Flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Alabama",
+    "county": "Cleburne Co.",
+    "locality": "Cheaha State Park; off of al 281. Woodland, service road and powerline cut to north of park road. South of anniston.",
+    "verbatimCoordinates": "33\u00b029.385'n, 85\u00b048.362'w",
+    "decimalLatitude": "33.48975",
+    "decimalLongitude": "-85.80603",
+    "minimumElevationInMeters": "686",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Newberry\nCollege\nNewberry College Herbarlum\nHerbarium of Newberry College (NBYC)\nPlants of alabama, usa\nGalax urceolata"
+  }
+}

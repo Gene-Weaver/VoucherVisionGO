@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n386504\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332640\n\nHerbarium of the University of North Carolina\nVIRGINIA\nMecklenburg Co.\n\n*Galax aphylla* L.\n\nSouth bank of Meherrin river in rocky\nwoods west of Va. 635.\n\nW. D. Seaman 6541, May 18, 1967\n(handwritten)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000665,
+      "total_cost": 0.0014437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 133
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPPE0411\nMSCCPPCC0411\nmm\n0\ncm\n1 2 3 4 5 6 7 8\n9\n10\nNCI\nat Cha\nUniversity of I\nx-rite\ncolorchecker\nY OF NORTH CAROLINAVI\nHERBARIUM\nUNIVE\nUN\n386504\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332640\nHerbarium of the University of North Carolina\nVIRGINIA\nMecklenburg Co.\nGalax aphylla L.\nSouth bank of Meherrin river in rocky\nwoods west of Va. 635.\nW.D. Seaman 6541, May 18, 1967\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2177,
+    "output": 525,
+    "cost_in": 0.00021770000000000003,
+    "cost_out": 0.00021
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n386504\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332640\n\nHerbarium of the University of North Carolina\nVIRGINIA\nMecklenburg Co.\n\n*Galax aphylla* L.\n\nSouth bank of Meherrin river in rocky\nwoods west of Va. 635.\n\nW. D. Seaman 6541, May 18, 1967\n(handwritten)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n0\ncm\n1 2 3 4 5 6 7 8\n9\n10\nNCI\nat Cha\nUniversity of I\nx-rite\ncolorchecker\nY OF NORTH CAROLINAVI\nHERBARIUM\nUNIVE\nUN\n386504\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332640\nHerbarium of the University of North Carolina\nVIRGINIA\nMecklenburg Co.\nGalax aphylla L.\nSouth bank of Meherrin river in rocky\nwoods west of Va. 635.\nW.D. Seaman 6541, May 18, 1967\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332640",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W. D. Seaman",
+    "collectorNumber": "6541",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 18, 1967",
+    "collectionDate": "1967-05-18",
+    "collectionDateEnd": "",
+    "habitat": "South bank of meherrin river in rocky woods west of va. 635.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Mecklenburg co.",
+    "locality": "South bank of meherrin river in rocky woods west of va. 635.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "MSCCPPPE0411\nMSCCPPCC0411\nmm\nuniversity of north carolina\nherbarium\n386504\nuniversity of north carolina herbarium\nherbarium of the university of north carolina\ngalax aphylla\n0\ncm\n1 2 3 4 5 6 7 8\n9\n10\nnci\nat cha\nuniversity of i\nx-rite\ncolorchecker"
+  }
+}

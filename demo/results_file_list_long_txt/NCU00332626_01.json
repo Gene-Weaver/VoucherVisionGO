@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "xrite\ncolorchecker\nMSCCPPCC0411\nmm\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nCopyright reserved\nNCU\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n351427\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332626\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nRich ravine along Nigger\nCreek n of Bent Creek.\n\nBuckingham Co.\n\nJun 8 11, 1967 (Handwritten '8')\n\nCollected by: A M Harvill 16535\nDetermined by:\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000715,
+      "total_cost": 0.0014937499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "xrite\ncolorchecker\nMSCCPPCC0411\nNORTH CAROLINA\nHERBARIUM\n351427\nFLORA VIRGINICA\nGalax aphylla L\nRich ravine along Nigger\nCreek n of Bent Creek.\nBuckingham Co.\nJune 11, 1967\nCollected by: A M Harvill 16535\nDetermined by:\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.6e-05,
+      "total_cost": 0.0007175,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 90
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2115,
+    "output": 479,
+    "cost_in": 0.00021150000000000002,
+    "cost_out": 0.0001916
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nxrite\ncolorchecker\nMSCCPPCC0411\nmm\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\nCopyright reserved\nNCU\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n351427\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332626\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nRich ravine along Nigger\nCreek n of Bent Creek.\n\nBuckingham Co.\n\nJun 8 11, 1967 (Handwritten '8')\n\nCollected by: A M Harvill 16535\nDetermined by:\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nxrite\ncolorchecker\nMSCCPPCC0411\nNORTH CAROLINA\nHERBARIUM\n351427\nFLORA VIRGINICA\nGalax aphylla L\nRich ravine along Nigger\nCreek n of Bent Creek.\nBuckingham Co.\nJune 11, 1967\nCollected by: A M Harvill 16535\nDetermined by:\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332626",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A M Harvill",
+    "collectorNumber": "16535",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Jun 8 11, 1967",
+    "collectionDate": "1967-06-08",
+    "collectionDateEnd": "1967-06-11",
+    "habitat": "Rich ravine along nigger creek n of bent creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buckingham co.",
+    "locality": "Rich ravine along nigger creek n of bent creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "xrite\ncolorchecker\nMSCCPPCC0411\nmm\nuniversity of north carolina\nat chapel hill\ncopyright reserved\nNCU\nuniversity of north carolina\nherbarium\n351427\nuniversity of north carolina herbarium\nflora virginica\ndetermined by\ngalax aphylla"
+  }
+}

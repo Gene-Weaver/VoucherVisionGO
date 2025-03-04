@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA HERBARIUM\n213830\n\nNCU00332633\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\n\nCounty & Date                    R. Kral #\nGiles: 29 Jun 1960            10676\n\n*Galax aphylla* L.\n\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\n\nDet: R.Kral\n(handwritten \"R.Kral\")\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00057,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPP\u00c90411\nMSCCPPCC0411\n0 1 2 3 4 5 6 7 8\ncm\n6\ncopyright reserved\nUniversity o\nat Ch\nNC\nmm\nx-rite\ncolorchecker\nOF NORTH\nHERBARIUM\nVERSITY\nUNIV\nCAROLINA\n213830\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332633\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nGiles: 29 Jun 1960\nR. Kral #\n10676\nGalax aphylla L.\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\nDet: R.Kral\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2158,
+    "output": 429,
+    "cost_in": 0.00021580000000000004,
+    "cost_out": 0.00017160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n213830\n\nNCU00332633\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\n\nCounty & Date                    R. Kral #\nGiles: 29 Jun 1960            10676\n\n*Galax aphylla* L.\n\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\n\nDet: R.Kral\n(handwritten \"R.Kral\")\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMSCCPPP\u00c90411\nMSCCPPCC0411\n0 1 2 3 4 5 6 7 8\ncm\n6\ncopyright reserved\nUniversity o\nat Ch\nNC\nmm\nx-rite\ncolorchecker\nOF NORTH\nHERBARIUM\nVERSITY\nUNIV\nCAROLINA\n213830\nUniversity of North Carolina\nat Chapel Hill\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332633\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nGiles: 29 Jun 1960\nR. Kral #\n10676\nGalax aphylla L.\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\nDet: R.Kral\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332633",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "10676",
+    "identifiedBy": "R. Kral",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 Jun 1960",
+    "collectionDate": "1960-06-29",
+    "collectionDateEnd": "",
+    "habitat": "Sandy loam of conifer woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles",
+    "locality": "9 mi. w. mt. lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n213830\nAnnotation\nBy\nPlants of virginia\nCounty & date"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WCUH0010403\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\nEvergreen herb, having scaly creeping rhizomes,\nwith fibrous red roots and veiny shining leaves\nand a slender naked scape 3-8 dm. high.\nOpen woods.\n\nJohn B. Brooks 36 28 June 1962\n\nHandwritten text: *Galax aphylla* L., John B. Brooks, 36, 28 June 1962.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nHERBARIUM O\nWESTER\nN.C.\n980\nCOLLEGE\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nEvergreen herb, having scaly creeping rhizomes,\nwith fibrous red roots and veiny shining leaves\nand a slender naked scape 3-8 dm. high.\nOpen woods.\nJohn B. Brooks\n36\n28 June 1962\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.84e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2263,
+    "output": 572,
+    "cost_in": 0.0002263,
+    "cost_out": 0.00022880000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWCUH0010403\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\nEvergreen herb, having scaly creeping rhizomes,\nwith fibrous red roots and veiny shining leaves\nand a slender naked scape 3-8 dm. high.\nOpen woods.\n\nJohn B. Brooks 36 28 June 1962\n\nHandwritten text: *Galax aphylla* L., John B. Brooks, 36, 28 June 1962.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWESTERN CAROLINA U. HERBARIUM\nHERBARIUM O\nWESTER\nN.C.\n980\nCOLLEGE\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nEvergreen herb, having scaly creeping rhizomes,\nwith fibrous red roots and veiny shining leaves\nand a slender naked scape 3-8 dm. high.\nOpen woods.\nJohn B. Brooks\n36\n28 June 1962\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wcuh0010403",
+    "scientificName": "Galax urceolata (poiret) brummitt",
+    "genus": "Galax",
+    "specificEpithet": "Urceolata",
+    "scientificNameAuthorship": "(Poiret) brummitt",
+    "collectedBy": "John b. brooks",
+    "collectorNumber": "36",
+    "identifiedBy": "A.s. weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "28 june 1962",
+    "collectionDate": "1962-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Open woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Evergreen herb, having scaly creeping rhizomes, with fibrous red roots and veiny shining leaves and a slender naked scape 3-8 dm. high.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Jackson county",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of western carolina college\ngalax aphylla l.\n\nHandwritten text galax aphylla l., john b. brooks, 36, 28 june 1962.\n\ngalax urceolata\ngalax aphylla\nWestern carolina u. herbarium\nherbarium o\nwester college\npreserved material\ncarolina biological supply company\nburlington, nc 27215 & gladstone, or 97027\nliving cultures\ninches\nmetric"
+  }
+}

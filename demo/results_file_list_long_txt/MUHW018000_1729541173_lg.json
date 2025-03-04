@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701 U.S.\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n\n144. *Galax aphylla* L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands,\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia\n\nA. B. Massey No. 3921                      July 23, 1940\n\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000805,
+      "total_cost": 0.0015837499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITATIS\nHERBARIUM\nMARSHALL UNIVERSITY\norgton, West Virginia 25701. LL.S\nINCHES\nMarshall University Herbarium\nMUHW018000\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\nA. B. Massey No. 3921\nJuly 23, 1940\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.76e-05,
+      "total_cost": 0.0007491,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 169
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2221,
+    "output": 508,
+    "cost_in": 0.0002221,
+    "cost_out": 0.0002032
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701 U.S.\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n\n144. *Galax aphylla* L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands,\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia\n\nA. B. Massey No. 3921                      July 23, 1940\n\n\n*Handwritten text is italicized.*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITATIS\nHERBARIUM\nMARSHALL UNIVERSITY\norgton, West Virginia 25701. LL.S\nINCHES\nMarshall University Herbarium\nMUHW018000\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nCommon in sandstone soil, circa pH 4.5, broadleaf woodlands.\nalong \"Warspur Trail\", Mt. Lake area, Giles County, Virginia.\nA. B. Massey No. 3921\nJuly 23, 1940\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW018000",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. B. Massey",
+    "collectorNumber": "3921",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 23, 1940",
+    "collectionDate": "1940-07-23",
+    "collectionDateEnd": "",
+    "habitat": "Common in sandstone soil, circa pH 4.5, broadleaf woodlands",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.S.",
+    "stateProvince": "Virginia",
+    "county": "Giles County",
+    "locality": "Along warspur trail, mt. lake area",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701 U.S.\nSOUTHERN APPALACHIAN BOTANICAL CLUB\nSECOND DISTRIBUTION OF SOUTHEASTERN PLANTS\n144. Galax aphylla L.\nGalax urceolata\nGalax aphylla"
+  }
+}

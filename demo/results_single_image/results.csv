@@ -1,6 +1,6 @@
-additionalText,catalogNumber,chromosomeCount,collectedBy,collectionDate,collectionDateEnd,collectorNumber,continent,country,county,cultivated,decimalLatitude,decimalLongitude,elevationUnits,genus,guardCell,habitat,identificationHistory,identifiedBy,identifiedConfidence,identifiedDate,identifiedRemarks,locality,maximumElevationInMeters,minimumElevationInMeters,scientificName,scientificNameAuthorship,specificEpithet,specimenDescription,stateProvince,verbatimCollectionDate,verbatimCoordinates
-"Eastern kentucky university
+filename,catalogNumber,scientificName,genus,specificEpithet,scientificNameAuthorship,collectedBy,collectorNumber,identifiedBy,identifiedDate,identifiedConfidence,identifiedRemarks,identificationHistory,verbatimCollectionDate,collectionDate,collectionDateEnd,habitat,chromosomeCount,guardCell,specimenDescription,cultivated,continent,country,stateProvince,county,locality,verbatimCoordinates,decimalLatitude,decimalLongitude,minimumElevationInMeters,maximumElevationInMeters,elevationUnits,additionalText
+tmpz9r92j60.jpg,060934,Galax aphylla auct. non L.,Galax,aphylla,auct. non L.,R. Hannan & L. R. Phillippe 2022,,IK,,,,,"May 31, 1979",1979-05-31,,Above falls.,,,,,North america,United states,Kentucky,Letcher county,Whitesburg Q.; Bad Branch. 1.5 miles NE of Eolia.,,,,,,,"Eastern kentucky university
 herbarium
-eky
-ik
-3 1234 10039611 6",060934,,R. Hannan & L. R. Phillippe 2022,1979-05-31,,,North america,United states,Letcher county,,,,,Galax,,Above falls.,,,,,,Whitesburg q.; bad branch. 1.5 miles ne of eolia.,,,Galax aphylla,auct. non L.,aphylla,,Kentucky,"May 31, 1979",
+EKY
+3 1234 10039611 6
+Galax aphylla"

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "POISONED WITH\nMERCURY BICHLORIDE\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n9189\n\n017433 SIU061662\n*Diapensia* #235 134-3-1 (Handwritten)\n\nHERBARIUM OF HAROLD GENTRY\nPLANTS OF *Virginia* (Handwritten)\n*Galax aphylla* L. (Handwritten)\nJuly 23rd 1953 Harold Gentry (Handwritten)\nScattered over mountain near (Handwritten)\nMountain Lake Biological (Handwritten)\nLaboratory (Handwritten)\nGiles Co. (Handwritten)\nno. 1524 (Handwritten)\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009199999999999999,
+      "total_cost": 0.0016987500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "POISONED WITH\nMERCURY BICHLORIDE\n\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n9189\n\n017433\nSIU061662\nHERBARIUM OF HAROLD GENTRY\nPLANTS OF Virginia\nGalax aphylla L\nJuly 23rd 1953 Harold Gentry\nScattered over mountain near\nmountain Lake Biological\nLaboratory\nSeles co.\nno. 1524\n\nDiapensiac #235 134-3-1\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 488,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nPOISONED WITH\nMERCURY BICHLORIDE\n\n= *Galax urceolata* (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n9189\n\n017433 SIU061662\n*Diapensia* #235 134-3-1 (Handwritten)\n\nHERBARIUM OF HAROLD GENTRY\nPLANTS OF *Virginia* (Handwritten)\n*Galax aphylla* L. (Handwritten)\nJuly 23rd 1953 Harold Gentry (Handwritten)\nScattered over mountain near (Handwritten)\nMountain Lake Biological (Handwritten)\nLaboratory (Handwritten)\nGiles Co. (Handwritten)\nno. 1524 (Handwritten)\n\n\nGalax aphylla\nGalax urceolata\n\n\ngemini-2.0-flash OCR:\nPOISONED WITH\nMERCURY BICHLORIDE\n\n= Galax urceolata (Poir.) Brummitt\nSouthern Illinois University (SIU), Feb. 2023\n\n9189\n\n017433\nSIU061662\nHERBARIUM OF HAROLD GENTRY\nPLANTS OF Virginia\nGalax aphylla L\nJuly 23rd 1953 Harold Gentry\nScattered over mountain near\nmountain Lake Biological\nLaboratory\nSeles co.\nno. 1524\n\nDiapensiac #235 134-3-1\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "017433",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Harold Gentry",
+    "collectorNumber": "1524",
+    "identifiedBy": "Southern Illinois University (SIU)",
+    "identifiedDate": "2023-02-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 23rd 1953",
+    "collectionDate": "1953-07-23",
+    "collectionDateEnd": "",
+    "habitat": "Scattered over mountain near",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles Co.",
+    "locality": "Mountain Lake Biological Laboratory",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "POISONED WITH\nMERCURY BICHLORIDE\n\n9189\nSIU061662\nHERBARIUM OF HAROLD GENTRY\nPLANTS OF Virginia\nGalax aphylla L\n\nSeles co.\nDiapensia #235 134-3-1"
+  }
+}

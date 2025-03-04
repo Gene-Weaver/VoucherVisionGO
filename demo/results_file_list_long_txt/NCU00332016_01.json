@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPC00411\nmm\nUniversity of North Carolina\nat Chapel Hill\ncm\n0 1 2 3 4 5 6 7 8 9 10\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332016\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHartsville, S.C.\n\n*Galax aphylla*\nBlack Creek Bluffs 1 mile above Hartsville\n\nDate\n\nNo.                      Collector *W.C. Coker.*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66667\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007149999999999999,
+      "total_cost": 0.00149375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPC00411\nmm\ncm\ncopyright reserved\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332016\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHartsville, S.C.\nGalax aphylla\nBlack Creek Bluffs 1 mile above Hartsville.\nDate\nCollector W.C. Coker.\nNo.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.8400000000000005e-05,
+      "total_cost": 0.0007199,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 96
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2126,
+    "output": 481,
+    "cost_in": 0.0002126,
+    "cost_out": 0.00019240000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\nMSCCPPC00411\nmm\nUniversity of North Carolina\nat Chapel Hill\ncm\n0 1 2 3 4 5 6 7 8 9 10\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332016\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHartsville, S.C.\n\n*Galax aphylla*\nBlack Creek Bluffs 1 mile above Hartsville\n\nDate\n\nNo.                      Collector *W.C. Coker.*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66667\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPC00411\nmm\ncm\ncopyright reserved\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332016\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHartsville, S.C.\nGalax aphylla\nBlack Creek Bluffs 1 mile above Hartsville.\nDate\nCollector W.C. Coker.\nNo.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332016",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "W.C. Coker",
+    "collectorNumber": "66667",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Date",
+    "collectionDate": "0000-00-00",
+    "collectionDateEnd": "0000-00-00",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "",
+    "locality": "Black Creek Bluffs 1 mile above Hartsville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "x-rite\ncolorchecker\nMSCCPPC00411\nmm\nUniversity of North Carolina\nat Chapel Hill\ncm\n0 1 2 3 4 5 6 7 8 9 10\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHartsville, S.C.\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\ncopyright reserved"
+  }
+}

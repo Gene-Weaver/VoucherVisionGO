@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059466\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975 not measured\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n(Handwritten) Giles                                         County\n(Handwritten) *Paronychia aphylla*, L.\n(Handwritten) Mt. Lake area\n\nHerbarium\nBiology Department 26,\u207043\nVirginia Polytechnic Institute\n(Handwritten) *Q. Culberson*       10/6/41\nA. B.-Massey                      Date\n\n\n*Galax urceolata*\n*Paryaf aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009,
+      "total_cost": 0.00167875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 180
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "VPI-V-0059466\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nGiles\nBaylaf aphylla, L.\nMt. Lake area\nA. B. Massey\n9. Culberson\n10/6/41\n\n\nGalax urceolata\nBayluf aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.440000000000001e-05,
+      "total_cost": 0.0007259,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 111
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 556,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00022239999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059466\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975 not measured\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n(Handwritten) Giles                                         County\n(Handwritten) *Paronychia aphylla*, L.\n(Handwritten) Mt. Lake area\n\nHerbarium\nBiology Department 26,\u207043\nVirginia Polytechnic Institute\n(Handwritten) *Q. Culberson*       10/6/41\nA. B.-Massey                      Date\n\n\n*Galax urceolata*\n*Paryaf aphylla*\n\n\ngemini-2.0-flash OCR:\nVPI-V-0059466\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nGiles\nBaylaf aphylla, L.\nMt. Lake area\nA. B. Massey\n9. Culberson\n10/6/41\n\n\nGalax urceolata\nBayluf aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059466",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. B.-Massey",
+    "collectorNumber": "26,\u207043",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Not measured",
+    "identificationHistory": "Paronychia aphylla, L. Q. Culberson, 10/6/41",
+    "verbatimCollectionDate": "10/6/41",
+    "collectionDate": "1941-10-06",
+    "collectionDateEnd": "",
+    "habitat": "Mt. Lake area",
+    "chromosomeCount": "n = , based on average guard cell area",
+    "guardCell": "n = , based on average guard cell area volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles",
+    "locality": "Mt. Lake area",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nDate\nGalax urceolata\nParyaf aphylla\nBaylaf aphylla\nBayluf aphylla"
+  }
+}

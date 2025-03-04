@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059506\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\n\nNo. 2945                                      APR 14 1965\nColl. Ruskin S. Freer\n*Galax aphylla* L.\nLocality: Rockbridge                      County;\n                                1 mi. below Petites Gap,\n                                road to Arnoldy Valley\nHabitat edge of dry bank in woods\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 514\u00b5\u00b2\nGuy L. Nesom, 1975\n\n(Handwritten Text) Herbarium #12, 156\n(Handwritten Text) Biology Department\n(Handwritten Text) Virginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Salax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.00178375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "2\n3\n4\n5\nPLANTS OF THE VIRGINIA BLUE RIDGE\n2945\nAPR 14 1965\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume ofsi412\nGuy L. Nesom, 1975\nHerbarium 12, 156\nBiology Department\nVirginia Polytechnic Institute\nNo.\nColl. Ruskin S. Freer\nGalax aphylla L.\nLocality:.\nRockbridge\nCounty;\nmi. below Petites Gap,\nHabitat edge of dry\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059506\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "total_cost": 0.0007499000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2264,
+    "output": 515,
+    "cost_in": 0.0002264,
+    "cost_out": 0.00020600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059506\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\n\nNo. 2945                                      APR 14 1965\nColl. Ruskin S. Freer\n*Galax aphylla* L.\nLocality: Rockbridge                      County;\n                                1 mi. below Petites Gap,\n                                road to Arnoldy Valley\nHabitat edge of dry bank in woods\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area\nvolume of 514\u00b5\u00b2\nGuy L. Nesom, 1975\n\n(Handwritten Text) Herbarium #12, 156\n(Handwritten Text) Biology Department\n(Handwritten Text) Virginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Salax aphylla*\n\n\ngemini-2.0-flash OCR:\n2\n3\n4\n5\nPLANTS OF THE VIRGINIA BLUE RIDGE\n2945\nAPR 14 1965\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\n, based on average guard cell area\nvolume ofsi412\nGuy L. Nesom, 1975\nHerbarium 12, 156\nBiology Department\nVirginia Polytechnic Institute\nNo.\nColl. Ruskin S. Freer\nGalax aphylla L.\nLocality:.\nRockbridge\nCounty;\nmi. below Petites Gap,\nHabitat edge of dry\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059506\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0059506",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Ruskin S. Freer",
+    "collectorNumber": "2945",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "APR 14 1965",
+    "collectionDate": "1965-04-14",
+    "collectionDateEnd": "",
+    "habitat": "Edge of dry bank in woods",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 514\u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Rockbridge",
+    "locality": "1 mi. below Petites Gap, road to Arnoldy Valley",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "PLANTS OF THE VIRGINIA BLUE RIDGE\nMassey Herbarium\nVirginia Polytechnic Institute\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n(Handwritten Text) Herbarium #12, 156\n(Handwritten Text) Biology Department\n(Handwritten Text) Virginia Polytechnic Institute"
+  }
+}

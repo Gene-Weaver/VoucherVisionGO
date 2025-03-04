@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U. *(handwritten)*\nDET.\nJuly 20, 1934 *(handwritten)*\n\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\ninches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft eles.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\nHandwritten text:\nJ.K.LI.\nJuly 20, 1934\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U.\nDET.\nJuly 20, 1934\n\n\nGalax urceolata\nGalax aphylla\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.00071,
-      "ocr_text": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U. *(handwritten)*\nDET.\nJuly 20, 1934 *(handwritten)*\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_out": 0.00067,
+      "total_cost": 0.00144875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 142,
-      "total_cost": 0.00148875
+      "tokens_out": 134
     },
     "gemini-2.0-flash": {
+      "ocr_text": "inches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\n9. 1206. Galax aphylla L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft elev.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\n\n\nGalax urceolata\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
-      "cost_out": 7.28e-05,
-      "ocr_text": "inches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft eles.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\nHandwritten text:\nJ.K.LI.\nJuly 20, 1934\n---\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503000000000001,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 182,
-      "total_cost": 0.0007543000000000001
+      "tokens_out": 172
     }
   },
-  "tokens_LLM": {
-    "input": 2169,
-    "output": 556
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2198,
+    "output": 516,
+    "cost_in": 0.0002198,
+    "cost_out": 0.0002064
   },
-  "vvgo_json": {
-    "additionalText": "KATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\n GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\nFLORA OF TENNESSEE\nPolemoniaceae\n5800 ft eles.\nCOLL. J.K.LI.\nDET.\nDENVER BOTANIC GARDENS\nHandwritten text\nJ.K.LI.\nJuly 20, 1934\n---\nGalax urceolata\nGalax aphylla\ninches\n2\ncm\n4",
+  "ocr": "\ngemini-1.5-pro OCR:\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\n\n= *Galax urceolata* (Poir.) Brummitt *(handwritten)*\n\nFLORA OF TENNESSEE\n*Polemoniaceae*\n*Diapensiaceae* J. K. Underwood Herbarium\n1206. *Galax aphylla* L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft. elev.\nCOLL. J.K.U.\nDET.\nJuly 20, 1934\n\n\nGalax urceolata\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\ninches\n2\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n1725\nDENVER BOTANIC\ncm\n4 GARDENS 0 1 2 3\n4\n5 6 7 8 9 10\ncopyright reserved\n= Galax urceolata (Poir.) Brummitt\nFLORA OF TENNESSEE\nPolemoniaceae\n9. 1206. Galax aphylla L.\nHemlock woods, Mt. Le Conte, Sevier Co.\n5800 ft elev.\nCOLL. J.K.LI.\nDET.\nJuly 20, 1934\nDENVER BOTANIC GARDENS KHD00041591\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
     "catalogNumber": "KHD00041591",
-    "chromosomeCount": "",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
     "collectedBy": "J. K. U.",
+    "collectorNumber": "1206",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 20, 1934",
     "collectionDate": "1934-07-20",
     "collectionDateEnd": "",
-    "collectorNumber": "1206",
+    "habitat": "Hemlock woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
     "continent": "North America",
     "country": "United States",
+    "stateProvince": "Tennessee",
     "county": "Sevier Co.",
-    "cultivated": "",
+    "locality": "Mt. Le Conte",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "ft",
-    "genus": "Galax",
-    "habitat": "Hemlock woods",
-    "identificationHistory": "Galax aphylla",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "Mt. Le Conte",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "1768",
-    "scientificName": "Galax urceolata (Poir.) Brummitt",
-    "scientificNameAuthorship": "(Poir.) Brummitt",
-    "specificEpithet": "urceolata",
-    "specimenDescription": "",
-    "stateProvince": "Tennessee",
-    "verbatimCollectionDate": "July 20, 1934",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Kathryn kalmbach herbarium\nDenver botanic gardens\n1725\nPolemoniaceae\nDiapensiaceae J. K. Underwood Herbarium\nGalax aphylla L.\n5800 ft elev.\nGalax urceolata\nGalax aphylla\nInches\nCm\nDenver botanic gardens 0 1 2 3 4 5 6 7 8 9 10\nCopyright reserved"
   }
 }

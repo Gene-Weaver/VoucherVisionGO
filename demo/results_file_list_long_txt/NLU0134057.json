@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n336308\nHERBARIUM\n\nDIAPENSIACEAE\n*Galax diphylla* L.\n\nUSA. NORTH CAROLINA. Surry County: In\nwoods at first rest stop on 177\nsouthbound, at state line\n\n3 August 1990\nMichael A. Vincent 4266\n\nEXCHANGE SPECIMEN FROM\n(Handwritten: MV)\nNLU0134057\n\n\n*Galax diphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00054,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA DAIVERSI\n336308\nHERBARIUM\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nA 1\n2\n3\n4\n56\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nDIAPENSIACEAE\nGalax diphylla L.\nUSA. NORTH CAROLINA. Surry County: In\nwoods at first rest stop on 177\nsouthbound, at state line\n3 August 1990\nMichael A. Vincent 4266\nUniversity of Louisiana at Monroe\nNLU0134057\nEXCHANGE SPECIMEN FROM\nMV\n\n\nGalax diphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.360000000000001e-05,
+      "total_cost": 0.0007551000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 184
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 446,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.0001784
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n336308\nHERBARIUM\n\nDIAPENSIACEAE\n*Galax diphylla* L.\n\nUSA. NORTH CAROLINA. Surry County: In\nwoods at first rest stop on 177\nsouthbound, at state line\n\n3 August 1990\nMichael A. Vincent 4266\n\nEXCHANGE SPECIMEN FROM\n(Handwritten: MV)\nNLU0134057\n\n\n*Galax diphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA DAIVERSI\n336308\nHERBARIUM\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan Green Yellow\nRed\nMagenta White\n3/Color\nBlack\nA 1\n2\n3\n4\n56\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nDIAPENSIACEAE\nGalax diphylla L.\nUSA. NORTH CAROLINA. Surry County: In\nwoods at first rest stop on 177\nsouthbound, at state line\n3 August 1990\nMichael A. Vincent 4266\nUniversity of Louisiana at Monroe\nNLU0134057\nEXCHANGE SPECIMEN FROM\nMV\n\n\nGalax diphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "336308",
+    "scientificName": "Galax diphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "diphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Michael A. Vincent",
+    "collectorNumber": "4266",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3 August 1990",
+    "collectionDate": "1990-08-03",
+    "collectionDateEnd": "",
+    "habitat": "In woods at first rest stop",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Surry county",
+    "locality": "On 177 southbound, at state line",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nDIAPENSIACEAE\nEXCHANGE SPECIMEN FROM\n(Handwritten MV)\nNLU0134057\nUniversity of Louisiana at Monroe"
+  }
+}

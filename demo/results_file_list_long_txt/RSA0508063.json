@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508063\n\nHERBARIUM OF\n337671\nPOMONA COLLEGE\n\nPLANTS OF VIRGINIA\nBLUE RIDGE PARKWAY\n\n*Galax aphylla* L.\n\nLocality 2.5 mi. s.w. of Fancy Gap,\nCarroll Co.\n\nOccurrence Common in humus soil in *Quercus\nprinus* forest with ericaceous shrub layer\n\nDate Sept. 10, 1959       Alt. 1184 m (map)\nColl. F.R. Fosberg           No. 40271\n\nRemarks Forming loose patches,\nscapes erect.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508063\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n337671\nPLANTS OF VIRGINIA\nBLUE RIDGE PARKWAY\nGalax aphylla L.\nLocality 2.5 mi. s.w. of Fancy Gap,\nCarroll Co.\nOccurrence Common in humus soil in Quercus\nprinus forest with ericaceous shrub layer\nDate Sept. 10, 1959 Alt. 1184 m (map)\nColl. F.R. Fosberg No. 40271\nRemarks Forming loose patches,\nscapes erect.\n\n\nGalax aphylla\nQuercus prinus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2206,
+    "output": 459,
+    "cost_in": 0.00022060000000000002,
+    "cost_out": 0.00018360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508063\n\nHERBARIUM OF\n337671\nPOMONA COLLEGE\n\nPLANTS OF VIRGINIA\nBLUE RIDGE PARKWAY\n\n*Galax aphylla* L.\n\nLocality 2.5 mi. s.w. of Fancy Gap,\nCarroll Co.\n\nOccurrence Common in humus soil in *Quercus\nprinus* forest with ericaceous shrub layer\n\nDate Sept. 10, 1959       Alt. 1184 m (map)\nColl. F.R. Fosberg           No. 40271\n\nRemarks Forming loose patches,\nscapes erect.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508063\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n337671\nPLANTS OF VIRGINIA\nBLUE RIDGE PARKWAY\nGalax aphylla L.\nLocality 2.5 mi. s.w. of Fancy Gap,\nCarroll Co.\nOccurrence Common in humus soil in Quercus\nprinus forest with ericaceous shrub layer\nDate Sept. 10, 1959 Alt. 1184 m (map)\nColl. F.R. Fosberg No. 40271\nRemarks Forming loose patches,\nscapes erect.\n\n\nGalax aphylla\nQuercus prinus\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508063",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "F.r. Fosberg",
+    "collectorNumber": "40271",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 10, 1959",
+    "collectionDate": "1959-09-10",
+    "collectionDateEnd": "",
+    "habitat": "Common in humus soil in Quercus prinus forest with ericaceous shrub layer",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Forming loose patches, scapes erect.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Carroll co.",
+    "locality": "2.5 mi. s.w. of fancy gap",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1184",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Herbarium of\npomona college\nplants of virginia\nblue ridge parkway\nalt. 1184 m (map)"
+  }
+}

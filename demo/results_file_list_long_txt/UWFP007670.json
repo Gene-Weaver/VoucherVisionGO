@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nTHE UNIVERSITY\nOF WEST FLORIDA\n2701\n\nMICHAEL L. COUSENS HERBARIUM\nUNIVERSITY OF WEST FLORIDA\nUWFP007670\n\nHERBARIUM OF THE UNIVERSITY OF WEST FLORIDA\nPlants of ALABAMA\n\n*Galax aphylla* L.\n\nJefferson Co., Birmingham. In wildflower\nsection of Birmingham Botanical Gardens.\nNative; transplanted.\n\nDate Dec 29, 1980  No. 7458\nColl. James R. Burkhalter\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nTHE UNIVERSITY\nOF WEST FLORIDA\n2701\n\nHERBARIUM OF THE UNIVERSITY OF WEST FLORIDA\nPlants of ALABAMA\nGalax aphylla L.\nJefferson Co., Birmingham. In wildflower\nsection of Birmingham Botanical Gardens.\nNative; transplanted.\nDate Dec 29, 1980 No. 7458\nColl. James R. Burkhalter\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.6e-05,
+      "total_cost": 0.0007175,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 90
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2112,
+    "output": 451,
+    "cost_in": 0.00021120000000000004,
+    "cost_out": 0.00018040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nTHE UNIVERSITY\nOF WEST FLORIDA\n2701\n\nMICHAEL L. COUSENS HERBARIUM\nUNIVERSITY OF WEST FLORIDA\nUWFP007670\n\nHERBARIUM OF THE UNIVERSITY OF WEST FLORIDA\nPlants of ALABAMA\n\n*Galax aphylla* L.\n\nJefferson Co., Birmingham. In wildflower\nsection of Birmingham Botanical Gardens.\nNative; transplanted.\n\nDate Dec 29, 1980  No. 7458\nColl. James R. Burkhalter\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nTHE UNIVERSITY\nOF WEST FLORIDA\n2701\n\nHERBARIUM OF THE UNIVERSITY OF WEST FLORIDA\nPlants of ALABAMA\nGalax aphylla L.\nJefferson Co., Birmingham. In wildflower\nsection of Birmingham Botanical Gardens.\nNative; transplanted.\nDate Dec 29, 1980 No. 7458\nColl. James R. Burkhalter\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UWFP007670",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "James R. Burkhalter",
+    "collectorNumber": "7458",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Dec 29, 1980",
+    "collectionDate": "1980-12-29",
+    "collectionDateEnd": "",
+    "habitat": "In wildflower section of Birmingham Botanical Gardens. Native; transplanted.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Jefferson co.",
+    "locality": "Birmingham",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of\nThe university\nOf west florida\n2701\nMichael l. cousens herbarium\nUniversity of west florida\nHerbarium of the university of west florida\nPlants of alabama"
+  }
+}

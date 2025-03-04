@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MECKLENBURG COUNTY\n40472\nHERBARIUM\nUNCC\n\nHerbarium\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCatawba County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nHickory. Glen Hilton Park. Xeric slope with *Kalmia latifolia* and *Quercus coccinea*. USGS Bethlehem Quad.\nUTM 17 467417E 3956902N (NAD 27). Local.\n\nDavid Campbell                                                     Dec. 29, 2006\n\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Quercus coccinea*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007750000000000001,
+      "total_cost": 0.0015537500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MECKLENBURG\n40472\nHERBARIUM\nUNCC\nHerbarium\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCatawba County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nHickory. Glen Hilton Park. Xeric slope with Kalmia\nlatifolia and Quercus coccinea. USGS Bethlehem Quad.\nUTM 17 467417E 3956902N (NAD 27). Local.\nDavid Campbell\nDec. 29, 2006\n2\n14 13\n15\n2\n3\n2\n3\n4\n5\n6\n7\n8\n9\n10 11\n12\n6\nTHE C-THRU RULER COMPANY\nBloomfield, CT 06002, USA\nC-Thru Custom Products\n(860)-243-0303\n2\nW-20\ncm 1\nTO INCH\nTENTHS\n\n\nGalax urceolata\nKalmia latifolia\nQuercus coccinea\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.84e-05,
+      "total_cost": 0.0007799,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 246
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2278,
+    "output": 579,
+    "cost_in": 0.0002278,
+    "cost_out": 0.0002316
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMECKLENBURG COUNTY\n40472\nHERBARIUM\nUNCC\n\nHerbarium\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCatawba County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nHickory. Glen Hilton Park. Xeric slope with *Kalmia latifolia* and *Quercus coccinea*. USGS Bethlehem Quad.\nUTM 17 467417E 3956902N (NAD 27). Local.\n\nDavid Campbell                                                     Dec. 29, 2006\n\n\n*Galax urceolata*\n*Kalmia latifolia*\n*Quercus coccinea*\n\n\ngemini-2.0-flash OCR:\nMECKLENBURG\n40472\nHERBARIUM\nUNCC\nHerbarium\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCatawba County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nHickory. Glen Hilton Park. Xeric slope with Kalmia\nlatifolia and Quercus coccinea. USGS Bethlehem Quad.\nUTM 17 467417E 3956902N (NAD 27). Local.\nDavid Campbell\nDec. 29, 2006\n2\n14 13\n15\n2\n3\n2\n3\n4\n5\n6\n7\n8\n9\n10 11\n12\n6\nTHE C-THRU RULER COMPANY\nBloomfield, CT 06002, USA\nC-Thru Custom Products\n(860)-243-0303\n2\nW-20\ncm 1\nTO INCH\nTENTHS\n\n\nGalax urceolata\nKalmia latifolia\nQuercus coccinea\n\n",
+  "formatted_json": {
+    "catalogNumber": "40472",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "David Campbell",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Dec. 29, 2006",
+    "collectionDate": "2006-12-29",
+    "collectionDateEnd": "",
+    "habitat": "Xeric slope with Kalmia latifolia and Quercus coccinea",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Catawba County",
+    "locality": "Hickory. Glen Hilton Park.  USGS Bethlehem Quad. UTM 17 467417E 3956902N (NAD 27). Local.",
+    "verbatimCoordinates": "UTM 17 467417E 3956902N (NAD 27)",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "MECKLENBURG COUNTY\nHERBARIUM\nUNCC\nHerbarium\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nDiapensiaceae\nGalax urceolata\nKalmia latifolia\nQuercus coccinea\nTHE C-THRU RULER COMPANY\nBloomfield, CT 06002, USA\nC-Thru Custom Products\n(860)-243-0303\nW-20\ncm 1\nTO INCH\nTENTHS"
+  }
+}

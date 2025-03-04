@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n\nCopyright reserved\n\nUniversity of North Carolina\nat Chapel Hill\n\nmm\nX-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\nNCU00332017\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nChesterfield Co.\n\n*Galax aphylla* L.\nDetermined by H. E. Ahles\n\nOak-hickory forest, Little Black Creek near S.C. 265\nA. E. Radford 12348 June 5, 1956\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n86566 (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007849999999999999,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "4 5 6 7 8 9\n0 1 2 3 4\ncm\n10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nOF NORTH\nHERBARIUM\nERSITY\nUNIV\nCAROLINA\n86566\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332017\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nChesterfield Co.\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, Little Black Creek near S.C.265\nA. E. Radford\n12348\nJune 5, 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.840000000000001e-05,
+      "total_cost": 0.0007599,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 196
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 498,
+    "cost_in": 0.0002234,
+    "cost_out": 0.0001992
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n\nCopyright reserved\n\nUniversity of North Carolina\nat Chapel Hill\n\nmm\nX-rite\nColorChecker\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\nNCU00332017\n\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nChesterfield Co.\n\n*Galax aphylla* L.\nDetermined by H. E. Ahles\n\nOak-hickory forest, Little Black Creek near S.C. 265\nA. E. Radford 12348 June 5, 1956\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n86566 (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n4 5 6 7 8 9\n0 1 2 3 4\ncm\n10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUniversity of North Carolina\nat Chapel Hill\nMSCCPPCC0411\nmm\nx-rite\ncolorchecker\nOF NORTH\nHERBARIUM\nERSITY\nUNIV\nCAROLINA\n86566\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332017\nHerbarium of the University of North Carolina\nSOUTH CAROLINA\nChesterfield Co.\nGalax aphylla L.\nDetermined by H. E. Ahles\nOak-hickory forest, Little Black Creek near S.C.265\nA. E. Radford\n12348\nJune 5, 1956\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332017",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "12348",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 5, 1956",
+    "collectionDate": "1956-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Oak-hickory forest, little black creek near s.c. 265",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Chesterfield co.",
+    "locality": "Little black creek near s.c. 265",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Copyright reserved\nUniversity of north carolina\nat chapel hill\nmm\nX-rite\nColorchecker\nUniversity of north carolina herbarium\nHerbarium of the university of north carolina\nCollected for the flora of the carolinas\nUniversity of north carolina\nHerbarium\n86566 (handwritten)\nMSCCPPCC0411"
+  }
+}

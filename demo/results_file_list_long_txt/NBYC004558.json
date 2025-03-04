@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n3576\n\nNewberry College Herbarium\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\n\n*Galax aphylla* L.\n\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\n\nMiklos Treiber  460 8 May 1975\nGuy Nesom\nPlants of the Southeastern United States\n\n\nHandwritten text: *Kehukee Swamp*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000715,
+      "total_cost": 0.0014937499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\nHERBARIUM\n3576\nNewberry College Herbarlum\nNBYC004558\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\nGalax aphylla L.\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\nMiklos Treiber 460\nGuy Nesom\n8 May 1975\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.32e-05,
+      "total_cost": 0.0007347,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 133
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 508,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.0002032
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n\n3576\n\nNewberry College Herbarium\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\n\n*Galax aphylla* L.\n\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\n\nMiklos Treiber  460 8 May 1975\nGuy Nesom\nPlants of the Southeastern United States\n\n\nHandwritten text: *Kehukee Swamp*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNEWBERRY\nCOLLEGE\nHERBARIUM\n3576\nNewberry College Herbarlum\nNBYC004558\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHalifax County\nGalax aphylla L.\nIn beech-mixed hardwoods community. Steep\nslopes along borders of Kehukee Swamp and\nits tributaries, off Co. Rd. 125, 2 miles N\nof Palmyra. \"Kehukee Swamp\" location\nMiklos Treiber 460\nGuy Nesom\n8 May 1975\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "3576",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Miklos Treiber",
+    "collectorNumber": "460",
+    "identifiedBy": "Guy Nesom",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8 May 1975",
+    "collectionDate": "1975-05-08",
+    "collectionDateEnd": "",
+    "habitat": "In beech-mixed hardwoods community. Steep slopes along borders of kehukee swamp and its tributaries, off co. rd. 125, 2 miles n of palmyra. Kehukee swamp location",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Halifax county",
+    "locality": "Off co. rd. 125, 2 miles n of palmyra. Kehukee swamp location",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Newberry college herbarium\nNewberry college herbarlum\nNbyc004558\nHerbarium of the university of north carolina\nPlants of the southeastern united states\nHandwritten text kehukee swamp"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "SOUTHERN UNIVERSITY HERBARIUM\n111974\nGAS\n\nGalax aphylla L.\n\nHerbarium of Donald Joseph Drapalik\nPLANTS OF THE UNITED STATES\nDiapensiaceae\n\nAshe County, N.C.  29 Sept. 1962\nBog and woodland on top of Bluff Mountain,\n3,800 ft.\n\nD. J. Drapalik 459\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00048,
+      "total_cost": 0.00125875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 96
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY HERBARIUN\nSOUTHERN\n111374\nGAS\nGeorgia Southern University Herbarium\nGAS022768\ninches\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of Donald Joseph Drapalik\nPLANTS OF THE UNITED STATES\nGalax aphylla L.\nDiapensiaceae\nAshe County, N.C. 29 Sept. 1962\nBog and woodland on top of Bluff Mountain,\n3,800 ft.\nD. J. Drapalik 459\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.28e-05,
+      "total_cost": 0.0007343,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 132
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2115,
+    "output": 464,
+    "cost_in": 0.00021150000000000002,
+    "cost_out": 0.0001856
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSOUTHERN UNIVERSITY HERBARIUM\n111974\nGAS\n\nGalax aphylla L.\n\nHerbarium of Donald Joseph Drapalik\nPLANTS OF THE UNITED STATES\nDiapensiaceae\n\nAshe County, N.C.  29 Sept. 1962\nBog and woodland on top of Bluff Mountain,\n3,800 ft.\n\nD. J. Drapalik 459\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY HERBARIUN\nSOUTHERN\n111374\nGAS\nGeorgia Southern University Herbarium\nGAS022768\ninches\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of Donald Joseph Drapalik\nPLANTS OF THE UNITED STATES\nGalax aphylla L.\nDiapensiaceae\nAshe County, N.C. 29 Sept. 1962\nBog and woodland on top of Bluff Mountain,\n3,800 ft.\nD. J. Drapalik 459\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "111374",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. J. Drapalik",
+    "collectorNumber": "459",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 Sept. 1962",
+    "collectionDate": "1962-09-29",
+    "collectionDateEnd": "",
+    "habitat": "Bog and woodland on top of Bluff Mountain",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.C.",
+    "county": "Ashe County",
+    "locality": "Bluff Mountain",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1158",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "SOUTHERN UNIVERSITY HERBARIUM\nGAS\nHerbarium of Donald Joseph Drapalik\nPLANTS OF THE UNITED STATES\nDiapensiaceae\nGeorgia Southern University Herbarium\nGAS022768\ninches\ncm\nGalax aphylla"
+  }
+}

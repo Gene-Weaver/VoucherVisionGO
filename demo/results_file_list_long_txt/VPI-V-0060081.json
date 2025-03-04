@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "5376\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060081\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area.\nGuy L. Nesom, 1975\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\nCounty & Date                                       R. Kral #\nSmyth: 2 Aug 1960                                10903\n*Galax aphylla* L.\n\n16 mi. n. Marion in white pine-\nhardwood cove.\nDet: R. Kral 2\n\nHerbarium\nBiology Department 261557\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000885,
+      "total_cost": 0.00166375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 177
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "$326\nCard\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 509 \u03bc2\nGuy L. Nesom, 1975\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nR. Kral #\nSmyth: 2 Aug 1960\n10903\nGalax aphylla L.\n16 mi. n. Marion in white pine-\nhardwood cove.\nDet: R. Kral 2\nHerbarium\nBiology Department 28,557\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060081\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2232,
+    "output": 528,
+    "cost_in": 0.0002232,
+    "cost_out": 0.00021120000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n5376\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060081\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 , based on average guard cell area.\nGuy L. Nesom, 1975\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\nCounty & Date                                       R. Kral #\nSmyth: 2 Aug 1960                                10903\n*Galax aphylla* L.\n\n16 mi. n. Marion in white pine-\nhardwood cove.\nDet: R. Kral 2\n\nHerbarium\nBiology Department 261557\nVirginia Polytechnic Institute\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n$326\nCard\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 509 \u03bc2\nGuy L. Nesom, 1975\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nR. Kral #\nSmyth: 2 Aug 1960\n10903\nGalax aphylla L.\n16 mi. n. Marion in white pine-\nhardwood cove.\nDet: R. Kral 2\nHerbarium\nBiology Department 28,557\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060081\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vpi-v-0060081",
+    "scientificName": "Galax urceolata (poir.) brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) brummit",
+    "collectedBy": "R. kral",
+    "collectorNumber": "10903",
+    "identifiedBy": "Guy l. nesom, r. kral",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "2 aug 1960",
+    "collectionDate": "1960-08-02",
+    "collectionDateEnd": "",
+    "habitat": "16 mi. n. marion in white pine- hardwood cove.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area volume of 509 \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Smyth",
+    "locality": "16 mi. n. marion in white pine- hardwood cove.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "5376\nMassey herbarium\nVirginia polytechnic institute\nHerbarium of the university of north carolina\nAnnotation\nBy\nPlants of virginia\nCounty & date\n#\nHerbarium\nBiology department 28,557\nVirginia polytechnic institute"
+  }
+}

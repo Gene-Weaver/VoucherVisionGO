@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042870\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\n\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\n\nSteven R. Hill 21494                                      18 May 1990\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001055,
+      "total_cost": 0.0018337499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 211
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1\n2 3 4\n5\n6 7 8 9\n10\ncopyright reserved\nCLEMS\n37769\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042870\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\nSteven R. Hill 21494\n18 May 1990\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9e-05,
+      "total_cost": 0.0007715,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 225
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2320,
+    "output": 545,
+    "cost_in": 0.000232,
+    "cost_out": 0.000218
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042870\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS) 1996\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\n\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\n\nSteven R. Hill 21494                                      18 May 1990\n\n\nHandwritten text: *Galax urceolata* (Poir.) Brummitt\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1\n2 3 4\n5\n6 7 8 9\n10\ncopyright reserved\nCLEMS\n37769\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0042870\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nDet. S.R.Hill 9/90\nOCONEE County: Hill property, 1 mi SW of Mountain\nRest Lake, W side West Village Creek. NW side Old\nRocky Gap Road, Mountain Rest. Elev. ca. 1800 ft.\nFlowers white. Rather common evergreen perennial. N\nfacing slopes, N property boundary.\nSteven R. Hill 21494\n18 May 1990\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042870",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Steven R. Hill",
+    "collectorNumber": "21494",
+    "identifiedBy": "S.R.Hill",
+    "identifiedDate": "1990-09-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "18 May 1990",
+    "collectionDate": "1990-05-18",
+    "collectionDateEnd": "",
+    "habitat": "N facing slopes, N property boundary.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white. Rather common evergreen perennial.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "U.S.A.",
+    "stateProvince": "South Carolina",
+    "county": "Oconee County",
+    "locality": "Hill property, 1 mi sw of mountain rest lake, w side west village creek. nw side old rocky gap road, mountain rest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "549",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "CLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS) \n1996\nPLANTS OF SOUTH CAROLINA, U.S.A.\nDiapensiaceae\nElev. ca. 1800 ft.\n\nGalax urceolata\nGalax urceolata\n37769\ncopyright reserved\n"
+  }
+}

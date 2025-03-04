@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNCC\n\nMECKLENBURG COUNTY\n42539\nHERBARIUM\n\nHerbarium of Mecklenburg County\n(UNCC)\nPlants of North Carolina\nCatawba County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nSand Pit Road, approximately 2 miles from origination \nof track, terminal end. Steep cliffs of Jacob Fork River, \neast side. Under *Pinus strobus*.\n\nDavid Campbell\n23 April 2011\n\n\n*Galax urceolata*\n*Pinus strobus*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006000000000000001,
+      "total_cost": 0.00137875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 120
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNCC\nCOUNTY\nCKLENBURG\n42539\nHERBARIUM\n10\n12 13 11\n14\n15\n9\n8\n7\n9\n5\n3\n4\n2\ncm 1\n2\n2\nTHE C-THRU RULER COMPANY\n5002, U.SA\nW-20\n(860) 243-0303\nC-Thru Custom Products\nHerbarium of Mecklenburg County\n(UNCC)\nPlants of North Carolina\nCatawba County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nSand Pit Road, approximately 2 miles from origination\nof track, terminal end. Steep cliffs of Jacob Fork River,\neast side. Under Pinus strobus.\nDavid Campbell\n23 April 2011\nTO INCH\nTENTHS\n2\n\n\nGalax urceolata\nPinus strobus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.280000000000001e-05,
+      "total_cost": 0.0007643000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 207
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2214,
+    "output": 589,
+    "cost_in": 0.0002214,
+    "cost_out": 0.0002356
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNCC\n\nMECKLENBURG COUNTY\n42539\nHERBARIUM\n\nHerbarium of Mecklenburg County\n(UNCC)\nPlants of North Carolina\nCatawba County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nSand Pit Road, approximately 2 miles from origination \nof track, terminal end. Steep cliffs of Jacob Fork River, \neast side. Under *Pinus strobus*.\n\nDavid Campbell\n23 April 2011\n\n\n*Galax urceolata*\n*Pinus strobus*\n\n\ngemini-2.0-flash OCR:\nUNCC\nCOUNTY\nCKLENBURG\n42539\nHERBARIUM\n10\n12 13 11\n14\n15\n9\n8\n7\n9\n5\n3\n4\n2\ncm 1\n2\n2\nTHE C-THRU RULER COMPANY\n5002, U.SA\nW-20\n(860) 243-0303\nC-Thru Custom Products\nHerbarium of Mecklenburg County\n(UNCC)\nPlants of North Carolina\nCatawba County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt\nSand Pit Road, approximately 2 miles from origination\nof track, terminal end. Steep cliffs of Jacob Fork River,\neast side. Under Pinus strobus.\nDavid Campbell\n23 April 2011\nTO INCH\nTENTHS\n2\n\n\nGalax urceolata\nPinus strobus\n\n",
+  "formatted_json": {
+    "catalogNumber": "42539",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "David Campbell",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "23 April 2011",
+    "collectionDate": "2011-04-23",
+    "collectionDateEnd": "",
+    "habitat": "Sand pit road, approximately 2 miles from origination of track, terminal end. Steep cliffs of Jacob Fork River, east side. Under Pinus strobus.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Catawba county",
+    "locality": "Sand pit road, approximately 2 miles from origination of track, terminal end. Steep cliffs of Jacob Fork River, east side.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Uncc\nMECKLENBURG COUNTY\nHERBARIUM\nHerbarium of Mecklenburg County\n(UNCC)\nPlants of North Carolina\nDiapensiaceae\nPinus strobus\nCOUNTY\nCKLENBURG\n10\n12 13 11\n14\n15\n9\n8\n7\n9\n5\n3\n4\n2\ncm 1\n2\nTHE C-THRU RULER COMPANY\n5002, U.sa\nW-20\n(860) 243-0303\nC-thru custom products\nto inch\ntenths\n2"
+  }
+}

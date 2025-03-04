@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087724\n\nAustin Peay\nState University                               Bell County, Kentucky\n\n*Galax urceolata*\n\nPine Mountain State Park. Trail to Chained Rock, [incomplete data].\n\nCollector(s): M. Medley, R. Thompson\nCollection Number: 13463-85\nMay 27, 1985\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005,
+      "total_cost": 0.0012787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 100
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087724\nAustin Peay\nState University\nBell County, Kentucky\nGalax urceolata\nPine Mountain State Park. Trail to Chained Rock, [incomplete data].\nCollector(s): M. Medley, R. Thompson\nCollection Number: 13463-85\nMay 27, 1985\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.84e-05,
+      "total_cost": 0.0007199000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 96
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2067,
+    "output": 430,
+    "cost_in": 0.00020669999999999998,
+    "cost_out": 0.000172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087724\n\nAustin Peay\nState University                               Bell County, Kentucky\n\n*Galax urceolata*\n\nPine Mountain State Park. Trail to Chained Rock, [incomplete data].\n\nCollector(s): M. Medley, R. Thompson\nCollection Number: 13463-85\nMay 27, 1985\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087724\nAustin Peay\nState University\nBell County, Kentucky\nGalax urceolata\nPine Mountain State Park. Trail to Chained Rock, [incomplete data].\nCollector(s): M. Medley, R. Thompson\nCollection Number: 13463-85\nMay 27, 1985\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087724",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "M. Medley, R. Thompson",
+    "collectorNumber": "13463-85",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 27, 1985",
+    "collectionDate": "1985-05-27",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Kentucky",
+    "county": "Bell County",
+    "locality": "Pine Mountain State Park. Trail to chained rock, [incomplete data].",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin peay state university\nHerbarium (apsc)\nAustin peay\nState university"
+  }
+}

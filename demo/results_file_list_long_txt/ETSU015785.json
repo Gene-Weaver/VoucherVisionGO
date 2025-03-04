@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "ETSU Herbarium\nNo. 3285\nEAST TENNESSEE STATE UNIVERSITY\nETSU015785\n\nFlora of East Tennessee\nEast Tennessee State University\n\nFamily DIAPENSIACEAE\nScientific Name *Galax aphylla* L.\nLocality Dick Creek Gap; N. 280 Co. Unicoi (handwritten)\nDate June 21, 1966\nCollector John Payne\nHabitat: moist woods\nCommon name: Galax\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00054,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "ETSU Herbarium\nNo. 3285\nEAST TENNESSEE STATE UNIVERSITY\nETSU015785\nFlora of East Tennessee\nEast Tennessee State University\nFamily DIAPENSIACEAE\nScientific Name Galax aphylla L.\nLocality Dick Creek Gap; N. Unicoi\nDate June 21, 1966\nCollector John Payne\nHabitat: moist woods\nCommon name: Galax\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nHandwritten text:\n280Co.\n144\n\n\nGalax aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007403,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2135,
+    "output": 437,
+    "cost_in": 0.00021350000000000004,
+    "cost_out": 0.00017480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nETSU Herbarium\nNo. 3285\nEAST TENNESSEE STATE UNIVERSITY\nETSU015785\n\nFlora of East Tennessee\nEast Tennessee State University\n\nFamily DIAPENSIACEAE\nScientific Name *Galax aphylla* L.\nLocality Dick Creek Gap; N. 280 Co. Unicoi (handwritten)\nDate June 21, 1966\nCollector John Payne\nHabitat: moist woods\nCommon name: Galax\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nETSU Herbarium\nNo. 3285\nEAST TENNESSEE STATE UNIVERSITY\nETSU015785\nFlora of East Tennessee\nEast Tennessee State University\nFamily DIAPENSIACEAE\nScientific Name Galax aphylla L.\nLocality Dick Creek Gap; N. Unicoi\nDate June 21, 1966\nCollector John Payne\nHabitat: moist woods\nCommon name: Galax\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9 10\ncm\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nHandwritten text:\n280Co.\n144\n\n\nGalax aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015785",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Diapensiaceae indet",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "John Payne",
+    "collectorNumber": "3285",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 21, 1966",
+    "collectionDate": "1966-06-21",
+    "collectionDateEnd": "",
+    "habitat": "Moist woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi",
+    "locality": "Dick Creek Gap; N. 280 Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora of East Tennessee\nEast Tennessee State University\nCommon name Galax\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nHandwritten text\n144"
+  }
+}

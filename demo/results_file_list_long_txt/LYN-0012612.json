@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012612\n\nLYNCHBURG COLLEGE\n18144\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 459 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\n\nCity of Lynchburg COUNTY\n\nNO. 14428 18144 (handwritten)\n*Galax aphylla* L.\n\nUp slope Blackwater Creek tributary\nback of Langhorne Square, corner of\nLanghorne Rd. and Tate Springs Rd.\n\nCOLLECTORS W.S. Hooks       July 31, '89 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001,
+      "total_cost": 0.00177875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 200
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012612\nLYNCHBURG\nCOLLEGE\n18144\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nbased on average guard cell area\nvolume of 459 \u03bc2\nGuy L. Nesom, 1975\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCity of Lynchburg COUNTY\nNO. 18144\nGalax aphylla L.\nUp slope Blackwater Creek tributory\nback of Langhorne Square, corner of\nLanghorne Rd. and Tate Springs Rd.\nCOLLECTORS W.S. Hooks\nJuly 31, '89\n1\n2\n3\n4\n5 6 7 8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.2e-05,
+      "total_cost": 0.0007635000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 205
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2304,
+    "output": 523,
+    "cost_in": 0.00023040000000000002,
+    "cost_out": 0.00020920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012612\n\nLYNCHBURG COLLEGE\n18144\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 459 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\n\nCity of Lynchburg COUNTY\n\nNO. 14428 18144 (handwritten)\n*Galax aphylla* L.\n\nUp slope Blackwater Creek tributary\nback of Langhorne Square, corner of\nLanghorne Rd. and Tate Springs Rd.\n\nCOLLECTORS W.S. Hooks       July 31, '89 (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012612\nLYNCHBURG\nCOLLEGE\n18144\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nbased on average guard cell area\nvolume of 459 \u03bc2\nGuy L. Nesom, 1975\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCity of Lynchburg COUNTY\nNO. 18144\nGalax aphylla L.\nUp slope Blackwater Creek tributory\nback of Langhorne Square, corner of\nLanghorne Rd. and Tate Springs Rd.\nCOLLECTORS W.S. Hooks\nJuly 31, '89\n1\n2\n3\n4\n5 6 7 8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012612",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "W.s. Hooks",
+    "collectorNumber": "18144",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 31, '89",
+    "collectionDate": "1989-07-31",
+    "collectionDateEnd": "",
+    "habitat": "Up slope Blackwater Creek tributary",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 459 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "City of lynchburg",
+    "locality": "Back of langhorne square, corner of langhorne rd. and tate springs rd.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nLYNCHBURG\nCOLLEGE\ncm\ncopyright reserved"
+  }
+}

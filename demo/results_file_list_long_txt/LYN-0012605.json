@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012605\n\n4098\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\nPIEDMONT\nCampbell COUNTY\n\nNO. 4098\n*Galax aphylla* L.\n\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\n\nCOLLECTORS\nG.W. Ramsey                                      June 13, 19_66_\n\nDIAPENSIA FAMILY\nBeetleweed\n\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000885,
+      "total_cost": 0.00166375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 177
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DIAPENSIA FAMILY\nBeetleweed\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012605\nCOLLEGE\n4098\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\nNO.4098\nGalax aphylla L.\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\nCOLLECTORS\nG.W. Ramsey June 13, 1966\nLYN\n1 2 3 4 5 6 7 8 9 10 Lynchburg\ncm College\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2274,
+    "output": 517,
+    "cost_in": 0.0002274,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012605\n\n4098\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\nPIEDMONT\nCampbell COUNTY\n\nNO. 4098\n*Galax aphylla* L.\n\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\n\nCOLLECTORS\nG.W. Ramsey                                      June 13, 19_66_\n\nDIAPENSIA FAMILY\nBeetleweed\n\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDIAPENSIA FAMILY\nBeetleweed\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012605\nCOLLEGE\n4098\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA PIEDMONT\nCampbell COUNTY\nNO.4098\nGalax aphylla L.\nShaded creek bank near origin of upper middle\nTomahawk Cr. near Sleepy Hollow Rd. in Rainbow\nForest\nCOLLECTORS\nG.W. Ramsey June 13, 1966\nLYN\n1 2 3 4 5 6 7 8 9 10 Lynchburg\ncm College\ncopyright reserved\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012605",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "G.w. Ramsey",
+    "collectorNumber": "4098",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 13, 19_66_",
+    "collectionDate": "1966-06-13",
+    "collectionDateEnd": "",
+    "habitat": "Shaded creek bank near origin of upper middle Tomahawk Cr. near Sleepy Hollow Rd. in Rainbow Forest",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Campbell",
+    "locality": "Tomahawk Cr. near Sleepy Hollow Rd. in Rainbow Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF VIRGINIA\nPIEDMONT\nDIAPENSIA FAMILY\nBeetleweed\ncopyright reserved\nLYN\nLynchburg\ncm College"
+  }
+}

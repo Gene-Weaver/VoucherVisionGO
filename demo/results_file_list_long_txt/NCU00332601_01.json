@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nat Chapel Hill\nUniversity of North Carolina\n\nx-rite\ncolorchecker\nMSCCPPPE041!\nMSCCPPCC0411\n\n7\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\n\n*Galax aphylla* L.\n\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\n\nAbundant along bluffs of river; leaves\nglossy-green; flowers white; roots\nreddish.\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332601\nRogers McVaugh, no. 9010       2 June 1948\n\nUNIVERSITY\nOF NORTH\nCAROLINA\n360543\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00098,
+      "total_cost": 0.0017587500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 196
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "at Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPPE041!\nMSCCPPCC0411\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nGalax aphylla L.\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\nAbundant along bluffs of river; leaves\nglossy-green; flowers white; roots\nreddish.\nNCU00332601\nRogers McVaugh, no.\n9010\n2 June 1948\nVERSIT)\nUNI\nOF NORTH\nCAROLINA\n360543\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.240000000000001e-05,
+      "total_cost": 0.0007639000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 206
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2288,
+    "output": 540,
+    "cost_in": 0.00022880000000000003,
+    "cost_out": 0.00021600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nat Chapel Hill\nUniversity of North Carolina\n\nx-rite\ncolorchecker\nMSCCPPPE041!\nMSCCPPCC0411\n\n7\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\n\n*Galax aphylla* L.\n\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\n\nAbundant along bluffs of river; leaves\nglossy-green; flowers white; roots\nreddish.\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332601\nRogers McVaugh, no. 9010       2 June 1948\n\nUNIVERSITY\nOF NORTH\nCAROLINA\n360543\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPPE041!\nMSCCPPCC0411\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nGalax aphylla L.\nDADE CO.: Summit of Lookout Mountain; near Little River\nabout 1.5 miles east of west brow, above Sulphur Springs\nStation; pine-oak-hickory woodlands, in sandy soil; elev.\nabout 600 meters.\nAbundant along bluffs of river; leaves\nglossy-green; flowers white; roots\nreddish.\nNCU00332601\nRogers McVaugh, no.\n9010\n2 June 1948\nVERSIT)\nUNI\nOF NORTH\nCAROLINA\n360543\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332601",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Rogers McVaugh",
+    "collectorNumber": "9010",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 June 1948",
+    "collectionDate": "1948-06-02",
+    "collectionDateEnd": "",
+    "habitat": "Pine-oak-hickory woodlands, in sandy soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Abundant along bluffs of river; leaves glossy-green; flowers white; roots reddish.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Dade County",
+    "locality": "Summit of Lookout Mountain; near Little River about 1.5 miles east of west brow, above Sulphur Springs Station; elev. about 600 meters.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "600",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "NCU\nat Chapel Hill\nUniversity of North Carolina\nx-rite\ncolorchecker\nMSCCPPPE041!\nMSCCPPCC0411\n7\nPLANTS OF GEORGIA\nHERBARIUM OF THE UNIVERSITY OF MICHIGAN\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nUNIVERSITY\nOF NORTH\nCAROLINA\n360543\ncopyright reserved"
+  }
+}

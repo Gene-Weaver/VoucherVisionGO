@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n108775\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nMacon                                       County\nGalax aphylla L.\nHighlands                                   Edge of woods near\nLake Ravenel                                  June 7, 1944\nNo. 787\nCatherine Keever\n\n\nHandwritten text: Edge of woods near, June 7, 1944, Highlands, Lake Ravenel, No. 787, Catherine Keever.\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008150000000000001,
+      "total_cost": 0.00159375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095580\nDUKE UNIVERSITY\nHERBARIUM\n108/75\nDuke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nMacon\nGalax aphylla L.\nHighlands\nLake Ravenel\nNo.787\nCatherine Keever\nCounty\nEdge of woods near\nJne 7, 1944\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.84e-05,
+      "total_cost": 0.0007399,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 146
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2202,
+    "output": 464,
+    "cost_in": 0.0002202,
+    "cost_out": 0.0001856
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE UNIVERSITY\nHERBARIUM\n108775\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nMacon                                       County\nGalax aphylla L.\nHighlands                                   Edge of woods near\nLake Ravenel                                  June 7, 1944\nNo. 787\nCatherine Keever\n\n\nHandwritten text: Edge of woods near, June 7, 1944, Highlands, Lake Ravenel, No. 787, Catherine Keever.\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095580\nDUKE UNIVERSITY\nHERBARIUM\n108/75\nDuke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nMacon\nGalax aphylla L.\nHighlands\nLake Ravenel\nNo.787\nCatherine Keever\nCounty\nEdge of woods near\nJne 7, 1944\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095580",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Catherine Keever",
+    "collectorNumber": "787",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Jne 7, 1944",
+    "collectionDate": "1944-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Edge of woods near",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon",
+    "locality": "Highlands, Lake Ravenel",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke University Herbarium\n108775\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nGalax aphylla"
+  }
+}

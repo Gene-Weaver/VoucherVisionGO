@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060068\n\n(Handwritten Text)\nName - Coltsfoot\nLocality - In swamp,\nwooded and hillsides.\nHabitat - It adapts itself to most any kind of soil.\nIt is an herb, and many found in this locality.\nViolets, pines and Mt. Laurel are found growing around this herb.\nNancy Pendleton\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPatrick                                                County\n*Galax aphylla* L.\n\n(Handwritten Text)\nIn swamp, woods\n& hillside\n\nHerbarium 28,539\nBiology Department\nVirginia Polytechnic Institute\nNancy Pendleton\n4-H Club\nCollector                                                Date\n                                                        1939\n124\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001155,
+      "total_cost": 0.00193375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 231
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060068\nName - Coltsfoot\nLocality-In swamp,\nwoods and hillsides.\nHabitat - It adopts its\nself to most any kind\nof soil.\nIt is an herb, and\nmany found in this\nlocality.\nViolets, pines and\nMt. Laurel are found\ngrowing around this\nherb.\nNancy Pendleton\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of491\u03bc 2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPatrick\nGalax aphylla L.\nCounty\nIn swamp, woods\n& hillside\nNancy Pendleton\nCollector\n1939\nDate\n\nHandwritten text:\nName - Coltsfoot\nLocality-In swamp,\nwoods and hillsides.\nHabitat - It adopts its\nself to most any kind\nof soil.\nIt is an herb, and\nmany found in this\nlocality.\nViolets, pines and\nMt. Laurel are found\ngrowing around this\nherb.\nNancy Pendleton\nIn swamp, woods\n& hillside\nNancy Pendleton\n4-H Club\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001156,
+      "total_cost": 0.0007971,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 289
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2436,
+    "output": 543,
+    "cost_in": 0.00024359999999999999,
+    "cost_out": 0.0002172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060068\n\n(Handwritten Text)\nName - Coltsfoot\nLocality - In swamp,\nwooded and hillsides.\nHabitat - It adapts itself to most any kind of soil.\nIt is an herb, and many found in this locality.\nViolets, pines and Mt. Laurel are found growing around this herb.\nNancy Pendleton\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPatrick                                                County\n*Galax aphylla* L.\n\n(Handwritten Text)\nIn swamp, woods\n& hillside\n\nHerbarium 28,539\nBiology Department\nVirginia Polytechnic Institute\nNancy Pendleton\n4-H Club\nCollector                                                Date\n                                                        1939\n124\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060068\nName - Coltsfoot\nLocality-In swamp,\nwoods and hillsides.\nHabitat - It adopts its\nself to most any kind\nof soil.\nIt is an herb, and\nmany found in this\nlocality.\nViolets, pines and\nMt. Laurel are found\ngrowing around this\nherb.\nNancy Pendleton\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of491\u03bc 2\nGuy L. Nesom, 1975\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nPatrick\nGalax aphylla L.\nCounty\nIn swamp, woods\n& hillside\nNancy Pendleton\nCollector\n1939\nDate\n\nHandwritten text:\nName - Coltsfoot\nLocality-In swamp,\nwoods and hillsides.\nHabitat - It adopts its\nself to most any kind\nof soil.\nIt is an herb, and\nmany found in this\nlocality.\nViolets, pines and\nMt. Laurel are found\ngrowing around this\nherb.\nNancy Pendleton\nIn swamp, woods\n& hillside\nNancy Pendleton\n4-H Club\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0060068",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Nancy Pendleton",
+    "collectorNumber": "28,539",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1939",
+    "collectionDate": "1939-00-00",
+    "collectionDateEnd": "",
+    "habitat": "It adopts its self to most any kind of soil. It is an herb, and many found in this locality. Violets, pines and Mt. Laurel are found growing around this herb.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of491\u03bc 2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Patrick",
+    "locality": "In swamp, woods & hillside",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey Herbarium\nVirginia Polytechnic Institute\nName - Coltsfoot\nLocality-In swamp,\nwoods and hillsides.\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n4-H Club\nGalax aphylla\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nGalax aphylla L."
+  }
+}

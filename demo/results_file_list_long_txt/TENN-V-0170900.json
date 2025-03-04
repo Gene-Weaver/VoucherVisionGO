@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170900\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nMcMinn County\n\n*Galax urceolata* Brummitt\n\nMecca Quadrangle (1957, photorevised 1980). Cherokee\nNational Forest--Starr Mt. Low woods SE of Bowers\nSpring along Bullet Creek. 1680 ft.\n\nNo. 347 6 June 90\nColl. Dan Wyrick, B.E. Wofford, Paul Davison\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\n(Handwritten \"6277\")\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000795,
+      "total_cost": 0.00157375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170900\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nMcMinn County\nGalax urceolata Brummitt\nMecca Quadrangle (1957, photorevised 1980). Cherokee\nNational Forest--Starr Mt. Low woods SE of Bowers\nSpring along Bullet Creek. 1680 ft.\nNo. 347 6 June 90\nColl. Dan Wyrick, B.E. Wofford, Paul Davison\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.04e-05,
+      "total_cost": 0.0007319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 126
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2171,
+    "output": 487,
+    "cost_in": 0.00021710000000000002,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170900\n\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nMcMinn County\n\n*Galax urceolata* Brummitt\n\nMecca Quadrangle (1957, photorevised 1980). Cherokee\nNational Forest--Starr Mt. Low woods SE of Bowers\nSpring along Bullet Creek. 1680 ft.\n\nNo. 347 6 June 90\nColl. Dan Wyrick, B.E. Wofford, Paul Davison\n\nHERBARIUM OF THE\nNo.\n6277\nUNIVERSITY OF TENNESSEE\n\n(Handwritten \"6277\")\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170900\nHERBARIUM OF THE UNIVERSITY OF TENNESSEE\nPlants of Tennessee\nMcMinn County\nGalax urceolata Brummitt\nMecca Quadrangle (1957, photorevised 1980). Cherokee\nNational Forest--Starr Mt. Low woods SE of Bowers\nSpring along Bullet Creek. 1680 ft.\nNo. 347 6 June 90\nColl. Dan Wyrick, B.E. Wofford, Paul Davison\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170900",
+    "scientificName": "Galax urceolata Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "Brummitt",
+    "collectedBy": "Dan Wyrick, B.E. Wofford, Paul Davison",
+    "collectorNumber": "347",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6 June 90",
+    "collectionDate": "1990-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Low woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Mcminn county",
+    "locality": "Mecca quadrangle (1957, photorevised 1980). cherokee national forest--starr mt. se of bowers spring along bullet creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "512",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "University of tennessee knoxville\nHerbarium of the university of tennessee\nPlants of tennessee\n1680 ft.\nHerbarium of the university of tennessee\nNo. 6277\n(Handwritten 6277)"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026119\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?)\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n*Galax aphylla* L.\nWhite Rock, 4 mi W of Ewing\n3400' elev.\nLee Co.                               Sept. 14, 1974\nC.E. Stevens & A. M. Harvill 3265-2\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007750000000000001,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026119\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 (?) , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla L.\nWhite Rocker, 4 mi W of Euniy\n3400' Ebu,\nLee lo.\nSept. 14, 1974\nGE. Alever & A. M. Harvill 3265-2\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.12e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2205,
+    "output": 494,
+    "cost_in": 0.0002205,
+    "cost_out": 0.0001976
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026119\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6(?)\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n*Galax aphylla* L.\nWhite Rock, 4 mi W of Ewing\n3400' elev.\nLee Co.                               Sept. 14, 1974\nC.E. Stevens & A. M. Harvill 3265-2\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026119\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 (?) , based on average guard cell area\nGuy L. Nesom, 1975\nFLORA VIRGINICA\nGalax aphylla L.\nWhite Rocker, 4 mi W of Euniy\n3400' Ebu,\nLee lo.\nSept. 14, 1974\nGE. Alever & A. M. Harvill 3265-2\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026119",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C.e. Stevens, A. M. Harvill",
+    "collectorNumber": "3265-2",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "?",
+    "identifiedRemarks": "Based on average guard cell area",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Sept. 14, 1974",
+    "collectionDate": "1974-09-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6 (?)",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Lee co.",
+    "locality": "White rock, 4 mi w of ewing",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1036",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHerbarium of the university of north carolina\nFlora virginica\nFarm\nHarvill-stevens\nHerbarium\nCopyright reserved"
+  }
+}

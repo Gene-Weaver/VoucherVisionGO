@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082925\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n43486\n\nGrays Mtn. Va. 2/XI/53 (handwritten)\nHerb. John A. Lowell.\n\n*Galax aphylla* L. (handwritten)\n\nIn montibus Virgini\u00e6 et Carolin\u00e6 Septentrionalis,\nlegerunt A. GRAY et J. CAREY, Julio 1841,\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005849999999999999,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082925\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n43486\nTIFFEN Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta White\n3/Color\nBlack\nHerb. John A. Lowell.\nGalax aphylla L.\nIn montibus Virgini\u00e6 et Carolin\u00e6 Septentrionalis,\nlegerunt A. GRAY et J. CAREY, Julio 1841,\n\nHandwritten text:\nGrains M.4.9.2pr.11.53\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.440000000000001e-05,
+      "total_cost": 0.0007459000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 161
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 529,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.0002116
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082925\n\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n43486\n\nGrays Mtn. Va. 2/XI/53 (handwritten)\nHerb. John A. Lowell.\n\n*Galax aphylla* L. (handwritten)\n\nIn montibus Virgini\u00e6 et Carolin\u00e6 Septentrionalis,\nlegerunt A. GRAY et J. CAREY, Julio 1841,\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082925\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n43486\nTIFFEN Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta White\n3/Color\nBlack\nHerb. John A. Lowell.\nGalax aphylla L.\nIn montibus Virgini\u00e6 et Carolin\u00e6 Septentrionalis,\nlegerunt A. GRAY et J. CAREY, Julio 1841,\n\nHandwritten text:\nGrains M.4.9.2pr.11.53\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082925",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. Gray, J. Carey",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2/XI/53, Julio 1841",
+    "collectionDate": "1841-07-00",
+    "collectionDateEnd": "1953-11-02",
+    "habitat": "In montibus Virgini\u00e6 et Carolin\u00e6 Septentrionalis",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia, North Carolina",
+    "county": "",
+    "locality": "Grays Mtn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North Carolina State University\nHerbarium (NCSC)\nHERBARIUM\nNORTH CAROLINA STATE COLLEGE\n43486\nHerb. John A. Lowell.\nHandwritten text\nGrains M.4.9.2pr.11.53\nTIFFEN Gray Scale\nR\nG\nB\nW\nG\nK\nC\nY\nM\nTIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta White\n3/Color\nBlack"
+  }
+}

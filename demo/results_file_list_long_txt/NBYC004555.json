@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n12500\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nCommon on steep slope next to road.\n\nNORTH CAROLINA- JACKSON CO.: Roadside along NC\n1100 (gravel road), 1.3 mi W of jct with NC 107. SW\nof Cashiers.\n\n13 July 1994                                with Steven Hill\nCharles N. Horn # 8131\n\nHandwritten Text: # 8131\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000755,
+      "total_cost": 0.00153375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 151
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\nHERBARIUM\n12500\nNewberry College Herbarium\nNBYC004555\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax aphylla L.\nDiapensiaceae\nCommon on steep slope next to road.\nNORTH CAROLINA- JACKSON CO.: Roadside along NC\n1100 (gravel road), 1.3 mi W of jct with NC 107. SW\nof Cashiers.\n13 July 1994\nwith Steven Hill\nCharles N. Horn # 8131\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.6000000000000006e-05,
+      "total_cost": 0.0007375000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 140
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2177,
+    "output": 471,
+    "cost_in": 0.00021770000000000003,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n12500\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nCommon on steep slope next to road.\n\nNORTH CAROLINA- JACKSON CO.: Roadside along NC\n1100 (gravel road), 1.3 mi W of jct with NC 107. SW\nof Cashiers.\n\n13 July 1994                                with Steven Hill\nCharles N. Horn # 8131\n\nHandwritten Text: # 8131\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNEWBERRY\nCOLLEGE\nHERBARIUM\n12500\nNewberry College Herbarium\nNBYC004555\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax aphylla L.\nDiapensiaceae\nCommon on steep slope next to road.\nNORTH CAROLINA- JACKSON CO.: Roadside along NC\n1100 (gravel road), 1.3 mi W of jct with NC 107. SW\nof Cashiers.\n13 July 1994\nwith Steven Hill\nCharles N. Horn # 8131\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "12500",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles N. Horn, Steven Hill",
+    "collectorNumber": "8131",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 July 1994",
+    "collectionDate": "1994-07-13",
+    "collectionDateEnd": "",
+    "habitat": "Common on steep slope next to road.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Jackson co.",
+    "locality": "Roadside along nc 1100 (gravel road), 1.3 mi w of jct with nc 107. sw of cashiers.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Newberry\nCollege\nNewberry College Herbarium\nNbyc004555\nHerbarium of newberry college (nbyc)\nPlants of north carolina, usa\nHandwritten text # 8131"
+  }
+}

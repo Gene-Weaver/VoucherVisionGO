@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011543\n\n5749\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Transylvania\n*Galax aphylla* L.\nYWCA Camp, Burgiss Glenn.\n\nCollector W.E. Merrill Date 8-13-28\n(Handwritten: Transylvania, W.E. Merrill)\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00044,
+      "total_cost": 0.0012187500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 88
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Furman University Herbarium\nFUGR0011543\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5749\nHerbarium of Furman University\nGreenville, South Carolina\nCounty\nTransylvania\nGalax aphylla L.\nYWCA Camp, Burgiss Glenn.\nCollector\nW.E. Merrill\nDate\n8-13-28\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.88e-05,
+      "total_cost": 0.0007203,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 97
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2063,
+    "output": 443,
+    "cost_in": 0.00020630000000000003,
+    "cost_out": 0.0001772
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFurman University Herbarium\nFUGR0011543\n\n5749\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Transylvania\n*Galax aphylla* L.\nYWCA Camp, Burgiss Glenn.\n\nCollector W.E. Merrill Date 8-13-28\n(Handwritten: Transylvania, W.E. Merrill)\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFurman University Herbarium\nFUGR0011543\nFURMAN\n3300 Poinsett Highway\nGreenville, South Carolina 29613\n5749\nHerbarium of Furman University\nGreenville, South Carolina\nCounty\nTransylvania\nGalax aphylla L.\nYWCA Camp, Burgiss Glenn.\nCollector\nW.E. Merrill\nDate\n8-13-28\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FUGR0011543",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W.e. merrill",
+    "collectorNumber": "5749",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8-13-28",
+    "collectionDate": "1928-08-13",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Transylvania",
+    "locality": "Ywca camp, burgiss glenn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Furman university herbarium\nFurman\n3300 poinsett highway\nGreenville, south carolina 29613\nHerbarium of furman university\nGreenville, south carolina\n"
+  }
+}

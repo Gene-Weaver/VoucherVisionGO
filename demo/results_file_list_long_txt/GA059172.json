@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\n\n106762\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nSteep W-facing slopes, pine land 3.6 mi\nW 22\u00b0S of Flowery Branch.\n\nw/ Preston Adams\nWilbur H. Duncan\n18926              21 June 1955\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000855,
+      "total_cost": 0.00163375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 171
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n106762\nUNIV. OF GEORGIA\nHERBARIUM\nSpecimen Examined for\nGeorgia Atlas Project\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep W-facing slopes, pine land 3.6 mi\nW 22\u00b0S of Flowery Branch.\nUNIVERSITY OF GEORGIA\n9 November 2005\nw/ Preston Adams\nGA059172\nWilbur H. Duncan\n18926\n21 June 1955\nInches\n2\n3\n4\n17\n8\n2\n3\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nIMAGED 2013\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001076,
+      "total_cost": 0.0007891,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 269
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2318,
+    "output": 588,
+    "cost_in": 0.00023180000000000002,
+    "cost_out": 0.0002352
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6\nGuy L. Nesom, 1975\n\n106762\nUNIV. OF GEORGIA\nHERBARIUM\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nSteep W-facing slopes, pine land 3.6 mi\nW 22\u00b0S of Flowery Branch.\n\nw/ Preston Adams\nWilbur H. Duncan\n18926              21 June 1955\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n106762\nUNIV. OF GEORGIA\nHERBARIUM\nSpecimen Examined for\nGeorgia Atlas Project\nHerbarium of The University of Georgia\nHALL COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nSteep W-facing slopes, pine land 3.6 mi\nW 22\u00b0S of Flowery Branch.\nUNIVERSITY OF GEORGIA\n9 November 2005\nw/ Preston Adams\nGA059172\nWilbur H. Duncan\n18926\n21 June 1955\nInches\n2\n3\n4\n17\n8\n2\n3\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nIMAGED 2013\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "106762",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Wilbur H. Duncan, Preston Adams",
+    "collectorNumber": "18926",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "21 June 1955",
+    "collectionDate": "1955-06-21",
+    "collectionDateEnd": "",
+    "habitat": "Steep w-facing slopes, pine land",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Hall County",
+    "locality": "3.6 mi w 22\u00b0s of flowery branch.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina Herbarium\nUniv. of Georgia Herbarium\nSpecimen examined for\nGeorgia atlas project\n9 november 2005\nHerbarium of the university of georgia\nFlora of georgia\nimaged 2013\nga059172\ninches\n2\n3\n4\n17\n8\n2\n3\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres tiffen\u00ae color control patches\nBlue\nCyan\nGreen\nyellow\nRed\nMagenta\nWhite\n3/color\nBlack"
+  }
+}

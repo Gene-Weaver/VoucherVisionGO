@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0134768\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nALABAMA\nCherokee Co.; 22 Jun 1993 R. Kral 82619\n*Galax aphylla* L.\n\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1\u20132 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\n\nDET.: R. Kral (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00079,
+      "total_cost": 0.00156875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 158
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0134768\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\nGalax aphylla L.\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\nDEt.:R.Kral\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.439999999999999e-05,
+      "total_cost": 0.0007559000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 186
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2216,
+    "output": 507,
+    "cost_in": 0.00022160000000000002,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0134768\n\nGalax urceolata (Poir.) Brummitt\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\n\nALABAMA\nCherokee Co.; 22 Jun 1993 R. Kral 82619\n*Galax aphylla* L.\n\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1\u20132 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\n\nDET.: R. Kral (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0134768\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nTIFFEN\u00ae Gray Scale\nThe Tiffen Company, 2007\nGalax urceolata (Poir.) Brummit\nDet. Mason Brock, Austin Peay State University (APSC)\nJanuary 2023\nALABAMA\nCherokee Co.; 22 Jun 1993 R.Kral 82619\nGalax aphylla L.\nWoods over sandstone, along small creek\nby where crossed by county 11 ca. 1-2 mi.\nN of AL 68, toward E face of escarpment\nE of Collinsville.\nDEt.:R.Kral\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0134768",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "82619",
+    "identifiedBy": "Mason Brock",
+    "identifiedDate": "2023-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "22 Jun 1993",
+    "collectionDate": "1993-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Woods over sandstone, along small creek by where crossed by county 11 ca. 1\u20132 mi. N of AL 68, toward E face of escarpment E of Collinsville.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Cherokee Co.",
+    "locality": "Where crossed by county 11 ca. 1\u20132 mi. N of AL 68, toward E face of escarpment E of Collinsville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Austin Peay State University\nHerbarium (APSC)\nGalax aphylla L.\nDEt.R.Kral"
+  }
+}

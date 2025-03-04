@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "VSC 0001505\n\nDIAPENSIACEAE\n*\n_Galax aphylla_ L.\n\nU.S.A. NORTH CAROLINA. Burke County: S of Linville Falls, along Kistler Memorial Hwy.; ca. 0.8 airmile NW Laurel Knob, Pisgah National Forest; USGS Linville Falls (NC) Quad., UTM 17 416734E 3975904N (WGS84/NAD83); bluff overlooking Linville River, elev. ca. 3900 ft.; plants locally abundant; flowers white.\n\nRichard Carter 6719\ndet. R. Carter                      17 Jun 1988\nValdosta State University Herbarium (VSC)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00086,
+      "total_cost": 0.0016387500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DIAPENSIACEAE\nGalax aphylla L.\nU.S.A. NORTH CAROLINA. Burke County: S of Linville Falls,\nalong Kistler Memorial Hwy.; ca. 0.8 airmile NW Laurel Knob,\nPisgah National Forest; USGS Linville Falls (NC) Quad., UTM 17\n416734E 3975904N (WGS84/NAD83); bluff overlooking Linville\nRiver, elev. ca. 3900 ft.; plants locally abundant; flowers white.\nRichard Carter 6719\ndet. R. Carter\n17 Jun 1988\nValdosta State University Herbarium (VSC)\nValdosta State University Herbarium\nVSC 0001505\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.120000000000001e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2209,
+    "output": 527,
+    "cost_in": 0.0002209,
+    "cost_out": 0.00021080000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nVSC 0001505\n\nDIAPENSIACEAE\n*\n_Galax aphylla_ L.\n\nU.S.A. NORTH CAROLINA. Burke County: S of Linville Falls, along Kistler Memorial Hwy.; ca. 0.8 airmile NW Laurel Knob, Pisgah National Forest; USGS Linville Falls (NC) Quad., UTM 17 416734E 3975904N (WGS84/NAD83); bluff overlooking Linville River, elev. ca. 3900 ft.; plants locally abundant; flowers white.\n\nRichard Carter 6719\ndet. R. Carter                      17 Jun 1988\nValdosta State University Herbarium (VSC)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDIAPENSIACEAE\nGalax aphylla L.\nU.S.A. NORTH CAROLINA. Burke County: S of Linville Falls,\nalong Kistler Memorial Hwy.; ca. 0.8 airmile NW Laurel Knob,\nPisgah National Forest; USGS Linville Falls (NC) Quad., UTM 17\n416734E 3975904N (WGS84/NAD83); bluff overlooking Linville\nRiver, elev. ca. 3900 ft.; plants locally abundant; flowers white.\nRichard Carter 6719\ndet. R. Carter\n17 Jun 1988\nValdosta State University Herbarium (VSC)\nValdosta State University Herbarium\nVSC 0001505\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VSC 0001505",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Richard Carter",
+    "collectorNumber": "6719",
+    "identifiedBy": "R. Carter",
+    "identifiedDate": "1988-06-17",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "1988-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Bluff overlooking linville river, elev. ca. 3900 ft.; plants locally abundant; flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Burke county",
+    "locality": "S of linville falls, along kistler memorial hwy.; ca. 0.8 airmile nw laurel knob, pisgah national forest; usgs linville falls (nc) quad., utm 17 416734e 3975904n (wgs84/nad83)",
+    "verbatimCoordinates": "UTM 17 416734E 3975904N (WGS84/NAD83)",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1189",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Diapensiaceae\nValdosta state university herbarium (vsc)\nValdosta state university herbarium"
+  }
+}

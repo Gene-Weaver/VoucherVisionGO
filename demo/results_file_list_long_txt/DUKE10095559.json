@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n169537\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095559\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nBurke Co.: Shortoff Mountain about\n16 miles northwest of Morganton on Route\n126. Dry wooded slopes and summit.\n\nOccasional on upper slopes and\nsummit. Corolla white.\n\nR. L. WILBUR NO. 7007                    27 May 1964\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008900000000000001,
+      "total_cost": 0.0016687499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 178
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Duke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nBurke Co.: Shortoff Mountain about\n16 miles northwest of Morganton on Route\n126. Dry wooded slopes and summit.\nOccasional on upper slopes and\nsummit. Corolla white.\nR. L. WILBUR NO. 7007\n27 May 1964\nDUKE UNIVERSITY\nHERBARIUM\n269537\nDUKE UNIVERSITY HERBARIUM\nDUKE10095559\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.280000000000001e-05,
+      "total_cost": 0.0007543000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 182
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2251,
+    "output": 568,
+    "cost_in": 0.0002251,
+    "cost_out": 0.00022720000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY\nHERBARIUM\n169537\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095559\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nBurke Co.: Shortoff Mountain about\n16 miles northwest of Morganton on Route\n126. Dry wooded slopes and summit.\n\nOccasional on upper slopes and\nsummit. Corolla white.\n\nR. L. WILBUR NO. 7007                    27 May 1964\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDuke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nBurke Co.: Shortoff Mountain about\n16 miles northwest of Morganton on Route\n126. Dry wooded slopes and summit.\nOccasional on upper slopes and\nsummit. Corolla white.\nR. L. WILBUR NO. 7007\n27 May 1964\nDUKE UNIVERSITY\nHERBARIUM\n269537\nDUKE UNIVERSITY HERBARIUM\nDUKE10095559\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095559",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. L. Wilbur",
+    "collectorNumber": "7007",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "27 May 1964",
+    "collectionDate": "1964-05-27",
+    "collectionDateEnd": "",
+    "habitat": "Dry wooded slopes and summit.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Corolla white.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Burke Co.",
+    "locality": "Shortoff Mountain about 16 miles northwest of Morganton on Route 126.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY\nHERBARIUM\n169537\n\nDUKE UNIVERSITY HERBARIUM\n\n(Galax aphylla auct. non L.)\ndet. I.\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nOccasional on upper slopes and\nsummit.\nNO.\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\nGalax aphylla auct. non L."
+  }
+}

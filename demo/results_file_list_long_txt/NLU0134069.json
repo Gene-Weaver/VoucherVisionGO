@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n385958\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of NORTH CAROLINA\nCounty: CHEROKEE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nNantahala National Forest. Woods along Upper\nTellico River all-terrain vehicle roads east of\nCherokee National Forest and the Tennessee\nState Line east of Green Cove.\n\nCollectors: R. Dale Thomas & B. Ray Thomas\nNo.: 150,022\nDate: 20 July 1996\n\nNLU0134069\nUniversity of Louisiana at Monroe\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.0015387500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "LOUISIANA UNIVERSITY\n385958\nHERRARIUM\nUniversity of Louisiana at Monroe\nNL00134069\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of NORTH CAROLINA\nCounty: CHEROKEE\nGALAX URCEOLATA (Poir.) Brummitt\nNantahala National Forest. Woods along Upper\nTellico River all-terrain vehicle roads east of\nCherokee National Forest and the Tennessee\nState Line east of Green Cove.\nCollectors: R. Dale Thomas & B. Ray Thomas\nNo.: 150,022\nDate: 20 July 1996\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.8800000000000006e-05,
+      "total_cost": 0.0007402999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 147
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2183,
+    "output": 542,
+    "cost_in": 0.00021830000000000002,
+    "cost_out": 0.00021679999999999998
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n385958\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of NORTH CAROLINA\nCounty: CHEROKEE\n\n*GALAX URCEOLATA* (Poir.) Brummitt\n\nNantahala National Forest. Woods along Upper\nTellico River all-terrain vehicle roads east of\nCherokee National Forest and the Tennessee\nState Line east of Green Cove.\n\nCollectors: R. Dale Thomas & B. Ray Thomas\nNo.: 150,022\nDate: 20 July 1996\n\nNLU0134069\nUniversity of Louisiana at Monroe\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nLOUISIANA UNIVERSITY\n385958\nHERRARIUM\nUniversity of Louisiana at Monroe\nNL00134069\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of NORTH CAROLINA\nCounty: CHEROKEE\nGALAX URCEOLATA (Poir.) Brummitt\nNantahala National Forest. Woods along Upper\nTellico River all-terrain vehicle roads east of\nCherokee National Forest and the Tennessee\nState Line east of Green Cove.\nCollectors: R. Dale Thomas & B. Ray Thomas\nNo.: 150,022\nDate: 20 July 1996\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "385958",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Dale Thomas & B. Ray Thomas",
+    "collectorNumber": "150,022",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 July 1996",
+    "collectionDate": "1996-07-20",
+    "collectionDateEnd": "",
+    "habitat": "Woods along upper tellico river all-terrain vehicle roads east of cherokee national forest and the tennessee state line east of green cove.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Cherokee",
+    "locality": "Nantahala national forest. Woods along upper tellico river all-terrain vehicle roads east of cherokee national forest and the tennessee state line east of green cove.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of NORTH CAROLINA\nCounty CHEROKEE\nNLU0134069\nUniversity of Louisiana at Monroe\nLOUISIANA UNIVERSITY\nHERRARIUM\nUniversity of Louisiana at Monroe\nNL00134069"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033783\n\nUCHT\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6429\n\nFLORA OF TENNESSEE\n\nFamily: Diapensiaceae\nScientific Name: *Galax aphylla* L.\nCommon Name: Galax\nLocality: Along bank of Lake Chilhowee, Polk Co. (handwritten)\nHabitat: Moist bank of lake, shaded (handwritten)\nCollector: Tom Goodwin (handwritten)\nDate: 9-19-82 (handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000645,
+      "total_cost": 0.00142375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033783\nUCHT\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6429\nFLORA OF TENNESSEE\nFamily Diapensiaceae\nScientific Name Galax aphylla L.\nCommon Name Galax\nLocality along bank of Lake Chilhowee, Polk Co.\nHabitat Moist bank of lake, shaded\nCollector Tom Goodwin\nDate 9-19-82\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.600000000000001e-05,
+      "total_cost": 0.0007275000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 115
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2154,
+    "output": 442,
+    "cost_in": 0.00021540000000000003,
+    "cost_out": 0.00017680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033783\n\nUCHT\n\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6429\n\nFLORA OF TENNESSEE\n\nFamily: Diapensiaceae\nScientific Name: *Galax aphylla* L.\nCommon Name: Galax\nLocality: Along bank of Lake Chilhowee, Polk Co. (handwritten)\nHabitat: Moist bank of lake, shaded (handwritten)\nCollector: Tom Goodwin (handwritten)\nDate: 9-19-82 (handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT033783\nUCHT\nBIOLOGY DEPARTMENT HERBARIUM\nSOUTHERN MISSIONARY COLLEGE\n6429\nFLORA OF TENNESSEE\nFamily Diapensiaceae\nScientific Name Galax aphylla L.\nCommon Name Galax\nLocality along bank of Lake Chilhowee, Polk Co.\nHabitat Moist bank of lake, shaded\nCollector Tom Goodwin\nDate 9-19-82\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT033783",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Tom Goodwin",
+    "collectorNumber": "6429",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9-19-82",
+    "collectionDate": "1982-09-19",
+    "collectionDateEnd": "",
+    "habitat": "Moist bank of lake, shaded",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Polk Co.",
+    "locality": "Along bank of Lake Chilhowee, Polk Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of tennessee\nat chattanooga\nUCHT\nBiology department herbarium\nSouthern missionary college\nFlora of tennessee\nFamily diapensiaceae\nCommon name galax\nSERNEC digitization project - tennessee herbarium consortium"
+  }
+}

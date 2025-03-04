@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28293\nHERBARIUM\n\nGalax urceolata\n(Poiret) Brummitt\nJFM\n10/16/2012\nDiapensiaceae\n\nGalax aphylla L.\n\nBetween Cove Creek & Smoky Mt.\nNat. Pk., on N.C. Rd. 284,\nHaywood Co., N.C.\nVI-23-56\nRoadside.\nT. Daggy\n\n2277\n\nHandwritten text: *Galax urceolata*, *(Poiret) Brummitt*, *JFM*, *10/16/2012*, *Diapensiaceae*, *T. Daggy*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00084,
+      "total_cost": 0.00161875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 168
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF\nHERBARIUM\nMETRIC 1\n24ColorCard Camera Trax.com\nGalax urceolata\n(Poiret) Brummit\nJM\n10/16/2012\nDispensizcezi\nGalax aphylla L.\nBetween Cove Creek 2 Smoky Mt.\nNat. Pk., on N.C.Rd. 284,\nHaywood Co., N.C.\nVI-23.56 T. Daggy\nRoadside.\n2277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2169,
+    "output": 440,
+    "cost_in": 0.00021690000000000001,
+    "cost_out": 0.00017600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n28293\nHERBARIUM\n\nGalax urceolata\n(Poiret) Brummitt\nJFM\n10/16/2012\nDiapensiaceae\n\nGalax aphylla L.\n\nBetween Cove Creek & Smoky Mt.\nNat. Pk., on N.C. Rd. 284,\nHaywood Co., N.C.\nVI-23-56\nRoadside.\nT. Daggy\n\n2277\n\nHandwritten text: *Galax urceolata*, *(Poiret) Brummitt*, *JFM*, *10/16/2012*, *Diapensiaceae*, *T. Daggy*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF\nHERBARIUM\nMETRIC 1\n24ColorCard Camera Trax.com\nGalax urceolata\n(Poiret) Brummit\nJM\n10/16/2012\nDispensizcezi\nGalax aphylla L.\nBetween Cove Creek 2 Smoky Mt.\nNat. Pk., on N.C.Rd. 284,\nHaywood Co., N.C.\nVI-23.56 T. Daggy\nRoadside.\n2277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "2277",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T. Daggy",
+    "collectorNumber": "2277",
+    "identifiedBy": "JFM",
+    "identifiedDate": "2012-10-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "VI-23-56",
+    "collectionDate": "1956-06-23",
+    "collectionDateEnd": "",
+    "habitat": "Roadside.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.C.",
+    "county": "Haywood Co.",
+    "locality": "Between Cove Creek & Smoky Mt. Nat. Pk., on N.C. Rd. 284",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte\nHerbarium"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039977\n\nHerbarium of George Mason University\nVIRGINIA\nPATRICK COUNTY\nDIAPENSIACEAE\n\n*Galax urceolata* (Poiret) Brummitt\n\nroadside, along rte. 686 at rte. 694 and Anglin\nBranch, w. of Patrick Springs\n\nwith Mike Hagar and Jeff Wuilliez\nTed Bradley No. 26658 May 22, 1995\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030713\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00063,
+      "total_cost": 0.0014087500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 126
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "039977\nHerbarium of George Mason University\nVIRGINIA\nPATRICK COUNTY\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nroadside, along rte. 686 at rte. 694 and Anglin\nBranch, w. of Patrick Springs\nwith Mike Hagar and Jeff Wuilliez\nTed Bradley No. 26658 May 22, 1995\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030713\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\nM\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.560000000000001e-05,
+      "total_cost": 0.0007471000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2167,
+    "output": 483,
+    "cost_in": 0.0002167,
+    "cost_out": 0.0001932
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039977\n\nHerbarium of George Mason University\nVIRGINIA\nPATRICK COUNTY\nDIAPENSIACEAE\n\n*Galax urceolata* (Poiret) Brummitt\n\nroadside, along rte. 686 at rte. 694 and Anglin\nBranch, w. of Patrick Springs\n\nwith Mike Hagar and Jeff Wuilliez\nTed Bradley No. 26658 May 22, 1995\n\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030713\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n039977\nHerbarium of George Mason University\nVIRGINIA\nPATRICK COUNTY\nDIAPENSIACEAE\nGalax urceolata (Poiret) Brummitt\nroadside, along rte. 686 at rte. 694 and Anglin\nBranch, w. of Patrick Springs\nwith Mike Hagar and Jeff Wuilliez\nTed Bradley No. 26658 May 22, 1995\nTed R. Bradley Herbarium\nGeorge Mason University\nGMUF-0030713\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nGMUF\nTed R. Bradley\nHerbarium\nM\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "039977",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Ted Bradley, Mike Hagar, Jeff Wuilliez",
+    "collectorNumber": "26658",
+    "identifiedBy": "Ted R. Bradley",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 22, 1995",
+    "collectionDate": "1995-05-22",
+    "collectionDateEnd": "",
+    "habitat": "Roadside, along rte. 686 at rte. 694 and anglin branch, w. of patrick springs",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Patrick county",
+    "locality": "Roadside, along rte. 686 at rte. 694 and anglin branch, w. of patrick springs",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of george mason university\nDiapensiaceae\nGmuf-0030713\nCm\nCopyright reserved\nGmuf"
+  }
+}

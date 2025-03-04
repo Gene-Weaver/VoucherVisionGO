@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n150740\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTransylvania County: Horsepasture Gorge,\nunder Kalmia, west of river, 1/2 mile\nabove crossing, 1600 ft. elevation.\n\nC.L. Rodgers #6130b          8 June 1961\n\nDUKE10095593\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00081,
+      "total_cost": 0.0015887499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 162
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY\nHERBARIUM\n150740\nDuke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTransylvania County: Horsepasture Gorge,\nunder Kalmia, west of river, 1/2 mile\nabove crossing, 1600 ft. elevation.\nC.L. Rodgers #6130b\n8 June 1961\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 507,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.0002028
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDUKE UNIVERSITY\nHERBARIUM\n150740\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\n\nGalax aphylla L.\n\nTransylvania County: Horsepasture Gorge,\nunder Kalmia, west of river, 1/2 mile\nabove crossing, 1600 ft. elevation.\n\nC.L. Rodgers #6130b          8 June 1961\n\nDUKE10095593\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY\nHERBARIUM\n150740\nDuke\nUNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nPLANTS OF NORTH CAROLINA\nDISTRIBUTED BY THE HERBARIUM OF\nDUKE UNIVERSITY\nGalax aphylla L.\nTransylvania County: Horsepasture Gorge,\nunder Kalmia, west of river, 1/2 mile\nabove crossing, 1600 ft. elevation.\nC.L. Rodgers #6130b\n8 June 1961\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "150740",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C.L. Rodgers",
+    "collectorNumber": "6130b",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla auct. non L.",
+    "verbatimCollectionDate": "8 June 1961",
+    "collectionDate": "1961-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Under kalmia",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Transylvania county",
+    "locality": "Horsepasture gorge, west of river, 1/2 mile above crossing",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "488",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Duke university\nherbarium\nPlants of north carolina\ndistributed by the herbarium of\nduke university\nGalax aphylla l.\n1600 ft. elevation.\nduke10095593\ngalax urceolata\ngalax aphylla"
+  }
+}

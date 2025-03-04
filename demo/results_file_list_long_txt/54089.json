@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n54089\nWILLIAM & MARY\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\nWooded slope 1 mi. W. of\nStuart\nPatrick Co.  May 31, 1974\nBarbara J. + A. M. Harvill 30815\n(Handwritten text)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00048,
+      "total_cost": 0.00125875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 96
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\nCOLLEGE OF\n54089\nVILLIAN & MARY\nww\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nAINLESS STEEL\nFLORA VIRGINICA\nGalax aphylla L.\nWooded slope 1 mi W. of\nStuart\nPatrick Co. May 21, 1974\nBarbara J. *\nA. M. Harvill 30815\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "total_cost": 0.0007499,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2136,
+    "output": 432,
+    "cost_in": 0.0002136,
+    "cost_out": 0.0001728
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nCOLLEGE OF\n54089\nWILLIAM & MARY\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\nWooded slope 1 mi. W. of\nStuart\nPatrick Co.  May 31, 1974\nBarbara J. + A. M. Harvill 30815\n(Handwritten text)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60 70 80\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\nCOLLEGE OF\n54089\nVILLIAN & MARY\nww\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nAINLESS STEEL\nFLORA VIRGINICA\nGalax aphylla L.\nWooded slope 1 mi W. of\nStuart\nPatrick Co. May 21, 1974\nBarbara J. *\nA. M. Harvill 30815\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "54089",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Barbara J., A. M. Harvill",
+    "collectorNumber": "30815",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 31, 1974",
+    "collectionDate": "1974-05-31",
+    "collectionDateEnd": "",
+    "habitat": "Wooded slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Patrick Co.",
+    "locality": "1 mi. W. of Stuart",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nCOLLEGE OF\nFLORA VIRGINICA\n(Handwritten text)"
+  }
+}

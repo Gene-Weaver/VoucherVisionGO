@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UPS/TE\nUSCS\nMETRIC1\nU OF S. CAROLINA\nHERBARIUM\nSPARTANBURG\nUniversity of South Carolina Upstate\nUSCS0008541\nSOUTH CAROLINA\nSPARTANBURG COUNTY\n*Galax aphylla\n*G. urceolata\ngrowing with Kalmia\non north facing slope\nat south side of\nLake Blalock just\nwest of bridge, Buck\nSprings Church area.\n\nLOCATION: Lake Blalock\nDATE: June 15, 1992\nCOLL: Gillian Newberry\nNO: 11573\n\n*Handwritten text\n\n*Galax aphylla*\n*G. urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00074,
+      "total_cost": 0.0015187500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 148
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF S.\nCAROLINA\nHERBARIUM\nSPARTANBURG\nLandrum\nChesnee\nSOUTH CAROLINA\nSPARTANBURG COUNTY\nGalax aphylla\nG. urceolata\ngrowing with Kalmia\non north facing slope\nat south side of\nLake Blalock just\nwest of bridge, Buck\nSprings Church area.\nLOCATION: Lake Blalock\nDATE: June 15, 1992\nCOLL: Gillian Newberry\nNO: 11573\n\u2713\n146\n\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007307,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2167,
+    "output": 482,
+    "cost_in": 0.0002167,
+    "cost_out": 0.00019280000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUPS/TE\nUSCS\nMETRIC1\nU OF S. CAROLINA\nHERBARIUM\nSPARTANBURG\nUniversity of South Carolina Upstate\nUSCS0008541\nSOUTH CAROLINA\nSPARTANBURG COUNTY\n*Galax aphylla\n*G. urceolata\ngrowing with Kalmia\non north facing slope\nat south side of\nLake Blalock just\nwest of bridge, Buck\nSprings Church area.\n\nLOCATION: Lake Blalock\nDATE: June 15, 1992\nCOLL: Gillian Newberry\nNO: 11573\n\n*Handwritten text\n\n*Galax aphylla*\n*G. urceolata*\n\n\ngemini-2.0-flash OCR:\nOF S.\nCAROLINA\nHERBARIUM\nSPARTANBURG\nLandrum\nChesnee\nSOUTH CAROLINA\nSPARTANBURG COUNTY\nGalax aphylla\nG. urceolata\ngrowing with Kalmia\non north facing slope\nat south side of\nLake Blalock just\nwest of bridge, Buck\nSprings Church area.\nLOCATION: Lake Blalock\nDATE: June 15, 1992\nCOLL: Gillian Newberry\nNO: 11573\n\u2713\n146\n\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCS0008541",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Gillian Newberry",
+    "collectorNumber": "11573",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 15, 1992",
+    "collectionDate": "1992-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Growing with kalmia on north facing slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Spartanburg county",
+    "locality": "At south side of lake blalock just west of bridge, buck springs church area. location lake blalock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ups/te\nmetric1\nu of s. carolina\nherbarium\nspartanburg\nuniversity of south carolina upstate\nlandrum\nchesnee\n\u2713\n146\ng. urceolata\nhandwritten text\ngalax aphylla\ng. urceolata\ng. urceolata"
+  }
+}

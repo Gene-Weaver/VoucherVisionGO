@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n305440\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE\nCounty: SEVIER\n\n*GALAX APHYLLA* L.\n\nAlong trail from Baker place to Bogle Springs on south\nside of Bluff Mountain along Compton Creek; Chilhowee\nMountain.\n\nCollector: R. Dale Thomas\nNo.: 109,321\nDate: 24 April 1989\n\nNLU0134428\nUniversity of Louisiana at Monroe\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000655,
+      "total_cost": 0.0014337500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 131
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "VST LIESTANA\nON\n305440\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134428\nKodak Gray Scale\nA\n1\n2\n3\n4\n5\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: SEVIER\nGalax aphylla L.\nAlong trail from Baker place to Bogle Springs on south\nside of Bluff Mountain along Compton Creek; Chilhowee\nMountain.\nCollector: R. Dale Thomas\nNo.: 109,321\nDate: 24 April 1989\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2181,
+    "output": 493,
+    "cost_in": 0.00021810000000000004,
+    "cost_out": 0.0001972
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n305440\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of TENNESSEE\nCounty: SEVIER\n\n*GALAX APHYLLA* L.\n\nAlong trail from Baker place to Bogle Springs on south\nside of Bluff Mountain along Compton Creek; Chilhowee\nMountain.\n\nCollector: R. Dale Thomas\nNo.: 109,321\nDate: 24 April 1989\n\nNLU0134428\nUniversity of Louisiana at Monroe\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nVST LIESTANA\nON\n305440\nHERBARIUM\nUniversity of Louisiana at Monroe\nNLU0134428\nKodak Gray Scale\nA\n1\n2\n3\n4\n5\nM 8 9 10 11 12 13 14 15\nB 17 18 19\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nCounty: SEVIER\nGalax aphylla L.\nAlong trail from Baker place to Bogle Springs on south\nside of Bluff Mountain along Compton Creek; Chilhowee\nMountain.\nCollector: R. Dale Thomas\nNo.: 109,321\nDate: 24 April 1989\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "305440",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "109,321",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "24 April 1989",
+    "collectionDate": "1989-04-24",
+    "collectionDateEnd": "",
+    "habitat": "Along trail from baker place to bogle springs on south side of bluff mountain along compton creek; chilhowee mountain.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Sevier",
+    "locality": "Along trail from Baker place to Bogle Springs on south side of Bluff Mountain along Compton Creek; Chilhowee Mountain.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NORTHEAST LOUISIANA UNIVERSITY\nHERBARIUM\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of TENNESSEE\nUniversity of Louisiana at Monroe\nNLU0134428\nNLU0134428"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\nMARTIN COUNTY\nGalax aphylla L.\n\nRiver bluff,\neast of Jamesville.\nColl.: H. L. Blomquist, 5/14/39\nIdent.: H. L. B.          #10710\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095579\n55546\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007150000000000001,
+      "total_cost": 0.00149375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 143
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Duke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nMARTIN COUNTY\nGalax aphylla L.\nRiver bluff,\neast of Jamesville,\nColl.: H.L. Blomquist, 5/14/39\nIdent.: H.L.B.\n#10710\nDUKE UNIVERSITY\nHERBARIUM\nDUKE UNIVERSITY HERBARIUM\nDUKE10095579\n55546\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.28e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2185,
+    "output": 468,
+    "cost_in": 0.0002185,
+    "cost_out": 0.0001872
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\nMARTIN COUNTY\nGalax aphylla L.\n\nRiver bluff,\neast of Jamesville.\nColl.: H. L. Blomquist, 5/14/39\nIdent.: H. L. B.          #10710\n\nDUKE UNIVERSITY HERBARIUM\nDUKE10095579\n55546\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDuke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nMARTIN COUNTY\nGalax aphylla L.\nRiver bluff,\neast of Jamesville,\nColl.: H.L. Blomquist, 5/14/39\nIdent.: H.L.B.\n#10710\nDUKE UNIVERSITY\nHERBARIUM\nDUKE UNIVERSITY HERBARIUM\nDUKE10095579\n55546\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095579",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. L. Blomquist",
+    "collectorNumber": "10710",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "5/14/39",
+    "collectionDate": "1939-05-14",
+    "collectionDateEnd": "",
+    "habitat": "River bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Martin County",
+    "locality": "East of Jamesville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke University Herbarium\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nGalax aphylla L.\nIdent. H.L.B.\nDUKE UNIVERSITY\nHERBARIUM\n55546"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012576\n\nLYNCHBURG COLLEGE\n22713\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\n\nCOUNTY Bedford\nBedford Lake\n\nNO 41 (handwritten)\nDiapensiaceae\n*Galax aphylla* Linnaeus\n(Galax)\n\nCOLLECTORS Walt Rivers (handwritten)\nApril 22, '77 (handwritten)\n\ncopyright reserved\n\n\n*Galax aphylla* Linnaeus\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000565,
+      "total_cost": 0.0013437500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 113
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012576\nLYNCHBURG\nCOLLEGE\n22713\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCOUNTY Bedford\nBedford Lake.\nNO.41\nDiapensiaceae\nGalax aphylla Linnaeus\n(Galax)\nCOLLECTORS Walt Rivers April 22, 19 77\nLYN\ncm\ncopyright reserved\nLynchburg\nCollege\n\n\nDiapensiaceae\nGalax aphylla Linnaeus\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6e-05,
+      "total_cost": 0.0007275000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 115
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2144,
+    "output": 449,
+    "cost_in": 0.0002144,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012576\n\nLYNCHBURG COLLEGE\n22713\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\n\nCOUNTY Bedford\nBedford Lake\n\nNO 41 (handwritten)\nDiapensiaceae\n*Galax aphylla* Linnaeus\n(Galax)\n\nCOLLECTORS Walt Rivers (handwritten)\nApril 22, '77 (handwritten)\n\ncopyright reserved\n\n\n*Galax aphylla* Linnaeus\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012576\nLYNCHBURG\nCOLLEGE\n22713\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCOUNTY Bedford\nBedford Lake.\nNO.41\nDiapensiaceae\nGalax aphylla Linnaeus\n(Galax)\nCOLLECTORS Walt Rivers April 22, 19 77\nLYN\ncm\ncopyright reserved\nLynchburg\nCollege\n\n\nDiapensiaceae\nGalax aphylla Linnaeus\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012576",
+    "scientificName": "Galax aphylla Linnaeus",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "Linnaeus",
+    "collectedBy": "Walt Rivers",
+    "collectorNumber": "41",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 22, '77",
+    "collectionDate": "1977-04-22",
+    "collectionDateEnd": "",
+    "habitat": "Bedford Lake.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Bedford",
+    "locality": "Bedford Lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\n22713\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\n(Galax)\ncopyright reserved\nLynchburg\nCollege\nDiapensiaceae"
+  }
+}

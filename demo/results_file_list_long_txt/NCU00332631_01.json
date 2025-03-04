@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n299565\n\nNCU00332631\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nSandstone soil on knob 3 miles\nnorth of Newport.\n\nCraig Co.\nApril 5, 1966\n\nCollected by: A M Harvill 13622\nDetermined by: amh (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000505,
+      "total_cost": 0.0012837500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 101
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n299565\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332631\nFLORA VIRGINICA\nGalax aphylla L.\nSandstone soil on knob & miles\nnorth of Newport.\nCraig Co.\nApril 5, 1966\nCollected by: A M Harvill 13622\nDetermined by:\namh\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4e-05,
+      "total_cost": 0.0007215,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 100
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2074,
+    "output": 455,
+    "cost_in": 0.0002074,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n299565\n\nNCU00332631\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nSandstone soil on knob 3 miles\nnorth of Newport.\n\nCraig Co.\nApril 5, 1966\n\nCollected by: A M Harvill 13622\nDetermined by: amh (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n299565\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332631\nFLORA VIRGINICA\nGalax aphylla L.\nSandstone soil on knob & miles\nnorth of Newport.\nCraig Co.\nApril 5, 1966\nCollected by: A M Harvill 13622\nDetermined by:\namh\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332631",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A M Harvill",
+    "collectorNumber": "13622",
+    "identifiedBy": "amh",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 5, 1966",
+    "collectionDate": "1966-04-05",
+    "collectionDateEnd": "",
+    "habitat": "Sandstone soil on knob 3 miles north of Newport.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Craig Co.",
+    "locality": "Sandstone soil on knob 3 miles north of Newport.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n299565\nFLORA VIRGINICA\nGalax aphylla L.\n\nDetermined by amh (handwritten)"
+  }
+}

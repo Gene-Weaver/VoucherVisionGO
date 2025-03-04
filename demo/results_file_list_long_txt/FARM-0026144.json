@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026144\n\nFlora of Virginia\n\n*Galax urceolata* (Poiret) Brum.\n\nnear Jamaica, Middlesex Co.\n\nColony of dozens on steep, N-facing,\noak - *Kalmia* bank of Thasons Mill Swamp\n2.3 mi. N of Jamaica.\n(Church View Quad.) Nov. 11, 1978\n\nNo. 17,079\nCharles E. Stevens\nDet.\n\n\n(Handwritten text identified with *)*\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000585,
+      "total_cost": 0.0013637500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Flora of Virginia\nJalax urceolata (Poiret) Brum.\nnear Jamaica, Middlesex Co.\nColony of dozens on steep, N-facing,\noak-Kalmia bank of Thasons Trill Swamp\n2.3 mi. N of Jamaica.\n(Church View Quad.\nNov. 11, 1978\nCharles E. Stevens\nDet.\nNo. 17,079\n\n\nJalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.88e-05,
+      "total_cost": 0.0007203000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 97
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2093,
+    "output": 461,
+    "cost_in": 0.0002093,
+    "cost_out": 0.0001844
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026144\n\nFlora of Virginia\n\n*Galax urceolata* (Poiret) Brum.\n\nnear Jamaica, Middlesex Co.\n\nColony of dozens on steep, N-facing,\noak - *Kalmia* bank of Thasons Mill Swamp\n2.3 mi. N of Jamaica.\n(Church View Quad.) Nov. 11, 1978\n\nNo. 17,079\nCharles E. Stevens\nDet.\n\n\n(Handwritten text identified with *)*\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nFlora of Virginia\nJalax urceolata (Poiret) Brum.\nnear Jamaica, Middlesex Co.\nColony of dozens on steep, N-facing,\noak-Kalmia bank of Thasons Trill Swamp\n2.3 mi. N of Jamaica.\n(Church View Quad.\nNov. 11, 1978\nCharles E. Stevens\nDet.\nNo. 17,079\n\n\nJalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026144",
+    "scientificName": "Galax urceolata (Poiret) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brum.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "17,079",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Nov. 11, 1978",
+    "collectionDate": "1978-11-11",
+    "collectionDateEnd": "",
+    "habitat": "Colony of dozens on steep, N-facing, oak - Kalmia bank of Thasons Mill Swamp",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Middlesex Co.",
+    "locality": "Near Jamaica, 2.3 mi. N of Jamaica. (Church View Quad.)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Flora of Virginia\nDet.\nGalax urceolata"
+  }
+}

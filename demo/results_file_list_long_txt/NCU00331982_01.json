@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\n\nX-Rite\nColorChecker\n\nNCU00331982\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF NORTH CAROLINA\nChapel Hill\n\n*Galax aphylla*\n\nBluffs of New Hope Creek at the Cave\n\nDate July 25-15\nCounty\nNo.\nCollector *W. C. Coker*\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66663\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00061,
+      "total_cost": 0.00138875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 122
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPP\u00c9041!\nMSCCPPCC0411\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\nNCU\nUniversity of North Carolina\ncopyright reserved\nx-rite\ncolorchecker\nNCU00331982\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nOF\nNORTH\nHERBARIUM\nCAROLINA\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF NORTH CAROLINA\nViola aphylla L.\nBluffs of New Hope Creek at the Cave\nDate July 25-15\nCounty\nNo.\nCollector W.Coker\n66663\n\n\nAsarum aphyllum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.159999999999999e-05,
+      "total_cost": 0.0007431,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 154
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2166,
+    "output": 500,
+    "cost_in": 0.0002166,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nCopyright reserved\nUniversity of North Carolina\nat Chapel Hill\n\nX-Rite\nColorChecker\n\nNCU00331982\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF NORTH CAROLINA\nChapel Hill\n\n*Galax aphylla*\n\nBluffs of New Hope Creek at the Cave\n\nDate July 25-15\nCounty\nNo.\nCollector *W. C. Coker*\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66663\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nMSCCPPP\u00c9041!\nMSCCPPCC0411\nmm\n0 1 2 3 4 5 6 7 8 9 10\ncm\nNCU\nUniversity of North Carolina\ncopyright reserved\nx-rite\ncolorchecker\nNCU00331982\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nOF\nNORTH\nHERBARIUM\nCAROLINA\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF NORTH CAROLINA\nViola aphylla L.\nBluffs of New Hope Creek at the Cave\nDate July 25-15\nCounty\nNo.\nCollector W.Coker\n66663\n\n\nAsarum aphyllum\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331982",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "W. C. Coker",
+    "collectorNumber": "66663",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 25-15",
+    "collectionDate": "0015-07-25",
+    "collectionDateEnd": "",
+    "habitat": "Bluffs of new hope creek at the cave",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Bluffs of new hope creek at the cave",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ncu\nCopyright reserved\nUniversity of north carolina\nat chapel hill\nx-rite\nColorchecker\nUniversity of north carolina herbarium\nHerbarium of the university of north carolina\nPlants of north carolina\nChapel hill\nUniversity of north\nHerbarium\nCarolina\nHerbarium of the university of north carolina\nPlants of north carolina\nViola aphylla l.\nAsarum aphyllum"
+  }
+}

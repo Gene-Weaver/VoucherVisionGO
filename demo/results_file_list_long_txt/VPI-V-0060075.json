@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060075\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 437 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\nCampbell  County\n*Galax aphylla*, L. (handwritten)\nFalling River (handwritten)\n\nHerbarium 26,540\nBiology Department\nVirginia Polytechnic Institute\nBertha Daniel (handwritten)\n*A. B. Massey*\n1938 (handwritten)\nDate\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008249999999999999,
+      "total_cost": 0.0016037500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCampbell County\nGalax aphylla, L.\nFalling River\nBertha Daniel\n1938\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060075\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.4399999999999995e-05,
+      "total_cost": 0.0007259,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 111
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2179,
+    "output": 484,
+    "cost_in": 0.0002179,
+    "cost_out": 0.00019360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060075\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 437 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\nCampbell  County\n*Galax aphylla*, L. (handwritten)\nFalling River (handwritten)\n\nHerbarium 26,540\nBiology Department\nVirginia Polytechnic Institute\nBertha Daniel (handwritten)\n*A. B. Massey*\n1938 (handwritten)\nDate\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCampbell County\nGalax aphylla, L.\nFalling River\nBertha Daniel\n1938\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060075\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vpi-v-0060075",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poir.) brummit",
+    "collectedBy": "Bertha daniel, a. b. massey",
+    "collectorNumber": "26,540",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, l.",
+    "verbatimCollectionDate": "1938",
+    "collectionDate": "1938-00-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "Based on average guard cell area volume of 437 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Campbell county",
+    "locality": "Falling river",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey herbarium\nVirginia polytechnic institute\nHerbarium of the university of north carolina\nFlora of virginia\nState herbarium of the virginia polytechnic institute\nBiology department\nVirginia polytechnic institute"
+  }
+}

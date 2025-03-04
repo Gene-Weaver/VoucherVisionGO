@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA059150\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nNo locality\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u00b5\u00b2\nGuy L. Nesom, 1975\n\nNAME *Galax aphylla* L.\nPLANTS OF\n\nNAME *Galax*\nLOCALITY Tallulah\nALT. 3200\nDATE 8-5-36\nHABITAT Dry woods. COLLECTED BY J.R. Thornton\nREMARKS\n\nUNIV. OF GEORGIA\nHERBARIUM\n18258\nPOISONED\n\nIMAGED 2013\n\nHandwritten Text:\n*5. Cardina?*\n*Tallulah*\n*3200*\n*8-5-36*\n*Dry woods.*\n*J.R. Thornton*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011149999999999999,
+      "total_cost": 0.0018937499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 223
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA059150\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nvolume of \u00b52\nGuy L. Nesom, 1975\nNAME Galax aphylla L.\nPLANTS OF\nNAME Galax\nLOCALITY Jabo Rock ALT. 3300 DATE 8-5-36\nHABITAT Dry woods. COLLECTED BY J.H. Thomas\nUNIV. OF GEORGIA\nHERBARIUM\n13258\nPOISONED\nIMAGED 2013\n5. Cardina?\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2251,
+    "output": 533,
+    "cost_in": 0.0002251,
+    "cost_out": 0.00021320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF GEORGIA\nGA059150\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nNo locality\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u00b5\u00b2\nGuy L. Nesom, 1975\n\nNAME *Galax aphylla* L.\nPLANTS OF\n\nNAME *Galax*\nLOCALITY Tallulah\nALT. 3200\nDATE 8-5-36\nHABITAT Dry woods. COLLECTED BY J.R. Thornton\nREMARKS\n\nUNIV. OF GEORGIA\nHERBARIUM\n18258\nPOISONED\n\nIMAGED 2013\n\nHandwritten Text:\n*5. Cardina?*\n*Tallulah*\n*3200*\n*8-5-36*\n*Dry woods.*\n*J.R. Thornton*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF GEORGIA\nGA059150\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell area\nvolume of \u00b52\nGuy L. Nesom, 1975\nNAME Galax aphylla L.\nPLANTS OF\nNAME Galax\nLOCALITY Jabo Rock ALT. 3300 DATE 8-5-36\nHABITAT Dry woods. COLLECTED BY J.H. Thomas\nUNIV. OF GEORGIA\nHERBARIUM\n13258\nPOISONED\nIMAGED 2013\n5. Cardina?\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059150",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "J.R. Thornton, J.H. Thomas",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8-5-36",
+    "collectionDate": "1936-05-08",
+    "collectionDateEnd": "",
+    "habitat": "Dry woods.",
+    "chromosomeCount": "",
+    "guardCell": "N = , based on average guard cell area volume of \u00b5\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "",
+    "county": "",
+    "locality": "Tallulah, Jabo Rock",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of georgia\nSpecimen examined for\ngeorgia atlas project\n9 november 2005\nNo locality\nHerbarium of the university of north carolina\nName galax aphylla l.\nPlants of\nName galax\nAlt. 3200, 3300\nRemarks\nUniv. of georgia\nHerbarium\n13258\nPoisoned\nImaged 2013\n5. cardina?\ngalax urceolata\ngalax aphylla"
+  }
+}

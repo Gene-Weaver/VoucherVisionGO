@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10739\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nC.T. NO.\nGRSM 81985\n\n6/22/16jb\n*Galax urceolata* (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nH. M. JENNISON NO. 1728\nCOLLECTOR(S)\n\nLOC. 11/2  1934\nBote Mt., Blount Co., Tenn.\n\n*Galax aphylla*, L.\n\nIn well drained woods soil at\n4000 ft.\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association 1979-1980 *MB*\nUplands Field Lab                                         1982\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001125,
+      "total_cost": 0.0019037499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 225
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10739\nMOUNTAINS NATIO\nCT. NO.\nGRSM 8985\n6/22/16jb\nGalax urceolata (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON NO. 1728\nBote Mt., Blount Co., Tenn.\nGalax aphylla, L.\nIn well drained woods soil at\n4000 ft.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980\nMB\nNP\nGSM\nBot\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.16e-05,
+      "total_cost": 0.0007531,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 179
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2280,
+    "output": 592,
+    "cost_in": 0.000228,
+    "cost_out": 0.0002368
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10739\n\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nC.T. NO.\nGRSM 81985\n\n6/22/16jb\n*Galax urceolata* (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\nH. M. JENNISON NO. 1728\nCOLLECTOR(S)\n\nLOC. 11/2  1934\nBote Mt., Blount Co., Tenn.\n\n*Galax aphylla*, L.\n\nIn well drained woods soil at\n4000 ft.\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association 1979-1980 *MB*\nUplands Field Lab                                         1982\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10739\nMOUNTAINS NATIO\nCT. NO.\nGRSM 8985\n6/22/16jb\nGalax urceolata (Poir.) Brummitt\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON NO. 1728\nBote Mt., Blount Co., Tenn.\nGalax aphylla, L.\nIn well drained woods soil at\n4000 ft.\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\n1979-1980\nMB\nNP\nGSM\nBot\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GSMNP10739",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "1728",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "1934",
+    "collectionDate": "1934-00-00",
+    "collectionDateEnd": "",
+    "habitat": "In well drained woods soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tenn.",
+    "county": "Blount Co.",
+    "locality": "Bote Mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1219",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGRSM 81985\n6/22/16jb\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nLOC. 11/2\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS - COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association 1979-1980 MB\nUplands Field Lab 1982\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax urceolata\nGalax aphylla\nMOUNTAINS NATIO\nCT. NO.\nGRSM 8985\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nBot"
+  }
+}

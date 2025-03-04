@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU007224\n\nPLANTS OF ROCKY FORK TENNESSEE\n*Galax aphylla* L.\nDiapensiaceae\nGalax\nUnicoi County, exposed slope,@4.9 mi on loop\n82.56565 W; 36.07772N\n\nCollected by\nFrosty Levy, Tim McDowell,\nJamey Donaldson\n\nRF1104\n12-May-2009\n\nJohn C. Warden Herbarium\nETSU #12-0859\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000645,
+      "total_cost": 0.00142375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU007224\nJohn C. Warden Herbarium\nETSU #12-0859\nETSU\nPLANTS OF ROCKY FORK TENNESSEE\nGalax aphylla L.\nDiapensiaceae\nGalax\nUnicoi County. exposed s slope,@4.9 mi on loop\n82.56565 W; 36.07772N\nCollected by\nFrosty Levy, Tim McDowell,\nJamey Donaldson\nRF1104\n12-May-2009\nRocky For\n36.046N Blockstand Cr\nFlint Cr\n82.557W\nHiggins Cr\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.760000000000002e-05,
+      "total_cost": 0.0007591,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2194,
+    "output": 499,
+    "cost_in": 0.00021940000000000002,
+    "cost_out": 0.0001996
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU007224\n\nPLANTS OF ROCKY FORK TENNESSEE\n*Galax aphylla* L.\nDiapensiaceae\nGalax\nUnicoi County, exposed slope,@4.9 mi on loop\n82.56565 W; 36.07772N\n\nCollected by\nFrosty Levy, Tim McDowell,\nJamey Donaldson\n\nRF1104\n12-May-2009\n\nJohn C. Warden Herbarium\nETSU #12-0859\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU007224\nJohn C. Warden Herbarium\nETSU #12-0859\nETSU\nPLANTS OF ROCKY FORK TENNESSEE\nGalax aphylla L.\nDiapensiaceae\nGalax\nUnicoi County. exposed s slope,@4.9 mi on loop\n82.56565 W; 36.07772N\nCollected by\nFrosty Levy, Tim McDowell,\nJamey Donaldson\nRF1104\n12-May-2009\nRocky For\n36.046N Blockstand Cr\nFlint Cr\n82.557W\nHiggins Cr\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU007224",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Frosty Levy, Tim McDowell, Jamey Donaldson",
+    "collectorNumber": "RF1104",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "12-May-2009",
+    "collectionDate": "2009-05-12",
+    "collectionDateEnd": "",
+    "habitat": "Exposed s slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi County",
+    "locality": "@4.9 mi on loop",
+    "verbatimCoordinates": "82.56565 W; 36.07772N",
+    "decimalLatitude": "36.07772",
+    "decimalLongitude": "-82.56565",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "EAST TENNESSEE STATE UNIVERSITY\nJohn C. Warden Herbarium\nETSU #12-0859\nPLANTS OF ROCKY FORK TENNESSEE\nRocky For\n36.046N Blockstand Cr\nFlint Cr\n82.557W\nHiggins Cr\nSERNEC Digitization Project - Tennessee Herbarium Consortium"
+  }
+}

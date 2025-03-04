@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012613\n\nLYNCHBURG COLLEGE\n13602\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 389 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCity of Lynchburg COUNTY\n\nNO. 13602\n*Galax aphylla* L.\n\n*Quercus-Pinus* woods, ericaceous shrubby\nlayer in ravines and draws of west\nfacing slope above Burnt Bridge branch\nsouth of Burnt Bridge Rd.\n\nCOLLECTORS W. S. Hooks       July 5<sup>th</sup>, '69\n\nHandwritten Text: COUNTY\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.00178375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012613\n13602\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGIN\u0399\u0391\nCity of Lynchburg\nNO. 13602\nGalax aphylla L.\nQurcus-Pinus woods, ericaceous shrubby\nlayer in ravines and draws of west\nfacing slope above Burnt Bridge branch\nsouth of Burnt Bridge Rd.\nCOLLECTORS W. S. Hooks\nJuly 59-69\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2272,
+    "output": 552,
+    "cost_in": 0.00022720000000000002,
+    "cost_out": 0.0002208
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012613\n\nLYNCHBURG COLLEGE\n13602\nHERBARIUM\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 389 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nCity of Lynchburg COUNTY\n\nNO. 13602\n*Galax aphylla* L.\n\n*Quercus-Pinus* woods, ericaceous shrubby\nlayer in ravines and draws of west\nfacing slope above Burnt Bridge branch\nsouth of Burnt Bridge Rd.\n\nCOLLECTORS W. S. Hooks       July 5<sup>th</sup>, '69\n\nHandwritten Text: COUNTY\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012613\n13602\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGIN\u0399\u0391\nCity of Lynchburg\nNO. 13602\nGalax aphylla L.\nQurcus-Pinus woods, ericaceous shrubby\nlayer in ravines and draws of west\nfacing slope above Burnt Bridge branch\nsouth of Burnt Bridge Rd.\nCOLLECTORS W. S. Hooks\nJuly 59-69\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012613",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "W. S. Hooks",
+    "collectorNumber": "13602",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 5th, '69",
+    "collectionDate": "1969-07-05",
+    "collectionDateEnd": "",
+    "habitat": "Quercus-pinus woods, ericaceous shrubby layer in ravines and draws of west facing slope above burnt bridge branch south of burnt bridge rd.",
+    "chromosomeCount": "n = 6",
+    "guardCell": "based on average guard cell area volume of 389 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "City of Lynchburg",
+    "locality": "City of Lynchburg",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\nHERBARIUM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nNO. 13602\nHandwritten Text COUNTY\nGalax urceolata\nGalax aphylla"
+  }
+}

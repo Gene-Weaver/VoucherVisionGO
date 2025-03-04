@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042867\n\nPLANTS OF SOUTH CAROLINA\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BIOLOGICAL SCIENCES\nCLEMSON, SOUTH CAROLINA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nBrasstown Creek, hemlock/pine forest\noff US 76 ca. 12 mi above Westminster\n\nCollector: J.E. Fairey III                                No.\nCounty: Oconee                                         Date: 30 Oct. 1969\nIdentified by: J.E. Fairey III\n\n*(Handwritten)* *Galax urceolata* (Poir.) Brummitt\n*(Handwritten)* John F. Townsend                            1996\nClemson University Herbarium (CLEMS)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00095,
+      "total_cost": 0.00172875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2\n3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042867\nPLANTS OF SOUTH CAROLINA\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BIOLOGICAL SCIENCES\nCLEMSON, SOUTH CAROLINA\nGalax aphylla L.\nDiapensiaceae\nBrasstown Creek, hemlock/pine forest\noff US 76 ca. 12 mi above Westminster\nJ.E.Fairey III\nCollector\nNo.\nOconee\nCounty\nDate\n30 Oct. 1969\nIdentified by J.E.Fairey II\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8e-05,
+      "total_cost": 0.0007615,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 200
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2296,
+    "output": 531,
+    "cost_in": 0.0002296,
+    "cost_out": 0.0002124
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042867\n\nPLANTS OF SOUTH CAROLINA\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BIOLOGICAL SCIENCES\nCLEMSON, SOUTH CAROLINA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nBrasstown Creek, hemlock/pine forest\noff US 76 ca. 12 mi above Westminster\n\nCollector: J.E. Fairey III                                No.\nCounty: Oconee                                         Date: 30 Oct. 1969\nIdentified by: J.E. Fairey III\n\n*(Handwritten)* *Galax urceolata* (Poir.) Brummitt\n*(Handwritten)* John F. Townsend                            1996\nClemson University Herbarium (CLEMS)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2\n3\n4\n5\n6\n7 8 9 10\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarlum\nCLEMS0042867\nPLANTS OF SOUTH CAROLINA\nHERBARIUM OF CLEMSON UNIVERSITY\nDEPARTMENT OF BIOLOGICAL SCIENCES\nCLEMSON, SOUTH CAROLINA\nGalax aphylla L.\nDiapensiaceae\nBrasstown Creek, hemlock/pine forest\noff US 76 ca. 12 mi above Westminster\nJ.E.Fairey III\nCollector\nNo.\nOconee\nCounty\nDate\n30 Oct. 1969\nIdentified by J.E.Fairey II\nGalax urceolata (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042867",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J.e. fairey iii",
+    "collectorNumber": "",
+    "identifiedBy": "J.e. fairey ii, John f. townsend",
+    "identifiedDate": "1996",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (poir.) brummitt, john f. townsend, 1996",
+    "verbatimCollectionDate": "30 Oct. 1969",
+    "collectionDate": "1969-10-30",
+    "collectionDateEnd": "",
+    "habitat": "Brasstown creek, hemlock/pine forest off us 76 ca. 12 mi above westminster",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Oconee",
+    "locality": "Brasstown creek, hemlock/pine forest off us 76 ca. 12 mi above westminster",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Clemson university herbarium\nPlants of south carolina\nHerbarium of clemson university\nDepartment of biological sciences\nClemson, south carolina\nGalax aphylla\nDiapensiaceae\nGalax aphylla\nGalax urceolata"
+  }
+}

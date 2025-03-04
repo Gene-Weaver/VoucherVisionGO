@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Wake Forest University Herbarium\n(WFU)\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet by: Emily Gillespie\n\nUnited States, Virginia, Giles County, Ripplemead,\nOn the property of Glen Alton Hunt Club. On a trail at\nthe end of CR 722.\n37.43094N, -80.5494W WGS84\nElev. 820m. (2689 ft)\nMixed deciduous forest.\n\nEmily Gillespie 08-025\n21 May 2008\n\n08-025 (handwritten)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.0015387500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Wake Forest University Herbarium\n(WFU)\nGalax urceolata (Poir.) Brummitt\nDet by: Emily Gillespie\nDiapensiaceae\nUnited States, Virginia, Giles County, Ripplemead,\nOn the property of Glen Alton Hunt Club. On a trail at\nthe end of CR 722.\n37.43094N, -80.5494W WGS84\nElev: 820m. (2689 ft)\nMixed deciduous forest.\nEmily Gillespie 08-025\n21 May 2008\nM/M 1\n10\n11\n12\n13\n14\n15\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nINCHES\nWake Forest University\nHerbarium (WFU)\nWFU000018\n08-025\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.520000000000001e-05,
+      "total_cost": 0.0007667,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 213
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2203,
+    "output": 521,
+    "cost_in": 0.00022030000000000002,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWake Forest University Herbarium\n(WFU)\n\n*Galax urceolata* (Poir.) Brummitt\nDiapensiaceae\nDet by: Emily Gillespie\n\nUnited States, Virginia, Giles County, Ripplemead,\nOn the property of Glen Alton Hunt Club. On a trail at\nthe end of CR 722.\n37.43094N, -80.5494W WGS84\nElev. 820m. (2689 ft)\nMixed deciduous forest.\n\nEmily Gillespie 08-025\n21 May 2008\n\n08-025 (handwritten)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nWake Forest University Herbarium\n(WFU)\nGalax urceolata (Poir.) Brummitt\nDet by: Emily Gillespie\nDiapensiaceae\nUnited States, Virginia, Giles County, Ripplemead,\nOn the property of Glen Alton Hunt Club. On a trail at\nthe end of CR 722.\n37.43094N, -80.5494W WGS84\nElev: 820m. (2689 ft)\nMixed deciduous forest.\nEmily Gillespie 08-025\n21 May 2008\nM/M 1\n10\n11\n12\n13\n14\n15\nGROBET - VIGOR 35.500\nMADE IN U.S.A.\nINCHES\nWake Forest University\nHerbarium (WFU)\nWFU000018\n08-025\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "Wfu000018",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poir.) brummitt",
+    "collectedBy": "Emily gillespie",
+    "collectorNumber": "08-025",
+    "identifiedBy": "Emily gillespie",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "21 May 2008",
+    "collectionDate": "2008-05-21",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous forest.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "Ripplemead, on the property of glen alton hunt club. on a trail at the end of cr 722.",
+    "verbatimCoordinates": "37.43094n, -80.5494w wgs84",
+    "decimalLatitude": "37.43094",
+    "decimalLongitude": "-80.5494",
+    "minimumElevationInMeters": "820",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Wake forest university herbarium\n(wfu)\ndiapensiaceae\n08-025 (handwritten)\nm/m 1\n10\n11\n12\n13\n14\n15\ngrobet - vigor 35.500\nmade in u.s.a.\ninches\nwake forest university\nherbarium (wfu)"
+  }
+}

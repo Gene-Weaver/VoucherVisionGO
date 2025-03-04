@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21874\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nCommon on slope above road.\n\nBUNCOMBE CO.: Along Forest Service Road 479, 0.5 miles north of \nBlue Ridge Parkway. Southwest of Asheville. Elevation 3,020 feet.\n35\u00b027.51'N, 82\u00b039.49'W\n\n29 June 2015                                        Charles N. Horn #20939\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007849999999999999,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC 1\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21894\nNewberry College Herbarium\nNBYC002405\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax aphylla L.\nDiapensaceae\nCommon on slope above road.\nBUNCOMBE CO.: Along Forest Service Road 479, 0.5 miles north of\nBlue Ridge Parkway. Southwest of Asheville. Elevation 3,020 feet.\n35\u00b027.51'N, 82\u00b039.49'W.\n29 June 2015\nCharles N. Horn #20939\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.560000000000001e-05,
+      "total_cost": 0.0007471,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 164
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2192,
+    "output": 504,
+    "cost_in": 0.00021920000000000002,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21874\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax aphylla* L.\nDiapensiaceae\n\nCommon on slope above road.\n\nBUNCOMBE CO.: Along Forest Service Road 479, 0.5 miles north of \nBlue Ridge Parkway. Southwest of Asheville. Elevation 3,020 feet.\n35\u00b027.51'N, 82\u00b039.49'W\n\n29 June 2015                                        Charles N. Horn #20939\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMETRIC 1\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21894\nNewberry College Herbarium\nNBYC002405\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax aphylla L.\nDiapensaceae\nCommon on slope above road.\nBUNCOMBE CO.: Along Forest Service Road 479, 0.5 miles north of\nBlue Ridge Parkway. Southwest of Asheville. Elevation 3,020 feet.\n35\u00b027.51'N, 82\u00b039.49'W.\n29 June 2015\nCharles N. Horn #20939\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "21894",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "20939",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 June 2015",
+    "collectionDate": "2015-06-29",
+    "collectionDateEnd": "",
+    "habitat": "Common on slope above road.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Buncombe co.",
+    "locality": "Along forest service road 479, 0.5 miles north of blue ridge parkway. southwest of asheville. elevation 3,020 feet.",
+    "verbatimCoordinates": "35\u00b027.51'n, 82\u00b039.49'w",
+    "decimalLatitude": "35.4585",
+    "decimalLongitude": "-82.658167",
+    "minimumElevationInMeters": "920",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "newberry\ncollegenewberry\ncollegenewberry college herbariumnbyc002405\nherbarium of newberry college (nbyc)\nplants of north carolina, usa\ndiapensaceae\ngalax aphylla"
+  }
+}

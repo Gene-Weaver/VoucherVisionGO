@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n546224\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax aphylla* L.\nDet. S.R.Hill 10/87 Diapensiaceae\n\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\n\nSteven R. Hill 18071 7 June 1987\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000765,
+      "total_cost": 0.0015437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "PLANTS OF SOUTH CAROLINA, U.S.A.\nGalax aphylla L.\nDet. S.R.Hill 10/87\nDiapensiaceae\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\nSteven R. Hill 18071\n7 June 1987\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.24e-05,
+      "total_cost": 0.0007339,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 131
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2165,
+    "output": 481,
+    "cost_in": 0.0002165,
+    "cost_out": 0.00019240000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n546224\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n\n*Galax aphylla* L.\nDet. S.R.Hill 10/87 Diapensiaceae\n\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\n\nSteven R. Hill 18071 7 June 1987\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax aphylla L.\nDet. S.R.Hill 10/87\nDiapensiaceae\nSOUTH CAROLINA. Oconee County: Sumter National\nForest. Rte. 107, 0.4 mi S of Cherry Hill Recreation\nArea sign. Margin of oak/hickory/mountain laurel\nwoodland. 3.6 mi S of Fish Hatchery Road. Flowers\nwhite; occasional to frequent evergreen herb.\nSteven R. Hill 18071\n7 June 1987\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "546224",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Steven R. Hill",
+    "collectorNumber": "18071",
+    "identifiedBy": "S.R.Hill",
+    "identifiedDate": "1987-10-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 June 1987",
+    "collectionDate": "1987-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Margin of oak/hickory/mountain laurel woodland.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white; occasional to frequent evergreen herb.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "South carolina",
+    "county": "Oconee county",
+    "locality": "Sumter national forest. Rte. 107, 0.4 mi s of cherry hill recreation area sign. 3.6 mi s of fish hatchery road.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nNCU\nPlants of south carolina, u.s.a.\nDiapensiaceae"
+  }
+}

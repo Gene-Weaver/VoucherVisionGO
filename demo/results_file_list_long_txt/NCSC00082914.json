@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082914\n\n07691\n\nNORTH CAROLINA STATE COLLEGE\n*Galax aphylla* L.\n\nHabitat: Woods stream bluff\nThe hemlocks, near Cary\n\nLocality: Wake Co., N. C.\nCollector: R. K. Godfrey 5-23 1937\n\n\nHandwritten Text: POISON[illegible]\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00051,
+      "total_cost": 0.00128875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 102
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082914\nTIFFEN Gray Scale\nTIFFEN\u00ae Color Control Patches\nNORTH CAROLINA STATE COLLEGE\nGalax aphylla L.\nHabitat: Woods stream bluff\nThe hemlocks, near Cary\nLocality: Wake Co., N. C.\n07691\nCollector: R. K. Godfrey 5-23 1937\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.8400000000000005e-05,
+      "total_cost": 0.0007199,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 96
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2078,
+    "output": 430,
+    "cost_in": 0.0002078,
+    "cost_out": 0.000172
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082914\n\n07691\n\nNORTH CAROLINA STATE COLLEGE\n*Galax aphylla* L.\n\nHabitat: Woods stream bluff\nThe hemlocks, near Cary\n\nLocality: Wake Co., N. C.\nCollector: R. K. Godfrey 5-23 1937\n\n\nHandwritten Text: POISON[illegible]\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082914\nTIFFEN Gray Scale\nTIFFEN\u00ae Color Control Patches\nNORTH CAROLINA STATE COLLEGE\nGalax aphylla L.\nHabitat: Woods stream bluff\nThe hemlocks, near Cary\nLocality: Wake Co., N. C.\n07691\nCollector: R. K. Godfrey 5-23 1937\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082914",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. K. Godfrey",
+    "collectorNumber": "07691",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-23 1937",
+    "collectionDate": "1937-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Woods stream bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Wake co.",
+    "locality": "The hemlocks, near cary",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "North carolina state university\nHerbarium (ncsc)\nnorth carolina state college\nhandwritten text poison[illegible]"
+  }
+}

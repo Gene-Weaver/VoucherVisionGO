@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\n131577\nPOMONA COLLEGE\n\n6717\nTENNESSEE FLORA.\nEX HERB., A. RUTH.\n\n*Galax aphylla* L.\n\nHABITAT: Prospect woods, Shades near Mt. Etna.\nNo.\nColl. Ruth.\nJuly 1885\n\n\nHandwritten text: *6717*, *Galax aphylla L.*, *Prospect woods, Shades near Mt. Etna.*, *Ruth*, *July 1885*\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005849999999999999,
+      "total_cost": 0.00136375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 117
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508061\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nHERBARIUM OF\n131577\nPOMONA COLLEGE\nTENNESSEE FLORA.\nEX HERB., A. RUTH.\nGalax aphylla L.\nHABITAT\nCOLR. Ruth\nJuly 1885\n\nHandwritten text:\n6717\nDeep woods, Thunder head Mt, E. Tenn.\n6277\nNo.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2132,
+    "output": 498,
+    "cost_in": 0.00021320000000000003,
+    "cost_out": 0.0001992
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\n131577\nPOMONA COLLEGE\n\n6717\nTENNESSEE FLORA.\nEX HERB., A. RUTH.\n\n*Galax aphylla* L.\n\nHABITAT: Prospect woods, Shades near Mt. Etna.\nNo.\nColl. Ruth.\nJuly 1885\n\n\nHandwritten text: *6717*, *Galax aphylla L.*, *Prospect woods, Shades near Mt. Etna.*, *Ruth*, *July 1885*\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508061\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nHERBARIUM OF\n131577\nPOMONA COLLEGE\nTENNESSEE FLORA.\nEX HERB., A. RUTH.\nGalax aphylla L.\nHABITAT\nCOLR. Ruth\nJuly 1885\n\nHandwritten text:\n6717\nDeep woods, Thunder head Mt, E. Tenn.\n6277\nNo.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "131577",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. Ruth, Ruth",
+    "collectorNumber": "6717",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 1885",
+    "collectionDate": "1885-07-00",
+    "collectionDateEnd": "",
+    "habitat": "Prospect woods, Shades near mt. etna, deep woods, thunder head mt, e. tenn.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Prospect woods, shades near mt. etna., thunder head mt, e. tenn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of\npomona college\ntennessee flora.\nex herb., a. ruth.\nrsa0508061\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\ncalifornia botanic garden\nclaremont, ca usa (rsa-pom)\n6277"
+  }
+}

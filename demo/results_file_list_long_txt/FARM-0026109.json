@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nGalax urceolata (Poir.) Brummitt\nn = 6, based on average guard cell \nGuy L. Nesom, 1975\n\n(Handwritten text)\nName: Galax aphylla L.\nFamily:\nLocality: Garden Mtn.,\nBland Co., Va.\nAltitude: 3850 ft.\nCollected by C. E. Stevens # 3562\nIdentified by\nDate: June 20, 1971\nHabitat: acid woods\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.00140375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026109\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell\nGuy L. Nesom, 1975\nName\nFamily\nLocality\nAltitude\nCollected by\nIdentified by\nGalax aphylla L.\nGarden Mtn.,\nBland Co, Va.\n3850 ft.\nC. E. Stearns # 3562\nU\nDate\nHabitat\nJune 20, 1971\nacid woods\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.720000000000001e-05,
+      "total_cost": 0.0007387000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2159,
+    "output": 462,
+    "cost_in": 0.0002159,
+    "cost_out": 0.00018480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nGalax urceolata (Poir.) Brummitt\nn = 6, based on average guard cell \nGuy L. Nesom, 1975\n\n(Handwritten text)\nName: Galax aphylla L.\nFamily:\nLocality: Garden Mtn.,\nBland Co., Va.\nAltitude: 3850 ft.\nCollected by C. E. Stevens # 3562\nIdentified by\nDate: June 20, 1971\nHabitat: acid woods\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026109\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell\nGuy L. Nesom, 1975\nName\nFamily\nLocality\nAltitude\nCollected by\nIdentified by\nGalax aphylla L.\nGarden Mtn.,\nBland Co, Va.\n3850 ft.\nC. E. Stearns # 3562\nU\nDate\nHabitat\nJune 20, 1971\nacid woods\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026109",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C. e. Stearns",
+    "collectorNumber": "3562",
+    "identifiedBy": "Guy l. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 20, 1971",
+    "collectionDate": "1971-06-20",
+    "collectionDateEnd": "",
+    "habitat": "Acid woods",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Va.",
+    "county": "Bland co",
+    "locality": "Garden mtn.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1173",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "galax urceolata \ngalax aphylla"
+  }
+}

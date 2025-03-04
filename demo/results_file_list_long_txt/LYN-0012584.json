@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012584\n\nLYNCHBURG COLLEGE\n21709\nHERBARIUM\n\nFLORA OF VIRGINIA\n*Jatropha aphyllan* L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\n\n(Handwritten text begins)\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte #632 bridge.\n\nMay 12, 1973\n(Handwritten text ends)\n\nCHARLES E. STEVENS       NO. 6757\nDET. \"\"\n\n\n*Jularia aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000725,
+      "total_cost": 0.00150375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 145
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012584\nLYNCHBURG\nCOLLEGE\n21709\nHERBARIUM\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\nMay 12, 1973\nCHARLES E. STEVENS NO. 6757\nDET. \"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.92e-05,
+      "total_cost": 0.0007306999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 123
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2140,
+    "output": 454,
+    "cost_in": 0.000214,
+    "cost_out": 0.0001816
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012584\n\nLYNCHBURG COLLEGE\n21709\nHERBARIUM\n\nFLORA OF VIRGINIA\n*Jatropha aphyllan* L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\n\n(Handwritten text begins)\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte #632 bridge.\n\nMay 12, 1973\n(Handwritten text ends)\n\nCHARLES E. STEVENS       NO. 6757\nDET. \"\"\n\n\n*Jularia aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012584\nLYNCHBURG\nCOLLEGE\n21709\nHERBARIUM\nFLORA OF VIRGINIA\nGalax aphylla L.\nnear North Halifax, Halifax Co.\nel. 400 ft.\nCommon under Kalmia on steep\nN-facing bluff of Childrey Creek\nbelow rte # 632 bridge.\nMay 12, 1973\nCHARLES E. STEVENS NO. 6757\nDET. \"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012584",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles e. stevens",
+    "collectorNumber": "6757",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 12, 1973",
+    "collectionDate": "1973-05-12",
+    "collectionDateEnd": "",
+    "habitat": "Common under kalmia on steep n-facing bluff of childrey creek below rte # 632 bridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Halifax co.",
+    "locality": "Near north halifax, halifax co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "122",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Ramsey-freer herbarium\nlynchburg college\nlynchburg college\n21709\nherbarium\nflora of virginia\ndet."
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "xrite\nMSCCPPPE0411\nMSCCPPCCO411\nx-rite\ncolorchecker\nHerbarium Specimen\n\nScientific Name: *Galax aphylla*\nCommon Name: Galax\nLocality: Danbury, N.C.\nDate: April 14, 1981\nCollector: *Muane Adams* (handwritten)\nIdentified by: *Tom Mowbray* (handwritten)\nRemarks: Family: Diapensiaceae\nShady bluffs and stream banks.\nInfrequent. May-July\n\nSalem College Herbarium (SC)\nSC000123\nUniversity of North Carolina\nat Chapel Hill\nNCU\nGeneral Biological Supply House, Inc., Chicago 20, Illinois\nMADE IN U.S.A.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00085,
+      "total_cost": 0.0016287500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 170
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "xrite\nMSCCPPPE0411\nMSCCPPCCO411\nx-rite\ncolorchecker\nHerbarium Specimen\nScientific Name Galax aphylla\nCommon Name Galax\nLocality Danbury, N.C.\nDate April 14, 1981\nCollector Muaniu Adams\nIdentified by Tom Mowbray\nRemarks Family: Diapensiaceae\nShady blutts and stream banks.\nInfrequent. May-July.\n\nSalem College Herbarium (SC)\nSC000123\nUniversity of North Carolina\nat Chapel Hill\nNCU\nGeneral Biological Supply House, Inc., Chicago 20. Illinois\nMADE IN U.S.A.\nUniversity of North Carolina\nat Chapel Hill\nNCU\ncopyright reserved\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007486999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2210,
+    "output": 504,
+    "cost_in": 0.00022100000000000003,
+    "cost_out": 0.00020160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nxrite\nMSCCPPPE0411\nMSCCPPCCO411\nx-rite\ncolorchecker\nHerbarium Specimen\n\nScientific Name: *Galax aphylla*\nCommon Name: Galax\nLocality: Danbury, N.C.\nDate: April 14, 1981\nCollector: *Muane Adams* (handwritten)\nIdentified by: *Tom Mowbray* (handwritten)\nRemarks: Family: Diapensiaceae\nShady bluffs and stream banks.\nInfrequent. May-July\n\nSalem College Herbarium (SC)\nSC000123\nUniversity of North Carolina\nat Chapel Hill\nNCU\nGeneral Biological Supply House, Inc., Chicago 20, Illinois\nMADE IN U.S.A.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nxrite\nMSCCPPPE0411\nMSCCPPCCO411\nx-rite\ncolorchecker\nHerbarium Specimen\nScientific Name Galax aphylla\nCommon Name Galax\nLocality Danbury, N.C.\nDate April 14, 1981\nCollector Muaniu Adams\nIdentified by Tom Mowbray\nRemarks Family: Diapensiaceae\nShady blutts and stream banks.\nInfrequent. May-July.\n\nSalem College Herbarium (SC)\nSC000123\nUniversity of North Carolina\nat Chapel Hill\nNCU\nGeneral Biological Supply House, Inc., Chicago 20. Illinois\nMADE IN U.S.A.\nUniversity of North Carolina\nat Chapel Hill\nNCU\ncopyright reserved\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "SC000123",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Muane Adams",
+    "collectorNumber": "",
+    "identifiedBy": "Tom Mowbray",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "Family diapensiaceae",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 14, 1981",
+    "collectionDate": "1981-04-14",
+    "collectionDateEnd": "",
+    "habitat": "Shady bluffs and stream banks. Infrequent. May-july.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Danbury, n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "xrite\nmsccpppe0411\nmsccppcco411\nx-rite\ncolorchecker\nHerbarium specimen\n\nSalem college herbarium (sc)\nUniversity of north carolina\nat chapel hill\nncu\ngeneral biological supply house, inc., chicago 20, illinois\nmade in u.s.a.\nUniversity of north carolina\nat chapel hill\nncu\ncopyright reserved\ncopyright reserved"
+  }
+}

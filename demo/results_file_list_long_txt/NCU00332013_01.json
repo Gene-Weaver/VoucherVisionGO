@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n32379\n\nDiaspensiaceae (handwritten)\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332013\n\nHerbarium of the University of North Carolina\n*Galax aphylla* L.\n\nPine-oak association,Daybook Olivine Deposit,\n\n3 miles N of Burnsville,Yancey Co.,N.C.\n\nJune 3,1947                                       A.E.Radford (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006500000000000001,
+      "total_cost": 0.00142875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUniversity of North Carolina\nNCU\nat Chapel Hill\nUniversity of North Carolina\nOF NORTH\nHERBARIUM\nCAROLINA\n32379\nmm\nx-rite\ncolorchecker\nDiaspensiaceae\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332013\nHerbarium of the University of North Carolina\nGalax aphylla L.\nPine-cak association, Daybook Olivine Deposit,\n3 miles N of Burnsville, Yancey Co., N.C.\nJune 3,1947\nA.E. Radford\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2169,
+    "output": 471,
+    "cost_in": 0.00021690000000000001,
+    "cost_out": 0.00018840000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUniversity of North Carolina\nat Chapel Hill\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n32379\n\nDiaspensiaceae (handwritten)\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332013\n\nHerbarium of the University of North Carolina\n*Galax aphylla* L.\n\nPine-oak association,Daybook Olivine Deposit,\n\n3 miles N of Burnsville,Yancey Co.,N.C.\n\nJune 3,1947                                       A.E.Radford (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUniversity of North Carolina\nNCU\nat Chapel Hill\nUniversity of North Carolina\nOF NORTH\nHERBARIUM\nCAROLINA\n32379\nmm\nx-rite\ncolorchecker\nDiaspensiaceae\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332013\nHerbarium of the University of North Carolina\nGalax aphylla L.\nPine-cak association, Daybook Olivine Deposit,\n3 miles N of Burnsville, Yancey Co., N.C.\nJune 3,1947\nA.E. Radford\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332013",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A.E. Radford",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 3,1947",
+    "collectionDate": "1947-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Pine-oak association",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "N.C.",
+    "county": "Yancey Co.",
+    "locality": "Daybook olivine deposit, 3 miles n of burnsville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NCU\nUniversity of north carolina\nat chapel hill\nUniversity of north\nherbarium\ncarolina\n32379\ndiaspensiaceae\nHerbarium of the university of north carolina\ngalax aphylla l.\ngalax aphylla l."
+  }
+}

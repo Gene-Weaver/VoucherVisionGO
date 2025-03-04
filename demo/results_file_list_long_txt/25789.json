@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\n25789\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\n\nCampbell County, Va.\n\n*Galax aphylla* L.\nHemlock bluff; N-facing slope along\nFalling River just below confluence\nof Hickory Creek and 4\u00bd mi. N\nof Brookneal, Va. Elev. 450'\n11 April 1977\nCollector: T.F. Wieboldt No. 2751\n\nHandwritten text: *Galax aphylla* L., Hemlock bluff; N-facing slope along Falling River just below confluence of Hickory Creek and 4\u00bd mi. N of Brookneal, Va. Elev. 450', 11 April 1977, T.F. Wieboldt\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00101,
+      "total_cost": 0.0017887500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 202
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150\nNO. 305 ME\n16ths\n1 2 3 4 5 6\nCHARTERED 1693\n25789\nHERBARIUM, COLLER\nOF\nWILLIAM & MARY\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nCampbell County, Va.\nGalax aphylla L.\nHemlock bluff; N-facing slope along\nFalling River just below confluence\nof Hickory Creek and 4\u00bd mi. N\nof BrookNeal, Va. Elev. 450'.\n11 April 1977\nCollector: T.F. Wieboldt No. 2751.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.36e-05,
+      "total_cost": 0.0007651,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 209
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2280,
+    "output": 583,
+    "cost_in": 0.000228,
+    "cost_out": 0.0002332
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\n25789\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\n\nCampbell County, Va.\n\n*Galax aphylla* L.\nHemlock bluff; N-facing slope along\nFalling River just below confluence\nof Hickory Creek and 4\u00bd mi. N\nof Brookneal, Va. Elev. 450'\n11 April 1977\nCollector: T.F. Wieboldt No. 2751\n\nHandwritten text: *Galax aphylla* L., Hemlock bluff; N-facing slope along Falling River just below confluence of Hickory Creek and 4\u00bd mi. N of Brookneal, Va. Elev. 450', 11 April 1977, T.F. Wieboldt\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150\nNO. 305 ME\n16ths\n1 2 3 4 5 6\nCHARTERED 1693\n25789\nHERBARIUM, COLLER\nOF\nWILLIAM & MARY\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nCampbell County, Va.\nGalax aphylla L.\nHemlock bluff; N-facing slope along\nFalling River just below confluence\nof Hickory Creek and 4\u00bd mi. N\nof BrookNeal, Va. Elev. 450'.\n11 April 1977\nCollector: T.F. Wieboldt No. 2751.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "25789",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "T.F. Wieboldt",
+    "collectorNumber": "2751",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 April 1977",
+    "collectionDate": "1977-04-11",
+    "collectionDateEnd": "",
+    "habitat": "Hemlock bluff; N-facing slope along Falling River just below confluence of Hickory Creek",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Campbell County",
+    "locality": "Falling River just below confluence of Hickory Creek and 4\u00bd mi. N of Brookneal, Va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "137",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nGalax aphylla L.\nElev. 450'\nCollector T.F. Wieboldt No.\nHandwritten text Galax aphylla L., Hemlock bluff; N-facing slope along Falling River just below confluence of Hickory Creek and 4\u00bd mi. N of Brookneal, Va. Elev. 450', 11 April 1977, T.F. Wieboldt\nGalax aphylla"
+  }
+}

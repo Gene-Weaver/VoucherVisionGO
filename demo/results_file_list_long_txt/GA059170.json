@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = \\~12, based on average guard cell area\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\nE1432\nPOISONED\n*Stephens* (handwritten)\n*Co* (handwritten)\n\nUNIVERSITY OF GEORGIA HERBARIUM\n*Galax aphylla* L.\nMountains.\nTallulah Falls, Ga.\nJune 21, 1923.\nNo. E1432\n*Miller.* (handwritten)\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00088,
+      "total_cost": 0.0016587499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 176
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA059170\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nE1432\nPOISONED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12\nbased on average guard cell area\nvolume of 72412\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA HERBARIUM\nGalax aphylla L.\nMountains.\nTallulah Falls, Ga.\nJune 21, 1923.\nNo. E1432\nMilles.\nInches\n2\n3\n4\n5\n6\n7\n8\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\nHandwritten text:\nStephens\nCo\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.000112,
+      "total_cost": 0.0007935,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 280
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2340,
+    "output": 455,
+    "cost_in": 0.00023400000000000002,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = \\~12, based on average guard cell area\nGuy L. Nesom, 1975\n\nUNIV. OF GEORGIA\nHERBARIUM\nE1432\nPOISONED\n*Stephens* (handwritten)\n*Co* (handwritten)\n\nUNIVERSITY OF GEORGIA HERBARIUM\n*Galax aphylla* L.\nMountains.\nTallulah Falls, Ga.\nJune 21, 1923.\nNo. E1432\n*Miller.* (handwritten)\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF GEORGIA\nGA059170\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIV. OF GEORGIA\nHERBARIUM\nE1432\nPOISONED\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12\nbased on average guard cell area\nvolume of 72412\nGuy L. Nesom, 1975\nUNIVERSITY OF GEORGIA HERBARIUM\nGalax aphylla L.\nMountains.\nTallulah Falls, Ga.\nJune 21, 1923.\nNo. E1432\nMilles.\nInches\n2\n3\n4\n5\n6\n7\n8\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nIMAGED 2013\n\nHandwritten text:\nStephens\nCo\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059170",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Miller",
+    "collectorNumber": "E1432",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 21, 1923.",
+    "collectionDate": "1923-06-21",
+    "collectionDateEnd": "",
+    "habitat": "Mountains.",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Stephens, Co",
+    "locality": "Tallulah Falls, Ga.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nPOISONED\nIMAGED 2013"
+  }
+}

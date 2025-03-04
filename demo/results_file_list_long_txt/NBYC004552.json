@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21485\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb under *Rhododendron maximum* shrubs. Past flowering.\n\nTRANSYLVANIA CO.: Roadside and woodland at jct of US 64 and NC 281. Ca. 7 mi W of Rosman. 35\u00b007.64'N, 82\u00b055.62'W. Elevation 2900 feet.\n\n9 July 2013                                                     Charles N. Horn #20523\n\n\n*Galax urceolata*\n*Rhododendron maximum*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00089,
+      "total_cost": 0.00166875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 178
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "METRIC\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21485\nNewberry College Herbarium\nNBYC004552\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nCommon herb under Rhododendron maximum shrubs. Past flowering.\nTRANSYLVANIA CO.: Roadside and woodland at jct of US 64 and NC\n281. Ca.7 mi W of Rosman. 35\u00b007.64'N, 82\u00b055.62'W. Elevation 2900\nfeet.\n9 July 2013\nCharles N. Horn #20523\n\n\nGalax urceolata\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2253,
+    "output": 513,
+    "cost_in": 0.0002253,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNEWBERRY\nCOLLEGE\n\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21485\n\nNewberry College Herbarium\n\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\n\n*Galax urceolata* (Poiret) Brummitt\nDiapensiaceae\n\nCommon herb under *Rhododendron maximum* shrubs. Past flowering.\n\nTRANSYLVANIA CO.: Roadside and woodland at jct of US 64 and NC 281. Ca. 7 mi W of Rosman. 35\u00b007.64'N, 82\u00b055.62'W. Elevation 2900 feet.\n\n9 July 2013                                                     Charles N. Horn #20523\n\n\n*Galax urceolata*\n*Rhododendron maximum*\n\n\ngemini-2.0-flash OCR:\nMETRIC\nN\nNEWBERRY\nCOLLEGE\nNEWBERRY\nCOLLEGE\nHERBARIUM\n21485\nNewberry College Herbarium\nNBYC004552\nHerbarium of Newberry College (NBYC)\nPLANTS OF NORTH CAROLINA, USA\nGalax urceolata (Poiret) Brummitt\nDiapensiaceae\nCommon herb under Rhododendron maximum shrubs. Past flowering.\nTRANSYLVANIA CO.: Roadside and woodland at jct of US 64 and NC\n281. Ca.7 mi W of Rosman. 35\u00b007.64'N, 82\u00b055.62'W. Elevation 2900\nfeet.\n9 July 2013\nCharles N. Horn #20523\n\n\nGalax urceolata\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "21485",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Charles N. Horn",
+    "collectorNumber": "20523",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9 July 2013",
+    "collectionDate": "2013-07-09",
+    "collectionDateEnd": "",
+    "habitat": "Common herb under Rhododendron maximum shrubs. Past flowering.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Transylvania co.",
+    "locality": "Roadside and woodland at jct of US 64 and NC 281. Ca. 7 mi W of Rosman.",
+    "verbatimCoordinates": "35\u00b007.64'N, 82\u00b055.62'W",
+    "decimalLatitude": "35.12733",
+    "decimalLongitude": "-82.927",
+    "minimumElevationInMeters": "884",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Newberry\nCollege\nNewberry College Herbarium\nNBYC004552\nHerbarium of Newberry College (NBYC)\nPlants of North Carolina, Usa\nRhododendron maximum\nMetric\nN"
+  }
+}

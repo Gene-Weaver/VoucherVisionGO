@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\n23875\n\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\nHandwritten Text: \"K\"\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\nGalax aphylla L.\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\n\nGalax aphylla\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\n23875\n\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\nHandwritten Text: \"K\"\n\n\n*Galax aphylla* L.\n\n",
       "cost_in": 0.00077875,
       "cost_out": 0.0005949999999999999,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\n23875\n\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\nHandwritten Text: \"K\"\n\n\n*Galax aphylla* L.\n\n",
+      "total_cost": 0.00137375,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 119,
-      "total_cost": 0.00137375
+      "tokens_out": 119
     },
     "gemini-2.0-flash": {
+      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\nINCH\n3 1234 10039617 3\nOPTIRECTILINEAR\nU.S.A.\nEASTERN KENTUCKY UNIVERSITY\n2375\nHERBARIUM\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\nGalax aphylla L.\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\n\nGalax aphylla\n\n",
       "cost_in": 0.0006815,
-      "cost_out": 3.6e-05,
-      "ocr_text": "EASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\nGalax aphylla L.\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\n\nGalax aphylla\n\n",
+      "cost_out": 5.92e-05,
+      "total_cost": 0.0007407,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 90,
-      "total_cost": 0.0007175
+      "tokens_out": 148
     }
   },
-  "tokens_LLM": {
-    "input": 2049,
-    "output": 427
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2145,
+    "output": 468,
+    "cost_in": 0.00021450000000000004,
+    "cost_out": 0.0001872
   },
-  "vvgo_json": {
-    "additionalText": "Eastern kentucky university herbarium\nflora of north carolina\nhandwritten text k",
-    "catalogNumber": "23875",
-    "chromosomeCount": "",
+  "ocr": "\ngemini-1.5-pro OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\n23875\n\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\n\n*Galax aphylla* L.\n\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\n\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\nHandwritten Text: \"K\"\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nINCH\n3 1234 10039617 3\nOPTIRECTILINEAR\nU.S.A.\nEASTERN KENTUCKY UNIVERSITY\n2375\nHERBARIUM\nEASTERN KENTUCKY UNIVERSITY HERBARIUM\nFLORA OF NORTH CAROLINA\nGalax aphylla L.\nMadison Co., Pine-Hardwood Forest,\nU.S. 25, 9 miles north of Walnut.\nPisgah National Forest.\nca-2200' elev.\nJ. Stuart Lassetter No. 2073\nMay 15, 1974\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "10039617",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
     "collectedBy": "J. Stuart Lassetter",
+    "collectorNumber": "2073",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 15, 1974",
     "collectionDate": "1974-05-15",
     "collectionDateEnd": "",
-    "collectorNumber": "2073",
-    "continent": "North America",
-    "country": "United States",
-    "county": "Madison Co.",
+    "habitat": "Pine-hardwood forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "North america",
+    "country": "U.s.a.",
+    "stateProvince": "North carolina",
+    "county": "Madison co.",
+    "locality": "U.s. 25, 9 miles north of walnut. pisgah national forest.",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "ft",
-    "genus": "Galax",
-    "habitat": "Pine-hardwood forest",
-    "identificationHistory": "",
-    "identifiedBy": "",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "U.s. 25, 9 miles north of walnut. pisgah national forest.",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "671",
-    "scientificName": "Galax aphylla L.",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "North Carolina",
-    "verbatimCollectionDate": "May 15, 1974",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Eastern kentucky university herbarium\n23875\n\nEastern kentucky university herbarium\n\nInch\n3 1234\nOptirectilinear\nEastern kentucky university\n2375\nHerbarium\nHandwritten text k"
   }
 }

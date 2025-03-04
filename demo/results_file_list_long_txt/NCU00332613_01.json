@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nUniversity of North Carolina\nat Chapel Hill\nNCU\ncopyright reserved\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332613\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\n*Galax aphylla* L.\nImmense bed on Rainbow Trail to LeConte,\nTenn. Smoky Mt. Nat. Park.\n\nNo.                      Date 6/15/1936     Coll. Laurie Stewart\n\n(Handwritten text identified with asterisks)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006699999999999999,
+      "total_cost": 0.0014487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 134
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1 2 3 4 5 6 7 8\nUniversity of North Carolina\nat Chapel Hill\nNCU\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nmm\nMSCCPPCC0411\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332613\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nImmense bed on Rainbow Trail to LeConte,\nTenn. Smoky Mt. Nat. Park.\nNo.\nDate 6/15/1936 Coll. Laurie Stewart\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.800000000000001e-05,
+      "total_cost": 0.0007395,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 145
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2167,
+    "output": 429,
+    "cost_in": 0.0002167,
+    "cost_out": 0.00017160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\nUniversity of North Carolina\nat Chapel Hill\nNCU\ncopyright reserved\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332613\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\n*Galax aphylla* L.\nImmense bed on Rainbow Trail to LeConte,\nTenn. Smoky Mt. Nat. Park.\n\nNo.                      Date 6/15/1936     Coll. Laurie Stewart\n\n(Handwritten text identified with asterisks)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\n1 2 3 4 5 6 7 8\nUniversity of North Carolina\nat Chapel Hill\nNCU\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nmm\nMSCCPPCC0411\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332613\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax aphylla L.\nImmense bed on Rainbow Trail to LeConte,\nTenn. Smoky Mt. Nat. Park.\nNo.\nDate 6/15/1936 Coll. Laurie Stewart\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332613",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Laurie Stewart",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/15/1936",
+    "collectionDate": "1936-06-15",
+    "collectionDateEnd": "",
+    "habitat": "Immense bed",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "On rainbow trail to leconte, tenn. smoky mt. nat. park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nat chapel hill\nNCU\ncopyright reserved\nUniversity of north carolina\nat chapel hill"
+  }
+}

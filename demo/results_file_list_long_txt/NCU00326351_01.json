@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\n\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n116793\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBeaufort County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nMixed deciduous forest, near NC. 33, 2 miles\nWNW. of Coxs crossroads\n\nA. E. Radford 33336                May 17, 1958\n\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326351\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "total_cost": 0.00155875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "x-rite\ncolorchecker\nMSCCPPPE04\nMSCCPPCC0411\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nNCU\nUniversity of North Carolina\nat Chapel Hill\nOF NORTH\nHERBARIUM\nUNIVERSITY\nCAROLINA\n116793\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBeaufort County\nGalax aphylla L.\nDetermined by H. E. Ahles\nMixed deciduous forest, near NC. 33, 2 miles\nwnw. of Coxs crossroads\nA. E. Radford 33336\nMay 17, 1958\nCollected for the \"Flora of the Carolinas\"\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326351\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2228,
+    "output": 474,
+    "cost_in": 0.0002228,
+    "cost_out": 0.0001896
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\n\nMSCCPPPE0411\nMSCCPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n116793\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBeaufort County\n\n*Galax aphylla* L.                      Determined by H. E. Ahles\n\nMixed deciduous forest, near NC. 33, 2 miles\nWNW. of Coxs crossroads\n\nA. E. Radford 33336                May 17, 1958\n\nCollected for the \"Flora of the Carolinas\"\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326351\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nx-rite\ncolorchecker\nMSCCPPPE04\nMSCCPPCC0411\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nNCU\nUniversity of North Carolina\nat Chapel Hill\nOF NORTH\nHERBARIUM\nUNIVERSITY\nCAROLINA\n116793\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBeaufort County\nGalax aphylla L.\nDetermined by H. E. Ahles\nMixed deciduous forest, near NC. 33, 2 miles\nwnw. of Coxs crossroads\nA. E. Radford 33336\nMay 17, 1958\nCollected for the \"Flora of the Carolinas\"\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326351\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326351",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. E. Radford",
+    "collectorNumber": "33336",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 17, 1958",
+    "collectionDate": "1958-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Mixed deciduous forest, near nc. 33, 2 miles wnw. of Coxs crossroads",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Beaufort county",
+    "locality": "Near nc. 33, 2 miles wnw. of Coxs crossroads",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "university of north carolina\nherbarium\n116793\nherbarium of the university of north carolina\ncollected for the flora of the carolinas"
+  }
+}

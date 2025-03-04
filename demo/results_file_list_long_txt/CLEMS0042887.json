@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\n16137\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042887\n\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\n*Galax urceolata* (Poir.) Brummitt\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nAvery Co.\n\n*Galax aphylla* L.\nNear Edgemont on roadside.\n\nDate 11 June, 1971\nCollected by R. Ables No. 20\n\n\nHandwritten Text: *Galax urceolata*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.00153875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\nGalax urceolata (Poir.) Brummitt\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nAvery Co.\nGalax aphylla L.\nNear Edgemont on roadside.\nDate 11 June, 1971\nCollected by R... Ables..\nNo. 20\n1996\nDiagens.\nGurceolata\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.880000000000001e-05,
+      "total_cost": 0.0007303000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 122
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2177,
+    "output": 505,
+    "cost_in": 0.00021770000000000003,
+    "cost_out": 0.00020200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\n16137\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042887\n\nJohn F. Townsend 1996\nClemson University Herbarium (CLEMS)\n*Galax urceolata* (Poir.) Brummitt\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nAvery Co.\n\n*Galax aphylla* L.\nNear Edgemont on roadside.\n\nDate 11 June, 1971\nCollected by R. Ables No. 20\n\n\nHandwritten Text: *Galax urceolata*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\nGalax urceolata (Poir.) Brummitt\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nAvery Co.\nGalax aphylla L.\nNear Edgemont on roadside.\nDate 11 June, 1971\nCollected by R... Ables..\nNo. 20\n1996\nDiagens.\nGurceolata\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042887",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "R. Ables",
+    "collectorNumber": "20",
+    "identifiedBy": "John F. Townsend",
+    "identifiedDate": "1996",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 June, 1971",
+    "collectionDate": "1971-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Near Edgemont on roadside.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Avery Co.",
+    "locality": "Near Edgemont on roadside.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "copyright reserved\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium (CLEMS)\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nGalax aphylla L.\nHandwritten Text Galax urceolata\nGalax urceolata\nGalax aphylla\nDiagens.\nGurceolata"
+  }
+}

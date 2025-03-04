@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "*Hydrocotyle* sp.\n\n*Hydrocotyle novae-zelandiae*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 8.999999999999999e-05,
+      "total_cost": 0.00086875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 18
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Viola rotundifolia\n\nI'm unable to find any scientific species names in this image.\n\n",
+      "cost_in": 0.00026869999999999997,
+      "cost_out": 6.800000000000001e-06,
+      "total_cost": 0.00027550000000000003,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 2687,
+      "tokens_out": 17
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 1924,
+    "output": 361,
+    "cost_in": 0.00019240000000000001,
+    "cost_out": 0.0001444
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n*Hydrocotyle* sp.\n\n*Hydrocotyle novae-zelandiae*\n\n\ngemini-2.0-flash OCR:\nViola rotundifolia\n\nI'm unable to find any scientific species names in this image.\n\n",
+  "formatted_json": {
+    "catalogNumber": "",
+    "scientificName": "Viola rotundifolia",
+    "genus": "Viola",
+    "specificEpithet": "rotundifolia",
+    "scientificNameAuthorship": "",
+    "collectedBy": "",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "",
+    "stateProvince": "",
+    "county": "",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "hydrocotyle sp.\n\nhydrocotyle novae-zelandiae\n\ni'm unable to find any scientific species names in this image."
+  }
+}

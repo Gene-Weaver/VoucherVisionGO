@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTVACO HERBARIUM\n\n122350\n\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: *Galax urceolata* AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax WESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois DATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: x FLOWER: FRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk. A common mountain ground cover.\n\n(Handwritten Text) *Sumter National*\n*Forest , approx*\n*34.968274*\n*-83.118613*\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nDarlington County\n*Galax aphylla* L.\nKalmia Gardens of Coker College\n\nColl. George P. Sawyer Date 8-8-75 No. 2689\nUSCH0025711\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001545,
+      "total_cost": 0.0023237500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 309
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "USCH\n0\ncm\n1 2 3 4\n5\n6\n7 8 9 10\ncopyright reserved University of South Carolina\nWESTVACO HERBARIUM\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: Galax urceolata AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax\nWESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois\nDATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: X FLOWER:\nFRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk A common mountain\nground cover.\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington\nGalax aphylla L.\nKalmia Gardens of Coker College\nCounty\nColl. George P. Sawyer Date 8-8-75\nNo. 2689\nUniversity of South Carolina Herbarium\n\u2605\nSumter National\nForest, approx\n34.968274\n-83.118613\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001252,
+      "total_cost": 0.0008067,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 313
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2497,
+    "output": 608,
+    "cost_in": 0.0002497,
+    "cost_out": 0.00024320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTVACO HERBARIUM\n\n122350\n\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: *Galax urceolata* AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax WESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois DATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: x FLOWER: FRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk. A common mountain ground cover.\n\n(Handwritten Text) *Sumter National*\n*Forest , approx*\n*34.968274*\n*-83.118613*\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS) 2024\n\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n002754\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nDarlington County\n*Galax aphylla* L.\nKalmia Gardens of Coker College\n\nColl. George P. Sawyer Date 8-8-75 No. 2689\nUSCH0025711\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUSCH\n0\ncm\n1 2 3 4\n5\n6\n7 8 9 10\ncopyright reserved University of South Carolina\nWESTVACO HERBARIUM\nFAMILY NAME: DIAPENSIACEAE\nBOTANICAL NAME: Galax urceolata AUTHORITY: (Poiret) Brummitt\nCOMMON NAME: Galax\nWESTVACO CODE: 6431\nCOLLECTED BY: D. Bourgeois\nDATE: 4/24/93\nSTATE: SC COUNTY: Oconee\nLOCALITY: Burrell's Ford campground near Chatooga River.\nPLANT HT: 1 dm HABITAT: Mountains of Southeast\nFOLIAGE: X FLOWER:\nFRUIT:\nCOMMENTS: Round Waxy evergreen leaves, one per stalk A common mountain\nground cover.\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nDarlington\nGalax aphylla L.\nKalmia Gardens of Coker College\nCounty\nColl. George P. Sawyer Date 8-8-75\nNo. 2689\nUniversity of South Carolina Herbarium\n\u2605\nSumter National\nForest, approx\n34.968274\n-83.118613\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "122350",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "D. Bourgeois",
+    "collectorNumber": "",
+    "identifiedBy": "Michelle L. Gaynor (flas)",
+    "identifiedDate": "2024",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4/24/93",
+    "collectionDate": "1993-04-24",
+    "collectionDateEnd": "",
+    "habitat": "Mountains of southeast",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Round waxy evergreen leaves, one per stalk. a common mountain ground cover.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Sc",
+    "county": "Oconee",
+    "locality": "Burrell's ford campground near chatooga river. sumter national forest, approx 34.968274 -83.118613",
+    "verbatimCoordinates": "34.968274\n-83.118613",
+    "decimalLatitude": "34.968274",
+    "decimalLongitude": "-83.118613",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Westvaco herbarium\nFamily name diapensiaceae\nCommon name galax westvaco code 6431\nPlant ht 1 dm\nfoliage x flower fruit\nUniversity of south carolina herbarium\nflora of south carolina\ndarlington county\ngalax aphylla l.\nkalmia gardens of coker college\ncoll. george p. sawyer date 8-8-75 no. 2689\nusch0025711\ngalax urceolata\ngalax aphylla\nusch\ncopyright reserved university of south carolina\ngalax aphylla\ngalax urceolata"
+  }
+}

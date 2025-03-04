@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n82486\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059476\n\nFlora of Virginia\n*Talax aphylla* L.\nnear Goshen, Rockbridge Co.\nal. 1900 ft.\n\nOak-heath roadbanks near\nhead of Guy's Run.\nApr. 10, 1976\n\nCharles E. Stevens\nNo. 12,236\nDet. \"\n\n(Handwritten text identified with *)*\n\n*Talax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006799999999999999,
+      "total_cost": 0.00145875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 136
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n82486\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax aphylla L.\nnear Yoshen, Rockbridge Co.\nel. 1900 ft.\nOak-heath roadbanks near\nhead of Guy's Run.\nApr. 10, 1976\nCharles E. Stevens\nDet. \"\nNo. 12,236\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059476\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.8e-05,
+      "total_cost": 0.0007295,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 120
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2118,
+    "output": 456,
+    "cost_in": 0.00021180000000000003,
+    "cost_out": 0.00018240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n82486\nVirginia Polytechnic Institute\nand State University\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059476\n\nFlora of Virginia\n*Talax aphylla* L.\nnear Goshen, Rockbridge Co.\nal. 1900 ft.\n\nOak-heath roadbanks near\nhead of Guy's Run.\nApr. 10, 1976\n\nCharles E. Stevens\nNo. 12,236\nDet. \"\n\n(Handwritten text identified with *)*\n\n*Talax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n82486\nVirginia Polytechnic Institute\nand State University\nFlora of Virginia\nGalax aphylla L.\nnear Yoshen, Rockbridge Co.\nel. 1900 ft.\nOak-heath roadbanks near\nhead of Guy's Run.\nApr. 10, 1976\nCharles E. Stevens\nDet. \"\nNo. 12,236\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059476\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "82486",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "12,236",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 10, 1976",
+    "collectionDate": "1976-04-10",
+    "collectionDateEnd": "",
+    "habitat": "Oak-heath roadbanks near head of guy's run.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Rockbridge co.",
+    "locality": "Near goshen",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "579",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia polytechnic institute\nand state university\nMassey herbarium\nVirginia polytechnic institute\nVpi-v-0059476\nFlora of virginia\nel. 1900 ft.\ndet."
+  }
+}

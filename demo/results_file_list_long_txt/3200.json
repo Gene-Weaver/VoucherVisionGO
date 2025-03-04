@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG VIRGINIA\n\nNew Kent County                                                     20 May 1970\n*Galax aphylla* L.\n\nIn dry soil on slope in ravine on southeast side\nof Co. Rte. 627, 0.7 mile south of junction of\nof Co. Rte. 627 and Co. Rte. 1002.\n\nCollector: Mary Sabra Gillespie                      No. 615\n\n3200\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n(handwritten arrow pointing to the number 3200)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008,
+      "total_cost": 0.0015787499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 160
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60\n70 80\n90 100 110 120\n16ths\n1 NO. 305 ME\n2\n3\nGENERAL\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG VIRGINIA\nNew Kent County\nGalax aphylla L.\n20 May 1970\nIn dry soil on slope in ravine on southeast side\nof Co. Rte. 627, 0.7 mile south of junction of\nof Co. Rte. 627 and Co. Rte. 1002.\nCollector:\nMary Sabra Gillespie\nNo.\n615\n3200\nHERBARIUM, COLLEGE\nWILLIAM & MARY\nOF\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.880000000000002e-05,
+      "total_cost": 0.0007703,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 222
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2258,
+    "output": 588,
+    "cost_in": 0.0002258,
+    "cost_out": 0.0002352
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG VIRGINIA\n\nNew Kent County                                                     20 May 1970\n*Galax aphylla* L.\n\nIn dry soil on slope in ravine on southeast side\nof Co. Rte. 627, 0.7 mile south of junction of\nof Co. Rte. 627 and Co. Rte. 1002.\n\nCollector: Mary Sabra Gillespie                      No. 615\n\n3200\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n(handwritten arrow pointing to the number 3200)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60\n70 80\n90 100 110 120\n16ths\n1 NO. 305 ME\n2\n3\nGENERAL\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG VIRGINIA\nNew Kent County\nGalax aphylla L.\n20 May 1970\nIn dry soil on slope in ravine on southeast side\nof Co. Rte. 627, 0.7 mile south of junction of\nof Co. Rte. 627 and Co. Rte. 1002.\nCollector:\nMary Sabra Gillespie\nNo.\n615\n3200\nHERBARIUM, COLLEGE\nWILLIAM & MARY\nOF\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "3200",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Mary Sabra Gillespie",
+    "collectorNumber": "615",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 May 1970",
+    "collectionDate": "1970-05-20",
+    "collectionDateEnd": "",
+    "habitat": "In dry soil on slope in ravine on southeast side of Co. Rte. 627, 0.7 mile south of junction of of Co. Rte. 627 and Co. Rte. 1002.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "New Kent County",
+    "locality": "On southeast side of Co. Rte. 627, 0.7 mile south of junction of of Co. Rte. 627 and Co. Rte. 1002.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WILLIAM & MARY\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG VIRGINIA\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nmm\n10\n20\n30\n40\n50\n60\n70 80\n90 100 110 120\n16ths\n1 NO. 305 ME\n2\n3\nGENERAL\n4\nMADE\n130\n5\n140 150\nESS STEEL\n6"
+  }
+}

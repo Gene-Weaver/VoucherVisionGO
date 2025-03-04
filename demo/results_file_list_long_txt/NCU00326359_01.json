@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n460839\n\nECOLOGICAL COLLECTIONS\n\nBrunswick County,\nNorth Carolina\n\n*Galax aphylla* L.\n\nDate: May 13, 1973\n\nSteep hardwood slopes of southeast tributary to\nBryant Mill Creek, north of Northwest.\n\nDavid M. DuMond, No. 1620\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326359\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080567\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00063,
+      "total_cost": 0.0014087499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 126
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n460839\nNCU\nECOLOGICAL COLLECTIONS\nBrunswick County,\nNorth Carolina\nGalax aphylla L.\nDate: May 13, 1973\nSteep hardwood slopes of southeast tributary to\nBryant Mill Creek, north of Northwest.\nDavid M. DuMond, No. 1620\nNCU00326359\nNCU00080567\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.2800000000000004e-05,
+      "total_cost": 0.0007243,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 107
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2116,
+    "output": 436,
+    "cost_in": 0.0002116,
+    "cost_out": 0.0001744
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n460839\n\nECOLOGICAL COLLECTIONS\n\nBrunswick County,\nNorth Carolina\n\n*Galax aphylla* L.\n\nDate: May 13, 1973\n\nSteep hardwood slopes of southeast tributary to\nBryant Mill Creek, north of Northwest.\n\nDavid M. DuMond, No. 1620\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326359\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080567\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n460839\nNCU\nECOLOGICAL COLLECTIONS\nBrunswick County,\nNorth Carolina\nGalax aphylla L.\nDate: May 13, 1973\nSteep hardwood slopes of southeast tributary to\nBryant Mill Creek, north of Northwest.\nDavid M. DuMond, No. 1620\nNCU00326359\nNCU00080567\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "460839",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "David M. DuMond",
+    "collectorNumber": "1620",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 13, 1973",
+    "collectionDate": "1973-05-13",
+    "collectionDateEnd": "",
+    "habitat": "Steep hardwood slopes of southeast tributary to Bryant Mill Creek, north of Northwest.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Brunswick county",
+    "locality": "North of northwest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nEcological collections\nNCU00326359\nNCU00080567\nNCU"
+  }
+}

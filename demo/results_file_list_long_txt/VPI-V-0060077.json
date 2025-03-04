@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 based on average guard cell area\nvolume of 507\u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\nNo. 4271  July 6, 1966\nColl. R.S. Freer & G.W. Ramsey\n*Galax aphylla* L.\n\nLocality: Botetourt County; Forest Service road\ndown from Black Horse Gap on Blue Ridge Pkwy.\nHabitat On Hampton shale\n\nHerbarium 805 (handwritten)\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060077\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009200000000000001,
+      "total_cost": 0.00169875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 184
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 507 \u03bc2\nGuy L. Nesom, 1975\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\nNo. 4271 July 6, 1966\nColl. R.S. Freer & G.W. Ramsey\nGalax aphylla L.\nLocality: Botetourt County; Forest Service road\ndown from Black Horse Gap on Blue Ridge Pkwy.\nHabitat On Hampton shale\nHerbarium 805\nBiology Department\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060077\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.88e-05,
+      "total_cost": 0.0007503000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 172
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2252,
+    "output": 510,
+    "cost_in": 0.00022520000000000003,
+    "cost_out": 0.00020400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 based on average guard cell area\nvolume of 507\u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\nNo. 4271  July 6, 1966\nColl. R.S. Freer & G.W. Ramsey\n*Galax aphylla* L.\n\nLocality: Botetourt County; Forest Service road\ndown from Black Horse Gap on Blue Ridge Pkwy.\nHabitat On Hampton shale\n\nHerbarium 805 (handwritten)\nBiology Department\nVirginia Polytechnic Institute\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060077\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6, based on average guard cell area\nvolume of 507 \u03bc2\nGuy L. Nesom, 1975\n\nPLANTS OF THE VIRGINIA BLUE RIDGE\nNo. 4271 July 6, 1966\nColl. R.S. Freer & G.W. Ramsey\nGalax aphylla L.\nLocality: Botetourt County; Forest Service road\ndown from Black Horse Gap on Blue Ridge Pkwy.\nHabitat On Hampton shale\nHerbarium 805\nBiology Department\nVirginia Polytechnic Institute\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060077\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "VPI-V-0060077",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "R.s. freer & g.w. ramsey",
+    "collectorNumber": "4271",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 6, 1966",
+    "collectionDate": "1966-07-06",
+    "collectionDateEnd": "",
+    "habitat": "On hampton shale",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 507 \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Botetourt county",
+    "locality": "Forest service road down from black horse gap on blue ridge pkwy.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the university of north carolina\nPlants of the virginia blue ridge\nHerbarium 805\nBiology department\nVirginia polytechnic institute\nMassey herbarium\nVirginia polytechnic institute"
+  }
+}

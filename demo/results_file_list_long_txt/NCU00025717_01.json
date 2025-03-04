@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n572107\n\nDiapensiaceae *(handwritten)*\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummitt\nDate 15 November 2000 County Cumberland\nLocation South side of Lower Little River, west of north\nend of Tissington Street, about 1.7 miles upstream\nfrom Elliot Bridge. Coastal Plain physiographic\nprovince.\n\nHabitat Crest of steep slope along small blackwater\nriver. Locally common as scattered populations under\n*Quercus nigra*, *Pinus taeda*, *Liquidambar styraciflua*,\n*Chamaecyparis thyoides*, *Magnolia virginiana*,\n*Symplocos tinctoria*, *Kalmia latifolia* (abundant), *Lyonia\nlucida*.\n\nB.A. Sorrie 10677\n\n\n*Galax urceolata*\n*Quercus nigra*\n*Pinus taeda*\n*Liquidambar styraciflua*\n*Chamaecyparis thyoides*\n*Magnolia virginiana*\n*Symplocos tinctoria*\n*Kalmia latifolia*\n*Lyonia lucida*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012599999999999998,
+      "total_cost": 0.0020387499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 252
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n572107\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummitt\nDate 15 November 2000 County Cumberland\nLocation South side of Lower Little River, west of north\nend of Tissington Street, about 1.7 miles upstream\nfrom Elliot Bridge. Coastal Plain physiographic\nprovince.\nHabitat Crest of steep slope along small blackwater\nriver. Locally common as scattered populations under\nQuercus nigra, Pinus taeda, Liquidambar styraciflua,\nChamaecyparis thyoides, Magnolia virginiana,\nSymplocos tinctoria, Kalmia latifolia (abundant), Lyonia\nlucida.\nB.A. Sorrie 10677\nDiapensiaceae\n\n\nGalax urceolata\nQuercus nigra\nPinus taeda\nLiquidambar styraciflua\nChamaecyparis thyoides\nMagnolia virginiana\nSymplocos tinctoria\nKalmia latifolia\nLyonia lucida\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.76e-05,
+      "total_cost": 0.0007691,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 219
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2413,
+    "output": 525,
+    "cost_in": 0.00024130000000000004,
+    "cost_out": 0.00021
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n572107\n\nDiapensiaceae *(handwritten)*\n\nNORTH CAROLINA FLORA\n\nSpecies *Galax urceolata* (Poiret) Brummitt\nDate 15 November 2000 County Cumberland\nLocation South side of Lower Little River, west of north\nend of Tissington Street, about 1.7 miles upstream\nfrom Elliot Bridge. Coastal Plain physiographic\nprovince.\n\nHabitat Crest of steep slope along small blackwater\nriver. Locally common as scattered populations under\n*Quercus nigra*, *Pinus taeda*, *Liquidambar styraciflua*,\n*Chamaecyparis thyoides*, *Magnolia virginiana*,\n*Symplocos tinctoria*, *Kalmia latifolia* (abundant), *Lyonia\nlucida*.\n\nB.A. Sorrie 10677\n\n\n*Galax urceolata*\n*Quercus nigra*\n*Pinus taeda*\n*Liquidambar styraciflua*\n*Chamaecyparis thyoides*\n*Magnolia virginiana*\n*Symplocos tinctoria*\n*Kalmia latifolia*\n*Lyonia lucida*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n572107\nNORTH CAROLINA FLORA\nSpecies Galax urceolata (Poiret) Brummitt\nDate 15 November 2000 County Cumberland\nLocation South side of Lower Little River, west of north\nend of Tissington Street, about 1.7 miles upstream\nfrom Elliot Bridge. Coastal Plain physiographic\nprovince.\nHabitat Crest of steep slope along small blackwater\nriver. Locally common as scattered populations under\nQuercus nigra, Pinus taeda, Liquidambar styraciflua,\nChamaecyparis thyoides, Magnolia virginiana,\nSymplocos tinctoria, Kalmia latifolia (abundant), Lyonia\nlucida.\nB.A. Sorrie 10677\nDiapensiaceae\n\n\nGalax urceolata\nQuercus nigra\nPinus taeda\nLiquidambar styraciflua\nChamaecyparis thyoides\nMagnolia virginiana\nSymplocos tinctoria\nKalmia latifolia\nLyonia lucida\n\n",
+  "formatted_json": {
+    "catalogNumber": "572107",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "B.A. Sorrie",
+    "collectorNumber": "10677",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "15 November 2000",
+    "collectionDate": "2000-11-15",
+    "collectionDateEnd": "",
+    "habitat": "Crest of steep slope along small blackwater river. Locally common as scattered populations under Quercus nigra, Pinus taeda, Liquidambar styraciflua, Chamaecyparis thyoides, Magnolia virginiana, Symplocos tinctoria, Kalmia latifolia (abundant), Lyonia lucida.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Cumberland",
+    "locality": "South side of lower little river, west of north end of tissington street, about 1.7 miles upstream from elliot bridge. Coastal plain physiographic province.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nHerbarium\nNcu\nNorth carolina flora\nDiapensiaceae"
+  }
+}

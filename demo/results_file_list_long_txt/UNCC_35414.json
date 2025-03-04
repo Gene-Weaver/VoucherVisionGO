@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n35414\nHERBARIUM\n\n*j.pm*\n10/16/2012 Natural Heritage\nSurvey\n\n*Galax urceolata* (Poir.) Brummitt\n\nHERBARIUM\nDiapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Lincoln\n\n*Galax aphylla* L.\n\nNorth facing, wooded slope, ca. 3,700 map\nft. ssw of South Fork Rd., SR 1248 bridge\nover the South Fork Catawba River, east\nof abandoned railroad bed. NH site #7\n\nJ.T. Soule\nJ.A. Levi\n04 Nov 1998\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008150000000000001,
+      "total_cost": 0.0015937500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 163
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTH CAROLINA AT CHARLOTTE\n85414\nHERBARIUM\n\n12\n13\n14\n15\nMETRIC 1\nTim\n10/16/2012 Natural Heritage\nSurvey\nGalax urceolata (Poiret) Brummitt\nHERBARIUM\nof the\nDiapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Lincoln\nGalax aphylla L.\nNorth facing, wooded slope, ca. 3,700 map\nft. ssw of South Fork Rd., SR 1248 bridge\nover the South Fork Catawba River, east\nof abandoned railroad bed. NHS site #7\nJ.T. Soule\nJ.A. Levi\n04 Nov 1998\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.120000000000001e-05,
+      "total_cost": 0.0007527,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 178
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2220,
+    "output": 458,
+    "cost_in": 0.00022200000000000003,
+    "cost_out": 0.0001832
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n35414\nHERBARIUM\n\n*j.pm*\n10/16/2012 Natural Heritage\nSurvey\n\n*Galax urceolata* (Poir.) Brummitt\n\nHERBARIUM\nDiapensiaceae\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Lincoln\n\n*Galax aphylla* L.\n\nNorth facing, wooded slope, ca. 3,700 map\nft. ssw of South Fork Rd., SR 1248 bridge\nover the South Fork Catawba River, east\nof abandoned railroad bed. NH site #7\n\nJ.T. Soule\nJ.A. Levi\n04 Nov 1998\n\n\nGalax aphylla\n\n\ngemini-2.0-flash OCR:\nNORTH CAROLINA AT CHARLOTTE\n85414\nHERBARIUM\n\n12\n13\n14\n15\nMETRIC 1\nTim\n10/16/2012 Natural Heritage\nSurvey\nGalax urceolata (Poiret) Brummitt\nHERBARIUM\nof the\nDiapensiaceae\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty Lincoln\nGalax aphylla L.\nNorth facing, wooded slope, ca. 3,700 map\nft. ssw of South Fork Rd., SR 1248 bridge\nover the South Fork Catawba River, east\nof abandoned railroad bed. NHS site #7\nJ.T. Soule\nJ.A. Levi\n04 Nov 1998\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "85414",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J.T. Soule, J.A. Levi",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "04 Nov 1998",
+    "collectionDate": "1998-11-04",
+    "collectionDateEnd": "",
+    "habitat": "North facing, wooded slope",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Lincoln",
+    "locality": "Ca. 3,700 map ft. ssw of South Fork Rd., SR 1248 bridge over the South Fork Catawba River, east of abandoned railroad bed. Nhs site #7",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "1128",
+    "elevationUnits": "ft",
+    "additionalText": "Natural heritage survey\nGalax aphylla l.\nGalax urceolata"
+  }
+}

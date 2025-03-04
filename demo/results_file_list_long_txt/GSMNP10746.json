@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10746\n\nMOUNTAIN\nCAT. NO.\nGRSM 5992\nPARK\n\n6/22/1936\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS- COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association 1979-1980\nUplands Field Lab 1982  mp *(handwritten)*\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\n2359\nCOLLECTOR(S) H. M. JENNISON NO.\nvic. Greenbrier  *(handwritten)*\nLoc. Sevier Co. 4/22/1936  *(handwritten)*\n\n*Galax aphylla*, L.\n\nRich acid woods soil. Pinnacle Mt.\n@ about 3500'.  *(handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011899999999999999,
+      "total_cost": 0.00196875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 238
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10746\nMOUNTAIN\nCAT. NO.\nGalax urceolata (Poir.) Brummit\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nmp\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\nNO. 2359\nvic. Greenbrier\nLoc. Sevier Co.\nGalax aphylla, L.\nRich acid woods soil. Pinnacle Mt.\n@ about 3500'.\nGRSM 8992\n6/22/6jb\n4/221936\nNP\nGSM\nBot.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.32e-05,
+      "total_cost": 0.0007547000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 183
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2300,
+    "output": 584,
+    "cost_in": 0.00023,
+    "cost_out": 0.0002336
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10746\n\nMOUNTAIN\nCAT. NO.\nGRSM 5992\nPARK\n\n6/22/1936\n*Galax urceolata* (Poir.) Brummitt\n\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS- COMPUTERIZATION PROJECT\n\nGreat Smoky Mountains Natural History Association 1979-1980\nUplands Field Lab 1982  mp *(handwritten)*\n\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\n\n2359\nCOLLECTOR(S) H. M. JENNISON NO.\nvic. Greenbrier  *(handwritten)*\nLoc. Sevier Co. 4/22/1936  *(handwritten)*\n\n*Galax aphylla*, L.\n\nRich acid woods soil. Pinnacle Mt.\n@ about 3500'.  *(handwritten)*\n\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGREAT SMOKY MOUNTAINS NATIONAL PARK\nGSMNP10746\nMOUNTAIN\nCAT. NO.\nGalax urceolata (Poir.) Brummit\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS-COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association\nUplands Field Lab\nmp\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nH. M. JENNISON\nNO. 2359\nvic. Greenbrier\nLoc. Sevier Co.\nGalax aphylla, L.\nRich acid woods soil. Pinnacle Mt.\n@ about 3500'.\nGRSM 8992\n6/22/6jb\n4/221936\nNP\nGSM\nBot.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GSMNP10746",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. M. Jennison",
+    "collectorNumber": "2359",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "6/22/1936",
+    "collectionDate": "1936-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Rich acid woods soil",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sevier Co.",
+    "locality": "Vic. Greenbrier. Pinnacle Mt. @ about 3500'.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "GREAT SMOKY MOUNTAINS NATIONAL PARK\nMOUNTAIN\nCAT. NO.\nGRSM 5992\nPARK\nFLORA OF GREAT SMOKY MOUNTAINS NATIONAL PARK\nHERBARIUM RECORDS- COMPUTERIZATION PROJECT\nGreat Smoky Mountains Natural History Association 1979-1980\nUplands Field Lab 1982  mp (handwritten)\nFLORA OF THE GREAT SMOKY MOUNTAINS\nNATIONAL PARK\nSERNEC Digitization Project - Tennessee Herbarium Consortium\nGalax urceolata\nGalax aphylla\nGRSM 8992\n6/22/6jb\n4/221936\nNP\nGSM\nBot."
+  }
+}

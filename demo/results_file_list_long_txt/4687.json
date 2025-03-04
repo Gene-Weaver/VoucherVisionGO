@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "PIHG004687\n4687\n\n285\n\nPLANTS OF NORTH CAROLINA\nRaleigh, Wake Co.\n\n*Galax aphylla* L.\n(*G. rotundifolia* Pursh)\n(*G. urceolata* [Poir.] Brumm.)\n\nVicinity of Raleigh.\n\nJ. G. Baldwin\n1968 or 1969                               Det.: K.L.\n(Handwritten Text)\n\n*Galax aphylla* L.\n(*G. rotundifolia* Pursh)\n(*G. urceolata* [Poir.] Brumm.)\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00065,
+      "total_cost": 0.00142875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DIVISION OF PLANT\nINDUSTRY HERBARIUM\n(PIHG)\nFlorida Department of\nAgriculture and\nConsumer Services\nGainesville\nDivision of Plant Industry\nFlorida Dept. Agriculture & Consumer Services\nPIHG004687\n4687\n285\nPLANTS OF NORTH CAROLINA\nRaleigh, Wake Co.\nGalax aphylla L.\n(G. rotundifolia Pursh)\n(G. urceolata [Poir.] Brumm.)\nVicinity of Raleigh.\nJ. G. Baldwin\n1968 or 1969\nDet.: K.L.\n\n\nGalax aphylla\nG. rotundifolia\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.76e-05,
+      "total_cost": 0.0007391000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 144
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2153,
+    "output": 500,
+    "cost_in": 0.0002153,
+    "cost_out": 0.0002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nPIHG004687\n4687\n\n285\n\nPLANTS OF NORTH CAROLINA\nRaleigh, Wake Co.\n\n*Galax aphylla* L.\n(*G. rotundifolia* Pursh)\n(*G. urceolata* [Poir.] Brumm.)\n\nVicinity of Raleigh.\n\nJ. G. Baldwin\n1968 or 1969                               Det.: K.L.\n(Handwritten Text)\n\n*Galax aphylla* L.\n(*G. rotundifolia* Pursh)\n(*G. urceolata* [Poir.] Brumm.)\n\n\ngemini-2.0-flash OCR:\nDIVISION OF PLANT\nINDUSTRY HERBARIUM\n(PIHG)\nFlorida Department of\nAgriculture and\nConsumer Services\nGainesville\nDivision of Plant Industry\nFlorida Dept. Agriculture & Consumer Services\nPIHG004687\n4687\n285\nPLANTS OF NORTH CAROLINA\nRaleigh, Wake Co.\nGalax aphylla L.\n(G. rotundifolia Pursh)\n(G. urceolata [Poir.] Brumm.)\nVicinity of Raleigh.\nJ. G. Baldwin\n1968 or 1969\nDet.: K.L.\n\n\nGalax aphylla\nG. rotundifolia\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "PIHG004687",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. G. Baldwin",
+    "collectorNumber": "285",
+    "identifiedBy": "K.L.",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1968 or 1969",
+    "collectionDate": "1968-00-00",
+    "collectionDateEnd": "1969-00-00",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Wake Co.",
+    "locality": "Vicinity of Raleigh.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "PLANTS OF NORTH CAROLINA\n(G. rotundifolia Pursh)\n(G. urceolata [Poir.] Brumm.)\nDIVISION OF PLANT\nINDUSTRY HERBARIUM\n(PIHG)\nFlorida Department of\nAgriculture and\nConsumer Services\nGainesville\nDivision of Plant Industry\nFlorida Dept. Agriculture & Consumer Services\nGalax aphylla\nG. rotundifolia\nG. urceolata"
+  }
+}

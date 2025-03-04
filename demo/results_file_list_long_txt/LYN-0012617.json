@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012617\n\n14665\n\n(Galax aphylla) L.\nJune 6, 1964\nN.W. Pitt.\nmile north exposures\nwaffle\n\n355\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 466 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nNO. 14665\nGalax aphylla L.\nRich northern exposures.\n\nCOLLECTORS W. Hathaway\nJune 6, 1964\n\ncopyright reserved\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00093,
+      "total_cost": 0.00170875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 186
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "(Galax aphylla) L.\ngume 6, 1969\nN.W. Pitt .\nmile nautho expo\nwaiifle\nLYN-0012617\n14665\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\nNO.14665\nGalax aphylla L.\nRich northern exposures.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 466 \u03bc2\nGuy L. Nesom, 1975\nCOLLECTORS W. Hathaway\nJune 6,\n1964\n355\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.96e-05,
+      "total_cost": 0.0007511,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 174
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2248,
+    "output": 498,
+    "cost_in": 0.00022480000000000002,
+    "cost_out": 0.0001992
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012617\n\n14665\n\n(Galax aphylla) L.\nJune 6, 1964\nN.W. Pitt.\nmile north exposures\nwaffle\n\n355\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummitt\nn = 6, based on average guard cell area\nvolume of 466 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nNO. 14665\nGalax aphylla L.\nRich northern exposures.\n\nCOLLECTORS W. Hathaway\nJune 6, 1964\n\ncopyright reserved\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n(Galax aphylla) L.\ngume 6, 1969\nN.W. Pitt .\nmile nautho expo\nwaiifle\nLYN-0012617\n14665\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nPittsylvania COUNTY\nNO.14665\nGalax aphylla L.\nRich northern exposures.\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of 466 \u03bc2\nGuy L. Nesom, 1975\nCOLLECTORS W. Hathaway\nJune 6,\n1964\n355\n\n\nGalax aphylla\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012617",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "N.w. Pitt, W. Hathaway",
+    "collectorNumber": "14665, 355",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "June 6, 1964",
+    "collectionDate": "1964-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Rich northern exposures",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6, based on average guard cell area volume of 466 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania",
+    "locality": "Mile north exposures",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\ncopyright reserved\nwaffle"
+  }
+}

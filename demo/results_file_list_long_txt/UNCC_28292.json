@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "28292\n\n*Galax urceolata* (Poiret) Brummitt\n*Galax aphylla* L.\n\nGENUS: *Galax*\nSPECIES: *aphylla* L.\nPOPULAR NAME: Galax\nLOCALITY: Table Rock, Burke Co., N.C.\nDATE: V1-5-51\nCOLLECTOR: T. Daggy\nREMARKS: Rich wooded slope.\n\n(Handwritten text: *Galax urceolata* (Poiret) Brummitt  JFu 1/16/2012)\n1252\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00065,
+      "total_cost": 0.0014287500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY\nHERBARIUM\n24ColorCard CameraTrax.com\nJFO/16/2012\nGalax urceolata (Poiret)\n(Pointummits\nDizpensizcere\nGENUS Galax\nSPECIES aphylla L.\nPOPULAR NAME Galax\nLOCALITY Table Rock, Burke Co., N.C.\nDATE V1-5-51 COLLECTOR T. Daggy\nREMARKS Rich wooded slope.\n1252\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.28e-05,
+      "total_cost": 0.0007243,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 107
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2125,
+    "output": 467,
+    "cost_in": 0.00021250000000000002,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n28292\n\n*Galax urceolata* (Poiret) Brummitt\n*Galax aphylla* L.\n\nGENUS: *Galax*\nSPECIES: *aphylla* L.\nPOPULAR NAME: Galax\nLOCALITY: Table Rock, Burke Co., N.C.\nDATE: V1-5-51\nCOLLECTOR: T. Daggy\nREMARKS: Rich wooded slope.\n\n(Handwritten text: *Galax urceolata* (Poiret) Brummitt  JFu 1/16/2012)\n1252\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY\nHERBARIUM\n24ColorCard CameraTrax.com\nJFO/16/2012\nGalax urceolata (Poiret)\n(Pointummits\nDizpensizcere\nGENUS Galax\nSPECIES aphylla L.\nPOPULAR NAME Galax\nLOCALITY Table Rock, Burke Co., N.C.\nDATE V1-5-51 COLLECTOR T. Daggy\nREMARKS Rich wooded slope.\n1252\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "28292",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "T. Daggy",
+    "collectorNumber": "1252",
+    "identifiedBy": "Jfu",
+    "identifiedDate": "2012-01-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poiret) Brummitt Jfu 1/16/2012",
+    "verbatimCollectionDate": "V1-5-51",
+    "collectionDate": "1951-05-01",
+    "collectionDateEnd": "",
+    "habitat": "Rich wooded slope.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "N.c.",
+    "county": "Burke co.",
+    "locality": "Table rock, burke co., n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Galax aphylla l.\nGenus galax\nSpecies aphylla l.\nPopular name galax"
+  }
+}

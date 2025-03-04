@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Botanical Research Institute of Texas\nBRIT\ncopyright reserved\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516626\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 50715\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of 1/2 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\n\nGiles Co.  A. Crooks 267\n*Galax aphylla*\nCut over area of Kelly's flats, with\n*Q. alba*, *Q. prinus* and *Pinus virginiana*\n\nDet: A. Crooks 6/24/66\n\nHandwritten Text:\n*Kelly's*\n*over*\n\n*Galax urceolata*\n*Galax aphylla*\n*Quercus alba*\n*Quercus prinus*\n*Pinus virginiana*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00112,
+      "total_cost": 0.00189875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 224
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516626\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 50715\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA\nGiles Co. A. Crooks 267\nGalax aphylla\nCut overm area of Kelly's flats, with\nQ. alba, Q. prinus and Pinus virginiana\nDet:\nA. Crooks\n6/24/666\n\n\nGalax urceolata\nGalax aphylla\nQ. alba\nQ. prinus\nPinus virginiana\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.88e-05,
+      "total_cost": 0.0007703,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 222
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2344,
+    "output": 606,
+    "cost_in": 0.00023440000000000003,
+    "cost_out": 0.0002424
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nBotanical Research Institute of Texas\nBRIT\ncopyright reserved\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516626\n\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 50715\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of 1/2 \u03bc\u00b2\nGuy L. Nesom, 1975\n\nPLANTS OF VIRGINIA\n\nGiles Co.  A. Crooks 267\n*Galax aphylla*\nCut over area of Kelly's flats, with\n*Q. alba*, *Q. prinus* and *Pinus virginiana*\n\nDet: A. Crooks 6/24/66\n\nHandwritten Text:\n*Kelly's*\n*over*\n\n*Galax urceolata*\n*Galax aphylla*\n*Quercus alba*\n*Quercus prinus*\n*Pinus virginiana*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516626\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 50715\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nPLANTS OF VIRGINIA\nGiles Co. A. Crooks 267\nGalax aphylla\nCut overm area of Kelly's flats, with\nQ. alba, Q. prinus and Pinus virginiana\nDet:\nA. Crooks\n6/24/666\n\n\nGalax urceolata\nGalax aphylla\nQ. alba\nQ. prinus\nPinus virginiana\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516626",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A. Crooks",
+    "collectorNumber": "267",
+    "identifiedBy": "A. Crooks, Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "6/24/66 Det A. Crooks: Galax aphylla",
+    "verbatimCollectionDate": "",
+    "collectionDate": "0000-00-00",
+    "collectionDateEnd": "",
+    "habitat": "Cut over area of Kelly's flats, with Q. alba, Q. prinus and Pinus virginiana",
+    "chromosomeCount": "n = , based on average guard cell volume of 1/2 \u03bc\u00b2",
+    "guardCell": "n = , based on average guard cell volume of 1/2 \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles Co.",
+    "locality": "Kelly's flats",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Botanical Research Institute of Texas\nBRIT\ncopyright reserved\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 50715\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nPLANTS OF VIRGINIA\nHandwritten Text\nGalax urceolata\nGalax aphylla\nQuercus alba\nQuercus prinus\nPinus virginiana\ncm\ncopyright reserved\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nTEXAS"
+  }
+}

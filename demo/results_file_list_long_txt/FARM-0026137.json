@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FARM-0026137\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brummitt\nSmith Mtn., Pittsylvania Co.\n\nwooded N-facing cliffs above\nel. 1800 ft.\n(Smith Mtn. Dam. Quad.)\n\nMay 29, 1977\n\nCharles E. Stevens\nNo. 14,348\nDet. \"\"\n\n(Handwritten text identified with *)\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000535,
+      "total_cost": 0.00131375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 107
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Jalax urceolata (Poiret) Brummett\nSmith Tits, Pittsylvania Co.\nwooded N-facing cliffs above\nDam. el. 1800 ft.\n(Smith Titu. Dam Quad.)\nThay 29, 1977\nCharles E. Stevens\nDet.\nNo. 14,348\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.3600000000000004e-05,
+      "total_cost": 0.0007151,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 84
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2060,
+    "output": 454,
+    "cost_in": 0.00020600000000000002,
+    "cost_out": 0.0001816
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFARM-0026137\n\nFlora of Virginia\n\n*Galax urceolata* (Poir.) Brummitt\nSmith Mtn., Pittsylvania Co.\n\nwooded N-facing cliffs above\nel. 1800 ft.\n(Smith Mtn. Dam. Quad.)\n\nMay 29, 1977\n\nCharles E. Stevens\nNo. 14,348\nDet. \"\"\n\n(Handwritten text identified with *)\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nJalax urceolata (Poiret) Brummett\nSmith Tits, Pittsylvania Co.\nwooded N-facing cliffs above\nDam. el. 1800 ft.\n(Smith Titu. Dam Quad.)\nThay 29, 1977\nCharles E. Stevens\nDet.\nNo. 14,348\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026137",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "14,348",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 29, 1977",
+    "collectionDate": "1977-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Wooded n-facing cliffs above",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Pittsylvania co.",
+    "locality": "Smith mtn., pittsylvania co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "549",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Smith mtn., pittsylvania co.\nel. 1800 ft.\n(smith mtn. dam. quad.)\nDet.\nGalax urceolata"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100982\n\nDelaware State University\nDOV0087155\n\nBILTMORE HERBARIUM.\nNo.1336.\n*Galax aphylla* L.\nShady banks, BILTMORE, NORTH CAROLINA. May 3rd & Nov., 1896.\n\nDelaware State University\nDOV0087156\n\nCURTISS, NORTH AMERICAN PLANTS, No. 1743\n*Galax aphylla* L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS. June\n\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\n*Galax aphylla*, Linnaeus (handwritten)\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001155,
+      "total_cost": 0.0019337499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 231
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Claude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4\n5 6 7 8 9 10\ncopyright reserved\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100982\nDelaware State University\nDOU0087156\nCURTISS,\nNORTH AMERICAN PLANTS,\nNo. 1743\nGalax aphylla, L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS.\nJune.\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\nGalax aphylla, Linnaeus\nDelaware State University\nDOV0087155\nBILTMORE HERBARIUM.\nNo.1336.\nGalax aphylla L.\nShady banks, BILTMORE, NORTH CAROLINA. May 3rd & Nov., 1896.\n\n\nGalax aphylla\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.200000000000001e-05,
+      "total_cost": 0.0007735000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 230
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2359,
+    "output": 553,
+    "cost_in": 0.00023590000000000001,
+    "cost_out": 0.0002212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nClaude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\n\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100982\n\nDelaware State University\nDOV0087155\n\nBILTMORE HERBARIUM.\nNo.1336.\n*Galax aphylla* L.\nShady banks, BILTMORE, NORTH CAROLINA. May 3rd & Nov., 1896.\n\nDelaware State University\nDOV0087156\n\nCURTISS, NORTH AMERICAN PLANTS, No. 1743\n*Galax aphylla* L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS. June\n\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\n*Galax aphylla*, Linnaeus (handwritten)\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nClaude E. Phillips Herbarium\nDelaware State University\n0\ncm\n1 2 3 4\n5 6 7 8 9 10\ncopyright reserved\nCLAUDE E. PHILLIPS HERBARIUM\nDELAWARE STATE UNIVERSITY, DOVER\n100982\nDelaware State University\nDOU0087156\nCURTISS,\nNORTH AMERICAN PLANTS,\nNo. 1743\nGalax aphylla, L.\nRocky woods, Chilhowee Mts., Tenn., 2,500 ft. alt.\nLegit A. H. CURTISS.\nJune.\nHERBARIUM OF\nTHE SOCIETY OF NATURAL HISTORY OF DELAWARE.\nGalax aphylla, Linnaeus\nDelaware State University\nDOV0087155\nBILTMORE HERBARIUM.\nNo.1336.\nGalax aphylla L.\nShady banks, BILTMORE, NORTH CAROLINA. May 3rd & Nov., 1896.\n\n\nGalax aphylla\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DOV0087155",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A. H. Curtiss",
+    "collectorNumber": "1743",
+    "identifiedBy": "Linnaeus",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June",
+    "collectionDate": "0000-06-00",
+    "collectionDateEnd": "",
+    "habitat": "Rocky woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Chilhowee mts.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "762",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Claude e. phillips herbarium\nDelaware state university\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nclaude e. phillips herbarium\ndelaware state university, dover\n100982\ndelaware state university\ndou0087156\ncurtiss,\nnorth american plants,\nno. 1743\nlegit a. h. curtiss.\nherbarium of\nthe society of natural history of delaware.\nbiltmore herbarium.\nno.1336.\nshady banks, biltmore, north carolina. may 3rd & nov., 1896."
+  }
+}

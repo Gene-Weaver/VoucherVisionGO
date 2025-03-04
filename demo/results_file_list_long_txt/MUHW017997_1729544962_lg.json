@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN\n\nGalax aphylla L.\n\nChromosomes: 2n = 12\nState North Carolina County Alleghany\nnear Sparta\n\nJ. T. Baldwin, Jr. No. 742 Date July 3, 1940\n\nDiapensiaceae 134 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007599999999999999,
+      "total_cost": 0.00153875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 152
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "VERSITATIS MAR\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarium\nMUHW017997\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\nChromosomes: 2n = 12\nState North Carolina County Alleghany\nnear Sparta\nDiapensiaceae 134\nJ. T. Baldwin, Jr. No.742 Date July 3, 1940\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.48e-05,
+      "total_cost": 0.0007463000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 162
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2209,
+    "output": 496,
+    "cost_in": 0.0002209,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\n\nMarshall University Herbarium\n\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)       2024\n\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN\n\nGalax aphylla L.\n\nChromosomes: 2n = 12\nState North Carolina County Alleghany\nnear Sparta\n\nJ. T. Baldwin, Jr. No. 742 Date July 3, 1940\n\nDiapensiaceae 134 *(handwritten)*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nVERSITATIS MAR\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarium\nMUHW017997\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\nChromosomes: 2n = 12\nState North Carolina County Alleghany\nnear Sparta\nDiapensiaceae 134\nJ. T. Baldwin, Jr. No.742 Date July 3, 1940\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW017997",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. T. Baldwin, Jr.",
+    "collectorNumber": "742",
+    "identifiedBy": "Michelle L. Gaynor (flas)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "July 3, 1940",
+    "collectionDate": "1940-07-03",
+    "collectionDateEnd": "",
+    "habitat": "Near sparta",
+    "chromosomeCount": "Chromosomes 2n = 12",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "North carolina",
+    "county": "Alleghany",
+    "locality": "Near sparta",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, U.S.A.\nMarshall University Herbarium\nFrom the united states national herbarium\nUNIVERSITY OF MICHIGAN\nDiapensiaceae 134"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nWESTERN CAROLINA COLLEGE\n829\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\nedge of woods on roadside on Co. 1603 at Horse Cove\nin Macon Co. Leaves simple, exstipulate; regular\n5-merous flower; calyx persistent; evergreen herb.\nFew.\n\nAlbert M. Cash 39                      28 June 1962\n\n*Diapensiaceae 19* (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008300000000000001,
+      "total_cost": 0.0016087500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 166
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nWESTERN\nCAROLINA COLLEGE\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nedge of woods on roadside on Co. 1603 at Horse Cove\nin Macon Co. Leaves simple, exstipulate; regular\n5-merous flower; calyx persistent; evergreen herb.\nFew.\nAlbert M. Cash 39\n28 June 1962\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC 1\nDiapensiaceae 19\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010417\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.680000000000001e-05,
+      "total_cost": 0.0007683000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 217
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2289,
+    "output": 540,
+    "cost_in": 0.00022889999999999998,
+    "cost_out": 0.00021600000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nWESTERN CAROLINA COLLEGE\n829\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\n\n*Galax aphylla* L.\nedge of woods on roadside on Co. 1603 at Horse Cove\nin Macon Co. Leaves simple, exstipulate; regular\n5-merous flower; calyx persistent; evergreen herb.\nFew.\n\nAlbert M. Cash 39                      28 June 1962\n\n*Diapensiaceae 19* (handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nWESTERN\nCAROLINA COLLEGE\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nJackson County\nGalax aphylla L.\nedge of woods on roadside on Co. 1603 at Horse Cove\nin Macon Co. Leaves simple, exstipulate; regular\n5-merous flower; calyx persistent; evergreen herb.\nFew.\nAlbert M. Cash 39\n28 June 1962\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC 1\nDiapensiaceae 19\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010417\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010417",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Albert M. Cash",
+    "collectorNumber": "39",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "28 June 1962",
+    "collectionDate": "1962-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Edge of woods on roadside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Leaves simple, exstipulate; regular 5-merous flower; calyx persistent; evergreen herb. Few.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Jackson County",
+    "locality": "On Co. 1603 at Horse Cove in Macon Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM OF\nWESTERN CAROLINA COLLEGE\nDiapensiaceae 19\nWESTERN CAROLINA U. HERBARIUM\nPRESERVED\nMATERIAL\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nINCHES\nMETRIC"
+  }
+}

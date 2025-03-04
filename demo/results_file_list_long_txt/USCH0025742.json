@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\n\n011750\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFLORA OF\nSevier\nCounty (Tenn.)\n\n*Galax aphylla* L.\nMountainside. Approx 3500 feet.\nBullhead Trail Mt. Le Conte\nGreat Smokey Mountains National Park.\nColl. James D. Martin Jr. Date May 3,1965 No.\n\nUniversity of South Carolina Herbarium\nUSCH0025742\n\nHandwritten text: *Galax aphylla* L., Mountainside., Approx 3500 feet., Bullhead Trail, Mt. Le Conte, Great Smokey Mountains National Park., Coll. James D. Martin Jr., Date May 3,1965, No.\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00106,
+      "total_cost": 0.0018387499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 212
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\n011750\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF\nSevier\nCounty (Tenn.)\nGalax aphylla\nL.\nMountainside.\nApprox 3500 feet.\nBullhead Trail\nmt, Le Conte\nGreat Smokey Mountains National Park.\nColl. James D. Martin Jr. Date May 3,1965 No.\nUniversity of South Carolina Herbarium\nUSCH0025742\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6e-05,
+      "total_cost": 0.0007415,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 150
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2242,
+    "output": 455,
+    "cost_in": 0.00022420000000000003,
+    "cost_out": 0.000182
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0 1 2 3 4 5 6 7 8 9 10\nUSCH\ncm\ncopyright reserved\nUniversity of South Carolina\n\n011750\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\n\nFLORA OF\nSevier\nCounty (Tenn.)\n\n*Galax aphylla* L.\nMountainside. Approx 3500 feet.\nBullhead Trail Mt. Le Conte\nGreat Smokey Mountains National Park.\nColl. James D. Martin Jr. Date May 3,1965 No.\n\nUniversity of South Carolina Herbarium\nUSCH0025742\n\nHandwritten text: *Galax aphylla* L., Mountainside., Approx 3500 feet., Bullhead Trail, Mt. Le Conte, Great Smokey Mountains National Park., Coll. James D. Martin Jr., Date May 3,1965, No.\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\n011750\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF\nSevier\nCounty (Tenn.)\nGalax aphylla\nL.\nMountainside.\nApprox 3500 feet.\nBullhead Trail\nmt, Le Conte\nGreat Smokey Mountains National Park.\nColl. James D. Martin Jr. Date May 3,1965 No.\nUniversity of South Carolina Herbarium\nUSCH0025742\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "011750",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "James D. Martin Jr.",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 3,1965",
+    "collectionDate": "1965-05-03",
+    "collectionDateEnd": "",
+    "habitat": "Mountainside.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tenn.",
+    "county": "Sevier",
+    "locality": "Bullhead Trail Mt. Le Conte Great Smokey Mountains National Park.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1067",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "USCH\ncm\ncopyright reserved\nUniversity of South Carolina\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUniversity of South Carolina Herbarium\nUniversity of South Carolina Herbarium\nUSCH0025742"
+  }
+}

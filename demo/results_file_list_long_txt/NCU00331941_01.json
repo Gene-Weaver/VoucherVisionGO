@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "University of North Carolina Herbarium (NCU)\nMordecai E. Hyams was based in Statesville, NC,\nand collected widely in North Carolina. The\n\"Statesville\" on the label should not be taken\nas a collecting locality. Plants so labeled are\nprobably from North Carolina, but no more\ndefinite locality can be determined.\n\nAnnot. Alan S. Weakley, Curator\n2002\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569936\n\nJESUP HERBARIUM\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\n*Galax urceolata* (POIR.)BRUMMITT\nannotated by ERIN LUNSFORD SEPT 2003\nNCU HERBARIUM\n\nHERBARIUM OF\nDR. F. BLANCHARD\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331941\n\n*Galax aphylla* L.\nStatesville\nIredell County NC\nM. E. Hyams\n\n**(Handwritten Text)**\nIredell County\nNorth Carolina\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001225,
+      "total_cost": 0.0020037500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 245
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina Herbarium (NCU)\nMordecai E. Hyams was based in Statesville, NC,\nand collected widely in North Carolina. The\n\"Statesville\" on the label should not be taken\nas a collecting locality. Plants so labeled are\nprobably from North Carolina, but no more\ndefinite locality can be determined.\nAnnot. Alan S. Weakley, Curator\n2002\nOF\nNORTH\nHERBARIUM\nNCU\nCAROLINA\n569936\nJESUP HERBARIUM\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nGALAX URCEOLATA (POIR.) BRUMMITT\nannotated by ERIN LUNSFORD SEPT 2003\nNCU HERBARIUM\nHERBARIUM OF\nDR. F. BLANCHARD\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331941\nFredell County\nNorth Carolina\nHERBARIUM, ELI LILLY & CO.\nGalax aphylla, L.\nStatesville,\nFredell County n.c\nM.E. Hyams.\n\n\nGalax aphylla\nGALAX URCEOLATA\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001016,
+      "total_cost": 0.0007831,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 254
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2401,
+    "output": 641,
+    "cost_in": 0.0002401,
+    "cost_out": 0.0002564
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUniversity of North Carolina Herbarium (NCU)\nMordecai E. Hyams was based in Statesville, NC,\nand collected widely in North Carolina. The\n\"Statesville\" on the label should not be taken\nas a collecting locality. Plants so labeled are\nprobably from North Carolina, but no more\ndefinite locality can be determined.\n\nAnnot. Alan S. Weakley, Curator\n2002\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569936\n\nJESUP HERBARIUM\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\n*Galax urceolata* (POIR.)BRUMMITT\nannotated by ERIN LUNSFORD SEPT 2003\nNCU HERBARIUM\n\nHERBARIUM OF\nDR. F. BLANCHARD\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331941\n\n*Galax aphylla* L.\nStatesville\nIredell County NC\nM. E. Hyams\n\n**(Handwritten Text)**\nIredell County\nNorth Carolina\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina Herbarium (NCU)\nMordecai E. Hyams was based in Statesville, NC,\nand collected widely in North Carolina. The\n\"Statesville\" on the label should not be taken\nas a collecting locality. Plants so labeled are\nprobably from North Carolina, but no more\ndefinite locality can be determined.\nAnnot. Alan S. Weakley, Curator\n2002\nOF\nNORTH\nHERBARIUM\nNCU\nCAROLINA\n569936\nJESUP HERBARIUM\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nGALAX URCEOLATA (POIR.) BRUMMITT\nannotated by ERIN LUNSFORD SEPT 2003\nNCU HERBARIUM\nHERBARIUM OF\nDR. F. BLANCHARD\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331941\nFredell County\nNorth Carolina\nHERBARIUM, ELI LILLY & CO.\nGalax aphylla, L.\nStatesville,\nFredell County n.c\nM.E. Hyams.\n\n\nGalax aphylla\nGALAX URCEOLATA\n\n",
+  "formatted_json": {
+    "catalogNumber": "569936",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "M. E. Hyams",
+    "collectorNumber": "",
+    "identifiedBy": "Erin Lunsford, Alan S. Weakley",
+    "identifiedDate": "2003-09-00, 2002-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "2003-09-00, Erin Lunsford: Galax urceolata (Poir.) Brummitt",
+    "verbatimCollectionDate": "",
+    "collectionDate": "0000-00-00",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "North Carolina",
+    "county": "Iredell County",
+    "locality": "Statesville, Iredell County n.c",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of North Carolina Herbarium (NCU)\nMordecai E. Hyams was based in Statesville, NC,\nand collected widely in North Carolina. The\nStatesville on the label should not be taken\nas a collecting locality. Plants so labeled are\nprobably from North Carolina, but no more\ndefinite locality can be determined.\nAnnot. Alan S. Weakley, Curator\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\nJESUP HERBARIUM\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nNCU HERBARIUM\nHERBARIUM OF\nDR. F. BLANCHARD\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00331941\nFredell County\nNorth Carolina\nHERBARIUM, ELI LILLY & CO.\nGalax aphylla\nGALAX URCEOLATA"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n507308\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332720\n\nHERBARIUM OF VIRGINIA COMMONWEALTH UNIV.\nRichmond, Virginia 23220\n\nVirginia: Appomattox Co.\n#188 *Galax aphylla* L.\nMixed evergreen/deciduous woods; 1 mile w.\nof Appomattox off Rt. 719.\n\nJune 2, 1975        Coll: Warren T. Mays\n\n(Handwritten text: *Galax aphylla* L., mixed evergreen/deciduous woods; 1 mile w., of Appomattox off Rt. 719., June 2, 1975, Coll: Warren T. Mays)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009049999999999999,
+      "total_cost": 0.0016837500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 181
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n507308\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332720\nHERBARIUM OF VIRGINIA COMMONWEALTH UNIV.\nRichmond, Virginia 23220\nVirginia: Appomattox Co.\nGalax aphylla L.\nmixed evergreen/deciduous woods; 1 mile w.\nof Appomattor off Rt. 719.\nJune 2,1975\nColl: Warren T. Mays\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.6800000000000006e-05,
+      "total_cost": 0.0007283000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 117
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 443,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.0001772
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n507308\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332720\n\nHERBARIUM OF VIRGINIA COMMONWEALTH UNIV.\nRichmond, Virginia 23220\n\nVirginia: Appomattox Co.\n#188 *Galax aphylla* L.\nMixed evergreen/deciduous woods; 1 mile w.\nof Appomattox off Rt. 719.\n\nJune 2, 1975        Coll: Warren T. Mays\n\n(Handwritten text: *Galax aphylla* L., mixed evergreen/deciduous woods; 1 mile w., of Appomattox off Rt. 719., June 2, 1975, Coll: Warren T. Mays)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n507308\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332720\nHERBARIUM OF VIRGINIA COMMONWEALTH UNIV.\nRichmond, Virginia 23220\nVirginia: Appomattox Co.\nGalax aphylla L.\nmixed evergreen/deciduous woods; 1 mile w.\nof Appomattor off Rt. 719.\nJune 2,1975\nColl: Warren T. Mays\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "507308",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Warren T. Mays",
+    "collectorNumber": "#188",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 2, 1975",
+    "collectionDate": "1975-06-02",
+    "collectionDateEnd": "",
+    "habitat": "Mixed evergreen/deciduous woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Appomattox Co.",
+    "locality": "1 mile w. of Appomattox off Rt. 719.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nUniversity of north carolina herbarium\nNCU00332720\nHerbarium of virginia commonwealth univ.\nRichmond, virginia 23220\nGalax aphylla"
+  }
+}

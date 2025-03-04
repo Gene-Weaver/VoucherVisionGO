@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSyn. Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nTULANE UNIVERSITY HERBARIUM\nNO 0092178\n\nTULANE\nUNIVERSITY\nHERBARIUM\n\nHERB. JOHN J. CROOKE, Staten Island.\nCollected in the mountains of North Carolina, by Messrs. LE ROY\nand RUGER. June, 1872.\n\n*(Handwritten Text)*\nGalax aphylla, L.\nFoot of Black.\n64-6\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007650000000000002,
+      "total_cost": 0.0015437500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nTULANE UNIVERSITY HERBARIUM\n\u039d\u039f 0092178\nTULANE\nUNIVERSITY\nHERBARIUM\nHERB. JOHN J. CROOKE, Staten Island.\nCollected in the mountains of North Carolina, by MESSRS. LE ROY\nand RUGER. June, 1872.\nGalax aphylla, L.\nFoot of Black.\n64-6\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.3200000000000006e-05,
+      "total_cost": 0.0007347,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 133
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2190,
+    "output": 480,
+    "cost_in": 0.000219,
+    "cost_out": 0.000192
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSyn. Galax aphylla auct. non L.\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nTULANE UNIVERSITY HERBARIUM\nNO 0092178\n\nTULANE\nUNIVERSITY\nHERBARIUM\n\nHERB. JOHN J. CROOKE, Staten Island.\nCollected in the mountains of North Carolina, by Messrs. LE ROY\nand RUGER. June, 1872.\n\n*(Handwritten Text)*\nGalax aphylla, L.\nFoot of Black.\n64-6\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nTULANE UNIVERSITY HERBARIUM\n\u039d\u039f 0092178\nTULANE\nUNIVERSITY\nHERBARIUM\nHERB. JOHN J. CROOKE, Staten Island.\nCollected in the mountains of North Carolina, by MESSRS. LE ROY\nand RUGER. June, 1872.\nGalax aphylla, L.\nFoot of Black.\n64-6\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092178",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Messrs. Le Roy, Ruger",
+    "collectorNumber": "64-6",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla, L.",
+    "verbatimCollectionDate": "June, 1872",
+    "collectionDate": "1872-06-00",
+    "collectionDateEnd": "",
+    "habitat": "Collected in the mountains",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Foot of black",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Tulane university herbarium\nsynonymy from plants (usda) database, oct. 2011.\ntulane university herbarium\ntulane\nuniversity\nherbarium\nherb. john j. crooke, staten island.\ngalax aphylla\n"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "039972\n\n= _G. urceolata (Poiret) Brummitt '95\n\nPlants of Virginia\n\nFloyd Co.                                                     10 August 1949\n*Culax aphylla L.\n\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\n\nBernard Mikula 3550  _N_=12\n\n(Handwritten text: *Culax aphylla L., _N_=12)\n\n\n*G. urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00054,
+      "total_cost": 0.00131875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 108
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "= G. urceolata (Poiret) Brumm.\nTB '95\nPlants of Virginia\nFloyd Co.\n10 August 1949\nGalax aphylla hr\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\nN=12\n039972\n\n\nG. urceolata\nGulax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.52e-05,
+      "total_cost": 0.0007167,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 88
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2071,
+    "output": 447,
+    "cost_in": 0.0002071,
+    "cost_out": 0.0001788
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n039972\n\n= _G. urceolata (Poiret) Brummitt '95\n\nPlants of Virginia\n\nFloyd Co.                                                     10 August 1949\n*Culax aphylla L.\n\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\n\nBernard Mikula 3550  _N_=12\n\n(Handwritten text: *Culax aphylla L., _N_=12)\n\n\n*G. urceolata*\n\n\ngemini-2.0-flash OCR:\n= G. urceolata (Poiret) Brumm.\nTB '95\nPlants of Virginia\nFloyd Co.\n10 August 1949\nGalax aphylla hr\nRavine bank; along Blue Ridge Parkway,\nW of Vesta.\nBernard Mikula 3550\nN=12\n039972\n\n\nG. urceolata\nGulax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "039972",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Bernard Mikula",
+    "collectorNumber": "3550",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 August 1949",
+    "collectionDate": "1949-08-10",
+    "collectionDateEnd": "",
+    "habitat": "Ravine bank; along Blue Ridge Parkway, W of Vesta.",
+    "chromosomeCount": "N=12",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Floyd co.",
+    "locality": "W of vesta",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of virginia\nCulax aphylla l.\nG. urceolata\nGulax aphylla"
+  }
+}

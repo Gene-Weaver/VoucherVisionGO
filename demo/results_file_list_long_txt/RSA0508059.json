@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "235 *Diapensia* c. (handwritten)\n\nRSA0508059\n\nRANCHO SANTA ANA\n786097\nBOTANIC GARDEN\n\nPLANTS OF SOUTH CAROLINA\n\n*Galax aphylla* L.\n\nRhizomatous herb; fls. white. Common along\nprotected streambank in mixed mesophytic\nforest, with *Medeola*, *Vaccinium*, many fern spp.\n\nOconee State Park, near Georgia-North Carolina\nSouth Carolina border. ca. 500 m.\n\nCounty: Oconee Collector: R. Patterson\nDate: 5 June 1976 No: 1081\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00078,
+      "total_cost": 0.0015587499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 156
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "235 Diapensiac.\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nRANCHO SANTA \u0391\u039d\u0391\n786097\nBOTANIC GARDEN\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508059\nPLANTS OF SOUTH CAROLINA\nGalax aphylla L.\nRhizomatous herb; fls. white. Common along\nprotected streambank in mixed mesophytic\nforest, with Medeola, Vaccinium, many fern spp.\nOnocee State Park, near Georgia-North Carolina.\nSouth Carolina border. ca. 500 m.\nCounty: Oconee\nDate: 5 June 1976\nColleator: R. Patterson\nNo: 1081\n\n\nGalax aphylla\nMedeola\nVaccinium\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.24e-05,
+      "total_cost": 0.0007639000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 206
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2222,
+    "output": 553,
+    "cost_in": 0.0002222,
+    "cost_out": 0.0002212
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n235 *Diapensia* c. (handwritten)\n\nRSA0508059\n\nRANCHO SANTA ANA\n786097\nBOTANIC GARDEN\n\nPLANTS OF SOUTH CAROLINA\n\n*Galax aphylla* L.\n\nRhizomatous herb; fls. white. Common along\nprotected streambank in mixed mesophytic\nforest, with *Medeola*, *Vaccinium*, many fern spp.\n\nOconee State Park, near Georgia-North Carolina\nSouth Carolina border. ca. 500 m.\n\nCounty: Oconee Collector: R. Patterson\nDate: 5 June 1976 No: 1081\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n235 Diapensiac.\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nRANCHO SANTA \u0391\u039d\u0391\n786097\nBOTANIC GARDEN\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508059\nPLANTS OF SOUTH CAROLINA\nGalax aphylla L.\nRhizomatous herb; fls. white. Common along\nprotected streambank in mixed mesophytic\nforest, with Medeola, Vaccinium, many fern spp.\nOnocee State Park, near Georgia-North Carolina.\nSouth Carolina border. ca. 500 m.\nCounty: Oconee\nDate: 5 June 1976\nColleator: R. Patterson\nNo: 1081\n\n\nGalax aphylla\nMedeola\nVaccinium\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508059",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Patterson",
+    "collectorNumber": "1081",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5 June 1976",
+    "collectionDate": "1976-06-05",
+    "collectionDateEnd": "",
+    "habitat": "Protected streambank in mixed mesophytic forest, with Medeola, Vaccinium, many fern spp.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Rhizomatous herb; fls. white.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "South carolina",
+    "county": "Oconee",
+    "locality": "Oconee state park, near georgia-north carolina border. ca. 500 m.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "500",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "235 Diapensiac.\nB000419\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nrancho santa \u03b1\u03bd\u03b1\n786097\nbotanic garden\ncalifornia botanic garden\nclaremont, ca usa (rsa-pom)\nplants of south carolina\nOnocee state park, near georgia-north carolina.\nSouth carolina border.\nColleator r. patterson\n\nMedeola\nVaccinium"
+  }
+}

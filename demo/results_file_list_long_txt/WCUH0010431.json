@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF\nWESTERN CAROLINA COLLEGE\nN.C.\n121-5\n\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010431\n\n*Diapensiaceae* 19 *(handwritten)*\n\n*Galax urceolata* (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nMacon County\n\n*Galax aphylla* L.\n\n4 miles west of junct. NC 28 and U.S. 64 at\nHighlands on U.S. 64. Elev. 3400 ft.\nDry woods above parking lot.\n\n\"Dry Falls\" *(handwritten)*\n\nDan Pittillo 4187                      26 May 1972\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001035,
+      "total_cost": 0.00181375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 207
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM OF\nN.C.\nNA COLLEGE\n2121~5\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nMacon County\nGalax aphylla L.\n4 miles west of junct. NC 28 and U.S. 64 at\nHighlands on U.S. 64. Elev. 3400 ft.\nDry woods above parking lot.\n\"Dry Falls\"\nDan Pittillo 4187\n26 May 1972\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010431\nD\u00eda pensiaceae 19\nINCHES\nLIVING\nCULTURES\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nMETRIC 11\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.4e-05,
+      "total_cost": 0.0007755,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 235
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2314,
+    "output": 539,
+    "cost_in": 0.00023140000000000001,
+    "cost_out": 0.0002156
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF\nWESTERN CAROLINA COLLEGE\nN.C.\n121-5\n\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010431\n\n*Diapensiaceae* 19 *(handwritten)*\n\n*Galax urceolata* (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina University\nNorth Carolina\nMacon County\n\n*Galax aphylla* L.\n\n4 miles west of junct. NC 28 and U.S. 64 at\nHighlands on U.S. 64. Elev. 3400 ft.\nDry woods above parking lot.\n\n\"Dry Falls\" *(handwritten)*\n\nDan Pittillo 4187                      26 May 1972\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM OF\nN.C.\nNA COLLEGE\n2121~5\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina University\nNorth Carolina\nMacon County\nGalax aphylla L.\n4 miles west of junct. NC 28 and U.S. 64 at\nHighlands on U.S. 64. Elev. 3400 ft.\nDry woods above parking lot.\n\"Dry Falls\"\nDan Pittillo 4187\n26 May 1972\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010431\nD\u00eda pensiaceae 19\nINCHES\nLIVING\nCULTURES\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nMETRIC 11\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010431",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Dan Pittillo",
+    "collectorNumber": "4187",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "26 May 1972",
+    "collectionDate": "1972-05-26",
+    "collectionDateEnd": "",
+    "habitat": "Dry woods above parking lot.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "4 miles west of junct. Nc 28 and U.s. 64 at Highlands on U.s. 64. Dry Falls",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1036",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium of Western Carolina College\nN.c.\n121-5\nWestern Carolina U. Herbarium\nDiapensiaceae 19\nHerbarium of Western Carolina University\nGalax aphylla L.\nCarolina Biological Supply Company\nBurlington, Nc 27215 & Gladstone, Or 97027\nGalax urceolata\nGalax aphylla"
+  }
+}

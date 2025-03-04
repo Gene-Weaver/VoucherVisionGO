@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n\nUniversity of Georgia Herbarium Staff 18 July 2009\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\n=G. urceolata (Poir.) Brummitt *(Handwritten)*\n\nHerbarium of The University of Georgia\nMURRAY COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nLake Conasauga Recreation Area. Grassy\nMountain. Cohutta Ranger District of\nChattahoochee National Forest. Along Lake\nConasauga Trail with Pinus strobus, Liriodendron\nTsuga canadensis and Rhododendron maximum.\n5 stamens, 5 staminodes. Plant with skunky odor\nRIDGE AND VALLEY PROVINCE\n\nHarriett G. DiGioia 205 30 May 1978\n\nUNIV. OF GEORGIA\nHERBARIUM\n134748\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Pinus strobus*\n*Liriodendron*\n*Tsuga canadensis*\n*Rhododendron maximum*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001215,
+      "total_cost": 0.00199375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 243
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\nUniversity of Georgia Herbarium Staff 18 July 2009\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n=G. urceolata (Poir.) Brummitt\nHerbarium of The University of Georgia\nMURRAY COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nLake Conasauga Recreation Area. Grassy\nMountain. Cohutta Ranger District of\nChattahoochee National Forest. Along Lake\nConasauga Trail with Pinus strobus, Liriodendron\nTsuga canadensis and Rhododendron maximum.\n5 stamens, 5 staminodes. Plant with skunky odor\nRIDGE AND VALLEY PROVINCE\nHarriett G. DiGioia 205\n30 May 1978\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\nPinus strobus\nLiriodendron\nTsuga canadensis\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.400000000000001e-05,
+      "total_cost": 0.0007655000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 210
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2372,
+    "output": 517,
+    "cost_in": 0.00023720000000000002,
+    "cost_out": 0.0002068
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n\nUniversity of Georgia Herbarium Staff 18 July 2009\n\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\n=G. urceolata (Poir.) Brummitt *(Handwritten)*\n\nHerbarium of The University of Georgia\nMURRAY COUNTY\nFLORA OF GEORGIA\n\nGalax aphylla L.\n\nLake Conasauga Recreation Area. Grassy\nMountain. Cohutta Ranger District of\nChattahoochee National Forest. Along Lake\nConasauga Trail with Pinus strobus, Liriodendron\nTsuga canadensis and Rhododendron maximum.\n5 stamens, 5 staminodes. Plant with skunky odor\nRIDGE AND VALLEY PROVINCE\n\nHarriett G. DiGioia 205 30 May 1978\n\nUNIV. OF GEORGIA\nHERBARIUM\n134748\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Galax aphylla*\n*Pinus strobus*\n*Liriodendron*\n*Tsuga canadensis*\n*Rhododendron maximum*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\nUniversity of Georgia Herbarium Staff 18 July 2009\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n=G. urceolata (Poir.) Brummitt\nHerbarium of The University of Georgia\nMURRAY COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nLake Conasauga Recreation Area. Grassy\nMountain. Cohutta Ranger District of\nChattahoochee National Forest. Along Lake\nConasauga Trail with Pinus strobus, Liriodendron\nTsuga canadensis and Rhododendron maximum.\n5 stamens, 5 staminodes. Plant with skunky odor\nRIDGE AND VALLEY PROVINCE\nHarriett G. DiGioia 205\n30 May 1978\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\nPinus strobus\nLiriodendron\nTsuga canadensis\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "134748",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Harriett G. DiGioia",
+    "collectorNumber": "205",
+    "identifiedBy": "University of Georgia Herbarium Staff",
+    "identifiedDate": "2009-07-18",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "30 May 1978",
+    "collectionDate": "1978-05-30",
+    "collectionDateEnd": "",
+    "habitat": "Along Lake Conasauga Trail with Pinus strobus, Liriodendron Tsuga canadensis and Rhododendron maximum.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "5 stamens, 5 staminodes. Plant with skunky odor",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Murray County",
+    "locality": "Lake Conasauga Recreation Area. Grassy Mountain. Cohutta Ranger District of Chattahoochee National Forest.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nRIDGE AND VALLEY PROVINCE\nIMAGED 2013\n"
+  }
+}

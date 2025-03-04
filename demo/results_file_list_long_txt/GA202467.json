@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n260144\n\nex DECA\nAgnes Scott College Herbarium\nDecatur, GA~ [2009]\n\n*Galax urceolata* (handwritten)\n235\nAGNES SCOTT COLLEGE HERBARIUM\n\nNAME\nPLANTS OF\nGILES COUNTY, VA.\n\nNAME *Galax aphylla* L. (handwritten)\nLOCALITY Mt. Lake (handwritten)\nALT.                      DATE 6/22/38 (handwritten)\nHABITAT woods (handwritten)       COLLECTED BY J. Matthews (handwritten)\nREMARKS\nDiapensiaceae (handwritten)\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000835,
+      "total_cost": 0.00161375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 167
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022GA.\nUniversity\nof Georgia\nHerbarium\n260144\nex DECA\nAgnes Scott College Herbarium\nDecatur, GA~ [2009]\nUNIVERSITY OF GEORGIA\nGA202467\nGalax urceolata\nAGNES SCOTT COLLEGE HERBARIUM\nNAME\n235\nPLANTS OF\nGILES COUNTY, VA\nNAME Galax aphylla\nLOCALITY Mt. hake\nHABITAT woods\nREMARKS\nDiapensiacere\nALT.\nDATE 6/22/38\nCOLLECTED BY J. Matthews\nImaged 2016\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0004751,
+      "cost_out": 5.68e-05,
+      "total_cost": 0.0005319,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 4751,
+      "tokens_out": 142
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2200,
+    "output": 477,
+    "cost_in": 0.00022000000000000003,
+    "cost_out": 0.0001908
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n260144\n\nex DECA\nAgnes Scott College Herbarium\nDecatur, GA~ [2009]\n\n*Galax urceolata* (handwritten)\n235\nAGNES SCOTT COLLEGE HERBARIUM\n\nNAME\nPLANTS OF\nGILES COUNTY, VA.\n\nNAME *Galax aphylla* L. (handwritten)\nLOCALITY Mt. Lake (handwritten)\nALT.                      DATE 6/22/38 (handwritten)\nHABITAT woods (handwritten)       COLLECTED BY J. Matthews (handwritten)\nREMARKS\nDiapensiaceae (handwritten)\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n\u2022GA.\nUniversity\nof Georgia\nHerbarium\n260144\nex DECA\nAgnes Scott College Herbarium\nDecatur, GA~ [2009]\nUNIVERSITY OF GEORGIA\nGA202467\nGalax urceolata\nAGNES SCOTT COLLEGE HERBARIUM\nNAME\n235\nPLANTS OF\nGILES COUNTY, VA\nNAME Galax aphylla\nLOCALITY Mt. hake\nHABITAT woods\nREMARKS\nDiapensiacere\nALT.\nDATE 6/22/38\nCOLLECTED BY J. Matthews\nImaged 2016\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "260144",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J. Matthews",
+    "collectorNumber": "235",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/22/38",
+    "collectionDate": "1938-06-22",
+    "collectionDateEnd": "",
+    "habitat": "Woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "Mt. lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "\u2022ga\u2022\nUniversity\nof Georgia\nHerbarium\nex deca\nAgnes scott college herbarium\ndecatur, ga~ [2009]\nuniversity of georgia\nga202467\nAgnes scott college herbarium\nname\nplants of\ngalax urceolata\ngalax aphylla\nremarks\ndiapensiacere\nalt.\nimaged 2016"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT022702\nUCHT\n\n235\nHerbarium of the University of Tennessee at Chattanooga\n\n*Galax aphylla* L.\n\nPerianth in bud, greenish-white. Growing\nalong trail, 100 ft. from base of Benton\nFalls.\n\nCherokee National Forest\nPolk Co., Tennessee                 Elev. 1700 ft.\n\nGene S. Van Horn #1030           13 April 1974\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006,
+      "total_cost": 0.00137875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 120
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT022702\nUCHT\nHerbarium of the University of Tennessee at Chattanooga\nGalax aphylla L.\nPerianth in bud, greenish-white. Growing\nalong trail, 100 ft. from base of Benton\nFalls.\nCherokee National Forest\nPolk Co., Tennessee\nElev. 1700 ft.\nGene S. Van Horn #1030\n13 April 1974\n235\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.64e-05,
+      "total_cost": 0.0007279000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 116
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2108,
+    "output": 434,
+    "cost_in": 0.00021080000000000003,
+    "cost_out": 0.0001736
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT022702\nUCHT\n\n235\nHerbarium of the University of Tennessee at Chattanooga\n\n*Galax aphylla* L.\n\nPerianth in bud, greenish-white. Growing\nalong trail, 100 ft. from base of Benton\nFalls.\n\nCherokee National Forest\nPolk Co., Tennessee                 Elev. 1700 ft.\n\nGene S. Van Horn #1030           13 April 1974\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE\nAT CHATTANOOGA\nUCHT022702\nUCHT\nHerbarium of the University of Tennessee at Chattanooga\nGalax aphylla L.\nPerianth in bud, greenish-white. Growing\nalong trail, 100 ft. from base of Benton\nFalls.\nCherokee National Forest\nPolk Co., Tennessee\nElev. 1700 ft.\nGene S. Van Horn #1030\n13 April 1974\n235\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCHT022702",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Gene S. Van Horn",
+    "collectorNumber": "1030",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "13 April 1974",
+    "collectionDate": "1974-04-13",
+    "collectionDateEnd": "",
+    "habitat": "Growing along trail, 100 ft. from base of Benton Falls.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Perianth in bud, greenish-white.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Polk Co.",
+    "locality": "Cherokee National Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "518",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "UCHT\n235\nHerbarium of the University of Tennessee at Chattanooga\n\n\n\n"
+  }
+}

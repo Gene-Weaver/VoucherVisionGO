@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508052\n\ncopyright reserved\n\nTRANSFERRED TO\nRANCHO SANTA ANA\n471412\nBOTANIC GARDEN\n\n*(Handwritten)* Diapensia\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\n*Galax aphylla* L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006699999999999999,
+      "total_cost": 0.0014487500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 134
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508052\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nTRANSFERRED TO\nRANCHO SANTA ANA\n471412\nBOTANIC GARDEN\nLOS ANGELES PUSEUM\nHERBARUM\n6369\nNo 2.797\nB000419\nDispen\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.24e-05,
+      "total_cost": 0.0007539000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 181
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2191,
+    "output": 496,
+    "cost_in": 0.00021909999999999999,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508052\n\ncopyright reserved\n\nTRANSFERRED TO\nRANCHO SANTA ANA\n471412\nBOTANIC GARDEN\n\n*(Handwritten)* Diapensia\n\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\n\n*Galax aphylla* L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508052\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nTRANSFERRED TO\nRANCHO SANTA ANA\n471412\nBOTANIC GARDEN\nLOS ANGELES PUSEUM\nHERBARUM\n6369\nNo 2.797\nB000419\nDispen\nPLANTS OF HENDERSON COUNTY, NORTH CAROLINA\nDistributed by the Catholic University of America\nGalax aphylla L.\nUpper banks of the French Broad River,\nMt. St. Louis, Aug. 12, 1933.\nSr. Margaret Potts, R. C. E., Collector. 300.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508052",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Sr. Margaret Potts, R. C. E.",
+    "collectorNumber": "300",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Aug. 12, 1933",
+    "collectionDate": "1933-08-12",
+    "collectionDateEnd": "",
+    "habitat": "Upper banks of the french broad river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Henderson county",
+    "locality": "Mt. st. louis",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "California botanic garden\nClaremont, ca usa (rsa-pom)\ncopyright reserved\ntransferred to\nrancho santa ana\n471412\nbotanic garden\nlos angeles puseum\nherbarum\n6369\nno 2.797\nb000419\ndispen\nplants of henderson county, north carolina\ndistributed by the catholic university of america\ngalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\n11671\nHERBARIUM, COLLEGE OF\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nNelson County\n*Galax aphylla* L.\n3 June 1972\n\nSteep north-facing bluff, phyllite outcrop in\na *Rhododendron catawbiense* Michaux thicket;\nalong the Tye River 1 mi. W of Norwood.\n\nCollector: Thomas F. Wieboldt No. 922\n(Handwritten: Nelson County, *Galax aphylla*, 3 June 1972, Steep north-facing bluff, phyllite outcrop in a *Rhododendron catawbiense* Michaux thicket; along the Tye River 1 mi. W of Norwood, Thomas F. Wieboldt)\n\n\n*Galax aphylla*\n*Rhododendron catawbiense*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001025,
+      "total_cost": 0.00180375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 205
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm l\n10\n20\n30\n40 50\n60\n70 80\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\nA\n11671\nHERBARIM, COLLEGE\nWILLIAM & MARY\nOF\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nNelson County\n3 June 1972\nGalax aphylla L.\nSteep north-facing bluff, phyllite outcrop in\na Rhododendron catawbiense Michaux thicket;\nalong the Tye River 1 mi. W of Norwood.\nCollector:\nThomas F. Wieboldt\nNo. 922\n\nGalax aphylla\nRhododendron catawbiense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.560000000000001e-05,
+      "total_cost": 0.0007671,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 214
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2322,
+    "output": 494,
+    "cost_in": 0.0002322,
+    "cost_out": 0.0001976
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\n11671\nHERBARIUM, COLLEGE OF\nWILLIAM & MARY\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\nNelson County\n*Galax aphylla* L.\n3 June 1972\n\nSteep north-facing bluff, phyllite outcrop in\na *Rhododendron catawbiense* Michaux thicket;\nalong the Tye River 1 mi. W of Norwood.\n\nCollector: Thomas F. Wieboldt No. 922\n(Handwritten: Nelson County, *Galax aphylla*, 3 June 1972, Steep north-facing bluff, phyllite outcrop in a *Rhododendron catawbiense* Michaux thicket; along the Tye River 1 mi. W of Norwood, Thomas F. Wieboldt)\n\n\n*Galax aphylla*\n*Rhododendron catawbiense*\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm l\n10\n20\n30\n40 50\n60\n70 80\n90 100 110 120 130 140 150\n4\n6\nMADE\n5\nNO. 305 ME\n16ths\n2\n3\nGENERAL\nCHARTERED 1693\nA\n11671\nHERBARIM, COLLEGE\nWILLIAM & MARY\nOF\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\nNelson County\n3 June 1972\nGalax aphylla L.\nSteep north-facing bluff, phyllite outcrop in\na Rhododendron catawbiense Michaux thicket;\nalong the Tye River 1 mi. W of Norwood.\nCollector:\nThomas F. Wieboldt\nNo. 922\n\nGalax aphylla\nRhododendron catawbiense\n\n",
+  "formatted_json": {
+    "catalogNumber": "11671",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Thomas F. Wieboldt",
+    "collectorNumber": "922",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3 June 1972",
+    "collectionDate": "1972-06-03",
+    "collectionDateEnd": "",
+    "habitat": "Steep north-facing bluff, phyllite outcrop in a Rhododendron catawbiense Michaux thicket; along the Tye River 1 mi. W of Norwood.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Nelson County",
+    "locality": "Along the Tye River 1 mi. W of Norwood.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nchartered 1693\nherbarium, college of\nwilliam & mary\nherbarium of the college of\nwilliam and mary\nWilliamsburg, Virginia\nVirginia\nGalax aphylla\nRhododendron catawbiense"
+  }
+}

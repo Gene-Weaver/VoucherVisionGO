@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\nClemson University Herbarium\nCLEMS0042903\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\n*Galax urceolata* (Poir.) Brummitt\n-O\u2019Darnel 16 OCT 2017\n\nRainy Mtn. Quad.\n\nPLANTS OF Georgia\n\nFamily: Diapensiaceae. 1,600\u2019\n*Galax aphylla* 488 m\nGalax\nseasonal growth dec. woods, trail,\nand stream sides.\nChattooga River Trail South of Laudy\nFord, Chattahoochee Natl. Forest\n\nCollector: Kingeland, M.C.\nCounty: Rabun\nDate: 5/15/2013 Identified by: ACK\n\nClemson University Herbarium (CLEMS)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009149999999999999,
+      "total_cost": 0.00169375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 183
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\nClemson University Herbarium\nCLEMSON\nUNIVERSITY\nHERBARIUM\nCLEMS0042903\nGalax urceolata (Poir.) Brummitt\nRaing Mtm Quad.\nPLANTS OF\nGeorgia\nFamily: Diapensiaceae.\nGalax aphylla\n1,600\n488m\nSeason growth dec. woods, trail.\nand stream sides.\nChattooga River Trail So. Sandy\nFord, Chattahoochee Natl. Forest\nCollector: Kingeland, H.C.\nCounty: Rabun\nDate: 5/25/2013\nIdentified by: ACK\nClemson University Herbarium (CLEMS)\n--- Handwritten Text ---\nGalax urceolata (Poir.) Brummitt\n-Darnel 16 OCT 2017\n---\n\nGalax urceolata\nDolcey ophylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.840000000000001e-05,
+      "total_cost": 0.0007699,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 221
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2277,
+    "output": 546,
+    "cost_in": 0.0002277,
+    "cost_out": 0.00021840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\nClemson University Herbarium\nCLEMS0042903\n\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\n*Galax urceolata* (Poir.) Brummitt\n-O\u2019Darnel 16 OCT 2017\n\nRainy Mtn. Quad.\n\nPLANTS OF Georgia\n\nFamily: Diapensiaceae. 1,600\u2019\n*Galax aphylla* 488 m\nGalax\nseasonal growth dec. woods, trail,\nand stream sides.\nChattooga River Trail South of Laudy\nFord, Chattahoochee Natl. Forest\n\nCollector: Kingeland, M.C.\nCounty: Rabun\nDate: 5/15/2013 Identified by: ACK\n\nClemson University Herbarium (CLEMS)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nCLEMS\nClemson University Herbarium\nCLEMSON\nUNIVERSITY\nHERBARIUM\nCLEMS0042903\nGalax urceolata (Poir.) Brummitt\nRaing Mtm Quad.\nPLANTS OF\nGeorgia\nFamily: Diapensiaceae.\nGalax aphylla\n1,600\n488m\nSeason growth dec. woods, trail.\nand stream sides.\nChattooga River Trail So. Sandy\nFord, Chattahoochee Natl. Forest\nCollector: Kingeland, H.C.\nCounty: Rabun\nDate: 5/25/2013\nIdentified by: ACK\nClemson University Herbarium (CLEMS)\n--- Handwritten Text ---\nGalax urceolata (Poir.) Brummitt\n-Darnel 16 OCT 2017\n---\n\nGalax urceolata\nDolcey ophylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042903",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Kingeland, H.C.",
+    "collectorNumber": "",
+    "identifiedBy": "ACK",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "5/25/2013",
+    "collectionDate": "2013-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Season growth dec. woods, trail, and stream sides.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Georgia",
+    "stateProvince": "Georgia",
+    "county": "Rabun",
+    "locality": "Chattooga River Trail So. Sandy Ford, Chattahoochee Natl. Forest",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "488",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "copyright reserved\nCLEMS\nClemson University Herbarium\nCLEMSON\nUNIVERSITY\nHERBARIUM\nRaing Mtm Quad.\nPLANTS OF\nFamily Diapensiaceae.\n1,600'\nClemson University Herbarium (CLEMS)\n--- Handwritten Text ---\nGalax urceolata (Poir.) Brummitt\n-Darnel 16 OCT 2017\n---\nGalax urceolata\nDolcey ophylla"
+  }
+}

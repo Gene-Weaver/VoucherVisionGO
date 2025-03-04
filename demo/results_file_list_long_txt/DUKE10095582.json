@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke University Herbarium\nDUKE10095582\n\nDUKE UNIVERSITY\nHERBARIUM\n35378\n\nDuke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n(Handwritten Text)\nMacon County\nGalax aphylla L.\nRocky open hardwoods, slopes of\nW. Kitasti Mts.\nN.J. Oosting         July 21, 1936\nNo. 3649\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000785,
+      "total_cost": 0.0015637499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE UNIVERSITY HERBARIUM\nDUKE10095582\nDUKE UNIVERSITY\nHERBARIUM\n35378\n0\ncm\n-Duke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nMacow Courity\nGalax aphylla L.\nRocky open hardwoods, slopes of\nN.J. Costing\nJudy 21,1936\nNo. 3649\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.04e-05,
+      "total_cost": 0.0007419,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2202,
+    "output": 544,
+    "cost_in": 0.0002202,
+    "cost_out": 0.0002176
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke University Herbarium\nDUKE10095582\n\nDUKE UNIVERSITY\nHERBARIUM\n35378\n\nDuke\nUNIVERSITY\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n\n(Handwritten Text)\nMacon County\nGalax aphylla L.\nRocky open hardwoods, slopes of\nW. Kitasti Mts.\nN.J. Oosting         July 21, 1936\nNo. 3649\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE UNIVERSITY HERBARIUM\nDUKE10095582\nDUKE UNIVERSITY\nHERBARIUM\n35378\n0\ncm\n-Duke\ncopyright reserved UNIVERSITY\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\nMacow Courity\nGalax aphylla L.\nRocky open hardwoods, slopes of\nN.J. Costing\nJudy 21,1936\nNo. 3649\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095582",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "N.j. Oosting",
+    "collectorNumber": "3649",
+    "identifiedBy": "R.l. Wilbur",
+    "identifiedDate": "2001-01-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 21, 1936",
+    "collectionDate": "1936-07-21",
+    "collectionDateEnd": "",
+    "habitat": "Rocky open hardwoods, slopes of",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Macon county",
+    "locality": "W. kitasti mts.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Duke University Herbarium\nDUKE UNIVERSITY\nHERBARIUM\n35378\nDuke\nUNIVERSITY\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nFlora of North Carolina\nDUKE UNIVERSITY HERBARIUM\n(Handwritten Text)\nGalax aphylla L.\nGalax urceolata\nGalax aphylla\ncm\ncopyright reserved\nJudy 21\nGalax aphylla\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "14027\n\nGeorgia Southern University Herbarium\nGAS017509\n\nHerbarium of The University of Georgia\nTowns County\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nIn moist woods along Tugaloo River\nabout 2 miles below Tate City\n\nFlorence Montgomery 523  4 June, 1966\n\n\nHandwritten text: 14027\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00047,
+      "total_cost": 0.0012487499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 94
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "14027\nGeorgia Southern University Herbarium\nGAS017509\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of The University of Georgia\nTowns County\nFLORA OF GEORGIA\nGalax aphylla L.\nIn moist woods along Tululla River\nabout 2 miles below Tate City\nFlorence Montgomery 523 4 June, 1966\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.1200000000000005e-05,
+      "total_cost": 0.0007227,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 103
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2079,
+    "output": 423,
+    "cost_in": 0.0002079,
+    "cost_out": 0.0001692
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n14027\n\nGeorgia Southern University Herbarium\nGAS017509\n\nHerbarium of The University of Georgia\nTowns County\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nIn moist woods along Tugaloo River\nabout 2 miles below Tate City\n\nFlorence Montgomery 523  4 June, 1966\n\n\nHandwritten text: 14027\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n14027\nGeorgia Southern University Herbarium\nGAS017509\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of The University of Georgia\nTowns County\nFLORA OF GEORGIA\nGalax aphylla L.\nIn moist woods along Tululla River\nabout 2 miles below Tate City\nFlorence Montgomery 523 4 June, 1966\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "14027",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Florence Montgomery",
+    "collectorNumber": "523",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4 June, 1966",
+    "collectionDate": "1966-06-04",
+    "collectionDateEnd": "",
+    "habitat": "In moist woods along Tugaloo River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "Towns County",
+    "locality": "About 2 miles below Tate City",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Georgia Southern University Herbarium\nGAS017509\nHerbarium of The University of Georgia\nFLORA OF GEORGIA"
+  }
+}

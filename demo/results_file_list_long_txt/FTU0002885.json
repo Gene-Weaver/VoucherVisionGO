@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Herbarium, University of Central Florida\nFTU0002885\n\nHERBARIUM\nFLORIDA TECHNOLOGICAL UNIVERSITY\n\nDiapensiaceae\n*Galax aphylla* Linnaeus\nGalax\n\nMitchell County, Clear Creek, North Carolina,\n3100' hwy 80.\n\nCOLLECTION NO.: 601\nCOLLECTED BY: Barbara Ann Whittier\nDETERMINED BY: Barbara Ann Whittier\nDATE: 9/16/70\n\nHandwritten Text: 1675\n\n*Galax aphylla* Linnaeus\n*Galax*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000595,
+      "total_cost": 0.00137375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 119
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Herbarium, University of Central Florida\nFTU0002885\nHERBARIUM\nFLORIDA TECHNOLOGICAL UNIVERSITY\nDiapensiaceae\nGalax aphylla Linnaeus\nGalax\nMitchell County, Clear Creek, North Carolina,\n3100' hwy 80.\nCOLLECTION NO.: 601\nCOLLECTED BY: Barbara Ann Whittier\nDETERMINED BY: Barbara Ann Whittier\nDATE: 9/16/70\n\n1675\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.24e-05,
+      "total_cost": 0.0007239,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 106
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2118,
+    "output": 447,
+    "cost_in": 0.00021180000000000003,
+    "cost_out": 0.0001788
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHerbarium, University of Central Florida\nFTU0002885\n\nHERBARIUM\nFLORIDA TECHNOLOGICAL UNIVERSITY\n\nDiapensiaceae\n*Galax aphylla* Linnaeus\nGalax\n\nMitchell County, Clear Creek, North Carolina,\n3100' hwy 80.\n\nCOLLECTION NO.: 601\nCOLLECTED BY: Barbara Ann Whittier\nDETERMINED BY: Barbara Ann Whittier\nDATE: 9/16/70\n\nHandwritten Text: 1675\n\n*Galax aphylla* Linnaeus\n*Galax*\n\n\ngemini-2.0-flash OCR:\nHerbarium, University of Central Florida\nFTU0002885\nHERBARIUM\nFLORIDA TECHNOLOGICAL UNIVERSITY\nDiapensiaceae\nGalax aphylla Linnaeus\nGalax\nMitchell County, Clear Creek, North Carolina,\n3100' hwy 80.\nCOLLECTION NO.: 601\nCOLLECTED BY: Barbara Ann Whittier\nDETERMINED BY: Barbara Ann Whittier\nDATE: 9/16/70\n\n1675\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FTU0002885",
+    "scientificName": "Galax aphylla Linnaeus",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "Linnaeus",
+    "collectedBy": "Barbara Ann Whittier",
+    "collectorNumber": "601",
+    "identifiedBy": "Barbara Ann Whittier",
+    "identifiedDate": "1970-09-16",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "9/16/70",
+    "collectionDate": "1970-09-16",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Mitchell County",
+    "locality": "Clear Creek, 3100' hwy 80",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium, University of Central Florida\nHerbarium\nFlorida technological university\nDiapensiaceae\nGalax\nHandwritten Text 1675"
+  }
+}

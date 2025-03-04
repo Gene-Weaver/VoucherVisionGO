@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "inches\ncm\n1  2  3  4  5  6  7  8  9\n\nHerbarium of The University of Georgia\nRABUN COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nIn moist woods along Persimmon Creek.\n\n14023\nGeorgia Southern University Herbarium\n\nFlorence Montgomery     4 June, 1966\n\nGAS017510\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00047499999999999994,
+      "total_cost": 0.00125375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 95
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "inches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of The University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nIn moist woods slong Persimmon Creek.\n14023\nGeorgia Southern University Herbarium\nFlorence Montgomery\n4 June, 1966\nGAS017510\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.6e-05,
+      "total_cost": 0.0007175,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 90
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2082,
+    "output": 432,
+    "cost_in": 0.00020820000000000002,
+    "cost_out": 0.0001728
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\ninches\ncm\n1  2  3  4  5  6  7  8  9\n\nHerbarium of The University of Georgia\nRABUN COUNTY\nFLORA OF GEORGIA\n\n*Galax aphylla* L.\n\nIn moist woods along Persimmon Creek.\n\n14023\nGeorgia Southern University Herbarium\n\nFlorence Montgomery     4 June, 1966\n\nGAS017510\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nHerbarium of The University of Georgia\nFLORA OF GEORGIA\nGalax aphylla L.\nIn moist woods slong Persimmon Creek.\n14023\nGeorgia Southern University Herbarium\nFlorence Montgomery\n4 June, 1966\nGAS017510\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GAS017510",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Florence Montgomery",
+    "collectorNumber": "14023",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4 June, 1966",
+    "collectionDate": "1966-06-04",
+    "collectionDateEnd": "",
+    "habitat": "In moist woods along Persimmon Creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Rabun county",
+    "locality": "In moist woods along Persimmon Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Inches\nCm\n1 2 3 4 5 6 7 8 9\nHerbarium of the university of georgia\nFlora of georgia\nGeorgia southern university herbarium"
+  }
+}

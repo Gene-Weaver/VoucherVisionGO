@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n236727\n\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2009 *(Handwritten)*\n\nPlants of the Etowah River Basin of Georgia\nDawson County\n\nDiapensiaceae\n*Galax urceolata*\nGalax\n(Poir.) Brummitt\n\nDawson Forest Wildlife Management Area, Wildcat Creek Tract, accessed from jeep trail just west of Pleasant Union Church, off of Steve Tate Hwy, 1.9 miles S. of Fausett Lake on State Hwy 136. Survey begins at confluence of Amicalola and Wildcat Cr.\n\nGrowing in scattered clumps in campground at confluence of Wildcat Cr. with the Amicalola R. In pine leaf litter, sparse herbaceous layer. Dense canopy cover dominated by *Pinus strobus* and *Tsuga canadensis*, also with *Acer rubrum*, *Liquidambar styraciflua*.\n\nLisa Kruse 01 - 266b\n11 June 2001\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Pinus strobus*\n*Tsuga canadensis*\n*Acer rubrum*\n*Liquidambar styraciflua*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0013,
+      "total_cost": 0.00207875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 260
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n236727\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2009\nPlants of the Etowah River Basin of Georgia\nDawson County\nDiapensiaceae\nGalax urceolata\nGalax\n(Poir.) Brummit\nDawson Forest Wildlife Management Area, Wildcat Creek Tract, accessed\nfrom jeep trail just west of Pleasant Union Church, off of Steve Tate Hwy,\n1.9 miles S. of Fausett Lake on State Hwy 136. Survey begins at\nconfluence of Amicalola and Wildcat Cr.\nGrowing in scattered clumps in campground at confluence of Wildcat Cr.\nwith the Amicalola R. In pine leaf litter, sparse herbaceous layer. Dense\ncanopy cover dominated by Pinus strobus and Tsuga canadensis, also\nwith Acer rubrum, Liquidambar styraciflua.\nLisa Kruse\n01-266b\n11 June 2001\nIMAGED 2013\n\n\nGalax urceolata\nPinus strobus\nTsuga canadensis\nAcer rubrum\nLiquidambar styraciflua\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.8e-05,
+      "total_cost": 0.0007795,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 245
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2408,
+    "output": 601,
+    "cost_in": 0.0002408,
+    "cost_out": 0.0002404
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n236727\n\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2009 *(Handwritten)*\n\nPlants of the Etowah River Basin of Georgia\nDawson County\n\nDiapensiaceae\n*Galax urceolata*\nGalax\n(Poir.) Brummitt\n\nDawson Forest Wildlife Management Area, Wildcat Creek Tract, accessed from jeep trail just west of Pleasant Union Church, off of Steve Tate Hwy, 1.9 miles S. of Fausett Lake on State Hwy 136. Survey begins at confluence of Amicalola and Wildcat Cr.\n\nGrowing in scattered clumps in campground at confluence of Wildcat Cr. with the Amicalola R. In pine leaf litter, sparse herbaceous layer. Dense canopy cover dominated by *Pinus strobus* and *Tsuga canadensis*, also with *Acer rubrum*, *Liquidambar styraciflua*.\n\nLisa Kruse 01 - 266b\n11 June 2001\n\nIMAGED 2013\n\n\n*Galax urceolata*\n*Pinus strobus*\n*Tsuga canadensis*\n*Acer rubrum*\n*Liquidambar styraciflua*\n\n\ngemini-2.0-flash OCR:\n\u2022GA\u2022\nUniversity\nof Georgia\nHerbarium\n236727\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2009\nPlants of the Etowah River Basin of Georgia\nDawson County\nDiapensiaceae\nGalax urceolata\nGalax\n(Poir.) Brummit\nDawson Forest Wildlife Management Area, Wildcat Creek Tract, accessed\nfrom jeep trail just west of Pleasant Union Church, off of Steve Tate Hwy,\n1.9 miles S. of Fausett Lake on State Hwy 136. Survey begins at\nconfluence of Amicalola and Wildcat Cr.\nGrowing in scattered clumps in campground at confluence of Wildcat Cr.\nwith the Amicalola R. In pine leaf litter, sparse herbaceous layer. Dense\ncanopy cover dominated by Pinus strobus and Tsuga canadensis, also\nwith Acer rubrum, Liquidambar styraciflua.\nLisa Kruse\n01-266b\n11 June 2001\nIMAGED 2013\n\n\nGalax urceolata\nPinus strobus\nTsuga canadensis\nAcer rubrum\nLiquidambar styraciflua\n\n",
+  "formatted_json": {
+    "catalogNumber": "236727",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Lisa Kruse",
+    "collectorNumber": "01 - 266b",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "11 June 2001",
+    "collectionDate": "2001-06-11",
+    "collectionDateEnd": "",
+    "habitat": "Growing in scattered clumps in campground at confluence of Wildcat Cr. with the Amicalola R. In pine leaf litter, sparse herbaceous layer. Dense canopy cover dominated by Pinus strobus and Tsuga canadensis, also with Acer rubrum, Liquidambar styraciflua.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "Georgia",
+    "county": "Dawson County",
+    "locality": "Dawson Forest Wildlife Management Area, Wildcat Creek Tract, accessed from jeep trail just west of Pleasant Union Church, off of Steve Tate Hwy, 1.9 miles S. of Fausett Lake on State Hwy 136. Survey begins at confluence of Amicalola and Wildcat Cr.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "\u2022ga\u2022\nUniversity\nof Georgia\nHerbarium\nSpecimen Examined for\nGeorgia Atlas Project\n18 July 2009\nPlants of the Etowah River Basin of Georgia\nDiapensiaceae\nGalax urceolata\nPinus strobus\nTsuga canadensis\nAcer rubrum\nLiquidambar styraciflua\nimaged 2013"
+  }
+}

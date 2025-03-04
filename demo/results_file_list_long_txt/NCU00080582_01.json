@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\n\nHERBARIUM\n457867\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMadison County\n\n*Galax aphylla* L.\n\n2.8 miles west of US routes 25-70 along the\nridge and slopes on the north side of the\nFrench Broad River. West of Hot Springs.\nPine-mixed oak-hickory woods.\n\nD. E. Boufford 13964 7 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\nNCU00080582\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001005,
+      "total_cost": 0.0017837499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 201
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nCAROLINA\n457867\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080582\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nNORTH CAROLINA\nMadison County\nGalax aphylla L.\n2.8 miles west of US routes 25-70 along the\nridge and slopes on the north side of the\nFrench Broad River. West of Hot Springs.\nPine-mixed oak-hickory woods.\nD. E. Boufford 13964 7 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.6e-05,
+      "total_cost": 0.0007574999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 190
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2279,
+    "output": 509,
+    "cost_in": 0.00022790000000000004,
+    "cost_out": 0.00020360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nUNIVERSITY OF NORTH CAROLINA\nat Chapel Hill\n\nHERBARIUM\n457867\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nMadison County\n\n*Galax aphylla* L.\n\n2.8 miles west of US routes 25-70 along the\nridge and slopes on the north side of the\nFrench Broad River. West of Hot Springs.\nPine-mixed oak-hickory woods.\n\nD. E. Boufford 13964 7 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\nNCU00080582\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nCAROLINA\n457867\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080582\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for North Carolina Natural Areas\nStudy. May 15-June 30, 1974. For community\ndata see Natural Areas file in Herbarium.\nNORTH CAROLINA\nMadison County\nGalax aphylla L.\n2.8 miles west of US routes 25-70 along the\nridge and slopes on the north side of the\nFrench Broad River. West of Hot Springs.\nPine-mixed oak-hickory woods.\nD. E. Boufford 13964 7 June 1974\nL. Schram, D. Wickland & E. Wood\nPlants of the Southeastern United States\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "457867",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "D. E. Boufford, L. Schram, D. Wickland & E. Wood",
+    "collectorNumber": "13964",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "7 June 1974",
+    "collectionDate": "1974-06-07",
+    "collectionDateEnd": "1974-06-30",
+    "habitat": "Pine-mixed oak-hickory woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Madison county",
+    "locality": "2.8 miles west of US routes 25-70 along the ridge and slopes on the north side of the French Broad River. West of Hot Springs.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ncu\nuniversity of north carolina\nat chapel hill\nherbarium\nherbarium of the university of north carolina\nvoucher for north carolina natural areas\nstudy. may 15-june 30, 1974. for community\ndata see natural areas file in herbarium.\nplants of the southeastern united states\nncu00080582"
+  }
+}

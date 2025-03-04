@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n262865\n\nNCU00332635\n\nHerbarium of the University of North Carolina\nHALIFAX COUNTY, VIRGINIA\n\n*Galax aphylla* L.\n\nwooded slope, Childrey Creek on Co. Rt. 632 (ese.\nof North Halifax)\n\nHarry E. Ahles\n60649\nwith F. James                   August 29, 1965\n\nCollected for the \"Flora of the Carolinas\"\n\n\nHandwritten text: 60649\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000705,
+      "total_cost": 0.0014837499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 141
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "MSCCPPP\u00c90411\nMSCCPPCC0411\nImm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332635\nHerbarium of the University of North Carolina\nHALIFAX COUNTY, VIRGINIA\nGalax aphylla L.\nwooded slope, Childrey Creek on Co. Rt. 632 (ese.\nof North Halifax)\nHarry E. Ahles\n60649\nAugust 29, 1965\nwith F. James\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.080000000000001e-05,
+      "total_cost": 0.0007323,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 127
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2133,
+    "output": 448,
+    "cost_in": 0.0002133,
+    "cost_out": 0.00017920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n262865\n\nNCU00332635\n\nHerbarium of the University of North Carolina\nHALIFAX COUNTY, VIRGINIA\n\n*Galax aphylla* L.\n\nwooded slope, Childrey Creek on Co. Rt. 632 (ese.\nof North Halifax)\n\nHarry E. Ahles\n60649\nwith F. James                   August 29, 1965\n\nCollected for the \"Flora of the Carolinas\"\n\n\nHandwritten text: 60649\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nMSCCPPP\u00c90411\nMSCCPPCC0411\nImm\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332635\nHerbarium of the University of North Carolina\nHALIFAX COUNTY, VIRGINIA\nGalax aphylla L.\nwooded slope, Childrey Creek on Co. Rt. 632 (ese.\nof North Halifax)\nHarry E. Ahles\n60649\nAugust 29, 1965\nwith F. James\nCollected for the \"Flora of the Carolinas\"\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332635",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Harry E. Ahles, F. James",
+    "collectorNumber": "60649",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "August 29, 1965",
+    "collectionDate": "1965-08-29",
+    "collectionDateEnd": "",
+    "habitat": "Wooded slope, childrey creek on co. rt. 632 (ese. of north halifax)",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Halifax",
+    "locality": "Childrey creek on co. rt. 632 (ese. of north halifax)",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nCollected for the flora of the carolinas"
+  }
+}

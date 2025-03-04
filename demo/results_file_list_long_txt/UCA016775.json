@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CM\n\nHERBARIUM OF\nNo. 2075\nSTATE COLLEGE OF ARKANSAS\n\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016775\n\nHERBARIUM\nArkansas State Teachers College\n\nFamily: Diapensiaceae\nName: *Galax aphylla* L. (handwritten)\nLocality: Carolina (handwritten)\nHabitat: \nDate: Jan. 29, 1931  Coll: Carol Harrin (handwritten)\nNo. 2075       Det: Flora A. Haas (handwritten)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000625,
+      "total_cost": 0.0014037500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 125
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CM\nHERBARIUM OF\nNo. 2075\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016775\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName Galax aphylla L.\nLocality Carolina\nHabitat\nDate Jan. 29, 1931 Coll. Carol Harrin\nNo. 2075\nDet. Flora A. Haas\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.9200000000000004e-05,
+      "total_cost": 0.0007207,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 98
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2120,
+    "output": 443,
+    "cost_in": 0.000212,
+    "cost_out": 0.0001772
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCM\n\nHERBARIUM OF\nNo. 2075\nSTATE COLLEGE OF ARKANSAS\n\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016775\n\nHERBARIUM\nArkansas State Teachers College\n\nFamily: Diapensiaceae\nName: *Galax aphylla* L. (handwritten)\nLocality: Carolina (handwritten)\nHabitat: \nDate: Jan. 29, 1931  Coll: Carol Harrin (handwritten)\nNo. 2075       Det: Flora A. Haas (handwritten)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nCM\nHERBARIUM OF\nNo. 2075\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nUCA016775\nHERBARIUM\nArkansas State Teachers College\nFamily Diapensiaceae\nName Galax aphylla L.\nLocality Carolina\nHabitat\nDate Jan. 29, 1931 Coll. Carol Harrin\nNo. 2075\nDet. Flora A. Haas\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UCA016775",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Diapensiaceae indet",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Carol Harrin",
+    "collectorNumber": "2075",
+    "identifiedBy": "Flora A. Haas",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Jan. 29, 1931",
+    "collectionDate": "1931-01-29",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Arkansas",
+    "county": "",
+    "locality": "Carolina",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "CM\nHERBARIUM OF\nNo. 2075\nSTATE COLLEGE OF ARKANSAS\nUNIVERSITY OF CENTRAL ARKANSAS\nHERBARIUM\nArkansas State Teachers College"
+  }
+}

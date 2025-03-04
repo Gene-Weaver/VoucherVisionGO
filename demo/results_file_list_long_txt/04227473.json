@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "0cm 1 2 3 4 5 6 7 8 9 10\n*Galax rotundifolia* (handwritten)\nBurk (handwritten)\n\nPRINCETON UNIVERSITY HERBARIUM\nDEPOSITED 1941\n\nNEW YORK BOTANICAL GARDEN\n04227473\n\n*Galax rotundifolia*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000395,
+      "total_cost": 0.00117375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 79
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE NEW YORK\nBOTANICAL GARDEN copyright reserved\n0cm 1 2 3 4 5 6 7 8 9 10\nGalax rotundifolia\nBurk\nPRINCETON UNIVERSITY HERBARIU.\nDEPOSITED 1945\nNEW YORK BOTANICAL GARDEN\n04227473\nHandwritten text:\nGalax\nRa\n\n\nGalax rotundifolia\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.5600000000000005e-05,
+      "total_cost": 0.0007171,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 89
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2056,
+    "output": 394,
+    "cost_in": 0.0002056,
+    "cost_out": 0.0001576
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n0cm 1 2 3 4 5 6 7 8 9 10\n*Galax rotundifolia* (handwritten)\nBurk (handwritten)\n\nPRINCETON UNIVERSITY HERBARIUM\nDEPOSITED 1941\n\nNEW YORK BOTANICAL GARDEN\n04227473\n\n*Galax rotundifolia*\n\n\ngemini-2.0-flash OCR:\nTHE NEW YORK\nBOTANICAL GARDEN copyright reserved\n0cm 1 2 3 4 5 6 7 8 9 10\nGalax rotundifolia\nBurk\nPRINCETON UNIVERSITY HERBARIU.\nDEPOSITED 1945\nNEW YORK BOTANICAL GARDEN\n04227473\nHandwritten text:\nGalax\nRa\n\n\nGalax rotundifolia\n\n",
+  "formatted_json": {
+    "catalogNumber": "04227473",
+    "scientificName": "Galax rotundifolia",
+    "genus": "Galax",
+    "specificEpithet": "rotundifolia",
+    "scientificNameAuthorship": "Burk",
+    "collectedBy": "",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "",
+    "collectionDate": "",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "",
+    "stateProvince": "",
+    "county": "",
+    "locality": "",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "0cm 1 2 3 4 5 6 7 8 9 10\nPrinceton university herbarium\nDeposited 1941\nThe new york\nbotanical garden copyright reserved\nDeposited 1945\nHandwritten text\nRa"
+  }
+}

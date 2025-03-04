@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, USA\n\nMarshall University Herbarium\nMUHW018003\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nFLORA TENNESSIENSIS\n\nCOLLECTOR *A.J. Sharp*\n                  *M.B. Wilson*\n*Sevier*                COUNTY\nNO. 1273                      *June 7*        1934\n\n*Galax aphylla* L.\n\n*Greenbrier, Jennicle mt. 2500ft.*\n(Handwritten text identified with asterisks)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008,
+      "total_cost": 0.0015787500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 160
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nMARSHALL UNIVERSITY\nWashington, West Virginia 25781, USA\nMarshall University Herbarium\nMUHW018003\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nFLORA TENNESSIENSIS\nCOLLECTOR A.J. Sharp\nSumer COUNTY\nNO. 1273\nJune 7 1934\nGalax aphylla L.\nGreenbrier, Jennicle mt. 2500ft.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.2000000000000004e-05,
+      "total_cost": 0.0007335,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 130
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 473,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, USA\n\nMarshall University Herbarium\nMUHW018003\n\n*Galax urceolata* (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)          2024\n\nFLORA TENNESSIENSIS\n\nCOLLECTOR *A.J. Sharp*\n                  *M.B. Wilson*\n*Sevier*                COUNTY\nNO. 1273                      *June 7*        1934\n\n*Galax aphylla* L.\n\n*Greenbrier, Jennicle mt. 2500ft.*\n(Handwritten text identified with asterisks)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nMARSHALL UNIVERSITY\nWashington, West Virginia 25781, USA\nMarshall University Herbarium\nMUHW018003\nGalax urceolata (Poir.) Brummitt\ndet. Michelle L. Gaynor (FLAS)\n2024\nFLORA TENNESSIENSIS\nCOLLECTOR A.J. Sharp\nSumer COUNTY\nNO. 1273\nJune 7 1934\nGalax aphylla L.\nGreenbrier, Jennicle mt. 2500ft.\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "MUHW018003",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "A.J. Sharp, M.B. Wilson",
+    "collectorNumber": "1273",
+    "identifiedBy": "Michelle L. Gaynor (FLAS)",
+    "identifiedDate": "2024-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 7 1934",
+    "collectionDate": "1934-06-07",
+    "collectionDateEnd": "",
+    "habitat": "Greenbrier, Jennicle mt. 2500ft.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "USA",
+    "stateProvince": "Tennessee",
+    "county": "Sevier",
+    "locality": "Greenbrier, Jennicle mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "762",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM\nMARSHALL UNIVERSITY\nHuntington, West Virginia 25701, USA\nFLORA TENNESSIENSIS"
+  }
+}

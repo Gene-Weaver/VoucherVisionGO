@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n467184\n\nNCU00332712\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWavel's 2 miles east of Nebo,\nSmyth Co. June 14, 1943\n\nC.E. Ahles & A.M. Harvill 28667\n\n(Handwritten text)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005,
+      "total_cost": 0.0012787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 100
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF NORTH\nHERBARIUM\nERSITY\nCAROLINA\n467184\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332712\nFLORA VIRGINICA\nGalax aphylla L.\nWavels 2 miles east of Nebo,\nSmyth Co. June 14, 1943\nC.E. Akteus & A.M. Hawill 28667\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.0400000000000006e-05,
+      "total_cost": 0.0007218999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 101
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2071,
+    "output": 428,
+    "cost_in": 0.0002071,
+    "cost_out": 0.00017120000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n467184\n\nNCU00332712\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWavel's 2 miles east of Nebo,\nSmyth Co. June 14, 1943\n\nC.E. Ahles & A.M. Harvill 28667\n\n(Handwritten text)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nOF NORTH\nHERBARIUM\nERSITY\nCAROLINA\n467184\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332712\nFLORA VIRGINICA\nGalax aphylla L.\nWavels 2 miles east of Nebo,\nSmyth Co. June 14, 1943\nC.E. Akteus & A.M. Hawill 28667\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332712",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C.E. Ahles, A.M. Harvill",
+    "collectorNumber": "28667",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 14, 1943",
+    "collectionDate": "1943-06-14",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Smyth co.",
+    "locality": "Wavels 2 miles east of nebo",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\n467184\nflora virginica\n(handwritten text)"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026143\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear New Canton, Buckingham Co.\nForming patches (longest: 30 ft.) atop schist\noutcrops on wooded, N-facing bluff of Bear Garden\nCreek just above Rte # 670 bridge. With *Quercus\nprinus*, *Q. rubra*, *Fagus*, *Kalmia*, *Vaccinium pallidum*\n& *Rhododendron periclymenoides*. Found by Steve Groy &\nTom Wieboldt.                                                  el. 250 ft.\n(Arvonia Quad.)                                                June 9, 1984\nCharles E. Stevens\nNo. 18,763\n\nFARM\n0   1   2   3   4   5   6   7   8   9   10\ncm\ncopyright reserved          Harvill-Stevens\n                                Herbarium\n\n\nHandwritten text:\n* near New Canton, Buckingham Co.\n* Forming patches (longest: 30 ft.) atop schist outcrops on wooded, N-facing bluff of Bear Garden Creek just above Rte # 670 bridge. With *Quercus prinus*, *Q. rubra*, *Fagus*, *Kalmia*, *Vaccinium pallidum* & *Rhododendron periclymenoides*. Found by Steve Groy & Tom Wieboldt. el. 250 ft. (Arvonia Quad.) June 9, 1984\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001735,
+      "total_cost": 0.00251375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 347
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Flora of Virginia\nGalax urceolata (Poir.) Brum.\nnear hew Canton, Buckingham Co.\nForming patches (longest: 30 ft.) atop schist\noutcrops on wooded, N-facing bluff of Bear Yarden\nCreek just above Rte #670 bridge. With Quercus\nprimus, Q. rubra, Fagus, Kalmia, Vaccin. pallidum\nFound by Steve Groy &\nTom Wreboldt.\n(Aroonia Quad)\nCharles E. Stevens\nNo. 18,763\nel. 250 H.\nJune 9, 1984\n\n\nGalax urceolata\nQuercus primus\nQ. rubra\nFagus\nKalmia\nVaccin. pallidum\nRhododendron periclyd\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "total_cost": 0.0007499,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2422,
+    "output": 547,
+    "cost_in": 0.00024220000000000003,
+    "cost_out": 0.0002188
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026143\n\nFlora of Virginia\n*Galax urceolata* (Poir.) Brum.\nnear New Canton, Buckingham Co.\nForming patches (longest: 30 ft.) atop schist\noutcrops on wooded, N-facing bluff of Bear Garden\nCreek just above Rte # 670 bridge. With *Quercus\nprinus*, *Q. rubra*, *Fagus*, *Kalmia*, *Vaccinium pallidum*\n& *Rhododendron periclymenoides*. Found by Steve Groy &\nTom Wieboldt.                                                  el. 250 ft.\n(Arvonia Quad.)                                                June 9, 1984\nCharles E. Stevens\nNo. 18,763\n\nFARM\n0   1   2   3   4   5   6   7   8   9   10\ncm\ncopyright reserved          Harvill-Stevens\n                                Herbarium\n\n\nHandwritten text:\n* near New Canton, Buckingham Co.\n* Forming patches (longest: 30 ft.) atop schist outcrops on wooded, N-facing bluff of Bear Garden Creek just above Rte # 670 bridge. With *Quercus prinus*, *Q. rubra*, *Fagus*, *Kalmia*, *Vaccinium pallidum* & *Rhododendron periclymenoides*. Found by Steve Groy & Tom Wieboldt. el. 250 ft. (Arvonia Quad.) June 9, 1984\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nFlora of Virginia\nGalax urceolata (Poir.) Brum.\nnear hew Canton, Buckingham Co.\nForming patches (longest: 30 ft.) atop schist\noutcrops on wooded, N-facing bluff of Bear Yarden\nCreek just above Rte #670 bridge. With Quercus\nprimus, Q. rubra, Fagus, Kalmia, Vaccin. pallidum\nFound by Steve Groy &\nTom Wreboldt.\n(Aroonia Quad)\nCharles E. Stevens\nNo. 18,763\nel. 250 H.\nJune 9, 1984\n\n\nGalax urceolata\nQuercus primus\nQ. rubra\nFagus\nKalmia\nVaccin. pallidum\nRhododendron periclyd\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026143",
+    "scientificName": "Galax urceolata (Poir.) Brum.",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brum.",
+    "collectedBy": "Steve Groy, Tom Wieboldt",
+    "collectorNumber": "18,763",
+    "identifiedBy": "Charles E. Stevens",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 9, 1984",
+    "collectionDate": "1984-06-09",
+    "collectionDateEnd": "",
+    "habitat": "Wooded, N-facing bluff",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Forming patches (longest 30 ft.) atop schist outcrops",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Buckingham Co.",
+    "locality": "Near New Canton, Buckingham Co. Forming patches (longest 30 ft.) atop schist outcrops on wooded, N-facing bluff of Bear Garden Creek just above Rte # 670 bridge.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "76",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "With Quercus prinus, Q. rubra, Fagus, Kalmia, Vaccinium pallidum & Rhododendron periclymenoides. el. 250 ft. (Arvonia Quad.)\ncopyright reserved          Harvill-Stevens\nHerbarium"
+  }
+}

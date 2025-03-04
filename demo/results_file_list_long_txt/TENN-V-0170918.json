@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170918\n\nUniversity of Tennessee Herbarium, Knoxville, Tennessee\nPlants of Tennessee\nUnicoi County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nSpecimen was found on the Rocky Fork Unit of Cherokee WMA, approximately\n5 miles southwest of Erwin, TN. Plants were located in moist areas within a\nmixed hardwood forest near several creeks.\n\nAssociated species: *Viola* spp., *Sedum* spp.\n\nMelissa A. Foster, MAF 0031\nMay 25, 2007\n\nHERBARIUM OF THE\nNo.\n6277 (handwritten)\nUNIVERSITY OF TENNESSEE\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n*Viola* spp.\n*Sedum* spp.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00094,
+      "total_cost": 0.00171875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 188
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170918\nUniversity of Tennessee Herbarium, Knoxville, Tennessee\nPlants of Tennessee\nUnicoi County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt.\nSpecimen was found on the Rocky Fork Unit of Cherokee WMA, approximately\n5 miles southwest of Erwin, TN. Plants were located in moist areas within a\nmixed hardwood forest near several creeks.\nAssociated species: Viola spp., Sedum spp.\nMelissa A. Foster, MAF 0031\nMay 25, 2007\nNo.\n6277\n\n\nGalax urceolata\nViola spp.\nSedum spp.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.04e-05,
+      "total_cost": 0.0007419,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 151
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 548,
+    "cost_in": 0.0002234,
+    "cost_out": 0.00021920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170918\n\nUniversity of Tennessee Herbarium, Knoxville, Tennessee\nPlants of Tennessee\nUnicoi County\n\nDiapensiaceae\n*Galax urceolata* (Poir.) Brummitt\n\nSpecimen was found on the Rocky Fork Unit of Cherokee WMA, approximately\n5 miles southwest of Erwin, TN. Plants were located in moist areas within a\nmixed hardwood forest near several creeks.\n\nAssociated species: *Viola* spp., *Sedum* spp.\n\nMelissa A. Foster, MAF 0031\nMay 25, 2007\n\nHERBARIUM OF THE\nNo.\n6277 (handwritten)\nUNIVERSITY OF TENNESSEE\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n*Galax urceolata*\n*Viola* spp.\n*Sedum* spp.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF TENNESSEE KNOXVILLE\nTENN-V-0170918\nUniversity of Tennessee Herbarium, Knoxville, Tennessee\nPlants of Tennessee\nUnicoi County\nDiapensiaceae\nGalax urceolata (Poir.) Brummitt.\nSpecimen was found on the Rocky Fork Unit of Cherokee WMA, approximately\n5 miles southwest of Erwin, TN. Plants were located in moist areas within a\nmixed hardwood forest near several creeks.\nAssociated species: Viola spp., Sedum spp.\nMelissa A. Foster, MAF 0031\nMay 25, 2007\nNo.\n6277\n\n\nGalax urceolata\nViola spp.\nSedum spp.\n\n",
+  "formatted_json": {
+    "catalogNumber": "TENN-V-0170918",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Melissa A. Foster",
+    "collectorNumber": "MAF 0031",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 25, 2007",
+    "collectionDate": "2007-05-25",
+    "collectionDateEnd": "",
+    "habitat": "Specimen was found on the rocky fork unit of cherokee wma, approximately 5 miles southwest of erwin, tn. plants were located in moist areas within a mixed hardwood forest near several creeks.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "Unicoi county",
+    "locality": "Approximately 5 miles southwest of erwin, tn",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of tennessee knoxville\nUniversity of tennessee herbarium, knoxville, tennessee\nPlants of tennessee\nDiapensiaceae\nNo.\n6277\nHerbarium of the\nUniversity of tennessee\nSternec digitization project - tennessee herbarium consortium\nViola spp.\nSedum spp.\nAssociated species viola spp., sedum spp."
+  }
+}

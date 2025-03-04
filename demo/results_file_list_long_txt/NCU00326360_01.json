@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Diapensiaceae\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\n*Galax aphylla* L.\nCamp Sequoyah, \"Snowball\" Int., 5000ft.\n20 mi. N.E. Asheville\n\nNo._________  Date: *June 20, 1928* Coll. *J.D. Harvey*\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326360\n\n66650\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005600000000000001,
+      "total_cost": 0.00133875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 112
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\nMSCCPCC00411\nNCU\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326360\nDiapensiaceae\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nGalax aphylla L.\nCamp Sequoyah, \"Snowball \"Int., 5000 ft.\n20 mi N.E. Asheville.\nDate June 20, 1928 Coll. J.V. Harvey.\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66650\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.4800000000000004e-05,
+      "total_cost": 0.0007363000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 137
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2118,
+    "output": 407,
+    "cost_in": 0.00021180000000000003,
+    "cost_out": 0.00016280000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDiapensiaceae\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\n*Galax aphylla* L.\nCamp Sequoyah, \"Snowball\" Int., 5000ft.\n20 mi. N.E. Asheville\n\nNo._________  Date: *June 20, 1928* Coll. *J.D. Harvey*\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326360\n\n66650\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina\nat Chapel Hill\nMSCCPCC00411\nNCU\nx-rite\ncolorchecker\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326360\nDiapensiaceae\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n\nGalax aphylla L.\nCamp Sequoyah, \"Snowball \"Int., 5000 ft.\n20 mi N.E. Asheville.\nDate June 20, 1928 Coll. J.V. Harvey.\n\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n66650\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326360",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "J.V. Harvey",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 20, 1928",
+    "collectionDate": "1928-06-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "",
+    "locality": "Camp Sequoyah, Snowball Int., 20 mi N.E. Asheville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1524",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Diapensiaceae\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\n66650"
+  }
+}

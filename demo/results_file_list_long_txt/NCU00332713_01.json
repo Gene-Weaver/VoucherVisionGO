@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU\nat Chapel Hill\nUniversity of North Carolina\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332713\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\nCounty & Date                    R. Kral #\nSmyth: 2 Aug 1960             10903\n*Galax aphylla* L.\n16 mi. n. Marion in white pine-hardwood\ncove.\nDet: R. Kral\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n217725\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000615,
+      "total_cost": 0.0013937500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 123
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "xrite\ncolorchecker\nMSCCPPCC0411\nmm\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nR. Kral #\nSmyth: 2 Aug 1960\n10903\nGalax aphylla L.\n16 mi. n. Marion in white pine-hardwood\ncove.\nDet: R. Kral\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332713\nY OF NORTH\nRSITY\nHERBARIUM\nUNIVE\nCAROLINA\n217725\n0 1 2 3 4 5 6 7 8 9\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.64e-05,
+      "total_cost": 0.0007479,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 166
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2164,
+    "output": 472,
+    "cost_in": 0.00021640000000000003,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU\nat Chapel Hill\nUniversity of North Carolina\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332713\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\nCounty & Date                    R. Kral #\nSmyth: 2 Aug 1960             10903\n*Galax aphylla* L.\n16 mi. n. Marion in white pine-hardwood\ncove.\nDet: R. Kral\n\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n217725\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nxrite\ncolorchecker\nMSCCPPCC0411\nmm\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date\nR. Kral #\nSmyth: 2 Aug 1960\n10903\nGalax aphylla L.\n16 mi. n. Marion in white pine-hardwood\ncove.\nDet: R. Kral\nNCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00332713\nY OF NORTH\nRSITY\nHERBARIUM\nUNIVE\nCAROLINA\n217725\n0 1 2 3 4 5 6 7 8 9\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00332713",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "10903",
+    "identifiedBy": "R. Kral",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "2 Aug 1960",
+    "collectionDate": "1960-08-02",
+    "collectionDateEnd": "",
+    "habitat": "16 mi. n. Marion in white pine-hardwood cove.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Smyth",
+    "locality": "16 mi. n. Marion in white pine-hardwood cove.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "NCU\nat Chapel Hill\nUniversity of North Carolina\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nAnnotation\nBy\nPLANTS OF VIRGINIA\nCounty & Date\nUNIVERSITY OF NORTH\nCAROLINA\nHERBARIUM\n217725"
+  }
+}

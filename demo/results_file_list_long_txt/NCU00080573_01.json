@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "xrite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nJESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569935\n\nNCU00080573\nGIFT FROM\nN.CAROLINA STATE UNIV.\n\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nHarnett County\n\n*Galax aphylla* L.\n\nNorth slope in rich woodland along Cape\nFear River in Raven Rock State Park ca.\n6 miles northwest of Lillington off\nCoRd 1250.\n\nCOLLECTOR Robert M. Downs NO. 13388\nMrs. James R. Downs\nDET R.M. Downs                    DATE May 7, 1973\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001015,
+      "total_cost": 0.0017937499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 203
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "University of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\nmm\nESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nOF NORTH\nCAROLINA\nHERBARIUM\nNCU\n569935\nGIFT FROM\nN.CAROLINA STATE UNIV.\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nHarnett County\nGalax aphylla L.\nNorth slope in rich woodland along Cape\nFear River in Raven Rock State Park ca.\n6 miles northwest of Lillington off\nCoRd 1250.\nCOLLECTORRobert M. Downs NO. 13388\nMrs. James R. Downs\nDET R.M. Downs\nDATE May 7, 1973\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.2e-05,
+      "total_cost": 0.0007535,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 180
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2271,
+    "output": 550,
+    "cost_in": 0.00022710000000000002,
+    "cost_out": 0.00022000000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nxrite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nJESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569935\n\nNCU00080573\nGIFT FROM\nN.CAROLINA STATE UNIV.\n\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nHarnett County\n\n*Galax aphylla* L.\n\nNorth slope in rich woodland along Cape\nFear River in Raven Rock State Park ca.\n6 miles northwest of Lillington off\nCoRd 1250.\n\nCOLLECTOR Robert M. Downs NO. 13388\nMrs. James R. Downs\nDET R.M. Downs                    DATE May 7, 1973\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUniversity of North Carolina\nat Chapel Hill\nxrite\ncolorchecker\nmm\nESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nOF NORTH\nCAROLINA\nHERBARIUM\nNCU\n569935\nGIFT FROM\nN.CAROLINA STATE UNIV.\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nHarnett County\nGalax aphylla L.\nNorth slope in rich woodland along Cape\nFear River in Raven Rock State Park ca.\n6 miles northwest of Lillington off\nCoRd 1250.\nCOLLECTORRobert M. Downs NO. 13388\nMrs. James R. Downs\nDET R.M. Downs\nDATE May 7, 1973\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080573",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Robert M. Downs, Mrs. James R. Downs",
+    "collectorNumber": "13388",
+    "identifiedBy": "R.M. Downs",
+    "identifiedDate": "1973-05-07",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 7, 1973",
+    "collectionDate": "1973-05-07",
+    "collectionDateEnd": "",
+    "habitat": "North slope in rich woodland along Cape Fear River",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Harnett County",
+    "locality": "Raven Rock State Park ca. 6 miles northwest of Lillington off CoRd 1250.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "xrite\ncolorchecker\nMSCCPPPE0411\nMSCCPPCC0411\nmm\nJESUP HERBARIUM\n1977\nGIFT TO NCU 2002\nDARTMOUTH COLLEGE\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\nNCU\n569935\nGIFT FROM\nN.CAROLINA STATE UNIV.\nJESUP HERBARIUM OF DARTMOUTH COLLEGE\nPLANTS OF NORTH CAROLINA\nGalax aphylla"
+  }
+}

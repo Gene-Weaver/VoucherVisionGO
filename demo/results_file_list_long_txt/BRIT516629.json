@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88923\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516629\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\n\nWarwick Co.\n*Galax aphylla* L.                                                     June 2, 1966\n\nIn thriving colonies under sweet gum (*Liquid-\nambar*), pine, etc. on banks above Lake Maury.\nImmediately behind the Mariner's Museum,\nNewport News, Va.\nDate:\nCollector: Gustav W. Hall                      No. 3859\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00105,
+      "total_cost": 0.0018287499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 210
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 68923\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516629\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA June 2, 1966\nWarwick Co.\nGalax aphylla L.\nIn thriving colonies under sweet gum (Liquid-\nambar), pine, etc. on banks above Lake Maury.\nImmediately behind the Mariner's Museum,\nNewport News, Va.\nDate:\nCollector: Gustav W. Hall\nNo. 3859\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.68e-05,
+      "total_cost": 0.0007783,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 242
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2363,
+    "output": 561,
+    "cost_in": 0.00023630000000000002,
+    "cost_out": 0.0002244
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 88923\n\nIMAGED\n15 NOV 2019\n\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516629\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell\nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA\n\nWarwick Co.\n*Galax aphylla* L.                                                     June 2, 1966\n\nIn thriving colonies under sweet gum (*Liquid-\nambar*), pine, etc. on banks above Lake Maury.\nImmediately behind the Mariner's Museum,\nNewport News, Va.\nDate:\nCollector: Gustav W. Hall                      No. 3859\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nHERBARIUM\nVANDERBILT UNIVERSITY\nVDB 68923\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBRIT516629\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn =\nbased on average guard cell\nvolume of \u03bc2\nGuy L. Nesom, 1975\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nVIRGINIA June 2, 1966\nWarwick Co.\nGalax aphylla L.\nIn thriving colonies under sweet gum (Liquid-\nambar), pine, etc. on banks above Lake Maury.\nImmediately behind the Mariner's Museum,\nNewport News, Va.\nDate:\nCollector: Gustav W. Hall\nNo. 3859\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BRIT516629",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Gustav W. Hall",
+    "collectorNumber": "3859",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 2, 1966",
+    "collectionDate": "1966-06-02",
+    "collectionDateEnd": "",
+    "habitat": "In thriving colonies under sweet gum (Liquid-ambar), pine, etc. on banks above lake maury.",
+    "chromosomeCount": "n =",
+    "guardCell": "Based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Warwick co.",
+    "locality": "Immediately behind the mariner's museum, newport news, va.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERBARIUM\nVANDERBILT UNIVERSITY\nVDB 68923\nIMAGED\n15 NOV 2019\nBOTANICAL RESEARCH INSTITUTE\nOF TEXAS\nBOTANICAL\nRESEARCH\nINSTITUTE OF\nBRIT. TEXAS\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWILLIAMSBURG, VIRGINIA\nDate\nGalax aphylla L."
+  }
+}

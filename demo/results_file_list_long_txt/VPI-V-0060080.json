@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "7302\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\n\nCounty & Date                                          R. Kral #\nGiles: 29 Jun 1960                                    10676\n\n*Galax aphylla* L.\n\n9 mi. w Mt. Lake on sandy loam of\nconifer woods.\n\n26,555\nDet: R. Kral\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060080\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008250000000000001,
+      "total_cost": 0.00160375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "7302\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date R. Kral #\nGiles: 29 Jun 1960 10676\nGalax aphylla L.\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nDet: R.Kral 1\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060080\n26,555\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.24e-05,
+      "total_cost": 0.0007439,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 156
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2197,
+    "output": 467,
+    "cost_in": 0.00021970000000000003,
+    "cost_out": 0.00018680000000000001
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n7302\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nAnnotation:\n\nBy:\n\nPLANTS OF VIRGINIA\n\nCounty & Date                                          R. Kral #\nGiles: 29 Jun 1960                                    10676\n\n*Galax aphylla* L.\n\n9 mi. w Mt. Lake on sandy loam of\nconifer woods.\n\n26,555\nDet: R. Kral\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060080\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n7302\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nGuy L. Nesom, 1975\nAnnotation:\nBy:\nPLANTS OF VIRGINIA\nCounty & Date R. Kral #\nGiles: 29 Jun 1960 10676\nGalax aphylla L.\n9 mi. w. Mt. Lake on sandy loam of\nconifer woods.\nHerbarium\nBiology Department\nVirginia Polytechnic Institute\nDet: R.Kral 1\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060080\n26,555\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "7302",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "R. Kral",
+    "collectorNumber": "10676",
+    "identifiedBy": "Guy L. Nesom, R. Kral",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "29 Jun 1960",
+    "collectionDate": "1960-06-29",
+    "collectionDateEnd": "",
+    "habitat": "On sandy loam of conifer woods",
+    "chromosomeCount": "n = 6 , based on average guard cell area",
+    "guardCell": "n = 6",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Giles",
+    "locality": "9 mi. w Mt. Lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Annotation\nBy\nPLANTS OF VIRGINIA\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060080"
+  }
+}

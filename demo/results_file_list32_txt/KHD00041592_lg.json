@@ -1,62 +1,66 @@
 {
-  "ocr_results": {
-    "OCR": "\ngemini-1.5-pro OCR:\ninches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nDENVER BOTANIC\nGARDENS\ncopyright reserved\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (Handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nDENVER BOTANIC GARDENS KHD00041592\nOriginal label (Handwritten)\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\ninches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "ocr_info": {
     "gemini-1.5-pro": {
+      "ocr_text": "inches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747 (handwritten)\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nOriginal label (handwritten)\nDENVER BOTANIC GARDENS KHD00041592\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
       "cost_in": 0.00077875,
-      "cost_out": 0.001,
-      "ocr_text": "inches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nDENVER BOTANIC\nGARDENS\ncopyright reserved\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (Handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nDENVER BOTANIC GARDENS KHD00041592\nOriginal label (Handwritten)\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_out": 0.0009600000000000001,
+      "total_cost": 0.00173875,
       "rates_in": 1.25,
       "rates_out": 5.0,
       "tokens_in": 623,
-      "tokens_out": 200,
-      "total_cost": 0.00177875
+      "tokens_out": 192
     },
     "gemini-2.0-flash": {
+      "ocr_text": "inches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\n\n",
       "cost_in": 0.0006815,
       "cost_out": 7.52e-05,
-      "ocr_text": "inches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "total_cost": 0.0007567000000000001,
       "rates_in": 0.1,
       "rates_out": 0.4,
       "tokens_in": 6815,
-      "tokens_out": 188,
-      "total_cost": 0.0007567000000000001
+      "tokens_out": 188
     }
   },
-  "tokens_LLM": {
-    "input": 2244,
-    "output": 497
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2277,
+    "output": 514,
+    "cost_in": 0.0002277,
+    "cost_out": 0.0002056
   },
-  "vvgo_json": {
-    "additionalText": "inches\nKathryn kalmbach herbarium\ndenver botanic gardens\n18 228\ndenver botanic\ngardens\ncopyright reserved\nherbarium specimen\ncommon name wandflower, beetleweed\nremarks\n#1747\nwandflower, beetleweed dia\n8-26-1964\norignal label\ncm\ngalax aphylla\ngalax urceolata",
+  "ocr": "\ngemini-1.5-pro OCR:\ninches\n\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n\n18 228\n\nHerbarium Specimen\nScientific Name *Galax aphylla* L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747 (handwritten)\n\n*Galax urceolata* (Poir.) Brummitt\nJ. Wingate 7/1997 (handwritten)\n\n*Galax aphylla* L.\nWandflower, Beetleweed DIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\n\nOriginal label (handwritten)\nDENVER BOTANIC GARDENS KHD00041592\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\ninches\n2\n3\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18228\nDENVER BOTANIC\ncm\nGARDENS\ncopyright reserved\nHerbarium Specimen\nScientific Name Galax aphylla L.\nCommon Name Wandflower, Beetleweed\nLocality High Knob, Virginia\nDate 8-26-64\nCollector A. Armstrong\nIdentified by Ditto\nRemarks\n#1747\nGalax urceolata (Poir.) Brummitt\nJ. Wingate 7/1997\nGalax aphylla L.\nWandflower, Beetleweed\nDIA\nLocality High Knob, Virginia\n8-26-1964\nA. Armstrong 1747\nOriginal label\nDENVER BOTANIC GARDENS KHD00041592\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
     "catalogNumber": "KHD00041592",
-    "chromosomeCount": "",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
     "collectedBy": "A. Armstrong",
+    "collectorNumber": "1747",
+    "identifiedBy": "Ditto",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummitt J. Wingate 7/1997",
+    "verbatimCollectionDate": "8-26-64",
     "collectionDate": "1964-08-26",
     "collectionDateEnd": "",
-    "collectorNumber": "1747",
-    "continent": "North America",
-    "country": "United States",
-    "county": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
     "cultivated": "",
+    "continent": "",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "",
+    "locality": "High Knob, Virginia",
+    "verbatimCoordinates": "",
     "decimalLatitude": "",
     "decimalLongitude": "",
-    "elevationUnits": "",
-    "genus": "Galax",
-    "habitat": "",
-    "identificationHistory": "Galax urceolata (poir.) brummit j. wingate 7/1997",
-    "identifiedBy": "Ditto",
-    "identifiedConfidence": "",
-    "identifiedDate": "",
-    "identifiedRemarks": "",
-    "locality": "High Knob, Virginia",
-    "maximumElevationInMeters": "",
     "minimumElevationInMeters": "",
-    "scientificName": "Galax aphylla L.",
-    "scientificNameAuthorship": "L.",
-    "specificEpithet": "aphylla",
-    "specimenDescription": "",
-    "stateProvince": "Virginia",
-    "verbatimCollectionDate": "8-26-64",
-    "verbatimCoordinates": ""
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "inches\nKATHRYN KALMBACH HERBARIUM\nDENVER BOTANIC GARDENS\n18 228\nHerbarium Specimen\nCommon Name Wandflower, Beetleweed\nRemarks\n#1747 (handwritten)\n(handwritten)\nDENVER BOTANIC GARDENS\nWandflower, Beetleweed DIA\nOriginal label (handwritten)\nGalax aphylla\nGalax urceolata\ncm\ncopyright reserved\n"
   }
 }

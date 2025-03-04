@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Duke University Herbarium\nDUKE10095575\n\nDUKE UNIVERSITY\nHERBARIUM\n160649\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nIREDELL County\n\nGalax aphylla L.\nUpper edge of bog, 2 miles west of\nUnion Grove, highway # 901.\nColl. H. L. Blomquist, R. B. Channell,\nCharles James & Howard Rock, #16657\nJune 8, 1955\nDet. H. L. B. (Handwritten)\nDiapensiaceae (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00095,
+      "total_cost": 0.00172875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 190
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "DUKE\nUNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095575\nDUKE UNIVERSITY\nHERBARIUM\n160649\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFORM 403\nDiapeusiaceae\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nIREDELL\nCounty\nGalax aphylla L.\nUpper edge of bog, 2 miles west of\nUnion Grove, highway # 901.\nColl. H.L.Blomquist, R.B.Channell,\nCharles James & Howard Rock, #16657\nDet. H. L. B.\nJune 8, 1955\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.76e-05,
+      "total_cost": 0.0007591000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 194
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2262,
+    "output": 506,
+    "cost_in": 0.00022620000000000002,
+    "cost_out": 0.00020240000000000004
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nDuke University Herbarium\nDUKE10095575\n\nDUKE UNIVERSITY\nHERBARIUM\n160649\n\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I 2001\nDuke University Herbarium\n\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nIREDELL County\n\nGalax aphylla L.\nUpper edge of bog, 2 miles west of\nUnion Grove, highway # 901.\nColl. H. L. Blomquist, R. B. Channell,\nCharles James & Howard Rock, #16657\nJune 8, 1955\nDet. H. L. B. (Handwritten)\nDiapensiaceae (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nDUKE\nUNIVERSITY\nDUKE UNIVERSITY HERBARIUM\nDUKE10095575\nDUKE UNIVERSITY\nHERBARIUM\n160649\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nFORM 403\nDiapeusiaceae\nDuke University Herbarium\nFLORA OF NORTH CAROLINA\nIREDELL\nCounty\nGalax aphylla L.\nUpper edge of bog, 2 miles west of\nUnion Grove, highway # 901.\nColl. H.L.Blomquist, R.B.Channell,\nCharles James & Howard Rock, #16657\nDet. H. L. B.\nJune 8, 1955\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095575",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "H. L. Blomquist, R. B. Channell, Charles James & Howard Rock",
+    "collectorNumber": "16657",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 8, 1955",
+    "collectionDate": "1955-06-08",
+    "collectionDateEnd": "",
+    "habitat": "Upper edge of bog",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Iredell",
+    "locality": "2 miles west of Union Grove, highway # 901",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DUKE UNIVERSITY\nHERBARIUM\n160649\n(Galax aphylla auct. non L.)\nDuke University Herbarium\nDet. H. L. B.\nDiapensiaceae\nDuke University Herbarium\nFORM 403"
+  }
+}

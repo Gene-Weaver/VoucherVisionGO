@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n326820\n\nExamined for \"FLORA & VEGETATION OF\nTHE CUMBERLAND PLATEAU IN ALABAMA\"\n\n*Galax urceolata (Poir.) Brummitt\n\nDet. R. D. Whetstone 1976\nUniversity of North Carolina at Chapel Hill\n\nHerbarium of the University of North Carolina\nALABAMA\nTallapoosa County\n\n*Galax aphylla* *(handwritten)*\n\nMesic woods and low ground at crossing of Ala.\n22 along Hillabee Creek, ca. 6.1 miles northeast\nof Alexander City.\nRoss C. Clark 15226 30 June 1967\nPlants of the Southeastern United States\n\nNCU00332600\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0009,
+      "total_cost": 0.0016787500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 180
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u05d0\u05db\u05d7\np\u0259\u043b\u043b\u0259s\u0259\n\u0e40\u0e27\nOL 6 829\nII!H jade je\n\u0e2d\u0e40\u0e19\u0e01\nMSCCPPPE0411\nMSCCPP000411\nx-rite\ncolorchecker\nCAROLINA\nOF\nNORTH\nHERBARIUM\n1115\n10\nat Chapel Hill\nUniversity of North Carolina\n\u0399\u039d\u03a0\n326820\nExamined for \"FLORA & VEGETATION OF\nTHE CUMBERLAND PLATEAU IN ALABAMA\"\nGalax urceolata (Poir.) Brummitt\nDet. R. D. Whetstone\nUniversity of North Carolina at Chapel Hill\n1976\nHerbarium of the University of North Carolina\nALABAMA\nTallapoosa County\nGalax aphylla L,\nMesic woods and low ground at crossing of Ala.\n22 along Hillabee Creek, ca. 6.1 miles northeast\nof Alexander City.\nRoss C. Clark 15226\n30 June 1967\nPlants of the Southeastern United States\nNCU00332600\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001008,
+      "total_cost": 0.0007823000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 252
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2308,
+    "output": 498,
+    "cost_in": 0.00023080000000000003,
+    "cost_out": 0.0001992
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n\n326820\n\nExamined for \"FLORA & VEGETATION OF\nTHE CUMBERLAND PLATEAU IN ALABAMA\"\n\n*Galax urceolata (Poir.) Brummitt\n\nDet. R. D. Whetstone 1976\nUniversity of North Carolina at Chapel Hill\n\nHerbarium of the University of North Carolina\nALABAMA\nTallapoosa County\n\n*Galax aphylla* *(handwritten)*\n\nMesic woods and low ground at crossing of Ala.\n22 along Hillabee Creek, ca. 6.1 miles northeast\nof Alexander City.\nRoss C. Clark 15226 30 June 1967\nPlants of the Southeastern United States\n\nNCU00332600\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u05d0\u05db\u05d7\np\u0259\u043b\u043b\u0259s\u0259\n\u0e40\u0e27\nOL 6 829\nII!H jade je\n\u0e2d\u0e40\u0e19\u0e01\nMSCCPPPE0411\nMSCCPP000411\nx-rite\ncolorchecker\nCAROLINA\nOF\nNORTH\nHERBARIUM\n1115\n10\nat Chapel Hill\nUniversity of North Carolina\n\u0399\u039d\u03a0\n326820\nExamined for \"FLORA & VEGETATION OF\nTHE CUMBERLAND PLATEAU IN ALABAMA\"\nGalax urceolata (Poir.) Brummitt\nDet. R. D. Whetstone\nUniversity of North Carolina at Chapel Hill\n1976\nHerbarium of the University of North Carolina\nALABAMA\nTallapoosa County\nGalax aphylla L,\nMesic woods and low ground at crossing of Ala.\n22 along Hillabee Creek, ca. 6.1 miles northeast\nof Alexander City.\nRoss C. Clark 15226\n30 June 1967\nPlants of the Southeastern United States\nNCU00332600\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "326820",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Ross C. Clark",
+    "collectorNumber": "15226",
+    "identifiedBy": "R. D. Whetstone",
+    "identifiedDate": "1976",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla",
+    "verbatimCollectionDate": "30 June 1967",
+    "collectionDate": "1967-06-30",
+    "collectionDateEnd": "",
+    "habitat": "Mesic woods and low ground at crossing of Ala. 22 along Hillabee Creek, ca. 6.1 miles northeast of Alexander City.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Tallapoosa County",
+    "locality": "Mesic woods and low ground at crossing of Ala. 22 along Hillabee Creek, ca. 6.1 miles northeast of Alexander City.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Examined for flora & vegetation of the Cumberland Plateau in Alabama\nPlants of the Southeastern United States\nNCU00332600"
+  }
+}

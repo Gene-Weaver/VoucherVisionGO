@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "RSA0508040\n\nHERBARIUM OF\n337672\nPOMONA COLLEGE\n\nPLANTS OF NORTH CAROLINA\nSurrey of County\n\n*Galax aphylla*\n\nLoc. Blue Ridge Parkway\njust south of Virginia boundary\n\nHabitat abundant as ground cover in\nsparse oak forest with *Nyssa*, ericaceous\nundergrowth\n\nDate Oct. 19, 1948  Alt. 2900 m.\nColl. F. R. Fosberg No. 29877\nDet. F.R.F.\n\nRemarks: leaves glossy green, occasionally\nturning red.\n\n(Handwritten text identified by italics)\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007499999999999999,
+      "total_cost": 0.00152875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 150
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "```text\n0\ncm\n1\n2 3\n4\n5\n6 7 8 9 10\ncopyright reserved\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508040\nHERLARIUM OF\n337672\nPOMONA COLLEGE\nPLANTS OF NORTH CAROLINA\nSurrey County\nGalax aphyllat.\nLoc. Blue Ridge Parkway\njust south of Virginia foundry.\nHabitat abundant as ground cover in\nsparse oak forest with Nyssa, ericaceous\nundergrowth\nDate 1/9/1948\nColl. F. R. Fosberg\nRemarks leaves\nAlt.\nNo. 29987\nDet. F.R.\nglossy green, occasionally\nturning red.\n```\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.08e-05,
+      "total_cost": 0.0007523,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 177
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2206,
+    "output": 449,
+    "cost_in": 0.00022060000000000002,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRSA0508040\n\nHERBARIUM OF\n337672\nPOMONA COLLEGE\n\nPLANTS OF NORTH CAROLINA\nSurrey of County\n\n*Galax aphylla*\n\nLoc. Blue Ridge Parkway\njust south of Virginia boundary\n\nHabitat abundant as ground cover in\nsparse oak forest with *Nyssa*, ericaceous\nundergrowth\n\nDate Oct. 19, 1948  Alt. 2900 m.\nColl. F. R. Fosberg No. 29877\nDet. F.R.F.\n\nRemarks: leaves glossy green, occasionally\nturning red.\n\n(Handwritten text identified by italics)\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n```text\n0\ncm\n1\n2 3\n4\n5\n6 7 8 9 10\ncopyright reserved\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508040\nHERLARIUM OF\n337672\nPOMONA COLLEGE\nPLANTS OF NORTH CAROLINA\nSurrey County\nGalax aphyllat.\nLoc. Blue Ridge Parkway\njust south of Virginia foundry.\nHabitat abundant as ground cover in\nsparse oak forest with Nyssa, ericaceous\nundergrowth\nDate 1/9/1948\nColl. F. R. Fosberg\nRemarks leaves\nAlt.\nNo. 29987\nDet. F.R.\nglossy green, occasionally\nturning red.\n```\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508040",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "F. R. Fosberg",
+    "collectorNumber": "29987",
+    "identifiedBy": "F.R.",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "1/9/1948",
+    "collectionDate": "1948-01-09",
+    "collectionDateEnd": "",
+    "habitat": "Abundant as ground cover in sparse oak forest with Nyssa, ericaceous undergrowth",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Leaves glossy green, occasionally turning red.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Surrey",
+    "locality": "Blue Ridge Parkway just south of Virginia foundry",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "HERLARIUM OF\n337672\nPOMONA COLLEGE\nPLANTS OF NORTH CAROLINA"
+  }
+}

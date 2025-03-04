@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CONV\nConverse College Herbarium\nCONV0002307\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest area 7. Elevation\n2200'\n\nR. C. Dunton                                      5/19/67\nPlants of the Southeastern United States\n\nConverse College\n062196\nHerbarium\n\n\nHandwritten text:\n* 5/19/67\n* R. C. Dunton\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000605,
+      "total_cost": 0.00138375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 121
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "CONVERSE CONV\nMETRIC\nConverse College Herbarium\nCONV0002307\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\nConverse College\n002196\nHerbarium\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.88e-05,
+      "total_cost": 0.0007203,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 97
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2111,
+    "output": 449,
+    "cost_in": 0.0002111,
+    "cost_out": 0.00017960000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCONV\nConverse College Herbarium\nCONV0002307\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest area 7. Elevation\n2200'\n\nR. C. Dunton                                      5/19/67\nPlants of the Southeastern United States\n\nConverse College\n062196\nHerbarium\n\n\nHandwritten text:\n* 5/19/67\n* R. C. Dunton\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nCONVERSE CONV\nMETRIC\nConverse College Herbarium\nCONV0002307\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\nConverse College\n002196\nHerbarium\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CONV0002307",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Warren Wilson college forest area 7",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Buncombe county",
+    "locality": "Warren Wilson College Forest area 7. Elevation 2200'",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "Converse College Herbarium\nHerbarium of the University of North Carolina\nPlants of the Southeastern United States\nConverse College\n002196\nHerbarium"
+  }
+}

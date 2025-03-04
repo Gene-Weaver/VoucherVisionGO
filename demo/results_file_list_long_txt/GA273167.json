@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285989\n\n\u2713=Galax urceolata\n\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County. From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside.\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\n\nSpecimen Examined for\nGeorgia Atlas Project\n7 Sept. 2020 (handwritten)\n\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\n05/23/1982\n\nIMAGED 2021\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001015,
+      "total_cost": 0.00179375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 203
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "\u2713 = Galax urceolata\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County, From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\nIMAGED 2021\n\u2713 Georgia Atlas Project\n7 sept. 2020\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.400000000000001e-05,
+      "total_cost": 0.0007455000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 160
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2239,
+    "output": 526,
+    "cost_in": 0.00022390000000000002,
+    "cost_out": 0.00021040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\n\u2022 GA \u2022\nUniversity\nof Georgia\nHerbarium\n285989\n\n\u2713=Galax urceolata\n\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County. From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside.\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\n\nSpecimen Examined for\nGeorgia Atlas Project\n7 Sept. 2020 (handwritten)\n\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\n05/23/1982\n\nIMAGED 2021\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n\u2713 = Galax urceolata\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non L.\nUnited States, Georgia, Rabun County, From the\njunction of Tallulah River and US 441 in Tallulah Falls,\nGA go about 0.9 mi north, nw on 441. Sunny sloping\nwest facing (east side of 441) hillside\nHabitat: Sunny sloping west facing (east side of 441)\nhillside\nCollector: Drapalik, Don\nCollector Number: 3929\nDiapensiaceae\nIMAGED 2021\n\u2713 Georgia Atlas Project\n7 sept. 2020\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "285989",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "",
+    "collectedBy": "Drapalik, Don",
+    "collectorNumber": "3929",
+    "identifiedBy": "",
+    "identifiedDate": "2020-09-07",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "05/23/1982",
+    "collectionDate": "1982-05-23",
+    "collectionDateEnd": "",
+    "habitat": "Sunny sloping west facing (east side of 441) hillside",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Rabun county",
+    "locality": "From the junction of tallulah river and us 441 in tallulah falls, ga go about 0.9 mi north, nw on 441. sunny sloping west facing (east side of 441) hillside.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University\nof Georgia\nHerbarium\n\u2713=Galax urceolata\nGeorgia Southern University Herbarium [GAS]\nGalax aphylla\nauct. non l.\nSpecimen examined for\ngeorgia atlas project\ndiapensiaceae\nimaged 2021\ngalax aphylla"
+  }
+}

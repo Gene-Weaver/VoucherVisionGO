@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "copyright reserved\nUSCH\nUniversity of South Carolina\n\nUniversity of South Carolina Herbarium\nUSCH0025723\n\n66932\n\nKINGS MOUNTAIN STATE PARK\nYork County, South Carolina\n\nDiapensiaceae\n*Galax aphylla* L.\nWater Pimpernel\n\nHigh ground on the E side of the headwaters\nof the Smost fk of Long Br; just S of the\nNational Park bndry; with *Aureolaria virginica*.\n\nDouglas E. Kennemore, Jr. 789\nwith John B. Nelson\nElevation 750 ft\n20 Jul 1993\n\nA.C. MOORE HERBARIUM - USCH\nUNIVERSITY OF SOUTH CAROLINA-COLUMBIA\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008249999999999999,
+      "total_cost": 0.0016037499999999997,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nUSCH\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0025723\nVERSITY OF SOUTH CAROL\nA. C\nUSCH\nC. MOORE HERBARIUM\n66932\nKINGS MOUNTAIN STATE PARK\nYork County, South Carolina\nDiapensiaceae\nGALAX APHYLLA L.\nWater Pimpernel\nHigh ground on the E side of the headwaters\nof the Smost fk of Long Br; just S of the\nNational Park bndry; with Aureolaria virginica.\nDouglas E. Kennemore, Jr. 789\nwith John B. Nelson\nElevation 750 ft\n20 Jul 1993\nA.C. MOORE HERBARIUM - USCH\nUNIVERSITY OF SOUTH CAROLINA-COLUMBIA\n\n\nGalax aphylla\nAureolaria virginica\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.440000000000002e-05,
+      "total_cost": 0.0007659,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 211
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2272,
+    "output": 495,
+    "cost_in": 0.00022720000000000002,
+    "cost_out": 0.00019800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\ncopyright reserved\nUSCH\nUniversity of South Carolina\n\nUniversity of South Carolina Herbarium\nUSCH0025723\n\n66932\n\nKINGS MOUNTAIN STATE PARK\nYork County, South Carolina\n\nDiapensiaceae\n*Galax aphylla* L.\nWater Pimpernel\n\nHigh ground on the E side of the headwaters\nof the Smost fk of Long Br; just S of the\nNational Park bndry; with *Aureolaria virginica*.\n\nDouglas E. Kennemore, Jr. 789\nwith John B. Nelson\nElevation 750 ft\n20 Jul 1993\n\nA.C. MOORE HERBARIUM - USCH\nUNIVERSITY OF SOUTH CAROLINA-COLUMBIA\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\n0\ncm\n1 2 3 4 5 6 7 8 9 10\ncopyright reserved\nUSCH\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\nUSCH0025723\nVERSITY OF SOUTH CAROL\nA. C\nUSCH\nC. MOORE HERBARIUM\n66932\nKINGS MOUNTAIN STATE PARK\nYork County, South Carolina\nDiapensiaceae\nGALAX APHYLLA L.\nWater Pimpernel\nHigh ground on the E side of the headwaters\nof the Smost fk of Long Br; just S of the\nNational Park bndry; with Aureolaria virginica.\nDouglas E. Kennemore, Jr. 789\nwith John B. Nelson\nElevation 750 ft\n20 Jul 1993\nA.C. MOORE HERBARIUM - USCH\nUNIVERSITY OF SOUTH CAROLINA-COLUMBIA\n\n\nGalax aphylla\nAureolaria virginica\n\n",
+  "formatted_json": {
+    "catalogNumber": "USCH0025723",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Douglas E. Kennemore, Jr., John B. Nelson",
+    "collectorNumber": "789",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 Jul 1993",
+    "collectionDate": "1993-07-20",
+    "collectionDateEnd": "",
+    "habitat": "High ground on the E side of the headwaters of the Smost fk of Long Br; just S of the National Park bndry; with Aureolaria virginica.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Water pimpernel",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "York county",
+    "locality": "Kings mountain state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "229",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "copyright reserved\nUSCH\nUniversity of South Carolina\nUniversity of South Carolina Herbarium\n66932\nA.C. Moore herbarium - USCH\nUniversity of south carolina-columbia\nGalax aphylla\nAureolaria virginica"
+  }
+}

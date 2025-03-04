@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\n92710\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n*Galax urceolata* (Poir.) Brummitt Diapensiaceae\n\nOCONEE CO.: stands 1,2,3,4; Sumter Natl. Forest, west\nside of Rich Mt. Rd. and Forest road 744\n\nflws. white, leaves shiny green, locally common in\nlarge colonies, on upper forested slopes\n\nJohn Latham 39 May 14, 1993\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006450000000000001,
+      "total_cost": 0.00142375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\ncm\n12\n3 4\n5\n6 7 89\n10\ncopyright reserved\nCLEMS\n92710\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0081437\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nOCONEE Co. : stands 1,2,3,4,; Sumter Natl. Forest, west\nside of Rich Mt. Rd. and Forest road 744\nflws. white, leaves shiny green, lacally common in\nlarge colonies, on upper forested slopes\nJohn Latham 39\nMay 14, 1993\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.84e-05,
+      "total_cost": 0.0007499,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 171
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 497,
+    "cost_in": 0.0002188,
+    "cost_out": 0.00019880000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\n92710\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nPLANTS OF SOUTH CAROLINA, U.S.A.\n*Galax urceolata* (Poir.) Brummitt Diapensiaceae\n\nOCONEE CO.: stands 1,2,3,4; Sumter Natl. Forest, west\nside of Rich Mt. Rd. and Forest road 744\n\nflws. white, leaves shiny green, locally common in\nlarge colonies, on upper forested slopes\n\nJohn Latham 39 May 14, 1993\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n0\ncm\n12\n3 4\n5\n6 7 89\n10\ncopyright reserved\nCLEMS\n92710\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nCLEMS0081437\nPLANTS OF SOUTH CAROLINA, U.S.A.\nGalax urceolata (Poir.) Brummitt\nDiapensiaceae\nOCONEE Co. : stands 1,2,3,4,; Sumter Natl. Forest, west\nside of Rich Mt. Rd. and Forest road 744\nflws. white, leaves shiny green, lacally common in\nlarge colonies, on upper forested slopes\nJohn Latham 39\nMay 14, 1993\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0081437",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "John Latham",
+    "collectorNumber": "39",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 14, 1993",
+    "collectionDate": "1993-05-14",
+    "collectionDateEnd": "",
+    "habitat": "Flws. white, leaves shiny green, locally common in large colonies, on upper forested slopes",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "South Carolina",
+    "county": "Oconee Co.",
+    "locality": "Stands 1,2,3,4; Sumter Natl. Forest, west side of Rich Mt. Rd. and Forest road 744",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "CLEMS\n92710\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nPLANTS OF SOUTH CAROLINA, U.S.A.\nDiapensiaceae\nGalax urceolata"
+  }
+}

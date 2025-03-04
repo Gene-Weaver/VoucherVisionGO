@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012634\n\nLYNCHBURG COLLEGE\n47699\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nAmherst  COUNTY\nDiapensiaceae\nNo. 50\n*Galax aphylla* (L.)\nOtter Creek Lake off the parkway north,\nat the bottom of the waterfall and path\n\n*Blue Ridge Parkway* (handwritten)\nCollectors:\nBrian Flynn\nApril 19, 1993 (handwritten)\nBLR-14144\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00069,
+      "total_cost": 0.0014687500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 138
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Ramsey-Freer Herbarium\nLynchburg College\nLYN-0012634\nLYNCHBURG\nCOLLEGE\n47699\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nAmherst\nCOUNTY\nDiapensiaceae\nNo.50\nGalax aphylla (L)\nOtter Creek Lake off the parkway north\nat the bottom of the waterfall and path\nBlue Ridge Parkway\nCollectors\nBrian Flynn\nApril 19,93\nLYN\n1\n2 3\n4\n5\n6\n7 8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.72e-05,
+      "total_cost": 0.0007387,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 143
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2185,
+    "output": 485,
+    "cost_in": 0.0002185,
+    "cost_out": 0.00019400000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012634\n\nLYNCHBURG COLLEGE\n47699\nHERBARIUM\n\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nAmherst  COUNTY\nDiapensiaceae\nNo. 50\n*Galax aphylla* (L.)\nOtter Creek Lake off the parkway north,\nat the bottom of the waterfall and path\n\n*Blue Ridge Parkway* (handwritten)\nCollectors:\nBrian Flynn\nApril 19, 1993 (handwritten)\nBLR-14144\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nRamsey-Freer Herbarium\nLynchburg College\nLYN-0012634\nLYNCHBURG\nCOLLEGE\n47699\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nAmherst\nCOUNTY\nDiapensiaceae\nNo.50\nGalax aphylla (L)\nOtter Creek Lake off the parkway north\nat the bottom of the waterfall and path\nBlue Ridge Parkway\nCollectors\nBrian Flynn\nApril 19,93\nLYN\n1\n2 3\n4\n5\n6\n7 8 9 10 Lynchburg\nCollege\ncm\ncopyright reserved\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "LYN-0012634",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "(L.)",
+    "collectedBy": "Brian Flynn",
+    "collectorNumber": "BLR-14144",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "April 19, 1993",
+    "collectionDate": "1993-04-19",
+    "collectionDateEnd": "",
+    "habitat": "Otter Creek Lake off the parkway north, at the bottom of the waterfall and path",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Amherst",
+    "locality": "Blue Ridge Parkway",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Ramsey-Freer Herbarium\nLynchburg College\nLYNCHBURG COLLEGE\n47699\nHERBARIUM\nLYNCHBURG COLLEGE HERBARIUM\nPLANTS OF VIRGINIA\nDiapensiaceae\nNo. 50\nLynchburg\nCollege\ncm\ncopyright reserved"
+  }
+}

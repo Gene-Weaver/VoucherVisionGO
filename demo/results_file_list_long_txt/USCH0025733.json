@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\ncopyright reserved\nUniversity of South Carolina\n\n006544\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025733\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nPickens County\nDIAPENSIACEAE\n*Galax aphylla*\nTop of Table Rock - near Spring\n\nColl. H. Sharpe Date 4-31-66 No. S-22\n(handwritten)\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000575,
+      "total_cost": 0.0013537500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 115
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\nUSCH0025733\n006544\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nPickens County\nDIAPENSIACEAE\nGalax aphylla\nTop of Table Rock - near Spring\nColl. H. Sharpe\n1966\nDate 4-31-66 No. 5-22\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.24e-05,
+      "total_cost": 0.0007339,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 131
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2136,
+    "output": 456,
+    "cost_in": 0.0002136,
+    "cost_out": 0.00018240000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\ncopyright reserved\nUniversity of South Carolina\n\n006544\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\n\nUniversity of South Carolina Herbarium\nUSCH0025733\n\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\n\nPickens County\nDIAPENSIACEAE\n*Galax aphylla*\nTop of Table Rock - near Spring\n\nColl. H. Sharpe Date 4-31-66 No. S-22\n(handwritten)\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\nUSCH\ncopyright reserved University of South Carolina\nUSCH0025733\n006544\nHERBARIUM\nUNIVERSITY OF\nSOUTH CAROLINA\nUSCH\nUniversity of South Carolina Herbarium\nFLORA OF SOUTH CAROLINA\nPickens County\nDIAPENSIACEAE\nGalax aphylla\nTop of Table Rock - near Spring\nColl. H. Sharpe\n1966\nDate 4-31-66 No. 5-22\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "006544",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "H. Sharpe",
+    "collectorNumber": "S-22",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "4-31-66",
+    "collectionDate": "1966-04-31",
+    "collectionDateEnd": "1966-04-31",
+    "habitat": "Top of table rock - near spring",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Pickens county",
+    "locality": "Top of table rock - near spring",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Usch\ncopyright reserved\nuniversity of south carolina\nusch\nherbarium\nuniversity of\nsouth carolina\nusch\nuniversity of south carolina herbarium\nusch0025733\nuniversity of south carolina herbarium\nflora of south carolina\ndiapensiaceae\n"
+  }
+}

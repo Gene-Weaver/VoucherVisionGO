@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "R. K. Godfrey Herbarium (FSU)\n*000105459*\n\nHERBARIUM\n194063\nFLORIDA STATE UNIVERSITY\n\nDistribution of the\nA. C. MOORE HERBARIUM (USCH)\nUniversity of South Carolina - Columbia\n\nPLANTS OF SOUTH CAROLINA\nLexington County\n\n*Galax aphylla* L.\n\nSandstone outcrop in longleaf pine territory in TNC\nPeachtree Rock Preserve. Hwy 302 south then left\nat fork on hwy 6 towards Bethel Church. Turn left\nbeside Bethel Church on unpaved road and follow to\nthe end.\nA.B. Pittman #09309912\nA.R. Darr                                         30 Sept. 1999\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* L. is synonym)\nThis is an update of the species name to make it consistent with Flora of the\nSouthern and Mid-Atlantic States (Working Draft of 30 November 12) by\nAlan S. Weakley. It is not meant to reflect verification of the previous\nidentification.\nAustin Mast and Michelle Smith                     May 21, 2015\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0014449999999999999,
+      "total_cost": 0.00222375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 289
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "R. K. Godfrey Herbarium (FSU)\n*000 10 5 4 5 9 *\nHERBARIUM\n194063\nFLORIDA STATE UNIVERSITY\nKodak Color Control Patches\nKodak Gray Scale\nDistribution of the\nA. C. MOORE HERBARIUM (USCH)\nUniversity of South Carolina - Columbia\nPLANTS OF SOUTH CAROLINA\nLexington County\nGalax aphylla L.\nSandstone outcrop in longleaf pine teritory in TNC\nPeachtree Rock Preserve. Hwy 302 south then left\nat fork on hwy 6 towards Bethal Church. Turn left\nbeside Bethal Church on unpaved road and follow to\nthe end.\nA.B. Pittman #09309912\nA.R. Darr\n30 Sept. 1999\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. is synonym)\nThis is an update of the species name to make it consistent with Flora of the\nSouthern and Mid-Atlantic States (Working Draft of 30 November 12) by\nAlan S. Weakley. It is not meant to reflect verification of the previous\nidentification.\nAustin Mast and Michelle Smith\nMay 21, 2015\n\n\nGalax aphylla\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001192,
+      "total_cost": 0.0008007000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 298
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2466,
+    "output": 626,
+    "cost_in": 0.0002466,
+    "cost_out": 0.0002504
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nR. K. Godfrey Herbarium (FSU)\n*000105459*\n\nHERBARIUM\n194063\nFLORIDA STATE UNIVERSITY\n\nDistribution of the\nA. C. MOORE HERBARIUM (USCH)\nUniversity of South Carolina - Columbia\n\nPLANTS OF SOUTH CAROLINA\nLexington County\n\n*Galax aphylla* L.\n\nSandstone outcrop in longleaf pine territory in TNC\nPeachtree Rock Preserve. Hwy 302 south then left\nat fork on hwy 6 towards Bethel Church. Turn left\nbeside Bethel Church on unpaved road and follow to\nthe end.\nA.B. Pittman #09309912\nA.R. Darr                                         30 Sept. 1999\n\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\n\n*Galax urceolata* (Poir.) Brummitt\n(*Galax aphylla* L. is synonym)\nThis is an update of the species name to make it consistent with Flora of the\nSouthern and Mid-Atlantic States (Working Draft of 30 November 12) by\nAlan S. Weakley. It is not meant to reflect verification of the previous\nidentification.\nAustin Mast and Michelle Smith                     May 21, 2015\n\n\n*Galax aphylla*\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nR. K. Godfrey Herbarium (FSU)\n*000 10 5 4 5 9 *\nHERBARIUM\n194063\nFLORIDA STATE UNIVERSITY\nKodak Color Control Patches\nKodak Gray Scale\nDistribution of the\nA. C. MOORE HERBARIUM (USCH)\nUniversity of South Carolina - Columbia\nPLANTS OF SOUTH CAROLINA\nLexington County\nGalax aphylla L.\nSandstone outcrop in longleaf pine teritory in TNC\nPeachtree Rock Preserve. Hwy 302 south then left\nat fork on hwy 6 towards Bethal Church. Turn left\nbeside Bethal Church on unpaved road and follow to\nthe end.\nA.B. Pittman #09309912\nA.R. Darr\n30 Sept. 1999\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. is synonym)\nThis is an update of the species name to make it consistent with Flora of the\nSouthern and Mid-Atlantic States (Working Draft of 30 November 12) by\nAlan S. Weakley. It is not meant to reflect verification of the previous\nidentification.\nAustin Mast and Michelle Smith\nMay 21, 2015\n\n\nGalax aphylla\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "000105459",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A.B. Pittman, A.R. Darr",
+    "collectorNumber": "09309912",
+    "identifiedBy": "Austin Mast and Michelle Smith",
+    "identifiedDate": "2015-05-21",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "This is an update of the species name to make it consistent with flora of the southern and mid-atlantic states (working draft of 30 november 12) by alan s. Weakley. It is not meant to reflect verification of the previous identification.",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "30 Sept. 1999",
+    "collectionDate": "1999-09-30",
+    "collectionDateEnd": "",
+    "habitat": "Sandstone outcrop in longleaf pine territory in tnc peachtree rock preserve",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Lexington County",
+    "locality": "Hwy 302 south then left at fork on hwy 6 towards bethel church. Turn left beside bethel church on unpaved road and follow to the end.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "R. K. Godfrey Herbarium (FSU)\nHERBARIUM\n194063\nFLORIDA STATE UNIVERSITY\nDistribution of the\nA. C. MOORE HERBARIUM (USCH)\nUniversity of South Carolina - Columbia\nPLANTS OF SOUTH CAROLINA\nSOUTH CAROLINA HERITAGE TRUST PROGRAM\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla L. is synonym)\nGalax aphylla\nGalax urceolata"
+  }
+}

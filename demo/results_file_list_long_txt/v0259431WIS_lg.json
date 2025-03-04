@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Imaged\n\nGalax\n\nWisconsin: Sauk County\n\nW-facing slope under an oak tree.\n*Galax urceolata* (Poiret) Brummitt (G. 'aphylla').\nFormerly a dairy farm, the plants on a steep slope\nwith cliffs that had been fenced off to keep the cows\nout. Deep within a natural area.\nTwo plants 1 ft. apart, one 12 in. in diam. with 21\nstems this year, one 4 in. in diam. \"We've been\nwatching these plants since 2001, and we always\nthought it was *Sullivantia*, because some botanist told\nus it was.\"\n\n10N 05E 04 SW4SE4       980 ft.\n\nLocality of Denzer- Rick and Deborah Bott's property,\nS7635 Pine Hollow Dr., 3.2\u20133.3 mi. (airline distance)\nNE of Leland, 1.8 mi. (airline) NNW of Denzer.\n\nBott, Rick       s.n.\nBott, Deborah       8/Jul/2009\n\nDet/Verf: Cochrane, Theodore S. 08Jul2009\n\n235\n\n**(Handwritten text: Galax)**\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001425,
+      "total_cost": 0.00220375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 285
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "```text\nImaged\n0\ncm\n1 2 3 4\n5\n6 7 8 9 10\ncopyright reserved\nWIS\nWisconsin: Sauk County\nW-facing slope under and oak tree.\nGalax urceolata (Poiret) Brummitt (G. 'aphylla').\nFormerly a dairy farm, the plants on a steep slope\nwith cliffs that had been fenced off to keep the cows\nout. Deep within a natural area.\nTwo plants 1 ft. apart, one 12 in. in diam. with 21\nstems this year, one 4 in. in diam. \"We've been\nwatching these plants since 2001, and we always\nthought it was Sullivantia, because some botanist told\nus it was.\"\nTOWN RANGE SECTION\n10N 05E 04\nSW4SE4\nELEV\n980 ft.\nLocality of Denzer- Rick and Deborah Bott's property,\nS7635 Pine Hollow Dr., 3.2--3.3 mi. (airline distance)\nNE of Leland, 1.8 mi. (airine) NNW of Denzer.\nCollector\nBott, Rick\nBott, Deborah\nColl. No\ns.n.\n8/Jul/2009\nCochrane, Theodore S. 08Jul2009\nGalax\n235\n```\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001264,
+      "total_cost": 0.0008079000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 316
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2468,
+    "output": 580,
+    "cost_in": 0.00024680000000000004,
+    "cost_out": 0.000232
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nImaged\n\nGalax\n\nWisconsin: Sauk County\n\nW-facing slope under an oak tree.\n*Galax urceolata* (Poiret) Brummitt (G. 'aphylla').\nFormerly a dairy farm, the plants on a steep slope\nwith cliffs that had been fenced off to keep the cows\nout. Deep within a natural area.\nTwo plants 1 ft. apart, one 12 in. in diam. with 21\nstems this year, one 4 in. in diam. \"We've been\nwatching these plants since 2001, and we always\nthought it was *Sullivantia*, because some botanist told\nus it was.\"\n\n10N 05E 04 SW4SE4       980 ft.\n\nLocality of Denzer- Rick and Deborah Bott's property,\nS7635 Pine Hollow Dr., 3.2\u20133.3 mi. (airline distance)\nNE of Leland, 1.8 mi. (airline) NNW of Denzer.\n\nBott, Rick       s.n.\nBott, Deborah       8/Jul/2009\n\nDet/Verf: Cochrane, Theodore S. 08Jul2009\n\n235\n\n**(Handwritten text: Galax)**\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\n```text\nImaged\n0\ncm\n1 2 3 4\n5\n6 7 8 9 10\ncopyright reserved\nWIS\nWisconsin: Sauk County\nW-facing slope under and oak tree.\nGalax urceolata (Poiret) Brummitt (G. 'aphylla').\nFormerly a dairy farm, the plants on a steep slope\nwith cliffs that had been fenced off to keep the cows\nout. Deep within a natural area.\nTwo plants 1 ft. apart, one 12 in. in diam. with 21\nstems this year, one 4 in. in diam. \"We've been\nwatching these plants since 2001, and we always\nthought it was Sullivantia, because some botanist told\nus it was.\"\nTOWN RANGE SECTION\n10N 05E 04\nSW4SE4\nELEV\n980 ft.\nLocality of Denzer- Rick and Deborah Bott's property,\nS7635 Pine Hollow Dr., 3.2--3.3 mi. (airline distance)\nNE of Leland, 1.8 mi. (airine) NNW of Denzer.\nCollector\nBott, Rick\nBott, Deborah\nColl. No\ns.n.\n8/Jul/2009\nCochrane, Theodore S. 08Jul2009\nGalax\n235\n```\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "235",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Bott, Rick, Bott, Deborah",
+    "collectorNumber": "s.n.",
+    "identifiedBy": "Cochrane, Theodore S.",
+    "identifiedDate": "2009-07-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "8/Jul/2009",
+    "collectionDate": "2009-07-08",
+    "collectionDateEnd": "",
+    "habitat": "W-facing slope under and oak tree.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Two plants 1 ft. apart, one 12 in. in diam. with 21 stems this year, one 4 in. in diam.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Wisconsin",
+    "county": "Sauk County",
+    "locality": "Locality of Denzer- Rick and Deborah Bott's property, S7635 Pine Hollow Dr., 3.2--3.3 mi. (airline distance) NE of Leland, 1.8 mi. (airine) NNW of Denzer.",
+    "verbatimCoordinates": "10N 05E 04 SW4SE4",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "299",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Imaged\nFormerly a dairy farm, the plants on a steep slope with cliffs that had been fenced off to keep the cows out. Deep within a natural area. We've been watching these plants since 2001, and we always thought it was Sullivantia, because some botanist told us it was."
+  }
+}

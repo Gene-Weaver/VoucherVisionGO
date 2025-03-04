@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NCU00331882\n\nHerbarium of the University of North Carolina\n\n*Galacaceae*\n*Diapensiaceae*\n\n*Galax aphylla*\n\nCliff on Yadkin River, below Fulton\nChurch, Davie County\n\nNo.                      Date *June 19, 1931* Coll. *H.R. Totten*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66648\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005,
+      "total_cost": 0.0012787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 100
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "cm\nMSCCPPCC0411\nmm\n0 1 2 3 4 5 6 7 8\nxrite\ncolorchecker\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nNCU00331882\nHerbarium of the University of North Carolina\nGalacaceae\nGolex aphylla\nCliff on Yadkin River, below Fulton\nChurch, Davie County.\nDate June 19,1931 Coll. H.R. Totten\nNORTH\nHERBARIUM\nVERSITY OF\n\u039b\u0399\u039d\u03a0\nCAROLINA\n66648\nUniversity of North Carolina\nat Chapel Hill\n--- Handwritten Text ---\nGalacaceae\nDiapesiaceae\nGolex aphyllo\nCliff on Yadkin River, below Fulton\nChurch, Davie County.\nDate June 19,1931 Coll. H.R. Totten\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.44e-05,
+      "total_cost": 0.0007659,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 211
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2193,
+    "output": 438,
+    "cost_in": 0.00021930000000000002,
+    "cost_out": 0.00017520000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNCU00331882\n\nHerbarium of the University of North Carolina\n\n*Galacaceae*\n*Diapensiaceae*\n\n*Galax aphylla*\n\nCliff on Yadkin River, below Fulton\nChurch, Davie County\n\nNo.                      Date *June 19, 1931* Coll. *H.R. Totten*\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n66648\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\ncm\nMSCCPPCC0411\nmm\n0 1 2 3 4 5 6 7 8\nxrite\ncolorchecker\n9 10\ncopyright reserved\nNCU\nat Chapel Hill\nUniversity of North Carolina\nNCU00331882\nHerbarium of the University of North Carolina\nGalacaceae\nGolex aphylla\nCliff on Yadkin River, below Fulton\nChurch, Davie County.\nDate June 19,1931 Coll. H.R. Totten\nNORTH\nHERBARIUM\nVERSITY OF\n\u039b\u0399\u039d\u03a0\nCAROLINA\n66648\nUniversity of North Carolina\nat Chapel Hill\n--- Handwritten Text ---\nGalacaceae\nDiapesiaceae\nGolex aphyllo\nCliff on Yadkin River, below Fulton\nChurch, Davie County.\nDate June 19,1931 Coll. H.R. Totten\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00331882",
+    "scientificName": "Galax aphylla",
+    "genus": "Galacaceae",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "",
+    "collectedBy": "H.r. Totten",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 19, 1931",
+    "collectionDate": "1931-06-19",
+    "collectionDateEnd": "",
+    "habitat": "Cliff on yadkin river, below fulton church",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Davie county",
+    "locality": "Cliff on yadkin river, below fulton church, davie county",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of the university of north carolina\nUniversity of north carolina\nAt chapel hill"
+  }
+}

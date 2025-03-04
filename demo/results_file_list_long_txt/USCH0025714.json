@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "USCH\nUniversity of South Carolina\n\n106834\n\nFlora of Cane Creek Watershed\nJocassee Gorges Tract\nClemson University\n\n*Galax aphylla* auct. Non Linnaeus\nDiapensiaceae\nSkunkweed\n\nLocation: Pickens Co.- S.C. Department of Natural \nResources eastern tract of Lake Jocassee. Accessed\nby scenic Hwy. 11/ Roy F. Jones Hwy. juncture (13 miles)\nto Horsepasture Road. Found along steep west facing\nridge leading from north Horsepasture Road to Cane Creek\nsouth. Flowers white.\n\nLayLa Waldrop w/ John F. Townsend, L.L. Gaddy & \nJennifer Zettler\nNo. W-300 Date: 5/20/98\n\nUniversity of South Carolina Herbarium\nUSCH0025714\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00097,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUSCH\nUniversity of South Carolina\nUNIVERSITY OF SOUTH CAROLINA\nA. C. MOORE HERBARIUM\nUSCH\n106834\nUniversity of South Carolina Herbarium\nFlora of Cane Creek Watershed\nJocassee Gorges Tract\nClemson University\nGalax aphylla auct. Non Linnaeus\nDiapensiaceae\nSkunkweed\nLocation: Pickens Co.- S.C. Department of Natural\nResources eastern tract of Lake Jocassee. Accessed\nby scenic Hwy. 11/ Roy F. Jones Hwy. juncture (13 miles)\nto Horsepasture Road. Found along steep west facing\nridge leading from north Horsepasture Road to Cane Creek\nsouth. Flowers white.\nLayLa Waldrop w/ John F Townsend, L.L. Gaddy &\nJennifer Zettler\nNo. W-300 Date: 5/20/98\nUSCH0025714\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.28e-05,
+      "total_cost": 0.0007743,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 232
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2312,
+    "output": 533,
+    "cost_in": 0.00023119999999999998,
+    "cost_out": 0.00021320000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUSCH\nUniversity of South Carolina\n\n106834\n\nFlora of Cane Creek Watershed\nJocassee Gorges Tract\nClemson University\n\n*Galax aphylla* auct. Non Linnaeus\nDiapensiaceae\nSkunkweed\n\nLocation: Pickens Co.- S.C. Department of Natural \nResources eastern tract of Lake Jocassee. Accessed\nby scenic Hwy. 11/ Roy F. Jones Hwy. juncture (13 miles)\nto Horsepasture Road. Found along steep west facing\nridge leading from north Horsepasture Road to Cane Creek\nsouth. Flowers white.\n\nLayLa Waldrop w/ John F. Townsend, L.L. Gaddy & \nJennifer Zettler\nNo. W-300 Date: 5/20/98\n\nUniversity of South Carolina Herbarium\nUSCH0025714\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0 1 2 3 4 5 6 7 8 9 10\ncm\ncopyright reserved\nUSCH\nUniversity of South Carolina\nUNIVERSITY OF SOUTH CAROLINA\nA. C. MOORE HERBARIUM\nUSCH\n106834\nUniversity of South Carolina Herbarium\nFlora of Cane Creek Watershed\nJocassee Gorges Tract\nClemson University\nGalax aphylla auct. Non Linnaeus\nDiapensiaceae\nSkunkweed\nLocation: Pickens Co.- S.C. Department of Natural\nResources eastern tract of Lake Jocassee. Accessed\nby scenic Hwy. 11/ Roy F. Jones Hwy. juncture (13 miles)\nto Horsepasture Road. Found along steep west facing\nridge leading from north Horsepasture Road to Cane Creek\nsouth. Flowers white.\nLayLa Waldrop w/ John F Townsend, L.L. Gaddy &\nJennifer Zettler\nNo. W-300 Date: 5/20/98\nUSCH0025714\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "106834",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "Auct. non linnaeus",
+    "collectedBy": "Layla waldrop w/ john f. townsend, l.l. gaddy & jennifer zettler",
+    "collectorNumber": "W-300",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/20/98",
+    "collectionDate": "1998-05-20",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Flowers white.",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "S.c.",
+    "county": "Pickens co.",
+    "locality": "Department of natural resources eastern tract of lake jocassee. accessed by scenic hwy. 11/ roy f. jones hwy. juncture (13 miles) to horsepasture road. found along steep west facing ridge leading from north horsepasture road to cane creek south.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of south carolina\nUniversity of south carolina herbarium\nFlora of cane creek watershed\nJocassee gorges tract\nClemson university\nDiapensiaceae\nSkunkweed\nUniversity of south carolina herbarium\nUSCH0025714"
+  }
+}

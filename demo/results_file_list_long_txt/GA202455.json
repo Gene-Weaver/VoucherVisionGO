@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA202455\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n49868\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nLANCASTER COUNTY\nFLORA OF SOUTH CAROLINA\n\n*Galax aphylla* L.\nVirgin deciduous woods on high, steep\nslopes overlooking Catawba R. bottomland\n13.7 mi. NNW of Lancaster.\nPIEDMONT PROVINCE\n\nJames W. Hardin\nWilbur H. Duncan  15619                      21 April 1953\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000945,
+      "total_cost": 0.0017237499999999998,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 189
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF GEORGIA\nGA202455\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n49868\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nLANCASTER COUNTY\nFLORA OF SOUTH CAROLINA\nGalax aphylla L.\nVirgin deciduous woods on high, steep\nslopes overlooking Catawba R. bottomland\n13.7 mi. NNW of Lancaster.\nPIEDMONT PROVINCE\nJames W. Hardin\nWilbur H. Duncan 15619\n21 April 1953\nInches\n1\n2\n3\n4\n5\n6\n7\n8\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite 3/Color\nBlack\nImaged 2016\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0004751,
+      "cost_out": 9.56e-05,
+      "total_cost": 0.0005707,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 4751,
+      "tokens_out": 239
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2333,
+    "output": 554,
+    "cost_in": 0.0002333,
+    "cost_out": 0.00022160000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF GEORGIA\nGA202455\n\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n49868\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\n\nHerbarium of The University of Georgia\nLANCASTER COUNTY\nFLORA OF SOUTH CAROLINA\n\n*Galax aphylla* L.\nVirgin deciduous woods on high, steep\nslopes overlooking Catawba R. bottomland\n13.7 mi. NNW of Lancaster.\nPIEDMONT PROVINCE\n\nJames W. Hardin\nWilbur H. Duncan  15619                      21 April 1953\n\nImaged 2016\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF GEORGIA\nGA202455\nUNIV. OF GEORGIA\nHERBARIUM\nPOISONED\n49868\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nGuy L. Nesom, 1975\nHerbarium of The University of Georgia\nLANCASTER COUNTY\nFLORA OF SOUTH CAROLINA\nGalax aphylla L.\nVirgin deciduous woods on high, steep\nslopes overlooking Catawba R. bottomland\n13.7 mi. NNW of Lancaster.\nPIEDMONT PROVINCE\nJames W. Hardin\nWilbur H. Duncan 15619\n21 April 1953\nInches\n1\n2\n3\n4\n5\n6\n7\n8\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green Yellow\nRed\nMagenta\nWhite 3/Color\nBlack\nImaged 2016\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA202455",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "James W. Hardin, Wilbur H. Duncan",
+    "collectorNumber": "15619",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata (Poir.) Brummit",
+    "verbatimCollectionDate": "21 April 1953",
+    "collectionDate": "1953-04-21",
+    "collectionDateEnd": "",
+    "habitat": "Virgin deciduous woods on high, steep slopes overlooking Catawba R. bottomland",
+    "chromosomeCount": "n = 6",
+    "guardCell": "n = 6 , based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "South Carolina",
+    "county": "Lancaster County",
+    "locality": "13.7 mi. nnw of lancaster. piedmont province",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Univ. of georgia\nherbarium\npoisoned\n49868\nherbarium of the university of north carolina\nImaged 2016\ninches\n1\n2\n3\n4\n5\n6\n7\n8\ncentimetres\ntiffen\u00ae color control patches\nthe tiffen company, 2007\nblue\ncyan green yellow\nred\nmagenta\nwhite 3/color\nblack"
+  }
+}

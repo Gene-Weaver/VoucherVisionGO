@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n8456\nHERBARIUM\n\nJFM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2,1975\nGuy L. Nesom, 1975\nDiapensiaceae\n\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Gaston\n*Galax aphylla* L.\n\nWest slope of Crowder's Mt., near \"The\nNeedle.\n\nJ.F. Matthews\nR.L. Kologiski\nD. Sharp\nJuly 1, 1973\n\nHandwritten Text: JFM, Diapensiaceae\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000875,
+      "total_cost": 0.00165375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 175
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "VERSITY OF NORTH CAROLINA\n8456\nHERBARIUM\nMETRIC 1\nJFM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn\nvolume of\nbased on average guard cell\n\u03bc2\nGuy L. Nesom, 1975\nDiapersiacere\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty\nGalax aphylla L.\nGaston\nWest slope of Crowder's Mt., near \"The\nNeedle.\nJ.F. Matthews\nR.L. Kologiski\nD. Pharp\nJuly 1, 1973\n24ColorCard Camera Trat.com\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.720000000000001e-05,
+      "total_cost": 0.0007487000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 168
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2245,
+    "output": 539,
+    "cost_in": 0.0002245,
+    "cost_out": 0.0002156
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA AT CHARLOTTE\n8456\nHERBARIUM\n\nJFM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = , based on average guard cell\nvolume of \u03bc\u00b2,1975\nGuy L. Nesom, 1975\nDiapensiaceae\n\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\n\nPlants of North Carolina\nCounty Gaston\n*Galax aphylla* L.\n\nWest slope of Crowder's Mt., near \"The\nNeedle.\n\nJ.F. Matthews\nR.L. Kologiski\nD. Sharp\nJuly 1, 1973\n\nHandwritten Text: JFM, Diapensiaceae\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nVERSITY OF NORTH CAROLINA\n8456\nHERBARIUM\nMETRIC 1\nJFM\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn\nvolume of\nbased on average guard cell\n\u03bc2\nGuy L. Nesom, 1975\nDiapersiacere\nHERBARIUM\nof the\nUniversity of North Carolina at Charlotte\nPlants of North Carolina\nCounty\nGalax aphylla L.\nGaston\nWest slope of Crowder's Mt., near \"The\nNeedle.\nJ.F. Matthews\nR.L. Kologiski\nD. Pharp\nJuly 1, 1973\n24ColorCard Camera Trat.com\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "8456",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "J.F. Matthews, R.L. Kologiski, D. Sharp",
+    "collectorNumber": "",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 1, 1973",
+    "collectionDate": "1973-07-01",
+    "collectionDateEnd": "",
+    "habitat": "West slope of Crowder's Mt., near the Needle.",
+    "chromosomeCount": "",
+    "guardCell": "N =, based on average guard cell volume of \u03bc\u00b2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Gaston",
+    "locality": "West slope of Crowder's Mt., near The Needle.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina at charlotte\nHerbarium\nJFM\nHerbarium of the university of north carolina\nDiapensiaceae\nHerbarium\nof the\nuniversity of north carolina at charlotte\nPlants of north carolina\nGalax aphylla L.\nHandwritten Text JFM, Diapensiaceae\nGalax urceolata\nGalax aphylla"
+  }
+}

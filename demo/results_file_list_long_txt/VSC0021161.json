@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "VSC 0021161\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n03594\nHerbarium of Valdosta State College\nRABUN COUNTY\nFLORA OF GEORGIA\n*Galax aphylla* L.\nDeciduous woods beside a small stream 9.7 mi\nN.E. of Dillard.\nBLUE RIDGE PROVINCE\n\nWayne R. Faircloth 1211\nJuanita Norsworthy                      20 June 1964\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00057,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Kodak Gray Scale\nA\n1\n2\n3\n4\n5\n6\nM\n8\n9\nCYM\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nYellow\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nRed\nMagenta\nWhite\n3/Color\nKodak, 2007 TM: Kodak\nBlack\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nBlue\nB\n17\n18\n19\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n03594\nHerbarium of Valdosta State College\nRABUN COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nDeciduous woods beside a small stream 9.7 mi\nN.E. of Dillard.\nBLUE RIDGE PROVINCE\nWayne R. Faircloth 1211\nJuanita Norsworthy\n20 June 1964\nValdosta State University Herbarium\nVSC 0021161\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001028,
+      "total_cost": 0.0007842999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 257
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2250,
+    "output": 436,
+    "cost_in": 0.000225,
+    "cost_out": 0.0001744
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nVSC 0021161\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n03594\nHerbarium of Valdosta State College\nRABUN COUNTY\nFLORA OF GEORGIA\n*Galax aphylla* L.\nDeciduous woods beside a small stream 9.7 mi\nN.E. of Dillard.\nBLUE RIDGE PROVINCE\n\nWayne R. Faircloth 1211\nJuanita Norsworthy                      20 June 1964\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nKodak Gray Scale\nA\n1\n2\n3\n4\n5\n6\nM\n8\n9\nCYM\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\nYellow\ninches\n2\n3\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\nRed\nMagenta\nWhite\n3/Color\nKodak, 2007 TM: Kodak\nBlack\nKodak Color Control Patches\nKodak, 2007 TM: Kodak\nBlue\nB\n17\n18\n19\nHERBARIUM\nVALDOSTA STATE\nCOLLEGE\n03594\nHerbarium of Valdosta State College\nRABUN COUNTY\nFLORA OF GEORGIA\nGalax aphylla L.\nDeciduous woods beside a small stream 9.7 mi\nN.E. of Dillard.\nBLUE RIDGE PROVINCE\nWayne R. Faircloth 1211\nJuanita Norsworthy\n20 June 1964\nValdosta State University Herbarium\nVSC 0021161\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vsc 0021161",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Wayne R. Faircloth, Juanita Norsworthy",
+    "collectorNumber": "1211",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "20 June 1964",
+    "collectionDate": "1964-06-20",
+    "collectionDateEnd": "",
+    "habitat": "Deciduous woods beside a small stream",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Rabun county",
+    "locality": "9.7 mi n.e. of dillard",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Herbarium of Valdosta State College\nBlue ridge province\nValdosta State University Herbarium\n"
+  }
+}

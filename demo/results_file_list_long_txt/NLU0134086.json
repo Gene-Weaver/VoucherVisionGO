@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n278140\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of ALABAMA\n\n*Galax aphylla* L.\n(*G. urceolata* (Poir.) Brummitt in K & K.)\n\nLittle River Gorge at DeSoto State Park off DeKalb Co.\nRoad 89 east of I-59 and U.S. 11 north of Ala. 35 and\nFort Payne.\n\nCollector: R. Dale Thomas\nNo.: 100,791\nDate: 15 July 1987\n\n\n*Galax aphylla*\n(*G. urceolata*)\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007649999999999998,
+      "total_cost": 0.00154375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 153
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "SORTHEAST LOUISIANA UNIVERSITY\n278140\nHERBARIUM\nA 1\n2\n3\n4\n5\nM 8 9\n10 11 12 13 14 15\nB 17 18 19\nCounty: DEKALB\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of ALABAMA\nUniversity of Louisiana at Monroe\nNLU0134086\nGalax aphylla L.\n(G. urceolata (Poir.) Brummitt in K & K.)\nLittle River Gorge at DeSoto State Park off DeKalb Co.\nRoad 89 east of I-59 and U.S. 11 north of Ala. 35 and\nFort Payne.\nCollector: R. Dale Thomas\nNo.: 100,791\nDate: 15 July 1987\n\n\nGalax aphylla\nG. urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.560000000000001e-05,
+      "total_cost": 0.0007670999999999999,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 214
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2234,
+    "output": 476,
+    "cost_in": 0.0002234,
+    "cost_out": 0.00019040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n278140\nHERBARIUM\n\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\n\nFlora of ALABAMA\n\n*Galax aphylla* L.\n(*G. urceolata* (Poir.) Brummitt in K & K.)\n\nLittle River Gorge at DeSoto State Park off DeKalb Co.\nRoad 89 east of I-59 and U.S. 11 north of Ala. 35 and\nFort Payne.\n\nCollector: R. Dale Thomas\nNo.: 100,791\nDate: 15 July 1987\n\n\n*Galax aphylla*\n(*G. urceolata*)\n\n\ngemini-2.0-flash OCR:\nSORTHEAST LOUISIANA UNIVERSITY\n278140\nHERBARIUM\nA 1\n2\n3\n4\n5\nM 8 9\n10 11 12 13 14 15\nB 17 18 19\nCounty: DEKALB\nHERBARIUM\nNORTHEAST LOUISIANA UNIVERSITY, MONROE\nFlora of ALABAMA\nUniversity of Louisiana at Monroe\nNLU0134086\nGalax aphylla L.\n(G. urceolata (Poir.) Brummitt in K & K.)\nLittle River Gorge at DeSoto State Park off DeKalb Co.\nRoad 89 east of I-59 and U.S. 11 north of Ala. 35 and\nFort Payne.\nCollector: R. Dale Thomas\nNo.: 100,791\nDate: 15 July 1987\n\n\nGalax aphylla\nG. urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "278140",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. Dale Thomas",
+    "collectorNumber": "100,791",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "15 July 1987",
+    "collectionDate": "1987-07-15",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Alabama",
+    "county": "Dekalb",
+    "locality": "Little river gorge at desoto state park off dekalb co. road 89 east of i-59 and u.s. 11 north of ala. 35 and fort payne.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "herbaria\nnortheast louisiana university\nnortheast louisiana university, monroe\nflora of alabama\n(g. urceolata (poir.) brummitt in k & k.)\n(g. urceolata)"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LSU\nLOUISIANA STATE UNIVERSITY\nHERBARIUM\n0186564\n\nDEACCESSED\nHERBARIUM\n10874\nSHREVEPORT\n\nHERBARIUM OF LOUISIANA STATE UNIVERSITY IN SHREVEPORT\n*Galax urceolata* (Poir.) Brummitt\n= *G. aphylla* sensu auct. non L.\ndet. *D.T. Mac Roberts* 1980\n\nHERBARIUM OF\nLOUISIANA STATE UNIVERSITY IN SHREVEPORT\nPLANTS OF: TENNESSEE\n\n*Galax aphylla* L.\nOccasional; leaves green with red underside,\nflowers white. Little River Rd. 3.9 mi. W. of\nUS 441.\n\nDiapensiaceae\n\nCOUNTY: Sevier\nDATE: 19 May 80       COLL.: L. W. Clark     NO. 142\n\nLSU00181028\n\nHandwritten Text: *Galax urceolata*, *G. aphylla*, *D.T. Mac Roberts*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001205,
+      "total_cost": 0.0019837500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 241
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "LSU\nLOUISIANA STATE UNIVERSITY\nHERBARIUM\n0186564\nDEACCESSED\nHERBARIUM OF LOUISIANA STATE UNIVERSITY IN SHREVEPORT\nGalax urceolata (Poir.) Brummitt\n= G. aphylla sensu auct. nou L.\ndet. D.T. Mac Roberts\n1980\nHERBARIUM OF\nLOUISIANA STATE UNIVERSITY IN SHREVEPORT\nPLANTS OF: TENNESSEE\nGalax aphylla L.\nOccasional; leaves green with red underside,\nflowers white. Little River Rd. 3.9 mi. W. of\nUS 441.\nDianensiacea\nCOUNTY: Sevier\nDATE: 19 May 80\nCOLL.: L. W. Clark NO. 142\n\u03b1\nLSU00181028\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.6e-05,
+      "total_cost": 0.0007575000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 190
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2320,
+    "output": 537,
+    "cost_in": 0.000232,
+    "cost_out": 0.00021480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLSU\nLOUISIANA STATE UNIVERSITY\nHERBARIUM\n0186564\n\nDEACCESSED\nHERBARIUM\n10874\nSHREVEPORT\n\nHERBARIUM OF LOUISIANA STATE UNIVERSITY IN SHREVEPORT\n*Galax urceolata* (Poir.) Brummitt\n= *G. aphylla* sensu auct. non L.\ndet. *D.T. Mac Roberts* 1980\n\nHERBARIUM OF\nLOUISIANA STATE UNIVERSITY IN SHREVEPORT\nPLANTS OF: TENNESSEE\n\n*Galax aphylla* L.\nOccasional; leaves green with red underside,\nflowers white. Little River Rd. 3.9 mi. W. of\nUS 441.\n\nDiapensiaceae\n\nCOUNTY: Sevier\nDATE: 19 May 80       COLL.: L. W. Clark     NO. 142\n\nLSU00181028\n\nHandwritten Text: *Galax urceolata*, *G. aphylla*, *D.T. Mac Roberts*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nLSU\nLOUISIANA STATE UNIVERSITY\nHERBARIUM\n0186564\nDEACCESSED\nHERBARIUM OF LOUISIANA STATE UNIVERSITY IN SHREVEPORT\nGalax urceolata (Poir.) Brummitt\n= G. aphylla sensu auct. nou L.\ndet. D.T. Mac Roberts\n1980\nHERBARIUM OF\nLOUISIANA STATE UNIVERSITY IN SHREVEPORT\nPLANTS OF: TENNESSEE\nGalax aphylla L.\nOccasional; leaves green with red underside,\nflowers white. Little River Rd. 3.9 mi. W. of\nUS 441.\nDianensiacea\nCOUNTY: Sevier\nDATE: 19 May 80\nCOLL.: L. W. Clark NO. 142\n\u03b1\nLSU00181028\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0186564",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "L. W. Clark",
+    "collectorNumber": "142",
+    "identifiedBy": "D.T. Mac Roberts",
+    "identifiedDate": "1980",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "19 May 80",
+    "collectionDate": "1980-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Occasional; leaves green with red underside, flowers white.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Sevier",
+    "locality": "Little River Rd. 3.9 mi. W. of US 441.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "DEACCESSED\nHERBARIUM\n10874\nSHREVEPORT\nHERBARIUM OF LOUISIANA STATE UNIVERSITY IN SHREVEPORT\n= G. aphylla sensu auct. nou L.\nHERBARIUM OF\nLOUISIANA STATE UNIVERSITY IN SHREVEPORT\nPLANTS OF TENNESSEE\nGalax aphylla L.\nDianensiacea\nLSU00181028\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082928\n\nHERBARIUM\nNCSC\n103458\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of North Carolina State University\nFLORA OF LOST COVE\nAvery Co., North Carolina\n\n*Galax urceolata* (Poir.) Brummitt\nCollected along Hughes Ridge.\n2,400 feet\nMay 30, 1986\n\nTracie L. Bradshaw, No. _(handwritten)_\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005949999999999999,
+      "total_cost": 0.00137375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 119
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "North Carolina State University\nHerbarium (NCSC)\nNCSC00082928\nA\nR\nG\nB\nW\nG\nK\nC\nY\nM\nThe Tiffen Company, 2007\nB\nInches\nCentimetres\nTIFFEN\u00ae Gray Scale\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nNCSC\nCAROLINA STATE UN\nHerbarium of North Carolina State University\nFLORA OF LOST COVE\nAvery Co., North Carolina\nGalax urceolata (Poir.) Brummit\nCollected along Hughes Ridge.\n2,400 feet\nMay 30, 1986\nTracie L. Bradshaw, No.\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.48e-05,
+      "total_cost": 0.0007563,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 187
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2195,
+    "output": 457,
+    "cost_in": 0.0002195,
+    "cost_out": 0.0001828
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082928\n\nHERBARIUM\nNCSC\n103458\nNORTH CAROLINA STATE UNIVERSITY\n\nHerbarium of North Carolina State University\nFLORA OF LOST COVE\nAvery Co., North Carolina\n\n*Galax urceolata* (Poir.) Brummitt\nCollected along Hughes Ridge.\n2,400 feet\nMay 30, 1986\n\nTracie L. Bradshaw, No. _(handwritten)_\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nNorth Carolina State University\nHerbarium (NCSC)\nNCSC00082928\nA\nR\nG\nB\nW\nG\nK\nC\nY\nM\nThe Tiffen Company, 2007\nB\nInches\nCentimetres\nTIFFEN\u00ae Gray Scale\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHERBARIUM\nNCSC\nCAROLINA STATE UN\nHerbarium of North Carolina State University\nFLORA OF LOST COVE\nAvery Co., North Carolina\nGalax urceolata (Poir.) Brummit\nCollected along Hughes Ridge.\n2,400 feet\nMay 30, 1986\nTracie L. Bradshaw, No.\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCSC00082928",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Tracie L. Bradshaw",
+    "collectorNumber": "",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "May 30, 1986",
+    "collectionDate": "1986-05-30",
+    "collectionDateEnd": "",
+    "habitat": "Collected along hughes ridge.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Avery co.",
+    "locality": "Flora of lost cove",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "732",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "m",
+    "additionalText": "North carolina state university\nherbarium (ncsc)\nHERBARIUM\nNCSC\nNORTH CAROLINA STATE UNIVERSITY\nherbarium of north carolina state university\nGalax urceolata"
+  }
+}

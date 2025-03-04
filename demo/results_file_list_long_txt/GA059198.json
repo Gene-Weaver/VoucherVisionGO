@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n\n183423\n\nFLORA OF GEORGIA\nTalbot County\n\n*Galax urceolata* (Poir.) Brummitt\n\nCa. 14.1 mi. NNE of Talbotton, ca. 0.2 mi. ESE\nof jct. Meriwether, Talbot and Upson Cos. Abundant, N base of Rock House Mountain, just above\nW bank of Flint River\n\nJames R. Allison 3232 June 6, 1988\n\nGeorgia Natural Heritage Inventory\nGeorgia Department of Natural Resources\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008049999999999999,
+      "total_cost": 0.00158375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183423\nFLORA OF GEORGIA\nTalbot County\nGalax urceolata (Poir.) Brummitt\nCa. 14.1 mi. NNE of Talbotton, ca. 0.2 mi. ESE\nof jct. Meriwether, Talbot and Upson Cos. Abun-\ndant, N base of Rock House Mountain, just above\nW bank of Flint River\nJames R. Allison 3232\nJune 6, 1988\nGeorgia Natural Heritage Inventory\nGeorgia Department of Natural Resources\nIMAGED 2013\n\n\nGalax urceolata\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.280000000000001e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2212,
+    "output": 496,
+    "cost_in": 0.0002212,
+    "cost_out": 0.00019840000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005 (handwritten)\n\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n\n183423\n\nFLORA OF GEORGIA\nTalbot County\n\n*Galax urceolata* (Poir.) Brummitt\n\nCa. 14.1 mi. NNE of Talbotton, ca. 0.2 mi. ESE\nof jct. Meriwether, Talbot and Upson Cos. Abundant, N base of Rock House Mountain, just above\nW bank of Flint River\n\nJames R. Allison 3232 June 6, 1988\n\nGeorgia Natural Heritage Inventory\nGeorgia Department of Natural Resources\n\nIMAGED 2013\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nUNIVERSITY\nOF GEORGIA\nHERBARIUM\n183423\nFLORA OF GEORGIA\nTalbot County\nGalax urceolata (Poir.) Brummitt\nCa. 14.1 mi. NNE of Talbotton, ca. 0.2 mi. ESE\nof jct. Meriwether, Talbot and Upson Cos. Abun-\ndant, N base of Rock House Mountain, just above\nW bank of Flint River\nJames R. Allison 3232\nJune 6, 1988\nGeorgia Natural Heritage Inventory\nGeorgia Department of Natural Resources\nIMAGED 2013\n\n\nGalax urceolata\n\n",
+  "formatted_json": {
+    "catalogNumber": "183423",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "James R. Allison",
+    "collectorNumber": "3232",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 6, 1988",
+    "collectionDate": "1988-06-06",
+    "collectionDateEnd": "",
+    "habitat": "Abundant, n base of rock house mountain, just above w bank of flint river",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Georgia",
+    "county": "Talbot County",
+    "locality": "Ca. 14.1 mi. nne of talbotton, ca. 0.2 mi. ese of jct. meriwether, talbot and upson cos",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\nGeorgia atlas project\n9 november 2005\nUniversity\nof georgia\nherbarium\nFlora of georgia\nGeorgia natural heritage inventory\nGeorgia department of natural resources\nimaged 2013"
+  }
+}

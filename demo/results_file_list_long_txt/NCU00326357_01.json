@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "MSCCPPP\u00c9041\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n356951\nx-rite\ncolorchecker\nUniversity of North Carolina at Chapel Hill\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326357\n\nPLANTS OF THE SOUTHERN UNITED STATES.\nCOLLECTED IN THE MOUNTAINS OF\nNORTH CAROLINA.\n\n*Galax aphylla* L.\n(handwritten)\n\nNo. 2375  July\n(handwritten)\n\nW. W. Ashe, Collector.\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006349999999999999,
+      "total_cost": 0.00141375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 127
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "OF NORTH\nHERBARIUM\nUNIVERSITA\nCAROLINA\n356951\nx-rite\ncolorchecker\nat Chapel Hill\nUniversity of North Carolina\nTO NCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326357\nPLANTS OF THE SOUTHERN UNITED STATES.\nCOLLECTED IN THE MOUNTAINS OF\nNORTH CAROLINA.\nGalax aphylla L.\nJuly\nNo. 2375\nW. W. Ashe, Collector.\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.36e-05,
+      "total_cost": 0.0007251,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 109
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2125,
+    "output": 462,
+    "cost_in": 0.00021250000000000002,
+    "cost_out": 0.00018480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMSCCPPP\u00c9041\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n356951\nx-rite\ncolorchecker\nUniversity of North Carolina at Chapel Hill\nNCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326357\n\nPLANTS OF THE SOUTHERN UNITED STATES.\nCOLLECTED IN THE MOUNTAINS OF\nNORTH CAROLINA.\n\n*Galax aphylla* L.\n(handwritten)\n\nNo. 2375  July\n(handwritten)\n\nW. W. Ashe, Collector.\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nOF NORTH\nHERBARIUM\nUNIVERSITA\nCAROLINA\n356951\nx-rite\ncolorchecker\nat Chapel Hill\nUniversity of North Carolina\nTO NCU\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326357\nPLANTS OF THE SOUTHERN UNITED STATES.\nCOLLECTED IN THE MOUNTAINS OF\nNORTH CAROLINA.\nGalax aphylla L.\nJuly\nNo. 2375\nW. W. Ashe, Collector.\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326357",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "W. W. Ashe",
+    "collectorNumber": "2375",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July",
+    "collectionDate": "0000-07-00",
+    "collectionDateEnd": "",
+    "habitat": "Collected in the mountains of north carolina.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Mountains of north carolina.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Msccppp\u00e9041\nUniversity of north\nHerbarium\nCarolina\n356951\nx-rite\ncolorchecker\nUniversity of north carolina at chapel hill\nTo ncu\nUniversity of north carolina herbarium\nPlants of the southern united states.\nGalax aphylla"
+  }
+}

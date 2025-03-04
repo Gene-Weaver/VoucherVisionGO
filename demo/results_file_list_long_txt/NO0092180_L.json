@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "TULANE UNIVERSITY HERBARIUM\nNO 0092180\n\nGalax urceolata (Poir.) Brummitt\nSyn = Galax aphylla auct. non L\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPLANTS OF GEORGIA\nDiapensiaceae\n\nGalax aphylla L.\nBear Creek.\n\nTULANE\nHERBARIUM\nUNIVERSITY\n\nDet.: A.S. Bradburn, 1994. (Handwritten)\nLegit: Sylvia Taylor 66-166-7 (Handwritten)\nDate: 17-Jun-66 (Handwritten)\n\nTulane University Herbarium, New Orleans\n6277 (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008600000000000001,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "TIFFEN Gray Scale\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color Black\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPLANTS OF GEORGIA\nDiapensiaceae\nGalax aphylla L.\nBear Creek.\nDet.: A.S. Bradburn, 1994.\nLegit: Sylvia Taylor 66-166-7\nDate: 17-Jun-66\nTulane University Herbarium, New Orleans\nTULANE\nHERBARIUM\nUNIVERSITY\n\u039d\u039f 0092180\n6277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.560000000000001e-05,
+      "total_cost": 0.0007571000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 189
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2248,
+    "output": 501,
+    "cost_in": 0.00022480000000000002,
+    "cost_out": 0.00020040000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTULANE UNIVERSITY HERBARIUM\nNO 0092180\n\nGalax urceolata (Poir.) Brummitt\nSyn = Galax aphylla auct. non L\nSynonymy from PLANTS (USDA) database, Oct. 2011.\n\nPLANTS OF GEORGIA\nDiapensiaceae\n\nGalax aphylla L.\nBear Creek.\n\nTULANE\nHERBARIUM\nUNIVERSITY\n\nDet.: A.S. Bradburn, 1994. (Handwritten)\nLegit: Sylvia Taylor 66-166-7 (Handwritten)\nDate: 17-Jun-66 (Handwritten)\n\nTulane University Herbarium, New Orleans\n6277 (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTIFFEN Gray Scale\nInches\nCentimetres\nTIFFEN\u00ae Color Control Patches\nThe Tiffen Company, 2007\nBlue\nCyan Green\nYellow\nRed\nMagenta\nWhite\n3/Color Black\nTULANE UNIVERSITY HERBARIUM\nGalax urceolata (Poir.) Brummitt\nSynonymy from PLANTS (USDA) database, Oct. 2011.\nPLANTS OF GEORGIA\nDiapensiaceae\nGalax aphylla L.\nBear Creek.\nDet.: A.S. Bradburn, 1994.\nLegit: Sylvia Taylor 66-166-7\nDate: 17-Jun-66\nTulane University Herbarium, New Orleans\nTULANE\nHERBARIUM\nUNIVERSITY\n\u039d\u039f 0092180\n6277\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "0092180",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Sylvia Taylor",
+    "collectorNumber": "66-166-7",
+    "identifiedBy": "A.S. Bradburn",
+    "identifiedDate": "1994-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "17-Jun-66",
+    "collectionDate": "1966-06-17",
+    "collectionDateEnd": "",
+    "habitat": "Bear Creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Georgia",
+    "county": "",
+    "locality": "Bear Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Syn = Galax aphylla auct. non L\nSynonymy from plants (usda) database, oct. 2011.\nPlants of georgia\nDiapensiaceae\nGalax aphylla l.\ntulane\nherbarium\nuniversity\ntulane university herbarium, new orleans\n6277\ngalax urceolata\ngalax aphylla"
+  }
+}

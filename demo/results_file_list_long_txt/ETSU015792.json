@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015792\n\n!= *Galax urceolata* J. Donaldson\nPLANTS OF NE TENNESSEE June 2011\nEast Tennessee State University Herbarium\n\n*Galax aphylla* L.\nDiapensiaceae\n\nWashington County, Tn\nBuffalo Mt service road off of High Ridge Rd\nWoodland margin on grassy bank, gravel roadside, \npartial shade.\n2215ft\n36.273566,-82.340019\n\nHerb. Leaves evergreen basal wide cordate. Flowers\nnumerous in raceme. 5 petals, white. Occasionally\nlocated along roadside.\n\nDetermined with reference to Radford et al. 1968\nCody Salyer Collection #11 05/19/2011\n\nJohn C. Warden Herbarium\nETSU #13-0247 ETSU\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00108,
+      "total_cost": 0.00185875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 216
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015792\nJohn C. Warden Herbarium\nETSU #13-0247\nETSU\n! = Galax urceolata J. Donaldson\nPLANTS OF NE TENNESSEE June 2011\nEast Tennessee State University Herbarium\nGalax aphylla L.\nDiapensiaceae\nWashington County, Tn\nBuffalo Mt service road off of High Ridge Rd\nWoodland margin on grassy bank, gravel roadside,\npartial shade.\n2215ft\n36.273566,-82.340019\nHerb. Leaves evergreen basal wide cordate. Flowers\nnumerous in raceme. 5 petals, white. Occasionally\nlocated along roadside.\nDetermined with reference to Radford et al. 1968\nCody Salyer Collecton #11\n05/19/2011\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n910\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.64e-05,
+      "total_cost": 0.0007779,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 241
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2328,
+    "output": 581,
+    "cost_in": 0.00023280000000000002,
+    "cost_out": 0.0002324
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015792\n\n!= *Galax urceolata* J. Donaldson\nPLANTS OF NE TENNESSEE June 2011\nEast Tennessee State University Herbarium\n\n*Galax aphylla* L.\nDiapensiaceae\n\nWashington County, Tn\nBuffalo Mt service road off of High Ridge Rd\nWoodland margin on grassy bank, gravel roadside, \npartial shade.\n2215ft\n36.273566,-82.340019\n\nHerb. Leaves evergreen basal wide cordate. Flowers\nnumerous in raceme. 5 petals, white. Occasionally\nlocated along roadside.\n\nDetermined with reference to Radford et al. 1968\nCody Salyer Collection #11 05/19/2011\n\nJohn C. Warden Herbarium\nETSU #13-0247 ETSU\n\n*Handwritten Text*\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015792\nJohn C. Warden Herbarium\nETSU #13-0247\nETSU\n! = Galax urceolata J. Donaldson\nPLANTS OF NE TENNESSEE June 2011\nEast Tennessee State University Herbarium\nGalax aphylla L.\nDiapensiaceae\nWashington County, Tn\nBuffalo Mt service road off of High Ridge Rd\nWoodland margin on grassy bank, gravel roadside,\npartial shade.\n2215ft\n36.273566,-82.340019\nHerb. Leaves evergreen basal wide cordate. Flowers\nnumerous in raceme. 5 petals, white. Occasionally\nlocated along roadside.\nDetermined with reference to Radford et al. 1968\nCody Salyer Collecton #11\n05/19/2011\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n910\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015792",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Cody Salyer",
+    "collectorNumber": "11",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax urceolata J. Donaldson",
+    "verbatimCollectionDate": "05/19/2011",
+    "collectionDate": "2011-05-19",
+    "collectionDateEnd": "",
+    "habitat": "Woodland margin on grassy bank, gravel roadside, partial shade.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Herb. Leaves evergreen basal wide cordate. Flowers numerous in raceme. 5 petals, white. Occasionally located along roadside.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Tennessee",
+    "county": "Washington County",
+    "locality": "Buffalo Mt service road off of High Ridge Rd",
+    "verbatimCoordinates": "36.273566,-82.340019",
+    "decimalLatitude": "36.273566",
+    "decimalLongitude": "-82.340019",
+    "minimumElevationInMeters": "675",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "!= Galax urceolata J. Donaldson\nPLANTS OF NE TENNESSEE June 2011\nEast Tennessee State University Herbarium\nDiapensiaceae\nTnn\nDetermined with reference to Radford et al. 1968\nCollection #11\nJohn C. Warden Herbarium\nETSU #13-0247 ETSU\nHandwritten Text\nGalax urceolata\nGalax aphylla\nSERNEC Digitization Project - Tennessee Herbarium Consortium\n"
+  }
+}

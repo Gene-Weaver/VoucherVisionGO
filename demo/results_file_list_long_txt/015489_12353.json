@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\nPRESERVED\nMATERIALS\n\nBOON015489\n\nHerbarium\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 12,353\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\n*Galax aphylla* L.\nfound in a mixed rich wood around\nTrout Lake elev. 3800\n\nDate 6/24/78\nCollected by *M. Turbiville*\n147\nNo.\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000645,
+      "total_cost": 0.00142375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 129
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC\nCAROLINA\nBurlington, NC 27215-1-800-334-5551\nPRESERVED\nMATERIALS\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015489\nHerbarium\nAppalachian State\nUniversity\nBoone, N. C\nNo. 12,353\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\nGalax aphylla L.\nfound in a mixed rich wood around\nTrout Lake Elev. 3800\nDate 6/24/78\nCollected by M.TURBIVILLE\nNo. 1\n$147\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.8e-05,
+      "total_cost": 0.0007495,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 170
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2178,
+    "output": 459,
+    "cost_in": 0.00021779999999999998,
+    "cost_out": 0.00018360000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\nPRESERVED\nMATERIALS\n\nBOON015489\n\nHerbarium\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 12,353\n\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\n\n*Galax aphylla* L.\nfound in a mixed rich wood around\nTrout Lake elev. 3800\n\nDate 6/24/78\nCollected by *M. Turbiville*\n147\nNo.\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC\nCAROLINA\nBurlington, NC 27215-1-800-334-5551\nPRESERVED\nMATERIALS\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015489\nHerbarium\nAppalachian State\nUniversity\nBoone, N. C\nNo. 12,353\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nPLANTS OF NORTH CAROLINA\nWATAUGA COUNTY\nGalax aphylla L.\nfound in a mixed rich wood around\nTrout Lake Elev. 3800\nDate 6/24/78\nCollected by M.TURBIVILLE\nNo. 1\n$147\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015489",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "M. Turbiville",
+    "collectorNumber": "147",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/24/78",
+    "collectionDate": "1978-06-24",
+    "collectionDateEnd": "",
+    "habitat": "Found in a mixed rich wood around trout lake",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Watauga county",
+    "locality": "Trout lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1158",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Living\nCultures\nPreserved\nMaterials\nAppalachian state\nUniversity\nBoone, N. C.\nNo. 12,353\nAppalachian state university herbarium\nPlants of north carolina\nElev. 3800"
+  }
+}

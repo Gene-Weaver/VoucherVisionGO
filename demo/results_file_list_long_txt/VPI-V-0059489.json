@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n61529\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n\n*Galax urceolata* (Poir.) Brummit\n\ndate: 1976                                   determined by: E. D. UTTAL\n\nFlora of Virginia\n\n*Galax aphylla* L.\nbelow Reekes Mill, near Wightman,\nMecklenburg Co.\nel. 300 ft.\n\nMassed under *Kalmia* on steep\nN-facing bluffs of Meherrin River\nopposite mouth of North Meherrin R.\nSept. 27, 1975\n\nCharles E. Stevens                      No. 10,143\nDet. \"                                         & A. Harvill\n\n\nHandwritten text: *Galax aphylla* L., below Reekes Mill, near Wightman, Mecklenburg Co., el. 300 ft., Massed under *Kalmia* on steep N-facing bluffs of Meherrin River opposite mouth of North Meherrin R., Sept. 27, 1975\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0012749999999999999,
+      "total_cost": 0.00205375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 255
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n61529\nVirginia Polytechnic Institute\nand State University\nMETRIC\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Brummit\ndate: 1976.\ndetermined by: C. J. UTTAL\nFlora of Virginia\nGalax aphylla L.\nbelow Reekes hill, near Wighitman,\nMecklenburg Co.\nel. 300 ft.\nMassed under Kalmia on steep\nN-facing bluffs of Meherrin River\nopposite mouth of North Meherrin R.\nSept. 27, 1975\nCharles E. Stevens\nDet. \"\nNo. 10,193\n& A. Harvill\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059489\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.960000000000001e-05,
+      "total_cost": 0.0007611,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 199
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2332,
+    "output": 541,
+    "cost_in": 0.0002332,
+    "cost_out": 0.00021640000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n61529\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n\n*Galax urceolata* (Poir.) Brummit\n\ndate: 1976                                   determined by: E. D. UTTAL\n\nFlora of Virginia\n\n*Galax aphylla* L.\nbelow Reekes Mill, near Wightman,\nMecklenburg Co.\nel. 300 ft.\n\nMassed under *Kalmia* on steep\nN-facing bluffs of Meherrin River\nopposite mouth of North Meherrin R.\nSept. 27, 1975\n\nCharles E. Stevens                      No. 10,143\nDet. \"                                         & A. Harvill\n\n\nHandwritten text: *Galax aphylla* L., below Reekes Mill, near Wightman, Mecklenburg Co., el. 300 ft., Massed under *Kalmia* on steep N-facing bluffs of Meherrin River opposite mouth of North Meherrin R., Sept. 27, 1975\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n61529\nVirginia Polytechnic Institute\nand State University\nMETRIC\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Brummit\ndate: 1976.\ndetermined by: C. J. UTTAL\nFlora of Virginia\nGalax aphylla L.\nbelow Reekes hill, near Wighitman,\nMecklenburg Co.\nel. 300 ft.\nMassed under Kalmia on steep\nN-facing bluffs of Meherrin River\nopposite mouth of North Meherrin R.\nSept. 27, 1975\nCharles E. Stevens\nDet. \"\nNo. 10,193\n& A. Harvill\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059489\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "61529",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Charles E. Stevens & A. Harvill",
+    "collectorNumber": "10,143",
+    "identifiedBy": "E. D. Uttal, C. J. Uttal",
+    "identifiedDate": "1976-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Sept. 27, 1975",
+    "collectionDate": "1975-09-27",
+    "collectionDateEnd": "",
+    "habitat": "Massed under Kalmia on steep N-facing bluffs of Meherrin River opposite mouth of North Meherrin R.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Mecklenburg Co.",
+    "locality": "Below Reekes Mill, near Wightman",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "91",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of\nVirginia Polytechnic Institute\nand State University\nVirginia Polytechnic Institute and State University\nHerbarium\nFlora of Virginia\nGalax aphylla L.\nDet.\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059489\nGalax urceolata\nGalax aphylla"
+  }
+}

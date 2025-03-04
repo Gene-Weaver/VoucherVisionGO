@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WESTERN CAROLINA U. HERBARIUM\nWCUH0010432\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA  Diapensiaceae\nMacon County\n19 (handwritten)\n\nGalax aphylla L.\nHorse Cove Rd. in dark shady area on bank to\nleft of Co. 1903. Slender naked scape 3-8 dm\nhigh, evergreen herb, round cordate leaves.\n\nLonnie Crawford 39                      28 June, 1962\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008250000000000001,
+      "total_cost": 0.00160375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 165
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "HERBARIUM\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010432\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nMacon County Diapensiaceae 19\nGalax aphylla L.\nHorse Cove Rd. in dark shady area on bank to\nleft of Co. 1903. Slender naked scape 3-8 cm\nhigh, evergreen herb, round cordate leaves.\nLonnie Crawford 39\n28 June, 1962\nN.C.\nCAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.280000000000001e-05,
+      "total_cost": 0.0007643000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 207
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2270,
+    "output": 570,
+    "cost_in": 0.000227,
+    "cost_out": 0.000228
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010432\n\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\n\nHerbarium of Western Carolina College\nNORTH CAROLINA  Diapensiaceae\nMacon County\n19 (handwritten)\n\nGalax aphylla L.\nHorse Cove Rd. in dark shady area on bank to\nleft of Co. 1903. Slender naked scape 3-8 dm\nhigh, evergreen herb, round cordate leaves.\n\nLonnie Crawford 39                      28 June, 1962\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHERBARIUM\nWESTERN CAROLINA U. HERBARIUM\nWCUH0010432\nGalax urceolata (Poiret) Brummitt\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nNORTH CAROLINA\nMacon County Diapensiaceae 19\nGalax aphylla L.\nHorse Cove Rd. in dark shady area on bank to\nleft of Co. 1903. Slender naked scape 3-8 cm\nhigh, evergreen herb, round cordate leaves.\nLonnie Crawford 39\n28 June, 1962\nN.C.\nCAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nPRESERVED\nMATERIAL\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WCUH0010432",
+    "scientificName": "Galax urceolata (Poiret) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poiret) Brummitt",
+    "collectedBy": "Lonnie Crawford",
+    "collectorNumber": "39",
+    "identifiedBy": "A.S. Weakley",
+    "identifiedDate": "2010-03-08",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "28 June, 1962",
+    "collectionDate": "1962-06-28",
+    "collectionDateEnd": "",
+    "habitat": "Dark shady area on bank",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Slender naked scape 3-8 cm high, evergreen herb, round cordate leaves.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Macon County",
+    "locality": "Horse Cove Rd. in dark shady area on bank to left of Co. 1903.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "WESTERN CAROLINA U. HERBARIUM\nper A.S. Weakley, Flora of the Southern and Mid-Atlantic\nStates, Working Draft of 8 March 2010\nHerbarium of Western Carolina College\nDiapensiaceae\n19 (handwritten)\nN.C.\nCAROLINA COLLEGE\nCarolina Biological Supply Company\nBurlington, NC 27215 & Gladstone, OR 97027\nLIVING\nCULTURES\nPRESERVED\nMATERIAL"
+  }
+}

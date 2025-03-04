@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "LIVING\nCULTURES\n\nCAROLINA\nPRESERVED\nMATERIALS\n\nCounty: Rutherford County  State: North Carolina\n\n*Galex aphylla* L.\n\nRhizomatous, acaulescent, glabrous herb. Leaves evergreen, ovate, dentate-serrate, base cordate. Flowers in a raceme, on a nonbracteate scape. Petals(5), white, separate, adnate to the staminal tube. Stamens united.\n\nShiloah, NC south on SR 1106 to Broad River, then downstream approx \u00bc mile and up a small unnamed stream approx \u00bc mile. Growing along the top bank of the stream.\n\nCollected by: James E. Padgett Date: 5-17-01\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. *16033*\n\nBOON015487\n\nHandwritten Text: *5/17/01*\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0010800000000000002,
+      "total_cost": 0.0018587500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 216
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "INCHES\nLIVING\nCULTURES\nMETRIC 11\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nCounty: Rutherford County State: North Carolina\nGalex aphylla L.\nRhizomatous, acaulescent, glabrous herb. Leaves evergreen, ovate,\ndentate-serrate, base cordate. Flowers in a raceme, on a nonbracteate\nscape. Petals(5), white, separate, adhearant to the staminal tube.\nStamens united.\nShiloah, NC south on SR 1106 to Broad River, then downstream approx\n\u00bc mile and up a small unnamed stream approc \u00bc mile. Growing along\nthe top bank of the stream.\nCollected by: James E. Padgett Date: 5-17-01\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 16033\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015487\n5/11/01\n\n\nGalex aphylla L.\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.00010240000000000001,
+      "total_cost": 0.0007839,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 256
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2342,
+    "output": 498,
+    "cost_in": 0.0002342,
+    "cost_out": 0.0001992
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nLIVING\nCULTURES\n\nCAROLINA\nPRESERVED\nMATERIALS\n\nCounty: Rutherford County  State: North Carolina\n\n*Galex aphylla* L.\n\nRhizomatous, acaulescent, glabrous herb. Leaves evergreen, ovate, dentate-serrate, base cordate. Flowers in a raceme, on a nonbracteate scape. Petals(5), white, separate, adnate to the staminal tube. Stamens united.\n\nShiloah, NC south on SR 1106 to Broad River, then downstream approx \u00bc mile and up a small unnamed stream approx \u00bc mile. Growing along the top bank of the stream.\n\nCollected by: James E. Padgett Date: 5-17-01\n\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. *16033*\n\nBOON015487\n\nHandwritten Text: *5/17/01*\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nINCHES\nLIVING\nCULTURES\nMETRIC 11\nCAROLINA\nBurlington, NC 272151-800-334-5551\nPRESERVED\nMATERIALS\nCounty: Rutherford County State: North Carolina\nGalex aphylla L.\nRhizomatous, acaulescent, glabrous herb. Leaves evergreen, ovate,\ndentate-serrate, base cordate. Flowers in a raceme, on a nonbracteate\nscape. Petals(5), white, separate, adhearant to the staminal tube.\nStamens united.\nShiloah, NC south on SR 1106 to Broad River, then downstream approx\n\u00bc mile and up a small unnamed stream approc \u00bc mile. Growing along\nthe top bank of the stream.\nCollected by: James E. Padgett Date: 5-17-01\nHERBARIUM\nAppalachian State\nUniversity\nBoone, N. C.\nNo. 16033\nAPPALACHIAN STATE UNIVERSITY HERBARIUM\nBOON015487\n5/11/01\n\n\nGalex aphylla L.\n\n",
+  "formatted_json": {
+    "catalogNumber": "BOON015487",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "James E. Padgett",
+    "collectorNumber": "16033",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-17-01",
+    "collectionDate": "2001-05-17",
+    "collectionDateEnd": "",
+    "habitat": "Growing along the top bank of the stream.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Rhizomatous, acaulescent, glabrous herb. Leaves evergreen, ovate, dentate-serrate, base cordate. Flowers in a raceme, on a nonbracteate scape. Petals(5), white, separate, adnate to the staminal tube. Stamens united.",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Rutherford County",
+    "locality": "Shiloah, nc south on sr 1106 to broad river, then downstream approx \u00bc mile and up a small unnamed stream approx \u00bc mile.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Living\nCultures\nCarolina\nPreserved\nMaterials\n5/11/01"
+  }
+}

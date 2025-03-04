@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell \nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nGalacaceae\n\nHERBARIUM OF\nGEORGIA EXPERIMENT STATION\n\n*Galax aphylla* L.\nHabitat:\n\nLocality: White, Ga. Bartow Co.\n5-1-31\nMrs. Amanda Byars Collector.\nDet. by. B.B.Higgins\n\nUNIV. OF GEORGIA\nHERBARIUM\n99601\n\nIMAGED 2013\n\nHandwritten Text:\n* White, Ga. Bartow Co.\n* 5-1-31\n* Mrs. Amanda Byars\n* B.B.Higgins\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00101,
+      "total_cost": 0.0017887500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 202
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Specimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nGalacaceae\nHERBARIUM OF\nGEORGIA EXPERIMENT STATION\nGalax aphylla\nHabitat:\nLocality: White, Ga. Bartow Co.\n5-1-31\nMrs. Amanda Byars\nDet. by B.B.Higgins\nUNIVERSITY OF GEORGIA\nGA059156\nUNIV. OF GEORGIA\nHERBARIUM\n99601\nCollector.\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.68e-05,
+      "total_cost": 0.0007483000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 167
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 495,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.00019800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = , based on average guard cell \nvolume of \u03bc\u00b2\nGuy L. Nesom, 1975\n\nGalacaceae\n\nHERBARIUM OF\nGEORGIA EXPERIMENT STATION\n\n*Galax aphylla* L.\nHabitat:\n\nLocality: White, Ga. Bartow Co.\n5-1-31\nMrs. Amanda Byars Collector.\nDet. by. B.B.Higgins\n\nUNIV. OF GEORGIA\nHERBARIUM\n99601\n\nIMAGED 2013\n\nHandwritten Text:\n* White, Ga. Bartow Co.\n* 5-1-31\n* Mrs. Amanda Byars\n* B.B.Higgins\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nSpecimen Examined for\nGeorgia Atlas Project\n9 November 2005\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = , based on average guard cell area\nvolume of \u03bc2\nGuy L. Nesom, 1975\nGalacaceae\nHERBARIUM OF\nGEORGIA EXPERIMENT STATION\nGalax aphylla\nHabitat:\nLocality: White, Ga. Bartow Co.\n5-1-31\nMrs. Amanda Byars\nDet. by B.B.Higgins\nUNIVERSITY OF GEORGIA\nGA059156\nUNIV. OF GEORGIA\nHERBARIUM\n99601\nCollector.\nIMAGED 2013\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "GA059156",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Mrs. Amanda Byars",
+    "collectorNumber": "",
+    "identifiedBy": "B.B.Higgins",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-1-31",
+    "collectionDate": "1931-05-01",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n =",
+    "guardCell": "Based on average guard cell area volume of \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Ga.",
+    "county": "Bartow Co.",
+    "locality": "White, Ga. Bartow Co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Specimen examined for\nGeorgia atlas project\n9 november 2005\nHerbarium of the university of north carolina\nGuy l. nesom, 1975\nGalacaceae\nHerbarium of\nGeorgia experiment station\nGalax aphylla l.\nUniversity of georgia\nUniv. of georgia\nHerbarium\n99601\nimaged 2013"
+  }
+}

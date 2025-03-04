@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087818\n\nUNIVERSITY OF LOUISVILLE\nDAVIES HERBARIUM\n25824\n\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\n*Galax aphylla* L.                               Harlan        County\n\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\nKEP-01-003-00130\n\nCollector(s)\nRich Hannan\nLoy R. Phillippe                                       Bledsoe, Ky. (handwritten)\nSeptember 12, 1978\n\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0011250000000000001,
+      "total_cost": 0.0019037500000000003,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 225
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Austin Peay State University\nHerbarium (APSC)\nAPSC0087818\nVERSITY OF LOVI\n179\nVILLE\nDAVIES HERBARIUM\n25824\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, ky\nSeptember 12, 19 78\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.920000000000001e-05,
+      "total_cost": 0.0007707,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 223
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2283,
+    "output": 535,
+    "cost_in": 0.0002283,
+    "cost_out": 0.000214
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087818\n\nUNIVERSITY OF LOUISVILLE\nDAVIES HERBARIUM\n25824\n\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\n*Galax aphylla* L.                               Harlan        County\n\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\nKEP-01-003-00130\n\nCollector(s)\nRich Hannan\nLoy R. Phillippe                                       Bledsoe, Ky. (handwritten)\nSeptember 12, 1978\n\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nAustin Peay State University\nHerbarium (APSC)\nAPSC0087818\nVERSITY OF LOVI\n179\nVILLE\nDAVIES HERBARIUM\n25824\nKENTUCKY NATURE PRESERVES COMMISSION\nKentucky Flora\nGalax aphylla L.\nHarlan County\nRich woods along edge of cliff on Pine Mt. (s.e. facing\nslope). 2.2 miles north of junction of US 421 and Ky.\n413 on US 421. Kentenia State Forest. Topo. Quad.\n3683-83 Lat. 36\u00b0 53' 57\" Long. 83\u00b0 18' 54\" Elev. about\n2600'\n\u039a\u0395\u03a1-01-003-00130\nCollector(s)\nRich Hannan\nLoy R. Phillippe\nBledsoe, ky\nSeptember 12, 19 78\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "APSC0087818",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Rich Hannan, Loy R. Phillippe",
+    "collectorNumber": "KEP-01-003-00130",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "September 12, 1978",
+    "collectionDate": "1978-09-12",
+    "collectionDateEnd": "",
+    "habitat": "Rich woods along edge of cliff on pine mt. (s.e. facing slope)",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "",
+    "country": "United states",
+    "stateProvince": "Kentucky",
+    "county": "Harlan",
+    "locality": "2.2 miles north of junction of us 421 and ky. 413 on us 421. kentenia state forest. topo. quad. 3683-83",
+    "verbatimCoordinates": "Lat. 36\u00b0 53' 57 Long. 83\u00b0 18' 54 Elev. about 2600'",
+    "decimalLatitude": "36.89916666666667",
+    "decimalLongitude": "-83.315",
+    "minimumElevationInMeters": "792",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Austin peay state university\nherbarium (apsc)\nuniversity of louisville\ndavies herbarium\n25824\nkentucky nature preserves commission\nkentucky flora\nbledsoe, ky"
+  }
+}

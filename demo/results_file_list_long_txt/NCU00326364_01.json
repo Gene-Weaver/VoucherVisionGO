@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n203611\n\nx-rite\ncolorchecker\nMSCCPPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326364\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\n\n*Galax aphylla* L.\nDate: 6/23/60\nDetermined by H. E. Ahles '61\n\nLocality: Bluff of small tributary of\nCape Fear, 8 miles below\nFayetteville, N.C.\n\nColl. Lionel Melvin\n\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text:\n*Galax aphylla* L.\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007849999999999999,
+      "total_cost": 0.00156375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 157
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n203611\nNORTH CAROLINA\nGalax aphylla L.\nDate: 6/23/60/\nLocality: Bluff of small tributary of\nCape Fear, 8 miles below\nFayetteville, N.C.\nColl. Lionel Melvin\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten text:\nGalax aphylla L.\nDetermined by H. E. Ahles 961\n---\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.36e-05,
+      "total_cost": 0.0007251,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 109
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2160,
+    "output": 488,
+    "cost_in": 0.00021600000000000002,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n203611\n\nx-rite\ncolorchecker\nMSCCPPPCC0411\nmm\n\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00326364\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\n\n*Galax aphylla* L.\nDate: 6/23/60\nDetermined by H. E. Ahles '61\n\nLocality: Bluff of small tributary of\nCape Fear, 8 miles below\nFayetteville, N.C.\n\nColl. Lionel Melvin\n\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten Text:\n*Galax aphylla* L.\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n203611\nNORTH CAROLINA\nGalax aphylla L.\nDate: 6/23/60/\nLocality: Bluff of small tributary of\nCape Fear, 8 miles below\nFayetteville, N.C.\nColl. Lionel Melvin\nCollected for the \"Flora of the Carolinas\"\n\nHandwritten text:\nGalax aphylla L.\nDetermined by H. E. Ahles 961\n---\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00326364",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Lionel Melvin",
+    "collectorNumber": "",
+    "identifiedBy": "H. E. Ahles",
+    "identifiedDate": "0061-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/23/60",
+    "collectionDate": "1960-06-23",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "",
+    "locality": "Bluff of small tributary of cape fear, 8 miles below fayetteville, n.c.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina herbarium\nx-rite\ncolorchecker\nMSCCPPPCC0411\nmm\nUniversity of north carolina herbarium\nHerbarium of the university of north carolina\nDate 6/23/60\n'61\nCollected for the flora of the carolinas\nhandwritten text"
+  }
+}

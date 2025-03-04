@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "THE HERBARIUM OF\n65911\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n*Galax urceolata* (Poir.) Brummitt\n1976 determined by: *L.J. Uttal*\n\nName *Galax aphylla* L. Date: April 25, 1970\nFamily\nLocality *James River* above Habitat Common under\nWrech *Island Creek*, *Rhododendron catawbiense*\n*Appomattox Co.*, Va. on steep wooded slopes\nAltitude 480 ft. opposite *Christian*\nCollected by *C.E. Stevens* #1695 *Island*.\nIdentified by *& W.F. Minor*\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059472\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000985,
+      "total_cost": 0.00176375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 197
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "THE HERBARIUM OF\n65911\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Buummit\ndate: 1976 determined by: Lf. Uttal\nName Galax aphylla L.\nFamily\nLocality James River above\nWrech Island Creek,\nCeppomattot Co., Va.\nAltitude 480 ft.\nCollected by C.E. Stevens # 1695\nIdentified by $ W.F. Minor\nDate: April 25, 1970\nHabitat Common under\nRhododendron catawbrense\non stap wooded slopes\nopposute Christian\nIsland.\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059472\n\n\nGalax aphylla\nGalax urceolata\nRhododendron catawbiense\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.2e-05,
+      "total_cost": 0.0007635000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 205
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2292,
+    "output": 521,
+    "cost_in": 0.00022920000000000004,
+    "cost_out": 0.0002084
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nTHE HERBARIUM OF\n65911\nVirginia Polytechnic Institute\nand State University\n\nVirginia Polytechnic Institute and State University\nHERBARIUM\n*Galax urceolata* (Poir.) Brummitt\n1976 determined by: *L.J. Uttal*\n\nName *Galax aphylla* L. Date: April 25, 1970\nFamily\nLocality *James River* above Habitat Common under\nWrech *Island Creek*, *Rhododendron catawbiense*\n*Appomattox Co.*, Va. on steep wooded slopes\nAltitude 480 ft. opposite *Christian*\nCollected by *C.E. Stevens* #1695 *Island*.\nIdentified by *& W.F. Minor*\n\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059472\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nTHE HERBARIUM OF\n65911\nVirginia Polytechnic Institute\nand State University\nMETRIC 1\n2\n3\n4\nVirginia Polytechnic Institute and State University\nHERBARIUM\nGalax urceolata (Poir.) Buummit\ndate: 1976 determined by: Lf. Uttal\nName Galax aphylla L.\nFamily\nLocality James River above\nWrech Island Creek,\nCeppomattot Co., Va.\nAltitude 480 ft.\nCollected by C.E. Stevens # 1695\nIdentified by $ W.F. Minor\nDate: April 25, 1970\nHabitat Common under\nRhododendron catawbrense\non stap wooded slopes\nopposute Christian\nIsland.\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0059472\n\n\nGalax aphylla\nGalax urceolata\nRhododendron catawbiense\n\n",
+  "formatted_json": {
+    "catalogNumber": "65911",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "C.e. Stevens",
+    "collectorNumber": "1695",
+    "identifiedBy": "L.j. Uttal, & w.f. Minor",
+    "identifiedDate": "1976-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L. date april 25, 1970",
+    "verbatimCollectionDate": "April 25, 1970",
+    "collectionDate": "1970-04-25",
+    "collectionDateEnd": "",
+    "habitat": "Common under rhododendron catawbiense on steep wooded slopes",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Va.",
+    "county": "Appomattox co.",
+    "locality": "James river above wrech island creek, opposite christian island.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "146",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "The herbarium of virginia polytechnic institute and state university\nvirginia polytechnic institute and state university\nherbarium\nmassey herbarium\nvirginia polytechnic institute\nvpi-v-0059472\nmetric 1\n2\n3\n4"
+  }
+}

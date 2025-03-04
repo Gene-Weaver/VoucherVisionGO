@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n84009\nHERBARIUM\n\nExchange Specimen From\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Oconee (S.C.)\n\n*Galax aphylla* L.\nBad Creek Reservoir Area. Road-\nside embankments among *Rhododendron maximum* thickets.\n\nCollector C.L. Rodgers  Date 5-29-73\n(Handwritten) Joe Green, Jr. 73253\nNL00134442\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000615,
+      "total_cost": 0.00139375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 123
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "NORTHEAST LOUISIANA UNIVERSITY\n84009\nHERBARIUM\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nExchange Specimen From\nHerbarium of Furman University\nGreenville, South Carolina\nOconee (S.C.)\nGalax aphylla L.\nBad Creek Reservoir Area. Road-\nside embankments among Rhododendron\nmaximum thickets.\nCounty\nCollector\nC.L. Rodgers\nJoe Green, Jr. 73253\nDate 5-29-73\nUniversity of Louisiana at Monroe\nNL00134442\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.319999999999999e-05,
+      "total_cost": 0.0007447,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 158
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2166,
+    "output": 487,
+    "cost_in": 0.0002166,
+    "cost_out": 0.00019480000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n84009\nHERBARIUM\n\nExchange Specimen From\n\nHerbarium of Furman University\nGreenville, South Carolina\n\nCounty Oconee (S.C.)\n\n*Galax aphylla* L.\nBad Creek Reservoir Area. Road-\nside embankments among *Rhododendron maximum* thickets.\n\nCollector C.L. Rodgers  Date 5-29-73\n(Handwritten) Joe Green, Jr. 73253\nNL00134442\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nNORTHEAST LOUISIANA UNIVERSITY\n84009\nHERBARIUM\nKodak Gray Scale\nCYM\nKodak Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nExchange Specimen From\nHerbarium of Furman University\nGreenville, South Carolina\nOconee (S.C.)\nGalax aphylla L.\nBad Creek Reservoir Area. Road-\nside embankments among Rhododendron\nmaximum thickets.\nCounty\nCollector\nC.L. Rodgers\nJoe Green, Jr. 73253\nDate 5-29-73\nUniversity of Louisiana at Monroe\nNL00134442\n\n\nGalax aphylla\nRhododendron maximum\n\n",
+  "formatted_json": {
+    "catalogNumber": "NL00134442",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "C.l. Rodgers, Joe Green, Jr.",
+    "collectorNumber": "73253",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5-29-73",
+    "collectionDate": "1973-05-29",
+    "collectionDateEnd": "",
+    "habitat": "Roadside embankments among Rhododendron maximum thickets.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "South carolina",
+    "county": "Oconee",
+    "locality": "Bad creek reservoir area.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Northeast louisiana university\n84009\nHerbarium\nExchange specimen from\nHerbarium of furman university\nGreenville, south carolina\nUniversity of louisiana at monroe\nKodak gray scale\ncym\nkodak color control patches\nblue\ncyan\ngreen\nyellow\nred\nmagenta\nwhite\n3/color\nblack"
+  }
+}

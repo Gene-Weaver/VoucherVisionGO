@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNA\nHERBARIUM\n43079\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA\n\n*Galax aphylla* L.\n\nMixed woods between river and sandstone bluff; moist soil; along edge\nof rock cliff; abundant; corolla white\n\nLittle River Canyon just below St. Rt. 35 bridge, ca. 6 mi. due SE of\nFort Payne\n\nDEKALB CO.\n11 MAY 1987                                         T/R/S: T7SR10E30\nRobert R. Haynes & Frank D. Bowers 9154\n\nUNA00013979\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00097,
+      "total_cost": 0.00174875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 194
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "UNA\nThe University\nof Alabama\nHerbarium\ncm\nUNA00013979\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA\nHERBARIUM\n43079\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R.. Haynes, 2001\nDiapensiaceal\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA\nGalax aphylla L.\nMixed woods between river and sandstone bluff; moist soil; along edge\nof rock cliff; abundant; corolla white\nLittle River Canyon just below St. Rt. 35 bridge, ca. 6 mi, due SE of\nFort Payne\nDEKALB CO.\n11 MAY 1987\nT/R/S: T7SR10E30\nRobert R. Haynes & Frank D. Bowers 9154\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 8.48e-05,
+      "total_cost": 0.0007663000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 212
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2289,
+    "output": 514,
+    "cost_in": 0.00022889999999999998,
+    "cost_out": 0.0002056
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNA\nHERBARIUM\n43079\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\n\n= *Galax urceolata* (Poir.) Brummitt\ndet. Robert R. Haynes, 2001\n\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA\n\n*Galax aphylla* L.\n\nMixed woods between river and sandstone bluff; moist soil; along edge\nof rock cliff; abundant; corolla white\n\nLittle River Canyon just below St. Rt. 35 bridge, ca. 6 mi. due SE of\nFort Payne\n\nDEKALB CO.\n11 MAY 1987                                         T/R/S: T7SR10E30\nRobert R. Haynes & Frank D. Bowers 9154\n\nUNA00013979\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nUNA\nThe University\nof Alabama\nHerbarium\ncm\nUNA00013979\nUNIVERSITY OF ALABAMA HERBARIUM\nUNA\nHERBARIUM\n43079\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nGalax urceolata (Poir.) Brummitt\ndet. Robert R.. Haynes, 2001\nDiapensiaceal\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA\nGalax aphylla L.\nMixed woods between river and sandstone bluff; moist soil; along edge\nof rock cliff; abundant; corolla white\nLittle River Canyon just below St. Rt. 35 bridge, ca. 6 mi, due SE of\nFort Payne\nDEKALB CO.\n11 MAY 1987\nT/R/S: T7SR10E30\nRobert R. Haynes & Frank D. Bowers 9154\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "UNA00013979",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Robert R. Haynes, Frank D. Bowers",
+    "collectorNumber": "9154",
+    "identifiedBy": "Robert R. Haynes",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "11 MAY 1987",
+    "collectionDate": "1987-05-11",
+    "collectionDateEnd": "",
+    "habitat": "Mixed woods between river and sandstone bluff; moist soil; along edge of rock cliff; abundant",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Corolla white",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Alabama",
+    "county": "Dekalb Co.",
+    "locality": "Little River Canyon just below St. Rt. 35 bridge, ca. 6 mi. due SE of Fort Payne",
+    "verbatimCoordinates": "T/R/S T7SR10E30",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "UNA\nHERBARIUM\n43079\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nHERBARIUM OF THE UNIVERSITY OF ALABAMA\nPLANTS OF ALABAMA"
+  }
+}

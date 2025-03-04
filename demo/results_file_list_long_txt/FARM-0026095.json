@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\n\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\nWoods in Saddle of\nShort Hills Mt.,\nRockbridge Co. July 9, 1967\nCollected by: A. M. Harvill 16935\nDetermined by:\n\n\n(Handwritten text identified with italics)\n\n\n*Galax urceolata*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005449999999999999,
+      "total_cost": 0.00132375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 109
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026095\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nGalax aphylla hi\nWoods in Saddle of\nShort Hills 374,\nRockbridge W.\nJuly 9, 1967\nCollected by: a m Harvill\n16935\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.64e-05,
+      "total_cost": 0.0007379000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 141
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2147,
+    "output": 513,
+    "cost_in": 0.00021470000000000001,
+    "cost_out": 0.0002052
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\n\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\nWoods in Saddle of\nShort Hills Mt.,\nRockbridge Co. July 9, 1967\nCollected by: A. M. Harvill 16935\nDetermined by:\n\n\n(Handwritten text identified with italics)\n\n\n*Galax urceolata*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026095\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn=6, based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA VIRGINICA\nGalax aphylla hi\nWoods in Saddle of\nShort Hills 374,\nRockbridge W.\nJuly 9, 1967\nCollected by: a m Harvill\n16935\nDetermined by:\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026095",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "A. m Harvill",
+    "collectorNumber": "16935",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 9, 1967",
+    "collectionDate": "1967-07-09",
+    "collectionDateEnd": "",
+    "habitat": "Woods in Saddle of",
+    "chromosomeCount": "n=6",
+    "guardCell": "n=6, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Rockbridge",
+    "locality": "Short Hills 374",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nFLORA VIRGINICA\nGalax aphylla hi\nRockbridge W.\nDetermined by\nFARM\nHarvill-Stevens\nHerbarium\n\nGalax urceolata\nGalax aphylla"
+  }
+}

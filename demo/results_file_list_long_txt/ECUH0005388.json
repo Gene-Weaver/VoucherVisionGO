@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "East Carolina University\nHerbarium\nECUH0005388\n\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03083\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                                     5/19/67\nPlants of the Southeastern United States\n\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005600000000000001,
+      "total_cost": 0.00133875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 112
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "East Carolina University\nHerbarlum\nECUH0005388\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03083\nA 1\n2\n3\n4\n5\n6\nTIFFEN\u00ae Gray Scale\nR\nG\nB\nW\nG\nK\nC\nM\nM 8\n9\n10 11 12 13 14 15\nB 17 18 19\nInches\n1\n2\n3\n4\n5\n9\n7\n8\n6\n10\n11\n13 12\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n1241\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 0.0001008,
+      "total_cost": 0.0007823,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 252
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2243,
+    "output": 432,
+    "cost_in": 0.00022430000000000003,
+    "cost_out": 0.0001728
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEast Carolina University\nHerbarium\nECUH0005388\n\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03083\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\n\n*Galax aphylla* L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\n\nR. C. Dunton                                                     5/19/67\nPlants of the Southeastern United States\n\n\nHandwritten Text: *2200'*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nEast Carolina University\nHerbarlum\nECUH0005388\nHERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03083\nA 1\n2\n3\n4\n5\n6\nTIFFEN\u00ae Gray Scale\nR\nG\nB\nW\nG\nK\nC\nM\nM 8\n9\n10 11 12 13 14 15\nB 17 18 19\nInches\n1\n2\n3\n4\n5\n9\n7\n8\n6\n10\n11\n13 12\n14\n15\n16\n17\n18\n19\nCentimetres TIFFEN\u00ae Color Control Patches\nBlue\nCyan\nGreen\nYellow\nRed\nMagenta\nWhite\n3/Color\nBlack\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nBuncombe County\nGalax aphylla L.\nWarren Wilson College Forest Area 7. Elevation\n2200'.\nR. C. Dunton\n5/19/67\nPlants of the Southeastern United States\n1241\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ECUH0005388",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "R. C. Dunton",
+    "collectorNumber": "1241",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "5/19/67",
+    "collectionDate": "1967-05-19",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Buncombe County",
+    "locality": "Warren Wilson College Forest Area 7. Elevation 2200'.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "671",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "HERBARIUM OF\nEAST CAROLINA UNIVERSITY\n03083\nPlants of the Southeastern United States"
+  }
+}

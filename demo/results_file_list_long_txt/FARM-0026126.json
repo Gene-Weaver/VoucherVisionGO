@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "HERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFlora of Virginia\n*Galax aphylla* L.\nbelow Reekes mill, near Wightman,\nMecklenburg Co.\nel. 300 ft.\n\nMassed under *Kalmia* on steep\nN-facing bluffs of the Meherrin R. opposite\nmouth of north Meherrin R.\nApr. 27, 1975\nCharles E. Stevens No. 10,143\nDet. \"  A. Harvill\n\n(Handwritten text identified above)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0008700000000000001,
+      "total_cost": 0.00164875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 174
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026126\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nvolume of 634 \u03bc2\nGuy L. Nesom, 1975\n\nFlora of Virginia\nGalax aphylla L.\nbelow Reckes mill, near Wighitman,\nMecklenburg Co.\nel. 300 ft.\nmassed under Kalmia on steep\nN-facing bluffs of Meherrin R. opposite\nmouth of North Meherrin R.\nApr. 27, 1975\nCharles E. Stevens\nNo. 10,193\nDet.\n& A. Harvill\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.88e-05,
+      "total_cost": 0.0007603,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 197
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2255,
+    "output": 555,
+    "cost_in": 0.0002255,
+    "cost_out": 0.00022200000000000003
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 12 , based on average guard cell area\nGuy L. Nesom, 1975\n\nFlora of Virginia\n*Galax aphylla* L.\nbelow Reekes mill, near Wightman,\nMecklenburg Co.\nel. 300 ft.\n\nMassed under *Kalmia* on steep\nN-facing bluffs of the Meherrin R. opposite\nmouth of north Meherrin R.\nApr. 27, 1975\nCharles E. Stevens No. 10,143\nDet. \"  A. Harvill\n\n(Handwritten text identified above)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026126\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nvolume of 634 \u03bc2\nGuy L. Nesom, 1975\n\nFlora of Virginia\nGalax aphylla L.\nbelow Reckes mill, near Wighitman,\nMecklenburg Co.\nel. 300 ft.\nmassed under Kalmia on steep\nN-facing bluffs of Meherrin R. opposite\nmouth of North Meherrin R.\nApr. 27, 1975\nCharles E. Stevens\nNo. 10,193\nDet.\n& A. Harvill\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026126",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "Charles E. Stevens",
+    "collectorNumber": "10,193",
+    "identifiedBy": "A. Harvill",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "Apr. 27, 1975",
+    "collectionDate": "1975-04-27",
+    "collectionDateEnd": "",
+    "habitat": "Massed under Kalmia on steep N-facing bluffs of Meherrin r. opposite mouth of north Meherrin r.",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell area volume of 634 \u03bc2",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Mecklenburg Co.",
+    "locality": "Below reckes mill, near wighitman",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "91",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Harvill-Stevens Herbarium\nLongwood University\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGuy L. Nesom, 1975\nFlora of Virginia\nGalax aphylla L.\nel. 300 ft.\nDet.\n& A. Harvill\nFARM\nHarvill-Stevens\nHerbarium\nGalax urceolata\nGalax aphylla"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "UNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n351428\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWest facing slope north of\nBent Creek.\n\nAppomattox Co.\n\nJune 13, 1967\n\nCollected by: A M Harvill 16569 *(handwritten)*\nDetermined by:\n\nNCU00332619\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000495,
+      "total_cost": 0.0012737500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 99
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FLORA VIRGINICA\n\nGalax aphylla L.\n\nWest facing slope north of\nBent Creek.\n\nAppomattox Co.\n\nJune 13, 1967\n\nCollected by: A M Harvill 16569\n\nDetermined by:\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 2.48e-05,
+      "total_cost": 0.0007063,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 62
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2034,
+    "output": 443,
+    "cost_in": 0.00020339999999999998,
+    "cost_out": 0.0001772
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n351428\n\nFLORA VIRGINICA\n\n*Galax aphylla* L.\n\nWest facing slope north of\nBent Creek.\n\nAppomattox Co.\n\nJune 13, 1967\n\nCollected by: A M Harvill 16569 *(handwritten)*\nDetermined by:\n\nNCU00332619\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFLORA VIRGINICA\n\nGalax aphylla L.\n\nWest facing slope north of\nBent Creek.\n\nAppomattox Co.\n\nJune 13, 1967\n\nCollected by: A M Harvill 16569\n\nDetermined by:\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "351428",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "A M Harvill",
+    "collectorNumber": "16569",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 13, 1967",
+    "collectionDate": "1967-06-13",
+    "collectionDateEnd": "",
+    "habitat": "West facing slope north of\nBent Creek.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "Appomattox Co.",
+    "locality": "West facing slope north of Bent Creek.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "University of north carolina\nHerbarium\nFlora virginica\nCollected by a m harvill 16569 (handwritten)\ndetermined by\nNCU00332619\ngalax aphylla l.\ngalax aphylla"
+  }
+}

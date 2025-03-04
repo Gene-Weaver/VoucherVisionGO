@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Hydrophyllaceae\n274\nHERBARIUM OF PAUL O. SCHALLERT, B.S., M.A., M.D.\nBox 262\nAltamonte Springs, Florida\nJune 20\n1960\n\n*Nematostylis* *aphylla*, &\nRocky place, 7 mi. S.E. Murphy, NC\nCherokee Co.\nele. 1800 ft\n(Handwritten text)\n\n\n*Phacelia aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0005499999999999999,
+      "total_cost": 0.00132875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 110
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Herbarium, University of Central Florida\nFTU0016284\nHyDrophyllaceae\nHERBARIUM OF PAUL O. SCHALLERT, B.S., M.A., M.D.\nAltamonte Springs, Florida\nBox 262\nbulax aphylla, &\nRocky plane, 7m. S. E. Murphy. NC\ncherokee @\nele. 1800 #\nJune 20\n1960\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 4.3200000000000007e-05,
+      "total_cost": 0.0007247,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 108
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2086,
+    "output": 508,
+    "cost_in": 0.00020860000000000003,
+    "cost_out": 0.0002032
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHydrophyllaceae\n274\nHERBARIUM OF PAUL O. SCHALLERT, B.S., M.A., M.D.\nBox 262\nAltamonte Springs, Florida\nJune 20\n1960\n\n*Nematostylis* *aphylla*, &\nRocky place, 7 mi. S.E. Murphy, NC\nCherokee Co.\nele. 1800 ft\n(Handwritten text)\n\n\n*Phacelia aphylla*\n\n\ngemini-2.0-flash OCR:\nHerbarium, University of Central Florida\nFTU0016284\nHyDrophyllaceae\nHERBARIUM OF PAUL O. SCHALLERT, B.S., M.A., M.D.\nAltamonte Springs, Florida\nBox 262\nbulax aphylla, &\nRocky plane, 7m. S. E. Murphy. NC\ncherokee @\nele. 1800 #\nJune 20\n1960\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FTU0016284",
+    "scientificName": "Nematostylis aphylla",
+    "genus": "Nematostylis",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "&",
+    "collectedBy": "Paul o. Schallert",
+    "collectorNumber": "274",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Phacelia aphylla, Galax aphylla",
+    "verbatimCollectionDate": "June 20\n1960",
+    "collectionDate": "1960-06-20",
+    "collectionDateEnd": "",
+    "habitat": "Rocky place",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Nc",
+    "county": "Cherokee co.",
+    "locality": "7 mi. S.e. Murphy",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "549",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "Herbarium, university of central florida\nhydrophyllaceae\nherbarium of paul o. Schallert, b.s., m.a., m.d.\naltamonte springs, florida\nbox 262\nbulax aphylla, &\nrocky plane, 7m. s. e. Murphy. nc\ncherokee @\nele. 1800 #\ngalax aphylla"
+  }
+}

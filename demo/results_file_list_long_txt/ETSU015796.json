@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015796\n\nETSU Herbarium\nNo. 3279\n7458\n\nFamily: Diapensiaceae\nGenus: *Galax*\nSpecies: *aphylla* L.\nCommon Name: galax\nLocality: open woods\nHabitat: Unaka Range, Elk R. Gorge\nDate: 3-26-50\nCollector: Houchens *(handwritten)*\n\n\n*Note:* Italicized words indicate scientific names.\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00057,
+      "total_cost": 0.0013487500000000001,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 114
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "EAST TENNESSEE STATE UNIVERSITY\nETSU015796\nITSU Herbarium\nNo. 3279 7458\nFamily Diapensiaceae\nGenus Galax\nSpecies aphylla L.\nCommon Name galax\nLocality open woods\nHabitat Unaka Range, Elk R. Gorge\nDate 3-26-50\nCollector Houchens\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 3.3600000000000004e-05,
+      "total_cost": 0.0007151,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 84
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2080,
+    "output": 398,
+    "cost_in": 0.000208,
+    "cost_out": 0.00015920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015796\n\nETSU Herbarium\nNo. 3279\n7458\n\nFamily: Diapensiaceae\nGenus: *Galax*\nSpecies: *aphylla* L.\nCommon Name: galax\nLocality: open woods\nHabitat: Unaka Range, Elk R. Gorge\nDate: 3-26-50\nCollector: Houchens *(handwritten)*\n\n\n*Note:* Italicized words indicate scientific names.\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nEAST TENNESSEE STATE UNIVERSITY\nETSU015796\nITSU Herbarium\nNo. 3279 7458\nFamily Diapensiaceae\nGenus Galax\nSpecies aphylla L.\nCommon Name galax\nLocality open woods\nHabitat Unaka Range, Elk R. Gorge\nDate 3-26-50\nCollector Houchens\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "ETSU015796",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Houchens",
+    "collectorNumber": "3279",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3-26-50",
+    "collectionDate": "1950-03-26",
+    "collectionDateEnd": "",
+    "habitat": "Unaka range, elk r. gorge",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Tennessee",
+    "county": "",
+    "locality": "Open woods",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "ETSU Herbarium\nNo. 7458\nFamily Diapensiaceae\nCommon Name galax"
+  }
+}

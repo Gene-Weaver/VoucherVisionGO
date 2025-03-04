@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "GEORGE B. ROSSBACH\nHERBARIUM\nWEST VIRGINIA WESLEYAN\nCOLLEGE\nBUCKHANNON, WV USA 26201\n\nWVW 019294\nWEST VIRGINIA WESLEYAN\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\n\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\n\nG. B. Rossbach     2642     6/18/51\n(Handwritten \"2642\" and \"6/18/51\")\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000775,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "GEORGE B. ROSSBACH\nHERBARIUM\nWEST VIRGINIA WESLEYAN\nCOLLEGE\nBUCKHANNON. WV USA 26201\nx-rite\ncolorchecker CLASSIC\n1 cm\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\nmm\nnm\nmn\nL\nPLANTS OF VIRGINIA\nGalax aphylla L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach\n2642\n6/18/61\nWEST VIRGINIA WESLEYAN\nWVW 019294\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.080000000000001e-05,
+      "total_cost": 0.0007723000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 227
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2265,
+    "output": 581,
+    "cost_in": 0.00022650000000000003,
+    "cost_out": 0.0002324
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGEORGE B. ROSSBACH\nHERBARIUM\nWEST VIRGINIA WESLEYAN\nCOLLEGE\nBUCKHANNON, WV USA 26201\n\nWVW 019294\nWEST VIRGINIA WESLEYAN\n\nPLANTS OF VIRGINIA\n*Galax aphylla* L.\n\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\n\nG. B. Rossbach     2642     6/18/51\n(Handwritten \"2642\" and \"6/18/51\")\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nGEORGE B. ROSSBACH\nHERBARIUM\nWEST VIRGINIA WESLEYAN\nCOLLEGE\nBUCKHANNON. WV USA 26201\nx-rite\ncolorchecker CLASSIC\n1 cm\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\nmm\nnm\nmn\nL\nPLANTS OF VIRGINIA\nGalax aphylla L.\nThin humus & sandstone-clay soil, woods of oaks,\nwhite pine (at one time also chestnut), Blue\nRidge Nat. Parkway, near Piper's Gap, se. of Galax,\nsw. Carroll Co.\nG. B. Rossbach\n2642\n6/18/61\nWEST VIRGINIA WESLEYAN\nWVW 019294\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "WVW 019294",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "G. B. Rossbach",
+    "collectorNumber": "2642",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "6/18/61",
+    "collectionDate": "1961-06-18",
+    "collectionDateEnd": "",
+    "habitat": "Thin humus & sandstone-clay soil, woods of oaks, white pine (at one time also chestnut), Blue Ridge Nat. Parkway, near Piper's Gap, se. of Galax, sw. Carroll co.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "Usa",
+    "stateProvince": "Virginia",
+    "county": "Carroll co.",
+    "locality": "Blue ridge nat. parkway, near piper's gap, se. of galax, sw. carroll co.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "George b. rossbach\nherbarium\nwest virginia wesleyan\ncollege\nbuckhannon. wv usa 26201\nx-rite\ncolorchecker classic\n1 cm\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\nmm\nnm\nmn\nl\nplants of virginia\nwest virginia wesleyan"
+  }
+}

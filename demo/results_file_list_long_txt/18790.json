@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "WILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\n18790\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nNew Kent Co.\n*Galax aphylla* L.\n10 June 1974\n\nGrowing on ravine side in Mountain Laurel\nthicket, shade of mixed deciduous woods; not\nfar from logging trail adjoining Rt. 600 0.2\nmiles east of Goddins Pond dam. Occasional.\nP.O. Barhamsville.\nCollector: Douglas Soltis\nNo. 127\n\n\n*Handwritten text: 18790*\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000805,
+      "total_cost": 0.00158375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 161
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "WILLIAM & MARY\nmm 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150\nNO. 305 ME\n16ths\n2\n3\nGENERAL 4\nMADE IN U.S.A.\n5\nSTAINLESS STEEL\n6\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n18790\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nNew Kent Co.\nGalax aphylla L.\n10 June 1974\nGrowing on ravine side in Mountain Laurel\nthicket, shade of mixed deciduous woods; not\nfar from logging trail adjoining Rt. 600 0.2\nmiles east of Goddins Pond dam. Occasional.\nP.O. Barhamsville.\nCollector: Douglas Soltis\nNo. 127\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 9.360000000000001e-05,
+      "total_cost": 0.0007751,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 234
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2271,
+    "output": 473,
+    "cost_in": 0.00022710000000000002,
+    "cost_out": 0.00018920000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nWILLIAM & MARY\nCHARTERED 1693\n\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n\n18790\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\n\nNew Kent Co.\n*Galax aphylla* L.\n10 June 1974\n\nGrowing on ravine side in Mountain Laurel\nthicket, shade of mixed deciduous woods; not\nfar from logging trail adjoining Rt. 600 0.2\nmiles east of Goddins Pond dam. Occasional.\nP.O. Barhamsville.\nCollector: Douglas Soltis\nNo. 127\n\n\n*Handwritten text: 18790*\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nWILLIAM & MARY\nmm 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150\nNO. 305 ME\n16ths\n2\n3\nGENERAL 4\nMADE IN U.S.A.\n5\nSTAINLESS STEEL\n6\nCHARTERED 1693\nHERBARIUM OF THE COLLEGE OF\nWILLIAM AND MARY\nWilliamsburg, Virginia\nVIRGINIA\n18790\nHERBARIUM, COLLEGE\nOF\nWILLIAM & MARY\nNew Kent Co.\nGalax aphylla L.\n10 June 1974\nGrowing on ravine side in Mountain Laurel\nthicket, shade of mixed deciduous woods; not\nfar from logging trail adjoining Rt. 600 0.2\nmiles east of Goddins Pond dam. Occasional.\nP.O. Barhamsville.\nCollector: Douglas Soltis\nNo. 127\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "18790",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Douglas Soltis",
+    "collectorNumber": "127",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "10 June 1974",
+    "collectionDate": "1974-06-10",
+    "collectionDateEnd": "",
+    "habitat": "Growing on ravine side in mountain laurel thicket, shade of mixed deciduous woods",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "Occasional",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "Virginia",
+    "county": "New Kent Co.",
+    "locality": "Not far from logging trail adjoining rt. 600 0.2 miles east of goddins pond dam. P.o. barhamsville.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "William & mary\nChartered 1693\nHerbarium of the college of\nWilliam and mary\nWilliamsburg, virginia\nVirginia\nHerbarium, college\nof\nWilliam & mary"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "x-rite\ncolorchecker\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n472699\n\nNCU00080588\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for An Ecosystematic Analysis of the \nVegetation of Hanging Rock State Park, Dan-\nbury, North Carolina (Yolande McCurdy, 1975);\nThesis in University of North Carolina library.\n\nHerbarium of the University of North Carolina\nHANGING ROCK STATE PARK\nStokes Co., North Carolina\n\n*Galax aphylla* L.\n\nCovering floodplain area along Cascade\nCreek above lake, in low woods tran-\nsitional between Mixed Oak-Dogwood\nand Mixed Oak-Rhododendron-*Galax*.\n\nYolande McCurdy 162 June 23, 1973\n\nHandwritten Text: *Galax aphylla* L., Yolande McCurdy\n\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.001,
+      "total_cost": 0.0017787500000000002,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 200
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "xrite\ncolorchecker\nMSCCPPCC0411\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n472699\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080588\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for An Ecosystematic Analysis of the\nVegetation of Hanging Rock State Park, Dan-\nbary, North Carolina (Yolande McCurdy, 1975);\nThesis in University of North Carolina library.\nHerbarium of the University of North Carolina\nHANGING ROCK STATE PARK\nStokes Co., North Carolina\nGalax aphylla L.\nCovering floodplain area along Cascade\nCreek above lake, in low woods tran-\nsitional between Mixed Oak-Dogwood\nand Mixed Oak-Rhododendron-Galax.\nYolande McCurdy\n162 June 23,1973\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.800000000000001e-05,
+      "total_cost": 0.0007595,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 195
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2288,
+    "output": 534,
+    "cost_in": 0.00022880000000000003,
+    "cost_out": 0.0002136
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nx-rite\ncolorchecker\n\nUNIVERSITY OF NORTH CAROLINA\nHERBARIUM\n472699\n\nNCU00080588\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for An Ecosystematic Analysis of the \nVegetation of Hanging Rock State Park, Dan-\nbury, North Carolina (Yolande McCurdy, 1975);\nThesis in University of North Carolina library.\n\nHerbarium of the University of North Carolina\nHANGING ROCK STATE PARK\nStokes Co., North Carolina\n\n*Galax aphylla* L.\n\nCovering floodplain area along Cascade\nCreek above lake, in low woods tran-\nsitional between Mixed Oak-Dogwood\nand Mixed Oak-Rhododendron-*Galax*.\n\nYolande McCurdy 162 June 23, 1973\n\nHandwritten Text: *Galax aphylla* L., Yolande McCurdy\n\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nxrite\ncolorchecker\nMSCCPPCC0411\nUNIVERSITY OF NORTH\nHERBARIUM\nCAROLINA\n472699\nUNIVERSITY OF NORTH CAROLINA HERBARIUM\nNCU00080588\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nVoucher for An Ecosystematic Analysis of the\nVegetation of Hanging Rock State Park, Dan-\nbary, North Carolina (Yolande McCurdy, 1975);\nThesis in University of North Carolina library.\nHerbarium of the University of North Carolina\nHANGING ROCK STATE PARK\nStokes Co., North Carolina\nGalax aphylla L.\nCovering floodplain area along Cascade\nCreek above lake, in low woods tran-\nsitional between Mixed Oak-Dogwood\nand Mixed Oak-Rhododendron-Galax.\nYolande McCurdy\n162 June 23,1973\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "NCU00080588",
+    "scientificName": "Galax aphylla",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "Yolande McCurdy",
+    "collectorNumber": "162",
+    "identifiedBy": "Yolande McCurdy",
+    "identifiedDate": "1973-06-23",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "June 23, 1973",
+    "collectionDate": "1973-06-23",
+    "collectionDateEnd": "",
+    "habitat": "Covering floodplain area along cascade creek above lake, in low woods transitional between mixed oak-dogwood and mixed oak-rhododendron-galax",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Stokes co.",
+    "locality": "Hanging rock state park",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "x-rite\ncolorchecker\nuniversity of north carolina herbarium\n472699\nherbarium of the university of north carolina\nvoucher for an ecosystematic analysis of the\nvegetation of hanging rock state park, dan-\nbury, north carolina (yolande mccurdy, 1975);\nthesis in university of north carolina library.\nherbarium of the university of north carolina\ngalax aphylla"
+  }
+}

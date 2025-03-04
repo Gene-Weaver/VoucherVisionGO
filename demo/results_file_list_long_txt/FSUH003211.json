@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "FROSTBURG\nFrostburg State University\nHerbarium (FSUH)\ncopyright reserved\n\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\n\nHaywood-Jackson County line\n*Galax aphylla* L.\n\nBeech forest at 5600', Herring Knob\n\nGeorge S. Ramseur 3437 July 12, 1957 *(Handwritten)*\n\nCollected for the \"Flora of the Carolinas\"\n\nFSUH003211\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0006500000000000001,
+      "total_cost": 0.00142875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 130
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "FROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\n0\n1\n2\n3\n4\n5\n6\n7 8\ncm\n9 10\ncopyright reserved\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHaywood-Jackson County line\nGalax aphylla L.\nBeech forest at 5600', Herring Knob\nGeorge S. Ramseur\n3437\nJuly 12, 1957\nCollected for the \"Flora of the Carolinas\"\nFrostburg State University Herbarium\nFSUH003211\n\n\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.2e-05,
+      "total_cost": 0.0007435,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 155
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2188,
+    "output": 472,
+    "cost_in": 0.0002188,
+    "cost_out": 0.0001888
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nFROSTBURG\nFrostburg State University\nHerbarium (FSUH)\ncopyright reserved\n\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\n\nHerbarium of the University of North Carolina\nNORTH CAROLINA\n\nHaywood-Jackson County line\n*Galax aphylla* L.\n\nBeech forest at 5600', Herring Knob\n\nGeorge S. Ramseur 3437 July 12, 1957 *(Handwritten)*\n\nCollected for the \"Flora of the Carolinas\"\n\nFSUH003211\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nFROSTBURG Frostburg State University\nSTATE UNIVERSITY\nHerbarium (FSUH)\n0\n1\n2\n3\n4\n5\n6\n7 8\ncm\n9 10\ncopyright reserved\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nHaywood-Jackson County line\nGalax aphylla L.\nBeech forest at 5600', Herring Knob\nGeorge S. Ramseur\n3437\nJuly 12, 1957\nCollected for the \"Flora of the Carolinas\"\nFrostburg State University Herbarium\nFSUH003211\n\n\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FSUH003211",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "George S. Ramseur",
+    "collectorNumber": "3437",
+    "identifiedBy": "",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 12, 1957",
+    "collectionDate": "1957-07-12",
+    "collectionDateEnd": "",
+    "habitat": "Beech forest",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Haywood-Jackson County line",
+    "locality": "Haywood-Jackson County line, Herring Knob",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1707",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "FROSTBURG\nFrostburg State University\nHerbarium (FSUH)\ncopyright reserved\nHERBARIUM\nof\nFROSTBURG STATE COLLEGE\nFrostburg, Maryland\nHerbarium of the University of North Carolina\nNORTH CAROLINA\nCollected for the Flora of the Carolinas"
+  }
+}

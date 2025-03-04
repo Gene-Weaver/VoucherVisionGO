@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060062\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n*(Handwritten)* Giles\n*Galax aphylla* L.\nMt. Lake Giles Co.\n\nHerbarium 28,539\nBiology Department\nVirginia Polytechnic Institute\n\nW.B.M.\nA. B. Massey\nDate 7/31/47 *(Handwritten)*\n\n*Galax urceolata*\n*Salax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007949999999999999,
+      "total_cost": 0.00157375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 159
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Massey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060062\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of545\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCounty\nGiles\nGalax aphylla L.\nMt. Lake\nW.B.M\nA. B. Massey.\nDate\n7/31/75\nHerbarium 28,559\nBiology Department\nVirginia Polytechnic Institute\n\n\nGalax urceolata\nBalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.120000000000001e-05,
+      "total_cost": 0.0007427,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 153
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2211,
+    "output": 490,
+    "cost_in": 0.0002211,
+    "cost_out": 0.000196
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060062\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummit\nn = 6 based on average guard cell area\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\n\n*(Handwritten)* Giles\n*Galax aphylla* L.\nMt. Lake Giles Co.\n\nHerbarium 28,539\nBiology Department\nVirginia Polytechnic Institute\n\nW.B.M.\nA. B. Massey\nDate 7/31/47 *(Handwritten)*\n\n*Galax urceolata*\n*Salax aphylla*\n\n\ngemini-2.0-flash OCR:\nMassey Herbarium\nVirginia Polytechnic Institute\nVPI-V-0060062\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 6 , based on average guard cell area\nvolume of545\u00b5\u00b2\nGuy L. Nesom, 1975\n\nFLORA OF VIRGINIA\nState Herbarium of the Virginia Polytechnic Institute\nCounty\nGiles\nGalax aphylla L.\nMt. Lake\nW.B.M\nA. B. Massey.\nDate\n7/31/75\nHerbarium 28,559\nBiology Department\nVirginia Polytechnic Institute\n\n\nGalax urceolata\nBalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "Vpi-v-0060062",
+    "scientificName": "Galax urceolata (Poir.) Brummit",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummit",
+    "collectedBy": "W.b.m, A. b. massey",
+    "collectorNumber": "28,539",
+    "identifiedBy": "Guy l. nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla l.",
+    "verbatimCollectionDate": "7/31/47",
+    "collectionDate": "1947-07-31",
+    "collectionDateEnd": "",
+    "habitat": "",
+    "chromosomeCount": "n = 6",
+    "guardCell": "N = 6 based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "Giles county",
+    "locality": "Mt. lake",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Massey herbarium\nVirginia polytechnic institute\nHerbarium of the university of north carolina\nFlora of virginia\nState herbarium of the virginia polytechnic institute\nBiology department\nVirginia polytechnic institute"
+  }
+}

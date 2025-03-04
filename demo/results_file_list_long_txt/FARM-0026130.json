@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026130\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 1/2 , based on average guard cell area\nGuy L. Nesom, 1975\n\nPlants of Virginia\n*Galax aphylla* L. (handwritten)\nNorth of Lanexa\nDeep wooded ravine\n\nBernard Mikula 3171  New Kent Co.\nJuly 30, 1949\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00072,
+      "total_cost": 0.0014987499999999999,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 144
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Harvill-Stevens Herbarium\nLongwood University\nFARM-0026130\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\nPlants of Virginia\nGalax aphylla L.\nNorth of Lanexa\nDeep wooded ravine\nBernard Mikula 3171\nNew Kent Co.\nJuly 30, 1949\n0\n1\n2\n3\n4\n5\n6 7 8 9 10\ncm\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 6.28e-05,
+      "total_cost": 0.0007443,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 157
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2207,
+    "output": 470,
+    "cost_in": 0.00022070000000000002,
+    "cost_out": 0.00018800000000000002
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026130\n\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\n*Galax urceolata* (Poir.) Brummitt\nn = 1/2 , based on average guard cell area\nGuy L. Nesom, 1975\n\nPlants of Virginia\n*Galax aphylla* L. (handwritten)\nNorth of Lanexa\nDeep wooded ravine\n\nBernard Mikula 3171  New Kent Co.\nJuly 30, 1949\n\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nHarvill-Stevens Herbarium\nLongwood University\nFARM-0026130\nHERBARIUM OF THE UNIVERSITY OF NORTH CAROLINA\nGalax urceolata (Poir.) Brummit\nn = 12, based on average guard cell area\nGuy L. Nesom, 1975\nPlants of Virginia\nGalax aphylla L.\nNorth of Lanexa\nDeep wooded ravine\nBernard Mikula 3171\nNew Kent Co.\nJuly 30, 1949\n0\n1\n2\n3\n4\n5\n6 7 8 9 10\ncm\ncopyright reserved\nFARM\nHarvill-Stevens\nHerbarium\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "FARM-0026130",
+    "scientificName": "Galax urceolata",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(poir.) brummit",
+    "collectedBy": "Bernard Mikula",
+    "collectorNumber": "3171",
+    "identifiedBy": "Guy L. Nesom",
+    "identifiedDate": "1975",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "July 30, 1949",
+    "collectionDate": "1949-07-30",
+    "collectionDateEnd": "",
+    "habitat": "Deep wooded ravine",
+    "chromosomeCount": "n = 12",
+    "guardCell": "n = 12, based on average guard cell area",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "Virginia",
+    "county": "New kent co.",
+    "locality": "North of lanexa",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "Plants of Virginia\nGalax aphylla L.\nFARM\nHarvill-Stevens\nHerbarium\ncopyright reserved\nGalax urceolata\nGalax aphylla"
+  }
+}

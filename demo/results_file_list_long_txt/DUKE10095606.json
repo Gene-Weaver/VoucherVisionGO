@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095606\nDUKE UNIVERSITY\nHERBARIUM\n91637\n\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN 263\nGalax aphylla L.\n\nChromosomes: 2n = 12\nState _North Carolina_ County _Yancey_\n_Mica-bearing outcrop west of_\n_Burnsville._ (Handwritten)\n\nJ. T. Baldwin, Jr. No. 730 Date _June 29, 1940_ (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.000875,
+      "total_cost": 0.00165375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 175
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "Galax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke\nUNIVERSITY\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\n263\nDUKE UNIVERSITY HERBARIUM\nDUKE10095606\nDUKE UNIVERSITY\nHERBARIUM\nChromosomes: 2n = 12\nState North Carolina\nCounty Yancey\nMica-bearing outcrop west of\nBurnsville\n91637\nJ. T. Baldwin, Jr. No. 730\nDate June 29, 1940\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7e-05,
+      "total_cost": 0.0007515,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 175
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2241,
+    "output": 488,
+    "cost_in": 0.0002241,
+    "cost_out": 0.0001952
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\n\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\n\nDUKE10095606\nDUKE UNIVERSITY\nHERBARIUM\n91637\n\nFrom THE UNITED STATES NATIONAL HERBARIUM\n\nUNIVERSITY OF MICHIGAN 263\nGalax aphylla L.\n\nChromosomes: 2n = 12\nState _North Carolina_ County _Yancey_\n_Mica-bearing outcrop west of_\n_Burnsville._ (Handwritten)\n\nJ. T. Baldwin, Jr. No. 730 Date _June 29, 1940_ (Handwritten)\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\nGalax urceolata (Poir.) Brummitt\n(Galax aphylla auct. non L.)\ndet. R.L. Wilbur I. 2001\nDuke University Herbarium\nDuke\nUNIVERSITY\nSMITHSONIAN INSTITUTION\nFrom THE UNITED STATES NATIONAL HERBARIUM\nUNIVERSITY OF MICHIGAN\nGalax aphylla L.\n263\nDUKE UNIVERSITY HERBARIUM\nDUKE10095606\nDUKE UNIVERSITY\nHERBARIUM\nChromosomes: 2n = 12\nState North Carolina\nCounty Yancey\nMica-bearing outcrop west of\nBurnsville\n91637\nJ. T. Baldwin, Jr. No. 730\nDate June 29, 1940\n\n\nGalax urceolata\nGalax aphylla\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "DUKE10095606",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "J. T. Baldwin, Jr.",
+    "collectorNumber": "730",
+    "identifiedBy": "R.L. Wilbur",
+    "identifiedDate": "2001-00-00",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "June 29, 1940",
+    "collectionDate": "1940-06-29",
+    "collectionDateEnd": "",
+    "habitat": "Mica-bearing outcrop west of Burnsville",
+    "chromosomeCount": "Chromosomes 2n = 12",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "United States",
+    "stateProvince": "North Carolina",
+    "county": "Yancey",
+    "locality": "Mica-bearing outcrop west of Burnsville",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "",
+    "additionalText": "(Galax aphylla auct. non L.)\nFrom the united states national herbarium\nUniversity of michigan\n263\nGalax aphylla\nGalax aphylla"
+  }
+}

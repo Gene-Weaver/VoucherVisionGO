@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508043\n\nRANCHO SANTA ANA\n270940\nBOTANIC GARDEN\n\nPLANTS OF NORTH CAROLINA\nHerbarium of Arizona State University\n\n*Galax aphylla* L.\nCOUNTY: Alleghany\nLOCATION: Spicer Mt., ca 1.5 mi S of Jct of Hwy 21 & 18 (Sparta). Green Acres Residential Area. James Doughton property. N-facing wooded slopes; mesic *Acer*, *Rhododendron*, *Castanea* woods.\nCOLLECTOR: T. Reeves  R5119\nDET.: T. Reeves\nELEV. 3100 ft\nDATE 3-VII-76\n\n\n*Galax aphylla* L.\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.00086,
+      "total_cost": 0.00163875,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 172
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508043\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncopyright reserved\nRANCHO SANTA ANA\n270940\nBOTANIC GARDEN\nPLANTS OF NORTH CAROLINA\nHerbarium of Arizona State University\nGalax aphylla L.\nAlleghany\nSpicer Mt., ca 1.5 mi S of Jct of\nHwy 21 & 18 (Sparta). Green Acres\nResidential Area. James Doughton\nproperty. N-facing wooded slopes;\nmesic Acer, Rhododendron, Castanea\nwoods.\nT. Reeves\nT.Reeves\nR5119\nELEV. 3100 ft\nDATE 3-VII-76\n---\n\nGalax aphylla\nAcer\nRhododendron\nCastanea\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 7.92e-05,
+      "total_cost": 0.0007607,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 198
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2263,
+    "output": 502,
+    "cost_in": 0.0002263,
+    "cost_out": 0.0002008
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508043\n\nRANCHO SANTA ANA\n270940\nBOTANIC GARDEN\n\nPLANTS OF NORTH CAROLINA\nHerbarium of Arizona State University\n\n*Galax aphylla* L.\nCOUNTY: Alleghany\nLOCATION: Spicer Mt., ca 1.5 mi S of Jct of Hwy 21 & 18 (Sparta). Green Acres Residential Area. James Doughton property. N-facing wooded slopes; mesic *Acer*, *Rhododendron*, *Castanea* woods.\nCOLLECTOR: T. Reeves  R5119\nDET.: T. Reeves\nELEV. 3100 ft\nDATE 3-VII-76\n\n\n*Galax aphylla* L.\n\n\ngemini-2.0-flash OCR:\nCalifornia Botanic Garden\nClaremont, CA USA (RSA-POM)\nRSA0508043\n0\ncm\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\ncopyright reserved\nRANCHO SANTA ANA\n270940\nBOTANIC GARDEN\nPLANTS OF NORTH CAROLINA\nHerbarium of Arizona State University\nGalax aphylla L.\nAlleghany\nSpicer Mt., ca 1.5 mi S of Jct of\nHwy 21 & 18 (Sparta). Green Acres\nResidential Area. James Doughton\nproperty. N-facing wooded slopes;\nmesic Acer, Rhododendron, Castanea\nwoods.\nT. Reeves\nT.Reeves\nR5119\nELEV. 3100 ft\nDATE 3-VII-76\n---\n\nGalax aphylla\nAcer\nRhododendron\nCastanea\n\n",
+  "formatted_json": {
+    "catalogNumber": "RSA0508043",
+    "scientificName": "Galax aphylla L.",
+    "genus": "Galax",
+    "specificEpithet": "aphylla",
+    "scientificNameAuthorship": "L.",
+    "collectedBy": "T. Reeves",
+    "collectorNumber": "R5119",
+    "identifiedBy": "T. Reeves",
+    "identifiedDate": "",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "",
+    "verbatimCollectionDate": "3-VII-76",
+    "collectionDate": "1976-07-03",
+    "collectionDateEnd": "",
+    "habitat": "N-facing wooded slopes; mesic Acer, Rhododendron, Castanea woods.",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North america",
+    "country": "United states",
+    "stateProvince": "North carolina",
+    "county": "Alleghany",
+    "locality": "Spicer Mt., ca 1.5 mi S of Jct of Hwy 21 & 18 (Sparta). Green Acres Residential Area. James Doughton property.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "945",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "California Botanic Garden\nClaremont, CA USA (RSA-POM)\nRANCHO SANTA ANA\nBOTANIC GARDEN\nPLANTS OF NORTH CAROLINA\nHerbarium of Arizona State University\nELEV. 3100 ft"
+  }
+}

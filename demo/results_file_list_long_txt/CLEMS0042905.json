@@ -1,0 +1,66 @@
+{
+  "ocr_info": {
+    "gemini-1.5-pro": {
+      "ocr_text": "CLEMS\ncopyright reserved\n\n16128\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042905\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF THE CLEMSON AGRICULTURAL COLLEGE\n\n*Galax aphylla* L.\nMoist granite ledges near summit\nof Sassafras Mt.\nAlt. 3500 feet.\nPickens county, S.C.\nSept., 16, 1938.\n\n*(Handwritten) Trapido*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n",
+      "cost_in": 0.00077875,
+      "cost_out": 0.0007750000000000001,
+      "total_cost": 0.00155375,
+      "rates_in": 1.25,
+      "rates_out": 5.0,
+      "tokens_in": 623,
+      "tokens_out": 155
+    },
+    "gemini-2.0-flash": {
+      "ocr_text": "0\n1\n2\n3\n4\n5\n6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nGalax urceolata (Poir) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nHERBARIUM OF THE CLEMSON AGRICULTURAL COLLEGE\nGalax aphylla L.\nMoist granite ledges near summit\nof Sassafras Mt.\nAlt. 3300 feet.\nPickens county, S. C.\nSept,16,1938.\nTrapido\n\n\nGalax urceolata\nGalax aphylla\n\n",
+      "cost_in": 0.0006815,
+      "cost_out": 5.960000000000001e-05,
+      "total_cost": 0.0007411000000000001,
+      "rates_in": 0.1,
+      "rates_out": 0.4,
+      "tokens_in": 6815,
+      "tokens_out": 149
+    }
+  },
+  "parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 2206,
+    "output": 486,
+    "cost_in": 0.00022060000000000002,
+    "cost_out": 0.0001944
+  },
+  "ocr": "\ngemini-1.5-pro OCR:\nCLEMS\ncopyright reserved\n\n16128\nCLEMSON\nUNIVERSITY\nHERBARIUM\n\nClemson University Herbarium\nCLEMS0042905\n\n*Galax urceolata* (Poir.) Brummitt\nJohn F. Townsend\n1996\nClemson University Herbarium (CLEMS)\n\nHERBARIUM OF THE CLEMSON AGRICULTURAL COLLEGE\n\n*Galax aphylla* L.\nMoist granite ledges near summit\nof Sassafras Mt.\nAlt. 3500 feet.\nPickens county, S.C.\nSept., 16, 1938.\n\n*(Handwritten) Trapido*\n\n\n*Galax urceolata*\n*Galax aphylla*\n\n\ngemini-2.0-flash OCR:\n0\n1\n2\n3\n4\n5\n6 7 8 9 10\ncm\ncopyright reserved\nCLEMS\nCLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nGalax urceolata (Poir) Brummitt\nJohn F. Townsend\nClemson University Herbarium (CLEMS)\n1996\nHERBARIUM OF THE CLEMSON AGRICULTURAL COLLEGE\nGalax aphylla L.\nMoist granite ledges near summit\nof Sassafras Mt.\nAlt. 3300 feet.\nPickens county, S. C.\nSept,16,1938.\nTrapido\n\n\nGalax urceolata\nGalax aphylla\n\n",
+  "formatted_json": {
+    "catalogNumber": "CLEMS0042905",
+    "scientificName": "Galax urceolata (Poir.) Brummitt",
+    "genus": "Galax",
+    "specificEpithet": "urceolata",
+    "scientificNameAuthorship": "(Poir.) Brummitt",
+    "collectedBy": "Trapido",
+    "collectorNumber": "",
+    "identifiedBy": "John F. Townsend",
+    "identifiedDate": "1996",
+    "identifiedConfidence": "",
+    "identifiedRemarks": "",
+    "identificationHistory": "Galax aphylla L.",
+    "verbatimCollectionDate": "Sept., 16, 1938.",
+    "collectionDate": "1938-09-16",
+    "collectionDateEnd": "",
+    "habitat": "Moist granite ledges near summit",
+    "chromosomeCount": "",
+    "guardCell": "",
+    "specimenDescription": "",
+    "cultivated": "",
+    "continent": "North America",
+    "country": "Usa",
+    "stateProvince": "S. C.",
+    "county": "Pickens county",
+    "locality": "Of sassafras mt.",
+    "verbatimCoordinates": "",
+    "decimalLatitude": "",
+    "decimalLongitude": "",
+    "minimumElevationInMeters": "1006",
+    "maximumElevationInMeters": "",
+    "elevationUnits": "ft",
+    "additionalText": "CLEMSON\nUNIVERSITY\nHERBARIUM\nClemson University Herbarium\nHERBARIUM OF THE CLEMSON AGRICULTURAL COLLEGE\nGalax urceolata\nGalax aphylla\ncopyright reserved\n16128"
+  }
+}
