@@ -11,6 +11,13 @@ import pandas as pd
 import concurrent.futures
 from collections import OrderedDict
 
+class OrderedDictJSONEncoder(json.JSONEncoder):
+    def encode(self, obj):
+        if isinstance(obj, OrderedDict):
+            # Convert OrderedDict to a list of tuples for ordered serialization
+            return '{' + ','.join(f'"{k}":{self.encode(v)}' for k, v in obj.items()) + '}'
+        return super().encode(obj)
+    
 def process_image(server_url, image_path, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
@@ -114,9 +121,11 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         else:
             print(f"Processed: {image_path}")
         
-        # Save the results
+        # Save the results - ensure we preserve order
         with open(output_file, 'w') as f:
-            json.dump(results, f, indent=2, sort_keys=False)
+            # Use json.dump with an OrderedDict to preserve key order 
+            json.dump(results, f, indent=2, sort_keys=False, 
+                     cls=OrderedDictJSONEncoder)  # Use custom encoder
         
         print(f"Results saved to: {output_file}")
         return results
@@ -275,14 +284,41 @@ def save_results_to_csv(results_list, output_dir):
         return
     
     # Extract vvgo_json from each result
-    vvgo_data = [result.get('vvgo_json', {}) for result in results_list if result and 'vvgo_json' in result]
+    vvgo_data = []
+    for result in results_list:
+        if result and 'vvgo_json' in result:
+            # Make sure we're getting the OrderedDict version
+            if isinstance(result['vvgo_json'], OrderedDict):
+                vvgo_data.append(result['vvgo_json'])
+            elif isinstance(result['vvgo_json'], str):
+                # Parse string JSON with OrderedDict
+                try:
+                    vvgo_data.append(json.loads(result['vvgo_json'], 
+                                    object_pairs_hook=OrderedDict))
+                except json.JSONDecodeError:
+                    # Skip invalid JSON
+                    pass
+            else:
+                vvgo_data.append(result['vvgo_json'])
     
     if not vvgo_data:
         print("No VoucherVision JSON data found in results")
         return
     
+    # Get the order of columns from the first result - assuming it has the correct order
+    if vvgo_data and isinstance(vvgo_data[0], OrderedDict):
+        column_order = list(vvgo_data[0].keys())
+    else:
+        column_order = None  # Let pandas decide
+    
     # Convert to DataFrame
     df = pd.DataFrame(vvgo_data)
+    
+    # Reorder columns to match original order if we have it
+    if column_order:
+        # Make sure all columns exist in the DataFrame
+        available_columns = [col for col in column_order if col in df.columns]
+        df = df[available_columns]
     
     # Save to CSV
     csv_path = os.path.join(output_dir, 'results.csv')

@@ -6,6 +6,7 @@ import threading
 from flask import Flask, request, jsonify
 import logging
 from werkzeug.utils import secure_filename
+from collections import OrderedDict
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -287,40 +288,16 @@ class VoucherVisionProcessor:
                 #         "output": tokens_out
                 #     }
                 # }
-                if isinstance(vv_results, str):
-                    try:
-                        # Just to validate it's JSON, but don't use the parsed result
-                        json.loads(vv_results)
-                        # Keep as string
-                        results = {
-                            "ocr_results": ocr_results,
-                            "vvgo_json": vv_results,  # Keep as string
-                            "tokens_LLM": {
-                                "input": tokens_in,
-                                "output": tokens_out
-                            }
-                        }
-                    except json.JSONDecodeError:
-                        # Not valid JSON, convert to dict
-                        logger.warning("vv_results is not valid JSON, treating as string")
-                        results = {
-                            "ocr_results": ocr_results,
-                            "vvgo_json": vv_results,
-                            "tokens_LLM": {
-                                "input": tokens_in,
-                                "output": tokens_out
-                            }
-                        }
-                else:
-                    # It's already a dictionary or other object
-                    results = {
-                        "ocr_results": ocr_results,
-                        "vvgo_json": vv_results,
-                        "tokens_LLM": {
-                            "input": tokens_in,
-                            "output": tokens_out
-                        }
-                    }
+                # Combine results
+                results = OrderedDict([
+                    ("ocr_results", ocr_results),
+                    ("vvgo_json", vv_results),
+                    ("tokens_LLM", OrderedDict([
+                        ("input", tokens_in),
+                        ("output", tokens_out)
+                    ]))
+                ])
+                
                 logger.warning(vv_results)
                 logger.warning(results)
                 return results, 200
