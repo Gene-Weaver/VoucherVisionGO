@@ -30,7 +30,7 @@ jobs:
           # Copy the client file
           cp source-repo/client.py client-repo/
           
-          # Only update the sync timestamp in the README
+          # Only update the sync timestamp in the README.md
           if [ -f client-repo/README.md ]; then
             # Use sed to replace or add the sync timestamp line
             grep -q "Last synchronized:" client-repo/README.md
