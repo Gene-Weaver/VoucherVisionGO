@@ -490,23 +490,40 @@ def extract_prompt_info(prompt_file):
             'full_path': str(prompt_file.absolute())
         }
         
-        # Look for fields with specific names
-        field_mapping = {
-            'prompt_author': 'author',
-            'prompt_author_institution': 'institution',
-            'prompt_name': 'name',
-            'prompt_version': 'version',
-            'prompt_description': 'description'
-        }
-        
-        # Extract values using regex
-        for json_field, info_field in field_mapping.items():
-            pattern = rf'{json_field}:\s*(.*?)(?=\n\w+:|$)'
-            matches = re.findall(pattern, content, re.DOTALL)
-            if matches:
-                # Clean up the value (remove extra whitespace, join multi-line values)
-                value = ' '.join([line.strip() for line in matches[0].strip().split('\n')])
-                info[info_field] = value
+        # Try YAML parsing
+        try:
+            data = yaml.safe_load(content)
+            
+            if isinstance(data, dict):
+                # Map YAML fields to info fields
+                field_mapping = {
+                    'prompt_name': 'name',
+                    'prompt_version': 'version',
+                    'prompt_author': 'author',
+                    'prompt_author_institution': 'institution',
+                    'prompt_description': 'description'
+                }
+                
+                for yaml_field, info_field in field_mapping.items():
+                    if yaml_field in data and data[yaml_field]:
+                        info[info_field] = data[yaml_field]
+            
+        except Exception as e:
+            logger.warning(f"YAML parsing failed for info extraction: {e}, using regex")
+            # Fall back to regex pattern matching for common fields
+            patterns = {
+                'name': r'prompt_name:\s*(.*?)(?=\n\w+:|$)',
+                'version': r'prompt_version:\s*(.*?)(?=\n\w+:|$)',
+                'author': r'prompt_author:\s*(.*?)(?=\n\w+:|$)',
+                'institution': r'prompt_author_institution:\s*(.*?)(?=\n\w+:|$)',
+                'description': r'prompt_description:\s*(.*?)(?=\n\w+:|$)'
+            }
+            
+            for field, pattern in patterns.items():
+                matches = re.findall(pattern, content, re.DOTALL)
+                if matches:
+                    value = ' '.join([line.strip() for line in matches[0].strip().split('\n')])
+                    info[field] = value
         
         return info
     
@@ -546,20 +563,21 @@ def extract_prompt_details(prompt_file):
             data = yaml.safe_load(content)
             
             if isinstance(data, dict):
-                # Successful YAML parsing - store the parsed structure
+                # Store the parsed data directly
                 details['parsed_data'] = data
             else:
                 logger.warning(f"YAML parsing produced non-dictionary: {type(data)}")
+                details['parsed_data'] = {"content": data}  # Wrap non-dict data
                 
         except Exception as e:
-            logger.warning(f"YAML parsing failed: {e}")
+            logger.warning(f"YAML parsing failed for {prompt_file}: {e}")
             details['parse_error'] = str(e)
         
         return details
     
     except Exception as e:
         logger.error(f"Error extracting details from {prompt_file}: {e}")
-        return {'error': str(e)}
+        return {'error': str(e), 'raw_content': ''}
 
 # HTML UI route for browsing prompts
 @app.route('/prompts-ui', methods=['GET'])
@@ -658,6 +676,28 @@ def prompts_ui():
         .tree-toggle:hover {
             text-decoration: underline;
         }
+        
+        /* Sections */
+        .section-nav {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 4px;
+        }
+        .section-nav a {
+            margin-right: 15px;
+            color: #3498db;
+            text-decoration: none;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-heading {
+            margin-top: 25px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            color: #2c3e50;
+        }
     </style>
 </head>
 <body>
@@ -667,6 +707,7 @@ def prompts_ui():
     <div id="detailsPanel">
         <span class="panel-close" id="closePanel">&times;</span>
         <h2 id="detailsTitle">Prompt Details</h2>
+        <div id="sectionNav" class="section-nav"></div>
         <div id="promptDetails">
             <!-- Prompt details will be loaded here -->
         </div>
@@ -678,6 +719,10 @@ def prompts_ui():
             <tr>
                 <th>#</th>
                 <th>Filename</th>
+                <th>Name</th>
+                <th class="description">Description</th>
+                <th>Version</th>
+                <th>Author</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -687,6 +732,24 @@ def prompts_ui():
     </table>
     
     <script>
+        // Helper function to safely get nested properties
+        function getNestedValue(obj, path, defaultValue = "") {
+            if (!obj) return defaultValue;
+            
+            const keys = path.split('.');
+            let current = obj;
+            
+            for (const key of keys) {
+                if (current && typeof current === 'object' && key in current) {
+                    current = current[key];
+                } else {
+                    return defaultValue;
+                }
+            }
+            
+            return current ?? defaultValue;
+        }
+        
         // Function to render hierarchical data
         function renderHierarchical(data, level = 0) {
             if (data === null) return '<span class="tree-value">null</span>';
@@ -744,9 +807,19 @@ def prompts_ui():
                         const row = document.createElement('tr');
                         row.id = `prompt-row-${index}`;
                         
+                        // Extract prompt metadata
+                        const name = getNestedValue(prompt, 'name');
+                        const description = getNestedValue(prompt, 'description');
+                        const version = getNestedValue(prompt, 'version');
+                        const author = getNestedValue(prompt, 'author');
+                        
                         row.innerHTML = `
                             <td>${index + 1}</td>
                             <td>${prompt.filename}</td>
+                            <td>${name}</td>
+                            <td class="description">${description}</td>
+                            <td>${version}</td>
+                            <td>${author}</td>
                             <td><button class="details-btn" data-filename="${prompt.filename}" data-row-id="${row.id}">View Details</button></td>
                         `;
                         
@@ -791,6 +864,7 @@ def prompts_ui():
             detailsPanel.style.display = 'block';
             document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
             document.getElementById('promptDetails').innerHTML = '<p>Loading prompt details...</p>';
+            document.getElementById('sectionNav').innerHTML = '';
             
             // Scroll to top to show the panel
             window.scrollTo({top: 0, behavior: 'smooth'});
@@ -802,30 +876,100 @@ def prompts_ui():
                         const prompt = data.prompt;
                         document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
                         
-                        let detailsHTML = '';
+                        // Get the raw content or parse the YAML directly
+                        let yamlData = {};
+                        let rawContent = '';
                         
-                        // Display hierarchical view of parsed data if available
-                        if (prompt.details && prompt.details.parsed_data) {
-                            detailsHTML += '<h3>Prompt Structure</h3>';
-                            detailsHTML += '<div class="tree-view">';
-                            detailsHTML += renderHierarchical(prompt.details.parsed_data);
-                            detailsHTML += '</div>';
-                            
-                            // Add raw content as alternative view
-                            detailsHTML += '<h3>Raw Content</h3>';
-                            detailsHTML += `<pre>${prompt.details.raw_content}</pre>`;
-                        } else {
-                            // Just show raw content if parsing failed
-                            detailsHTML += '<h3>Raw Content</h3>';
-                            detailsHTML += `<pre>${prompt.details.raw_content}</pre>`;
-                            
-                            // Show parse error if any
-                            if (prompt.details.parse_error) {
-                                detailsHTML += '<h3>Parse Error</h3>';
-                                detailsHTML += `<div style="color: red;">${prompt.details.parse_error}</div>`;
+                        if (prompt.details && prompt.details.raw_content) {
+                            rawContent = prompt.details.raw_content;
+                            // If there's parsed data, use it
+                            if (prompt.details.parsed_data) {
+                                yamlData = prompt.details.parsed_data;
                             }
+                        } else if (prompt.details) {
+                            // If raw_content is not directly available, try to use details
+                            rawContent = JSON.stringify(prompt.details, null, 2);
+                            yamlData = prompt.details;
+                        } else {
+                            // Last resort, use the prompt object itself
+                            rawContent = JSON.stringify(prompt, null, 2);
+                            yamlData = prompt;
                         }
                         
+                        // Start building the details HTML
+                        let detailsHTML = '';
+                        let sectionLinks = [];
+                        
+                        // Build the metadata section
+                        const metaFields = [
+                            {key: 'prompt_name', label: 'Name'},
+                            {key: 'prompt_description', label: 'Description'},
+                            {key: 'prompt_version', label: 'Version'},
+                            {key: 'prompt_author', label: 'Author'},
+                            {key: 'prompt_author_institution', label: 'Institution'},
+                            {key: 'LLM', label: 'LLM Type'}
+                        ];
+                        
+                        detailsHTML += `<div id="section-metadata">`;
+                        detailsHTML += `<h3 class="section-heading">Metadata</h3>`;
+                        detailsHTML += `<table class="metadata-table">`;
+                        
+                        metaFields.forEach(field => {
+                            const value = yamlData[field.key] || '';
+                            if (value) {
+                                detailsHTML += `<tr><td>${field.label}:</td><td>${value}</td></tr>`;
+                            }
+                        });
+                        
+                        detailsHTML += `</table></div>`;
+                        sectionLinks.push({id: 'section-metadata', label: 'Metadata'});
+                        
+                        // Add common sections that most prompts would have
+                        const commonSections = [
+                            {key: 'instructions', label: 'Instructions'},
+                            {key: 'json_formatting_instructions', label: 'JSON Formatting'},
+                            {key: 'rules', label: 'Rules'},
+                            {key: 'mapping', label: 'Mapping'}
+                        ];
+                        
+                        commonSections.forEach(section => {
+                            if (yamlData[section.key]) {
+                                const sectionId = `section-${section.key}`;
+                                detailsHTML += `<div id="${sectionId}">`;
+                                detailsHTML += `<h3 class="section-heading">${section.label}</h3>`;
+                                
+                                if (typeof yamlData[section.key] === 'object') {
+                                    detailsHTML += `<div class="tree-view">`;
+                                    detailsHTML += renderHierarchical(yamlData[section.key]);
+                                    detailsHTML += `</div>`;
+                                } else {
+                                    detailsHTML += `<pre>${yamlData[section.key]}</pre>`;
+                                }
+                                
+                                detailsHTML += `</div>`;
+                                sectionLinks.push({id: sectionId, label: section.label});
+                            }
+                        });
+                        
+                        // Add raw content section
+                        const rawSectionId = 'section-raw';
+                        detailsHTML += `<div id="${rawSectionId}">`;
+                        detailsHTML += `<h3 class="section-heading">Raw Content</h3>`;
+                        detailsHTML += `<pre>${rawContent}</pre>`;
+                        detailsHTML += `</div>`;
+                        sectionLinks.push({id: rawSectionId, label: 'Raw Content'});
+                        
+                        // Create section navigation
+                        let navHtml = '';
+                        sectionLinks.forEach((link, index) => {
+                            navHtml += `<a href="#${link.id}">${link.label}</a>`;
+                            if (index < sectionLinks.length - 1) {
+                                navHtml += ' | ';
+                            }
+                        });
+                        document.getElementById('sectionNav').innerHTML = navHtml;
+                        
+                        // Update the details content
                         document.getElementById('promptDetails').innerHTML = detailsHTML;
                         
                         // Add event listeners for tree toggles
@@ -858,6 +1002,17 @@ def prompts_ui():
             document.getElementById('detailsPanel').style.display = 'none';
             removeAllHighlights();
         });
+        
+        // Helper function to check if an element is in the viewport
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
     </script>
 </body>
 </html>
