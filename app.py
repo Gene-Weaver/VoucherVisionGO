@@ -365,10 +365,10 @@ def process_image():
     file = request.files['file']
     
     # Get engine options from request if specified
-    engine_options = request.form.getlist('engines') or None
+    engine_options = request.form.getlist('engines') if 'engines' in request.form else None
 
     # Get prompt from request if specified, otherwise None (use default)
-    prompt = request.form.get('prompt') or None
+    prompt = request.form.get('prompt')  if 'prompt' in request.form else None
     
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(file=file, engine_options=engine_options, prompt=prompt)
