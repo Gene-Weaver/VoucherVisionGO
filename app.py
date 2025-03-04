@@ -382,6 +382,18 @@ def process_image():
     
     return jsonify(results), status_code
 
+@app.route('/test_json_order', methods=['GET'])
+# curl https://vouchervision-go-738307415303.us-central1.run.app/test_json_order
+def test_json_order():
+    from collections import OrderedDict
+    test_dict = OrderedDict([
+        ("first", 1),
+        ("second", 2),
+        ("third", 3),
+        ("fourth", 4)
+    ])
+    return jsonify(test_dict)
+
 @app.route('/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
