@@ -169,6 +169,7 @@ class VoucherVisionProcessor:
         
         for ocr_opt in engine_options:
             ocr_packet[ocr_opt] = {}
+            logger.info(ocr_opt)
             
             # Thread-safe access to OCR engines
             with self.ocr_engines_lock:
