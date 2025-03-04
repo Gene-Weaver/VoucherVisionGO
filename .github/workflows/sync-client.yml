@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'client.py'
+      - '/demo'
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:

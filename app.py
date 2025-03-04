@@ -3,10 +3,13 @@ import sys
 import json
 import tempfile
 import threading
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template_string
 import logging
 from werkzeug.utils import secure_filename
 from collections import OrderedDict
+from pathlib import Path
+import yaml
+import re
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -401,6 +404,392 @@ def health_check():
         'max_concurrent_requests': max_requests,
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
     }), 200
+
+@app.route('/prompts', methods=['GET'])
+def list_prompts_api():
+    """API endpoint to list all available prompt templates"""
+    # Get prompt directory
+    prompt_dir = os.path.join(project_root, "vouchervision_main", "custom_prompts")
+    
+    # Default to only listing prompts
+    view_details = request.args.get('view', 'false').lower() == 'true'
+    specific_prompt = request.args.get('prompt')
+    
+    # Get all YAML files
+    prompt_files = []
+    for ext in ['.yaml', '.yml']:
+        prompt_files.extend(list(Path(prompt_dir).glob(f'*{ext}')))
+    
+    if not prompt_files:
+        return jsonify({
+            'status': 'error',
+            'message': f'No prompt files found in {prompt_dir}'
+        }), 404
+    
+    # If a specific prompt was requested
+    if specific_prompt:
+        target_file = None
+        for file in prompt_files:
+            if file.name == specific_prompt:
+                target_file = file
+                break
+                
+        if target_file:
+            # Return the prompt content
+            return jsonify({
+                'status': 'success',
+                'prompt': extract_prompt_details(target_file)
+            })
+        else:
+            # Return error with list of available prompts
+            return jsonify({
+                'status': 'error',
+                'message': f"Prompt file '{specific_prompt}' not found.",
+                'available_prompts': [file.name for file in prompt_files]
+            }), 404
+    
+    # Otherwise list all prompts
+    prompt_info_list = []
+    for file in prompt_files:
+        info = extract_prompt_info(file)
+        
+        # If view_details is True, include the full prompt content
+        if view_details:
+            info['details'] = extract_prompt_details(file)
+        
+        prompt_info_list.append(info)
+    
+    return jsonify({
+        'status': 'success',
+        'count': len(prompt_files),
+        'prompts': prompt_info_list
+    })
+
+def extract_prompt_info(prompt_file):
+    """
+    Extract basic information from a prompt file for API response
+    
+    Args:
+        prompt_file (Path): Path to the prompt file
+        
+    Returns:
+        dict: Dictionary with name, description, and other info
+    """
+    try:
+        with open(prompt_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Initialize info dictionary with defaults
+        info = {
+            'filename': prompt_file.name,
+            'description': 'No description provided',
+            'version': 'Unknown',
+            'author': 'Unknown',
+            'institution': 'Unknown',
+            'name': os.path.splitext(prompt_file.name)[0],
+            'full_path': str(prompt_file.absolute())
+        }
+        
+        # Look for fields with specific names
+        field_mapping = {
+            'prompt_author': 'author',
+            'prompt_author_institution': 'institution',
+            'prompt_name': 'name',
+            'prompt_version': 'version',
+            'prompt_description': 'description'
+        }
+        
+        # Extract values using regex
+        for json_field, info_field in field_mapping.items():
+            pattern = rf'{json_field}:\s*(.*?)(?=\n\w+:|$)'
+            matches = re.findall(pattern, content, re.DOTALL)
+            if matches:
+                # Clean up the value (remove extra whitespace, join multi-line values)
+                value = ' '.join([line.strip() for line in matches[0].strip().split('\n')])
+                info[info_field] = value
+        
+        return info
+    
+    except Exception as e:
+        logger.error(f"Error extracting info from {prompt_file}: {e}")
+        return {
+            'filename': prompt_file.name,
+            'description': f'Error reading file: {str(e)}',
+            'version': 'Unknown',
+            'author': 'Unknown',
+            'institution': 'Unknown',
+            'name': os.path.splitext(prompt_file.name)[0],
+            'full_path': str(prompt_file.absolute())
+        }
+
+def extract_prompt_details(prompt_file):
+    """
+    Extract detailed content from a prompt file
+    
+    Args:
+        prompt_file (Path): Path to the prompt file
+        
+    Returns:
+        dict: Dictionary with sections of the prompt
+    """
+    try:
+        with open(prompt_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Initialize details dictionary
+        details = {
+            'raw_content': content,
+            'sections': {}
+        }
+        
+        # Try YAML parsing first
+        try:
+            data = yaml.safe_load(content)
+            
+            if isinstance(data, dict):
+                # Store all sections from the YAML
+                details['sections'] = data
+            else:
+                # Fallback to manual parsing
+                raise ValueError("YAML parsing didn't produce a dictionary")
+                
+        except Exception:
+            # Manual parsing for non-YAML format
+            prompt_sections = {
+                'SYSTEM_PROMPT': 'system_prompt',
+                'USER_PROMPT': 'user_prompt',
+                'EXAMPLES': 'examples',
+                'FIELDS': 'fields'
+            }
+            
+            # Try to find prompt sections
+            lines = content.split('\n')
+            current_section = None
+            section_content = []
+            
+            for line in lines:
+                # Check if this line starts a new section
+                for section_key, section_name in prompt_sections.items():
+                    if line.strip().startswith(section_key):
+                        # Save the previous section if there was one
+                        if current_section and section_content:
+                            details['sections'][current_section] = '\n'.join(section_content)
+                        
+                        # Start new section
+                        current_section = section_name
+                        section_content = []
+                        break
+                else:
+                    # Skip metadata lines
+                    if line.strip().startswith(('PROMPT_AUTHOR:', 'PROMPT_AUTHOR_INSTITUTION:', 
+                                            'PROMPT_NAME:', 'PROMPT_VERSION:', 'PROMPT_DESCRIPTION:')):
+                        continue
+                    
+                    # If we're in a section, add this line to its content
+                    if current_section:
+                        section_content.append(line)
+            
+            # Save the last section
+            if current_section and section_content:
+                details['sections'][current_section] = '\n'.join(section_content)
+        
+        return details
+    
+    except Exception as e:
+        logger.error(f"Error extracting details from {prompt_file}: {e}")
+        return {'error': str(e)}
+
+# HTML UI route for browsing prompts
+@app.route('/prompts-ui', methods=['GET'])
+def prompts_ui():
+    """Web UI for browsing prompts"""
+    html_template = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VoucherVision Prompt Templates</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #2c3e50; }
+        .prompt-table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        .prompt-table th, .prompt-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .prompt-table th { background-color: #f2f2f2; color: #333; }
+        .prompt-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .prompt-table tr:hover { background-color: #f1f1f1; }
+        .description { max-width: 400px; }
+        .details-btn { padding: 6px 12px; background-color: #3498db; color: white; border: none; 
+                     border-radius: 4px; cursor: pointer; }
+        .details-btn:hover { background-color: #2980b9; }
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; 
+               overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; 
+                        width: 80%; max-height: 80%; overflow: auto; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: black; }
+        pre { background-color: #f8f8f8; padding: 10px; border-radius: 4px; overflow-x: auto; 
+            white-space: pre-wrap; word-wrap: break-word; }
+        .section-title { color: #2c3e50; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>VoucherVision Prompt Templates</h1>
+    <div id="loading">Loading prompts...</div>
+    <table class="prompt-table" id="promptTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Filename</th>
+                <th>Name</th>
+                <th class="description">Description</th>
+                <th>Version</th>
+                <th>Author</th>
+                <th>Institution</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="promptList">
+            <!-- Prompts will be loaded here -->
+        </tbody>
+    </table>
+    
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Prompt Details</h2>
+            <div id="promptDetails">
+                <!-- Prompt details will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Fetch and display the prompt list
+        fetch('/prompts')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('promptTable').style.display = 'table';
+                
+                if (data.status === 'success') {
+                    const promptList = document.getElementById('promptList');
+                    
+                    data.prompts.forEach((prompt, index) => {
+                        const row = document.createElement('tr');
+                        
+                        row.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${prompt.filename}</td>
+                            <td>${prompt.name}</td>
+                            <td class="description">${prompt.description}</td>
+                            <td>${prompt.version}</td>
+                            <td>${prompt.author}</td>
+                            <td>${prompt.institution}</td>
+                            <td><button class="details-btn" data-filename="${prompt.filename}">View Details</button></td>
+                        `;
+                        
+                        promptList.appendChild(row);
+                    });
+                    
+                    // Add event listeners to the buttons
+                    document.querySelectorAll('.details-btn').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const filename = button.getAttribute('data-filename');
+                            loadPromptDetails(filename);
+                        });
+                    });
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching prompts:', error);
+                document.getElementById('loading').textContent = 'Error loading prompts: ' + error.message;
+            });
+        
+        // Load prompt details
+        function loadPromptDetails(filename) {
+            fetch(`/prompts?prompt=${filename}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const prompt = data.prompt;
+                        document.getElementById('modalTitle').textContent = `Prompt: ${filename}`;
+                        
+                        let detailsHTML = `
+                            <h3>Metadata</h3>
+                            <table>
+                                <tr><td><strong>Name:</strong></td><td>${data.prompt.name || filename}</td></tr>
+                                <tr><td><strong>Description:</strong></td><td>${data.prompt.description || 'No description'}</td></tr>
+                                <tr><td><strong>Version:</strong></td><td>${data.prompt.version || 'Unknown'}</td></tr>
+                                <tr><td><strong>Author:</strong></td><td>${data.prompt.author || 'Unknown'}</td></tr>
+                                <tr><td><strong>Institution:</strong></td><td>${data.prompt.institution || 'Unknown'}</td></tr>
+                            </table>
+                        `;
+                        
+                        // Add sections
+                        if (prompt.details && prompt.details.sections) {
+                            const sections = prompt.details.sections;
+                            
+                            // Common section names to display first and with specific formatting
+                            const prioritySections = ['system_prompt', 'user_prompt', 'examples', 'fields'];
+                            
+                            // Add priority sections first
+                            prioritySections.forEach(sectionKey => {
+                                if (sections[sectionKey]) {
+                                    const sectionTitle = sectionKey.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
+                                    detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
+                                    detailsHTML += `<pre>${sections[sectionKey]}</pre>`;
+                                    delete sections[sectionKey]; // Remove from object so we don't display twice
+                                }
+                            });
+                            
+                            // Add remaining sections
+                            for (const [key, value] of Object.entries(sections)) {
+                                if (key !== 'raw_content') {  // Skip raw content
+                                    const sectionTitle = key.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase());
+                                    detailsHTML += `<h3 class="section-title">${sectionTitle}</h3>`;
+                                    
+                                    if (typeof value === 'object') {
+                                        detailsHTML += `<pre>${JSON.stringify(value, null, 2)}</pre>`;
+                                    } else {
+                                        detailsHTML += `<pre>${value}</pre>`;
+                                    }
+                                }
+                            }
+                        } else if (prompt.details && prompt.details.raw_content) {
+                            // Fallback to raw content
+                            detailsHTML += `<h3 class="section-title">Raw Content</h3>`;
+                            detailsHTML += `<pre>${prompt.details.raw_content}</pre>`;
+                        }
+                        
+                        document.getElementById('promptDetails').innerHTML = detailsHTML;
+                        document.getElementById('promptModal').style.display = 'block';
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching prompt details:', error);
+                    alert('Error loading prompt details: ' + error.message);
+                });
+        }
+        
+        // Close the modal when clicking the close button
+        document.querySelector('.close').addEventListener('click', () => {
+            document.getElementById('promptModal').style.display = 'none';
+        });
+        
+        // Close the modal when clicking outside the content
+        window.addEventListener('click', (event) => {
+            if (event.target === document.getElementById('promptModal')) {
+                document.getElementById('promptModal').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+    """
+    return render_template_string(html_template)
 
 if __name__ == '__main__':
     # Get port from environment variable or default to 8080
