@@ -14,7 +14,7 @@ from termcolor import colored
 from tabulate import tabulate
 from tqdm import tqdm
 
-N_SIZE=80
+N_SIZE=100
 N_INDENT=2
 
 class OrderedDictJSONEncoder(json.JSONEncoder):
