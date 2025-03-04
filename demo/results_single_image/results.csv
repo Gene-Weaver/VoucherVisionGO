@@ -1,4 +1,5 @@
 filename,catalogNumber,scientificName,genus,specificEpithet,scientificNameAuthorship,collectedBy,collectorNumber,identifiedBy,identifiedDate,identifiedConfidence,identifiedRemarks,identificationHistory,verbatimCollectionDate,collectionDate,collectionDateEnd,habitat,chromosomeCount,guardCell,specimenDescription,cultivated,continent,country,stateProvince,county,locality,verbatimCoordinates,decimalLatitude,decimalLongitude,minimumElevationInMeters,maximumElevationInMeters,elevationUnits,additionalText
-31234100396116,060934,Galax aphylla,Galax,aphylla,auct. non L.,R. Hannan & L. R. Phillippe,2022,,,,,,"May 31, 1979",1979-05-31,,Above falls.,,,,,North america,Usa,Kentucky,Letcher County,Whitesburg Q.; Bad Branch. 1.5 miles NE of Eolia.,,,,,,,"Eastern Kentucky University Herbarium
-IK 3 1234 10039611 6
-Eky"
+31234100396116,060934,Galax aphylla,Galax,aphylla,auct. non L.,"R. Hannnan, L. R. Phillippe",2022,IK,,,,,"May. 31, 1979",1979-05-31,,Above falls.,,,,,North america,United states,Kentucky,Letcher county,Whitesburg q.; bad branch. 1.5 miles ne of eolia.,,,,,,,"eastern kentucky university
+herbarium
+eky
+3 1234 10039611 6"
