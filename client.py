@@ -24,7 +24,7 @@ class OrderedDictJSONEncoder(json.JSONEncoder):
             return '{' + ','.join(f'"{k}":{self.encode(v)}' for k, v in obj.items()) + '}'
         return super().encode(obj)
     
-def process_image(server_url, image_path, verbose=False, engines=None, prompt=None):
+def process_image(server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
     
@@ -81,6 +81,9 @@ def process_image(server_url, image_path, verbose=False, engines=None, prompt=No
             results = json.loads(response.text, object_pairs_hook=OrderedDict)
             # If formatted_json is a string that contains JSON, parse it with OrderedDict
             if 'formatted_json' in results and isinstance(results['formatted_json'], str):
+                output_file = get_output_filename(image_path, output_dir)
+                fname = os.path.basename(output_file).split(".")[0]
+                results['filename'] = fname
                 try:
                     # Try to parse it as JSON with order preserved
                     results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
@@ -118,7 +121,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
     """
     try:
         # Process the image
-        results = process_image(server_url, image_path, verbose, engines, prompt)
+        results = process_image(server_url, image_path, output_dir, verbose, engines, prompt)
         
         # Generate output filename
         output_file = get_output_filename(image_path, output_dir)
