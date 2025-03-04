@@ -165,7 +165,7 @@ class VoucherVisionProcessor:
     def perform_ocr(self, file_path, engine_options):
         """Perform OCR on the provided image"""
         ocr_packet = {}
-        ocr_packet["OCR"] = ""
+        ocr_all = ""
         
         for ocr_opt in engine_options:
             ocr_packet[ocr_opt] = {}
@@ -199,9 +199,9 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt]["tokens_in"] = tokens_in
             ocr_packet[ocr_opt]["tokens_out"] = tokens_out
 
-            ocr_packet["OCR"] += f"\n{ocr_opt} OCR:\n{response}"
+            ocr_all += f"\n{ocr_opt} OCR:\n{response}"
 
-        return ocr_packet
+        return ocr_packet, ocr_all
     
     def get_thread_local_vv(self, prompt):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
@@ -279,16 +279,16 @@ class VoucherVisionProcessor:
                 logger.info(f"Using prompt file: {current_prompt}")
                 
                 # Perform OCR
-                ocr_results = self.perform_ocr(file_path, engine_options)
+                ocr_info, ocr = self.perform_ocr(file_path, engine_options)
                 
                 # Process with VoucherVision
-                vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr_results["OCR"], current_prompt)
+                vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt)
                 
                 # Combine results
                 # results = {
-                #     "ocr_results": ocr_results,
+                #     "ocr_info": ocr_info,
                 #     "vvgo_json": vv_results,
-                #     "tokens_LLM": {
+                #     "parsing_info": {
                 #         "input": tokens_in,
                 #         "output": tokens_out
                 #     }
@@ -298,18 +298,19 @@ class VoucherVisionProcessor:
                     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
 
                 results = OrderedDict([
-                    ("ocr_results", ocr_results),
-                    ("vvgo_json", vv_results),
-                    ("tokens_LLM", OrderedDict([
+                    ("ocr_info", ocr_info),
+                    ("parsing_info", OrderedDict([
                         ("model", model_print),
                         ("input", tokens_in),
                         ("output", tokens_out),
                         ("cost_in", cost_in),
                         ("cost_out", cost_out),
-                    ]))
+                    ])),
+                    ("ocr", ocr),
+                    ("formatted_json", vv_results),
+                    
                 ])
                 
-                logger.warning(vv_results)
                 logger.warning(results)
                 return results, 200
             

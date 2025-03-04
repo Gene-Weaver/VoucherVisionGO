@@ -73,11 +73,11 @@ def process_image(server_url, image_path, engines=None, prompt=None):
         # Check if the request was successful
         if response.status_code == 200:
             results = json.loads(response.text, object_pairs_hook=OrderedDict)
-            # If vvgo_json is a string that contains JSON, parse it with OrderedDict
-            if 'vvgo_json' in results and isinstance(results['vvgo_json'], str):
+            # If formatted_json is a string that contains JSON, parse it with OrderedDict
+            if 'formatted_json' in results and isinstance(results['formatted_json'], str):
                 try:
                     # Try to parse it as JSON with order preserved
-                    results['vvgo_json'] = json.loads(results['vvgo_json'], object_pairs_hook=OrderedDict)
+                    results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
                 except json.JSONDecodeError:
                     # Not valid JSON, leave as string
                     pass
@@ -117,7 +117,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         # Generate output filename
         output_file = get_output_filename(image_path, output_dir)
         fname = os.path.basename(output_file).split(".")[0]
-        
+
         # Print summary of results if verbose is enabled
         if verbose:
             print_results_summary(results, fname)
@@ -201,28 +201,26 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
     
     # Print top-level sections one by one
     for section_name, section_data in results.items():
-        print("\n" + colored(f"{section_name.upper()}:", 'cyan', attrs=['bold']))
-        print("-" * n_size)
-        
-        if section_name == 'ocr_results':
+        print(colored(f"{section_name.upper()}:", 'cyan', attrs=['bold']))
+
+        if section_name == 'ocr_info':
             # Handle OCR results specially
             # Print engine summary table
             ocr_table = []
             total_cost = 0
             
             for engine, engine_data in section_data.items():
-                if engine != "OCR":  # Handle the OCR text separately
-                    tokens_in = engine_data.get('tokens_in', 0)
-                    tokens_out = engine_data.get('tokens_out', 0)
-                    cost = engine_data.get('total_cost', 0)
-                    total_cost += cost
-                    
-                    ocr_table.append([
-                        engine,
-                        f"{tokens_in:,}",
-                        f"{tokens_out:,}",
-                        f"${cost:.6f}"
-                    ])
+                tokens_in = engine_data.get('tokens_in', 0)
+                tokens_out = engine_data.get('tokens_out', 0)
+                cost = engine_data.get('total_cost', 0)
+                total_cost += cost
+                
+                ocr_table.append([
+                    engine,
+                    f"{tokens_in:,}",
+                    f"{tokens_out:,}",
+                    f"${cost:.6f}"
+                ])
             
             # Add total row if we have engine data
             if ocr_table:
@@ -238,11 +236,12 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
                               tablefmt='grid'))
             
             # Print the OCR text
-            if "OCR" in section_data:
-                print("\n" + colored("OCR TEXT:", 'magenta'))
-                print(section_data["OCR"])
+        elif section_name == 'ocr':
+            print(colored("OCR Text:", 'magenta'))
+            print(str(section_data))
+
         
-        elif section_name == 'tokens_LLM':
+        elif section_name == 'parsing_info':
             # Enhanced handling for tokens_LLM that now includes model, cost_in, and cost_out
             llm_table = []
             
@@ -282,7 +281,7 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
                       headers=['Tokens In', 'Tokens Out'],
                       tablefmt='simple'))
         
-        elif section_name == 'vvgo_json':
+        elif section_name == 'formatted_json':
             # Format the extracted JSON data
             if isinstance(section_data, dict):
                 # Create a table for all top-level fields
@@ -314,7 +313,7 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
             except:
                 print(str(section_data))
     
-    print("\n" + "="*n_size)
+    print("="*n_size + "\n")
 
 def get_output_filename(input_path, output_dir=None):
     """
@@ -389,23 +388,23 @@ def save_results_to_csv(results_list, output_dir):
         print("No results to save to CSV")
         return
     
-    # Extract vvgo_json from each result
+    # Extract formatted_json from each result
     vvgo_data = []
     for result in results_list:
-        if result and 'vvgo_json' in result:
+        if result and 'formatted_json' in result:
             # Make sure we're getting the OrderedDict version
-            if isinstance(result['vvgo_json'], OrderedDict):
-                vvgo_data.append(result['vvgo_json'])
-            elif isinstance(result['vvgo_json'], str):
+            if isinstance(result['formatted_json'], OrderedDict):
+                vvgo_data.append(result['formatted_json'])
+            elif isinstance(result['formatted_json'], str):
                 # Parse string JSON with OrderedDict
                 try:
-                    vvgo_data.append(json.loads(result['vvgo_json'], 
+                    vvgo_data.append(json.loads(result['formatted_json'], 
                                     object_pairs_hook=OrderedDict))
                 except json.JSONDecodeError:
                     # Skip invalid JSON
                     pass
             else:
-                vvgo_data.append(result['vvgo_json'])
+                vvgo_data.append(result['formatted_json'])
     
     if not vvgo_data:
         print("No VoucherVision JSON data found in results")
@@ -429,7 +428,7 @@ def save_results_to_csv(results_list, output_dir):
     # Save to CSV
     csv_path = os.path.join(output_dir, 'results.csv')
     df.to_csv(csv_path, index=False)
-    print(f"\nCombined results saved to CSV: {csv_path}")
+    print(f"Combined results saved to CSV: {csv_path}")
     print(f"Total records: {len(df)}")
     
     # Print column names for verification
@@ -460,7 +459,7 @@ def main():
     parser.add_argument('--verbose', action='store_true',
                         help='Print all output to console')
     parser.add_argument('--save-to-csv', action='store_true',
-                        help='Save all vvgo_json results to a CSV file in the output directory')
+                        help='Save all formatted_json results to a CSV file in the output directory')
     parser.add_argument('--max-workers', type=int, default=4,
                         help='Maximum number of parallel workers (default: 4)')
     
