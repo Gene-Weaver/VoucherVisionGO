@@ -682,23 +682,48 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Usage examples:
+### Usage examples:
 # Single image:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image" --verbose
+# python client.py --server https://vouchervision-go-XXXXXX.app --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image" --verbose
 
 # URL image:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_url" --verbose
+# python client.py --server https://vouchervision-go-XXXXXX.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_url" --verbose
 
 # Directory of images:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory "./demo/images" --output-dir "./demo/results_dir_images" --verbose --max-workers 4
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_csv" --verbose --prompt "SLTPvM_default_chromosome.yaml" --max-workers 4
+# python client.py --server https://vouchervision-go-XXXXXX.app --directory "./demo/images" --output-dir "./demo/results_dir_images" --verbose --max-workers 4
+# python client.py --server https://vouchervision-go-XXXXXX.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_csv" --verbose --prompt "SLTPvM_default_chromosome.yaml" --max-workers 4
 
 # List of files:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/csv/file_list.csv" --output-dir "./demo/results_file_list_csv" --verbose --max-workers 2
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --file-list "./demo/txt/file_list.txt" --output-dir "./demo/results_file_list_txt" --verbose --max-workers 4
+# python client.py --server https://vouchervision-go-XXXXXX.app --file-list "./demo/csv/file_list.csv" --output-dir "./demo/results_file_list_csv" --verbose --max-workers 2
+# python client.py --server https://vouchervision-go-XXXXXX.app --file-list "./demo/txt/file_list.txt" --output-dir "./demo/results_file_list_txt" --verbose --max-workers 4
 
 # Custom prompt:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_image_custom_prompt" --verbose --prompt "SLTPvM_default_chromosome.yaml"
+# python client.py --server https://vouchervision-go-XXXXXX.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_image_custom_prompt" --verbose --prompt "SLTPvM_default_chromosome.yaml"
 
 # Save results to CSV:
-# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --directory ./demo/images --output-dir "./demo/results_dir_images_save_to_csv" --save-to-csv
+# python client.py --server https://vouchervision-go-XXXXXX.app --directory ./demo/images --output-dir "./demo/results_dir_images_save_to_csv" --save-to-csv
+
+### Programmatic Example
+'''
+from client import process_vouchers
+
+if __name__ == '__main__':
+	process_vouchers(server="https://vouchervision-go-XXXXXX.app", 
+output_dir="./output", 
+prompt="SLTPvM_default_chromosome.yaml", 
+image="https://swbiodiversity.org/imglib/seinet/sernec/EKY/31234100396/31234100396116.jpg", 
+directory=None, 
+file_list=None, 
+verbose=True, 
+save_to_csv=True, 
+max_workers=4)
+	process_vouchers(server="https://vouchervision-go-XXXXXX.app", 
+output_dir="./output2", 
+prompt="SLTPvM_default_chromosome.yaml", 
+image=None, 
+directory="D:/Dropbox/VoucherVisionGO/demo/images", 
+file_list=None, 
+verbose=True, 
+save_to_csv=True, 
+max_workers=4)
+'''
