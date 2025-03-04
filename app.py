@@ -357,7 +357,8 @@ def process_image():
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(file, engine_options, prompt)
     
-    return jsonify(results), status_code
+    # return jsonify(results), status_code
+    return json.dumps(results, cls=OrderedJsonEncoder), status_code, {'Content-Type': 'application/json'}
 
 @app.route('/test_json_order', methods=['GET'])
 # curl https://vouchervision-go-738307415303.us-central1.run.app/test_json_order
@@ -369,7 +370,7 @@ def test_json_order():
         ("third", 3),
         ("fourth", 4)
     ])
-    return jsonify(test_dict)
+    return json.dumps(test_dict, cls=OrderedJsonEncoder), 200, {'Content-Type': 'application/json'}
 
 @app.route('/health', methods=['GET'])
 def health_check():
