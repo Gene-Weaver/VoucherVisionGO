@@ -411,7 +411,8 @@ def list_prompts_api():
     # Get prompt directory
     prompt_dir = os.path.join(project_root, "vouchervision_main", "custom_prompts")
     
-    # Default to only listing prompts
+    # Determine format type: json (default for API) or html (for web UI)
+    format_type = request.args.get('format', 'json')
     view_details = request.args.get('view', 'false').lower() == 'true'
     specific_prompt = request.args.get('prompt')
     
@@ -421,10 +422,13 @@ def list_prompts_api():
         prompt_files.extend(list(Path(prompt_dir).glob(f'*{ext}')))
     
     if not prompt_files:
-        return jsonify({
-            'status': 'error',
-            'message': f'No prompt files found in {prompt_dir}'
-        }), 404
+        if format_type == 'text':
+            return "No prompt files found.", 404, {'Content-Type': 'text/plain'}
+        else:
+            return jsonify({
+                'status': 'error',
+                'message': f'No prompt files found in {prompt_dir}'
+            }), 404
     
     # If a specific prompt was requested
     if specific_prompt:
@@ -436,17 +440,34 @@ def list_prompts_api():
                 
         if target_file:
             # Return the prompt content
-            return jsonify({
-                'status': 'success',
-                'prompt': extract_prompt_details(target_file)
-            })
+            prompt_details = extract_prompt_details(target_file)
+            
+            # Format response based on requested format
+            if format_type == 'text':
+                # Return plain text version for command line
+                response_text = format_prompt_as_text(target_file.name, prompt_details)
+                return response_text, 200, {'Content-Type': 'text/plain'}
+            else:
+                # Return JSON structure
+                return jsonify({
+                    'status': 'success',
+                    'prompt': {
+                        'filename': target_file.name,
+                        'details': prompt_details
+                    }
+                })
         else:
             # Return error with list of available prompts
-            return jsonify({
-                'status': 'error',
-                'message': f"Prompt file '{specific_prompt}' not found.",
-                'available_prompts': [file.name for file in prompt_files]
-            }), 404
+            available_prompts = [file.name for file in prompt_files]
+            
+            if format_type == 'text':
+                return f"Prompt file '{specific_prompt}' not found.\nAvailable prompts: {', '.join(available_prompts)}", 404, {'Content-Type': 'text/plain'}
+            else:
+                return jsonify({
+                    'status': 'error',
+                    'message': f"Prompt file '{specific_prompt}' not found.",
+                    'available_prompts': available_prompts
+                }), 404
     
     # Otherwise list all prompts
     prompt_info_list = []
@@ -459,11 +480,197 @@ def list_prompts_api():
         
         prompt_info_list.append(info)
     
-    return jsonify({
-        'status': 'success',
-        'count': len(prompt_files),
-        'prompts': prompt_info_list
-    })
+    # Format response based on requested format
+    if format_type == 'text':
+        # Return a text table for command line
+        response_text = format_prompts_as_text_table(prompt_info_list)
+        return response_text, 200, {'Content-Type': 'text/plain'}
+    else:
+        # Return JSON structure
+        return jsonify({
+            'status': 'success',
+            'count': len(prompt_files),
+            'prompts': prompt_info_list
+        })
+    
+def format_prompts_as_text_table(prompt_list):
+    """
+    Format a list of prompts as a text table suitable for terminal display
+    
+    Args:
+        prompt_list (list): List of prompt info dictionaries
+        
+    Returns:
+        str: Formatted text table
+    """
+    import textwrap
+    from tabulate import tabulate
+    
+    # Prepare table data
+    table_data = []
+    for i, info in enumerate(prompt_list, 1):
+        # Format the description with proper text wrapping
+        wrapped_description = textwrap.fill(info.get('description', ''), width=50)
+        
+        table_data.append([
+            i,
+            info.get('filename', ''),
+            wrapped_description,
+            info.get('version', 'Unknown'),
+            info.get('author', 'Unknown'),
+            info.get('institution', 'Unknown')
+        ])
+    
+    # Generate table
+    table = tabulate(
+        table_data, 
+        headers=['#', 'Filename', 'Description', 'Version', 'Author', 'Institution'],
+        tablefmt='grid'
+    )
+    
+    return f"Available Prompt Templates:\n\n{table}\n\nTotal: {len(prompt_list)} prompt file(s) found"
+
+def format_prompt_as_text(filename, details):
+    """
+    Format a prompt's details as plain text suitable for terminal display
+    
+    Args:
+        filename (str): Name of the prompt file
+        details (dict): Prompt details dictionary
+        
+    Returns:
+        str: Formatted text representation
+    """
+    import textwrap
+    
+    lines = []
+    lines.append("=" * 80)
+    lines.append(f"PROMPT FILE: {filename}")
+    lines.append("=" * 80)
+    lines.append("")
+    
+    # Extract metadata from parsed data
+    metadata = {}
+    if 'parsed_data' in details and details['parsed_data']:
+        data = details['parsed_data']
+        metadata_fields = {
+            'prompt_name': 'Name',
+            'prompt_description': 'Description',
+            'prompt_version': 'Version',
+            'prompt_author': 'Author',
+            'prompt_author_institution': 'Institution',
+            'LLM': 'LLM Type'
+        }
+        
+        for field_key, display_name in metadata_fields.items():
+            if field_key in data and data[field_key]:
+                metadata[display_name] = data[field_key]
+    
+    # Display metadata section
+    if metadata:
+        lines.append("METADATA:")
+        for name, value in metadata.items():
+            if isinstance(value, str):
+                wrapped_value = textwrap.fill(value, width=76, subsequent_indent='    ')
+                lines.append(f"{name}: {wrapped_value}")
+            else:
+                lines.append(f"{name}: {value}")
+        lines.append("")
+    
+    # Display important content sections
+    if 'parsed_data' in details and details['parsed_data']:
+        data = details['parsed_data']
+        
+        # Priority sections to display first
+        priority_sections = [
+            ('instructions', 'INSTRUCTIONS'),
+            ('json_formatting_instructions', 'JSON FORMATTING INSTRUCTIONS'),
+            ('rules', 'RULES'),
+            ('mapping', 'MAPPING'),
+            ('examples', 'EXAMPLES'),
+        ]
+        
+        for key, heading in priority_sections:
+            if key in data and data[key]:
+                lines.append(heading + ":")
+                value = data[key]
+                if isinstance(value, str):
+                    # Format strings with proper wrapping
+                    wrapped = textwrap.fill(value, width=76, subsequent_indent='  ')
+                    lines.append(wrapped)
+                else:
+                    # Format dictionaries/lists with proper indentation
+                    import yaml
+                    yaml_str = yaml.dump(value, default_flow_style=False)
+                    for yaml_line in yaml_str.split('\n'):
+                        lines.append("  " + yaml_line)
+                lines.append("")
+        
+        # Add other sections not in priority list
+        for key, value in data.items():
+            if key not in [k for k, _ in priority_sections] and key not in [
+                'prompt_name', 'prompt_description', 'prompt_version', 
+                'prompt_author', 'prompt_author_institution', 'LLM'
+            ]:
+                heading = key.replace('_', ' ').upper()
+                lines.append(heading + ":")
+                if isinstance(value, str):
+                    # Format strings with proper wrapping
+                    wrapped = textwrap.fill(value, width=76, subsequent_indent='  ')
+                    lines.append(wrapped)
+                else:
+                    # Format dictionaries/lists with proper indentation
+                    import yaml
+                    yaml_str = yaml.dump(value, default_flow_style=False)
+                    for yaml_line in yaml_str.split('\n'):
+                        lines.append("  " + yaml_line)
+                lines.append("")
+    
+    # Display raw content if parsing failed or as a fallback
+    elif 'raw_content' in details:
+        lines.append("RAW CONTENT:")
+        lines.append(details['raw_content'])
+    
+    lines.append("=" * 80)
+    
+    return "\n".join(lines)
+
+def format_prompts_as_text_table(prompt_list):
+    """
+    Format a list of prompts as a text table suitable for terminal display
+    
+    Args:
+        prompt_list (list): List of prompt info dictionaries
+        
+    Returns:
+        str: Formatted text table
+    """
+    import textwrap
+    from tabulate import tabulate
+    
+    # Prepare table data
+    table_data = []
+    for i, info in enumerate(prompt_list, 1):
+        # Format the description with proper text wrapping
+        wrapped_description = textwrap.fill(info.get('description', ''), width=50)
+        
+        table_data.append([
+            i,
+            info.get('filename', ''),
+            wrapped_description,
+            info.get('version', 'Unknown'),
+            info.get('author', 'Unknown'),
+            info.get('institution', 'Unknown')
+        ])
+    
+    # Generate table
+    table = tabulate(
+        table_data, 
+        headers=['#', 'Filename', 'Description', 'Version', 'Author', 'Institution'],
+        tablefmt='grid'
+    )
+    
+    return f"Available Prompt Templates:\n\n{table}\n\nTotal: {len(prompt_list)} prompt file(s) found"
 
 def extract_prompt_info(prompt_file):
     """
@@ -541,7 +748,7 @@ def extract_prompt_info(prompt_file):
 
 def extract_prompt_details(prompt_file):
     """
-    Extract detailed content from a prompt file without hardcoding field names
+    Extract detailed content from a prompt file with improved YAML parsing
     
     Args:
         prompt_file (Path): Path to the prompt file
@@ -558,8 +765,11 @@ def extract_prompt_details(prompt_file):
             'raw_content': content
         }
         
-        # Try YAML parsing
+        # Try YAML parsing with improved error handling
         try:
+            import yaml
+            
+            # Use safe_load to prevent code execution
             data = yaml.safe_load(content)
             
             if isinstance(data, dict):
@@ -572,6 +782,54 @@ def extract_prompt_details(prompt_file):
         except Exception as e:
             logger.warning(f"YAML parsing failed for {prompt_file}: {e}")
             details['parse_error'] = str(e)
+            
+            # Attempt a line-by-line parsing approach for common YAML formats
+            try:
+                parsed_data = {}
+                current_section = None
+                section_content = []
+                lines = content.split('\n')
+                
+                for line in lines:
+                    line = line.rstrip()
+                    
+                    # Check if this is a top-level key
+                    if not line.startswith(' ') and ':' in line and not line.startswith('#'):
+                        # Store previous section if any
+                        if current_section and section_content:
+                            parsed_data[current_section] = '\n'.join(section_content)
+                            section_content = []
+                        
+                        # Extract new key
+                        parts = line.split(':', 1)
+                        key = parts[0].strip()
+                        value = parts[1].strip() if len(parts) > 1 else ''
+                        
+                        if value in ['>', '|', '']:
+                            # Multi-line value starts
+                            current_section = key
+                        else:
+                            # Single line value
+                            parsed_data[key] = value
+                            current_section = None
+                    
+                    # Append to current section if inside one
+                    elif current_section and line.strip():
+                        # Remove consistent indentation from the beginning
+                        if line.startswith('  '):
+                            line = line[2:]
+                        section_content.append(line)
+                
+                # Add the last section if any
+                if current_section and section_content:
+                    parsed_data[current_section] = '\n'.join(section_content)
+                
+                # Add the backup parsed data if primary parsing failed
+                if 'parsed_data' not in details or not details['parsed_data']:
+                    details['parsed_data'] = parsed_data
+                
+            except Exception as backup_e:
+                logger.warning(f"Backup parsing also failed: {backup_e}")
         
         return details
     
@@ -583,7 +841,7 @@ def extract_prompt_details(prompt_file):
 @app.route('/prompts-ui', methods=['GET'])
 def prompts_ui():
     """Web UI for browsing prompts"""
-    html_template = """
+    return render_template_string("""
 <!DOCTYPE html>
 <html>
 <head>
@@ -876,24 +1134,21 @@ def prompts_ui():
                         const prompt = data.prompt;
                         document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
                         
-                        // Get the raw content or parse the YAML directly
-                        let yamlData = {};
+                        // Get the parsed YAML data or raw content
+                        let parsedData = null;
                         let rawContent = '';
                         
-                        if (prompt.details && prompt.details.raw_content) {
-                            rawContent = prompt.details.raw_content;
-                            // If there's parsed data, use it
-                            if (prompt.details.parsed_data) {
-                                yamlData = prompt.details.parsed_data;
-                            }
+                        if (prompt.details && prompt.details.parsed_data) {
+                            parsedData = prompt.details.parsed_data;
+                            rawContent = prompt.details.raw_content || '';
                         } else if (prompt.details) {
-                            // If raw_content is not directly available, try to use details
+                            // Fallback if structure is different
+                            parsedData = prompt.details;
                             rawContent = JSON.stringify(prompt.details, null, 2);
-                            yamlData = prompt.details;
                         } else {
-                            // Last resort, use the prompt object itself
+                            // Last resort
+                            parsedData = prompt;
                             rawContent = JSON.stringify(prompt, null, 2);
-                            yamlData = prompt;
                         }
                         
                         // Start building the details HTML
@@ -915,9 +1170,9 @@ def prompts_ui():
                         detailsHTML += `<table class="metadata-table">`;
                         
                         metaFields.forEach(field => {
-                            const value = yamlData[field.key] || '';
+                            const value = parsedData[field.key] || '';
                             if (value) {
-                                detailsHTML += `<tr><td>${field.label}:</td><td>${value}</td></tr>`;
+                                detailsHTML += `<tr><td><strong>${field.label}:</strong></td><td>${value}</td></tr>`;
                             }
                         });
                         
@@ -929,25 +1184,52 @@ def prompts_ui():
                             {key: 'instructions', label: 'Instructions'},
                             {key: 'json_formatting_instructions', label: 'JSON Formatting'},
                             {key: 'rules', label: 'Rules'},
-                            {key: 'mapping', label: 'Mapping'}
+                            {key: 'mapping', label: 'Mapping'},
+                            {key: 'examples', label: 'Examples'}
                         ];
                         
                         commonSections.forEach(section => {
-                            if (yamlData[section.key]) {
+                            if (parsedData[section.key]) {
                                 const sectionId = `section-${section.key}`;
                                 detailsHTML += `<div id="${sectionId}">`;
                                 detailsHTML += `<h3 class="section-heading">${section.label}</h3>`;
                                 
-                                if (typeof yamlData[section.key] === 'object') {
+                                if (typeof parsedData[section.key] === 'object') {
                                     detailsHTML += `<div class="tree-view">`;
-                                    detailsHTML += renderHierarchical(yamlData[section.key]);
+                                    detailsHTML += renderHierarchical(parsedData[section.key]);
                                     detailsHTML += `</div>`;
                                 } else {
-                                    detailsHTML += `<pre>${yamlData[section.key]}</pre>`;
+                                    detailsHTML += `<pre>${parsedData[section.key]}</pre>`;
                                 }
                                 
                                 detailsHTML += `</div>`;
                                 sectionLinks.push({id: sectionId, label: section.label});
+                            }
+                        });
+                        
+                        // Add other sections not included in commonSections
+                        Object.keys(parsedData).forEach(key => {
+                            // Skip metadata fields and already processed common sections
+                            if (!metaFields.some(field => field.key === key) && 
+                                !commonSections.some(section => section.key === key)) {
+                                
+                                const sectionId = `section-${key}`;
+                                const sectionLabel = key.replace(/_/g, ' ')
+                                    .replace(/\b\w/g, l => l.toUpperCase());
+                                
+                                detailsHTML += `<div id="${sectionId}">`;
+                                detailsHTML += `<h3 class="section-heading">${sectionLabel}</h3>`;
+                                
+                                if (typeof parsedData[key] === 'object') {
+                                    detailsHTML += `<div class="tree-view">`;
+                                    detailsHTML += renderHierarchical(parsedData[key]);
+                                    detailsHTML += `</div>`;
+                                } else {
+                                    detailsHTML += `<pre>${parsedData[key]}</pre>`;
+                                }
+                                
+                                detailsHTML += `</div>`;
+                                sectionLinks.push({id: sectionId, label: sectionLabel});
                             }
                         });
                         
@@ -1002,22 +1284,9 @@ def prompts_ui():
             document.getElementById('detailsPanel').style.display = 'none';
             removeAllHighlights();
         });
-        
-        // Helper function to check if an element is in the viewport
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
     </script>
 </body>
-</html>
-    """
-    return render_template_string(html_template)
+</html>""")
 
 if __name__ == '__main__':
     # Get port from environment variable or default to 8080
