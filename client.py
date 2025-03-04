@@ -195,7 +195,7 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Create a dictionary mapping futures to their corresponding file paths
-        # Verbose is forced off when using parallel, it's too messy in console print
+        # Verbose is forced off when using parallel, it's too messy in console printout
         future_to_path = {
             executor.submit(
                 process_image_file, 

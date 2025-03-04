@@ -31,20 +31,14 @@ sys.path.insert(0, component_detector_path)
 # Import VoucherVision modules
 try:
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
-    from vouchervision_main.vouchervision.directory_structure_VV import Dir_Structure
-    from vouchervision_main.vouchervision.LM2_logger import start_logging
     from vouchervision_main.vouchervision.vouchervision_main import load_custom_cfg
-    from vouchervision_main.vouchervision.data_project import Project_Info
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
 except:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
-    from vouchervision.directory_structure_VV import Dir_Structure # type: ignore
-    from vouchervision.LM2_logger import start_logging # type: ignore
     from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
-    from vouchervision.data_project import Project_Info # type: ignore
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
