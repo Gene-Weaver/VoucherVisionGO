@@ -12,6 +12,10 @@ import concurrent.futures
 from collections import OrderedDict
 from termcolor import colored
 from tabulate import tabulate
+from tqdm import tqdm
+
+N_SIZE=80
+N_INDENT=2
 
 class OrderedDictJSONEncoder(json.JSONEncoder):
     def encode(self, obj):
@@ -20,7 +24,7 @@ class OrderedDictJSONEncoder(json.JSONEncoder):
             return '{' + ','.join(f'"{k}":{self.encode(v)}' for k, v in obj.items()) + '}'
         return super().encode(obj)
     
-def process_image(server_url, image_path, engines=None, prompt=None):
+def process_image(server_url, image_path, verbose=False, engines=None, prompt=None):
     """
     Process an image using the VoucherVision API server
     
@@ -36,7 +40,8 @@ def process_image(server_url, image_path, engines=None, prompt=None):
     # Check if the image path is a URL or a local file
     if image_path.startswith(('http://', 'https://')):
         # For URL-based images, download them first or let the server handle it
-        print(f"Processing image from URL: {image_path}")
+        if verbose:
+            print(f"Processing image from URL: {image_path}")
         response = requests.get(image_path)
         if response.status_code != 200:
             raise Exception(f"Failed to download image from URL: {response.status_code}")
@@ -47,7 +52,7 @@ def process_image(server_url, image_path, engines=None, prompt=None):
             temp_file.write(response.content)
         
         try:
-            return process_image(server_url, temp_file_path, engines, prompt)
+            return process_image(server_url, temp_file_path, verbose, engines, prompt)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -67,7 +72,8 @@ def process_image(server_url, image_path, engines=None, prompt=None):
     
     try:
         # Send the request
-        print(f"Sending request to {url}")
+        if verbose:
+            print(f"Sending request to {url}")
         response = requests.post(url, files=files, data=data)
         
         # Check if the request was successful
@@ -112,7 +118,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
     """
     try:
         # Process the image
-        results = process_image(server_url, image_path, engines, prompt)
+        results = process_image(server_url, image_path, verbose, engines, prompt)
         
         # Generate output filename
         output_file = get_output_filename(image_path, output_dir)
@@ -121,7 +127,6 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         # Print summary of results if verbose is enabled
         if verbose:
             print_results_summary(results, fname)
-        else:
             print(f"Processed: {image_path}")
         
         # Save the results - ensure we preserve order
@@ -130,7 +135,8 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
             json.dump(results, f, indent=2, sort_keys=False, 
                      cls=OrderedDictJSONEncoder)  # Use custom encoder
         
-        print(f"Results saved to: {output_file}")
+        if verbose:
+            print(f"Individual results saved to: {output_file}")
         return results
     
     except Exception as e:
@@ -156,9 +162,14 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
     results = []
     
     print(f"Processing {len(image_paths)} images with up to {max_workers} parallel workers")
+
+    # Create a progress bar
+    progress_bar = tqdm(total=len(image_paths), desc="Processing", unit="image")
+    
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Create a dictionary mapping futures to their corresponding file paths
+        # Verbose is forced off when using parallel, it's too messy in console print
         future_to_path = {
             executor.submit(
                 process_image_file, 
@@ -167,7 +178,7 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
                 engines, 
                 prompt, 
                 output_dir, 
-                verbose
+                False
             ): path for path in image_paths
         }
         
@@ -179,11 +190,17 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
                 if result:
                     results.append(result)
             except Exception as e:
-                print(f"Error processing {path}: {e}")
+                print(f"\nError processing {path}: {e}")
+            finally:
+                # Update the progress bar
+                progress_bar.update(1)
     
+    # Close the progress bar
+    progress_bar.close()
+
     return results
 
-def print_results_summary(results, fname, n_size=80, n_indent=2):
+def print_results_summary(results, fname):
     """
     Print a summary of the VoucherVision processing results with enhanced formatting.
     Dynamically determines fields from the JSON structure.
@@ -195,13 +212,14 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
     from tabulate import tabulate
     import json
     
-    print("\n" + "="*n_size)
+    print("\n" + "="*N_SIZE)
     print("VOUCHERVISION RESULTS SUMMARY", colored(f"{fname}", 'green', attrs=['bold']))
-    print("="*n_size)
+    print("="*N_SIZE)
     
     # Print top-level sections one by one
     for section_name, section_data in results.items():
-        print(colored(f"{section_name.upper()}:", 'cyan', attrs=['bold']))
+        if section_name != "ocr":
+            print(colored(f"{section_name.upper()}:", 'cyan', attrs=['bold']))
 
         if section_name == 'ocr_info':
             # Handle OCR results specially
@@ -228,7 +246,7 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
                     colored("TOTAL", attrs=['bold']),
                     "",
                     "",
-                    colored(f"${total_cost:.6f}", attrs=['bold'])
+                    colored(f"${total_cost:.6f}", 'yellow', attrs=['bold'])
                 ])
                 
                 print(tabulate(ocr_table, 
@@ -237,7 +255,7 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
             
             # Print the OCR text
         elif section_name == 'ocr':
-            print(colored("OCR Text:", 'magenta'))
+            print(colored("OCR Text:", 'magenta', attrs=['bold']))
             print(str(section_data))
 
         
@@ -304,16 +322,15 @@ def print_results_summary(results, fname, n_size=80, n_indent=2):
                     print(tabulate(json_table, tablefmt='simple'))
             else:
                 # If not a dict, just print the data
-                print(json.dumps(section_data, indent=n_indent, sort_keys=False, cls=OrderedDictJSONEncoder))
+                print(json.dumps(section_data, indent=N_INDENT, sort_keys=False, cls=OrderedDictJSONEncoder))
         
         else:
             # Generic handler for any other sections
             try:
-                print(json.dumps(section_data, indent=n_indent, sort_keys=False, cls=OrderedDictJSONEncoder))
+                print(json.dumps(section_data, indent=N_INDENT, sort_keys=False, cls=OrderedDictJSONEncoder))
             except:
                 print(str(section_data))
     
-    print("="*n_size + "\n")
 
 def get_output_filename(input_path, output_dir=None):
     """
@@ -378,7 +395,8 @@ def read_file_list(list_file):
 
 def save_results_to_csv(results_list, output_dir):
     """
-    Save a list of VoucherVision results to a CSV file
+    Save a list of VoucherVision results to a CSV file using the filename 
+    that's already included in the results
     
     Args:
         results_list (list): List of dictionaries containing the results
@@ -388,29 +406,69 @@ def save_results_to_csv(results_list, output_dir):
         print("No results to save to CSV")
         return
     
-    # Extract formatted_json from each result
+    # Extract formatted_json from each result and add filename
     vvgo_data = []
-    for result in results_list:
-        if result and 'formatted_json' in result:
-            # Make sure we're getting the OrderedDict version
-            if isinstance(result['formatted_json'], OrderedDict):
-                vvgo_data.append(result['formatted_json'])
-            elif isinstance(result['formatted_json'], str):
+    
+    for i, result in enumerate(results_list):
+        # Debug info for the first few results
+        if i < 2:
+            print(f"\nDebug - Result keys: {list(result.keys() if result else [])}")
+        
+        # Skip if result is empty
+        if not result:
+            continue
+            
+        # Get the filename directly from the result
+        filename = result.get('filename', '')
+        if not filename:
+            # Fallback methods if filename is not directly available
+            if 'source_file' in result:
+                filename = os.path.splitext(os.path.basename(result['source_file']))[0]
+            else:
+                # Use index as last resort
+                filename = f"file_{i+1}"
+                
+        # Get the JSON data (try formatted_json first, then vvgo_json)
+        json_data = None
+        json_key = None
+        
+        if 'formatted_json' in result:
+            json_key = 'formatted_json'
+        elif 'vvgo_json' in result:
+            json_key = 'vvgo_json'
+            
+        if json_key:
+            # Get the JSON data in the appropriate format
+            if isinstance(result[json_key], OrderedDict):
+                json_data = result[json_key]
+            elif isinstance(result[json_key], str):
                 # Parse string JSON with OrderedDict
                 try:
-                    vvgo_data.append(json.loads(result['formatted_json'], 
-                                    object_pairs_hook=OrderedDict))
+                    json_data = json.loads(result[json_key], object_pairs_hook=OrderedDict)
                 except json.JSONDecodeError:
-                    # Skip invalid JSON
-                    pass
+                    continue
+            elif isinstance(result[json_key], dict):
+                # Convert regular dict to OrderedDict
+                json_data = OrderedDict(result[json_key])
             else:
-                vvgo_data.append(result['formatted_json'])
+                json_data = result[json_key]
+            
+            if json_data:
+                # Create a new OrderedDict with filename as the first key
+                data_with_filename = OrderedDict([('filename', filename)])
+                
+                # Add all other keys in their original order
+                for key, value in json_data.items():
+                    data_with_filename[key] = value
+                
+                vvgo_data.append(data_with_filename)
     
     if not vvgo_data:
         print("No VoucherVision JSON data found in results")
+        print("Available keys in results:", [list(r.keys()) for r in results_list[:3] if r])
         return
     
-    # Get the order of columns from the first result - assuming it has the correct order
+    # Get the order of columns from the first result
     if vvgo_data and isinstance(vvgo_data[0], OrderedDict):
         column_order = list(vvgo_data[0].keys())
     else:
@@ -419,7 +477,7 @@ def save_results_to_csv(results_list, output_dir):
     # Convert to DataFrame
     df = pd.DataFrame(vvgo_data)
     
-    # Reorder columns to match original order if we have it
+    # Ensure column order with filename first if we have a specific order
     if column_order:
         # Make sure all columns exist in the DataFrame
         available_columns = [col for col in column_order if col in df.columns]
@@ -428,8 +486,8 @@ def save_results_to_csv(results_list, output_dir):
     # Save to CSV
     csv_path = os.path.join(output_dir, 'results.csv')
     df.to_csv(csv_path, index=False)
-    print(f"Combined results saved to CSV: {csv_path}")
-    print(f"Total records: {len(df)}")
+    print(f"\nCombined results saved to CSV: {csv_path}")
+    print(f"Total records processed: {len(df)}")
     
     # Print column names for verification
     if not df.empty:
@@ -566,9 +624,9 @@ def main():
     end_time = time.time()
     elapsed_seconds = end_time - start_time
     minutes, seconds = divmod(elapsed_seconds, 60)
-    print(f"\n{'-' * 40}")
+    print(f"\n{'-' * N_SIZE}")
     print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
-    print(f"{'-' * 40}")
+    print(f"{'-' * N_SIZE}")
 
 if __name__ == "__main__":
     main()

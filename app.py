@@ -298,6 +298,7 @@ class VoucherVisionProcessor:
                     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
 
                 results = OrderedDict([
+                    ("filename", file.filename),
                     ("ocr_info", ocr_info),
                     ("parsing_info", OrderedDict([
                         ("model", model_print),
