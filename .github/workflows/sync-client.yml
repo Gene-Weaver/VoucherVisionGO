@@ -25,22 +25,48 @@ jobs:
           path: client-repo
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      - name: Debug repository contents
+        run: |
+          echo "=== SOURCE REPOSITORY ==="
+          ls -la source-repo/
+          echo ""
+          echo "=== CLIENT REPOSITORY ==="
+          ls -la client-repo/
+          echo ""
+          echo "=== CHECKING FOR client.py ==="
+          if [ -f source-repo/client.py ]; then
+            echo "client.py found in source repository"
+          else
+            echo "client.py NOT found in source repository"
+            find source-repo -name "client.py" | xargs -I{} echo "Found at: {}"
+          fi
+
       - name: Copy client.py and update README sync information
         run: |
-          # Copy the client file
-          cp source-repo/client.py client-repo/
+          # Copy the client file with error checking
+          if [ ! -f source-repo/client.py ]; then
+            echo "ERROR: client.py not found in source repository"
+            exit 1
+          fi
           
-          # Only update the sync timestamp in the README.md
-          if [ -f client-repo/README.md ]; then
-            # Use sed to replace or add the sync timestamp line
-            grep -q "Last synchronized:" client-repo/README.md
-            if [ $? -eq 0 ]; then
-              # Replace existing timestamp line
-              sed -i "s/Last synchronized:.*$/Last synchronized: $(date)/" client-repo/README.md
-            else
-              # Add timestamp after the "About" section
-              sed -i "/## About/,/^$/s/^\(.*it is automatically synchronized.*\)$/\1\n\nLast synchronized: $(date)/" client-repo/README.md
-            fi
+          echo "Copying client.py to client repository..."
+          cp -v source-repo/client.py client-repo/
+          
+          # Check if README.md exists
+          if [ ! -f client-repo/README.md ]; then
+            echo "ERROR: README.md not found in client repository"
+            exit 1
+          fi
+          
+          echo "Updating README.md timestamp..."
+          # Check if the timestamp line exists
+          if grep -q "Last synchronized:" client-repo/README.md; then
+            echo "Updating existing timestamp line"
+            sed -i "s/Last synchronized:.*$/Last synchronized: $(date)/" client-repo/README.md
+          else
+            echo "Adding new timestamp line"
+            # Simple approach: add timestamp after the About section header
+            sed -i "/## About/a\\Last synchronized: $(date)" client-repo/README.md
           fi
           
           # Commit and push changes
@@ -48,5 +74,13 @@ jobs:
           git config user.name "VoucherVision Bot"
           git config user.email "bot@github.com"
           git add client.py README.md
-          git diff --staged --quiet || git commit -m "Sync client.py from VoucherVisionGO repository [$(date)]"
-          git push
+          
+          # Check if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes detected in files"
+          else 
+            echo "Changes detected, committing..."
+            git commit -m "Sync client.py from VoucherVisionGO repository [$(date)]"
+            echo "Pushing changes..."
+            git push || { echo "Push failed. Check token permissions"; exit 1; }
+          fi
