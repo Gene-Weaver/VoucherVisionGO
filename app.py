@@ -241,7 +241,7 @@ class VoucherVisionProcessor:
         response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
-
+        logger.info(f"response_candidate\n{response_candidate}")
         return response_candidate, nt_in, nt_out
     
     def process_image_request(self, file, engine_options=None, prompt=None):
