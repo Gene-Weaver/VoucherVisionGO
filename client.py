@@ -496,7 +496,144 @@ def save_results_to_csv(results_list, output_dir):
     # Print column names for verification
     if not df.empty:
         print(f"CSV columns: {', '.join(df.columns.tolist())}")
+
+def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], 
+                    prompt="SLTPvM_default.yaml", image=None, directory=None, 
+                    file_list=None, verbose=False, save_to_csv=False, max_workers=4):
+    """
+    Process voucher images through the VoucherVision API.
     
+    Args:
+        server (str): URL of the VoucherVision API server
+        output_dir (str): Directory to save the output JSON results
+        engines (list): OCR engine options to use
+        prompt (str): Custom prompt file to use
+        image (str): Path to a single image file or URL to process
+        directory (str): Path to a directory containing images to process
+        file_list (str): Path to a file containing a list of image paths or URLs
+        verbose (bool): Print all output to console
+        save_to_csv (bool): Save all formatted_json results to a CSV file
+        max_workers (int): Maximum number of parallel workers
+        
+    Returns:
+        list: List of processed results if save_to_csv is True, otherwise None
+    """
+    import os
+    import time
+    import sys
+    import glob
+
+    # Ensure max_workers is no more than 32
+    max_workers = min(max_workers, 32)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Start timing
+    start_time = time.time()
+    
+    try:
+        # To store all results if save-to-csv is enabled
+        all_results = []
+        
+        # Process based on the input type
+        if image:
+            # Single image (no need for parallelization)
+            result = process_image_file(server, image, engines, prompt, output_dir, verbose)
+            if result and save_to_csv:
+                all_results.append(result)
+        
+        elif directory:
+            # Directory of images - use parallel processing
+            if not os.path.isdir(directory):
+                raise ValueError(f"Directory not found: {directory}")
+            
+            # Get all image files in the directory
+            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
+            image_files = []
+
+            for ext in image_extensions:
+                # Just use the lowercase extension - Windows is case-insensitive anyway
+                image_files.extend(glob.glob(os.path.join(directory, f"*{ext}")))
+
+            # Remove duplicates using lowercase comparison
+            seen = set()
+            unique_files = []
+            for file in image_files:
+                lowercase_path = file.lower()
+                if lowercase_path not in seen:
+                    seen.add(lowercase_path)
+                    unique_files.append(file)
+
+            image_files = unique_files
+            print(f"Found {len(image_files)} unique image files to process")
+
+            if not image_files:
+                print(f"No image files found in {directory}")
+                return None
+            
+            # Process images in parallel
+            results = process_images_parallel(
+                server, 
+                image_files, 
+                engines, 
+                prompt, 
+                output_dir, 
+                verbose,
+                max_workers
+            )
+            
+            if save_to_csv:
+                all_results.extend(results)
+        
+        elif file_list:
+            # List of image paths or URLs from a file - use parallel processing
+            file_paths = read_file_list(file_list)
+            
+            if not file_paths:
+                print(f"No file paths found in {file_list}")
+                return None
+            
+            print(f"Found {len(file_paths)} paths to process")
+            
+            # Process files in parallel
+            results = process_images_parallel(
+                server, 
+                file_paths, 
+                engines, 
+                prompt, 
+                output_dir, 
+                verbose,
+                max_workers
+            )
+            
+            if save_to_csv:
+                all_results.extend(results)
+        
+        # Save to CSV if requested
+        if save_to_csv and all_results:
+            save_results_to_csv(all_results, output_dir)
+            
+        if save_to_csv:
+            return all_results
+        return None
+
+    except Exception as e:
+        print(f"Error: {e}")
+        if __name__ == "__main__":
+            sys.exit(1)
+        else:
+            raise
+
+    finally:
+        # End timing and report
+        end_time = time.time()
+        elapsed_seconds = end_time - start_time
+        minutes, seconds = divmod(elapsed_seconds, 60)
+        print(f"\n{'-' * N_SIZE}")
+        print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
+        print(f"{'-' * N_SIZE}")
+
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='VoucherVisionGO Client')
@@ -527,110 +664,20 @@ def main():
     
     args = parser.parse_args()
     
-    # Ensure max_workers is no more than 4
-    max_workers = min(args.max_workers, 32)
-    
-    # Create output directory if it doesn't exist
-    os.makedirs(args.output_dir, exist_ok=True)
+    # Call the processing function with CLI arguments
+    process_vouchers(
+        server=args.server,
+        output_dir=args.output_dir,
+        engines=args.engines,
+        prompt=args.prompt,
+        image=args.image,
+        directory=args.directory,
+        file_list=args.file_list,
+        verbose=args.verbose,
+        save_to_csv=args.save_to_csv,
+        max_workers=args.max_workers
+    )
 
-    # Start timing
-    start_time = time.time()
-    
-    try:
-        # To store all results if save-to-csv is enabled
-        all_results = []
-        
-        # Process based on the input type
-        if args.image:
-            # Single image (no need for parallelization)
-            result = process_image_file(args.server, args.image, args.engines, args.prompt, args.output_dir, args.verbose)
-            if result and args.save_to_csv:
-                all_results.append(result)
-        
-        elif args.directory:
-            # Directory of images - use parallel processing
-            if not os.path.isdir(args.directory):
-                raise ValueError(f"Directory not found: {args.directory}")
-            
-            # Get all image files in the directory
-            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
-            image_files = []
-
-            for ext in image_extensions:
-                # Just use the lowercase extension - Windows is case-insensitive anyway
-                image_files.extend(glob.glob(os.path.join(args.directory, f"*{ext}")))
-
-            # Remove duplicates using lowercase comparison
-            seen = set()
-            unique_files = []
-            for file in image_files:
-                lowercase_path = file.lower()
-                if lowercase_path not in seen:
-                    seen.add(lowercase_path)
-                    unique_files.append(file)
-
-            image_files = unique_files
-            print(f"Found {len(image_files)} unique image files to process")
-
-            if not image_files:
-                print(f"No image files found in {args.directory}")
-                return
-            
-            print(f"Found {len(image_files)} image files to process")
-            
-            # Process images in parallel
-            results = process_images_parallel(
-                args.server, 
-                image_files, 
-                args.engines, 
-                args.prompt, 
-                args.output_dir, 
-                args.verbose,
-                max_workers
-            )
-            
-            if args.save_to_csv:
-                all_results.extend(results)
-        
-        elif args.file_list:
-            # List of image paths or URLs from a file - use parallel processing
-            file_paths = read_file_list(args.file_list)
-            
-            if not file_paths:
-                print(f"No file paths found in {args.file_list}")
-                return
-            
-            print(f"Found {len(file_paths)} paths to process")
-            
-            # Process files in parallel
-            results = process_images_parallel(
-                args.server, 
-                file_paths, 
-                args.engines, 
-                args.prompt, 
-                args.output_dir, 
-                args.verbose,
-                max_workers
-            )
-            
-            if args.save_to_csv:
-                all_results.extend(results)
-        
-        # Save to CSV if requested
-        if args.save_to_csv:
-            save_results_to_csv(all_results, args.output_dir)
-
-    except Exception as e:
-        print(f"Error: {e}")
-        sys.exit(1)
-
-    # End timing and report
-    end_time = time.time()
-    elapsed_seconds = end_time - start_time
-    minutes, seconds = divmod(elapsed_seconds, 60)
-    print(f"\n{'-' * N_SIZE}")
-    print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
-    print(f"{'-' * N_SIZE}")
 
 if __name__ == "__main__":
     main()
