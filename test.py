@@ -8,7 +8,7 @@ from datetime import datetime
 import platform
 
 class VoucherVisionTester:
-    def __init__(self, server_url, base_dir="./demo", venv_path=None):
+    def __init__(self, server_url, base_dir="./", venv_path=None):
         self.server_url = server_url
         self.base_dir = base_dir
         self.venv_path = venv_path
@@ -18,14 +18,14 @@ class VoucherVisionTester:
     def setup_test_cases(self):
         """Setup all test cases with their descriptions and commands"""
         # Create base directories if they don't exist
-        os.makedirs(f"{self.base_dir}/results_single_image", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_single_url", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_dir_images", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_dir_images_custom_prompt_save_to_csv", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_file_list_csv", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_file_list_txt", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_single_image_custom_prompt", exist_ok=True)
-        os.makedirs(f"{self.base_dir}/results_dir_images_save_to_csv", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/single_image", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/single_url", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/dir_images", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/dir_images_custom_prompt_save_to_csv", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/file_list_csv", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/file_list_txt", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/single_image_custom_prompt", exist_ok=True)
+        os.makedirs(f"{self.base_dir}/results/dir_images_save_to_csv", exist_ok=True)
         
         # Test cases
         self.tests = [
@@ -36,7 +36,7 @@ class VoucherVisionTester:
                     sys.executable, "client.py",
                     "--server", self.server_url,
                     "--image", f"{self.base_dir}/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg",
-                    "--output-dir", f"{self.base_dir}/results_single_image",
+                    "--output-dir", f"{self.base_dir}/results/single_image",
                 ]
             },
             {
@@ -46,7 +46,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--image", "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",
-                    "--output-dir", f"{self.base_dir}/results_single_url",
+                    "--output-dir", f"{self.base_dir}/results/single_url",
                 ]
             },
             {
@@ -56,7 +56,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--image", "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",
-                    "--output-dir", f"{self.base_dir}/results_single_image_custom_prompt",
+                    "--output-dir", f"{self.base_dir}/results/single_image_custom_prompt",
                     "--verbose",
                     "--prompt", "SLTPvM_default_chromosome.yaml"
                 ]
@@ -68,7 +68,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--directory", f"{self.base_dir}/images",
-                    "--output-dir", f"{self.base_dir}/results_dir_images",
+                    "--output-dir", f"{self.base_dir}/results/dir_images",
                 ]
             },
             {
@@ -78,7 +78,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--directory", f"{self.base_dir}/images",
-                    "--output-dir", f"{self.base_dir}/results_dir_images_custom_prompt_save_to_csv",
+                    "--output-dir", f"{self.base_dir}/results/dir_images_custom_prompt_save_to_csv",
                     "--verbose",
                     "--prompt", "SLTPvM_default_chromosome.yaml",
                     "--save-to-csv"
@@ -91,7 +91,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--file-list", f"{self.base_dir}/csv/file_list.csv",
-                    "--output-dir", f"{self.base_dir}/results_file_list_csv",
+                    "--output-dir", f"{self.base_dir}/results/file_list_csv",
                 ]
             },
             {
@@ -101,7 +101,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--file-list", f"{self.base_dir}/txt/file_list.txt",
-                    "--output-dir", f"{self.base_dir}/results_file_list_txt",
+                    "--output-dir", f"{self.base_dir}/results/file_list_txt",
                 ]
             },
             {
@@ -111,7 +111,7 @@ class VoucherVisionTester:
                     "python", "client.py",
                     "--server", self.server_url,
                     "--directory", f"{self.base_dir}/images",
-                    "--output-dir", f"{self.base_dir}/results_dir_images_save_to_csv",
+                    "--output-dir", f"{self.base_dir}/results/dir_images_save_to_csv",
                     "--save-to-csv"
                 ]
             }

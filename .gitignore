@@ -9,6 +9,7 @@ yolov8n.pt
 .DS_Store
 
 leafmachine2/
+results/
 
 vouchervision/LLM_MistralAI_Azure_endpoints.py
 
