@@ -50,22 +50,31 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
     else:  # Default to JSON string
         return json.dumps(regular_dict, indent=4)
     
-def process_image(fname, server_url, image_path, output_dir, verbose=False, engines=None, prompt=None):
+def process_image(fname, server_url, image_path, output_dir, verbose=False, engines=None, prompt=None, auth_token=None):
     """
     Process an image using the VoucherVision API server
     
     Args:
+        fname (str): Name for the output file
         server_url (str): URL of the VoucherVision API server
         image_path (str): Path to the image file or URL of the image
+        output_dir (str): Directory to save output files
+        verbose (bool): Whether to print verbose output
         engines (list): List of OCR engine options to use
         prompt (str): Custom prompt file to use
+        auth_token (str): Authentication token for the API
         
     Returns:
         dict: The processed results from the server
     """
+    # Always verify authentication using the cached verification
+    if not verify_authentication(server_url, auth_token):
+        print("Aborting. Authentication failed.")
+        return
+    
     # Check if the image path is a URL or a local file
     if image_path.startswith(('http://', 'https://')):
-        # For URL-based images, download them first or let the server handle it
+        # For URL-based images, download them first
         if verbose:
             print(f"Processing image from URL: {image_path}")
         response = requests.get(image_path)
@@ -78,7 +87,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
             temp_file.write(response.content)
         
         try:
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt)
+            # Pass the auth token to the recursive call
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt, auth_token)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -95,12 +105,15 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         data['engines'] = engines
     if prompt:
         data['prompt'] = prompt
+
+    # Prepare headers with authentication
+    headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
     
     try:
         # Send the request
         if verbose:
             print(f"Sending request to {url}")
-        response = requests.post(url, files=files, data=data)
+        response = requests.post(url, files=files, data=data, headers=headers)
         
         # Check if the request was successful
         if response.status_code == 200:
@@ -113,7 +126,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
                 except json.JSONDecodeError:
                     # Not valid JSON, leave as string
                     pass
-            results['filename'] = fname ## Add in the filename
+            results['filename'] = fname  # Add in the filename
             return results
         else:
             error_msg = f"Error: {response.status_code}"
@@ -128,7 +141,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose):
+def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose, auth_token=None):
     """
     Process a single image file and save the results
     
@@ -148,7 +161,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt, auth_token)
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -169,7 +182,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, prompt, output_dir, verbose, max_workers=4):
+def process_images_parallel(server_url, image_paths, engines, prompt, output_dir, verbose, max_workers=4, auth_token=None):
     """
     Process multiple images in parallel
     
@@ -204,7 +217,8 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
                 engines, 
                 prompt, 
                 output_dir, 
-                False
+                False, 
+                auth_token
             ): path for path in image_paths
         }
         
@@ -520,9 +534,28 @@ def save_results_to_csv(results_list, output_dir):
     if not df.empty:
         print(f"CSV columns: {', '.join(df.columns.tolist())}")
 
+def verify_authentication(server_url, auth_token):
+    """Verify the authentication token before starting any processing"""
+    try:
+        headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
+        response = requests.get(f"{server_url}/auth-check", headers=headers)
+        
+        if response.status_code == 200:
+            return True
+        elif response.status_code == 401:
+            print("ERROR: Authentication failed. Please provide a valid authentication token.")
+            print("Visit the login page to get your token: " + server_url + "/login")
+            return False
+        else:
+            print(f"ERROR: Server returned unexpected status code: {response.status_code}")
+            return False
+    except Exception as e:
+        print(f"ERROR: Could not connect to server: {str(e)}")
+        return False
+    
 def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], 
                     prompt="SLTPvM_default.yaml", image=None, directory=None, 
-                    file_list=None, verbose=False, save_to_csv=False, max_workers=4):
+                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None):
     """
     Process voucher images through the VoucherVision API.
     
@@ -541,6 +574,11 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
     Returns:
         list: List of processed results if save_to_csv is True, otherwise None
     """
+    # First verify authentication before doing anything
+    if not verify_authentication(server, auth_token):
+        print("Aborting. Authentication failed.")
+        return
+    
     import os
     import time
     import sys
@@ -562,7 +600,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, prompt, output_dir, verbose)
+            result = process_image_file(server, image, engines, prompt, output_dir, verbose, auth_token)
             if result and save_to_csv:
                 all_results.append(result)
         
@@ -603,7 +641,8 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 prompt, 
                 output_dir, 
                 verbose,
-                max_workers
+                max_workers,
+                auth_token
             )
             
             if save_to_csv:
@@ -627,7 +666,8 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 prompt, 
                 output_dir, 
                 verbose,
-                max_workers
+                max_workers,
+                auth_token
             )
             
             if save_to_csv:

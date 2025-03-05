@@ -1,4 +1,5 @@
 import os
+import requests
 import sys
 import json
 import tempfile
@@ -390,6 +391,16 @@ except Exception as e:
     logger.error(f"Failed to initialize VoucherVision processor: {str(e)}")
     raise
 
+@app.route('/auth-check', methods=['GET'])
+@authenticated_route
+def auth_check():
+    """Simple endpoint to verify authentication status"""
+    # If we get here, authentication was successful
+    return jsonify({
+        'status': 'authenticated',
+        'message': 'Your authentication token is valid.'
+    }), 200
+    
 @app.route('/process', methods=['POST'])
 @authenticated_route
 def process_image():
