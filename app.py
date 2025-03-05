@@ -471,23 +471,47 @@ def login_page():
           
           // Firebase UI config
           var uiConfig = {
-            signInSuccessUrl: '/auth-success',
+            signInSuccessUrl: window.location.origin + '/auth-success',
             signInOptions: [
               firebase.auth.GoogleAuthProvider.PROVIDER_ID,
               firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],
+            callbacks: {
+              signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                console.log("Sign-in successful, redirecting to:", redirectUrl);
+                return true;
+              }
+            },
             tosUrl: '/terms-of-service',
             privacyPolicyUrl: '/privacy-policy'
           };
           
-          // Initialize the FirebaseUI Widget
-          var ui = new firebaseui.auth.AuthUI(firebase.auth());
-          ui.start('#firebaseui-auth-container', uiConfig);
+          // Check authentication state
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in, redirect to success page
+              console.log("User already signed in, redirecting...");
+              window.location.href = window.location.origin + '/auth-success';
+            } else {
+              // User is not signed in, initialize FirebaseUI
+              var ui = new firebaseui.auth.AuthUI(firebase.auth());
+              
+              // Check for pending redirects
+              if (ui.isPendingRedirect()) {
+                console.log("Handling pending redirect...");
+                ui.start('#firebaseui-auth-container', uiConfig);
+              } else {
+                // No pending redirect, start UI normally
+                ui.start('#firebaseui-auth-container', uiConfig);
+              }
+            }
+          });
         </script>
       </head>
       <body>
         <h1>VoucherVision API Authentication</h1>
         <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
       </body>
     </html>
     """, api_key=firebase_api_key, auth_domain=auth_domain, 
