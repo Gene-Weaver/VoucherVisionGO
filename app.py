@@ -11,6 +11,9 @@ from pathlib import Path
 import yaml
 import re
 
+import firebase_admin
+from firebase_admin import credentials, auth
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -43,6 +46,40 @@ except:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
+
+# Initialize Firebase Admin SDK (place near the top of your file)
+try:
+    firebase_admin.initialize_app()
+except ValueError:
+    # Already initialized
+    pass
+
+# Authentication middleware function
+def authenticate_request(request):
+    """Verify Firebase ID token in authorization header."""
+    auth_header = request.headers.get('Authorization', '')
+    if not auth_header.startswith('Bearer '):
+        return None
+    
+    id_token = auth_header.split('Bearer ')[1]
+    try:
+        # Verify the token
+        decoded_token = auth.verify_id_token(id_token)
+        return decoded_token
+    except Exception as e:
+        logger.error(f"Error verifying token: {e}")
+        return None
+
+# Add protected route decorator
+def authenticated_route(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Get auth token
+        user = authenticate_request(request)
+        if not user:
+            return jsonify({'error': 'Unauthorized - Valid Firebase token required'}), 401
+        return f(*args, **kwargs)
+    return decorated_function
 
 class RequestThrottler:
     """
@@ -353,6 +390,7 @@ except Exception as e:
     raise
 
 @app.route('/process', methods=['POST'])
+@authenticated_route
 def process_image():
     """API endpoint to process an image"""
     # Check if file is present in the request
@@ -398,6 +436,160 @@ def health_check():
         'max_concurrent_requests': max_requests,
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
     }), 200
+
+@app.route('/login', methods=['GET'])
+def login_page():
+    # Get Firebase configuration from environment variables
+    firebase_api_key = os.environ.get("FIREBASE_API_KEY")
+    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    firebase_app_id = os.environ.get("FIREBASE_APP_ID")
+    
+    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>VoucherVision Login</title>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
+        <script type="text/javascript">
+          // Firebase configuration from environment variables
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            appId: "{{ app_id }}"
+          };
+        
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          
+          // Firebase UI config
+          var uiConfig = {
+            signInSuccessUrl: '/auth-success',
+            signInOptions: [
+              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            tosUrl: '/terms-of-service',
+            privacyPolicyUrl: '/privacy-policy'
+          };
+          
+          // Initialize the FirebaseUI Widget
+          var ui = new firebaseui.auth.AuthUI(firebase.auth());
+          ui.start('#firebaseui-auth-container', uiConfig);
+        </script>
+      </head>
+      <body>
+        <h1>VoucherVision API Authentication</h1>
+        <div id="firebaseui-auth-container"></div>
+      </body>
+    </html>
+    """, api_key=firebase_api_key, auth_domain=auth_domain, 
+         project_id=firebase_project_id, app_id=firebase_app_id)
+
+@app.route('/auth-success', methods=['GET'])
+def auth_success():
+    # Get Firebase configuration from environment variables
+    firebase_api_key = os.environ.get("FIREBASE_API_KEY")
+    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    firebase_app_id = os.environ.get("FIREBASE_APP_ID")
+    
+    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Authentication Successful</title>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+      </head>
+      <body>
+        <h1>Authentication Successful</h1>
+        <p>You are now authenticated. You can use your authentication token to access the API.</p>
+        
+        <div>
+          <h3>Your ID Token:</h3>
+          <pre id="token" style="background-color: #f5f5f5; padding: 15px; overflow-x: auto;"></pre>
+          <button onclick="copyToken()">Copy Token</button>
+        </div>
+        
+        <script>
+          // Initialize Firebase with environment variables
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            appId: "{{ app_id }}"
+          };
+          firebase.initializeApp(firebaseConfig);
+          
+          // Get the token
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              user.getIdToken().then(function(token) {
+                document.getElementById('token').textContent = token;
+              });
+            }
+          });
+          
+          // Copy token function
+          function copyToken() {
+            const tokenElement = document.getElementById('token');
+            const text = tokenElement.textContent;
+            
+            navigator.clipboard.writeText(text)
+              .then(() => {
+                alert('Token copied to clipboard');
+              })
+              .catch(err => {
+                console.error('Failed to copy token: ', err);
+              });
+          }
+        </script>
+      </body>
+    </html>
+    """, api_key=firebase_api_key, auth_domain=auth_domain, 
+         project_id=firebase_project_id, app_id=firebase_app_id)
+
+@app.route('/api-client', methods=['GET']) ######################################################################## optional? TODO
+def api_client():
+    # Get Firebase configuration from environment variables
+    firebase_api_key = os.environ.get("FIREBASE_API_KEY")
+    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    firebase_app_id = os.environ.get("FIREBASE_APP_ID")
+    
+    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html>
+      <!-- HTML content remains the same except for the script block -->
+      <body>
+        <!-- Body content remains the same -->
+        
+        <script>
+          // Initialize Firebase with environment variables
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            appId: "{{ app_id }}"
+          };
+          firebase.initializeApp(firebaseConfig);
+          
+          // Rest of the JavaScript remains the same
+        </script>
+      </body>
+    </html>
+    """, api_key=firebase_api_key, auth_domain=auth_domain, 
+         project_id=firebase_project_id, app_id=firebase_app_id)
 
 @app.route('/prompts', methods=['GET'])
 def list_prompts_api():

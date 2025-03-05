@@ -111,7 +111,7 @@ class VoucherVisionTester:
                 "cmd": [
                     "python", "client.py",
                     "--server", self.server_url,
-                    "--file-list", f"{self.base_dir}/txt/file_list_long_txt.txt",
+                    "--file-list", f"{self.base_dir}/txt/file_list_long.txt",
                     "--output-dir", f"{self.base_dir}/results/file_list_long_txt",
                     "--save-to-csv",
                 ]
