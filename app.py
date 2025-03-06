@@ -49,9 +49,10 @@ except:
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
 
-# Initialize Firebase Admin SDK (place near the top of your file)
+# Initialize Firebase Admin SDK 
+options = {'projectId': os.environ.get("FIREBASE_projectId"),}
 try:
-    firebase_admin.initialize_app()
+    firebase_admin.initialize_app(options=options)
 except ValueError:
     # Already initialized
     pass
