@@ -118,7 +118,7 @@ try:
         firebase_admin.initialize_app(options={"projectId": project_id})
         logger.info(f"Firebase Admin SDK initialized with default options for project: {project_id}")
 except ValueError as e:
-    # Already initialized
+    # Already initialize
     logger.info(f"Firebase Admin SDK already initialized: {e}")
 except Exception as e:
     logger.error(f"Failed to initialize Firebase Admin SDK: {e}")
