@@ -15,6 +15,7 @@ from functools import wraps
 
 import firebase_admin
 from firebase_admin import credentials, auth
+from google.cloud import secretmanager
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -49,22 +50,40 @@ except:
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
 
-# Initialize Firebase Admin SDK using the Google credential implicitly available to Cloud Run
+
+def get_secret(secret_name):
+    """Get secret from Secret Manager"""
+    client = secretmanager.SecretManagerServiceClient()
+    project_id = os.environ.get('GOOGLE_CLOUD_PROJECT', '738307415303')
+    name = f"projects/{project_id}/secrets/{secret_name}/versions/latest"
+    try:
+        response = client.access_secret_version(name=name)
+        return response.payload.data.decode('UTF-8')
+    except Exception as e:
+        logger.error(f"Error accessing secret {secret_name}: {e}")
+        return None
+    
+# Initialize Firebase Admin SDK with service account key
 try:
-    # Initialize with default credentials but specify the project ID
-    project_id = os.environ.get("FIREBASE_PROJECT_ID")
-    app_options = {
-        'projectId': project_id
-    }
-    cred = credentials.ApplicationDefault()
-    firebase_admin.initialize_app(credential=cred, options=app_options)
-    logger.info(f"Firebase Admin SDK initialized with default credentials for project: {project_id}")
+    # Load service account credentials from Secret Manager
+    cred_json = get_secret('firebase-admin-key')
+    if cred_json:
+        cred_dict = json.loads(cred_json)
+        creds = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(credential=creds)
+        logger.info("Firebase Admin SDK initialized with service account credentials")
+    else:
+        # Fallback to default initialization
+        project_id = os.environ.get("FIREBASE_PROJECT_ID", "vouchervision-387816")
+        firebase_admin.initialize_app(options={"projectId": project_id})
+        logger.info(f"Firebase Admin SDK initialized with default options for project: {project_id}")
 except ValueError as e:
     # Already initialized
-    logger.info("Firebase Admin SDK already initialized")
+    logger.info(f"Firebase Admin SDK already initialized: {e}")
 except Exception as e:
     logger.error(f"Failed to initialize Firebase Admin SDK: {e}")
-    raise
+    # Log but continue - better to try to operate than to crash completely
+    logger.error(f"Continuing despite initialization error")
 
 # Authentication middleware function
 def authenticate_request(request):
