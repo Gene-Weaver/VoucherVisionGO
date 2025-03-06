@@ -50,12 +50,23 @@ except:
     from vouchervision.general_utils import calculate_cost # type: ignore
 
 # Initialize Firebase Admin SDK 
-options = {'projectId': os.environ.get("FIREBASE_projectId"),}
 try:
-    firebase_admin.initialize_app(options=options)
-except ValueError:
+    # Get the Firebase project ID
+    project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    
+    # Initialize with just the project ID
+    app_options = {
+        'projectId': project_id
+    }
+    firebase_admin.initialize_app(options=app_options)
+    logger.info(f"Firebase Admin SDK initialized for project: {project_id}")
+except ValueError as e:
     # Already initialized
+    logger.info("Firebase Admin SDK already initialized")
     pass
+except Exception as e:
+    logger.error(f"Failed to initialize Firebase Admin SDK: {e}")
+    raise
 
 # Authentication middleware function
 def authenticate_request(request):
@@ -491,7 +502,7 @@ def debug_auth():
             'error_type': type(e).__name__,
             'error_message': str(e)
         }), 401
-        
+
 @app.route('/login', methods=['GET'])
 def login_page():
     # Get Firebase configuration from environment variables
