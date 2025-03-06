@@ -49,21 +49,19 @@ except:
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
 
-# Initialize Firebase Admin SDK 
+# Initialize Firebase Admin SDK using the Google credential implicitly available to Cloud Run
 try:
-    # Get the Firebase project ID
+    # Initialize with default credentials but specify the project ID
     project_id = os.environ.get("FIREBASE_PROJECT_ID")
-    
-    # Initialize with just the project ID
     app_options = {
         'projectId': project_id
     }
-    firebase_admin.initialize_app(options=app_options)
-    logger.info(f"Firebase Admin SDK initialized for project: {project_id}")
+    cred = credentials.ApplicationDefault()
+    firebase_admin.initialize_app(credential=cred, options=app_options)
+    logger.info(f"Firebase Admin SDK initialized with default credentials for project: {project_id}")
 except ValueError as e:
     # Already initialized
     logger.info("Firebase Admin SDK already initialized")
-    pass
 except Exception as e:
     logger.error(f"Failed to initialize Firebase Admin SDK: {e}")
     raise
