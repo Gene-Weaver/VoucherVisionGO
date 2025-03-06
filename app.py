@@ -506,93 +506,6 @@ def health_check():
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
     }), 200
 
-@app.route('/check-project', methods=['GET'])
-def check_project():
-    """Check project ID configuration"""
-    # Get Firebase configuration from Secret Manager
-    firebase_config = get_firebase_config()
-    
-    return jsonify({
-        'firebase_project_id': firebase_config["projectId"],
-        'firebase_initialized': firebase_admin._apps is not None and len(firebase_admin._apps) > 0,
-        'firebase_config': {
-            'apiKey': firebase_config["apiKey"], 
-            'projectId': firebase_config["projectId"],
-            'authDomain': firebase_config["authDomain"]
-        },
-        'env_vars': {k: v for k, v in os.environ.items() if 'FIREBASE' in k.upper() or 'GOOGLE_CLOUD' in k.upper()}
-    })
-
-@app.route('/diagnostics', methods=['GET'])
-def diagnostics():
-    """Diagnostic endpoint for troubleshooting"""
-    import datetime
-    
-    # Check Secret Manager access
-    secret_test = os.environ.get('firebase-web-config')
-    secret_manager_status = "Available" if secret_test else "Unavailable"
-    
-    # Check Firebase Admin initialization
-    firebase_admin_status = "Initialized" if firebase_admin._apps else "Not initialized"
-    
-    # Get Firebase configuration 
-    firebase_config = get_firebase_config()
-    
-    # Build diagnostic info
-    diag_info = {
-        "timestamp": datetime.datetime.now().isoformat(),
-        "service": "VoucherVision API",
-        "environment": {
-            "GOOGLE_CLOUD_PROJECT": os.environ.get("GOOGLE_CLOUD_PROJECT", "Not set"),
-            "GAE_ENV": os.environ.get("GAE_ENV", "Not set"),
-            "K_SERVICE": os.environ.get("K_SERVICE", "Not set"),  # Cloud Run service name
-            "K_REVISION": os.environ.get("K_REVISION", "Not set"),  # Cloud Run revision
-        },
-        "services": {
-            "secret_manager": secret_manager_status,
-            "firebase_admin": firebase_admin_status
-        },
-        "firebase_config": {
-            "project_id": firebase_config["projectId"],
-            "auth_domain": firebase_config["authDomain"],
-            "has_api_key": bool(firebase_config["apiKey"]),
-            "has_app_id": bool(firebase_config["appId"])
-        }
-    }
-    
-    return jsonify(diag_info)
-
-@app.route('/debug-auth', methods=['GET'])
-def debug_auth():
-    """Debug endpoint for authentication issues"""
-    auth_header = request.headers.get('Authorization', '')
-    if not auth_header.startswith('Bearer '):
-        return jsonify({'error': 'No bearer token provided'}), 401
-    
-    id_token = auth_header.split('Bearer ')[1]
-    try:
-        # Print debugging info
-        print(f"Project ID: {os.environ.get('FIREBASE_PROJECT_ID')}")
-        print(f"Token prefix: {id_token[:20]}...")
-        
-        # Try to decode the token
-        decoded_token = auth.verify_id_token(id_token)
-        
-        # If successful, return detailed info
-        return jsonify({
-            'status': 'Success',
-            'user_id': decoded_token.get('uid', 'N/A'),
-            'email': decoded_token.get('email', 'N/A'),
-            'provider': decoded_token.get('firebase', {}).get('sign_in_provider', 'N/A'),
-            'project': decoded_token.get('aud', 'N/A')
-        }), 200
-    except Exception as e:
-        # If failed, return detailed error
-        return jsonify({
-            'status': 'Failed',
-            'error_type': type(e).__name__,
-            'error_message': str(e)
-        }), 401
 
 @app.route('/login', methods=['GET'])
 def login_page():
@@ -791,41 +704,41 @@ def auth_success():
     app_id=firebase_config["appId"])
 
 
-@app.route('/api-client', methods=['GET']) ######################################################################## optional? TODO
-def api_client():
-    # Get Firebase configuration from Secret Manager
-    firebase_config = get_firebase_config()
+# @app.route('/api-client', methods=['GET']) ######################################################################## optional? TODO
+# def api_client():
+#     # Get Firebase configuration from Secret Manager
+#     firebase_config = get_firebase_config()
     
-    return render_template_string("""
-    <!DOCTYPE html>
-    <html>
-      <!-- HTML content remains the same except for the script block -->
-      <body>
-        <!-- Body content remains the same -->
+#     return render_template_string("""
+#     <!DOCTYPE html>
+#     <html>
+#         <!-- HTML content remains the same except for the script block -->
+#         <body>
+#         <!-- Body content remains the same -->
         
-        <script>
-          // Initialize Firebase
-          const firebaseConfig = {
-            apiKey: "{{ api_key }}",
-            authDomain: "{{ auth_domain }}",
-            projectId: "{{ project_id }}",
-            storageBucket: "{{ storage_bucket }}",
-            messagingSenderId: "{{ messaging_sender_id }}",
-            appId: "{{ app_id }}"
-          };
-          firebase.initializeApp(firebaseConfig);
-          
-          // Rest of the JavaScript remains the same
-        </script>
-      </body>
-    </html>
-    """, 
-    api_key=firebase_config["apiKey"],
-    auth_domain=firebase_config["authDomain"],
-    project_id=firebase_config["projectId"],
-    storage_bucket=firebase_config.get("storageBucket", ""),
-    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
-    app_id=firebase_config["appId"])
+#         <script>
+#             // Initialize Firebase
+#             const firebaseConfig = {
+#             apiKey: "{{ api_key }}",
+#             authDomain: "{{ auth_domain }}",
+#             projectId: "{{ project_id }}",
+#             storageBucket: "{{ storage_bucket }}",
+#             messagingSenderId: "{{ messaging_sender_id }}",
+#             appId: "{{ app_id }}"
+#             };
+#             firebase.initializeApp(firebaseConfig);
+            
+#             // Rest of the JavaScript remains the same
+#         </script>
+#         </body>
+#     </html>
+#     """, 
+#     api_key=firebase_config["apiKey"],
+#     auth_domain=firebase_config["authDomain"],
+#     project_id=firebase_config["projectId"],
+#     storage_bucket=firebase_config.get("storageBucket", ""),
+#     messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+#     app_id=firebase_config["appId"])
 
 
 @app.route('/prompts', methods=['GET'])
