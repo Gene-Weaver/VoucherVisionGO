@@ -50,6 +50,46 @@ except:
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
 
+def get_firebase_config():
+    """Get Firebase configuration for client-side use from Secret Manager"""
+    # Default configuration values
+    config = {
+        "apiKey": "",
+        "authDomain": "",
+        "projectId": "vouchervision-387816",
+        "storageBucket": "",
+        "messagingSenderId": "",
+        "appId": ""
+    }
+    
+    # Try to get web configuration from Secret Manager
+    firebase_web_config = get_secret('firebase-web-config')
+    if firebase_web_config:
+        try:
+            web_config = json.loads(firebase_web_config)
+            # Update config with values from the secret
+            config.update(web_config)
+            logger.info("Retrieved Firebase web config from Secret Manager")
+        except json.JSONDecodeError as e:
+            logger.error(f"Failed to parse firebase-web-config JSON: {e}")
+    else:
+        logger.warning("Could not retrieve firebase-web-config from Secret Manager, using defaults")
+        
+        # Try to get project ID from admin key as fallback
+        firebase_admin_key = get_secret('firebase-admin-key')
+        if firebase_admin_key:
+            try:
+                admin_key_dict = json.loads(firebase_admin_key)
+                config["projectId"] = admin_key_dict.get("project_id", config["projectId"])
+                logger.info(f"Extracted project ID from admin key: {config['projectId']}")
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse firebase-admin-key JSON: {e}")
+    
+    # Ensure authDomain is set if projectId is available
+    if not config["authDomain"] and config["projectId"]:
+        config["authDomain"] = f"{config['projectId']}.firebaseapp.com"
+    
+    return config
 
 def get_secret(secret_name):
     """Get secret from Secret Manager"""
@@ -481,25 +521,58 @@ def health_check():
 @app.route('/check-project', methods=['GET'])
 def check_project():
     """Check project ID configuration"""
-    # Get project ID from Firebase admin key
-    firebase_admin_key = get_secret('firebase-admin-key')
-    project_id = "Unknown"
-    
-    if firebase_admin_key:
-        try:
-            admin_key_dict = json.loads(firebase_admin_key)
-            project_id = admin_key_dict.get("project_id", "Unknown")
-        except Exception as e:
-            logger.error(f"Error parsing Firebase admin key: {e}")
-            project_id = os.environ.get("FIREBASE_PROJECT_ID", "Unknown")
-    else:
-        project_id = os.environ.get("FIREBASE_PROJECT_ID", "Unknown")
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
     
     return jsonify({
-        'firebase_project_id': project_id,
-        'firebase_initialized': True,
-        'env_vars': {k: v for k, v in os.environ.items() if 'FIREBASE' in k.upper()}
+        'firebase_project_id': firebase_config["projectId"],
+        'firebase_initialized': firebase_admin._apps is not None and len(firebase_admin._apps) > 0,
+        'firebase_config': {
+            'apiKey': firebase_config["apiKey"], 
+            'projectId': firebase_config["projectId"],
+            'authDomain': firebase_config["authDomain"]
+        },
+        'env_vars': {k: v for k, v in os.environ.items() if 'FIREBASE' in k.upper() or 'GOOGLE_CLOUD' in k.upper()}
     })
+
+@app.route('/diagnostics', methods=['GET'])
+def diagnostics():
+    """Diagnostic endpoint for troubleshooting"""
+    import datetime
+    
+    # Check Secret Manager access
+    secret_test = get_secret('firebase-web-config')
+    secret_manager_status = "Available" if secret_test else "Unavailable"
+    
+    # Check Firebase Admin initialization
+    firebase_admin_status = "Initialized" if firebase_admin._apps else "Not initialized"
+    
+    # Get Firebase configuration 
+    firebase_config = get_firebase_config()
+    
+    # Build diagnostic info
+    diag_info = {
+        "timestamp": datetime.datetime.now().isoformat(),
+        "service": "VoucherVision API",
+        "environment": {
+            "GOOGLE_CLOUD_PROJECT": os.environ.get("GOOGLE_CLOUD_PROJECT", "Not set"),
+            "GAE_ENV": os.environ.get("GAE_ENV", "Not set"),
+            "K_SERVICE": os.environ.get("K_SERVICE", "Not set"),  # Cloud Run service name
+            "K_REVISION": os.environ.get("K_REVISION", "Not set"),  # Cloud Run revision
+        },
+        "services": {
+            "secret_manager": secret_manager_status,
+            "firebase_admin": firebase_admin_status
+        },
+        "firebase_config": {
+            "project_id": firebase_config["projectId"],
+            "auth_domain": firebase_config["authDomain"],
+            "has_api_key": bool(firebase_config["apiKey"]),
+            "has_app_id": bool(firebase_config["appId"])
+        }
+    }
+    
+    return jsonify(diag_info)
 
 @app.route('/debug-auth', methods=['GET'])
 def debug_auth():
@@ -535,30 +608,8 @@ def debug_auth():
 
 @app.route('/login', methods=['GET'])
 def login_page():
-    # Get Firebase configuration from the same admin key used for auth
-    firebase_admin_key = get_secret('firebase-admin-key')
-    
-    # Default values in case secret isn't available
-    firebase_api_key = os.environ.get("FIREBASE_API_KEY", "")
-    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID", "vouchervision-387816")
-    firebase_app_id = os.environ.get("FIREBASE_APP_ID", "")
-    
-    if firebase_admin_key:
-        try:
-            # Parse the admin key JSON to extract project_id
-            admin_key_dict = json.loads(firebase_admin_key)
-            firebase_project_id = admin_key_dict.get("project_id", firebase_project_id)
-            
-            # Get web app credentials from a separate secret
-            firebase_web_config = get_secret('firebase-web-config')
-            if firebase_web_config:
-                web_config = json.loads(firebase_web_config)
-                firebase_api_key = web_config.get("apiKey", firebase_api_key)
-                firebase_app_id = web_config.get("appId", firebase_app_id)
-        except Exception as e:
-            logger.error(f"Error parsing Firebase admin key: {e}")
-    
-    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
     
     return render_template_string("""
     <!DOCTYPE html>
@@ -600,11 +651,13 @@ def login_page():
         </div>
         
         <script type="text/javascript">
-          // Firebase configuration from environment variables
+          // Firebase configuration 
           const firebaseConfig = {
             apiKey: "{{ api_key }}",
             authDomain: "{{ auth_domain }}",
             projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
             appId: "{{ app_id }}"
           };
         
@@ -671,36 +724,19 @@ def login_page():
         </script>
       </body>
     </html>
-    """, api_key=firebase_api_key, auth_domain=auth_domain, 
-         project_id=firebase_project_id, app_id=firebase_app_id)
+    """, 
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"])
 
 
 @app.route('/auth-success', methods=['GET'])
 def auth_success():
-    # Use the same approach as login_page
-    firebase_admin_key = get_secret('firebase-admin-key')
-    
-    # Default values in case secret isn't available
-    firebase_api_key = os.environ.get("FIREBASE_API_KEY", "")
-    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID", "vouchervision-387816")
-    firebase_app_id = os.environ.get("FIREBASE_APP_ID", "")
-    
-    if firebase_admin_key:
-        try:
-            # Parse the admin key JSON to extract project_id
-            admin_key_dict = json.loads(firebase_admin_key)
-            firebase_project_id = admin_key_dict.get("project_id", firebase_project_id)
-            
-            # Get web app credentials from a separate secret
-            firebase_web_config = get_secret('firebase-web-config')
-            if firebase_web_config:
-                web_config = json.loads(firebase_web_config)
-                firebase_api_key = web_config.get("apiKey", firebase_api_key)
-                firebase_app_id = web_config.get("appId", firebase_app_id)
-        except Exception as e:
-            logger.error(f"Error parsing Firebase admin key: {e}")
-    
-    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
     
     return render_template_string("""
     <!DOCTYPE html>
@@ -722,11 +758,13 @@ def auth_success():
         </div>
         
         <script>
-          // Initialize Firebase with environment variables
+          // Initialize Firebase
           const firebaseConfig = {
             apiKey: "{{ api_key }}",
             authDomain: "{{ auth_domain }}",
             projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
             appId: "{{ app_id }}"
           };
           firebase.initializeApp(firebaseConfig);
@@ -756,36 +794,19 @@ def auth_success():
         </script>
       </body>
     </html>
-    """, api_key=firebase_api_key, auth_domain=auth_domain, 
-         project_id=firebase_project_id, app_id=firebase_app_id)
+    """, 
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"])
 
 
 @app.route('/api-client', methods=['GET']) ######################################################################## optional? TODO
 def api_client():
-    # Use the same approach as login_page
-    firebase_admin_key = get_secret('firebase-admin-key')
-    
-    # Default values in case secret isn't available
-    firebase_api_key = os.environ.get("FIREBASE_API_KEY", "")
-    firebase_project_id = os.environ.get("FIREBASE_PROJECT_ID", "vouchervision-387816")
-    firebase_app_id = os.environ.get("FIREBASE_APP_ID", "")
-    
-    if firebase_admin_key:
-        try:
-            # Parse the admin key JSON to extract project_id
-            admin_key_dict = json.loads(firebase_admin_key)
-            firebase_project_id = admin_key_dict.get("project_id", firebase_project_id)
-            
-            # Get web app credentials from a separate secret
-            firebase_web_config = get_secret('firebase-web-config')
-            if firebase_web_config:
-                web_config = json.loads(firebase_web_config)
-                firebase_api_key = web_config.get("apiKey", firebase_api_key)
-                firebase_app_id = web_config.get("appId", firebase_app_id)
-        except Exception as e:
-            logger.error(f"Error parsing Firebase admin key: {e}")
-    
-    auth_domain = f"{firebase_project_id}.firebaseapp.com"
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
     
     return render_template_string("""
     <!DOCTYPE html>
@@ -795,11 +816,13 @@ def api_client():
         <!-- Body content remains the same -->
         
         <script>
-          // Initialize Firebase with environment variables
+          // Initialize Firebase
           const firebaseConfig = {
             apiKey: "{{ api_key }}",
             authDomain: "{{ auth_domain }}",
             projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
             appId: "{{ app_id }}"
           };
           firebase.initializeApp(firebaseConfig);
@@ -808,8 +831,13 @@ def api_client():
         </script>
       </body>
     </html>
-    """, api_key=firebase_api_key, auth_domain=auth_domain, 
-         project_id=firebase_project_id, app_id=firebase_app_id)
+    """, 
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"])
 
 
 @app.route('/prompts', methods=['GET'])
