@@ -450,6 +450,48 @@ def health_check():
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
     }), 200
 
+@app.route('/check-project', methods=['GET'])
+def check_project():
+    """Check project ID configuration"""
+    project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    return jsonify({
+        'firebase_project_id': project_id,
+        'firebase_initialized': True,
+        'env_vars': {k: v for k, v in os.environ.items() if 'FIREBASE' in k.upper()}
+    })
+
+@app.route('/debug-auth', methods=['GET'])
+def debug_auth():
+    """Debug endpoint for authentication issues"""
+    auth_header = request.headers.get('Authorization', '')
+    if not auth_header.startswith('Bearer '):
+        return jsonify({'error': 'No bearer token provided'}), 401
+    
+    id_token = auth_header.split('Bearer ')[1]
+    try:
+        # Print debugging info
+        print(f"Project ID: {os.environ.get('FIREBASE_PROJECT_ID')}")
+        print(f"Token prefix: {id_token[:20]}...")
+        
+        # Try to decode the token
+        decoded_token = auth.verify_id_token(id_token)
+        
+        # If successful, return detailed info
+        return jsonify({
+            'status': 'Success',
+            'user_id': decoded_token.get('uid', 'N/A'),
+            'email': decoded_token.get('email', 'N/A'),
+            'provider': decoded_token.get('firebase', {}).get('sign_in_provider', 'N/A'),
+            'project': decoded_token.get('aud', 'N/A')
+        }), 200
+    except Exception as e:
+        # If failed, return detailed error
+        return jsonify({
+            'status': 'Failed',
+            'error_type': type(e).__name__,
+            'error_message': str(e)
+        }), 401
+        
 @app.route('/login', methods=['GET'])
 def login_page():
     # Get Firebase configuration from environment variables
@@ -469,6 +511,35 @@ def login_page():
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
+        <style>
+          body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+          .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+          .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+          .signed-in-container { display: none; text-align: center; margin: 20px 0; }
+          .btn { 
+            background-color: #4285f4; color: white; border: none; padding: 10px 15px; 
+            border-radius: 4px; cursor: pointer; font-size: 14px; 
+          }
+          .btn:hover { background-color: #3367d6; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>VoucherVision API Authentication</h1>
+            <button id="signout-btn" class="btn" style="display:none;">Sign Out</button>
+          </div>
+          
+          <div id="signed-in-container" class="signed-in-container">
+            <h2>You are currently signed in</h2>
+            <p>Signed in as: <strong id="user-email"></strong></p>
+            <p>You can continue to the <a href="/auth-success">token page</a> or sign out to use a different account.</p>
+          </div>
+          
+          <div id="firebaseui-auth-container"></div>
+          <div id="loader">Loading...</div>
+        </div>
+        
         <script type="text/javascript">
           // Firebase configuration from environment variables
           const firebaseConfig = {
@@ -498,15 +569,24 @@ def login_page():
             privacyPolicyUrl: '/privacy-policy'
           };
           
+          // Initialize FirebaseUI
+          var ui = new firebaseui.auth.AuthUI(firebase.auth());
+          
           // Check authentication state
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-              // User is signed in, redirect to success page
-              console.log("User already signed in, redirecting...");
-              window.location.href = window.location.origin + '/auth-success';
+              // User is signed in
+              console.log("User signed in:", user.email);
+              document.getElementById('user-email').textContent = user.email;
+              document.getElementById('signed-in-container').style.display = 'block';
+              document.getElementById('signout-btn').style.display = 'block';
+              document.getElementById('firebaseui-auth-container').style.display = 'none';
+              document.getElementById('loader').style.display = 'none';
             } else {
-              // User is not signed in, initialize FirebaseUI
-              var ui = new firebaseui.auth.AuthUI(firebase.auth());
+              // User is not signed in
+              document.getElementById('signed-in-container').style.display = 'none';
+              document.getElementById('signout-btn').style.display = 'none';
+              document.getElementById('firebaseui-auth-container').style.display = 'block';
               
               // Check for pending redirects
               if (ui.isPendingRedirect()) {
@@ -518,12 +598,18 @@ def login_page():
               }
             }
           });
+          
+          // Sign out button
+          document.getElementById('signout-btn').addEventListener('click', function() {
+            firebase.auth().signOut().then(function() {
+              console.log('User signed out');
+              // Reload the page to show sign-in options
+              window.location.reload();
+            }).catch(function(error) {
+              console.error('Sign out error:', error);
+            });
+          });
         </script>
-      </head>
-      <body>
-        <h1>VoucherVision API Authentication</h1>
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
       </body>
     </html>
     """, api_key=firebase_api_key, auth_domain=auth_domain, 
