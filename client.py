@@ -703,6 +703,9 @@ def main():
     parser.add_argument('--server', required=True, 
                         help='URL of the VoucherVision API server (e.g., http://localhost:8080)')
     
+    parser.add_argument('--auth-token', required=True, 
+                        help='Authentication token (https://vouchervision-go-738307415303.us-central1.run.app/login)')
+    
     # Create a mutually exclusive group for input sources
     input_group = parser.add_mutually_exclusive_group(required=True)
     input_group.add_argument('--image', 
@@ -738,7 +741,8 @@ def main():
         file_list=args.file_list,
         verbose=args.verbose,
         save_to_csv=args.save_to_csv,
-        max_workers=args.max_workers
+        max_workers=args.max_workers,
+        auth_token=args.auth_token
     )
 
 
