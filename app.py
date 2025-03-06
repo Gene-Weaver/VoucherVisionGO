@@ -63,7 +63,7 @@ def get_firebase_config():
     }
     
     # Try to get web configuration from Secret Manager
-    firebase_web_config = get_secret('firebase-web-config')
+    firebase_web_config = os.environ.get('firebase-web-config')
     if firebase_web_config:
         try:
             web_config = json.loads(firebase_web_config)
@@ -76,7 +76,7 @@ def get_firebase_config():
         logger.warning("Could not retrieve firebase-web-config from Secret Manager, using defaults")
         
         # Try to get project ID from admin key as fallback
-        firebase_admin_key = get_secret('firebase-admin-key')
+        firebase_admin_key = os.environ.get('firebase-admin-key')
         if firebase_admin_key:
             try:
                 admin_key_dict = json.loads(firebase_admin_key)
@@ -91,22 +91,10 @@ def get_firebase_config():
     
     return config
 
-def get_secret(secret_name):
-    """Get secret from Secret Manager"""
-    client = secretmanager.SecretManagerServiceClient()
-    project_id = os.environ.get('GOOGLE_CLOUD_PROJECT')
-    name = f"projects/{project_id}/secrets/{secret_name}/versions/latest"
-    try:
-        response = client.access_secret_version(name=name)
-        return response.payload.data.decode('UTF-8')
-    except Exception as e:
-        logger.error(f"Error accessing secret {secret_name}: {e}")
-        return None
-    
 # Initialize Firebase Admin SDK with service account key
 try:
     # Load service account credentials from Secret Manager
-    cred_json = get_secret('firebase-admin-key')
+    cred_json = os.environ.get('firebase-admin-key')
     if cred_json:
         cred_dict = json.loads(cred_json)
         creds = credentials.Certificate(cred_dict)
@@ -541,7 +529,7 @@ def diagnostics():
     import datetime
     
     # Check Secret Manager access
-    secret_test = get_secret('firebase-web-config')
+    secret_test = os.environ.get('firebase-web-config')
     secret_manager_status = "Available" if secret_test else "Unavailable"
     
     # Check Firebase Admin initialization
