@@ -62,7 +62,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         verbose (bool): Whether to print verbose output
         engines (list): List of OCR engine options to use
         prompt (str): Custom prompt file to use
-        auth_token (str): Authentication token for the API
+        auth_token (str): Authentication token for the API (Firebase token or API key)
         
     Returns:
         dict: The processed results from the server
@@ -106,8 +106,17 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
     if prompt:
         data['prompt'] = prompt
 
-    # Prepare headers with authentication
-    headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
+    # Determine auth header type based on auth_token format
+    # API keys are typically alphanumeric strings without periods
+    # Firebase tokens are JWT tokens with periods separating sections
+    headers = {}
+    if auth_token:
+        if '.' in auth_token and len(auth_token) > 100:
+            # Likely a Firebase token
+            headers["Authorization"] = f"Bearer {auth_token}"
+        else:
+            # Likely an API key
+            headers["X-API-Key"] = auth_token
     
     try:
         # Send the request
@@ -534,17 +543,35 @@ def save_results_to_csv(results_list, output_dir):
     if not df.empty:
         print(f"CSV columns: {', '.join(df.columns.tolist())}")
 
-def verify_authentication(server_url, auth_token):
+def verify_authentication(server_url, auth_token=None):
     """Verify the authentication token before starting any processing"""
+    if not auth_token:
+        print("ERROR: No authentication token provided.")
+        print("Visit the login page to get your token: " + server_url + "/login")
+        print("Or visit the API key management page: " + server_url + "/api-key-management")
+        return False
     try:
-        headers = {"Authorization": f"Bearer {auth_token}"} if auth_token else {}
+        # We'll check both authentication methods - API key or Firebase token
+        
+        # First, try as API key
+        headers = {"X-API-Key": auth_token}
         response = requests.get(f"{server_url}/auth-check", headers=headers)
         
         if response.status_code == 200:
+            print("Authentication successful using API key.")
+            return True
+        
+        # If that fails, try as Firebase token
+        headers = {"Authorization": f"Bearer {auth_token}"}
+        response = requests.get(f"{server_url}/auth-check", headers=headers)
+        
+        if response.status_code == 200:
+            print("Authentication successful using Firebase token.")
             return True
         elif response.status_code == 401:
-            print("ERROR: Authentication failed. Please provide a valid authentication token.")
+            print("ERROR: Authentication failed. Please provide a valid authentication token or API key.")
             print("Visit the login page to get your token: " + server_url + "/login")
+            print("Or visit the API key management page: " + server_url + "/api-key-management")
             return False
         else:
             print(f"ERROR: Server returned unexpected status code: {response.status_code}")
