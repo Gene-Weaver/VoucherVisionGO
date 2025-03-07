@@ -1647,6 +1647,30 @@ def auth_success():
                 checkUserApproval(user)
                   .then(isApproved => {
                     if (isApproved) {
+                        // Check if user has API key permission and show API key management button if they do
+                        checkApiKeyPermission(user)
+                        .then(hasApiKeyAccess => {
+                            if (hasApiKeyAccess) {
+                            // Add API key management button
+                            const apiKeysDiv = document.createElement('div');
+                            apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
+                            apiKeysDiv.innerHTML = `
+                                <h4>API Key Management</h4>
+                                <p>You have permission to create and manage API keys for programmatic access.</p>
+                                <a href="/api-key-management" class="btn btn-primary">Manage API Keys</a>
+                            `;
+                            
+                            // Add it after the token container
+                            const tokenContainer = document.querySelector('.token-container');
+                            if (tokenContainer) {
+                                tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
+                            }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error checking API key permission:', error);
+                        });
+                                  
                       // Check if user is admin and show admin button if they are
                       checkIsAdmin(user)
                         .then(isAdmin => {
@@ -2081,6 +2105,23 @@ def admin_dashboard():
           .badge-rejected {
             background-color: #ea4335;
           }
+        .badge-api-access {
+            background-color: #4CAF50;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        
+        .badge-no-api-access {
+            background-color: #757575;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+            text-decoration: none;
+        }
           .modal {
             display: none;
             position: fixed;
@@ -2437,117 +2478,97 @@ def admin_dashboard():
           const closeButtons = document.querySelectorAll('.close');
           
           // Initialize the page
-          function initPage() {
-            // Check if user is authenticated and is an admin
+            function initPage() {
+            // Check if user is authenticated
             firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
-                // Display user email
+                if (user) {
+                // User is signed in, display their email
                 document.getElementById('user-email').textContent = user.email;
                 
-                // Load data for active tab
-                const activeTab = document.querySelector('.tab-button.active').dataset.tab;
-                loadDataForTab(activeTab, user);
-                
-                // Set up search functionality
-                setupSearch();
-              } else {
-                // Not signed in, redirect to login
+                // Check if user has API key permission
+                checkApiKeyPermission(user)
+                    .then(hasPermission => {
+                    if (hasPermission) {
+                        // Show the create button and load keys
+                        document.getElementById('create-key-btn').style.display = 'inline-block';
+                        loadApiKeys(user);
+                    } else {
+                        // Hide the create button and show a message
+                        document.getElementById('create-key-btn').style.display = 'none';
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('no-permission').style.display = 'block';
+                    }
+                    })
+                    .catch(error => {
+                    console.error('Error checking API key permission:', error);
+                    document.getElementById('error-message').textContent = 'Error: ' + error.message;
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('loading').style.display = 'none';
+                    });
+                } else {
+                // Not signed in, redirect to login page
                 window.location.href = '/login';
-              }
-            });
-            
-            // Tab switching
-            tabButtons.forEach(button => {
-              button.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-                
-                // Add active class to the clicked tab
-                button.classList.add('active');
-                const tabId = button.dataset.tab;
-                document.getElementById(tabId).classList.add('active');
-                
-                // Load data for the selected tab
-                const user = firebase.auth().currentUser;
-                if (user) {
-                  loadDataForTab(tabId, user);
                 }
-              });
             });
             
-            // Status filter
-            filterButtons.forEach(button => {
-              button.addEventListener('click', () => {
-                // Remove active class from all filter buttons
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                
-                // Add active class to the clicked button
-                button.classList.add('active');
-                
-                // Apply filter
-                currentStatusFilter = button.dataset.status;
-                applyFiltersToApplications();
-              });
+            // Set up event listeners
+            
+            // Create Key button
+            createKeyBtn.addEventListener('click', () => {
+                createKeyModal.style.display = 'block';
             });
             
-            // Application modal
-            document.getElementById('approve-btn').addEventListener('click', approveApplication);
-            document.getElementById('reject-btn').addEventListener('click', () => {
-              document.getElementById('application-actions').style.display = 'none';
-              document.getElementById('rejection-form').style.display = 'block';
-            });
-            document.getElementById('confirm-reject-btn').addEventListener('click', rejectApplication);
-            document.getElementById('cancel-reject-btn').addEventListener('click', () => {
-              document.getElementById('rejection-form').style.display = 'none';
-              document.getElementById('application-actions').style.display = 'flex';
-            });
-            
-            // Add admin modal
-            document.getElementById('add-admin-btn').addEventListener('click', () => {
-              addAdminModal.style.display = 'block';
-              document.getElementById('admin-email').value = '';
-              document.getElementById('add-admin-error').style.display = 'none';
-              document.getElementById('add-admin-success').style.display = 'none';
-            });
-            document.getElementById('confirm-add-admin-btn').addEventListener('click', addAdmin);
-            
-            // Revoke API key modal
-            document.getElementById('confirm-revoke-key-btn').addEventListener('click', revokeApiKey);
-            document.getElementById('cancel-revoke-key-btn').addEventListener('click', () => {
-              revokeKeyModal.style.display = 'none';
-            });
-            
-            // Close modals
+            // Close buttons
             closeButtons.forEach(btn => {
-              btn.addEventListener('click', () => {
-                applicationModal.style.display = 'none';
-                addAdminModal.style.display = 'none';
-                revokeKeyModal.style.display = 'none';
-              });
+                btn.addEventListener('click', closeCurrentModal);
             });
             
             // Close modals when clicking outside
             window.addEventListener('click', (event) => {
-              if (event.target === applicationModal) {
-                applicationModal.style.display = 'none';
-              }
-              if (event.target === addAdminModal) {
-                addAdminModal.style.display = 'none';
-              }
-              if (event.target === revokeKeyModal) {
-                revokeKeyModal.style.display = 'none';
-              }
+                if (event.target === createKeyModal) {
+                createKeyModal.style.display = 'none';
+                }
+                if (event.target === displayKeyModal) {
+                displayKeyModal.style.display = 'none';
+                }
+            });
+            
+            // Create key form submission
+            createKeyForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                createApiKey();
+            });
+            
+            // Copy key button
+            copyKeyBtn.addEventListener('click', () => {
+                const keyText = apiKeyDisplay.textContent;
+                navigator.clipboard.writeText(keyText)
+                .then(() => {
+                    copySuccess.style.display = 'block';
+                    setTimeout(() => {
+                    copySuccess.style.display = 'none';
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
             });
             
             // Logout button
-            document.getElementById('logout-btn').addEventListener('click', () => {
-              firebase.auth().signOut().then(() => {
+            logoutBtn.addEventListener('click', () => {
+                firebase.auth().signOut().then(() => {
                 window.location.href = '/login';
-              });
+                });
             });
-          }
-          
+        }
+                                  
+        // Function to close the currently open modal
+            function closeCurrentModal() {
+            // Hide all modals
+            createKeyModal.style.display = 'none';
+            displayKeyModal.style.display = 'none';
+            }
+                    
           // Load data based on the selected tab
           function loadDataForTab(tabId, user) {
             switch (tabId) {
@@ -2661,56 +2682,66 @@ def admin_dashboard():
             applicationsListElem.innerHTML = '';
             
             pageApplications.forEach(app => {
-              // Format dates
-              const createdDate = app.created_at ? new Date(app.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
-              
-              // Status badge
-              let statusBadge = '';
-              switch (app.status) {
+            // Format dates
+            const createdDate = app.created_at ? new Date(app.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
+            
+            // Status badge for approval status
+            let statusBadge = '';
+            switch (app.status) {
                 case 'pending':
-                  statusBadge = '<span class="badge badge-pending">Pending</span>';
-                  break;
+                statusBadge = '<span class="badge badge-pending">Pending</span>';
+                break;
                 case 'approved':
-                  statusBadge = '<span class="badge badge-approved">Approved</span>';
-                  break;
+                statusBadge = '<span class="badge badge-approved">Approved</span>';
+                break;
                 case 'rejected':
-                  statusBadge = '<span class="badge badge-rejected">Rejected</span>';
-                  break;
+                statusBadge = '<span class="badge badge-rejected">Rejected</span>';
+                break;
                 default:
-                  statusBadge = '<span class="badge">Unknown</span>';
-              }
-              
-              const row = document.createElement('tr');
-              row.innerHTML = `
+                statusBadge = '<span class="badge">Unknown</span>';
+            }
+            
+            // API access badge (only for approved users)
+            let apiAccessBadge = '';
+            if (app.status === 'approved') {
+                if (app.api_key_access === true) {
+                apiAccessBadge = '<span class="badge badge-api-access ms-2" title="Has API key permission">🔑</span>';
+                } else {
+                apiAccessBadge = '<span class="badge badge-no-api-access ms-2" title="No API key permission">🔒</span>';
+                }
+            }
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
                 <td>${app.email}</td>
                 <td>${app.organization || 'N/A'}</td>
                 <td>${app.purpose ? (app.purpose.length > 50 ? app.purpose.substring(0, 50) + '...' : app.purpose) : 'N/A'}</td>
-                <td>${statusBadge}</td>
+                <td>${statusBadge} ${apiAccessBadge}</td>
                 <td>${createdDate}</td>
                 <td>
-                  <button class="btn-primary view-application-btn" data-email="${app.email}">View</button>
+                <button class="btn-primary view-application-btn" data-email="${app.email}">View</button>
                 </td>
-              `;
-              
-              applicationsListElem.appendChild(row);
+            `;
+            
+            applicationsListElem.appendChild(row);
             });
             
             // Setup view buttons
             document.querySelectorAll('.view-application-btn').forEach(btn => {
-              btn.addEventListener('click', () => {
+            btn.addEventListener('click', () => {
                 const email = btn.getAttribute('data-email');
                 viewApplicationDetails(email);
-              });
+            });
             });
             
             // Generate pagination
             generatePagination(
-              filteredApplications.length, 
-              currentApplicationsPage, 
-              'applications-pagination', 
-              renderApplicationsPage
+            filteredApplications.length, 
+            currentApplicationsPage, 
+            'applications-pagination', 
+            renderApplicationsPage
             );
-          }
+        }
           
           // View application details
           async function viewApplicationDetails(email) {
