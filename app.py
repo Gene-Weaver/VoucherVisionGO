@@ -1674,13 +1674,13 @@ def auth_success():
                       // Check if user is admin and show admin button if they are
                       checkIsAdmin(user)
                         .then(isAdmin => {
-                          if (isAdmin) {
+                            if (isAdmin) {
                             // Add an admin dashboard link
                             const adminButton = document.createElement('button');
                             adminButton.className = 'btn-admin';
                             adminButton.textContent = 'Admin Dashboard';
                             adminButton.onclick = async function() {
-                            try {
+                                try {
                                 // Get fresh token
                                 const freshToken = await user.getIdToken(true);
                                 
@@ -1700,13 +1700,16 @@ def auth_success():
                                 // Add the form to the body and submit it
                                 document.body.appendChild(form);
                                 form.submit();
-                            } catch (error) {
+                                } catch (error) {
                                 console.error('Error accessing admin dashboard:', error);
                                 alert('Authentication error. Please try logging in again.');
-                            }
+                                }
                             };
                             document.querySelector('.user-info div').appendChild(adminButton);
-                          }
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error checking admin status:', error);
                         });
                       
                       // Continue with token display
@@ -1878,23 +1881,23 @@ def auth_success():
           // New function to check if user is admin
           async function checkIsAdmin(user) {
             try {
-              const idToken = await user.getIdToken();
-              const response = await fetch('/check-admin-status', {
+                const idToken = await user.getIdToken();
+                const response = await fetch('/check-admin-status', {
                 headers: {
-                  'Authorization': `Bearer ${idToken}`
+                    'Authorization': `Bearer ${idToken}`
                 }
-              });
-              
-              if (response.ok) {
+                });
+                
+                if (response.ok) {
                 const data = await response.json();
                 return data.is_admin === true;
-              }
-              return false;
+                }
+                return false;
             } catch (error) {
-              console.error('Error checking admin status:', error);
-              return false;
+                console.error('Error checking admin status:', error);
+                return false;
             }
-          }
+            }
           
           // Start the page initialization when the DOM is ready
           document.addEventListener('DOMContentLoaded', initPage);
