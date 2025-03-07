@@ -2514,39 +2514,178 @@ def admin_dashboard():
           
           // Initialize the page
             function initPage() {
-            // Check if user is authenticated
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                // User is signed in, display their email
-                document.getElementById('user-email').textContent = user.email;
-                
-                // Check if user has API key permission
-                checkApiKeyPermission(user)
-                    .then(hasPermission => {
-                    if (hasPermission) {
-                        // Show the create button and load keys
-                        document.getElementById('create-key-btn').style.display = 'inline-block';
-                        loadApiKeys(user);
-                    } else {
-                        // Hide the create button and show a message
-                        document.getElementById('create-key-btn').style.display = 'none';
-                        document.getElementById('loading').style.display = 'none';
-                        document.getElementById('no-permission').style.display = 'block';
-                    }
-                    })
-                    .catch(error => {
-                    console.error('Error checking API key permission:', error);
-                    document.getElementById('error-message').textContent = 'Error: ' + error.message;
-                    document.getElementById('error-message').style.display = 'block';
-                    document.getElementById('loading').style.display = 'none';
+                // Check if user is authenticated
+                firebase.auth().onAuthStateChanged(function(user) {
+                    if (user) {
+                    // User is signed in, display their email
+                    document.getElementById('user-email').textContent = user.email;
+                    
+                    // Load initial data
+                    loadApplications(user);
+                    
+                    // Set up tab buttons
+                    const tabButtons = document.querySelectorAll('.tab-button');
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    
+                    tabButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                        // Remove active class from all buttons and contents
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Add active class to clicked button and corresponding content
+                        button.classList.add('active');
+                        const tabId = button.getAttribute('data-tab');
+                        document.getElementById(tabId).classList.add('active');
+                        
+                        // Load data for the selected tab
+                        loadDataForTab(tabId, user);
+                        });
                     });
-                } else {
-                // Not signed in, redirect to login page
-                window.location.href = '/login';
+                    
+                    // Set up status filters
+                    const filterButtons = document.querySelectorAll('.filter-btn');
+                    filterButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                        // Remove active class from all filter buttons
+                        filterButtons.forEach(btn => btn.classList.remove('active'));
+                        
+                        // Add active class to clicked button
+                        button.classList.add('active');
+                        
+                        // Update filter and apply
+                        currentStatusFilter = button.getAttribute('data-status');
+                        applyFiltersToApplications();
+                        });
+                    });
+                    
+                    // Setup search functionality
+                    setupSearch();
+                    
+                    // Setup modal event listeners
+                    setupModalEventListeners(user);
+                    
+                    } else {
+                    // Not signed in, redirect to login page
+                    window.location.href = '/login';
+                    }
+                });
                 }
-            });
             
             // Set up event listeners
+            function setupModalEventListeners(user) {
+                // Close buttons for modals
+                document.querySelectorAll('.close').forEach(closeBtn => {
+                    closeBtn.addEventListener('click', function() {
+                    // Find the parent modal and hide it
+                    let modal = this.closest('.modal');
+                    if (modal) {
+                        modal.style.display = 'none';
+                    }
+                    });
+                });
+                                  
+            // Add admin button
+            const addAdminBtn = document.getElementById('add-admin-btn');
+            if (addAdminBtn) {
+                addAdminBtn.addEventListener('click', function() {
+                document.getElementById('add-admin-modal').style.display = 'block';
+                });
+            }
+            
+            // Confirm add admin button
+            const confirmAddAdminBtn = document.getElementById('confirm-add-admin-btn');
+            if (confirmAddAdminBtn) {
+                confirmAddAdminBtn.addEventListener('click', function() {
+                addAdmin();
+                });
+            }
+                                  
+            // Approve button
+            const approveBtn = document.getElementById('approve-btn');
+            if (approveBtn) {
+                approveBtn.addEventListener('click', function() {
+                approveApplication();
+                });
+            }
+            
+            // Reject button
+            const rejectBtn = document.getElementById('reject-btn');
+            if (rejectBtn) {
+                rejectBtn.addEventListener('click', function() {
+                // Show rejection form
+                document.getElementById('rejection-form').style.display = 'block';
+                document.getElementById('rejection-reason').focus();
+                });
+            }
+            
+            // Update API access button
+            const updateApiAccessBtn = document.getElementById('update-api-access-btn');
+            if (updateApiAccessBtn) {
+                updateApiAccessBtn.addEventListener('click', function() {
+                updateApiKeyAccess();
+                });
+            }
+            
+            // Confirm revoke key button
+            const confirmRevokeKeyBtn = document.getElementById('confirm-revoke-key-btn');
+            if (confirmRevokeKeyBtn) {
+                confirmRevokeKeyBtn.addEventListener('click', function() {
+                revokeApiKey();
+                });
+            }
+            
+            // Cancel revoke key button
+            const cancelRevokeKeyBtn = document.getElementById('cancel-revoke-key-btn');
+            if (cancelRevokeKeyBtn) {
+                cancelRevokeKeyBtn.addEventListener('click', function() {
+                document.getElementById('revoke-key-modal').style.display = 'none';
+                });
+            }
+                                  
+            // Create Key button
+            const createKeyBtn = document.getElementById('create-key-btn');
+            if (createKeyBtn) {
+                createKeyBtn.addEventListener('click', () => {
+                    const createKeyModal = document.getElementById('create-key-modal');
+                    if (createKeyModal) {
+                        createKeyModal.style.display = 'block';
+                    }
+                });
+            }
+
+            // Create key form submission
+            const createKeyForm = document.getElementById('create-key-form');
+            if (createKeyForm) {
+                createKeyForm.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    createApiKey();
+                });
+            }
+
+            // Copy key button
+            const copyKeyBtn = document.getElementById('copy-key-btn');
+            if (copyKeyBtn) {
+                copyKeyBtn.addEventListener('click', () => {
+                    const apiKeyDisplay = document.getElementById('api-key-display');
+                    if (apiKeyDisplay) {
+                        const keyText = apiKeyDisplay.textContent;
+                        navigator.clipboard.writeText(keyText)
+                        .then(() => {
+                            const copySuccess = document.getElementById('copy-success');
+                            if (copySuccess) {
+                                copySuccess.style.display = 'block';
+                                setTimeout(() => {
+                                    copySuccess.style.display = 'none';
+                                }, 3000);
+                            }
+                        })
+                        .catch(err => {
+                            console.error('Could not copy text: ', err);
+                        });
+                    }
+                });
+            }
             
             // Create Key button
             createKeyBtn.addEventListener('click', () => {
@@ -2559,13 +2698,12 @@ def admin_dashboard():
             });
             
             // Close modals when clicking outside
-            window.addEventListener('click', (event) => {
-                if (event.target === createKeyModal) {
-                createKeyModal.style.display = 'none';
+            window.addEventListener('click', function(event) {
+                document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
                 }
-                if (event.target === displayKeyModal) {
-                displayKeyModal.style.display = 'none';
-                }
+                });
             });
             
             // Create key form submission
@@ -2590,11 +2728,16 @@ def admin_dashboard():
             });
             
             // Logout button
-            logoutBtn.addEventListener('click', () => {
-                firebase.auth().signOut().then(() => {
-                window.location.href = '/login';
+            const logoutBtn = document.getElementById('logout-btn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                firebase.auth().signOut().then(function() {
+                    window.location.href = '/login';
+                }).catch(function(error) {
+                    console.error('Error signing out:', error);
                 });
-            });
+                });
+            }
         }
                                   
         // Function to close the currently open modal
@@ -5229,37 +5372,88 @@ curl -X POST "{{ server_url }}/process" \\
           function initPage() {
             // Check if user is authenticated
             firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
+                if (user) {
                 // User is signed in, display their email
                 document.getElementById('user-email').textContent = user.email;
                 
                 // Check if user has API key permission
                 checkApiKeyPermission(user)
-                .then(hasPermission => {
+                    .then(hasPermission => {
                     if (hasPermission) {
-                    // Show the create button and load keys
-                    document.getElementById('create-key-btn').style.display = 'inline-block';
-                    loadApiKeys(user);
+                        // Show the create button and load keys
+                        document.getElementById('create-key-btn').style.display = 'inline-block';
+                        loadApiKeys(user);
+                        
+                        // Add event listeners for the create key functionality
+                        // Create Key button
+                        document.getElementById('create-key-btn').addEventListener('click', () => {
+                        document.getElementById('create-key-modal').style.display = 'block';
+                        });
+                        
+                        // Close buttons
+                        document.querySelectorAll('.close').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            document.getElementById('create-key-modal').style.display = 'none';
+                            document.getElementById('display-key-modal').style.display = 'none';
+                        });
+                        });
+                        
+                        // Close modals when clicking outside
+                        window.addEventListener('click', (event) => {
+                        if (event.target === document.getElementById('create-key-modal')) {
+                            document.getElementById('create-key-modal').style.display = 'none';
+                        }
+                        if (event.target === document.getElementById('display-key-modal')) {
+                            document.getElementById('display-key-modal').style.display = 'none';
+                        }
+                        });
+                        
+                        // Create key form submission
+                        document.getElementById('create-key-form').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        createApiKey();
+                        });
+                        
+                        // Copy key button
+                        document.getElementById('copy-key-btn').addEventListener('click', () => {
+                        const keyText = document.getElementById('api-key-display').textContent;
+                        navigator.clipboard.writeText(keyText)
+                            .then(() => {
+                            document.getElementById('copy-success').style.display = 'block';
+                            setTimeout(() => {
+                                document.getElementById('copy-success').style.display = 'none';
+                            }, 3000);
+                            })
+                            .catch(err => {
+                            console.error('Could not copy text: ', err);
+                            });
+                        });
                     } else {
-                    // Hide the create button and show a message
-                    document.getElementById('create-key-btn').style.display = 'none';
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('no-permission').style.display = 'block';
+                        // Hide the create button and show a message
+                        document.getElementById('create-key-btn').style.display = 'none';
+                        document.getElementById('loading').style.display = 'none';
+                        document.getElementById('no-permission').style.display = 'block';
                     }
-                })
-                .catch(error => {
+                    })
+                    .catch(error => {
                     console.error('Error checking API key permission:', error);
                     document.getElementById('error-message').textContent = 'Error: ' + error.message;
                     document.getElementById('error-message').style.display = 'block';
                     document.getElementById('loading').style.display = 'none';
+                    });
+                    
+                // Logout button
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                    firebase.auth().signOut().then(() => {
+                    window.location.href = '/login';
+                    });
                 });
-            } else {
+                } else {
                 // Not signed in, redirect to login page
                 window.location.href = '/login';
-            }
+                }
             });
-            
-        }
+            }
           
         // Function to check if the user has API key permission
         async function checkApiKeyPermission(user) {
