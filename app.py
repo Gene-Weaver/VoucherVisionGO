@@ -630,6 +630,531 @@ def health_check():
     }), 200
 
 
+@app.route('/auth-success', methods=['GET'])
+def auth_success():
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
+    
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Authentication Successful</title>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <style>
+          body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f5f5f5; 
+          }
+          .container { 
+            max-width: 800px; 
+            margin: 50px auto; 
+            padding: 30px; 
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          }
+          .header { 
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          h1 {
+            color: #4285f4;
+            margin-bottom: 20px;
+          }
+          .token-container {
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+          }
+          pre {
+            white-space: pre-wrap;
+            word-break: break-all;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+          }
+          .expiry-info {
+            color: #6c757d;
+            font-size: 14px;
+            margin-top: 10px;
+          }
+          .copy-btn {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          .copy-btn:hover {
+            background-color: #3367d6;
+          }
+          .success-message {
+            display: none;
+            color: #28a745;
+            margin-top: 5px;
+            font-size: 14px;
+          }
+          .error-message {
+            display: none;
+            color: #dc3545;
+            margin-top: 5px;
+            font-size: 14px;
+          }
+          .user-info {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #e9f5ff;
+            border-radius: 4px;
+          }
+          .btn-logout {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          .btn-logout:hover {
+            background-color: #d32f2f;
+          }
+          .btn-admin {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+          }
+          .btn-admin:hover {
+            background-color: #3367d6;
+          }
+          .usage-instructions {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 30px;
+          }
+          code {
+            background-color: #e9ecef;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 14px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Authentication Successful</h1>
+            <p>You are now authenticated to use the VoucherVision API.</p>
+          </div>
+          
+          <div class="user-info">
+            <p><strong>Signed in as:</strong> <span id="user-email">Loading...</span></p>
+            <div>
+              <button id="logout-btn" class="btn-logout">Sign Out</button>
+              <!-- Admin button will be added here dynamically if user is admin -->
+            </div>
+          </div>
+          
+          <div class="token-container">
+            <h3>Your API Authentication Token</h3>
+            <p>Use this token in your API requests by setting the Authorization header to: <code>Bearer YOUR_TOKEN</code></p>
+            <pre id="token">Loading your token...</pre>
+            <div class="expiry-info">Token valid for 60 minutes. The token will auto-refresh while this page is open.</div>
+            <div class="error-message" id="error-message"></div>
+            <div class="success-message" id="success-message"></div>
+            <button id="copy-token-btn" class="copy-btn">Copy Token</button>
+            <button id="refresh-token-btn" class="copy-btn ms-2">Refresh Token</button>
+          </div>
+          
+          <div class="usage-instructions">
+            <h3>Using the API</h3>
+            <p>To use this token with the VoucherVision API:</p>
+            <ol>
+              <li>Add an Authorization header to your requests: <code>Authorization: Bearer YOUR_TOKEN</code></li>
+              <li>Make requests to the API endpoints (e.g., <code>POST /process</code>)</li>
+            </ol>
+            <h4>Example with cURL:</h4>
+            <pre>curl -X POST "{{ server_url }}/process" \\
+     -H "Authorization: Bearer YOUR_TOKEN" \\
+     -F "file=@your_image.jpg"</pre>
+            
+            <h4>Example with Python client:</h4>
+            <pre>python client.py --server {{ server_url }} --auth-token YOUR_TOKEN --image "path/to/image.jpg" --output-dir "./results"</pre>
+          </div>
+        </div>
+        
+        <script>
+          // Firebase configuration
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
+            appId: "{{ app_id }}"
+          };
+          
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          
+          // Token refresh interval (45 minutes = 2,700,000 milliseconds)
+          // We'll refresh before the 60-minute expiration
+          const TOKEN_REFRESH_INTERVAL = 2700000;
+          let tokenRefreshTimer;
+          
+          // Initialize the page
+          function initPage() {
+            const tokenElement = document.getElementById('token');
+            const userEmailElement = document.getElementById('user-email');
+            const errorElement = document.getElementById('error-message');
+            const successElement = document.getElementById('success-message');
+            const userInfoDiv = document.querySelector('.user-info div');
+            
+            // Check if user is authenticated
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                // User is signed in, display their email
+                userEmailElement.textContent = user.email;
+                
+                // First, check if user is an admin
+                checkAdminStatus(user)
+                  .then(isAdmin => {
+                    if (isAdmin) {
+                      // Add admin dashboard button
+                      console.log("User is an admin, adding admin button");
+                      const adminButton = document.createElement('button');
+                      adminButton.className = 'btn-admin';
+                      adminButton.textContent = 'Admin Dashboard';
+                      adminButton.onclick = async function() {
+                        try {
+                          // Get fresh token
+                          const freshToken = await user.getIdToken(true);
+                          
+                          // Create a form to submit the token via POST
+                          const form = document.createElement('form');
+                          form.method = 'POST';
+                          form.action = '/admin';
+                          form.style.display = 'none';
+                          
+                          // Add the token as a hidden input
+                          const tokenInput = document.createElement('input');
+                          tokenInput.type = 'hidden';
+                          tokenInput.name = 'auth_token';
+                          tokenInput.value = freshToken;
+                          form.appendChild(tokenInput);
+                          
+                          // Add the form to the body and submit it
+                          document.body.appendChild(form);
+                          form.submit();
+                        } catch (error) {
+                          console.error('Error accessing admin dashboard:', error);
+                          alert('Authentication error. Please try logging in again.');
+                        }
+                      };
+                      userInfoDiv.appendChild(adminButton);
+                    }
+                    
+                    // Then check if user is approved
+                    return checkUserApproval(user);
+                  })
+                  .then(isApproved => {
+                    if (isApproved) {
+                      // Check if user has API key permission and show API key management button if they do
+                      checkApiKeyPermission(user)
+                        .then(hasApiKeyAccess => {
+                          if (hasApiKeyAccess) {
+                            // Add API key management button
+                            const apiKeysDiv = document.createElement('div');
+                            apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
+                            apiKeysDiv.innerHTML = `
+                              <h4>API Key Management</h4>
+                              <p>You have permission to create and manage API keys for programmatic access.</p>
+                              <a href="/api-key-management" class="btn btn-primary">Manage API Keys</a>
+                            `;
+                            
+                            // Add it after the token container
+                            const tokenContainer = document.querySelector('.token-container');
+                            if (tokenContainer) {
+                              tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
+                            }
+                          }
+                        })
+                        .catch(error => {
+                          console.error('Error checking API key permission:', error);
+                        });
+                      
+                      // Continue with token display
+                      updateTokenDisplay(user);
+                      setupTokenRefresh(user);
+                    } else {
+                      // Not approved, redirect to pending page
+                      window.location.href = '/pending-approval';
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error during initialization:', error);
+                    errorElement.textContent = 'Error: ' + error.message;
+                    errorElement.style.display = 'block';
+                  });
+              } else {
+                // Not signed in, redirect to login page
+                window.location.href = '/login';
+              }
+            });
+            
+            // Copy token button
+            document.getElementById('copy-token-btn').addEventListener('click', function() {
+              const token = tokenElement.textContent;
+              navigator.clipboard.writeText(token)
+                .then(() => {
+                  successElement.textContent = 'Token copied to clipboard!';
+                  successElement.style.display = 'block';
+                  errorElement.style.display = 'none';
+                  setTimeout(() => {
+                    successElement.style.display = 'none';
+                  }, 3000);
+                })
+                .catch(err => {
+                  errorElement.textContent = 'Failed to copy: ' + err;
+                  errorElement.style.display = 'block';
+                  successElement.style.display = 'none';
+                });
+            });
+            
+            // Refresh token button
+            document.getElementById('refresh-token-btn').addEventListener('click', function() {
+              const currentUser = firebase.auth().currentUser;
+              
+              if (currentUser) {
+                refreshToken(currentUser);
+              } else {
+                errorElement.textContent = 'Not signed in. Please log in again.';
+                errorElement.style.display = 'block';
+                successElement.style.display = 'none';
+              }
+            });
+            
+            // Logout button
+            document.getElementById('logout-btn').addEventListener('click', function() {
+              firebase.auth().signOut().then(function() {
+                // Clear localStorage items
+                localStorage.removeItem('auth_id_token');
+                localStorage.removeItem('auth_refresh_token');
+                localStorage.removeItem('auth_user_email');
+                
+                // Clear any refresh timers
+                clearTimeout(tokenRefreshTimer);
+                
+                // Redirect to login page
+                window.location.href = '/login';
+              }).catch(function(error) {
+                errorElement.textContent = 'Error signing out: ' + error.message;
+                errorElement.style.display = 'block';
+              });
+            });
+          }
+          
+          // Update token display
+          function updateTokenDisplay(user) {
+            const tokenElement = document.getElementById('token');
+            const errorElement = document.getElementById('error-message');
+            
+            user.getIdToken(true).then(function(idToken) {
+              // Store the token in localStorage for persistence
+              localStorage.setItem('auth_id_token', idToken);
+              
+              // Display the token
+              tokenElement.textContent = idToken;
+            }).catch(function(error) {
+              errorElement.textContent = 'Error getting token: ' + error.message;
+              errorElement.style.display = 'block';
+              
+              // Try to use cached token if available
+              const cachedToken = localStorage.getItem('auth_id_token');
+              if (cachedToken) {
+                tokenElement.textContent = cachedToken;
+              }
+            });
+          }
+          
+          // Set up automatic token refresh
+          function setupTokenRefresh(user) {
+            // Clear any existing timer
+            clearTimeout(tokenRefreshTimer);
+            
+            // Setup new timer to refresh the token
+            tokenRefreshTimer = setTimeout(() => {
+              refreshToken(user);
+            }, TOKEN_REFRESH_INTERVAL);
+          }
+          
+          // Refresh the token
+          function refreshToken(user) {
+            const tokenElement = document.getElementById('token');
+            const errorElement = document.getElementById('error-message');
+            const successElement = document.getElementById('success-message');
+            
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+            
+            // Force token refresh
+            user.getIdToken(true).then(function(idToken) {
+              // Update the token in localStorage
+              localStorage.setItem('auth_id_token', idToken);
+              
+              // Update displayed token
+              tokenElement.textContent = idToken;
+              
+              // Show success message
+              successElement.textContent = 'Token refreshed successfully';
+              successElement.style.display = 'block';
+              
+              // Set up the next refresh
+              setupTokenRefresh(user);
+            }).catch(function(error) {
+              errorElement.textContent = 'Error refreshing token: ' + error.message;
+              errorElement.style.display = 'block';
+              
+              // If error, try again in 1 minute
+              tokenRefreshTimer = setTimeout(() => {
+                const currentUser = firebase.auth().currentUser;
+                if (currentUser) {
+                  refreshToken(currentUser);
+                }
+              }, 60000);
+            });
+          }
+          
+          // Check if user is an admin
+          async function checkAdminStatus(user) {
+            try {
+              console.log("Checking admin status for user:", user.email);
+              const idToken = await user.getIdToken();
+              
+              const response = await fetch('/check-admin-status', {
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              if (response.ok) {
+                const data = await response.json();
+                console.log("Admin status response:", data);
+                return data.is_admin === true;
+              }
+              
+              console.log("Admin check failed, response status:", response.status);
+              return false;
+            } catch (error) {
+              console.error('Error checking admin status:', error);
+              return false;
+            }
+          }
+          
+          // Function to check approval status
+          async function checkUserApproval(user) {
+            try {
+              const idToken = await user.getIdToken();
+              const response = await fetch('/check-approval-status', {
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              if (response.ok) {
+                const data = await response.json();
+                if (data.status === 'approved') {
+                  return true;
+                } else if (data.status === 'pending') {
+                  window.location.href = '/pending-approval';
+                  return false;
+                } else if (data.status === 'rejected') {
+                  window.location.href = '/application-rejected';
+                  return false;
+                }
+              }
+              return false;
+            } catch (error) {
+              console.error('Error checking approval status:', error);
+              return false;
+            }
+          }
+          
+          // Function to check API key permission
+          async function checkApiKeyPermission(user) {
+            try {
+              const idToken = await user.getIdToken();
+              const response = await fetch('/check-api-key-permission', {
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              if (response.ok) {
+                const data = await response.json();
+                return data.has_api_key_permission === true;
+              }
+              return false;
+            } catch (error) {
+              console.error('Error checking API key permission:', error);
+              return false;
+            }
+          }
+          
+          // Start the page initialization when the DOM is ready
+          document.addEventListener('DOMContentLoaded', initPage);
+        </script>
+      </body>
+    </html>
+    """,
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"],
+    server_url=request.url_root.rstrip('/'))
+
+@app.route('/check-admin-status', methods=['GET'])
+@authenticated_route
+def check_admin_status():
+    """Check if the authenticated user is an admin"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    user_email = user.get('email')
+    
+    try:
+        # Check if the user is an admin
+        admin_doc = db.collection('admins').document(user_email).get()
+        
+        is_admin = admin_doc.exists
+        
+        return jsonify({
+            'is_admin': is_admin,
+            'email': user_email
+        })
+        
+    except Exception as e:
+        logger.error(f"Error checking admin status: {str(e)}")
+        return jsonify({'error': f'Failed to check admin status: {str(e)}'}), 500
+    
 
 @app.route('/signup', methods=['GET'])
 def signup_page():
@@ -1445,500 +1970,7 @@ def check_approval_status():
         logger.error(f"Error checking approval status: {str(e)}")
         return jsonify({'error': f'Failed to check approval status: {str(e)}'}), 500
 
-@app.route('/auth-success', methods=['GET'])
-def auth_success():
-    # Get Firebase configuration from Secret Manager
-    firebase_config = get_firebase_config()
-    
-    return render_template_string("""
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>Authentication Successful</title>
-        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-        <style>
-          body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            background-color: #f5f5f5; 
-          }
-          .container { 
-            max-width: 800px; 
-            margin: 50px auto; 
-            padding: 30px; 
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-          }
-          .header { 
-            text-align: center;
-            margin-bottom: 30px;
-          }
-          h1 {
-            color: #4285f4;
-            margin-bottom: 20px;
-          }
-          .token-container {
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            padding: 20px;
-            margin-bottom: 20px;
-          }
-          pre {
-            white-space: pre-wrap;
-            word-break: break-all;
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 4px;
-            font-size: 14px;
-            max-height: 200px;
-            overflow-y: auto;
-          }
-          .expiry-info {
-            color: #6c757d;
-            font-size: 14px;
-            margin-top: 10px;
-          }
-          .copy-btn {
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          .copy-btn:hover {
-            background-color: #3367d6;
-          }
-          .success-message {
-            display: none;
-            color: #28a745;
-            margin-top: 5px;
-            font-size: 14px;
-          }
-          .error-message {
-            display: none;
-            color: #dc3545;
-            margin-top: 5px;
-            font-size: 14px;
-          }
-          .user-info {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #e9f5ff;
-            border-radius: 4px;
-          }
-          .btn-logout {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-          }
-          .btn-logout:hover {
-            background-color: #d32f2f;
-          }
-          .btn-admin {
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-          }
-          .btn-admin:hover {
-            background-color: #3367d6;
-          }
-          .usage-instructions {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 4px;
-            margin-top: 30px;
-          }
-          code {
-            background-color: #e9ecef;
-            padding: 2px 5px;
-            border-radius: 3px;
-            font-size: 14px;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>Authentication Successful</h1>
-            <p>You are now authenticated to use the VoucherVision API.</p>
-          </div>
-          
-          <div class="user-info">
-            <p><strong>Signed in as:</strong> <span id="user-email">Loading...</span></p>
-            <div>
-              <button id="logout-btn" class="btn-logout">Sign Out</button>
-            </div>
-          </div>
-          
-          <div class="token-container">
-            <h3>Your API Authentication Token</h3>
-            <p>Use this token in your API requests by setting the Authorization header to: <code>Bearer YOUR_TOKEN</code></p>
-            <pre id="token">Loading your token...</pre>
-            <div class="expiry-info">Token valid for 60 minutes. The token will auto-refresh while this page is open.</div>
-            <div class="error-message" id="error-message"></div>
-            <div class="success-message" id="success-message"></div>
-            <button id="copy-token-btn" class="copy-btn">Copy Token</button>
-            <button id="refresh-token-btn" class="copy-btn ms-2">Refresh Token</button>
-          </div>
-          
-          <div class="usage-instructions">
-            <h3>Using the API</h3>
-            <p>To use this token with the VoucherVision API:</p>
-            <ol>
-              <li>Add an Authorization header to your requests: <code>Authorization: Bearer YOUR_TOKEN</code></li>
-              <li>Make requests to the API endpoints (e.g., <code>POST /process</code>)</li>
-            </ol>
-            <h4>Example with cURL:</h4>
-            <pre>curl -X POST "{{ server_url }}/process" \\
-     -H "Authorization: Bearer YOUR_TOKEN" \\
-     -F "file=@your_image.jpg"</pre>
-            
-            <h4>Example with Python client:</h4>
-            <pre>python client.py --server {{ server_url }} --auth-token YOUR_TOKEN --image "path/to/image.jpg" --output-dir "./results"</pre>
-          </div>
-        </div>
-        
-        <script>
-          // Firebase configuration
-          const firebaseConfig = {
-            apiKey: "{{ api_key }}",
-            authDomain: "{{ auth_domain }}",
-            projectId: "{{ project_id }}",
-            storageBucket: "{{ storage_bucket }}",
-            messagingSenderId: "{{ messaging_sender_id }}",
-            appId: "{{ app_id }}"
-          };
-          
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          
-          // Token refresh interval (45 minutes = 2,700,000 milliseconds)
-          // We'll refresh before the 60-minute expiration
-          const TOKEN_REFRESH_INTERVAL = 2700000;
-          let tokenRefreshTimer;
-          
-          // Initialize the page
-          function initPage() {
-            const tokenElement = document.getElementById('token');
-            const userEmailElement = document.getElementById('user-email');
-            const errorElement = document.getElementById('error-message');
-            const successElement = document.getElementById('success-message');
-            
-            // Check if user is authenticated
-            firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
-                // User is signed in, display their email
-                userEmailElement.textContent = user.email;
-                
-                // Check if user is approved and/or an admin
-                checkUserApproval(user)
-                  .then(isApproved => {
-                    if (isApproved) {
-                        // Check if user has API key permission and show API key management button if they do
-                        checkApiKeyPermission(user)
-                        .then(hasApiKeyAccess => {
-                            if (hasApiKeyAccess) {
-                            // Add API key management button
-                            const apiKeysDiv = document.createElement('div');
-                            apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
-                            apiKeysDiv.innerHTML = `
-                                <h4>API Key Management</h4>
-                                <p>You have permission to create and manage API keys for programmatic access.</p>
-                                <a href="/api-key-management" class="btn btn-primary">Manage API Keys</a>
-                            `;
-                            
-                            // Add it after the token container
-                            const tokenContainer = document.querySelector('.token-container');
-                            if (tokenContainer) {
-                                tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
-                            }
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error checking API key permission:', error);
-                        });
-                                  
-                      // Check if user is admin and show admin button if they are
-                      checkIsAdmin(user)
-                        .then(isAdmin => {
-                            if (isAdmin) {
-                            // Add an admin dashboard link
-                            const adminButton = document.createElement('button');
-                            adminButton.className = 'btn-admin';
-                            adminButton.textContent = 'Admin Dashboard';
-                            adminButton.onclick = async function() {
-                                try {
-                                // Get fresh token
-                                const freshToken = await user.getIdToken(true);
-                                
-                                // Create a form to submit the token via POST
-                                const form = document.createElement('form');
-                                form.method = 'POST';
-                                form.action = '/admin';
-                                form.style.display = 'none';
-                                
-                                // Add the token as a hidden input
-                                const tokenInput = document.createElement('input');
-                                tokenInput.type = 'hidden';
-                                tokenInput.name = 'auth_token';
-                                tokenInput.value = freshToken;
-                                form.appendChild(tokenInput);
-                                
-                                // Add the form to the body and submit it
-                                document.body.appendChild(form);
-                                form.submit();
-                                } catch (error) {
-                                console.error('Error accessing admin dashboard:', error);
-                                alert('Authentication error. Please try logging in again.');
-                                }
-                            };
-                            document.querySelector('.user-info div').appendChild(adminButton);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error checking admin status:', error);
-                        });
-                      
-                      // Continue with token display
-                      updateTokenDisplay(user);
-                      setupTokenRefresh(user);
-                    } else {
-                      // Not approved, redirect to pending page
-                      window.location.href = '/pending-approval';
-                    }
-                  });
-              } else {
-                // Not signed in, redirect to login page
-                window.location.href = '/login';
-              }
-            });
-            
-            // Copy token button
-            document.getElementById('copy-token-btn').addEventListener('click', function() {
-              const token = tokenElement.textContent;
-              navigator.clipboard.writeText(token)
-                .then(() => {
-                  successElement.textContent = 'Token copied to clipboard!';
-                  successElement.style.display = 'block';
-                  errorElement.style.display = 'none';
-                  setTimeout(() => {
-                    successElement.style.display = 'none';
-                  }, 3000);
-                })
-                .catch(err => {
-                  errorElement.textContent = 'Failed to copy: ' + err;
-                  errorElement.style.display = 'block';
-                  successElement.style.display = 'none';
-                });
-            });
-            
-            // Refresh token button
-            document.getElementById('refresh-token-btn').addEventListener('click', function() {
-              const currentUser = firebase.auth().currentUser;
-              
-              if (currentUser) {
-                refreshToken(currentUser);
-              } else {
-                errorElement.textContent = 'Not signed in. Please log in again.';
-                errorElement.style.display = 'block';
-                successElement.style.display = 'none';
-              }
-            });
-            
-            // Logout button
-            document.getElementById('logout-btn').addEventListener('click', function() {
-              firebase.auth().signOut().then(function() {
-                // Clear localStorage items
-                localStorage.removeItem('auth_id_token');
-                localStorage.removeItem('auth_refresh_token');
-                localStorage.removeItem('auth_user_email');
-                
-                // Clear any refresh timers
-                clearTimeout(tokenRefreshTimer);
-                
-                // Redirect to login page
-                window.location.href = '/login';
-              }).catch(function(error) {
-                errorElement.textContent = 'Error signing out: ' + error.message;
-                errorElement.style.display = 'block';
-              });
-            });
-          }
-          
-          // Update token display
-          function updateTokenDisplay(user) {
-            const tokenElement = document.getElementById('token');
-            const errorElement = document.getElementById('error-message');
-            
-            user.getIdToken(true).then(function(idToken) {
-              // Store the token in localStorage for persistence
-              localStorage.setItem('auth_id_token', idToken);
-              
-              // Display the token
-              tokenElement.textContent = idToken;
-            }).catch(function(error) {
-              errorElement.textContent = 'Error getting token: ' + error.message;
-              errorElement.style.display = 'block';
-              
-              // Try to use cached token if available
-              const cachedToken = localStorage.getItem('auth_id_token');
-              if (cachedToken) {
-                tokenElement.textContent = cachedToken;
-              }
-            });
-          }
-          
-          // Set up automatic token refresh
-          function setupTokenRefresh(user) {
-            // Clear any existing timer
-            clearTimeout(tokenRefreshTimer);
-            
-            // Setup new timer to refresh the token
-            tokenRefreshTimer = setTimeout(() => {
-              refreshToken(user);
-            }, TOKEN_REFRESH_INTERVAL);
-          }
-          
-          // Refresh the token
-          function refreshToken(user) {
-            const tokenElement = document.getElementById('token');
-            const errorElement = document.getElementById('error-message');
-            const successElement = document.getElementById('success-message');
-            
-            errorElement.style.display = 'none';
-            successElement.style.display = 'none';
-            
-            // Force token refresh
-            user.getIdToken(true).then(function(idToken) {
-              // Update the token in localStorage
-              localStorage.setItem('auth_id_token', idToken);
-              
-              // Update displayed token
-              tokenElement.textContent = idToken;
-              
-              // Show success message
-              successElement.textContent = 'Token refreshed successfully';
-              successElement.style.display = 'block';
-              
-              // Set up the next refresh
-              setupTokenRefresh(user);
-            }).catch(function(error) {
-              errorElement.textContent = 'Error refreshing token: ' + error.message;
-              errorElement.style.display = 'block';
-              
-              // If error, try again in 1 minute
-              tokenRefreshTimer = setTimeout(() => {
-                const currentUser = firebase.auth().currentUser;
-                if (currentUser) {
-                  refreshToken(currentUser);
-                }
-              }, 60000);
-            });
-          }
-          
-          // New function to check approval status
-          async function checkUserApproval(user) {
-            try {
-              const idToken = await user.getIdToken();
-              const response = await fetch('/check-approval-status', {
-                headers: {
-                  'Authorization': `Bearer ${idToken}`
-                }
-              });
-              
-              if (response.ok) {
-                const data = await response.json();
-                if (data.status === 'approved') {
-                  return true;
-                } else if (data.status === 'pending') {
-                  window.location.href = '/pending-approval';
-                  return false;
-                } else if (data.status === 'rejected') {
-                  window.location.href = '/application-rejected';
-                  return false;
-                }
-              }
-              return false;
-            } catch (error) {
-              console.error('Error checking approval status:', error);
-              return false;
-            }
-          }
-          
-          // New function to check if user is admin
-          async function checkIsAdmin(user) {
-            try {
-                const idToken = await user.getIdToken();
-                const response = await fetch('/check-admin-status', {
-                headers: {
-                    'Authorization': `Bearer ${idToken}`
-                }
-                });
-                
-                if (response.ok) {
-                const data = await response.json();
-                return data.is_admin === true;
-                }
-                return false;
-            } catch (error) {
-                console.error('Error checking admin status:', error);
-                return false;
-            }
-            }
-          
-          // Start the page initialization when the DOM is ready
-          document.addEventListener('DOMContentLoaded', initPage);
-        </script>
-      </body>
-    </html>
-    """,
-    api_key=firebase_config["apiKey"],
-    auth_domain=firebase_config["authDomain"],
-    project_id=firebase_config["projectId"],
-    storage_bucket=firebase_config.get("storageBucket", ""),
-    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
-    app_id=firebase_config["appId"],
-    server_url=request.url_root.rstrip('/'))  # Add server URL for examples
 
-@app.route('/check-admin-status', methods=['GET'])
-@authenticated_route
-def check_admin_status():
-    """Check if the authenticated user is an admin"""
-    # Get the authenticated user from the token
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
-        return jsonify({'error': 'User not properly authenticated'}), 401
-    
-    user_email = user.get('email')
-    
-    try:
-        # Check if the user is an admin
-        admin_doc = db.collection('admins').document(user_email).get()
-        
-        is_admin = admin_doc.exists
-        
-        return jsonify({
-            'is_admin': is_admin,
-            'email': user_email
-        })
-        
-    except Exception as e:
-        logger.error(f"Error checking admin status: {str(e)}")
-        return jsonify({'error': f'Failed to check admin status: {str(e)}'}), 500
-    
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_dashboard():
     """Admin dashboard for managing user applications"""
