@@ -520,39 +520,85 @@ def login_page():
         <title>VoucherVision Login</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.1.0/firebase-ui-auth.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
-          body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-          .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-          .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-          .signed-in-container { display: none; text-align: center; margin: 20px 0; }
-          .btn { 
-            background-color: #4285f4; color: white; border: none; padding: 10px 15px; 
-            border-radius: 4px; cursor: pointer; font-size: 14px; 
+          body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f5f5f5; 
           }
-          .btn:hover { background-color: #3367d6; }
+          .container { 
+            max-width: 500px; 
+            margin: 50px auto; 
+            padding: 30px; 
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          }
+          .header { 
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          .form-group {
+            margin-bottom: 20px;
+          }
+          .btn-primary { 
+            background-color: #4285f4; 
+            border-color: #4285f4;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+          }
+          .btn-primary:hover { 
+            background-color: #3367d6; 
+            border-color: #3367d6;
+          }
+          .error-message {
+            color: #d93025;
+            margin-top: 10px;
+            display: none;
+          }
+          .success-message {
+            color: #0f9d58;
+            margin-top: 10px;
+            display: none;
+          }
+          .toggle-link {
+            text-align: center;
+            margin-top: 20px;
+          }
         </style>
       </head>
       <body>
         <div class="container">
           <div class="header">
-            <h1>VoucherVision API Authentication</h1>
-            <button id="signout-btn" class="btn" style="display:none;">Sign Out</button>
+            <h2>VoucherVision API</h2>
+            <p>Sign in to access the API</p>
           </div>
           
-          <div id="signed-in-container" class="signed-in-container">
-            <h2>You are currently signed in</h2>
-            <p>Signed in as: <strong id="user-email"></strong></p>
-            <p>You can continue to the <a href="/auth-success">token page</a> or sign out to use a different account.</p>
+          <div id="login-form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Email address">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" placeholder="Password">
+            </div>
+            <button id="login-button" class="btn btn-primary">Sign In</button>
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+            
+            <div class="toggle-link">
+              <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+              <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+            </div>
           </div>
-          
-          <div id="firebaseui-auth-container"></div>
-          <div id="loader">Loading...</div>
         </div>
         
-        <script type="text/javascript">
-          // Firebase configuration 
+        <script>
+          // Firebase configuration
           const firebaseConfig = {
             apiKey: "{{ api_key }}",
             authDomain: "{{ auth_domain }}",
@@ -561,66 +607,238 @@ def login_page():
             messagingSenderId: "{{ messaging_sender_id }}",
             appId: "{{ app_id }}"
           };
-        
+          
           // Initialize Firebase
           firebase.initializeApp(firebaseConfig);
           
-          // Firebase UI config
-          var uiConfig = {
-            signInSuccessUrl: window.location.origin + '/auth-success',
-            signInOptions: [
-              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-              firebase.auth.EmailAuthProvider.PROVIDER_ID
-            ],
-            callbacks: {
-              signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                console.log("Sign-in successful, redirecting to:", redirectUrl);
-                return true;
-              }
-            },
-            tosUrl: '/terms-of-service',
-            privacyPolicyUrl: '/privacy-policy'
-          };
-          
-          // Initialize FirebaseUI
-          var ui = new firebaseui.auth.AuthUI(firebase.auth());
-          
-          // Check authentication state
+          // Check if user is already signed in
           firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-              // User is signed in
-              console.log("User signed in:", user.email);
-              document.getElementById('user-email').textContent = user.email;
-              document.getElementById('signed-in-container').style.display = 'block';
-              document.getElementById('signout-btn').style.display = 'block';
-              document.getElementById('firebaseui-auth-container').style.display = 'none';
-              document.getElementById('loader').style.display = 'none';
-            } else {
-              // User is not signed in
-              document.getElementById('signed-in-container').style.display = 'none';
-              document.getElementById('signout-btn').style.display = 'none';
-              document.getElementById('firebaseui-auth-container').style.display = 'block';
-              
-              // Check for pending redirects
-              if (ui.isPendingRedirect()) {
-                console.log("Handling pending redirect...");
-                ui.start('#firebaseui-auth-container', uiConfig);
-              } else {
-                // No pending redirect, start UI normally
-                ui.start('#firebaseui-auth-container', uiConfig);
-              }
+              // User is signed in, redirect to success page
+              window.location.href = '/auth-success';
             }
           });
           
-          // Sign out button
-          document.getElementById('signout-btn').addEventListener('click', function() {
-            firebase.auth().signOut().then(function() {
-              console.log('User signed out');
-              // Reload the page to show sign-in options
-              window.location.reload();
-            }).catch(function(error) {
-              console.error('Sign out error:', error);
-            });
+          // Email/Password login
+          document.getElementById('login-button').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorElement = document.getElementById('error-message');
+            const successElement = document.getElementById('success-message');
+            
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+            
+            if (!email || !password) {
+              errorElement.textContent = 'Please enter both email and password';
+              errorElement.style.display = 'block';
+              return;
+            }
+            
+            firebase.auth().signInWithEmailAndPassword(email, password)
+              .then((userCredential) => {
+                // Success - will redirect via onAuthStateChanged
+                successElement.textContent = 'Login successful, redirecting...';
+                successElement.style.display = 'block';
+              })
+              .catch((error) => {
+                // Show error message
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+              });
+          });
+          
+          // Forgot password
+          document.getElementById('forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const errorElement = document.getElementById('error-message');
+            const successElement = document.getElementById('success-message');
+            
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+            
+            if (!email) {
+              errorElement.textContent = 'Please enter your email address';
+              errorElement.style.display = 'block';
+              return;
+            }
+            
+            firebase.auth().sendPasswordResetEmail(email)
+              .then(() => {
+                successElement.textContent = 'Password reset email sent. Check your inbox.';
+                successElement.style.display = 'block';
+              })
+              .catch((error) => {
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+              });
+          });
+        </script>
+      </body>
+    </html>
+    """, 
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"])
+
+@app.route('/signup', methods=['GET'])
+def signup_page():
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
+    
+    return render_template_string("""
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>VoucherVision Signup</title>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+        <style>
+          body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f5f5f5; 
+          }
+          .container { 
+            max-width: 500px; 
+            margin: 50px auto; 
+            padding: 30px; 
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          }
+          .header { 
+            text-align: center;
+            margin-bottom: 30px;
+          }
+          .form-group {
+            margin-bottom: 20px;
+          }
+          .btn-primary { 
+            background-color: #4285f4; 
+            border-color: #4285f4;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+          }
+          .btn-primary:hover { 
+            background-color: #3367d6; 
+            border-color: #3367d6;
+          }
+          .error-message {
+            color: #d93025;
+            margin-top: 10px;
+            display: none;
+          }
+          .success-message {
+            color: #0f9d58;
+            margin-top: 10px;
+            display: none;
+          }
+          .toggle-link {
+            text-align: center;
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>Create an Account</h2>
+            <p>Sign up to access the VoucherVision API</p>
+          </div>
+          
+          <div id="signup-form">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Email address">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" class="form-control" placeholder="Password (at least 6 characters)">
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Confirm Password</label>
+              <input type="password" id="confirm-password" class="form-control" placeholder="Confirm password">
+            </div>
+            <button id="signup-button" class="btn btn-primary">Create Account</button>
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+            
+            <div class="toggle-link">
+              <p>Already have an account? <a href="/login">Sign In</a></p>
+            </div>
+          </div>
+        </div>
+        
+        <script>
+          // Firebase configuration
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
+            appId: "{{ app_id }}"
+          };
+          
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          
+          // Check if user is already signed in
+          firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+              // User is signed in, redirect to success page
+              window.location.href = '/auth-success';
+            }
+          });
+          
+          // Email/Password signup
+          document.getElementById('signup-button').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const errorElement = document.getElementById('error-message');
+            const successElement = document.getElementById('success-message');
+            
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+            
+            if (!email || !password || !confirmPassword) {
+              errorElement.textContent = 'Please fill in all fields';
+              errorElement.style.display = 'block';
+              return;
+            }
+            
+            if (password !== confirmPassword) {
+              errorElement.textContent = 'Passwords do not match';
+              errorElement.style.display = 'block';
+              return;
+            }
+            
+            if (password.length < 6) {
+              errorElement.textContent = 'Password must be at least 6 characters';
+              errorElement.style.display = 'block';
+              return;
+            }
+            
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+              .then((userCredential) => {
+                // Will redirect via onAuthStateChanged
+                successElement.textContent = 'Account created successfully, redirecting...';
+                successElement.style.display = 'block';
+              })
+              .catch((error) => {
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+              });
           });
         </script>
       </body>
