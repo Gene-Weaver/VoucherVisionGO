@@ -119,7 +119,7 @@ db = firestore.client()
 
 
 def validate_api_key(api_key):
-    """Validate an API key against the Firestore database"""
+    """Validate an API key against the Firestore database """
     try:
         # Check if the API key exists
         api_key_doc = db.collection('api_keys').document(api_key).get()
