@@ -117,7 +117,6 @@ except Exception as e:
 db = firestore.client()
 
 
-
 def validate_api_key(api_key):
     """Validate an API key against the Firestore database """
     try:
@@ -135,9 +134,23 @@ def validate_api_key(api_key):
             # Check expiration if set
             if 'expires_at' in key_data:
                 import datetime
-                now = datetime.datetime.now()
+                from datetime import timezone
+                
+                # Create timezone-aware current datetime
+                now = datetime.datetime.now(timezone.utc)
+                
+                # Get expiration time and ensure it's timezone-aware
                 expires_at = key_data['expires_at']
                 
+                # If expires_at is a Firestore timestamp, convert it to datetime
+                if hasattr(expires_at, '_seconds'):
+                    # Convert Firestore timestamp to datetime with UTC timezone
+                    expires_at = datetime.datetime.fromtimestamp(expires_at._seconds, timezone.utc)
+                # If it's already a datetime but has no timezone, add UTC
+                elif isinstance(expires_at, datetime.datetime) and expires_at.tzinfo is None:
+                    expires_at = expires_at.replace(tzinfo=timezone.utc)
+                
+                # Now both datetimes have timezone information for safe comparison
                 if now > expires_at:
                     logger.warning(f"Expired API key used: {api_key[:8]}...")
                     return False
@@ -5354,6 +5367,27 @@ curl -X POST "{{ server_url }}/process" \\
           
           // Initialize Firebase
           firebase.initializeApp(firebaseConfig);
+                                  
+        // Helper function for formatting Firestore timestamps
+        function formatFirestoreDate(firestoreTimestamp) {
+            if (!firestoreTimestamp) return 'N/A';
+            
+            // Check if it's a Firestore timestamp object
+            if (firestoreTimestamp._seconds) {
+            // Convert seconds to milliseconds and create a JavaScript Date
+            return new Date(firestoreTimestamp._seconds * 1000).toLocaleDateString();
+            } 
+            // If it's already a JavaScript Date object
+            else if (firestoreTimestamp instanceof Date) {
+            return firestoreTimestamp.toLocaleDateString();
+            }
+            // If it's an ISO string
+            else if (typeof firestoreTimestamp === 'string') {
+            return new Date(firestoreTimestamp).toLocaleDateString();
+            }
+            
+            return 'Invalid Date';
+        }
           
           // DOM elements
           const createKeyBtn = document.getElementById('create-key-btn');
@@ -5552,93 +5586,93 @@ curl -X POST "{{ server_url }}/process" \\
             }
         }
           // Load API keys
-          async function loadApiKeys(user) {
-            const keysContainer = document.getElementById('keys-container');
-            const loadingElem = document.getElementById('loading');
-            const errorMessageElem = document.getElementById('error-message');
-            const noKeysElem = document.getElementById('no-keys');
-            const keysTableElem = document.getElementById('keys-table');
-            const keysListElem = document.getElementById('keys-list');
+        async function loadApiKeys(user) {
+        const keysContainer = document.getElementById('keys-container');
+        const loadingElem = document.getElementById('loading');
+        const errorMessageElem = document.getElementById('error-message');
+        const noKeysElem = document.getElementById('no-keys');
+        const keysTableElem = document.getElementById('keys-table');
+        const keysListElem = document.getElementById('keys-list');
+        
+        try {
+            // Get ID token for authentication
+            const idToken = await user.getIdToken();
             
-            try {
-              // Get ID token for authentication
-              const idToken = await user.getIdToken();
-              
-              // Fetch API keys from server
-              const response = await fetch('/api-keys', {
-                headers: {
-                  'Authorization': `Bearer ${idToken}`
-                }
-              });
-              
-              if (!response.ok) {
-                throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-              }
-              
-              const data = await response.json();
-              
-              // Hide loading indicator
-              loadingElem.style.display = 'none';
-              
-              if (data.status === 'success') {
-                if (data.count === 0) {
-                  // No keys found
-                  noKeysElem.style.display = 'block';
-                  keysTableElem.style.display = 'none';
-                } else {
-                  // Display keys
-                  noKeysElem.style.display = 'none';
-                  keysTableElem.style.display = 'table';
-                  
-                  // Clear existing list
-                  keysListElem.innerHTML = '';
-                  
-                  // Add each key to the table
-                  data.api_keys.forEach(key => {
-                    const row = document.createElement('tr');
-                    
-                    // Format dates
-                    const createdDate = key.created_at ? new Date(key.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
-                    const expiresDate = key.expires_at ? new Date(key.expires_at._seconds * 1000).toLocaleDateString() : 'N/A';
-                    
-                    // Status badge
-                    const statusBadge = key.active 
-                      ? '<span class="badge-active">Active</span>'
-                      : '<span class="badge-inactive">Inactive</span>';
-                    
-                    row.innerHTML = `
-                      <td>${key.name || 'Unnamed Key'}</td>
-                      <td>${createdDate}</td>
-                      <td>${expiresDate}</td>
-                      <td>${statusBadge}</td>
-                      <td>
-                        ${key.active ? `<button class="btn-revoke" data-key-id="${key.key_id}">Revoke</button>` : ''}
-                      </td>
-                    `;
-                    
-                    keysListElem.appendChild(row);
-                  });
-                  
-                  // Add event listeners to revoke buttons
-                  document.querySelectorAll('.btn-revoke').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                      const keyId = e.target.getAttribute('data-key-id');
-                      if (confirm('Are you sure you want to revoke this API key? This action cannot be undone.')) {
-                        revokeApiKey(keyId);
-                      }
-                    });
-                  });
-                }
-              } else {
-                throw new Error(data.error || 'Failed to load API keys');
-              }
-            } catch (error) {
-              console.error('Error loading API keys:', error);
-              loadingElem.style.display = 'none';
-              errorMessageElem.textContent = `Error: ${error.message}`;
-              errorMessageElem.style.display = 'block';
+            // Fetch API keys from server
+            const response = await fetch('/api-keys', {
+            headers: {
+                'Authorization': `Bearer ${idToken}`
             }
-          }
+            });
+            
+            if (!response.ok) {
+            throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            
+            // Hide loading indicator
+            loadingElem.style.display = 'none';
+            
+            if (data.status === 'success') {
+            if (data.count === 0) {
+                // No keys found
+                noKeysElem.style.display = 'block';
+                keysTableElem.style.display = 'none';
+            } else {
+                // Display keys
+                noKeysElem.style.display = 'none';
+                keysTableElem.style.display = 'table';
+                
+                // Clear existing list
+                keysListElem.innerHTML = '';
+                
+                // Add each key to the table
+                data.api_keys.forEach(key => {
+                const row = document.createElement('tr');
+                
+                // Format dates using the helper function
+                const createdDate = formatFirestoreDate(key.created_at);
+                const expiresDate = formatFirestoreDate(key.expires_at);
+                
+                // Status badge
+                const statusBadge = key.active 
+                    ? '<span class="badge-active">Active</span>'
+                    : '<span class="badge-inactive">Inactive</span>';
+                
+                row.innerHTML = `
+                    <td>${key.name || 'Unnamed Key'}</td>
+                    <td>${createdDate}</td>
+                    <td>${expiresDate}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                    ${key.active ? `<button class="btn-revoke" data-key-id="${key.key_id}">Revoke</button>` : ''}
+                    </td>
+                `;
+                
+                keysListElem.appendChild(row);
+                });
+                
+                // Add event listeners to revoke buttons
+                document.querySelectorAll('.btn-revoke').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const keyId = e.target.getAttribute('data-key-id');
+                    if (confirm('Are you sure you want to revoke this API key? This action cannot be undone.')) {
+                    revokeApiKey(keyId);
+                    }
+                });
+                });
+            }
+            } else {
+            throw new Error(data.error || 'Failed to load API keys');
+            }
+        } catch (error) {
+            console.error('Error loading API keys:', error);
+            loadingElem.style.display = 'none';
+            errorMessageElem.textContent = `Error: ${error.message}`;
+            errorMessageElem.style.display = 'block';
+        }
+        }
           
           // Revoke API key
           async function revokeApiKey(keyId) {
@@ -5715,12 +5749,30 @@ def list_api_keys():
             # Add the document ID (the actual API key)
             key_data['key_id'] = key_doc.id
             
+            # Format timestamps for frontend display
+            if 'created_at' in key_data and hasattr(key_data['created_at'], '_seconds'):
+                key_data['created_at'] = {
+                    '_seconds': key_data['created_at']._seconds,
+                    '_formatted': datetime.datetime.fromtimestamp(
+                        key_data['created_at']._seconds
+                    ).strftime('%Y-%m-%d %H:%M:%S')
+                }
+                
+            if 'expires_at' in key_data and hasattr(key_data['expires_at'], '_seconds'):
+                key_data['expires_at'] = {
+                    '_seconds': key_data['expires_at']._seconds,
+                    '_formatted': datetime.datetime.fromtimestamp(
+                        key_data['expires_at']._seconds
+                    ).strftime('%Y-%m-%d %H:%M:%S')
+                }
+            
             # Don't return the full API key for security - mask it
             if 'api_key' in key_data:
                 key_data['api_key'] = key_data['api_key'][:8] + '...'
                 
             keys.append(key_data)
-            
+        
+        # Return the API keys with formatted dates
         return jsonify({
             'status': 'success',
             'count': len(keys),
