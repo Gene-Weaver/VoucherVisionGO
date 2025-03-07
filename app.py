@@ -2305,31 +2305,52 @@ def admin_dashboard():
         
         <!-- Application Details Modal -->
         <div id="application-modal" class="modal">
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Application Details</h3>
-            
-            <div id="application-details" class="user-details">
-              <!-- Application details will be displayed here -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Application Details</h3>
+                
+                <div id="application-details" class="user-details">
+                <!-- Application details will be displayed here -->
+                </div>
+                
+                <div id="application-actions" class="action-buttons">
+                <div class="form-group" id="api-key-permission-group" style="margin-bottom: 15px; display: none;">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="allow-api-keys">
+                    <label class="form-check-label" for="allow-api-keys">
+                        Allow API key creation (for programmatic access without browser authentication)
+                    </label>
+                    <div class="small text-muted">
+                        Only grant this to trusted users who need to automate API access
+                    </div>
+                    </div>
+                </div>
+                
+                <button id="approve-btn" class="btn-success">Approve</button>
+                <button id="reject-btn" class="btn-danger">Reject</button>
+                </div>
+                
+                <!-- For already approved applications -->
+                <div id="api-key-access-actions" style="display: none; margin-top: 15px;">
+                <h4>API Key Permission</h4>
+                <div class="form-group mb-3">
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="update-api-keys">
+                    <label class="form-check-label" for="update-api-keys">
+                        Allow API key creation
+                    </label>
+                    </div>
+                </div>
+                <button id="update-api-access-btn" class="btn-primary">Update API Key Permission</button>
+                </div>
+                
+                <div id="rejection-form" style="display: none;" class="mt-3">
+                <!-- Rejection form remains the same -->
+                </div>
+                
+                <div id="application-status-message" class="mt-3"></div>
             </div>
-            
-            <div id="application-actions" class="action-buttons">
-              <button id="approve-btn" class="btn-success">Approve</button>
-              <button id="reject-btn" class="btn-danger">Reject</button>
             </div>
-            
-            <div id="rejection-form" style="display: none;" class="mt-3">
-              <div class="form-group">
-                <label for="rejection-reason">Rejection Reason</label>
-                <textarea id="rejection-reason" class="form-control" rows="3" placeholder="Provide a reason for rejecting this application"></textarea>
-              </div>
-              <button id="confirm-reject-btn" class="btn-danger">Confirm Rejection</button>
-              <button id="cancel-reject-btn" class="btn-secondary">Cancel</button>
-            </div>
-            
-            <div id="application-status-message" class="mt-3"></div>
-          </div>
-        </div>
         
         <!-- Add Admin Modal -->
         <div id="add-admin-modal" class="modal">
@@ -2694,122 +2715,247 @@ def admin_dashboard():
           // View application details
           async function viewApplicationDetails(email) {
             try {
-              // Set current application email
-              currentApplicationEmail = email;
-              
-              // Find application in the list
-              const application = allApplications.find(app => app.email === email);
-              
-              if (!application) {
+            // Set current application email
+            currentApplicationEmail = email;
+            
+            // Find application in the list
+            const application = allApplications.find(app => app.email === email);
+            
+            if (!application) {
                 throw new Error('Application not found');
-              }
-              
-              // Format dates
-              const createdDate = application.created_at ? 
+            }
+            
+            // Format dates
+            const createdDate = application.created_at ? 
                 new Date(application.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
-              const updatedDate = application.updated_at ? 
+            const updatedDate = application.updated_at ? 
                 new Date(application.updated_at._seconds * 1000).toLocaleDateString() : 'N/A';
-              
-              // Generate details HTML
-              let detailsHtml = `
+            
+            // Generate details HTML
+            let detailsHtml = `
                 <p><strong>Email:</strong> ${application.email}</p>
                 <p><strong>Organization:</strong> ${application.organization || 'N/A'}</p>
                 <p><strong>Purpose:</strong> ${application.purpose || 'N/A'}</p>
                 <p><strong>Status:</strong> ${application.status || 'N/A'}</p>
                 <p><strong>Created:</strong> ${createdDate}</p>
                 <p><strong>Last Updated:</strong> ${updatedDate}</p>
-              `;
-              
-              // Add approval/rejection info if available
-              if (application.status === 'approved' && application.approved_by) {
-                detailsHtml += `<p><strong>Approved By:</strong> ${application.approved_by}</p>`;
-              } else if (application.status === 'rejected') {
+            `;
+            
+            // Add API key permission status if approved
+            if (application.status === 'approved') {
+                const hasApiKeyAccess = application.api_key_access === true;
                 detailsHtml += `
-                  <p><strong>Rejected By:</strong> ${application.rejected_by || 'N/A'}</p>
-                  <p><strong>Rejection Reason:</strong> ${application.rejection_reason || 'No reason provided'}</p>
+                <p><strong>API Key Permission:</strong> 
+                    <span class="${hasApiKeyAccess ? 'text-success' : 'text-danger'}">
+                    ${hasApiKeyAccess ? 'Granted' : 'Not Granted'}
+                    </span>
+                </p>
                 `;
-              }
-              
-              // Update modal content
-              document.getElementById('application-details').innerHTML = detailsHtml;
-              
-              // Show/hide action buttons based on status
-              if (application.status === 'pending') {
-                document.getElementById('application-actions').style.display = 'flex';
-                document.getElementById('rejection-form').style.display = 'none';
-              } else {
-                document.getElementById('application-actions').style.display = 'none';
-                document.getElementById('rejection-form').style.display = 'none';
-              }
-              
-              // Clear status message
-              document.getElementById('application-status-message').innerHTML = '';
-              
-              // Show the modal
-              applicationModal.style.display = 'block';
-              
-            } catch (error) {
-              console.error('Error viewing application details:', error);
-              alert('Error viewing application details: ' + error.message);
             }
-          }
+            
+            // Add approval/rejection info if available
+            if (application.status === 'approved' && application.approved_by) {
+                const approvedDate = application.approved_at ? 
+                new Date(application.approved_at._seconds * 1000).toLocaleDateString() : 'N/A';
+                detailsHtml += `
+                <p><strong>Approved By:</strong> ${application.approved_by}</p>
+                <p><strong>Approved Date:</strong> ${approvedDate}</p>
+                `;
+            } else if (application.status === 'rejected') {
+                detailsHtml += `
+                <p><strong>Rejected By:</strong> ${application.rejected_by || 'N/A'}</p>
+                <p><strong>Rejection Reason:</strong> ${application.rejection_reason || 'No reason provided'}</p>
+                `;
+            }
+            
+            // Update modal content
+            document.getElementById('application-details').innerHTML = detailsHtml;
+            
+            // Show/hide action buttons based on status
+            if (application.status === 'pending') {
+                document.getElementById('application-actions').style.display = 'flex';
+                document.getElementById('api-key-permission-group').style.display = 'block';
+                document.getElementById('api-key-access-actions').style.display = 'none';
+                document.getElementById('rejection-form').style.display = 'none';
+                
+                // Uncheck the API key permission by default
+                document.getElementById('allow-api-keys').checked = false;
+            } else if (application.status === 'approved') {
+                document.getElementById('application-actions').style.display = 'none';
+                document.getElementById('api-key-access-actions').style.display = 'block';
+                document.getElementById('rejection-form').style.display = 'none';
+                
+                // Set the current API key access status
+                document.getElementById('update-api-keys').checked = application.api_key_access === true;
+            } else {
+                document.getElementById('application-actions').style.display = 'none';
+                document.getElementById('api-key-access-actions').style.display = 'none';
+                document.getElementById('rejection-form').style.display = 'none';
+            }
+            
+            // Clear status message
+            document.getElementById('application-status-message').innerHTML = '';
+            
+            // Show the modal
+            applicationModal.style.display = 'block';
+            
+            } catch (error) {
+            console.error('Error viewing application details:', error);
+            alert('Error viewing application details: ' + error.message);
+            }
+        }
+        
+        // New function for updating API key access
+        async function updateApiKeyAccess() {
+            if (!currentApplicationEmail) return;
+            
+            try {
+            const user = firebase.auth().currentUser;
+            if (!user) throw new Error('Not authenticated');
+            
+            // Get the updated API key permission
+            const allowApiKeys = document.getElementById('update-api-keys').checked;
+            
+            // Get ID token
+            const idToken = await user.getIdToken(true);
+            
+            // Send the update request
+            const response = await fetch(`/admin/applications/${currentApplicationEmail}/update-api-access`, {
+                method: 'POST',
+                headers: {
+                'Authorization': `Bearer ${idToken}`,
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                allow_api_keys: allowApiKeys
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Server returned ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                // Show success message
+                document.getElementById('application-status-message').innerHTML = `
+                <div class="alert alert-success">
+                    API key permission ${allowApiKeys ? 'granted' : 'revoked'} successfully.
+                </div>
+                `;
+                
+                // Update application in the list
+                updateApplicationInList(currentApplicationEmail, 'approved', allowApiKeys);
+                
+                // Reload applications after a short delay
+                setTimeout(() => {
+                loadApplications(user);
+                }, 2000);
+            } else {
+                throw new Error(data.error || 'Failed to update API key permission');
+            }
+            } catch (error) {
+            console.error('Error updating API key permission:', error);
+            document.getElementById('application-status-message').innerHTML = `
+                <div class="alert alert-danger">
+                Error updating API key permission: ${error.message}
+                </div>
+            `;
+            }
+        }
           
           // Approve application
           async function approveApplication() {
             if (!currentApplicationEmail) return;
             
             try {
-              const user = firebase.auth().currentUser;
-              if (!user) throw new Error('Not authenticated');
-              
-              // Get ID token
-              const idToken = await user.getIdToken(true);
-              
-              // Send approval request
-              const response = await fetch(`/admin/applications/${currentApplicationEmail}/approve`, {
+            const user = firebase.auth().currentUser;
+            if (!user) throw new Error('Not authenticated');
+            
+            // Get the API key permission value
+            const allowApiKeys = document.getElementById('allow-api-keys').checked;
+            
+            // Get ID token
+            const idToken = await user.getIdToken(true);
+            
+            // Send approval request with API key permission
+            const response = await fetch(`/admin/applications/${currentApplicationEmail}/approve`, {
                 method: 'POST',
                 headers: {
-                  'Authorization': `Bearer ${idToken}`
-                }
-              });
-              
-              if (!response.ok) {
+                'Authorization': `Bearer ${idToken}`,
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                allow_api_keys: allowApiKeys
+                })
+            });
+            
+            if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.error || `Server returned ${response.status}`);
-              }
-              
-              const data = await response.json();
-              
-              if (data.status === 'success') {
+            }
+            
+            const data = await response.json();
+            
+            if (data.status === 'success') {
                 // Show success message
                 document.getElementById('application-status-message').innerHTML = `
-                  <div class="alert alert-success">
+                <div class="alert alert-success">
                     Application approved successfully. The user can now access the API.
-                  </div>
+                    ${allowApiKeys ? 'User has been granted permission to create API keys.' : ''}
+                </div>
                 `;
                 
                 // Hide action buttons
                 document.getElementById('application-actions').style.display = 'none';
                 
+                // Show API key access actions now
+                document.getElementById('api-key-access-actions').style.display = 'block';
+                document.getElementById('update-api-keys').checked = allowApiKeys;
+                
                 // Update application in the list
-                updateApplicationInList(currentApplicationEmail, 'approved');
+                updateApplicationInList(currentApplicationEmail, 'approved', allowApiKeys);
                 
                 // Reload applications after a short delay
                 setTimeout(() => {
-                  loadApplications(user);
+                loadApplications(user);
                 }, 2000);
-              } else {
+            } else {
                 throw new Error(data.error || 'Failed to approve application');
-              }
-            } catch (error) {
-              console.error('Error approving application:', error);
-              document.getElementById('application-status-message').innerHTML = `
-                <div class="alert alert-danger">
-                  Error approving application: ${error.message}
-                </div>
-              `;
             }
-          }
+            } catch (error) {
+            console.error('Error approving application:', error);
+            document.getElementById('application-status-message').innerHTML = `
+                <div class="alert alert-danger">
+                Error approving application: ${error.message}
+                </div>
+            `;
+            }
+        }
+                                  
+        // Add event listener for the update API access button
+        document.getElementById('update-api-access-btn').addEventListener('click', updateApiKeyAccess);
+        
+        // Update the updateApplicationInList function to include API key permission
+        function updateApplicationInList(email, newStatus, apiKeyAccess = null) {
+            // Find application in the list
+            const appIndex = allApplications.findIndex(app => app.email === email);
+            
+            if (appIndex >= 0) {
+            // Update application status
+            allApplications[appIndex].status = newStatus;
+            
+            // Update API key permission if provided
+            if (apiKeyAccess !== null) {
+                allApplications[appIndex].api_key_access = apiKeyAccess;
+            }
+            
+            // Reapply filters
+            applyFiltersToApplications();
+            }
+        }
           
           // Reject application
           async function rejectApplication() {
@@ -3381,7 +3527,7 @@ def list_applications():
 @app.route('/admin/applications/<email>/approve', methods=['POST'])
 @authenticated_route
 def approve_application(email):
-    """Approve a user application"""
+    """Approve a user application with optional API key permission"""
     # Get the authenticated user from the token
     user = authenticate_request(request)
     if not user or not user.get('email'):
@@ -3395,6 +3541,11 @@ def approve_application(email):
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
     
     try:
+        # Get data from request
+        data = request.get_json() or {}
+        # Check if API key creation is allowed for this user
+        allow_api_keys = data.get('allow_api_keys', False)
+        
         # Get the application
         app_doc = db.collection('user_applications').document(email).get()
         
@@ -3408,21 +3559,79 @@ def approve_application(email):
             return jsonify({'error': 'Application is already approved'}), 400
         
         # Update the application status
-        db.collection('user_applications').document(email).update({
+        update_data = {
             'status': 'approved',
             'approved_by': admin_email,
             'approved_at': firestore.SERVER_TIMESTAMP,
-            'updated_at': firestore.SERVER_TIMESTAMP
-        })
+            'updated_at': firestore.SERVER_TIMESTAMP,
+            'api_key_access': allow_api_keys  # Add API key permission flag
+        }
+        
+        db.collection('user_applications').document(email).update(update_data)
         
         return jsonify({
             'status': 'success',
-            'message': f'Application for {email} has been approved'
+            'message': f'Application for {email} has been approved',
+            'api_key_access': allow_api_keys
         })
         
     except Exception as e:
         logger.error(f"Error approving application: {str(e)}")
         return jsonify({'error': f'Failed to approve application: {str(e)}'}), 500
+
+# 2. Add endpoint to update API key permission for already approved users
+@app.route('/admin/applications/<email>/update-api-access', methods=['POST'])
+@authenticated_route
+def update_api_key_access(email):
+    """Update API key creation permission for a user"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    admin_email = user.get('email')
+    
+    # Check if the user is an admin
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+    
+    try:
+        # Get data from request
+        data = request.get_json() or {}
+        allow_api_keys = data.get('allow_api_keys', False)
+        
+        # Get the application
+        app_doc = db.collection('user_applications').document(email).get()
+        
+        if not app_doc.exists:
+            return jsonify({'error': 'User application not found'}), 404
+        
+        app_data = app_doc.to_dict()
+        
+        # Check if application is approved
+        if app_data.get('status') != 'approved':
+            return jsonify({'error': 'Cannot update API key access for non-approved users'}), 400
+        
+        # Update the API key permission
+        db.collection('user_applications').document(email).update({
+            'api_key_access': allow_api_keys,
+            'updated_at': firestore.SERVER_TIMESTAMP,
+            'notes': firestore.ArrayUnion([
+                f"API key access {'granted' if allow_api_keys else 'revoked'} by {admin_email} on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+            ])
+        })
+        
+        return jsonify({
+            'status': 'success',
+            'message': f"API key access {'granted' if allow_api_keys else 'revoked'} for {email}",
+            'api_key_access': allow_api_keys
+        })
+        
+    except Exception as e:
+        logger.error(f"Error updating API key access: {str(e)}")
+        return jsonify({'error': f'Failed to update API key access: {str(e)}'}), 500
+
 
 @app.route('/admin/applications/<email>/reject', methods=['POST'])
 @authenticated_route
@@ -4891,6 +5100,13 @@ def api_key_management_ui():
               <div id="form-error" class="error-message"></div>
             </div>
           </div>
+                                  
+            <div id="no-permission" class="alert alert-warning" style="display: none;">
+            <h4>API Key Creation Not Allowed</h4>
+            <p>Your account does not have permission to create API keys for programmatic access.</p>
+            <p>API keys allow access to the VoucherVision API without browser authentication, which is a privileged operation.</p>
+            <p>Please contact an administrator if you need this level of access for your integration.</p>
+            </div>
           
           <!-- Display Key Modal -->
           <div id="display-key-modal" class="modal">
@@ -4947,69 +5163,134 @@ curl -X POST "{{ server_url }}/process" \\
           function initPage() {
             // Check if user is authenticated
             firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
+            if (user) {
                 // User is signed in, display their email
                 document.getElementById('user-email').textContent = user.email;
                 
-                // Get the user's API keys
-                loadApiKeys(user);
-              } else {
+                // Check if user has API key permission
+                checkApiKeyPermission(user)
+                .then(hasPermission => {
+                    if (hasPermission) {
+                    // Show the create button and load keys
+                    document.getElementById('create-key-btn').style.display = 'inline-block';
+                    loadApiKeys(user);
+                    } else {
+                    // Hide the create button and show a message
+                    document.getElementById('create-key-btn').style.display = 'none';
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('no-permission').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking API key permission:', error);
+                    document.getElementById('error-message').textContent = 'Error: ' + error.message;
+                    document.getElementById('error-message').style.display = 'block';
+                    document.getElementById('loading').style.display = 'none';
+                });
+            } else {
                 // Not signed in, redirect to login page
                 window.location.href = '/login';
-              }
+            }
             });
             
-            // Event listeners
-            createKeyBtn.addEventListener('click', () => {
-              createKeyModal.style.display = 'block';
-            });
-            
-            closeButtons.forEach(btn => {
-              btn.addEventListener('click', () => {
-                createKeyModal.style.display = 'none';
-                displayKeyModal.style.display = 'none';
-              });
-            });
-            
-            // Close modals when clicking outside
-            window.addEventListener('click', (event) => {
-              if (event.target === createKeyModal) {
-                createKeyModal.style.display = 'none';
-              }
-              if (event.target === displayKeyModal) {
-                displayKeyModal.style.display = 'none';
-              }
-            });
-            
-            // Create key form submission
-            createKeyForm.addEventListener('submit', (e) => {
-              e.preventDefault();
-              createApiKey();
-            });
-            
-            // Copy key button
-            copyKeyBtn.addEventListener('click', () => {
-              const keyText = apiKeyDisplay.textContent;
-              navigator.clipboard.writeText(keyText)
-                .then(() => {
-                  copySuccess.style.display = 'block';
-                  setTimeout(() => {
-                    copySuccess.style.display = 'none';
-                  }, 3000);
-                })
-                .catch(err => {
-                  console.error('Could not copy text: ', err);
-                });
-            });
-            
-            // Logout button
-            logoutBtn.addEventListener('click', () => {
-              firebase.auth().signOut().then(() => {
-                window.location.href = '/login';
-              });
-            });
-          }
+        }
           
+        // Function to check if the user has API key permission
+        async function checkApiKeyPermission(user) {
+            try {
+            // Get ID token for authentication
+            const idToken = await user.getIdToken();
+            
+            // Check permission
+            const response = await fetch('/check-api-key-permission', {
+                headers: {
+                'Authorization': `Bearer ${idToken}`
+                }
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Server returned ${response.status}`);
+            }
+            
+            const data = await response.json();
+            
+            return data.has_api_key_permission === true;
+            } catch (error) {
+            console.error('Error checking API key permission:', error);
+            return false;
+            }
+        }
+        
+        // Modified createApiKey function to handle permission errors
+        async function createApiKey() {
+            try {
+            formError.style.display = 'none';
+            
+            // Get form values
+            const name = document.getElementById('key-name').value;
+            const description = document.getElementById('key-description').value;
+            const expiryDays = document.getElementById('key-expiry').value;
+            
+            if (!name) {
+                throw new Error('Please provide a name for your API key');
+            }
+            
+            // Get current user
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                throw new Error('You must be logged in to create an API key');
+            }
+            
+            // Get ID token for authentication
+            const idToken = await user.getIdToken();
+            
+            // Create the API key
+            const response = await fetch('/api-keys/create', {
+                method: 'POST',
+                headers: {
+                'Authorization': `Bearer ${idToken}`,
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                name: name,
+                description: description,
+                expires_days: parseInt(expiryDays, 10)
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok && data.status === 'success') {
+                // Close create modal
+                createKeyModal.style.display = 'none';
+                
+                // Update usage example with the new key
+                usageExample.textContent = usageExample.textContent.replace(/YOUR_API_KEY/g, data.api_key);
+                
+                // Display the API key
+                apiKeyDisplay.textContent = data.api_key;
+                displayKeyModal.style.display = 'block';
+                
+                // Reset form
+                createKeyForm.reset();
+                
+                // Reload the API keys list
+                loadApiKeys(user);
+            } else {
+                // Special handling for permission errors
+                if (response.status === 403 && data.code === 'no_api_key_permission') {
+                throw new Error('You do not have permission to create API keys. Please contact an administrator to request this access.');
+                } else {
+                throw new Error(data.error || 'Failed to create API key');
+                }
+            }
+            } catch (error) {
+            console.error('Error creating API key:', error);
+            formError.textContent = error.message;
+            formError.style.display = 'block';
+            }
+        }
           // Load API keys
           async function loadApiKeys(user) {
             const keysContainer = document.getElementById('keys-container');
@@ -5099,76 +5380,6 @@ curl -X POST "{{ server_url }}/process" \\
             }
           }
           
-          // Create API key
-          async function createApiKey() {
-            try {
-              formError.style.display = 'none';
-              
-              // Get form values
-              const name = document.getElementById('key-name').value;
-              const description = document.getElementById('key-description').value;
-              const expiryDays = document.getElementById('key-expiry').value;
-              
-              if (!name) {
-                throw new Error('Please provide a name for your API key');
-              }
-              
-              // Get current user
-              const user = firebase.auth().currentUser;
-              if (!user) {
-                throw new Error('You must be logged in to create an API key');
-              }
-              
-              // Get ID token for authentication
-              const idToken = await user.getIdToken();
-              
-              // Create the API key
-              const response = await fetch('/api-keys/create', {
-                method: 'POST',
-                headers: {
-                  'Authorization': `Bearer ${idToken}`,
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                  name: name,
-                  description: description,
-                  expires_days: parseInt(expiryDays, 10)
-                })
-              });
-              
-              if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || `Server returned ${response.status}`);
-              }
-              
-              const data = await response.json();
-              
-              if (data.status === 'success') {
-                // Close create modal
-                createKeyModal.style.display = 'none';
-                
-                // Update usage example with the new key
-                usageExample.textContent = usageExample.textContent.replace(/YOUR_API_KEY/g, data.api_key);
-                
-                // Display the API key
-                apiKeyDisplay.textContent = data.api_key;
-                displayKeyModal.style.display = 'block';
-                
-                // Reset form
-                createKeyForm.reset();
-                
-                // Reload the API keys list
-                loadApiKeys(user);
-              } else {
-                throw new Error(data.error || 'Failed to create API key');
-              }
-            } catch (error) {
-              console.error('Error creating API key:', error);
-              formError.textContent = error.message;
-              formError.style.display = 'block';
-            }
-          }
-          
           // Revoke API key
           async function revokeApiKey(keyId) {
             try {
@@ -5207,6 +5418,7 @@ curl -X POST "{{ server_url }}/process" \\
               alert(`Error: ${error.message}`);
             }
           }
+
           
           // Start the page initialization when the DOM is ready
           document.addEventListener('DOMContentLoaded', initPage);
@@ -5262,7 +5474,7 @@ def list_api_keys():
 @app.route('/api-keys/create', methods=['POST'])
 @authenticated_route
 def create_api_key():
-    """Create a new API key for the authenticated user"""
+    """Create a new API key for the authenticated user (only if they have API key permission)"""
     # Get the authenticated user from the token
     user = authenticate_request(request)
     if not user or not user.get('email'):
@@ -5271,6 +5483,29 @@ def create_api_key():
     user_email = user.get('email')
     
     try:
+        # Check if the user is an admin first (admins always have API key access)
+        admin_doc = db.collection('admins').document(user_email).get()
+        is_admin = admin_doc.exists
+        
+        if not is_admin:
+            # Check if the user has API key access permission
+            app_doc = db.collection('user_applications').document(user_email).get()
+            
+            if not app_doc.exists:
+                return jsonify({'error': 'User application not found'}), 404
+            
+            app_data = app_doc.to_dict()
+            
+            # Verify the user is approved and has API key access
+            if app_data.get('status') != 'approved':
+                return jsonify({'error': 'Your account is not approved yet'}), 403
+            
+            if not app_data.get('api_key_access', False):
+                return jsonify({
+                    'error': 'You do not have permission to create API keys. Please contact an administrator.',
+                    'code': 'no_api_key_permission'
+                }), 403
+        
         # Get data from request
         data = request.get_json() or {}
         
@@ -5315,6 +5550,57 @@ def create_api_key():
         logger.error(f"Error creating API key: {str(e)}")
         return jsonify({'error': f'Failed to create API key: {str(e)}'}), 500
 
+@app.route('/check-api-key-permission', methods=['GET'])
+@authenticated_route
+def check_api_key_permission():
+    """Check if the authenticated user has permission to create API keys"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    user_email = user.get('email')
+    
+    try:
+        # Check if the user is an admin first (admins always have API key access)
+        admin_doc = db.collection('admins').document(user_email).get()
+        is_admin = admin_doc.exists
+        
+        if is_admin:
+            # Admins always have API key access
+            return jsonify({
+                'status': 'success',
+                'has_api_key_permission': True,
+                'is_admin': True
+            })
+        
+        # Check regular user permissions
+        app_doc = db.collection('user_applications').document(user_email).get()
+        
+        if not app_doc.exists:
+            return jsonify({
+                'status': 'error',
+                'has_api_key_permission': False,
+                'message': 'User application not found'
+            }), 404
+        
+        app_data = app_doc.to_dict()
+        
+        # Check if approved and has API key access
+        is_approved = app_data.get('status') == 'approved'
+        has_api_key_access = app_data.get('api_key_access', False)
+        
+        return jsonify({
+            'status': 'success',
+            'has_api_key_permission': is_approved and has_api_key_access,
+            'is_approved': is_approved,
+            'is_admin': False
+        })
+        
+    except Exception as e:
+        logger.error(f"Error checking API key permission: {str(e)}")
+        return jsonify({'error': f'Failed to check API key permission: {str(e)}'}), 500
+    
 @app.route('/api-keys/<key_id>/revoke', methods=['POST'])
 @authenticated_route
 def revoke_api_key(key_id):
