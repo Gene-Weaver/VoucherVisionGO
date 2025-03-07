@@ -5,7 +5,7 @@ import json
 import datetime
 import tempfile
 import threading
-from flask import Flask, request, jsonify, render_template_string, redirect
+from flask import Flask, request, jsonify, render_template_string, redirect, make_response
 import logging
 from werkzeug.utils import secure_filename
 from collections import OrderedDict
@@ -199,12 +199,25 @@ def create_initial_admin(email):
 
 # Authentication middleware function
 def authenticate_request(request):
-    """Verify Firebase ID token in authorization header."""
+    """Verify Firebase ID token from various sources."""
+    # Check in Authorization header
     auth_header = request.headers.get('Authorization', '')
-    if not auth_header.startswith('Bearer '):
-        return None
+    id_token = None
     
-    id_token = auth_header.split('Bearer ')[1]
+    if auth_header.startswith('Bearer '):
+        id_token = auth_header.split('Bearer ')[1]
+    
+    # If not in header, check in query parameters
+    if not id_token:
+        id_token = request.args.get('token')
+    
+    # If not in query, check in cookies
+    if not id_token:
+        id_token = request.cookies.get('auth_token')
+    
+    if not id_token:
+        return None
+        
     try:
         # Verify the token
         decoded_token = auth.verify_id_token(id_token)
@@ -1642,8 +1655,31 @@ def auth_success():
                             const adminButton = document.createElement('button');
                             adminButton.className = 'btn-admin';
                             adminButton.textContent = 'Admin Dashboard';
-                            adminButton.onclick = function() {
-                              window.location.href = '/admin';
+                            adminButton.onclick = async function() {
+                            try {
+                                // Get fresh token
+                                const freshToken = await user.getIdToken(true);
+                                
+                                // Create a form to submit the token via POST
+                                const form = document.createElement('form');
+                                form.method = 'POST';
+                                form.action = '/admin';
+                                form.style.display = 'none';
+                                
+                                // Add the token as a hidden input
+                                const tokenInput = document.createElement('input');
+                                tokenInput.type = 'hidden';
+                                tokenInput.name = 'auth_token';
+                                tokenInput.value = freshToken;
+                                form.appendChild(tokenInput);
+                                
+                                // Add the form to the body and submit it
+                                document.body.appendChild(form);
+                                form.submit();
+                            } catch (error) {
+                                console.error('Error accessing admin dashboard:', error);
+                                alert('Authentication error. Please try logging in again.');
+                            }
                             };
                             document.querySelector('.user-info div').appendChild(adminButton);
                           }
@@ -1876,11 +1912,20 @@ def check_admin_status():
         logger.error(f"Error checking admin status: {str(e)}")
         return jsonify({'error': f'Failed to check admin status: {str(e)}'}), 500
     
-@app.route('/admin', methods=['GET'])
-@authenticated_route
+@app.route('/admin', methods=['GET', 'POST'])
 def admin_dashboard():
     """Admin dashboard for managing user applications"""
-    # Get the authenticated user from the token
+    # For POST requests, get token from form data
+    auth_token = None
+    if request.method == 'POST':
+        auth_token = request.form.get('auth_token')
+        if auth_token:
+            # Store in cookie for future requests
+            response = make_response(redirect('/admin'))
+            response.set_cookie('auth_token', auth_token, httponly=True, secure=True)
+            return response
+    
+    # For GET requests, follow normal authentication
     user = authenticate_request(request)
     if not user or not user.get('email'):
         return jsonify({'error': 'User not properly authenticated'}), 401
