@@ -905,9 +905,9 @@ def auth_success():
                             const apiKeysDiv = document.createElement('div');
                             apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
                             apiKeysDiv.innerHTML = `
-                              <h4>API Key Management</h4>
-                              <p>You have permission to create and manage API keys for programmatic access.</p>
-                              <a href="/api-key-management" class="btn btn-primary">Manage API Keys</a>
+                            <h4>API Key Management</h4>
+                            <p>You have permission to create and manage API keys for programmatic access.</p>
+                            <button id="manage-api-keys-btn" class="btn btn-primary">Manage API Keys</button>
                             `;
                             
                             // Add it after the token container
@@ -5122,6 +5122,16 @@ def prompts_ui():
 @authenticated_route
 def api_key_management_ui():
     """Web UI for API key management"""
+    # For POST requests, get token from form data and set in cookie
+    if request.method == 'POST':
+        auth_token = request.form.get('auth_token')
+        if auth_token:
+            # Create response that redirects to the same page via GET
+            response = make_response(redirect('/api-key-management'))
+            # Store token in cookie for future requests
+            response.set_cookie('auth_token', auth_token, httponly=True, secure=True)
+            return response
+        
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
     
@@ -5500,6 +5510,33 @@ curl -X POST "{{ server_url }}/process" \\
             document.getElementById('create-key-form').addEventListener('submit', (e) => {
               e.preventDefault();
               createApiKey();
+            });
+                                  
+            document.getElementById('manage-api-keys-btn').addEventListener('click', async function() {
+            try {
+                // Get fresh ID token
+                const idToken = await user.getIdToken(true);
+                
+                // Create form to submit the token
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/api-key-management';
+                form.style.display = 'none';
+                
+                // Add token as hidden input
+                const tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = 'auth_token';
+                tokenInput.value = idToken;
+                form.appendChild(tokenInput);
+                
+                // Submit the form
+                document.body.appendChild(form);
+                form.submit();
+            } catch (error) {
+                console.error('Error accessing API key management:', error);
+                alert('Authentication error. Please try logging in again.');
+            }
             });
             
             // Copy key button
