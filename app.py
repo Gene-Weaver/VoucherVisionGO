@@ -42,6 +42,8 @@ try:
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
+    from send_email import SimpleEmailSender
+    
 except:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
     from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
@@ -49,6 +51,7 @@ except:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
+    from send_email import SimpleEmailSender
 
 def get_firebase_config():
     """Get Firebase configuration for client-side use from Secret Manager"""
@@ -580,8 +583,16 @@ try:
     processor = VoucherVisionProcessor()
     app.config['processor'] = processor
     logger.info("VoucherVision processor initialized successfully")
+
+    # Initialize email sender
+    email_sender = SimpleEmailSender()
+    app.config['email_sender'] = email_sender
+    if email_sender.is_enabled:
+        logger.info("Email sender initialized successfully")
+    else:
+        logger.warning("Email sender initialized but email sending is disabled due to missing configuration")
 except Exception as e:
-    logger.error(f"Failed to initialize VoucherVision processor: {str(e)}")
+    logger.error(f"Failed to initialize application components: {str(e)}")
     raise
 
 @app.route('/auth-check', methods=['GET'])
@@ -3791,15 +3802,27 @@ def approve_application(email):
         
         db.collection('user_applications').document(email).update(update_data)
         
+        # Send email notification
+        email_sent = False
+        if 'email_sender' in app.config and app.config['email_sender'].is_enabled:
+            # Send approval notification
+            email_sent = app.config['email_sender'].send_approval_notification(email)
+            
+            # If API key access is granted, send another notification
+            if allow_api_keys:
+                app.config['email_sender'].send_api_key_permission_notification(email)
+        
         return jsonify({
             'status': 'success',
             'message': f'Application for {email} has been approved',
-            'api_key_access': allow_api_keys
+            'api_key_access': allow_api_keys,
+            'email_sent': email_sent
         })
         
     except Exception as e:
         logger.error(f"Error approving application: {str(e)}")
         return jsonify({'error': f'Failed to approve application: {str(e)}'}), 500
+
 
 # 2. Add endpoint to update API key permission for already approved users
 @app.route('/admin/applications/<email>/update-api-access', methods=['POST'])
@@ -3835,6 +3858,9 @@ def update_api_key_access(email):
         if app_data.get('status') != 'approved':
             return jsonify({'error': 'Cannot update API key access for non-approved users'}), 400
         
+        # Check if API key permission is changing from false to true (new grant)
+        is_new_grant = allow_api_keys and not app_data.get('api_key_access', False)
+        
         # Update the API key permission
         db.collection('user_applications').document(email).update({
             'api_key_access': allow_api_keys,
@@ -3844,10 +3870,16 @@ def update_api_key_access(email):
             ])
         })
         
+        # Send email notification if it's a new grant
+        email_sent = False
+        if is_new_grant and 'email_sender' in app.config and app.config['email_sender'].is_enabled:
+            email_sent = app.config['email_sender'].send_api_key_permission_notification(email)
+        
         return jsonify({
             'status': 'success',
             'message': f"API key access {'granted' if allow_api_keys else 'revoked'} for {email}",
-            'api_key_access': allow_api_keys
+            'api_key_access': allow_api_keys,
+            'email_sent': email_sent
         })
         
     except Exception as e:
