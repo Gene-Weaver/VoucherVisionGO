@@ -1459,7 +1459,9 @@ def pending_approval_page():
           <div class="status-icon">⏳</div>
           <h1>Application Pending</h1>
           <p>Your application to access the VoucherVision API is currently being reviewed.</p>
-          <p>You will receive a notification when your application has been approved.</p>
+          <p>You will receive an email notification from vouchervision.api@gmail.com when your application has been approved.</p>
+          <p>Please add vouchervision.api@gmail.com to your approved contacts list, or check your spam folder.</p>
+          <p>Emails sent from VoucherVision and vouchervision.api@gmail.com will never request sensitive information from you.</p>
           
           <div class="user-info">
             <p>Signed in as: <span id="user-email">Loading...</span></p>
