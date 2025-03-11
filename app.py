@@ -952,33 +952,33 @@ def auth_success():
                                     // Get fresh ID token
                                     const freshToken = await user.getIdToken(true);
                                     
-                                    // Create a new form
+                                    // First log token info for debugging (just the length, not the token itself)
+                                    console.log("Token length:", freshToken.length);
+                                    
+                                    // Create form with the proper encoding type
                                     const form = document.createElement('form');
                                     form.method = 'POST';
                                     form.action = '/api-key-management';
+                                    form.style.display = 'none';
+                                    form.enctype = 'application/x-www-form-urlencoded';
                                     
-                                    // Important: Add this attribute to allow credentials to be sent
-                                    form.setAttribute('enctype', 'application/x-www-form-urlencoded');
+                                    // Add token as hidden input field
+                                    const tokenInput = document.createElement('input');
+                                    tokenInput.type = 'hidden';
+                                    tokenInput.name = 'auth_token';
+                                    tokenInput.value = freshToken;
+                                    form.appendChild(tokenInput);
                                     
-                                    // Create a hidden field for the auth token
-                                    const tokenField = document.createElement('input');
-                                    tokenField.type = 'hidden';
-                                    tokenField.name = 'auth_token';
-                                    tokenField.value = freshToken;
-                                    
-                                    // Append the field to the form
-                                    form.appendChild(tokenField);
-                                    
-                                    // Append the form to the document body
+                                    // Add the form to the document body
                                     document.body.appendChild(form);
                                     
-                                    // Log for debugging
-                                    console.log("Submitting form to /api-key-management with token:", freshToken.substring(0, 10) + "...");
+                                    // Log that we're submitting the form
+                                    console.log("Submitting form to /api-key-management with token length:", freshToken.length);
                                     
                                     // Submit the form
                                     form.submit();
                                 } catch (error) {
-                                    console.error('Error accessing API key management:', error);
+                                    console.error('Error preparing API key management form:', error);
                                     alert('Authentication error. Please try logging in again.');
                                 }
                                 });
@@ -5193,22 +5193,30 @@ def prompts_ui():
 </html>""")
 
 @app.route('/api-key-management', methods=['GET', 'POST'])
-@authenticated_route
 def api_key_management_ui():
     """Web UI for API key management"""
     # For POST requests, get token from form data and set in cookie
     if request.method == 'POST':
+        # Log all form data for debugging
+        logger.info(f"POST to /api-key-management with form keys: {list(request.form.keys())}")
+        
         auth_token = request.form.get('auth_token')
         if auth_token:
             try:
                 # Verify the token is valid
+                logger.info(f"Received auth_token of length: {len(auth_token)}")
+                # Log first and last few characters for debugging (don't log the whole token!)
+                logger.info(f"Token prefix: {auth_token[:10]}..., suffix: ...{auth_token[-10:]}")
+                
                 decoded_token = auth.verify_id_token(auth_token)
+                user_email = decoded_token.get('email', 'unknown')
+                
+                logger.info(f"Token verified successfully for: {user_email}")
                 
                 # Create response that redirects to the same page via GET
                 response = make_response(redirect('/api-key-management'))
                 
                 # Store token in cookie for future requests
-                # Set SameSite to 'Lax' to allow redirects with the cookie
                 response.set_cookie(
                     'auth_token', 
                     auth_token, 
@@ -5218,15 +5226,15 @@ def api_key_management_ui():
                     max_age=3600  # 1 hour expiration
                 )
                 
-                logger.info(f"User authenticated and redirected: {decoded_token.get('email', 'unknown')}")
                 return response
             except Exception as e:
-                logger.error(f"Authentication error in API key management: {str(e)}")
+                logger.error(f"Error verifying token in /api-key-management POST: {str(e)}")
                 return jsonify({'error': f'Authentication failed: {str(e)}'}), 401
         else:
             logger.warning("POST to /api-key-management without auth_token")
             return jsonify({'error': 'Missing authentication token'}), 400
     
+    # For GET requests, use existing authentication mechanism
     user = authenticate_request(request)
     if not user or not user.get('email'):
         logger.warning(f"Unauthenticated GET request to /api-key-management from {request.remote_addr}")
@@ -5236,7 +5244,6 @@ def api_key_management_ui():
     user_email = user.get('email')
     logger.info(f"User {user_email} accessing API key management UI")
     
-        
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
     
@@ -5471,442 +5478,443 @@ def api_key_management_ui():
               <div id="form-error" class="error-message"></div>
             </div>
           </div>
-            <!-- No API Key Permission Warning -->
-            <div id="no-permission" class="alert alert-warning" style="display: none;">
-                <h4>API Key Creation Not Allowed</h4>
-                <p>Your account does not have permission to create API keys for programmatic access.</p>
-                <p>API keys allow access to the VoucherVision API without browser authentication, which is a privileged operation.</p>
-                <p>Please contact an administrator if you need this level of access for your integration.</p>
-            </div>
-            
-            <!-- Display Key Modal -->
-            <div id="display-key-modal" class="modal">
-                <div class="modal-content">
-                <span class="close">&times;</span>
-                <h3>Your New API Key</h3>
-                <p><strong>IMPORTANT:</strong> This key will only be displayed once. Please copy it and store it securely.</p>
-                
-                <div id="api-key-display" class="key-display"></div>
-                <button id="copy-key-btn" class="copy-btn">Copy to Clipboard</button>
-                <div id="copy-success" class="success-message">API key copied to clipboard!</div>
-                
-                <h4 class="mt-4">Usage Example:</h4>
-                <pre id="usage-example" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px;">
-    # Using API key with Python client
-    python client.py --server {{ server_url }} --api-key YOUR_API_KEY --image "path/to/image.jpg" --output-dir "./results"
+          
+          <!-- No API Key Permission Warning -->
+          <div id="no-permission" class="alert alert-warning" style="display: none;">
+            <h4>API Key Creation Not Allowed</h4>
+            <p>Your account does not have permission to create API keys for programmatic access.</p>
+            <p>API keys allow access to the VoucherVision API without browser authentication, which is a privileged operation.</p>
+            <p>Please contact an administrator if you need this level of access for your integration.</p>
+          </div>
+          
+          <!-- Display Key Modal -->
+          <div id="display-key-modal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h3>Your New API Key</h3>
+              <p><strong>IMPORTANT:</strong> This key will only be displayed once. Please copy it and store it securely.</p>
+              
+              <div id="api-key-display" class="key-display"></div>
+              <button id="copy-key-btn" class="copy-btn">Copy to Clipboard</button>
+              <div id="copy-success" class="success-message">API key copied to clipboard!</div>
+              
+              <h4 class="mt-4">Usage Example:</h4>
+              <pre id="usage-example" style="background-color: #f8f9fa; padding: 15px; border-radius: 4px;">
+# Using API key with Python client
+python client.py --server {{ server_url }} --api-key YOUR_API_KEY --image "path/to/image.jpg" --output-dir "./results"
 
-    # Using API key with cURL
-    curl -X POST "{{ server_url }}/process" \\
-        -H "X-API-Key: YOUR_API_KEY" \\
-        -F "file=@your_image.jpg"</pre>
-                </div>
+# Using API key with cURL
+curl -X POST "{{ server_url }}/process" \\
+     -H "X-API-Key: YOUR_API_KEY" \\
+     -F "file=@your_image.jpg"</pre>
             </div>
-            </div>
+          </div>
+        </div>
+        
+        <script>
+          // Firebase configuration
+          const firebaseConfig = {
+            apiKey: "{{ api_key }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}",
+            storageBucket: "{{ storage_bucket }}",
+            messagingSenderId: "{{ messaging_sender_id }}",
+            appId: "{{ app_id }}"
+          };
+          
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+                                  
+          // Helper function for formatting Firestore timestamps
+          function formatFirestoreDate(firestoreTimestamp) {
+            if (!firestoreTimestamp) return 'N/A';
             
-            <script>
-            // Firebase configuration
-            const firebaseConfig = {
-                apiKey: "{{ api_key }}",
-                authDomain: "{{ auth_domain }}",
-                projectId: "{{ project_id }}",
-                storageBucket: "{{ storage_bucket }}",
-                messagingSenderId: "{{ messaging_sender_id }}",
-                appId: "{{ app_id }}"
-            };
-            
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-                                    
-            // Helper function for formatting Firestore timestamps
-            function formatFirestoreDate(firestoreTimestamp) {
-                if (!firestoreTimestamp) return 'N/A';
-                
-                // Check if it's a Firestore timestamp object
-                if (firestoreTimestamp._seconds) {
-                // Convert seconds to milliseconds and create a JavaScript Date
-                return new Date(firestoreTimestamp._seconds * 1000).toLocaleDateString();
-                } 
-                // If it's already a JavaScript Date object
-                else if (firestoreTimestamp instanceof Date) {
-                return firestoreTimestamp.toLocaleDateString();
-                }
-                // If it's an ISO string
-                else if (typeof firestoreTimestamp === 'string') {
-                return new Date(firestoreTimestamp).toLocaleDateString();
-                }
-                
-                return 'Invalid Date';
+            // Check if it's a Firestore timestamp object
+            if (firestoreTimestamp._seconds) {
+              // Convert seconds to milliseconds and create a JavaScript Date
+              return new Date(firestoreTimestamp._seconds * 1000).toLocaleDateString();
+            } 
+            // If it's already a JavaScript Date object
+            else if (firestoreTimestamp instanceof Date) {
+              return firestoreTimestamp.toLocaleDateString();
             }
+            // If it's an ISO string
+            else if (typeof firestoreTimestamp === 'string') {
+              return new Date(firestoreTimestamp).toLocaleDateString();
+            }
+            
+            return 'Invalid Date';
+          }
 
-            // Initialize the page
-            function initPage() {
-                console.log("Initializing API key management page");
-                // Check if user is authenticated
-                firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    // User is signed in, display their email
-                    document.getElementById('user-email').textContent = user.email;
-                    console.log("User authenticated:", user.email);
-                    
-                    // Check if user has API key permission
-                    checkApiKeyPermission(user)
-                    .then(hasApiKeyAccess => {
-                        console.log("API key permission check result:", hasApiKeyAccess);
-                        if (hasApiKeyAccess) {
-                        // User has permission, initialize API key management functionality
-                        initializeCreateKeyListeners();
-                        loadApiKeys(user);
-                        } else {
-                        // Show no permission message
-                        document.getElementById('no-permission').style.display = 'block';
-                        document.getElementById('create-key-btn').style.display = 'none';
-                        document.getElementById('keys-container').style.display = 'none';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error checking API key permission:', error);
-                        document.getElementById('error-message').textContent = 'Error: ' + error.message;
-                        document.getElementById('error-message').style.display = 'block';
-                    });
-                    
-                    // Attach logout button handler
-                    document.getElementById('logout-btn').addEventListener('click', () => {
-                    firebase.auth().signOut().then(() => {
-                        window.location.href = '/login';
-                    });
-                    });
-                } else {
-                    // Not signed in, redirect to login page
+          // Initialize the page
+          function initPage() {
+            console.log("Initializing API key management page");
+            // Check if user is authenticated
+            firebase.auth().onAuthStateChanged(function(user) {
+              if (user) {
+                // User is signed in, display their email
+                document.getElementById('user-email').textContent = user.email;
+                console.log("User authenticated:", user.email);
+                
+                // Check if user has API key permission
+                checkApiKeyPermission(user)
+                  .then(hasApiKeyAccess => {
+                    console.log("API key permission check result:", hasApiKeyAccess);
+                    if (hasApiKeyAccess) {
+                      // User has permission, initialize API key management functionality
+                      initializeCreateKeyListeners();
+                      loadApiKeys(user);
+                    } else {
+                      // Show no permission message
+                      document.getElementById('no-permission').style.display = 'block';
+                      document.getElementById('create-key-btn').style.display = 'none';
+                      document.getElementById('keys-container').style.display = 'none';
+                    }
+                  })
+                  .catch(error => {
+                    console.error('Error checking API key permission:', error);
+                    document.getElementById('error-message').textContent = 'Error: ' + error.message;
+                    document.getElementById('error-message').style.display = 'block';
+                  });
+                
+                // Attach logout button handler
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                  firebase.auth().signOut().then(() => {
                     window.location.href = '/login';
-                }
+                  });
                 });
-            }
-
-            // Set up all event listeners for the key management interface
-            function initializeCreateKeyListeners() {
-                console.log("Setting up event listeners for API key management");
-                
-                // Create Key button
-                const createKeyBtn = document.getElementById('create-key-btn');
-                if (createKeyBtn) {
-                createKeyBtn.addEventListener('click', () => {
-                    document.getElementById('create-key-modal').style.display = 'block';
-                });
-                }
-                
-                // Close buttons
-                document.querySelectorAll('.close').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.getElementById('create-key-modal').style.display = 'none';
-                    document.getElementById('display-key-modal').style.display = 'none';
-                });
-                });
-                
-                // Close modals when clicking outside
-                window.addEventListener('click', (event) => {
-                if (event.target === document.getElementById('create-key-modal')) {
-                    document.getElementById('create-key-modal').style.display = 'none';
-                }
-                if (event.target === document.getElementById('display-key-modal')) {
-                    document.getElementById('display-key-modal').style.display = 'none';
-                }
-                });
-                
-                // Create key form submission
-                const createKeyForm = document.getElementById('create-key-form');
-                if (createKeyForm) {
-                createKeyForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    createApiKey();
-                });
-                }
-                
-                // Copy key button
-                const copyKeyBtn = document.getElementById('copy-key-btn');
-                if (copyKeyBtn) {
-                copyKeyBtn.addEventListener('click', () => {
-                    const keyText = document.getElementById('api-key-display').textContent;
-                    navigator.clipboard.writeText(keyText)
-                    .then(() => {
-                        document.getElementById('copy-success').style.display = 'block';
-                        setTimeout(() => {
-                        document.getElementById('copy-success').style.display = 'none';
-                        }, 3000);
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err);
-                    });
-                });
-                }
-            }
-
-            // Improved checkApiKeyPermission function with better error handling
-            async function checkApiKeyPermission(user) {
-                try {
-                // Get ID token for authentication
-                const idToken = await user.getIdToken();
-                
-                // Check permission
-                const response = await fetch('/check-api-key-permission', {
-                    headers: {
-                    'Authorization': `Bearer ${idToken}`
-                    }
-                });
-                
-                // Log the raw response for debugging
-                console.log("API key permission check response status:", response.status);
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error("API key permission check error:", errorText);
-                    try {
-                    const errorData = JSON.parse(errorText);
-                    throw new Error(errorData.error || `Server returned ${response.status}`);
-                    } catch (jsonError) {
-                    throw new Error(`Server returned ${response.status}: ${errorText}`);
-                    }
-                }
-                
-                const data = await response.json();
-                console.log("API key permission data:", data);
-                
-                // Be explicit about checking the value to avoid falsy values
-                return data.has_api_key_permission === true;
-                } catch (error) {
-                console.error('Error checking API key permission:', error);
-                return false;
-                }
-            }
-
-            // Modified createApiKey function with better error handling
-            async function createApiKey() {
-                const formError = document.getElementById('form-error');
-                try {
-                formError.style.display = 'none';
-                
-                // Get form values
-                const name = document.getElementById('key-name').value;
-                const description = document.getElementById('key-description').value;
-                const expiryDays = document.getElementById('key-expiry').value;
-                
-                if (!name) {
-                    throw new Error('Please provide a name for your API key');
-                }
-                
-                // Get current user
-                const user = firebase.auth().currentUser;
-                if (!user) {
-                    throw new Error('You must be logged in to create an API key');
-                }
-                
-                // Get ID token for authentication
-                const idToken = await user.getIdToken();
-                
-                console.log("Creating API key...");
-                
-                // Create the API key
-                const response = await fetch('/api-keys/create', {
-                    method: 'POST',
-                    headers: {
-                    'Authorization': `Bearer ${idToken}`,
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                    name: name,
-                    description: description,
-                    expires_days: parseInt(expiryDays, 10)
-                    })
-                });
-                
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error("API key creation error response:", errorText);
-                    try {
-                    const errorData = JSON.parse(errorText);
-                    if (response.status === 403 && errorData.code === 'no_api_key_permission') {
-                        throw new Error('You do not have permission to create API keys. Please contact an administrator to request this access.');
-                    } else {
-                        throw new Error(errorData.error || `Server returned ${response.status}`);
-                    }
-                    } catch (jsonError) {
-                    throw new Error(`Server error: ${errorText}`);
-                    }
-                }
-                
-                const data = await response.json();
-                console.log("API key created successfully");
-                
-                if (data.status === 'success') {
-                    // Close create modal
-                    document.getElementById('create-key-modal').style.display = 'none';
-                    
-                    // Update usage example with the new key
-                    const usageExample = document.getElementById('usage-example');
-                    usageExample.textContent = usageExample.textContent.replace(/YOUR_API_KEY/g, data.api_key);
-                    
-                    // Display the API key
-                    document.getElementById('api-key-display').textContent = data.api_key;
-                    document.getElementById('display-key-modal').style.display = 'block';
-                    
-                    // Reset form
-                    document.getElementById('create-key-form').reset();
-                    
-                    // Reload the API keys list
-                    loadApiKeys(user);
-                } else {
-                    throw new Error(data.error || 'Failed to create API key');
-                }
-                } catch (error) {
-                console.error('Error creating API key:', error);
-                formError.textContent = error.message;
-                formError.style.display = 'block';
-                }
-            }
-
-            // Load API keys
-            async function loadApiKeys(user) {
-                const keysContainer = document.getElementById('keys-container');
-                const loadingElem = document.getElementById('loading');
-                const errorMessageElem = document.getElementById('error-message');
-                const noKeysElem = document.getElementById('no-keys');
-                const keysTableElem = document.getElementById('keys-table');
-                const keysListElem = document.getElementById('keys-list');
-                
-                try {
-                // Get ID token for authentication
-                const idToken = await user.getIdToken();
-                
-                // Fetch API keys from server
-                const response = await fetch('/api-keys', {
-                    headers: {
-                    'Authorization': `Bearer ${idToken}`
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-                }
-                
-                const data = await response.json();
-                
-                // Hide loading indicator
-                loadingElem.style.display = 'none';
-                
-                if (data.status === 'success') {
-                    if (data.count === 0) {
-                    // No keys found
-                    noKeysElem.style.display = 'block';
-                    keysTableElem.style.display = 'none';
-                    } else {
-                    // Display keys
-                    noKeysElem.style.display = 'none';
-                    keysTableElem.style.display = 'table';
-                    
-                    // Clear existing list
-                    keysListElem.innerHTML = '';
-                    
-                    // Add each key to the table
-                    data.api_keys.forEach(key => {
-                        const row = document.createElement('tr');
-                        
-                        // Format dates using the helper function
-                        const createdDate = formatFirestoreDate(key.created_at);
-                        const expiresDate = formatFirestoreDate(key.expires_at);
-                        
-                        // Status badge
-                        const statusBadge = key.active 
-                        ? '<span class="badge-active">Active</span>'
-                        : '<span class="badge-inactive">Inactive</span>';
-                        
-                        row.innerHTML = `
-                        <td>${key.name || 'Unnamed Key'}</td>
-                        <td>${createdDate}</td>
-                        <td>${expiresDate}</td>
-                        <td>${statusBadge}</td>
-                        <td>
-                            ${key.active ? `<button class="btn-revoke" data-key-id="${key.key_id}">Revoke</button>` : ''}
-                        </td>
-                        `;
-                        
-                        keysListElem.appendChild(row);
-                    });
-                    
-                    // Add event listeners to revoke buttons
-                    document.querySelectorAll('.btn-revoke').forEach(btn => {
-                        btn.addEventListener('click', (e) => {
-                        const keyId = e.target.getAttribute('data-key-id');
-                        if (confirm('Are you sure you want to revoke this API key? This action cannot be undone.')) {
-                            revokeApiKey(keyId);
-                        }
-                        });
-                    });
-                    }
-                } else {
-                    throw new Error(data.error || 'Failed to load API keys');
-                }
-                } catch (error) {
-                console.error('Error loading API keys:', error);
-                loadingElem.style.display = 'none';
-                errorMessageElem.textContent = `Error: ${error.message}`;
-                errorMessageElem.style.display = 'block';
-                }
-            }
-
-            // Revoke API key
-            async function revokeApiKey(keyId) {
-                try {
-                // Get current user
-                const user = firebase.auth().currentUser;
-                if (!user) {
-                    throw new Error('You must be logged in to revoke an API key');
-                }
-                
-                // Get ID token for authentication
-                const idToken = await user.getIdToken();
-                
-                // Revoke the API key
-                const response = await fetch(`/api-keys/${keyId}/revoke`, {
-                    method: 'POST',
-                    headers: {
-                    'Authorization': `Bearer ${idToken}`
-                    }
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || `Server returned ${response.status}`);
-                }
-                
-                const data = await response.json();
-                
-                if (data.status === 'success') {
-                    // Reload the API keys list
-                    loadApiKeys(user);
-                } else {
-                    throw new Error(data.error || 'Failed to revoke API key');
-                }
-                } catch (error) {
-                console.error('Error revoking API key:', error);
-                alert(`Error: ${error.message}`);
-                }
-            }
-
-            // Start the page initialization when the DOM is ready
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log("DOM content loaded, initializing page");
-                initPage();
+              } else {
+                // Not signed in, redirect to login page
+                window.location.href = '/login';
+              }
             });
-            </script>
-        </body>
-        </html>
-        """,
-        api_key=firebase_config["apiKey"],
-        auth_domain=firebase_config["authDomain"],
-        project_id=firebase_config["projectId"],
-        storage_bucket=firebase_config.get("storageBucket", ""),
-        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
-        app_id=firebase_config["appId"],
-        server_url=request.url_root.rstrip('/'))  # Add server URL for examples
+          }
+
+          // Set up all event listeners for the key management interface
+          function initializeCreateKeyListeners() {
+            console.log("Setting up event listeners for API key management");
+            
+            // Create Key button
+            const createKeyBtn = document.getElementById('create-key-btn');
+            if (createKeyBtn) {
+              createKeyBtn.addEventListener('click', () => {
+                document.getElementById('create-key-modal').style.display = 'block';
+              });
+            }
+            
+            // Close buttons
+            document.querySelectorAll('.close').forEach(btn => {
+              btn.addEventListener('click', () => {
+                document.getElementById('create-key-modal').style.display = 'none';
+                document.getElementById('display-key-modal').style.display = 'none';
+              });
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', (event) => {
+              if (event.target === document.getElementById('create-key-modal')) {
+                document.getElementById('create-key-modal').style.display = 'none';
+              }
+              if (event.target === document.getElementById('display-key-modal')) {
+                document.getElementById('display-key-modal').style.display = 'none';
+              }
+            });
+            
+            // Create key form submission
+            const createKeyForm = document.getElementById('create-key-form');
+            if (createKeyForm) {
+              createKeyForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                createApiKey();
+              });
+            }
+            
+            // Copy key button
+            const copyKeyBtn = document.getElementById('copy-key-btn');
+            if (copyKeyBtn) {
+              copyKeyBtn.addEventListener('click', () => {
+                const keyText = document.getElementById('api-key-display').textContent;
+                navigator.clipboard.writeText(keyText)
+                  .then(() => {
+                    document.getElementById('copy-success').style.display = 'block';
+                    setTimeout(() => {
+                      document.getElementById('copy-success').style.display = 'none';
+                    }, 3000);
+                  })
+                  .catch(err => {
+                    console.error('Could not copy text: ', err);
+                  });
+              });
+            }
+          }
+
+          // Improved checkApiKeyPermission function with better error handling
+          async function checkApiKeyPermission(user) {
+            try {
+              // Get ID token for authentication
+              const idToken = await user.getIdToken();
+              
+              // Check permission
+              const response = await fetch('/check-api-key-permission', {
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              // Log the raw response for debugging
+              console.log("API key permission check response status:", response.status);
+              
+              if (!response.ok) {
+                const errorText = await response.text();
+                console.error("API key permission check error:", errorText);
+                try {
+                  const errorData = JSON.parse(errorText);
+                  throw new Error(errorData.error || `Server returned ${response.status}`);
+                } catch (jsonError) {
+                  throw new Error(`Server returned ${response.status}: ${errorText}`);
+                }
+              }
+              
+              const data = await response.json();
+              console.log("API key permission data:", data);
+              
+              // Be explicit about checking the value to avoid falsy values
+              return data.has_api_key_permission === true;
+            } catch (error) {
+              console.error('Error checking API key permission:', error);
+              return false;
+            }
+          }
+
+          // Modified createApiKey function with better error handling
+          async function createApiKey() {
+            const formError = document.getElementById('form-error');
+            try {
+              formError.style.display = 'none';
+              
+              // Get form values
+              const name = document.getElementById('key-name').value;
+              const description = document.getElementById('key-description').value;
+              const expiryDays = document.getElementById('key-expiry').value;
+              
+              if (!name) {
+                throw new Error('Please provide a name for your API key');
+              }
+              
+              // Get current user
+              const user = firebase.auth().currentUser;
+              if (!user) {
+                throw new Error('You must be logged in to create an API key');
+              }
+              
+              // Get ID token for authentication
+              const idToken = await user.getIdToken();
+              
+              console.log("Creating API key...");
+              
+              // Create the API key
+              const response = await fetch('/api-keys/create', {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${idToken}`,
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: name,
+                  description: description,
+                  expires_days: parseInt(expiryDays, 10)
+                })
+              });
+              
+              if (!response.ok) {
+                const errorText = await response.text();
+                console.error("API key creation error response:", errorText);
+                try {
+                  const errorData = JSON.parse(errorText);
+                  if (response.status === 403 && errorData.code === 'no_api_key_permission') {
+                    throw new Error('You do not have permission to create API keys. Please contact an administrator to request this access.');
+                  } else {
+                    throw new Error(errorData.error || `Server returned ${response.status}`);
+                  }
+                } catch (jsonError) {
+                  throw new Error(`Server error: ${errorText}`);
+                }
+              }
+              
+              const data = await response.json();
+              console.log("API key created successfully");
+              
+              if (data.status === 'success') {
+                // Close create modal
+                document.getElementById('create-key-modal').style.display = 'none';
+                
+                // Update usage example with the new key
+                const usageExample = document.getElementById('usage-example');
+                usageExample.textContent = usageExample.textContent.replace(/YOUR_API_KEY/g, data.api_key);
+                
+                // Display the API key
+                document.getElementById('api-key-display').textContent = data.api_key;
+                document.getElementById('display-key-modal').style.display = 'block';
+                
+                // Reset form
+                document.getElementById('create-key-form').reset();
+                
+                // Reload the API keys list
+                loadApiKeys(user);
+              } else {
+                throw new Error(data.error || 'Failed to create API key');
+              }
+            } catch (error) {
+              console.error('Error creating API key:', error);
+              formError.textContent = error.message;
+              formError.style.display = 'block';
+            }
+          }
+
+          // Load API keys
+          async function loadApiKeys(user) {
+            const keysContainer = document.getElementById('keys-container');
+            const loadingElem = document.getElementById('loading');
+            const errorMessageElem = document.getElementById('error-message');
+            const noKeysElem = document.getElementById('no-keys');
+            const keysTableElem = document.getElementById('keys-table');
+            const keysListElem = document.getElementById('keys-list');
+            
+            try {
+              // Get ID token for authentication
+              const idToken = await user.getIdToken();
+              
+              // Fetch API keys from server
+              const response = await fetch('/api-keys', {
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              if (!response.ok) {
+                throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+              }
+              
+              const data = await response.json();
+              
+              // Hide loading indicator
+              loadingElem.style.display = 'none';
+              
+              if (data.status === 'success') {
+                if (data.count === 0) {
+                  // No keys found
+                  noKeysElem.style.display = 'block';
+                  keysTableElem.style.display = 'none';
+                } else {
+                  // Display keys
+                  noKeysElem.style.display = 'none';
+                  keysTableElem.style.display = 'table';
+                  
+                  // Clear existing list
+                  keysListElem.innerHTML = '';
+                  
+                  // Add each key to the table
+                  data.api_keys.forEach(key => {
+                    const row = document.createElement('tr');
+                    
+                    // Format dates using the helper function
+                    const createdDate = formatFirestoreDate(key.created_at);
+                    const expiresDate = formatFirestoreDate(key.expires_at);
+                    
+                    // Status badge
+                    const statusBadge = key.active 
+                      ? '<span class="badge-active">Active</span>'
+                      : '<span class="badge-inactive">Inactive</span>';
+                    
+                    row.innerHTML = `
+                      <td>${key.name || 'Unnamed Key'}</td>
+                      <td>${createdDate}</td>
+                      <td>${expiresDate}</td>
+                      <td>${statusBadge}</td>
+                      <td>
+                        ${key.active ? `<button class="btn-revoke" data-key-id="${key.key_id}">Revoke</button>` : ''}
+                      </td>
+                    `;
+                    
+                    keysListElem.appendChild(row);
+                  });
+                  
+                  // Add event listeners to revoke buttons
+                  document.querySelectorAll('.btn-revoke').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                      const keyId = e.target.getAttribute('data-key-id');
+                      if (confirm('Are you sure you want to revoke this API key? This action cannot be undone.')) {
+                        revokeApiKey(keyId);
+                      }
+                    });
+                  });
+                }
+              } else {
+                throw new Error(data.error || 'Failed to load API keys');
+              }
+            } catch (error) {
+              console.error('Error loading API keys:', error);
+              loadingElem.style.display = 'none';
+              errorMessageElem.textContent = `Error: ${error.message}`;
+              errorMessageElem.style.display = 'block';
+            }
+          }
+
+          // Revoke API key
+          async function revokeApiKey(keyId) {
+            try {
+              // Get current user
+              const user = firebase.auth().currentUser;
+              if (!user) {
+                throw new Error('You must be logged in to revoke an API key');
+              }
+              
+              // Get ID token for authentication
+              const idToken = await user.getIdToken();
+              
+              // Revoke the API key
+              const response = await fetch(`/api-keys/${keyId}/revoke`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${idToken}`
+                }
+              });
+              
+              if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || `Server returned ${response.status}`);
+              }
+              
+              const data = await response.json();
+              
+              if (data.status === 'success') {
+                // Reload the API keys list
+                loadApiKeys(user);
+              } else {
+                throw new Error(data.error || 'Failed to revoke API key');
+              }
+            } catch (error) {
+              console.error('Error revoking API key:', error);
+              alert(`Error: ${error.message}`);
+            }
+          }
+
+          // Start the page initialization when the DOM is ready
+          document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM content loaded, initializing page");
+            initPage();
+          });
+        </script>
+      </body>
+    </html>
+    """,
+    api_key=firebase_config["apiKey"],
+    auth_domain=firebase_config["authDomain"],
+    project_id=firebase_config["projectId"],
+    storage_bucket=firebase_config.get("storageBucket", ""),
+    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+    app_id=firebase_config["appId"],
+    server_url=request.url_root.rstrip('/'))
 
 @app.route('/api-keys', methods=['GET'])
 @authenticated_route
