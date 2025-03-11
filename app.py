@@ -948,31 +948,40 @@ def auth_success():
                             if (manageApiKeysBtn) {
                               manageApiKeysBtn.addEventListener('click', async function() {
                                 try {
-                                  console.log("API keys button clicked");
-                                  // Get fresh ID token
-                                  const idToken = await user.getIdToken(true);
-                                  
-                                  // Create form to submit the token
-                                  const form = document.createElement('form');
-                                  form.method = 'POST';
-                                  form.action = '/api-key-management';
-                                  form.style.display = 'none';
-                                  
-                                  // Add token as hidden input
-                                  const tokenInput = document.createElement('input');
-                                  tokenInput.type = 'hidden';
-                                  tokenInput.name = 'auth_token';
-                                  tokenInput.value = idToken;
-                                  form.appendChild(tokenInput);
-                                  
-                                  // Submit the form
-                                  document.body.appendChild(form);
-                                  form.submit();
+                                    console.log("API keys button clicked");
+                                    // Get fresh ID token
+                                    const freshToken = await user.getIdToken(true);
+                                    
+                                    // Create a new form
+                                    const form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = '/api-key-management';
+                                    
+                                    // Important: Add this attribute to allow credentials to be sent
+                                    form.setAttribute('enctype', 'application/x-www-form-urlencoded');
+                                    
+                                    // Create a hidden field for the auth token
+                                    const tokenField = document.createElement('input');
+                                    tokenField.type = 'hidden';
+                                    tokenField.name = 'auth_token';
+                                    tokenField.value = freshToken;
+                                    
+                                    // Append the field to the form
+                                    form.appendChild(tokenField);
+                                    
+                                    // Append the form to the document body
+                                    document.body.appendChild(form);
+                                    
+                                    // Log for debugging
+                                    console.log("Submitting form to /api-key-management with token:", freshToken.substring(0, 10) + "...");
+                                    
+                                    // Submit the form
+                                    form.submit();
                                 } catch (error) {
-                                  console.error('Error accessing API key management:', error);
-                                  alert('Authentication error. Please try logging in again.');
+                                    console.error('Error accessing API key management:', error);
+                                    alert('Authentication error. Please try logging in again.');
                                 }
-                              });
+                                });
                               console.log("Event listener added successfully");
                             } else {
                               console.error("Could not find manage-api-keys-btn element after adding to DOM");
@@ -5191,11 +5200,42 @@ def api_key_management_ui():
     if request.method == 'POST':
         auth_token = request.form.get('auth_token')
         if auth_token:
-            # Create response that redirects to the same page via GET
-            response = make_response(redirect('/api-key-management'))
-            # Store token in cookie for future requests
-            response.set_cookie('auth_token', auth_token, httponly=True, secure=True)
-            return response
+            try:
+                # Verify the token is valid
+                decoded_token = auth.verify_id_token(auth_token)
+                
+                # Create response that redirects to the same page via GET
+                response = make_response(redirect('/api-key-management'))
+                
+                # Store token in cookie for future requests
+                # Set SameSite to 'Lax' to allow redirects with the cookie
+                response.set_cookie(
+                    'auth_token', 
+                    auth_token, 
+                    httponly=True, 
+                    secure=True, 
+                    samesite='Lax',
+                    max_age=3600  # 1 hour expiration
+                )
+                
+                logger.info(f"User authenticated and redirected: {decoded_token.get('email', 'unknown')}")
+                return response
+            except Exception as e:
+                logger.error(f"Authentication error in API key management: {str(e)}")
+                return jsonify({'error': f'Authentication failed: {str(e)}'}), 401
+        else:
+            logger.warning("POST to /api-key-management without auth_token")
+            return jsonify({'error': 'Missing authentication token'}), 400
+    
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        logger.warning(f"Unauthenticated GET request to /api-key-management from {request.remote_addr}")
+        # Redirect to login instead of showing an error
+        return redirect('/login')
+    
+    user_email = user.get('email')
+    logger.info(f"User {user_email} accessing API key management UI")
+    
         
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
