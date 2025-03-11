@@ -842,65 +842,64 @@ def auth_success():
           
           // Initialize the page
           function initPage() {
-            const tokenElement = document.getElementById('token');
-            const userEmailElement = document.getElementById('user-email');
-            const errorElement = document.getElementById('error-message');
-            const successElement = document.getElementById('success-message');
-            const userInfoDiv = document.querySelector('.user-info div');
-            
             // Check if user is authenticated
             firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
+                if (user) {
                 // User is signed in, display their email
-                userEmailElement.textContent = user.email;
+                document.getElementById('user-email').textContent = user.email;
                 
-                // First, check if user is an admin
+                // Check if user is an admin
                 checkAdminStatus(user)
-                  .then(isAdmin => {
+                    .then(isAdmin => {
                     if (isAdmin) {
-                      // Add admin dashboard button
-                      console.log("User is an admin, adding admin button");
-                      const adminButton = document.createElement('button');
-                      adminButton.className = 'btn-admin';
-                      adminButton.textContent = 'Admin Dashboard';
-                      adminButton.onclick = async function() {
+                        // Add admin dashboard button
+                        console.log("User is an admin, adding admin button");
+                        const adminButton = document.createElement('button');
+                        adminButton.className = 'btn-admin';
+                        adminButton.textContent = 'Admin Dashboard';
+                        adminButton.onclick = async function() {
                         try {
-                          // Get fresh token
-                          const freshToken = await user.getIdToken(true);
-                          
-                          // Create a form to submit the token via POST
-                          const form = document.createElement('form');
-                          form.method = 'POST';
-                          form.action = '/admin';
-                          form.style.display = 'none';
-                          
-                          // Add the token as a hidden input
-                          const tokenInput = document.createElement('input');
-                          tokenInput.type = 'hidden';
-                          tokenInput.name = 'auth_token';
-                          tokenInput.value = freshToken;
-                          form.appendChild(tokenInput);
-                          
-                          // Add the form to the body and submit it
-                          document.body.appendChild(form);
-                          form.submit();
+                            // Get fresh token
+                            const freshToken = await user.getIdToken(true);
+                            
+                            // Create a form to submit the token via POST
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '/admin';
+                            form.style.display = 'none';
+                            
+                            // Add the token as a hidden input
+                            const tokenInput = document.createElement('input');
+                            tokenInput.type = 'hidden';
+                            tokenInput.name = 'auth_token';
+                            tokenInput.value = freshToken;
+                            form.appendChild(tokenInput);
+                            
+                            // Add the form to the body and submit it
+                            document.body.appendChild(form);
+                            form.submit();
                         } catch (error) {
-                          console.error('Error accessing admin dashboard:', error);
-                          alert('Authentication error. Please try logging in again.');
+                            console.error('Error accessing admin dashboard:', error);
+                            alert('Authentication error. Please try logging in again.');
                         }
-                      };
-                      userInfoDiv.appendChild(adminButton);
+                        };
+                        
+                        // Find the user-info div and append the button
+                        const userInfoDiv = document.querySelector('.user-info div');
+                        if (userInfoDiv) {
+                        userInfoDiv.appendChild(adminButton);
+                        }
                     }
                     
                     // Then check if user is approved
                     return checkUserApproval(user);
-                  })
-                  .then(isApproved => {
+                    })
+                    .then(isApproved => {
                     if (isApproved) {
-                      // Check if user has API key permission and show API key management button if they do
-                      checkApiKeyPermission(user)
+                        // Check if user has API key permission and show API key management button if they do
+                        checkApiKeyPermission(user)
                         .then(hasApiKeyAccess => {
-                          if (hasApiKeyAccess) {
+                            if (hasApiKeyAccess) {
                             // Add API key management button
                             const apiKeysDiv = document.createElement('div');
                             apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
@@ -910,35 +909,64 @@ def auth_success():
                             <button id="manage-api-keys-btn" class="btn btn-primary">Manage API Keys</button>
                             `;
                             
-                            // Add it after the token container
+                            // Find appropriate container to add the API keys div
                             const tokenContainer = document.querySelector('.token-container');
                             if (tokenContainer) {
-                              tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
+                                tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
+                                
+                                // Add event listener for API keys button
+                                document.getElementById('manage-api-keys-btn').addEventListener('click', async function() {
+                                try {
+                                    // Get fresh token
+                                    const freshToken = await user.getIdToken(true);
+                                    
+                                    // Create a form to submit the token via POST
+                                    const form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = '/api-key-management';
+                                    form.style.display = 'none';
+                                    
+                                    // Add the token as a hidden input
+                                    const tokenInput = document.createElement('input');
+                                    tokenInput.type = 'hidden';
+                                    tokenInput.name = 'auth_token';
+                                    tokenInput.value = freshToken;
+                                    form.appendChild(tokenInput);
+                                    
+                                    // Add the form to the body and submit it
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                } catch (error) {
+                                    console.error('Error accessing API key management:', error);
+                                    alert('Authentication error. Please try logging in again.');
+                                }
+                                });
                             }
-                          }
+                            }
                         })
                         .catch(error => {
-                          console.error('Error checking API key permission:', error);
+                            console.error('Error checking API key permission:', error);
                         });
-                      
-                      // Continue with token display
-                      updateTokenDisplay(user);
-                      setupTokenRefresh(user);
+                        
+                        // Continue with token display
+                        updateTokenDisplay(user);
+                        setupTokenRefresh(user);
                     } else {
-                      // Not approved, redirect to pending page
-                      window.location.href = '/pending-approval';
+                        // Not approved, redirect to pending page
+                        window.location.href = '/pending-approval';
                     }
-                  })
-                  .catch(error => {
+                    })
+                    .catch(error => {
                     console.error('Error during initialization:', error);
                     errorElement.textContent = 'Error: ' + error.message;
                     errorElement.style.display = 'block';
-                  });
-              } else {
+                    });
+                } else {
                 // Not signed in, redirect to login page
                 window.location.href = '/login';
-              }
+                }
             });
+            }
             
             // Copy token button
             document.getElementById('copy-token-btn').addEventListener('click', function() {
@@ -5437,74 +5465,42 @@ curl -X POST "{{ server_url }}/process" \\
           function initPage() {
             // Check if user is authenticated
             firebase.auth().onAuthStateChanged(function(user) {
-              if (user) {
+                if (user) {
                 // User is signed in, display their email
                 document.getElementById('user-email').textContent = user.email;
                 
                 // Check if user has API key permission
                 checkApiKeyPermission(user)
                     .then(hasApiKeyAccess => {
-                        if (hasApiKeyAccess) {
-                        // Add API key management button
-                        const apiKeysDiv = document.createElement('div');
-                        apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
-                        apiKeysDiv.innerHTML = `
-                            <h4>API Key Management</h4>
-                            <p>You have permission to create and manage API keys for programmatic access.</p>
-                            <button id="manage-api-keys-btn" class="btn btn-primary">Manage API Keys</button>
-                        `;
-                        
-                        // Add it after the token container
-                        const tokenContainer = document.querySelector('.token-container');
-                        if (tokenContainer) {
-                            tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
-                            
-                            // Add event listener *after* adding to DOM, and capture user in closure
-                            document.getElementById('manage-api-keys-btn').addEventListener('click', async function() {
-                                try {
-                                    // Get fresh ID token
-                                    const idToken = await user.getIdToken(true);
-                                    
-                                    // Create form to submit the token
-                                    const form = document.createElement('form');
-                                    form.method = 'POST';
-                                    form.action = '/api-key-management';
-                                    form.style.display = 'none';
-                                    
-                                    // Add token as hidden input
-                                    const tokenInput = document.createElement('input');
-                                    tokenInput.type = 'hidden';
-                                    tokenInput.name = 'auth_token';
-                                    tokenInput.value = idToken;
-                                    form.appendChild(tokenInput);
-                                    
-                                    // Submit the form
-                                    document.body.appendChild(form);
-                                    form.submit();
-                                } catch (error) {
-                                    console.error('Error accessing API key management:', error);
-                                    alert('Authentication error. Please try logging in again.');
-                                }
-                                });
-                        }
-                        }
+                    if (hasApiKeyAccess) {
+                        // Initialize API key management functionality
+                        initializeCreateKeyListeners();
+                        loadApiKeys(user);
+                    } else {
+                        // Show no permission message
+                        document.getElementById('no-permission').style.display = 'block';
+                        document.getElementById('create-key-btn').style.display = 'none';
+                        document.getElementById('keys-container').style.display = 'none';
+                    }
                     })
                     .catch(error => {
-                        console.error('Error checking API key permission:', error);
+                    console.error('Error checking API key permission:', error);
+                    document.getElementById('error-message').textContent = 'Error: ' + error.message;
+                    document.getElementById('error-message').style.display = 'block';
                     });
                 
-                // Logout button
+                // Attach logout button handler
                 document.getElementById('logout-btn').addEventListener('click', () => {
-                  firebase.auth().signOut().then(() => {
+                    firebase.auth().signOut().then(() => {
                     window.location.href = '/login';
-                  });
+                    });
                 });
-              } else {
+                } else {
                 // Not signed in, redirect to login page
                 window.location.href = '/login';
-              }
+                }
             });
-          }
+            }
 
           // Extract the event listener setup into a separate function for clarity
           function initializeCreateKeyListeners() {
@@ -5806,7 +5802,10 @@ curl -X POST "{{ server_url }}/process" \\
           }
 
           // Start the page initialization when the DOM is ready
-          document.addEventListener('DOMContentLoaded', initPage);
+          document.addEventListener('DOMContentLoaded', function() {
+            initPage();
+            initializeCreateKeyListeners();  // Ensure this is called unconditionally
+            });
         </script>
       </body>
     </html>
