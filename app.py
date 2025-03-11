@@ -5443,30 +5443,55 @@ curl -X POST "{{ server_url }}/process" \\
                 
                 // Check if user has API key permission
                 checkApiKeyPermission(user)
-                  .then(hasPermission => {
-                    console.log("API key permission check result:", hasPermission);
-                    
-                    if (hasPermission) {
-                      // Show the create button and load keys
-                      document.getElementById('create-key-btn').style.display = 'inline-block';
-                      document.getElementById('no-permission').style.display = 'none';
-                      loadApiKeys(user);
-                      
-                      // Initialize event listeners for key creation and management
-                      initializeCreateKeyListeners();
-                    } else {
-                      // Hide the create button and show permission message
-                      document.getElementById('create-key-btn').style.display = 'none';
-                      document.getElementById('loading').style.display = 'none';
-                      document.getElementById('no-permission').style.display = 'block';
-                    }
-                  })
-                  .catch(error => {
-                    console.error('Error checking API key permission:', error);
-                    document.getElementById('error-message').textContent = 'Error checking permissions: ' + error.message;
-                    document.getElementById('error-message').style.display = 'block';
-                    document.getElementById('loading').style.display = 'none';
-                  });
+                    .then(hasApiKeyAccess => {
+                        if (hasApiKeyAccess) {
+                        // Add API key management button
+                        const apiKeysDiv = document.createElement('div');
+                        apiKeysDiv.className = 'api-keys-access mt-4 p-3 bg-light rounded';
+                        apiKeysDiv.innerHTML = `
+                            <h4>API Key Management</h4>
+                            <p>You have permission to create and manage API keys for programmatic access.</p>
+                            <button id="manage-api-keys-btn" class="btn btn-primary">Manage API Keys</button>
+                        `;
+                        
+                        // Add it after the token container
+                        const tokenContainer = document.querySelector('.token-container');
+                        if (tokenContainer) {
+                            tokenContainer.parentNode.insertBefore(apiKeysDiv, tokenContainer.nextSibling);
+                            
+                            // Add event listener *after* adding to DOM, and capture user in closure
+                            document.getElementById('manage-api-keys-btn').addEventListener('click', async function() {
+                                try {
+                                    // Get fresh ID token
+                                    const idToken = await user.getIdToken(true);
+                                    
+                                    // Create form to submit the token
+                                    const form = document.createElement('form');
+                                    form.method = 'POST';
+                                    form.action = '/api-key-management';
+                                    form.style.display = 'none';
+                                    
+                                    // Add token as hidden input
+                                    const tokenInput = document.createElement('input');
+                                    tokenInput.type = 'hidden';
+                                    tokenInput.name = 'auth_token';
+                                    tokenInput.value = idToken;
+                                    form.appendChild(tokenInput);
+                                    
+                                    // Submit the form
+                                    document.body.appendChild(form);
+                                    form.submit();
+                                } catch (error) {
+                                    console.error('Error accessing API key management:', error);
+                                    alert('Authentication error. Please try logging in again.');
+                                }
+                                });
+                        }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error checking API key permission:', error);
+                    });
                 
                 // Logout button
                 document.getElementById('logout-btn').addEventListener('click', () => {
@@ -5512,32 +5537,6 @@ curl -X POST "{{ server_url }}/process" \\
               createApiKey();
             });
                                   
-            document.getElementById('manage-api-keys-btn').addEventListener('click', async function() {
-            try {
-                // Get fresh ID token
-                const idToken = await user.getIdToken(true);
-                
-                // Create form to submit the token
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/api-key-management';
-                form.style.display = 'none';
-                
-                // Add token as hidden input
-                const tokenInput = document.createElement('input');
-                tokenInput.type = 'hidden';
-                tokenInput.name = 'auth_token';
-                tokenInput.value = idToken;
-                form.appendChild(tokenInput);
-                
-                // Submit the form
-                document.body.appendChild(form);
-                form.submit();
-            } catch (error) {
-                console.error('Error accessing API key management:', error);
-                alert('Authentication error. Please try logging in again.');
-            }
-            });
             
             // Copy key button
             document.getElementById('copy-key-btn').addEventListener('click', () => {
