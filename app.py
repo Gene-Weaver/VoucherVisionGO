@@ -667,6 +667,7 @@ def auth_success():
         <title>Authentication Successful</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           body { 
@@ -1857,6 +1858,7 @@ def pending_approval_page():
         <title>Application Pending</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           body { 
@@ -2011,6 +2013,7 @@ def application_rejected_page():
         <title>Application Rejected</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           body { 
@@ -2189,6 +2192,7 @@ def login_page():
         <title>VoucherVision Login</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           /* Styles remain the same */
@@ -2485,6 +2489,7 @@ def admin_dashboard():
         <title>VoucherVision Admin Dashboard</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           body { 
@@ -5633,6 +5638,7 @@ def api_key_management_ui():
         <title>VoucherVision API Key Management</title>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
         <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
         <style>
           body { 
