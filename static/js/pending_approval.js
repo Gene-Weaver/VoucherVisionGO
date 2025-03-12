@@ -42,7 +42,7 @@ async function checkApprovalStatus(user) {
       // If still pending, stay on this page
     }
   } catch (error) {
-    console.error('Error checking approval status:', error);
+    console.error('Error checking approval status: ', error);
   }
 }
 
