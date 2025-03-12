@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VoucherVision Prompt Templates</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/prompts_ui.css') }}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+            <h1>VoucherVision Prompt Templates</h1>
+        </div>
+    </div>
+    
+    <!-- Details panel that stays above the table -->
+    <div id="detailsPanel">
+        <span class="panel-close" id="closePanel">&times;</span>
+        <h2 id="detailsTitle">Prompt Details</h2>
+        <div id="sectionNav" class="section-nav"></div>
+        <div id="promptDetails">
+            <!-- Prompt details will be loaded here -->
+        </div>
+    </div>
+    
+    <div id="loading">Loading prompts...</div>
+    <table class="prompt-table" id="promptTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Filename</th>
+                <th>Name</th>
+                <th class="description">Description</th>
+                <th>Version</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="promptList">
+            <!-- Prompts will be loaded here -->
+        </tbody>
+    </table>
+    
+    <script src="{{ url_for('static', filename='js/prompts_ui.js') }}"></script>
+</body>
+</html>
