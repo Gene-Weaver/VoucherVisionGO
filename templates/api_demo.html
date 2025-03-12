@@ -201,6 +201,13 @@
         const apiKey = "{{ api_key|default('', true) }}";
         const hasApiKeys = JSON.parse("{{ 'true' if has_api_keys else 'false' }}");
         const serverUrl = "{{ server_url|default('https://vouchervision-go-738307415303.us-central1.run.app', true) }}";
+        
+        // Firebase configuration for authentication
+        const firebaseConfig = {
+            apiKey: "{{ api_key_config }}",
+            authDomain: "{{ auth_domain }}",
+            projectId: "{{ project_id }}"
+        };
 
         document.addEventListener('DOMContentLoaded', function() {
             // Debug auth information 
@@ -655,6 +662,10 @@
             const testCorsButton = document.getElementById('testCorsButton');
             const resultsDiv = document.getElementById('results');
             const verboseCheckbox = document.getElementById('verboseCheckbox');
+            const originalProcessLocalImage = processLocalImage;
+            const originalProcessImageUrl = processImageUrl;
+            const originalProcessImageUrlWorkaround = processImageUrlWorkaround;
+    
             
             // CORS test button
             if (testCorsButton) {
@@ -809,29 +820,94 @@
                 
                 // Insert before the API Key input
                 const apiKeyInput = document.getElementById('apiKeyInput');
-                apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+                if (apiKeyInput && apiKeyInput.parentNode) {
+                    apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+                    
+                    // Hide the API key input since we're using the auth token
+                    apiKeyInput.parentNode.style.display = 'none';
+                }
                 
-                // Create Bearer token header for requests
-                originalProcessLocalImage = processLocalImage;
-                processLocalImage = function(file, apiKey, engines, prompt, verbose) {
-                    return originalProcessLocalImage(file, apiKey || authToken, engines, prompt, verbose);
+                // Override the process functions to use the auth token
+                processLocalImage = function(file, unusedApiKey, engines, prompt, verbose) {
+                    if (verbose) {
+                        console.log('Using authentication token instead of API key');
+                    }
+                    
+                    return originalProcessLocalImage(
+                        file, 
+                        '', // Don't pass API key
+                        engines, 
+                        prompt, 
+                        verbose
+                    );
                 };
                 
-                originalProcessImageUrl = processImageUrl;
-                processImageUrl = function(imageUrl, apiKey, engines, prompt, verbose) {
-                    return originalProcessImageUrl(imageUrl, apiKey || authToken, engines, prompt, verbose);
+                processImageUrl = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
+                    if (verbose) {
+                        console.log('Using authentication token instead of API key');
+                    }
+                    
+                    return originalProcessImageUrl(
+                        imageUrl, 
+                        '', // Don't pass API key
+                        engines, 
+                        prompt, 
+                        verbose
+                    );
                 };
                 
-                originalProcessImageUrlWorkaround = processImageUrlWorkaround;
-                processImageUrlWorkaround = function(imageUrl, apiKey, engines, prompt, verbose) {
-                    return originalProcessImageUrlWorkaround(imageUrl, apiKey || authToken, engines, prompt, verbose);
+                processImageUrlWorkaround = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
+                    if (verbose) {
+                        console.log('Using authentication token instead of API key');
+                    }
+                    
+                    return originalProcessImageUrlWorkaround(
+                        imageUrl, 
+                        '', // Don't pass API key
+                        engines, 
+                        prompt, 
+                        verbose
+                    );
                 };
                 
-                console.log('Authentication token loaded from session.');
+                // Modify the fetch function to inject the auth token
+                const originalFetch = window.fetch;
+                window.fetch = function(resource, init) {
+                    // Clone the init object to avoid modifying the original
+                    const newInit = init ? { ...init } : {};
+                    
+                    // Add headers if they don't exist
+                    if (!newInit.headers) {
+                        newInit.headers = {};
+                    }
+                    
+                    // Convert Headers object to plain object if needed
+                    if (newInit.headers instanceof Headers) {
+                        const plainHeaders = {};
+                        for (const [key, value] of newInit.headers.entries()) {
+                            plainHeaders[key] = value;
+                        }
+                        newInit.headers = plainHeaders;
+                    }
+                    
+                    // Add Authorization header with Bearer token if not already present
+                    // and if X-API-Key is not present (don't override if explicitly set)
+                    if (!newInit.headers['Authorization'] && !newInit.headers['X-API-Key']) {
+                        newInit.headers['Authorization'] = `Bearer ${authToken}`;
+                    }
+                    
+                    // Call the original fetch with our modified init
+                    return originalFetch(resource, newInit);
+                };
+                
+                console.log('Authentication token loaded from session and applied globally.');
             } else if (apiKey) {
                 // If API key is available
-                document.getElementById('apiKeyInput').value = apiKey;
-                console.log('API key loaded from session.');
+                const apiKeyInput = document.getElementById('apiKeyInput');
+                if (apiKeyInput) {
+                    apiKeyInput.value = apiKey;
+                    console.log('API key loaded from session.');
+                }
             } else if (hasApiKeys) {
                 const authInfo = document.createElement('div');
                 authInfo.className = 'auth-info';
@@ -839,12 +915,15 @@
                 
                 // Insert before the API Key input
                 const apiKeyInput = document.getElementById('apiKeyInput');
-                apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+                if (apiKeyInput && apiKeyInput.parentNode) {
+                    apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+                }
             }
             
             // Set the server URL from the template
-            if (serverUrl) {
-                document.getElementById('serverUrlInput').value = serverUrl;
+            const serverUrlInput = document.getElementById('serverUrlInput');
+            if (serverUrl && serverUrlInput) {
+                serverUrlInput.value = serverUrl;
             }
             
             // Log that the script is loaded
