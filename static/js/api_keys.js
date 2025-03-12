@@ -1,173 +1,223 @@
-// Load admins
-async function loadAdmins(user) {
-    try {
-      // Show loading indicator
-      document.getElementById('admins-loading').style.display = 'block';
-      document.getElementById('admins-table').style.display = 'none';
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Fetch admins
-      const response = await fetch('/admin/list-admins', {
-        headers: {
-          'Authorization': `Bearer ${idToken}`
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+// Variables to store current key being viewed
+let currentKeyId = null;
+
+// Load API keys from the API
+function loadApiKeys() {
+  document.getElementById('api-keys-loading').style.display = 'block';
+  document.getElementById('api-keys-table').style.display = 'none';
+
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch('/admin/api-keys', {
+      headers: {
+        'Authorization': 'Bearer ' + idToken
       }
-      
-      const data = await response.json();
-      
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Hide loading, show table
-        document.getElementById('admins-loading').style.display = 'none';
-        document.getElementById('admins-table').style.display = 'table';
-        
-        // Populate table
-        const adminsListElem = document.getElementById('admins-list');
-        adminsListElem.innerHTML = '';
-        
-        data.admins.forEach(admin => {
-          // Format date
-          const addedDate = admin.added_at ? 
-            new Date(admin.added_at._seconds * 1000).toLocaleDateString() : 'N/A';
-          
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${admin.email}</td>
-            <td>${admin.added_by || 'N/A'}</td>
-            <td>${addedDate}</td>
-            <td>
-              ${admin.email !== user.email ? 
-                `<button class="btn-danger remove-admin-btn" data-email="${admin.email}">Remove</button>` : 
-                '<em>Current User</em>'}
-            </td>
-          `;
-          
-          adminsListElem.appendChild(row);
-        });
-        
-        // Setup remove buttons
-        document.querySelectorAll('.remove-admin-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const email = btn.getAttribute('data-email');
-            if (confirm(`Are you sure you want to remove ${email} as an admin?`)) {
-              removeAdmin(email);
-            }
-          });
-        });
+        window.allApiKeys = data.api_keys;
+        window.filteredApiKeys = [...allApiKeys];
+        renderApiKeysPage(1);
       } else {
-        throw new Error(data.error || 'Failed to load admins');
+        console.error('Failed to load API keys:', data.error);
+        document.getElementById('api-keys-loading').textContent = 'Error loading API keys: ' + data.error;
       }
-    } catch (error) {
-      console.error('Error loading admins:', error);
-      document.getElementById('admins-loading').textContent = 
-        'Error loading admins: ' + error.message;
-    }
+    })
+    .catch(error => {
+      console.error('Error loading API keys:', error);
+      document.getElementById('api-keys-loading').textContent = 'Error loading API keys. Please try again.';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    document.getElementById('api-keys-loading').textContent = 'Authentication error. Please try logging in again.';
+  });
+}
+
+// Render a page of API keys
+function renderApiKeysPage(page) {
+  window.currentApiKeysPage = page;
+  
+  const start = (page - 1) * window.itemsPerPage;
+  const end = start + window.itemsPerPage;
+  const pageItems = window.filteredApiKeys.slice(start, end);
+  
+  const tableBody = document.getElementById('api-keys-list');
+  tableBody.innerHTML = '';
+  
+  if (pageItems.length === 0) {
+    document.getElementById('api-keys-loading').style.display = 'block';
+    document.getElementById('api-keys-loading').textContent = 'No API keys found matching your search.';
+    document.getElementById('api-keys-table').style.display = 'none';
+    document.getElementById('api-keys-pagination').innerHTML = '';
+    return;
   }
   
-  // Add admin
-  async function addAdmin() {
-    const emailElem = document.getElementById('admin-email');
-    const errorElem = document.getElementById('add-admin-error');
-    const successElem = document.getElementById('add-admin-success');
-    const email = emailElem.value.trim();
+  document.getElementById('api-keys-loading').style.display = 'none';
+  document.getElementById('api-keys-table').style.display = 'table';
+  
+  pageItems.forEach(key => {
+    const createdDate = key.created_at && (key.created_at._seconds || key.created_at._formatted) ? 
+      (key.created_at._formatted || new Date(key.created_at._seconds * 1000).toLocaleDateString()) : 'Unknown';
     
-    // Clear status messages
-    errorElem.style.display = 'none';
-    successElem.style.display = 'none';
+    const expiresDate = key.expires_at && (key.expires_at._seconds || key.expires_at._formatted) ? 
+      (key.expires_at._formatted || new Date(key.expires_at._seconds * 1000).toLocaleDateString()) : 'Never';
     
-    if (!email) {
-      errorElem.textContent = 'Please enter an email address';
-      errorElem.style.display = 'block';
-      return;
+    const isActive = key.active !== false; // Default to active if not specified
+    
+    const row = document.createElement('tr');
+    
+    // User column
+    const userCell = document.createElement('td');
+    userCell.textContent = key.owner || 'Unknown';
+    row.appendChild(userCell);
+    
+    // Key name column
+    const nameCell = document.createElement('td');
+    nameCell.textContent = key.name || key.key_id.substring(0, 8) + '...';
+    row.appendChild(nameCell);
+    
+    // Created column
+    const createdCell = document.createElement('td');
+    createdCell.textContent = createdDate;
+    row.appendChild(createdCell);
+    
+    // Expires column
+    const expiresCell = document.createElement('td');
+    expiresCell.textContent = expiresDate;
+    row.appendChild(expiresCell);
+    
+    // Status column
+    const statusCell = document.createElement('td');
+    const statusBadge = document.createElement('span');
+    statusBadge.className = 'badge ' + (isActive ? 'badge-approved' : 'badge-rejected');
+    statusBadge.textContent = isActive ? 'Active' : 'Revoked';
+    statusCell.appendChild(statusBadge);
+    row.appendChild(statusCell);
+    
+    // Actions column
+    const actionsCell = document.createElement('td');
+    
+    if (isActive) {
+      const revokeButton = document.createElement('button');
+      revokeButton.className = 'btn-danger';
+      revokeButton.textContent = 'Revoke';
+      revokeButton.addEventListener('click', () => showRevokeKeyModal(key));
+      actionsCell.appendChild(revokeButton);
+    } else {
+      const inactiveText = document.createElement('span');
+      inactiveText.textContent = 'Revoked';
+      inactiveText.className = 'text-muted';
+      actionsCell.appendChild(inactiveText);
     }
     
-    try {
-      const user = firebase.auth().currentUser;
-      if (!user) throw new Error('Not authenticated');
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Send add admin request
-      const response = await fetch('/admin/add-admin', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server returned ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
+    row.appendChild(actionsCell);
+    
+    tableBody.appendChild(row);
+  });
+  
+  // Generate pagination
+  window.generatePagination(
+    window.filteredApiKeys.length, 
+    page, 
+    'api-keys-pagination', 
+    renderApiKeysPage
+  );
+}
+
+// Show revoke key modal
+function showRevokeKeyModal(key) {
+  currentKeyId = key.key_id;
+  
+  // Set modal content
+  document.getElementById('key-user-email').textContent = key.owner || 'Unknown';
+  document.getElementById('key-name').textContent = key.name || key.key_id.substring(0, 8) + '...';
+  
+  const createdDate = key.created_at && (key.created_at._seconds || key.created_at._formatted) ? 
+    (key.created_at._formatted || new Date(key.created_at._seconds * 1000).toLocaleString()) : 'Unknown';
+  
+  document.getElementById('key-created').textContent = createdDate;
+  
+  // Clear previous messages
+  document.getElementById('revoke-key-error').style.display = 'none';
+  document.getElementById('revoke-key-success').style.display = 'none';
+  document.getElementById('revocation-reason').value = '';
+  
+  // Show the modal
+  document.getElementById('revoke-key-modal').style.display = 'block';
+}
+
+// Revoke an API key
+function revokeApiKey() {
+  if (!currentKeyId) return;
+  
+  const reason = document.getElementById('revocation-reason').value.trim();
+  const errorDiv = document.getElementById('revoke-key-error');
+  const successDiv = document.getElementById('revoke-key-success');
+  
+  // Clear previous messages
+  errorDiv.style.display = 'none';
+  successDiv.style.display = 'none';
+  
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch(`/admin/api-keys/${currentKeyId}/revoke`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + idToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        reason: reason
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Show success message
-        successElem.textContent = `${email} has been added as an admin`;
-        successElem.style.display = 'block';
+        successDiv.textContent = 'API key revoked successfully!';
+        successDiv.style.display = 'block';
         
-        // Clear input
-        emailElem.value = '';
-        
-        // Reload admins list
-        loadAdmins(user);
+        // Reload API keys after a short delay
+        setTimeout(() => {
+          document.getElementById('revoke-key-modal').style.display = 'none';
+          loadApiKeys();
+        }, 1500);
       } else {
-        throw new Error(data.error || 'Failed to add admin');
+        errorDiv.textContent = 'Error: ' + (data.error || 'Failed to revoke API key');
+        errorDiv.style.display = 'block';
       }
-    } catch (error) {
-      console.error('Error adding admin:', error);
-      errorElem.textContent = 'Error: ' + error.message;
-      errorElem.style.display = 'block';
-    }
+    })
+    .catch(error => {
+      console.error('Error revoking API key:', error);
+      errorDiv.textContent = 'Error revoking API key. Please try again.';
+      errorDiv.style.display = 'block';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    errorDiv.textContent = 'Authentication error. Please try logging in again.';
+    errorDiv.style.display = 'block';
+  });
+}
+
+// Set up event listeners when the document is ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Confirm revoke key button
+  const confirmRevokeKeyBtn = document.getElementById('confirm-revoke-key-btn');
+  if (confirmRevokeKeyBtn) {
+    confirmRevokeKeyBtn.addEventListener('click', revokeApiKey);
   }
   
-  // Remove admin
-  async function removeAdmin(email) {
-    try {
-      const user = firebase.auth().currentUser;
-      if (!user) throw new Error('Not authenticated');
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Send remove admin request
-      const response = await fetch('/admin/remove-admin', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server returned ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
-      if (data.status === 'success') {
-        // Reload admins list
-        loadAdmins(user);
-      } else {
-        throw new Error(data.error || 'Failed to remove admin');
-      }
-    } catch (error) {
-      console.error('Error removing admin:', error);
-      alert('Error: ' + error.message);
-    }
+  // Cancel revoke key button
+  const cancelRevokeKeyBtn = document.getElementById('cancel-revoke-key-btn');
+  if (cancelRevokeKeyBtn) {
+    cancelRevokeKeyBtn.addEventListener('click', function() {
+      document.getElementById('revoke-key-modal').style.display = 'none';
+    });
   }
+});
+
+// Expose functions to global scope
+window.loadApiKeys = loadApiKeys;
+window.renderApiKeysPage = renderApiKeysPage;
+window.showRevokeKeyModal = showRevokeKeyModal;
+window.revokeApiKey = revokeApiKey;

@@ -1,427 +1,387 @@
-// Load user applications
-async function loadApplications(user) {
-    try {
-      // Show loading indicator
-      document.getElementById('applications-loading').style.display = 'block';
-      document.getElementById('applications-table').style.display = 'none';
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Fetch applications
-      const response = await fetch('/admin/applications', {
-        headers: {
-          'Authorization': `Bearer ${idToken}`
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+// Variables to store current application being viewed
+let currentApplicationEmail = null;
+
+// Load applications from the API
+function loadApplications() {
+  document.getElementById('applications-loading').style.display = 'block';
+  document.getElementById('applications-table').style.display = 'none';
+
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch('/admin/applications', {
+      headers: {
+        'Authorization': 'Bearer ' + idToken
       }
-      
-      const data = await response.json();
-      
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Store all applications
-        allApplications = data.applications;
-        
-        // Apply initial filters
+        window.allApplications = data.applications;
+        window.filteredApplications = [...allApplications];
         applyFiltersToApplications();
       } else {
-        throw new Error(data.error || 'Failed to load applications');
+        console.error('Failed to load applications:', data.error);
+        document.getElementById('applications-loading').textContent = 'Error loading applications: ' + data.error;
       }
-    } catch (error) {
+    })
+    .catch(error => {
       console.error('Error loading applications:', error);
-      document.getElementById('applications-loading').textContent = 
-        'Error loading applications: ' + error.message;
-    }
-  }
-  
-  // Render applications page
-  function renderApplicationsPage(page) {
-    // Update current page
-    currentApplicationsPage = page;
-    
-    // Calculate pagination
-    const startIndex = (page - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const pageApplications = filteredApplications.slice(startIndex, endIndex);
-    
-    // Hide loading, show table
-    document.getElementById('applications-loading').style.display = 'none';
-    document.getElementById('applications-table').style.display = 'table';
-    
-    // Populate table
-    const applicationsListElem = document.getElementById('applications-list');
-    applicationsListElem.innerHTML = '';
-    
-    pageApplications.forEach(app => {
-      // Format dates
-      const createdDate = app.created_at ? new Date(app.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
-      
-      // Status badge for approval status
-      let statusBadge = '';
-      switch (app.status) {
-        case 'pending':
-          statusBadge = '<span class="badge badge-pending">Pending</span>';
-          break;
-        case 'approved':
-          statusBadge = '<span class="badge badge-approved">Approved</span>';
-          break;
-        case 'rejected':
-          statusBadge = '<span class="badge badge-rejected">Rejected</span>';
-          break;
-        default:
-          statusBadge = '<span class="badge">Unknown</span>';
-      }
-      
-      // API access badge (only for approved users)
-      let apiAccessBadge = '';
-      if (app.status === 'approved') {
-        if (app.api_key_access === true) {
-          apiAccessBadge = '<span class="badge badge-api-access ms-2" title="Has API key permission">🔑</span>';
-        } else {
-          apiAccessBadge = '<span class="badge badge-no-api-access ms-2" title="No API key permission">🔒</span>';
-        }
-      }
-      
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${app.email}</td>
-        <td>${app.organization || 'N/A'}</td>
-        <td>${app.purpose ? (app.purpose.length > 50 ? app.purpose.substring(0, 50) + '...' : app.purpose) : 'N/A'}</td>
-        <td>${statusBadge} ${apiAccessBadge}</td>
-        <td>${createdDate}</td>
-        <td>
-          <button class="btn-primary view-application-btn" data-email="${app.email}">View</button>
-        </td>
-      `;
-      
-      applicationsListElem.appendChild(row);
+      document.getElementById('applications-loading').textContent = 'Error loading applications. Please try again.';
     });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    document.getElementById('applications-loading').textContent = 'Authentication error. Please try logging in again.';
+  });
+}
+
+// Render a page of applications
+function renderApplicationsPage(page) {
+  window.currentApplicationsPage = page;
+  
+  const start = (page - 1) * window.itemsPerPage;
+  const end = start + window.itemsPerPage;
+  const pageItems = window.filteredApplications.slice(start, end);
+  
+  const tableBody = document.getElementById('applications-list');
+  tableBody.innerHTML = '';
+  
+  if (pageItems.length === 0) {
+    document.getElementById('applications-loading').style.display = 'block';
+    document.getElementById('applications-loading').textContent = 'No applications found matching your filters.';
+    document.getElementById('applications-table').style.display = 'none';
+    document.getElementById('applications-pagination').innerHTML = '';
+    return;
+  }
+  
+  document.getElementById('applications-loading').style.display = 'none';
+  document.getElementById('applications-table').style.display = 'table';
+  
+  pageItems.forEach(app => {
+    const createdDate = app.created_at && app.created_at._seconds ? 
+      new Date(app.created_at._seconds * 1000).toLocaleDateString() : 'Unknown';
     
-    // Setup view buttons
-    document.querySelectorAll('.view-application-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const email = btn.getAttribute('data-email');
-        viewApplicationDetails(email);
-      });
+    const row = document.createElement('tr');
+    
+    // Email column
+    const emailCell = document.createElement('td');
+    emailCell.textContent = app.email;
+    row.appendChild(emailCell);
+    
+    // Organization column
+    const orgCell = document.createElement('td');
+    orgCell.textContent = app.organization || 'Not specified';
+    row.appendChild(orgCell);
+    
+    // Purpose column
+    const purposeCell = document.createElement('td');
+    purposeCell.textContent = app.purpose ? 
+      (app.purpose.length > 50 ? app.purpose.substring(0, 50) + '...' : app.purpose) : 
+      'Not specified';
+    row.appendChild(purposeCell);
+    
+    // Status column
+    const statusCell = document.createElement('td');
+    const statusBadge = document.createElement('span');
+    statusBadge.textContent = app.status || 'pending';
+    statusBadge.className = 'badge badge-' + (app.status || 'pending');
+    statusCell.appendChild(statusBadge);
+    row.appendChild(statusCell);
+    
+    // Created column
+    const createdCell = document.createElement('td');
+    createdCell.textContent = createdDate;
+    row.appendChild(createdCell);
+    
+    // Actions column
+    const actionsCell = document.createElement('td');
+    const viewButton = document.createElement('button');
+    viewButton.className = 'btn-secondary';
+    viewButton.textContent = 'View';
+    viewButton.addEventListener('click', () => showApplicationDetails(app));
+    actionsCell.appendChild(viewButton);
+    row.appendChild(actionsCell);
+    
+    tableBody.appendChild(row);
+  });
+  
+  // Generate pagination
+  window.generatePagination(
+    window.filteredApplications.length, 
+    page, 
+    'applications-pagination', 
+    renderApplicationsPage
+  );
+}
+
+// Show application details in the modal
+function showApplicationDetails(application) {
+  currentApplicationEmail = application.email;
+  
+  const detailsDiv = document.getElementById('application-details');
+  
+  // Format creation date
+  const createdDate = application.created_at && application.created_at._seconds ? 
+    new Date(application.created_at._seconds * 1000).toLocaleString() : 'Unknown';
+  
+  // Format status date (approved_at or rejected_at)
+  let statusDate = 'N/A';
+  if (application.status === 'approved' && application.approved_at && application.approved_at._seconds) {
+    statusDate = new Date(application.approved_at._seconds * 1000).toLocaleString();
+  } else if (application.status === 'rejected' && application.rejected_at && application.rejected_at._seconds) {
+    statusDate = new Date(application.rejected_at._seconds * 1000).toLocaleString();
+  }
+  
+  // Build HTML for details
+  let html = `
+    <p><strong>Email:</strong> ${application.email}</p>
+    <p><strong>Organization:</strong> ${application.organization || 'Not specified'}</p>
+    <p><strong>Purpose:</strong> ${application.purpose || 'Not specified'}</p>
+    <p><strong>Status:</strong> <span class="badge badge-${application.status || 'pending'}">${application.status || 'pending'}</span></p>
+    <p><strong>Submitted:</strong> ${createdDate}</p>
+  `;
+  
+  if (application.status === 'approved') {
+    html += `
+      <p><strong>Approved By:</strong> ${application.approved_by || 'Unknown'}</p>
+      <p><strong>Approved On:</strong> ${statusDate}</p>
+      <p><strong>API Key Access:</strong> ${application.api_key_access ? 'Allowed' : 'Not allowed'}</p>
+    `;
+  } else if (application.status === 'rejected') {
+    html += `
+      <p><strong>Rejected By:</strong> ${application.rejected_by || 'Unknown'}</p>
+      <p><strong>Rejected On:</strong> ${statusDate}</p>
+      <p><strong>Rejection Reason:</strong> ${application.rejection_reason || 'No reason provided'}</p>
+    `;
+  }
+  
+  if (application.notes && application.notes.length > 0) {
+    html += '<p><strong>Notes:</strong></p><ul>';
+    application.notes.forEach(note => {
+      html += `<li>${note}</li>`;
     });
-    
-    // Generate pagination
-    generatePagination(
-      filteredApplications.length, 
-      currentApplicationsPage, 
-      'applications-pagination', 
-      renderApplicationsPage
-    );
+    html += '</ul>';
   }
   
-  // View application details
-  async function viewApplicationDetails(email) {
-    try {
-      // Set current application email
-      currentApplicationEmail = email;
-      
-      // Find application in the list
-      const application = allApplications.find(app => app.email === email);
-      
-      if (!application) {
-        throw new Error('Application not found');
-      }
-      
-      // Format dates
-      const createdDate = application.created_at ? 
-        new Date(application.created_at._seconds * 1000).toLocaleDateString() : 'N/A';
-      const updatedDate = application.updated_at ? 
-        new Date(application.updated_at._seconds * 1000).toLocaleDateString() : 'N/A';
-      
-      // Generate details HTML
-      let detailsHtml = `
-        <p><strong>Email:</strong> ${application.email}</p>
-        <p><strong>Organization:</strong> ${application.organization || 'N/A'}</p>
-        <p><strong>Purpose:</strong> ${application.purpose || 'N/A'}</p>
-        <p><strong>Status:</strong> ${application.status || 'N/A'}</p>
-        <p><strong>Created:</strong> ${createdDate}</p>
-        <p><strong>Last Updated:</strong> ${updatedDate}</p>
-      `;
-      
-      // Add API key permission status if approved
-      if (application.status === 'approved') {
-        const hasApiKeyAccess = application.api_key_access === true;
-        detailsHtml += `
-          <p><strong>API Key Permission:</strong> 
-            <span class="${hasApiKeyAccess ? 'text-success' : 'text-danger'}">
-              ${hasApiKeyAccess ? 'Granted' : 'Not Granted'}
-            </span>
-          </p>
-        `;
-      }
-      
-      // Add approval/rejection info if available
-      if (application.status === 'approved' && application.approved_by) {
-        const approvedDate = application.approved_at ? 
-          new Date(application.approved_at._seconds * 1000).toLocaleDateString() : 'N/A';
-        detailsHtml += `
-          <p><strong>Approved By:</strong> ${application.approved_by}</p>
-          <p><strong>Approved Date:</strong> ${approvedDate}</p>
-        `;
-      } else if (application.status === 'rejected') {
-        detailsHtml += `
-          <p><strong>Rejected By:</strong> ${application.rejected_by || 'N/A'}</p>
-          <p><strong>Rejection Reason:</strong> ${application.rejection_reason || 'No reason provided'}</p>
-        `;
-      }
-      
-      // Update modal content
-      document.getElementById('application-details').innerHTML = detailsHtml;
-      
-      // Show/hide action buttons based on status
-      if (application.status === 'pending') {
-        document.getElementById('application-actions').style.display = 'flex';
-        document.getElementById('api-key-permission-group').style.display = 'block';
-        document.getElementById('api-key-access-actions').style.display = 'none';
-        document.getElementById('rejection-form').style.display = 'none';
-        
-        // Uncheck the API key permission by default
-        document.getElementById('allow-api-keys').checked = false;
-      } else if (application.status === 'approved') {
-        document.getElementById('application-actions').style.display = 'none';
-        document.getElementById('api-key-access-actions').style.display = 'block';
-        document.getElementById('rejection-form').style.display = 'none';
-        
-        // Set the current API key access status
-        document.getElementById('update-api-keys').checked = application.api_key_access === true;
-      } else {
-        document.getElementById('application-actions').style.display = 'none';
-        document.getElementById('api-key-access-actions').style.display = 'none';
-        document.getElementById('rejection-form').style.display = 'none';
-      }
-      
-      // Clear status message
-      document.getElementById('application-status-message').innerHTML = '';
-      
-      // Show the modal
-      document.getElementById('application-modal').style.display = 'block';
-      
-    } catch (error) {
-      console.error('Error viewing application details:', error);
-      alert('Error viewing application details: ' + error.message);
-    }
+  detailsDiv.innerHTML = html;
+  
+  // Show/hide relevant action buttons based on status
+  const approveBtn = document.getElementById('approve-btn');
+  const rejectBtn = document.getElementById('reject-btn');
+  const apiKeyAccessActions = document.getElementById('api-key-access-actions');
+  const updateApiKeysCheckbox = document.getElementById('update-api-keys');
+  const rejectionForm = document.getElementById('rejection-form');
+  const statusMessage = document.getElementById('application-status-message');
+  
+  // Reset UI elements
+  statusMessage.innerHTML = '';
+  rejectionForm.style.display = 'none';
+  apiKeyAccessActions.style.display = 'none';
+  document.getElementById('api-key-permission-group').style.display = 'none';
+  
+  if (application.status === 'pending') {
+    approveBtn.style.display = 'inline-block';
+    rejectBtn.style.display = 'inline-block';
+    document.getElementById('api-key-permission-group').style.display = 'block';
+    document.getElementById('allow-api-keys').checked = false;
+  } else if (application.status === 'approved') {
+    approveBtn.style.display = 'none';
+    rejectBtn.style.display = 'none';
+    apiKeyAccessActions.style.display = 'block';
+    updateApiKeysCheckbox.checked = application.api_key_access || false;
+  } else {
+    approveBtn.style.display = 'none';
+    rejectBtn.style.display = 'none';
   }
   
-  // Approve application
-  async function approveApplication() {
-    if (!currentApplicationEmail) return;
-    
-    try {
-      const user = firebase.auth().currentUser;
-      if (!user) throw new Error('Not authenticated');
-      
-      // Get the API key permission value
-      const allowApiKeys = document.getElementById('allow-api-keys').checked;
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Send approval request with API key permission
-      const response = await fetch(`/admin/applications/${currentApplicationEmail}/approve`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          allow_api_keys: allowApiKeys
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server returned ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
+  // Show the modal
+  document.getElementById('application-modal').style.display = 'block';
+}
+
+// Approve an application
+function approveApplication() {
+  if (!currentApplicationEmail) return;
+  
+  const allowApiKeys = document.getElementById('allow-api-keys').checked;
+  const statusMessage = document.getElementById('application-status-message');
+  
+  statusMessage.innerHTML = '<div class="loading">Processing...</div>';
+  
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch(`/admin/applications/${currentApplicationEmail}/approve`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + idToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        allow_api_keys: allowApiKeys
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Show success message
-        document.getElementById('application-status-message').innerHTML = `
-          <div class="alert alert-success">
-            Application approved successfully. The user can now access the API.
-            ${allowApiKeys ? 'User has been granted permission to create API keys.' : ''}
-          </div>
-        `;
-        
-        // Hide action buttons
-        document.getElementById('application-actions').style.display = 'none';
-        
-        // Show API key access actions now
-        document.getElementById('api-key-access-actions').style.display = 'block';
-        document.getElementById('update-api-keys').checked = allowApiKeys;
-        
-        // Update application in the list
-        updateApplicationInList(currentApplicationEmail, 'approved', allowApiKeys);
+        statusMessage.innerHTML = '<div class="alert alert-success">Application approved successfully!</div>';
         
         // Reload applications after a short delay
         setTimeout(() => {
-          loadApplications(user);
-        }, 2000);
+          document.getElementById('application-modal').style.display = 'none';
+          loadApplications();
+        }, 1500);
       } else {
-        throw new Error(data.error || 'Failed to approve application');
+        statusMessage.innerHTML = `<div class="alert alert-danger">Error: ${data.error}</div>`;
       }
-    } catch (error) {
+    })
+    .catch(error => {
       console.error('Error approving application:', error);
-      document.getElementById('application-status-message').innerHTML = `
-        <div class="alert alert-danger">
-          Error approving application: ${error.message}
-        </div>
-      `;
-    }
+      statusMessage.innerHTML = '<div class="alert alert-danger">Error approving application. Please try again.</div>';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    statusMessage.innerHTML = '<div class="alert alert-danger">Authentication error. Please try logging in again.</div>';
+  });
+}
+
+// Reject an application
+function rejectApplication() {
+  if (!currentApplicationEmail) return;
+  
+  const reason = document.getElementById('rejection-reason').value.trim();
+  
+  if (!reason) {
+    alert('Please provide a reason for rejection');
+    return;
   }
   
-  // Reject application
-  async function rejectApplication() {
-    if (!currentApplicationEmail) return;
-    
-    try {
-      const user = firebase.auth().currentUser;
-      if (!user) throw new Error('Not authenticated');
-      
-      // Get rejection reason
-      const reason = document.getElementById('rejection-reason').value;
-      if (!reason) {
-        throw new Error('Please provide a reason for rejection');
-      }
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Send rejection request
-      const response = await fetch(`/admin/applications/${currentApplicationEmail}/reject`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          reason: reason
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server returned ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
+  const statusMessage = document.getElementById('application-status-message');
+  statusMessage.innerHTML = '<div class="loading">Processing...</div>';
+  
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch(`/admin/applications/${currentApplicationEmail}/reject`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + idToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        reason: reason
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Show success message
-        document.getElementById('application-status-message').innerHTML = `
-          <div class="alert alert-success">
-            Application rejected successfully.
-          </div>
-        `;
-        
-        // Hide rejection form
         document.getElementById('rejection-form').style.display = 'none';
-        
-        // Update application in the list
-        updateApplicationInList(currentApplicationEmail, 'rejected');
+        statusMessage.innerHTML = '<div class="alert alert-success">Application rejected successfully!</div>';
         
         // Reload applications after a short delay
         setTimeout(() => {
-          loadApplications(user);
-        }, 2000);
+          document.getElementById('application-modal').style.display = 'none';
+          loadApplications();
+        }, 1500);
       } else {
-        throw new Error(data.error || 'Failed to reject application');
+        statusMessage.innerHTML = `<div class="alert alert-danger">Error: ${data.error}</div>`;
       }
-    } catch (error) {
+    })
+    .catch(error => {
       console.error('Error rejecting application:', error);
-      document.getElementById('application-status-message').innerHTML = `
-        <div class="alert alert-danger">
-          Error rejecting application: ${error.message}
-        </div>
-      `;
-    }
-  }
+      statusMessage.innerHTML = '<div class="alert alert-danger">Error rejecting application. Please try again.</div>';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    statusMessage.innerHTML = '<div class="alert alert-danger">Authentication error. Please try logging in again.</div>';
+  });
+}
+
+// Update API key access for an approved application
+function updateApiKeyAccess() {
+  if (!currentApplicationEmail) return;
   
-  // Update API key access for an application
-  async function updateApiKeyAccess() {
-    if (!currentApplicationEmail) return;
-    
-    try {
-      const user = firebase.auth().currentUser;
-      if (!user) throw new Error('Not authenticated');
-      
-      // Get the updated API key permission
-      const allowApiKeys = document.getElementById('update-api-keys').checked;
-      
-      // Get ID token
-      const idToken = await user.getIdToken(true);
-      
-      // Send the update request
-      const response = await fetch(`/admin/applications/${currentApplicationEmail}/update-api-access`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${idToken}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          allow_api_keys: allowApiKeys
-        })
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `Server returned ${response.status}`);
-      }
-      
-      const data = await response.json();
-      
+  const allowApiKeys = document.getElementById('update-api-keys').checked;
+  const statusMessage = document.getElementById('application-status-message');
+  
+  statusMessage.innerHTML = '<div class="loading">Processing...</div>';
+  
+  // Get Firebase auth token
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch(`/admin/applications/${currentApplicationEmail}/update-api-access`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + idToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        allow_api_keys: allowApiKeys
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
       if (data.status === 'success') {
-        // Show success message
-        document.getElementById('application-status-message').innerHTML = `
-          <div class="alert alert-success">
-            API key permission ${allowApiKeys ? 'granted' : 'revoked'} successfully.
-          </div>
-        `;
-        
-        // Update application in the list
-        updateApplicationInList(currentApplicationEmail, 'approved', allowApiKeys);
+        statusMessage.innerHTML = '<div class="alert alert-success">API key permission updated successfully!</div>';
         
         // Reload applications after a short delay
         setTimeout(() => {
-          loadApplications(user);
-        }, 2000);
+          document.getElementById('application-modal').style.display = 'none';
+          loadApplications();
+        }, 1500);
       } else {
-        throw new Error(data.error || 'Failed to update API key permission');
+        statusMessage.innerHTML = `<div class="alert alert-danger">Error: ${data.error}</div>`;
       }
-    } catch (error) {
-      console.error('Error updating API key permission:', error);
-      document.getElementById('application-status-message').innerHTML = `
-        <div class="alert alert-danger">
-          Error updating API key permission: ${error.message}
-        </div>
-      `;
-    }
+    })
+    .catch(error => {
+      console.error('Error updating API key access:', error);
+      statusMessage.innerHTML = '<div class="alert alert-danger">Error updating API key permission. Please try again.</div>';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    statusMessage.innerHTML = '<div class="alert alert-danger">Authentication error. Please try logging in again.</div>';
+  });
+}
+
+// Set up event listeners when the document is ready
+document.addEventListener('DOMContentLoaded', function() {
+  // Set up approve button
+  const approveBtn = document.getElementById('approve-btn');
+  if (approveBtn) {
+    approveBtn.addEventListener('click', approveApplication);
   }
   
-  // Update application in the local list
-  function updateApplicationInList(email, newStatus, apiKeyAccess = null) {
-    // Find application in the list
-    const appIndex = allApplications.findIndex(app => app.email === email);
-    
-    if (appIndex >= 0) {
-      // Update application status
-      allApplications[appIndex].status = newStatus;
-      
-      // Update API key permission if provided
-      if (apiKeyAccess !== null) {
-        allApplications[appIndex].api_key_access = apiKeyAccess;
-      }
-      
-      // Reapply filters
-      applyFiltersToApplications();
-    }
+  // Set up reject button
+  const rejectBtn = document.getElementById('reject-btn');
+  if (rejectBtn) {
+    rejectBtn.addEventListener('click', function() {
+      // Show rejection form
+      document.getElementById('rejection-form').style.display = 'block';
+      document.getElementById('rejection-reason').focus();
+    });
   }
+  
+  // Set up confirm reject button
+  const confirmRejectBtn = document.getElementById('confirm-reject-btn');
+  if (confirmRejectBtn) {
+    confirmRejectBtn.addEventListener('click', rejectApplication);
+  }
+  
+  // Set up cancel reject button
+  const cancelRejectBtn = document.getElementById('cancel-reject-btn');
+  if (cancelRejectBtn) {
+    cancelRejectBtn.addEventListener('click', function() {
+      // Hide rejection form
+      document.getElementById('rejection-form').style.display = 'none';
+    });
+  }
+  
+  // Set up update API access button
+  const updateApiAccessBtn = document.getElementById('update-api-access-btn');
+  if (updateApiAccessBtn) {
+    updateApiAccessBtn.addEventListener('click', updateApiKeyAccess);
+  }
+});
+
+// Expose functions to global scope
+window.loadApplications = loadApplications;
+window.renderApplicationsPage = renderApplicationsPage;
+window.showApplicationDetails = showApplicationDetails;
+window.approveApplication = approveApplication;
+window.rejectApplication = rejectApplication;
+window.updateApiKeyAccess = updateApiKeyAccess;

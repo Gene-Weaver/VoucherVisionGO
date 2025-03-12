@@ -1,30 +1,49 @@
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if firebaseConfig is defined in the page
+  if (typeof firebaseConfig === 'undefined') {
+    console.error('Firebase configuration is not defined. The admin dashboard requires a valid Firebase configuration.');
+    
+    // Display a friendly error message on the page
+    const container = document.querySelector('.container');
+    if (container) {
+      container.innerHTML = `
+        <div class="alert alert-danger">
+          <h4>Firebase Configuration Error</h4>
+          <p>The Firebase configuration is missing. This is likely an issue with how the admin dashboard template is being rendered.</p>
+          <p>Please check that the Firebase configuration is being properly passed from app.py to the admin_dashboard.html template.</p>
+        </div>
+      `;
+    }
+    return;
+  }
 
-// Variables to store pagination settings
-const itemsPerPage = 10;
-let currentApplicationsPage = 1;
-let currentApiKeysPage = 1;
-let filteredApplications = [];
-let filteredApiKeys = [];
-let allApplications = [];
-let allApiKeys = [];
-let currentStatusFilter = 'all';
+  // Initialize Firebase if configuration is available
+  try {
+    firebase.initializeApp(firebaseConfig);
+    console.log('Firebase initialized successfully');
+  } catch (error) {
+    console.error('Error initializing Firebase:', error);
+    return;
+  }
 
-// Variables to store current application or API key being viewed
-let currentApplicationEmail = null;
-let currentKeyId = null;
+  // Variables to store pagination settings
+  const itemsPerPage = 10;
+  let currentApplicationsPage = 1;
+  let currentApiKeysPage = 1;
+  let currentAdminsPage = 1;
+  let filteredApplications = [];
+  let filteredApiKeys = [];
+  let allApplications = [];
+  let allApiKeys = [];
+  let allAdmins = [];
+  let currentStatusFilter = 'all';
 
-// Initialize the page
-function initPage() {
   // Check if user is authenticated
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in, display their email
       document.getElementById('user-email').textContent = user.email;
-      
-      // Load initial data
-      loadApplications(user);
       
       // Set up tab buttons
       const tabButtons = document.querySelectorAll('.tab-button');
@@ -42,7 +61,7 @@ function initPage() {
           document.getElementById(tabId).classList.add('active');
           
           // Load data for the selected tab
-          loadDataForTab(tabId, user);
+          loadDataForTab(tabId);
         });
       });
       
@@ -63,220 +82,161 @@ function initPage() {
       });
       
       // Setup search functionality
-      setupSearch();
+      const applicationSearch = document.getElementById('application-search');
+      if (applicationSearch) {
+        applicationSearch.addEventListener('input', () => {
+          applyFiltersToApplications();
+        });
+      }
+      
+      const apiKeySearch = document.getElementById('api-key-search');
+      if (apiKeySearch) {
+        apiKeySearch.addEventListener('input', () => {
+          const searchTerm = apiKeySearch.value.toLowerCase();
+          filteredApiKeys = allApiKeys.filter(key => {
+            return key.owner.toLowerCase().includes(searchTerm) || 
+                   (key.name && key.name.toLowerCase().includes(searchTerm));
+          });
+          renderApiKeysPage(1);
+        });
+      }
       
       // Setup modal event listeners
-      setupModalEventListeners(user);
+      setupModals();
+      
+      // Logout button
+      const logoutBtn = document.getElementById('logout-btn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+          firebase.auth().signOut().then(function() {
+            window.location.href = '/login';
+          }).catch(function(error) {
+            console.error('Error signing out:', error);
+          });
+        });
+      }
+      
+      // Load initial data for the active tab
+      const activeTab = document.querySelector('.tab-content.active');
+      if (activeTab) {
+        const tabId = activeTab.id;
+        loadDataForTab(tabId);
+      }
       
     } else {
       // Not signed in, redirect to login page
       window.location.href = '/login';
     }
   });
-}
 
-// Load data based on the selected tab
-function loadDataForTab(tabId, user) {
-  switch (tabId) {
-    case 'user-applications':
-      loadApplications(user);
-      break;
-    case 'api-keys':
-      loadApiKeys(user);
-      break;
-    case 'admins':
-      loadAdmins(user);
-      break;
-  }
-}
-
-// Setup search functionality
-function setupSearch() {
-  const applicationSearch = document.getElementById('application-search');
-  applicationSearch.addEventListener('input', () => {
-    applyFiltersToApplications();
-  });
-  
-  const apiKeySearch = document.getElementById('api-key-search');
-  apiKeySearch.addEventListener('input', () => {
-    const searchTerm = apiKeySearch.value.toLowerCase();
-    filteredApiKeys = allApiKeys.filter(key => {
-      return key.owner.toLowerCase().includes(searchTerm) || 
-              (key.name && key.name.toLowerCase().includes(searchTerm));
-    });
-    renderApiKeysPage(1);
-  });
-}
-
-// Generate pagination buttons
-function generatePagination(totalItems, currentPage, containerId, clickHandler) {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const container = document.getElementById(containerId);
-  
-  if (totalPages <= 1) {
-    container.innerHTML = '';
-    return;
-  }
-  
-  let html = '';
-  
-  // Previous button
-  html += `<button ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Prev</button>`;
-  
-  // Page buttons
-  const maxButtons = 5;
-  const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
-  const endPage = Math.min(totalPages, startPage + maxButtons - 1);
-  
-  for (let i = startPage; i <= endPage; i++) {
-    html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
-  }
-  
-  // Next button
-  html += `<button ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next</button>`;
-  
-  container.innerHTML = html;
-  
-  // Add event listeners
-  container.querySelectorAll('button:not([disabled])').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const page = parseInt(btn.getAttribute('data-page'));
-      clickHandler(page);
-    });
-  });
-}
-
-// Setup modal event listeners
-function setupModalEventListeners(user) {
-  // Close buttons for modals
-  document.querySelectorAll('.close').forEach(closeBtn => {
-    closeBtn.addEventListener('click', function() {
-      // Find the parent modal and hide it
-      let modal = this.closest('.modal');
-      if (modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
-  
-  // Close modals when clicking outside
-  window.addEventListener('click', function(event) {
-    document.querySelectorAll('.modal').forEach(modal => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  });
-  
-  // Add admin button
-  const addAdminBtn = document.getElementById('add-admin-btn');
-  if (addAdminBtn) {
-    addAdminBtn.addEventListener('click', function() {
-      document.getElementById('add-admin-modal').style.display = 'block';
-    });
-  }
-  
-  // Confirm add admin button
-  const confirmAddAdminBtn = document.getElementById('confirm-add-admin-btn');
-  if (confirmAddAdminBtn) {
-    confirmAddAdminBtn.addEventListener('click', function() {
-      addAdmin();
-    });
-  }
-  
-  // Approve button
-  const approveBtn = document.getElementById('approve-btn');
-  if (approveBtn) {
-    approveBtn.addEventListener('click', function() {
-      approveApplication();
-    });
-  }
-  
-  // Reject button
-  const rejectBtn = document.getElementById('reject-btn');
-  if (rejectBtn) {
-    rejectBtn.addEventListener('click', function() {
-      // Show rejection form
-      document.getElementById('rejection-form').style.display = 'block';
-      document.getElementById('rejection-reason').focus();
-    });
-  }
-  
-  // Confirm reject button
-  const confirmRejectBtn = document.getElementById('confirm-reject-btn');
-  if (confirmRejectBtn) {
-    confirmRejectBtn.addEventListener('click', function() {
-      rejectApplication();
-    });
-  }
-  
-  // Cancel reject button
-  const cancelRejectBtn = document.getElementById('cancel-reject-btn');
-  if (cancelRejectBtn) {
-    cancelRejectBtn.addEventListener('click', function() {
-      // Hide rejection form
-      document.getElementById('rejection-form').style.display = 'none';
-    });
+  // Load data based on the selected tab
+  function loadDataForTab(tabId) {
+    switch (tabId) {
+      case 'user-applications':
+        loadApplications();
+        break;
+      case 'api-keys':
+        loadApiKeys();
+        break;
+      case 'admins':
+        loadAdmins();
+        break;
+    }
   }
 
-  // Update API access button
-  const updateApiAccessBtn = document.getElementById('update-api-access-btn');
-  if (updateApiAccessBtn) {
-    updateApiAccessBtn.addEventListener('click', function() {
-      updateApiKeyAccess();
+  // Setup modal event listeners
+  function setupModals() {
+    // Close buttons for modals
+    document.querySelectorAll('.close').forEach(closeBtn => {
+      closeBtn.addEventListener('click', function() {
+        // Find the parent modal and hide it
+        let modal = this.closest('.modal');
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      });
     });
-  }
-  
-  // Confirm revoke key button
-  const confirmRevokeKeyBtn = document.getElementById('confirm-revoke-key-btn');
-  if (confirmRevokeKeyBtn) {
-    confirmRevokeKeyBtn.addEventListener('click', function() {
-      revokeApiKey();
-    });
-  }
-  
-  // Cancel revoke key button
-  const cancelRevokeKeyBtn = document.getElementById('cancel-revoke-key-btn');
-  if (cancelRevokeKeyBtn) {
-    cancelRevokeKeyBtn.addEventListener('click', function() {
-      document.getElementById('revoke-key-modal').style.display = 'none';
-    });
-  }
-  
-  // Logout button
-  const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', function() {
-      firebase.auth().signOut().then(function() {
-        window.location.href = '/login';
-      }).catch(function(error) {
-        console.error('Error signing out:', error);
+    
+    // Close modals when clicking outside
+    window.addEventListener('click', function(event) {
+      document.querySelectorAll('.modal').forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
       });
     });
   }
-}
 
-// Apply filters to applications
-function applyFiltersToApplications() {
-  const searchTerm = document.getElementById('application-search').value.toLowerCase();
-  
-  filteredApplications = allApplications.filter(app => {
-    // Status filter
-    if (currentStatusFilter !== 'all' && app.status !== currentStatusFilter) {
-      return false;
+  // Generate pagination buttons
+  window.generatePagination = function(totalItems, currentPage, containerId, clickHandler) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const container = document.getElementById(containerId);
+    
+    if (totalPages <= 1) {
+      container.innerHTML = '';
+      return;
     }
     
-    // Search term filter
-    if (searchTerm) {
-      return app.email.toLowerCase().includes(searchTerm) || 
-              (app.organization && app.organization.toLowerCase().includes(searchTerm));
+    let html = '';
+    
+    // Previous button
+    html += `<button ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Prev</button>`;
+    
+    // Page buttons
+    const maxButtons = 5;
+    const startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    const endPage = Math.min(totalPages, startPage + maxButtons - 1);
+    
+    for (let i = startPage; i <= endPage; i++) {
+      html += `<button class="${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
     }
     
-    return true;
-  });
-  
-  renderApplicationsPage(1);
-}
+    // Next button
+    html += `<button ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next</button>`;
+    
+    container.innerHTML = html;
+    
+    // Add event listeners
+    container.querySelectorAll('button:not([disabled])').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const page = parseInt(btn.getAttribute('data-page'));
+        clickHandler(page);
+      });
+    });
+  };
 
-// Start the page initialization when the DOM is ready
-document.addEventListener('DOMContentLoaded', initPage);
+  // Apply filters to applications
+  window.applyFiltersToApplications = function() {
+    const searchTerm = document.getElementById('application-search')?.value.toLowerCase() || '';
+    
+    filteredApplications = allApplications.filter(app => {
+      // Status filter
+      if (currentStatusFilter !== 'all' && app.status !== currentStatusFilter) {
+        return false;
+      }
+      
+      // Search term filter
+      if (searchTerm) {
+        return app.email.toLowerCase().includes(searchTerm) || 
+                (app.organization && app.organization.toLowerCase().includes(searchTerm));
+      }
+      
+      return true;
+    });
+    
+    renderApplicationsPage(1);
+  };
+
+  // Make functions available to other scripts
+  window.loadDataForTab = loadDataForTab;
+  window.currentStatusFilter = currentStatusFilter;
+  window.itemsPerPage = itemsPerPage;
+  window.filteredApplications = filteredApplications;
+  window.filteredApiKeys = filteredApiKeys;
+  window.allApplications = allApplications;
+  window.allApiKeys = allApiKeys;
+  window.allAdmins = allAdmins;
+  window.currentApplicationsPage = currentApplicationsPage;
+  window.currentApiKeysPage = currentApiKeysPage;
+  window.currentAdminsPage = currentAdminsPage;
+});
