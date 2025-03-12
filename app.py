@@ -657,6 +657,12 @@ def health_check():
 def auth_success():
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
+
+    # Get the base URL from the request
+    base_url = request.url_root.rstrip('/')
+    # Force HTTPS
+    if base_url.startswith('http:'):
+        base_url = 'https:' + base_url[5:]
     
     # Pass the firebase config and server URL to the template
     return render_template(
@@ -667,7 +673,7 @@ def auth_success():
         storage_bucket=firebase_config.get("storageBucket", ""),
         messaging_sender_id=firebase_config.get("messagingSenderId", ""),
         app_id=firebase_config["appId"],
-        server_url=request.url_root.rstrip('/')
+        server_url=base_url
     )
 
 @app.route('/check-admin-status', methods=['GET'])
