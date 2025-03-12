@@ -1,0 +1,134 @@
+<h4>Method 1: Firebase Token Authentication</h4>
+<p>Use the token shown above in the Authorization header for programmatic API access. This token is valid for 60 minutes and must be refreshed periodically.</p>
+
+<div class="accordion" id="token-examples">
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-curl">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-curl" aria-expanded="true" aria-controls="collapse-curl">
+                cURL Example
+            </button>
+        </h5>
+        <div id="collapse-curl" class="accordion-collapse collapse show" aria-labelledby="heading-curl" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-F "file=@your_image.jpg"</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-python">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-python" aria-expanded="false" aria-controls="collapse-python">
+                Python Example
+            </button>
+        </h5>
+        <div id="collapse-python" class="accordion-collapse collapse" aria-labelledby="heading-python" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <pre><code>import requests
+
+# Using the provided Python client
+python client.py --server {{ server_url }} --auth-token YOUR_TOKEN --image "path/to/image.jpg" --output-dir "./results"
+
+# Direct API call with requests
+token = "YOUR_TOKEN"  # The token from above
+url = "{{ server_url }}/process"
+files = {"file": open("path/to/image.jpg", "rb")}
+headers = {"Authorization": f"Bearer {token}"}
+
+response = requests.post(url, headers=headers, files=files)
+result = response.json()
+print(result)</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-javascript">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-javascript" aria-expanded="false" aria-controls="collapse-javascript">
+                JavaScript Example
+            </button>
+        </h5>
+        <div id="collapse-javascript" class="accordion-collapse collapse" aria-labelledby="heading-javascript" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <pre><code>// Browser example using fetch API
+async function processImage(imageFile, token) {
+    const formData = new FormData();
+    formData.append('file', imageFile);
+    
+    const response = await fetch('{{ server_url }}/process', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        },
+        body: formData
+    });
+    
+    return await response.json();
+}
+
+// Node.js example using axios
+const axios = require('axios');
+const fs = require('fs');
+const FormData = require('form-data');
+
+async function processImage(imagePath, token) {
+    const formData = new FormData();
+    formData.append('file', fs.createReadStream(imagePath));
+    
+    const response = await axios.post('{{ server_url }}/process', formData, {
+        headers: {
+            ...formData.getHeaders(),
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    
+    return response.data;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-custom-prompt">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-custom-prompt" aria-expanded="false" aria-controls="collapse-custom-prompt">
+                Using Custom Prompts
+            </button>
+        </h5>
+        <div id="collapse-custom-prompt" class="accordion-collapse collapse" aria-labelledby="heading-custom-prompt" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <p>You can specify a custom prompt template by adding a <code>prompt</code> parameter:</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-F "file=@your_image.jpg" \
+-F "prompt=SLTPvM_default.yaml"</code></pre>
+                
+                <p>Available prompt templates can be viewed at: <a href="{{ server_url }}/prompts-ui" target="_blank">{{ server_url }}/prompts-ui</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-custom-engines">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-custom-engines" aria-expanded="false" aria-controls="collapse-custom-engines">
+                Specifying OCR Engines
+            </button>
+        </h5>
+        <div id="collapse-custom-engines" class="accordion-collapse collapse" aria-labelledby="heading-custom-engines" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <p>You can specify which OCR engines to use (default is both gemini-1.5-pro and gemini-2.0-flash):</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-F "file=@your_image.jpg" \
+-F "engines=gemini-1.5-pro"</code></pre>
+                
+                <p>Or specify multiple engines:</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+-H "Authorization: Bearer YOUR_TOKEN" \
+-F "file=@your_image.jpg" \
+-F "engines=gemini-1.5-pro" \
+-F "engines=gemini-2.0-flash"</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,181 @@
+<h4>Method 2: API Key Authentication</h4>
+<p>If you have permission to create API keys, you can use long-lived API keys for programmatic access without dealing with token refreshes.</p>
+<p><a href="#" id="go-to-api-keys" class="btn btn-primary btn-sm">Manage API Keys</a></p>
+
+<div class="accordion" id="apikey-examples">
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-curl-apikey">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-curl-apikey" aria-expanded="true" aria-controls="collapse-curl-apikey">
+                cURL Example
+            </button>
+        </h5>
+        <div id="collapse-curl-apikey" class="accordion-collapse collapse show" aria-labelledby="heading-curl-apikey" data-bs-parent="#apikey-examples">
+            <div class="accordion-body">
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+-H "X-API-Key: YOUR_API_KEY" \
+-F "file=@your_image.jpg"</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-python-apikey">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-python-apikey" aria-expanded="false" aria-controls="collapse-python-apikey">
+                Python Example
+            </button>
+        </h5>
+        <div id="collapse-python-apikey" class="accordion-collapse collapse" aria-labelledby="heading-python-apikey" data-bs-parent="#apikey-examples">
+            <div class="accordion-body">
+                <pre><code>import requests
+
+# Using the provided Python client
+python client.py --server {{ server_url }} --api-key YOUR_API_KEY --image "path/to/image.jpg" --output-dir "./results"
+
+# Direct API call with requests
+api_key = "YOUR_API_KEY"
+url = "{{ server_url }}/process"
+files = {"file": open("path/to/image.jpg", "rb")}
+headers = {"X-API-Key": api_key}
+
+response = requests.post(url, headers=headers, files=files)
+result = response.json()
+print(result)</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-javascript-apikey">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-javascript-apikey" aria-expanded="false" aria-controls="collapse-javascript-apikey">
+                JavaScript Example
+            </button>
+        </h5>
+        <div id="collapse-javascript-apikey" class="accordion-collapse collapse" aria-labelledby="heading-javascript-apikey" data-bs-parent="#apikey-examples">
+            <div class="accordion-body">
+                <pre><code>// Browser example using fetch API
+async function processImage(imageFile, apiKey) {
+    const formData = new FormData();
+    formData.append('file', imageFile);
+    
+    const response = await fetch('{{ server_url }}/process', {
+        method: 'POST',
+        headers: {
+            'X-API-Key': apiKey
+        },
+        body: formData
+    });
+    
+    return await response.json();
+}
+
+// Node.js example using axios
+const axios = require('axios');
+const fs = require('fs');
+const FormData = require('form-data');
+
+async function processImage(imagePath, apiKey) {
+    const formData = new FormData();
+    formData.append('file', fs.createReadStream(imagePath));
+    
+    const response = await axios.post('{{ server_url }}/process', formData, {
+        headers: {
+            ...formData.getHeaders(),
+            'X-API-Key': apiKey
+        }
+    });
+    
+    return response.data;
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-batch-processing">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-batch-processing" aria-expanded="false" aria-controls="collapse-batch-processing">
+                Batch Processing
+            </button>
+        </h5>
+        <div id="collapse-batch-processing" class="accordion-collapse collapse" aria-labelledby="heading-batch-processing" data-bs-parent="#apikey-examples">
+            <div class="accordion-body">
+                <p>Python script for batch processing multiple files:</p>
+                <pre><code>import requests
+import os
+import json
+from pathlib import Path
+
+API_KEY = "YOUR_API_KEY"
+SERVER_URL = "{{ server_url }}/process"
+INPUT_DIR = "path/to/images"
+OUTPUT_DIR = "path/to/results"
+
+# Create output directory if it doesn't exist
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# Process all images in the input directory
+for image_path in Path(INPUT_DIR).glob('*.jpg'):
+    filename = image_path.name
+    print(f"Processing {filename}...")
+    
+    # Prepare the request
+    headers = {"X-API-Key": API_KEY}
+    files = {"file": open(image_path, "rb")}
+    
+    # Send the request
+    response = requests.post(SERVER_URL, headers=headers, files=files)
+    
+    # Save the result
+    if response.status_code == 200:
+        result = response.json()
+        output_path = os.path.join(OUTPUT_DIR, f"{image_path.stem}_result.json")
+        with open(output_path, 'w') as f:
+            json.dump(result, f, indent=2)
+        print(f"  ✓ Result saved to {output_path}")
+    else:
+        print(f"  ✗ Error: {response.status_code} {response.text}")</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-api-details">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-api-details" aria-expanded="false" aria-controls="collapse-api-details">
+                API Response Format
+            </button>
+        </h5>
+        <div id="collapse-api-details" class="accordion-collapse collapse" aria-labelledby="heading-api-details" data-bs-parent="#apikey-examples">
+            <div class="accordion-body">
+                <p>The API returns a JSON response with the following structure:</p>
+                <pre><code>{
+"filename": "example.jpg",
+"ocr_info": {
+    "gemini-1.5-pro": {
+    "ocr_text": "...",
+    "cost_in": 0.0,
+    "cost_out": 0.0,
+    "total_cost": 0.0,
+    "rates_in": 0.0,
+    "rates_out": 0.0,
+    "tokens_in": 0,
+    "tokens_out": 0
+    },
+    "gemini-2.0-flash": {
+    ...
+    }
+},
+"parsing_info": {
+    "model": "gemini-2-0-flash",
+    "input": 0,
+    "output": 0,
+    "cost_in": 0.0,
+    "cost_out": 0.0
+},
+"ocr": "...",
+"formatted_json": {
+    // Structured data extracted from the image
+}
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

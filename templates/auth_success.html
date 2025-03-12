@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Authentication Successful</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth_success.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Authentication Successful</h1>
+        <p>You are now authenticated to use the VoucherVision API.</p>
+      </div>
+      
+      <div class="user-info">
+        <p><strong>Signed in as:</strong> <span id="user-email">Loading...</span></p>
+        <div>
+          <button id="logout-btn" class="btn-logout">Sign Out</button>
+          <!-- Admin button will be added here dynamically if user is admin -->
+        </div>
+      </div>
+      
+      <div class="token-container">
+        <h3>Your API Authentication Token</h3>
+        <p>Use this token in your API requests by setting the Authorization header to: <code>Bearer YOUR_TOKEN</code></p>
+        <pre id="token">Loading your token...</pre>
+        <div class="expiry-info">Token valid for 60 minutes. The token will auto-refresh while this page is open.</div>
+        <div class="error-message" id="error-message"></div>
+        <div class="success-message" id="success-message"></div>
+        <button id="copy-token-btn" class="copy-btn">Copy Token</button>
+        <button id="refresh-token-btn" class="copy-btn ms-2">Refresh Token</button>
+      </div>
+      
+      <div class="usage-instructions">
+        <h3>Using the VoucherVision API</h3>
+        <p>There are two ways to authenticate with the VoucherVision API:</p>
+        
+        <ul class="nav nav-tabs" id="auth-methods" role="tablist">
+            <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="token-tab" data-bs-toggle="tab" data-bs-target="#token-content" type="button" role="tab" aria-controls="token-content" aria-selected="true">Firebase Token Authentication</button>
+            </li>
+            <li class="nav-item" role="presentation">
+            <button class="nav-link" id="apikey-tab" data-bs-toggle="tab" data-bs-target="#apikey-content" type="button" role="tab" aria-controls="apikey-content" aria-selected="false">API Key Authentication</button>
+            </li>
+        </ul>
+        
+        <div class="tab-content mt-3" id="auth-methods-content">
+            <div class="tab-pane fade show active" id="token-content" role="tabpanel" aria-labelledby="token-tab">
+                {% include 'token_auth_instructions.html' %}
+            </div>
+            
+            <div class="tab-pane fade" id="apikey-content" role="tabpanel" aria-labelledby="apikey-tab">
+                {% include 'apikey_auth_instructions.html' %}
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "{{ api_key }}",
+        authDomain: "{{ auth_domain }}",
+        projectId: "{{ project_id }}",
+        storageBucket: "{{ storage_bucket }}",
+        messagingSenderId: "{{ messaging_sender_id }}",
+        appId: "{{ app_id }}"
+      };
+      
+      // Server URL for API calls
+      const serverUrl = "{{ server_url }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/auth_success.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/tabs_init.js') }}"></script>
+  </body>
+</html>
