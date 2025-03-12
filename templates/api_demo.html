@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoucherVision API Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            color: #2E7D32;
+        }
+        .card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow: auto;
+            max-height: 500px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            background-color: #ddd;
+            cursor: pointer;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+        }
+        .tab.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .error {
+            color: #D32F2F;
+            background-color: #FFEBEE;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .loading {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+        .logs {
+            background-color: #111;
+            color: #eee;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 4px;
+            height: 150px;
+            overflow: auto;
+            margin-top: 20px;
+        }
+        .log-entry {
+            margin: 0;
+            padding: 2px 0;
+        }
+        .log-entry.info {
+            color: #8bc34a;
+        }
+        .log-entry.error {
+            color: #f44336;
+        }
+        .log-entry.warn {
+            color: #ff9800;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .note {
+            background-color: #E3F2FD;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .options-section {
+            border-top: 1px solid #ddd;
+            margin-top: 15px;
+            padding-top: 15px;
+        }
+        #corsStatus {
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .cors-success {
+            background-color: #C8E6C9;
+            color: #2E7D32;
+        }
+        .cors-error {
+            background-color: #FFCDD2;
+            color: #C62828;
+        }
+        .user-info-banner {
+            background-color: #E8F5E9;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .auth-link {
+            color: #388E3C;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-info {
+            background-color: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 10px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <script>
+        // Authentication details passed from the server
+        const userEmail = "{{ user_email|default('', true) }}";
+        const authToken = "{{ auth_token|default('', true) }}";
+        const apiKey = "{{ api_key|default('', true) }}";
+        const hasApiKeys = JSON.parse("{{ 'true' if has_api_keys else 'false' }}");
+        const serverUrl = "{{ server_url|default('https://vouchervision-go-738307415303.us-central1.run.app', true) }}";
+    </script>
+    
+    <h1>VoucherVision API Demo</h1>
+
+    <div class="user-info-banner">
+        <p>Signed in as: <strong>{{ user_email }}</strong></p>
+        <a href="/auth-success" class="auth-link">Return to Authentication Page</a>
+    </div>
+    
+    <div class="card">
+        <h2>API Configuration</h2>
+        <div class="form-group">
+            <label for="apiKeyInput">API Key:</label>
+            <input type="text" id="apiKeyInput" placeholder="Enter your API key">
+        </div>
+        <div class="form-group">
+            <label for="serverUrlInput">Server URL:</label>
+            <input type="text" id="serverUrlInput" value="https://vouchervision-go-738307415303.us-central1.run.app" placeholder="Enter server URL">
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" id="verboseCheckbox" checked>
+            <label for="verboseCheckbox">Enable verbose logging</label>
+        </div>
+        <button id="testCorsButton">Test CORS Support</button>
+        <div id="corsStatus"></div>
+    </div>
+    
+    <div class="tabs">
+        <div class="tab active" data-tab="file-upload">Upload Image</div>
+        <div class="tab" data-tab="image-url">Image URL</div>
+    </div>
+    
+    <div class="card tab-content active" id="file-upload-tab">
+        <h2>Process Image from File</h2>
+        
+        <div class="form-group">
+            <label for="imageInput">Select Image:</label>
+            <input type="file" id="imageInput" accept="image/*">
+        </div>
+        
+        <div class="options-section">
+            <h3>Options</h3>
+            <div class="form-group">
+                <label for="promptSelect">Prompt Template:</label>
+                <select id="promptSelect">
+                    <option value="SLTPvM_default.yaml">SLTPvM_default.yaml</option>
+                    <option value="SLTPvM_default_chromosome.yaml">SLTPvM_default_chromosome.yaml</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>OCR Engines:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="engineGemini15" checked>
+                    <label for="engineGemini15">gemini-1.5-pro</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="engineGemini20" checked>
+                    <label for="engineGemini20">gemini-2.0-flash</label>
+                </div>
+            </div>
+        </div>
+        
+        <button id="processButton">Process Image</button>
+    </div>
+    
+    <div class="card tab-content" id="image-url-tab">
+        <h2>Process Image from URL</h2>
+        
+        <div class="form-group">
+            <label for="imageUrlInput">Image URL:</label>
+            <input type="text" id="imageUrlInput" placeholder="https://example.com/image.jpg" value="https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg">
+        </div>
+        
+        <div class="options-section">
+            <h3>Options</h3>
+            <div class="form-group">
+                <label for="promptSelectUrl">Prompt Template:</label>
+                <select id="promptSelectUrl">
+                    <option value="SLTPvM_default.yaml">SLTPvM_default.yaml</option>
+                    <option value="SLTPvM_default_chromosome.yaml">SLTPvM_default_chromosome.yaml</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>OCR Engines:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="engineGemini15Url" checked>
+                    <label for="engineGemini15Url">gemini-1.5-pro</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="engineGemini20Url" checked>
+                    <label for="engineGemini20Url">gemini-2.0-flash</label>
+                </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="useDirectUrlEndpoint" checked>
+                <label for="useDirectUrlEndpoint">Try using /process-url endpoint first (fallback to workaround if unavailable)</label>
+            </div>
+        </div>
+        
+        <button id="processUrlButton">Process Image URL</button>
+    </div>
+    
+    <div class="card">
+        <h2>Console Log</h2>
+        <div class="logs" id="consoleLog"></div>
+    </div>
+    
+    <div class="card">
+        <h2>Results</h2>
+        <div id="results">
+            <p>Results will appear here after processing.</p>
+        </div>
+    </div>
+
+    <script>
+        // Custom logging to display in the UI
+        const consoleLogElement = document.getElementById('consoleLog');
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            warn: console.warn
+        };
+        
+        function addLogEntry(type, ...args) {
+            // Call original console method
+            originalConsole[type](...args);
+            
+            // Add to UI log
+            const logEntry = document.createElement('p');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = `[${type.toUpperCase()}] ${args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg
+            ).join(' ')}`;
+            
+            consoleLogElement.appendChild(logEntry);
+            consoleLogElement.scrollTop = consoleLogElement.scrollHeight;
+        }
+        
+        // Override console methods
+        console.log = (...args) => addLogEntry('info', ...args);
+        console.error = (...args) => addLogEntry('error', ...args);
+        console.warn = (...args) => addLogEntry('warn', ...args);
+        
+        /**
+         * Process an image using the VoucherVision API with a local file input
+         */
+        async function processLocalImage(file, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+            const serverUrl = document.getElementById('serverUrlInput').value;
+            const endpoint = '/process';
+            
+            if (verbose) {
+                console.log(`Processing local file: ${file.name}`);
+                console.log(`Server URL: ${serverUrl}${endpoint}`);
+            }
+            
+            // Create a FormData object
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            // Add engines as separate form fields with the same name
+            if (engines && engines.length) {
+                engines.forEach(engine => {
+                    formData.append('engines', engine);
+                });
+                
+                if (verbose) {
+                    console.log(`Using engines: ${engines.join(', ')}`);
+                }
+            }
+            
+            // Add prompt if specified
+            if (prompt) {
+                formData.append('prompt', prompt);
+                
+                if (verbose) {
+                    console.log(`Using prompt: ${prompt}`);
+                }
+            }
+            
+            // Prepare headers
+            const headers = {
+                'X-API-Key': apiKey
+                // No Content-Type header - let the browser set it for FormData
+            };
+            
+            if (verbose) {
+                console.log('Sending request with headers:', headers);
+                console.log(`File details: ${file.name}, ${file.type}, ${file.size} bytes`);
+            }
+            
+            try {
+                // Send the request
+                const response = await fetch(`${serverUrl}${endpoint}`, {
+                    method: 'POST',
+                    headers: headers,
+                    body: formData
+                });
+                
+                if (verbose) {
+                    console.log(`Response status: ${response.status}`);
+                    console.log('Response headers:', Object.fromEntries([...response.headers.entries()]));
+                }
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    if (verbose) {
+                        console.error(`Request failed: ${response.status} - ${errorText}`);
+                    }
+                    throw new Error(`API request failed: ${response.status} - ${errorText}`);
+                }
+                
+                const result = await response.json();
+                
+                if (verbose) {
+                    console.log('Request successful!');
+                }
+                
+                return result;
+            } catch (error) {
+                if (verbose) {
+                    console.error('Error in processLocalImage:', error);
+                }
+                throw error;
+            }
+        }
+
+        /**
+         * Process an image using the VoucherVision API with an image URL
+         */
+        async function processImageUrl(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+            const serverUrl = document.getElementById('serverUrlInput').value;
+            const endpoint = '/process-url';
+            
+            if (verbose) {
+                console.log(`Processing image URL: ${imageUrl}`);
+                console.log(`Server URL: ${serverUrl}${endpoint}`);
+            }
+            
+            // Create request data
+            const requestData = {
+                image_url: imageUrl
+            };
+            
+            // Add engines if specified
+            if (engines && engines.length) {
+                requestData.engines = engines;
+                
+                if (verbose) {
+                    console.log(`Using engines: ${engines.join(', ')}`);
+                }
+            }
+            
+            // Add prompt if specified
+            if (prompt) {
+                requestData.prompt = prompt;
+                
+                if (verbose) {
+                    console.log(`Using prompt: ${prompt}`);
+                }
+            }
+            
+            // Prepare headers
+            const headers = {
+                'X-API-Key': apiKey,
+                'Content-Type': 'application/json'
+            };
+            
+            if (verbose) {
+                console.log('Sending request with headers:', headers);
+                console.log('Request data:', requestData);
+            }
+            
+            try {
+                // Send the request
+                const response = await fetch(`${serverUrl}${endpoint}`, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(requestData)
+                });
+                
+                if (verbose) {
+                    console.log(`Response status: ${response.status}`);
+                    console.log('Response headers:', Object.fromEntries([...response.headers.entries()]));
+                }
+                
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    if (verbose) {
+                        console.error(`Request failed: ${response.status} - ${errorText}`);
+                    }
+                    throw new Error(`API request failed: ${response.status} - ${errorText}`);
+                }
+                
+                const result = await response.json();
+                
+                if (verbose) {
+                    console.log('Request successful!');
+                }
+                
+                return result;
+            } catch (error) {
+                if (verbose) {
+                    console.error('Error in processImageUrl:', error);
+                }
+                throw error;
+            }
+        }
+
+        /**
+         * Process an image URL by first downloading it and then uploading to the API
+         * This is a workaround if the server doesn't support the /process-url endpoint
+         */
+        async function processImageUrlWorkaround(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+            try {
+                if (verbose) {
+                    console.log(`Using URL download workaround for: ${imageUrl}`);
+                    console.log('This method first downloads the image then uploads it to the API');
+                }
+                
+                // First fetch the image - note that this might not work for cross-origin images
+                // without proper CORS headers on the image server
+                const imageResponse = await fetch(imageUrl);
+                if (!imageResponse.ok) {
+                    const errorMessage = `Failed to fetch image: ${imageResponse.status}`;
+                    if (verbose) {
+                        console.error(errorMessage);
+                    }
+                    throw new Error(errorMessage);
+                }
+                
+                // Get the image as a blob
+                const imageBlob = await imageResponse.blob();
+                
+                if (verbose) {
+                    console.log(`Downloaded image: ${imageBlob.type}, ${imageBlob.size} bytes`);
+                }
+                
+                // Get filename from URL
+                const filename = imageUrl.split('/').pop() || 'image.jpg';
+                
+                // Create a File object from the blob
+                const file = new File([imageBlob], filename, { type: imageBlob.type });
+                
+                if (verbose) {
+                    console.log(`Created file object: ${file.name}`);
+                }
+                
+                // Use the processLocalImage function to upload the file
+                return await processLocalImage(file, apiKey, engines, prompt, verbose);
+            } catch (error) {
+                if (verbose) {
+                    console.error('Error in processImageUrlWorkaround:', error);
+                }
+                throw error;
+            }
+        }
+
+        // Test CORS support
+        async function testCorsSupport() {
+            const serverUrl = document.getElementById('serverUrlInput').value;
+            const corsStatusElement = document.getElementById('corsStatus');
+            const verbose = document.getElementById('verboseCheckbox').checked;
+            
+            try {
+                if (verbose) {
+                    console.log(`Testing CORS support for: ${serverUrl}/cors-test`);
+                }
+                
+                corsStatusElement.textContent = 'Testing CORS...';
+                corsStatusElement.className = '';
+                
+                const response = await fetch(`${serverUrl}/cors-test`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (verbose) {
+                    console.log(`CORS test response status: ${response.status}`);
+                    console.log('CORS test response headers:', Object.fromEntries([...response.headers.entries()]));
+                }
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    corsStatusElement.textContent = 'CORS is properly configured!';
+                    corsStatusElement.className = 'cors-success';
+                    
+                    if (verbose) {
+                        console.log('CORS test successful:', result);
+                    }
+                    
+                    return true;
+                } else {
+                    corsStatusElement.textContent = `CORS test failed: ${response.status}`;
+                    corsStatusElement.className = 'cors-error';
+                    
+                    if (verbose) {
+                        console.error(`CORS test failed: ${response.status}`);
+                    }
+                    
+                    return false;
+                }
+            } catch (error) {
+                corsStatusElement.textContent = `CORS test error: ${error.message}`;
+                corsStatusElement.className = 'cors-error';
+                
+                if (verbose) {
+                    console.error('CORS test error:', error);
+                }
+                
+                return false;
+            }
+        }
+
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and tab contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding tab content
+                const tabId = tab.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get DOM elements
+            const fileInput = document.getElementById('imageInput');
+            const processButton = document.getElementById('processButton');
+            const urlInput = document.getElementById('imageUrlInput');
+            const processUrlButton = document.getElementById('processUrlButton');
+            const testCorsButton = document.getElementById('testCorsButton');
+            const resultsDiv = document.getElementById('results');
+            const verboseCheckbox = document.getElementById('verboseCheckbox');
+            
+            // CORS test button
+            if (testCorsButton) {
+                testCorsButton.addEventListener('click', testCorsSupport);
+            }
+            
+            // Process local file
+            if (processButton) {
+                processButton.addEventListener('click', async () => {
+                    if (!fileInput.files.length) {
+                        alert('Please select a file first');
+                        return;
+                    }
+                    
+                    const apiKey = document.getElementById('apiKeyInput').value;
+                    if (!apiKey) {
+                        alert('Please enter your API key');
+                        return;
+                    }
+                    
+                    // Get options
+                    const isVerbose = verboseCheckbox.checked;
+                    const prompt = document.getElementById('promptSelect').value;
+                    const engines = [];
+                    
+                    if (document.getElementById('engineGemini15').checked) {
+                        engines.push('gemini-1.5-pro');
+                    }
+                    
+                    if (document.getElementById('engineGemini20').checked) {
+                        engines.push('gemini-2.0-flash');
+                    }
+                    
+                    if (engines.length === 0) {
+                        alert('Please select at least one OCR engine');
+                        return;
+                    }
+                    
+                    try {
+                        resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Processing...</p></div>';
+                        
+                        const result = await processLocalImage(
+                            fileInput.files[0], 
+                            apiKey,
+                            engines,
+                            prompt,
+                            isVerbose
+                        );
+                        
+                        resultsDiv.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                    } catch (error) {
+                        resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                    }
+                });
+            }
+            
+            // Process image URL
+            if (processUrlButton) {
+                processUrlButton.addEventListener('click', async () => {
+                    const imageUrl = urlInput.value;
+                    if (!imageUrl) {
+                        alert('Please enter an image URL');
+                        return;
+                    }
+                    
+                    const apiKey = document.getElementById('apiKeyInput').value;
+                    if (!apiKey) {
+                        alert('Please enter your API key');
+                        return;
+                    }
+                    
+                    // Get options
+                    const isVerbose = verboseCheckbox.checked;
+                    const prompt = document.getElementById('promptSelectUrl').value;
+                    const useDirectUrl = document.getElementById('useDirectUrlEndpoint').checked;
+                    const engines = [];
+                    
+                    if (document.getElementById('engineGemini15Url').checked) {
+                        engines.push('gemini-1.5-pro');
+                    }
+                    
+                    if (document.getElementById('engineGemini20Url').checked) {
+                        engines.push('gemini-2.0-flash');
+                    }
+                    
+                    if (engines.length === 0) {
+                        alert('Please select at least one OCR engine');
+                        return;
+                    }
+                    
+                    try {
+                        resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Processing...</p></div>';
+                        
+                        let result;
+                        
+                        if (useDirectUrl) {
+                            // Try direct URL endpoint first, fallback to workaround if needed
+                            try {
+                                if (isVerbose) {
+                                    console.log('Attempting to use direct URL endpoint first');
+                                }
+                                
+                                result = await processImageUrl(
+                                    imageUrl,
+                                    apiKey,
+                                    engines,
+                                    prompt,
+                                    isVerbose
+                                );
+                            } catch (directUrlError) {
+                                if (isVerbose) {
+                                    console.warn('Direct URL processing failed, trying workaround:', directUrlError);
+                                    resultsDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Direct URL processing failed, trying workaround...</p></div>';
+                                }
+                                
+                                // Fallback to the workaround method
+                                result = await processImageUrlWorkaround(
+                                    imageUrl,
+                                    apiKey,
+                                    engines,
+                                    prompt,
+                                    isVerbose
+                                );
+                            }
+                        } else {
+                            // Use the workaround method directly
+                            if (isVerbose) {
+                                console.log('Using URL workaround method as requested');
+                            }
+                            
+                            result = await processImageUrlWorkaround(
+                                imageUrl,
+                                apiKey,
+                                engines,
+                                prompt,
+                                isVerbose
+                            );
+                        }
+                        
+                        resultsDiv.innerHTML = '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                    } catch (error) {
+                        resultsDiv.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+                    }
+                });
+            }
+
+            if (authToken) {
+                // For the Firebase token authentication, add this info
+                const authInfo = document.createElement('div');
+                authInfo.className = 'auth-info';
+                authInfo.innerHTML = 'Using your authentication token from session. You don\'t need to enter an API key.';
+                
+                // Insert before the API Key input
+                const apiKeyInput = document.getElementById('apiKeyInput');
+                apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+                
+                // Create Bearer token header for requests
+                originalProcessLocalImage = processLocalImage;
+                processLocalImage = function(file, apiKey, engines, prompt, verbose) {
+                    return originalProcessLocalImage(file, apiKey || authToken, engines, prompt, verbose);
+                };
+                
+                originalProcessImageUrl = processImageUrl;
+                processImageUrl = function(imageUrl, apiKey, engines, prompt, verbose) {
+                    return originalProcessImageUrl(imageUrl, apiKey || authToken, engines, prompt, verbose);
+                };
+                
+                originalProcessImageUrlWorkaround = processImageUrlWorkaround;
+                processImageUrlWorkaround = function(imageUrl, apiKey, engines, prompt, verbose) {
+                    return originalProcessImageUrlWorkaround(imageUrl, apiKey || authToken, engines, prompt, verbose);
+                };
+                
+                console.log('Authentication token loaded from session.');
+            } else if (apiKey) {
+                // If API key is available
+                document.getElementById('apiKeyInput').value = apiKey;
+                console.log('API key loaded from session.');
+            } else if (hasApiKeys) {
+                const authInfo = document.createElement('div');
+                authInfo.className = 'auth-info';
+                authInfo.innerHTML = 'You have API keys available. <a href="/api-key-management">Manage your API keys</a>';
+                
+                // Insert before the API Key input
+                const apiKeyInput = document.getElementById('apiKeyInput');
+                apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+            }
+            
+            // Set the server URL from the template
+            if (serverUrl) {
+                document.getElementById('serverUrlInput').value = serverUrl;
+            }
+            
+            // Log that the script is loaded
+            console.log('VoucherVision API client script loaded and initialized');
+            console.log('Verbose logging is enabled by default');
+        });
+    </script>
+</body>
+</html>

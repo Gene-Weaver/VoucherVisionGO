@@ -100,6 +100,28 @@ pre {
 .btn-admin:hover {
   background-color: #3367d6;
 }
+.api-demo-link {
+  background-color: #f0f8ff;
+  border-left: 4px solid #4285f4;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #4285f4;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #3367d6;
+}
 .usage-instructions {
   background-color: #f8f9fa;
   padding: 20px;

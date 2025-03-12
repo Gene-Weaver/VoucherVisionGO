@@ -6,13 +6,16 @@ import datetime
 import tempfile
 import threading
 from flask import Flask, request, jsonify, render_template_string, redirect, make_response, render_template
+from flask_cors import CORS
 import logging
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
 from collections import OrderedDict
 from pathlib import Path
 import yaml
 import re
 from functools import wraps
+from io import BytesIO
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
@@ -559,6 +562,7 @@ class VoucherVisionProcessor:
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
+CORS(app)  # This enables CORS for all routes
 
 # Create a custom encoder that preserves order
 class OrderedJsonEncoder(json.JSONEncoder):
@@ -605,13 +609,32 @@ def auth_check():
         'message': 'Your authentication token is valid.'
     }), 200
     
-@app.route('/process', methods=['POST'])
+@app.route('/process', methods=['POST', 'OPTIONS'])
 @authenticated_route
 def process_image():
-    """API endpoint to process an image"""
+    """API endpoint to process an image with explicit CORS headers"""
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        return response
+    
+    # For POST requests, authenticate first
+    if not authenticate_request(request):
+        # Create a response with authentication error
+        response = make_response(jsonify({'error': 'Unauthorized - Valid authentication required'}), 401)
+        # Add CORS headers to error response too
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    
+    # Now proceed with the actual request handling
     # Check if file is present in the request
     if 'file' not in request.files:
-        return jsonify({'error': 'No file provided'}), 400
+        response = make_response(jsonify({'error': 'No file provided'}), 400)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     
     file = request.files['file']
     
@@ -619,13 +642,178 @@ def process_image():
     engine_options = request.form.getlist('engines') if 'engines' in request.form else None
 
     # Get prompt from request if specified, otherwise None (use default)
-    prompt = request.form.get('prompt')  if 'prompt' in request.form else None
+    prompt = request.form.get('prompt') if 'prompt' in request.form else None
     
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(file=file, engine_options=engine_options, prompt=prompt)
     
-    # return jsonify(results), status_code
-    return json.dumps(results, cls=OrderedJsonEncoder), status_code, {'Content-Type': 'application/json'}
+    # Create response with CORS headers
+    response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+    response.headers['Content-Type'] = 'application/json'
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    
+    return response
+
+@app.route('/process-url', methods=['POST', 'OPTIONS'])
+@authenticated_route
+def process_image_by_url():
+    """API endpoint to process an image from a URL with CORS support"""
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+        response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
+        return response
+    
+    # Get JSON data from request
+    data = request.get_json()
+    
+    if not data or 'image_url' not in data:
+        response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    
+    image_url = data['image_url']
+    
+    # Get engine options from request if specified
+    engines = data.get('engines') if 'engines' in data else None
+
+    # Get prompt from request if specified, otherwise None (use default)
+    prompt = data.get('prompt')
+    
+    try:
+        # Download the image to a temporary location
+        import tempfile
+        import requests
+        from werkzeug.utils import secure_filename
+        import os
+        from io import BytesIO
+        from werkzeug.datastructures import FileStorage
+        
+        # Get the filename from the URL
+        filename = os.path.basename(image_url.split('?')[0])  # Remove query params if any
+        if not filename:
+            filename = "image.jpg"
+        
+        # Download the image
+        image_response = requests.get(image_url, stream=True)
+        if image_response.status_code != 200:
+            error_response = make_response(jsonify({
+                'error': f'Failed to download image from URL: {image_response.status_code}'
+            }), 400)
+            error_response.headers.add('Access-Control-Allow-Origin', '*')
+            return error_response
+        
+        # Save to a temporary file
+        temp_dir = tempfile.mkdtemp()
+        file_path = os.path.join(temp_dir, secure_filename(filename))
+        
+        with open(file_path, 'wb') as f:
+            for chunk in image_response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        
+        with open(file_path, 'rb') as f:
+            file_content = f.read()
+        
+        file_obj = FileStorage(
+            stream=BytesIO(file_content),
+            filename=filename,
+            content_type=image_response.headers.get('Content-Type', 'image/jpeg')
+        )
+        
+        # Process the image using the processor
+        results, status_code = app.config['processor'].process_image_request(
+            file=file_obj, 
+            engine_options=engines, 
+            prompt=prompt
+        )
+        
+        # Clean up the temporary file
+        try:
+            os.remove(file_path)
+            os.rmdir(temp_dir)
+        except:
+            pass
+        
+        # Create response with CORS headers
+        response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+        response.headers['Content-Type'] = 'application/json'
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+        
+    except Exception as e:
+        logger.exception(f"Error processing image from URL: {e}")
+        error_response = make_response(jsonify({'error': str(e)}), 500)
+        error_response.headers.add('Access-Control-Allow-Origin', '*')
+        return error_response
+
+@app.route('/api-demo', methods=['GET'])
+@authenticated_route
+def api_demo_page():
+    """Serve the API demo HTML page - restricted to authenticated users only"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        # Redirect to login page if not authenticated
+        return redirect('/login')
+    
+    user_email = user.get('email')
+    
+    # Get current authentication token if available
+    auth_token = None
+    # Check in Authorization header
+    auth_header = request.headers.get('Authorization', '')
+    if auth_header.startswith('Bearer '):
+        auth_token = auth_header.split('Bearer ')[1]
+    # If not in header, check in cookies
+    if not auth_token:
+        auth_token = request.cookies.get('auth_token')
+    
+    # Check for API key in header or query params
+    api_key = request.headers.get('X-API-Key') or request.args.get('api_key')
+    
+    # Check if user has API keys
+    has_api_keys = False
+    try:
+        keys_ref = db.collection('api_keys').where('owner', '==', user_email).where('active', '==', True).limit(1).get()
+        has_api_keys = len(list(keys_ref)) > 0
+    except:
+        pass
+    
+    # Get the base URL from the request
+    base_url = request.url_root.rstrip('/')
+    # Force HTTPS
+    if base_url.startswith('http:'):
+        base_url = 'https:' + base_url[5:]
+    
+    # Pass the user info and server URL to the template
+    return render_template(
+        'api_demo.html',
+        server_url=base_url,
+        user_email=user_email,
+        auth_token=auth_token,
+        api_key=api_key,
+        has_api_keys=has_api_keys
+    )
+
+@app.route('/cors-test', methods=['GET', 'OPTIONS'])
+def cors_test():
+    """Simple endpoint to test CORS configuration"""
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+        response.headers.add('Access-Control-Allow-Methods', 'GET')
+        response.headers.add('Access-Control-Max-Age', '3600')
+        return response
+        
+    return jsonify({
+        'status': 'ok',
+        'cors': 'enabled',
+        'message': 'If you can see this response in your browser or JavaScript app, CORS is working correctly.'
+    })
 
 @app.route('/test_json_order', methods=['GET'])
 # curl https://vouchervision-go-738307415303.us-central1.run.app/test_json_order
@@ -1879,6 +2067,12 @@ def api_key_management_ui():
     
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
+
+    # Get the base URL from the request
+    base_url = request.url_root.rstrip('/')
+    # Force HTTPS
+    if base_url.startswith('http:'):
+        base_url = 'https:' + base_url[5:]
     
     return render_template('api_key_management.html',
         api_key=firebase_config["apiKey"],
@@ -1887,7 +2081,7 @@ def api_key_management_ui():
         storage_bucket=firebase_config.get("storageBucket", ""),
         messaging_sender_id=firebase_config.get("messagingSenderId", ""),
         app_id=firebase_config["appId"],
-        server_url=request.url_root.rstrip('/')
+        server_url=base_url
     )
 
 @app.route('/api-keys', methods=['GET'])
