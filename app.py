@@ -558,7 +558,7 @@ class VoucherVisionProcessor:
 
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # Create a custom encoder that preserves order
 class OrderedJsonEncoder(json.JSONEncoder):
