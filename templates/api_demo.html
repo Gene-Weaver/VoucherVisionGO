@@ -201,6 +201,16 @@
         const apiKey = "{{ api_key|default('', true) }}";
         const hasApiKeys = JSON.parse("{{ 'true' if has_api_keys else 'false' }}");
         const serverUrl = "{{ server_url|default('https://vouchervision-go-738307415303.us-central1.run.app', true) }}";
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Debug auth information 
+            console.log("Authentication information loaded:");
+            console.log("- User Email:", "{{ user_email|default('Not provided', true) }}");
+            console.log("- Auth Token Present:", "{{ 'true' if auth_token else 'false' }}");
+            console.log("- API Key Present:", "{{ 'true' if api_key else 'false' }}");
+            console.log("- Has API Keys:", "{{ 'true' if has_api_keys else 'false' }}");
+        });
+
     </script>
     
     <h1>VoucherVision API Demo</h1>

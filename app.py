@@ -751,20 +751,19 @@ def process_image_by_url():
 
 @app.route('/api-demo', methods=['GET', 'POST'])
 def api_demo_page():
-    """Serve the API demo HTML page - with improved authentication handling"""
+    """Serve the API demo HTML page with improved authentication handling"""
     # For POST requests, get token from form data and set in cookie
     if request.method == 'POST':
         # Log all form data for debugging
         logger.info(f"POST to /api-demo with form keys: {list(request.form.keys())}")
         
+        # Get the auth token from the form data
         auth_token = request.form.get('auth_token')
+        logger.info(f"Auth token from form: {auth_token[:10]}... (length: {len(auth_token) if auth_token else 0})")
+        
         if auth_token:
             try:
                 # Verify the token is valid
-                logger.info(f"Received auth_token of length: {len(auth_token)}")
-                # Log first and last few characters for debugging (don't log the whole token!)
-                logger.info(f"Token prefix: {auth_token[:10]}..., suffix: ...{auth_token[-10:]}")
-                
                 decoded_token = auth.verify_id_token(auth_token)
                 user_email = decoded_token.get('email', 'unknown')
                 
@@ -789,7 +788,18 @@ def api_demo_page():
                 return jsonify({'error': f'Authentication failed: {str(e)}'}), 401
         else:
             logger.warning("POST to /api-demo without auth_token")
-            return jsonify({'error': 'Missing authentication token'}), 400
+            # Improved error response
+            error_html = """
+            <html>
+            <head><title>Authentication Error</title></head>
+            <body>
+                <h1>Authentication Error</h1>
+                <p>No authentication token was provided.</p>
+                <p>Please return to the <a href="/auth-success">authentication page</a> and try again.</p>
+            </body>
+            </html>
+            """
+            return error_html, 400, {'Content-Type': 'text/html'}
     
     # For GET requests, use existing authentication mechanism
     user = authenticate_request(request)
@@ -819,8 +829,8 @@ def api_demo_page():
     try:
         keys_ref = db.collection('api_keys').where('owner', '==', user_email).where('active', '==', True).limit(1).get()
         has_api_keys = len(list(keys_ref)) > 0
-    except:
-        pass
+    except Exception as e:
+        logger.warning(f"Error checking for API keys: {str(e)}")
     
     # Get the base URL from the request
     base_url = request.url_root.rstrip('/')
@@ -831,7 +841,7 @@ def api_demo_page():
     # Get Firebase configuration
     firebase_config = get_firebase_config()
     
-    # Pass the user info and server URL to the template
+    # Pass all necessary data to the template
     return render_template(
         'api_demo.html',
         server_url=base_url,

@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="card mt-4">
+      <div class="api-demo-link mb-4">
         <div class="card-header">
           <h5>API Demo</h5>
         </div>
@@ -77,6 +77,45 @@
     </div>
     
     <script>
+      // Function to get the current Firebase ID token and submit the form
+      async function submitApiDemoForm() {
+        try {
+          const user = firebase.auth().currentUser;
+          if (user) {
+            // Get a fresh token
+            const token = await user.getIdToken(true);
+            console.log("Token retrieved, length: " + token.length);
+            
+            // Set the token value in the form
+            document.getElementById('apiDemoAuthToken').value = token;
+            
+            // Log for debugging
+            console.log("Form will be submitted with token");
+            
+            // Submit the form
+            document.getElementById('apiDemoForm').submit();
+          } else {
+            console.error("No user is signed in");
+            alert('You must be logged in to access the API demo.');
+          }
+        } catch (error) {
+          console.error('Error getting auth token:', error);
+          alert('Authentication error: ' + error.message);
+        }
+      }
+
+      // Initialize the form on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        // Set up button click handler
+        const demoButton = document.getElementById('launchApiDemoBtn');
+        if (demoButton) {
+          demoButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            submitApiDemoForm();
+          });
+        }
+      });
+
       // Firebase configuration
       const firebaseConfig = {
         apiKey: "{{ api_key }}",
