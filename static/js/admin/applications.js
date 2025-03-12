@@ -57,8 +57,35 @@ function renderApplicationsPage(page) {
   document.getElementById('applications-table').style.display = 'table';
   
   pageItems.forEach(app => {
+    // Format dates
     const createdDate = app.created_at && app.created_at._seconds ? 
       new Date(app.created_at._seconds * 1000).toLocaleDateString() : 'Unknown';
+    
+    // Status badge for approval status
+    let statusBadge = '';
+    switch (app.status) {
+      case 'pending':
+        statusBadge = '<span class="badge badge-pending">Pending</span>';
+        break;
+      case 'approved':
+        statusBadge = '<span class="badge badge-approved">Approved</span>';
+        break;
+      case 'rejected':
+        statusBadge = '<span class="badge badge-rejected">Rejected</span>';
+        break;
+      default:
+        statusBadge = '<span class="badge">Unknown</span>';
+    }
+    
+    // API access badge (only for approved users)
+    let apiAccessBadge = '';
+    if (app.status === 'approved') {
+      if (app.api_key_access === true) {
+        apiAccessBadge = '<span class="badge badge-api-access ms-2" title="Has API key permission">🔑</span>';
+      } else {
+        apiAccessBadge = '<span class="badge badge-no-api-access ms-2" title="No API key permission">🔒</span>';
+      }
+    }
     
     const row = document.createElement('tr');
     
@@ -79,12 +106,9 @@ function renderApplicationsPage(page) {
       'Not specified';
     row.appendChild(purposeCell);
     
-    // Status column
+    // Status column with API access badge
     const statusCell = document.createElement('td');
-    const statusBadge = document.createElement('span');
-    statusBadge.textContent = app.status || 'pending';
-    statusBadge.className = 'badge badge-' + (app.status || 'pending');
-    statusCell.appendChild(statusBadge);
+    statusCell.innerHTML = statusBadge + ' ' + apiAccessBadge;
     row.appendChild(statusCell);
     
     // Created column
