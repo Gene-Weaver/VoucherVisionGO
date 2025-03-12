@@ -744,183 +744,22 @@ def application_rejected_page():
         app_id=firebase_config["appId"]
     )
 
-
-
 @app.route('/login', methods=['GET'])
 def login_page():
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
     
-    return render_template_string("""
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8">
-        <title>VoucherVision Login</title>
-        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-        <style>
-          /* Styles remain the same */
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h2>VoucherVision API</h2>
-            <p>Sign in to access the API</p>
-          </div>
-          
-          <div id="login-form">
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" class="form-control" placeholder="Email address">
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" class="form-control" placeholder="Password">
-            </div>
-            <div class="form-check mb-3">
-              <input class="form-check-input" type="checkbox" id="remember-me" checked>
-              <label class="form-check-label" for="remember-me">
-                Remember me
-              </label>
-            </div>
-            <button id="login-button" class="btn btn-primary">Sign In</button>
-            <div id="error-message" class="error-message"></div>
-            <div id="success-message" class="success-message"></div>
-            
-            <div class="toggle-link">
-              <p>Don't have an account? <a href="/signup">Apply for Access</a></p>
-              <p><a href="#" id="forgot-password">Forgot Password?</a></p>
-            </div>
-          </div>
-        </div>
-        
-        <script>
-          // Firebase configuration
-          const firebaseConfig = {
-            apiKey: "{{ api_key }}",
-            authDomain: "{{ auth_domain }}",
-            projectId: "{{ project_id }}",
-            storageBucket: "{{ storage_bucket }}",
-            messagingSenderId: "{{ messaging_sender_id }}",
-            appId: "{{ app_id }}"
-          };
-          
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          
-          // Set persistence based on remember me checkbox
-          // Default to LOCAL persistence (survives browser restarts)
-          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-          
-          // Check if user is already signed in
-          firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-              // Check the user's approval status
-              checkApprovalStatus(user);
-            }
-          });
-          
-          // Function to check user approval status
-          async function checkApprovalStatus(user) {
-            try {
-              // Get ID token for API call
-              const idToken = await user.getIdToken();
-              
-              // Check user status
-              const response = await fetch('/check-approval-status', {
-                headers: {
-                  'Authorization': `Bearer ${idToken}`
-                }
-              });
-              
-              if (response.ok) {
-                const data = await response.json();
-                
-                if (data.status === 'approved') {
-                  // Store user info
-                  localStorage.setItem('auth_user_email', user.email);
-                  
-                  // Get the latest ID token and save refresh token
-                  user.getIdToken(true).then(function(idToken) {
-                    localStorage.setItem('auth_id_token', idToken);
-                    
-                    // Also store user refresh token for later use
-                    if (user.refreshToken) {
-                      localStorage.setItem('auth_refresh_token', user.refreshToken);
-                    }
-                    
-                    // Redirect to success page
-                    window.location.href = '/auth-success';
-                  });
-                } else if (data.status === 'pending') {
-                  // Redirect to pending approval page
-                  window.location.href = '/pending-approval';
-                } else if (data.status === 'rejected') {
-                  // Redirect to rejected page
-                  window.location.href = '/application-rejected';
-                }
-              }
-            } catch (error) {
-              console.error('Error checking approval status:', error);
-            }
-          }
-          
-          // Email/Password login
-          document.getElementById('login-button').addEventListener('click', function() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const rememberMe = document.getElementById('remember-me').checked;
-            const errorElement = document.getElementById('error-message');
-            const successElement = document.getElementById('success-message');
-            
-            errorElement.style.display = 'none';
-            successElement.style.display = 'none';
-            
-            if (!email || !password) {
-              errorElement.textContent = 'Please enter both email and password';
-              errorElement.style.display = 'block';
-              return;
-            }
-            
-            // Set persistence type based on remember me
-            const persistenceType = rememberMe 
-              ? firebase.auth.Auth.Persistence.LOCAL  // Survives browser restart
-              : firebase.auth.Auth.Persistence.SESSION; // Until tab is closed
-            
-            firebase.auth().setPersistence(persistenceType)
-              .then(() => {
-                return firebase.auth().signInWithEmailAndPassword(email, password);
-              })
-              .then((userCredential) => {
-                // Success - will redirect via checkApprovalStatus
-                successElement.textContent = 'Login successful, checking account status...';
-                successElement.style.display = 'block';
-                
-                // Check approval status
-                checkApprovalStatus(userCredential.user);
-              })
-              .catch((error) => {
-                // Show error message
-                errorElement.textContent = error.message;
-                errorElement.style.display = 'block';
-              });
-          });
-          
-          // Forgot password - remains the same
-        </script>
-      </body>
-    </html>
-    """, 
-    api_key=firebase_config["apiKey"],
-    auth_domain=firebase_config["authDomain"],
-    project_id=firebase_config["projectId"],
-    storage_bucket=firebase_config.get("storageBucket", ""),
-    messaging_sender_id=firebase_config.get("messagingSenderId", ""),
-    app_id=firebase_config["appId"])
+    # Pass the firebase config to the template
+    return render_template(
+        'login.html',
+        api_key=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
+    )
+
 
 @app.route('/submit-application', methods=['POST'])
 def submit_application():
