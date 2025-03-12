@@ -749,17 +749,57 @@ def process_image_by_url():
         error_response.headers.add('Access-Control-Allow-Origin', '*')
         return error_response
 
-@app.route('/api-demo', methods=['GET'])
-@authenticated_route
+@app.route('/api-demo', methods=['GET', 'POST'])
 def api_demo_page():
-    """Serve the API demo HTML page - restricted to authenticated users only"""
-    # Get the authenticated user from the token
+    """Serve the API demo HTML page - with improved authentication handling"""
+    # For POST requests, get token from form data and set in cookie
+    if request.method == 'POST':
+        # Log all form data for debugging
+        logger.info(f"POST to /api-demo with form keys: {list(request.form.keys())}")
+        
+        auth_token = request.form.get('auth_token')
+        if auth_token:
+            try:
+                # Verify the token is valid
+                logger.info(f"Received auth_token of length: {len(auth_token)}")
+                # Log first and last few characters for debugging (don't log the whole token!)
+                logger.info(f"Token prefix: {auth_token[:10]}..., suffix: ...{auth_token[-10:]}")
+                
+                decoded_token = auth.verify_id_token(auth_token)
+                user_email = decoded_token.get('email', 'unknown')
+                
+                logger.info(f"Token verified successfully for: {user_email}")
+                
+                # Create response that redirects to the same page via GET
+                response = make_response(redirect('/api-demo'))
+                
+                # Store token in cookie for future requests
+                response.set_cookie(
+                    'auth_token', 
+                    auth_token, 
+                    httponly=True, 
+                    secure=True, 
+                    samesite='Lax',
+                    max_age=3600  # 1 hour expiration
+                )
+                
+                return response
+            except Exception as e:
+                logger.error(f"Error verifying token in /api-demo POST: {str(e)}")
+                return jsonify({'error': f'Authentication failed: {str(e)}'}), 401
+        else:
+            logger.warning("POST to /api-demo without auth_token")
+            return jsonify({'error': 'Missing authentication token'}), 400
+    
+    # For GET requests, use existing authentication mechanism
     user = authenticate_request(request)
     if not user or not user.get('email'):
-        # Redirect to login page if not authenticated
+        logger.warning(f"Unauthenticated GET request to /api-demo from {request.remote_addr}")
+        # Redirect to login instead of showing an error
         return redirect('/login')
     
     user_email = user.get('email')
+    logger.info(f"User {user_email} accessing API demo page")
     
     # Get current authentication token if available
     auth_token = None
@@ -788,6 +828,9 @@ def api_demo_page():
     if base_url.startswith('http:'):
         base_url = 'https:' + base_url[5:]
     
+    # Get Firebase configuration
+    firebase_config = get_firebase_config()
+    
     # Pass the user info and server URL to the template
     return render_template(
         'api_demo.html',
@@ -795,7 +838,13 @@ def api_demo_page():
         user_email=user_email,
         auth_token=auth_token,
         api_key=api_key,
-        has_api_keys=has_api_keys
+        has_api_keys=has_api_keys,
+        api_key_firebase=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
     )
 
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])

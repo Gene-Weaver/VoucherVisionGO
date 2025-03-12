@@ -27,11 +27,17 @@
         </div>
       </div>
 
-      <div class="api-demo-link mb-4">
-        <h3>Try the API Demo</h3>
-        <p>Want to test the API right away? Use our interactive demo page to make test requests:</p>
-        <a href="/api-demo" class="btn btn-primary">Launch API Demo</a>
-        <p class="small mt-2">Note: Your authentication token will be automatically loaded in the demo.</p>
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5>API Demo</h5>
+        </div>
+        <div class="card-body">
+          <p>Access the API demo page to test the VoucherVision API.</p>
+          <form id="apiDemoForm" method="POST" action="/api-demo">
+            <input type="hidden" id="apiDemoAuthToken" name="auth_token" value="">
+            <button type="submit" class="btn btn-primary" id="launchApiDemoBtn">Launch API Demo</button>
+          </form>
+        </div>
       </div>
       
       <div class="token-container">
