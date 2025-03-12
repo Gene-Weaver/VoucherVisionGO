@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>VoucherVision Admin Dashboard</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo-container">
+          <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+          <h2>VoucherVision Admin Dashboard</h2>
+        </div>
+        <div class="user-info">
+          <span class="user-email">Admin: <strong id="user-email">Loading...</strong></span>
+          <button id="logout-btn" class="btn-secondary">Sign Out</button>
+        </div>
+      </div>
+      
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="user-applications">User Applications</button>
+          <button class="tab-button" data-tab="api-keys">API Keys</button>
+          <button class="tab-button" data-tab="admins">Manage Admins</button>
+        </div>
+        
+        <!-- User Applications Tab -->
+        <div id="user-applications" class="tab-content active">
+          <h3>User Applications</h3>
+          
+          <div class="status-filter">
+            <button class="filter-btn active" data-status="all">All</button>
+            <button class="filter-btn" data-status="pending">Pending</button>
+            <button class="filter-btn" data-status="approved">Approved</button>
+            <button class="filter-btn" data-status="rejected">Rejected</button>
+          </div>
+          
+          <div class="search-container">
+            <input type="text" class="search-input" id="application-search" placeholder="Search by email or organization...">
+          </div>
+          
+          <div id="applications-table-container">
+            <div id="applications-loading" class="loading">Loading applications...</div>
+            <table id="applications-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Organization</th>
+                  <th>Purpose</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="applications-list">
+                <!-- Applications will be listed here -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="applications-pagination" class="pagination">
+            <!-- Pagination buttons will be generated here -->
+          </div>
+        </div>
+        
+        <!-- API Keys Tab -->
+        <div id="api-keys" class="tab-content">
+          <h3>API Key Management</h3>
+          
+          <div class="search-container">
+            <input type="text" class="search-input" id="api-key-search" placeholder="Search by email or key name...">
+          </div>
+          
+          <div id="api-keys-table-container">
+            <div id="api-keys-loading" class="loading">Loading API keys...</div>
+            <table id="api-keys-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Key Name</th>
+                  <th>Created</th>
+                  <th>Expires</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="api-keys-list">
+                <!-- API keys will be listed here -->
+              </tbody>
+            </table>
+          </div>
+          
+          <div id="api-keys-pagination" class="pagination">
+            <!-- Pagination buttons will be generated here -->
+          </div>
+        </div>
+        
+        <!-- Admins Tab -->
+        <div id="admins" class="tab-content">
+          <h3>Admin Management</h3>
+          
+          <div class="mb-4">
+            <button id="add-admin-btn" class="btn-primary">Add New Admin</button>
+          </div>
+          
+          <div id="admins-table-container">
+            <div id="admins-loading" class="loading">Loading admins...</div>
+            <table id="admins-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>Added By</th>
+                  <th>Added Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admins-list">
+                <!-- Admins will be listed here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Application Details Modal -->
+    {% include 'admin/application_modal.html' %}
+    
+    <!-- Add Admin Modal -->
+    {% include 'admin/add_admin_modal.html' %}
+    
+    <!-- Revoke API Key Modal -->
+    {% include 'admin/revoke_key_modal.html' %}
+    
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "{{ api_key }}",
+        authDomain: "{{ auth_domain }}",
+        projectId: "{{ project_id }}",
+        storageBucket: "{{ storage_bucket }}",
+        messagingSenderId: "{{ messaging_sender_id }}",
+        appId: "{{ app_id }}"
+      };
+    </script>
+    
+    <!-- Main dashboard scripts -->
+    <script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/applications.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/api_keys.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
+  </body>
+</html>

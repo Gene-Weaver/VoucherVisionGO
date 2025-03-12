@@ -858,6 +858,45 @@ def check_approval_status():
         logger.error(f"Error checking approval status: {str(e)}")
         return jsonify({'error': f'Failed to check approval status: {str(e)}'}), 500
 
+@app.route('/admin', methods=['GET', 'POST'])
+def admin_dashboard():
+    """Admin dashboard for managing user applications"""
+    # For POST requests, get token from form data
+    auth_token = None
+    if request.method == 'POST':
+        auth_token = request.form.get('auth_token')
+        if auth_token:
+            # Store in cookie for future requests
+            response = make_response(redirect('/admin'))
+            response.set_cookie('auth_token', auth_token, httponly=True, secure=True)
+            return response
+    
+    # For GET requests, follow normal authentication
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    user_email = user.get('email')
+    
+    # Check if the user is an admin
+    admin_doc = db.collection('admins').document(user_email).get()
+    if not admin_doc.exists:
+        # Not an admin - redirect to appropriate page
+        return redirect('/auth-success')
+    
+    firebase_config = get_firebase_config()
+    
+    # Pass the firebase config and user info to the template
+    return render_template(
+        'admin_dashboard.html',
+        api_key=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
+    )
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_dashboard():

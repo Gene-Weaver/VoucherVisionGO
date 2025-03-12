@@ -1,0 +1,28 @@
+<!-- Revoke API Key Modal -->
+<div id="revoke-key-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Revoke API Key</h3>
+      
+      <div class="user-details">
+        <p><strong>User:</strong> <span id="key-user-email"></span></p>
+        <p><strong>Key Name:</strong> <span id="key-name"></span></p>
+        <p><strong>Created:</strong> <span id="key-created"></span></p>
+      </div>
+      
+      <div class="alert alert-danger">
+        <p><strong>Warning:</strong> Revoking an API key is permanent and cannot be undone. The user will no longer be able to access the API with this key.</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="revocation-reason">Reason (Optional)</label>
+        <textarea id="revocation-reason" class="form-control" rows="2" placeholder="Reason for revoking this key"></textarea>
+      </div>
+      
+      <div id="revoke-key-error" class="alert alert-danger" style="display: none;"></div>
+      <div id="revoke-key-success" class="alert alert-success" style="display: none;"></div>
+      
+      <button id="confirm-revoke-key-btn" class="btn-danger">Revoke API Key</button>
+      <button id="cancel-revoke-key-btn" class="btn-secondary">Cancel</button>
+    </div>
+  </div>
