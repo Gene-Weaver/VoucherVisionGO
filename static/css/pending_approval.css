@@ -1,0 +1,64 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background-color: #f5f5f5; 
+  }
+  
+  .container { 
+    max-width: 600px; 
+    margin: 50px auto; 
+    padding: 30px; 
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .logo-container {
+    margin-bottom: 20px;
+  }
+  
+  .logo {
+    max-height: 80px;
+    width: auto;
+  }
+  
+  .status-icon {
+    font-size: 64px;
+    color: #ffc107;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .btn-logout {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn-logout:hover {
+    background-color: #e9ecef;
+  }
+  
+  .user-info {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #888;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }

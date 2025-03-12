@@ -712,6 +712,21 @@ def signup_page():
         app_id=firebase_config["appId"]
     )
 
+@app.route('/pending-approval', methods=['GET'])
+def pending_approval_page():
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
+    
+    # Pass the firebase config to the template
+    return render_template(
+        'pending_approval.html',
+        api_key=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
+    )
 
 @app.route('/pending-approval', methods=['GET'])
 def pending_approval_page():
