@@ -22,6 +22,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install git and debugging tools
 RUN apt-get update && apt-get install -y git procps
 
+# Pre-generate the Matplotlib font cache to avoid runtime initialization
+RUN python -c "import matplotlib.pyplot as plt; plt.figure(); plt.close()"
+
 # Copy application code
 COPY . .
 
@@ -29,12 +32,12 @@ COPY . .
 RUN if [ ! -d "/vouchervision_main" ]; then \
         echo "vouchervision_main directory not found, attempting to clone"; \
         if [ -f .gitmodules ]; then \
-            git submodule update --init --recursive; \
+            git submodule update --init --recursive --remote; \
         fi; \
     fi
 
 # Initialize and update the submodule
-RUN git submodule update --init --recursive
+RUN git submodule update --init --recursive --remote
 
 # Create symbolic links to ensure Python can find the modules both ways
 RUN ln -sf /vouchervision_main/vouchervision /vouchervision || echo "Could not create symlink to vouchervision"
