@@ -53,7 +53,6 @@ try:
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
-    from send_email import SimpleEmailSender
     
 except:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
@@ -62,7 +61,6 @@ except:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
-    from send_email import SimpleEmailSender
 
 def get_firebase_config():
     """Get Firebase configuration for client-side use from Secret Manager"""
