@@ -1,5 +1,5 @@
-<h4>Method 1: Firebase Token Authentication</h4>
-<p>This method uses short-lived Firebase ID tokens (60 minutes) that are automatically refreshed while this page is open.</p>
+<h4>Method 1: Token Authentication</h4>
+<p>This method uses short-lived ID tokens (60 minutes) that are automatically refreshed while this browser page is open.</p>
 
 <div class="accordion" id="token-examples">
     <div class="accordion-item">
@@ -11,7 +11,7 @@
         <div id="collapse-curl-token" class="accordion-collapse collapse show" aria-labelledby="heading-curl-token" data-bs-parent="#token-examples">
             <div class="accordion-body">
                 <pre><code>curl -X POST "{{ server_url }}/process" \
--H "Authorization: Bearer YOUR_FIREBASE_TOKEN" \
+-H "Authorization: Bearer YOUR_TOKEN" \
 -F "file=@your_image.jpg"</code></pre>
             </div>
         </div>
@@ -28,10 +28,10 @@
                 <pre><code>import requests
 
 # Using the provided Python client
-python client.py --server {{ server_url }} --token YOUR_FIREBASE_TOKEN --image "path/to/image.jpg" --output-dir "./results"
+python client.py --server {{ server_url }} --token YOUR_TOKEN --image "path/to/image.jpg" --output-dir "./results"
 
 # Direct API call with requests
-id_token = "YOUR_FIREBASE_TOKEN"
+id_token = "YOUR_TOKEN"
 url = "{{ server_url }}/process"
 files = {"file": open("path/to/image.jpg", "rb")}
 headers = {"Authorization": "Bearer " + id_token}
@@ -51,15 +51,15 @@ print(result)</code></pre>
         </h5>
         <div id="collapse-javascript-token" class="accordion-collapse collapse" aria-labelledby="heading-javascript-token" data-bs-parent="#token-examples">
             <div class="accordion-body">
-                <pre><code>// Firebase Authentication Example
+                <pre><code>// Token Authentication Example
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 // Initialize Firebase
 const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "YOUR_FIREBASE_AUTH_DOMAIN",
-  projectId: "YOUR_FIREBASE_PROJECT_ID"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
