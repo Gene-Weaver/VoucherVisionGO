@@ -343,10 +343,23 @@
             error: console.error,
             warn: console.warn
         };
+
+        // Helper function to get cookie value
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
         
         function addLogEntry(type, ...args) {
-            // Call original console method
-            originalConsole[type](...args);
+            // Call original console method - use proper method mapping
+            if (originalConsole[type]) {
+                originalConsole[type](...args);
+            } else {
+                // Fallback if the type doesn't match a console method
+                originalConsole.log(`[${type}]`, ...args);
+            }
             
             // Add to UI log
             const logEntry = document.createElement('p');
@@ -665,7 +678,7 @@
             const originalProcessLocalImage = processLocalImage;
             const originalProcessImageUrl = processImageUrl;
             const originalProcessImageUrlWorkaround = processImageUrlWorkaround;
-    
+            const authToken = getCookie('auth_token');
             
             // CORS test button
             if (testCorsButton) {
@@ -813,7 +826,9 @@
             }
 
             if (authToken) {
-                // For the Firebase token authentication, add this info
+                console.log('Authentication token found in cookie');
+                
+                // Add info banner
                 const authInfo = document.createElement('div');
                 authInfo.className = 'auth-info';
                 authInfo.innerHTML = 'Using your authentication token from session. You don\'t need to enter an API key.';
@@ -828,7 +843,7 @@
                 }
                 
                 // Override the process functions to use the auth token
-                processLocalImage = function(file, unusedApiKey, engines, prompt, verbose) {
+                window.processLocalImage = function(file, unusedApiKey, engines, prompt, verbose) {
                     if (verbose) {
                         console.log('Using authentication token instead of API key');
                     }
@@ -842,7 +857,7 @@
                     );
                 };
                 
-                processImageUrl = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
+                window.processImageUrl = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
                     if (verbose) {
                         console.log('Using authentication token instead of API key');
                     }
@@ -856,7 +871,7 @@
                     );
                 };
                 
-                processImageUrlWorkaround = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
+                window.processImageUrlWorkaround = function(imageUrl, unusedApiKey, engines, prompt, verbose) {
                     if (verbose) {
                         console.log('Using authentication token instead of API key');
                     }
@@ -900,25 +915,26 @@
                     return originalFetch(resource, newInit);
                 };
                 
-                console.log('Authentication token loaded from session and applied globally.');
-            } else if (apiKey) {
-                // If API key is available
-                const apiKeyInput = document.getElementById('apiKeyInput');
-                if (apiKeyInput) {
-                    apiKeyInput.value = apiKey;
-                    console.log('API key loaded from session.');
-                }
-            } else if (hasApiKeys) {
-                const authInfo = document.createElement('div');
-                authInfo.className = 'auth-info';
-                authInfo.innerHTML = 'You have API keys available. <a href="/api-key-management">Manage your API keys</a>';
-                
-                // Insert before the API Key input
-                const apiKeyInput = document.getElementById('apiKeyInput');
-                if (apiKeyInput && apiKeyInput.parentNode) {
-                    apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
-                }
+                console.log('Authentication token loaded from cookie and applied globally.');
             }
+            // } else if (apiKey) {
+            //     // If API key is available
+            //     const apiKeyInput = document.getElementById('apiKeyInput');
+            //     if (apiKeyInput) {
+            //         apiKeyInput.value = apiKey;
+            //         console.log('API key loaded from session.');
+            //     }
+            // } else if (hasApiKeys) {
+            //     const authInfo = document.createElement('div');
+            //     authInfo.className = 'auth-info';
+            //     authInfo.innerHTML = 'You have API keys available. <a href="/api-key-management">Manage your API keys</a>';
+                
+            //     // Insert before the API Key input
+            //     const apiKeyInput = document.getElementById('apiKeyInput');
+            //     if (apiKeyInput && apiKeyInput.parentNode) {
+            //         apiKeyInput.parentNode.insertBefore(authInfo, apiKeyInput);
+            //     }
+            // }
             
             // Set the server URL from the template
             const serverUrlInput = document.getElementById('serverUrlInput');
