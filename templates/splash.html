@@ -23,10 +23,10 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 90%;
-            width: 400px;
+            width: 500px; /* Increased width to accommodate larger logo */
         }
         .logo {
-            width: 120px;
+            width: 360px; /* 3x bigger than the original 120px */
             margin-bottom: 2rem;
         }
         h1 {
@@ -83,7 +83,7 @@
 </head>
 <body>
     <div class="splash-container">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="VoucherVision Logo" class="logo" 
+        <img src="https://storage.googleapis.com/vouchervision-static-assets/logo.png" alt="VoucherVision Logo" class="logo" 
              onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjNENBRjUwIiBkPSJNNTAgNUMyNSA1IDUgMjUgNSA1MHMyMCA0NSA0NSA0NSA0NS0yMCA0NS00NVM3NSA1IDUwIDV6bTAgODBjLTE5LjMgMC0zNS0xNS43LTM1LTM1czE1LjctMzUgMzUtMzUgMzUgMTUuNyAzNSAzNS0xNS43IDM1LTM1IDM1eiIvPjxwYXRoIGZpbGw9IiM0Q0FGNTAiIGQ9Ik00MCA2NWwzMC0zMC01IDUgMjUgMjVoLTUweiIvPjwvc3ZnPg=='">
         <h1>Starting VoucherVisionGO</h1>
         <div class="spinner"></div>
@@ -119,15 +119,16 @@
         // Start cycling status messages
         updateStatus();
 
+        // Get the URL path to redirect to after loading
+        const path = window.location.pathname || "/";
+        const targetUrl = path === "/splash.html" ? "/" : path;
+        const serverUrl = window.location.origin; // Base URL of your server
+
         // Function to check if real page is ready and redirect
         function checkPageReady() {
-            // Get the actual URL we want to redirect to (or use the current URL)
-            const targetUrl = "{{ redirect_url }}";
-            const checkUrl = "{{ health_check_url or '/health' }}";
-            
             // Function to check if the server is ready by pinging the health check endpoint
             function tryFetch() {
-                fetch(checkUrl, { method: 'GET' })
+                fetch(`${serverUrl}/health`, { method: 'GET' })
                     .then(response => {
                         if (response.ok) {
                             // Server responded successfully, now load the real page
