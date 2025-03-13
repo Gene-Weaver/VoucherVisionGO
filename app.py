@@ -103,6 +103,29 @@ def get_firebase_config():
     
     return config
 
+def should_show_splash():
+    """
+    Determine if we should show the splash screen
+    - Checks if the server is in a cold start state
+    - Uses a simple timing check to estimate if this is a cold start
+    """
+    import time
+    global server_start_time
+    
+    # If the server start time hasn't been set, set it now and assume cold start
+    if not hasattr(app, 'server_start_time'):
+        app.server_start_time = time.time()
+        app.is_cold_start = True
+        return True
+    
+    # If the server has been running for more than 5 minutes, it's probably warmed up
+    elapsed_time = time.time() - app.server_start_time
+    if elapsed_time > 300:  # 5 minutes in seconds
+        app.is_cold_start = False
+    
+    # Return the current cold start status
+    return app.is_cold_start
+
 # Initialize Firebase Admin SDK with service account key
 try:
     # Load service account credentials from Secret Manager
@@ -948,6 +971,11 @@ def api_demo_page():
         else:
             return redirect('/login')
     
+    # For GET requests, check if we should show splash screen
+    if should_show_splash() and 'no_splash' not in request.args:
+        logger.info("Directing to splash screen for api-demo page")
+        return redirect('/loading-splash?redirect=/api-demo')
+    
     # For GET requests, verify authentication
     user = authenticate_request(request)
     if not user or not user.get('email'):
@@ -1045,6 +1073,11 @@ def health_check():
 
 @app.route('/auth-success', methods=['GET'])
 def auth_success():
+    # Check if we should show the splash screen
+    if should_show_splash() and 'no_splash' not in request.args:
+        logger.info("Directing to splash screen for auth-success page")
+        return redirect('/loading-splash?redirect=/auth-success')
+    
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
 
@@ -1094,6 +1127,11 @@ def check_admin_status():
     
 @app.route('/signup', methods=['GET'])
 def signup_page():
+    # Check if we should show the splash screen
+    if should_show_splash() and 'no_splash' not in request.args:
+        logger.info("Directing to splash screen for signup page")
+        return redirect('/signup-splash')
+    
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
     
@@ -1142,6 +1180,11 @@ def application_rejected_page():
 
 @app.route('/login', methods=['GET'])
 def login_page():
+    # Check if we should show the splash screen
+    if should_show_splash() and 'no_splash' not in request.args:
+        logger.info("Directing to splash screen for login page")
+        return redirect('/login-splash')
+    
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
     

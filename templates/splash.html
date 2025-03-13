@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoucherVision - Loading</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .splash-container {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 400px;
+        }
+        .logo {
+            width: 120px;
+            margin-bottom: 2rem;
+        }
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #2E7D32;
+        }
+        p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #666;
+        }
+        .spinner {
+            margin: 0 auto 1.5rem;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(76, 175, 80, 0.2);
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite;
+        }
+        .progress-bar {
+            height: 6px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-bar-fill {
+            position: absolute;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.5s ease;
+            animation: progress-fill 60s linear forwards;
+        }
+        .status-text {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            color: #777;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes progress-fill {
+            0% { width: 0%; }
+            90% { width: 90%; }
+            100% { width: 95%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="splash-container">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="VoucherVision Logo" class="logo" 
+             onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjNENBRjUwIiBkPSJNNTAgNUMyNSA1IDUgMjUgNSA1MHMyMCA0NSA0NSA0NSA0NS0yMCA0NS00NVM3NSA1IDUwIDV6bTAgODBjLTE5LjMgMC0zNS0xNS43LTM1LTM1czE1LjctMzUgMzUtMzUgMzUgMTUuNyAzNSAzNS0xNS43IDM1LTM1IDM1eiIvPjxwYXRoIGZpbGw9IiM0Q0FGNTAiIGQ9Ik00MCA2NWwzMC0zMC01IDUgMjUgMjVoLTUweiIvPjwvc3ZnPg=='">
+        <h1>Starting VoucherVisionGO</h1>
+        <div class="spinner"></div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+        </div>
+        <p>Please wait while we start the server...<br>(This may take up to 60 seconds)</p>
+        <div class="status-text" id="status">Initializing...</div>
+    </div>
+
+    <script>
+        // Array of status messages to cycle through
+        const statusMessages = [
+            "Initializing...",
+            "Loading server components...",
+            "Starting AI services...",
+            "Connecting to databases...",
+            "Preparing OCR models...",
+            "Almost there..."
+        ];
+
+        // Function to update status message
+        function updateStatus() {
+            const statusElement = document.getElementById('status');
+            let currentIndex = 0;
+            
+            setInterval(() => {
+                statusElement.textContent = statusMessages[currentIndex];
+                currentIndex = (currentIndex + 1) % statusMessages.length;
+            }, 5000);
+        }
+
+        // Start cycling status messages
+        updateStatus();
+
+        // Function to check if real page is ready and redirect
+        function checkPageReady() {
+            // Get the actual URL we want to redirect to (or use the current URL)
+            const targetUrl = "{{ redirect_url }}";
+            const checkUrl = "{{ health_check_url or '/health' }}";
+            
+            // Function to check if the server is ready by pinging the health check endpoint
+            function tryFetch() {
+                fetch(checkUrl, { method: 'GET' })
+                    .then(response => {
+                        if (response.ok) {
+                            // Server responded successfully, now load the real page
+                            window.location.href = targetUrl;
+                        } else {
+                            // Server responded but not OK, retry after delay
+                            setTimeout(tryFetch, 3000);
+                        }
+                    })
+                    .catch(error => {
+                        // Error occurred, retry after delay
+                        setTimeout(tryFetch, 3000);
+                    });
+            }
+            
+            // Start checking if server is ready
+            tryFetch();
+        }
+
+        // Start checking if page is ready
+        window.addEventListener('load', checkPageReady);
+    </script>
+</body>
+</html>
