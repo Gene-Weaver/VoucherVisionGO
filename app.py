@@ -1031,7 +1031,7 @@ def test_json_order():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    """Health check endpoint"""
+    """Health check endpoint """
     # Get the active request count from the processor
     active_requests = app.config['processor'].throttler.get_active_count()
     max_requests = app.config['processor'].throttler.max_concurrent
