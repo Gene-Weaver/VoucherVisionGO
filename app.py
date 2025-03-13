@@ -20,6 +20,13 @@ from io import BytesIO
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
 
+'''
+### TO UPDATE FROM MAIN VV REPO
+git submodule update --init --recursive --remote
+
+
+'''
+
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

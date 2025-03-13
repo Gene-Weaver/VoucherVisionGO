@@ -219,8 +219,10 @@
         });
 
     </script>
-    
-    <h1>VoucherVision API Demo</h1>
+    <div class="logo-container">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+        <h1>VoucherVision API Demo</h1>
+    </div>
 
     <div class="user-info-banner">
         <p>Signed in as: <strong>{{ user_email }}</strong></p>
