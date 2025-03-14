@@ -334,6 +334,55 @@ class SimpleEmailSender:
         
         return self.send_email(user_email, subject, body)
     
+    def send_application_submission_notification(self, user_email, organization, purpose):
+        """
+        Send notification to admin about a new application submission
+        
+        Args:
+            user_email (str): The email of the user who submitted the application
+            organization (str): The organization the user belongs to
+            purpose (str): The purpose for API access as described by the user
+            
+        Returns:
+            bool: True if sent successfully, False otherwise
+        """
+        subject = "New VoucherVision API Application Submitted"
+        
+        # Create HTML content
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #4285f4;">New Application Received</h2>
+                    <p>A new application for VoucherVision API access has been submitted.</p>
+                    
+                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                        <h3 style="margin-top: 0; color: #333;">Application Details</h3>
+                        <p><strong>Email:</strong> {user_email}</p>
+                        <p><strong>Organization:</strong> {organization}</p>
+                        <p><strong>Purpose:</strong> {purpose}</p>
+                    </div>
+                    
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin" 
+                          style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Review Application
+                        </a>
+                    </div>
+                    
+                    <p>Please review this application at your earliest convenience.</p>
+                    <p>Best regards,<br>VoucherVision Notification System</p>
+                </div>
+            </body>
+        </html>
+        """
+        
+        # Send to the same email address configured for sending
+        # This assumes the admin's email is the same as the sender email
+        admin_email = self.from_email
+        
+        return self.send_email(admin_email, subject, body)
+      
 def create_initial_admin(email):
     """Create the initial admin user"""
     try:
@@ -1206,11 +1255,14 @@ def submit_application():
         if not data.get('organization') or not data.get('purpose'):
             return jsonify({'error': 'Missing required fields'}), 400
         
+        organization = data.get('organization')
+        purpose = data.get('purpose')
+        
         # Create an application record in Firestore
         application_data = {
             'email': user_email,
-            'organization': data.get('organization'),
-            'purpose': data.get('purpose'),
+            'organization': organization,
+            'purpose': purpose,
             'status': 'pending',  # pending, approved, rejected
             'created_at': firestore.SERVER_TIMESTAMP,
             'updated_at': firestore.SERVER_TIMESTAMP,
@@ -1223,10 +1275,26 @@ def submit_application():
         # Save to Firestore - use email as document ID for easy lookup
         db.collection('user_applications').document(user_email).set(application_data)
         
+        # Send notification email to admin
+        notification_sent = False
+        if 'email_sender' in app.config and app.config['email_sender'].is_enabled:
+            notification_sent = app.config['email_sender'].send_application_submission_notification(
+                user_email, 
+                organization, 
+                purpose
+            )
+            if notification_sent:
+                logger.info(f"Application submission notification sent for {user_email}")
+            else:
+                logger.warning(f"Failed to send application submission notification for {user_email}")
+        else:
+            logger.warning("Email sender not configured or disabled, skipping notification")
+        
         # Return success response
         return jsonify({
             'status': 'success',
             'message': 'Application submitted successfully',
+            'notification_sent': notification_sent
         })
         
     except Exception as e:
