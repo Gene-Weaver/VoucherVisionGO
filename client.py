@@ -178,7 +178,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt, auth_token)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt, auth_token, ocr_only)
 
         # Print summary of results if verbose is enabled
         if verbose:
