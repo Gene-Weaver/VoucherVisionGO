@@ -383,6 +383,11 @@
                     <label for="engineGemini20">gemini-2.0-flash</label>
                 </div>
             </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="ocrOnlyCheckbox">
+                <label for="ocrOnlyCheckbox">OCR only mode (skip VoucherVision processing)</label>
+            </div>
         </div>
         
         <button id="processButton">Process Image</button>
@@ -416,6 +421,11 @@
                     <input type="checkbox" id="engineGemini20Url" checked>
                     <label for="engineGemini20Url">gemini-2.0-flash</label>
                 </div>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="ocrOnlyCheckboxUrl">
+                <label for="ocrOnlyCheckboxUrl">OCR only mode (skip VoucherVision processing)</label>
             </div>
             
             <div class="checkbox-group">
@@ -521,7 +531,7 @@
         }
         
         // Function to update API call display for local image processing
-        function updateApiCallDisplay(file, apiKey, engines, prompt, serverUrl, endpoint) {
+        function updateApiCallDisplay(file, apiKey, engines, prompt, serverUrl, endpoint, ocrOnly = false) {
             // Update URL
             const apiUrlDisplay = document.getElementById('apiUrlDisplay');
             apiUrlDisplay.textContent = `${serverUrl}${endpoint}`;
@@ -534,11 +544,21 @@
             
             // Update body display (simplified for FormData)
             const apiBodyDisplay = document.getElementById('apiBodyDisplay');
-            apiBodyDisplay.textContent = `FormData {
-                file: File(${file ? `"${file.name}", ${file.size} bytes` : '"image.jpg"'}),
-                engines: [${engines.map(e => `"${e}"`).join(', ')}],
-                prompt: "${prompt}"
-                }`;
+            let bodyText = `FormData {
+            file: File(${file ? `"${file.name}", ${file.size} bytes` : '"image.jpg"'}),
+            engines: [${engines.map(e => `"${e}"`).join(', ')}],
+            prompt: "${prompt}"`;
+            
+            if (ocrOnly) {
+                bodyText += `,
+            ocr_only: "true"`;
+            }
+            
+            bodyText += `
+        }`;
+            
+            apiBodyDisplay.textContent = bodyText;
+            
             // Update cURL command
             const curlCommandDisplay = document.getElementById('curlCommandDisplay');
             let curlCommand = `curl -X POST "${serverUrl}${endpoint}" \\
@@ -556,15 +576,24 @@
             
             curlCommand += `\n-F "prompt=${prompt}"`;
             
+            if (ocrOnly) {
+                curlCommand += ` \\\n-F "ocr_only=true"`;
+            }
+            
             curlCommandDisplay.textContent = curlCommand;
             
             // Update Fetch code
             const fetchCommandDisplay = document.getElementById('fetchCommandDisplay');
-            fetchCommandDisplay.textContent = `const formData = new FormData();
+            let fetchCode = `const formData = new FormData();
         formData.append('file', fileObject); // Your file object
         ${engines.map(engine => `formData.append('engines', '${engine}');`).join('\n')}
-        formData.append('prompt', '${prompt}');
+        formData.append('prompt', '${prompt}');`;
 
+            if (ocrOnly) {
+                fetchCode += `\nformData.append('ocr_only', 'true');`;
+            }
+
+            fetchCode += `\n
         fetch('${serverUrl}${endpoint}', {
         method: 'POST',
         headers: {
@@ -575,10 +604,12 @@
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Error:', error));`;
+            
+            fetchCommandDisplay.textContent = fetchCode;
         }
 
         // Function to update API call display for image URL processing
-        function updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, endpoint) {
+        function updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, endpoint, ocrOnly = false) {
             // Update URL
             const apiUrlDisplay = document.getElementById('apiUrlDisplay');
             apiUrlDisplay.textContent = `${serverUrl}${endpoint}`;
@@ -596,6 +627,11 @@
                 engines: engines,
                 prompt: prompt
             };
+            
+            // Add ocr_only if true
+            if (ocrOnly) {
+                requestBody.ocr_only = true;
+            }
             
             // Update body display
             const apiBodyDisplay = document.getElementById('apiBodyDisplay');
@@ -634,13 +670,16 @@
         /**
          * Process an image using the VoucherVision API with a local file input
          */
-        async function processLocalImage(file, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+         async function processLocalImage(file, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
             const serverUrl = document.getElementById('serverUrlInput').value;
             const endpoint = '/process';
             
             if (verbose) {
                 console.log(`Processing local file: ${file.name}`);
                 console.log(`Server URL: ${serverUrl}${endpoint}`);
+                if (ocrOnly) {
+                    console.log(`OCR-only mode: Skipping VoucherVision processing`);
+                }
             }
             
             // Create a FormData object
@@ -664,6 +703,15 @@
                 
                 if (verbose) {
                     console.log(`Using prompt: ${prompt}`);
+                }
+            }
+            
+            // Add ocr_only flag if true
+            if (ocrOnly) {
+                formData.append('ocr_only', 'true');
+                
+                if (verbose) {
+                    console.log(`Added ocr_only=true parameter`);
                 }
             }
             
@@ -717,13 +765,16 @@
         /**
          * Process an image using the VoucherVision API with an image URL
          */
-        async function processImageUrl(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+         async function processImageUrl(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
             const serverUrl = document.getElementById('serverUrlInput').value;
             const endpoint = '/process-url';
             
             if (verbose) {
                 console.log(`Processing image URL: ${imageUrl}`);
                 console.log(`Server URL: ${serverUrl}${endpoint}`);
+                if (ocrOnly) {
+                    console.log(`OCR-only mode: Skipping VoucherVision processing`);
+                }
             }
             
             // Create request data
@@ -746,6 +797,15 @@
                 
                 if (verbose) {
                     console.log(`Using prompt: ${prompt}`);
+                }
+            }
+            
+            // Add ocr_only flag if true
+            if (ocrOnly) {
+                requestData.ocr_only = true;
+                
+                if (verbose) {
+                    console.log(`Added ocr_only=true parameter`);
                 }
             }
             
@@ -800,11 +860,14 @@
          * Process an image URL by first downloading it and then uploading to the API
          * This is a workaround if the server doesn't support the /process-url endpoint
          */
-        async function processImageUrlWorkaround(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+         async function processImageUrlWorkaround(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
             try {
                 if (verbose) {
                     console.log(`Using URL download workaround for: ${imageUrl}`);
                     console.log('This method first downloads the image then uploads it to the API');
+                    if (ocrOnly) {
+                        console.log(`OCR-only mode: Skipping VoucherVision processing`);
+                    }
                 }
                 
                 // First fetch the image - note that this might not work for cross-origin images
@@ -836,7 +899,7 @@
                 }
                 
                 // Use the processLocalImage function to upload the file
-                return await processLocalImage(file, apiKey, engines, prompt, verbose);
+                return await processLocalImage(file, apiKey, engines, prompt, verbose, ocrOnly);
             } catch (error) {
                 if (verbose) {
                     console.error('Error in processImageUrlWorkaround:', error);
@@ -844,6 +907,7 @@
                 throw error;
             }
         }
+
 
         // Test CORS support
         async function testCorsSupport() {
@@ -1119,31 +1183,31 @@
                 
                 // Override the process functions to use the auth token
                 const originalProcessLocalImage = window.processLocalImage;
-                window.processLocalImage = async function(file, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+                window.processLocalImage = async function(file, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
                     const serverUrl = document.getElementById('serverUrlInput').value;
                     const endpoint = '/process';
                     
                     // Update API call display before making the request
-                    updateApiCallDisplay(file, apiKey, engines, prompt, serverUrl, endpoint);
+                    updateApiCallDisplay(file, apiKey, engines, prompt, serverUrl, endpoint, ocrOnly);
                     
                     // Call the original function
-                    return originalProcessLocalImage(file, apiKey, engines, prompt, verbose);
+                    return originalProcessLocalImage(file, apiKey, engines, prompt, verbose, ocrOnly);
                 };
 
                 const originalProcessImageUrl = window.processImageUrl;
-                window.processImageUrl = async function(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+                window.processImageUrl = async function(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
                     const serverUrl = document.getElementById('serverUrlInput').value;
                     const endpoint = '/process-url';
                     
                     // Update API call display before making the request
-                    updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, endpoint);
+                    updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, endpoint, ocrOnly);
                     
                     // Call the original function
-                    return originalProcessImageUrl(imageUrl, apiKey, engines, prompt, verbose);
+                    return originalProcessImageUrl(imageUrl, apiKey, engines, prompt, verbose, ocrOnly);
                 };
 
                 const originalProcessImageUrlWorkaround = window.processImageUrlWorkaround;
-                window.processImageUrlWorkaround = async function(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false) {
+                window.processImageUrlWorkaround = async function(imageUrl, apiKey, engines = ['gemini-1.5-pro', 'gemini-2.0-flash'], prompt = 'SLTPvM_default.yaml', verbose = false, ocrOnly = false) {
                     const serverUrl = document.getElementById('serverUrlInput').value;
                     const endpoint = '/process';
                     
@@ -1153,10 +1217,10 @@
                     }
                     
                     // First show the URL endpoint that we're attempting to use
-                    updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, '/process-url');
+                    updateApiUrlCallDisplay(imageUrl, apiKey, engines, prompt, serverUrl, '/process-url', ocrOnly);
                     
                     // Call the original function
-                    return originalProcessImageUrlWorkaround(imageUrl, apiKey, engines, prompt, verbose);
+                    return originalProcessImageUrlWorkaround(imageUrl, apiKey, engines, prompt, verbose, ocrOnly);
                 };
                 
                 // Modify the fetch function to inject the auth token

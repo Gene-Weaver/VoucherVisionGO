@@ -635,7 +635,7 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
     
-    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], prompt=None):
+    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], prompt=None, ocr_only=False):
         """Process an image from a request file"""
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
@@ -667,37 +667,57 @@ class VoucherVisionProcessor:
                 
                 # Perform OCR
                 ocr_info, ocr = self.perform_ocr(file_path, engine_options)
-                
-                # Process with VoucherVision
-                vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt)
-                
-                # Combine results
-                # results = {
-                #     "ocr_info": ocr_info,
-                #     "vvgo_json": vv_results,
-                #     "parsing_info": {
-                #         "input": tokens_in,
-                #         "output": tokens_out
-                #     }
-                # }
-                # Combine results
-                if "GEMINI" in self.LLM_name_cost:
-                    model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
 
-                results = OrderedDict([
-                    ("filename", ""),
-                    ("ocr_info", ocr_info),
-                    ("parsing_info", OrderedDict([
-                        ("model", model_print),
-                        ("input", tokens_in),
-                        ("output", tokens_out),
-                        ("cost_in", cost_in),
-                        ("cost_out", cost_out),
-                    ])),
-                    ("ocr", ocr),
-                    ("formatted_json", vv_results),
+                # If ocr_only is True, skip VoucherVision processing
+                if ocr_only:
+                    # If OCR only, return minimal results structure with empty fields
+                    if "GEMINI" in self.LLM_name_cost:
+                        model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
                     
-                ])
+                    results = OrderedDict([
+                        ("filename", ""),
+                        ("ocr_info", ocr_info),
+                        ("parsing_info", OrderedDict([
+                            ("model", model_print),
+                            ("input", 0),
+                            ("output", 0),
+                            ("cost_in", 0),
+                            ("cost_out", 0),
+                        ])),
+                        ("ocr", ocr),
+                        ("formatted_json", ""),
+                    ])
+                else:
+                    # Process with VoucherVision
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt)
+                    
+                    # Combine results
+                    # results = {
+                    #     "ocr_info": ocr_info,
+                    #     "vvgo_json": vv_results,
+                    #     "parsing_info": {
+                    #         "input": tokens_in,
+                    #         "output": tokens_out
+                    #     }
+                    # }
+                    # Combine results
+                    if "GEMINI" in self.LLM_name_cost:
+                        model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
+
+                    results = OrderedDict([
+                        ("filename", ""),
+                        ("ocr_info", ocr_info),
+                        ("parsing_info", OrderedDict([
+                            ("model", model_print),
+                            ("input", tokens_in),
+                            ("output", tokens_out),
+                            ("cost_in", cost_in),
+                            ("cost_out", cost_out),
+                        ])),
+                        ("ocr", ocr),
+                        ("formatted_json", vv_results),
+                        
+                    ])
                 
                 logger.warning(results)
                 return results, 200
@@ -804,9 +824,17 @@ def process_image():
 
     # Get prompt from request if specified, otherwise None (use default)
     prompt = request.form.get('prompt') if 'prompt' in request.form else None
+
+    # Get ocr_only flag from request if specified
+    ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
     
     # Process the image using the initialized processor
-    results, status_code = app.config['processor'].process_image_request(file=file, engine_options=engine_options, prompt=prompt)
+    results, status_code = app.config['processor'].process_image_request(
+        file=file, 
+        engine_options=engine_options, 
+        prompt=prompt,
+        ocr_only=ocr_only,
+    )
     
     # Create response with CORS headers
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -843,6 +871,9 @@ def process_image_by_url():
 
     # Get prompt from request if specified, otherwise None (use default)
     prompt = data.get('prompt')
+
+    # Get ocr_only flag if specified
+    ocr_only = data.get('ocr_only', False)
     
     try:
         # Download the image to a temporary location
@@ -888,7 +919,8 @@ def process_image_by_url():
         results, status_code = app.config['processor'].process_image_request(
             file=file_obj, 
             engine_options=engines, 
-            prompt=prompt
+            prompt=prompt,
+            ocr_only=ocr_only
         )
         
         # Clean up the temporary file

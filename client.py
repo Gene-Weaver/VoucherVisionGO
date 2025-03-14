@@ -50,7 +50,8 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
     else:  # Default to JSON string
         return json.dumps(regular_dict, indent=4)
     
-def process_image(fname, server_url, image_path, output_dir, verbose=False, engines=None, prompt=None, auth_token=None):
+def process_image(fname, server_url, image_path, output_dir, verbose=False, 
+                  engines=None, prompt=None, auth_token=None, ocr_only=False):
     """
     Process an image using the VoucherVision API server
     
@@ -63,7 +64,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         engines (list): List of OCR engine options to use
         prompt (str): Custom prompt file to use
         auth_token (str): Authentication token for the API (Firebase token or API key)
-        
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+
     Returns:
         dict: The processed results from the server
     """
@@ -88,7 +90,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         
         try:
             # Pass the auth token to the recursive call
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt, auth_token)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt, auth_token, ocr_only)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -105,6 +107,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         data['engines'] = engines
     if prompt:
         data['prompt'] = prompt
+    if ocr_only:
+        data['ocr_only'] = 'true'
 
     # Determine auth header type based on auth_token format
     # API keys are typically alphanumeric strings without periods
@@ -122,6 +126,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         # Send the request
         if verbose:
             print(f"Sending request to {url}")
+            if ocr_only:
+                print("OCR-only mode: Skipping VoucherVision JSON parsing")
         response = requests.post(url, files=files, data=data, headers=headers)
         
         # Check if the request was successful
@@ -150,7 +156,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False, engi
         # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose, auth_token=None):
+def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose, auth_token=None, ocr_only=False):
     """
     Process a single image file and save the results
     
@@ -161,7 +167,9 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         prompt (str): Custom prompt file to use
         output_dir (str): Directory to save output files
         verbose (bool): Whether to print verbose output
-        
+        auth_token (str): Authentication token for the API
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+       
     Returns:
         dict: The processing results
     """
@@ -191,7 +199,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, prompt, output_dir, verbose, max_workers=4, auth_token=None):
+def process_images_parallel(server_url, image_paths, engines, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False):
     """
     Process multiple images in parallel
     
@@ -203,13 +211,17 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
         output_dir (str): Directory to save output files
         verbose (bool): Whether to print verbose output
         max_workers (int): Maximum number of parallel workers
-        
+        auth_token (str): Authentication token for the API
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+       
     Returns:
         list: List of processing results
     """
     results = []
     
     print(f"Processing {len(image_paths)} images with up to {max_workers} parallel workers")
+    if ocr_only:
+        print("OCR-only mode: Skipping VoucherVision processing")
 
     # Create a progress bar
     progress_bar = tqdm(total=len(image_paths), desc="Processing", unit="image")
@@ -227,7 +239,8 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
                 prompt, 
                 output_dir, 
                 False, 
-                auth_token
+                auth_token,
+                ocr_only,
             ): path for path in image_paths
         }
         
@@ -582,7 +595,7 @@ def verify_authentication(server_url, auth_token=None):
     
 def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], 
                     prompt="SLTPvM_default.yaml", image=None, directory=None, 
-                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None):
+                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None, ocr_only=False):
     """
     Process voucher images through the VoucherVision API.
     
@@ -597,6 +610,8 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         verbose (bool): Print all output to console
         save_to_csv (bool): Save all formatted_json results to a CSV file
         max_workers (int): Maximum number of parallel workers
+        auth_token (str): Authentication token for the API
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
         
     Returns:
         list: List of processed results if save_to_csv is True, otherwise None
@@ -620,6 +635,10 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
     # Start timing
     start_time = time.time()
     
+    # If in OCR-only mode, inform user
+    if ocr_only:
+        print("Running in OCR-only mode: Skipping VoucherVision JSON parsing")
+    
     try:
         # To store all results if save-to-csv is enabled
         all_results = []
@@ -627,7 +646,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, prompt, output_dir, verbose, auth_token)
+            result = process_image_file(server, image, engines, prompt, output_dir, verbose, auth_token, ocr_only)
             if result and save_to_csv:
                 all_results.append(result)
         
@@ -669,7 +688,8 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 output_dir, 
                 verbose,
                 max_workers,
-                auth_token
+                auth_token,
+                ocr_only,
             )
             
             if save_to_csv:
@@ -694,7 +714,8 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 output_dir, 
                 verbose,
                 max_workers,
-                auth_token
+                auth_token,
+                ocr_only,
             )
             
             if save_to_csv:
@@ -754,6 +775,8 @@ def main():
                         help='Save all formatted_json results to a CSV file in the output directory')
     parser.add_argument('--max-workers', type=int, default=4,
                         help='Maximum number of parallel workers (default: 4)')
+    parser.add_argument('--ocr-only', action='store_true',
+                        help='Only perform OCR and skip VoucherVision processing')
     
     args = parser.parse_args()
     
@@ -769,7 +792,8 @@ def main():
         verbose=args.verbose,
         save_to_csv=args.save_to_csv,
         max_workers=args.max_workers,
-        auth_token=args.auth_token
+        auth_token=args.auth_token,
+        ocr_only=args.ocr_only,
     )
 
 
