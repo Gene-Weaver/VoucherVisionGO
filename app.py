@@ -1288,7 +1288,7 @@ def submit_application():
             else:
                 logger.warning(f"Failed to send application submission notification for {user_email}")
         else:
-            logger.warning("Email sender not configured or disabled, skipping notification.")
+            logger.warning("Email sender not configured or disabled, skipping notification")
         
         # Return success response
         return jsonify({

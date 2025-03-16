@@ -23,10 +23,10 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             max-width: 90%;
-            width: 500px; /* Increased width to accommodate larger logo */
+            width: 500px;
         }
         .logo {
-            width: 360px; /* 3x bigger than the original 120px */
+            width: 360px;
             margin-bottom: 2rem;
         }
         h1 {
@@ -123,33 +123,68 @@
         const path = window.location.pathname || "/";
         const targetUrl = path === "/splash.html" ? "/" : path;
         const serverUrl = window.location.origin; // Base URL of your server
+        
+        // Track the number of checks
+        let checkCount = 0;
+        const minChecks = 12; // Minimum checks (12 * 5 seconds = 60 seconds minimum wait)
 
         // Function to check if real page is ready and redirect
         function checkPageReady() {
-            // Function to check if the server is ready by pinging the health check endpoint
-            function tryFetch() {
-                fetch(`${serverUrl}/health`, { method: 'GET' })
-                    .then(response => {
-                        if (response.ok) {
-                            // Server responded successfully, now load the real page
-                            window.location.href = targetUrl;
-                        } else {
-                            // Server responded but not OK, retry after delay
-                            setTimeout(tryFetch, 3000);
-                        }
-                    })
-                    .catch(error => {
-                        // Error occurred, retry after delay
-                        setTimeout(tryFetch, 3000);
-                    });
+            // Get Cloud Run actual URL
+            const cloudRunUrl = "https://vouchervision-go-738307415303.us-central1.run.app";
+            
+            // Wait at least minChecks before allowing a redirect
+            const readyToRedirect = () => {
+                checkCount++;
+                return checkCount >= minChecks;
+            };
+
+            // Function to test if a page exists and has content
+            function testPage(endpoint) {
+                // Don't redirect too early no matter what
+                if (!readyToRedirect()) {
+                    setTimeout(() => testPage(endpoint), 5000);
+                    return;
+                }
+                
+                fetch(endpoint, { 
+                    method: 'GET',
+                    cache: 'no-store'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error('Page not available');
+                })
+                .then(html => {
+                    // Look for evidence the page is actually loaded with content
+                    if (html.length > 500) {
+                        console.log('Page is ready with content!');
+                        window.location.href = targetUrl;
+                    } else {
+                        // Still not ready
+                        setTimeout(() => testPage(endpoint), 3000);
+                    }
+                })
+                .catch(error => {
+                    // Error occurred, retry after delay
+                    console.log('Failed to fetch, retrying...', error);
+                    setTimeout(() => testPage(endpoint), 3000);
+                });
             }
             
-            // Start checking if server is ready
-            tryFetch();
+            // Start checking auth-success which should be available
+            testPage(`${serverUrl}/login`);
         }
 
-        // Start checking if page is ready
-        window.addEventListener('load', checkPageReady);
+        // Start checking if page is ready after a minimum delay
+        setTimeout(checkPageReady, 5000);
+        
+        // Fallback redirect after 240 seconds no matter what
+        setTimeout(() => {
+            window.location.href = targetUrl;
+        }, 240000);
     </script>
 </body>
 </html>
