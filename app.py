@@ -455,6 +455,16 @@ def authenticate_request(request):
 def authenticated_route(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
+        # For OPTIONS requests, only return CORS headers without executing the route function
+        if request.method == 'OPTIONS':
+            response = make_response()
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+            response.headers.add('Access-Control-Allow-Methods', 'GET,POST')
+            response.headers.add('Access-Control-Max-Age', '3600')
+            return response
+            
+        # For non-OPTIONS requests, proceed with authentication
         # Check for API key first in header
         api_key = request.headers.get('X-API-Key')
         
@@ -789,7 +799,13 @@ class VoucherVisionProcessor:
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-CORS(app)  # This enables CORS for all routes
+# CORS(app)  # This enables CORS for all routes
+CORS(app, resources={r"/*": {
+    "origins": "*",
+    "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+    "allow_headers": ["Content-Type", "Authorization", "X-API-Key"],
+    "supports_credentials": True 
+}})
 
 # Create a custom encoder that preserves order
 class OrderedJsonEncoder(json.JSONEncoder):
