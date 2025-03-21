@@ -54,7 +54,6 @@ venv_VV/
 venv*/
 .venv*/
 .vvgo/
-tests/
 .vscode/
 runs/
 KP_Test/

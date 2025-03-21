@@ -865,16 +865,9 @@ def process_image():
         response.headers.add('Access-Control-Allow-Origin', '*')
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
         response.headers.add('Access-Control-Allow-Methods', 'POST')
+        response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
         return response
-    
-    # For POST requests, authenticate first
-    if not authenticate_request(request):
-        # Create a response with authentication error
-        response = make_response(jsonify({'error': 'Unauthorized - Valid authentication required'}), 401)
-        # Add CORS headers to error response too
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-    
+        
     # Now proceed with the actual request handling
     # Check if file is present in the request
     if 'file' not in request.files:

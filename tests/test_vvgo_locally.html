@@ -1,0 +1,115 @@
+<!-- 
+To test, in terminal run this to start a local server:
+python -m http.server 8000
+
+Then in a browser open:
+http://localhost:8000/tests/test_vvgo_locally.html 
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoucherVision API Test - Improved</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="test_vvgo_locally.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <h2>VoucherVision API Test</h2>
+            </div>
+        </div>
+        
+        <!-- Settings section moved above the tabs -->
+        <div id="Settings" class="settings-panel">
+            <h2>API Settings</h2>
+            <div class="form-group">
+                <label for="apiKey">API Key:</label>
+                <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
+                <!-- Buttons will be added by our JavaScript -->
+            </div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="ocrOnly"> OCR Only Mode
+                </label>
+            </div>
+            <div class="form-group">
+                <label>Engines:</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked> gemini-1.5-pro
+                    </label>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="promptTemplate">Prompt Template:</label>
+                <input type="text" id="promptTemplate" value="SLTPvM_default.yaml">
+            </div>
+            
+            <div class="form-group">
+                <button id="testCorsButton" class="button">Test CORS Support</button>
+                <div id="corsStatus" class="status-display"></div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="FileUpload">File Upload</div>
+            <div class="tab" data-tab="ImageUrl">Image URL</div>
+        </div>
+        
+        <div id="FileUpload" class="tab-content active">
+            <h2>Test with File Upload</h2>
+            <div class="form-group">
+                <label for="fileInput">Select an image file:</label>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <button id="uploadButton" class="button">Upload and Process</button>
+            <div id="fileResults" class="results"></div>
+        </div>
+        
+        <div id="ImageUrl" class="tab-content">
+            <h2>Test with Image URL</h2>
+            <div class="form-group">
+                <label for="imageUrl">Image URL:</label>
+                <input type="text" id="imageUrl" value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg" placeholder="Enter image URL">
+            </div>
+            <div class="form-group">
+                <button id="testUrlAvailability" class="button">Test URL Availability</button>
+                <span id="urlTestResult"></span>
+            </div>
+            <button id="processUrlButton" class="button">Process URL</button>
+            <div id="urlResults" class="results"></div>
+        </div>
+
+        <div class="debug-section">
+            <h3>Debug Information</h3>
+            <div id="debugInfo" class="logs"></div>
+        </div>
+    </div>
+    
+    <script>
+    // Additional CSS to add to the existing stylesheet
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+        .settings-panel {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+        }
+    `;
+    document.head.appendChild(styleElement);
+    </script>
+    
+    <script src="test_vvgo_locally.js"></script>
+    <script src="api_key_validator.js"></script>
+</body>
+</html>
