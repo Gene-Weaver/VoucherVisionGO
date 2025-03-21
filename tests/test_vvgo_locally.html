@@ -25,11 +25,34 @@ http://localhost:8000/tests/test_vvgo_locally.html
         <!-- Settings section moved above the tabs -->
         <div id="Settings" class="settings-panel">
             <h2>API Settings</h2>
+            
+            <!-- Authentication Method Selection -->
             <div class="form-group">
+                <label>Authentication Method:</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="authMethod" value="apiKey" checked> API Key
+                    </label>
+                    <label>
+                        <input type="radio" name="authMethod" value="token"> Auth Token
+                    </label>
+                </div>
+            </div>
+            
+            <!-- API Key Fields -->
+            <div id="apiKeyFields" class="form-group">
                 <label for="apiKey">API Key:</label>
                 <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
                 <!-- Buttons will be added by our JavaScript -->
             </div>
+            
+            <!-- Auth Token Fields -->
+            <div id="tokenFields" class="form-group" style="display: none;">
+                <label for="authToken">Auth Token:</label>
+                <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
+                <button id="clearTokenButton" class="button" style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
+            </div>
+            
             <div class="checkbox-group">
                 <label>
                     <input type="checkbox" id="ocrOnly"> OCR Only Mode
@@ -104,6 +127,14 @@ http://localhost:8000/tests/test_vvgo_locally.html
             border-radius: 4px;
             margin-bottom: 20px;
             background-color: #f8f8f8;
+        }
+        
+        .radio-group {
+            margin: 10px 0;
+        }
+        
+        .radio-group label {
+            cursor: pointer;
         }
     `;
     document.head.appendChild(styleElement);

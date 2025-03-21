@@ -124,6 +124,43 @@ async function testUrlAvailability() {
     }
 }
 
+// Get authentication headers based on the selected auth method
+function getAuthHeaders() {
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+    
+    // Get auth method
+    const authMethod = $('input[name="authMethod"]:checked').val();
+    
+    if (authMethod === 'apiKey') {
+        // Get the API key value from the data attribute (not the visible field)
+        const apiKeyField = document.getElementById('apiKey');
+        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+        
+        if (apiKey && apiKey !== 'YOUR_API_KEY') {
+            headers['X-API-Key'] = apiKey;
+            logDebug('Using API Key authentication', {
+                apiKey: apiKey.substring(0, 3) + '•••••••' + apiKey.substring(apiKey.length - 2)
+            });
+        }
+    } else if (authMethod === 'token') {
+        // Get the auth token from the data attribute (not the visible field)
+        const authTokenField = document.getElementById('authToken');
+        const authToken = authTokenField.dataset.authToken || authTokenField.value.trim();
+        
+        if (authToken) {
+            headers['Authorization'] = `Bearer ${authToken}`;
+            logDebug('Using Bearer Token authentication', {
+                tokenLength: authToken.length,
+                tokenPrefix: authToken.substring(0, 3) + '•••••••'
+            });
+        }
+    }
+    
+    return headers;
+}
+
 // Process image with file upload
 function processFile() {
     const fileInput = document.getElementById('fileInput');
@@ -132,13 +169,24 @@ function processFile() {
         return;
     }
     
-    // Get the API key value from the data attribute (not the visible field)
-    const apiKeyField = document.getElementById('apiKey');
-    const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+    // Check authentication
+    const authMethod = $('input[name="authMethod"]:checked').val();
     
-    if (!apiKey || apiKey === 'YOUR_API_KEY') {
-        alert('Please enter an API key');
-        return;
+    if (authMethod === 'apiKey') {
+        // Get the API key value from the data attribute (not the visible field)
+        const apiKeyField = document.getElementById('apiKey');
+        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+        
+        if (!apiKey || apiKey === 'YOUR_API_KEY') {
+            alert('Please enter an API key');
+            return;
+        }
+    } else if (authMethod === 'token') {
+        const authToken = $('#authToken').val().trim();
+        if (!authToken) {
+            alert('Please enter an auth token');
+            return;
+        }
     }
     
     const ocrOnly = $('#ocrOnly').is(':checked');
@@ -173,11 +221,15 @@ function processFile() {
     $('#uploadButton').prop('disabled', true).text('Processing...');
     $('#fileResults').html('<p class="loading">Processing... Please wait.</p>');
     
+    // Get authentication headers
+    const headers = getAuthHeaders();
+    
+    // Log request details
     logDebug('Starting file upload', {
         fileName: fileInput.files[0].name,
         fileSize: fileInput.files[0].size,
         fileType: fileInput.files[0].type,
-        apiKey: apiKey.substring(0, 3) + '•••••••' + apiKey.substring(apiKey.length - 2),
+        authMethod,
         ocrOnly: ocrOnly,
         engines: engines,
         promptTemplate: promptTemplate
@@ -192,19 +244,15 @@ function processFile() {
     
     $.ajax({
         type: 'POST',
-        headers: {
-            'X-API-Key': apiKey
-        },
+        headers: headers,
         url: 'https://vouchervision-go-738307415303.us-central1.run.app/process',
         data: formData,
         processData: false,
         contentType: false,
         dataType: 'json',
         beforeSend: function(xhr) {
-            // Log the API key being sent for debugging (masked version)
-            logDebug('Request Headers', {
-                'X-API-Key': apiKey.substring(0, 3) + '•••••••' + apiKey.substring(apiKey.length - 2)
-            });
+            // Log the headers being sent for debugging (masked version)
+            logDebug('Request Headers', headers);
         },
         success: function(data) {
             logDebug('API response success', data);
@@ -247,13 +295,24 @@ function processImageUrl() {
         return;
     }
     
-    // Get the API key value from the data attribute (not the visible field)
-    const apiKeyField = document.getElementById('apiKey');
-    const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+    // Check authentication
+    const authMethod = $('input[name="authMethod"]:checked').val();
     
-    if (!apiKey || apiKey === 'YOUR_API_KEY') {
-        alert('Please enter an API key');
-        return;
+    if (authMethod === 'apiKey') {
+        // Get the API key value from the data attribute (not the visible field)
+        const apiKeyField = document.getElementById('apiKey');
+        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+        
+        if (!apiKey || apiKey === 'YOUR_API_KEY') {
+            alert('Please enter an API key');
+            return;
+        }
+    } else if (authMethod === 'token') {
+        const authToken = $('#authToken').val().trim();
+        if (!authToken) {
+            alert('Please enter an auth token');
+            return;
+        }
     }
     
     const ocrOnly = $('#ocrOnly').is(':checked');
@@ -271,7 +330,7 @@ function processImageUrl() {
     
     logDebug('Starting URL processing', {
         imageUrl: imageUrl,
-        apiKey: apiKey.substring(0, 3) + '•••••••' + apiKey.substring(apiKey.length - 2),
+        authMethod,
         ocrOnly: ocrOnly,
         engines: engines,
         promptTemplate: promptTemplate
@@ -287,15 +346,16 @@ function processImageUrl() {
         requestBody.prompt = promptTemplate;
     }
     
+    // Get authentication headers
+    const headers = getAuthHeaders();
+    
     $.ajax({
         type: 'POST',
-        headers: {
-            'X-API-Key': apiKey,
-            'Content-Type': 'application/json'
-        },
+        headers: headers,
         url: 'https://vouchervision-go-738307415303.us-central1.run.app/process-url',
         data: JSON.stringify(requestBody),
         dataType: 'json',
+        contentType: 'application/json',
         success: function(data) {
             logDebug('API response success', data);
             $('#urlResults').html(`
@@ -329,6 +389,21 @@ function processImageUrl() {
     });
 }
 
+// Toggle auth method visibility
+function toggleAuthFields() {
+    const authMethod = $('input[name="authMethod"]:checked').val();
+    
+    if (authMethod === 'apiKey') {
+        $('#apiKeyFields').show();
+        $('#tokenFields').hide();
+    } else {
+        $('#apiKeyFields').hide();
+        $('#tokenFields').show();
+    }
+    
+    logDebug(`Auth method changed to: ${authMethod}`);
+}
+
 // Initialize when document is ready
 $(document).ready(function() {
     // Add comments at the top for running local server
@@ -352,6 +427,12 @@ $(document).ready(function() {
     $('#testUrlAvailability').click(testUrlAvailability);
     $('#uploadButton').click(processFile);
     $('#processUrlButton').click(processImageUrl);
+    
+    // Set up auth method toggle
+    $('input[name="authMethod"]').change(toggleAuthFields);
+    
+    // Init auth method visibility
+    toggleAuthFields();
     
     // Initialize the page
     logDebug('Page initialized');

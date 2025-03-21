@@ -1,6 +1,6 @@
-// API Key Validation Logic for VoucherVision API Test
+// API Key and Auth Token Validation Logic for VoucherVision API Test
 
-// Create modal overlay and popup
+// Create modal overlay and popup for API Key
 function createApiKeyModal() {
     // Create modal container
     const modalOverlay = document.createElement('div');
@@ -84,7 +84,7 @@ function createApiKeyModal() {
     `;
 
     // Add event listeners
-            continueButton.addEventListener('click', function() {
+    continueButton.addEventListener('click', function() {
         const apiKey = apiKeyInput.value.trim();
         if (apiKey) {
             // Store the actual API key in a hidden input
@@ -141,21 +141,182 @@ function createApiKeyModal() {
     return modalOverlay;
 }
 
+// Create modal overlay and popup for Auth Token
+function createAuthTokenModal() {
+    // Create modal container
+    const modalOverlay = document.createElement('div');
+    modalOverlay.id = 'authTokenModalOverlay';
+    modalOverlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    `;
+
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        width: 500px;
+        max-width: 90%;
+    `;
+
+    // Add title and description
+    const modalTitle = document.createElement('h2');
+    modalTitle.textContent = 'VoucherVision Auth Token Required';
+    modalTitle.style.color = '#2E7D32';
+    modalTitle.style.marginTop = '0';
+
+    const modalDescription = document.createElement('p');
+    modalDescription.textContent = 'Please enter your Firebase Authentication Token to use the VoucherVision API testing tool.';
+
+    // Help text
+    const helpText = document.createElement('p');
+    helpText.innerHTML = '<small>You can get your token from the browser console after logging in to the VoucherVision web app. Look for "ID Token:" in the console logs.</small>';
+    helpText.style.color = '#666';
+
+    // Create form elements
+    const tokenInput = document.createElement('textarea');
+    tokenInput.id = 'modalAuthToken';
+    tokenInput.placeholder = 'Enter your authentication token';
+    tokenInput.style.cssText = `
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-family: monospace;
+        font-size: 12px;
+    `;
+
+    // Create buttons
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.display = 'flex';
+    buttonContainer.style.justifyContent = 'space-between';
+    buttonContainer.style.marginTop = '20px';
+
+    const continueButton = document.createElement('button');
+    continueButton.textContent = 'Continue';
+    continueButton.className = 'button';
+    continueButton.style.cssText = `
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    `;
+
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.style.cssText = `
+        background-color: #f1f1f1;
+        color: #333;
+        border: 1px solid #ddd;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    `;
+
+    // Add event listeners
+    continueButton.addEventListener('click', function() {
+        const token = tokenInput.value.trim();
+        if (token) {
+            // Store the actual token in a data attribute
+            const authTokenField = document.getElementById('authToken');
+            authTokenField.dataset.authToken = token;
+            
+            // Set the masked token in the visible input field
+            authTokenField.value = maskAuthToken(token);
+            
+            // Store token in localStorage for future visits
+            localStorage.setItem('vouchervision_auth_token', token);
+            
+            // Remove the modal
+            document.body.removeChild(modalOverlay);
+            
+            // Enable all buttons
+            enableButtons();
+            
+            // Log success
+            logDebug('Auth token set successfully (masked for display)');
+        } else {
+            // Show error message
+            alert('Please enter a valid authentication token');
+        }
+    });
+
+    cancelButton.addEventListener('click', function() {
+        document.body.removeChild(modalOverlay);
+        // Keep buttons disabled if canceled
+        disableButtons();
+        logDebug('Auth token prompt canceled');
+    });
+
+    // Add keypress event for Enter key
+    tokenInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && e.ctrlKey) {
+            continueButton.click();
+        }
+    });
+
+    // Assemble the modal
+    buttonContainer.appendChild(cancelButton);
+    buttonContainer.appendChild(continueButton);
+
+    modalContent.appendChild(modalTitle);
+    modalContent.appendChild(modalDescription);
+    modalContent.appendChild(helpText);
+    modalContent.appendChild(tokenInput);
+    modalContent.appendChild(buttonContainer);
+
+    modalOverlay.appendChild(modalContent);
+    
+    return modalOverlay;
+}
+
 // Function to check if the API key is set
 function isApiKeySet() {
     const apiKey = document.getElementById('apiKey').value.trim();
     return apiKey !== '' && apiKey !== 'YOUR_API_KEY';
 }
 
+// Function to check if the auth token is set
+function isAuthTokenSet() {
+    const authToken = document.getElementById('authToken').value.trim();
+    return authToken !== '';
+}
+
 // Function to mask API key for display
 function maskApiKey(apiKey) {
     if (apiKey.length <= 8) {
-        return '••••••••';
+        return '---HIDDEN---';
     }
-    return apiKey.substring(0, 4) + '••••••••' + apiKey.substring(apiKey.length - 4);
+    return apiKey.substring(0, 4) + '---HIDDEN---' + apiKey.substring(apiKey.length - 4);
 }
 
-// Function to disable all action buttons until API key is provided
+// Function to mask auth token for display
+function maskAuthToken(token) {
+    if (!token || token.length <= 10) {
+        return '---HIDDEN---';
+    }
+    return token.substring(0, 5) + '---HIDDEN---' + token.substring(token.length - 5);
+}
+
+// Function to disable all action buttons until authentication is provided
 function disableButtons() {
     document.getElementById('uploadButton').disabled = true;
     document.getElementById('processUrlButton').disabled = true;
@@ -169,7 +330,21 @@ function enableButtons() {
     document.getElementById('testUrlAvailability').disabled = false;
 }
 
-// Add this to the init function in the main script
+// Check the current authentication method and initialize accordingly
+function initAuthCheck() {
+    const authMethod = $('input[name="authMethod"]:checked').val();
+    
+    if (authMethod === 'apiKey') {
+        return initApiKeyCheck();
+    } else if (authMethod === 'token') {
+        return initAuthTokenCheck();
+    }
+    
+    // Default to API key if something goes wrong
+    return initApiKeyCheck();
+}
+
+// Initialize API key check
 function initApiKeyCheck() {
     // See if we have a stored API key
     const storedApiKey = localStorage.getItem('vouchervision_api_key');
@@ -204,6 +379,44 @@ function initApiKeyCheck() {
     disableButtons();
     
     logDebug('API key prompt displayed');
+    return false;
+}
+
+// Initialize auth token check
+function initAuthTokenCheck() {
+    // See if we have a stored auth token
+    const storedToken = localStorage.getItem('vouchervision_auth_token');
+    
+    if (storedToken) {
+        // Set the masked token in the visible input field
+        document.getElementById('authToken').value = maskAuthToken(storedToken);
+        // Store the actual token in a data attribute for use in API calls
+        document.getElementById('authToken').dataset.authToken = storedToken;
+        logDebug('Auth token loaded from local storage (masked for display)');
+        return true;
+    }
+    
+    // Check if auth token is already set
+    if (isAuthTokenSet()) {
+        // If it's already set but not masked, mask it now
+        const currentToken = document.getElementById('authToken').value.trim();
+        if (!currentToken.includes('•')) {
+            document.getElementById('authToken').dataset.authToken = currentToken;
+            document.getElementById('authToken').value = maskAuthToken(currentToken);
+        }
+        logDebug('Auth token already set in the form');
+        return true;
+    }
+    
+    // Create and show modal
+    const modal = createAuthTokenModal();
+    document.body.appendChild(modal);
+    document.getElementById('modalAuthToken').focus();
+    
+    // Disable buttons until auth token is set
+    disableButtons();
+    
+    logDebug('Auth token prompt displayed');
     return false;
 }
 
@@ -273,10 +486,24 @@ function addValidateApiKeyButton() {
     apiKeyInput.parentNode.appendChild(validateButton);
 }
 
+// Add clear token button event handler
+function setupClearTokenButton() {
+    document.getElementById('clearTokenButton').addEventListener('click', function() {
+        // Clear the auth token
+        document.getElementById('authToken').value = '';
+        localStorage.removeItem('vouchervision_auth_token');
+        
+        // Show the modal again
+        initAuthTokenCheck();
+        
+        logDebug('Auth token cleared');
+    });
+}
+
 // Add this to the document ready function
 $(document).ready(function() {
-    // Initialize API key check
-    initApiKeyCheck();
+    // Initialize auth check based on selected method
+    initAuthCheck();
     
     // Add clear API key button
     addClearApiKeyButton();
@@ -284,18 +511,41 @@ $(document).ready(function() {
     // Add validate API key button
     addValidateApiKeyButton();
     
-    // Intercept all action button clicks to verify API key is set
+    // Setup clear token button
+    setupClearTokenButton();
+    
+    // Handle auth method change
+    $('input[name="authMethod"]').change(function() {
+        const method = $(this).val();
+        
+        // Check if we need to initialize the newly selected method
+        if (method === 'apiKey') {
+            initApiKeyCheck();
+        } else if (method === 'token') {
+            initAuthTokenCheck();
+        }
+    });
+    
+    // Intercept all action button clicks to verify authentication is set
     const actionButtons = ['uploadButton', 'processUrlButton', 'testUrlAvailability'];
     
     actionButtons.forEach(buttonId => {
         const originalHandler = $(`#${buttonId}`).click;
         $(`#${buttonId}`).click(function(e) {
-            if (!isApiKeySet()) {
+            const authMethod = $('input[name="authMethod"]:checked').val();
+            
+            if (authMethod === 'apiKey' && !isApiKeySet()) {
                 e.preventDefault();
                 const modal = createApiKeyModal();
                 document.body.appendChild(modal);
                 return false;
+            } else if (authMethod === 'token' && !isAuthTokenSet()) {
+                e.preventDefault();
+                const modal = createAuthTokenModal();
+                document.body.appendChild(modal);
+                return false;
             }
+            
             // Continue with the original handler
             return true;
         });

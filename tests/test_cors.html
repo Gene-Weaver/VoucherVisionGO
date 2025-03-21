@@ -92,6 +92,18 @@ http://localhost:8000/tests/test_cors.html
             box-sizing: border-box;
         }
         
+        .auth-token-input {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
         .button-container {
             display: flex;
             justify-content: space-between;
@@ -111,15 +123,53 @@ http://localhost:8000/tests/test_cors.html
         .error {
             color: #d32f2f;
         }
+        
+        .radio-group {
+            margin: 15px 0;
+        }
+        
+        .radio-group label {
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        
+        .auth-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+        }
     </style>
 </head>
 <body>
     <h1>VoucherVision CORS Test</h1>
-    <div>
-        <label for="apiKeyDisplay">API Key:</label>
-        <input type="text" id="apiKeyDisplay" placeholder="Set via popup" readonly>
-        <button id="changeApiKeyButton">Change API Key</button>
+    
+    <div class="auth-section">
+        <h2>Authentication Settings</h2>
+        
+        <div class="radio-group">
+            <label>
+                <input type="radio" name="authMethod" value="apiKey" checked> API Key
+            </label>
+            <label>
+                <input type="radio" name="authMethod" value="token"> Auth Token
+            </label>
+        </div>
+        
+        <div id="apiKeySection">
+            <label for="apiKeyDisplay">API Key:</label>
+            <input type="text" id="apiKeyDisplay" placeholder="Set via popup" readonly>
+            <button id="changeApiKeyButton">Change API Key</button>
+        </div>
+        
+        <div id="tokenSection" style="display: none;">
+            <label for="authTokenDisplay">Auth Token:</label>
+            <input type="text" id="authTokenDisplay" placeholder="Set via popup" readonly>
+            <button id="changeTokenButton">Change Token</button>
+        </div>
     </div>
+    
     <button id="testButton" disabled>Test API with URL</button>
     <pre id="results">Click the button to test...</pre>
 
@@ -199,17 +249,112 @@ http://localhost:8000/tests/test_cors.html
             return modalOverlay;
         }
         
+        // Create Auth Token modal popup
+        function createAuthTokenModal() {
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            modalContent.style.width = '500px';
+            
+            const modalTitle = document.createElement('h2');
+            modalTitle.className = 'modal-title';
+            modalTitle.textContent = 'VoucherVision Auth Token Required';
+            
+            const modalDescription = document.createElement('p');
+            modalDescription.textContent = 'Please enter your Firebase authentication token to use the VoucherVision API testing tool.';
+            
+            const helpText = document.createElement('p');
+            helpText.innerHTML = '<small>You can get your token from the browser console after logging in to the VoucherVision web app.</small>';
+            helpText.style.color = '#666';
+            
+            const tokenInput = document.createElement('textarea');
+            tokenInput.className = 'auth-token-input';
+            tokenInput.id = 'modalAuthToken';
+            tokenInput.placeholder = 'Enter your authentication token';
+            
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'button-container';
+            
+            const continueButton = document.createElement('button');
+            continueButton.textContent = 'Continue';
+            
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Cancel';
+            cancelButton.className = 'cancel-button';
+            
+            // Add event listeners
+            continueButton.addEventListener('click', function() {
+                const token = tokenInput.value.trim();
+                if (token) {
+                    // Store token and enable button
+                    localStorage.setItem('vouchervision_auth_token', token);
+                    
+                    // Store the actual token in a data attribute
+                    const authTokenField = document.getElementById('authTokenDisplay');
+                    authTokenField.dataset.authToken = token;
+                    
+                    // Display masked token
+                    authTokenField.value = maskToken(token);
+                    document.getElementById('testButton').disabled = false;
+                    
+                    // Remove modal
+                    document.body.removeChild(modalOverlay);
+                    
+                    console.log('Auth token set successfully (masked for display)');
+                } else {
+                    alert('Please enter a valid authentication token');
+                }
+            });
+            
+            cancelButton.addEventListener('click', function() {
+                document.body.removeChild(modalOverlay);
+                console.log('Auth token prompt canceled');
+            });
+            
+            // Add keypress event for Ctrl+Enter key
+            tokenInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    continueButton.click();
+                }
+            });
+            
+            // Assemble modal
+            buttonContainer.appendChild(cancelButton);
+            buttonContainer.appendChild(continueButton);
+            
+            modalContent.appendChild(modalTitle);
+            modalContent.appendChild(modalDescription);
+            modalContent.appendChild(helpText);
+            modalContent.appendChild(tokenInput);
+            modalContent.appendChild(buttonContainer);
+            
+            modalOverlay.appendChild(modalContent);
+            
+            return modalOverlay;
+        }
+        
         // Mask API key for display
         function maskApiKey(apiKey) {
             if (apiKey.length <= 8) {
-                return '########';
+                return '---HIDDEN---';
             }
             
-            return apiKey.substring(0, 4) + '########' + apiKey.substring(apiKey.length - 4);
+            return apiKey.substring(0, 4) + '---HIDDEN---' + apiKey.substring(apiKey.length - 4);
         }
         
-        // Initialize API key check
-        function initApiKeyCheck() {
+        // Mask token for display
+        function maskToken(token) {
+            if (token.length <= 10) {
+                return '---HIDDEN---';
+            }
+            
+            return token.substring(0, 5) + '---HIDDEN---' + token.substring(token.length - 5);
+        }
+        
+        // Check if API key exists in localStorage
+        function checkApiKey() {
             const storedApiKey = localStorage.getItem('vouchervision_api_key');
             
             if (storedApiKey) {
@@ -219,13 +364,77 @@ http://localhost:8000/tests/test_cors.html
                 return true;
             }
             
-            // Create and show modal
-            const modal = createApiKeyModal();
-            document.body.appendChild(modal);
-            document.getElementById('modalApiKey').focus();
-            
-            console.log('API key prompt displayed');
             return false;
+        }
+        
+        // Check if Auth Token exists in localStorage
+        function checkAuthToken() {
+            const storedToken = localStorage.getItem('vouchervision_auth_token');
+            
+            if (storedToken) {
+                document.getElementById('authTokenDisplay').value = maskToken(storedToken);
+                document.getElementById('testButton').disabled = false;
+                console.log('Auth token loaded from local storage');
+                return true;
+            }
+            
+            return false;
+        }
+        
+        // Initialize authentication based on selected method
+        function initAuth() {
+            const authMethod = document.querySelector('input[name="authMethod"]:checked').value;
+            
+            if (authMethod === 'apiKey') {
+                document.getElementById('apiKeySection').style.display = 'block';
+                document.getElementById('tokenSection').style.display = 'none';
+                
+                if (!checkApiKey()) {
+                    // Show API key modal
+                    const modal = createApiKeyModal();
+                    document.body.appendChild(modal);
+                    document.getElementById('modalApiKey').focus();
+                }
+            } else {
+                document.getElementById('apiKeySection').style.display = 'none';
+                document.getElementById('tokenSection').style.display = 'block';
+                
+                if (!checkAuthToken()) {
+                    // Show auth token modal
+                    const modal = createAuthTokenModal();
+                    document.body.appendChild(modal);
+                    document.getElementById('modalAuthToken').focus();
+                }
+            }
+        }
+        
+        // Toggle auth method and update UI
+        function toggleAuthMethod() {
+            const authMethod = document.querySelector('input[name="authMethod"]:checked').value;
+            
+            if (authMethod === 'apiKey') {
+                document.getElementById('apiKeySection').style.display = 'block';
+                document.getElementById('tokenSection').style.display = 'none';
+            } else {
+                document.getElementById('apiKeySection').style.display = 'none';
+                document.getElementById('tokenSection').style.display = 'block';
+            }
+            
+            // Update test button disabled state
+            updateTestButtonState();
+        }
+        
+        // Update test button state based on current auth method
+        function updateTestButtonState() {
+            const authMethod = document.querySelector('input[name="authMethod"]:checked').value;
+            
+            if (authMethod === 'apiKey') {
+                const apiKey = document.getElementById('apiKeyDisplay').value;
+                document.getElementById('testButton').disabled = !apiKey || apiKey === '';
+            } else {
+                const token = document.getElementById('authTokenDisplay').value;
+                document.getElementById('testButton').disabled = !token || token === '';
+            }
         }
         
         // Change API key handler
@@ -240,29 +449,60 @@ http://localhost:8000/tests/test_cors.html
             }
         });
         
+        // Change Auth Token handler
+        document.getElementById('changeTokenButton').addEventListener('click', function() {
+            const modal = createAuthTokenModal();
+            document.body.appendChild(modal);
+            
+            // Pre-fill with existing token if available
+            const storedToken = localStorage.getItem('vouchervision_auth_token');
+            if (storedToken) {
+                document.getElementById('modalAuthToken').value = storedToken;
+            }
+        });
+        
         // Test button handler
         document.getElementById('testButton').addEventListener('click', async function() {
             const results = document.getElementById('results');
             results.textContent = 'Testing...';
             
-            // Get API key from storage
-            const apiKey = localStorage.getItem('vouchervision_api_key');
-            if (!apiKey) {
-                results.textContent = 'Error: No API key found. Please set your API key first.';
-                results.className = 'error';
-                return;
+            const authMethod = document.querySelector('input[name="authMethod"]:checked').value;
+            let headers = {
+                'Content-Type': 'application/json'
+            };
+            
+            if (authMethod === 'apiKey') {
+                // Get API key from storage
+                const apiKey = localStorage.getItem('vouchervision_api_key');
+                if (!apiKey) {
+                    results.textContent = 'Error: No API key found. Please set your API key first.';
+                    results.className = 'error';
+                    return;
+                }
+                
+                headers['X-API-Key'] = apiKey;
+                console.log('Using API Key authentication');
+            } else {
+                // Get auth token from storage
+                const authToken = localStorage.getItem('vouchervision_auth_token');
+                if (!authToken) {
+                    results.textContent = 'Error: No auth token found. Please set your token first.';
+                    results.className = 'error';
+                    return;
+                }
+                
+                headers['Authorization'] = `Bearer ${authToken}`;
+                console.log('Using Bearer Token authentication');
             }
 
             try {
                 console.log('Sending request to VoucherVision API');
+                console.log('Headers:', headers);
                 
                 // This will log any preflight request details
                 const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
                     method: 'POST',
-                    headers: {
-                        'X-API-Key': apiKey,
-                        'Content-Type': 'application/json'
-                    },
+                    headers: headers,
                     body: JSON.stringify({
                         image_url: 'https://swbiodiversity.org/imglib/seinet/sernec/EKY/31234100396/31234100396116.jpg',
                         engines: ['gemini-2.0-flash']
@@ -287,7 +527,13 @@ http://localhost:8000/tests/test_cors.html
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            initApiKeyCheck();
+            // Setup auth method toggle
+            document.querySelectorAll('input[name="authMethod"]').forEach(radio => {
+                radio.addEventListener('change', toggleAuthMethod);
+            });
+            
+            // Initialize auth
+            initAuth();
         });
     </script>
 </body>
