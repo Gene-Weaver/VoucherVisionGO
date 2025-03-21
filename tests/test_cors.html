@@ -202,10 +202,10 @@ http://localhost:8000/tests/test_cors.html
         // Mask API key for display
         function maskApiKey(apiKey) {
             if (apiKey.length <= 8) {
-                return '••••••••';
+                return '########';
             }
             
-            return apiKey.substring(0, 4) + '••••••••' + apiKey.substring(apiKey.length - 4);
+            return apiKey.substring(0, 4) + '########' + apiKey.substring(apiKey.length - 4);
         }
         
         // Initialize API key check
