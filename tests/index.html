@@ -3,7 +3,11 @@ To test, in terminal run this to start a local server:
 python -m http.server 8000
 
 Then in a browser open:
-http://localhost:8000/tests/vouchervisiongo.html 
+http://localhost:8000/webpage/index.html 
+
+OR 
+
+http://localhost:8000/index.html 
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,198 +17,6 @@ http://localhost:8000/tests/vouchervisiongo.html
     <title>VoucherVision API</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/vouchervisiongo.css">
-    <style>
-        .file-input-container {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 15px;
-        }
-        
-        .file-preview {
-            margin-top: 10px;
-            max-width: 100%;
-            max-height: 300px;
-            display: none;
-            object-fit: contain;
-            width: auto;
-            height: auto;
-        }
-        
-        .file-name {
-            margin-top: 5px;
-            font-style: italic;
-            color: #4CAF50;
-        }
-        
-        .api-status {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-        
-        .api-status.success {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            border: 1px solid #c8e6c9;
-        }
-        
-        .api-status.error {
-            background-color: #ffebee;
-            color: #c62828;
-            border: 1px solid #ffcdd2;
-        }
-        .container { 
-            max-width: 1200px; 
-            margin: 30px auto; 
-            padding: 0;
-        }
-        
-        .header { 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 15px 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo {
-            max-height: 50px;
-            width: auto;
-            margin-right: 15px;
-        }
-        
-        h2 {
-            margin: 0;
-            color: #333;
-        }
-
-        /* Additional styles for the new batch processing tabs */
-        .batch-progress {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        .progress-bar {
-            height: 20px;
-            background-color: #4CAF50;
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.3s;
-        }
-
-        .progress-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 5px;
-            font-size: 14px;
-        }
-
-        .batch-results {
-            margin-top: 20px;
-        }
-
-        .result-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .result-item.success {
-            border-left: 4px solid #4CAF50;
-        }
-
-        .result-item.error {
-            border-left: 4px solid #f44336;
-        }
-
-        .url-preview-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .url-preview-item {
-            width: 150px;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .url-preview-item img {
-            max-width: 100%;
-            max-height: 160px;
-            object-fit: contain;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .url-preview-item .url-name {
-            font-size: 12px;
-            margin-top: 5px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .folder-drop-zone {
-            border: 2px dashed #4CAF50;
-            border-radius: 4px;
-            padding: 30px;
-            text-align: center;
-            margin: 20px 0;
-            background-color: #f8f9fa;
-            cursor: pointer;
-        }
-
-        .folder-drop-zone.drag-over {
-            background-color: #e8f5e9;
-        }
-
-        .batch-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 15px 0;
-        }
-
-        .concurrency-selector {
-            display: flex;
-            align-items: center;
-        }
-
-        #concurrencySlider {
-            margin: 0 10px;
-        }
-
-        .file-list {
-            max-height: 320px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-
-        .save-options {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #f5f5f5;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -215,260 +27,244 @@ http://localhost:8000/tests/vouchervisiongo.html
             </div>
         </div>
         
-        <!-- Settings section moved above the tabs -->
-        <div id="Settings" class="settings-panel">
-            <h2>API Settings</h2>
-            
-            <!-- Authentication Method Selection -->
-            <div class="form-group">
-                <label>Authentication Method:</label>
-                <div class="radio-group">
-                    <label>
-                        <input type="radio" name="authMethod" value="apiKey" checked> API Key
-                    </label>
-                    <label>
-                        <input type="radio" name="authMethod" value="token"> Auth Token
-                    </label>
-                </div>
-            </div>
-            
-            <!-- API Key Fields -->
-            <div id="apiKeyFields" class="form-group">
-                <label for="apiKey">API Key:</label>
-                <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
-                <!-- Buttons will be added by our JavaScript -->
-            </div>
-            
-            <!-- Auth Token Fields -->
-            <div id="tokenFields" class="form-group" style="display: none;">
-                <label for="authToken">Auth Token:</label>
-                <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
-                <button id="clearTokenButton" class="button" style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
-            </div>
-            
-            <div class="checkbox-group">
-                <label>
-                    <input type="checkbox" id="ocrOnly"> OCR Only Mode
-                </label>
-            </div>
-            <div class="form-group">
-                <label>Engines:</label>
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked> gemini-1.5-pro
-                    </label>
-                </div>
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="promptTemplate">Prompt Template:</label>
-                <input type="text" id="promptTemplate" value="SLTPvM_default.yaml">
-            </div>
-            
-            <div class="form-group">
-                <button id="testCorsButton" class="button">Test CORS Support</button>
-                <div id="corsStatus" class="status-display"></div>
-            </div>
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <ul>
+                <li><a href="#" id="homeLink" class="active">Home</a></li>
+                <li><a href="#" id="readmeLink">About</a></li>
+                <li><a href="#" id="promptsLink">Available Prompts</a></li>
+                <li class="nav-right"><a href="#" id="signupLink">Sign up / Login</a></li>
+            </ul>
         </div>
         
-        <div class="tabs">
-            <div class="tab active" data-tab="FileUpload">File Upload</div>
-            <div class="tab" data-tab="ImageUrl">Image URL</div>
-            <div class="tab" data-tab="BatchUrls">Batch URLs</div>
-            <div class="tab" data-tab="BatchFolder">Batch Folder</div>
+        <!-- README Content Section (initially hidden) -->
+        <div id="readmeContent" class="readme-section" style="display: none;"></div>
+        
+        <!-- Prompts Content Section (initially hidden) -->
+        <div id="promptsContent" class="prompts-section" style="display: none;">
+            <iframe id="promptsFrame" src="about:blank" frameborder="0"></iframe>
         </div>
         
-        <div id="FileUpload" class="tab-content active">
-            <h2>Test with File Upload</h2>
-            <div class="form-group file-input-container">
-                <label for="fileInput">Select an image file:</label>
-                <input type="file" id="fileInput" accept="image/*">
-                <img id="imagePreview" class="file-preview" src="#" alt="Image Preview">
-            </div>
-            <div id="api-status" class="api-status"></div>
-            <button id="uploadButton" class="button">Upload and Process</button>
-            <div id="fileResults" class="results"></div>
+        <!-- Signup/Login Content Section (initially hidden) -->
+        <div id="signupContent" class="signup-section" style="display: none;">
+            <iframe id="signupFrame" src="about:blank" frameborder="0"></iframe>
         </div>
         
-        <div id="ImageUrl" class="tab-content">
-            <h2>Test with Image URL</h2>
-            <div class="form-group">
-                <label for="imageUrl">Image URL:</label>
-                <input type="text" id="imageUrl" value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg" placeholder="Enter image URL">
-            </div>
-            <div class="form-group">
-                <button id="testUrlAvailability" class="button">Test URL Availability</button>
-                <span id="urlTestResult"></span>
-            </div>
-            <button id="processUrlButton" class="button">Process URL</button>
-            <div id="urlResults" class="results"></div>
-        </div>
-
-        <!-- New tab for Batch URL Processing -->
-        <div id="BatchUrls" class="tab-content">
-            <h2>Batch Process URLs</h2>
-            <div class="form-group">
-                <label>Upload URL List:</label>
-                <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs in a column.</p>
-                <input type="file" id="batchUrlFileInput" accept=".txt,.csv">
-                <div id="urlFilePreview" class="file-list"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="csvUrlColumn">Column Name Containing URLs (if using CSV):</label>
-                <input type="text" id="csvUrlColumn" value="url" placeholder="Enter column name containing URLs">
-            </div>
-
-            <div class="form-group">
+        <!-- Main App Content (initially visible) -->
+        <div id="mainContent">
+            <!-- Settings section moved above the tabs -->
+            <div id="Settings" class="settings-panel">
+                <h2>API Settings</h2>
+                
+                <!-- Authentication Method Selection -->
+                <div class="form-group">
+                    <label>Authentication Method:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="authMethod" value="apiKey" checked> API Key
+                        </label>
+                        <label>
+                            <input type="radio" name="authMethod" value="token"> Auth Token
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- API Key Fields -->
+                <div id="apiKeyFields" class="form-group">
+                    <label for="apiKey">API Key:</label>
+                    <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
+                    <!-- Buttons will be added by our JavaScript -->
+                </div>
+                
+                <!-- Auth Token Fields -->
+                <div id="tokenFields" class="form-group" style="display: none;">
+                    <label for="authToken">Auth Token:</label>
+                    <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
+                    <button id="clearTokenButton" class="button" style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
+                </div>
+                
                 <div class="checkbox-group">
                     <label>
-                        <input type="checkbox" id="saveBatchToCsv" checked disabled> Save results to CSV
+                        <input type="checkbox" id="ocrOnly"> OCR Only Mode
                     </label>
                 </div>
-            </div>
-
-            <div class="batch-controls">
-                <div class="concurrency-selector">
-                    <label for="concurrencySlider">Concurrent requests:</label>
-                    <input type="range" id="concurrencySlider" min="1" max="32" value="8">
-                    <span id="concurrencyValue">8</span>
+                <div class="form-group">
+                    <label>Engines:</label>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked> gemini-1.5-pro
+                        </label>
+                    </div>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                        </label>
+                    </div>
                 </div>
-                <button id="processBatchUrlsButton" class="button">Process URLs</button>
-            </div>
-
-            <div class="batch-progress" style="display: none;">
-                <div class="progress-bar"></div>
-                <div class="progress-stats">
-                    <span class="progress-text">Processing...</span>
-                    <span class="progress-count">0/0</span>
+                <div class="form-group">
+                    <label for="promptTemplate">Prompt Template:</label>
+                    <input type="text" id="promptTemplate" value="SLTPvM_default.yaml">
+                </div>
+                
+                <div class="form-group">
+                    <button id="testCorsButton" class="button">Test CORS Support</button>
+                    <div id="corsStatus" class="status-display"></div>
                 </div>
             </div>
-
-            <div class="url-preview-gallery"></div>
-            <div id="batchUrlResults" class="batch-results"></div>
-        </div>
-
-        <!-- New tab for Batch Folder Processing -->
-        <div id="BatchFolder" class="tab-content">
-            <h2>Batch Process Local Images</h2>
             
-            <div class="folder-drop-zone" id="imageFolderDropZone">
-                <p>Drop image files here or</p>
-                <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
-                <div id="selectedFilesList" class="file-list"></div>
+            <div class="tabs">
+                <div class="tab active" data-tab="FileUpload">File Upload</div>
+                <div class="tab" data-tab="ImageUrl">Image URL</div>
+                <div class="tab" data-tab="BatchUrls">Batch URLs</div>
+                <div class="tab" data-tab="BatchFolder">Batch Folder</div>
             </div>
-
-            <div class="form-group">
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" id="saveImageBatchToCsv" checked disabled> Save results to CSV
-                    </label>
+            
+            <div id="FileUpload" class="tab-content active">
+                <h2>Test with File Upload</h2>
+                <div class="form-group file-input-container">
+                    <label for="fileInput">Select an image file:</label>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <img id="imagePreview" class="file-preview" src="#" alt="Image Preview">
                 </div>
+                <div id="api-status" class="api-status"></div>
+                <button id="uploadButton" class="button">Upload and Process</button>
+                <div id="fileResults" class="results"></div>
             </div>
-
-            <div class="batch-controls">
-                <div class="concurrency-selector">
-                    <label for="imageConcurrencySlider">Concurrent requests:</label>
-                    <input type="range" id="imageConcurrencySlider" min="1" max="32" value="8">
-                    <span id="imageConcurrencyValue">8</span>
+            
+            <div id="ImageUrl" class="tab-content">
+                <h2>Test with Image URL</h2>
+                <div class="form-group">
+                    <label for="imageUrl">Image URL:</label>
+                    <input type="text" id="imageUrl" value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg" placeholder="Enter image URL">
                 </div>
-                <button id="processBatchImagesButton" class="button">Process Images</button>
-            </div>
-
-            <div class="batch-progress" style="display: none;">
-                <div class="progress-bar"></div>
-                <div class="progress-stats">
-                    <span class="progress-text">Processing...</span>
-                    <span class="progress-count">0/0</span>
+                <div class="form-group">
+                    <button id="testUrlAvailability" class="button">Test URL Availability</button>
+                    <span id="urlTestResult"></span>
                 </div>
+                <button id="processUrlButton" class="button">Process URL</button>
+                <div id="urlResults" class="results"></div>
             </div>
 
-            <div id="batchImageResults" class="batch-results"></div>
-        </div>
+            <!-- New tab for Batch URL Processing -->
+            <div id="BatchUrls" class="tab-content">
+                <h2>Batch Process URLs</h2>
+                <div class="form-group">
+                    <label>Upload URL List:</label>
+                    <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs in a column.</p>
+                    <input type="file" id="batchUrlFileInput" accept=".txt,.csv">
+                    <div id="urlFilePreview" class="file-list"></div>
+                </div>
 
-        <div class="debug-section">
-            <h3>Debug Information</h3>
-            <div id="debugInfo" class="logs"></div>
+                <div class="form-group">
+                    <label for="csvUrlColumn">CSV URL Column Name (if using CSV):</label>
+                    <input type="text" id="csvUrlColumn" value="url" placeholder="Enter column name containing URLs">
+                </div>
+                
+                <div class="form-group">
+                    <p>Example CSV file format:</p>
+                    <table class="csv-example">
+                        <thead>
+                            <tr>
+                                <th>url</th>
+                                <th>description</th>
+                                <th>category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>https://example.com/image1.jpg</td>
+                                <td>Specimen 1</td>
+                                <td>Category A</td>
+                            </tr>
+                            <tr>
+                                <td>https://example.com/image2.jpg</td>
+                                <td>Specimen 2</td>
+                                <td>Category B</td>
+                            </tr>
+                            <tr>
+                                <td>https://example.com/image3.jpg</td>
+                                <td>Specimen 3</td>
+                                <td>Category C</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="saveBatchToCsv" checked disabled> Save results to CSV
+                        </label>
+                    </div>
+                </div>
+
+                <div class="batch-controls">
+                    <div class="concurrency-selector">
+                        <label for="concurrencySlider">Concurrent requests:</label>
+                        <input type="range" id="concurrencySlider" min="1" max="32" value="8">
+                        <span id="concurrencyValue">8</span>
+                    </div>
+                    <button id="processBatchUrlsButton" class="button">Process URLs</button>
+                </div>
+
+                <div class="batch-progress" style="display: none;">
+                    <div class="progress-bar"></div>
+                    <div class="progress-stats">
+                        <span class="progress-text">Processing...</span>
+                        <span class="progress-count">0/0</span>
+                    </div>
+                </div>
+
+                <div class="url-preview-gallery"></div>
+                <div id="batchUrlResults" class="batch-results"></div>
+            </div>
+
+            <!-- New tab for Batch Folder Processing -->
+            <div id="BatchFolder" class="tab-content">
+                <h2>Batch Process Local Images</h2>
+                
+                <div class="folder-drop-zone" id="imageFolderDropZone">
+                    <p>Drop image files here or</p>
+                    <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
+                    <div id="selectedFilesList" class="file-list"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="saveImageBatchToCsv" checked disabled> Save results to CSV
+                        </label>
+                    </div>
+                </div>
+
+                <div class="batch-controls">
+                    <div class="concurrency-selector">
+                        <label for="imageConcurrencySlider">Concurrent requests:</label>
+                        <input type="range" id="imageConcurrencySlider" min="1" max="32" value="8">
+                        <span id="imageConcurrencyValue">8</span>
+                    </div>
+                    <button id="processBatchImagesButton" class="button">Process Images</button>
+                </div>
+
+                <div class="batch-progress" style="display: none;">
+                    <div class="progress-bar"></div>
+                    <div class="progress-stats">
+                        <span class="progress-text">Processing...</span>
+                        <span class="progress-count">0/0</span>
+                    </div>
+                </div>
+
+                <div id="batchImageResults" class="batch-results"></div>
+            </div>
+
+            <div class="debug-section">
+                <h3>Debug Information</h3>
+                <div id="debugInfo" class="logs"></div>
+            </div>
         </div>
     </div>
     
     <script>
-    // Additional CSS to add to the existing stylesheet
-    const styleElement = document.createElement('style');
-    styleElement.textContent = `
-        .settings-panel {
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            background-color: #f8f8f8;
-        }
-        
-        .radio-group {
-            margin: 10px 0;
-        }
-        
-        .radio-group label {
-            cursor: pointer;
-        }
-        
-        /* Preview image for file upload */
-        #imagePreview {
-            max-width: 100%;
-            max-height: 300px;
-            margin-top: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: none;
-            object-fit: contain;
-            width: auto;
-            height: auto;
-        }
-
-        .help-text {
-            font-size: 14px;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        .batch-summary {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #e8f5e9;
-            border-radius: 4px;
-        }
-
-        .download-options {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .download-options .button {
-            margin-top: 0;
-        }
-
-        .csv-download-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 15px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-        }
-
-        .csv-download-link:hover {
-            background-color: #45a049;
-        }
-    `;
-    document.head.appendChild(styleElement);
-    
     // Add image preview functionality
     document.getElementById('fileInput').addEventListener('change', function(event) {
         const imagePreview = document.getElementById('imagePreview');
@@ -485,8 +281,121 @@ http://localhost:8000/tests/vouchervisiongo.html
             imagePreview.style.display = 'none';
         }
     });
+    
+    // Navigation functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const homeLink = document.getElementById('homeLink');
+        const readmeLink = document.getElementById('readmeLink');
+        const promptsLink = document.getElementById('promptsLink');
+        const signupLink = document.getElementById('signupLink');
+        const mainContent = document.getElementById('mainContent');
+        const readmeContent = document.getElementById('readmeContent');
+        const promptsContent = document.getElementById('promptsContent');
+        const signupContent = document.getElementById('signupContent');
+        const promptsFrame = document.getElementById('promptsFrame');
+        const signupFrame = document.getElementById('signupFrame');
+        
+        // Load README content
+        fetch('./README.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                // Convert markdown to HTML
+                const converter = new showdown.Converter({
+                    tables: true,
+                    tasklists: true,
+                    strikethrough: true,
+                    ghCodeBlocks: true
+                });
+                const html = converter.makeHtml(data);
+                readmeContent.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error fetching README:', error);
+                readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
+            });
+        
+        // Function to reset all navigation states
+        function resetNavigation() {
+            // Hide all content sections
+            mainContent.style.display = 'none';
+            readmeContent.style.display = 'none';
+            promptsContent.style.display = 'none';
+            signupContent.style.display = 'none';
+            
+            // Remove active class from all nav links
+            homeLink.classList.remove('active');
+            readmeLink.classList.remove('active');
+            promptsLink.classList.remove('active');
+            signupLink.classList.remove('active');
+            
+            // Reset iframes to reduce resource usage when not visible
+            promptsFrame.src = 'about:blank';
+            signupFrame.src = 'about:blank';
+        }
+        
+        // Handle home link click
+        homeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetNavigation();
+            mainContent.style.display = 'block';
+            homeLink.classList.add('active');
+        });
+        
+        // Handle README link click
+        readmeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetNavigation();
+            readmeContent.style.display = 'block';
+            readmeLink.classList.add('active');
+        });
+        
+        // Handle prompts link click
+        promptsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetNavigation();
+            promptsContent.style.display = 'block';
+            promptsLink.classList.add('active');
+            
+            // Load the prompts UI in the iframe
+            promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
+            
+            // Show loading indicator
+            promptsContent.classList.add('loading');
+            
+            // Remove loading indicator when iframe is loaded
+            promptsFrame.onload = function() {
+                promptsContent.classList.remove('loading');
+            };
+        });
+        
+        // Handle signup link click
+        signupLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetNavigation();
+            signupContent.style.display = 'block';
+            signupLink.classList.add('active');
+            
+            // Load the signup page in the iframe
+            signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
+            
+            // Show loading indicator
+            signupContent.classList.add('loading');
+            
+            // Remove loading indicator when iframe is loaded
+            signupFrame.onload = function() {
+                signupContent.classList.remove('loading');
+            };
+        });
+    });
     </script>
     
+    <!-- Include showdown.js for Markdown conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <script src="js/vouchervisiongo.js"></script>
     <script src="js/api_key_validator.js"></script>
     <script src="js/batch_processing.js"></script>

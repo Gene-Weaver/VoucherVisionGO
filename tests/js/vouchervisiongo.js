@@ -316,7 +316,7 @@ function processImageUrl() {
     
     // Disable button during processing
     $('#processUrlButton').prop('disabled', true).text('Processing...');
-    $('#urlResults').html('<p class="loading">Processing... Please wait.</p>');
+    $('#urlResults').html('<p class="loading">Processing... Please wait...</p>');
     
     logDebug('Starting URL processing', {
         imageUrl: imageUrl,

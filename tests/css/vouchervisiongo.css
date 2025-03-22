@@ -12,22 +12,184 @@ body {
     background-color: #f8f9fa;
 }
 
-.container {
-    max-width: 800px;
-    margin: 20px auto;
+.result-item.success {
+    border-left: 4px solid #4CAF50;
+}
+
+.result-item.error {
+    border-left: 4px solid #f44336;
+}
+
+.url-preview-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.url-preview-item {
+    width: 150px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.url-preview-item img {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.url-preview-item .url-name {
+    font-size: 12px;
+    margin-top: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.folder-drop-zone {
+    border: 2px dashed #4CAF50;
+    border-radius: 4px;
     padding: 30px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 20px 0;
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+.folder-drop-zone.drag-over {
+    background-color: #e8f5e9;
+}
+
+.batch-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.concurrency-selector {
+    display: flex;
+    align-items: center;
+}
+
+#concurrencySlider, #imageConcurrencySlider {
+    margin: 0 10px;
+}
+
+.file-list {
+    max-height: 320px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.save-options {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+
+/* Additional styles from inline script */
+#imagePreview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: none;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+}
+
+.help-text {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.batch-summary {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e8f5e9;
+    border-radius: 4px;
+}
+
+.progress-download-options {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.progress-download-options .button {
+    margin-top: 0;
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.batch-progress .progress-text {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.download-options {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.download-options .button {
+    margin-top: 0;
+}
+
+.csv-download-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.csv-download-link:hover {
+    background-color: #45a049;
+}
+
+/* Add this class for highlighting elements */
+.highlight {
+    animation: highlight-pulse 2s;
+}
+
+@keyframes highlight-pulse {
+    0% { background-color: transparent; }
+    50% { background-color: rgba(76, 175, 80, 0.3); }
+    100% { background-color: transparent; }
+}
+
+.container {
+    max-width: 1200px; 
+    margin: 30px auto; 
+    padding: 0;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .logo-container {
@@ -35,12 +197,245 @@ body {
     align-items: center;
 }
 
+.logo {
+    max-height: 50px;
+    width: auto;
+    margin-right: 15px;
+}
+
+/* Navigation Bar Styles */
+.nav-bar {
+    background-color: #4CAF50;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    position: relative;
+}
+
+.nav-bar li {
+    margin: 0;
+}
+
+.nav-bar li.nav-right {
+    margin-left: auto;
+}
+
+.nav-bar a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.nav-bar a:hover {
+    background-color: #45a049;
+    border-radius: 8px;
+}
+
+.nav-bar a.active {
+    background-color: #388e3c;
+    border-radius: 8px;
+}
+
+/* README Content Styles */
+.readme-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.readme-section h1 {
+    color: #2E7D32;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+.readme-section h2 {
+    color: #2E7D32;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 8px;
+    margin-top: 30px;
+}
+
+.readme-section h3 {
+    color: #388e3c;
+    margin-top: 25px;
+}
+
+.readme-section code {
+    background-color: #f5f5f5;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    font-size: 0.9em;
+}
+
+.readme-section pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    border: 1px solid #eaeaea;
+}
+
+.readme-section pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.readme-section ul, .readme-section ol {
+    padding-left: 25px;
+}
+
+.readme-section blockquote {
+    border-left: 4px solid #4CAF50;
+    padding-left: 15px;
+    margin-left: 0;
+    color: #555;
+}
+
+/* Prompts section styles */
+.prompts-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 600px;
+}
+
+.prompts-section iframe {
+    width: 100%;
+    height: 800px;
+    border: none;
+    border-radius: 8px;
+}
+
+.prompts-section.loading:before {
+    content: "Loading prompts...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: rgba(76, 175, 80, 0.8);
+    color: white;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.prompts-section.loading:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 0;
+    border-radius: 8px;
+}
+
+/* Signup section styles */
+.signup-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 1400px;
+}
+
+.signup-section iframe {
+    width: 100%;
+    height: 1400px;
+    border: none;
+    border-radius: 8px;
+}
+
+.signup-section.loading:before {
+    content: "Loading sign up page...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: rgba(76, 175, 80, 0.8);
+    color: white;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.signup-section.loading:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 0;
+    border-radius: 8px;
+}
+
+/* CSV example table styles */
+.csv-example {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 14px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.csv-example th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+.csv-example td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.csv-example tr:last-child td {
+    border-bottom: none;
+}
+
+.csv-example tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.csv-example tr:hover {
+    background-color: #f1f8e9;
+}
+
+/* End prompts and signup styles */
+
 h1, h2, h3 {
     color: #2E7D32;
 }
 
 h2 {
-    margin-top: 0;
+    margin: 0;
+    color: #333;
     border-bottom: 2px solid #4CAF50;
     padding-bottom: 10px;
 }
@@ -188,4 +583,99 @@ pre {
 .cors-error {
     background-color: #FFCDD2;
     color: #C62828;
+}
+
+/* File input styling */
+.file-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.file-preview {
+    margin-top: 10px;
+    max-width: 100%;
+    max-height: 300px;
+    display: none;
+    object-fit: contain;
+    width: auto;
+    height: auto;
+}
+
+.file-name {
+    margin-top: 5px;
+    font-style: italic;
+    color: #4CAF50;
+}
+
+/* API status display */
+.api-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+
+.api-status.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.api-status.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+/* Settings panel styling */
+.settings-panel {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background-color: #f8f8f8;
+}
+
+.radio-group {
+    margin: 10px 0;
+}
+
+.radio-group label {
+    cursor: pointer;
+}
+
+/* Batch processing styles */
+.batch-progress {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.batch-results {
+    margin-top: 20px;
+}
+
+.result-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }

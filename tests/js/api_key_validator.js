@@ -72,7 +72,7 @@ function createApiKeyModal() {
     `;
 
     const cancelButton = document.createElement('button');
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'Skip for now';
     cancelButton.style.cssText = `
         background-color: #f1f1f1;
         color: #333;
@@ -99,14 +99,25 @@ function createApiKeyModal() {
             // Store the actual API key in a data attribute for use in API calls
             document.getElementById('apiKey').dataset.apiKey = actualApiKey;
             
-            // Remove the modal
+            // Show testing message
+            logDebug('Testing API key validity...');
+            
+            // Automatically test the API key
+            testCorsSupport().then(success => {
+                if (success) {
+                    logDebug('API key validation successful');
+                    // Enable all buttons
+                    enableButtons();
+                } else {
+                    logDebug('API key validation failed');
+                    // Keep buttons disabled if validation fails
+                    disableButtons();
+                    alert('Could not connect to the API with the provided API key. Please check your API key and try again.');
+                }
+            });
+            
+            // Remove the modal regardless of test result
             document.body.removeChild(modalOverlay);
-            
-            // Enable all buttons
-            enableButtons();
-            
-            // Log success
-            logDebug('API key set successfully');
         } else {
             // Show error message
             alert('Please enter a valid API key');
@@ -220,7 +231,7 @@ function createAuthTokenModal() {
     `;
 
     const cancelButton = document.createElement('button');
-    cancelButton.textContent = 'Cancel';
+    cancelButton.textContent = 'Skip for now';
     cancelButton.style.cssText = `
         background-color: #f1f1f1;
         color: #333;
@@ -245,14 +256,25 @@ function createAuthTokenModal() {
             // Store token in localStorage for future visits
             localStorage.setItem('vouchervision_auth_token', token);
             
-            // Remove the modal
+            // Show testing message
+            logDebug('Testing auth token validity...');
+            
+            // Automatically test the auth token
+            testCorsSupport().then(success => {
+                if (success) {
+                    logDebug('Auth token validation successful');
+                    // Enable all buttons
+                    enableButtons();
+                } else {
+                    logDebug('Auth token validation failed');
+                    // Keep buttons disabled if validation fails
+                    disableButtons();
+                    alert('Could not connect to the API with the provided authentication token. Please check your token and try again.');
+                }
+            });
+            
+            // Remove the modal regardless of test result
             document.body.removeChild(modalOverlay);
-            
-            // Enable all buttons
-            enableButtons();
-            
-            // Log success
-            logDebug('Auth token set successfully (masked for display)');
         } else {
             // Show error message
             alert('Please enter a valid authentication token');
@@ -357,6 +379,23 @@ function initApiKeyCheck() {
         // Store the actual API key in a data attribute for use in API calls
         document.getElementById('apiKey').dataset.apiKey = storedApiKey;
         logDebug('API key loaded from local storage');
+        
+        // Automatically test the stored API key
+        logDebug('Testing stored API key validity...');
+        testCorsSupport().then(success => {
+            if (success) {
+                logDebug('Stored API key validation successful');
+                enableButtons();
+            } else {
+                logDebug('Stored API key validation failed');
+                disableButtons();
+                // Show the API key modal to get a new key
+                const modal = createApiKeyModal();
+                document.body.appendChild(modal);
+                document.getElementById('modalApiKey').focus();
+            }
+        });
+        
         return true;
     }
     
@@ -369,6 +408,23 @@ function initApiKeyCheck() {
             document.getElementById('apiKey').value = maskApiKey(currentKey);
         }
         logDebug('API key already set in the form');
+        
+        // Automatically test the existing API key
+        logDebug('Testing existing API key validity...');
+        testCorsSupport().then(success => {
+            if (success) {
+                logDebug('Existing API key validation successful');
+                enableButtons();
+            } else {
+                logDebug('Existing API key validation failed');
+                disableButtons();
+                // Show the API key modal to get a new key
+                const modal = createApiKeyModal();
+                document.body.appendChild(modal);
+                document.getElementById('modalApiKey').focus();
+            }
+        });
+        
         return true;
     }
     
@@ -395,6 +451,23 @@ function initAuthTokenCheck() {
         // Store the actual token in a data attribute for use in API calls
         document.getElementById('authToken').dataset.authToken = storedToken;
         logDebug('Auth token loaded from local storage (masked for display)');
+        
+        // Automatically test the stored token
+        logDebug('Testing stored auth token validity...');
+        testCorsSupport().then(success => {
+            if (success) {
+                logDebug('Stored auth token validation successful');
+                enableButtons();
+            } else {
+                logDebug('Stored auth token validation failed');
+                disableButtons();
+                // Show the auth token modal to get a new token
+                const modal = createAuthTokenModal();
+                document.body.appendChild(modal);
+                document.getElementById('modalAuthToken').focus();
+            }
+        });
+        
         return true;
     }
     
@@ -407,6 +480,23 @@ function initAuthTokenCheck() {
             document.getElementById('authToken').value = maskAuthToken(currentToken);
         }
         logDebug('Auth token already set in the form');
+        
+        // Automatically test the existing token
+        logDebug('Testing existing auth token validity...');
+        testCorsSupport().then(success => {
+            if (success) {
+                logDebug('Existing auth token validation successful');
+                enableButtons();
+            } else {
+                logDebug('Existing auth token validation failed');
+                disableButtons();
+                // Show the auth token modal to get a new token
+                const modal = createAuthTokenModal();
+                document.body.appendChild(modal);
+                document.getElementById('modalAuthToken').focus();
+            }
+        });
+        
         return true;
     }
     
@@ -437,6 +527,9 @@ function addClearApiKeyButton() {
         document.getElementById('apiKey').value = '';
         document.getElementById('apiKey').dataset.apiKey = '';
         localStorage.removeItem('vouchervision_api_key');
+        
+        // Disable buttons until new key is provided
+        disableButtons();
         
         // Show the modal again
         initApiKeyCheck();
@@ -497,6 +590,9 @@ function setupClearTokenButton() {
         document.getElementById('authToken').value = '';
         document.getElementById('authToken').dataset.authToken = '';
         localStorage.removeItem('vouchervision_auth_token');
+        
+        // Disable buttons until new token is provided
+        disableButtons();
         
         // Show the modal again
         initAuthTokenCheck();

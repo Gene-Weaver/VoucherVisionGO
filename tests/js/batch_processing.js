@@ -1,6 +1,3 @@
-// VoucherVision Batch Processing Module
-// Handles batch processing of URLs and local image folders
-
 // Utility function to convert CSV data to structured object
 async function parseCSV(csvContent, urlColumnName = 'url') {
     return new Promise((resolve, reject) => {
@@ -101,7 +98,9 @@ async function processBatchUrls(urls, concurrency, options = {}) {
         $('.batch-progress .progress-count').text(`${completedCount}/${totalCount}`);
         
         if (completedCount === totalCount) {
-            $('.batch-progress .progress-text').text('Processing complete');
+            $('.batch-progress .progress-text').html(`<strong>Processing complete!</strong>`);
+        } else {
+            $('.batch-progress .progress-text').text(`Processing ${completedCount} of ${totalCount} URLs...`);
         }
     }
     
@@ -179,6 +178,20 @@ async function processBatchUrls(urls, concurrency, options = {}) {
     async function processInBatches() {
         // Initialize progress tracking
         $('.batch-progress').show();
+        
+        // Clear any previous download options
+        $('.batch-progress .progress-download-options').remove();
+        
+        // Add download buttons (disabled initially)
+        $('.batch-progress').append(`
+            <div class="progress-download-options">
+                <button id="downloadSummaryBtn" class="button" disabled>Download Summary CSV</button>
+                <button id="downloadDetailedCsvBtn" class="button" disabled>Download Results CSV</button>
+                <button id="downloadJsonFilesBtn" class="button" disabled>Download Results JSON</button>
+                <button id="downloadFullJsonFilesBtn" class="button" disabled>Download Full JSON</button>
+            </div>
+        `);
+        
         updateProgress();
         
         // Clear previous results
@@ -205,31 +218,100 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             });
         }
         
-        // Show summary
+        // Show summary in progress bar
         const successCount = results.length;
         const errorCount = errors.length;
         
-        $('#batchUrlResults').append(`
-            <div class="batch-summary">
-                <h3>Processing Complete</h3>
-                <p>Successfully processed: ${successCount} URLs</p>
-                <p>Errors: ${errorCount} URLs</p>
-            </div>
+        $('.batch-progress .progress-text').html(`
+            <strong>Processing Complete</strong><br>
+            Successfully processed: ${successCount} URLs<br>
+            Errors: ${errorCount} URLs
         `);
         
-        // Generate CSV if requested
-        if (options.saveToCSV) {
-            const csvContent = generateResultsCSV(results, errors);
+        // Enable download buttons if we have results
+        $('#downloadSummaryBtn').prop('disabled', false);
+        
+        if (successCount > 0) {
+            $('#downloadDetailedCsvBtn, #downloadJsonFilesBtn, #downloadFullJsonFilesBtn').prop('disabled', false);
+        }
+        
+        // Download Summary CSV
+        $('#downloadSummaryBtn').click(function() {
+            const csvContent = generateResultsSummaryCSV(results, errors);
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
-            
-            // Add download link
-            $('#batchUrlResults').append(`
-                <a href="${url}" download="batch_results_${Date.now()}.csv" class="csv-download-link">
-                    Download Results CSV
-                </a>
-            `);
-        }
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `batch_summary_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+        
+        // Download Detailed CSV
+        $('#downloadDetailedCsvBtn').click(function() {
+            const csvContent = generateDetailedResultsCSV(results);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `batch_detailed_results_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+        
+        // Download Results JSON
+        $('#downloadJsonFilesBtn').click(async function() {
+            try {
+                $(this).prop('disabled', true).text('Creating ZIP...');
+                const zipContent = await createJsonZipArchive(results);
+                const url = URL.createObjectURL(zipContent);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `batch_json_results_${Date.now()}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (error) {
+                logDebug('Error creating ZIP archive', error);
+                alert(`Error creating ZIP archive: ${error.message}`);
+            } finally {
+                $(this).prop('disabled', false).text('Download Results JSON');
+            }
+        });
+        
+        // Download Full JSON
+        $('#downloadFullJsonFilesBtn').click(async function() {
+            try {
+                $(this).prop('disabled', true).text('Creating ZIP...');
+                const zipContent = await createFullJsonZipArchive(results);
+                const url = URL.createObjectURL(zipContent);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `batch_full_json_results_${Date.now()}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (error) {
+                logDebug('Error creating ZIP archive', error);
+                alert(`Error creating ZIP archive: ${error.message}`);
+            } finally {
+                $(this).prop('disabled', false).text('Download Full JSON');
+            }
+        });
         
         return {
             results,
@@ -314,8 +396,8 @@ function renderResultItem(result) {
             
             // Show OCR text (truncated)
             if (result.apiResponse.ocr) {
-                const truncatedOcr = result.apiResponse.ocr.substring(0, 200) + 
-                    (result.apiResponse.ocr.length > 200 ? '...' : '');
+                const truncatedOcr = result.apiResponse.ocr.substring(0, 500) + 
+                    (result.apiResponse.ocr.length > 500 ? '...' : '');
                 responsePreview += `<details>
                     <summary>OCR Text</summary>
                     <p>${truncatedOcr}</p>
@@ -498,8 +580,8 @@ async function processBatchImages(files, concurrency, options = {}) {
             try {
                 // Show OCR text (truncated)
                 if (result.apiResponse.ocr) {
-                    const truncatedOcr = result.apiResponse.ocr.substring(0, 200) + 
-                        (result.apiResponse.ocr.length > 200 ? '...' : '');
+                    const truncatedOcr = result.apiResponse.ocr.substring(0, 500) + 
+                        (result.apiResponse.ocr.length > 500 ? '...' : '');
                     responsePreview += `<details>
                         <summary>OCR Text</summary>
                         <p>${truncatedOcr}</p>
@@ -538,6 +620,20 @@ async function processBatchImages(files, concurrency, options = {}) {
     async function processInBatches() {
         // Initialize progress tracking
         $('#BatchFolder .batch-progress').show();
+        
+        // Clear any previous download options
+        $('#BatchFolder .batch-progress .progress-download-options').remove();
+        
+        // Add download buttons (disabled initially)
+        $('#BatchFolder .batch-progress').append(`
+            <div class="progress-download-options">
+                <button id="downloadImageSummaryBtn" class="button" disabled>Download Summary CSV</button>
+                <button id="downloadImageDetailedCsvBtn" class="button" disabled>Download Results CSV</button>
+                <button id="downloadImageJsonFilesBtn" class="button" disabled>Download Results JSON</button>
+                <button id="downloadImageFullJsonFilesBtn" class="button" disabled>Download Full JSON</button>
+            </div>
+        `);
+        
         updateProgress();
         
         // Clear previous results
@@ -567,22 +663,20 @@ async function processBatchImages(files, concurrency, options = {}) {
         const successCount = results.length;
         const errorCount = errors.length;
         
-        $('#batchImageResults').append(`
-            <div class="batch-summary">
-                <h3>Processing Complete</h3>
-                <p>Successfully processed: ${successCount} images</p>
-                <p>Errors: ${errorCount} images</p>
-                <div class="download-options">
-                    <button id="downloadImageSummaryBtn" class="button">Download Summary CSV</button>
-                    ${successCount > 0 ? `
-                        <button id="downloadImageDetailedCsvBtn" class="button">Download Results CSV</button>
-                        <button id="downloadImageJsonFilesBtn" class="button">Download Results JSON</button>
-                    ` : ''}
-                </div>
-            </div>
+        $('#BatchFolder .batch-progress .progress-text').html(`
+            <strong>Processing Complete</strong><br>
+            Successfully processed: ${successCount} images<br>
+            Errors: ${errorCount} images
         `);
         
-        // Set up download button handlers
+        // Enable download buttons if we have results
+        $('#downloadImageSummaryBtn').prop('disabled', false);
+        
+        if (successCount > 0) {
+            $('#downloadImageDetailedCsvBtn, #downloadImageJsonFilesBtn, #downloadImageFullJsonFilesBtn').prop('disabled', false);
+        }
+        
+        // Download Summary CSV
         $('#downloadImageSummaryBtn').click(function() {
             const csvContent = generateImageSummaryCSV(results, errors);
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -590,37 +684,75 @@ async function processBatchImages(files, concurrency, options = {}) {
             const a = document.createElement('a');
             a.href = url;
             a.download = `image_batch_summary_${Date.now()}.csv`;
+            document.body.appendChild(a);
             a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
         });
-        
-        if (successCount > 0) {
-            $('#downloadImageDetailedCsvBtn').click(function() {
-                const csvContent = generateImageDetailedCSV(results);
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
+
+        // Download Detailed CSV
+        $('#downloadImageDetailedCsvBtn').click(function() {
+            const csvContent = generateImageDetailedCSV(results);
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `image_batch_detailed_results_${Date.now()}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 100);
+        });
+
+        // Download Results JSON
+        $('#downloadImageJsonFilesBtn').click(async function() {
+            try {
+                $(this).prop('disabled', true).text('Creating ZIP...');
+                const zipContent = await createImageJsonZipArchive(results);
+                const url = URL.createObjectURL(zipContent);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `image_batch_detailed_results_${Date.now()}.csv`;
+                a.download = `image_batch_json_results_${Date.now()}.zip`;
+                document.body.appendChild(a);
                 a.click();
-            });
-            
-            $('#downloadImageJsonFilesBtn').click(async function() {
-                try {
-                    $(this).prop('disabled', true).text('Creating ZIP...');
-                    const zipContent = await createImageJsonZipArchive(results);
-                    const url = URL.createObjectURL(zipContent);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `image_batch_json_results_${Date.now()}.zip`;
-                    a.click();
-                } catch (error) {
-                    logDebug('Error creating ZIP archive', error);
-                    alert(`Error creating ZIP archive: ${error.message}`);
-                } finally {
-                    $(this).prop('disabled', false).text('Download Results JSON');
-                }
-            });
-        }
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (error) {
+                logDebug('Error creating ZIP archive', error);
+                alert(`Error creating ZIP archive: ${error.message}`);
+            } finally {
+                $(this).prop('disabled', false).text('Download Results JSON');
+            }
+        });
+
+        // Download Full JSON
+        $('#downloadImageFullJsonFilesBtn').click(async function() {
+            try {
+                $(this).prop('disabled', true).text('Creating ZIP...');
+                const zipContent = await createFullImageJsonZipArchive(results);
+                const url = URL.createObjectURL(zipContent);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `image_batch_full_json_results_${Date.now()}.zip`;
+                document.body.appendChild(a);
+                a.click();
+                setTimeout(() => {
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, 100);
+            } catch (error) {
+                logDebug('Error creating ZIP archive', error);
+                alert(`Error creating ZIP archive: ${error.message}`);
+            } finally {
+                $(this).prop('disabled', false).text('Download Full JSON');
+            }
+        });
         
         return {
             results,
@@ -628,7 +760,6 @@ async function processBatchImages(files, concurrency, options = {}) {
             totalProcessed: completedCount
         };
     }
-    
     return processInBatches();
 }
 
@@ -773,6 +904,236 @@ async function createImageJsonZipArchive(results) {
     return content;
 }
 
+function generateResultsSummaryCSV(results, errors) {
+    // Combine successful and failed results
+    const allResults = [...results, ...errors];
+    
+    if (allResults.length === 0) {
+        return 'No results to export';
+    }
+    
+    // Start with headers
+    const headers = [
+        'URL',
+        'Status',
+        'Error',
+        'OCR Engine'
+    ];
+    
+    // Add column headers
+    let csv = headers.join(',') + '\n';
+    
+    // Add rows
+    allResults.forEach(result => {
+        const row = [
+            // URL - escape quotes
+            `"${result.url.replace(/"/g, '""')}"`,
+            
+            // Status
+            result.success ? 'Success' : 'Failed',
+            
+            // Error message (if any)
+            result.success ? '' : `"${result.error.replace(/"/g, '""')}"`,
+            
+            // OCR Engine
+            result.success ? (result.apiResponse.ocr_info ? 
+                Object.keys(result.apiResponse.ocr_info).join('+') : '') : ''
+        ];
+        
+        csv += row.join(',') + '\n';
+    });
+    
+    return csv;
+}
+
+// Generate detailed CSV with JSON fields as columns
+function generateDetailedResultsCSV(results) {
+    if (results.length === 0) {
+        return 'No results to export';
+    }
+    
+    // First pass: gather all possible fields from formatted_json across all results
+    const allJsonFields = new Set();
+    
+    results.forEach(result => {
+        if (result.success && result.apiResponse.formatted_json) {
+            Object.keys(result.apiResponse.formatted_json).forEach(key => {
+                allJsonFields.add(key);
+            });
+        }
+    });
+    
+    // Convert to array and sort for consistent output
+    const jsonFields = Array.from(allJsonFields).sort();
+    
+    // Start with headers (URL + all JSON fields)
+    const headers = ['URL', ...jsonFields];
+    
+    // Add column headers
+    let csv = headers.join(',') + '\n';
+    
+    // Add rows for successful results only
+    results.forEach(result => {
+        if (!result.success || !result.apiResponse.formatted_json) return;
+        
+        const row = [
+            // URL - escape quotes
+            `"${result.url.replace(/"/g, '""')}"`
+        ];
+        
+        // Add data for each JSON field (or empty if not present)
+        jsonFields.forEach(field => {
+            const value = result.apiResponse.formatted_json[field];
+            
+            if (value === undefined || value === null) {
+                row.push(''); // Empty for missing fields
+            } else if (typeof value === 'object') {
+                // For objects or arrays, convert to JSON string and escape quotes
+                row.push(`"${JSON.stringify(value).replace(/"/g, '""')}"`);
+            } else if (typeof value === 'string') {
+                // For strings, escape quotes and wrap in quotes
+                row.push(`"${value.replace(/"/g, '""')}"`);
+            } else {
+                // For numbers, booleans, etc.
+                row.push(value);
+            }
+        });
+        
+        csv += row.join(',') + '\n';
+    });
+    
+    return csv;
+}
+
+// Extract filename from URL
+function getFilenameFromUrl(url) {
+    try {
+        // Parse the URL
+        const urlObj = new URL(url);
+        
+        // Get the path part
+        const path = urlObj.pathname;
+        
+        // Get the last segment (filename with extension)
+        const filename = path.split('/').pop();
+        
+        // If no filename found or it's empty, use a hash of the URL
+        if (!filename || filename === '') {
+            return `file_${Math.abs(hashCode(url))}.json`;
+        }
+        
+        // If filename has no extension, add .json
+        if (!filename.includes('.')) {
+            return `${filename}.json`;
+        }
+        
+        // Replace extension with .json
+        const filenameWithoutExt = filename.substring(0, filename.lastIndexOf('.'));
+        return `${filenameWithoutExt}.json`;
+    } catch (e) {
+        // If URL parsing fails, use a hash of the URL
+        return `file_${Math.abs(hashCode(url))}.json`;
+    }
+}
+
+// Simple string hash function
+function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
+}
+
+// Create zip archive with JSON files
+async function createJsonZipArchive(results) {
+    // Dynamically load JSZip library if not already loaded
+    if (typeof JSZip === 'undefined') {
+        await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    
+    const zip = new JSZip();
+    
+    // Add each formatted_json as a separate file
+    results.forEach(result => {
+        if (result.success && result.apiResponse.formatted_json) {
+            const filename = getFilenameFromUrl(result.url);
+            zip.file(filename, JSON.stringify(result.apiResponse.formatted_json, null, 2));
+        }
+    });
+    
+    // Generate the zip file
+    const content = await zip.generateAsync({type: 'blob'});
+    return content;
+}
+
+// Function to create a ZIP archive with full API response JSON files for URLs
+async function createFullJsonZipArchive(results) {
+    // Dynamically load JSZip library if not already loaded
+    if (typeof JSZip === 'undefined') {
+        await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    
+    const zip = new JSZip();
+    
+    // Add each full API response as a separate file
+    results.forEach(result => {
+        if (result.success && result.apiResponse) {
+            const filename = getFilenameFromUrl(result.url);
+            zip.file(filename, JSON.stringify(result.apiResponse, null, 2));
+        }
+    });
+    
+    // Generate the zip file
+    const content = await zip.generateAsync({type: 'blob'});
+    return content;
+}
+
+// Function to create a ZIP archive with full API response JSON files for image files
+async function createFullImageJsonZipArchive(results) {
+    // Dynamically load JSZip library
+    if (typeof JSZip === 'undefined') {
+        await new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+    
+    const zip = new JSZip();
+    
+    // Add each full API response as a separate file
+    results.forEach(result => {
+        if (result.success && result.apiResponse) {
+            // Get filename without extension
+            const filenameWithoutExt = result.filename.substring(0, result.filename.lastIndexOf('.'));
+            const jsonFilename = `${filenameWithoutExt}.json`;
+            
+            zip.file(jsonFilename, JSON.stringify(result.apiResponse, null, 2));
+        }
+    });
+    
+    // Generate the zip file
+    const content = await zip.generateAsync({type: 'blob'});
+    return content;
+}
+
 // Initialize event handlers for batch processing
 $(document).ready(function() {
     // Load Papa Parse for CSV processing
@@ -829,7 +1190,7 @@ $(document).ready(function() {
                         $('#urlFilePreview').html(`
                             <p><strong>Text file loaded:</strong> ${file.name}</p>
                             <p><strong>URLs found:</strong> ${parsedData.urls.length}</p>
-                            <p><strong>Subset URLs:</strong></p>
+                            <p><strong>Sample URLs:</strong></p>
                             <ul>
                                 ${parsedData.urls.slice(0, 5).map(item => 
                                     `<li>${item.url}</li>`).join('')}
