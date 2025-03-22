@@ -223,6 +223,8 @@ function processFile() {
     
     // Get authentication headers
     const headers = getAuthHeaders();
+    // Note: Do not set Content-Type header when using FormData - the browser will set it automatically with the boundary
+    delete headers['Content-Type']; 
     
     // Log request details
     logDebug('Starting file upload', {
@@ -242,48 +244,36 @@ function processFile() {
     }
     logDebug('FormData contents', formDataEntries);
     
-    $.ajax({
-        type: 'POST',
+    // Use fetch API instead of jQuery AJAX
+    fetch('https://vouchervision-go-738307415303.us-central1.run.app/process', {
+        method: 'POST',
         headers: headers,
-        url: 'https://vouchervision-go-738307415303.us-central1.run.app/process',
-        data: formData,
-        processData: false,
-        contentType: false,
-        dataType: 'json',
-        beforeSend: function(xhr) {
-            // Log the headers being sent for debugging (masked version)
-            logDebug('Request Headers', headers);
-        },
-        success: function(data) {
-            logDebug('API response success', data);
-            $('#fileResults').html(`
-                <h3 class="success">Results:</h3>
-                <pre>${JSON.stringify(data, null, 2)}</pre>
-            `);
-        },
-        error: function(xhr, status, error) {
-            const response = xhr.responseText || 'No response content';
-            logDebug('API response error', {
-                status: status,
-                error: error,
-                response: response,
-                statusCode: xhr.status,
-                headers: xhr.getAllResponseHeaders()
-            });
-            
-            $('#fileResults').html(`
-                <h3 class="error">Error:</h3>
-                <p>Status: ${status}</p>
-                <p>Status Code: ${xhr.status}</p>
-                <p>Error: ${error}</p>
-                <p>Response:</p>
-                <pre>${response}</pre>
-            `);
-        },
-        complete: function() {
-            // Re-enable button
-            $('#uploadButton').prop('disabled', false).text('Upload and Process');
-        }
+        body: formData,
+    })
+    .then(response => {
+        logDebug(`Response status: ${response.status}`);
+        return response.json();
+    })
+    .then(data => {
+        logDebug('API response success', data);
+        $('#fileResults').html(`
+            <h3 class="success">Results:</h3>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+        `);
+    })
+    .catch(error => {
+        logDebug('API response error', {
+            error: error.toString(),
+        });
+        
+        $('#fileResults').html(`
+            <h3 class="error">Error:</h3>
+            <p>Error: ${error.toString()}</p>
+        `);
+    })
+    .finally(() => {
+        // Re-enable button
+        $('#uploadButton').prop('disabled', false).text('Upload and Process');
     });
 }
 
@@ -412,7 +402,7 @@ $(document).ready(function() {
     ---------------------------
     To run this locally:
     1. Start a local server: python -m http.server 8000
-    2. Open in browser: http://localhost:8000/test_vvgo_locally.html
+    2. Open in browser: http://localhost:8000/vouchervisiongo.html
     `);
     
     // Set up tab click events
@@ -434,6 +424,16 @@ $(document).ready(function() {
     // Init auth method visibility
     toggleAuthFields();
     
+    // Set up file input change event for visual feedback
+    $('#fileInput').change(function() {
+        if (this.files && this.files.length > 0) {
+            const fileName = this.files[0].name;
+            $(this).next('.file-name').remove();
+            $(this).after(`<span class="file-name">Selected: ${fileName}</span>`);
+        }
+    });
+    
     // Initialize the page
     logDebug('Page initialized');
 });
+

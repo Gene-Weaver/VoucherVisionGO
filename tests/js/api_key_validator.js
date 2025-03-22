@@ -36,7 +36,7 @@ function createApiKeyModal() {
     modalTitle.style.marginTop = '0';
 
     const modalDescription = document.createElement('p');
-    modalDescription.textContent = 'Please enter your API key to use the VoucherVision API testing tool.';
+    modalDescription.innerHTML = 'Please enter your API key to use the VoucherVision API testing tool. If you do not have an API Key or an Authentication Token, <a href="https://vouchervision-go-738307415303.us-central1.run.app/signup" target="_blank">sign up for access</a> or <a href="https://vouchervision-go-738307415303.us-central1.run.app/login" target="_blank">log in to an existing account</a>.';
 
     // Create form elements
     const apiKeyInput = document.createElement('input');
@@ -177,11 +177,11 @@ function createAuthTokenModal() {
     modalTitle.style.marginTop = '0';
 
     const modalDescription = document.createElement('p');
-    modalDescription.textContent = 'Please enter your Firebase Authentication Token to use the VoucherVision API testing tool.';
+    modalDescription.textContent = 'Please enter your Token to use the VoucherVision API testing tool.';
 
     // Help text
     const helpText = document.createElement('p');
-    helpText.innerHTML = '<small>You can get your token from the browser console after logging in to the VoucherVision web app. Look for "ID Token:" in the console logs.</small>';
+    helpText.innerHTML = '<small>Tokens are valid for 1 hour, or as long as you are logged into the browser page. API Keys are valid for longer durations without requiring browser-based authentication.</small>';
     helpText.style.color = '#666';
 
     // Create form elements
@@ -290,13 +290,15 @@ function createAuthTokenModal() {
 
 // Function to check if the API key is set
 function isApiKeySet() {
-    const apiKey = document.getElementById('apiKey').value.trim();
+    const apiKeyField = document.getElementById('apiKey');
+    const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
     return apiKey !== '' && apiKey !== 'YOUR_API_KEY';
 }
 
 // Function to check if the auth token is set
 function isAuthTokenSet() {
-    const authToken = document.getElementById('authToken').value.trim();
+    const authTokenField = document.getElementById('authToken');
+    const authToken = authTokenField.dataset.authToken || authTokenField.value.trim();
     return authToken !== '';
 }
 
@@ -458,8 +460,10 @@ function addValidateApiKeyButton() {
     `;
     
     validateButton.addEventListener('click', function() {
-        const apiKey = document.getElementById('apiKey').value.trim();
-        if (!apiKey) {
+        const apiKeyField = document.getElementById('apiKey');
+        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+        
+        if (!apiKey || apiKey === 'YOUR_API_KEY') {
             alert('Please enter an API key');
             return;
         }
@@ -491,6 +495,7 @@ function setupClearTokenButton() {
     document.getElementById('clearTokenButton').addEventListener('click', function() {
         // Clear the auth token
         document.getElementById('authToken').value = '';
+        document.getElementById('authToken').dataset.authToken = '';
         localStorage.removeItem('vouchervision_auth_token');
         
         // Show the modal again
@@ -530,24 +535,31 @@ $(document).ready(function() {
     const actionButtons = ['uploadButton', 'processUrlButton', 'testUrlAvailability'];
     
     actionButtons.forEach(buttonId => {
-        const originalHandler = $(`#${buttonId}`).click;
-        $(`#${buttonId}`).click(function(e) {
-            const authMethod = $('input[name="authMethod"]:checked').val();
+        const originalButton = document.getElementById(buttonId);
+        if (originalButton) {
+            const originalOnClick = originalButton.onclick;
             
-            if (authMethod === 'apiKey' && !isApiKeySet()) {
-                e.preventDefault();
-                const modal = createApiKeyModal();
-                document.body.appendChild(modal);
-                return false;
-            } else if (authMethod === 'token' && !isAuthTokenSet()) {
-                e.preventDefault();
-                const modal = createAuthTokenModal();
-                document.body.appendChild(modal);
-                return false;
-            }
-            
-            // Continue with the original handler
-            return true;
-        });
+            originalButton.onclick = function(e) {
+                const authMethod = $('input[name="authMethod"]:checked').val();
+                
+                if (authMethod === 'apiKey' && !isApiKeySet()) {
+                    e.preventDefault();
+                    const modal = createApiKeyModal();
+                    document.body.appendChild(modal);
+                    return false;
+                } else if (authMethod === 'token' && !isAuthTokenSet()) {
+                    e.preventDefault();
+                    const modal = createAuthTokenModal();
+                    document.body.appendChild(modal);
+                    return false;
+                }
+                
+                // Continue with the original handler
+                if (typeof originalOnClick === 'function') {
+                    return originalOnClick.call(this, e);
+                }
+                return true;
+            };
+        }
     });
 });
