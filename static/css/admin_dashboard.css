@@ -319,3 +319,24 @@ body {
     color: white;
     border-color: #4285f4;
   }
+
+  /* Styles for the details modal */
+  .details-section {
+    margin-bottom: 20px;
+  }
+
+  .details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  .details-table th, .details-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  .details-table th {
+    background-color: #f5f5f5;
+  }

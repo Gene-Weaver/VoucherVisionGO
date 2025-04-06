@@ -182,6 +182,61 @@ def validate_api_key(api_key):
         logger.error(f"Error validating API key: {str(e)}")
         return False
 
+def update_usage_statistics(user_email, engines=None):
+    """Update usage statistics for a user in Firestore"""
+    if not user_email or user_email == 'unknown':
+        logger.warning("Cannot track usage for unknown user")
+        return
+        
+    try:
+        # Get current month for monthly tracking
+        current_month = datetime.datetime.now().strftime("%Y-%m")
+        
+        # Reference to user's usage document
+        user_usage_ref = db.collection('usage_statistics').document(user_email)
+        user_usage_doc = user_usage_ref.get()
+        
+        if user_usage_doc.exists:
+            # Update existing document
+            user_data = user_usage_doc.to_dict()
+            
+            # Update monthly usage
+            monthly_usage = user_data.get('monthly_usage', {})
+            monthly_usage[current_month] = monthly_usage.get(current_month, 0) + 1
+            
+            # Update engine usage if available
+            ocr_info = user_data.get('ocr_info', {})
+            if engines:
+                for engine in engines:
+                    ocr_info[engine] = ocr_info.get(engine, 0) + 1
+            
+            # Update the document
+            user_usage_ref.update({
+                'total_images_processed': firestore.Increment(1),
+                'last_processed_at': firestore.SERVER_TIMESTAMP,
+                'monthly_usage': monthly_usage,
+                'ocr_info': ocr_info
+            })
+        else:
+            # Create new document
+            monthly_usage = {current_month: 1}
+            ocr_info = {}
+            if engines:
+                for engine in engines:
+                    ocr_info[engine] = 1
+                    
+            user_usage_ref.set({
+                'user_email': user_email,
+                'total_images_processed': 1,
+                'last_processed_at': firestore.SERVER_TIMESTAMP,
+                'monthly_usage': monthly_usage,
+                'ocr_info': ocr_info,
+                'first_processed_at': firestore.SERVER_TIMESTAMP,
+            })
+            
+        logger.info(f"Updated usage statistics for {user_email}")
+    except Exception as e:
+        logger.error(f"Error updating usage statistics: {str(e)}")
 
 class SimpleEmailSender:
     """
@@ -451,6 +506,68 @@ def authenticate_request(request):
     except Exception as e:
         logger.error(f"Error verifying token: {e}")
         return None
+
+def get_user_email_from_request(request):
+    """
+    Get the user email from an already authenticated request.
+    This function assumes authentication has already been performed by authenticate_request.
+    
+    Args:
+        request: The Flask request object
+        
+    Returns:
+        str: The user's email address, or 'unknown' if not found
+    """
+    user_email = 'unknown'
+    
+    try:
+        # Check for API key first in header
+        api_key = request.headers.get('X-API-Key')
+        
+        # Also check for API key in query parameters
+        if not api_key:
+            api_key = request.args.get('api_key')
+        
+        if api_key:
+            # Get the API key document
+            api_key_doc = db.collection('api_keys').document(api_key).get()
+            
+            if api_key_doc.exists:
+                key_data = api_key_doc.to_dict()
+                user_email = key_data.get('owner', 'unknown')
+                logger.info(f"Request authenticated via API key from user: {user_email}")
+                return user_email
+        
+        # Check for Firebase token
+        auth_header = request.headers.get('Authorization', '')
+        id_token = None
+        
+        if auth_header.startswith('Bearer '):
+            id_token = auth_header.split('Bearer ')[1]
+        
+        # If not in header, check in query parameters
+        if not id_token:
+            id_token = request.args.get('token')
+        
+        # If not in query, check in cookies
+        if not id_token:
+            id_token = request.cookies.get('auth_token')
+        
+        if id_token:
+            # Just get the email from the token without re-validating
+            # This relies on the authenticate_request middleware having already validated the token
+            try:
+                # Get info about the token without full verification
+                decoded_claims = auth.verify_id_token(id_token, check_revoked=False)
+                user_email = decoded_claims.get('email', 'unknown')
+                logger.info(f"Request from Firebase user: {user_email}")
+            except Exception as e:
+                logger.error(f"Error getting email from token: {e}")
+        
+    except Exception as e:
+        logger.error(f"Error getting user email: {e}")
+    
+    return user_email
 
 def authenticated_route(f):
     @wraps(f)
@@ -875,6 +992,9 @@ def process_image():
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     
+    # Get user email using the new function
+    user_email = get_user_email_from_request(request)
+
     file = request.files['file']
     
     # Get engine options from request if specified
@@ -893,6 +1013,10 @@ def process_image():
         prompt=prompt,
         ocr_only=ocr_only,
     )
+    
+    # If processing was successful, update usage statistics
+    if status_code == 200:
+        update_usage_statistics(user_email, engines=engine_options) ########################################################## also log attempts #TODO
     
     # Create response with CORS headers
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -913,6 +1037,9 @@ def process_image_by_url():
         response.headers.add('Access-Control-Allow-Methods', 'POST')
         response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
         return response
+    
+    # Get user email using the new function
+    user_email = get_user_email_from_request(request)
     
     # Get JSON data from request
     data = request.get_json()
@@ -980,6 +1107,10 @@ def process_image_by_url():
             prompt=prompt,
             ocr_only=ocr_only
         )
+        
+        # If processing was successful, update usage statistics
+        if status_code == 200:
+            update_usage_statistics(user_email, engines=engines)
         
         # Clean up the temporary file
         try:
@@ -1090,6 +1221,62 @@ def api_demo_page():
         project_id=firebase_config["projectId"]
     )
 
+@app.route('/admin/usage-statistics', methods=['GET'])
+@authenticated_route
+def get_usage_statistics():
+    """Get usage statistics for all users"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    admin_email = user.get('email')
+    
+    # Check if the user is an admin
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+    
+    try:
+        # Get all usage statistics
+        stats_ref = db.collection('usage_statistics').stream()
+        
+        stats_list = []
+        for stat_doc in stats_ref:
+            stat_data = stat_doc.to_dict()
+            
+            # Format timestamps for display
+            if 'last_processed_at' in stat_data and hasattr(stat_data['last_processed_at'], '_seconds'):
+                stat_data['last_processed_at'] = {
+                    '_seconds': stat_data['last_processed_at']._seconds,
+                    '_formatted': datetime.datetime.fromtimestamp(
+                        stat_data['last_processed_at']._seconds
+                    ).strftime('%Y-%m-%d %H:%M:%S')
+                }
+            
+            if 'first_processed_at' in stat_data and hasattr(stat_data['first_processed_at'], '_seconds'):
+                stat_data['first_processed_at'] = {
+                    '_seconds': stat_data['first_processed_at']._seconds,
+                    '_formatted': datetime.datetime.fromtimestamp(
+                        stat_data['first_processed_at']._seconds
+                    ).strftime('%Y-%m-%d %H:%M:%S')
+                }
+            
+            stats_list.append(stat_data)
+        
+        # Sort by total images processed (descending)
+        stats_list.sort(key=lambda x: x.get('total_images_processed', 0), reverse=True)
+        
+        return jsonify({
+            'status': 'success',
+            'count': len(stats_list),
+            'usage_statistics': stats_list
+        })
+        
+    except Exception as e:
+        logger.error(f"Error getting usage statistics: {str(e)}")
+        return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
+    
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])
 def cors_test():
     """Simple endpoint to test CORS configuration"""
