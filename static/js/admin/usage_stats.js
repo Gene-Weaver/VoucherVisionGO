@@ -58,14 +58,34 @@ async function loadUsageStatistics() {
             const currentMonthUsage = monthlyUsage[currentMonth] || 0;
             const prevMonthUsage = monthlyUsage[prevMonth] || 0;
             
-            // Format timestamps
-            const lastUsed = stat.last_processed_at && stat.last_processed_at._formatted 
-              ? stat.last_processed_at._formatted 
-              : 'N/A';
+            // Format timestamps correctly
+            const formatTimestamp = (timestamp) => {
+              if (!timestamp) return 'N/A';
               
-            const firstUsed = stat.first_processed_at && stat.first_processed_at._formatted 
-              ? stat.first_processed_at._formatted 
-              : 'N/A';
+              // Handle different timestamp formats
+              if (timestamp._seconds) {
+                // Firestore timestamp from server
+                return new Date(timestamp._seconds * 1000).toLocaleString();
+              } else if (timestamp._formatted) {
+                // Pre-formatted timestamp 
+                return timestamp._formatted;
+              } else if (timestamp instanceof Date) {
+                // JavaScript Date object
+                return timestamp.toLocaleString();
+              } else if (typeof timestamp === 'string') {
+                // ISO string or other string format
+                try {
+                  return new Date(timestamp).toLocaleString();
+                } catch (e) {
+                  return timestamp;
+                }
+              }
+              
+              return 'N/A';
+            };
+            
+            const firstUsed = formatTimestamp(stat.first_processed_at);
+            const lastUsed = formatTimestamp(stat.last_processed_at);
             
             row.innerHTML = `
               <td>${stat.user_email || 'Unknown'}</td>
@@ -132,6 +152,35 @@ async function loadUsageStatistics() {
       monthlyHtml += `<tr><td>${month}</td><td>${monthlyUsage[month]}</td></tr>`;
     }
     
+    // Format timestamps correctly
+    const formatTimestamp = (timestamp) => {
+      if (!timestamp) return 'N/A';
+      
+      // Handle different timestamp formats
+      if (timestamp._seconds) {
+        // Firestore timestamp from server
+        return new Date(timestamp._seconds * 1000).toLocaleString();
+      } else if (timestamp._formatted) {
+        // Pre-formatted timestamp 
+        return timestamp._formatted;
+      } else if (timestamp instanceof Date) {
+        // JavaScript Date object
+        return timestamp.toLocaleString();
+      } else if (typeof timestamp === 'string') {
+        // ISO string or other string format
+        try {
+          return new Date(timestamp).toLocaleString();
+        } catch (e) {
+          return timestamp;
+        }
+      }
+      
+      return 'N/A';
+    };
+    
+    const firstUsed = formatTimestamp(userStat.first_processed_at);
+    const lastUsed = formatTimestamp(userStat.last_processed_at);
+    
     modal.innerHTML = `
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -140,8 +189,8 @@ async function loadUsageStatistics() {
         <div class="details-section">
           <h4>Summary</h4>
           <p>Total Images Processed: ${userStat.total_images_processed || 0}</p>
-          <p>First Used: ${userStat.first_processed_at && userStat.first_processed_at._formatted || 'N/A'}</p>
-          <p>Last Used: ${userStat.last_processed_at && userStat.last_processed_at._formatted || 'N/A'}</p>
+          <p>First Used: ${firstUsed}</p>
+          <p>Last Used: ${lastUsed}</p>
         </div>
         
         <div class="details-section">

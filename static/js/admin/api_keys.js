@@ -1,6 +1,31 @@
 // Variables to store current key being viewed
 let currentKeyId = null;
 
+function formatTimestamp(timestamp) {
+  if (!timestamp) return 'N/A';
+  
+  // Handle different timestamp formats
+  if (timestamp._seconds) {
+    // Firestore timestamp from server
+    return new Date(timestamp._seconds * 1000).toLocaleString();
+  } else if (timestamp._formatted) {
+    // Pre-formatted timestamp 
+    return timestamp._formatted;
+  } else if (timestamp instanceof Date) {
+    // JavaScript Date object
+    return timestamp.toLocaleString();
+  } else if (typeof timestamp === 'string') {
+    // ISO string or other string format
+    try {
+      return new Date(timestamp).toLocaleString();
+    } catch (e) {
+      return timestamp;
+    }
+  }
+  
+  return 'N/A';
+}
+
 // Load API keys from the API
 function loadApiKeys() {
   document.getElementById('api-keys-loading').style.display = 'block';
@@ -57,13 +82,10 @@ function renderApiKeysPage(page) {
   document.getElementById('api-keys-table').style.display = 'table';
   
   pageItems.forEach(key => {
-    const createdDate = key.created_at && (key.created_at._seconds || key.created_at._formatted) ? 
-      (key.created_at._formatted || new Date(key.created_at._seconds * 1000).toLocaleDateString()) : 'Unknown';
+    const createdDate = formatTimestamp(key.created_at);
+    const expiresDate = formatTimestamp(key.expires_at);
     
-    const expiresDate = key.expires_at && (key.expires_at._seconds || key.expires_at._formatted) ? 
-      (key.expires_at._formatted || new Date(key.expires_at._seconds * 1000).toLocaleDateString()) : 'Never';
-    
-    const isActive = key.active !== false; // Default to active if not specified
+    const isActive = key.active === true; 
     
     const row = document.createElement('tr');
     
