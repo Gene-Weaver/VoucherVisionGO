@@ -14,7 +14,8 @@ leafmachine:
   #       'Gemini 1.5 Pro'
   #       'Gemini 1.5 Flash'
   #       'Gemini 1.5 Flash 8B'
-  LLM_version: Gemini 2.0 Flash
+  # LLM_version: Gemini 2.0 Flash
+  LLM_version: Gemini 2.5 Flash
 
 
   project:

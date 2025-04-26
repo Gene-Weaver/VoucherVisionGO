@@ -25,6 +25,8 @@ from url_name_parser import extract_filename_from_url
 '''
 ### TO UPDATE FROM MAIN VV REPO
 git submodule update --init --recursive --remote
+
+good example url: https://medialib.naturalis.nl/file/id/L.3800382/format/large
 '''
 
 # Configure logging
@@ -656,7 +658,7 @@ class VoucherVisionProcessor:
         # Initialize OCR engines 
         self.ocr_engines = {}
         self.ocr_engines_lock = threading.Lock()
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash"]:
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"]:
             self.ocr_engines[model_name] = OCRGeminiProVision(
                 self.api_key, 
                 model_name=model_name, 
@@ -898,6 +900,7 @@ class VoucherVisionProcessor:
 
                     results = OrderedDict([
                         ("filename", original_filename),
+                        ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
                             ("model", model_print),
