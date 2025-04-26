@@ -88,10 +88,10 @@ http://localhost:8000/index.html
                 <div style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
                     <p>About the models:</p>
                     <ul>
-                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
-                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens</li>
-                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting performance seems worse than Gemini 2.0 Flash</li>
                         <li><strong>Gemini 2.5 Pro</strong>: Higher accuracy, especially for handwritten text, can follow complex instructions, like parsing multiple species determinations</li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens</li>
+                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
+                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting performance seems worse than Gemini 2.0 Flash</li>
                         <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
                     </ul>
                 </div>
@@ -101,24 +101,44 @@ http://localhost:8000/index.html
                         <label>OCR Engines:</label>
                         <div class="checkbox-group">
                             <label>
-                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled> gemini-1.5-pro
+                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
+                                <span class="tooltip">
+                                    <span class="info-icon">i</span>
+                                    <span class="tooltip-text">Highest overall accuracy, particularly for difficult handwriting and complex annotations. Can identify multiple species determinations from a single specimen.</span>
+                                </span>
                             </label>
                         </div>
+                        
                         <div class="checkbox-group">
                             <label>
                                 <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                                <span class="tooltip">
+                                    <span class="info-icon">i</span>
+                                    <span class="tooltip-text">Optimized for speed with reliable accuracy for typed text and standard specimens. Best choice for high-volume processing or when quick results are needed.</span>
+                                </span>
                             </label>
                         </div>
+                        
                         <div class="checkbox-group">
                             <label>
                                 <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked disabled> gemini-2.5-flash
+                                <span class="tooltip">
+                                    <span class="info-icon">i</span>
+                                    <span class="tooltip-text">Disabled because it costs more and performs worse than Gemini 2.0. Currently in preview state with inconsistent results for handwriting recognition.</span>
+                                </span>
                             </label>
                         </div>
+                        
                         <div class="checkbox-group">
                             <label>
-                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
+                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled> gemini-1.5-pro
+                                <span class="tooltip">
+                                    <span class="info-icon">i</span>
+                                    <span class="tooltip-text">Disabled because it will be deprecated sometime in 2025 (but it does perform well). Excellent with handwritten text and complex layout understanding.</span>
+                                </span>
                             </label>
                         </div>
+                        
                     </div>
                 
                     <div style="margin-top: 0px;"> <!-- Aligned with the OCR Engines label -->
