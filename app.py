@@ -900,7 +900,7 @@ class VoucherVisionProcessor:
 
                     results = OrderedDict([
                         ("filename", original_filename),
-                        ("prompt", ocr_prompt_option),
+                        ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
                             ("model", model_print),
