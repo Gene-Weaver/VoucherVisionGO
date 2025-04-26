@@ -98,44 +98,67 @@ http://localhost:8000/index.html
 
                 <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
-                        <label>OCR Engines:</label>
+                        <h3>OCR Engines:</h3>
                         <div class="checkbox-group">
                             <label>
                                 <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
-                                <span class="tooltip">
-                                    <span class="info-icon">i</span>
-                                    <span class="tooltip-text">Highest overall accuracy, particularly for difficult handwriting and complex annotations. Can identify multiple species determinations from a single specimen.</span>
-                                </span>
                             </label>
                         </div>
-                        
                         <div class="checkbox-group">
                             <label>
                                 <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
-                                <span class="tooltip">
-                                    <span class="info-icon">i</span>
-                                    <span class="tooltip-text">Optimized for speed with reliable accuracy for typed text and standard specimens. Best choice for high-volume processing or when quick results are needed.</span>
-                                </span>
                             </label>
                         </div>
+                        <style>
+                        /* Tooltip container */
+                        .custom-tooltip {
+                            position: relative;
+                            display: inline-block;
+                        }
                         
+                        /* Tooltip text - hidden by default */
+                        .custom-tooltip:hover::after {
+                            content: attr(data-tooltip);
+                            visibility: visible;
+                            width: 240px;
+                            background-color: #4CAF50;
+                            color: #fff;
+                            text-align: center;
+                            padding: 5px 0;
+                            border-radius: 6px;
+                        
+                            /* Position the tooltip text */
+                            position: absolute;
+                            z-index: 100;
+                            top: 0;
+                            left: 110%;
+                        }
+                        
+                        /* Tooltip arrow */
+                        .custom-tooltip:hover::before {
+                            content: "";
+                            visibility: visible;
+                            position: absolute;
+                            top: 50%;
+                            right: -10px;
+                            /* Position to the right of the element */
+                            margin-top: -5px;
+                            border-width: 5px;
+                            border-style: solid;
+                            border-color: transparent transparent transparent #4CAF50;
+                            z-index: 101;
+                        }
+                        </style>
+                        
+                        <!-- Modified HTML using data-tooltip attribute instead of title -->
                         <div class="checkbox-group">
-                            <label>
+                            <label class="custom-tooltip" data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
                                 <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked disabled> gemini-2.5-flash
-                                <span class="tooltip">
-                                    <span class="info-icon">i</span>
-                                    <span class="tooltip-text">Disabled because it costs more and performs worse than Gemini 2.0. Currently in preview state with inconsistent results for handwriting recognition.</span>
-                                </span>
                             </label>
                         </div>
-                        
                         <div class="checkbox-group">
-                            <label>
+                            <label class="custom-tooltip" data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
                                 <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled> gemini-1.5-pro
-                                <span class="tooltip">
-                                    <span class="info-icon">i</span>
-                                    <span class="tooltip-text">Disabled because it will be deprecated sometime in 2025 (but it does perform well). Excellent with handwritten text and complex layout understanding.</span>
-                                </span>
                             </label>
                         </div>
                         
@@ -150,11 +173,12 @@ http://localhost:8000/index.html
                     </div>
                 </div>
 
-                <label>LLM Model for creating JSON: Will use Gemini-2.0-Flash. Gemini-2.5-Pro is marginally better, but does not seem worth the extra cost at the moment.</label>
+                <h3>LLM Model for creating JSON:</h3>
+                <p>Will use Gemini-2.0-Flash. Gemini-2.5-Pro is marginally better, but does not seem worth the extra cost at the moment.</p>
 
                 <div class="form-group">
-                    <label for="promptTemplate">Prompt Template:</label>
-                    <input type="text" id="promptTemplate" value="SLTPvM_default.yaml">
+                    <h3 for="promptTemplate">Prompt Template:</h3>
+                    <input type="text" id="promptTemplate" value="SLTPvM_default_v2.yaml">
                 </div>
                 
                 <div class="form-group">
@@ -186,6 +210,7 @@ http://localhost:8000/index.html
                 <h2>Test with Image URL</h2>
                 <div class="form-group">
                     <label for="imageUrl">Image URL:</label>
+                    <!-- <input type="text" id="imageUrl" value="https://medialib.naturalis.nl/file/id/L.3800382/format/large" placeholder="Enter image URL"> -->
                     <input type="text" id="imageUrl" value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg" placeholder="Enter image URL">
                 </div>
                 <div class="form-group">
