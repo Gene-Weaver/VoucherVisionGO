@@ -83,34 +83,55 @@ http://localhost:8000/index.html
                     <button id="clearTokenButton" class="button" style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
                 </div>
                 
-                <div class="checkbox-group">
-                    <label>
-                        <input type="checkbox" id="ocrOnly"> OCR Only Mode
-                    </label>
+                <label>Selecting OCR Engine Options</label>
+                <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and performance characteristics.</p>
+                <div style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
+                    <p>About the models:</p>
+                    <ul>
+                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens</li>
+                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting performance seems worse than Gemini 2.0 Flash</li>
+                        <li><strong>Gemini 2.5 Pro</strong>: Higher accuracy, especially for handwritten text, can follow complex instructions, like parsing multiple species determinations</li>
+                        <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <label>OCR Engines:</label>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked> gemini-1.5-pro
-                        </label>
+
+                <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
+                    <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
+                        <label>OCR Engines:</label>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled> gemini-1.5-pro
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked disabled> gemini-2.5-flash
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
+                            </label>
+                        </div>
                     </div>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
-                        </label>
-                    </div>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked> gemini-2.5-flash
-                        </label>
-                    </div>
-                    <div class="checkbox-group">
-                        <label>
-                            <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
-                        </label>
+                
+                    <div style="margin-top: 0px;"> <!-- Aligned with the OCR Engines label -->
+                        <div style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
+                            <label>
+                                <input type="checkbox" id="ocrOnly"> OCR Only Mode
+                            </label>
+                        </div>
                     </div>
                 </div>
+
+                <label>LLM Model for creating JSON: Will use Gemini-2.0-Flash. Gemini-2.5-Pro is marginally better, but does not seem worth the extra cost at the moment.</label>
+
                 <div class="form-group">
                     <label for="promptTemplate">Prompt Template:</label>
                     <input type="text" id="promptTemplate" value="SLTPvM_default.yaml">
