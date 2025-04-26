@@ -1,27 +1,26 @@
 import os
-import requests
 import sys
 import json
 import datetime
 import tempfile
 import threading
-from flask import Flask, request, jsonify, render_template_string, redirect, make_response, render_template
+from flask import Flask, request, jsonify, redirect, make_response, render_template
 from flask_cors import CORS
 import logging
 from werkzeug.utils import secure_filename
-from werkzeug.datastructures import FileStorage
 from collections import OrderedDict
 from pathlib import Path
 import yaml
 import re
 from functools import wraps
-from io import BytesIO
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
+
+from url_name_parser import extract_filename_from_url
 
 '''
 ### TO UPDATE FROM MAIN VV REPO
@@ -840,6 +839,9 @@ class VoucherVisionProcessor:
                 logger.info(f"Using prompt file: {current_prompt}")
                 logger.info(f"file_path: {file_path}")
                 logger.info(f"engine_options: {engine_options}")
+
+                # Extract the original filename for the response
+                original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
                 ocr_info, ocr = self.perform_ocr(file_path, engine_options)
@@ -851,7 +853,8 @@ class VoucherVisionProcessor:
                         model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
                     
                     results = OrderedDict([
-                        ("filename", ""),
+                        ("filename", original_filename),
+                        ("prompt", "vouchervision_default_ocr.yaml"),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
                             ("model", model_print),
@@ -881,7 +884,7 @@ class VoucherVisionProcessor:
                         model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
 
                     results = OrderedDict([
-                        ("filename", ""),
+                        ("filename", original_filename),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
                             ("model", model_print),
@@ -1070,9 +1073,7 @@ def process_image_by_url():
         from werkzeug.datastructures import FileStorage
         
         # Get the filename from the URL
-        filename = os.path.basename(image_url.split('?')[0])  # Remove query params if any
-        if not filename:
-            filename = "image.jpg"
+        filename = extract_filename_from_url(image_url)
         
         # Download the image
         image_response = requests.get(image_url, stream=True)
