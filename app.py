@@ -721,7 +721,7 @@ class VoucherVisionProcessor:
         """Check if file has allowed extension"""
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
     
-    def perform_ocr(self, file_path, engine_options):
+    def perform_ocr(self, file_path, engine_options, ocr_prompt_option):
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
@@ -748,7 +748,7 @@ class VoucherVisionProcessor:
                 OCR_Engine = self.ocr_engines[ocr_opt]
             
             # Execute OCR (this API call can run concurrently)
-            response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path)
+            response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
             
             ocr_packet[ocr_opt]["ocr_text"] = response
             ocr_packet[ocr_opt]["cost_in"] = cost_in
@@ -810,8 +810,12 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
     
-    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], prompt=None, ocr_only=False):
-        """Process an image from a request file"""
+    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], ocr_prompt_option=None, prompt=None, ocr_only=False):
+        """
+        Process an image from a request file
+        ocr_prompt_option=["ocr_verbatim_v1", None]
+        None will use the default LLM ocr, *anything* else will use the "verbatim"
+        """
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
             return {'error': 'Server is at maximum capacity. Please try again later.'}, 429
@@ -832,7 +836,16 @@ class VoucherVisionProcessor:
             try:
                 # Get engine options (default to gemini models if not specified)
                 if engine_options is None:
-                    engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+                    if ocr_only:
+                        engine_options = ["gemini-2.0-flash"]
+                    else:
+                        engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+
+                if ocr_prompt_option is None:
+                    if ocr_only:
+                        ocr_prompt_option = "ocr_verbatim_v1"
+                    else:
+                        ocr_prompt_option = None
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
@@ -844,7 +857,7 @@ class VoucherVisionProcessor:
                 original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
-                ocr_info, ocr = self.perform_ocr(file_path, engine_options)
+                ocr_info, ocr = self.perform_ocr(file_path, engine_options, ocr_prompt_option)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if ocr_only:
@@ -854,7 +867,7 @@ class VoucherVisionProcessor:
                     
                     results = OrderedDict([
                         ("filename", original_filename),
-                        ("prompt", "vouchervision_default_ocr.yaml"),
+                        ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
                             ("model", model_print),
