@@ -17,6 +17,10 @@ http://localhost:8000/index.html
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoucherVision API</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Keep the external script references -->
+    <!-- <script src="js/vouchervisiongo.js"></script>
+    <script src="js/api_key_validator.js"></script>
+    <script src="js/batch_processing.js"></script> -->
     <link rel="stylesheet" href="css/vouchervisiongo.css">
 </head>
 
@@ -682,10 +686,153 @@ http://localhost:8000/index.html
         });
     </script>
     
-    <!-- Keep the external script references -->
+    <!-- Include showdown.js for Markdown conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+
+    <!-- Load external scripts in the correct order -->
     <script src="js/vouchervisiongo.js"></script>
     <script src="js/api_key_validator.js"></script>
     <script src="js/batch_processing.js"></script>
+    <script src="js/prompt_templates.js"></script>
+
+    <!-- Additional initialization script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image preview functionality
+            document.getElementById('fileInput').addEventListener('change', function (event) {
+                const imagePreview = document.getElementById('imagePreview');
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+            });
+
+            // Navigation functionality
+            const homeLink = document.getElementById('homeLink');
+            const readmeLink = document.getElementById('readmeLink');
+            const promptsLink = document.getElementById('promptsLink');
+            const signupLink = document.getElementById('signupLink');
+            const mainContent = document.getElementById('mainContent');
+            const readmeContent = document.getElementById('readmeContent');
+            const promptsContent = document.getElementById('promptsContent');
+            const signupContent = document.getElementById('signupContent');
+            const promptsFrame = document.getElementById('promptsFrame');
+            const signupFrame = document.getElementById('signupFrame');
+
+            // Load README content
+            fetch('./README.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Convert markdown to HTML
+                    const converter = new showdown.Converter({
+                        tables: true,
+                        tasklists: true,
+                        strikethrough: true,
+                        ghCodeBlocks: true
+                    });
+                    const html = converter.makeHtml(data);
+                    readmeContent.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching README:', error);
+                    readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
+                });
+
+            // Function to reset all navigation states
+            function resetNavigation() {
+                // Hide all content sections
+                mainContent.style.display = 'none';
+                readmeContent.style.display = 'none';
+                promptsContent.style.display = 'none';
+                signupContent.style.display = 'none';
+
+                // Remove active class from all nav links
+                homeLink.classList.remove('active');
+                readmeLink.classList.remove('active');
+                promptsLink.classList.remove('active');
+                signupLink.classList.remove('active');
+
+                // Reset iframes to reduce resource usage when not visible
+                promptsFrame.src = 'about:blank';
+                signupFrame.src = 'about:blank';
+            }
+
+            // Handle home link click
+            homeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                mainContent.style.display = 'block';
+                homeLink.classList.add('active');
+            });
+
+            // Handle README link click
+            readmeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                readmeContent.style.display = 'block';
+                readmeLink.classList.add('active');
+            });
+
+            // Handle prompts link click
+            promptsLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                promptsContent.style.display = 'block';
+                promptsLink.classList.add('active');
+
+                // Load the prompts UI in the iframe
+                promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
+
+                // Show loading indicator
+                promptsContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                promptsFrame.onload = function () {
+                    promptsContent.classList.remove('loading');
+                };
+            });
+
+            // Handle signup link click
+            signupLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                signupContent.style.display = 'block';
+                signupLink.classList.add('active');
+
+                // Load the signup page in the iframe
+                signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
+
+                // Show loading indicator
+                signupContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                signupFrame.onload = function () {
+                    signupContent.classList.remove('loading');
+                };
+            });
+
+            // Add manual check for LLM model selections to log them
+            document.querySelectorAll('input[name="llm_model"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    console.log(`LLM model changed to: ${this.value}`);
+                    logDebug(`LLM model selection changed to: ${this.value}`);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

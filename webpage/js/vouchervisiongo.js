@@ -40,7 +40,20 @@ function logDebug(message, data = null) {
 
 // Get selected model
 function getSelectedModel() {
-    return $('input[name="llm_model"]:checked').val();
+    // Get the selected model directly from the DOM
+    const selectedRadio = document.querySelector('input[name="llm_model"]:checked');
+    
+    // Debug the selection
+    console.log("Selected LLM model radio:", selectedRadio);
+    
+    if (selectedRadio) {
+        console.log("Selected model value:", selectedRadio.value);
+        return selectedRadio.value;
+    } else {
+        // Fallback to default if no radio is selected (shouldn't happen with properly set defaults)
+        console.log("No model selected, using default: gemini-2.0-flash");
+        return "gemini-2.0-flash";
+    }
 }
 
 // Get selected engines
@@ -235,9 +248,8 @@ function processFile() {
     
     // Get authentication headers
     const headers = getAuthHeaders();
-    // Note: Do not set Content-Type header when using FormData - the browser will set it automatically with the boundary
-    delete headers['Content-Type']; 
-    
+    delete headers['Content-Type'];
+
     // Log request details
     logDebug('Starting file upload', {
         fileName: fileInput.files[0].name,
@@ -291,114 +303,93 @@ function processFile() {
 }
 
 
-// Process image with URL 
-function processImageUrl() {
-    const imageUrl = $('#imageUrl').val();
-    if (!imageUrl) {
-        alert('Please enter an image URL');
-        return;
-    }
+// Process image with URL - Using FormData
+// function processImageUrl() {
+//     const imageUrl = $('#imageUrl').val();
+//     if (!imageUrl) {
+//         alert('Please enter an image URL');
+//         return;
+//     }
     
-    // Check authentication
-    const authMethod = $('input[name="authMethod"]:checked').val();
-    
-    if (authMethod === 'apiKey') {
-        // Get the API key value from the data attribute (not the visible field)
-        const apiKeyField = document.getElementById('apiKey');
-        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
-        
-        if (!apiKey || apiKey === 'YOUR_API_KEY') {
-            alert('Please enter an API key');
-            return;
-        }
-    } else if (authMethod === 'token') {
-        const authToken = $('#authToken').val().trim();
-        if (!authToken) {
-            alert('Please enter an auth token');
-            return;
-        }
-    }
-    
-    const ocrOnly = $('#ocrOnly').is(':checked');
-    const engines = getSelectedEngines();
-    const promptTemplate = $('#promptTemplate').val();
-    const llm_model = getSelectedModel(); // Get selected model
-    
-    if (engines.length === 0) {
-        alert('Please select at least one engine');
-        return;
-    }
-    
-    // Disable button during processing
-    $('#processUrlButton').prop('disabled', true).text('Processing...');
-    $('#urlResults').html('<p class="loading">Processing... Please wait...</p>');
-    
-    logDebug('Starting URL processing', {
-        imageUrl: imageUrl,
-        authMethod,
-        ocrOnly: ocrOnly,
-        engines: engines,
-        promptTemplate: promptTemplate,
-        llm_model: llm_model // Log the model
-    });
-    
-    const requestBody = {
-        image_url: imageUrl,
-        engines: engines,
-        ocr_only: ocrOnly
-    };
-    
-    if (promptTemplate) {
-        requestBody.prompt = promptTemplate;
-    }
-    
-    // Add the selected model to the request
-    // if (llm_model) {
-    //     requestBody.llm_model = llm_model;
-    // }
-    
-    // Get authentication headers
-    const headers = getAuthHeaders();
-    
-    $.ajax({
-        type: 'POST',
-        headers: headers,
-        url: 'https://vouchervision-go-738307415303.us-central1.run.app/process-url',
-        data: JSON.stringify(requestBody),
-        dataType: 'json',
-        contentType: 'application/json',
-        success: function(data) {
-            logDebug('API response success', data);
-            $('#urlResults').html(`
-                <h3 class="success">Results:</h3>
-                <pre>${JSON.stringify(data, null, 2)}</pre>
-            `);
-        },
-        error: function(xhr, status, error) {
-            const response = xhr.responseText || 'No response content';
-            logDebug('API response error', {
-                status: status,
-                error: error,
-                response: response,
-                statusCode: xhr.status,
-                headers: xhr.getAllResponseHeaders()
-            });
-            
-            $('#urlResults').html(`
-                <h3 class="error">Error:</h3>
-                <p>Status: ${status}</p>
-                <p>Status Code: ${xhr.status}</p>
-                <p>Error: ${error}</p>
-                <p>Response:</p>
-                <pre>${response}</pre>
-            `);
-        },
-        complete: function() {
-            // Re-enable button
-            $('#processUrlButton').prop('disabled', false).text('Process URL');
-        }
-    });
-}
+//     // Check authentication
+//     const authMethod = $('input[name="authMethod"]:checked').val();
+//     if (authMethod === 'apiKey') {
+//         const apiKeyField = document.getElementById('apiKey');
+//         const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+//         if (!apiKey || apiKey === 'YOUR_API_KEY') {
+//             alert('Please enter an API key');
+//             return;
+//         }
+//     } else if (authMethod === 'token') {
+//         const authToken = $('#authToken').val().trim();
+//         if (!authToken) {
+//             alert('Please enter an auth token');
+//             return;
+//         }
+//     }
+
+//     const ocrOnly = $('#ocrOnly').is(':checked');
+//     const engines = getSelectedEngines();
+//     const promptTemplate = $('#promptTemplate').val();
+//     const llm_model = getSelectedModel(); // use your standard function here!
+
+//     if (engines.length === 0) {
+//         alert('Please select at least one engine');
+//         return;
+//     }
+
+//     $('#processUrlButton').prop('disabled', true).text('Processing...');
+//     $('#urlResults').html('<p class="loading">Processing... Please wait...</p>');
+
+//     const formData = new FormData();
+//     formData.append('image_url', imageUrl);
+
+//     engines.forEach(engine => formData.append('engines', engine));
+//     if (promptTemplate) formData.append('prompt', promptTemplate);
+//     if (ocrOnly) formData.append('ocr_only', 'true');
+//     if (llm_model) formData.append('llm_model', llm_model);
+
+//     // Get auth headers
+//     const headers = getAuthHeaders();
+//     if ('Content-Type' in headers) {delete headers['Content-Type'];}
+
+//     const formDataEntries = [];
+//     for (const pair of formData.entries()) {
+//         formDataEntries.push({ key: pair[0], value: pair[1] });
+//     }
+//     logDebug('FINAL FormData contents for URL upload', formDataEntries);
+
+//     fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
+//         method: 'POST',
+//         headers: headers,
+//         body: formData
+//     })
+//     .then(response => {
+//         logDebug(`Response status: ${response.status}`);
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         logDebug('API response success', data);
+//         $('#urlResults').html(`
+//             <h3 class="success">Results:</h3>
+//             <pre>${JSON.stringify(data, null, 2)}</pre>
+//         `);
+//     })
+//     .catch(error => {
+//         logDebug('API response error', { error: error.toString() });
+//         $('#urlResults').html(`
+//             <h3 class="error">Error:</h3>
+//             <p>Error: ${error.toString()}</p>
+//         `);
+//     })
+//     .finally(() => {
+//         $('#processUrlButton').prop('disabled', false).text('Process URL');
+//     });
+// }
+
 
 // Toggle auth method visibility
 function toggleAuthFields() {
@@ -417,7 +408,6 @@ function toggleAuthFields() {
 
 // Initialize when document is ready
 $(document).ready(function() {
-    // Add comments at the top for running local server
     console.log(`
     VoucherVision API Test Tool
     ---------------------------
@@ -425,27 +415,21 @@ $(document).ready(function() {
     1. Start a local server: python -m http.server 8000
     2. Open in browser: http://localhost:8000/vouchervisiongo.html
     `);
-    
-    // Set up tab click events
+
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function(event) {
             openTab(event, this.getAttribute('data-tab'));
         });
     });
-    
-    // Set up button click events
+
     $('#testCorsButton').click(testCorsSupport);
     $('#testUrlAvailability').click(testUrlAvailability);
-    $('#uploadButton').click(processFile);
-    $('#processUrlButton').click(processImageUrl);
-    
-    // Set up auth method toggle
+    $('#uploadButton').click(() => processImage('file'));
+    $('#processUrlButton').click(() => processImage('url'));
+
     $('input[name="authMethod"]').change(toggleAuthFields);
-    
-    // Init auth method visibility
     toggleAuthFields();
-    
-    // Set up file input change event for visual feedback
+
     $('#fileInput').change(function() {
         if (this.files && this.files.length > 0) {
             const fileName = this.files[0].name;
@@ -453,8 +437,236 @@ $(document).ready(function() {
             $(this).after(`<span class="file-name">Selected: ${fileName}</span>`);
         }
     });
-    
-    // Initialize the page
+
     logDebug('Page initialized');
 });
 
+
+// Process a single URL
+// async function processUrl() {
+//     const imageUrl = $('#imageUrl').val();
+//     if (!imageUrl) {
+//         alert('Please enter an image URL');
+//         return;
+//     }
+
+//     const authMethod = $('input[name="authMethod"]:checked').val();
+//     if (authMethod === 'apiKey') {
+//         const apiKeyField = document.getElementById('apiKey');
+//         const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+//         if (!apiKey || apiKey === 'YOUR_API_KEY') {
+//             alert('Please enter a valid API key');
+//             return;
+//         }
+//     } else if (authMethod === 'token') {
+//         const authToken = $('#authToken').val().trim();
+//         if (!authToken) {
+//             alert('Please enter a valid auth token');
+//             return;
+//         }
+//     }
+
+//     const ocrOnly = $('#ocrOnly').is(':checked');
+//     const engines = getSelectedEngines();
+//     const promptTemplate = $('#promptTemplate').val();
+//     const llm_model = getSelectedModel(); 
+
+//     if (engines.length === 0) {
+//         alert('Please select at least one engine');
+//         return;
+//     }
+
+//     // Create form data
+//     const formData = new FormData();
+//     formData.append('image_url', imageUrl);
+
+//     engines.forEach(engine => {
+//         formData.append('engines', engine);
+//     });
+
+//     if (promptTemplate) {
+//         formData.append('prompt', promptTemplate);
+//     }
+
+//     if (ocrOnly) {
+//         formData.append('ocr_only', 'true');
+//     }
+
+//     if (llm_model) {
+//         formData.append('llm_model', llm_model);  // ✅ add selected model
+//     }
+
+//     $('#processUrlButton').prop('disabled', true).text('Processing...');
+//     $('#urlResults').html('<p class="loading">Processing... Please wait.</p>');
+
+//     const headers = getAuthHeaders();
+//     delete headers['Content-Type'];
+
+//     logDebug('Starting URL processing', {
+//         imageUrl: imageUrl,
+//         authMethod,
+//         ocrOnly: ocrOnly,
+//         engines: engines,
+//         promptTemplate: promptTemplate,
+//         llm_model: llm_model
+//     });
+
+//     try {
+//         const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
+//             method: 'POST',
+//             headers: headers,
+//             body: formData,
+//         });
+
+//         if (!response.ok) {
+//             throw new Error(`API error: ${response.status} ${response.statusText}`);
+//         }
+
+//         const data = await response.json();
+//         logDebug('API response success', data);
+
+//         $('#urlResults').html(`
+//             <h3 class="success">Results:</h3>
+//             <pre>${JSON.stringify(data, null, 2)}</pre>
+//         `);
+//     } catch (error) {
+//         logDebug('API response error', error);
+
+//         $('#urlResults').html(`
+//             <h3 class="error">Error:</h3>
+//             <p>${error.message}</p>
+//         `);
+//     } finally {
+//         $('#processUrlButton').prop('disabled', false).text('Process URL');
+//     }
+// }
+// $(document).ready(function() {
+//     $('#processUrlButton').click(processUrl);
+// });
+
+
+// Universal Image Processor
+async function processImage(sourceType = 'file') {
+    const authMethod = $('input[name="authMethod"]:checked').val();
+    if (authMethod === 'apiKey') {
+        const apiKeyField = document.getElementById('apiKey');
+        const apiKey = apiKeyField.dataset.apiKey || apiKeyField.value.trim();
+        if (!apiKey || apiKey === 'YOUR_API_KEY') {
+            alert('Please enter a valid API key');
+            return;
+        }
+    } else if (authMethod === 'token') {
+        const authToken = $('#authToken').val().trim();
+        if (!authToken) {
+            alert('Please enter a valid auth token');
+            return;
+        }
+    }
+
+    const ocrOnly = $('#ocrOnly').is(':checked');
+    const engines = getSelectedEngines();
+    const promptTemplate = $('#promptTemplate').val();
+    const llm_model = getSelectedModel();
+
+    if (engines.length === 0) {
+        alert('Please select at least one engine');
+        return;
+    }
+
+    const formData = new FormData();
+
+    if (sourceType === 'file') {
+        const fileInput = document.getElementById('fileInput');
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert('Please select a file first');
+            return;
+        }
+        formData.append('file', fileInput.files[0]);
+    } else if (sourceType === 'url') {
+        const imageUrl = $('#imageUrl').val();
+        if (!imageUrl) {
+            alert('Please enter an image URL');
+            return;
+        }
+        formData.append('image_url', imageUrl);
+    } else {
+        alert('Invalid source type');
+        return;
+    }
+
+    engines.forEach(engine => formData.append('engines', engine));
+    if (promptTemplate) formData.append('prompt', promptTemplate);
+    if (ocrOnly) formData.append('ocr_only', 'true');
+    if (llm_model) formData.append('llm_model', llm_model);
+
+    const headers = getAuthHeaders();
+    if ('Content-Type' in headers) delete headers['Content-Type'];
+
+    // Choose the correct endpoint
+    const endpoint = (sourceType === 'file') 
+        ? 'https://vouchervision-go-738307415303.us-central1.run.app/process'
+        : 'https://vouchervision-go-738307415303.us-central1.run.app/process-url';
+
+    // Disable buttons during processing
+    if (sourceType === 'file') {
+        $('#uploadButton').prop('disabled', true).text('Processing...');
+        $('#fileResults').html('<p class="loading">Processing... Please wait.</p>');
+    } else {
+        $('#processUrlButton').prop('disabled', true).text('Processing...');
+        $('#urlResults').html('<p class="loading">Processing... Please wait.</p>');
+    }
+
+    // Debug log
+    const formDataEntries = [];
+    for (const pair of formData.entries()) {
+        formDataEntries.push({ key: pair[0], value: pair[1] instanceof File ? pair[1].name : pair[1] });
+    }
+    logDebug('FINAL FormData contents', formDataEntries);
+
+    try {
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: headers,
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        logDebug('API response success', data);
+
+        if (sourceType === 'file') {
+            $('#fileResults').html(`
+                <h3 class="success">Results:</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `);
+        } else {
+            $('#urlResults').html(`
+                <h3 class="success">Results:</h3>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `);
+        }
+    } catch (error) {
+        logDebug('API response error', { error: error.toString() });
+
+        if (sourceType === 'file') {
+            $('#fileResults').html(`
+                <h3 class="error">Error:</h3>
+                <p>${error.message}</p>
+            `);
+        } else {
+            $('#urlResults').html(`
+                <h3 class="error">Error:</h3>
+                <p>${error.message}</p>
+            `);
+        }
+    } finally {
+        if (sourceType === 'file') {
+            $('#uploadButton').prop('disabled', false).text('Upload and Process');
+        } else {
+            $('#processUrlButton').prop('disabled', false).text('Process URL');
+        }
+    }
+}

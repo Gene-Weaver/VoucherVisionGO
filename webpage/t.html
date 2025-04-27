@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Model Selection Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #testResults {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-left: 4px solid #4CAF50;
+        }
+        .status-display {
+            padding: 5px 10px;
+            margin: 5px 0;
+            border-radius: 3px;
+        }
+        .cors-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .cors-error {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        .debug-section {
+            margin-top: 30px;
+        }
+        #debugInfo {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <h1>LLM Model Selection Test</h1>
+    <p>This page tests whether the LLM model selection is properly passed to API requests.</p>
+    
+    <!-- Minimal required elements from the main page -->
+    <div class="test-section">
+        <h3>Auth Settings (Required by scripts)</h3>
+        <div>
+            <input type="radio" name="authMethod" value="apiKey" checked id="authMethodApiKey"> 
+            <label for="authMethodApiKey">API Key</label>
+            
+            <input type="radio" name="authMethod" value="token" id="authMethodToken"> 
+            <label for="authMethodToken">Auth Token</label>
+        </div>
+        
+        <div id="apiKeyFields">
+            <label for="apiKey">API Key:</label>
+            <input type="text" id="apiKey" value="test-api-key">
+        </div>
+        
+        <div id="tokenFields" style="display: none;">
+            <label for="authToken">Auth Token:</label>
+            <input type="text" id="authToken" placeholder="Enter token">
+            <button id="clearTokenButton">Clear Token</button>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>OCR Engine Selection</h3>
+        <div>
+            <label>
+                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25"> gemini-2.5-pro
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="ocrOnly"> OCR Only Mode
+            </label>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>LLM Model Selection (Testing Target)</h3>
+        <div>
+            <label>
+                <input type="radio" name="llm_model" value="gemini-2.5-pro-preview-03-25"> gemini-2.5-pro
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
+            </label>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>Prompt Template</h3>
+        <input type="text" id="promptTemplate" value="SLTPvM_default_v2.yaml">
+    </div>
+    
+    <!-- CORS test section -->
+    <div class="test-section">
+        <button id="testCorsButton" class="button">Test CORS Support</button>
+        <div id="corsStatus" class="status-display"></div>
+    </div>
+    
+    <!-- Test buttons -->
+    <div class="test-section">
+        <button id="runModelTest" class="button">Run Model Selection Test</button>
+        <div id="testResults"></div>
+    </div>
+    
+    <!-- Debug info -->
+    <div class="debug-section">
+        <h3>Debug Information</h3>
+        <div id="debugInfo"></div>
+    </div>
+    
+    <!-- Add minimal stubs to satisfy other scripts -->
+    <div style="display: none;">
+        <input type="file" id="fileInput">
+        <input type="text" id="imageUrl">
+        <button id="uploadButton">Upload</button>
+        <button id="processUrlButton">Process URL</button>
+        <button id="testUrlAvailability">Test URL</button>
+        <div id="urlTestResult"></div>
+        <div id="urlResults"></div>
+        <div id="fileResults"></div>
+    </div>
+    
+    <!-- Load your existing scripts -->
+    <script src="js/vouchervisiongo.js"></script>
+    <script src="js/api_key_validator.js"></script>
+    <script src="js/batch_processing.js"></script>
+    
+    <!-- LLM Model Test Script -->
+    <script>
+    // Function to monitor and verify LLM model selection
+    function testLlmModelSelection() {
+      console.log("===== LLM Model Selection Test =====");
+      
+      // Clear previous results
+      $('#testResults').html('<p>Running test...</p>');
+      
+      // 1. Get the current selection
+      const currentSelection = getSelectedModel();
+      console.log(`Current LLM model selection: ${currentSelection}`);
+      
+      let results = `<p><strong>Current LLM model:</strong> ${currentSelection}</p>`;
+      
+      // 2. Create a test FormData to verify model is included
+      const testFormData = createTestFormData();
+      const formDataEntries = getFormDataEntries(testFormData);
+      console.log("Test FormData contents:", formDataEntries);
+      
+      // Check if llm_model is in the FormData
+      const modelInFormData = formDataEntries.find(entry => entry.key === 'llm_model');
+      const modelValue = modelInFormData ? modelInFormData.value : 'NOT FOUND';
+      
+      if (modelInFormData && modelInFormData.value === currentSelection) {
+        results += `<p style="color: green">✅ Model correctly included in FormData: ${modelValue}</p>`;
+      } else {
+        results += `<p style="color: red">❌ Model not correctly included in FormData! Value: ${modelValue}</p>`;
+      }
+      
+      // 3. Test changing the selection
+      console.log("Testing selection change...");
+      results += `<p><strong>Testing selection change...</strong></p>`;
+      
+      const radioButtons = document.querySelectorAll('input[name="llm_model"]');
+      
+      // Find a different option than current
+      let differentOption = null;
+      for (const radio of radioButtons) {
+        if (radio.value !== currentSelection && !radio.disabled) {
+          differentOption = radio;
+          break;
+        }
+      }
+      
+      if (differentOption) {
+        console.log(`Changing selection to: ${differentOption.value}`);
+        differentOption.checked = true;
+        
+        // Trigger change event
+        const event = new Event('change');
+        differentOption.dispatchEvent(event);
+        
+        // Verify change was detected
+        const newSelection = getSelectedModel();
+        console.log(`New LLM model selection: ${newSelection}`);
+        
+        results += `<p>Changed selection to: ${differentOption.value}</p>`;
+        results += `<p>getSelectedModel() returned: ${newSelection}</p>`;
+        
+        // Create a new test FormData to verify model is updated
+        const updatedFormData = createTestFormData();
+        const updatedEntries = getFormDataEntries(updatedFormData);
+        console.log("Updated FormData contents:", updatedEntries);
+        
+        // Check if llm_model is in the FormData with updated value
+        const updatedModelInFormData = updatedEntries.find(entry => entry.key === 'llm_model');
+        const updatedModelValue = updatedModelInFormData ? updatedModelInFormData.value : 'NOT FOUND';
+        
+        if (updatedModelInFormData && updatedModelInFormData.value === newSelection) {
+          results += `<p style="color: green">✅ Updated model correctly included in FormData: ${updatedModelValue}</p>`;
+        } else {
+          results += `<p style="color: red">❌ Updated model not correctly included in FormData! Value: ${updatedModelValue}</p>`;
+        }
+        
+        if (newSelection === differentOption.value) {
+          results += `<p style="color: green">✅ Test PASSED: Model selection was updated correctly</p>`;
+          console.log("✅ Test PASSED: Model selection was updated correctly");
+        } else {
+          results += `<p style="color: red">❌ Test FAILED: Model selection did not update correctly</p>`;
+          console.error("❌ Test FAILED: Model selection did not update correctly");
+        }
+      } else {
+        results += `<p>No alternative model options available for testing</p>`;
+        console.log("No alternative model options available for testing");
+      }
+      
+      console.log("===== Test Complete =====");
+      
+      // Show results
+      $('#testResults').html(results);
+      logDebug("LLM Model Selection Test Completed");
+    }
+
+    // Helper function to create a test FormData with current settings
+    function createTestFormData() {
+      const formData = new FormData();
+      
+      // Add image URL (test value)
+      formData.append('image_url', 'https://example.com/test-image.jpg');
+      
+      // Add selected engines
+      getSelectedEngines().forEach(engine => {
+        formData.append('engines', engine);
+      });
+      
+      // Add OCR only mode if selected
+      if ($('#ocrOnly').is(':checked')) {
+        formData.append('ocr_only', 'true');
+      }
+      
+      // Add prompt template if specified
+      const promptTemplate = $('#promptTemplate').val();
+      if (promptTemplate) {
+        formData.append('prompt', promptTemplate);
+      }
+      
+      // Add selected model
+      const llm_model = getSelectedModel();
+      if (llm_model) {
+        formData.append('llm_model', llm_model);
+      }
+      
+      return formData;
+    }
+
+    // Helper function to extract FormData entries for display
+    function getFormDataEntries(formData) {
+      const entries = [];
+      for (const pair of formData.entries()) {
+        entries.push({ key: pair[0], value: pair[1] });
+      }
+      return entries;
+    }
+
+    // Document ready handler
+    $(document).ready(function() {
+      // Handle auth method toggle
+      $('input[name="authMethod"]').change(function() {
+        const authMethod = $(this).val();
+        if (authMethod === 'apiKey') {
+          $('#apiKeyFields').show();
+          $('#tokenFields').hide();
+        } else {
+          $('#apiKeyFields').hide();
+          $('#tokenFields').show();
+        }
+      });
+      
+      // Set up test button event
+      $('#runModelTest').click(function() {
+        testLlmModelSelection();
+      });
+      
+      // Log model changes
+      $('input[name="llm_model"]').change(function() {
+        const selectedValue = $('input[name="llm_model"]:checked').val();
+        logDebug(`LLM model selection changed to: ${selectedValue}`);
+      });
+      
+      // Initialize
+      logDebug('Test page initialized');
+    });
+    </script>
+</body>
+</html>

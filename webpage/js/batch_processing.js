@@ -113,34 +113,51 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             // Get authentication headers
             const headers = getAuthHeaders();
             
+            // Get the selected LLM model
+            const llm_model = getSelectedModel();
+            
             // Build request body
-            const requestBody = {
-                image_url: url,
-                engines: getSelectedEngines(),
-                llm_model: getSelectedModel(),
-                ocr_only: $('#ocrOnly').is(':checked')
-            };
+            const formData = new FormData();
+            formData.append('image_url', url);
+            
+            // Add selected engines
+            getSelectedEngines().forEach(engine => {
+                formData.append('engines', engine);
+            });
+            
+            // Add OCR only mode if selected
+            if ($('#ocrOnly').is(':checked')) {
+                formData.append('ocr_only', 'true');
+            }
             
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
             if (promptTemplate) {
-                requestBody.prompt = promptTemplate;
+                formData.append('prompt', promptTemplate);
             }
             
-            // Add selected model
-            // const llm_model = getSelectedModel();
-            // if (llm_model) {
-            //     requestBody.llm_model = llm_model;
-            // }
+            // Add selected model - make sure to include this!
+            if (llm_model) {
+                formData.append('llm_model', llm_model);
+            }
+            
+            // Remove Content-Type header as it will be set by the browser with form boundary
+            if ('Content-Type' in headers) {
+                delete headers['Content-Type'];
+            }
+            
+            // Log what we're sending
+            const formDataEntries = [];
+            for (const pair of formData.entries()) {
+                formDataEntries.push({ key: pair[0], value: pair[1] });
+            }
+            logDebug(`Request for URL ${url}:`, formDataEntries);
             
             // Make the API request
             const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
                 method: 'POST',
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
+                headers: headers,
+                body: formData
             });
             
             if (!response.ok) {
@@ -527,11 +544,22 @@ async function processBatchImages(files, concurrency, options = {}) {
                 formData.append('prompt', promptTemplate);
             }
             
-            // Add selected model
+            // Add selected model - make sure to include this!
             const llm_model = getSelectedModel();
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
+            
+            // Log what we're sending
+            const formDataEntries = [];
+            for (const pair of formData.entries()) {
+                if (pair[0] !== 'file') {
+                    formDataEntries.push({ key: pair[0], value: pair[1] });
+                } else {
+                    formDataEntries.push({ key: pair[0], value: pair[1].name });
+                }
+            }
+            logDebug(`Request for file ${file.name}:`, formDataEntries);
             
             // Make the API request
             const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process', {

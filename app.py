@@ -1077,7 +1077,7 @@ def process_image():
 @app.route('/process-url', methods=['POST', 'OPTIONS'])
 @authenticated_route
 def process_image_by_url():
-    """API endpoint to process an image from a URL with CORS support"""
+    """API endpoint to process an image from a URL with FormData, matching /process behavior"""
     # Handle preflight OPTIONS request
     if request.method == 'OPTIONS':
         response = make_response()
@@ -1087,43 +1087,40 @@ def process_image_by_url():
         response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
         return response
     
-    # Get user email using the new function
+    # Get user email
     user_email = get_user_email_from_request(request)
     
-    # Get JSON data from request
-    data = request.get_json()
-    
-    if not data or 'image_url' not in data:
+    # Now read from FormData (NOT JSON)
+    if 'image_url' not in request.form:
         response = make_response(jsonify({'error': 'No image URL provided'}), 400)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
-    
-    image_url = data['image_url']
-    
-    # Get engine options from request if specified
-    engines = data.get('engines') if 'engines' in data else None
 
-    # Get prompt from request if specified, otherwise None (use default)
-    prompt = data.get('prompt')
+    image_url = request.form.get('image_url')
 
-    # Get ocr_only flag if specified
-    ocr_only = data.get('ocr_only', False)
+    # Get engine options from form
+    engine_options = request.form.getlist('engines') if 'engines' in request.form else None
 
-    # Get LLM model from request if specified
-    llm_model_name = data.get('llm_model')
-    
+    # Get prompt from form
+    prompt = request.form.get('prompt') if 'prompt' in request.form else None
+
+    # OCR-only flag
+    ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+
+    # LLM model
+    llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+
     try:
-        # Download the image to a temporary location
         import tempfile
         import requests
         from werkzeug.utils import secure_filename
         import os
         from io import BytesIO
         from werkzeug.datastructures import FileStorage
-        
-        # Get the filename from the URL
+
+        # Get filename from URL
         filename = extract_filename_from_url(image_url)
-        
+
         # Download the image
         image_response = requests.get(image_url, stream=True)
         if image_response.status_code != 200:
@@ -1132,55 +1129,164 @@ def process_image_by_url():
             }), 400)
             error_response.headers.add('Access-Control-Allow-Origin', '*')
             return error_response
-        
-        # Save to a temporary file
+
+        # Save to temp file
         temp_dir = tempfile.mkdtemp()
         file_path = os.path.join(temp_dir, secure_filename(filename))
-        
+
         with open(file_path, 'wb') as f:
             for chunk in image_response.iter_content(chunk_size=8192):
                 f.write(chunk)
-        
+
         with open(file_path, 'rb') as f:
             file_content = f.read()
-        
+
         file_obj = FileStorage(
             stream=BytesIO(file_content),
             filename=filename,
             content_type=image_response.headers.get('Content-Type', 'image/jpeg')
         )
-        
-        # Process the image using the processor
+
+        # Process image
         results, status_code = app.config['processor'].process_image_request(
-            file=file_obj, 
-            engine_options=engines, 
+            file=file_obj,
+            engine_options=engine_options,
             prompt=prompt,
             ocr_only=ocr_only,
             llm_model_name=llm_model_name
         )
-        
-        # If processing was successful, update usage statistics
+
+        # Update usage stats
         if status_code == 200:
-            update_usage_statistics(user_email, engines=engines, llm_model_name=llm_model_name)
-        
-        # Clean up the temporary file
+            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
+
+        # Clean temp file
         try:
             os.remove(file_path)
             os.rmdir(temp_dir)
         except:
             pass
-        
-        # Create response with CORS headers
+
+        # Return JSON response
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
-        
+
     except Exception as e:
         logger.exception(f"Error processing image from URL: {e}")
         error_response = make_response(jsonify({'error': str(e)}), 500)
         error_response.headers.add('Access-Control-Allow-Origin', '*')
         return error_response
+
+
+# @app.route('/process-url', methods=['POST', 'OPTIONS'])
+# @authenticated_route
+# def process_image_by_url():
+#     """API endpoint to process an image from a URL with CORS support"""
+#     # Handle preflight OPTIONS request
+#     if request.method == 'OPTIONS':
+#         response = make_response()
+#         response.headers.add('Access-Control-Allow-Origin', '*')
+#         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+#         response.headers.add('Access-Control-Allow-Methods', 'POST')
+#         response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
+#         return response
+    
+#     # Get user email using the new function
+#     user_email = get_user_email_from_request(request)
+    
+#     # Get JSON data from request
+#     data = request.get_json()
+    
+#     if not data or 'image_url' not in data:
+#         response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+#         response.headers.add('Access-Control-Allow-Origin', '*')
+#         return response
+    
+#     image_url = data['image_url']
+    
+#     # Get engine options from request if specified
+#     engines = data.get('engines') if 'engines' in data else None
+
+#     # Get prompt from request if specified, otherwise None (use default)
+#     prompt = data.get('prompt')
+
+#     # Get ocr_only flag if specified
+#     ocr_only = data.get('ocr_only', False)
+
+#     # Get LLM model from request if specified
+#     llm_model_name = data.get('llm_model')
+    
+#     try:
+#         # Download the image to a temporary location
+#         import tempfile
+#         import requests
+#         from werkzeug.utils import secure_filename
+#         import os
+#         from io import BytesIO
+#         from werkzeug.datastructures import FileStorage
+        
+#         # Get the filename from the URL
+#         filename = extract_filename_from_url(image_url)
+        
+#         # Download the image
+#         image_response = requests.get(image_url, stream=True)
+#         if image_response.status_code != 200:
+#             error_response = make_response(jsonify({
+#                 'error': f'Failed to download image from URL: {image_response.status_code}'
+#             }), 400)
+#             error_response.headers.add('Access-Control-Allow-Origin', '*')
+#             return error_response
+        
+#         # Save to a temporary file
+#         temp_dir = tempfile.mkdtemp()
+#         file_path = os.path.join(temp_dir, secure_filename(filename))
+        
+#         with open(file_path, 'wb') as f:
+#             for chunk in image_response.iter_content(chunk_size=8192):
+#                 f.write(chunk)
+        
+#         with open(file_path, 'rb') as f:
+#             file_content = f.read()
+        
+#         file_obj = FileStorage(
+#             stream=BytesIO(file_content),
+#             filename=filename,
+#             content_type=image_response.headers.get('Content-Type', 'image/jpeg')
+#         )
+        
+#         # Process the image using the processor
+#         results, status_code = app.config['processor'].process_image_request(
+#             file=file_obj, 
+#             engine_options=engines, 
+#             prompt=prompt,
+#             ocr_only=ocr_only,
+#             llm_model_name=llm_model_name
+#         )
+        
+#         # If processing was successful, update usage statistics
+#         if status_code == 200:
+#             update_usage_statistics(user_email, engines=engines, llm_model_name=llm_model_name)
+        
+#         # Clean up the temporary file
+#         try:
+#             os.remove(file_path)
+#             os.rmdir(temp_dir)
+#         except:
+#             pass
+        
+#         # Create response with CORS headers
+#         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+#         response.headers['Content-Type'] = 'application/json'
+#         response.headers.add('Access-Control-Allow-Origin', '*')
+#         return response
+        
+#     except Exception as e:
+#         logger.exception(f"Error processing image from URL: {e}")
+#         error_response = make_response(jsonify({'error': str(e)}), 500)
+#         error_response.headers.add('Access-Control-Allow-Origin', '*')
+#         return error_response
 
 @app.route('/api-demo', methods=['GET', 'POST'])
 def api_demo_page():
