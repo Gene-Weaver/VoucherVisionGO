@@ -183,7 +183,7 @@ def validate_api_key(api_key):
         logger.error(f"Error validating API key: {str(e)}")
         return False
 
-def update_usage_statistics(user_email, engines=None):
+def update_usage_statistics(user_email, engines=None, llm_model_name=None):
     """Update usage statistics for a user in Firestore"""
     if not user_email or user_email == 'unknown':
         logger.warning("Cannot track usage for unknown user")
@@ -210,13 +210,19 @@ def update_usage_statistics(user_email, engines=None):
             if engines:
                 for engine in engines:
                     ocr_info[engine] = ocr_info.get(engine, 0) + 1
+
+            # Update LLM model usage if available
+            llm_info = user_data.get('llm_info', {})
+            if llm_model_name:
+                llm_info[llm_model_name] = llm_info.get(llm_model_name, 0) + 1
             
             # Update the document
             user_usage_ref.update({
                 'total_images_processed': firestore.Increment(1),
                 'last_processed_at': firestore.SERVER_TIMESTAMP,
                 'monthly_usage': monthly_usage,
-                'ocr_info': ocr_info
+                'ocr_info': ocr_info,
+                'llm_info': llm_info,
             })
         else:
             # Create new document
@@ -232,6 +238,7 @@ def update_usage_statistics(user_email, engines=None):
                 'last_processed_at': firestore.SERVER_TIMESTAMP,
                 'monthly_usage': monthly_usage,
                 'ocr_info': ocr_info,
+                'llm_info': llm_info,
                 'first_processed_at': firestore.SERVER_TIMESTAMP,
             })
             
@@ -643,11 +650,10 @@ class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self, max_concurrent=32, LLM_name_cost='GEMINI_2_0_FLASH'): 
+    def __init__(self, max_concurrent=32): 
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
-        self.LLM_name_cost = LLM_name_cost
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
@@ -701,13 +707,15 @@ class VoucherVisionProcessor:
         )
 
         # Initialize LLM model handler
-        self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
+        # self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
         self.Voucher_Vision.setup_JSON_dict_structure()
         
-        self.llm_model = GoogleGeminiHandler(
-            self.cfg, self.logger, self.model_name, self.Voucher_Vision.JSON_dict_structure, 
-            config_vals_for_permutation=None, exit_early_for_JSON=True
-        )
+        self.llm_models = {}
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"]:
+            self.llm_models[model_name] = GoogleGeminiHandler(
+                self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure, 
+                config_vals_for_permutation=None, exit_early_for_JSON=True
+            )
 
         # Thread-local storage for handling per-request VoucherVision instances
         self.thread_local = threading.local()
@@ -765,7 +773,7 @@ class VoucherVisionProcessor:
 
         return ocr_packet, ocr_all
     
-    def get_thread_local_vv(self, prompt):
+    def get_thread_local_vv(self, prompt, llm_model_name):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         # Always create a new instance when a prompt is explicitly specified
         if prompt != self.default_prompt or not hasattr(self.thread_local, 'vv'):
@@ -786,7 +794,7 @@ class VoucherVisionProcessor:
             
             # Create a thread-local LLM model handler
             self.thread_local.llm_model = GoogleGeminiHandler(
-                self.cfg, self.logger, self.model_name, self.thread_local.vv.JSON_dict_structure, 
+                self.cfg, self.logger, llm_model_name, self.thread_local.vv.JSON_dict_structure, 
                 config_vals_for_permutation=None, exit_early_for_JSON=True
             )
             
@@ -794,10 +802,10 @@ class VoucherVisionProcessor:
         
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
-        vv, llm_model = self.get_thread_local_vv(prompt)
+        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name)
         
         # Update OCR text for processing
         vv.OCR = ocr_text
@@ -812,7 +820,7 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
     
-    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], ocr_prompt_option=None, prompt=None, ocr_only=False):
+    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], ocr_prompt_option=None, prompt=None, ocr_only=False, llm_model_name=None):
         """
         Process an image from a request file
         ocr_prompt_option=["ocr_verbatim_v1", None]
@@ -848,12 +856,19 @@ class VoucherVisionProcessor:
                         ocr_prompt_option = "ocr_verbatim_v1"
                     else:
                         ocr_prompt_option = None
+
+                if llm_model_name is None:
+                    llm_model_name = "gemini-2.0-flash"
+
+                self.LLM_name_cost = ModelMaps.get_version_mapping_cost(llm_model_name)
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
                 logger.info(f"Using prompt file: {current_prompt}")
                 logger.info(f"file_path: {file_path}")
                 logger.info(f"engine_options: {engine_options}")
+                logger.info(f"llm_model_name: {llm_model_name}")
+                logger.info(f"LLM_name_cost {self.LLM_name_cost}")
 
                 # Extract the original filename for the response
                 original_filename = os.path.basename(file.filename)
@@ -864,15 +879,15 @@ class VoucherVisionProcessor:
                 # If ocr_only is True, skip VoucherVision processing
                 if ocr_only:
                     # If OCR only, return minimal results structure with empty fields
-                    if "GEMINI" in self.LLM_name_cost:
-                        model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
+                    # if "GEMINI" in self.LLM_name_cost:
+                    #     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
                     
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
-                            ("model", model_print),
+                            ("model", ""),
                             ("input", 0),
                             ("output", 0),
                             ("cost_in", 0),
@@ -883,7 +898,7 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt)
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt, llm_model_name)
                     
                     # Combine results
                     # results = {
@@ -895,15 +910,15 @@ class VoucherVisionProcessor:
                     #     }
                     # }
                     # Combine results
-                    if "GEMINI" in self.LLM_name_cost:
-                        model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
+                    # if "GEMINI" in self.LLM_name_cost:
+                    #     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
 
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
-                            ("model", model_print),
+                            ("model", llm_model_name),
                             ("input", tokens_in),
                             ("output", tokens_out),
                             ("cost_in", cost_in),
@@ -1024,18 +1039,21 @@ def process_image():
 
     # Get ocr_only flag from request if specified
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
-    
+
+    llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(
         file=file, 
         engine_options=engine_options, 
         prompt=prompt,
         ocr_only=ocr_only,
+        llm_model_name=llm_model_name
     )
     
     # If processing was successful, update usage statistics
     if status_code == 200:
-        update_usage_statistics(user_email, engines=engine_options) ########################################################## also log attempts #TODO
+        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name) ########################################################## also log attempts #TODO
     
     # Create response with CORS headers
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -1078,6 +1096,9 @@ def process_image_by_url():
 
     # Get ocr_only flag if specified
     ocr_only = data.get('ocr_only', False)
+
+    # Get LLM model from request if specified
+    llm_model_name = data.get('llm_model')
     
     try:
         # Download the image to a temporary location
@@ -1122,12 +1143,13 @@ def process_image_by_url():
             file=file_obj, 
             engine_options=engines, 
             prompt=prompt,
-            ocr_only=ocr_only
+            ocr_only=ocr_only,
+            llm_model_name=llm_model_name
         )
         
         # If processing was successful, update usage statistics
         if status_code == 200:
-            update_usage_statistics(user_email, engines=engines)
+            update_usage_statistics(user_email, engines=engines, llm_model_name=llm_model_name)
         
         # Clean up the temporary file
         try:
