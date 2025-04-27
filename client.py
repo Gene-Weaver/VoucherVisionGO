@@ -17,6 +17,12 @@ from tqdm import tqdm
 N_SIZE=100
 N_INDENT=2
 
+"""
+NOTE:
+    You can use any of the Gemini models, not just those that I specify: https://ai.google.dev/gemini-api/docs/models
+    Just pick the one you want (e.g. gemini-2.5-flash-preview-04-17) as long as it supports: Audio, images, videos, and text
+"""
+
 class OrderedDictJSONEncoder(json.JSONEncoder):
     def encode(self, obj):
         if isinstance(obj, OrderedDict):
@@ -51,7 +57,7 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
         return json.dumps(regular_dict, indent=4)
     
 def process_image(fname, server_url, image_path, output_dir, verbose=False, 
-                  engines=None, prompt=None, auth_token=None, ocr_only=False):
+                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False):
     """
     Process an image using the VoucherVision API server
     
@@ -62,6 +68,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         output_dir (str): Directory to save output files
         verbose (bool): Whether to print verbose output
         engines (list): List of OCR engine options to use
+        llm_model (str): LLM model to use for creating JSON
         prompt (str): Custom prompt file to use
         auth_token (str): Authentication token for the API (Firebase token or API key)
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
@@ -90,7 +97,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         
         try:
             # Pass the auth token to the recursive call
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, prompt, auth_token, ocr_only)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -105,6 +112,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
     data = {}
     if engines:
         data['engines'] = engines
+    if llm_model:
+        data['llm_model'] = llm_model
     if prompt:
         data['prompt'] = prompt
     if ocr_only:
@@ -156,7 +165,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, prompt, output_dir, verbose, auth_token=None, ocr_only=False):
+def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False):
     """
     Process a single image file and save the results
     
@@ -164,6 +173,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         server_url (str): URL of the VoucherVision API server
         image_path (str): Path to the image file or URL
         engines (list): List of OCR engine options to use
+        llm_model
         prompt (str): Custom prompt file to use
         output_dir (str): Directory to save output files
         verbose (bool): Whether to print verbose output
@@ -178,7 +188,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, prompt, auth_token, ocr_only)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -199,7 +209,7 @@ def process_image_file(server_url, image_path, engines, prompt, output_dir, verb
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False):
+def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False):
     """
     Process multiple images in parallel
     
@@ -207,6 +217,7 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
         server_url (str): URL of the VoucherVision API server
         image_paths (list): List of paths to image files or URLs
         engines (list): List of OCR engine options to use
+        llm_model
         prompt (str): Custom prompt file to use
         output_dir (str): Directory to save output files
         verbose (bool): Whether to print verbose output
@@ -236,6 +247,7 @@ def process_images_parallel(server_url, image_paths, engines, prompt, output_dir
                 server_url, 
                 path, 
                 engines, 
+                llm_model,
                 prompt, 
                 output_dir, 
                 False, 
@@ -593,7 +605,7 @@ def verify_authentication(server_url, auth_token=None):
         print(f"ERROR: Could not connect to server: {str(e)}")
         return False
     
-def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], 
+def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], llm_model="gemini-2.0-flash",
                     prompt="SLTPvM_default.yaml", image=None, directory=None, 
                     file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None, ocr_only=False):
     """
@@ -603,6 +615,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         server (str): URL of the VoucherVision API server
         output_dir (str): Directory to save the output JSON results
         engines (list): OCR engine options to use
+        llm_model
         prompt (str): Custom prompt file to use
         image (str): Path to a single image file or URL to process
         directory (str): Path to a directory containing images to process
@@ -646,7 +659,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, prompt, output_dir, verbose, auth_token, ocr_only)
+            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only)
             if result and save_to_csv:
                 all_results.append(result)
         
@@ -684,6 +697,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 server, 
                 image_files, 
                 engines, 
+                llm_model,
                 prompt, 
                 output_dir, 
                 verbose,
@@ -710,6 +724,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 server, 
                 file_paths, 
                 engines, 
+                llm_model,
                 prompt, 
                 output_dir, 
                 verbose,
@@ -765,6 +780,8 @@ def main():
     
     parser.add_argument('--engines', nargs='+', default=["gemini-1.5-pro", "gemini-2.0-flash"],
                         help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
+    parser.add_argument('--llm-model', default="gemini-2.0-flash",
+                        help='OCR engine options to use (default: gemini-2.0-flash)')
     parser.add_argument('--prompt', default="SLTPvM_default.yaml",
                         help='Custom prompt file to use (default: SLTPvM_default.yaml)')
     parser.add_argument('--output-dir', required=True,
@@ -785,6 +802,7 @@ def main():
         server=args.server,
         output_dir=args.output_dir,
         engines=args.engines,
+        llm_model=args.llm_model,
         prompt=args.prompt,
         image=args.image,
         directory=args.directory,
