@@ -117,6 +117,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             const requestBody = {
                 image_url: url,
                 engines: getSelectedEngines(),
+                llm_model: getSelectedModel(),
                 ocr_only: $('#ocrOnly').is(':checked')
             };
             
@@ -127,10 +128,10 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             }
             
             // Add selected model
-            const llm_model = getSelectedModel();
-            if (llm_model) {
-                requestBody.llm_model = llm_model;
-            }
+            // const llm_model = getSelectedModel();
+            // if (llm_model) {
+            //     requestBody.llm_model = llm_model;
+            // }
             
             // Make the API request
             const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {

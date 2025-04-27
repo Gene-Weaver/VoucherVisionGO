@@ -353,9 +353,9 @@ function processImageUrl() {
     }
     
     // Add the selected model to the request
-    if (llm_model) {
-        requestBody.llm_model = llm_model;
-    }
+    // if (llm_model) {
+    //     requestBody.llm_model = llm_model;
+    // }
     
     // Get authentication headers
     const headers = getAuthHeaders();
