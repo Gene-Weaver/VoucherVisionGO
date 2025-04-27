@@ -126,6 +126,12 @@ async function processBatchUrls(urls, concurrency, options = {}) {
                 requestBody.prompt = promptTemplate;
             }
             
+            // Add selected model
+            const llm_model = getSelectedModel();
+            if (llm_model) {
+                requestBody.llm_model = llm_model;
+            }
+            
             // Make the API request
             const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
                 method: 'POST',
@@ -518,6 +524,12 @@ async function processBatchImages(files, concurrency, options = {}) {
             const promptTemplate = $('#promptTemplate').val();
             if (promptTemplate) {
                 formData.append('prompt', promptTemplate);
+            }
+            
+            // Add selected model
+            const llm_model = getSelectedModel();
+            if (llm_model) {
+                formData.append('llm_model', llm_model);
             }
             
             // Make the API request

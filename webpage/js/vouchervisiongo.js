@@ -37,6 +37,12 @@ function logDebug(message, data = null) {
     $('#debugInfo').prepend(logEntry);
 }
 
+
+// Get selected model
+function getSelectedModel() {
+    return $('input[name="llm_model"]:checked').val();
+}
+
 // Get selected engines
 function getSelectedEngines() {
     const engines = [];
@@ -192,6 +198,7 @@ function processFile() {
     const ocrOnly = $('#ocrOnly').is(':checked');
     const engines = getSelectedEngines();
     const promptTemplate = $('#promptTemplate').val();
+    const llm_model = getSelectedModel(); // Get selected model
     
     if (engines.length === 0) {
         alert('Please select at least one engine');
@@ -217,6 +224,11 @@ function processFile() {
         formData.append('ocr_only', 'true');
     }
     
+    // Add selected model
+    if (llm_model) {
+        formData.append('llm_model', llm_model);
+    }
+    
     // Disable button during processing
     $('#uploadButton').prop('disabled', true).text('Processing...');
     $('#fileResults').html('<p class="loading">Processing... Please wait.</p>');
@@ -234,7 +246,8 @@ function processFile() {
         authMethod,
         ocrOnly: ocrOnly,
         engines: engines,
-        promptTemplate: promptTemplate
+        promptTemplate: promptTemplate,
+        llm_model: llm_model // Log the model
     });
     
     // Log FormData contents for debugging
@@ -277,7 +290,8 @@ function processFile() {
     });
 }
 
-// Process image with URL
+
+// Process image with URL 
 function processImageUrl() {
     const imageUrl = $('#imageUrl').val();
     if (!imageUrl) {
@@ -308,6 +322,7 @@ function processImageUrl() {
     const ocrOnly = $('#ocrOnly').is(':checked');
     const engines = getSelectedEngines();
     const promptTemplate = $('#promptTemplate').val();
+    const llm_model = getSelectedModel(); // Get selected model
     
     if (engines.length === 0) {
         alert('Please select at least one engine');
@@ -323,7 +338,8 @@ function processImageUrl() {
         authMethod,
         ocrOnly: ocrOnly,
         engines: engines,
-        promptTemplate: promptTemplate
+        promptTemplate: promptTemplate,
+        llm_model: llm_model // Log the model
     });
     
     const requestBody = {
@@ -334,6 +350,11 @@ function processImageUrl() {
     
     if (promptTemplate) {
         requestBody.prompt = promptTemplate;
+    }
+    
+    // Add the selected model to the request
+    if (llm_model) {
+        requestBody.llm_model = llm_model;
     }
     
     // Get authentication headers
