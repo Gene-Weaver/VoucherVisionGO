@@ -11,6 +11,7 @@ http://localhost:8000/index.html
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +19,7 @@ http://localhost:8000/index.html
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="css/vouchervisiongo.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -26,7 +28,7 @@ http://localhost:8000/index.html
                 <h2>VoucherVisionGO API</h2>
             </div>
         </div>
-        
+
         <!-- Navigation Bar -->
         <div class="nav-bar">
             <ul>
@@ -36,26 +38,26 @@ http://localhost:8000/index.html
                 <li class="nav-right"><a href="#" id="signupLink">Sign up / Login</a></li>
             </ul>
         </div>
-        
+
         <!-- README Content Section (initially hidden) -->
         <div id="readmeContent" class="readme-section" style="display: none;"></div>
-        
+
         <!-- Prompts Content Section (initially hidden) -->
         <div id="promptsContent" class="prompts-section" style="display: none;">
             <iframe id="promptsFrame" src="about:blank" frameborder="0"></iframe>
         </div>
-        
+
         <!-- Signup/Login Content Section (initially hidden) -->
         <div id="signupContent" class="signup-section" style="display: none;">
             <iframe id="signupFrame" src="about:blank" frameborder="0"></iframe>
         </div>
-        
+
         <!-- Main App Content (initially visible) -->
         <div id="mainContent">
             <!-- Settings section moved above the tabs -->
             <div id="Settings" class="settings-panel">
                 <h2>API Settings</h2>
-                
+
                 <!-- Authentication Method Selection -->
                 <div class="form-group">
                     <label>Authentication Method:</label>
@@ -68,40 +70,50 @@ http://localhost:8000/index.html
                         </label>
                     </div>
                 </div>
-                
+
                 <!-- API Key Fields -->
                 <div id="apiKeyFields" class="form-group">
                     <label for="apiKey">API Key:</label>
                     <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
                     <!-- Buttons will be added by our JavaScript -->
                 </div>
-                
+
                 <!-- Auth Token Fields -->
                 <div id="tokenFields" class="form-group" style="display: none;">
                     <label for="authToken">Auth Token:</label>
                     <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
-                    <button id="clearTokenButton" class="button" style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
+                    <button id="clearTokenButton" class="button"
+                        style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
                 </div>
-                
+
                 <label>Selecting OCR Engine Options</label>
-                <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and performance characteristics.</p>
-                <div style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
+                <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
+                    performance characteristics.</p>
+                <div
+                    style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
                     <p>About the models:</p>
                     <ul>
-                        <li><strong>Gemini 2.5 Pro</strong>: Higher accuracy, especially for handwritten text, can follow complex instructions, like parsing multiple species determinations</li>
-                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens</li>
-                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
-                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting performance seems worse than Gemini 2.0 Flash</li>
+                        <li><strong>Gemini 2.5 Pro</strong>: Higher accuracy, especially for handwritten text, can
+                            follow complex instructions, like parsing multiple species determinations. Can perform geolocation, 
+                            search the internet to validate content, etc.
+                        </li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens
+                        </li>
+                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be
+                            deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
+                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting
+                            performance seems worse than Gemini 2.0 Flash</li>
                         <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
                     </ul>
                 </div>
 
+                <h3>OCR Engines (can select one or multiple):</h3>
                 <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
-                        <h3>OCR Engines:</h3>
                         <div class="checkbox-group">
                             <label>
-                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
+                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked>
+                                gemini-2.5-pro
                             </label>
                         </div>
                         <div class="checkbox-group">
@@ -110,62 +122,67 @@ http://localhost:8000/index.html
                             </label>
                         </div>
                         <style>
-                        /* Tooltip container */
-                        .custom-tooltip {
-                            position: relative;
-                            display: inline-block;
-                        }
-                        
-                        /* Tooltip text - hidden by default */
-                        .custom-tooltip:hover::after {
-                            content: attr(data-tooltip);
-                            visibility: visible;
-                            width: 240px;
-                            background-color: #4CAF50;
-                            color: #fff;
-                            text-align: center;
-                            padding: 5px 0;
-                            border-radius: 6px;
-                        
-                            /* Position the tooltip text */
-                            position: absolute;
-                            z-index: 100;
-                            top: 0;
-                            left: 110%;
-                        }
-                        
-                        /* Tooltip arrow */
-                        .custom-tooltip:hover::before {
-                            content: "";
-                            visibility: visible;
-                            position: absolute;
-                            top: 50%;
-                            right: -10px;
-                            /* Position to the right of the element */
-                            margin-top: -5px;
-                            border-width: 5px;
-                            border-style: solid;
-                            border-color: transparent transparent transparent #4CAF50;
-                            z-index: 101;
-                        }
+                            /* Tooltip container */
+                            .custom-tooltip {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            /* Tooltip text - hidden by default */
+                            .custom-tooltip:hover::after {
+                                content: attr(data-tooltip);
+                                visibility: visible;
+                                width: 240px;
+                                background-color: #4CAF50;
+                                color: #fff;
+                                text-align: center;
+                                padding: 5px 0;
+                                border-radius: 6px;
+
+                                /* Position the tooltip text */
+                                position: absolute;
+                                z-index: 100;
+                                top: 0;
+                                left: 110%;
+                            }
+
+                            /* Tooltip arrow */
+                            .custom-tooltip:hover::before {
+                                content: "";
+                                visibility: visible;
+                                position: absolute;
+                                top: 50%;
+                                right: -10px;
+                                /* Position to the right of the element */
+                                margin-top: -5px;
+                                border-width: 5px;
+                                border-style: solid;
+                                border-color: transparent transparent transparent #4CAF50;
+                                z-index: 101;
+                            }
                         </style>
-                        
+
                         <!-- Modified HTML using data-tooltip attribute instead of title -->
                         <div class="checkbox-group">
-                            <label class="custom-tooltip" data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
-                                <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked disabled> gemini-2.5-flash
+                            <label class="custom-tooltip"
+                                data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
+                                <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked
+                                    disabled> gemini-2.5-flash
                             </label>
                         </div>
                         <div class="checkbox-group">
-                            <label class="custom-tooltip" data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
-                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled> gemini-1.5-pro
+                            <label class="custom-tooltip"
+                                data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
+                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled>
+                                gemini-1.5-pro
                             </label>
                         </div>
-                        
+
                     </div>
-                
+
                     <div style="margin-top: 0px;"> <!-- Aligned with the OCR Engines label -->
-                        <div style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
+                        <div
+                            style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
                             <label>
                                 <input type="checkbox" id="ocrOnly"> OCR Only Mode
                             </label>
@@ -174,26 +191,58 @@ http://localhost:8000/index.html
                 </div>
 
                 <h3>LLM Model for creating JSON:</h3>
-                <p>Will use Gemini-2.0-Flash. Gemini-2.5-Pro is marginally better, but does not seem worth the extra cost at the moment.</p>
+                <p>Please use gemini-2.0-flash and reserve gemini-2.5-pro for the prompts that are optimized to take full advantage of its capabilities (e.g. SLTPvM_geolocate_flag_multispecimen.yaml).</p>
+                <p>SLTPvM_geolocate_flag_multispecimen.yaml will flag sheets that have more than one specimen (barcodes) and will automatically geolocate specimens that lack GPS coordinates in the label text</p>
+                <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
+                    <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Please do not use this for bulk processing, reserve this for challenging specimens.">
+                                <input type="radio" name="models" value="gemini-2.5-pro-preview-03-25"> gemini-2.5-pro
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="models" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            </label>
+                        </div>
 
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
+                                <input type="radio" name="models" value="gemini-2.5-flash-preview-04-17" disabled>
+                                gemini-2.5-flash
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
+                                <input type="radio" name="models" value="gemini-1.5-pro" disabled> gemini-1.5-pro
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <h3 for="promptTemplate">Prompt Template:</h3>
                     <input type="text" id="promptTemplate" value="SLTPvM_default_v2.yaml">
+                    <!-- This is where the prompts buttons will be added -->
+                    <div id="promptButtonsArea"></div>
                 </div>
-                
+
                 <div class="form-group">
                     <button id="testCorsButton" class="button">Test CORS Support</button>
                     <div id="corsStatus" class="status-display"></div>
                 </div>
             </div>
-            
+
             <div class="tabs">
                 <div class="tab active" data-tab="FileUpload">File Upload</div>
                 <div class="tab" data-tab="ImageUrl">Image URL</div>
                 <div class="tab" data-tab="BatchUrls">Batch URLs</div>
                 <div class="tab" data-tab="BatchFolder">Batch Folder</div>
             </div>
-            
+
             <div id="FileUpload" class="tab-content active">
                 <h2>Test with File Upload</h2>
                 <div class="form-group file-input-container">
@@ -205,13 +254,15 @@ http://localhost:8000/index.html
                 <button id="uploadButton" class="button">Upload and Process</button>
                 <div id="fileResults" class="results"></div>
             </div>
-            
+
             <div id="ImageUrl" class="tab-content">
                 <h2>Test with Image URL</h2>
                 <div class="form-group">
                     <label for="imageUrl">Image URL:</label>
                     <!-- <input type="text" id="imageUrl" value="https://medialib.naturalis.nl/file/id/L.3800382/format/large" placeholder="Enter image URL"> -->
-                    <input type="text" id="imageUrl" value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg" placeholder="Enter image URL">
+                    <input type="text" id="imageUrl"
+                        value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg"
+                        placeholder="Enter image URL">
                 </div>
                 <div class="form-group">
                     <button id="testUrlAvailability" class="button">Test URL Availability</button>
@@ -226,7 +277,8 @@ http://localhost:8000/index.html
                 <h2>Batch Process URLs</h2>
                 <div class="form-group">
                     <label>Upload URL List:</label>
-                    <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs in a column.</p>
+                    <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs
+                        in a column.</p>
                     <input type="file" id="batchUrlFileInput" accept=".txt,.csv">
                     <div id="urlFilePreview" class="file-list"></div>
                 </div>
@@ -235,7 +287,7 @@ http://localhost:8000/index.html
                     <label for="csvUrlColumn">CSV URL Column Name (if using CSV):</label>
                     <input type="text" id="csvUrlColumn" value="url" placeholder="Enter column name containing URLs">
                 </div>
-                
+
                 <div class="form-group">
                     <p>Example CSV file format:</p>
                     <table class="csv-example">
@@ -298,7 +350,7 @@ http://localhost:8000/index.html
             <!-- New tab for Batch Folder Processing -->
             <div id="BatchFolder" class="tab-content">
                 <h2>Batch Process Local Images</h2>
-                
+
                 <div class="folder-drop-zone" id="imageFolderDropZone">
                     <p>Drop image files here or</p>
                     <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
@@ -339,141 +391,302 @@ http://localhost:8000/index.html
             </div>
         </div>
     </div>
-    
-    <script>
-    // Add image preview functionality
-    document.getElementById('fileInput').addEventListener('change', function(event) {
-        const imagePreview = document.getElementById('imagePreview');
-        if (this.files && this.files[0]) {
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-            }
-            
-            reader.readAsDataURL(this.files[0]);
-        } else {
-            imagePreview.style.display = 'none';
-        }
-    });
-    
-    // Navigation functionality
-    document.addEventListener('DOMContentLoaded', function() {
-        const homeLink = document.getElementById('homeLink');
-        const readmeLink = document.getElementById('readmeLink');
-        const promptsLink = document.getElementById('promptsLink');
-        const signupLink = document.getElementById('signupLink');
-        const mainContent = document.getElementById('mainContent');
-        const readmeContent = document.getElementById('readmeContent');
-        const promptsContent = document.getElementById('promptsContent');
-        const signupContent = document.getElementById('signupContent');
-        const promptsFrame = document.getElementById('promptsFrame');
-        const signupFrame = document.getElementById('signupFrame');
-        
-        // Load README content
-        fetch('./README.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                // Convert markdown to HTML
-                const converter = new showdown.Converter({
-                    tables: true,
-                    tasklists: true,
-                    strikethrough: true,
-                    ghCodeBlocks: true
-                });
-                const html = converter.makeHtml(data);
-                readmeContent.innerHTML = html;
-            })
-            .catch(error => {
-                console.error('Error fetching README:', error);
-                readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
-            });
-        
-        // Function to reset all navigation states
-        function resetNavigation() {
-            // Hide all content sections
-            mainContent.style.display = 'none';
-            readmeContent.style.display = 'none';
-            promptsContent.style.display = 'none';
-            signupContent.style.display = 'none';
-            
-            // Remove active class from all nav links
-            homeLink.classList.remove('active');
-            readmeLink.classList.remove('active');
-            promptsLink.classList.remove('active');
-            signupLink.classList.remove('active');
-            
-            // Reset iframes to reduce resource usage when not visible
-            promptsFrame.src = 'about:blank';
-            signupFrame.src = 'about:blank';
-        }
-        
-        // Handle home link click
-        homeLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            resetNavigation();
-            mainContent.style.display = 'block';
-            homeLink.classList.add('active');
-        });
-        
-        // Handle README link click
-        readmeLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            resetNavigation();
-            readmeContent.style.display = 'block';
-            readmeLink.classList.add('active');
-        });
-        
-        // Handle prompts link click
-        promptsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            resetNavigation();
-            promptsContent.style.display = 'block';
-            promptsLink.classList.add('active');
-            
-            // Load the prompts UI in the iframe
-            promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
-            
-            // Show loading indicator
-            promptsContent.classList.add('loading');
-            
-            // Remove loading indicator when iframe is loaded
-            promptsFrame.onload = function() {
-                promptsContent.classList.remove('loading');
-            };
-        });
-        
-        // Handle signup link click
-        signupLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            resetNavigation();
-            signupContent.style.display = 'block';
-            signupLink.classList.add('active');
-            
-            // Load the signup page in the iframe
-            signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
-            
-            // Show loading indicator
-            signupContent.classList.add('loading');
-            
-            // Remove loading indicator when iframe is loaded
-            signupFrame.onload = function() {
-                signupContent.classList.remove('loading');
-            };
-        });
-    });
-    </script>
-    
+
     <!-- Include showdown.js for Markdown conversion -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    
+    <!-- Embed prompt_templates.js directly in HTML document to ensure proper loading order -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image preview functionality
+            document.getElementById('fileInput').addEventListener('change', function (event) {
+                const imagePreview = document.getElementById('imagePreview');
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+            });
+
+            // Navigation functionality
+            const homeLink = document.getElementById('homeLink');
+            const readmeLink = document.getElementById('readmeLink');
+            const promptsLink = document.getElementById('promptsLink');
+            const signupLink = document.getElementById('signupLink');
+            const mainContent = document.getElementById('mainContent');
+            const readmeContent = document.getElementById('readmeContent');
+            const promptsContent = document.getElementById('promptsContent');
+            const signupContent = document.getElementById('signupContent');
+            const promptsFrame = document.getElementById('promptsFrame');
+            const signupFrame = document.getElementById('signupFrame');
+
+            // Load README content
+            fetch('./README.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Convert markdown to HTML
+                    const converter = new showdown.Converter({
+                        tables: true,
+                        tasklists: true,
+                        strikethrough: true,
+                        ghCodeBlocks: true
+                    });
+                    const html = converter.makeHtml(data);
+                    readmeContent.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching README:', error);
+                    readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
+                });
+
+            // Function to reset all navigation states
+            function resetNavigation() {
+                // Hide all content sections
+                mainContent.style.display = 'none';
+                readmeContent.style.display = 'none';
+                promptsContent.style.display = 'none';
+                signupContent.style.display = 'none';
+
+                // Remove active class from all nav links
+                homeLink.classList.remove('active');
+                readmeLink.classList.remove('active');
+                promptsLink.classList.remove('active');
+                signupLink.classList.remove('active');
+
+                // Reset iframes to reduce resource usage when not visible
+                promptsFrame.src = 'about:blank';
+                signupFrame.src = 'about:blank';
+            }
+
+            // Handle home link click
+            homeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                mainContent.style.display = 'block';
+                homeLink.classList.add('active');
+            });
+
+            // Handle README link click
+            readmeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                readmeContent.style.display = 'block';
+                readmeLink.classList.add('active');
+            });
+
+            // Handle prompts link click
+            promptsLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                promptsContent.style.display = 'block';
+                promptsLink.classList.add('active');
+
+                // Load the prompts UI in the iframe
+                promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
+
+                // Show loading indicator
+                promptsContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                promptsFrame.onload = function () {
+                    promptsContent.classList.remove('loading');
+                };
+            });
+
+            // Handle signup link click
+            signupLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                signupContent.style.display = 'block';
+                signupLink.classList.add('active');
+
+                // Load the signup page in the iframe
+                signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
+
+                // Show loading indicator
+                signupContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                signupFrame.onload = function () {
+                    signupContent.classList.remove('loading');
+                };
+            });
+            
+            // Function to set up prompt templates from first file
+            function setupPromptTemplates() {
+                console.log('Prompt templates script loaded');
+
+                const promptTemplateGroup = document.querySelector('.form-group h3[for="promptTemplate"]')?.parentElement;
+                if (!promptTemplateGroup) {
+                    console.error('Could not find prompt template group on first try. Retrying...');
+                    setTimeout(setupPromptTemplates, 500);  // Increased retry time
+                    return;
+                }
+
+                console.log('Found prompt template group, injecting buttons');
+
+                // Create the promptButtonsArea if it doesn't exist
+                let promptArea = document.getElementById('promptButtonsArea');
+                if (!promptArea) {
+                    console.log('Creating new promptButtonsArea');
+                    promptArea = document.createElement('div');
+                    promptArea.id = 'promptButtonsArea';
+                    promptTemplateGroup.appendChild(promptArea);
+                }
+
+                promptArea.innerHTML = `
+                    <button id="refreshPromptsBtn" class="button" style="margin-bottom: 10px;">Refresh Prompts</button>
+                    <div id="promptCount" style="font-size: 14px; margin-bottom: 5px;"></div>
+                    <div id="templateButtonsContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;
+                         max-height: 150px; overflow-y: auto; padding: 5px; border: 1px solid #eee; border-radius: 4px;"></div>
+                `;
+
+                const refreshButton = document.getElementById('refreshPromptsBtn');
+                const countDisplay = document.getElementById('promptCount');
+                const buttonsContainer = document.getElementById('templateButtonsContainer');
+
+                function showStatus(message, isError = false) {
+                    const statusElem = document.createElement('p');
+                    statusElem.textContent = message;
+                    statusElem.style.margin = '5px 0';
+                    statusElem.style.fontSize = '12px';
+                    statusElem.style.color = isError ? '#f44336' : '#666';
+                    statusElem.style.fontStyle = 'italic';
+
+                    buttonsContainer.innerHTML = '';
+                    buttonsContainer.appendChild(statusElem);
+                    countDisplay.textContent = '';
+                }
+
+                function createButtons(templates) {
+                    buttonsContainer.innerHTML = '';
+                    countDisplay.textContent = `Available Prompts: ${templates.length}`;
+
+                    templates.sort((a, b) => a.localeCompare(b));
+
+                    templates.forEach(template => {
+                        const button = document.createElement('button');
+                        button.textContent = template;
+                        button.title = template;
+                        button.style.padding = '6px 12px';
+                        button.style.borderRadius = '4px';
+                        button.style.border = '1px solid #ddd';
+                        button.style.backgroundColor = '#f8f8f8';
+                        button.style.cursor = 'pointer';
+                        button.style.transition = 'all 0.2s ease';
+
+                        button.addEventListener('click', function() {
+                            document.getElementById('promptTemplate').value = template;
+
+                            const originalBg = button.style.backgroundColor;
+                            const originalText = button.textContent;
+
+                            button.style.backgroundColor = '#4CAF50';
+                            button.style.color = 'white';
+                            button.textContent = 'Selected!';
+
+                            setTimeout(() => {
+                                button.style.backgroundColor = originalBg;
+                                button.style.color = '';
+                                button.textContent = originalText;
+                            }, 1000);
+                        });
+
+                        buttonsContainer.appendChild(button);
+                    });
+                }
+
+                function fetchTemplates(showStatusOnError = false, retries = 5) {
+                    if (showStatusOnError) {
+                        showStatus('Loading prompts...');
+                    }
+
+                    console.log('Fetching prompts from API...');
+
+                    fetch('https://vouchervision-go-738307415303.us-central1.run.app/prompts')
+                        .then(response => {
+                            console.log('Fetch response:', response);
+                            if (!response.ok) {
+                                throw new Error(`Error: ${response.status} ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Received data from server:', data);
+
+                            if (data && data.prompts && Array.isArray(data.prompts)) {
+                                const templates = data.prompts
+                                    .map(p => p.filename || '')
+                                    .filter(name => name.trim() !== '');
+
+                                console.log(`Parsed ${templates.length} prompt templates`);
+                                localStorage.setItem('vouchervision_templates', JSON.stringify(templates));
+
+                                createButtons(templates);
+                            } else {
+                                console.error('Invalid data structure:', data);
+                                throw new Error('Invalid response format from API');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching prompts:', error);
+
+                            if (retries > 0) {
+                                console.warn(`Retrying fetchTemplates... (${retries} retries left)`);
+                                setTimeout(() => fetchTemplates(showStatusOnError, retries - 1), 1000);
+                            } else if (showStatusOnError) {
+                                console.error('Out of retries fetching prompts.');
+                                showStatus('Error loading prompts. Please click Refresh.', true);
+                            }
+                        });
+                }
+
+                const cached = localStorage.getItem('vouchervision_templates');
+
+                if (cached) {
+                    try {
+                        const templates = JSON.parse(cached);
+                        createButtons(templates);
+
+                        fetchTemplates(false);
+                    } catch (e) {
+                        console.error('Failed to parse cache, fetching from server');
+                        fetchTemplates(true);
+                    }
+                } else {
+                    fetchTemplates(true);
+                }
+
+                refreshButton.addEventListener('click', function() {
+                    console.log('Manual refresh clicked');
+                    fetchTemplates(true);
+                });
+
+                console.log('Prompt templates setup complete');
+            }
+
+            // Call setupPromptTemplates after DOM is fully loaded with a slight delay
+            // to ensure all other scripts have initialized
+            setTimeout(setupPromptTemplates, 1000);
+        });
+    </script>
+    
+    <!-- Keep the external script references -->
     <script src="js/vouchervisiongo.js"></script>
     <script src="js/api_key_validator.js"></script>
     <script src="js/batch_processing.js"></script>
 </body>
+
 </html>

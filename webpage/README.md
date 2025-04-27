@@ -1,5 +1,15 @@
 # VoucherVisionGO API Guide
 
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+3. [Features](#features)
+4. [Processing Options](#processing-options)
+5. [Model Selection Guide (OCR and LLMs)](#model-selection-guide)
+6. [Results and Visualization](#results-and-visualization)
+7. [Additional Tools](#additional-tools)
+8. [Best Practices](#best-practices)
+9. [Local Implementation](#local-implementation)
+
 [VoucherVision is an AI transcription tool for museum specimens](https://bsapubs.onlinelibrary.wiley.com/doi/10.1002/ajb2.16256). There are several ways of using VoucherVision. This is the simplest. Here you can upload images or URLs and receive CSV or JSON files back. The [Hugging Face implementation](https://huggingface.co/spaces/phyloforfun/VoucherVision) and the [full GitHub version](https://github.com/Gene-Weaver/VoucherVision)  are designed to enable in-depth optimization of workflows, to test new AI models, and to prepare data for use with the [VoucherVision Editor application](https://github.com/Gene-Weaver/VoucherVisionEditor). If you don't need the VV Editor, you can use this API instead. 
 
 The VoucherVisionGO API provides access to the best OCR/LLM combination for AI transcription - Google Gemini. We will update the VoucherVisionGO API as models continue to improve. 
@@ -106,6 +116,18 @@ Process multiple image files from your computer:
 - **OCR Only Mode**: When enabled, only performs OCR without additional processing
 - **Concurrent Requests**: Control how many images are processed simultaneously (higher values increase speed but may encounter rate limiting)
 - **Prompt Template**: Customize how the API processes extracted text
+
+## Picking LLMs
+Use Gemini-2.0-Flash for most cases. Only use Gemini-2.5-Pro if you are using a "thinking-model" prompt like SLTP_vM_geolocate_flag_multispecimen.yaml
+- **Geolocation with SLTP_vM_geolocate_flag_multispecimen.yaml**: This is experimental, but pretty impressive. The LLM queries Google based on label text and finds the most reasonable coordinates. This is triggered if the label lacks explicit coordinates. The LLM should act conservatively, not assigning coordinates unless there is a specific landmark/locality; sometimes it will not return coordinates. You can tell if the LLM performed geolocation because there will be decimal coordinates but not verbatim coordinates. 
+
+## Picking OCR Engines
+All supported models work well, but each can fail in some circumstances. Gemini models are useful for OCR because their large context windows allow us to upload high resolution images. The Flash models though might have internal compression as a cost-saving measure, while the Pro models seem to always use the full resolution image. 
+- **Best for Handwriting**: Gemini-2.5-Pro
+- **Best for Printed Text**: Gemini-2.0-Flash, Gemini-2.5-Pro
+- **Best for Flagging Image Components**: Gemini-2.5-Pro
+- **Best for Following Instructions**: Gemini-2.5-Pro
+- **Best for Bulk Processing**: Gemini-2.5-Pro **AND** Gemini-2.0-Flash together. Even though this costs more, using both models maximizes the chance that all text (especially handwriting) is identified.
 
 ## Results Visualization
 
