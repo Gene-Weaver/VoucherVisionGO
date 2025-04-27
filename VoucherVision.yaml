@@ -44,6 +44,8 @@ leafmachine:
     tool_WFO: false
     tool_wikipedia: false
 
+    tool_google: true
+
     OCR_GPT_4o_mini_resolution: high
     OCR_option_llava: llava-v1.6-mistral-7b
     OCR_option_llava_bit: full
