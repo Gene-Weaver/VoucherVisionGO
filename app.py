@@ -857,10 +857,22 @@ class VoucherVisionProcessor:
                     else:
                         ocr_prompt_option = None
 
+                # Simpler alternative approach
                 if llm_model_name is None:
                     llm_model_name = "gemini-2.0-flash"
 
-                self.LLM_name_cost = ModelMaps.get_version_mapping_cost(llm_model_name)
+                # Direct mapping from API model names to cost constants
+                api_to_cost_mapping = {
+                    "gemini-2.0-flash": "GEMINI_2_0_FLASH",
+                    "gemini-1.5-flash": "GEMINI_1_5_FLASH",
+                    "gemini-1.5-pro": "GEMINI_1_5_PRO",
+                    "gemini-2.5-flash-preview-04-17": "GEMINI_2_5_FLASH",
+                    "gemini-2.5-flash": "GEMINI_2_5_FLASH",
+                    "gemini-2.5-pro-preview-03-25": "GEMINI_2_5_PRO",
+                    "gemini-2.5-pro": "GEMINI_2_5_PRO"
+                }
+
+                self.LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
