@@ -669,9 +669,8 @@ class VoucherVisionProcessor:
                 self.api_key, 
                 model_name=model_name, 
                 max_output_tokens=1024, 
-                temperature=0.5, 
-                top_p=0.3, 
-                top_k=3, 
+                temperature=1.0, 
+                top_p=0.95, 
                 seed=123456, 
                 do_resize_img=False
             )
@@ -748,9 +747,8 @@ class VoucherVisionProcessor:
                         self.api_key, 
                         model_name=ocr_opt, 
                         max_output_tokens=1024, 
-                        temperature=0.5, 
-                        top_p=0.3, 
-                        top_k=3, 
+                        temperature=1, 
+                        top_p=0.95, 
                         seed=123456, 
                         do_resize_img=False
                     )
