@@ -206,15 +206,14 @@ http://localhost:8000/index.html
                             </label>
                         </div>
                         <div class="radio-group">
-                            <label>
-                                <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            <label class="custom-tooltip"
+                                data-tooltip="Sometimes performs worse than Gemini 2.0 Flash">
+                                <input type="radio" name="llm_model" value="gemini-2.5-flash-preview-04-17"> gemini-2.5-flash
                             </label>
                         </div>
-
                         <div class="radio-group">
-                            <label class="custom-tooltip"
-                                data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
-                                <input type="radio" name="llm_model" value="gemini-2.5-flash-preview-04-17" disabled> gemini-2.5-flash
+                            <label>
+                                <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
                             </label>
                         </div>
                         <div class="radio-group">
