@@ -17,11 +17,28 @@ http://localhost:8000/index.html
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoucherVision API</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Keep the external script references -->
-    <!-- <script src="js/vouchervisiongo.js"></script>
-    <script src="js/api_key_validator.js"></script>
-    <script src="js/batch_processing.js"></script> -->
+    <!-- Make sure Mapbox JS and CSS are loaded -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="css/vouchervisiongo.css">
+    <script>
+        // Function to dynamically add Mapbox (optional, already in head)
+        function addMapboxToHead() {
+            if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
+                const mapboxScript = document.createElement('script');
+                mapboxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js';
+                document.head.appendChild(mapboxScript);
+            }
+            if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+                const mapboxCss = document.createElement('link');
+                mapboxCss.rel = 'stylesheet';
+                mapboxCss.href = 'https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css';
+                document.head.appendChild(mapboxCss);
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -247,14 +264,16 @@ http://localhost:8000/index.html
 
             <div id="FileUpload" class="tab-content active">
                 <h2>Test with File Upload</h2>
-                <div class="form-group file-input-container">
-                    <label for="fileInput">Select an image file:</label>
-                    <input type="file" id="fileInput" accept="image/*">
-                    <img id="imagePreview" class="file-preview" src="#" alt="Image Preview">
-                </div>
-                <div id="api-status" class="api-status"></div>
-                <button id="uploadButton" class="button">Upload and Process</button>
-                <div id="fileResults" class="results"></div>
+                <!-- ... File Upload Input/Button ... -->
+                 <div class="form-group file-input-container">
+                     <label for="fileInput">Select an image file:</label>
+                     <input type="file" id="fileInput" accept="image/*">
+                     <img id="imagePreview" class="file-preview" src="#" alt="Image Preview">
+                 </div>
+                 <button id="uploadButton" class="button">Upload and Process</button>
+                 <div id="fileResults" class="results">
+                    <div id="fileJsonResults" class="json-results"></div> <!-- Results appear here -->
+                 </div>
             </div>
 
             <div id="ImageUrl" class="tab-content">
@@ -271,7 +290,9 @@ http://localhost:8000/index.html
                     <span id="urlTestResult"></span>
                 </div>
                 <button id="processUrlButton" class="button">Process URL</button>
-                <div id="urlResults" class="results"></div>
+                <div id="urlResults" class="results">
+                    <div id="urlJsonResults" class="json-results"></div>
+                </div>
             </div>
 
             <!-- New tab for Batch URL Processing -->
@@ -346,7 +367,9 @@ http://localhost:8000/index.html
                 </div>
 
                 <div class="url-preview-gallery"></div>
-                <div id="batchUrlResults" class="batch-results"></div>
+                <div id="batchUrlResults" class="batch-results">
+                    <div id="batchUrlJsonResults" class="json-results"></div>
+                </div>
             </div>
 
             <!-- New tab for Batch Folder Processing -->
@@ -384,8 +407,18 @@ http://localhost:8000/index.html
                     </div>
                 </div>
 
-                <div id="batchImageResults" class="batch-results"></div>
+                <div id="batchImageResults" class="batch-results">
+                    <div id="batchImageJsonResults" class="json-results"></div>
+                </div>
             </div>
+
+            <!-- ===== NEW Global Map Section ===== -->
+            <div class="global-map-section" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+                <h3 style="margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">🗺️ Specimen Location Map (Last Processed)</h3>
+                <div class="coord-status invalid" id="global-map-coord-status">⚠️ Waiting for results with coordinates...</div>
+                <div id="global-map-container" style="width: 100%; height: 450px; border-radius: 8px; margin-top: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"></div>
+           </div>
+           <!-- ================================ -->
 
             <div class="debug-section">
                 <h3>Debug Information</h3>
@@ -832,6 +865,252 @@ http://localhost:8000/index.html
             });
         });
     </script>
-</body>
+    <!-- MAPBOX_TOKEN_PLACEHOLDER -->
+    <script>
+        // This empty script will be replaced by the server with the actual Mapbox integration
+        // DO NOT MODIFY THIS COMMENT OR LINE - it's used by the server to inject the token
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 
+    <!-- Load external scripts in the correct order -->
+    <script src="js/vouchervisiongo.js"></script>
+    <script src="js/api_key_validator.js"></script>
+    <script src="js/batch_processing.js"></script>
+    <script src="js/prompt_templates.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script> <!-- If needed by other scripts -->
+    <!-- Add other necessary external scripts -->
+
+
+    <!-- START: Embedded Mapbox Initialization Script (REVISED Observer Target) -->
+    <script>
+    (function() {
+        // --- Hardcode your working Mapbox token here ---
+        const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGh5bG9mb3JmdW4iLCJhIjoiY2xqN29rYmFiMGI0ZjNlcDFyd243eHE1aSJ9.HWBxNMKGhJ7QUx2JA2RmQg';
+        // ---------------------------------------------
+
+        let map = null; // Store the single map instance
+        let mapboxLoaded = typeof mapboxgl !== 'undefined';
+
+        function logDebug(message, ...args) { console.log(`[Map Debug] ${message}`, ...args); }
+        function logError(message, ...args) { console.error(`[Map Error] ${message}`, ...args); }
+
+        logDebug('Initial Mapbox GL JS loaded status:', mapboxLoaded);
+
+        // --- Function to create or update the SINGLE map (NO CHANGE from previous) ---
+        function createOrUpdateGlobalMap(data) {
+            // ... (Keep the full working function from the previous response) ...
+                logDebug(">>> createOrUpdateGlobalMap called. Current map instance:", map ? 'Exists' : 'null');
+            const mapContainerElement = document.getElementById('global-map-container');
+            const statusElement = document.getElementById('global-map-coord-status');
+
+            if (!mapContainerElement || !statusElement) {
+                logError('Global map container or status element not found.');
+                return;
+            }
+            if (typeof mapboxgl === 'undefined') {
+                    logError('Mapbox GL JS not available for global map.');
+                    mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox GL JS library not loaded.</div>';
+                    return;
+            }
+            mapboxLoaded = true;
+            if (!MAPBOX_ACCESS_TOKEN) {
+                    logError('Mapbox token missing for global map.');
+                    mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox token missing.</div>';
+                    return;
+            }
+            mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+
+            let lat = 0, lng = 0, hasValidCoordinates = false;
+            let sourceData = data;
+            if (data && data.apiResponse) { sourceData = data.apiResponse; logDebug("Using data from apiResponse wrapper."); }
+            const formattedJson = sourceData ? sourceData.formatted_json || sourceData : null;
+            logDebug("Data used for coordinates:", formattedJson);
+
+            if (formattedJson && formattedJson.decimalLatitude && formattedJson.decimalLongitude) {
+                lat = parseFloat(formattedJson.decimalLatitude);
+                lng = parseFloat(formattedJson.decimalLongitude);
+                hasValidCoordinates = !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+                logDebug(`Parsed Coords: lat=${lat}, lng=${lng}`);
+            } else { logDebug("No valid decimalLatitude/decimalLongitude found in formattedJson."); }
+            logDebug(`Coordinate Validity Check: hasValidCoordinates = ${hasValidCoordinates}`);
+
+            statusElement.className = 'coord-status ' + (hasValidCoordinates ? 'valid' : 'invalid');
+            statusElement.innerHTML = hasValidCoordinates ? `✅ Coordinates found: ${lat.toFixed(4)}, ${lng.toFixed(4)}` : (data ? '⚠️ No valid coordinates in last result. Showing world view.' : '⚠️ Waiting for results with coordinates...');
+
+            if (map && typeof map.remove === 'function') {
+                    logDebug('Attempting to update existing global map.');
+                    try {
+                    if (map.marker) { logDebug("Removing existing marker."); map.marker.remove(); map.marker = null; }
+                    else { logDebug("No existing marker to remove."); }
+                    const targetCenter = hasValidCoordinates ? [lng, lat] : [0, 0];
+                    const targetZoom = hasValidCoordinates ? 10 : 1;
+                    logDebug(`Flying map to center: [${targetCenter.join(', ')}], zoom: ${targetZoom}`);
+                    map.flyTo({ center: targetCenter, zoom: targetZoom, essential: true });
+                    if (hasValidCoordinates) {
+                        const popupContent = createPopupContent(formattedJson);
+                        logDebug("Adding new marker.");
+                        setTimeout(() => {
+                                if (map && map.addControl) {
+                                    map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                                    logDebug("Marker added.");
+                                } else { logDebug("Map removed before marker could be added."); }
+                        }, 50);
+                    }
+                        logDebug("Requesting map resize.");
+                        requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                    } catch(updateError) { logError("Error during map update (flyTo/marker):", updateError); }
+            } else { /* ... (map creation logic - keep same as before) ... */
+                    if (mapContainerElement.classList.contains('mapboxgl-map')) { logWarn('Global map looks initialized but instance is missing/invalid.'); return; }
+                logDebug('Creating global map (should only happen once on init)');
+                mapContainerElement.innerHTML = '';
+                try {
+                    map = new mapboxgl.Map({ container: 'global-map-container', style: 'mapbox://styles/mapbox/outdoors-v12', center: [0, 0], zoom: 1 });
+                    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+                    map.on('load', () => {
+                        logDebug('Global map loaded.');
+                        if (hasValidCoordinates) {
+                                const popupContent = createPopupContent(formattedJson);
+                                map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                        }
+                        requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                    });
+                    map.on('error', (e) => {
+                        logError('Global Mapbox error:', e);
+                        mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error loading map: ${e.error ? e.error.message : 'Unknown error'}</div>`;
+                        map = null;
+                    });
+                } catch (initError) {
+                    logError('Error initializing global map:', initError);
+                    mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error initializing map: ${initError.message}</div>`;
+                    map = null;
+                }
+                }
+        }
+
+        // --- Helper to create popup HTML (NO CHANGE) ---
+        function createPopupContent(formattedJson) {
+                if (!formattedJson) return 'No details available.';
+                let content = `<strong>${formattedJson.scientificName || 'Unknown specimen'}</strong><br>`;
+                if (formattedJson.collectionDate) content += `Date: ${formattedJson.collectionDate}<br>`;
+                if (formattedJson.collectedBy) content += `Collector: ${formattedJson.collectedBy}<br>`;
+                if (formattedJson.locality) content += `<small>Locality: ${formattedJson.locality.substring(0, 100)}...</small>`;
+                return content;
+            }
+
+        // --- Initialize the SINGLE global map on page load (NO CHANGE) ---
+        function initializeGlobalMap() {
+            if (!mapboxLoaded) { console.warn('Embedded Script: Mapbox GL JS not loaded, cannot init global map yet.'); return; }
+            logDebug('Initializing global map with null data.');
+            createOrUpdateGlobalMap(null);
+        }
+
+        // --- Monitor results containers for new JSON data ---
+        function monitorResults() {
+            logDebug('Setting up MutationObservers for results (TARGETING PARENT)');
+            // *** CHANGE: Target the PARENT results/batch-results containers ***
+            const resultContainerIds = ['fileResults', 'urlResults', 'batchUrlResults', 'batchImageResults'];
+            resultContainerIds.forEach(function(containerId) {
+                    const container = document.getElementById(containerId); // Get the parent container
+                    if (container) {
+                    watchContainer(container); // Watch the parent
+                    } else {
+                        console.warn('Embedded Script: PARENT Result container not found for monitoring:', containerId);
+                    }
+            });
+        }
+
+        // --- Watch Container (NO CHANGE - still observes the passed node) ---
+        function watchContainer(container) {
+            const observer = new MutationObserver(function(mutationsList) {
+                logDebug("MutationObserver fired for:", container.id || container.className);
+                let relevantMutation = false;
+                for (const mutation of mutationsList) {
+                        // Check if the mutation happened *within* the observed node (or is the node itself)
+                        // and involves adding/changing a PRE tag or its text content
+                        if (mutation.type === 'childList') {
+                            mutation.addedNodes.forEach(node => {
+                            // Check if the added node IS a PRE or CONTAINS a PRE
+                            if (node.nodeName === 'PRE' || (node.querySelector && node.querySelector('pre'))) {
+                                relevantMutation = true;
+                            }
+                            });
+                        } else if (mutation.type === 'characterData') {
+                            // Check if the text change happened *inside* a PRE tag
+                            let parent = mutation.target.parentElement;
+                            while(parent && parent !== container) { // Traverse up to the observed container
+                            if (parent.nodeName === 'PRE') {
+                                relevantMutation = true;
+                                break;
+                            }
+                            parent = parent.parentElement;
+                            }
+                            // Also check if the change happened directly in a PRE that is a child of container
+                            if (!relevantMutation && mutation.target.parentElement && mutation.target.parentElement.nodeName === 'PRE' && mutation.target.parentElement.parentElement === container) {
+                            relevantMutation = true;
+                            }
+                        }
+                        if(relevantMutation) break;
+                }
+
+                if (relevantMutation) {
+                    logDebug('Relevant mutation detected, checking for JSON inside:', container.id || container.className);
+                    // *** CHANGE: Check the container that was passed (the parent) ***
+                    checkParentContainerForJson(container);
+                } else {
+                        // logDebug('Mutation detected, but no relevant PRE change found.'); // Reduce noise
+                }
+            });
+            // Observe the PARENT container for changes in its children/subtree
+            observer.observe(container, { childList: true, subtree: true, characterData: true });
+            logDebug('MutationObserver attached to PARENT:', container.id || container.className);
+        }
+
+        // --- Check the PARENT container for JSON and update the GLOBAL map ---
+            function checkParentContainerForJson(parentContainer) {
+                // *** CHANGE: Look for PRE directly inside the parent container ***
+            const preElement = parentContainer.querySelector(':scope > .json-results pre, :scope > pre'); // Look in json-results div OR directly in parent
+                if (preElement) {
+                    const contentSample = preElement.textContent.substring(0, 300);
+                    logDebug(`Found PRE inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
+                    setTimeout(() => {
+                        try {
+                            const currentContent = preElement.textContent;
+                            if (!currentContent.trim()) { logDebug("PRE content is empty after delay, skipping parse."); return; }
+                            const jsonData = JSON.parse(currentContent);
+                            logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
+                            createOrUpdateGlobalMap(jsonData); // Update the single global map
+                        } catch (e) {
+                            logError(`Could not parse JSON from PRE in ${parentContainer.id || parentContainer.className}. Error:`, e);
+                            logError('Problematic PRE content:', preElement.textContent);
+                        }
+                    }, 50);
+                } else {
+                    logDebug(`No PRE element found directly inside the mutated container: ${parentContainer.id || parentContainer.className}`);
+                }
+            }
+
+
+        // --- DOM Ready (NO CHANGE) ---
+        document.addEventListener('DOMContentLoaded', function() {
+            logDebug('DOM Loaded. Waiting slightly before Mapbox Init.');
+            setTimeout(() => {
+                logDebug('Attempting Mapbox Init after short delay.');
+                mapboxLoaded = typeof mapboxgl !== 'undefined';
+                if (!mapboxLoaded) {
+                        logError("Mapbox GL JS still not loaded after delay. Global map cannot be initialized.");
+                        const mapContainerElement = document.getElementById('global-map-container');
+                        if(mapContainerElement) mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Map library failed to load.</div>';
+                        return;
+                }
+                if (!MAPBOX_ACCESS_TOKEN) { logWarn('No MAPBOX_ACCESS_TOKEN found (hardcoded). Map may not work.'); }
+                initializeGlobalMap();
+                monitorResults();
+            }, 150);
+        });
+
+    })();
+    </script>
+    <!-- END: Embedded Mapbox Initialization Script -->
+
+</body>
 </html>
