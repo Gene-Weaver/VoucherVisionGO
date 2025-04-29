@@ -131,17 +131,6 @@ http://localhost:8000/index.html
                 <h3>OCR Engines (can select one or multiple):</h3>
                 <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
-                        <div class="checkbox-group">
-                            <label>
-                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked>
-                                gemini-2.5-pro
-                            </label>
-                        </div>
-                        <div class="checkbox-group">
-                            <label>
-                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
-                            </label>
-                        </div>
                         <style>
                             /* Tooltip container */
                             .custom-tooltip {
@@ -182,20 +171,35 @@ http://localhost:8000/index.html
                                 z-index: 101;
                             }
                         </style>
-
-                        <!-- Modified HTML using data-tooltip attribute instead of title -->
+                        
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Disabled because it costs more and performs worse than Gemini 2.0">
-                                <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked
-                                    disabled> gemini-2.5-flash
+                                data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
+                                <input type="checkbox" name="engines" value="gemini-2.5-pro-preview-03-25" unchecked> gemini-2.5-pro
                             </label>
                         </div>
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
-                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked disabled>
-                                gemini-1.5-pro
+                                data-tooltip="Use this model. You can add another model for even better support">
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
+                                <input type="checkbox" name="engines" value="gemini-2.5-flash-preview-04-17" unchecked> gemini-2.5-flash
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Will be deprecated sometime in 2025 (but it does perform well)">
+                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked>gemini-1.5-pro
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Very lightweight">
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash-lite" unchecked>gemini-2.0-flash-lite
                             </label>
                         </div>
 
@@ -218,18 +222,19 @@ http://localhost:8000/index.html
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Please do not use this for bulk processing, reserve this for challenging specimens.">
+                                data-tooltip="Use this model">
                                 <input type="radio" name="llm_model" value="gemini-2.5-pro-preview-03-25"> gemini-2.5-pro
                             </label>
                         </div>
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Sometimes performs worse than Gemini 2.0 Flash">
+                                data-tooltip="This model is a bit unpredictable">
                                 <input type="radio" name="llm_model" value="gemini-2.5-flash-preview-04-17"> gemini-2.5-flash
                             </label>
                         </div>
                         <div class="radio-group">
-                            <label>
+                            <label  class="custom-tooltip"
+                                data-tooltip="Use this for bulk workloads">
                                 <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
                             </label>
                         </div>

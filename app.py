@@ -1087,26 +1087,36 @@ def process_image_by_url():
     
     # Get user email
     user_email = get_user_email_from_request(request)
+
+    # Check content type to determine how to process the request
+    content_type = request.headers.get('Content-Type', '').lower()
     
-    # Now read from FormData (NOT JSON)
-    if 'image_url' not in request.form:
-        response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+    # Handle JSON request
+    if 'application/json' in content_type:
+        data = request.get_json()
+        if not data or 'image_url' not in data:
+            response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+            
+        image_url = data.get('image_url')
+        engine_options = data.get('engines')
+        prompt = data.get('prompt')
+        ocr_only = data.get('ocr_only', False)
+        llm_model_name = data.get('llm_model')
+    
+    # Handle form data request
+    else:
+        if 'image_url' not in request.form:
+            response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
-    image_url = request.form.get('image_url')
-
-    # Get engine options from form
-    engine_options = request.form.getlist('engines') if 'engines' in request.form else None
-
-    # Get prompt from form
-    prompt = request.form.get('prompt') if 'prompt' in request.form else None
-
-    # OCR-only flag
-    ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
-
-    # LLM model
-    llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+        image_url = request.form.get('image_url')
+        engine_options = request.form.getlist('engines') if 'engines' in request.form else None
+        prompt = request.form.get('prompt') if 'prompt' in request.form else None
+        ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+        llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     try:
         import tempfile
