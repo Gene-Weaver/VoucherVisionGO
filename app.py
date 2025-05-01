@@ -258,7 +258,7 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
         logger.info(f"Updated usage statistics for {user_email}")
     except Exception as e:
         logger.error(f"Error updating usage statistics: {str(e)}")
-        
+
 class SimpleEmailSender:
     """
     A simple class to send emails using Gmail SMTP with credentials from environment variables
@@ -831,7 +831,13 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
     
-    def process_image_request(self, file, engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], ocr_prompt_option=None, prompt=None, ocr_only=False, llm_model_name=None):
+    def process_image_request(self, file, 
+                              engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], 
+                              ocr_prompt_option=None, 
+                              prompt=None, 
+                              ocr_only=False, 
+                              llm_model_name=None, 
+                              url_source=""):
         """
         Process an image from a request file
         ocr_prompt_option=["ocr_verbatim_v1", None]
@@ -907,6 +913,7 @@ class VoucherVisionProcessor:
                     
                     results = OrderedDict([
                         ("filename", original_filename),
+                        ("url_source", url_source),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
@@ -938,6 +945,7 @@ class VoucherVisionProcessor:
 
                     results = OrderedDict([
                         ("filename", original_filename),
+                        ("url_source", url_source),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("parsing_info", OrderedDict([
@@ -1071,7 +1079,8 @@ def process_image():
         engine_options=engine_options, 
         prompt=prompt,
         ocr_only=ocr_only,
-        llm_model_name=llm_model_name
+        llm_model_name=llm_model_name,
+        url_source=""
     )
     
     # If processing was successful, update usage statistics
@@ -1174,7 +1183,8 @@ def process_image_by_url():
             engine_options=engine_options,
             prompt=prompt,
             ocr_only=ocr_only,
-            llm_model_name=llm_model_name
+            llm_model_name=llm_model_name,
+            url_source=image_url,
         )
 
         # Update usage stats
