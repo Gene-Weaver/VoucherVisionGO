@@ -849,6 +849,7 @@ function formatEmail(email) {
 }
 
 // Function to create a chart using Chart.js
+// Function to create a chart using Chart.js
 function createChartWithChartJS(containerId, data, userColors, users) {
   // Prepare data for Chart.js
   const labels = data.map(item => item.label);
@@ -891,9 +892,22 @@ function createChartWithChartJS(containerId, data, userColors, users) {
         tooltip: {
           mode: 'index',
           intersect: false,
-          filter: function(tooltipItem) {
-            // Only show tooltip if the value is greater than 0
-            return tooltipItem.raw > 0;
+          callbacks: {
+            // Only display tooltip items for users who have data > 0
+            label: function(context) {
+              const value = context.raw;
+              // Only show if value is greater than 0
+              if (value > 0) {
+                return `${context.dataset.label}: ${value}`;
+              } else {
+                return null;
+              }
+            },
+            // Filter out any tooltips with null labels (the ones we removed above)
+            afterBody: function(context) {
+              // Remove any empty lines from the tooltip
+              return context.filter(item => item !== null);
+            }
           }
         }
       },
