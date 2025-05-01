@@ -624,64 +624,7 @@ function prepareDailyUsageData(allStats, preassignedColors = null) {
 // }
 
 
-// Function to create a chart using Chart.js
-function createChartWithChartJS(containerId, data, userColors, users) {
-  // Prepare data for Chart.js
-  const labels = data.map(item => item.label);
 
-  const datasets = users.map(user => {
-    return {
-      label: formatEmail(user),
-      backgroundColor: userColors[user],
-      data: data.map(item => item[user] || 0)
-    };
-  });
-
-  // Create canvas element
-  const canvas = document.createElement('canvas');
-  canvas.id = 'myChart';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  document.getElementById(containerId).appendChild(canvas);
-
-  // Create chart
-  const ctx = canvas.getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: datasets
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false // Hide the default legend
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false
-        }
-      },
-      scales: {
-        x: {
-          stacked: true,
-          grid: {
-            display: false
-          }
-        },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.1)'
-          }
-        }
-      }
-    }
-  });
-}
 
 // Function to process timestamps and organize data by day
 function processDailyUsageData(allStats) {
@@ -918,18 +861,17 @@ function createChartWithChartJS(containerId, data, userColors, users) {
     };
   });
   
-  // Remove any existing canvas to prevent duplicates
-  const existingCanvas = document.getElementById('daily-usage-chart');
-  if (existingCanvas) {
-    existingCanvas.remove();
+  // Check for existing chart instance and destroy it
+  const chartContainer = document.getElementById(containerId);
+  if (chartContainer) {
+    // Clear the container first
+    chartContainer.innerHTML = '';
   }
   
   // Create new canvas
   const canvas = document.createElement('canvas');
   canvas.id = 'daily-usage-chart';
-  canvas.style.width = '100%';
-  canvas.style.height = '100%';
-  document.getElementById(containerId).appendChild(canvas);
+  chartContainer.appendChild(canvas);
   
   // Create chart
   const ctx = canvas.getContext('2d');
@@ -948,7 +890,11 @@ function createChartWithChartJS(containerId, data, userColors, users) {
         },
         tooltip: {
           mode: 'index',
-          intersect: false
+          intersect: false,
+          filter: function(tooltipItem) {
+            // Only show tooltip if the value is greater than 0
+            return tooltipItem.raw > 0;
+          }
         }
       },
       scales: {
