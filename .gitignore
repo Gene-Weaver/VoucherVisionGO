@@ -37,6 +37,7 @@ demo/validation_xlsx/
 
 datasets/*
 datasets/
+output*/
 
 demo/demo_configs/*
 uploads/*
