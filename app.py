@@ -190,8 +190,10 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
         return
         
     try:
-        # Get current month for monthly tracking
-        current_month = datetime.datetime.now().strftime("%Y-%m")
+        # Get current month and day for tracking
+        current_date = datetime.datetime.now()
+        current_month = current_date.strftime("%Y-%m")
+        current_day = current_date.strftime("%Y-%m-%d")
         
         # Reference to user's usage document
         user_usage_ref = db.collection('usage_statistics').document(user_email)
@@ -204,6 +206,10 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
             # Update monthly usage
             monthly_usage = user_data.get('monthly_usage', {})
             monthly_usage[current_month] = monthly_usage.get(current_month, 0) + 1
+            
+            # Update daily usage
+            daily_usage = user_data.get('daily_usage', {})
+            daily_usage[current_day] = daily_usage.get(current_day, 0) + 1
             
             # Update engine usage if available
             ocr_info = user_data.get('ocr_info', {})
@@ -221,22 +227,29 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
                 'total_images_processed': firestore.Increment(1),
                 'last_processed_at': firestore.SERVER_TIMESTAMP,
                 'monthly_usage': monthly_usage,
+                'daily_usage': daily_usage,
                 'ocr_info': ocr_info,
                 'llm_info': llm_info,
             })
         else:
             # Create new document
             monthly_usage = {current_month: 1}
+            daily_usage = {current_day: 1}
             ocr_info = {}
             if engines:
                 for engine in engines:
                     ocr_info[engine] = 1
+            
+            llm_info = {}
+            if llm_model_name:
+                llm_info[llm_model_name] = 1
                     
             user_usage_ref.set({
                 'user_email': user_email,
                 'total_images_processed': 1,
                 'last_processed_at': firestore.SERVER_TIMESTAMP,
                 'monthly_usage': monthly_usage,
+                'daily_usage': daily_usage,
                 'ocr_info': ocr_info,
                 'llm_info': llm_info,
                 'first_processed_at': firestore.SERVER_TIMESTAMP,
@@ -245,7 +258,7 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
         logger.info(f"Updated usage statistics for {user_email}")
     except Exception as e:
         logger.error(f"Error updating usage statistics: {str(e)}")
-
+        
 class SimpleEmailSender:
     """
     A simple class to send emails using Gmail SMTP with credentials from environment variables
