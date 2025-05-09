@@ -34,7 +34,7 @@ def extract_filename_from_url(url, timeout=10, debug=False):
     server headers and path-based matching.
 
     """
-    generic_words = {'full', 'native', 'large', 'default', 'original', 'format', 'preview', 'thumb', 'thumbnail', 'web'}
+    generic_words = {'full', 'native', 'large', 'default', 'original', 'format', 'preview', 'thumb', 'thumbnail', 'web','webview','imagefullview','imagedownload','download'}
     valid_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff'}
 
     parsed = urlparse(unquote(url))
