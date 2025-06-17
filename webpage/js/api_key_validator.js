@@ -512,8 +512,12 @@ function initAuthTokenCheck() {
     return false;
 }
 
-// Add button to Settings section to clear API key
-function addClearApiKeyButton() {
+// Create and add API Key buttons dynamically
+function createApiKeyButtons() {
+    const apiKeyInput = document.getElementById('apiKey');
+    const apiKeyContainer = apiKeyInput.parentNode;
+    
+    // Create Clear API Key button
     const clearButton = document.createElement('button');
     clearButton.textContent = 'Clear API Key';
     clearButton.className = 'button';
@@ -537,13 +541,7 @@ function addClearApiKeyButton() {
         logDebug('API key cleared');
     });
     
-    // Add button next to the API key input
-    const apiKeyInput = document.getElementById('apiKey');
-    apiKeyInput.parentNode.appendChild(clearButton);
-}
-
-// Add button to validate API key
-function addValidateApiKeyButton() {
+    // Create Test API Key button
     const validateButton = document.createElement('button');
     validateButton.textContent = 'Test API Key';
     validateButton.className = 'button';
@@ -578,27 +576,30 @@ function addValidateApiKeyButton() {
         });
     });
     
-    // Add button next to the API key input
-    const apiKeyInput = document.getElementById('apiKey');
-    apiKeyInput.parentNode.appendChild(validateButton);
+    // Add buttons to the container
+    apiKeyContainer.appendChild(clearButton);
+    apiKeyContainer.appendChild(validateButton);
 }
 
-// Add clear token button event handler
+// Setup clear token button event handler
 function setupClearTokenButton() {
-    document.getElementById('clearTokenButton').addEventListener('click', function() {
-        // Clear the auth token
-        document.getElementById('authToken').value = '';
-        document.getElementById('authToken').dataset.authToken = '';
-        localStorage.removeItem('vouchervision_auth_token');
-        
-        // Disable buttons until new token is provided
-        disableButtons();
-        
-        // Show the modal again
-        initAuthTokenCheck();
-        
-        logDebug('Auth token cleared');
-    });
+    const clearTokenButton = document.getElementById('clearTokenButton');
+    if (clearTokenButton) {
+        clearTokenButton.addEventListener('click', function() {
+            // Clear the auth token
+            document.getElementById('authToken').value = '';
+            document.getElementById('authToken').dataset.authToken = '';
+            localStorage.removeItem('vouchervision_auth_token');
+            
+            // Disable buttons until new token is provided
+            disableButtons();
+            
+            // Show the modal again
+            initAuthTokenCheck();
+            
+            logDebug('Auth token cleared');
+        });
+    }
 }
 
 // Add this to the document ready function
@@ -606,13 +607,10 @@ $(document).ready(function() {
     // Initialize auth check based on selected method
     initAuthCheck();
     
-    // Add clear API key button
-    addClearApiKeyButton();
+    // Create API key buttons dynamically
+    createApiKeyButtons();
     
-    // Add validate API key button
-    addValidateApiKeyButton();
-    
-    // Setup clear token button
+    // Setup clear token button (this button exists in HTML)
     setupClearTokenButton();
     
     // Handle auth method change
