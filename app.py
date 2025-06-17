@@ -677,7 +677,7 @@ class VoucherVisionProcessor:
         # Initialize OCR engines 
         self.ocr_engines = {}
         self.ocr_engines_lock = threading.Lock()
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"]:
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
             self.ocr_engines[model_name] = OCRGeminiProVision(
                 self.api_key, 
                 model_name=model_name, 
@@ -723,7 +723,7 @@ class VoucherVisionProcessor:
         self.Voucher_Vision.setup_JSON_dict_structure()
         
         self.llm_models = {}
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"]:
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
             self.llm_models[model_name] = GoogleGeminiHandler(
                 self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure, 
                 config_vals_for_permutation=None, exit_early_for_JSON=True
@@ -883,9 +883,7 @@ class VoucherVisionProcessor:
                     "gemini-2.0-flash": "GEMINI_2_0_FLASH",
                     "gemini-1.5-flash": "GEMINI_1_5_FLASH",
                     "gemini-1.5-pro": "GEMINI_1_5_PRO",
-                    "gemini-2.5-flash-preview-04-17": "GEMINI_2_5_FLASH",
                     "gemini-2.5-flash": "GEMINI_2_5_FLASH",
-                    "gemini-2.5-pro-preview-03-25": "GEMINI_2_5_PRO",
                     "gemini-2.5-pro": "GEMINI_2_5_PRO"
                 }
 

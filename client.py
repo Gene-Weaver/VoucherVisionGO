@@ -20,7 +20,7 @@ N_INDENT=2
 """
 NOTE:
     You can use any of the Gemini models, not just those that I specify: https://ai.google.dev/gemini-api/docs/models
-    Just pick the one you want (e.g. gemini-2.5-flash-preview-04-17) as long as it supports: Audio, images, videos, and text
+    Just pick the one you want (e.g. gemini-2.5-flash) as long as it supports: Audio, images, videos, and text
 """
 
 class OrderedDictJSONEncoder(json.JSONEncoder):

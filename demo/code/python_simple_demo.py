@@ -17,8 +17,8 @@ if __name__ == '__main__':
 		save_to_csv=True, 
 		max_workers=4,
 		ocr_only=False,
-		engines=["gemini-2.0-flash-lite", "gemini-2.0-flash"], # "gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"
-		llm_model="gemini-2.5-pro-preview-03-25", # "gemini-2.0-flash"
+		engines=["gemini-2.0-flash-lite", "gemini-2.0-flash"], # "gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5", "gemini-2.5-pro"
+		llm_model="gemini-2.5-pro", # "gemini-2.0-flash"
 		auth_token=YOUR_API_KEY_OR_AUTH_TOKEN
 	)
 
@@ -31,10 +31,10 @@ if __name__ == '__main__':
 		verbose=True, 
 		save_to_csv=True, 
 		ocr_only=False,
-		llm_model="gemini-2.5-pro-preview-03-25",
+		llm_model="gemini-2.5-pro",
 		max_workers=8,
-		# engines=["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash-preview-04-17", "gemini-2.5-pro-preview-03-25"],
-		engines=["gemini-2.0-flash", "gemini-2.5-pro-preview-03-25"],
+		# engines=["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"],
+		engines=["gemini-2.0-flash", "gemini-2.5-pro"],
 		auth_token=YOUR_API_KEY_OR_AUTH_TOKEN
 	)
 
