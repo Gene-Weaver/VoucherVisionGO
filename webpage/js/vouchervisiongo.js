@@ -598,6 +598,7 @@ async function processImage(sourceType = 'file') {
     if (promptTemplate) formData.append('prompt', promptTemplate);
     if (ocrOnly) formData.append('ocr_only', 'true');
     if (llm_model) formData.append('llm_model', llm_model);
+    if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
 
     const headers = getAuthHeaders();
     if ('Content-Type' in headers) delete headers['Content-Type'];

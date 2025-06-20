@@ -890,7 +890,9 @@ class VoucherVisionProcessor:
                     "gemini-2.5-pro": "GEMINI_2_5_PRO"
                 }
 
+                logger.info(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})")
                 self.LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
+                logger.info(f"Mapped to cost constant: {self.LLM_name_cost}")
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
@@ -1132,6 +1134,7 @@ def process_image_by_url():
         engine_options = data.get('engines')
         prompt = data.get('prompt')
         ocr_only = data.get('ocr_only', False)
+        include_wfo = data.get('include_wfo', False)
         llm_model_name = data.get('llm_model')
     
     # Handle form data request

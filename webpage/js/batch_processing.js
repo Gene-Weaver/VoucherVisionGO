@@ -537,6 +537,11 @@ async function processBatchImages(files, concurrency, options = {}) {
             if ($('#ocrOnly').is(':checked')) {
                 formData.append('ocr_only', 'true');
             }
+
+            // Add WFO validation if selected
+            if ($('#includeWfo').is(':checked')) {
+                formData.append('include_wfo', 'true');
+            }
             
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
