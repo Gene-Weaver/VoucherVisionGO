@@ -57,7 +57,7 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
         return json.dumps(regular_dict, indent=4)
     
 def process_image(fname, server_url, image_path, output_dir, verbose=False, 
-                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False):
+                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False, include_wfo=False):
     """
     Process an image using the VoucherVision API server
     
@@ -72,6 +72,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         prompt (str): Custom prompt file to use
         auth_token (str): Authentication token for the API (Firebase token or API key)
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
 
     Returns:
         dict: The processed results from the server
@@ -97,7 +98,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         
         try:
             # Pass the auth token to the recursive call
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, include_wfo)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -118,6 +119,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         data['prompt'] = prompt
     if ocr_only:
         data['ocr_only'] = 'true'
+    if include_wfo:
+        data['include_wfo'] = 'true'
 
     # Determine auth header type based on auth_token format
     # API keys are typically alphanumeric strings without periods
@@ -165,7 +168,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False):
+def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False, include_wfo=False):
     """
     Process a single image file and save the results
     
@@ -179,6 +182,7 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         verbose (bool): Whether to print verbose output
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
        
     Returns:
         dict: The processing results
@@ -188,7 +192,7 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, include_wfo)
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -209,7 +213,7 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False):
+def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False, include_wfo=False):
     """
     Process multiple images in parallel
     
@@ -224,6 +228,7 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
         max_workers (int): Maximum number of parallel workers
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
        
     Returns:
         list: List of processing results
@@ -233,6 +238,9 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
     print(f"Processing {len(image_paths)} images with up to {max_workers} parallel workers")
     if ocr_only:
         print("OCR-only mode: Skipping VoucherVision processing")
+    if include_wfo:
+        print("Running WFO Tool")
+
 
     # Create a progress bar
     progress_bar = tqdm(total=len(image_paths), desc="Processing", unit="image")
@@ -253,6 +261,7 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
                 False, 
                 auth_token,
                 ocr_only,
+                include_wfo,
             ): path for path in image_paths
         }
         
@@ -607,7 +616,7 @@ def verify_authentication(server_url, auth_token=None):
     
 def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], llm_model="gemini-2.0-flash",
                     prompt="SLTPvM_default.yaml", image=None, directory=None, 
-                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None, ocr_only=False):
+                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None, ocr_only=False, include_wfo=False):
     """
     Process voucher images through the VoucherVision API.
     
@@ -625,6 +634,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         max_workers (int): Maximum number of parallel workers
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
         
     Returns:
         list: List of processed results if save_to_csv is True, otherwise None
@@ -651,6 +661,9 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
     # If in OCR-only mode, inform user
     if ocr_only:
         print("Running in OCR-only mode: Skipping VoucherVision JSON parsing")
+    if include_wfo:
+        print("Running in WFO Tool")
+
     
     try:
         # To store all results if save-to-csv is enabled
@@ -659,7 +672,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only)
+            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only, include_wfo)
             if result and save_to_csv:
                 all_results.append(result)
         
@@ -704,6 +717,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 max_workers,
                 auth_token,
                 ocr_only,
+                include_wfo,
             )
             
             if save_to_csv:
@@ -731,6 +745,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 max_workers,
                 auth_token,
                 ocr_only,
+                include_wfo,
             )
             
             if save_to_csv:
@@ -794,6 +809,8 @@ def main():
                         help='Maximum number of parallel workers (default: 4)')
     parser.add_argument('--ocr-only', action='store_true',
                         help='Only perform OCR and skip VoucherVision processing')
+    parser.add_argument('--include-wfo', action='store_true',
+                        help='Validate taxonomy against World Flora Online')
     
     args = parser.parse_args()
     
@@ -812,6 +829,7 @@ def main():
         max_workers=args.max_workers,
         auth_token=args.auth_token,
         ocr_only=args.ocr_only,
+        include_wfo = args.include_wfo,
     )
 
 

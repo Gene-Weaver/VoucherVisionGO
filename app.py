@@ -784,7 +784,7 @@ class VoucherVisionProcessor:
 
         return ocr_packet, ocr_all
     
-    def get_thread_local_vv(self, prompt, llm_model_name):
+    def get_thread_local_vv(self, prompt, llm_model_name, include_wfo):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         # Always create a new instance when a prompt is explicitly specified
         if prompt != self.default_prompt or not hasattr(self.thread_local, 'vv'):
@@ -806,36 +806,39 @@ class VoucherVisionProcessor:
             # Create a thread-local LLM model handler
             self.thread_local.llm_model = GoogleGeminiHandler(
                 self.cfg, self.logger, llm_model_name, self.thread_local.vv.JSON_dict_structure, 
-                config_vals_for_permutation=None, exit_early_for_JSON=True
+                config_vals_for_permutation=None, 
+                exit_early_for_JSON=True,
+                exit_early_with_WFO=include_wfo,
             )
             
             self.logger.info(f"Created new thread-local VV instance with prompt: {prompt}")
         
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt, llm_model_name):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
-        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name)
+        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, include_wfo)
         
         # Update OCR text for processing
         vv.OCR = ocr_text
         prompt_text = vv.setup_prompt()
         
         # Call the LLM to process the OCR text
-        response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
+        response_candidate, nt_in, nt_out, _, _, _, WFO = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
         logger.info(f"response_candidate\n{response_candidate}")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(self.LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
-        return response_candidate, nt_in, nt_out, cost_in, cost_out
+        return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
     
     def process_image_request(self, file, 
                               engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], 
                               ocr_prompt_option=None, 
                               prompt=None, 
                               ocr_only=False, 
+                              include_wfo=False,
                               llm_model_name=None, 
                               url_source=""):
         """
@@ -914,6 +917,7 @@ class VoucherVisionProcessor:
                         ("url_source", url_source),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
+                        ("WFO_info", ""),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
                             ("input", 0),
@@ -926,7 +930,7 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr, current_prompt, llm_model_name)
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo)
                     
                     # Combine results
                     # results = {
@@ -946,6 +950,7 @@ class VoucherVisionProcessor:
                         ("url_source", url_source),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
+                        ("WFO_info", WFO),
                         ("parsing_info", OrderedDict([
                             ("model", llm_model_name),
                             ("input", tokens_in),
@@ -1069,6 +1074,9 @@ def process_image():
     # Get ocr_only flag from request if specified
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
 
+    # Get WFO flag from request if specified
+    include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
+
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     # Process the image using the initialized processor
@@ -1077,6 +1085,7 @@ def process_image():
         engine_options=engine_options, 
         prompt=prompt,
         ocr_only=ocr_only,
+        include_wfo=include_wfo,
         llm_model_name=llm_model_name,
         url_source=""
     )
@@ -1136,6 +1145,7 @@ def process_image_by_url():
         engine_options = request.form.getlist('engines') if 'engines' in request.form else None
         prompt = request.form.get('prompt') if 'prompt' in request.form else None
         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+        include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     try:
@@ -1181,6 +1191,7 @@ def process_image_by_url():
             engine_options=engine_options,
             prompt=prompt,
             ocr_only=ocr_only,
+            include_wfo=include_wfo,
             llm_model_name=llm_model_name,
             url_source=image_url,
         )
