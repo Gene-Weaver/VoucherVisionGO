@@ -1,10 +1,15 @@
-# Use Python 3.12 as the base image (to match the error log Python version)
+# Use the official Python slim image as a parent image
 FROM python:3.12-slim
 
-# Set workdir to root directory 
+# Step 1: Add ARG and LABEL to enable intelligent cache busting from cloudbuild.yaml
+ARG VCS_REF
+LABEL REPO_COMMIT_REF=$VCS_REF
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies including OpenCV dependencies
+# Install system-level dependencies required by OpenCV and other libraries
+# Consolidate all apt-get installs into a single RUN layer for efficiency
 RUN apt-get update && apt-get install -y \
     git \
     procps \
@@ -13,46 +18,29 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxrender1 \
     libxext6 \
+    # Clean up apt-get lists to reduce image size
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for better caching
+# Copy the requirements file into the container
 COPY requirements.txt .
+
+# Install Python dependencies from the requirements file
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install git and debugging tools
-RUN apt-get update && apt-get install -y git procps
-
-# Pre-generate the Matplotlib font cache to avoid runtime initialization
+# Pre-generate the Matplotlib font cache to prevent slow first-time startup
 RUN python -c "import matplotlib.pyplot as plt; plt.figure(); plt.close()"
 
-# Copy application code
+# Copy the entire build context (including the now-correct submodule) into the container
 COPY . .
 
-# Check if vouchervision_main exists, if not clone it
-RUN if [ ! -d "/vouchervision_main" ]; then \
-        echo "vouchervision_main directory not found, attempting to clone"; \
-        if [ -f .gitmodules ]; then \
-            git submodule update --init --recursive --remote; \
-        fi; \
-    fi
-
-# Initialize and update the submodule
-RUN git submodule update --init --recursive --remote
-
-# Create symbolic links to ensure Python can find the modules both ways
-RUN ln -sf /vouchervision_main/vouchervision /vouchervision || echo "Could not create symlink to vouchervision"
-
-# Create symbolic links for modules
-RUN ln -sf /app/vouchervision_main/vouchervision /app/vouchervision
-
-# Make sure the entrypoint script is executable
+# Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.sh
 
-# Environment variables
+# Set environment variables for the container
 ENV PORT=8080
 ENV PYTHONUNBUFFERED=1
-# ENV PYTHONPATH="/app:/app/vouchervision_main"
+# Set the PYTHONPATH to ensure all modules are discoverable
 ENV PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision"
 
-# Run the application
+# Specify the entrypoint for the container
 ENTRYPOINT ["/app/entrypoint.sh"]

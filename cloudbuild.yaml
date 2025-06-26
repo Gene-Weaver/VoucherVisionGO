@@ -46,20 +46,30 @@ steps:
         docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
 
   # Step 3: Build with appropriate caching strategy based on whether deps changed
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   id: build
+  #   entrypoint: 'bash'
+  #   args:
+  #     - '-c'
+  #     - |
+  #       _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
+  #       if [ "$_DEPS_CHANGED" = "true" ]; then
+  #         echo "Rebuilding container from scratch..."
+  #         docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
+  #       else
+  #         echo "Performing incremental build..."
+  #         docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
+  #       fi
   - name: 'gcr.io/cloud-builders/docker'
     id: build
-    entrypoint: 'bash'
     args:
-      - '-c'
-      - |
-        _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
-        if [ "$_DEPS_CHANGED" = "true" ]; then
-          echo "Rebuilding container from scratch..."
-          docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
-        else
-          echo "Performing incremental build..."
-          docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
-        fi
+      - 'build'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}'
+      # Always force a rebuild if the superproject commit changes (which it does on submodule update)
+      - '--build-arg'
+      - 'VCS_REF=${COMMIT_SHA}'
+      - '.'
 
   # Step 4: Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
