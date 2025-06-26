@@ -55,7 +55,8 @@ try:
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
     
-except:
+except Exception as e:
+    logger.error(f"Import ERROR: {e}")
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
     from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
