@@ -819,8 +819,7 @@ class VoucherVisionProcessor:
         vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name)
         
         # Update OCR text for processing
-        vv.OCR = ocr_text
-        prompt_text = vv.setup_prompt()
+        prompt_text = vv.setup_prompt(ocr_text)
         
         # Call the LLM to process the OCR text
         response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
