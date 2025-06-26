@@ -30,8 +30,19 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Pre-generate the Matplotlib font cache to prevent slow first-time startup
 RUN python -c "import matplotlib.pyplot as plt; plt.figure(); plt.close()"
 
-# Copy the entire build context (including the now-correct submodule) into the container
+# Copy Git configuration files first (needed for submodule operations)
+COPY .git .git
+COPY .gitmodules .gitmodules
+
+# Initialize and update submodules inside the Docker container
+RUN git submodule update --init --recursive --force
+
+# Copy the rest of the application code
 COPY . .
+
+# Verify submodule content was properly initialized (debug step)
+RUN ls -la vouchervision_main/ && \
+    ls -la vouchervision_main/vouchervision/ || echo "Submodule content check failed"
 
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.sh
