@@ -6,13 +6,18 @@ steps:
     args:
       - '-c'
       - |
-        # Initialize the submodule to ensure it's available for diffing
-        git submodule update --init --recursive
+        # --- NEW, MORE AGGRESSIVE SUBMODULE SYNC ---
+        # De-initialize to remove any local submodule configuration/caching.
+        git submodule deinit -f .
+        # Re-initialize from the .gitmodules file and force a fresh clone of the submodule content.
+        git submodule update --init --force --recursive
+        
         # Default to false for first build where we can't diff
         _DEPS_CHANGED="false"
+        
         # Check if we can access previous commit
         if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
-          # Check if dependency files changed between this commit and the previous one
+          # Check if dependency files OR the submodule reference itself has changed
           if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh|vouchervision_main'; then
             _DEPS_CHANGED="true"
           fi
@@ -20,6 +25,7 @@ steps:
           # First commit or shallow clone - rebuild required
           _DEPS_CHANGED="true"
         fi
+        
         # Store the result as a build artifact
         echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
         echo "Dependencies changed: $_DEPS_CHANGED"
