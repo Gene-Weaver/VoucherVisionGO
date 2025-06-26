@@ -1,58 +1,36 @@
 steps:
-  # Step 1: Check for changes in dependencies or submodules
+  # Step 1: Check if we need to rebuild dependencies and store the result
   - name: 'gcr.io/cloud-builders/git'
     id: check-changes
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Ensure we have the full git history for diffing
-        git fetch --unshallow || echo "Repository is not shallow."
-
-        # Initialize the submodule
-        git submodule update --init --recursive
+        # --- NEW, MORE AGGRESSIVE SUBMODULE SYNC ---
+        # De-initialize to remove any local submodule configuration/caching.
+        git submodule deinit -f .
+        # Re-initialize from the .gitmodules file and force a fresh clone of the submodule content.
+        git submodule update --init --force --recursive
         
-        # --- LOGIC TO DETECT REAL CHANGES ---
+        # Default to false for first build where we can't diff
         _DEPS_CHANGED="false"
-
-        # 1. Check for changes in critical project files
-        if git diff --name-only HEAD~1 HEAD | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh'; then
-          echo "Critical dependency file changed."
+        
+        # Check if we can access previous commit
+        if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
+          # Check if dependency files OR the submodule reference itself has changed
+          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh|vouchervision_main'; then
+            _DEPS_CHANGED="true"
+          fi
+        else
+          # First commit or shallow clone - rebuild required
           _DEPS_CHANGED="true"
         fi
         
-        # 2. Check for changes WITHIN the submodule
-        # Go into the submodule directory
-        cd vouchervision_main
-        
-        # Get the current commit hash of the submodule checked out by the superproject
-        CURRENT_SUB_COMMIT=$(git rev-parse HEAD)
-        
-        # Fetch the latest from the submodule's origin to make sure we have all remote info
-        git fetch origin
-        
-        # Get the latest commit hash from the submodule's remote main/master branch
-        # Try 'main' first, then fall back to 'master'
-        LATEST_REMOTE_COMMIT=$(git rev-parse origin/main || git rev-parse origin/master)
-        
-        echo "Current submodule commit: $CURRENT_SUB_COMMIT"
-        echo "Latest remote submodule commit: $LATEST_REMOTE_COMMIT"
-        
-        # Compare the hashes. If they are different, a rebuild is needed.
-        if [ "$CURRENT_SUB_COMMIT" != "$LATEST_REMOTE_COMMIT" ]; then
-          echo "Submodule 'vouchervision_main' has new commits."
-          _DEPS_CHANGED="true"
-        fi
-        
-        # Go back to the root workspace
-        cd /workspace
-        
-        # Store the final result
+        # Store the result as a build artifact
         echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
-        echo "Final check - critical files changed: $_DEPS_CHANGED"
+        echo "Dependencies changed: $_DEPS_CHANGED"
 
-
-  # Step 2: Pull the latest image to use as cache (no changes needed)
+  # Step 2: Pull the latest image to use as cache
   - name: 'gcr.io/cloud-builders/docker'
     id: pull-cache
     entrypoint: 'bash'
@@ -69,13 +47,9 @@ steps:
     args:
       - '-c'
       - |
-        # Before building, ensure the submodule is updated to the absolute latest version
-        # This is crucial because the check above only DETECTS a change, it doesn't APPLY it.
-        git submodule update --init --recursive --remote
-      
         _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
         if [ "$_DEPS_CHANGED" = "true" ]; then
-          echo "Rebuilding container from scratch due to critical file changes..."
+          echo "Rebuilding container from scratch..."
           docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
         else
           echo "Performing incremental build..."
