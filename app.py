@@ -509,10 +509,6 @@ def authenticate_request(request):
     if auth_header.startswith('Bearer '):
         id_token = auth_header.split('Bearer ')[1]
     
-    # If not in header, check in query parameters
-    if not id_token:
-        id_token = request.args.get('token')
-    
     # If not in query, check in cookies
     if not id_token:
         id_token = request.cookies.get('auth_token')
