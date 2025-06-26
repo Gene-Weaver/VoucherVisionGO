@@ -1,52 +1,50 @@
 steps:
-  # Step 1: Ensure submodules are fully updated. This brings the latest files into the workspace.
-  - name: 'gcr.io/cloud-builders/git'
-    id: update-submodules
-    args: ['submodule', 'update', '--init', '--recursive', '--remote']
-
-  # Step 2: (DEBUG) List the contents of the custom_prompts directory to verify they are present.
-  - name: 'ubuntu'
-    id: list-prompts
-    args: ['ls', '-R', 'vouchervision_main/custom_prompts']
-
-  # Step 3: Check if a full rebuild is needed and write the decision to a file.
+  # Step 1: Check if we need to rebuild dependencies and store the result
   - name: 'gcr.io/cloud-builders/git'
     id: check-changes
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Ensure we have enough git history for a proper diff.
-        git fetch --unshallow || echo "Repo is not shallow."
-        
-        # Check if critical files in the main repo OR the submodule directory itself have changed.
-        # The 'if' statement checks the exit code of the 'grep' command.
-        if git diff --name-only HEAD~1 HEAD | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh|vouchervision_main'; then
-          echo "Critical file or submodule pointer changed. Forcing a full rebuild."
-          # Write "true" to the decision file.
-          echo "true" > /workspace/force_rebuild.txt
+        # Default to false for first build where we can't diff
+        _DEPS_CHANGED="false"
+        # Check if we can access previous commit
+        if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
+          # Check if dependency files changed between this commit and the previous one
+          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh'; then
+            _DEPS_CHANGED="true"
+          fi
         else
-          echo "No critical file changes detected. A cached build will be attempted."
-          # Write "false" to the decision file.
-          echo "false" > /workspace/force_rebuild.txt
+          # First commit or shallow clone - rebuild required
+          _DEPS_CHANGED="true"
         fi
+        # Store the result as a build artifact
+        echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
+        echo "Dependencies changed: $_DEPS_CHANGED"
 
-  # Step 4: Build the container with the correct caching strategy.
+  # Step 2: Pull the latest image to use as cache
+  - name: 'gcr.io/cloud-builders/docker'
+    id: pull-cache
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        # Try to pull the latest image to use as cache, ignore errors if it doesn't exist
+        docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
+
+  # Step 3: Build with appropriate caching strategy based on whether deps changed
   - name: 'gcr.io/cloud-builders/docker'
     id: build
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Read the decision from the previous step.
-        _FORCE_REBUILD=$(cat /workspace/force_rebuild.txt)
-        
-        if [ "$_FORCE_REBUILD" = "true" ]; then
-          echo "Building container from scratch (--no-cache)..."
+        _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
+        if [ "$_DEPS_CHANGED" = "true" ]; then
+          echo "Rebuilding container from scratch..."
           docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
         else
-          echo "Building container with cache from latest image..."
-          docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
+          echo "Performing incremental build..."
           docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
         fi
 
