@@ -29,6 +29,11 @@ steps:
         # Store the result as a build artifact
         echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
         echo "Dependencies changed: $_DEPS_CHANGED"
+  
+  # Step 2: (DEBUG) List the contents of the custom_prompts directory.
+  - name: 'ubuntu'
+    id: list-prompts
+    args: ['ls', '-R', 'vouchervision_main/custom_prompts']
 
   # Step 2: Pull the latest image to use as cache
   - name: 'gcr.io/cloud-builders/docker'
