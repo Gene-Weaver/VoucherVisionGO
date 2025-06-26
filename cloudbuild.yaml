@@ -11,7 +11,7 @@ steps:
         # Check if we can access previous commit
         if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
           # Check if dependency files changed between this commit and the previous one
-          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh'; then
+          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh|vouchervision_main/custom_prompts/'; then
             _DEPS_CHANGED="true"
           fi
         else
