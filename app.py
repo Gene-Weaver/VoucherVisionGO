@@ -2541,6 +2541,22 @@ def remove_admin():
         logger.error(f"Error removing admin: {str(e)}")
         return jsonify({'error': f'Failed to remove admin: {str(e)}'}), 500
 
+@app.route('/session-expired', methods=['GET'])
+def session_expired():
+    """Simple page that shows session expired message and login form"""
+    # Get Firebase configuration from Secret Manager
+    firebase_config = get_firebase_config()
+    
+    return render_template(
+        'session_expired.html',
+        api_key=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
+    )
+
 @app.route('/prompts', methods=['GET'])
 def list_prompts_api():
     """API endpoint to list all available prompt templates"""
