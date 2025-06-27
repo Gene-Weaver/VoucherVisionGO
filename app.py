@@ -164,10 +164,16 @@ def maintenance_mode_middleware(f):
         
         # Check if maintenance mode is enabled
         if get_maintenance_status():
-            return jsonify({
+            response = jsonify({
                 'error': 'VoucherVisionGO API Temporarily Unavailable',
                 'message': 'The API is temporarily down for maintenance, please try again later. Visit https://leafmachine.org/vouchervisiongo/ for more information.'
-            }), 503
+            })
+            response.status_code = 503
+            # Ensure CORS headers are added to maintenance responses
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key,Accept')
+            response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE')
+            return response
         
         return f(*args, **kwargs)
     return decorated_function
@@ -1224,12 +1230,14 @@ class VoucherVisionProcessor:
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 # CORS(app)  # This enables CORS for all routes
-CORS(app, resources={r"/*": {
-    "origins": "*",
-    "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-    "allow_headers": ["Content-Type", "Authorization", "X-API-Key"],
-    "supports_credentials": True 
-}})
+CORS(app, 
+     origins=["*"],  # Allow all origins, or specify: ["https://leafmachine.org", "http://localhost:8000"]
+     methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
+     allow_headers=["Content-Type", "Authorization", "X-API-Key", "Accept"],
+     supports_credentials=True,
+     send_wildcard=False,
+     vary_header=True
+)
 
 # Create a custom encoder that preserves order
 class OrderedJsonEncoder(json.JSONEncoder):
@@ -1269,6 +1277,16 @@ except Exception as e:
     logger.error(f"Failed to initialize application components: {str(e)}")
     raise
 
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = make_response()
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        response.headers.add('Access-Control-Allow-Headers', "Content-Type,Authorization,X-API-Key,Accept")
+        response.headers.add('Access-Control-Allow-Methods', "GET,POST,OPTIONS,PUT,DELETE")
+        response.headers.add('Access-Control-Max-Age', '3600')
+        return response
+
 @app.route('/auth-check', methods=['GET'])
 @maintenance_mode_middleware
 @authenticated_route
@@ -1286,13 +1304,13 @@ def auth_check():
 def process_image():
     """API endpoint to process an image with explicit CORS headers and automatic resizing"""
     # Handle preflight OPTIONS request
-    if request.method == 'OPTIONS':
-        response = make_response()
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-        response.headers.add('Access-Control-Allow-Methods', 'POST')
-        response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
-        return response
+    # if request.method == 'OPTIONS':
+    #     response = make_response()
+    #     response.headers.add('Access-Control-Allow-Origin', '*')
+    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+    #     response.headers.add('Access-Control-Allow-Methods', 'POST')
+    #     response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
+    #     return response
         
     # Now proceed with the actual request handling
     # Check if file is present in the request
@@ -1358,13 +1376,13 @@ def process_image():
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
     # Handle preflight OPTIONS request
-    if request.method == 'OPTIONS':
-        response = make_response()
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-        response.headers.add('Access-Control-Allow-Methods', 'POST')
-        response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
-        return response
+    # if request.method == 'OPTIONS':
+    #     response = make_response()
+    #     response.headers.add('Access-Control-Allow-Origin', '*')
+    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+    #     response.headers.add('Access-Control-Allow-Methods', 'POST')
+    #     response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
+    #     return response
     
     # Get user email
     user_email = get_user_email_from_request(request)
@@ -1695,17 +1713,9 @@ def get_usage_statistics():
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
     
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])
-@maintenance_mode_middleware  # Add this line to make it respect maintenance mode
+@maintenance_mode_middleware
 def cors_test():
     """Simple endpoint to test CORS configuration and maintenance status"""
-    if request.method == 'OPTIONS':
-        response = make_response()
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-        response.headers.add('Access-Control-Allow-Methods', 'GET')
-        response.headers.add('Access-Control-Max-Age', '3600')
-        return response
-        
     return jsonify({
         'status': 'ok',
         'cors': 'enabled',
