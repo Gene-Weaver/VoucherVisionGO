@@ -1,15 +1,15 @@
 # Use the official Python slim image as a parent image
 FROM python:3.12-slim
 
-# Step 1: Add ARG and LABEL to enable intelligent cache busting from cloudbuild.yaml
-ARG VCS_REF
-LABEL REPO_COMMIT_REF=$VCS_REF
+# Set environment variables
+ENV PORT=8080 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision"
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /app
 
-# Install system-level dependencies required by OpenCV and other libraries
-# Consolidate all apt-get installs into a single RUN layer for efficiency
+# Install system dependencies. This layer will be cached.
 RUN apt-get update && apt-get install -y \
     git \
     procps \
@@ -18,40 +18,19 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxrender1 \
     libxext6 \
-    # Clean up apt-get lists to reduce image size
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy the requirements file into the container
+# Copy only requirements.txt first. This layer is cached unless the file changes.
 COPY requirements.txt .
-
-# Install Python dependencies from the requirements file
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Pre-generate the Matplotlib font cache to prevent slow first-time startup
-RUN python -c "import matplotlib.pyplot as plt; plt.figure(); plt.close()"
-
-# Copy Git configuration files first (needed for submodule operations)
-COPY .git .git
-COPY .gitmodules .gitmodules
-
-# Initialize and update submodules inside the Docker container
-RUN git submodule update --init --recursive --force
-
-# Copy the rest of the application code
+# Copy the entire application source code from the build context.
+# The `cloudbuild.yaml` has already ensured the submodule is present and correct.
 COPY . .
-
-# Verify submodule content was properly initialized (debug step)
-RUN ls -la vouchervision_main/ && \
-    ls -la vouchervision_main/vouchervision/ || echo "Submodule content check failed"
 
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.sh
 
-# Set environment variables for the container
-ENV PORT=8080
-ENV PYTHONUNBUFFERED=1
-# Set the PYTHONPATH to ensure all modules are discoverable
-ENV PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision"
-
-# Specify the entrypoint for the container
+# Run the application
 ENTRYPOINT ["/app/entrypoint.sh"]

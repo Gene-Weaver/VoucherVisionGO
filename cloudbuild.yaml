@@ -1,75 +1,45 @@
 steps:
-  # Step 1: Check if we need to rebuild dependencies and store the result
+  # Step 1: Check ONLY for dependency changes.
   - name: 'gcr.io/cloud-builders/git'
     id: check-changes
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # --- NEW, MORE AGGRESSIVE SUBMODULE SYNC ---
-        # De-initialize to remove any local submodule configuration/caching.
-        git submodule deinit -f .
-        # Re-initialize from the .gitmodules file and force a fresh clone of the submodule content.
-        git submodule update --init --force --recursive
-        
-        # Default to false for first build where we can't diff
+        # Ensure we have git history for the diff
+        git fetch --unshallow || echo "Repo is not shallow."
+        # Default to a fast build
         _DEPS_CHANGED="false"
-        
-        # Check if we can access previous commit
-        if git rev-parse --verify ${COMMIT_SHA}~1 >/dev/null 2>&1; then
-          # Check if dependency files OR the submodule reference itself has changed
-          if git diff --name-only ${COMMIT_SHA}~1 ${COMMIT_SHA} | grep -q -E 'requirements.txt|Dockerfile|entrypoint.sh|vouchervision_main'; then
-            _DEPS_CHANGED="true"
-          fi
-        else
-          # First commit or shallow clone - rebuild required
+        # Check if critical dependency files changed since the last commit
+        if git diff --name-only HEAD~1 HEAD | grep -q -E '^(requirements\.txt|Dockerfile|entrypoint\.sh)$'; then
           _DEPS_CHANGED="true"
         fi
-        
-        # Store the result as a build artifact
-        echo $_DEPS_CHANGED > /workspace/_deps_changed.txt
-        echo "Dependencies changed: $_DEPS_CHANGED"
-  
-  # Step 2: (DEBUG) List the contents of the custom_prompts directory.
-  - name: 'ubuntu'
-    id: list-prompts
-    args: ['ls', '-R', 'vouchervision_main/custom_prompts']
+        # Write the decision to a file for the build step
+        echo "$_DEPS_CHANGED" > /workspace/_deps_changed.txt
+        echo "Critical dependencies changed: $_DEPS_CHANGED"
 
-  # Step 2: Pull the latest image to use as cache
+  # Step 2: Ensure submodules are fully initialized and updated in the workspace.
+  # This is crucial so the COPY command in the Dockerfile gets the right files.
+  - name: 'gcr.io/cloud-builders/git'
+    id: update-submodules
+    args: ['submodule', 'update', '--init', '--recursive']
+
+  # Step 3: Build the Docker image using the caching strategy from Step 1.
   - name: 'gcr.io/cloud-builders/docker'
-    id: pull-cache
+    id: build
     entrypoint: 'bash'
     args:
       - '-c'
       - |
-        # Try to pull the latest image to use as cache, ignore errors if it doesn't exist
-        docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
-
-  # Step 3: Build with appropriate caching strategy based on whether deps changed
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   id: build
-  #   entrypoint: 'bash'
-  #   args:
-  #     - '-c'
-  #     - |
-  #       _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
-  #       if [ "$_DEPS_CHANGED" = "true" ]; then
-  #         echo "Rebuilding container from scratch..."
-  #         docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
-  #       else
-  #         echo "Performing incremental build..."
-  #         docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
-  #       fi
-  - name: 'gcr.io/cloud-builders/docker'
-    id: build
-    args:
-      - 'build'
-      - '-t'
-      - 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}'
-      # Always force a rebuild if the superproject commit changes (which it does on submodule update)
-      - '--build-arg'
-      - 'VCS_REF=${COMMIT_SHA}'
-      - '.'
+        _DEPS_CHANGED=$(cat /workspace/_deps_changed.txt)
+        if [ "$_DEPS_CHANGED" = "true" ]; then
+          echo "Rebuilding container from scratch due to dependency change..."
+          docker build --no-cache -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
+        else
+          echo "Performing incremental build with cache..."
+          docker pull us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest || true
+          docker build --cache-from us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest -t us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA} .
+        fi
 
   # Step 4: Push the container image to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
