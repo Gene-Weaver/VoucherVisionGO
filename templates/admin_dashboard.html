@@ -43,6 +43,7 @@
           <button class="tab-button" data-tab="api-keys">API Keys</button>
           <button class="tab-button" data-tab="admins">Manage Admins</button>
           <button class="tab-button" data-tab="usage-stats">Usage Statistics</button>
+          <button class="tab-button" data-tab="maintenance">Maintenance</button>
         </div>
         
         <!-- User Applications Tab -->
@@ -174,6 +175,56 @@
             <!-- Pagination buttons will be generated here -->
           </div>
         </div>
+
+        <!-- Maintenance Tab -->
+        <div id="maintenance" class="tab-content">
+          <div class="maintenance-container">
+            <h3>System Maintenance</h3>
+            <p>Use this panel to control the maintenance mode of the VoucherVision API. When maintenance mode is enabled, all API requests will receive a 503 error response.</p>
+            
+            <!-- Loading indicator -->
+            <div id="maintenance-loading" class="loading" style="display: none;">
+              Loading maintenance status...
+            </div>
+            
+            <!-- Error message -->
+            <div id="maintenance-error" class="alert alert-danger" style="display: none;"></div>
+            
+            <!-- Success message -->
+            <div id="maintenance-success" class="alert alert-success" style="display: none;"></div>
+            
+            <!-- Maintenance toggle container -->
+            <div id="maintenance-toggle-container" class="maintenance-toggle-container" style="display: none;">
+              <div class="maintenance-status-card">
+                <div class="maintenance-status-header">
+                  <h4>API Status: <span id="maintenance-status-text" class="status-disabled">Disabled</span></h4>
+                </div>
+                
+                <div class="maintenance-toggle-section">
+                  <div class="toggle-container">
+                    <label class="toggle-label">
+                      <input type="checkbox" id="maintenance-toggle" class="maintenance-toggle maintenance-disabled">
+                      <span class="toggle-slider"></span>
+                    </label>
+                    <span class="toggle-text">Maintenance Mode</span>
+                  </div>
+                </div>
+                
+                <div class="maintenance-description">
+                  <p id="maintenance-description">The API is currently operational and accepting requests.</p>
+                </div>
+                
+                <div class="maintenance-warning">
+                  <div class="warning-box">
+                    <strong>⚠️ Warning:</strong> Enabling maintenance mode will immediately block all API requests. 
+                    Users will receive a 503 error response. Admin functions will remain accessible.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     
@@ -192,5 +243,6 @@
     <script src="{{ url_for('static', filename='js/admin/api_keys.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/usage_stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/maintenance.js') }}"></script>
   </body>
 </html>

@@ -129,7 +129,42 @@ except Exception as e:
 
 # Initialize Firestore client
 db = firestore.client()
+# Maintenance mode state - shared across all requests
+maintenance_mode = {
+    'enabled': False,
+    'lock': threading.Lock()
+}
 
+def get_maintenance_status():
+    """Get current maintenance status"""
+    with maintenance_mode['lock']:
+        return maintenance_mode['enabled']
+
+def set_maintenance_status(enabled):
+    """Set maintenance status"""
+    with maintenance_mode['lock']:
+        maintenance_mode['enabled'] = enabled
+        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'}")
+
+def maintenance_mode_middleware(f):
+    """Decorator to check maintenance mode before executing route"""
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Skip maintenance check for admin routes and health checks
+        if (request.endpoint and 
+            (request.endpoint.startswith('admin') or 
+             request.endpoint in ['health_check', 'cors_test', 'get_maintenance_status', 'set_maintenance_mode'])):
+            return f(*args, **kwargs)
+        
+        # Check if maintenance mode is enabled
+        if get_maintenance_status():
+            return jsonify({
+                'error': 'VoucherVisionGO API Temporarily Unavailable',
+                'message': 'The API is temporarily down for maintenance, please try again later. Visit https://leafmachine.org/vouchervisiongo/ for more information.'
+            }), 503
+        
+        return f(*args, **kwargs)
+    return decorated_function
 
 def validate_api_key(api_key):
     """Validate an API key against the Firestore database """
@@ -1029,6 +1064,7 @@ except Exception as e:
     raise
 
 @app.route('/auth-check', methods=['GET'])
+@maintenance_mode_middleware
 @authenticated_route
 def auth_check():
     """Simple endpoint to verify authentication status"""
@@ -1039,6 +1075,7 @@ def auth_check():
     }), 200
     
 @app.route('/process', methods=['POST', 'OPTIONS'])
+@maintenance_mode_middleware
 @authenticated_route
 def process_image():
     """API endpoint to process an image with explicit CORS headers"""
@@ -1100,6 +1137,7 @@ def process_image():
     return response
 
 @app.route('/process-url', methods=['POST', 'OPTIONS'])
+@maintenance_mode_middleware
 @authenticated_route
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior"""
@@ -3024,6 +3062,74 @@ def revoke_api_key(key_id):
     except Exception as e:
         logger.error(f"Error revoking API key: {str(e)}")
         return jsonify({'error': f'Failed to revoke API key: {str(e)}'}), 500
+    
+@app.route('/admin/maintenance-status', methods=['GET'])
+@authenticated_route
+def get_maintenance_status_endpoint():
+    """Get current maintenance status (admin only)"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    admin_email = user.get('email')
+    
+    # Check if the user is an admin
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+    
+    try:
+        return jsonify({
+            'status': 'success',
+            'maintenance_enabled': get_maintenance_status()
+        })
+    except Exception as e:
+        logger.error(f"Error getting maintenance status: {str(e)}")
+        return jsonify({'error': f'Failed to get maintenance status: {str(e)}'}), 500
+
+@app.route('/admin/maintenance-mode', methods=['POST'])
+@authenticated_route
+def set_maintenance_mode_endpoint():
+    """Set maintenance mode status (admin only)"""
+    # Get the authenticated user from the token
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+    
+    admin_email = user.get('email')
+    
+    # Check if the user is an admin
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+    
+    try:
+        # Get data from request
+        data = request.get_json() or {}
+        enabled = data.get('enabled', False)
+        
+        # Validate the input
+        if not isinstance(enabled, bool):
+            return jsonify({'error': 'enabled must be a boolean value'}), 400
+        
+        # Set maintenance mode
+        set_maintenance_status(enabled)
+        
+        # Log the action
+        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'} by {admin_email}")
+        
+        return jsonify({
+            'status': 'success',
+            'message': f"Maintenance mode {'enabled' if enabled else 'disabled'}",
+            'maintenance_enabled': enabled
+        })
+        
+    except Exception as e:
+        logger.error(f"Error setting maintenance mode: {str(e)}")
+        return jsonify({'error': f'Failed to set maintenance mode: {str(e)}'}), 500
+
+
 
 
 if __name__ == '__main__':

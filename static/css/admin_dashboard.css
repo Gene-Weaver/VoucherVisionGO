@@ -340,3 +340,134 @@ body {
   .details-table th {
     background-color: #f5f5f5;
   }
+
+  /* Maintenance Tab Styles */
+  .maintenance-container {
+    max-width: 800px;
+  }
+
+  .maintenance-status-card {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+  }
+
+  .maintenance-status-header {
+    margin-bottom: 20px;
+  }
+
+  .maintenance-status-header h4 {
+    margin: 0;
+    color: #333;
+  }
+
+  .status-enabled {
+    color: #dc3545;
+    font-weight: bold;
+  }
+
+  .status-disabled {
+    color: #28a745;
+    font-weight: bold;
+  }
+
+  .maintenance-toggle-section {
+    margin-bottom: 20px;
+  }
+
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 0;
+  }
+
+  .maintenance-toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+  }
+
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  .maintenance-toggle:checked + .toggle-slider {
+    background-color: #dc3545;
+  }
+
+  .maintenance-toggle:checked + .toggle-slider:before {
+    transform: translateX(26px);
+  }
+
+  .maintenance-toggle.maintenance-disabled + .toggle-slider {
+    background-color: #28a745;
+  }
+
+  .maintenance-toggle.maintenance-enabled + .toggle-slider {
+    background-color: #dc3545;
+  }
+
+  .toggle-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .maintenance-description {
+    margin-bottom: 20px;
+  }
+
+  .maintenance-description p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+
+  .warning-box {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 15px;
+    color: #856404;
+    font-size: 14px;
+  }
+
+  .warning-box strong {
+    color: #721c24;
+  }
+
+  /* Disable animation when toggle is disabled */
+  .maintenance-toggle:disabled + .toggle-slider {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }

@@ -141,6 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'admins':
         loadAdmins();
         break;
+      case 'usage-stats':
+        loadUsageStatistics();
+        break;
+      case 'maintenance':  // Add this case
+        loadMaintenanceStatus();
+        break;
     }
   }
 
