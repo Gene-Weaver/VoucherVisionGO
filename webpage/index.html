@@ -1128,5 +1128,337 @@ http://localhost:8000/index.html
     </script>
     <!-- END: Embedded Mapbox Initialization Script -->
 
+    <script>
+    // API Status Checker - Works without authentication
+    (function() {
+        let statusCheckInterval;
+        let isCheckingStatus = false;
+        
+        function createStatusIndicator() {
+            // Create the status indicator container
+            const statusContainer = document.createElement('div');
+            statusContainer.id = 'api-status-indicator';
+            statusContainer.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                padding: 8px 12px;
+                font-size: 12px;
+                font-weight: 500;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+                max-width: 200px;
+                text-align: center;
+            `;
+            
+            // Insert at the beginning of body
+            document.body.insertBefore(statusContainer, document.body.firstChild);
+            
+            return statusContainer;
+        }
+        
+        function updateStatusDisplay(isAvailable, isChecking = false) {
+            const container = document.getElementById('api-status-indicator');
+            if (!container) return;
+            
+            if (isChecking) {
+                container.innerHTML = '🔍 <span style="color: #666;">Checking API...</span>';
+                container.style.borderColor = '#ccc';
+                return;
+            }
+            
+            if (isAvailable) {
+                container.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
+                container.style.borderColor = '#4CAF50';
+                container.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
+            } else {
+                container.innerHTML = '🚧 <span style="color: #FF9800;">VVGO API: Maintenance</span>';
+                container.style.borderColor = '#FF9800';
+                container.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
+            }
+        }
+        
+        async function checkAPIStatus() {
+            if (isCheckingStatus) return; // Prevent multiple simultaneous checks
+            
+            isCheckingStatus = true;
+            updateStatusDisplay(false, true);
+            
+            try {
+                // Use the health endpoint which should bypass maintenance mode
+                const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('API Health Check:', data);
+                    
+                    // If health endpoint is available, try a simple CORS test to see if maintenance is active
+                    // The health endpoint should always work, but other endpoints might return 503
+                    const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    if (corsResponse.status === 503) {
+                        // Maintenance mode is active
+                        updateStatusDisplay(false);
+                        console.log('API Status: Maintenance mode detected');
+                    } else if (corsResponse.ok) {
+                        // API is fully available
+                        updateStatusDisplay(true);
+                        console.log('API Status: Available');
+                    } else {
+                        // Some other error, assume available but log it
+                        updateStatusDisplay(true);
+                        console.log('API Status: Available (with warnings)', corsResponse.status);
+                    }
+                } else {
+                    // Health endpoint failed, API might be completely down
+                    updateStatusDisplay(false);
+                    console.log('API Status: Health check failed', response.status);
+                }
+            } catch (error) {
+                // Network error or CORS error, assume API is down
+                updateStatusDisplay(false);
+                console.log('API Status: Network error', error.message);
+            } finally {
+                isCheckingStatus = false;
+            }
+        }
+        
+        function startStatusMonitoring() {
+            // Check immediately when page loads
+            setTimeout(checkAPIStatus, 1000);
+            
+            // Then check every 30 seconds
+            statusCheckInterval = setInterval(checkAPIStatus, 30000);
+            
+            // Also check when the page becomes visible again (user switches back to tab)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden && !isCheckingStatus) {
+                    setTimeout(checkAPIStatus, 500);
+                }
+            });
+        }
+        
+        function stopStatusMonitoring() {
+            if (statusCheckInterval) {
+                clearInterval(statusCheckInterval);
+                statusCheckInterval = null;
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                createStatusIndicator();
+                startStatusMonitoring();
+            });
+        } else {
+            // DOM already loaded
+            createStatusIndicator();
+            startStatusMonitoring();
+        }
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', stopStatusMonitoring);
+        
+        // Expose functions for manual control if needed
+        window.VVGOStatus = {
+            check: checkAPIStatus,
+            start: startStatusMonitoring,
+            stop: stopStatusMonitoring
+        };
+    })();
+    </script>
+
+    <!-- API Status Indicator Script -->
+    <script>
+    // API Status Checker - Works without authentication
+    (function() {
+        let statusCheckInterval;
+        let isCheckingStatus = false;
+        
+        function createStatusIndicator() {
+            // Create the status indicator container
+            const statusContainer = document.createElement('div');
+            statusContainer.id = 'api-status-indicator';
+            statusContainer.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(255, 255, 255, 0.95);
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                padding: 8px 12px;
+                font-size: 12px;
+                font-weight: 500;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+                max-width: 200px;
+                text-align: center;
+                cursor: pointer;
+            `;
+            
+            // Add click handler to manually refresh status
+            statusContainer.addEventListener('click', function() {
+                if (!isCheckingStatus) {
+                    checkAPIStatus();
+                }
+            });
+            
+            statusContainer.title = 'Click to refresh API status';
+            
+            // Insert at the beginning of body
+            document.body.insertBefore(statusContainer, document.body.firstChild);
+            
+            return statusContainer;
+        }
+        
+        function updateStatusDisplay(isAvailable, isChecking = false) {
+            const container = document.getElementById('api-status-indicator');
+            if (!container) return;
+            
+            if (isChecking) {
+                container.innerHTML = '🔍 <span style="color: #666;">Checking API...</span>';
+                container.style.borderColor = '#ccc';
+                container.style.backgroundColor = 'rgba(248, 249, 250, 0.95)';
+                return;
+            }
+            
+            if (isAvailable) {
+                container.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
+                container.style.borderColor = '#4CAF50';
+                container.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
+            } else {
+                container.innerHTML = '🚧 <span style="color: #FF9800;">VVGO API: Down for Maintenance</span>';
+                container.style.borderColor = '#FF9800';
+                container.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
+            }
+        }
+        
+        async function checkAPIStatus() {
+            if (isCheckingStatus) return; // Prevent multiple simultaneous checks
+            
+            isCheckingStatus = true;
+            updateStatusDisplay(false, true);
+            
+            try {
+                // First check the health endpoint (should always work)
+                const healthResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (healthResponse.ok) {
+                    const healthData = await healthResponse.json();
+                    console.log('API Health Check:', healthData);
+                    
+                    // Check if maintenance mode is reported in health response
+                    if (healthData.maintenance_mode === true) {
+                        updateStatusDisplay(false);
+                        console.log('API Status: Maintenance mode active (from health check)');
+                        return;
+                    }
+                    
+                    // Double-check with cors-test endpoint which respects maintenance mode
+                    const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache'
+                    });
+                    
+                    if (corsResponse.status === 503) {
+                        // Maintenance mode is active
+                        updateStatusDisplay(false);
+                        console.log('API Status: Maintenance mode detected (503 from cors-test)');
+                    } else if (corsResponse.ok) {
+                        // API is fully available
+                        updateStatusDisplay(true);
+                        console.log('API Status: Available');
+                    } else {
+                        // Some other error, but health is OK so assume available
+                        updateStatusDisplay(true);
+                        console.log('API Status: Available (cors-test returned', corsResponse.status, ')');
+                    }
+                } else {
+                    // Health endpoint failed, API might be completely down
+                    updateStatusDisplay(false);
+                    console.log('API Status: Health check failed', healthResponse.status);
+                }
+            } catch (error) {
+                // Network error or CORS error, assume API is down
+                updateStatusDisplay(false);
+                console.log('API Status: Network error', error.message);
+            } finally {
+                isCheckingStatus = false;
+            }
+        }
+        
+        function startStatusMonitoring() {
+            // Check immediately when page loads (with a small delay)
+            setTimeout(checkAPIStatus, 1500);
+            
+            // Then check every 30 seconds
+            statusCheckInterval = setInterval(checkAPIStatus, 30000);
+            
+            // Also check when the page becomes visible again (user switches back to tab)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden && !isCheckingStatus) {
+                    setTimeout(checkAPIStatus, 500);
+                }
+            });
+        }
+        
+        function stopStatusMonitoring() {
+            if (statusCheckInterval) {
+                clearInterval(statusCheckInterval);
+                statusCheckInterval = null;
+            }
+        }
+        
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                createStatusIndicator();
+                startStatusMonitoring();
+            });
+        } else {
+            // DOM already loaded
+            createStatusIndicator();
+            startStatusMonitoring();
+        }
+        
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', stopStatusMonitoring);
+        
+        // Expose functions for manual control if needed
+        window.VVGOStatus = {
+            check: checkAPIStatus,
+            start: startStatusMonitoring,
+            stop: stopStatusMonitoring
+        };
+    })();
+    </script>
+
 </body>
 </html>

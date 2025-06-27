@@ -150,10 +150,10 @@ def maintenance_mode_middleware(f):
     """Decorator to check maintenance mode before executing route"""
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        # Skip maintenance check for admin routes and health checks
+        # Skip maintenance check for admin routes, health checks, and maintenance status endpoints
         if (request.endpoint and 
             (request.endpoint.startswith('admin') or 
-             request.endpoint in ['health_check', 'cors_test', 'get_maintenance_status', 'set_maintenance_mode'])):
+             request.endpoint in ['health_check', 'get_maintenance_status_endpoint', 'set_maintenance_mode_endpoint'])):
             return f(*args, **kwargs)
         
         # Check if maintenance mode is enabled
@@ -1512,8 +1512,9 @@ def get_usage_statistics():
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
     
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])
+@maintenance_mode_middleware  # Add this line to make it respect maintenance mode
 def cors_test():
-    """Simple endpoint to test CORS configuration"""
+    """Simple endpoint to test CORS configuration and maintenance status"""
     if request.method == 'OPTIONS':
         response = make_response()
         response.headers.add('Access-Control-Allow-Origin', '*')
@@ -1525,7 +1526,8 @@ def cors_test():
     return jsonify({
         'status': 'ok',
         'cors': 'enabled',
-        'message': 'If you can see this response in your browser or JavaScript app, CORS is working correctly.'
+        'message': 'If you can see this response in your browser or JavaScript app, CORS is working correctly.',
+        'maintenance_mode': False  # If this endpoint responds, maintenance is not active
     })
 
 @app.route('/test_json_order', methods=['GET'])
@@ -1542,16 +1544,21 @@ def test_json_order():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    """Health check endpoint """
+    """Health check endpoint that bypasses maintenance mode and reports status"""
     # Get the active request count from the processor
     active_requests = app.config['processor'].throttler.get_active_count()
     max_requests = app.config['processor'].throttler.max_concurrent
+    
+    # Check maintenance status
+    maintenance_status = get_maintenance_status()
     
     return jsonify({
         'status': 'ok',
         'active_requests': active_requests,
         'max_concurrent_requests': max_requests,
-        'server_load': f"{(active_requests / max_requests) * 100:.1f}%"
+        'server_load': f"{(active_requests / max_requests) * 100:.1f}%",
+        'maintenance_mode': maintenance_status,
+        'api_status': 'maintenance' if maintenance_status else 'available'
     }), 200
 
 @app.route('/auth-success', methods=['GET'])
