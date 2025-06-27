@@ -4,6 +4,12 @@ import json
 import datetime
 import tempfile
 import threading
+import math
+import io
+import requests
+from io import BytesIO
+from werkzeug.datastructures import FileStorage
+from PIL import Image
 from flask import Flask, request, jsonify, redirect, make_response, render_template
 from flask_cors import CORS
 import logging
@@ -294,6 +300,206 @@ def update_usage_statistics(user_email, engines=None, llm_model_name=None):
         logger.info(f"Updated usage statistics for {user_email}")
     except Exception as e:
         logger.error(f"Error updating usage statistics: {str(e)}")
+
+def resize_image_to_max_pixels(image, max_pixels=5200000):
+    """
+    Resize an image to have no more than max_pixels while maintaining aspect ratio.
+    
+    Args:
+        image (PIL.Image): The image to resize
+        max_pixels (int): Maximum number of pixels allowed (default: 5,000,000 = 5 megapixels)
+    
+    Returns:
+        PIL.Image: Resized image or original image if no resize needed
+    """
+    # Get current dimensions
+    width, height = image.size
+    current_pixels = width * height
+    
+    # If image is already within limits, return as-is
+    if current_pixels <= max_pixels:
+        return image
+    
+    # Calculate the scale factor needed
+    scale_factor = math.sqrt(max_pixels / current_pixels)
+    
+    # Calculate new dimensions
+    new_width = int(width * scale_factor)
+    new_height = int(height * scale_factor)
+    
+    # Ensure we don't exceed the pixel limit due to rounding
+    while new_width * new_height > max_pixels:
+        if new_width > new_height:
+            new_width -= 1
+        else:
+            new_height -= 1
+    
+    # Resize the image using high-quality resampling
+    resized_image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
+    
+    logger.info(f"Image resized from {width}x{height} ({current_pixels:,} pixels) to {new_width}x{new_height} ({new_width * new_height:,} pixels)")
+    
+    return resized_image
+
+def process_uploaded_file_with_resize(file, max_pixels=5200000):
+    """
+    Process an uploaded file, resize if necessary, and return a new file-like object.
+    
+    Args:
+        file: Flask uploaded file object
+        max_pixels (int): Maximum number of pixels allowed
+    
+    Returns:
+        FileStorage: New file object with resized image, or original if no resize needed
+    """
+    try:
+        # Open the image
+        image = Image.open(file.stream)
+        original_filename = file.filename
+        
+        # Check if resize is needed
+        width, height = image.size
+        current_pixels = width * height
+        
+        if current_pixels <= max_pixels:
+            # No resize needed, reset stream position and return original
+            file.stream.seek(0)
+            return file
+        
+        # Resize the image
+        resized_image = resize_image_to_max_pixels(image, max_pixels)
+        
+        # Save resized image to bytes
+        img_byte_array = io.BytesIO()
+        
+        # Determine format - default to JPEG for compatibility
+        image_format = 'JPEG'
+        if original_filename and original_filename.lower().endswith('.png'):
+            image_format = 'PNG'
+        elif original_filename and original_filename.lower().endswith(('.jpg', '.jpeg')):
+            image_format = 'JPEG'
+        
+        # Convert to RGB if necessary for JPEG
+        if image_format == 'JPEG' and resized_image.mode in ('RGBA', 'LA', 'P'):
+            # Create white background for transparency
+            background = Image.new('RGB', resized_image.size, (255, 255, 255))
+            if resized_image.mode == 'P':
+                resized_image = resized_image.convert('RGBA')
+            background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
+            resized_image = background
+        
+        # Save with high quality
+        save_kwargs = {'format': image_format}
+        if image_format == 'JPEG':
+            save_kwargs['quality'] = 95
+            save_kwargs['optimize'] = True
+        
+        resized_image.save(img_byte_array, **save_kwargs)
+        img_byte_array.seek(0)
+        
+        # Create new FileStorage object
+        from werkzeug.datastructures import FileStorage
+        
+        # Update filename if format changed
+        if image_format == 'JPEG' and original_filename and not original_filename.lower().endswith(('.jpg', '.jpeg')):
+            name_without_ext = os.path.splitext(original_filename)[0]
+            original_filename = f"{name_without_ext}.jpg"
+        
+        resized_file = FileStorage(
+            stream=img_byte_array,
+            filename=original_filename,
+            content_type=f'image/{image_format.lower()}'
+        )
+        
+        return resized_file
+        
+    except Exception as e:
+        logger.error(f"Error processing image for resize: {e}")
+        # If there's an error, return the original file
+        file.stream.seek(0)
+        return file
+
+def process_url_image_with_resize(image_url, max_pixels=5000000):
+    """
+    Download and resize an image from URL if necessary.
+    
+    Args:
+        image_url (str): URL of the image
+        max_pixels (int): Maximum number of pixels allowed
+    
+    Returns:
+        tuple: (FileStorage object, filename)
+    """
+    try:        
+        # Download the image
+        response = requests.get(image_url, stream=True, timeout=30)
+        response.raise_for_status()
+        
+        # Get filename from URL
+        filename = extract_filename_from_url(image_url)
+        
+        # Open image from response content
+        image = Image.open(io.BytesIO(response.content))
+        
+        # Check if resize is needed
+        width, height = image.size
+        current_pixels = width * height
+        
+        if current_pixels <= max_pixels:
+            # No resize needed, create FileStorage from original content
+            file_obj = FileStorage(
+                stream=io.BytesIO(response.content),
+                filename=filename,
+                content_type=response.headers.get('Content-Type', 'image/jpeg')
+            )
+            return file_obj, filename
+        
+        # Resize the image
+        resized_image = resize_image_to_max_pixels(image, max_pixels)
+        
+        # Save resized image to bytes
+        img_byte_array = io.BytesIO()
+        
+        # Determine format
+        image_format = 'JPEG'
+        if filename and filename.lower().endswith('.png'):
+            image_format = 'PNG'
+        
+        # Convert to RGB if necessary for JPEG
+        if image_format == 'JPEG' and resized_image.mode in ('RGBA', 'LA', 'P'):
+            background = Image.new('RGB', resized_image.size, (255, 255, 255))
+            if resized_image.mode == 'P':
+                resized_image = resized_image.convert('RGBA')
+            background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
+            resized_image = background
+        
+        # Save with high quality
+        save_kwargs = {'format': image_format}
+        if image_format == 'JPEG':
+            save_kwargs['quality'] = 95
+            save_kwargs['optimize'] = True
+        
+        resized_image.save(img_byte_array, **save_kwargs)
+        img_byte_array.seek(0)
+        
+        # Update filename if format changed
+        if image_format == 'JPEG' and filename and not filename.lower().endswith(('.jpg', '.jpeg')):
+            name_without_ext = os.path.splitext(filename)[0]
+            filename = f"{name_without_ext}.jpg"
+        
+        # Create FileStorage object
+        file_obj = FileStorage(
+            stream=img_byte_array,
+            filename=filename,
+            content_type=f'image/{image_format.lower()}'
+        )
+        
+        return file_obj, filename
+        
+    except Exception as e:
+        logger.error(f"Error processing URL image for resize: {e}")
+        raise
+
 
 class SimpleEmailSender:
     """
@@ -1078,7 +1284,7 @@ def auth_check():
 @maintenance_mode_middleware
 @authenticated_route
 def process_image():
-    """API endpoint to process an image with explicit CORS headers"""
+    """API endpoint to process an image with explicit CORS headers and automatic resizing"""
     # Handle preflight OPTIONS request
     if request.method == 'OPTIONS':
         response = make_response()
@@ -1099,6 +1305,16 @@ def process_image():
     user_email = get_user_email_from_request(request)
 
     file = request.files['file']
+    
+    # NEW: Resize the image if it's too large (>5 megapixels)
+    try:
+        file = process_uploaded_file_with_resize(file, max_pixels=5200000)
+        logger.info(f"Image processed and resized if necessary for user: {user_email}")
+    except Exception as e:
+        logger.error(f"Error processing image for resize: {e}")
+        response = make_response(jsonify({'error': f'Error processing image: {str(e)}'}), 500)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     
     # Get engine options from request if specified
     engine_options = request.form.getlist('engines') if 'engines' in request.form else None
@@ -1127,7 +1343,7 @@ def process_image():
     
     # If processing was successful, update usage statistics
     if status_code == 200:
-        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name) ########################################################## also log attempts #TODO
+        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
     
     # Create response with CORS headers
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -1140,7 +1356,7 @@ def process_image():
 @maintenance_mode_middleware
 @authenticated_route
 def process_image_by_url():
-    """API endpoint to process an image from a URL with FormData, matching /process behavior"""
+    """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
     # Handle preflight OPTIONS request
     if request.method == 'OPTIONS':
         response = make_response()
@@ -1186,41 +1402,9 @@ def process_image_by_url():
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     try:
-        import tempfile
-        import requests
-        from werkzeug.utils import secure_filename
-        import os
-        from io import BytesIO
-        from werkzeug.datastructures import FileStorage
-
-        # Get filename from URL
-        filename = extract_filename_from_url(image_url)
-
-        # Download the image
-        image_response = requests.get(image_url, stream=True)
-        if image_response.status_code != 200:
-            error_response = make_response(jsonify({
-                'error': f'Failed to download image from URL: {image_response.status_code}'
-            }), 400)
-            error_response.headers.add('Access-Control-Allow-Origin', '*')
-            return error_response
-
-        # Save to temp file
-        temp_dir = tempfile.mkdtemp()
-        file_path = os.path.join(temp_dir, secure_filename(filename))
-
-        with open(file_path, 'wb') as f:
-            for chunk in image_response.iter_content(chunk_size=8192):
-                f.write(chunk)
-
-        with open(file_path, 'rb') as f:
-            file_content = f.read()
-
-        file_obj = FileStorage(
-            stream=BytesIO(file_content),
-            filename=filename,
-            content_type=image_response.headers.get('Content-Type', 'image/jpeg')
-        )
+        # NEW: Process and resize the URL image if necessary
+        file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
+        logger.info(f"URL image processed and resized if necessary for user: {user_email}")
 
         # Process image
         results, status_code = app.config['processor'].process_image_request(
@@ -1237,13 +1421,6 @@ def process_image_by_url():
         if status_code == 200:
             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
 
-        # Clean temp file
-        try:
-            os.remove(file_path)
-            os.rmdir(temp_dir)
-        except:
-            pass
-
         # Return JSON response
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
@@ -1255,12 +1432,12 @@ def process_image_by_url():
         error_response = make_response(jsonify({'error': str(e)}), 500)
         error_response.headers.add('Access-Control-Allow-Origin', '*')
         return error_response
-
-
+    
 # @app.route('/process-url', methods=['POST', 'OPTIONS'])
+# @maintenance_mode_middleware
 # @authenticated_route
 # def process_image_by_url():
-#     """API endpoint to process an image from a URL with CORS support"""
+#     """API endpoint to process an image from a URL with FormData, matching /process behavior"""
 #     # Handle preflight OPTIONS request
 #     if request.method == 'OPTIONS':
 #         response = make_response()
@@ -1270,43 +1447,45 @@ def process_image_by_url():
 #         response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
 #         return response
     
-#     # Get user email using the new function
+#     # Get user email
 #     user_email = get_user_email_from_request(request)
-    
-#     # Get JSON data from request
-#     data = request.get_json()
-    
-#     if not data or 'image_url' not in data:
-#         response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-#         response.headers.add('Access-Control-Allow-Origin', '*')
-#         return response
-    
-#     image_url = data['image_url']
-    
-#     # Get engine options from request if specified
-#     engines = data.get('engines') if 'engines' in data else None
 
-#     # Get prompt from request if specified, otherwise None (use default)
-#     prompt = data.get('prompt')
-
-#     # Get ocr_only flag if specified
-#     ocr_only = data.get('ocr_only', False)
-
-#     # Get LLM model from request if specified
-#     llm_model_name = data.get('llm_model')
+#     # Check content type to determine how to process the request
+#     content_type = request.headers.get('Content-Type', '').lower()
     
+#     # Handle JSON request
+#     if 'application/json' in content_type:
+#         data = request.get_json()
+#         if not data or 'image_url' not in data:
+#             response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+#             response.headers.add('Access-Control-Allow-Origin', '*')
+#             return response
+            
+#         image_url = data.get('image_url')
+#         engine_options = data.get('engines')
+#         prompt = data.get('prompt')
+#         ocr_only = data.get('ocr_only', False)
+#         include_wfo = data.get('include_wfo', False)
+#         llm_model_name = data.get('llm_model')
+    
+#     # Handle form data request
+#     else:
+#         if 'image_url' not in request.form:
+#             response = make_response(jsonify({'error': 'No image URL provided'}), 400)
+#             response.headers.add('Access-Control-Allow-Origin', '*')
+#             return response
+
+#         image_url = request.form.get('image_url')
+#         engine_options = request.form.getlist('engines') if 'engines' in request.form else None
+#         prompt = request.form.get('prompt') if 'prompt' in request.form else None
+#         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+#         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
+#         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+
 #     try:
-#         # Download the image to a temporary location
-#         import tempfile
-#         import requests
-#         from werkzeug.utils import secure_filename
-#         import os
-#         from io import BytesIO
-#         from werkzeug.datastructures import FileStorage
-        
-#         # Get the filename from the URL
+#         # Get filename from URL
 #         filename = extract_filename_from_url(image_url)
-        
+
 #         # Download the image
 #         image_response = requests.get(image_url, stream=True)
 #         if image_response.status_code != 200:
@@ -1315,55 +1494,59 @@ def process_image_by_url():
 #             }), 400)
 #             error_response.headers.add('Access-Control-Allow-Origin', '*')
 #             return error_response
-        
-#         # Save to a temporary file
+
+#         # Save to temp file
 #         temp_dir = tempfile.mkdtemp()
 #         file_path = os.path.join(temp_dir, secure_filename(filename))
-        
+
 #         with open(file_path, 'wb') as f:
 #             for chunk in image_response.iter_content(chunk_size=8192):
 #                 f.write(chunk)
-        
+
 #         with open(file_path, 'rb') as f:
 #             file_content = f.read()
-        
+
 #         file_obj = FileStorage(
 #             stream=BytesIO(file_content),
 #             filename=filename,
 #             content_type=image_response.headers.get('Content-Type', 'image/jpeg')
 #         )
-        
-#         # Process the image using the processor
+
+#         # Process image
 #         results, status_code = app.config['processor'].process_image_request(
-#             file=file_obj, 
-#             engine_options=engines, 
+#             file=file_obj,
+#             engine_options=engine_options,
 #             prompt=prompt,
 #             ocr_only=ocr_only,
-#             llm_model_name=llm_model_name
+#             include_wfo=include_wfo,
+#             llm_model_name=llm_model_name,
+#             url_source=image_url,
 #         )
-        
-#         # If processing was successful, update usage statistics
+
+#         # Update usage stats
 #         if status_code == 200:
-#             update_usage_statistics(user_email, engines=engines, llm_model_name=llm_model_name)
-        
-#         # Clean up the temporary file
+#             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
+
+#         # Clean temp file
 #         try:
 #             os.remove(file_path)
 #             os.rmdir(temp_dir)
 #         except:
 #             pass
-        
-#         # Create response with CORS headers
+
+#         # Return JSON response
 #         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
 #         response.headers['Content-Type'] = 'application/json'
 #         response.headers.add('Access-Control-Allow-Origin', '*')
 #         return response
-        
+
 #     except Exception as e:
 #         logger.exception(f"Error processing image from URL: {e}")
 #         error_response = make_response(jsonify({'error': str(e)}), 500)
 #         error_response.headers.add('Access-Control-Allow-Origin', '*')
 #         return error_response
+
+
 
 @app.route('/api-demo', methods=['GET', 'POST'])
 def api_demo_page():
