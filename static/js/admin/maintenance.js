@@ -1,7 +1,8 @@
-// Create a new file: static/js/maintenance.js
+// Updated maintenance.js file with enhanced info display
 
 // Variables to track maintenance state
 let maintenanceEnabled = false;
+let maintenanceInfo = {};
 
 // Load maintenance status from the API
 function loadMaintenanceStatus() {
@@ -26,7 +27,9 @@ function loadMaintenanceStatus() {
       
       if (data.status === 'success') {
         maintenanceEnabled = data.maintenance_enabled;
+        maintenanceInfo = data.maintenance_info || {};
         updateMaintenanceToggle();
+        updateMaintenanceInfo();
         if (toggleContainer) toggleContainer.style.display = 'block';
       } else {
         console.error('Failed to load maintenance status:', data.error);
@@ -84,6 +87,48 @@ function updateMaintenanceToggle() {
   }
 }
 
+// Update maintenance info display
+function updateMaintenanceInfo() {
+  const infoContainer = document.getElementById('maintenance-info');
+  
+  if (!infoContainer) {
+    // Create the info container if it doesn't exist
+    const toggleContainer = document.getElementById('maintenance-toggle-container');
+    if (toggleContainer) {
+      const infoDiv = document.createElement('div');
+      infoDiv.id = 'maintenance-info';
+      infoDiv.className = 'maintenance-info mt-3';
+      toggleContainer.appendChild(infoDiv);
+    }
+  }
+  
+  const infoElem = document.getElementById('maintenance-info');
+  if (infoElem && Object.keys(maintenanceInfo).length > 0) {
+    let infoHtml = '<h5>Maintenance Status Information</h5>';
+    
+    if (maintenanceInfo.last_updated) {
+      let lastUpdated = 'Unknown';
+      
+      // Handle Firestore timestamp format
+      if (maintenanceInfo.last_updated._seconds) {
+        lastUpdated = new Date(maintenanceInfo.last_updated._seconds * 1000).toLocaleString();
+      } else if (typeof maintenanceInfo.last_updated === 'string') {
+        lastUpdated = new Date(maintenanceInfo.last_updated).toLocaleString();
+      }
+      
+      infoHtml += `<p><strong>Last Updated:</strong> ${lastUpdated}</p>`;
+    }
+    
+    if (maintenanceInfo.updated_by) {
+      infoHtml += `<p><strong>Updated By:</strong> ${maintenanceInfo.updated_by}</p>`;
+    }
+    
+    infoElem.innerHTML = infoHtml;
+  } else if (infoElem) {
+    infoElem.innerHTML = '';
+  }
+}
+
 // Toggle maintenance mode
 function toggleMaintenanceMode() {
   const toggle = document.getElementById('maintenance-toggle');
@@ -120,6 +165,11 @@ function toggleMaintenanceMode() {
       if (data.status === 'success') {
         maintenanceEnabled = data.maintenance_enabled;
         updateMaintenanceToggle();
+        
+        // Reload the full status to get updated info
+        setTimeout(() => {
+          loadMaintenanceStatus();
+        }, 500);
         
         if (successElem) {
           successElem.textContent = `Maintenance mode ${maintenanceEnabled ? 'enabled' : 'disabled'} successfully!`;
@@ -173,4 +223,5 @@ document.addEventListener('DOMContentLoaded', function() {
 // Expose functions to global scope
 window.loadMaintenanceStatus = loadMaintenanceStatus;
 window.updateMaintenanceToggle = updateMaintenanceToggle;
+window.updateMaintenanceInfo = updateMaintenanceInfo;
 window.toggleMaintenanceMode = toggleMaintenanceMode;

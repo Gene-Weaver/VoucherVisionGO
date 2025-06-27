@@ -135,22 +135,43 @@ except Exception as e:
 
 # Initialize Firestore client
 db = firestore.client()
-# Maintenance mode state - shared across all requests
-maintenance_mode = {
-    'enabled': False,
-    'lock': threading.Lock()
-}
+
 
 def get_maintenance_status():
-    """Get current maintenance status"""
-    with maintenance_mode['lock']:
-        return maintenance_mode['enabled']
+    """Get current maintenance status from Firestore"""
+    try:
+        maintenance_doc = db.collection('system_config').document('maintenance').get()
+        if maintenance_doc.exists:
+            data = maintenance_doc.to_dict()
+            return data.get('enabled', False)
+        else:
+            # If document doesn't exist, create it with default value
+            db.collection('system_config').document('maintenance').set({
+                'enabled': False,
+                'last_updated': firestore.SERVER_TIMESTAMP,
+                'updated_by': 'System'
+            })
+            return False
+    except Exception as e:
+        logger.error(f"Error getting maintenance status from Firestore: {str(e)}")
+        # Default to False if there's an error
+        return False
 
-def set_maintenance_status(enabled):
-    """Set maintenance status"""
-    with maintenance_mode['lock']:
-        maintenance_mode['enabled'] = enabled
-        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'}")
+def set_maintenance_status(enabled, updated_by='System'):
+    """Set maintenance status in Firestore"""
+    try:
+        maintenance_data = {
+            'enabled': enabled,
+            'last_updated': firestore.SERVER_TIMESTAMP,
+            'updated_by': updated_by
+        }
+        
+        db.collection('system_config').document('maintenance').set(maintenance_data)
+        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'} by {updated_by}")
+        return True
+    except Exception as e:
+        logger.error(f"Error setting maintenance status in Firestore: {str(e)}")
+        return False
 
 def maintenance_mode_middleware(f):
     """Decorator to check maintenance mode before executing route"""
@@ -162,7 +183,7 @@ def maintenance_mode_middleware(f):
              request.endpoint in ['health_check', 'get_maintenance_status_endpoint', 'set_maintenance_mode_endpoint'])):
             return f(*args, **kwargs)
         
-        # Check if maintenance mode is enabled
+        # Check if maintenance mode is enabled (now from Firestore)
         if get_maintenance_status():
             response = jsonify({
                 'error': 'VoucherVisionGO API Temporarily Unavailable',
@@ -1742,8 +1763,21 @@ def health_check():
     active_requests = app.config['processor'].throttler.get_active_count()
     max_requests = app.config['processor'].throttler.max_concurrent
     
-    # Check maintenance status
+    # Check maintenance status from Firestore
     maintenance_status = get_maintenance_status()
+    
+    # Get maintenance info if available
+    maintenance_info = {}
+    try:
+        maintenance_doc = db.collection('system_config').document('maintenance').get()
+        if maintenance_doc.exists:
+            data = maintenance_doc.to_dict()
+            maintenance_info = {
+                'last_updated': data.get('last_updated'),
+                'updated_by': data.get('updated_by', 'Unknown')
+            }
+    except Exception as e:
+        logger.warning(f"Could not get maintenance info: {str(e)}")
     
     return jsonify({
         'status': 'ok',
@@ -1751,6 +1785,7 @@ def health_check():
         'max_concurrent_requests': max_requests,
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%",
         'maintenance_mode': maintenance_status,
+        'maintenance_info': maintenance_info,
         'api_status': 'maintenance' if maintenance_status else 'available'
     }), 200
 
@@ -3280,9 +3315,22 @@ def get_maintenance_status_endpoint():
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
     
     try:
+        maintenance_enabled = get_maintenance_status()
+        
+        # Also get additional maintenance info from Firestore
+        maintenance_doc = db.collection('system_config').document('maintenance').get()
+        maintenance_info = {}
+        if maintenance_doc.exists:
+            data = maintenance_doc.to_dict()
+            maintenance_info = {
+                'last_updated': data.get('last_updated'),
+                'updated_by': data.get('updated_by', 'Unknown')
+            }
+        
         return jsonify({
             'status': 'success',
-            'maintenance_enabled': get_maintenance_status()
+            'maintenance_enabled': maintenance_enabled,
+            'maintenance_info': maintenance_info
         })
     except Exception as e:
         logger.error(f"Error getting maintenance status: {str(e)}")
@@ -3313,8 +3361,11 @@ def set_maintenance_mode_endpoint():
         if not isinstance(enabled, bool):
             return jsonify({'error': 'enabled must be a boolean value'}), 400
         
-        # Set maintenance mode
-        set_maintenance_status(enabled)
+        # Set maintenance mode in Firestore
+        success = set_maintenance_status(enabled, admin_email)
+        
+        if not success:
+            return jsonify({'error': 'Failed to update maintenance status in database'}), 500
         
         # Log the action
         logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'} by {admin_email}")
@@ -3328,6 +3379,7 @@ def set_maintenance_mode_endpoint():
     except Exception as e:
         logger.error(f"Error setting maintenance mode: {str(e)}")
         return jsonify({'error': f'Failed to set maintenance mode: {str(e)}'}), 500
+
 
 
 
