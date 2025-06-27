@@ -514,11 +514,18 @@ function initAuthTokenCheck() {
 
 // Create and add API Key buttons dynamically
 function createApiKeyButtons() {
+    // IDEMPOTENCY CHECK: If the clear button already exists, do nothing and exit.
+    // This prevents duplicate buttons if the script is loaded more than once.
+    if (document.getElementById('clearApiKeyButton')) {
+        return;
+    }
+
     const apiKeyInput = document.getElementById('apiKey');
     const apiKeyContainer = apiKeyInput.parentNode;
     
     // Create Clear API Key button
     const clearButton = document.createElement('button');
+    clearButton.id = 'clearApiKeyButton'; // ADDED: Assign a unique ID for the check
     clearButton.textContent = 'Clear API Key';
     clearButton.className = 'button';
     clearButton.style.cssText = `
@@ -543,6 +550,7 @@ function createApiKeyButtons() {
     
     // Create Test API Key button
     const validateButton = document.createElement('button');
+    validateButton.id = 'validateApiKeyButton'; // ADDED: Assign a unique ID
     validateButton.textContent = 'Test API Key';
     validateButton.className = 'button';
     validateButton.style.cssText = `

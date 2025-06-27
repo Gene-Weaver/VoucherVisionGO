@@ -1359,7 +1359,7 @@ $(document).ready(function() {
     }
     
     // Process batch URLs button click
-    $('#processBatchUrlsButton').click(async function() {
+    $('#processBatchUrlsButton').off('click').on('click', async function() {
         // Get the parsed data
         const parsedData = $('#batchUrlFileInput')[0].parsedData;
         
@@ -1409,7 +1409,7 @@ $(document).ready(function() {
     });
     
     // Process batch images button click
-    $('#processBatchImagesButton').click(async function() {
+    $('#processBatchImagesButton').off('click').on('click', async function() {
         // Get the image files
         const imageFiles = $('#imageFolderInput')[0].imageFiles;
         
