@@ -1088,16 +1088,3 @@ function showUserUsageDetails(email, allStats) {
   });
 }
 
-// Initialize the page when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-  // When the usage statistics tab is selected
-  const usageStatsTab = document.querySelector('.tab-button[data-tab="usage-stats"]');
-  if (usageStatsTab) {
-    usageStatsTab.addEventListener('click', function() {
-      loadUsageStatistics();
-    });
-  }
-  
-  // Initialize global storage for stats
-  window.allStats = [];
-});
