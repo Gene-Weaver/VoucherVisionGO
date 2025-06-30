@@ -38,6 +38,24 @@ git submodule update --init --recursive --remote
 
 good example url: https://medialib.naturalis.nl/file/id/L.3800382/format/large
 '''
+
+# Setup paths and imports
+project_root = os.path.abspath(os.path.dirname(__file__))
+sys.path.insert(0, project_root)
+
+submodule_path = os.path.join(project_root, "vouchervision_main")
+sys.path.insert(0, submodule_path)
+
+vouchervision_path = os.path.join(submodule_path, "vouchervision")
+sys.path.insert(0, vouchervision_path)
+
+component_detector_path = os.path.join(vouchervision_path, "component_detector")
+sys.path.insert(0, component_detector_path)
+
+text_collage_path = os.path.join(project_root, "TextCollage")
+sys.path.insert(0, text_collage_path)
+
+
 def setup_cloud_logging():
     """Setup structured logging for Google Cloud Run"""
     import json
@@ -64,10 +82,11 @@ def setup_cloud_logging():
                 
             return json.dumps(log_entry)
     
+    # Configure root logger
+    root_logger = logging.getLogger()
+    
     # Only set up cloud logging if we're in production
     if os.environ.get('ENV') == 'production':
-        root_logger = logging.getLogger()
-        
         # Remove existing handlers
         for handler in root_logger.handlers[:]:
             root_logger.removeHandler(handler)
@@ -77,9 +96,23 @@ def setup_cloud_logging():
         handler.setFormatter(CloudFormatter())
         root_logger.addHandler(handler)
         root_logger.setLevel(logging.INFO)
+    else:
+        # Development logging - ensure we have a handler
+        if not root_logger.handlers:
+            handler = logging.StreamHandler(sys.stdout)
+            formatter = logging.Formatter(
+                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            )
+            handler.setFormatter(formatter)
+            root_logger.addHandler(handler)
+            root_logger.setLevel(logging.INFO)
 def get_logger(name):
     """Get a logger with appropriate configuration for the environment"""
     logger = logging.getLogger(name)
+    
+    # Ensure logger has a proper level set
+    if logger.level == 0:  # NOTSET
+        logger.setLevel(logging.INFO)
     
     # Add request context if available
     try:
@@ -95,24 +128,26 @@ def get_logger(name):
 setup_cloud_logging()
 logger = get_logger(__name__)
 
-# Setup paths and imports
-project_root = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(0, project_root)
 
-submodule_path = os.path.join(project_root, "vouchervision_main")
-sys.path.insert(0, submodule_path)
-
-vouchervision_path = os.path.join(submodule_path, "vouchervision")
-sys.path.insert(0, vouchervision_path)
-
-component_detector_path = os.path.join(vouchervision_path, "component_detector")
-sys.path.insert(0, component_detector_path)
-
-text_collage_path = os.path.join(project_root, "TextCollage")
-sys.path.insert(0, text_collage_path)
+vouchervision_main_path = os.path.join(project_root, "vouchervision_main")
+if os.path.exists(vouchervision_main_path):
+    sys.path.insert(0, vouchervision_main_path)
+    
+    vouchervision_path = os.path.join(vouchervision_main_path, "vouchervision")
+    if os.path.exists(vouchervision_path):
+        sys.path.insert(0, vouchervision_path)
 
 # Import VoucherVision modules
 try:
+    from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
+    from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
+    from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
+    from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
+    from vouchervision.model_maps import ModelMaps # type: ignore
+    from vouchervision.general_utils import calculate_cost # type: ignore
+    from TextCollage.CollageEngine import CollageEngine 
+except Exception as e:
+    logger.error(f"Import ERROR: {e}")
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
     from vouchervision_main.vouchervision.vouchervision_main import load_custom_cfg
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
@@ -121,14 +156,7 @@ try:
     from vouchervision_main.vouchervision.general_utils import calculate_cost
     from TextCollage.CollageEngine import CollageEngine 
 
-except Exception as e:
-    logger.error(f"Import ERROR: {e}")
-    from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
-    from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
-    from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
-    from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
-    from vouchervision.model_maps import ModelMaps # type: ignore
-    from vouchervision.general_utils import calculate_cost # type: ignore
+    
 
 def get_firebase_config():
     """Get Firebase configuration for client-side use from Secret Manager"""
@@ -992,7 +1020,10 @@ class VoucherVisionProcessor:
     def __init__(self, app_logger=None, max_concurrent=32): 
         print("🔧 VoucherVisionProcessor.__init__ called (using print)")
         
-        self.logger = app_logger or logging.getLogger(__name__)
+        if app_logger:
+            self.logger = app_logger
+        else:
+            self.logger = logging.getLogger(__name__)
         
         # Test logging immediately
         self.logger.info("🔧 VoucherVisionProcessor.__init__ - logging test")
