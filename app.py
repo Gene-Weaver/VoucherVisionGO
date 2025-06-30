@@ -1007,6 +1007,10 @@ class VoucherVisionProcessor:
         self.logger.info(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}")
         self.logger.info(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}")
         self.logger.info(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}")
+        print(f"Looking for model at: {model_path}")
+        print(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}")
+        print(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}")
+        print(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}")
         tc_dir = os.path.join(project_root, "TextCollage")
         if os.path.exists(tc_dir):
             self.logger.info(f"Contents of TextCollage: {os.listdir(tc_dir)}")
