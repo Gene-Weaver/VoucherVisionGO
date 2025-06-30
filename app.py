@@ -24,6 +24,8 @@ from functools import wraps
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import textwrap
+from tabulate import tabulate
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
@@ -36,10 +38,62 @@ git submodule update --init --recursive --remote
 
 good example url: https://medialib.naturalis.nl/file/id/L.3800382/format/large
 '''
-
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+def setup_cloud_logging():
+    """Setup structured logging for Google Cloud Run"""
+    import json
+    import sys
+    
+    class CloudFormatter(logging.Formatter):
+        def format(self, record):
+            # Create structured log entry for Google Cloud Logging
+            log_entry = {
+                'timestamp': self.formatTime(record, self.datefmt),
+                'severity': record.levelname,
+                'message': record.getMessage(),
+                'logger': record.name,
+                'module': record.module,
+                'function': record.funcName,
+                'line': record.lineno
+            }
+            
+            # Add extra fields if present
+            if hasattr(record, 'user_id'):
+                log_entry['user_id'] = record.user_id
+            if hasattr(record, 'request_id'):
+                log_entry['request_id'] = record.request_id
+                
+            return json.dumps(log_entry)
+    
+    # Only set up cloud logging if we're in production
+    if os.environ.get('ENV') == 'production':
+        root_logger = logging.getLogger()
+        
+        # Remove existing handlers
+        for handler in root_logger.handlers[:]:
+            root_logger.removeHandler(handler)
+        
+        # Add cloud-formatted handler
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setFormatter(CloudFormatter())
+        root_logger.addHandler(handler)
+        root_logger.setLevel(logging.INFO)
+def get_logger(name):
+    """Get a logger with appropriate configuration for the environment"""
+    logger = logging.getLogger(name)
+    
+    # Add request context if available
+    try:
+        from flask import request, g
+        if request:
+            # Add request ID for tracing
+            if not hasattr(g, 'request_id'):
+                g.request_id = str(uuid.uuid4())[:8]
+    except:
+        pass
+    
+    return logger
+setup_cloud_logging()
+logger = get_logger(__name__)
 
 # Setup paths and imports
 project_root = os.path.abspath(os.path.dirname(__file__))
@@ -117,6 +171,8 @@ def get_firebase_config():
     
     return config
 
+
+
 # Initialize Firebase Admin SDK with service account key
 try:
     # Load service account credentials from Secret Manager
@@ -141,7 +197,6 @@ except Exception as e:
 
 # Initialize Firestore client
 db = firestore.client()
-
 
 def get_maintenance_status():
     """Get current maintenance status from Firestore"""
@@ -934,7 +989,8 @@ class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self, max_concurrent=32): 
+    def __init__(self, app_logger=None, max_concurrent=32): 
+        self.logger = app_logger or logging.getLogger(__name__)
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
@@ -961,20 +1017,20 @@ class VoucherVisionProcessor:
 
         self.collage_engine = None
         try:
-            logger.info("Attempting to initialize CollageEngine...")
+            self.logger.info("Attempting to initialize CollageEngine...")
             # The model path is relative to the app's root directory
             model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
             
-            logger.info(f"Checking for CollageEngine model at absolute path: {model_path}")
+            self.logger.info(f"Checking for CollageEngine model at absolute path: {model_path}")
             parent_dir = os.path.dirname(model_path)
             if os.path.exists(parent_dir):
-                logger.info(f"Contents of {parent_dir}: {os.listdir(parent_dir)}")
+                self.logger.info(f"Contents of {parent_dir}: {os.listdir(parent_dir)}")
             else:
-                logger.warning(f"Model parent directory does not exist: {parent_dir}")
+                self.logger.warning(f"Model parent directory does not exist: {parent_dir}")
                 # Also check one level up
                 grandparent_dir = os.path.dirname(parent_dir)
                 if os.path.exists(grandparent_dir):
-                     logger.warning(f"Contents of {grandparent_dir}: {os.listdir(grandparent_dir)}")
+                    self.logger.warning(f"Contents of {grandparent_dir}: {os.listdir(grandparent_dir)}")
 
             if not os.path.exists(model_path):
                  raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
@@ -987,9 +1043,9 @@ class VoucherVisionProcessor:
                 hide_long_objects=False, # Sensible default for clean OCR input
                 draw_overlay=False
             )
-            logger.info("CollageEngine initialized successfully.")
+            self.logger.info("CollageEngine initialized successfully.")
         except Exception as e:
-            logger.error(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", exc_info=True)
+            self.logger.error(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", exc_info=True)
         
         # Initialize VoucherVision components
         self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
@@ -1001,8 +1057,8 @@ class VoucherVisionProcessor:
         # Load configuration
         self.cfg = load_custom_cfg(self.config_file)
         
-        logging.basicConfig(level=logging.INFO)
-        self.logger = logging.getLogger(__name__)
+        # logging.basicConfig(level=logging.INFO)
+        # self.logger = logging.getLogger(__name__)
         self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
 
         self.Voucher_Vision = VoucherVision(
@@ -1053,7 +1109,7 @@ class VoucherVisionProcessor:
         
         for ocr_opt in engine_options:
             ocr_packet[ocr_opt] = {}
-            logger.info(f"ocr_opt {ocr_opt}")
+            self.logger.info(f"ocr_opt {ocr_opt}")
             
             # Thread-safe access to OCR engines
             with self.ocr_engines_lock:
@@ -1115,7 +1171,7 @@ class VoucherVisionProcessor:
             )
             
             self.logger.info(f"Created new thread-local VV instance with prompt: {prompt}")
-        
+
         return self.thread_local.vv, self.thread_local.llm_model
     
     def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo):
@@ -1130,7 +1186,7 @@ class VoucherVisionProcessor:
         response_candidate, nt_in, nt_out, WFO, _, _ = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
-        logger.info(f"response_candidate\n{response_candidate}")
+        self.logger.info(f"response_candidate\n{response_candidate}")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(self.LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
@@ -1171,7 +1227,7 @@ class VoucherVisionProcessor:
             original_temp_path = os.path.join(temp_dir, f"original_{secure_filename(file.filename)}")
             file.save(original_temp_path)
             
-            logger.info("Running CollageEngine for pre-processing...")
+            self.logger.info("Running CollageEngine for pre-processing...")
             collage_json_data, collage_image_bytes = self.collage_engine.run(original_temp_path)
             
             if collage_image_bytes is None:
@@ -1181,7 +1237,7 @@ class VoucherVisionProcessor:
             collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
             with open(collage_temp_path, 'wb') as f:
                 f.write(collage_image_bytes)
-            logger.info(f"Collage created at {collage_temp_path}, proceeding to OCR.")
+            self.logger.info(f"Collage created at {collage_temp_path}, proceeding to OCR.")
             
             try:
                 # Get engine options (default to gemini models if not specified)
@@ -1210,17 +1266,17 @@ class VoucherVisionProcessor:
                     "gemini-2.5-pro": "GEMINI_2_5_PRO"
                 }
 
-                logger.info(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})")
+                self.logger.info(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})")
                 self.LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
-                logger.info(f"Mapped to cost constant: {self.LLM_name_cost}")
+                self.logger.info(f"Mapped to cost constant: {self.LLM_name_cost}")
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
-                logger.info(f"Using prompt file: {current_prompt}")
-                logger.info(f"file_path: {collage_temp_path}")
-                logger.info(f"engine_options: {engine_options}")
-                logger.info(f"llm_model_name: {llm_model_name}")
-                logger.info(f"LLM_name_cost {self.LLM_name_cost}")
+                self.logger.info(f"Using prompt file: {current_prompt}")
+                self.logger.info(f"file_path: {collage_temp_path}")
+                self.logger.info(f"engine_options: {engine_options}")
+                self.logger.info(f"llm_model_name: {llm_model_name}")
+                self.logger.info(f"LLM_name_cost {self.LLM_name_cost}")
 
                 # Extract the original filename for the response
                 original_filename = os.path.basename(file.filename)
@@ -1287,11 +1343,11 @@ class VoucherVisionProcessor:
                         
                     ])
                 
-                logger.warning(results)
+                self.logger.warning(results)
                 return results, collage_image_bytes, 200
             
             except Exception as e:
-                self.logger.exception("Error processing request")
+                self.logger.warning("Error processing request")
                 return {'error': str(e)}, None, 500
             
             finally:
@@ -1377,22 +1433,22 @@ except Exception as e:
 
 # Initialize processor once at startup
 try:
-    processor = VoucherVisionProcessor()
+    processor = VoucherVisionProcessor(app.logger)
     app.config['processor'] = processor
-    logger.info("VoucherVision processor initialized successfully")
+    app.logger.info("VoucherVision processor initialized successfully")
 
     # Initialize email sender
     email_sender = SimpleEmailSender()
     app.config['email_sender'] = email_sender
     if email_sender.is_enabled:
-        logger.info("Email sender initialized successfully")
-        logger.info(f"Email configuration: SMTP_SERVER={os.environ.get('SMTP_SERVER')}, " 
+        app.logger.info("Email sender initialized successfully")
+        app.logger.info(f"Email configuration: SMTP_SERVER={os.environ.get('SMTP_SERVER')}, " 
             f"SMTP_USERNAME={'Set' if os.environ.get('SMTP_USERNAME') else 'Not set'}, "
             f"SMTP_PASSWORD={'Set' if os.environ.get('SMTP_PASSWORD') else 'Not set'}")
     else:
-        logger.warning("Email sender initialized but email sending is disabled due to missing configuration")
+        app.logger.warning("Email sender initialized but email sending is disabled due to missing configuration")
 except Exception as e:
-    logger.error(f"Failed to initialize application components: {str(e)}")
+    app.logger.error(f"Failed to initialize application components: {str(e)}")
     raise
 
 
@@ -2750,9 +2806,6 @@ def format_prompts_as_text_table(prompt_list):
     Returns:
         str: Formatted text table
     """
-    import textwrap
-    from tabulate import tabulate
-    
     # Prepare table data
     table_data = []
     for i, info in enumerate(prompt_list, 1):
@@ -3496,6 +3549,21 @@ def set_maintenance_mode_endpoint():
 
 
 if __name__ == '__main__':
-    # Get port from environment variable or default to 8080
+    # Only configure logging when running directly (not under Gunicorn)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
     port = int(os.environ.get('PORT', 8080))
+    logger.info('VoucherVision service is starting up directly (not under Gunicorn)...')
     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
+else:
+    # When running under Gunicorn, let Gunicorn handle logging configuration
+    # Just ensure our logger uses the same level as Gunicorn
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    if gunicorn_logger.handlers:
+        # Set our logger to use the same level as Gunicorn
+        logger.setLevel(gunicorn_logger.level)
+        # Don't replace handlers - let the logging hierarchy work naturally
+        logger.info('VoucherVision service is starting up under Gunicorn...')

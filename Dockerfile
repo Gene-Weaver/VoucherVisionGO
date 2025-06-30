@@ -29,6 +29,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # The `cloudbuild.yaml` has already ensured the submodule is present and correct.
 COPY . .
 
+CMD exec gunicorn --config gunicorn.conf.py main:app
+
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.sh
 
