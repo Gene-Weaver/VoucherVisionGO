@@ -1025,6 +1025,53 @@ class VoucherVisionProcessor:
                 do_resize_img=False
             )
 
+        # Add comprehensive debugging BEFORE CollageEngine initialization
+        self.logger.info("=" * 60)
+        self.logger.info("DEBUGGING COLLAGEENGINE INITIALIZATION")
+        self.logger.info("=" * 60)
+        
+        # Debug project root
+        self.logger.info(f"Project root: {project_root}")
+        self.logger.info(f"Current working directory: {os.getcwd()}")
+        self.logger.info(f"Contents of project root: {os.listdir(project_root) if os.path.exists(project_root) else 'NOT FOUND'}")
+        
+        # Debug TextCollage path
+        textcollage_path = os.path.join(project_root, "TextCollage")
+        self.logger.info(f"TextCollage path: {textcollage_path}")
+        self.logger.info(f"TextCollage exists: {os.path.exists(textcollage_path)}")
+        
+        if os.path.exists(textcollage_path):
+            self.logger.info(f"Contents of TextCollage: {os.listdir(textcollage_path)}")
+            
+            # Check models directory
+            models_path = os.path.join(textcollage_path, "models")
+            self.logger.info(f"Models path: {models_path}")
+            self.logger.info(f"Models exists: {os.path.exists(models_path)}")
+            
+            if os.path.exists(models_path):
+                self.logger.info(f"Contents of models: {os.listdir(models_path)}")
+                
+                # Check openvino directory
+                openvino_path = os.path.join(models_path, "openvino")
+                self.logger.info(f"OpenVINO path: {openvino_path}")
+                self.logger.info(f"OpenVINO exists: {os.path.exists(openvino_path)}")
+                
+                if os.path.exists(openvino_path):
+                    self.logger.info(f"Contents of openvino: {os.listdir(openvino_path)}")
+                    
+                    # Check specific model files
+                    xml_path = os.path.join(openvino_path, "best.xml")
+                    bin_path = os.path.join(openvino_path, "best.bin")
+                    self.logger.info(f"best.xml exists: {os.path.exists(xml_path)}")
+                    self.logger.info(f"best.bin exists: {os.path.exists(bin_path)}")
+                    
+                    if os.path.exists(xml_path):
+                        self.logger.info(f"best.xml size: {os.path.getsize(xml_path)} bytes")
+                    if os.path.exists(bin_path):
+                        self.logger.info(f"best.bin size: {os.path.getsize(bin_path)} bytes")
+        
+        self.logger.info("=" * 60)
+
         self.collage_engine = None
         try:
             self.logger.info("Attempting to initialize CollageEngine...")
