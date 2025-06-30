@@ -961,8 +961,21 @@ class VoucherVisionProcessor:
 
         self.collage_engine = None
         try:
+            logger.info("Attempting to initialize CollageEngine...")
             # The model path is relative to the app's root directory
             model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
+            
+            logger.info(f"Checking for CollageEngine model at absolute path: {model_path}")
+            parent_dir = os.path.dirname(model_path)
+            if os.path.exists(parent_dir):
+                logger.info(f"Contents of {parent_dir}: {os.listdir(parent_dir)}")
+            else:
+                logger.warning(f"Model parent directory does not exist: {parent_dir}")
+                # Also check one level up
+                grandparent_dir = os.path.dirname(parent_dir)
+                if os.path.exists(grandparent_dir):
+                     logger.warning(f"Contents of {grandparent_dir}: {os.listdir(grandparent_dir)}")
+
             if not os.path.exists(model_path):
                  raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
 
@@ -976,7 +989,7 @@ class VoucherVisionProcessor:
             )
             logger.info("CollageEngine initialized successfully.")
         except Exception as e:
-            logger.error(f"Failed to initialize CollageEngine: {e}")
+            logger.error(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", exc_info=True)
         
         # Initialize VoucherVision components
         self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')

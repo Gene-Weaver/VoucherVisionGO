@@ -4,7 +4,7 @@ FROM python:3.12-slim
 # Set environment variables
 ENV PORT=8080 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision"
+    PYTHONPATH="/app:/app/vouchervision_main:/app/vouchervision_main/vouchervision:/app/TextCollage"
 
 # Set the working directory
 WORKDIR /app
