@@ -1740,7 +1740,7 @@ def process_image():
     content_type = request.headers.get('Content-Type', '').lower()
     if 'multipart/form-data' in content_type:
         # For form submissions, return a multipart response
-        if image_bytes:
+        if image_bytes is not None and len(image_bytes) > 0:
             response = create_multipart_response(results, image_bytes)
         else: # Fallback if image bytes are missing
             response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
