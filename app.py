@@ -991,6 +991,16 @@ class VoucherVisionProcessor:
     """
     def __init__(self, app_logger=None, max_concurrent=32): 
         self.logger = app_logger or logging.getLogger(__name__)
+
+        model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
+        self.logger.info(f"Looking for model at: {model_path}")
+        self.logger.info(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}")
+        self.logger.info(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}")
+        self.logger.info(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}")
+        tc_dir = os.path.join(project_root, "TextCollage")
+        if os.path.exists(tc_dir):
+            self.logger.info(f"Contents of TextCollage: {os.listdir(tc_dir)}")
+
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size

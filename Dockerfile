@@ -9,7 +9,7 @@ ENV PORT=8080 \
 # Set the working directory
 WORKDIR /app
 
-# Install system dependencies. This layer will be cached.
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     procps \
@@ -21,18 +21,20 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy only requirements.txt first. This layer is cached unless the file changes.
+# Copy requirements first for better caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire application source code from the build context.
-# The `cloudbuild.yaml` has already ensured the submodule is present and correct.
+# Copy the entire application (including submodules)
 COPY . .
 
-CMD exec gunicorn --config gunicorn.conf.py main:app
+# Verify TextCollage was copied correctly
+RUN ls -la /app/TextCollage/ || echo "TextCollage not found"
+RUN ls -la /app/TextCollage/models/ || echo "models directory not found"
+RUN ls -la /app/TextCollage/models/openvino/ || echo "openvino directory not found"
 
-# Make the entrypoint script executable
+# Make entrypoint executable
 RUN chmod +x /app/entrypoint.sh
 
-# Run the application
+# Use the entrypoint
 ENTRYPOINT ["/app/entrypoint.sh"]

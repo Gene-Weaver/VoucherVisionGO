@@ -24,6 +24,17 @@ steps:
     id: update-submodules
     args: ['submodule', 'update', '--init', '--recursive']
 
+  - name: 'gcr.io/cloud-builders/git'
+    id: verify-submodules
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "Verifying submodule contents..."
+        ls -la TextCollage/ || echo "TextCollage not found"
+        ls -la TextCollage/models/ || echo "models not found"
+        ls -la TextCollage/models/openvino/ || echo "openvino not found"
+
   # Step 3: Build the Docker image using the caching strategy from Step 1.
   - name: 'gcr.io/cloud-builders/docker'
     id: build
