@@ -1,3 +1,6 @@
 [submodule "vouchervision_main"]
 	path = vouchervision_main
 	url = https://github.com/Gene-Weaver/VoucherVision.git
+[submodule "TextCollage"]
+	path = TextCollage
+	url = https://github.com/Gene-Weaver/TextCollage.git
