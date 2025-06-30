@@ -990,7 +990,17 @@ class VoucherVisionProcessor:
     Class to handle VoucherVision processing with initialization done once.
     """
     def __init__(self, app_logger=None, max_concurrent=32): 
+        print("🔧 VoucherVisionProcessor.__init__ called (using print)")
+        
         self.logger = app_logger or logging.getLogger(__name__)
+        
+        # Test logging immediately
+        self.logger.info("🔧 VoucherVisionProcessor.__init__ - logging test")
+        self.logger.error("🔧 VoucherVisionProcessor.__init__ - error level test")
+        
+        print(f"🔧 Logger type: {type(self.logger)}")
+        print(f"🔧 Logger level: {self.logger.level}")
+        print(f"🔧 Logger handlers: {self.logger.handlers}")
 
         model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
         self.logger.info(f"Looking for model at: {model_path}")
@@ -1004,6 +1014,9 @@ class VoucherVisionProcessor:
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+
+        self.logger.info("Starting detailed CollageEngine debugging...")
+        print("🔧 About to start CollageEngine debugging")
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
