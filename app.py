@@ -1018,127 +1018,192 @@ class VoucherVisionProcessor:
     Class to handle VoucherVision processing with initialization done once.
     """
     def __init__(self, app_logger=None, max_concurrent=32): 
-        print("🔧 VoucherVisionProcessor.__init__ called (using print)")
+        print("VoucherVisionProcessor.__init__ called")
         
-        if app_logger:
+        # Setup logging with console fallback
+        if app_logger and hasattr(app_logger, 'info'):
             self.logger = app_logger
+            self.use_console_fallback = False
         else:
             self.logger = logging.getLogger(__name__)
+            # Check if logger has handlers and proper level
+            if not self.logger.handlers or self.logger.level == 0:
+                self.use_console_fallback = True
+                print("Logger not properly configured, using console fallback")
+            else:
+                self.use_console_fallback = False
         
         # Test logging immediately
-        self.logger.info("🔧 VoucherVisionProcessor.__init__ - logging test")
-        self.logger.error("🔧 VoucherVisionProcessor.__init__ - error level test")
+        self._log("VoucherVisionProcessor.__init__ - logging test", "info")
+        self._log("VoucherVisionProcessor.__init__ - error level test", "error")
         
-        print(f"🔧 Logger type: {type(self.logger)}")
-        print(f"🔧 Logger level: {self.logger.level}")
-        print(f"🔧 Logger handlers: {self.logger.handlers}")
+        print(f"Logger type: {type(self.logger)}")
+        print(f"Logger level: {self.logger.level}")
+        print(f"Logger handlers: {self.logger.handlers}")
 
         model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
-        self.logger.info(f"Looking for model at: {model_path}")
-        self.logger.info(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}")
-        self.logger.info(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}")
-        self.logger.info(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}")
-        print(f"Looking for model at: {model_path}")
-        print(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}")
-        print(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}")
-        print(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}")
+        self._log(f"Looking for model at: {model_path}", "info")
+        self._log(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}", "info")
+        self._log(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}", "info")
+        self._log(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}", "info")
+        
         tc_dir = os.path.join(project_root, "TextCollage")
         if os.path.exists(tc_dir):
-            self.logger.info(f"Contents of TextCollage: {os.listdir(tc_dir)}")
+            try:
+                tc_contents = os.listdir(tc_dir)
+                self._log(f"Contents of TextCollage: {tc_contents}", "info")
+            except Exception as e:
+                self._log(f"Error listing TextCollage contents: {e}", "error")
 
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
 
-        self.logger.info("Starting detailed CollageEngine debugging...")
-        print("🔧 About to start CollageEngine debugging")
+        self._log("Starting detailed CollageEngine debugging...", "info")
+        print("About to start CollageEngine debugging")
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
         
         # Get API key for Gemini
-        self.api_key = self._get_api_key()
+        try:
+            self.api_key = self._get_api_key()
+            self._log("API key retrieved successfully", "info")
+        except Exception as e:
+            self._log(f"Failed to get API key: {e}", "error")
+            raise
         
         # Initialize OCR engines 
         self.ocr_engines = {}
         self.ocr_engines_lock = threading.Lock()
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
-            self.ocr_engines[model_name] = OCRGeminiProVision(
-                self.api_key, 
-                model_name=model_name, 
-                max_output_tokens=1024, 
-                temperature=1.0, 
-                top_p=0.95, 
-                seed=123456, 
-                do_resize_img=False
-            )
+        
+        try:
+            for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
+                self.ocr_engines[model_name] = OCRGeminiProVision(
+                    self.api_key, 
+                    model_name=model_name, 
+                    max_output_tokens=1024, 
+                    temperature=1.0, 
+                    top_p=0.95, 
+                    seed=123456, 
+                    do_resize_img=False
+                )
+            self._log(f"Initialized {len(self.ocr_engines)} OCR engines", "info")
+        except Exception as e:
+            self._log(f"Failed to initialize OCR engines: {e}", "error")
+            raise
 
         # Add comprehensive debugging BEFORE CollageEngine initialization
-        self.logger.info("=" * 60)
-        self.logger.info("DEBUGGING COLLAGEENGINE INITIALIZATION")
-        self.logger.info("=" * 60)
+        self._log("=" * 60, "info")
+        self._log("DEBUGGING COLLAGEENGINE INITIALIZATION", "info")
+        self._log("=" * 60, "info")
         
         # Debug project root
-        self.logger.info(f"Project root: {project_root}")
-        self.logger.info(f"Current working directory: {os.getcwd()}")
-        self.logger.info(f"Contents of project root: {os.listdir(project_root) if os.path.exists(project_root) else 'NOT FOUND'}")
+        self._log(f"Project root: {project_root}", "info")
+        self._log(f"Current working directory: {os.getcwd()}", "info")
+        
+        try:
+            if os.path.exists(project_root):
+                project_contents = os.listdir(project_root)
+                self._log(f"Contents of project root: {project_contents}", "info")
+            else:
+                self._log("Project root NOT FOUND", "error")
+        except Exception as e:
+            self._log(f"Error listing project root: {e}", "error")
         
         # Debug TextCollage path
         textcollage_path = os.path.join(project_root, "TextCollage")
-        self.logger.info(f"TextCollage path: {textcollage_path}")
-        self.logger.info(f"TextCollage exists: {os.path.exists(textcollage_path)}")
+        self._log(f"TextCollage path: {textcollage_path}", "info")
+        self._log(f"TextCollage exists: {os.path.exists(textcollage_path)}", "info")
         
         if os.path.exists(textcollage_path):
-            self.logger.info(f"Contents of TextCollage: {os.listdir(textcollage_path)}")
+            try:
+                tc_list = os.listdir(textcollage_path)
+                self._log(f"Contents of TextCollage: {tc_list}", "info")
+            except Exception as e:
+                self._log(f"Error listing TextCollage: {e}", "error")
             
             # Check models directory
             models_path = os.path.join(textcollage_path, "models")
-            self.logger.info(f"Models path: {models_path}")
-            self.logger.info(f"Models exists: {os.path.exists(models_path)}")
+            self._log(f"Models path: {models_path}", "info")
+            self._log(f"Models exists: {os.path.exists(models_path)}", "info")
             
             if os.path.exists(models_path):
-                self.logger.info(f"Contents of models: {os.listdir(models_path)}")
+                try:
+                    models_list = os.listdir(models_path)
+                    self._log(f"Contents of models: {models_list}", "info")
+                except Exception as e:
+                    self._log(f"Error listing models: {e}", "error")
                 
                 # Check openvino directory
                 openvino_path = os.path.join(models_path, "openvino")
-                self.logger.info(f"OpenVINO path: {openvino_path}")
-                self.logger.info(f"OpenVINO exists: {os.path.exists(openvino_path)}")
+                self._log(f"OpenVINO path: {openvino_path}", "info")
+                self._log(f"OpenVINO exists: {os.path.exists(openvino_path)}", "info")
                 
                 if os.path.exists(openvino_path):
-                    self.logger.info(f"Contents of openvino: {os.listdir(openvino_path)}")
+                    try:
+                        openvino_list = os.listdir(openvino_path)
+                        self._log(f"Contents of openvino: {openvino_list}", "info")
+                    except Exception as e:
+                        self._log(f"Error listing openvino: {e}", "error")
                     
                     # Check specific model files
                     xml_path = os.path.join(openvino_path, "best.xml")
                     bin_path = os.path.join(openvino_path, "best.bin")
-                    self.logger.info(f"best.xml exists: {os.path.exists(xml_path)}")
-                    self.logger.info(f"best.bin exists: {os.path.exists(bin_path)}")
+                    self._log(f"best.xml exists: {os.path.exists(xml_path)}", "info")
+                    self._log(f"best.bin exists: {os.path.exists(bin_path)}", "info")
                     
                     if os.path.exists(xml_path):
-                        self.logger.info(f"best.xml size: {os.path.getsize(xml_path)} bytes")
+                        try:
+                            xml_size = os.path.getsize(xml_path)
+                            self._log(f"best.xml size: {xml_size} bytes", "info")
+                        except Exception as e:
+                            self._log(f"Error getting xml size: {e}", "error")
+                    
                     if os.path.exists(bin_path):
-                        self.logger.info(f"best.bin size: {os.path.getsize(bin_path)} bytes")
+                        try:
+                            bin_size = os.path.getsize(bin_path)
+                            self._log(f"best.bin size: {bin_size} bytes", "info")
+                        except Exception as e:
+                            self._log(f"Error getting bin size: {e}", "error")
         
-        self.logger.info("=" * 60)
+        self._log("=" * 60, "info")
 
         self.collage_engine = None
         try:
-            self.logger.info("Attempting to initialize CollageEngine...")
+            self._log("Attempting to initialize CollageEngine...", "info")
             # The model path is relative to the app's root directory
             model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
             
-            self.logger.info(f"Checking for CollageEngine model at absolute path: {model_path}")
+            self._log(f"Checking for CollageEngine model at absolute path: {model_path}", "info")
             parent_dir = os.path.dirname(model_path)
             if os.path.exists(parent_dir):
-                self.logger.info(f"Contents of {parent_dir}: {os.listdir(parent_dir)}")
+                try:
+                    parent_contents = os.listdir(parent_dir)
+                    self._log(f"Contents of {parent_dir}: {parent_contents}", "info")
+                except Exception as e:
+                    self._log(f"Error listing parent dir: {e}", "error")
             else:
-                self.logger.warning(f"Model parent directory does not exist: {parent_dir}")
+                self._log(f"Model parent directory does not exist: {parent_dir}", "warning")
                 # Also check one level up
                 grandparent_dir = os.path.dirname(parent_dir)
                 if os.path.exists(grandparent_dir):
-                    self.logger.warning(f"Contents of {grandparent_dir}: {os.listdir(grandparent_dir)}")
+                    try:
+                        grandparent_contents = os.listdir(grandparent_dir)
+                        self._log(f"Contents of {grandparent_dir}: {grandparent_contents}", "warning")
+                    except Exception as e:
+                        self._log(f"Error listing grandparent dir: {e}", "error")
 
             if not os.path.exists(model_path):
                  raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
+
+            # Try to import CollageEngine
+            try:
+                from TextCollage.CollageEngine import CollageEngine
+                self._log("CollageEngine import successful", "info")
+            except ImportError as ie:
+                self._log(f"CollageEngine import failed: {ie}", "error")
+                raise
 
             self.collage_engine = CollageEngine(
                 model_xml_path=model_path,
@@ -1148,9 +1213,11 @@ class VoucherVisionProcessor:
                 hide_long_objects=False, # Sensible default for clean OCR input
                 draw_overlay=False
             )
-            self.logger.info("CollageEngine initialized successfully.")
+            self._log("CollageEngine initialized successfully.", "info")
         except Exception as e:
-            self.logger.error(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", exc_info=True)
+            self._log(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", "error")
+            import traceback
+            self._log(f"Traceback: {traceback.format_exc()}", "error")
         
         # Initialize VoucherVision components
         self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
@@ -1160,41 +1227,92 @@ class VoucherVisionProcessor:
             raise FileNotFoundError(f"Configuration file not found at {self.config_file}")
 
         # Load configuration
-        self.cfg = load_custom_cfg(self.config_file)
+        try:
+            self.cfg = load_custom_cfg(self.config_file)
+            self._log("VoucherVision config loaded successfully", "info")
+        except Exception as e:
+            self._log(f"Failed to load VoucherVision config: {e}", "error")
+            raise
         
-        # logging.basicConfig(level=logging.INFO)
-        # self.logger = logging.getLogger(__name__)
         self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
+        self._log(f"VoucherVision home directory: {self.dir_home}", "info")
+        self._log(f"VoucherVision home exists: {os.path.exists(self.dir_home)}", "info")
 
-        self.Voucher_Vision = VoucherVision(
-            self.cfg, self.logger, self.dir_home, None, None, None, 
-            is_hf=False, skip_API_keys=True
-        )
+        try:
+            self.Voucher_Vision = VoucherVision(
+                self.cfg, self.logger, self.dir_home, None, None, None, 
+                is_hf=False, skip_API_keys=True
+            )
+            self._log("VoucherVision instance created successfully", "info")
+        except Exception as e:
+            self._log(f"Failed to create VoucherVision instance: {e}", "error")
+            raise
 
-        self.Voucher_Vision.initialize_token_counters()
+        try:
+            self.Voucher_Vision.initialize_token_counters()
+            self._log("Token counters initialized", "info")
+        except Exception as e:
+            self._log(f"Failed to initialize token counters: {e}", "error")
+            raise
+        
         # Default prompt file
         self.default_prompt = "SLTPvM_default.yaml"
         self.custom_prompts_dir = os.path.join(self.dir_home, 'custom_prompts')
+        self._log(f"Custom prompts directory: {self.custom_prompts_dir}", "info")
+        self._log(f"Custom prompts dir exists: {os.path.exists(self.custom_prompts_dir)}", "info")
 
         self.Voucher_Vision.path_custom_prompts = os.path.join(
             self.dir_home, 
             'custom_prompts', 
             self.default_prompt
         )
+        self._log(f"Default prompt path: {self.Voucher_Vision.path_custom_prompts}", "info")
+        self._log(f"Default prompt exists: {os.path.exists(self.Voucher_Vision.path_custom_prompts)}", "info")
 
         # Initialize LLM model handler
-        # self.model_name = ModelMaps.get_API_name(self.Voucher_Vision.model_name)
-        self.Voucher_Vision.setup_JSON_dict_structure()
+        try:
+            self.Voucher_Vision.setup_JSON_dict_structure()
+            self._log("JSON dict structure setup completed", "info")
+        except Exception as e:
+            self._log(f"Failed to setup JSON dict structure: {e}", "error")
+            raise
         
         self.llm_models = {}
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
-            self.llm_models[model_name] = GoogleGeminiHandler(
-                self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure, 
-                config_vals_for_permutation=None, exit_early_for_JSON=True
-            )
+        try:
+            for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro"]:
+                self.llm_models[model_name] = GoogleGeminiHandler(
+                    self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure, 
+                    config_vals_for_permutation=None, exit_early_for_JSON=True
+                )
+            self._log(f"Initialized {len(self.llm_models)} LLM models", "info")
+        except Exception as e:
+            self._log(f"Failed to initialize LLM models: {e}", "error")
+            raise
 
         # Thread-local storage for handling per-request VoucherVision instances
         self.thread_local = threading.local()
+        
+        self._log("VoucherVisionProcessor initialization completed successfully", "info")
+    
+    def _log(self, message, level="info"):
+        """Log with console fallback if logger is not working"""
+        if self.use_console_fallback:
+            print(f"[{level.upper()}] {message}")
+        else:
+            try:
+                if level == "info":
+                    self.logger.info(message)
+                elif level == "warning":
+                    self.logger.warning(message)
+                elif level == "error":
+                    self.logger.error(message)
+                elif level == "debug":
+                    self.logger.debug(message)
+                else:
+                    self.logger.info(message)
+            except:
+                # If logger fails, fall back to console
+                print(f"[{level.upper()}] {message}")
     
     def _get_api_key(self):
         """Get API key from environment variable"""
@@ -1214,7 +1332,7 @@ class VoucherVisionProcessor:
         
         for ocr_opt in engine_options:
             ocr_packet[ocr_opt] = {}
-            self.logger.info(f"ocr_opt {ocr_opt}")
+            self._log(f"ocr_opt {ocr_opt}", "info")
             
             # Thread-safe access to OCR engines
             with self.ocr_engines_lock:
@@ -1275,7 +1393,7 @@ class VoucherVisionProcessor:
                 exit_early_with_WFO=include_wfo,
             )
             
-            self.logger.info(f"Created new thread-local VV instance with prompt: {prompt}")
+            self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
 
         return self.thread_local.vv, self.thread_local.llm_model
     
@@ -1291,7 +1409,7 @@ class VoucherVisionProcessor:
         response_candidate, nt_in, nt_out, WFO, _, _ = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
-        self.logger.info(f"response_candidate\n{response_candidate}")
+        self._log(f"response_candidate\n{response_candidate}", "info")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(self.LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
@@ -1332,7 +1450,7 @@ class VoucherVisionProcessor:
             original_temp_path = os.path.join(temp_dir, f"original_{secure_filename(file.filename)}")
             file.save(original_temp_path)
             
-            self.logger.info("Running CollageEngine for pre-processing...")
+            self._log("Running CollageEngine for pre-processing...", "info")
             collage_json_data, collage_image_bytes = self.collage_engine.run(original_temp_path)
             
             if collage_image_bytes is None:
@@ -1342,7 +1460,7 @@ class VoucherVisionProcessor:
             collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
             with open(collage_temp_path, 'wb') as f:
                 f.write(collage_image_bytes)
-            self.logger.info(f"Collage created at {collage_temp_path}, proceeding to OCR.")
+            self._log(f"Collage created at {collage_temp_path}, proceeding to OCR.", "info")
             
             try:
                 # Get engine options (default to gemini models if not specified)
@@ -1371,17 +1489,17 @@ class VoucherVisionProcessor:
                     "gemini-2.5-pro": "GEMINI_2_5_PRO"
                 }
 
-                self.logger.info(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})")
+                self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
                 self.LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
-                self.logger.info(f"Mapped to cost constant: {self.LLM_name_cost}")
+                self._log(f"Mapped to cost constant: {self.LLM_name_cost}", "info")
                 
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
-                self.logger.info(f"Using prompt file: {current_prompt}")
-                self.logger.info(f"file_path: {collage_temp_path}")
-                self.logger.info(f"engine_options: {engine_options}")
-                self.logger.info(f"llm_model_name: {llm_model_name}")
-                self.logger.info(f"LLM_name_cost {self.LLM_name_cost}")
+                self._log(f"Using prompt file: {current_prompt}", "info")
+                self._log(f"file_path: {collage_temp_path}", "info")
+                self._log(f"engine_options: {engine_options}", "info")
+                self._log(f"llm_model_name: {llm_model_name}", "info")
+                self._log(f"LLM_name_cost {self.LLM_name_cost}", "info")
 
                 # Extract the original filename for the response
                 original_filename = os.path.basename(file.filename)
@@ -1391,10 +1509,6 @@ class VoucherVisionProcessor:
 
                 # If ocr_only is True, skip VoucherVision processing
                 if ocr_only:
-                    # If OCR only, return minimal results structure with empty fields
-                    # if "GEMINI" in self.LLM_name_cost:
-                    #     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
-                    
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
@@ -1416,19 +1530,6 @@ class VoucherVisionProcessor:
                     # Process with VoucherVision
                     vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo)
                     
-                    # Combine results
-                    # results = {
-                    #     "ocr_info": ocr_info,
-                    #     "vvgo_json": vv_results,
-                    #     "parsing_info": {
-                    #         "input": tokens_in,
-                    #         "output": tokens_out
-                    #     }
-                    # }
-                    # Combine results
-                    # if "GEMINI" in self.LLM_name_cost:
-                    #     model_print = self.LLM_name_cost.lower().replace("_", "-").replace("gemini", "gemini", 1)
-
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
@@ -1448,11 +1549,13 @@ class VoucherVisionProcessor:
                         
                     ])
                 
-                self.logger.warning(results)
+                self._log(f"Processing completed successfully", "info")
                 return results, collage_image_bytes, 200
             
             except Exception as e:
-                self.logger.warning("Error processing request")
+                self._log(f"Error processing request: {e}", "error")
+                import traceback
+                self._log(f"Traceback: {traceback.format_exc()}", "error")
                 return {'error': str(e)}, None, 500
             
             finally:
@@ -1464,8 +1567,8 @@ class VoucherVisionProcessor:
                         os.remove(collage_temp_path)
                     if 'temp_dir' in locals() and os.path.exists(temp_dir):
                         os.rmdir(temp_dir)
-                except:
-                    pass
+                except Exception as cleanup_error:
+                    self._log(f"Error during cleanup: {cleanup_error}", "warning")
         finally:
             # Release the throttling semaphore
             self.throttler.release()
