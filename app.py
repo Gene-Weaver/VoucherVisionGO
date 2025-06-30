@@ -6,6 +6,8 @@ import tempfile
 import threading
 import math
 import io
+import base64
+import uuid
 import requests
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
@@ -52,6 +54,9 @@ sys.path.insert(0, vouchervision_path)
 component_detector_path = os.path.join(vouchervision_path, "component_detector")
 sys.path.insert(0, component_detector_path)
 
+text_collage_path = os.path.join(project_root, "TextCollage")
+sys.path.insert(0, text_collage_path)
+
 # Import VoucherVision modules
 try:
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
@@ -60,7 +65,8 @@ try:
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
-    
+    from TextCollage.CollageEngine import CollageEngine 
+
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
@@ -952,6 +958,25 @@ class VoucherVisionProcessor:
                 seed=123456, 
                 do_resize_img=False
             )
+
+        self.collage_engine = None
+        try:
+            # The model path is relative to the app's root directory
+            model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
+            if not os.path.exists(model_path):
+                 raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
+
+            self.collage_engine = CollageEngine(
+                model_xml_path=model_path,
+                collage_classes=['barcode', 'label', 'map'], # Classes to RENDER in the collage
+                engine="gemini", # No resizing, use original resolution
+                output_path=None, # Force return in-memory
+                hide_long_objects=False, # Sensible default for clean OCR input
+                draw_overlay=False
+            )
+            logger.info("CollageEngine initialized successfully.")
+        except Exception as e:
+            logger.error(f"Failed to initialize CollageEngine: {e}")
         
         # Initialize VoucherVision components
         self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
@@ -1112,20 +1137,38 @@ class VoucherVisionProcessor:
         """
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
-            return {'error': 'Server is at maximum capacity. Please try again later.'}, 429
-            
+            return {'error': 'Server is at maximum capacity. Please try again later.'}, None, 429
+        
+        original_temp_path = None
+        collage_temp_path = None
         try:
             # Check if the file is valid
             if file.filename == '':
-                return {'error': 'No file selected'}, 400
+                return {'error': 'No file selected'}, None, 400
             
             if not self.allowed_file(file.filename):
-                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
+                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, None, 400
+            
+            # --- STAGE 1: COLLAGE ENGINE PRE-PROCESSING ---
+            if not self.collage_engine:
+                return {'error': 'Collage Engine is not available on the server.'}, None, 503
             
             # Save uploaded file to a temporary location
             temp_dir = tempfile.mkdtemp()
-            file_path = os.path.join(temp_dir, secure_filename(file.filename))
-            file.save(file_path)
+            original_temp_path = os.path.join(temp_dir, f"original_{secure_filename(file.filename)}")
+            file.save(original_temp_path)
+            
+            logger.info("Running CollageEngine for pre-processing...")
+            collage_json_data, collage_image_bytes = self.collage_engine.run(original_temp_path)
+            
+            if collage_image_bytes is None:
+                raise RuntimeError("CollageEngine failed to produce an image.")
+            
+            # Save the resulting collage image to a *new* temporary file for the OCR step
+            collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
+            with open(collage_temp_path, 'wb') as f:
+                f.write(collage_image_bytes)
+            logger.info(f"Collage created at {collage_temp_path}, proceeding to OCR.")
             
             try:
                 # Get engine options (default to gemini models if not specified)
@@ -1161,7 +1204,7 @@ class VoucherVisionProcessor:
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
                 logger.info(f"Using prompt file: {current_prompt}")
-                logger.info(f"file_path: {file_path}")
+                logger.info(f"file_path: {collage_temp_path}")
                 logger.info(f"engine_options: {engine_options}")
                 logger.info(f"llm_model_name: {llm_model_name}")
                 logger.info(f"LLM_name_cost {self.LLM_name_cost}")
@@ -1170,7 +1213,7 @@ class VoucherVisionProcessor:
                 original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
-                ocr_info, ocr = self.perform_ocr(file_path, engine_options, ocr_prompt_option)
+                ocr_info, ocr = self.perform_ocr(collage_temp_path, engine_options, ocr_prompt_option)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if ocr_only:
@@ -1181,6 +1224,7 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
+                        ("collage_info", collage_json_data),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
@@ -1214,6 +1258,7 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
+                        ("collage_info", collage_json_data),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("WFO_info", WFO),
@@ -1230,23 +1275,62 @@ class VoucherVisionProcessor:
                     ])
                 
                 logger.warning(results)
-                return results, 200
+                return results, collage_image_bytes, 200
             
             except Exception as e:
                 self.logger.exception("Error processing request")
-                return {'error': str(e)}, 500
+                return {'error': str(e)}, None, 500
             
             finally:
                 # Clean up the temporary file
                 try:
-                    os.remove(file_path)
-                    os.rmdir(temp_dir)
+                    if original_temp_path and os.path.exists(original_temp_path):
+                        os.remove(original_temp_path)
+                    if collage_temp_path and os.path.exists(collage_temp_path):
+                        os.remove(collage_temp_path)
+                    if 'temp_dir' in locals() and os.path.exists(temp_dir):
+                        os.rmdir(temp_dir)
                 except:
                     pass
         finally:
             # Release the throttling semaphore
             self.throttler.release()
 
+def create_multipart_response(json_data, image_bytes):
+    """Creates a multipart/form-data response containing both JSON and an image."""
+    boundary = f"boundary--{uuid.uuid4()}"
+    
+    # Start the multipart body
+    body = []
+    
+    # Part 1: JSON data
+    body.append(f'--{boundary}')
+    body.append('Content-Disposition: form-data; name="json_data"')
+    body.append('Content-Type: application/json')
+    body.append('')
+    body.append(json.dumps(json_data, cls=OrderedJsonEncoder))
+    
+    # Part 2: Image data
+    body.append(f'--{boundary}')
+    body.append('Content-Disposition: form-data; name="image"; filename="collage.jpg"')
+    body.append('Content-Type: image/jpeg')
+    body.append('')
+    # The image bytes need to be appended as raw bytes, not strings
+    # So we join the text parts first, then append the bytes
+    
+    # Final boundary
+    end_boundary = f'\r\n--{boundary}--\r\n'
+    
+    # Combine text parts
+    text_parts = "\r\n".join(body) + "\r\n"
+    
+    # Create the full response body
+    full_body = text_parts.encode('utf-8') + image_bytes + end_boundary.encode('utf-8')
+
+    # Create and return the Flask response
+    response = make_response(full_body)
+    response.headers['Content-Type'] = f'multipart/form-data; boundary={boundary}'
+    return response
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
@@ -1298,6 +1382,8 @@ except Exception as e:
     logger.error(f"Failed to initialize application components: {str(e)}")
     raise
 
+
+
 @app.before_request
 def handle_preflight():
     if request.method == "OPTIONS":
@@ -1324,16 +1410,6 @@ def auth_check():
 @authenticated_route
 def process_image():
     """API endpoint to process an image with explicit CORS headers and automatic resizing"""
-    # Handle preflight OPTIONS request
-    # if request.method == 'OPTIONS':
-    #     response = make_response()
-    #     response.headers.add('Access-Control-Allow-Origin', '*')
-    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-    #     response.headers.add('Access-Control-Allow-Methods', 'POST')
-    #     response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
-    #     return response
-        
-    # Now proceed with the actual request handling
     # Check if file is present in the request
     if 'file' not in request.files:
         response = make_response(jsonify({'error': 'No file provided'}), 400)
@@ -1370,7 +1446,7 @@ def process_image():
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     # Process the image using the initialized processor
-    results, status_code = app.config['processor'].process_image_request(
+    results, image_bytes, status_code = app.config['processor'].process_image_request(
         file=file, 
         engine_options=engine_options, 
         prompt=prompt,
@@ -1383,27 +1459,29 @@ def process_image():
     # If processing was successful, update usage statistics
     if status_code == 200:
         update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
-    
-    # Create response with CORS headers
-    response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-    response.headers['Content-Type'] = 'application/json'
+
+    content_type = request.headers.get('Content-Type', '').lower()
+    if 'multipart/form-data' in content_type:
+        # For form submissions, return a multipart response
+        if image_bytes:
+            response = create_multipart_response(results, image_bytes)
+        else: # Fallback if image bytes are missing
+            response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+            response.headers['Content-Type'] = 'application/json'
+    else:
+        # For other clients, return standard JSON
+        response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+        response.headers['Content-Type'] = 'application/json'
+
     response.headers.add('Access-Control-Allow-Origin', '*')
-    
     return response
+    
 
 @app.route('/process-url', methods=['POST', 'OPTIONS'])
 @maintenance_mode_middleware
 @authenticated_route
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
-    # Handle preflight OPTIONS request
-    # if request.method == 'OPTIONS':
-    #     response = make_response()
-    #     response.headers.add('Access-Control-Allow-Origin', '*')
-    #     response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-    #     response.headers.add('Access-Control-Allow-Methods', 'POST')
-    #     response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
-    #     return response
     
     # Get user email
     user_email = get_user_email_from_request(request)
@@ -1441,12 +1519,11 @@ def process_image_by_url():
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     try:
-        # NEW: Process and resize the URL image if necessary
         file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
         logger.info(f"URL image processed and resized if necessary for user: {user_email}")
 
         # Process image
-        results, status_code = app.config['processor'].process_image_request(
+        results, image_bytes, status_code = app.config['processor'].process_image_request(
             file=file_obj,
             engine_options=engine_options,
             prompt=prompt,
@@ -1460,17 +1537,22 @@ def process_image_by_url():
         if status_code == 200:
             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
 
-        # Return JSON response
-        response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-        response.headers['Content-Type'] = 'application/json'
+        if 'multipart/form-data' in content_type:
+            if image_bytes:
+                response = create_multipart_response(results, image_bytes)
+            else:
+                response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+                response.headers['Content-Type'] = 'application/json'
+        else:
+            response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+            response.headers['Content-Type'] = 'application/json'
+
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
     except Exception as e:
         logger.exception(f"Error processing image from URL: {e}")
-        error_response = make_response(jsonify({'error': str(e)}), 500)
-        error_response.headers.add('Access-Control-Allow-Origin', '*')
-        return error_response
+        return jsonify({'error': str(e)}), 500
     
 # @app.route('/process-url', methods=['POST', 'OPTIONS'])
 # @maintenance_mode_middleware
