@@ -1613,7 +1613,6 @@ def create_multipart_response(json_data, image_bytes):
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-# CORS(app)  # This enables CORS for all routes
 CORS(app, 
      origins=["*"],  # Allow all origins, or specify: ["https://leafmachine.org", "http://localhost:8000"]
      methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
@@ -2102,9 +2101,19 @@ def test_json_order():
     ])
     return json.dumps(test_dict, cls=OrderedJsonEncoder), 200, {'Content-Type': 'application/json'}
 
-@app.route('/health', methods=['GET'])
+@app.route('/health', methods=['GET', 'OPTIONS'])
 def health_check():
     """Health check endpoint that bypasses maintenance mode and reports status"""
+    
+    # Handle OPTIONS preflight request for CORS
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
+        response.headers.add('Access-Control-Max-Age', '3600')
+        return response
+    
     # Get the active request count from the processor
     active_requests = app.config['processor'].throttler.get_active_count()
     max_requests = app.config['processor'].throttler.max_concurrent
@@ -2125,7 +2134,8 @@ def health_check():
     except Exception as e:
         logger.warning(f"Could not get maintenance info: {str(e)}")
     
-    return jsonify({
+    # Create the response with all the original functionality
+    response = jsonify({
         'status': 'ok',
         'active_requests': active_requests,
         'max_concurrent_requests': max_requests,
@@ -2133,7 +2143,28 @@ def health_check():
         'maintenance_mode': maintenance_status,
         'maintenance_info': maintenance_info,
         'api_status': 'maintenance' if maintenance_status else 'available'
-    }), 200
+    })
+    
+    # Ensure CORS headers are present on the actual response
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
+    
+    return response, 200
+
+@app.after_request
+def after_request(response):
+    """Ensure CORS headers are present on all responses"""
+    # Add CORS headers to all responses (if not already present)
+    if not response.headers.get('Access-Control-Allow-Origin'):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+    
+    # Add other CORS headers for non-preflight responses
+    if request.method != 'OPTIONS':
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key,Accept')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE')
+    
+    return response
 
 @app.route('/auth-success', methods=['GET'])
 def auth_success():    
