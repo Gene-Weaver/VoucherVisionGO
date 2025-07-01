@@ -632,22 +632,35 @@ async function processImage(sourceType = 'file') {
         });
 
         if (!response.ok) {
+            const errorText = await response.text();
+            if (response.status === 503) {
+                throw new Error('API is temporarily down for maintenance');
+            }
             throw new Error(`API error: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
         logDebug('API response success', data);
 
+        let resultsHTML = `<h3 class="success">Results:</h3>`;
+
+        // Show collage image if available
+        if (data.collage_info && data.collage_info.image_collage) {
+            resultsHTML += `
+                <div style="margin: 10px 0;">
+                    <h4>Processed Collage:</h4>
+                    <img src="data:image/jpeg;base64,${data.collage_info.image_collage}" 
+                        style="max-width: 100%; max-height: 400px; border: 1px solid #ccc;" />
+                </div>
+            `;
+        }
+
+        resultsHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+
         if (sourceType === 'file') {
-            $('#fileResults').html(`
-                <h3 class="success">Results:</h3>
-                <pre>${JSON.stringify(data, null, 2)}</pre>
-            `);
+            $('#fileResults').html(resultsHTML);
         } else {
-            $('#urlResults').html(`
-                <h3 class="success">Results:</h3>
-                <pre>${JSON.stringify(data, null, 2)}</pre>
-            `);
+            $('#urlResults').html(resultsHTML);
         }
     } catch (error) {
         logDebug('API response error', { error: error.toString() });

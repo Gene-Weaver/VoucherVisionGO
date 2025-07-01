@@ -1429,21 +1429,21 @@ class VoucherVisionProcessor:
         """
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
-            return {'error': 'Server is at maximum capacity. Please try again later.'}, None, 429
+            return {'error': 'Server is at maximum capacity. Please try again later.'}, 429
         
         original_temp_path = None
         collage_temp_path = None
         try:
             # Check if the file is valid
             if file.filename == '':
-                return {'error': 'No file selected'}, None, 400
+                return {'error': 'No file selected'}, 400
             
             if not self.allowed_file(file.filename):
-                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, None, 400
+                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
             
             # --- STAGE 1: COLLAGE ENGINE PRE-PROCESSING ---
             if not self.collage_engine:
-                return {'error': 'Collage Engine is not available on the server.'}, None, 503
+                return {'error': 'Collage Engine is not available on the server.'}, 503
             
             # Save uploaded file to a temporary location
             temp_dir = tempfile.mkdtemp()
@@ -1451,15 +1451,15 @@ class VoucherVisionProcessor:
             file.save(original_temp_path)
             
             self._log("Running CollageEngine for pre-processing...", "info")
-            collage_json_data, collage_image_bytes = self.collage_engine.run(original_temp_path)
+            collage_json_data = self.collage_engine.run(original_temp_path)
             
-            if collage_image_bytes is None:
+            if collage_json_data['image_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
             
             # Save the resulting collage image to a *new* temporary file for the OCR step
             collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
             with open(collage_temp_path, 'wb') as f:
-                f.write(collage_image_bytes)
+                f.write(collage_json_data['image_collage'])
             self._log(f"Collage created at {collage_temp_path}, proceeding to OCR.", "info")
             
             try:
@@ -1513,6 +1513,7 @@ class VoucherVisionProcessor:
                         ("filename", original_filename),
                         ("url_source", url_source),
                         ("collage_info", collage_json_data),
+                        ("collage_image_format", 'jpeg'),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
@@ -1534,6 +1535,7 @@ class VoucherVisionProcessor:
                         ("filename", original_filename),
                         ("url_source", url_source),
                         ("collage_info", collage_json_data),
+                        ("collage_image_format", 'jpeg'),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("WFO_info", WFO),
@@ -1550,13 +1552,13 @@ class VoucherVisionProcessor:
                     ])
                 
                 self._log(f"Processing completed successfully", "info")
-                return results, collage_image_bytes, 200
+                return results, 200
             
             except Exception as e:
                 self._log(f"Error processing request: {e}", "error")
                 import traceback
                 self._log(f"Traceback: {traceback.format_exc()}", "error")
-                return {'error': str(e)}, None, 500
+                return {'error': str(e)}, 500
             
             finally:
                 # Clean up the temporary file
@@ -1723,7 +1725,7 @@ def process_image():
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     # Process the image using the initialized processor
-    results, image_bytes, status_code = app.config['processor'].process_image_request(
+    results, status_code = app.config['processor'].process_image_request(
         file=file, 
         engine_options=engine_options, 
         prompt=prompt,
@@ -1736,20 +1738,12 @@ def process_image():
     # If processing was successful, update usage statistics
     if status_code == 200:
         update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
-
-    content_type = request.headers.get('Content-Type', '').lower()
-    if 'multipart/form-data' in content_type:
-        # For form submissions, return a multipart response
-        if image_bytes is not None and len(image_bytes) > 0:
-            response = create_multipart_response(results, image_bytes)
-        else: # Fallback if image bytes are missing
-            response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-            response.headers['Content-Type'] = 'application/json'
     else:
-        # For other clients, return standard JSON
-        response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-        response.headers['Content-Type'] = 'application/json'
+        update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}")
 
+    # Always return JSON
+    response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+    response.headers['Content-Type'] = 'application/json'
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
     
@@ -1800,7 +1794,7 @@ def process_image_by_url():
         logger.info(f"URL image processed and resized if necessary for user: {user_email}")
 
         # Process image
-        results, image_bytes, status_code = app.config['processor'].process_image_request(
+        results, status_code = app.config['processor'].process_image_request(
             file=file_obj,
             engine_options=engine_options,
             prompt=prompt,
@@ -1814,15 +1808,8 @@ def process_image_by_url():
         if status_code == 200:
             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
 
-        if 'multipart/form-data' in content_type:
-            if image_bytes:
-                response = create_multipart_response(results, image_bytes)
-            else:
-                response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-                response.headers['Content-Type'] = 'application/json'
-        else:
-            response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-            response.headers['Content-Type'] = 'application/json'
+        response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
+        response.headers['Content-Type'] = 'application/json'
 
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
