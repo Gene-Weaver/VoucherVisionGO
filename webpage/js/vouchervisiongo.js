@@ -642,26 +642,18 @@ async function processImage(sourceType = 'file') {
         const data = await response.json();
         logDebug('API response success', data);
 
-        let resultsHTML = `<h3 class="success">Results:</h3>`;
-
-        // Show collage image if available
-        if (data.collage_info && data.collage_info.image_collage) {
-            resultsHTML += `
-                <div style="margin: 10px 0;">
-                    <h4>Processed Collage:</h4>
-                    <img src="data:image/jpeg;base64,${data.collage_info.image_collage}" 
-                        style="max-width: 100%; max-height: 400px; border: 1px solid #ccc;" />
-                </div>
-            `;
-        }
-
-        resultsHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        // Create split layout for results
+        let resultsHTML = createSplitResultsLayout(data);
 
         if (sourceType === 'file') {
             $('#fileResults').html(resultsHTML);
         } else {
             $('#urlResults').html(resultsHTML);
         }
+
+        // Set up interactive features after DOM is updated
+        setupResultsInteractions(sourceType);
+
     } catch (error) {
         logDebug('API response error', { error: error.toString() });
 
@@ -683,4 +675,192 @@ async function processImage(sourceType = 'file') {
             $('#processUrlButton').prop('disabled', false).text('Process URL');
         }
     }
+}
+
+
+// Create split layout with JSON on left and image on right
+function createSplitResultsLayout(data) {
+    const hasCollageImage = data.collage_info && data.collage_info.image_collage;
+    
+    let html = `
+        <h3 class="success">Results:</h3>
+        <div class="split-results-container">
+            <div class="json-result-container">
+                <h4>API Response</h4>
+                <div class="json-controls">
+                    <button class="button copy-btn" onclick="copyJsonToClipboard()">Copy JSON</button>
+                    <button class="button download-btn" onclick="downloadJson()">Download JSON</button>
+                </div>
+                <details open>
+                    <summary>Full JSON Response</summary>
+                    <div class="json-content">${JSON.stringify(data, null, 2)}</div>
+                </details>
+            </div>
+    `;
+    
+    // Add image container on the right
+    html += `
+            <div class="image-result-container">
+                <h4>Processed Image</h4>
+    `;
+    
+    if (hasCollageImage) {
+        html += `
+                <img src="data:image/jpeg;base64,${data.collage_info.image_collage}" 
+                     class="processed-image" 
+                     alt="Processed Collage"
+                     onclick="openImageModal(this)" />
+                <div class="image-actions">
+                    <button class="button" onclick="downloadCollageImage('${data.collage_info.image_collage}')">Download Image</button>
+                </div>
+        `;
+    } else {
+        html += `
+                <div class="no-image-msg">
+                    No processed image available for this result.
+                </div>
+        `;
+    }
+    
+    html += `
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+// Set up interactive features for the results
+function setupResultsInteractions(sourceType) {
+    // Store the current data for copy/download functions
+    const resultsContainer = sourceType === 'file' ? '#fileResults' : '#urlResults';
+    const jsonContent = $(resultsContainer + ' .json-content').text();
+    
+    // Store data in a global variable for access by other functions
+    window.currentResultData = JSON.parse(jsonContent);
+}
+
+// Copy JSON to clipboard
+function copyJsonToClipboard() {
+    if (window.currentResultData) {
+        const jsonText = JSON.stringify(window.currentResultData, null, 2);
+        
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(jsonText).then(() => {
+                showTemporaryMessage('JSON copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                fallbackCopyToClipboard(jsonText);
+            });
+        } else {
+            fallbackCopyToClipboard(jsonText);
+        }
+    }
+}
+
+// Fallback copy method for older browsers
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showTemporaryMessage('JSON copied to clipboard!');
+    } catch (err) {
+        console.error('Fallback copy failed: ', err);
+        showTemporaryMessage('Copy failed. Please select and copy manually.');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Download JSON file
+function downloadJson() {
+    if (window.currentResultData) {
+        const jsonText = JSON.stringify(window.currentResultData, null, 2);
+        const blob = new Blob([jsonText], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `vouchervision_result_${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 100);
+    }
+}
+
+// Download collage image
+function downloadCollageImage(base64Data) {
+    const link = document.createElement('a');
+    link.href = `data:image/jpeg;base64,${base64Data}`;
+    link.download = `vouchervision_collage_${Date.now()}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Open image in modal for full-size viewing
+function openImageModal(img) {
+    const modal = document.createElement('div');
+    modal.className = 'image-modal-overlay';
+    modal.innerHTML = `
+        <div class="image-modal-content">
+            <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+            <img src="${img.src}" alt="Full Size Image" class="image-modal-img">
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close modal when clicking outside the image
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeImageModal();
+        }
+    });
+    
+    // Store reference to modal for closing
+    window.currentImageModal = modal;
+}
+
+// Close image modal
+function closeImageModal() {
+    if (window.currentImageModal) {
+        document.body.removeChild(window.currentImageModal);
+        window.currentImageModal = null;
+    }
+}
+
+// Show temporary message
+function showTemporaryMessage(message, duration = 2000) {
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = message;
+    messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    `;
+    
+    document.body.appendChild(messageDiv);
+    
+    setTimeout(() => {
+        if (document.body.contains(messageDiv)) {
+            document.body.removeChild(messageDiv);
+        }
+    }, duration);
 }

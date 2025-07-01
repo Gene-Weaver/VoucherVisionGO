@@ -1517,11 +1517,11 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
-                        ("collage_info", collage_json_data),
-                        ("collage_image_format", 'jpeg'),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
+                        ("ocr", ocr),
+                        ("formatted_json", ""),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
                             ("input", 0),
@@ -1529,8 +1529,8 @@ class VoucherVisionProcessor:
                             ("cost_in", 0),
                             ("cost_out", 0),
                         ])),
-                        ("ocr", ocr),
-                        ("formatted_json", ""),
+                        ("collage_info", collage_json_data),
+                        ("collage_image_format", 'jpeg'),
                     ])
                 else:
                     # Process with VoucherVision
@@ -1539,11 +1539,11 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
-                        ("collage_info", collage_json_data),
-                        ("collage_image_format", 'jpeg'),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info),
                         ("WFO_info", WFO),
+                        ("ocr", ocr),
+                        ("formatted_json", vv_results),
                         ("parsing_info", OrderedDict([
                             ("model", llm_model_name),
                             ("input", tokens_in),
@@ -1551,9 +1551,8 @@ class VoucherVisionProcessor:
                             ("cost_in", cost_in),
                             ("cost_out", cost_out),
                         ])),
-                        ("ocr", ocr),
-                        ("formatted_json", vv_results),
-                        
+                        ("collage_info", collage_json_data),
+                        ("collage_image_format", 'jpeg'),
                     ])
                 
                 self._log(f"Processing completed successfully", "info")
