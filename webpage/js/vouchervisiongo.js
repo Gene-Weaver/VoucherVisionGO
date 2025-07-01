@@ -680,7 +680,7 @@ async function processImage(sourceType = 'file') {
 
 // Create split layout with JSON on left and image on right
 function createSplitResultsLayout(data) {
-    const hasCollageImage = data.collage_info && data.collage_info.image_collage;
+    const hasCollageImage = data.collage_info && data.collage_info.base64image_text_collage;
     
     let html = `
         <h3 class="success">Results:</h3>
@@ -706,12 +706,12 @@ function createSplitResultsLayout(data) {
     
     if (hasCollageImage) {
         html += `
-                <img src="data:image/jpeg;base64,${data.collage_info.image_collage}" 
+                <img src="data:image/jpeg;base64,${data.collage_info.base64image_text_collage}" 
                      class="processed-image" 
                      alt="Processed Collage"
                      onclick="openImageModal(this)" />
                 <div class="image-actions">
-                    <button class="button" onclick="downloadCollageImage('${data.collage_info.image_collage}')">Download Image</button>
+                    <button class="button" onclick="downloadCollageImage('${data.collage_info.base64image_text_collage}')">Download Image</button>
                 </div>
         `;
     } else {

@@ -3347,48 +3347,28 @@ def api_key_management_ui():
     """Web UI for API key management"""
     # For POST requests, get token from form data and set in cookie
     if request.method == 'POST':
-        # Log all form data for debugging
-        logger.info(f"POST to /api-key-management with form keys: {list(request.form.keys())}")
-        
         auth_token = request.form.get('auth_token')
         if auth_token:
-            try:
-                # Verify the token is valid
-                logger.info(f"Received auth_token of length: {len(auth_token)}")
-                # Log first and last few characters for debugging (don't log the whole token!)
-                logger.info(f"Token prefix: {auth_token[:10]}..., suffix: ...{auth_token[-10:]}")
-                
-                decoded_token = auth.verify_id_token(auth_token)
-                user_email = decoded_token.get('email', 'unknown')
-                
-                logger.info(f"Token verified successfully for: {user_email}")
-                
-                # Create response that redirects to the same page via GET
-                response = make_response(redirect('/api-key-management'))
-                
-                # Store token in cookie for future requests
-                response.set_cookie(
-                    'auth_token', 
-                    auth_token, 
-                    httponly=True, 
-                    secure=True, 
-                    samesite='Lax',
-                    max_age=3600  # 1 hour expiration
-                )
-                
-                return response
-            except Exception as e:
-                logger.error(f"Error verifying token in /api-key-management POST: {str(e)}")
-                return jsonify({'error': f'Authentication failed: {str(e)}'}), 401
+            logger.info(f"POST to /api-key-management. Setting auth_token cookie and redirecting.")
+            response = make_response(redirect('/api-key-management'))
+            response.set_cookie(
+                'auth_token', 
+                auth_token, 
+                httponly=True, 
+                secure=True, 
+                samesite='Lax',
+                max_age=3600  # 1 hour expiration
+            )
+            return response
         else:
-            logger.warning("POST to /api-key-management without auth_token")
-            return jsonify({'error': 'Missing authentication token'}), 400
+            # If no token is provided in the POST, redirect to login.
+            logger.warning("POST to /api-key-management without auth_token. Redirecting to login.")
+            return redirect('/login')
     
     # For GET requests, use existing authentication mechanism
     user = authenticate_request(request)
     if not user or not user.get('email'):
-        logger.warning(f"Unauthenticated GET request to /api-key-management from {request.remote_addr}")
-        # Redirect to login instead of showing an error
+        logger.warning(f"Unauthenticated GET request to /api-key-management from {request.remote_addr}. Redirecting to login.")
         return redirect('/login')
     
     user_email = user.get('email')
