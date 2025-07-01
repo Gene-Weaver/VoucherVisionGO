@@ -948,7 +948,9 @@ pre {
 
 /* JSON Container (left side) */
 .json-result-container {
-    flex: 1;
+    /* flex: 1; DEPRECATED - We want a fixed percentage */
+    flex-basis: 75%; /* NEW: Set the base size to 75% */
+    flex-shrink: 0;   /* NEW: Prevent this container from shrinking */
     min-width: 0;
     background-color: #f8f9fa;
     border: 1px solid #e9ecef;
@@ -1017,7 +1019,9 @@ pre {
 
 /* Image Container (right side) */
 .image-result-container {
-    flex: 0 0 350px;
+    /* flex: 0 0 350px; DEPRECATED - We want a percentage, not fixed pixels */
+    flex-basis: 25%; /* NEW: Set the base size to 25% */
+    flex-shrink: 0;   /* NEW: Prevent this container from shrinking */
     display: flex;
     flex-direction: column;
     background-color: #ffffff;

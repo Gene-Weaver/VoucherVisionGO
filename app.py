@@ -6,6 +6,7 @@ import tempfile
 import threading
 import math
 import io
+import time
 import base64
 import uuid
 import requests
@@ -1773,7 +1774,7 @@ def process_image():
 @authenticated_route
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
-    
+    max_retries=3
     # Get user email
     user_email = get_user_email_from_request(request)
 
@@ -1809,48 +1810,69 @@ def process_image_by_url():
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
-    try:
-        #### Try to get the url image, if url returns 404 or is not available, will do a 200, but with empty data packet
+    file_obj, filename = None, None
+    last_exception = None
+
+    for attempt in range(max_retries):
         try:
+            logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch URL: {image_url}")
+            # The actual download attempt
             file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
-            logger.info(f"URL image processed and resized if necessary for user: {user_email}")
+            logger.info(f"URL image fetched successfully for user: {user_email}")
+            # If successful, break the loop and proceed
+            break
         except requests.exceptions.RequestException as e:
-            # This block catches 404s, connection errors, timeouts, etc.
-            logger.warning(f"Failed to fetch image from URL '{image_url}'. Reason: {e}")
-            
-            # Construct the desired empty JSON response
-            error_response_data = OrderedDict([
-                ("filename", extract_filename_from_url(image_url)), # Attempt to get a filename
-                ("url_source", image_url),
-                ("prompt", prompt),
-                ("ocr_info", {"error": f"Failed to fetch URL: {str(e)}"}),
-                ("WFO_info", ""),
-                ("ocr", ""),
-                ("formatted_json", ""),
-                ("parsing_info", OrderedDict([
-                    ("model", ""),
-                    ("input", 0),
-                    ("output", 0),
-                    ("cost_in", 0),
-                    ("cost_out", 0),
-                ])),
-                ("collage_info", {"error": "Image could not be retrieved from URL."}),
-                ("collage_image_format", ""),
-                ("success", {
-                    "image_available": "False",
-                    "text_collage": "False",
-                    "text_collage_resize": "False",
-                    "ocr": "False",
-                    "llm": "False",
-                }),
-            ])
-            
-            # Return this structure with a 200 OK status
-            response = make_response(json.dumps(error_response_data, cls=OrderedJsonEncoder), 200)
-            response.headers['Content-Type'] = 'application/json'
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
+            last_exception = e
+            logger.warning(f"Attempt {attempt + 1} failed for URL '{image_url}'. Reason: {e}")
+
+            # If this was the last attempt, the loop will end, and we'll handle the failure below.
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                logger.info(f"Waiting for {wait_time} second(s) before retrying...")
+                time.sleep(wait_time)
+        except Exception as e:
+            # Catch other unexpected errors during download/resize
+            logger.exception(f"An unexpected error occurred during URL processing on attempt {attempt + 1}: {e}")
+            return jsonify({'error': f'An unexpected server error occurred: {str(e)}'}), 500
+    
+    # After the loop, check if we ultimately failed
+    if file_obj is None and last_exception is not None:
+        logger.error(f"All {max_retries} retries failed for URL '{image_url}'. Final error: {last_exception}")
         
+        # Construct the desired empty JSON response for the final failure
+        error_response_data = OrderedDict([
+            ("filename", extract_filename_from_url(image_url)),
+            ("url_source", image_url),
+            ("prompt", prompt),
+            ("ocr_info", {"error": f"Failed to fetch URL: {str(last_exception)}"}),
+            ("WFO_info", ""),
+            ("ocr", ""),
+            ("formatted_json", ""),
+            ("parsing_info", OrderedDict([
+                ("model", ""),
+                ("input", 0),
+                ("output", 0),
+                ("cost_in", 0),
+                ("cost_out", 0),
+            ])),
+            ("collage_info", {"error": "Image could not be retrieved from URL."}),
+            ("collage_image_format", ""),
+            ("success", {  # Assuming you want to add this field
+                "image_available": "False",
+                "text_collage": "False",
+                "text_collage_resize": "False",
+                "ocr": "False",
+                "llm": "False",
+            }),
+        ])
+        
+        # Return this structure with a 200 OK status
+        response = make_response(json.dumps(error_response_data, cls=OrderedJsonEncoder), 200)
+        response.headers['Content-Type'] = 'application/json'
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    try:
         # Process image
         results, status_code = app.config['processor'].process_image_request(
             file=file_obj,
@@ -1865,6 +1887,9 @@ def process_image_by_url():
         # Update usage stats
         if status_code == 200:
             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
+        else:
+            # Log that the request failed after a successful download
+            update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}")
 
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
@@ -1873,121 +1898,9 @@ def process_image_by_url():
         return response
 
     except Exception as e:
-        logger.exception(f"Error processing image from URL: {e}")
+        logger.exception(f"Error during main processing after successful download from URL: {e}")
         return jsonify({'error': str(e)}), 500
     
-# @app.route('/process-url', methods=['POST', 'OPTIONS'])
-# @maintenance_mode_middleware
-# @authenticated_route
-# def process_image_by_url():
-#     """API endpoint to process an image from a URL with FormData, matching /process behavior"""
-#     # Handle preflight OPTIONS request
-#     if request.method == 'OPTIONS':
-#         response = make_response()
-#         response.headers.add('Access-Control-Allow-Origin', '*')
-#         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-#         response.headers.add('Access-Control-Allow-Methods', 'POST')
-#         response.headers.add('Access-Control-Max-Age', '3600')  # Cache preflight for 1 hour
-#         return response
-    
-#     # Get user email
-#     user_email = get_user_email_from_request(request)
-
-#     # Check content type to determine how to process the request
-#     content_type = request.headers.get('Content-Type', '').lower()
-    
-#     # Handle JSON request
-#     if 'application/json' in content_type:
-#         data = request.get_json()
-#         if not data or 'image_url' not in data:
-#             response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-#             response.headers.add('Access-Control-Allow-Origin', '*')
-#             return response
-            
-#         image_url = data.get('image_url')
-#         engine_options = data.get('engines')
-#         prompt = data.get('prompt')
-#         ocr_only = data.get('ocr_only', False)
-#         include_wfo = data.get('include_wfo', False)
-#         llm_model_name = data.get('llm_model')
-    
-#     # Handle form data request
-#     else:
-#         if 'image_url' not in request.form:
-#             response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-#             response.headers.add('Access-Control-Allow-Origin', '*')
-#             return response
-
-#         image_url = request.form.get('image_url')
-#         engine_options = request.form.getlist('engines') if 'engines' in request.form else None
-#         prompt = request.form.get('prompt') if 'prompt' in request.form else None
-#         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
-#         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
-#         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
-
-#     try:
-#         # Get filename from URL
-#         filename = extract_filename_from_url(image_url)
-
-#         # Download the image
-#         image_response = requests.get(image_url, stream=True)
-#         if image_response.status_code != 200:
-#             error_response = make_response(jsonify({
-#                 'error': f'Failed to download image from URL: {image_response.status_code}'
-#             }), 400)
-#             error_response.headers.add('Access-Control-Allow-Origin', '*')
-#             return error_response
-
-#         # Save to temp file
-#         temp_dir = tempfile.mkdtemp()
-#         file_path = os.path.join(temp_dir, secure_filename(filename))
-
-#         with open(file_path, 'wb') as f:
-#             for chunk in image_response.iter_content(chunk_size=8192):
-#                 f.write(chunk)
-
-#         with open(file_path, 'rb') as f:
-#             file_content = f.read()
-
-#         file_obj = FileStorage(
-#             stream=BytesIO(file_content),
-#             filename=filename,
-#             content_type=image_response.headers.get('Content-Type', 'image/jpeg')
-#         )
-
-#         # Process image
-#         results, status_code = app.config['processor'].process_image_request(
-#             file=file_obj,
-#             engine_options=engine_options,
-#             prompt=prompt,
-#             ocr_only=ocr_only,
-#             include_wfo=include_wfo,
-#             llm_model_name=llm_model_name,
-#             url_source=image_url,
-#         )
-
-#         # Update usage stats
-#         if status_code == 200:
-#             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
-
-#         # Clean temp file
-#         try:
-#             os.remove(file_path)
-#             os.rmdir(temp_dir)
-#         except:
-#             pass
-
-#         # Return JSON response
-#         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
-#         response.headers['Content-Type'] = 'application/json'
-#         response.headers.add('Access-Control-Allow-Origin', '*')
-#         return response
-
-#     except Exception as e:
-#         logger.exception(f"Error processing image from URL: {e}")
-#         error_response = make_response(jsonify({'error': str(e)}), 500)
-#         error_response.headers.add('Access-Control-Allow-Origin', '*')
-#         return error_response
 
 
 
