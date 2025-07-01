@@ -1457,12 +1457,12 @@ class VoucherVisionProcessor:
             collage_resize_method = "gemini"
             collage_json_data = self.collage_engine.run(original_temp_path) # TODO collage_resize_method to the run to set the method
             
-            if collage_json_data['image_collage'] is None:
+            if collage_json_data['base64image_text_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
             
             # Save the resulting collage image to a *new* temporary file for the OCR step
             # Decode the base64 string to bytes
-            collage_image_bytes = base64.b64decode(collage_json_data['image_collage'])
+            collage_image_bytes = base64.b64decode(collage_json_data['base64image_text_collage'])
             
             # Save the resulting collage image to a *new* temporary file for the OCR step
             collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
