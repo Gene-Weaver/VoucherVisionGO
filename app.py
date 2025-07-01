@@ -1334,21 +1334,23 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt] = {}
             self._log(f"ocr_opt {ocr_opt}", "info")
             
-            # Thread-safe access to OCR engines
-            with self.ocr_engines_lock:
-                # Use pre-initialized OCR engine if available, or create a new one
-                if ocr_opt not in self.ocr_engines:
-                    self.ocr_engines[ocr_opt] = OCRGeminiProVision(
-                        self.api_key, 
-                        model_name=ocr_opt, 
-                        max_output_tokens=1024, 
-                        temperature=1, 
-                        top_p=0.95, 
-                        seed=123456, 
-                        do_resize_img=False
-                    )
+            if ocr_opt not in self.ocr_engines:
+                # Thread-safe access to OCR engines
+                with self.ocr_engines_lock:
+                    # Second check (inside lock) to prevent race condition
+                    if ocr_opt not in self.ocr_engines:
+                        self._log(f"Lazily initializing new OCR engine for: {ocr_opt}", "info")
+                        self.ocr_engines[ocr_opt] = OCRGeminiProVision(
+                            self.api_key, 
+                            model_name=ocr_opt, 
+                            max_output_tokens=1024, 
+                            temperature=1, 
+                            top_p=0.95, 
+                            seed=123456, 
+                            do_resize_img=False
+                        )
                 
-                OCR_Engine = self.ocr_engines[ocr_opt]
+            OCR_Engine = self.ocr_engines[ocr_opt]
             
             # Execute OCR (this API call can run concurrently)
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
@@ -1397,7 +1399,7 @@ class VoucherVisionProcessor:
 
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo, LLM_name_cost):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
         vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, include_wfo)
@@ -1410,12 +1412,12 @@ class VoucherVisionProcessor:
             prompt_text, json_report=None, paths=None
         )
         self._log(f"response_candidate\n{response_candidate}", "info")
-        cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(self.LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
+        cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
     
     def process_image_request(self, file, 
-                              engine_options=["gemini-1.5-pro", "gemini-2.0-flash"], 
+                              engine_options=None, 
                               ocr_prompt_option=None, 
                               prompt=None, 
                               ocr_only=False, 
@@ -1495,9 +1497,9 @@ class VoucherVisionProcessor:
                 }
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
-                self.LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
-                self._log(f"Mapped to cost constant: {self.LLM_name_cost}", "info")
-                
+                LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
+                self._log(f"Mapped to cost constant: {LLM_name_cost}", "info")
+
                 # Use default prompt if none specified
                 current_prompt = prompt if prompt else self.default_prompt
                 self._log(f"Using prompt file: {current_prompt}", "info")
@@ -1534,7 +1536,7 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo)
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo, LLM_name_cost)
                     
                     results = OrderedDict([
                         ("filename", original_filename),
