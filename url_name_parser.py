@@ -1,7 +1,7 @@
 import re
 import requests
 import hashlib
-from urllib.parse import urlparse, unquote
+from urllib.parse import urlparse, unquote, parse_qs
 import os
 
 def extract_best_match(url, server_filename, debug=False):
@@ -52,6 +52,31 @@ def extract_filename_from_url(url, timeout=10, debug=False):
             # Base must have digits and valid characters
             if re.fullmatch(r'[A-Za-z0-9._-]+', base) and re.search(r'\d', base):
                 return fallback_name
+            
+    if parsed.query:
+        query_params = parse_qs(parsed.query)
+        
+        # Look for common parameter names that contain the actual image URL
+        url_param_names = ['url', 'src', 'image', 'file', 'path', 'link']
+        
+        for param_name in url_param_names:
+            if param_name in query_params:
+                nested_url = query_params[param_name][0]  # Get first value
+                if debug:
+                    print(f"Found nested URL in '{param_name}' parameter: {nested_url}")
+                
+                # Recursively extract filename from the nested URL
+                nested_parsed = urlparse(unquote(nested_url))
+                nested_filename = os.path.basename(nested_parsed.path)
+                
+                # Check if the nested filename looks valid
+                if nested_filename and any(nested_filename.lower().endswith(ext) for ext in valid_extensions):
+                    # Check if it's not a generic name
+                    name_without_ext = os.path.splitext(nested_filename)[0].lower()
+                    if name_without_ext not in generic_words:
+                        if debug:
+                            print(f"Using filename from nested URL: {nested_filename}")
+                        return nested_filename
 
     # See if the name is in the head (MICH)
     try:
@@ -131,6 +156,7 @@ def extract_filename_from_url(url, timeout=10, debug=False):
 
 if __name__ == "__main__":
     urls = [
+        "https://img.cyverse.org/resize?width=4000&url=https://data.cyverse.org/dav-anon/iplant/projects/magnoliagrandiFLORA/images/specimens/MISS0055041/MISS0055041.JPG",
         "https://id.digitarium.fi/api/C.131915/Preview001.jpg",
         "https://oregonflora.org/imglib/OSU_V/OSC-V-269/OSC-V-269340_med.jpg",
         "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg",

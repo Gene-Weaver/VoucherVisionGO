@@ -548,7 +548,7 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
     """
     try:        
         # Download the image
-        response = requests.get(image_url, stream=True, timeout=30)
+        response = requests.get(image_url, stream=True, timeout=60)
         response.raise_for_status()
         
         # Get filename from URL
@@ -1453,7 +1453,8 @@ class VoucherVisionProcessor:
             file.save(original_temp_path)
             
             self._log("Running CollageEngine for pre-processing...", "info")
-            collage_json_data = self.collage_engine.run(original_temp_path)
+            collage_resize_method = "gemini"
+            collage_json_data = self.collage_engine.run(original_temp_path) # TODO collage_resize_method to the run to set the method
             
             if collage_json_data['image_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
@@ -1533,6 +1534,13 @@ class VoucherVisionProcessor:
                         ])),
                         ("collage_info", collage_json_data),
                         ("collage_image_format", 'jpeg'),
+                        ("success", {
+                            "image_available": "True",
+                            "text_collage": "True",
+                            "text_collage_resize": f'{collage_resize_method}',
+                            "ocr": "True",
+                            "llm": "False",
+                        }),
                     ])
                 else:
                     # Process with VoucherVision
@@ -1555,6 +1563,13 @@ class VoucherVisionProcessor:
                         ])),
                         ("collage_info", collage_json_data),
                         ("collage_image_format", 'jpeg'),
+                        ("success", {
+                            "image_available": "True",
+                            "text_collage": "True",
+                            "text_collage_resize": f'{collage_resize_method}',
+                            "ocr": "True",
+                            "llm": "True",
+                        }),
                     ])
                 
                 self._log(f"Processing completed successfully", "info")
@@ -1795,9 +1810,47 @@ def process_image_by_url():
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
     try:
-        file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
-        logger.info(f"URL image processed and resized if necessary for user: {user_email}")
-
+        #### Try to get the url image, if url returns 404 or is not available, will do a 200, but with empty data packet
+        try:
+            file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
+            logger.info(f"URL image processed and resized if necessary for user: {user_email}")
+        except requests.exceptions.RequestException as e:
+            # This block catches 404s, connection errors, timeouts, etc.
+            logger.warning(f"Failed to fetch image from URL '{image_url}'. Reason: {e}")
+            
+            # Construct the desired empty JSON response
+            error_response_data = OrderedDict([
+                ("filename", extract_filename_from_url(image_url)), # Attempt to get a filename
+                ("url_source", image_url),
+                ("prompt", prompt),
+                ("ocr_info", {"error": f"Failed to fetch URL: {str(e)}"}),
+                ("WFO_info", ""),
+                ("ocr", ""),
+                ("formatted_json", ""),
+                ("parsing_info", OrderedDict([
+                    ("model", ""),
+                    ("input", 0),
+                    ("output", 0),
+                    ("cost_in", 0),
+                    ("cost_out", 0),
+                ])),
+                ("collage_info", {"error": "Image could not be retrieved from URL."}),
+                ("collage_image_format", ""),
+                ("success", {
+                    "image_available": "False",
+                    "text_collage": "False",
+                    "text_collage_resize": "False",
+                    "ocr": "False",
+                    "llm": "False",
+                }),
+            ])
+            
+            # Return this structure with a 200 OK status
+            response = make_response(json.dumps(error_response_data, cls=OrderedJsonEncoder), 200)
+            response.headers['Content-Type'] = 'application/json'
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+        
         # Process image
         results, status_code = app.config['processor'].process_image_request(
             file=file_obj,
