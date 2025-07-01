@@ -109,63 +109,67 @@ async function processBatchUrls(urls, concurrency, options = {}) {
         const url = urlData.url;
         try {
             logDebug(`Processing URL: ${url}`);
-            
+    
             // Get authentication headers
             const headers = getAuthHeaders();
-            
+    
             // Get the selected LLM model
             const llm_model = getSelectedModel();
-            
+    
             // Build request body
             const formData = new FormData();
             formData.append('image_url', url);
-            
+    
             // Add selected engines
             getSelectedEngines().forEach(engine => {
                 formData.append('engines', engine);
             });
-            
+    
             // Add OCR only mode if selected
             if ($('#ocrOnly').is(':checked')) {
                 formData.append('ocr_only', 'true');
             }
-            
+    
+            if ($('#includeWfo').is(':checked')) {
+                formData.append('include_wfo', 'true');
+            }
+    
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
             if (promptTemplate) {
                 formData.append('prompt', promptTemplate);
             }
-            
+    
             // Add selected model - make sure to include this!
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
-            
+    
             // Remove Content-Type header as it will be set by the browser with form boundary
             if ('Content-Type' in headers) {
                 delete headers['Content-Type'];
             }
-            
+    
             // Log what we're sending
             const formDataEntries = [];
             for (const pair of formData.entries()) {
                 formDataEntries.push({ key: pair[0], value: pair[1] });
             }
             logDebug(`Request for URL ${url}:`, formDataEntries);
-            
+    
             // Make the API request
             const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/process-url', {
                 method: 'POST',
                 headers: headers,
                 body: formData
             });
-            
+    
             if (!response.ok) {
                 throw new Error(`API error: ${response.status} ${response.statusText}`);
             }
-            
+    
             const data = await response.json();
-            
+    
             // Combine original data with API response
             const result = {
                 url: url,
@@ -173,23 +177,23 @@ async function processBatchUrls(urls, concurrency, options = {}) {
                 apiResponse: data,
                 success: true
             };
-            
+    
             results.push(result);
-            
+    
             // Add a preview thumbnail
             addUrlPreview(url, result);
-            
+    
             return result;
         } catch (error) {
             logDebug(`Error processing URL ${url}: ${error.message}`);
-            
+    
             const errorResult = {
                 url: url,
                 originalData: urlData.original,
                 error: error.message,
                 success: false
             };
-            
+    
             errors.push(errorResult);
             return errorResult;
         } finally {
