@@ -801,28 +801,28 @@ http://localhost:8000/index.html
         }
 
         // --- Check the PARENT container for JSON and update the GLOBAL map ---
-            function checkParentContainerForJson(parentContainer) {
-                // *** CHANGE: Look for PRE directly inside the parent container ***
-            const preElement = parentContainer.querySelector(':scope > .json-results pre, :scope > pre'); // Look in json-results div OR directly in parent
-                if (preElement) {
-                    const contentSample = preElement.textContent.substring(0, 300);
-                    logDebug(`Found PRE inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
-                    setTimeout(() => {
-                        try {
-                            const currentContent = preElement.textContent;
-                            if (!currentContent.trim()) { logDebug("PRE content is empty after delay, skipping parse."); return; }
-                            const jsonData = JSON.parse(currentContent);
-                            logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
-                            createOrUpdateGlobalMap(jsonData); // Update the single global map
-                        } catch (e) {
-                            logError(`Could not parse JSON from PRE in ${parentContainer.id || parentContainer.className}. Error:`, e);
-                            logError('Problematic PRE content:', preElement.textContent);
-                        }
-                    }, 50);
-                } else {
-                    logDebug(`No PRE element found directly inside the mutated container: ${parentContainer.id || parentContainer.className}`);
-                }
+        function checkParentContainerForJson(parentContainer) {
+            const jsonContentElement = parentContainer.querySelector('.json-content');
+
+            if (jsonContentElement) {
+                const contentSample = jsonContentElement.textContent.substring(0, 300);
+                logDebug(`Found .json-content inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
+                setTimeout(() => {
+                    try {
+                        const currentContent = jsonContentElement.textContent;
+                        if (!currentContent.trim()) { logDebug("JSON content is empty after delay, skipping parse."); return; }
+                        const jsonData = JSON.parse(currentContent);
+                        logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
+                        createOrUpdateGlobalMap(jsonData); // Update the single global map
+                    } catch (e) {
+                        logError(`Could not parse JSON from .json-content in ${parentContainer.id || parentContainer.className}. Error:`, e);
+                        logError('Problematic content:', jsonContentElement.textContent);
+                    }
+                }, 50); // A small delay to ensure the content is fully rendered
+            } else {
+                logDebug(`No .json-content element found inside the mutated container: ${parentContainer.id || parentContainer.className}`);
             }
+        }
 
 
         // --- DOM Ready (NO CHANGE) ---

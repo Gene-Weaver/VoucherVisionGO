@@ -701,7 +701,7 @@ function createSplitResultsLayout(data) {
     // Add image container on the right
     html += `
             <div class="image-result-container">
-                <h4>Processed Image</h4>
+                <h4>Text Collage</h4>
     `;
     
     if (hasCollageImage) {
@@ -717,7 +717,7 @@ function createSplitResultsLayout(data) {
     } else {
         html += `
                 <div class="no-image-msg">
-                    No processed image available for this result.
+                    Text Collage image not available.
                 </div>
         `;
     }
