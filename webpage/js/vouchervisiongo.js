@@ -814,7 +814,7 @@ function openImageModal(img) {
     modal.className = 'image-modal-overlay';
     modal.innerHTML = `
         <div class="image-modal-content">
-            <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+            <button class="image-modal-close" onclick="closeImageModal()">×</button>
             <img src="${img.src}" alt="Full Size Image" class="image-modal-img">
         </div>
     `;

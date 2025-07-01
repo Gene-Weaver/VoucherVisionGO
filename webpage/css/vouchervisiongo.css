@@ -943,13 +943,13 @@ pre {
     gap: 20px;
     margin-top: 15px;
     min-height: 400px;
-    align-items: flex-start; /* Align items to top */
+    align-items: flex-start;
 }
 
 /* JSON Container (left side) */
 .json-result-container {
     flex: 1;
-    min-width: 0; /* Allows flex item to shrink below content size */
+    min-width: 0;
     background-color: #f8f9fa;
     border: 1px solid #e9ecef;
     border-radius: 8px;
@@ -1017,7 +1017,7 @@ pre {
 
 /* Image Container (right side) */
 .image-result-container {
-    flex: 0 0 350px; /* Fixed width for image container */
+    flex: 0 0 350px;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -1184,70 +1184,4 @@ pre {
     border-top-right-radius: 0;
     margin-top: 0;
     border-top: none;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .image-result-container {
-        flex: 0 0 300px;
-    }
-    
-    .processed-image {
-        max-height: 300px;
-    }
-}
-
-@media (max-width: 768px) {
-    .split-results-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .image-result-container {
-        flex: 1;
-        min-width: auto;
-    }
-    
-    .processed-image {
-        max-height: 250px;
-    }
-    
-    .json-controls {
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    
-    .json-controls .button {
-        flex: 1;
-        min-width: 120px;
-    }
-    
-    .image-modal-content {
-        max-width: 95%;
-        max-height: 95%;
-        margin: 10px;
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .json-controls .button,
-    .image-actions .button {
-        padding: 8px 12px;
-        font-size: 12px;
-    }
-    
-    .processed-image {
-        max-height: 200px;
-    }
-    
-    .image-result-container,
-    .json-result-container {
-        padding: 10px;
-    }
-    
-    .image-result-container h4,
-    .json-result-container h4 {
-        font-size: 16px;
-    }
 }
