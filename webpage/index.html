@@ -58,6 +58,7 @@ http://localhost:8000/index.html
                 <li><a href="#" id="homeLink" class="active">Home</a></li>
                 <li><a href="#" id="readmeLink">About</a></li>
                 <li><a href="#" id="promptsLink">Available Prompts</a></li>
+                <li><a href="#" id="changelogLink">Changelog</a></li>
                 <li class="nav-right"><a href="#" id="signupLink">Sign up / Login</a></li>
             </ul>
         </div>
@@ -68,6 +69,10 @@ http://localhost:8000/index.html
         <!-- Prompts Content Section (initially hidden) -->
         <div id="promptsContent" class="prompts-section" style="display: none;">
             <iframe id="promptsFrame" src="about:blank" frameborder="0"></iframe>
+        </div>
+
+        <div id="changelogContent" class="changelog-section" style="display: none;">
+            <!-- This will be populated by JS -->
         </div>
 
         <!-- Signup/Login Content Section (initially hidden) -->
@@ -453,6 +458,7 @@ http://localhost:8000/index.html
     <script src="js/api_key_validator.js"></script>
     <script src="js/batch_processing.js"></script>
     <script src="js/prompt_templates.js"></script>
+    <script src="js/changelog_viewer.js"></script>
 
     <!-- Additional initialization script -->
     <script>
@@ -478,10 +484,12 @@ http://localhost:8000/index.html
             const homeLink = document.getElementById('homeLink');
             const readmeLink = document.getElementById('readmeLink');
             const promptsLink = document.getElementById('promptsLink');
+            const changelogLink = document.getElementById('changelogLink');
             const signupLink = document.getElementById('signupLink');
             const mainContent = document.getElementById('mainContent');
             const readmeContent = document.getElementById('readmeContent');
             const promptsContent = document.getElementById('promptsContent');
+            const changelogContent = document.getElementById('changelogContent');
             const signupContent = document.getElementById('signupContent');
             const promptsFrame = document.getElementById('promptsFrame');
             const signupFrame = document.getElementById('signupFrame');
@@ -516,12 +524,14 @@ http://localhost:8000/index.html
                 mainContent.style.display = 'none';
                 readmeContent.style.display = 'none';
                 promptsContent.style.display = 'none';
+                changelogContent.style.display = 'none';
                 signupContent.style.display = 'none';
 
                 // Remove active class from all nav links
                 homeLink.classList.remove('active');
                 readmeLink.classList.remove('active');
                 promptsLink.classList.remove('active');
+                changelogLink.classList.remove('active');
                 signupLink.classList.remove('active');
 
                 // Reset iframes to reduce resource usage when not visible
@@ -562,6 +572,14 @@ http://localhost:8000/index.html
                 promptsFrame.onload = function () {
                     promptsContent.classList.remove('loading');
                 };
+            });
+
+            changelogLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                changelogContent.style.display = 'block';
+                changelogLink.classList.add('active');
+                // The changelog script will handle fetching/displaying the content
             });
 
             // Handle signup link click

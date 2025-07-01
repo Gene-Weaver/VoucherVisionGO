@@ -1185,3 +1185,58 @@ pre {
     margin-top: 0;
     border-top: none;
 }
+
+.changelog-section {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.version-block {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+.version-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+.version-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+.version-header h2 {
+    color: #34495e;
+    margin: 0;
+}
+.date {
+    font-style: italic;
+    color: #7f8c8d;
+}
+.change-list {
+    list-style: none;
+    padding-left: 0;
+}
+.change-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+}
+.change-tag {
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    color: white;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+.tag-Feature { background-color: #3498db; }
+.tag-Fix { background-color: #e74c3c; }
+.tag-Improvement { background-color: #2ecc71; }
+.tag-Security { background-color: #f39c12; }

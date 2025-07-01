@@ -3776,7 +3776,37 @@ def set_maintenance_mode_endpoint():
         logger.error(f"Error setting maintenance mode: {str(e)}")
         return jsonify({'error': f'Failed to set maintenance mode: {str(e)}'}), 500
 
-
+@app.route('/changelog', methods=['GET'])
+def get_changelog():
+    """API endpoint to get the application changelog from a YAML file."""
+    changelog_file = os.path.join(project_root, 'changelog.yaml')
+    
+    if not os.path.exists(changelog_file):
+        logger.error(f"Changelog file not found at {changelog_file}")
+        return jsonify({'error': 'Changelog file not found.'}), 404
+        
+    try:
+        with open(changelog_file, 'r', encoding='utf-8') as f:
+            changelog_data = yaml.safe_load(f)
+        
+        # The YAML file is a list, so we can return it directly.
+        # Add a status wrapper for good practice.
+        return jsonify({
+            'status': 'success',
+            'changelog': changelog_data
+        })
+        
+    except yaml.YAMLError as e:
+        logger.error(f"Error parsing changelog.yaml: {e}")
+        return jsonify({'error': f'Failed to parse changelog file: {str(e)}'}), 500
+    except Exception as e:
+        logger.error(f"Error reading changelog file: {e}")
+        return jsonify({'error': f'An unexpected error occurred: {str(e)}'}), 500
+# HTML UI route for browsing the changelog
+@app.route('/changelog-ui', methods=['GET'])
+def changelog_ui():
+    """Web UI for viewing the changelog."""
+    return render_template('changelog_ui.html')
 
 
 
