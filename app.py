@@ -1506,7 +1506,7 @@ class VoucherVisionProcessor:
                 self._log(f"file_path: {collage_temp_path}", "info")
                 self._log(f"engine_options: {engine_options}", "info")
                 self._log(f"llm_model_name: {llm_model_name}", "info")
-                self._log(f"LLM_name_cost {self.LLM_name_cost}", "info")
+                self._log(f"LLM_name_cost {LLM_name_cost}", "info")
 
                 # Extract the original filename for the response
                 original_filename = os.path.basename(file.filename)
