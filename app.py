@@ -1457,10 +1457,15 @@ class VoucherVisionProcessor:
                 raise RuntimeError("CollageEngine failed to produce an image.")
             
             # Save the resulting collage image to a *new* temporary file for the OCR step
+            # Decode the base64 string to bytes
+            collage_image_bytes = base64.b64decode(collage_json_data['image_collage'])
+            
+            # Save the resulting collage image to a *new* temporary file for the OCR step
             collage_temp_path = os.path.join(temp_dir, f"collage_{secure_filename(file.filename)}")
             with open(collage_temp_path, 'wb') as f:
-                f.write(collage_json_data['image_collage'])
+                f.write(collage_image_bytes)
             self._log(f"Collage created at {collage_temp_path}, proceeding to OCR.", "info")
+            
             
             try:
                 # Get engine options (default to gemini models if not specified)
