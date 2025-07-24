@@ -616,245 +616,356 @@ http://localhost:8000/index.html
         // DO NOT MODIFY THIS COMMENT OR LINE - it's used by the server to inject the token
     </script>
 
-    <!-- START: Embedded Mapbox Initialization Script (REVISED Observer Target) -->
-    <script>
-    (function() {
-        // --- Hardcode your working Mapbox token here ---
-        const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGh5bG9mb3JmdW4iLCJhIjoiY2xqN29rYmFiMGI0ZjNlcDFyd243eHE1aSJ9.HWBxNMKGhJ7QUx2JA2RmQg';
-        // ---------------------------------------------
-
-        let map = null; // Store the single map instance
-        let mapboxLoaded = typeof mapboxgl !== 'undefined';
-
-        function logDebug(message, ...args) { console.log(`[Map Debug] ${message}`, ...args); }
-        function logError(message, ...args) { console.error(`[Map Error] ${message}`, ...args); }
-
-        logDebug('Initial Mapbox GL JS loaded status:', mapboxLoaded);
-
-        // --- Function to create or update the SINGLE map (NO CHANGE from previous) ---
-        function createOrUpdateGlobalMap(data) {
-            // ... (Keep the full working function from the previous response) ...
-                logDebug(">>> createOrUpdateGlobalMap called. Current map instance:", map ? 'Exists' : 'null');
-            const mapContainerElement = document.getElementById('global-map-container');
-            const statusElement = document.getElementById('global-map-coord-status');
-
-            if (!mapContainerElement || !statusElement) {
-                logError('Global map container or status element not found.');
-                return;
-            }
-            if (typeof mapboxgl === 'undefined') {
-                    logError('Mapbox GL JS not available for global map.');
-                    mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox GL JS library not loaded.</div>';
-                    return;
-            }
-            mapboxLoaded = true;
-            if (!MAPBOX_ACCESS_TOKEN) {
-                    logError('Mapbox token missing for global map.');
-                    mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox token missing.</div>';
-                    return;
-            }
-            mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
-
-            let lat = 0, lng = 0, hasValidCoordinates = false;
-            let sourceData = data;
-            if (data && data.apiResponse) { sourceData = data.apiResponse; logDebug("Using data from apiResponse wrapper."); }
-            const formattedJson = sourceData ? sourceData.formatted_json || sourceData : null;
-            logDebug("Data used for coordinates:", formattedJson);
-
-            if (formattedJson && formattedJson.decimalLatitude && formattedJson.decimalLongitude) {
-                lat = parseFloat(formattedJson.decimalLatitude);
-                lng = parseFloat(formattedJson.decimalLongitude);
-                hasValidCoordinates = !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
-                logDebug(`Parsed Coords: lat=${lat}, lng=${lng}`);
-            } else { logDebug("No valid decimalLatitude/decimalLongitude found in formattedJson."); }
-            logDebug(`Coordinate Validity Check: hasValidCoordinates = ${hasValidCoordinates}`);
-
-            statusElement.className = 'coord-status ' + (hasValidCoordinates ? 'valid' : 'invalid');
-            statusElement.innerHTML = hasValidCoordinates ? `✅ Coordinates found: ${lat.toFixed(4)}, ${lng.toFixed(4)}` : (data ? '⚠️ No valid coordinates in last result. Showing world view.' : '⚠️ Waiting for results with coordinates...');
-
-            if (map && typeof map.remove === 'function') {
-                    logDebug('Attempting to update existing global map.');
-                    try {
-                    if (map.marker) { logDebug("Removing existing marker."); map.marker.remove(); map.marker = null; }
-                    else { logDebug("No existing marker to remove."); }
-                    const targetCenter = hasValidCoordinates ? [lng, lat] : [0, 0];
-                    const targetZoom = hasValidCoordinates ? 10 : 1;
-                    logDebug(`Flying map to center: [${targetCenter.join(', ')}], zoom: ${targetZoom}`);
-                    map.flyTo({ center: targetCenter, zoom: targetZoom, essential: true });
-                    if (hasValidCoordinates) {
-                        const popupContent = createPopupContent(formattedJson);
-                        logDebug("Adding new marker.");
-                        setTimeout(() => {
-                                if (map && map.addControl) {
-                                    map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
-                                    logDebug("Marker added.");
-                                } else { logDebug("Map removed before marker could be added."); }
-                        }, 50);
-                    }
-                        logDebug("Requesting map resize.");
-                        requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
-                    } catch(updateError) { logError("Error during map update (flyTo/marker):", updateError); }
-            } else { /* ... (map creation logic - keep same as before) ... */
-                    if (mapContainerElement.classList.contains('mapboxgl-map')) { logWarn('Global map looks initialized but instance is missing/invalid.'); return; }
-                logDebug('Creating global map (should only happen once on init)');
-                mapContainerElement.innerHTML = '';
-                try {
-                    map = new mapboxgl.Map({ container: 'global-map-container', style: 'mapbox://styles/mapbox/outdoors-v12', center: [0, 0], zoom: 1 });
-                    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-                    map.on('load', () => {
-                        logDebug('Global map loaded.');
-                        if (hasValidCoordinates) {
-                                const popupContent = createPopupContent(formattedJson);
-                                map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
-                        }
-                        requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
-                    });
-                    map.on('error', (e) => {
-                        logError('Global Mapbox error:', e);
-                        mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error loading map: ${e.error ? e.error.message : 'Unknown error'}</div>`;
-                        map = null;
-                    });
-                } catch (initError) {
-                    logError('Error initializing global map:', initError);
-                    mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error initializing map: ${initError.message}</div>`;
-                    map = null;
-                }
-                }
-        }
-
-        // --- Helper to create popup HTML (NO CHANGE) ---
-        function createPopupContent(formattedJson) {
-                if (!formattedJson) return 'No details available.';
-                let content = `<strong>${formattedJson.scientificName || 'Unknown specimen'}</strong><br>`;
-                if (formattedJson.collectionDate) content += `Date: ${formattedJson.collectionDate}<br>`;
-                if (formattedJson.collectedBy) content += `Collector: ${formattedJson.collectedBy}<br>`;
-                if (formattedJson.locality) content += `<small>Locality: ${formattedJson.locality.substring(0, 100)}...</small>`;
-                return content;
-            }
-
-        // --- Initialize the SINGLE global map on page load (NO CHANGE) ---
-        function initializeGlobalMap() {
-            if (!mapboxLoaded) { console.warn('Embedded Script: Mapbox GL JS not loaded, cannot init global map yet.'); return; }
-            logDebug('Initializing global map with null data.');
-            createOrUpdateGlobalMap(null);
-        }
-
-        // --- Monitor results containers for new JSON data ---
-        function monitorResults() {
-            logDebug('Setting up MutationObservers for results (TARGETING PARENT)');
-            // *** CHANGE: Target the PARENT results/batch-results containers ***
-            const resultContainerIds = ['fileResults', 'urlResults', 'batchUrlResults', 'batchImageResults'];
-            resultContainerIds.forEach(function(containerId) {
-                    const container = document.getElementById(containerId); // Get the parent container
-                    if (container) {
-                    watchContainer(container); // Watch the parent
-                    } else {
-                        console.warn('Embedded Script: PARENT Result container not found for monitoring:', containerId);
-                    }
-            });
-        }
-
-        // --- Watch Container (NO CHANGE - still observes the passed node) ---
-        function watchContainer(container) {
-            const observer = new MutationObserver(function(mutationsList) {
-                logDebug("MutationObserver fired for:", container.id || container.className);
-                let relevantMutation = false;
-                for (const mutation of mutationsList) {
-                        // Check if the mutation happened *within* the observed node (or is the node itself)
-                        // and involves adding/changing a PRE tag or its text content
-                        if (mutation.type === 'childList') {
-                            mutation.addedNodes.forEach(node => {
-                            // Check if the added node IS a PRE or CONTAINS a PRE
-                            if (node.nodeName === 'PRE' || (node.querySelector && node.querySelector('pre'))) {
-                                relevantMutation = true;
-                            }
-                            });
-                        } else if (mutation.type === 'characterData') {
-                            // Check if the text change happened *inside* a PRE tag
-                            let parent = mutation.target.parentElement;
-                            while(parent && parent !== container) { // Traverse up to the observed container
-                            if (parent.nodeName === 'PRE') {
-                                relevantMutation = true;
-                                break;
-                            }
-                            parent = parent.parentElement;
-                            }
-                            // Also check if the change happened directly in a PRE that is a child of container
-                            if (!relevantMutation && mutation.target.parentElement && mutation.target.parentElement.nodeName === 'PRE' && mutation.target.parentElement.parentElement === container) {
-                            relevantMutation = true;
-                            }
-                        }
-                        if(relevantMutation) break;
-                }
-
-                if (relevantMutation) {
-                    logDebug('Relevant mutation detected, checking for JSON inside:', container.id || container.className);
-                    // *** CHANGE: Check the container that was passed (the parent) ***
-                    checkParentContainerForJson(container);
-                } else {
-                        // logDebug('Mutation detected, but no relevant PRE change found.'); // Reduce noise
-                }
-            });
-            // Observe the PARENT container for changes in its children/subtree
-            observer.observe(container, { childList: true, subtree: true, characterData: true });
-            logDebug('MutationObserver attached to PARENT:', container.id || container.className);
-        }
-
-        // --- Check the PARENT container for JSON and update the GLOBAL map ---
-        function checkParentContainerForJson(parentContainer) {
-            const jsonContentElement = parentContainer.querySelector('.json-content');
-
-            if (jsonContentElement) {
-                const contentSample = jsonContentElement.textContent.substring(0, 300);
-                logDebug(`Found .json-content inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
-                setTimeout(() => {
-                    try {
-                        const currentContent = jsonContentElement.textContent;
-                        if (!currentContent.trim()) { logDebug("JSON content is empty after delay, skipping parse."); return; }
-                        const jsonData = JSON.parse(currentContent);
-                        logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
-                        createOrUpdateGlobalMap(jsonData); // Update the single global map
-                    } catch (e) {
-                        logError(`Could not parse JSON from .json-content in ${parentContainer.id || parentContainer.className}. Error:`, e);
-                        logError('Problematic content:', jsonContentElement.textContent);
-                    }
-                }, 50); // A small delay to ensure the content is fully rendered
-            } else {
-                logDebug(`No .json-content element found inside the mutated container: ${parentContainer.id || parentContainer.className}`);
-            }
-        }
-
-
-        // --- DOM Ready (NO CHANGE) ---
-        document.addEventListener('DOMContentLoaded', function() {
-            logDebug('DOM Loaded. Waiting slightly before Mapbox Init.');
-            setTimeout(() => {
-                logDebug('Attempting Mapbox Init after short delay.');
-                mapboxLoaded = typeof mapboxgl !== 'undefined';
-                if (!mapboxLoaded) {
-                        logError("Mapbox GL JS still not loaded after delay. Global map cannot be initialized.");
-                        const mapContainerElement = document.getElementById('global-map-container');
-                        if(mapContainerElement) mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Map library failed to load.</div>';
+        <!-- START: Embedded Mapbox Initialization Script (FINAL FIX) -->
+        <script>
+            (function() {
+                // --- Hardcode your working Mapbox token here ---
+                const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGh5bG9mb3JmdW4iLCJhIjoiY2xqN29rYmFiMGI0ZjNlcDFyd243eHE1aSJ9.HWBxNMKGhJ7QUx2JA2RmQg';
+                // ---------------------------------------------
+        
+                let map = null; // Store the single map instance
+                let mapboxLoaded = typeof mapboxgl !== 'undefined';
+        
+                function logDebug(message, ...args) { console.log(`[Map Debug] ${message}`, ...args); }
+                function logError(message, ...args) { console.error(`[Map Error] ${message}`, ...args); }
+        
+                logDebug('Initial Mapbox GL JS loaded status:', mapboxLoaded);
+        
+                // --- Function to create or update the SINGLE map (NO CHANGE) ---
+                function createOrUpdateGlobalMap(data) {
+                    logDebug(">>> createOrUpdateGlobalMap called. Current map instance:", map ? 'Exists' : 'null');
+                    const mapContainerElement = document.getElementById('global-map-container');
+                    const statusElement = document.getElementById('global-map-coord-status');
+        
+                    if (!mapContainerElement || !statusElement) {
+                        logError('Global map container or status element not found.');
                         return;
+                    }
+                    if (typeof mapboxgl === 'undefined') {
+                            logError('Mapbox GL JS not available for global map.');
+                            mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox GL JS library not loaded.</div>';
+                            return;
+                    }
+                    mapboxLoaded = true;
+                    if (!MAPBOX_ACCESS_TOKEN) {
+                            logError('Mapbox token missing for global map.');
+                            mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox token missing.</div>';
+                            return;
+                    }
+                    mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+        
+                    let lat = 0, lng = 0, hasValidCoordinates = false;
+                    let sourceData = data;
+                    // *** FIX: Check for the full JSON response structure ***
+                    if (data && data.filename) { sourceData = data; logDebug("Using data from the full API response wrapper."); }
+                    const formattedJson = sourceData ? sourceData.formatted_json || null : null;
+                    logDebug("Data used for coordinates:", formattedJson);
+        
+                    if (formattedJson && formattedJson.decimalLatitude && formattedJson.decimalLongitude) {
+                        lat = parseFloat(formattedJson.decimalLatitude);
+                        lng = parseFloat(formattedJson.decimalLongitude);
+                        hasValidCoordinates = !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+                        logDebug(`Parsed Coords: lat=${lat}, lng=${lng}`);
+                    } else { logDebug("No valid decimalLatitude/decimalLongitude found in formattedJson."); }
+                    logDebug(`Coordinate Validity Check: hasValidCoordinates = ${hasValidCoordinates}`);
+        
+                    statusElement.className = 'coord-status ' + (hasValidCoordinates ? 'valid' : 'invalid');
+                    statusElement.innerHTML = hasValidCoordinates ? `✅ Coordinates found: ${lat.toFixed(4)}, ${lng.toFixed(4)}` : (data ? '⚠️ No valid coordinates in last result. Showing world view.' : '⚠️ Waiting for results with coordinates...');
+        
+                    if (map && typeof map.remove === 'function') {
+                            logDebug('Attempting to update existing global map.');
+                            try {
+                            if (map.marker) { logDebug("Removing existing marker."); map.marker.remove(); map.marker = null; }
+                            else { logDebug("No existing marker to remove."); }
+                            const targetCenter = hasValidCoordinates ? [lng, lat] : [0, 0];
+                            const targetZoom = hasValidCoordinates ? 10 : 1;
+                            logDebug(`Flying map to center: [${targetCenter.join(', ')}], zoom: ${targetZoom}`);
+                            map.flyTo({ center: targetCenter, zoom: targetZoom, essential: true });
+                            if (hasValidCoordinates) {
+                                const popupContent = createPopupContent(formattedJson);
+                                logDebug("Adding new marker.");
+                                setTimeout(() => {
+                                        if (map && map.addControl) {
+                                            map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                                            logDebug("Marker added.");
+                                        } else { logDebug("Map removed before marker could be added."); }
+                                }, 50);
+                            }
+                                logDebug("Requesting map resize.");
+                                requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                            } catch(updateError) { logError("Error during map update (flyTo/marker):", updateError); }
+                    } else {
+                            if (mapContainerElement.classList.contains('mapboxgl-map')) { console.warn('Global map looks initialized but instance is missing/invalid.'); return; }
+                        logDebug('Creating global map (should only happen once on init)');
+                        mapContainerElement.innerHTML = '';
+                        try {
+                            map = new mapboxgl.Map({ container: 'global-map-container', style: 'mapbox://styles/mapbox/outdoors-v12', center: [0, 0], zoom: 1 });
+                            map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+                            map.on('load', () => {
+                                logDebug('Global map loaded.');
+                                if (hasValidCoordinates) {
+                                        const popupContent = createPopupContent(formattedJson);
+                                        map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                                }
+                                requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                            });
+                            map.on('error', (e) => {
+                                logError('Global Mapbox error:', e);
+                                mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error loading map: ${e.error ? e.error.message : 'Unknown error'}</div>`;
+                                map = null;
+                            });
+                        } catch (initError) {
+                            logError('Error initializing global map:', initError);
+                            mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error initializing map: ${initError.message}</div>`;
+                            map = null;
+                        }
+                    }
                 }
-                if (!MAPBOX_ACCESS_TOKEN) { logWarn('No MAPBOX_ACCESS_TOKEN found (hardcoded). Map may not work.'); }
-                initializeGlobalMap();
-                monitorResults();
-            }, 150);
-        });
-
-    })();
-    </script>
-    <!-- END: Embedded Mapbox Initialization Script -->
+        
+                function createPopupContent(formattedJson) {
+                    if (!formattedJson) return 'No details available.';
+                    let content = `<strong>${formattedJson.scientificName || 'Unknown specimen'}</strong><br>`;
+                    if (formattedJson.collectionDate) content += `Date: ${formattedJson.collectionDate}<br>`;
+                    if (formattedJson.collectedBy) content += `Collector: ${formattedJson.collectedBy}<br>`;
+                    if (formattedJson.locality) content += `<small>Locality: ${formattedJson.locality.substring(0, 100)}...</small>`;
+                    return content;
+                }
+        
+                function initializeGlobalMap() {
+                    if (!mapboxLoaded) { console.warn('Embedded Script: Mapbox GL JS not loaded, cannot init global map yet.'); return; }
+                    logDebug('Initializing global map with null data.');
+                    createOrUpdateGlobalMap(null);
+                }
+        
+                function monitorResults() {
+                    logDebug('Setting up MutationObservers for results (TARGETING PARENT)');
+                    const resultContainerIds = ['fileResults', 'urlResults', 'batchUrlResults', 'batchImageResults'];
+                    resultContainerIds.forEach(function(containerId) {
+                        const container = document.getElementById(containerId);
+                        if (container) {
+                            watchContainer(container);
+                        } else {
+                            console.warn('Embedded Script: PARENT Result container not found for monitoring:', containerId);
+                        }
+                    });
+                }
+        
+                // *** FIX: Simplified the observer callback logic ***
+                function watchContainer(container) {
+                    const observer = new MutationObserver(function(mutationsList) {
+                        // The mutation itself is the trigger. No need to inspect it deeply.
+                        // The check function is robust enough to handle cases where no JSON is present.
+                        logDebug("MutationObserver fired for:", container.id || container.className, ". Checking for JSON content.");
+                        checkParentContainerForJson(container);
+                    });
+                    observer.observe(container, { childList: true, subtree: true });
+                    logDebug('MutationObserver attached to PARENT:', container.id || container.className);
+                }
+        
+                function checkParentContainerForJson(parentContainer) {
+                    const jsonContentElement = parentContainer.querySelector('.json-content');
+        
+                    if (jsonContentElement) {
+                        const contentSample = jsonContentElement.textContent.substring(0, 300);
+                        logDebug(`Found .json-content inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
+                        setTimeout(() => {
+                            try {
+                                const currentContent = jsonContentElement.textContent;
+                                if (!currentContent.trim()) { logDebug("JSON content is empty after delay, skipping parse."); return; }
+                                const jsonData = JSON.parse(currentContent);
+                                logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
+                                createOrUpdateGlobalMap(jsonData);
+                            } catch (e) {
+                                logError(`Could not parse JSON from .json-content in ${parentContainer.id || parentContainer.className}. Error:`, e);
+                                logError('Problematic content:', jsonContentElement.textContent);
+                            }
+                        }, 50);
+                    } else {
+                        logDebug(`No .json-content element found inside the mutated container: ${parentContainer.id || parentContainer.className}`);
+                    }
+                }
+        
+                document.addEventListener('DOMContentLoaded', function() {
+                    logDebug('DOM Loaded. Waiting slightly before Mapbox Init.');
+                    setTimeout(() => {
+                        logDebug('Attempting Mapbox Init after short delay.');
+                        mapboxLoaded = typeof mapboxgl !== 'undefined';
+                        if (!mapboxLoaded) {
+                            logError("Mapbox GL JS still not loaded after delay. Global map cannot be initialized.");
+                            const mapContainerElement = document.getElementById('global-map-container');
+                            if(mapContainerElement) mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Map library failed to load.</div>';
+                            return;
+                        }
+                        if (!MAPBOX_ACCESS_TOKEN) { logWarn('No MAPBOX_ACCESS_TOKEN found (hardcoded). Map may not work.'); }
+                        initializeGlobalMap();
+                        monitorResults();
+                    }, 150);
+                });
+        
+            })();
+            </script>
+            <!-- END: Embedded Mapbox Initialization Script -->
 
     <!-- API Status Indicator Script -->
     <script>
-    // API Status Checker - Works without authentication
-    (function() {
-        let statusCheckInterval;
-        let isCheckingStatus = false;
-        
-        function createStatusIndicator() {
+    // Global flag to enable/disable the API status checker
+    const ENABLE_API_CHECK = false;
+
+    if (ENABLE_API_CHECK) {
+        // --- Original API Status Checker Code ---
+        (function() {
+            let statusCheckInterval;
+            let isCheckingStatus = false;
+            
+            function createStatusIndicator() {
+                const statusContainer = document.createElement('div');
+                statusContainer.id = 'api-status-indicator';
+                statusContainer.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(255, 255, 255, 0.95);
+                    border: 1px solid #ddd;
+                    border-radius: 20px;
+                    padding: 8px 12px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    z-index: 1000;
+                    transition: all 0.3s ease;
+                    backdrop-filter: blur(5px);
+                    max-width: 200px;
+                    text-align: center;
+                    cursor: pointer;
+                `;
+                
+                statusContainer.addEventListener('click', function() {
+                    if (!isCheckingStatus) {
+                        checkAPIStatus();
+                    }
+                });
+                
+                statusContainer.title = 'Click to refresh API status';
+                
+                document.body.insertBefore(statusContainer, document.body.firstChild);
+                
+                return statusContainer;
+            }
+            
+            function updateStatusDisplay(isAvailable, isChecking = false) {
+                const container = document.getElementById('api-status-indicator');
+                if (!container) return;
+                
+                if (isChecking) {
+                    container.innerHTML = '🔍 <span style="color: #666;">Checking API...</span>';
+                    container.style.borderColor = '#ccc';
+                    container.style.backgroundColor = 'rgba(248, 249, 250, 0.95)';
+                    return;
+                }
+                
+                if (isAvailable) {
+                    container.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
+                    container.style.borderColor = '#4CAF50';
+                    container.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
+                } else {
+                    container.innerHTML = '🚧 <span style="color: #FF9800;">VVGO API: Down for Maintenance</span>';
+                    container.style.borderColor = '#FF9800';
+                    container.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
+                }
+            }
+            
+            async function checkAPIStatus() {
+                if (isCheckingStatus) return;
+                
+                isCheckingStatus = true;
+                updateStatusDisplay(false, true);
+                
+                try {
+                    const healthResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    if (healthResponse.ok) {
+                        const healthData = await healthResponse.json();
+                        console.log('API Health Check:', healthData);
+                        
+                        if (healthData.maintenance_mode === true) {
+                            updateStatusDisplay(false);
+                            console.log('API Status: Maintenance mode active (from health check)');
+                            return;
+                        }
+                        
+                        const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
+                            method: 'GET',
+                            mode: 'cors',
+                            cache: 'no-cache'
+                        });
+                        
+                        if (corsResponse.status === 503) {
+                            updateStatusDisplay(false);
+                            console.log('API Status: Maintenance mode detected (503 from cors-test)');
+                        } else if (corsResponse.ok) {
+                            updateStatusDisplay(true);
+                            console.log('API Status: Available');
+                        } else {
+                            updateStatusDisplay(true);
+                            console.log('API Status: Available (cors-test returned', corsResponse.status, ')');
+                        }
+                    } else {
+                        updateStatusDisplay(false);
+                        console.log('API Status: Health check failed', healthResponse.status);
+                    }
+                } catch (error) {
+                    updateStatusDisplay(false);
+                    console.log('API Status: Network error', error.message);
+                } finally {
+                    isCheckingStatus = false;
+                }
+            }
+            
+            function startStatusMonitoring() {
+                setTimeout(checkAPIStatus, 1500);
+                statusCheckInterval = setInterval(checkAPIStatus, 30000);
+                document.addEventListener('visibilitychange', function() {
+                    if (!document.hidden && !isCheckingStatus) {
+                        setTimeout(checkAPIStatus, 500);
+                    }
+                });
+            }
+            
+            function stopStatusMonitoring() {
+                if (statusCheckInterval) {
+                    clearInterval(statusCheckInterval);
+                    statusCheckInterval = null;
+                }
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    createStatusIndicator();
+                    startStatusMonitoring();
+                });
+            } else {
+                createStatusIndicator();
+                startStatusMonitoring();
+            }
+            
+            window.addEventListener('beforeunload', stopStatusMonitoring);
+            
+            window.VVGOStatus = {
+                check: checkAPIStatus,
+                start: startStatusMonitoring,
+                stop: stopStatusMonitoring
+            };
+        })();
+    } else {
+        // --- Fallback behavior when API check is disabled ---
+        document.addEventListener('DOMContentLoaded', function() {
             // Create the status indicator container
             const statusContainer = document.createElement('div');
             statusContainer.id = 'api-status-indicator';
@@ -862,8 +973,8 @@ http://localhost:8000/index.html
                 position: fixed;
                 top: 10px;
                 right: 10px;
-                background: rgba(255, 255, 255, 0.95);
-                border: 1px solid #ddd;
+                background: rgba(232, 245, 233, 0.95);
+                border: 1px solid #4CAF50;
                 border-radius: 20px;
                 padding: 8px 12px;
                 font-size: 12px;
@@ -874,152 +985,16 @@ http://localhost:8000/index.html
                 backdrop-filter: blur(5px);
                 max-width: 200px;
                 text-align: center;
-                cursor: pointer;
             `;
-            
-            // Add click handler to manually refresh status
-            statusContainer.addEventListener('click', function() {
-                if (!isCheckingStatus) {
-                    checkAPIStatus();
-                }
-            });
-            
-            statusContainer.title = 'Click to refresh API status';
+            // Set a static "Available" message without performing any checks
+            statusContainer.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
             
             // Insert at the beginning of body
             document.body.insertBefore(statusContainer, document.body.firstChild);
             
-            return statusContainer;
-        }
-        
-        function updateStatusDisplay(isAvailable, isChecking = false) {
-            const container = document.getElementById('api-status-indicator');
-            if (!container) return;
-            
-            if (isChecking) {
-                container.innerHTML = '🔍 <span style="color: #666;">Checking API...</span>';
-                container.style.borderColor = '#ccc';
-                container.style.backgroundColor = 'rgba(248, 249, 250, 0.95)';
-                return;
-            }
-            
-            if (isAvailable) {
-                container.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
-                container.style.borderColor = '#4CAF50';
-                container.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
-            } else {
-                container.innerHTML = '🚧 <span style="color: #FF9800;">VVGO API: Down for Maintenance</span>';
-                container.style.borderColor = '#FF9800';
-                container.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
-            }
-        }
-        
-        async function checkAPIStatus() {
-            if (isCheckingStatus) return; // Prevent multiple simultaneous checks
-            
-            isCheckingStatus = true;
-            updateStatusDisplay(false, true);
-            
-            try {
-                // First check the health endpoint (should always work)
-                const healthResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', {
-                    method: 'GET',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-                
-                if (healthResponse.ok) {
-                    const healthData = await healthResponse.json();
-                    console.log('API Health Check:', healthData);
-                    
-                    // Check if maintenance mode is reported in health response
-                    if (healthData.maintenance_mode === true) {
-                        updateStatusDisplay(false);
-                        console.log('API Status: Maintenance mode active (from health check)');
-                        return;
-                    }
-                    
-                    // Double-check with cors-test endpoint which respects maintenance mode
-                    const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
-                        method: 'GET',
-                        mode: 'cors',
-                        cache: 'no-cache'
-                    });
-                    
-                    if (corsResponse.status === 503) {
-                        // Maintenance mode is active
-                        updateStatusDisplay(false);
-                        console.log('API Status: Maintenance mode detected (503 from cors-test)');
-                    } else if (corsResponse.ok) {
-                        // API is fully available
-                        updateStatusDisplay(true);
-                        console.log('API Status: Available');
-                    } else {
-                        // Some other error, but health is OK so assume available
-                        updateStatusDisplay(true);
-                        console.log('API Status: Available (cors-test returned', corsResponse.status, ')');
-                    }
-                } else {
-                    // Health endpoint failed, API might be completely down
-                    updateStatusDisplay(false);
-                    console.log('API Status: Health check failed', healthResponse.status);
-                }
-            } catch (error) {
-                // Network error or CORS error, assume API is down
-                updateStatusDisplay(false);
-                console.log('API Status: Network error', error.message);
-            } finally {
-                isCheckingStatus = false;
-            }
-        }
-        
-        function startStatusMonitoring() {
-            // Check immediately when page loads (with a small delay)
-            setTimeout(checkAPIStatus, 1500);
-            
-            // Then check every 30 seconds
-            statusCheckInterval = setInterval(checkAPIStatus, 30000);
-            
-            // Also check when the page becomes visible again (user switches back to tab)
-            document.addEventListener('visibilitychange', function() {
-                if (!document.hidden && !isCheckingStatus) {
-                    setTimeout(checkAPIStatus, 500);
-                }
-            });
-        }
-        
-        function stopStatusMonitoring() {
-            if (statusCheckInterval) {
-                clearInterval(statusCheckInterval);
-                statusCheckInterval = null;
-            }
-        }
-        
-        // Initialize when DOM is ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                createStatusIndicator();
-                startStatusMonitoring();
-            });
-        } else {
-            // DOM already loaded
-            createStatusIndicator();
-            startStatusMonitoring();
-        }
-        
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', stopStatusMonitoring);
-        
-        // Expose functions for manual control if needed
-        window.VVGOStatus = {
-            check: checkAPIStatus,
-            start: startStatusMonitoring,
-            stop: stopStatusMonitoring
-        };
-    })();
+            console.log("API status check is disabled. Displaying static 'Available' indicator.");
+        });
+    }
     </script>
 
 </body>
