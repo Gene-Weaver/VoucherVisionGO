@@ -7,9 +7,9 @@ firebase.auth().onAuthStateChanged(function(user) {
     // Display user email
     document.getElementById('user-email').textContent = user.email;
     
-    // Check approval status periodically
+    // Check approval status once on page load
     checkApprovalStatus(user);
-    setInterval(() => checkApprovalStatus(user), 60000); // Check every minute
+    // setInterval(() => checkApprovalStatus(user), 60000); // Check every minute
   } else {
     // Not signed in, redirect to login
     window.location.href = '/login';
