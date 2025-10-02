@@ -1,0 +1,17 @@
+.git
+**/.git
+**/__pycache__
+*.ipynb
+*.md
+tests/
+docs/
+data/
+*.pt
+*.ckpt
+*.onnx
+*.bin
+*.npz
+*.npy
+*.rdb
+*.tar
+*.zip
