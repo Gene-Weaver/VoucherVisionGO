@@ -1,143 +1,11 @@
-# # cloudbuild.yaml
-# options:
-#   logging: GCS_ONLY
-#   env:
-#     - DOCKER_BUILDKIT=1
-
-# steps:
-#   # 1) Detect dependency/submodule changes (robust to first build)
-#   - name: gcr.io/cloud-builders/git
-#     id: check-changes
-#     entrypoint: bash
-#     args:
-#       - -lc
-#       - |
-#         set -euo pipefail
-#         git fetch --unshallow || true
-#         if git rev-parse HEAD~1 >/dev/null 2>&1; then
-#           RANGE="HEAD~1..HEAD"
-#         else
-#           echo "true" > /workspace/_deps_changed.txt
-#           echo "Critical dependencies changed: first build"
-#           exit 0
-#         fi
-
-#         DEPS_CHANGED=false
-#         # Docker/system/python deps
-#         if git diff --name-only "$RANGE" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|entrypoint\.sh)$'; then
-#           DEPS_CHANGED=true
-#         fi
-#         # Submodules / vendor trees (pointer changes)
-#         if git diff --name-only "$RANGE" -- TextCollage vouchervision_main | grep -q .; then
-#           DEPS_CHANGED=true
-#         fi
-
-#         echo "$DEPS_CHANGED" > /workspace/_deps_changed.txt
-#         echo "Critical dependencies changed: $DEPS_CHANGED"
-
-#   # 2) Shallow init submodules for speed
-#   - name: gcr.io/cloud-builders/git
-#     id: update-submodules
-#     entrypoint: bash
-#     args:
-#       - -lc
-#       - |
-#         git submodule init
-#         git submodule update --recursive --depth 1 --recommend-shallow
-
-#   - name: gcr.io/cloud-builders/git
-#     id: verify-submodules
-#     entrypoint: bash
-#     args:
-#       - -lc
-#       - |
-#         echo "Verifying submodule contents..."
-#         ls -la TextCollage/ || echo "TextCollage not found"
-#         ls -la TextCollage/models/ || echo "models not found"
-#         ls -la TextCollage/models/openvino/ || echo "openvino not found"
-
-#   # 3) Buildx setup (enables cache-to/from registry)
-#   - name: gcr.io/cloud-builders/docker
-#     id: setup-buildx
-#     entrypoint: bash
-#     args:
-#       - -lc
-#       - |
-#         docker buildx create --name vv-builder --use || docker buildx use vv-builder
-#         docker buildx inspect --bootstrap
-
-#   # 4) Build with persistent cache. Full rebuild only when deps changed.
-#   - name: gcr.io/cloud-builders/docker
-#     id: build
-#     entrypoint: bash
-#     args:
-#       - -lc
-#       - |
-#         set -euo pipefail
-#         _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
-#         CACHE_REF="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv:buildcache"
-#         IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-#         TAG_SHA="${IMAGE}:${COMMIT_SHA}"
-#         TAG_LATEST="${IMAGE}:latest"
-
-#         if [ "$_DEPS_CHANGED" = "true" ]; then
-#           echo "Full rebuild (deps/submodules changed)"
-#           # no-cache forces layers to be re-evaluated; cache-to repopulates registry cache afterwards
-#           docker buildx build \
-#             --load \
-#             --no-cache \
-#             --cache-to=type=registry,ref=${CACHE_REF},mode=max \
-#             -t "${TAG_SHA}" -t "${TAG_LATEST}" .
-#         else
-#           echo "Fast rebuild (code-only changes) using registry cache"
-#           docker buildx build \
-#             --load \
-#             --cache-from=type=registry,ref=${CACHE_REF} \
-#             --cache-to=type=registry,ref=${CACHE_REF},mode=max \
-#             -t "${TAG_SHA}" -t "${TAG_LATEST}" .
-#         fi
-
-#   # 5) Push the images
-#   - name: gcr.io/cloud-builders/docker
-#     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}']
-
-#   - name: gcr.io/cloud-builders/docker
-#     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest']
-
-#   # 6) Deploy to Cloud Run
-#   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-#     entrypoint: gcloud
-#     args:
-#       - run
-#       - deploy
-#       - vouchervision-go
-#       - --image
-#       - us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}
-#       - --region
-#       - us-central1
-#       - --platform
-#       - managed
-#       - --allow-unauthenticated
-
-# images:
-#   - us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}
-#   - us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest
-
-# serviceAccount: projects/${PROJECT_ID}/serviceAccounts/${_SERVICE_ACCOUNT_EMAIL}
-# logsBucket: gs://${_BUCKET}
-
-# substitutions:
-#   _API_KEY: ''
-#   _SERVICE_ACCOUNT_EMAIL: ''
-#   _BUCKET: ''
-
+# cloudbuild.yaml
 options:
   logging: GCS_ONLY
   env:
     - DOCKER_BUILDKIT=1
 
 steps:
-  # 1) Detect dependency or submodule changes (robust to first build)
+  # 1) Detect dependency/submodule changes (robust to first build)
   - name: gcr.io/cloud-builders/git
     id: check-changes
     entrypoint: bash
@@ -146,30 +14,26 @@ steps:
       - |
         set -euo pipefail
         git fetch --unshallow || true
-
-        _DEPS_CHANGED=true
         if git rev-parse HEAD~1 >/dev/null 2>&1; then
-          _RANGE="HEAD~1..HEAD"
-          _DEPS_CHANGED=false
-
-          # Check files without piping errors killing the script
-          _CHANGED="$(git diff --name-only "$_RANGE" || true)"
-          if echo "$_CHANGED" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|Dockerfile\.base|entrypoint\.sh)$'; then
-            _DEPS_CHANGED=true
-          fi
-
-          # Check submodule pointer changes
-          if echo "$_CHANGED" | grep -qE '^(TextCollage|vouchervision_main)/'; then
-            _DEPS_CHANGED=true
-          fi
+          RANGE="HEAD~1..HEAD"
         else
-          echo "First build in this history; forcing base build."
-          _DEPS_CHANGED=true
+          echo "true" > /workspace/_deps_changed.txt
+          echo "Critical dependencies changed: first build"
+          exit 0
         fi
 
-        echo "$_DEPS_CHANGED" > /workspace/_deps_changed.txt
-        echo "Critical dependencies changed: ${_DEPS_CHANGED}"
+        DEPS_CHANGED=false
+        # Docker/system/python deps
+        if git diff --name-only "$RANGE" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|entrypoint\.sh)$'; then
+          DEPS_CHANGED=true
+        fi
+        # Submodules / vendor trees (pointer changes)
+        if git diff --name-only "$RANGE" -- TextCollage vouchervision_main | grep -q .; then
+          DEPS_CHANGED=true
+        fi
 
+        echo "$DEPS_CHANGED" > /workspace/_deps_changed.txt
+        echo "Critical dependencies changed: $DEPS_CHANGED"
 
   # 2) Shallow init submodules for speed
   - name: gcr.io/cloud-builders/git
@@ -192,7 +56,7 @@ steps:
         ls -la TextCollage/models/ || echo "models not found"
         ls -la TextCollage/models/openvino/ || echo "openvino not found"
 
-  # 3) Setup buildx (enables cache-to/from registry)
+  # 3) Buildx setup (enables cache-to/from registry)
   - name: gcr.io/cloud-builders/docker
     id: setup-buildx
     entrypoint: bash
@@ -202,106 +66,43 @@ steps:
         docker buildx create --name vv-builder --use || docker buildx use vv-builder
         docker buildx inspect --bootstrap
 
-  # 4) Build/push BASE image if deps changed OR if base doesn't exist yet
+  # 4) Build with persistent cache. Full rebuild only when deps changed.
   - name: gcr.io/cloud-builders/docker
-    id: build-base
+    id: build
     entrypoint: bash
     args:
       - -lc
       - |
         set -euo pipefail
-
-        # Cloud Build substitutions may be empty in manual builds — provide safe fallbacks.
-        _PROJECT_ID_VAL="${PROJECT_ID:-}"
-        _COMMIT_SHA_VAL="${COMMIT_SHA:-}"
-
-        if [[ -z "$_PROJECT_ID_VAL" ]]; then
-          echo "ERROR: PROJECT_ID substitution is empty. Ensure your trigger defines PROJECT_ID or use a repo-trigger." >&2
-          exit 1
-        fi
-        if [[ -z "$_COMMIT_SHA_VAL" ]]; then
-          _COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${_COMMIT_SHA_VAL}"
-        fi
-
         _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
-        _BASE_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/bases/vv-base"
-        _BASE_LATEST="${_BASE_IMAGE}:latest"
-        _BASE_SHA="${_BASE_IMAGE}:${_COMMIT_SHA_VAL}"
-        _CACHE_REF_BASE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-base:buildcache"
+        CACHE_REF="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv:buildcache"
+        IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
+        TAG_SHA="${IMAGE}:${COMMIT_SHA}"
+        TAG_LATEST="${IMAGE}:latest"
 
-        echo "DBG PROJECT_ID=${_PROJECT_ID_VAL}"
-        echo "DBG COMMIT_SHA=${_COMMIT_SHA_VAL}"
-        echo "DBG _BASE_IMAGE=${_BASE_IMAGE}"
-        echo "DBG _BASE_LATEST=${_BASE_LATEST}"
-        echo "DBG _BASE_SHA=${_BASE_SHA}"
-
-        # Guard against any accidental empties (defensive)
-        for t in "$_BASE_LATEST" "$_BASE_SHA"; do
-          if [[ -z "$t" || "$t" =~ :: || "$t" =~ ^: || "$t" =~ :$ ]]; then
-            echo "ERROR: invalid computed tag: '$t'" >&2
-            exit 1
-          fi
-        done
-
-        build_base() {
-          echo "Building base image..."
+        if [ "$_DEPS_CHANGED" = "true" ]; then
+          echo "Full rebuild (deps/submodules changed)"
+          # no-cache forces layers to be re-evaluated; cache-to repopulates registry cache afterwards
           docker buildx build \
-            --push \
-            --file Dockerfile.base \
-            --cache-from=type=registry,ref="${_CACHE_REF_BASE}" \
-            --cache-to=type=registry,ref="${_CACHE_REF_BASE}",mode=max \
-            -t "${_BASE_SHA}" -t "${_BASE_LATEST}" .
-        }
-
-        if [[ "${_DEPS_CHANGED}" == "true" ]]; then
-          build_base
+            --load \
+            --no-cache \
+            --cache-to=type=registry,ref=${CACHE_REF},mode=max \
+            -t "${TAG_SHA}" -t "${TAG_LATEST}" .
         else
-          if ! docker pull "${_BASE_LATEST}" >/dev/null 2>&1; then
-            echo "Base image not found; building it once..."
-            build_base
-          else
-            echo "Base image exists and deps unchanged; skip base build."
-          fi
+          echo "Fast rebuild (code-only changes) using registry cache"
+          docker buildx build \
+            --load \
+            --cache-from=type=registry,ref=${CACHE_REF} \
+            --cache-to=type=registry,ref=${CACHE_REF},mode=max \
+            -t "${TAG_SHA}" -t "${TAG_LATEST}" .
         fi
 
-  # 5) Build APP image quickly FROM the base, with its own cache
+  # 5) Push the images
   - name: gcr.io/cloud-builders/docker
-    id: build-app
-    entrypoint: bash
-    args:
-      - -lc
-      - |
-        set -euo pipefail
-        _PROJECT_ID_VAL="${PROJECT_ID:-}"
-        _COMMIT_SHA_VAL="${COMMIT_SHA:-}"
-        if [[ -z "$_PROJECT_ID_VAL" ]]; then
-          echo "ERROR: PROJECT_ID substitution is empty." >&2
-          exit 1
-        fi
-        if [[ -z "$_COMMIT_SHA_VAL" ]]; then
-          _COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${_COMMIT_SHA_VAL}"
-        fi
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}']
 
-        _APP_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-        _TAG_SHA="${_APP_IMAGE}:${_COMMIT_SHA_VAL}"
-        _TAG_LATEST="${_APP_IMAGE}:latest"
-        _CACHE_REF_APP="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-app:buildcache"
-
-        echo "DBG _APP_IMAGE=${_APP_IMAGE}"
-        echo "DBG _TAG_SHA=${_TAG_SHA}"
-        echo "DBG _TAG_LATEST=${_TAG_LATEST}"
-
-        docker buildx build \
-          --push \
-          --build-arg PROJECT_ID="${_PROJECT_ID_VAL}" \
-          --cache-from=type=registry,ref="${_CACHE_REF_APP}" \
-          --cache-to=type=registry,ref="${_CACHE_REF_APP}",mode=max \
-          -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
-
-
-
+  - name: gcr.io/cloud-builders/docker
+    args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest']
 
   # 6) Deploy to Cloud Run
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -319,9 +120,6 @@ steps:
       - --allow-unauthenticated
 
 images:
-  # Track both base and app images
-  - us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base:${COMMIT_SHA}
-  - us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base:latest
   - us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}
   - us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest
 
@@ -332,4 +130,3 @@ substitutions:
   _API_KEY: ''
   _SERVICE_ACCOUNT_EMAIL: ''
   _BUCKET: ''
-
