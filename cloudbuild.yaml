@@ -147,12 +147,12 @@ steps:
         set -euo pipefail
         git fetch --unshallow || true
         if git rev-parse HEAD~1 >/dev/null 2>&1; then
-          RANGE="HEAD~1..HEAD"
+          _RANGE="HEAD~1..HEAD"
           DEPS_CHANGED=false
-          if git diff --name-only "$RANGE" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|Dockerfile\.base|entrypoint\.sh)$'; then
+          if git diff --name-only "$_RANGE" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|Dockerfile\.base|entrypoint\.sh)$'; then
             DEPS_CHANGED=true
           fi
-          if git diff --name-only "$RANGE" -- TextCollage vouchervision_main | grep -q .; then
+          if git diff --name-only "$_RANGE" -- TextCollage vouchervision_main | grep -q .; then
             DEPS_CHANGED=true
           fi
         else
