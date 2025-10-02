@@ -4,27 +4,27 @@ async function loadUsageStatistics() {
   const loadingElem = document.getElementById('usage-loading');
   const tableElem = document.getElementById('usage-table');
   const listElem = document.getElementById('usage-list');
-  
+
   try {
     // Get the Firebase ID token for authentication
     const idToken = await firebase.auth().currentUser.getIdToken();
-    
+
     // Fetch usage statistics from server
     const response = await fetch('/admin/usage-statistics', {
       headers: {
         'Authorization': `Bearer ${idToken}`
       }
     });
-    
+
     if (!response.ok) {
       throw new Error(`Server returned ${response.status}: ${response.statusText}`);
     }
-    
+
     const data = await response.json();
-    
+
     // Hide loading indicator
     loadingElem.style.display = 'none';
-    
+
     if (data.status === 'success') {
       if (data.count === 0) {
         // No usage data found
@@ -32,26 +32,26 @@ async function loadUsageStatistics() {
       } else {
         // Save statistics globally for reuse
         window.allStats = data.usage_statistics;
-        
-        // First, create the chart
+
+        // First, create the chart container (the summary widgets are rendered inside the chart container)
         const chartContainerDiv = document.createElement('div');
         chartContainerDiv.id = 'daily-usage-chart-container';
         chartContainerDiv.style.marginBottom = '30px';
         usageContainer.insertBefore(chartContainerDiv, usageContainer.firstChild);
-        
-        // Process and render the daily usage chart
+
+        // Process and render the daily usage chart (this will also render the new Total widgets above it)
         createUsageChart(data.usage_statistics);
-        
+
         // Display usage statistics table
         tableElem.style.display = 'table';
-        
+
         // Clear existing list
         listElem.innerHTML = '';
-        
+
         // Current and previous month
         const now = new Date();
         const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-        
+
         // Previous month calculation
         let prevMonth;
         if (now.getMonth() === 0) {
@@ -60,25 +60,25 @@ async function loadUsageStatistics() {
         } else {
           prevMonth = `${now.getFullYear()}-${String(now.getMonth()).padStart(2, '0')}`;
         }
-        
+
         // Create color map for all users
         const userColors = createUserColorMap(data.usage_statistics);
-        
+
         // Add each statistic to the table
         data.usage_statistics.forEach(stat => {
           const row = document.createElement('tr');
           const email = stat.user_email || 'Unknown';
           const userColor = userColors[email];
-          
+
           // Get monthly usage numbers
           const monthlyUsage = stat.monthly_usage || {};
           const currentMonthUsage = monthlyUsage[currentMonth] || 0;
           const prevMonthUsage = monthlyUsage[prevMonth] || 0;
-          
+
           // Format timestamps
           const firstUsed = formatTimestamp(stat.first_processed_at);
           const lastUsed = formatTimestamp(stat.last_processed_at);
-          
+
           row.innerHTML = `
             <td>
               <div style="display: flex; align-items: center;">
@@ -95,10 +95,10 @@ async function loadUsageStatistics() {
               <button class="btn-view-details" data-email="${email}">View Details</button>
             </td>
           `;
-          
+
           listElem.appendChild(row);
         });
-        
+
         // Add event listeners to details buttons
         document.querySelectorAll('.btn-view-details').forEach(btn => {
           btn.addEventListener('click', (e) => {
@@ -106,7 +106,7 @@ async function loadUsageStatistics() {
             showUserUsageDetails(email, data.usage_statistics);
           });
         });
-        
+
         // Initialize search functionality
         initializeUsageSearch(data.usage_statistics);
       }
@@ -122,7 +122,7 @@ async function loadUsageStatistics() {
 
 function createUsageChart(stats) {
   const chartContainer = document.getElementById('daily-usage-chart-container');
-  
+
   // Check if Chart.js is available
   if (typeof Chart === 'undefined') {
     console.error('Chart.js is not available');
@@ -131,7 +131,7 @@ function createUsageChart(stats) {
         <strong>Error:</strong> Chart library is not available. Please refresh the page or check console for errors.
       </div>
     `;
-    
+
     // Try to load Chart.js dynamically
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js';
@@ -146,8 +146,8 @@ function createUsageChart(stats) {
     document.head.appendChild(script);
     return;
   }
-  
-  // Chart.js is available, create the chart
+
+  // Chart.js is available, create the chart (and widgets)
   createChartWithData(stats);
 }
 
@@ -159,20 +159,20 @@ function createUserColorMap(stats) {
     '#8e24aa', '#e53935', '#039be5', '#7cb342',
     '#3949ab', '#c2185b', '#00897b', '#fdd835'
   ];
-  
+
   // Assign colors to users
   stats.forEach((stat, index) => {
     const email = stat.user_email || 'Unknown';
     userColors[email] = colorSet[index % colorSet.length];
   });
-  
+
   return userColors;
 }
 
 // Format timestamps for display
 function formatTimestamp(timestamp) {
   if (!timestamp) return 'N/A';
-  
+
   // Handle different timestamp formats
   if (timestamp._seconds) {
     // Firestore timestamp from server
@@ -191,7 +191,7 @@ function formatTimestamp(timestamp) {
       return timestamp;
     }
   }
-  
+
   return 'N/A';
 }
 
@@ -199,24 +199,24 @@ function formatTimestamp(timestamp) {
 function processChartData(stats) {
   const userColors = createUserColorMap(stats);
   const users = stats.map(stat => stat.user_email || 'Unknown');
-  
+
   // Get date range for the last 30 days
   const today = new Date();
   const dates = [];
   const dateLabels = [];
-  
+
   for (let i = 29; i >= 0; i--) {
     const date = new Date();
     date.setDate(today.getDate() - i);
     const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD format
     dates.push(dateStr);
-    
+
     // Create readable format for x-axis labels
     const month = date.toLocaleString('default', { month: 'short' });
     const day = date.getDate();
     dateLabels.push(`${month} ${day}`);
   }
-  
+
   // Initialize data for each user
   const dailyData = {};
   users.forEach(email => {
@@ -225,11 +225,11 @@ function processChartData(stats) {
       dailyData[email][date] = 0;
     });
   });
-  
+
   // Fill in actual data
   stats.forEach(stat => {
     const email = stat.user_email || 'Unknown';
-    
+
     if (stat.daily_usage) {
       Object.entries(stat.daily_usage).forEach(([date, count]) => {
         if (dates.includes(date)) {
@@ -241,7 +241,7 @@ function processChartData(stats) {
       generateSampleData(dailyData, email, dates, stat.total_images_processed || 0);
     }
   });
-  
+
   // Prepare chart data
   const chartData = [];
   dates.forEach((date, index) => {
@@ -249,14 +249,14 @@ function processChartData(stats) {
       date: date,
       label: dateLabels[index]
     };
-    
+
     users.forEach(email => {
       dataPoint[email] = dailyData[email][date];
     });
-    
+
     chartData.push(dataPoint);
   });
-  
+
   return {
     chartData,
     userColors,
@@ -269,15 +269,15 @@ function processChartData(stats) {
 function generateSampleData(dailyData, email, dates, totalImages) {
   // Skip if no total images
   if (totalImages === 0) return;
-  
+
   // Create a distribution where more recent days tend to have more activity
   const baseActivity = Math.min(5, Math.ceil(totalImages / 20)) || 1;
-  
+
   dates.forEach((date, index) => {
     const recencyFactor = Math.max(0.1, (30 - index) / 30);
     // Some randomness but weighted by user activity and recency
     const count = Math.floor(Math.random() * baseActivity * recencyFactor);
-    
+
     if (count > 0) {
       dailyData[email][date] = count;
     }
@@ -287,11 +287,31 @@ function generateSampleData(dailyData, email, dates, totalImages) {
 function createChartWithData(stats) {
   // Process the data
   const { chartData, userColors, users, dateLabels } = processChartData(stats);
-  
+
   // Create the chart container
   const chartContainer = document.getElementById('daily-usage-chart-container');
   if (!chartContainer) return;
-  
+
+  // --- NEW: Summary Widgets (Total Transcribed & Total Users) ---
+  const totalTranscribed = stats.reduce((sum, s) => sum + (s.total_images_processed || 0), 0);
+  const totalUsers = stats.length;
+
+  const widgetsHtml = `
+    <div id="usage-summary-widgets" style="display:flex; gap:16px; margin-bottom:12px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Transcribed</div>
+        <div style="font-size:28px; font-weight:700;">${Number(totalTranscribed).toLocaleString()}</div>
+        <div style="font-size:12px; color:#9ca3af;">All users • All time</div>
+      </div>
+      <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Users</div>
+        <div style="font-size:28px; font-weight:700;">${Number(totalUsers).toLocaleString()}</div>
+        <div style="font-size:12px; color:#9ca3af;">Unique accounts</div>
+      </div>
+    </div>
+  `;
+  // -------------------------------------------------------------
+
   // Create legend items
   const legendItems = users.map(email => {
     return `
@@ -300,9 +320,10 @@ function createChartWithData(stats) {
         <span class="legend-label">${formatEmail(email)}</span>
       </div>`;
   }).join('\n');
-  
+
   // Create chart HTML
   chartContainer.innerHTML = `
+    ${widgetsHtml}
     <div style="width: 100%; margin-bottom: 30px;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
         <h3 style="margin: 0;">Daily Image Processing (Last 30 Days)</h3>
@@ -315,10 +336,10 @@ function createChartWithData(stats) {
       </div>
     </div>
   `;
-  
+
   // Create the chart
   const ctx = document.getElementById('usageChart').getContext('2d');
-  
+
   // Prepare datasets
   const datasets = users.map(user => {
     return {
@@ -328,7 +349,7 @@ function createChartWithData(stats) {
       borderWidth: 0
     };
   });
-  
+
   // Create the chart
   new Chart(ctx, {
     type: 'bar',
@@ -375,15 +396,15 @@ function createChartWithData(stats) {
 // Function to initialize search functionality
 function initializeUsageSearch(allStats) {
   const searchInput = document.getElementById('usage-search');
-  
+
   searchInput.addEventListener('input', () => {
     const searchTerm = searchInput.value.toLowerCase();
-    
+
     // Filter statistics based on search term
-    const filteredStats = allStats.filter(stat => 
+    const filteredStats = allStats.filter(stat =>
       stat.user_email && stat.user_email.toLowerCase().includes(searchTerm)
     );
-    
+
     // Update the table
     updateUsageTable(filteredStats);
   });
@@ -394,27 +415,27 @@ function updateUsageTable(filteredStats) {
   const listElem = document.getElementById('usage-list');
   const loadingElem = document.getElementById('usage-loading');
   const tableElem = document.getElementById('usage-table');
-  
+
   // Clear existing list
   listElem.innerHTML = '';
-  
+
   if (filteredStats.length === 0) {
     loadingElem.style.display = 'block';
     loadingElem.textContent = 'No users found matching your search.';
     tableElem.style.display = 'none';
     return;
   }
-  
+
   loadingElem.style.display = 'none';
   tableElem.style.display = 'table';
-  
+
   // Create color map for users
   const userColors = createUserColorMap(filteredStats);
-  
+
   // Current and previous month
   const now = new Date();
   const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-  
+
   // Previous month calculation
   let prevMonth;
   if (now.getMonth() === 0) {
@@ -422,21 +443,21 @@ function updateUsageTable(filteredStats) {
   } else {
     prevMonth = `${now.getFullYear()}-${String(now.getMonth()).padStart(2, '0')}`;
   }
-  
+
   // Add each statistic to the table
   filteredStats.forEach(stat => {
     const row = document.createElement('tr');
     const email = stat.user_email || 'Unknown';
     const userColor = userColors[email];
-    
+
     // Get monthly usage numbers
     const monthlyUsage = stat.monthly_usage || {};
     const currentMonthUsage = monthlyUsage[currentMonth] || 0;
     const prevMonthUsage = monthlyUsage[prevMonth] || 0;
-    
+
     const firstUsed = formatTimestamp(stat.first_processed_at);
     const lastUsed = formatTimestamp(stat.last_processed_at);
-    
+
     row.innerHTML = `
       <td>
         <div style="display: flex; align-items: center;">
@@ -453,10 +474,10 @@ function updateUsageTable(filteredStats) {
         <button class="btn-view-details" data-email="${email}">View Details</button>
       </td>
     `;
-    
+
     listElem.appendChild(row);
   });
-  
+
   // Add event listeners to details buttons
   document.querySelectorAll('.btn-view-details').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -464,8 +485,8 @@ function updateUsageTable(filteredStats) {
       showUserUsageDetails(email, filteredStats);
     });
   });
-  
-  // Update the chart with filtered data
+
+  // Update the chart (and widgets) with filtered data
   createChartWithData(filteredStats);
 }
 
@@ -533,8 +554,7 @@ function prepareDailyUsageData(allStats, preassignedColors = null) {
       });
     } else {
       // If we need to derive daily data from timestamps of processing events
-      // This would require having a list of timestamps for each processing event
-      // which is not in the current data model, so we'll skip this for now
+      // (Not available in current model)
     }
   });
 
@@ -561,112 +581,7 @@ function prepareDailyUsageData(allStats, preassignedColors = null) {
   };
 }
 
-// Function to create a stacked bar chart for daily usage
-// function createDailyUsageChart(containerId, allStats) {
-//   const { chartData, userColors, users } = prepareDailyUsageData(allStats);
-
-//   // Format data for recharts
-//   const data = chartData;
-
-//   // Create stacked bars for each user
-//   const stackedBars = users.map(email => {
-//     return `<Bar dataKey="${email}" stackId="a" fill="${userColors[email]}" name="${formatEmail(email)}" />`;
-//   }).join('\n      ');
-
-//   // Create legend items
-//   const legendItems = users.map(email => {
-//     return `
-//       <div class="legend-item">
-//         <span class="color-box" style="background-color: ${userColors[email]}"></span>
-//         <span class="legend-label">${formatEmail(email)}</span>
-//       </div>`;
-//   }).join('\n');
-
-//   // Create and mount the React component for the chart
-//   const chartComponent = `
-//   <div id="daily-usage-chart" style="width: 100%; height: 170px; margin-bottom: 30px;">
-//     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-//       <h3 style="margin: 0;">Daily Image Processing (Last 30 Days)</h3>
-//       <div class="chart-legend" style="display: flex; flex-wrap: wrap; gap: 10px;">
-//         ${legendItems}
-//       </div>
-//     </div>
-//     <div id="chart-container" style="width: 100%; height: 100px;"></div>
-//   </div>
-//   `;
-
-//   // Insert the chart into the container
-//   document.getElementById(containerId).innerHTML = chartComponent;
-
-//   // Apply some additional styles for the legend
-//   const style = document.createElement('style');
-//   style.textContent = `
-//     .chart-legend {
-//       font-size: 12px;
-//     }
-//     .legend-item {
-//       display: flex;
-//       align-items: center;
-//       margin-right: 10px;
-//     }
-//     .color-box {
-//       display: inline-block;
-//       width: 12px;
-//       height: 12px;
-//       margin-right: 5px;
-//       border-radius: 2px;
-//     }
-//   `;
-//   document.head.appendChild(style);
-
-//   // Create the chart with Chart.js
-//   createChartWithChartJS('chart-container', data, userColors, users);
-// }
-
-
-
-
-// Function to process timestamps and organize data by day
-function processDailyUsageData(allStats) {
-  const stats = JSON.parse(JSON.stringify(allStats)); // Deep clone
-  
-  // For each user, ensure daily_usage exists
-  stats.forEach(stat => {
-    // Initialize daily_usage if not exists
-    if (!stat.daily_usage) {
-      stat.daily_usage = {};
-    }
-    
-    // If we need to generate sample data for demonstration purposes
-    if (Object.keys(stat.daily_usage).length === 0) {
-      // Generate sample data for the last 30 days
-      const today = new Date();
-      for (let i = 0; i < 30; i++) {
-        const date = new Date();
-        date.setDate(today.getDate() - i);
-        const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD format
-        
-        // Create a distribution where more recent days tend to have more activity
-        // and active users have more activities
-        const baseActivity = stat.total_images_processed ? 
-          Math.min(5, Math.ceil(stat.total_images_processed / 20)) : 1;
-        
-        const recencyFactor = Math.max(0.1, (30 - i) / 30);
-        // Some randomness but weighted by user activity and recency
-        const count = Math.floor(Math.random() * baseActivity * recencyFactor);
-        
-        if (count > 0) {
-          stat.daily_usage[dateStr] = count;
-        }
-      }
-    }
-  });
-  
-  return stats;
-}
-
-
-// Function to create a stacked bar chart for daily usage
+// (Alternate chart creation path used elsewhere in the codebase)
 function createDailyUsageChart(containerId, allStats, preassignedColors = null) {
   // First, ensure Chart.js is loaded
   if (typeof Chart === 'undefined') {
@@ -676,7 +591,7 @@ function createDailyUsageChart(containerId, allStats, preassignedColors = null) 
       createChartAfterLoad(containerId, allStats, preassignedColors);
     }).catch(error => {
       console.error('Failed to load Chart.js:', error);
-      document.getElementById(containerId).innerHTML = 
+      document.getElementById(containerId).innerHTML =
         '<div class="alert alert-danger">Failed to load chart library. Please refresh the page and try again.</div>';
     });
   } else {
@@ -690,19 +605,19 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
   const today = new Date();
   const dates = [];
   const dateLabels = [];
-  
+
   for (let i = 29; i >= 0; i--) {
     const date = new Date();
     date.setDate(today.getDate() - i);
     const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD format
     dates.push(dateStr);
-    
+
     // Create more readable format for x-axis labels
     const month = date.toLocaleString('default', { month: 'short' });
     const day = date.getDate();
     dateLabels.push(`${month} ${day}`);
   }
-  
+
   // Initialize data structure
   const dailyData = {};
   const userColors = preassignedColors || {};
@@ -713,9 +628,9 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
     '#3949ab', '#c2185b', '#00897b', '#fdd835',
     '#5c6bc0', '#d32f2f', '#0288d1', '#689f38'
   ];
-  
+
   let colorIndex = 0;
-  
+
   // Initialize data for each user
   allStats.forEach(stat => {
     const email = stat.user_email || 'Unknown';
@@ -723,17 +638,17 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
       userColors[email] = colorSet[colorIndex % colorSet.length];
       colorIndex++;
     }
-    
+
     dailyData[email] = {};
     dates.forEach(date => {
       dailyData[email][date] = 0;
     });
   });
-  
+
   // Fill in actual data
   allStats.forEach(stat => {
     const email = stat.user_email || 'Unknown';
-    
+
     if (stat.daily_usage) {
       Object.entries(stat.daily_usage).forEach(([date, count]) => {
         if (dates.includes(date)) {
@@ -742,7 +657,7 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
       });
     }
   });
-  
+
   // Prepare chart data
   const chartData = [];
   dates.forEach((date, index) => {
@@ -750,16 +665,16 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
       date: date,
       label: dateLabels[index]
     };
-    
+
     Object.keys(dailyData).forEach(email => {
       dataPoint[email] = dailyData[email][date];
     });
-    
+
     chartData.push(dataPoint);
   });
-  
+
   const users = Object.keys(dailyData);
-  
+
   // Create legend items
   const legendItems = users.map(email => {
     return `
@@ -768,8 +683,8 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
         <span class="legend-label">${formatEmail(email)}</span>
       </div>`;
   }).join('\n');
-  
-  // Create chart container
+
+  // Create chart container (this path does not need the summary widgets; the main path already renders them)
   const chartComponent = `
   <div style="width: 100%; height: 170px; margin-bottom: 30px;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -781,10 +696,10 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
     <div id="chart-container" style="width: 100%; height: 100px;"></div>
   </div>
   `;
-  
+
   // Insert chart container
   document.getElementById(containerId).innerHTML = chartComponent;
-  
+
   // Add styles for legend
   if (!document.getElementById('chart-legend-styles')) {
     const style = document.createElement('style');
@@ -808,7 +723,7 @@ function createChartAfterLoad(containerId, allStats, preassignedColors) {
     `;
     document.head.appendChild(style);
   }
-  
+
   // Create chart
   createChartWithChartJS('chart-container', chartData, userColors, users);
 }
@@ -820,17 +735,17 @@ function loadChartJs() {
       resolve();
       return;
     }
-    
+
     // Create script element
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js';
     script.integrity = 'sha384-dLFzkG3ypvCiHuR3t91rUxAI3m3s1GFc4liJepgYQxYJ/suRKPjCPGPQF2ycXjHc';
     script.crossOrigin = 'anonymous';
-    
+
     // Set up event handlers
     script.onload = () => resolve();
     script.onerror = () => reject(new Error('Failed to load Chart.js'));
-    
+
     // Add to document
     document.head.appendChild(script);
   });
@@ -849,11 +764,10 @@ function formatEmail(email) {
 }
 
 // Function to create a chart using Chart.js
-// Function to create a chart using Chart.js
 function createChartWithChartJS(containerId, data, userColors, users) {
   // Prepare data for Chart.js
   const labels = data.map(item => item.label);
-  
+
   const datasets = users.map(user => {
     return {
       label: formatEmail(user),
@@ -861,19 +775,19 @@ function createChartWithChartJS(containerId, data, userColors, users) {
       data: data.map(item => item[user] || 0)
     };
   });
-  
+
   // Check for existing chart instance and destroy it
   const chartContainer = document.getElementById(containerId);
   if (chartContainer) {
     // Clear the container first
     chartContainer.innerHTML = '';
   }
-  
+
   // Create new canvas
   const canvas = document.createElement('canvas');
   canvas.id = 'daily-usage-chart';
   chartContainer.appendChild(canvas);
-  
+
   // Create chart
   const ctx = canvas.getContext('2d');
   new Chart(ctx, {
@@ -938,31 +852,31 @@ function createChartWithChartJS(containerId, data, userColors, users) {
 // Function to show user usage details modal
 function showUserUsageDetails(email, allStats) {
   const userStat = allStats.find(stat => stat.user_email === email);
-  
+
   if (!userStat) {
     alert('User statistics not found');
     return;
   }
-  
+
   // Create and show a modal with detailed statistics
   const modal = document.createElement('div');
   modal.className = 'modal';
   modal.style.display = 'block';
-  
+
   // Get engine usage
   const engineUsage = userStat.ocr_info || {};
   let engineHtml = '';
   for (const [engine, count] of Object.entries(engineUsage)) {
     engineHtml += `<tr><td>${engine}</td><td>${count}</td></tr>`;
   }
-  
+
   // Get LLM usage
   const llmUsage = userStat.llm_info || {};
   let llmHtml = '';
   for (const [model, count] of Object.entries(llmUsage)) {
     llmHtml += `<tr><td>${model}</td><td>${count}</td></tr>`;
   }
-  
+
   // Get monthly usage
   const monthlyUsage = userStat.monthly_usage || {};
   const sortedMonths = Object.keys(monthlyUsage).sort().reverse();
@@ -970,15 +884,15 @@ function showUserUsageDetails(email, allStats) {
   for (const month of sortedMonths) {
     monthlyHtml += `<tr><td>${month}</td><td>${monthlyUsage[month]}</td></tr>`;
   }
-  
+
   const firstUsed = formatTimestamp(userStat.first_processed_at);
   const lastUsed = formatTimestamp(userStat.last_processed_at);
-  
+
   // Get daily usage data for this user
   const dailyUsage = userStat.daily_usage || {};
   const sortedDays = Object.keys(dailyUsage).sort().reverse();
   let dailyHtml = '';
-  
+
   for (const day of sortedDays) {
     const count = dailyUsage[day];
     if (count > 0) {
@@ -992,7 +906,7 @@ function showUserUsageDetails(email, allStats) {
       dailyHtml += `<tr><td>${formattedDate}</td><td>${count}</td></tr>`;
     }
   }
-  
+
   // Add a new "Daily Usage" section to the modal
   const dailyUsageSection = dailyHtml ? `
     <div class="details-section">
@@ -1010,21 +924,21 @@ function showUserUsageDetails(email, allStats) {
       </table>
     </div>
   ` : '';
-  
+
   modal.innerHTML = `
     <div class="modal-content">
       <span class="close">&times;</span>
       <h3>Usage Details: ${email}</h3>
-      
+
       <div class="details-section">
         <h4>Summary</h4>
         <p>Total Images Processed: ${userStat.total_images_processed || 0}</p>
         <p>First Used: ${firstUsed}</p>
         <p>Last Used: ${lastUsed}</p>
       </div>
-      
+
       ${dailyUsageSection}
-      
+
       <div class="details-section">
         <h4>OCR Engine Usage</h4>
         <table class="details-table">
@@ -1039,7 +953,7 @@ function showUserUsageDetails(email, allStats) {
           </tbody>
         </table>
       </div>
-      
+
       <div class="details-section">
         <h4>LLM Usage</h4>
         <table class="details-table">
@@ -1054,7 +968,7 @@ function showUserUsageDetails(email, allStats) {
           </tbody>
         </table>
       </div>
-      
+
       <div class="details-section">
         <h4>Monthly Usage</h4>
         <table class="details-table">
@@ -1071,20 +985,24 @@ function showUserUsageDetails(email, allStats) {
       </div>
     </div>
   `;
-  
+
   document.body.appendChild(modal);
-  
+
   // Add close button functionality
   const closeBtn = modal.querySelector('.close');
-  closeBtn.addEventListener('click', () => {
-    document.body.removeChild(modal);
-  });
-  
-  // Close when clicking outside the modal content
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      document.body.removeChild(modal);
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modal.remove();
+    });
+  }
+
+  // Close modal when clicking outside content
+  window.addEventListener('click', function onOutsideClick(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      modal.remove();
+      window.removeEventListener('click', onOutsideClick);
     }
   });
 }
-
