@@ -147,22 +147,28 @@ steps:
         set -euo pipefail
         git fetch --unshallow || true
 
+        _DEPS_CHANGED=true
         if git rev-parse HEAD~1 >/dev/null 2>&1; then
           _RANGE="HEAD~1..HEAD"
           _DEPS_CHANGED=false
-          if git diff --name-only "$_RANGE" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|Dockerfile\.base|entrypoint\.sh)$'; then
+
+          # Check files without piping errors killing the script
+          _CHANGED="$(git diff --name-only "$_RANGE" || true)"
+          if echo "$_CHANGED" | grep -qE '^(requirements\.txt|constraints\.txt|Dockerfile|Dockerfile\.base|entrypoint\.sh)$'; then
             _DEPS_CHANGED=true
           fi
-          if git diff --name-only "$_RANGE" -- TextCollage vouchervision_main | grep -q .; then
+
+          # Check submodule pointer changes
+          if echo "$_CHANGED" | grep -qE '^(TextCollage|vouchervision_main)/'; then
             _DEPS_CHANGED=true
           fi
         else
+          echo "First build in this history; forcing base build."
           _DEPS_CHANGED=true
-          echo "First build: forcing base build"
         fi
 
         echo "$_DEPS_CHANGED" > /workspace/_deps_changed.txt
-        echo "Critical dependencies changed: $_DEPS_CHANGED"
+        echo "Critical dependencies changed: ${_DEPS_CHANGED}"
 
 
   # 2) Shallow init submodules for speed
@@ -199,44 +205,59 @@ steps:
   # 4) Build/push BASE image if deps changed OR if base doesn't exist yet
   - name: gcr.io/cloud-builders/docker
     id: build-base
-    env:
-      - "PROJECT_ID=${PROJECT_ID}"
-      - "COMMIT_SHA=${COMMIT_SHA}"
     entrypoint: bash
     args:
       - -lc
       - |
         set -euo pipefail
 
-        # Hard guardrails; no gcloud in this image
-        if [[ -z "${PROJECT_ID:-}" ]]; then
-          echo "ERROR: PROJECT_ID is empty"; exit 1
+        # Cloud Build substitutions may be empty in manual builds — provide safe fallbacks.
+        PROJECT_ID_VAL="${PROJECT_ID:-}"
+        COMMIT_SHA_VAL="${COMMIT_SHA:-}"
+
+        if [[ -z "$PROJECT_ID_VAL" ]]; then
+          echo "ERROR: PROJECT_ID substitution is empty. Ensure your trigger defines PROJECT_ID or use a repo-trigger." >&2
+          exit 1
         fi
-        if [[ -z "${COMMIT_SHA:-}" ]]; then
-          COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
+        if [[ -z "$COMMIT_SHA_VAL" ]]; then
+          COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${COMMIT_SHA_VAL}"
         fi
 
-        _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
-        _BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base"
-        _BASE_LATEST="${_BASE_IMAGE}:latest"
-        _BASE_SHA="${_BASE_IMAGE}:${COMMIT_SHA}"
-        _CACHE_REF_BASE="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-base:buildcache"
+        DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
+        BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/bases/vv-base"
+        BASE_LATEST="${BASE_IMAGE}:latest"
+        BASE_SHA="${BASE_IMAGE}:${COMMIT_SHA_VAL}"
+        CACHE_REF_BASE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cache/vv-base:buildcache"
+
+        echo "DBG PROJECT_ID=${PROJECT_ID_VAL}"
+        echo "DBG COMMIT_SHA=${COMMIT_SHA_VAL}"
+        echo "DBG BASE_IMAGE=${BASE_IMAGE}"
+        echo "DBG BASE_LATEST=${BASE_LATEST}"
+        echo "DBG BASE_SHA=${BASE_SHA}"
+
+        # Guard against any accidental empties (defensive)
+        for t in "$BASE_LATEST" "$BASE_SHA"; do
+          if [[ -z "$t" || "$t" =~ :: || "$t" =~ ^: || "$t" =~ :$ ]]; then
+            echo "ERROR: invalid computed tag: '$t'" >&2
+            exit 1
+          fi
+        done
 
         build_base() {
           echo "Building base image..."
           docker buildx build \
             --push \
             --file Dockerfile.base \
-            --cache-from=type=registry,ref=${_CACHE_REF_BASE} \
-            --cache-to=type=registry,ref=${_CACHE_REF_BASE},mode=max \
-            -t "${_BASE_SHA}" -t "${_BASE_LATEST}" .
+            --cache-from=type=registry,ref="${CACHE_REF_BASE}" \
+            --cache-to=type=registry,ref="${CACHE_REF_BASE}",mode=max \
+            -t "${BASE_SHA}" -t "${BASE_LATEST}" .
         }
 
-        if [ "$_DEPS_CHANGED" = "true" ]; then
+        if [[ "${DEPS_CHANGED}" == "true" ]]; then
           build_base
         else
-          if ! docker pull "${_BASE_LATEST}" >/dev/null 2>&1; then
+          if ! docker pull "${BASE_LATEST}" >/dev/null 2>&1; then
             echo "Base image not found; building it once..."
             build_base
           else
@@ -247,33 +268,38 @@ steps:
   # 5) Build APP image quickly FROM the base, with its own cache
   - name: gcr.io/cloud-builders/docker
     id: build-app
-    env:
-      - "PROJECT_ID=${PROJECT_ID}"
-      - "COMMIT_SHA=${COMMIT_SHA}"
     entrypoint: bash
     args:
       - -lc
       - |
         set -euo pipefail
-        if [[ -z "${PROJECT_ID:-}" ]]; then
-          echo "ERROR: PROJECT_ID is empty"; exit 1
+        PROJECT_ID_VAL="${PROJECT_ID:-}"
+        COMMIT_SHA_VAL="${COMMIT_SHA:-}"
+        if [[ -z "$PROJECT_ID_VAL" ]]; then
+          echo "ERROR: PROJECT_ID substitution is empty." >&2
+          exit 1
         fi
-        if [[ -z "${COMMIT_SHA:-}" ]]; then
-          COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
+        if [[ -z "$COMMIT_SHA_VAL" ]]; then
+          COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${COMMIT_SHA_VAL}"
         fi
 
-        _IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-        _TAG_SHA="${_IMAGE}:${COMMIT_SHA}"
-        _TAG_LATEST="${_IMAGE}:latest"
-        _CACHE_REF_APP="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-app:buildcache"
+        APP_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
+        TAG_SHA="${APP_IMAGE}:${COMMIT_SHA_VAL}"
+        TAG_LATEST="${APP_IMAGE}:latest"
+        CACHE_REF_APP="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cache/vv-app:buildcache"
+
+        echo "DBG APP_IMAGE=${APP_IMAGE}"
+        echo "DBG TAG_SHA=${TAG_SHA}"
+        echo "DBG TAG_LATEST=${TAG_LATEST}"
 
         docker buildx build \
           --push \
-          --build-arg PROJECT_ID="${PROJECT_ID}" \
-          --cache-from=type=registry,ref=${_CACHE_REF_APP} \
-          --cache-to=type=registry,ref=${_CACHE_REF_APP},mode=max \
-          -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
+          --build-arg PROJECT_ID="${PROJECT_ID_VAL}" \
+          --cache-from=type=registry,ref="${CACHE_REF_APP}" \
+          --cache-to=type=registry,ref="${CACHE_REF_APP}",mode=max \
+          -t "${TAG_SHA}" -t "${TAG_LATEST}" .
+
 
 
 
