@@ -202,26 +202,26 @@ steps:
       - |
         set -euo pipefail
         _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
-        BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base"
-        BASE_LATEST="${BASE_IMAGE}:latest"
-        BASE_SHA="${BASE_IMAGE}:${COMMIT_SHA}"
-        CACHE_REF_BASE="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-base:buildcache"
+        _BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base"
+        _BASE_LATEST="${_BASE_IMAGE}:latest"
+        _BASE_SHA="${_BASE_IMAGE}:${COMMIT_SHA}"
+        _CACHE_REF_BASE="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-base:buildcache"
 
         build_base() {
           echo "Building base image..."
           docker buildx build \
             --push \
             --file Dockerfile.base \
-            --cache-from=type=registry,ref=${CACHE_REF_BASE} \
-            --cache-to=type=registry,ref=${CACHE_REF_BASE},mode=max \
-            -t "${BASE_SHA}" -t "${BASE_LATEST}" .
+            --cache-from=type=registry,ref=${_CACHE_REF_BASE} \
+            --cache-to=type=registry,ref=${_CACHE_REF_BASE},mode=max \
+            -t "${_BASE_SHA}" -t "${_BASE_LATEST}" .
         }
 
         if [ "$_DEPS_CHANGED" = "true" ]; then
           build_base
         else
           # If base:latest not found, create it once
-          if ! docker pull "${BASE_LATEST}" >/dev/null 2>&1; then
+          if ! docker pull "${_BASE_LATEST}" >/dev/null 2>&1; then
             echo "Base image not found; building it once..."
             build_base
           else
