@@ -237,17 +237,17 @@ steps:
       - -lc
       - |
         set -euo pipefail
-        IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-        TAG_SHA="${IMAGE}:${COMMIT_SHA}"
-        TAG_LATEST="${IMAGE}:latest"
-        CACHE_REF_APP="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-app:buildcache"
+        _IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
+        _TAG_SHA="${_IMAGE}:${COMMIT_SHA}"
+        _TAG_LATEST="${_IMAGE}:latest"
+        _CACHE_REF_APP="us-central1-docker.pkg.dev/${PROJECT_ID}/cache/vv-app:buildcache"
 
         docker buildx build \
           --push \
           --build-arg PROJECT_ID="${PROJECT_ID}" \
-          --cache-from=type=registry,ref=${CACHE_REF_APP} \
-          --cache-to=type=registry,ref=${CACHE_REF_APP},mode=max \
-          -t "${TAG_SHA}" -t "${TAG_LATEST}" .
+          --cache-from=type=registry,ref=${_CACHE_REF_APP} \
+          --cache-to=type=registry,ref=${_CACHE_REF_APP},mode=max \
+          -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
 
   # 6) Deploy to Cloud Run
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
