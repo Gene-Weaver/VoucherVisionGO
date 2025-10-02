@@ -199,18 +199,19 @@ steps:
   # 4) Build/push BASE image if deps changed OR if base doesn't exist yet
   - name: gcr.io/cloud-builders/docker
     id: build-base
+    env:
+      - "PROJECT_ID=${PROJECT_ID}"
+      - "COMMIT_SHA=${COMMIT_SHA}"
     entrypoint: bash
     args:
       - -lc
       - |
         set -euo pipefail
-        # Fallbacks for manual builds / non-repo triggers
-        : "${PROJECT_ID:=$(gcloud config get-value project -q || true)}"
+
+        # Hard guardrails; no gcloud in this image
         if [[ -z "${PROJECT_ID:-}" ]]; then
           echo "ERROR: PROJECT_ID is empty"; exit 1
         fi
-
-        : "${COMMIT_SHA:=$(git rev-parse --short=12 HEAD 2>/dev/null || true)}"
         if [[ -z "${COMMIT_SHA:-}" ]]; then
           COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
           echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
@@ -246,16 +247,17 @@ steps:
   # 5) Build APP image quickly FROM the base, with its own cache
   - name: gcr.io/cloud-builders/docker
     id: build-app
+    env:
+      - "PROJECT_ID=${PROJECT_ID}"
+      - "COMMIT_SHA=${COMMIT_SHA}"
     entrypoint: bash
     args:
       - -lc
       - |
         set -euo pipefail
-        : "${PROJECT_ID:=$(gcloud config get-value project -q || true)}"
         if [[ -z "${PROJECT_ID:-}" ]]; then
           echo "ERROR: PROJECT_ID is empty"; exit 1
         fi
-        : "${COMMIT_SHA:=$(git rev-parse --short=12 HEAD 2>/dev/null || true)}"
         if [[ -z "${COMMIT_SHA:-}" ]]; then
           COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
           echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
@@ -272,6 +274,7 @@ steps:
           --cache-from=type=registry,ref=${_CACHE_REF_APP} \
           --cache-to=type=registry,ref=${_CACHE_REF_APP},mode=max \
           -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
+
 
 
   # 6) Deploy to Cloud Run
