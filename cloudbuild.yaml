@@ -212,32 +212,32 @@ steps:
         set -euo pipefail
 
         # Cloud Build substitutions may be empty in manual builds — provide safe fallbacks.
-        PROJECT_ID_VAL="${PROJECT_ID:-}"
-        COMMIT_SHA_VAL="${COMMIT_SHA:-}"
+        _PROJECT_ID_VAL="${PROJECT_ID:-}"
+        _COMMIT_SHA_VAL="${COMMIT_SHA:-}"
 
-        if [[ -z "$PROJECT_ID_VAL" ]]; then
+        if [[ -z "$_PROJECT_ID_VAL" ]]; then
           echo "ERROR: PROJECT_ID substitution is empty. Ensure your trigger defines PROJECT_ID or use a repo-trigger." >&2
           exit 1
         fi
-        if [[ -z "$COMMIT_SHA_VAL" ]]; then
-          COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${COMMIT_SHA_VAL}"
+        if [[ -z "$_COMMIT_SHA_VAL" ]]; then
+          _COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${_COMMIT_SHA_VAL}"
         fi
 
-        DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
-        BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/bases/vv-base"
-        BASE_LATEST="${BASE_IMAGE}:latest"
-        BASE_SHA="${BASE_IMAGE}:${COMMIT_SHA_VAL}"
-        CACHE_REF_BASE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cache/vv-base:buildcache"
+        _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
+        _BASE_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/bases/vv-base"
+        _BASE_LATEST="${_BASE_IMAGE}:latest"
+        _BASE_SHA="${_BASE_IMAGE}:${_COMMIT_SHA_VAL}"
+        _CACHE_REF_BASE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-base:buildcache"
 
-        echo "DBG PROJECT_ID=${PROJECT_ID_VAL}"
-        echo "DBG COMMIT_SHA=${COMMIT_SHA_VAL}"
-        echo "DBG BASE_IMAGE=${BASE_IMAGE}"
-        echo "DBG BASE_LATEST=${BASE_LATEST}"
-        echo "DBG BASE_SHA=${BASE_SHA}"
+        echo "DBG PROJECT_ID=${_PROJECT_ID_VAL}"
+        echo "DBG COMMIT_SHA=${_COMMIT_SHA_VAL}"
+        echo "DBG _BASE_IMAGE=${_BASE_IMAGE}"
+        echo "DBG _BASE_LATEST=${_BASE_LATEST}"
+        echo "DBG _BASE_SHA=${_BASE_SHA}"
 
         # Guard against any accidental empties (defensive)
-        for t in "$BASE_LATEST" "$BASE_SHA"; do
+        for t in "$_BASE_LATEST" "$_BASE_SHA"; do
           if [[ -z "$t" || "$t" =~ :: || "$t" =~ ^: || "$t" =~ :$ ]]; then
             echo "ERROR: invalid computed tag: '$t'" >&2
             exit 1
@@ -249,15 +249,15 @@ steps:
           docker buildx build \
             --push \
             --file Dockerfile.base \
-            --cache-from=type=registry,ref="${CACHE_REF_BASE}" \
-            --cache-to=type=registry,ref="${CACHE_REF_BASE}",mode=max \
-            -t "${BASE_SHA}" -t "${BASE_LATEST}" .
+            --cache-from=type=registry,ref="${_CACHE_REF_BASE}" \
+            --cache-to=type=registry,ref="${_CACHE_REF_BASE}",mode=max \
+            -t "${_BASE_SHA}" -t "${_BASE_LATEST}" .
         }
 
-        if [[ "${DEPS_CHANGED}" == "true" ]]; then
+        if [[ "${_DEPS_CHANGED}" == "true" ]]; then
           build_base
         else
-          if ! docker pull "${BASE_LATEST}" >/dev/null 2>&1; then
+          if ! docker pull "${_BASE_LATEST}" >/dev/null 2>&1; then
             echo "Base image not found; building it once..."
             build_base
           else
@@ -273,21 +273,21 @@ steps:
       - -lc
       - |
         set -euo pipefail
-        PROJECT_ID_VAL="${PROJECT_ID:-}"
-        COMMIT_SHA_VAL="${COMMIT_SHA:-}"
-        if [[ -z "$PROJECT_ID_VAL" ]]; then
+        _PROJECT_ID_VAL="${PROJECT_ID:-}"
+        _COMMIT_SHA_VAL="${COMMIT_SHA:-}"
+        if [[ -z "$_PROJECT_ID_VAL" ]]; then
           echo "ERROR: PROJECT_ID substitution is empty." >&2
           exit 1
         fi
-        if [[ -z "$COMMIT_SHA_VAL" ]]; then
-          COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
-          echo "COMMIT_SHA not provided; using ${COMMIT_SHA_VAL}"
+        if [[ -z "$_COMMIT_SHA_VAL" ]]; then
+          _COMMIT_SHA_VAL="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${_COMMIT_SHA_VAL}"
         fi
 
-        APP_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-        TAG_SHA="${APP_IMAGE}:${COMMIT_SHA_VAL}"
+        APP_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
+        TAG_SHA="${APP_IMAGE}:${_COMMIT_SHA_VAL}"
         TAG_LATEST="${APP_IMAGE}:latest"
-        CACHE_REF_APP="us-central1-docker.pkg.dev/${PROJECT_ID_VAL}/cache/vv-app:buildcache"
+        CACHE_REF_APP="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-app:buildcache"
 
         echo "DBG APP_IMAGE=${APP_IMAGE}"
         echo "DBG TAG_SHA=${TAG_SHA}"
@@ -295,7 +295,7 @@ steps:
 
         docker buildx build \
           --push \
-          --build-arg PROJECT_ID="${PROJECT_ID_VAL}" \
+          --build-arg PROJECT_ID="${_PROJECT_ID_VAL}" \
           --cache-from=type=registry,ref="${CACHE_REF_APP}" \
           --cache-to=type=registry,ref="${CACHE_REF_APP}",mode=max \
           -t "${TAG_SHA}" -t "${TAG_LATEST}" .
