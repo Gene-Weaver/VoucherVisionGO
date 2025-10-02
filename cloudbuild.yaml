@@ -146,6 +146,7 @@ steps:
       - |
         set -euo pipefail
         git fetch --unshallow || true
+
         if git rev-parse HEAD~1 >/dev/null 2>&1; then
           _RANGE="HEAD~1..HEAD"
           _DEPS_CHANGED=false
@@ -159,8 +160,10 @@ steps:
           _DEPS_CHANGED=true
           echo "First build: forcing base build"
         fi
+
         echo "$_DEPS_CHANGED" > /workspace/_deps_changed.txt
         echo "Critical dependencies changed: $_DEPS_CHANGED"
+
 
   # 2) Shallow init submodules for speed
   - name: gcr.io/cloud-builders/git
@@ -201,6 +204,18 @@ steps:
       - -lc
       - |
         set -euo pipefail
+        # Fallbacks for manual builds / non-repo triggers
+        : "${PROJECT_ID:=$(gcloud config get-value project -q || true)}"
+        if [[ -z "${PROJECT_ID:-}" ]]; then
+          echo "ERROR: PROJECT_ID is empty"; exit 1
+        fi
+
+        : "${COMMIT_SHA:=$(git rev-parse --short=12 HEAD 2>/dev/null || true)}"
+        if [[ -z "${COMMIT_SHA:-}" ]]; then
+          COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
+        fi
+
         _DEPS_CHANGED="$(cat /workspace/_deps_changed.txt)"
         _BASE_IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/bases/vv-base"
         _BASE_LATEST="${_BASE_IMAGE}:latest"
@@ -220,7 +235,6 @@ steps:
         if [ "$_DEPS_CHANGED" = "true" ]; then
           build_base
         else
-          # If base:latest not found, create it once
           if ! docker pull "${_BASE_LATEST}" >/dev/null 2>&1; then
             echo "Base image not found; building it once..."
             build_base
@@ -237,6 +251,16 @@ steps:
       - -lc
       - |
         set -euo pipefail
+        : "${PROJECT_ID:=$(gcloud config get-value project -q || true)}"
+        if [[ -z "${PROJECT_ID:-}" ]]; then
+          echo "ERROR: PROJECT_ID is empty"; exit 1
+        fi
+        : "${COMMIT_SHA:=$(git rev-parse --short=12 HEAD 2>/dev/null || true)}"
+        if [[ -z "${COMMIT_SHA:-}" ]]; then
+          COMMIT_SHA="manual-$(date +%Y%m%d%H%M%S)"
+          echo "COMMIT_SHA not provided; using ${COMMIT_SHA}"
+        fi
+
         _IMAGE="us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
         _TAG_SHA="${_IMAGE}:${COMMIT_SHA}"
         _TAG_LATEST="${_IMAGE}:latest"
@@ -248,6 +272,7 @@ steps:
           --cache-from=type=registry,ref=${_CACHE_REF_APP} \
           --cache-to=type=registry,ref=${_CACHE_REF_APP},mode=max \
           -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
+
 
   # 6) Deploy to Cloud Run
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
