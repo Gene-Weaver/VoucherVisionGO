@@ -284,21 +284,21 @@ steps:
           echo "COMMIT_SHA not provided; using ${_COMMIT_SHA_VAL}"
         fi
 
-        APP_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
-        TAG_SHA="${APP_IMAGE}:${_COMMIT_SHA_VAL}"
-        TAG_LATEST="${APP_IMAGE}:latest"
-        CACHE_REF_APP="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-app:buildcache"
+        _APP_IMAGE="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go"
+        _TAG_SHA="${_APP_IMAGE}:${_COMMIT_SHA_VAL}"
+        _TAG_LATEST="${_APP_IMAGE}:latest"
+        _CACHE_REF_APP="us-central1-docker.pkg.dev/${_PROJECT_ID_VAL}/cache/vv-app:buildcache"
 
-        echo "DBG APP_IMAGE=${APP_IMAGE}"
-        echo "DBG TAG_SHA=${TAG_SHA}"
-        echo "DBG TAG_LATEST=${TAG_LATEST}"
+        echo "DBG _APP_IMAGE=${_APP_IMAGE}"
+        echo "DBG _TAG_SHA=${_TAG_SHA}"
+        echo "DBG _TAG_LATEST=${_TAG_LATEST}"
 
         docker buildx build \
           --push \
           --build-arg PROJECT_ID="${_PROJECT_ID_VAL}" \
-          --cache-from=type=registry,ref="${CACHE_REF_APP}" \
-          --cache-to=type=registry,ref="${CACHE_REF_APP}",mode=max \
-          -t "${TAG_SHA}" -t "${TAG_LATEST}" .
+          --cache-from=type=registry,ref="${_CACHE_REF_APP}" \
+          --cache-to=type=registry,ref="${_CACHE_REF_APP}",mode=max \
+          -t "${_TAG_SHA}" -t "${_TAG_LATEST}" .
 
 
 
