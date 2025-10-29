@@ -1013,7 +1013,7 @@ class RequestThrottler:
         """Get the current count of active requests"""
         with self.lock:
             return self.active_count
-        
+
 class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
@@ -1096,7 +1096,7 @@ class VoucherVisionProcessor:
 
         # Add comprehensive debugging BEFORE CollageEngine initialization
         self._log("=" * 60, "info")
-        self._log("DEBUGGING COLLAGEENGINE INITIALIZATION", "info")
+        self._log("DEBUGGING COLLAGE ENGINE INITIALIZATION", "info")
         self._log("=" * 60, "info")
         
         # Debug project root
@@ -1323,11 +1323,18 @@ class VoucherVisionProcessor:
         return api_key
     
     def _sanitize_text(self, s: str) -> str:
+        DANGER_PREFIXES = ("=", "+", "-", "@")  # Excel formula-injection set
+
         if not isinstance(s, str):
             return s
         # 1) collapse newlines to spaces, 2) drop §, «, »
         s = re.sub(r'[\r\n]+', ' ', s)
         s = s.replace('§', '').replace('«', '').replace('»', '')
+        s = s.replace('<', '').replace('>', '').replace('~', '')
+
+        if s and s[0] in DANGER_PREFIXES:
+            s = "'" + s
+
         # also collapse multiple spaces that may result
         s = re.sub(r'\s{2,}', ' ', s).strip()
         return s
@@ -1491,10 +1498,11 @@ class VoucherVisionProcessor:
                               ocr_only=False, 
                               include_wfo=False,
                               llm_model_name=None, 
-                              url_source=""):
+                              url_source="",
+                              notebook_mode=False):
         """
         Process an image from a request file
-        ocr_prompt_option=["ocr_verbatim_v1", None]
+        ocr_prompt_option=["verbatim_with_annotations", None]
         None will use the default LLM ocr, *anything* else will use the "verbatim"
         """
         # Check if we can accept this request based on throttling
@@ -1504,6 +1512,9 @@ class VoucherVisionProcessor:
         original_temp_path = None
         collage_temp_path = None
         try:
+            if notebook_mode:
+                ocr_only = True
+
             # Check if the file is valid
             if file.filename == '':
                 return {'error': 'No file selected'}, 400
@@ -1519,10 +1530,18 @@ class VoucherVisionProcessor:
             temp_dir = tempfile.mkdtemp()
             original_temp_path = os.path.join(temp_dir, f"original_{secure_filename(file.filename)}")
             file.save(original_temp_path)
-            
-            self._log("Running CollageEngine for pre-processing...", "info")
+
+            if not self.collage_engine:
+                return {'error': 'Collage Engine is not available on the server.'}, 503
+
             collage_resize_method = "gemini"
-            collage_json_data = self.collage_engine.run(original_temp_path) # TODO collage_resize_method to the run to set the method
+
+            if not notebook_mode:
+                self._log("Running CollageEngine for pre-processing...", "info")
+                collage_json_data = self.collage_engine.run(original_temp_path) # TODO collage_resize_method to the run to set the method
+            else:
+                self._log("NOT Running CollageEngine for pre-processing... Using original image...", "info")
+                collage_json_data = self.collage_engine.run_fake(original_temp_path) 
             
             if collage_json_data['base64image_text_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
@@ -1537,6 +1556,7 @@ class VoucherVisionProcessor:
                 f.write(collage_image_bytes)
             self._log(f"Collage created at {collage_temp_path}, proceeding to OCR.", "info")
             
+           
             
             try:
                 # Get engine options (default to gemini models if not specified)
@@ -1544,11 +1564,13 @@ class VoucherVisionProcessor:
                     if ocr_only:
                         engine_options = ["gemini-2.0-flash"]
                     else:
-                        engine_options = ["gemini-1.5-pro", "gemini-2.0-flash"]
+                        engine_options = ["gemini-2.0-flash"]
 
                 if ocr_prompt_option is None:
-                    if ocr_only:
-                        ocr_prompt_option = "ocr_verbatim_v1"
+                    if notebook_mode:
+                        ocr_prompt_option = "verbatim_notebook"
+                    elif ocr_only:
+                        ocr_prompt_option = "verbatim_with_annotations"
                     else:
                         ocr_prompt_option = None
 
@@ -1584,7 +1606,34 @@ class VoucherVisionProcessor:
                 ocr_info, ocr = self.perform_ocr(collage_temp_path, engine_options, ocr_prompt_option)
 
                 # If ocr_only is True, skip VoucherVision processing
-                if ocr_only:
+                if notebook_mode:
+                    results = OrderedDict([
+                        ("filename", original_filename),
+                        ("url_source", url_source),
+                        ("prompt", ocr_prompt_option),
+                        ("ocr_info", ocr_info),
+                        ("WFO_info", ""),
+                        ("ocr", ocr),
+                        ("formatted_json", ""),
+                        ("parsing_info", OrderedDict([
+                            ("model", ""),
+                            ("input", 0),
+                            ("output", 0),
+                            ("cost_in", 0),
+                            ("cost_out", 0),
+                        ])),
+                        ("collage_info", collage_json_data),
+                        ("collage_image_format", 'jpeg'),
+                        ("success", {
+                            "image_available": "True",
+                            "text_collage": "True",
+                            "text_collage_resize": f'{collage_resize_method}',
+                            "ocr": "True",
+                            "llm": "False",
+                        }),
+                    ])
+
+                elif ocr_only:
 
                     ocr_info_sanitized = self._sanitize_obj(ocr_info)
                     ocr_sanitized = self._sanitize_text(ocr)
