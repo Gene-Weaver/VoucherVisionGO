@@ -65,6 +65,7 @@ venv*/
 runs/
 KP_Test/
 will.py
+umbs.py
 
 # VV Specific
 vouchervision/DEP_*

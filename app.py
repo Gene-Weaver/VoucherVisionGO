@@ -1322,6 +1322,73 @@ class VoucherVisionProcessor:
             raise ValueError("API_KEY environment variable not set")
         return api_key
     
+    def _sanitize_text(self, s: str) -> str:
+        if not isinstance(s, str):
+            return s
+        # 1) collapse newlines to spaces, 2) drop §, «, »
+        s = re.sub(r'[\r\n]+', ' ', s)
+        s = s.replace('§', '').replace('«', '').replace('»', '')
+        # also collapse multiple spaces that may result
+        s = re.sub(r'\s{2,}', ' ', s).strip()
+        return s
+    
+    def _sanitize_obj(self, obj):
+        """Recursively sanitize strings in dict/list/tuple structures."""
+        if isinstance(obj, dict):
+            return {k: self._sanitize_obj(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [self._sanitize_obj(v) for v in obj]
+        if isinstance(obj, tuple):
+            return tuple(self._sanitize_obj(v) for v in obj)
+        if isinstance(obj, (str,)):
+            return self._sanitize_text(obj)
+        # if the LLM returns a JSON string, try to sanitize the string version
+        return obj
+    
+    def _strip_ocr_headers(self, s: str) -> str:
+        if not isinstance(s, str):
+            return s
+
+        # 1) Drop lines like "gemini-2.0-flash OCR:" (case-insensitive, any leading spaces)
+        s = re.sub(
+            r'(?im)^\s*gemini-(?:\d+(?:\.\d+)?)-(?:flash|pro)\s+OCR:\s*\n?',
+            '',
+            s,
+        )
+
+        # 2) Remove the exact known strings (defensive—covers historical variants)
+        exact_headers = [
+            "gemini-2.0-flash OCR:",
+            "gemini-2.5-flash OCR:",
+            "gemini-1.5-pro OCR:",
+            "gemini-2.5-pro OCR:",
+            "gemini-3.0-flash OCR:",
+            "gemini-3.0-pro OCR:",
+        ]
+        for h in exact_headers:
+            s = s.replace(h, '')
+
+        # 3) Remove bare model-name mentions anywhere in the text
+        s = re.sub(
+            r'(?i)\bgemini-(?:\d+(?:\.\d+)?)-(?:flash|pro)\b',
+            '',
+            s,
+        )
+
+        # Also remove the exact bare names 
+        bare_models = [
+            "gemini-2.0-flash",
+            "gemini-2.5-flash",
+            "gemini-1.5-pro",
+            "gemini-2.5-pro",
+            "gemini-3.0-flash",
+            "gemini-3.0-pro",
+        ]
+        for m in bare_models:
+            s = s.replace(m, '')
+
+        return s
+    
     def allowed_file(self, filename):
         """Check if file has allowed extension"""
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
@@ -1518,13 +1585,17 @@ class VoucherVisionProcessor:
 
                 # If ocr_only is True, skip VoucherVision processing
                 if ocr_only:
+
+                    ocr_info_sanitized = self._sanitize_obj(ocr_info)
+                    ocr_sanitized = self._sanitize_text(ocr)
+
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
                         ("prompt", ocr_prompt_option),
-                        ("ocr_info", ocr_info),
+                        ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", ""),
-                        ("ocr", ocr),
+                        ("ocr", ocr_sanitized),
                         ("formatted_json", ""),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
@@ -1547,14 +1618,24 @@ class VoucherVisionProcessor:
                     # Process with VoucherVision
                     vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo, LLM_name_cost)
                     
+                    ocr_info_sanitized = self._sanitize_obj(ocr_info)
+                    ocr_for_response = self._sanitize_text(self._strip_ocr_headers(ocr))
+
+                    try:
+                        parsed = json.loads(vv_results)
+                        parsed_sanitized = self._sanitize_obj(parsed)
+                        vv_results_sanitized = json.dumps(parsed_sanitized, ensure_ascii=False)
+                    except Exception:
+                        vv_results_sanitized = self._sanitize_text(vv_results)
+
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
                         ("prompt", current_prompt),
-                        ("ocr_info", ocr_info),
+                        ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", WFO),
-                        ("ocr", ocr),
-                        ("formatted_json", vv_results),
+                        ("ocr", ocr_for_response),
+                        ("formatted_json", vv_results_sanitized),
                         ("parsing_info", OrderedDict([
                             ("model", llm_model_name),
                             ("input", tokens_in),
@@ -1653,7 +1734,6 @@ class OrderedJsonEncoder(json.JSONEncoder):
 # Set the encoder immediately after creating the Flask app
 app.json_encoder = OrderedJsonEncoder
 
-# Add this to your app initialization code
 try:
     # Create initial admin if specified
     initial_admin_email = os.environ.get("INITIAL_ADMIN_EMAIL")
@@ -1857,7 +1937,7 @@ def process_image_by_url():
             ])),
             ("collage_info", {"error": "Image could not be retrieved from URL."}),
             ("collage_image_format", ""),
-            ("success", {  # Assuming you want to add this field
+            ("success", {  
                 "image_available": "False",
                 "text_collage": "False",
                 "text_collage_resize": "False",

@@ -669,7 +669,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 raise ValueError(f"Directory not found: {directory}")
             
             # Get all image files in the directory
-            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
+            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif', '.JPG', '.JPEG', '.PNG']
             image_files = []
 
             for ext in image_extensions:
