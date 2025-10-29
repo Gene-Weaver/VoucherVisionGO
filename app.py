@@ -27,6 +27,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import textwrap
 from tabulate import tabulate
+import shutil
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
@@ -141,7 +142,7 @@ if os.path.exists(vouchervision_main_path):
 # Import VoucherVision modules
 try:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
-    from vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, to_excel_literal # type: ignore
+    from vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record # type: ignore
     from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
@@ -151,7 +152,7 @@ try:
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
-    from vouchervision_main.vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, to_excel_literal
+    from vouchervision_main.vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record
     from vouchervision_main.vouchervision.vouchervision_main import load_custom_cfg
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
@@ -1324,6 +1325,46 @@ class VoucherVisionProcessor:
             raise ValueError("API_KEY environment variable not set")
         return api_key
     
+    # def _sanitize_text(self, s: str) -> str: 
+    #     DANGER_PREFIXES = ("=", "+", "-", "@") # Excel formula-injection set 
+        
+    #     if not isinstance(s, str): return s
+    #     # 1) collapse newlines to spaces, 
+    #     # 2) drop §, «, » 
+    #     s = re.sub(r'[\r\n]+', ' ', s)
+    #     s = s.replace('§', '').replace('«', '').replace('»', '') 
+    #     s = s.replace('<', '').replace('>', '').replace('~', '') 
+    #     if s and s[0] in DANGER_PREFIXES: 
+    #         s = "'" + s 
+    #     # also collapse multiple spaces that may result 
+    #     s = re.sub(r'\s{2,}', ' ', s).strip() 
+    #     return s 
+    
+    # def _sanitize_obj(self, obj): 
+    #     """Recursively sanitize strings in dict/list/tuple structures.""" 
+    #     if isinstance(obj, dict): 
+    #         return {k: self._sanitize_obj(v) for k, v in obj.items()} 
+    #     if isinstance(obj, list): return [self._sanitize_obj(v) for v in obj] 
+    #     if isinstance(obj, tuple): return tuple(self._sanitize_obj(v) for v in obj) 
+    #     if isinstance(obj, (str,)): return self._sanitize_text(obj) 
+    #     # if the LLM returns a JSON string, try to sanitize the string version return obj 
+    
+    # def _strip_ocr_headers(self, s: str) -> str: 
+    #     if not isinstance(s, str): return s 
+    #     # 1) Drop lines like "gemini-2.0-flash OCR:" (case-insensitive, any leading spaces) 
+    #     s = re.sub( r'(?im)^\s*gemini-(?:\d+(?:\.\d+)?)-(?:flash|pro)\s+OCR:\s*\n?', '', s, )
+    #     # 2) Remove the exact known strings (defensive—covers historical variants) 
+    #     exact_headers = [ "gemini-2.0-flash OCR:", "gemini-2.5-flash OCR:", "gemini-1.5-pro OCR:", "gemini-2.5-pro OCR:", "gemini-3.0-flash OCR:", "gemini-3.0-pro OCR:", ] 
+    #     for h in exact_headers: 
+    #         s = s.replace(h, '') 
+    #     # 3) Remove bare model-name mentions anywhere in the text 
+    #     s = re.sub( r'(?i)\bgemini-(?:\d+(?:\.\d+)?)-(?:flash|pro)\b', '', s, ) 
+    #     # Also remove the exact bare names 
+    #     bare_models = [ "gemini-2.0-flash", "gemini-2.5-flash", "gemini-1.5-pro", "gemini-2.5-pro", "gemini-3.0-flash", "gemini-3.0-pro", ] 
+    #     for m in bare_models: 
+    #         s = s.replace(m, '') 
+    #     return s
+
     def _sanitize_formatted_json(self, vv_results):
         """
         Ensure VoucherVision's JSON payload is deeply sanitized for storage/export.
@@ -1596,7 +1637,7 @@ class VoucherVisionProcessor:
                 elif ocr_only:
 
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
-                    ocr_sanitized = sanitize_for_storage(strip_headers(ocr))
+                    ocr_sanitized = sanitize_for_storage(ocr)
 
                     results = OrderedDict([
                         ("filename", original_filename),
@@ -1628,7 +1669,7 @@ class VoucherVisionProcessor:
                     vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo, LLM_name_cost)
                     
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
-                    ocr_sanitized = sanitize_for_storage(strip_headers(ocr))
+                    ocr_sanitized = sanitize_for_storage(ocr)
                     vv_results_sanitized = self._sanitize_formatted_json(vv_results)            
 
                     results = OrderedDict([
@@ -1674,7 +1715,7 @@ class VoucherVisionProcessor:
                     if collage_temp_path and os.path.exists(collage_temp_path):
                         os.remove(collage_temp_path)
                     if 'temp_dir' in locals() and os.path.exists(temp_dir):
-                        os.rmdir(temp_dir)
+                        shutil.rmtree(temp_dir, ignore_errors=True)
                 except Exception as cleanup_error:
                     self._log(f"Error during cleanup: {cleanup_error}", "warning")
         finally:
@@ -1823,6 +1864,8 @@ def process_image():
     # Get ocr_only flag from request if specified
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
 
+    notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
+
     # Get WFO flag from request if specified
     include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
 
@@ -1836,7 +1879,8 @@ def process_image():
         ocr_only=ocr_only,
         include_wfo=include_wfo,
         llm_model_name=llm_model_name,
-        url_source=""
+        url_source="",
+        notebook_mode=notebook_mode
     )
     
     # If processing was successful, update usage statistics
@@ -1876,6 +1920,7 @@ def process_image_by_url():
         engine_options = data.get('engines')
         prompt = data.get('prompt')
         ocr_only = data.get('ocr_only', False)
+        notebook_mode = data.get('notebook_mode', False)
         include_wfo = data.get('include_wfo', False)
         llm_model_name = data.get('llm_model')
     
@@ -1890,6 +1935,7 @@ def process_image_by_url():
         engine_options = request.form.getlist('engines') if 'engines' in request.form else None
         prompt = request.form.get('prompt') if 'prompt' in request.form else None
         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+        notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
@@ -1965,6 +2011,7 @@ def process_image_by_url():
             include_wfo=include_wfo,
             llm_model_name=llm_model_name,
             url_source=image_url,
+            notebook_mode=notebook_mode
         )
 
         # Update usage stats

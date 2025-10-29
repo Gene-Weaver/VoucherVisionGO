@@ -209,6 +209,7 @@ function processFile() {
     }
     
     const ocrOnly = $('#ocrOnly').is(':checked');
+    const notebookMode = $('#notebookMode').is(':checked');
     const engines = getSelectedEngines();
     const promptTemplate = $('#promptTemplate').val();
     const llm_model = getSelectedModel(); // Get selected model
@@ -235,6 +236,11 @@ function processFile() {
     // Add OCR only mode if selected
     if (ocrOnly) {
         formData.append('ocr_only', 'true');
+    }
+
+    // Add notebook mode if selected
+    if (ocrOnly) {
+        formData.append('notebook_mode', 'true');
     }
     
     // Add selected model
@@ -564,6 +570,7 @@ async function processImage(sourceType = 'file') {
     }
 
     const ocrOnly = $('#ocrOnly').is(':checked');
+    const notebookMode = $('#notebookMode').is(':checked');
     const engines = getSelectedEngines();
     const promptTemplate = $('#promptTemplate').val();
     const llm_model = getSelectedModel();
@@ -597,6 +604,7 @@ async function processImage(sourceType = 'file') {
     engines.forEach(engine => formData.append('engines', engine));
     if (promptTemplate) formData.append('prompt', promptTemplate);
     if (ocrOnly) formData.append('ocr_only', 'true');
+    if (notebookMode) formData.append('notebook_mode', 'true');
     if (llm_model) formData.append('llm_model', llm_model);
     if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
 
@@ -690,6 +698,14 @@ function createSplitResultsLayout(data) {
                 <div class="json-controls">
                     <button class="button copy-btn" onclick="copyJsonToClipboard()">Copy JSON</button>
                     <button class="button download-btn" onclick="downloadJson()">Download JSON</button>
+                    ${
+                        // Show the Markdown download button ONLY if:
+                        //  - Notebook Mode checkbox is checked on the page
+                        //  - and the response includes a non-empty 'ocr' string
+                        ($('#notebookMode').is(':checked') && typeof data.ocr === 'string' && data.ocr.trim())
+                            ? `<button class="button download-btn" onclick="downloadOcrMarkdown()">Download OCR (.md)</button>`
+                            : ``
+                    }
                 </div>
                 <details open>
                     <summary>Full JSON Response</summary>
@@ -789,6 +805,33 @@ function downloadJson() {
         const a = document.createElement('a');
         a.href = url;
         a.download = `vouchervision_result_${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 100);
+    }
+}
+
+// Download OCR as Markdown (.md)
+function downloadOcrMarkdown() {
+    if (window.currentResultData) {
+        const ocr = (typeof window.currentResultData.ocr === 'string') ? window.currentResultData.ocr.trim() : '';
+        if (!ocr) {
+            showTemporaryMessage('No OCR text available to download.');
+            return;
+        }
+
+        // derive a filename from API filename or fallback
+        const base = (window.currentResultData.filename || 'vouchervision_ocr').replace(/\.[^/.]+$/, '');
+        const mdName = `${base}.md`;
+
+        const blob = new Blob([ocr], { type: 'text/markdown;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = mdName;
         document.body.appendChild(a);
         a.click();
         setTimeout(() => {

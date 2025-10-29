@@ -129,6 +129,10 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             if ($('#ocrOnly').is(':checked')) {
                 formData.append('ocr_only', 'true');
             }
+
+            if ($('#notebookMode').is(':checked')) {
+                formData.append('notebook_mode', 'true');
+            }
     
             if ($('#includeWfo').is(':checked')) {
                 formData.append('include_wfo', 'true');
