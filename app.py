@@ -1368,34 +1368,30 @@ class VoucherVisionProcessor:
     def _sanitize_formatted_json(self, vv_results):
         """
         Ensure VoucherVision's JSON payload is deeply sanitized for storage/export.
+
         Behavior:
-        - If vv_results parses as JSON: deep-sanitize dict/list with sanitize_excel_record
-        - If not JSON: treat as text with sanitize_for_storage
-        - Always return a JSON-string suitable for 'formatted_json' field
+        - If vv_results is JSON (dict/list/tuple or JSON string): deep-sanitize and
+        RETURN THE PYTHON OBJECT (no json.dumps here).
+        - If vv_results is a non-JSON string: sanitize as text and return a plain string.
+        - If scalar: sanitize and return the scalar.
         """
         # Case 1: already a Python object (dict/list/tuple)
         if isinstance(vv_results, (dict, list, tuple)):
-            cleaned = sanitize_excel_record(vv_results)
-            return json.dumps(cleaned, ensure_ascii=False)
+            return sanitize_excel_record(vv_results)
 
         # Case 2: string that may be JSON
         if isinstance(vv_results, str):
             try:
                 parsed = json.loads(vv_results)
             except Exception:
-                # Not valid JSON, sanitize as text-ish block
+                # Not valid JSON → sanitize as text-ish block, return string
                 return sanitize_for_storage(vv_results)
             else:
-                cleaned = sanitize_excel_record(parsed)
-                return json.dumps(cleaned, ensure_ascii=False)
+                # Valid JSON string → sanitize object, return object
+                return sanitize_excel_record(parsed)
 
         # Case 3: other scalar (rare)
-        cleaned = sanitize_excel_record(vv_results)
-        # If cleaning produced a scalar, store as JSON string for consistency
-        try:
-            return json.dumps(cleaned, ensure_ascii=False)
-        except Exception:
-            return sanitize_for_storage(str(cleaned))
+        return sanitize_excel_record(vv_results)
     
     def allowed_file(self, filename):
         """Check if file has allowed extension"""

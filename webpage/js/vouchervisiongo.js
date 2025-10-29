@@ -239,7 +239,7 @@ function processFile() {
     }
 
     // Add notebook mode if selected
-    if (ocrOnly) {
+    if (notebookMode) {
         formData.append('notebook_mode', 'true');
     }
     
