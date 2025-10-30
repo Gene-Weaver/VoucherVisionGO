@@ -1401,7 +1401,6 @@ class VoucherVisionProcessor:
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
-        ocr_all_simple = ""
         
         for i, ocr_opt in enumerate(engine_options):
             ocr_packet[ocr_opt] = {}
