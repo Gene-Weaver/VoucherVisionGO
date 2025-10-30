@@ -1401,8 +1401,9 @@ class VoucherVisionProcessor:
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
+        ocr_all_simple = ""
         
-        for ocr_opt in engine_options:
+        for i, ocr_opt in enumerate(engine_options):
             ocr_packet[ocr_opt] = {}
             self._log(f"ocr_opt {ocr_opt}", "info")
             
@@ -1436,7 +1437,9 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt]["tokens_in"] = tokens_in
             ocr_packet[ocr_opt]["tokens_out"] = tokens_out
 
-            ocr_all += f"\n{ocr_opt} OCR:\n{response}"
+            # ocr_all += f"{ocr_opt} OCR: {response} "
+            # ocr_all += f"OCR Version {i}: {response} "
+            ocr_all += f"{response} "
 
         return ocr_packet, ocr_all
     
