@@ -263,6 +263,7 @@ function processFile() {
         fileType: fileInput.files[0].type,
         authMethod,
         ocrOnly: ocrOnly,
+        notebookMode: notebookMode,
         engines: engines,
         promptTemplate: promptTemplate,
         llm_model: llm_model // Log the model
