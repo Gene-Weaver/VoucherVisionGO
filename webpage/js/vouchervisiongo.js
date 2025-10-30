@@ -703,8 +703,8 @@ function createSplitResultsLayout(data) {
                         // Show the Markdown download button ONLY if:
                         //  - Notebook Mode checkbox is checked on the page
                         //  - and the response includes a non-empty 'ocr' string
-                        ($('#notebookMode').is(':checked') && typeof data.ocr === 'string' && data.ocr.trim())
-                            ? `<button class="button download-btn" onclick="downloadOcrMarkdown()">Download OCR (.md)</button>`
+                        ($('#notebookMode').is(':checked') && typeof data.formatted_md === 'string' && data.formatted_md.trim())
+                            ? `<button class="button download-btn" onclick="downloadFormattedMarkdown()">Download Markdown (.md)</button>`
                             : ``
                     }
                 </div>
@@ -816,30 +816,33 @@ function downloadJson() {
 }
 
 // Download OCR as Markdown (.md)
-function downloadOcrMarkdown() {
-    if (window.currentResultData) {
-        const ocr = (typeof window.currentResultData.ocr === 'string') ? window.currentResultData.ocr.trim() : '';
-        if (!ocr) {
-            showTemporaryMessage('No OCR text available to download.');
-            return;
-        }
+function downloadFormattedMarkdown() {
+    if (!window.currentResultData) return;
 
-        // derive a filename from API filename or fallback
-        const base = (window.currentResultData.filename || 'vouchervision_ocr').replace(/\.[^/.]+$/, '');
-        const mdName = `${base}.md`;
+    // Prefer new field; fall back for backward compatibility
+    const md = (typeof window.currentResultData.formatted_md === 'string' && window.currentResultData.formatted_md.trim())
+        ? window.currentResultData.formatted_md.trim()
+        : (typeof window.currentResultData.ocr === 'string' ? window.currentResultData.ocr.trim() : '');
 
-        const blob = new Blob([ocr], { type: 'text/markdown;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = mdName;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => {
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }, 100);
+    if (!md) {
+        showTemporaryMessage('No Markdown available to download.');
+        return;
     }
+
+    const base = (window.currentResultData.filename || 'vouchervision_ocr').replace(/\.[^/.]+$/, '');
+    const mdName = `${base}.md`;
+
+    const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = mdName;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }, 100);
 }
 
 // Download collage image

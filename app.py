@@ -142,17 +142,17 @@ if os.path.exists(vouchervision_main_path):
 # Import VoucherVision modules
 try:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
-    from vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record # type: ignore
+    from vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, markdown_to_simple_text # type: ignore
     from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
-    from TextCollage.CollageEngine import CollageEngine 
+    from TextCollage.CollageEngine import CollageEngine # type: ignore
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
-    from vouchervision_main.vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record
+    from vouchervision_main.vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, markdown_to_simple_text
     from vouchervision_main.vouchervision.vouchervision_main import load_custom_cfg
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
@@ -1606,14 +1606,18 @@ class VoucherVisionProcessor:
 
                 # If ocr_only is True, skip VoucherVision processing
                 if notebook_mode:
+                    # In this mode "ocr" is actually md formatted, we need to remove that for the basic ocr field in the response
+                    ocr_plain = markdown_to_simple_text(ocr, remove_headers=True, guard_excel=True)
+
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
-                        ("ocr", ocr),
+                        ("ocr", ocr_plain),
                         ("formatted_json", ""),
+                        ("formatted_md", ocr),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
                             ("input", 0),
@@ -1645,6 +1649,7 @@ class VoucherVisionProcessor:
                         ("WFO_info", ""),
                         ("ocr", ocr_sanitized),
                         ("formatted_json", ""),
+                        ("formatted_md", ""),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
                             ("input", 0),
@@ -1678,6 +1683,7 @@ class VoucherVisionProcessor:
                         ("WFO_info", WFO),
                         ("ocr", ocr_sanitized),
                         ("formatted_json", vv_results_sanitized),
+                        ("formatted_md", ""),
                         ("parsing_info", OrderedDict([
                             ("model", llm_model_name),
                             ("input", tokens_in),

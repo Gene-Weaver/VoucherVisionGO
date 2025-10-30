@@ -221,7 +221,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
                 <button id="downloadDetailedCsvBtn" class="button" disabled>Download Results CSV</button>
                 <button id="downloadJsonFilesBtn" class="button" disabled>Download Results JSON</button>
                 <button id="downloadFullJsonFilesBtn" class="button" disabled>Download Full JSON</button>
-                <button id="downloadMdFilesBtn" class="button" disabled>Download OCR Markdown</button>
+                <button id="downloadMdFilesBtn" class="button" disabled>Download Markdown</button>
             </div>
         `);
         
@@ -269,8 +269,16 @@ async function processBatchUrls(urls, concurrency, options = {}) {
         }
 
         // Enable OCR Markdown when notebook mode + at least one OCR present
-        const hasAnyOcr = results.some(r => r.success && r.apiResponse && typeof r.apiResponse.ocr === 'string' && r.apiResponse.ocr.trim());
-        if ($('#notebookMode').is(':checked') && hasAnyOcr) {
+        const hasAnyMd = results.some(r =>
+            r.success &&
+            r.apiResponse &&
+            (
+                (typeof r.apiResponse.formatted_md === 'string' && r.apiResponse.formatted_md.trim()) ||
+                (typeof r.apiResponse.ocr === 'string' && r.apiResponse.ocr.trim()) // fallback
+            )
+        );
+
+        if ($('#notebookMode').is(':checked') && hasAnyMd) {
             $('#downloadMdFilesBtn').prop('disabled', false).off('click').on('click', async function() {
                 try {
                     $(this).prop('disabled', true).text('Creating ZIP...');
@@ -278,7 +286,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
                     const url = URL.createObjectURL(zipContent);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `batch_ocr_markdown_${Date.now()}.zip`;
+                    a.download = `batch_markdown_${Date.now()}.zip`;
                     document.body.appendChild(a);
                     a.click();
                     setTimeout(() => {
@@ -289,7 +297,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
                     logDebug('Error creating Markdown ZIP', error);
                     alert(`Error creating ZIP archive: ${error.message}`);
                 } finally {
-                    $(this).prop('disabled', false).text('Download OCR Markdown');
+                    $(this).prop('disabled', false).text('Download Markdown');
                 }
             });
         }
@@ -454,13 +462,18 @@ function renderResultItem(result) {
             }
             
             // Show OCR text (truncated)
-            if (result.apiResponse.ocr) {
-                const truncatedOcr = result.apiResponse.ocr.substring(0, 500) + 
-                    (result.apiResponse.ocr.length > 500 ? '...' : '');
-                responsePreview += `<details>
-                    <summary>OCR Text</summary>
-                    <p>${truncatedOcr}</p>
-                </details>`;
+            if (result.apiResponse.formatted_md || result.apiResponse.ocr) {
+                const md = (typeof result.apiResponse.formatted_md === 'string' && result.apiResponse.formatted_md.trim())
+                    ? result.apiResponse.formatted_md
+                    : (typeof result.apiResponse.ocr === 'string' ? result.apiResponse.ocr : '');
+            
+                if (md) {
+                    const truncated = md.substring(0, 500) + (md.length > 500 ? '...' : '');
+                    responsePreview += `<details>
+                        <summary>Markdown (formatted)</summary>
+                        <pre>${truncated}</pre>
+                    </details>`;
+                }
             }
             
             // Add full response details
@@ -665,12 +678,15 @@ async function processBatchImages(files, concurrency, options = {}) {
             
             try {
                 // Show OCR text (truncated)
-                if (result.apiResponse.ocr) {
-                    const truncatedOcr = result.apiResponse.ocr.substring(0, 500) + 
-                        (result.apiResponse.ocr.length > 500 ? '...' : '');
+                const md = (result.apiResponse && typeof result.apiResponse.formatted_md === 'string' && result.apiResponse.formatted_md.trim())
+                    ? result.apiResponse.formatted_md
+                    : (result.apiResponse && typeof result.apiResponse.ocr === 'string' ? result.apiResponse.ocr : '');
+
+                if (md) {
+                    const truncated = md.substring(0, 500) + (md.length > 500 ? '...' : '');
                     responsePreview += `<details>
-                        <summary>OCR Text</summary>
-                        <p>${truncatedOcr}</p>
+                        <summary>Markdown (formatted)</summary>
+                        <pre>${truncated}</pre>
                     </details>`;
                 }
                 
@@ -717,7 +733,7 @@ async function processBatchImages(files, concurrency, options = {}) {
                 <button id="downloadImageDetailedCsvBtn" class="button" disabled>Download Results CSV</button>
                 <button id="downloadImageJsonFilesBtn" class="button" disabled>Download Results JSON</button>
                 <button id="downloadImageFullJsonFilesBtn" class="button" disabled>Download Full JSON</button>
-                <button id="downloadImageMdFilesBtn" class="button" disabled>Download OCR Markdown</button>
+                <button id="downloadImageMdFilesBtn" class="button" disabled>Download Markdown</button>
 
             </div>
         `);
@@ -764,8 +780,16 @@ async function processBatchImages(files, concurrency, options = {}) {
             $('#downloadImageDetailedCsvBtn, #downloadImageJsonFilesBtn, #downloadImageFullJsonFilesBtn').prop('disabled', false);
         }
 
-        const hasAnyImageOcr = results.some(r => r.success && r.apiResponse && typeof r.apiResponse.ocr === 'string' && r.apiResponse.ocr.trim());
-        if ($('#notebookMode').is(':checked') && hasAnyImageOcr) {
+        const hasAnyImageMd = results.some(r =>
+            r.success &&
+            r.apiResponse &&
+            (
+                (typeof r.apiResponse.formatted_md === 'string' && r.apiResponse.formatted_md.trim()) ||
+                (typeof r.apiResponse.ocr === 'string' && r.apiResponse.ocr.trim())
+            )
+        );
+
+        if ($('#notebookMode').is(':checked') && hasAnyImageMd) {
             $('#downloadImageMdFilesBtn').prop('disabled', false).off('click').on('click', async function() {
                 try {
                     $(this).prop('disabled', true).text('Creating ZIP...');
@@ -773,7 +797,7 @@ async function processBatchImages(files, concurrency, options = {}) {
                     const url = URL.createObjectURL(zipContent);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = `image_batch_ocr_markdown_${Date.now()}.zip`;
+                    a.download = `image_batch_markdown_${Date.now()}.zip`;
                     document.body.appendChild(a);
                     a.click();
                     setTimeout(() => {
@@ -784,7 +808,7 @@ async function processBatchImages(files, concurrency, options = {}) {
                     logDebug('Error creating Markdown ZIP', error);
                     alert(`Error creating ZIP archive: ${error.message}`);
                 } finally {
-                    $(this).prop('disabled', false).text('Download OCR Markdown');
+                    $(this).prop('disabled', false).text('Download Markdown');
                 }
             });
         }
@@ -1249,30 +1273,28 @@ async function createFullImageJsonZipArchive(results) {
 
 // Create zip archive with OCR Markdown files for URL batch
 async function createMdZipArchive(results) {
-    // Dynamically load JSZip if needed
     if (typeof JSZip === 'undefined') {
         await new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
+            const s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+            s.onload = resolve; s.onerror = reject; document.head.appendChild(s);
         });
     }
 
     const zip = new JSZip();
 
     results.forEach(result => {
-        if (!result.success) return;
-        const ocr = (result.apiResponse && typeof result.apiResponse.ocr === 'string')
-            ? result.apiResponse.ocr.trim()
-            : '';
-        if (!ocr) return;
+        if (!result.success || !result.apiResponse) return;
 
-        // Reuse your URL->filename logic, but .md
-        const jsonName = getFilenameFromUrl(result.url);       // e.g., something.json
-        const mdName = jsonName.replace(/\.json$/i, '.md');    // swap to .md
-        zip.file(mdName, ocr);
+        const md = (typeof result.apiResponse.formatted_md === 'string' && result.apiResponse.formatted_md.trim())
+            ? result.apiResponse.formatted_md.trim()
+            : (typeof result.apiResponse.ocr === 'string' ? result.apiResponse.ocr.trim() : '');
+
+        if (!md) return;
+
+        const jsonName = getFilenameFromUrl(result.url);    // e.g., something.json
+        const mdName   = jsonName.replace(/\.json$/i, '.md');
+        zip.file(mdName, md);
     });
 
     return await zip.generateAsync({ type: 'blob' });
@@ -1282,28 +1304,28 @@ async function createMdZipArchive(results) {
 async function createImageMdZipArchive(results) {
     if (typeof JSZip === 'undefined') {
         await new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
-            script.onload = resolve;
-            script.onerror = reject;
-            document.head.appendChild(script);
+            const s = document.createElement('script');
+            s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+            s.onload = resolve; s.onerror = reject; document.head.appendChild(s);
         });
     }
 
     const zip = new JSZip();
 
     results.forEach(result => {
-        if (!result.success) return;
-        const ocr = (result.apiResponse && typeof result.apiResponse.ocr === 'string')
-            ? result.apiResponse.ocr.trim()
-            : '';
-        if (!ocr) return;
+        if (!result.success || !result.apiResponse) return;
+
+        const md = (typeof result.apiResponse.formatted_md === 'string' && result.apiResponse.formatted_md.trim())
+            ? result.apiResponse.formatted_md.trim()
+            : (typeof result.apiResponse.ocr === 'string' ? result.apiResponse.ocr.trim() : '');
+
+        if (!md) return;
 
         const base = result.filename.includes('.')
             ? result.filename.slice(0, result.filename.lastIndexOf('.'))
             : result.filename || 'ocr_result';
-        const mdName = `${base}.md`;
-        zip.file(mdName, ocr);
+
+        zip.file(`${base}.md`, md);
     });
 
     return await zip.generateAsync({ type: 'blob' });
