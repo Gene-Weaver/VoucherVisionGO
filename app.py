@@ -370,7 +370,7 @@ def update_usage_statistics(
             est_impact = est_impact = estimate_impact(0)
 
         # Extract top-level metrics
-        t_all   = int(est_impact.get("total_tokens", 0))
+        t_all   = int(est_impact.get("total_tokens_all", 0))
         wh   = float(est_impact.get("estimate_watt_hours", 0.0))
         gco2 = float(est_impact.get("estimate_grams_CO2", 0.0))
         h2o  = float(est_impact.get("estimate_milliliters_water",
@@ -2170,13 +2170,13 @@ def get_impact_summary():
                 'user_email': user_email,
                 'totals': {
                     'total_images_processed': 0,
-                    'total_tokens': 0,
+                    'total_tokens_all': 0,
                     'total_watt_hours': 0.0,
                     'total_grams_CO2': 0.0,
                     'total_mL_water': 0.0,
                 },
                 'units': {
-                    'total_tokens': 'tokens',
+                    'total_tokens_all': 'tokens',
                     'total_watt_hours': 'Wh',
                     'total_grams_CO2': 'g CO2e',
                     'total_mL_water': 'mL'
@@ -2187,7 +2187,7 @@ def get_impact_summary():
 
         # Normalize/defend against missing fields
         total_images_processed = int(data.get('total_images_processed', 0) or 0)
-        total_tokens          = int(data.get('total_tokens', 0) or 0)
+        total_tokens_all          = int(data.get('total_tokens_all', 0) or 0)
         total_watt_hours      = float(data.get('total_watt_hours', 0.0) or 0.0)
         total_grams_CO2       = float(data.get('total_grams_CO2', 0.0) or 0.0)
         # water may be stored under either name; support both
@@ -2200,13 +2200,13 @@ def get_impact_summary():
             'status': 'success',
             'totals': {
                 'total_images_processed': total_images_processed,
-                'total_tokens': total_tokens,
+                'total_tokens_all': total_tokens_all,
                 'total_watt_hours': total_watt_hours,
                 'total_grams_CO2': total_grams_CO2,
                 'total_mL_water': total_mL_water,
             },
             'units': {
-                'total_tokens': 'tokens',
+                'total_tokens_all': 'tokens',
                 'total_watt_hours': 'Wh',
                 'total_grams_CO2': 'g CO2e',
                 'total_mL_water': 'mL'
