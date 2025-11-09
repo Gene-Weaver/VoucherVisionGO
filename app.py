@@ -33,6 +33,7 @@ import firebase_admin
 from firebase_admin import credentials, auth, firestore
 
 from url_name_parser import extract_filename_from_url
+from impact import estimate_impact
 
 '''
 ### TO UPDATE FROM MAIN VV REPO
@@ -345,79 +346,156 @@ def validate_api_key(api_key):
         logger.error(f"Error validating API key: {str(e)}")
         return False
 
-def update_usage_statistics(user_email, engines=None, llm_model_name=None):
-    """Update usage statistics for a user in Firestore"""
+def update_usage_statistics(
+    user_email: str,
+    engines: list[str] | None = None,
+    llm_model_name: str | None = None,
+    est_impact: dict | None = None,
+    *,
+    backfill_tokens: int = 5000,
+):
+    """Update usage statistics for a user in Firestore, preserving original behavior,
+    mirroring with token/sustainability totals, and retroactively estimating past
+    impact as total_images_processed * estimate_impact(5000).
+    """
+
     if not user_email or user_email == 'unknown':
         logger.warning("Cannot track usage for unknown user")
         return
-        
+
+    # --- impact for this request (compute if not provided) ---
     try:
-        # Get current month and day for tracking
-        current_date = datetime.datetime.now()
-        current_month = current_date.strftime("%Y-%m")
-        current_day = current_date.strftime("%Y-%m-%d")
-        
-        # Reference to user's usage document
-        user_usage_ref = db.collection('usage_statistics').document(user_email)
-        user_usage_doc = user_usage_ref.get()
-        
-        if user_usage_doc.exists:
-            # Update existing document
-            user_data = user_usage_doc.to_dict()
-            
-            # Update monthly usage
-            monthly_usage = user_data.get('monthly_usage', {})
+        if est_impact is None:
+            logger.error(f"est_impact was None, defaulting to zeros: {backfill_tokens} tokens")
+            est_impact = est_impact = estimate_impact(0)
+
+        # Extract top-level metrics
+        t_all   = int(est_impact.get("total_tokens", 0))
+        wh   = float(est_impact.get("estimate_watt_hours", 0.0))
+        gco2 = float(est_impact.get("estimate_grams_CO2", 0.0))
+        h2o  = float(est_impact.get("estimate_milliliters_water",
+                                    est_impact.get("estimate_mL_water", 0.0)))
+    except Exception as e:
+        logger.error(f"impact extraction failed, defaulting to zeros: {e}")
+        est_impact = {}
+        t_all = 0
+        wh = gco2 = h2o = 0.0
+
+    try:
+        # Get current month/day
+        now = datetime.datetime.now()
+        current_month = now.strftime("%Y-%m")
+        current_day = now.strftime("%Y-%m-%d")
+
+        user_ref = db.collection("usage_statistics").document(user_email)
+        doc = user_ref.get()
+
+        if doc.exists:
+            data = doc.to_dict() or {}
+
+            # --- ONE-TIME BACKFILL ---
+            backfill_done = bool(data.get("backfill_applied_v2", False))
+            if not backfill_done:
+                total_uses = int(data.get("total_images_processed", 0) or 0)
+                if total_uses > 0:
+                    try:
+                        default_impact = estimate_impact(backfill_tokens)
+                    except Exception as e:
+                        logger.error(f"Backfill estimate_impact({backfill_tokens}) failed: {e}")
+                        default_impact = {}
+
+                    wh_per = float(default_impact.get("estimate_watt_hours", 0.0))
+                    gco2_per = float(default_impact.get("estimate_grams_CO2", 0.0))
+                    h2o_per = float(default_impact.get("estimate_milliliters_water",
+                                                       default_impact.get("estimate_mL_water", 0.0)))
+
+                    # total_images_processed * per-usage estimate
+                    wh_total = wh_per * total_uses
+                    gco2_total = gco2_per * total_uses
+                    h2o_total = h2o_per * total_uses
+
+                    t_all = t_all + (backfill_tokens * total_uses)
+
+                    user_ref.update({
+                        "total_watt_hours": firestore.Increment(wh_total),
+                        "total_grams_CO2": firestore.Increment(gco2_total),
+                        "total_mL_water": firestore.Increment(h2o_total),
+                        "backfill_applied_v2": True,
+                        "backfill_method": "total_images_processed * estimate_impact(5000)",
+                        "backfill_snapshot": default_impact,
+                        "backfill_tokens": backfill_tokens,
+                    })
+                    logger.info(f"Applied backfill for {user_email}: {total_uses} × {backfill_tokens} tokens.")
+
+            # --- Update fine-grain per-request data ---
+            monthly_usage = data.get("monthly_usage", {})
             monthly_usage[current_month] = monthly_usage.get(current_month, 0) + 1
-            
-            # Update daily usage
-            daily_usage = user_data.get('daily_usage', {})
+
+            daily_usage = data.get("daily_usage", {})
             daily_usage[current_day] = daily_usage.get(current_day, 0) + 1
-            
-            # Update engine usage if available
-            ocr_info = user_data.get('ocr_info', {})
+
+            ocr_info = data.get("ocr_info", {})
             if engines:
                 for engine in engines:
-                    ocr_info[engine] = ocr_info.get(engine, 0) + 1
+                    if engine:
+                        ocr_info[engine] = ocr_info.get(engine, 0) + 1
 
-            # Update LLM model usage if available
-            llm_info = user_data.get('llm_info', {})
+            llm_info = data.get("llm_info", {})
             if llm_model_name:
                 llm_info[llm_model_name] = llm_info.get(llm_model_name, 0) + 1
-            
-            # Update the document
-            user_usage_ref.update({
-                'total_images_processed': firestore.Increment(1),
-                'last_processed_at': firestore.SERVER_TIMESTAMP,
-                'monthly_usage': monthly_usage,
-                'daily_usage': daily_usage,
-                'ocr_info': ocr_info,
-                'llm_info': llm_info,
+
+            increments = {
+                "total_images_processed": firestore.Increment(1),
+                "total_tokens_all": firestore.Increment(t_all),
+                "total_watt_hours": firestore.Increment(wh),
+                "total_grams_CO2": firestore.Increment(gco2),
+                "total_mL_water": firestore.Increment(h2o),
+            }
+
+            user_ref.update({
+                **increments,
+                "last_processed_at": firestore.SERVER_TIMESTAMP,
+                "monthly_usage": monthly_usage,
+                "daily_usage": daily_usage,
+                "ocr_info": ocr_info,
+                "llm_info": llm_info,
             })
+
         else:
-            # Create new document
+            # Create new document (no backfill needed yet)
             monthly_usage = {current_month: 1}
             daily_usage = {current_day: 1}
+
             ocr_info = {}
             if engines:
                 for engine in engines:
-                    ocr_info[engine] = 1
-            
+                    if engine:
+                        ocr_info[engine] = 1
+
             llm_info = {}
             if llm_model_name:
                 llm_info[llm_model_name] = 1
-                    
-            user_usage_ref.set({
-                'user_email': user_email,
-                'total_images_processed': 1,
-                'last_processed_at': firestore.SERVER_TIMESTAMP,
-                'monthly_usage': monthly_usage,
-                'daily_usage': daily_usage,
-                'ocr_info': ocr_info,
-                'llm_info': llm_info,
-                'first_processed_at': firestore.SERVER_TIMESTAMP,
+
+            user_ref.set({
+                "user_email": user_email,
+                "first_processed_at": firestore.SERVER_TIMESTAMP,
+                "last_processed_at": firestore.SERVER_TIMESTAMP,
+                "total_images_processed": 1,
+                "monthly_usage": monthly_usage,
+                "daily_usage": daily_usage,
+                "ocr_info": ocr_info,
+                "llm_info": llm_info,
+                "total_tokens_all": t_all,
+                "total_watt_hours": wh,
+                "total_grams_CO2": gco2,
+                "total_mL_water": h2o,
+                "backfill_applied_v2": True,  # Nothing to backfill yet
+                "backfill_tokens": backfill_tokens,
+                "last_impact_snapshot": est_impact,
             })
-            
+
         logger.info(f"Updated usage statistics for {user_email}")
+
     except Exception as e:
         logger.error(f"Error updating usage statistics: {str(e)}")
 
@@ -1318,6 +1396,21 @@ class VoucherVisionProcessor:
                 # If logger fails, fall back to console
                 print(f"[{level.upper()}] {message}")
     
+    def _add_tokens(self, tokens_in, tokens_out, ocr_tokens_total) -> float:
+        """
+        Safely sums any of the three token counts.
+        Accepts int, float, or numeric strings; treats None and "" as 0.0.
+        """
+        def to_number(x):
+            if x in (None, ""):
+                return 0.0
+            try:
+                return float(x)
+            except (ValueError, TypeError):
+                return 0.0
+
+        return to_number(tokens_in) + to_number(tokens_out) + to_number(ocr_tokens_total)
+
     def _get_api_key(self):
         """Get API key from environment variable"""
         api_key = os.environ.get("API_KEY")
@@ -1401,6 +1494,7 @@ class VoucherVisionProcessor:
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
+        ocr_tokens_total = 0
         
         for i, ocr_opt in enumerate(engine_options):
             ocr_packet[ocr_opt] = {}
@@ -1439,8 +1533,9 @@ class VoucherVisionProcessor:
             # ocr_all += f"{ocr_opt} OCR: {response} "
             # ocr_all += f"OCR Version {i}: {response} "
             ocr_all += f"{response} "
+            ocr_tokens_total += self._add_tokens(tokens_in, tokens_out, 0)
 
-        return ocr_packet, ocr_all
+        return ocr_packet, ocr_all, ocr_tokens_total
     
     def get_thread_local_vv(self, prompt, llm_model_name, include_wfo):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
@@ -1602,12 +1697,15 @@ class VoucherVisionProcessor:
                 original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
-                ocr_info, ocr = self.perform_ocr(collage_temp_path, engine_options, ocr_prompt_option)
+                ocr_info, ocr, ocr_tokens_total = self.perform_ocr(collage_temp_path, engine_options, ocr_prompt_option)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if notebook_mode:
                     # In this mode "ocr" is actually md formatted, we need to remove that for the basic ocr field in the response
                     ocr_plain = markdown_to_simple_text(ocr, remove_headers=True, guard_excel=True)
+
+                    self._log(f"Tokens: OCR={ocr_tokens_total}", "info")
+                    est_impact = estimate_impact(ocr_tokens_total)
 
                     results = OrderedDict([
                         ("filename", original_filename),
@@ -1625,11 +1723,12 @@ class VoucherVisionProcessor:
                             ("cost_in", 0),
                             ("cost_out", 0),
                         ])),
+                        ("impact", est_impact),
                         ("collage_info", collage_json_data),
                         ("collage_image_format", 'jpeg'),
                         ("success", {
                             "image_available": "True",
-                            "text_collage": "True",
+                            "text_collage": "False",
                             "text_collage_resize": f'{collage_resize_method}',
                             "ocr": "True",
                             "llm": "False",
@@ -1640,6 +1739,9 @@ class VoucherVisionProcessor:
 
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
                     ocr_sanitized = sanitize_for_storage(ocr)
+
+                    self._log(f"Tokens: OCR={ocr_tokens_total}", "info")
+                    est_impact = estimate_impact(ocr_tokens_total)
 
                     results = OrderedDict([
                         ("filename", original_filename),
@@ -1657,6 +1759,7 @@ class VoucherVisionProcessor:
                             ("cost_in", 0),
                             ("cost_out", 0),
                         ])),
+                        ("impact", est_impact),
                         ("collage_info", collage_json_data),
                         ("collage_image_format", 'jpeg'),
                         ("success", {
@@ -1673,7 +1776,12 @@ class VoucherVisionProcessor:
                     
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
                     ocr_sanitized = sanitize_for_storage(ocr)
-                    vv_results_sanitized = self._sanitize_formatted_json(vv_results)            
+                    vv_results_sanitized = self._sanitize_formatted_json(vv_results)   
+
+                    llm_tokens_total = self._add_tokens(tokens_in, tokens_out, ocr_tokens_total)    
+                    self._log(f"Tokens: OCR={ocr_tokens_total}, LLM_in={tokens_in}, LLM_out={tokens_out}, total={llm_tokens_total}", "info")
+
+                    est_impact = estimate_impact(llm_tokens_total)
 
                     results = OrderedDict([
                         ("filename", original_filename),
@@ -1691,6 +1799,7 @@ class VoucherVisionProcessor:
                             ("cost_in", cost_in),
                             ("cost_out", cost_out),
                         ])),
+                        ("impact", est_impact),
                         ("collage_info", collage_json_data),
                         ("collage_image_format", 'jpeg'),
                         ("success", {
@@ -1889,9 +1998,9 @@ def process_image():
     
     # If processing was successful, update usage statistics
     if status_code == 200:
-        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
+        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
     else:
-        update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}")
+        update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}", est_impact=None)
 
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -1988,6 +2097,7 @@ def process_image_by_url():
                 ("cost_in", 0),
                 ("cost_out", 0),
             ])),
+            ("impact", {}),
             ("collage_info", {"error": "Image could not be retrieved from URL."}),
             ("collage_image_format", ""),
             ("success", {  
@@ -2020,10 +2130,10 @@ def process_image_by_url():
 
         # Update usage stats
         if status_code == 200:
-            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name)
+            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
         else:
             # Log that the request failed after a successful download
-            update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}")
+            update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}", est_impact=None)
 
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
