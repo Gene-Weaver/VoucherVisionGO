@@ -124,7 +124,7 @@ def estimate_impact(tokens: float | None) -> dict:
     est_w = sum(all_water) / len(all_water)
 
     return {
-        "total_tokens": tokens,
+        "total_tokens_all": tokens,
         "estimate_grams_CO2": est_CO2,   # grams CO2e (mean)
         "estimate_watt_hours": est_wH,     # watt-hours (mean)
         "estimate_mL_water": est_w,       # milliliters water (mean)
