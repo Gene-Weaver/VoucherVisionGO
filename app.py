@@ -2146,6 +2146,75 @@ def process_image_by_url():
         return jsonify({'error': str(e)}), 500
     
 
+@app.route('/impact', methods=['GET'])
+@authenticated_route
+def get_impact_summary():
+    """
+    Return total impact summary for the authenticated caller.
+    Works with API key only (X-API-Key) or Firebase auth.
+    """
+    try:
+        # Resolve the user email from API key or Firebase token
+        user_email = get_user_email_from_request(request)
+        if not user_email or user_email == 'unknown':
+            return jsonify({'error': 'Unable to resolve user from credentials'}), 401
+
+        # Fetch their usage stats doc (doc id = user_email)
+        doc_ref = db.collection('usage_statistics').document(user_email)
+        doc = doc_ref.get()
+
+        if not doc.exists:
+            # Return zeros if they have no usage yet
+            return jsonify({
+                'status': 'success',
+                'user_email': user_email,
+                'totals': {
+                    'total_images_processed': 0,
+                    'total_tokens': 0,
+                    'total_watt_hours': 0.0,
+                    'total_grams_CO2': 0.0,
+                    'total_mL_water': 0.0,
+                },
+                'units': {
+                    'total_tokens': 'tokens',
+                    'total_watt_hours': 'Wh',
+                    'total_grams_CO2': 'g CO2e',
+                    'total_mL_water': 'mL'
+                }
+            })
+
+        data = doc.to_dict() or {}
+
+        # Normalize/defend against missing fields
+        total_images_processed = int(data.get('total_images_processed', 0) or 0)
+        total_tokens          = int(data.get('total_tokens', 0) or 0)
+        total_watt_hours      = float(data.get('total_watt_hours', 0.0) or 0.0)
+        total_grams_CO2       = float(data.get('total_grams_CO2', 0.0) or 0.0)
+        # water may be stored under either name; support both
+        total_mL_water        = float(
+            data.get('total_mL_water',
+                     data.get('total_milliliters_water', 0.0)) or 0.0
+        )
+
+        return jsonify({
+            'status': 'success',
+            'totals': {
+                'total_images_processed': total_images_processed,
+                'total_tokens': total_tokens,
+                'total_watt_hours': total_watt_hours,
+                'total_grams_CO2': total_grams_CO2,
+                'total_mL_water': total_mL_water,
+            },
+            'units': {
+                'total_tokens': 'tokens',
+                'total_watt_hours': 'Wh',
+                'total_grams_CO2': 'g CO2e',
+                'total_mL_water': 'mL'
+            }
+        })
+    except Exception as e:
+        logger.error(f"/impact/summary failed: {e}")
+        return jsonify({'error': f'Failed to get impact summary: {str(e)}'}), 500
 
 
 @app.route('/api-demo', methods=['GET', 'POST'])

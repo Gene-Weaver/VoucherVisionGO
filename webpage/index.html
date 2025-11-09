@@ -114,6 +114,13 @@ http://localhost:8000/index.html
                         style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
                 </div>
 
+                <!-- Impact summary button + output -->
+                <div id="impactControls" class="form-group" style="margin-top: 10px;">
+                    <button id="showImpactBtn" class="button" disabled>Show My Impact</button>
+                    <div id="impactStatus" class="status-display" style="margin-top: 8px;"></div>
+                    <div id="impactSummary" style="margin-top: 12px;"></div>
+                </div>
+
                 <label>Selecting OCR Engine Options</label>
                 <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
                     performance characteristics.</p>
@@ -1007,6 +1014,163 @@ http://localhost:8000/index.html
         });
     }
     </script>
+
+    <script>
+    (function() {
+      // Optional: set to your Cloud Run base if serving the page elsewhere.
+      // Defaults to same-origin.
+      const API_BASE = window.VVGO_API_BASE || location.origin;
+    
+      // Minimal UI helpers
+      function fmtCO2(g) {
+        if (g >= 1e9) return (g/1e9).toFixed(2) + ' kt CO₂e';
+        if (g >= 1e6) return (g/1e6).toFixed(2) + ' t CO₂e';
+        if (g >= 1e3) return (g/1e3).toLocaleString(undefined, {maximumFractionDigits: 1}) + ' kg CO₂e';
+        return Math.round(g).toLocaleString() + ' g CO₂e';
+      }
+      function fmtWh(wh) {
+        if (wh >= 1e6) return (wh/1e6).toFixed(2) + ' MWh';
+        if (wh >= 1e3) return (wh/1e3).toFixed(2) + ' kWh';
+        return (wh >= 100 ? wh.toLocaleString(undefined, {maximumFractionDigits: 0}) : wh.toLocaleString(undefined, {maximumFractionDigits: 1})) + ' Wh';
+      }
+      function fmtTokens(n) {
+        if (n >= 1_000_000_000) return (n/1_000_000_000).toFixed(2) + 'B';
+        if (n >= 1_000_000)     return (n/1_000_000).toFixed(2) + 'M';
+        if (n >= 1_000)         return (n/1_000).toFixed(2) + 'K';
+        return String(n);
+      }
+      function fmtVolumeML(ml) {
+        if (ml >= 1e6) return (ml/1e6).toFixed(2) + ' m³';
+        if (ml >= 1e3) return (ml/1e3).toFixed(2) + ' L';
+        return Math.round(ml).toLocaleString() + ' mL';
+      }
+    
+      function renderSummary(t) {
+        // Simple responsive cards
+        return `
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Images Processed</div>
+              <div style="font-size:28px; font-weight:700;">${Number(t.total_images_processed||0).toLocaleString()}</div>
+            </div>
+            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Tokens</div>
+              <div style="font-size:28px; font-weight:700;">${fmtTokens(t.total_tokens||0)}</div>
+            </div>
+            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Energy Used</div>
+              <div style="font-size:28px; font-weight:700;">${fmtWh(t.total_watt_hours||0)}</div>
+            </div>
+            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Estimated CO₂e</div>
+              <div style="font-size:28px; font-weight:700;">${fmtCO2(t.total_grams_CO2||0)}</div>
+            </div>
+            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Water (est.)</div>
+              <div style="font-size:28px; font-weight:700;">${fmtVolumeML(t.total_mL_water||0)}</div>
+            </div>
+          </div>
+        `;
+      }
+    
+      function getAuthMethod() {
+        const el = document.querySelector('input[name="authMethod"]:checked');
+        return el ? el.value : 'apiKey';
+      }
+      function currentApiKey() {
+        const v = (document.getElementById('apiKey')?.value || '').trim();
+        // Treat default placeholder as empty
+        return (v && v !== 'YOUR_API_KEY') ? v : '';
+      }
+      function currentToken() {
+        return (document.getElementById('authToken')?.value || '').trim();
+      }
+    
+      function credsPresent() {
+        const method = getAuthMethod();
+        if (method === 'apiKey') {
+          const key = currentApiKey();
+          return key.length > 10; // simple sanity check
+        } else {
+          const tok = currentToken();
+          return tok.length > 10; // simple sanity check
+        }
+      }
+    
+      function updateButtonState() {
+        const btn = document.getElementById('showImpactBtn');
+        if (!btn) return;
+        btn.disabled = !credsPresent();
+      }
+    
+      async function fetchImpact() {
+        const btn = document.getElementById('showImpactBtn');
+        const status = document.getElementById('impactStatus');
+        const out = document.getElementById('impactSummary');
+        if (!btn || !status || !out) return;
+    
+        btn.disabled = true;
+        status.textContent = 'Fetching impact summary…';
+        out.innerHTML = '';
+    
+        try {
+          const method = getAuthMethod();
+          const headers = { 'Content-Type': 'application/json' };
+          if (method === 'apiKey') {
+            headers['X-API-Key'] = currentApiKey();
+          } else {
+            headers['Authorization'] = 'Bearer ' + currentToken();
+          }
+    
+          const resp = await fetch(`${API_BASE}/impact`, {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers
+          });
+    
+          if (!resp.ok) {
+            const text = await resp.text().catch(()=>'');
+            throw new Error(`HTTP ${resp.status}: ${text || resp.statusText}`);
+          }
+    
+          const data = await resp.json();
+          if (!data || !data.totals) {
+            throw new Error('Unexpected response shape.');
+          }
+    
+          status.textContent = '✅ Impact summary loaded';
+          out.innerHTML = renderSummary(data.totals);
+        } catch (err) {
+          console.error('Impact fetch error:', err);
+          status.textContent = '⚠️ ' + (err?.message || 'Failed to fetch impact summary');
+        } finally {
+          // Re-enable if creds still present
+          updateButtonState();
+        }
+      }
+    
+      document.addEventListener('DOMContentLoaded', function() {
+        // Wire events to (re)enable the button when creds appear
+        const btn = document.getElementById('showImpactBtn');
+        const apiKeyInput = document.getElementById('apiKey');
+        const tokenInput  = document.getElementById('authToken');
+        const radios = document.querySelectorAll('input[name="authMethod"]');
+    
+        if (btn) btn.addEventListener('click', fetchImpact);
+    
+        [apiKeyInput, tokenInput].forEach(el => {
+          if (el) el.addEventListener('input', updateButtonState);
+        });
+        radios.forEach(r => r.addEventListener('change', updateButtonState));
+    
+        // Initial state
+        updateButtonState();
+      });
+    })();
+    </script>
+    
+
 
 </body>
 </html>

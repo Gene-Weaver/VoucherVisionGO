@@ -296,6 +296,37 @@ function createChartWithData(stats) {
   const totalTranscribed = stats.reduce((sum, s) => sum + (s.total_images_processed || 0), 0);
   const totalUsers = stats.length;
 
+  // aggregate carbon (grams CO2e)
+  const totalCO2g = stats.reduce((sum, s) => sum + (s.total_grams_CO2 || 0), 0);
+  const totalWh = stats.reduce((sum, s) => sum + (s.total_watt_hours || 0), 0);
+  const totalTokens = stats.reduce((sum, s) => sum + (s.total_tokens || 0), 0);
+
+
+  // Formatters
+  function formatCO2(g) {
+    if (g >= 1e9) return `${(g / 1e9).toFixed(2)} kt CO₂e`;
+    if (g >= 1e6) return `${(g / 1e6).toFixed(2)} t CO₂e`;
+    if (g >= 1e3) return `${(g / 1e3).toLocaleString(undefined, { maximumFractionDigits: 1 })} kg CO₂e`;
+    return `${Math.round(g).toLocaleString()} g CO₂e`;
+  }
+
+  function formatWh(wh) {
+    if (wh >= 1e6) return `${(wh / 1e6).toFixed(2)} MWh`;
+    if (wh >= 1e3) return `${(wh / 1e3).toFixed(2)} kWh`;
+    // show up to 1 decimal for large Wh, otherwise integer
+    return wh >= 100 ? `${wh.toLocaleString(undefined, { maximumFractionDigits: 0 })} Wh`
+                    : `${wh.toLocaleString(undefined, { maximumFractionDigits: 1 })} Wh`;
+  }
+
+  function formatTokens(n) {
+    // compact, but keep precision reasonable
+    if (n >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(2)}B`;
+    if (n >= 1_000_000)     return `${(n / 1_000_000).toFixed(2)}M`;
+    if (n >= 1_000)         return `${(n / 1_000).toFixed(2)}K`;
+    return `${n}`;
+  }
+
+
   const widgetsHtml = `
     <div id="usage-summary-widgets" style="display:flex; gap:16px; margin-bottom:12px; flex-wrap:wrap;">
       <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
@@ -307,6 +338,23 @@ function createChartWithData(stats) {
         <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Users</div>
         <div style="font-size:28px; font-weight:700;">${Number(totalUsers).toLocaleString()}</div>
         <div style="font-size:12px; color:#9ca3af;">Unique accounts</div>
+      </div>
+      <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Estimated CO₂e</div>
+        <div style="font-size:28px; font-weight:700;">${formatCO2(totalCO2g)}</div>
+        <div style="font-size:12px; color:#9ca3af;">Sum across users</div>
+      </div>
+      <!-- NEW: Energy Used -->
+      <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Energy Used</div>
+        <div style="font-size:28px; font-weight:700;">${formatWh(totalWh)}</div>
+        <div style="font-size:12px; color:#9ca3af;">Aggregated watt-hours</div>
+      </div>
+      <!-- NEW: Total Tokens -->
+      <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
+        <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Tokens</div>
+        <div style="font-size:28px; font-weight:700;">${formatTokens(totalTokens)}</div>
+        <div style="font-size:12px; color:#9ca3af;">Prompt + completion</div>
       </div>
     </div>
   `;
