@@ -22,6 +22,7 @@ http://localhost:8000/index.html
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css" rel="stylesheet" />
 
     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+    <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
     <link rel="stylesheet" href="css/vouchervisiongo.css">
     <script>
@@ -58,6 +59,7 @@ http://localhost:8000/index.html
                 <li><a href="#" id="homeLink" class="active">Home</a></li>
                 <li><a href="#" id="readmeLink">About</a></li>
                 <li><a href="#" id="promptsLink">Available Prompts</a></li>
+                <li><a href="#" id="impactLink">Impact</a></li>
                 <li><a href="#" id="changelogLink">Changelog</a></li>
                 <li class="nav-right"><a href="#" id="signupLink">Sign up / Login</a></li>
             </ul>
@@ -70,6 +72,8 @@ http://localhost:8000/index.html
         <div id="promptsContent" class="prompts-section" style="display: none;">
             <iframe id="promptsFrame" src="about:blank" frameborder="0"></iframe>
         </div>
+        
+        <div id="impactContent" class="readme-section" style="display: none;"></div>
 
         <div id="changelogContent" class="changelog-section" style="display: none;">
             <!-- This will be populated by JS -->
@@ -113,7 +117,9 @@ http://localhost:8000/index.html
                     <button id="clearTokenButton" class="button"
                         style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
                 </div>
-
+                
+                <h3>Display Water, CO₂, Energy Usage</h3>
+                <p class="help-text">This displays impact associated with your API key. All API responses contain this information so you can track your usage in a more granular manner. Please consult the "Impact" page for more information about how these metrics are calculated. </p>
                 <!-- Impact summary button + output -->
                 <div id="impactControls" class="form-group" style="margin-top: 10px;">
                     <button id="showImpactBtn" class="button" disabled>Show My Impact</button>
@@ -121,7 +127,7 @@ http://localhost:8000/index.html
                     <div id="impactSummary" style="margin-top: 12px;"></div>
                 </div>
 
-                <label>Selecting OCR Engine Options</label>
+                <h3>About OCR Engine Options</h3>
                 <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
                     performance characteristics.</p>
                 <div
@@ -502,6 +508,7 @@ http://localhost:8000/index.html
             const homeLink = document.getElementById('homeLink');
             const readmeLink = document.getElementById('readmeLink');
             const promptsLink = document.getElementById('promptsLink');
+            const impactLink = document.getElementById('impactLink');
             const changelogLink = document.getElementById('changelogLink');
             const signupLink = document.getElementById('signupLink');
             const mainContent = document.getElementById('mainContent');
@@ -536,12 +543,46 @@ http://localhost:8000/index.html
                     readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
                 });
 
+            // Load impact content (convert IMPACT.md → HTML like README)
+            function loadImpact() {
+                const impactContent = document.getElementById('impactContent');
+                const impactFrame = document.getElementById('impactFrame'); // optional: hide if you’re no longer using it
+
+                // Show loading state
+                impactContent.classList.add('loading');
+
+                fetch('./IMPACT.md')
+                    .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                    })
+                    .then(data => {
+                    const converter = new showdown.Converter({
+                        tables: true,
+                        tasklists: true,
+                        strikethrough: true,
+                        ghCodeBlocks: true
+                    });
+                    const html = converter.makeHtml(data);
+                    impactContent.innerHTML = html;  // inject converted HTML directly
+                    })
+                    .catch(error => {
+                    console.error('Error fetching IMPACT.md:', error);
+                    impactContent.innerHTML =
+                        '<div class="error">Error loading IMPACT.md. Please make sure IMPACT.md exists and is accessible.</div>';
+                    })
+                    .finally(() => {
+                    impactContent.classList.remove('loading');
+                });
+            }
+
             // Function to reset all navigation states
             function resetNavigation() {
                 // Hide all content sections
                 mainContent.style.display = 'none';
                 readmeContent.style.display = 'none';
                 promptsContent.style.display = 'none';
+                impactContent.style.display = 'none';
                 changelogContent.style.display = 'none';
                 signupContent.style.display = 'none';
 
@@ -549,6 +590,7 @@ http://localhost:8000/index.html
                 homeLink.classList.remove('active');
                 readmeLink.classList.remove('active');
                 promptsLink.classList.remove('active');
+                impactLink.classList.remove('active');
                 changelogLink.classList.remove('active');
                 signupLink.classList.remove('active');
 
@@ -591,6 +633,16 @@ http://localhost:8000/index.html
                     promptsContent.classList.remove('loading');
                 };
             });
+
+            // Handle impact link click
+            impactLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                impactContent.style.display = 'block';
+                impactLink.classList.add('active');
+                loadImpact();           // <-- load from IMPACT.md
+            });
+
 
             changelogLink.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1015,95 +1067,178 @@ http://localhost:8000/index.html
     }
     </script>
 
+
+
+<style>
+    /* Layout container */
+    .vv-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;           /* keep single row */
+      overflow-x: auto;            /* allow horizontal scroll if too many */
+      gap: 16px;
+      padding-bottom: 10px;        /* space below for scrollbar */
+      scroll-snap-type: x mandatory;
+    }
+    .vv-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .vv-grid::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+    .vv-grid::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+    
+    /* Tile cards */
+    .impact-tile {
+      flex: 0 0 220px;             /* fixed width per tile */
+      min-width: 200px;
+      background: var(--vv-card-bg, #fff);
+      border: 1px solid var(--vv-card-border, #e5e7eb);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform .15s ease, box-shadow .15s ease;
+      scroll-snap-align: start;
+    }
+    .impact-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .impact-icon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+    .impact-label {
+      font-size: 0.9rem;
+      color: var(--vv-muted, #000000);
+      margin-bottom: 2px;
+    }
+    .impact-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--vv-text, #111);
+      margin-bottom: 4px;
+    }
+    .impact-sub {
+      font-size: 0.8rem;
+      color: var(--vv-soft, #000000);
+    }
+    @media (prefers-color-scheme: dark){
+      .impact-tile {
+        background: #b8b8b8;
+        border-color: #343434;
+      }
+      .impact-value { color: #3377ff; }
+    }
+    </style>    
     <script>
     (function() {
-      // Optional: set to your Cloud Run base if serving the page elsewhere.
-      // Defaults to same-origin.
-      const API_BASE = window.VVGO_API_BASE || location.origin;
+      const API_BASE = window.VVGO_API_BASE || location.origin; 
     
-      // Minimal UI helpers
-      function fmtCO2(g) {
-        if (g >= 1e9) return (g/1e9).toFixed(2) + ' kt CO₂e';
-        if (g >= 1e6) return (g/1e6).toFixed(2) + ' t CO₂e';
-        if (g >= 1e3) return (g/1e3).toLocaleString(undefined, {maximumFractionDigits: 1}) + ' kg CO₂e';
-        return Math.round(g).toLocaleString() + ' g CO₂e';
-      }
-      function fmtWh(wh) {
-        if (wh >= 1e6) return (wh/1e6).toFixed(2) + ' MWh';
-        if (wh >= 1e3) return (wh/1e3).toFixed(2) + ' kWh';
-        return (wh >= 100 ? wh.toLocaleString(undefined, {maximumFractionDigits: 0}) : wh.toLocaleString(undefined, {maximumFractionDigits: 1})) + ' Wh';
-      }
-      function fmtTokens(n) {
-        if (n >= 1_000_000_000) return (n/1_000_000_000).toFixed(2) + 'B';
-        if (n >= 1_000_000)     return (n/1_000_000).toFixed(2) + 'M';
-        if (n >= 1_000)         return (n/1_000).toFixed(2) + 'K';
-        return String(n);
-      }
-      function fmtVolumeML(ml) {
-        if (ml >= 1e6) return (ml/1e6).toFixed(2) + ' m³';
-        if (ml >= 1e3) return (ml/1e3).toFixed(2) + ' L';
-        return Math.round(ml).toLocaleString() + ' mL';
-      }
+      // ---------- Formatters (unchanged) ----------
+      function fmtCO2(g){ if(g>=1e9)return(g/1e9).toFixed(2)+' kt CO₂e'; if(g>=1e6)return(g/1e6).toFixed(2)+' t CO₂e'; if(g>=1e3)return((g/1e3).toLocaleString(undefined,{maximumFractionDigits:1}))+' kg CO₂e'; return Math.round(g).toLocaleString()+' g CO₂e'; }
+      function fmtWh(wh){ if(wh>=1e6)return(wh/1e6).toFixed(2)+' MWh'; if(wh>=1e3)return(wh/1e3).toFixed(2)+' kWh'; return (wh>=100?wh.toLocaleString(undefined,{maximumFractionDigits:0}):wh.toLocaleString(undefined,{maximumFractionDigits:1}))+' Wh'; }
+      function fmtTokens(n){ if(n>=1_000_000_000)return(n/1_000_000_000).toFixed(2)+'B'; if(n>=1_000_000)return(n/1_000_000).toFixed(2)+'M'; if(n>=1_000)return(n/1_000).toFixed(2)+'K'; return String(n); }
+      function fmtVolumeML(ml){ if(ml>=1e6)return(ml/1e6).toFixed(2)+' m³'; if(ml>=1e3)return(ml/1e3).toFixed(2)+' L'; return Math.round(ml).toLocaleString()+' mL'; }
     
+      // ---------- Render (theme-matched) ----------
       function renderSummary(t) {
-        // Simple responsive cards
+        // Data ready
+        const items = [
+            {
+            label: 'Images Processed',
+            value: Number(t.total_images_processed || 0).toLocaleString(),
+            sub: 'All time',
+            icon: '🖼️'
+            },
+            {
+            label: 'Total Tokens',
+            value: fmtTokens(t.total_tokens || 0),
+            sub: 'Prompt + completion',
+            icon: '🔠'
+            },
+            {
+            label: 'Energy Used',
+            value: fmtWh(t.total_watt_hours || 0),
+            sub: 'Aggregated Wh',
+            icon: '⚡'
+            },
+            {
+            label: 'Estimated CO₂e',
+            value: fmtCO2(t.total_grams_CO2 || 0),
+            sub: 'Sum across usage',
+            icon: '🌍'
+            },
+            {
+            label: 'Water (est.)',
+            value: fmtVolumeML(t.total_mL_water || 0),
+            sub: 'Lifecycle estimate',
+            icon: '💧'
+            },
+        ];
+
+        // Tile grid
         return `
-          <div style="display:flex; gap:16px; flex-wrap:wrap;">
-            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Images Processed</div>
-              <div style="font-size:28px; font-weight:700;">${Number(t.total_images_processed||0).toLocaleString()}</div>
+            <div class="vv-grid">
+            ${items.map(i => `
+                <div class="vv-card impact-tile">
+                <div class="impact-icon">${i.icon}</div>
+                <div class="impact-label">${i.label}</div>
+                <div class="impact-value">${i.value}</div>
+                <div class="impact-sub">${i.sub}</div>
+                </div>
+            `).join('')}
             </div>
-            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Total Tokens</div>
-              <div style="font-size:28px; font-weight:700;">${fmtTokens(t.total_tokens||0)}</div>
-            </div>
-            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Energy Used</div>
-              <div style="font-size:28px; font-weight:700;">${fmtWh(t.total_watt_hours||0)}</div>
-            </div>
-            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Estimated CO₂e</div>
-              <div style="font-size:28px; font-weight:700;">${fmtCO2(t.total_grams_CO2||0)}</div>
-            </div>
-            <div style="flex:1; min-width:220px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
-              <div style="font-size:12px; color:#6b7280; margin-bottom:4px;">Water (est.)</div>
-              <div style="font-size:28px; font-weight:700;">${fmtVolumeML(t.total_mL_water||0)}</div>
-            </div>
-          </div>
         `;
-      }
-    
-      function getAuthMethod() {
-        const el = document.querySelector('input[name="authMethod"]:checked');
-        return el ? el.value : 'apiKey';
-      }
-      function currentApiKey() {
-        const v = (document.getElementById('apiKey')?.value || '').trim();
-        // Treat default placeholder as empty
-        return (v && v !== 'YOUR_API_KEY') ? v : '';
-      }
-      function currentToken() {
-        return (document.getElementById('authToken')?.value || '').trim();
-      }
-    
-      function credsPresent() {
-        const method = getAuthMethod();
-        if (method === 'apiKey') {
-          const key = currentApiKey();
-          return key.length > 10; // simple sanity check
-        } else {
-          const tok = currentToken();
-          return tok.length > 10; // simple sanity check
         }
+
+    
+      // ---------- Borrow from api_key_validator.js ----------
+      // Actual API key/token are saved in dataset OR localStorage by your validator.
+      function getEffectiveApiKey(){
+        const el = document.getElementById('apiKey');
+        const fromDataset = (el?.dataset?.apiKey || '').trim();
+        if (fromDataset) return fromDataset;
+        const stored = (localStorage.getItem('vouchervision_api_key') || '').trim();
+        return stored;
+      }
+      function getEffectiveToken(){
+        const el = document.getElementById('authToken');
+        const fromDataset = (el?.dataset?.authToken || '').trim();
+        if (fromDataset) return fromDataset;
+        const stored = (localStorage.getItem('vouchervision_auth_token') || '').trim();
+        return stored;
       }
     
-      function updateButtonState() {
+      // Enable button if *either* API key or token is present.
+      function updateButtonState(){
         const btn = document.getElementById('showImpactBtn');
         if (!btn) return;
-        btn.disabled = !credsPresent();
+        // Reuse your validator’s checks when available:
+        const apiReady  = (typeof isApiKeySet === 'function') ? isApiKeySet() : !!getEffectiveApiKey();
+        const tokReady  = (typeof isAuthTokenSet === 'function') ? isAuthTokenSet() : !!getEffectiveToken();
+        btn.disabled = !(apiReady || tokReady);
       }
     
-      async function fetchImpact() {
+      // Keep in sync with validator updates
+      function attachObservers(){
+        const watchIds = ['apiKey','authToken'];
+        watchIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          new MutationObserver(updateButtonState).observe(el, { attributes:true });
+        });
+        window.addEventListener('storage', updateButtonState);
+        // After the validator initializes (it runs on $(document).ready), recheck:
+        setTimeout(updateButtonState, 300); // minor delay so validator can populate dataset/localStorage
+      }
+    
+      // ---------- Fetch & render ----------
+      async function fetchImpact(){
         const btn = document.getElementById('showImpactBtn');
         const status = document.getElementById('impactStatus');
         const out = document.getElementById('impactSummary');
@@ -1114,30 +1249,22 @@ http://localhost:8000/index.html
         out.innerHTML = '';
     
         try {
-          const method = getAuthMethod();
-          const headers = { 'Content-Type': 'application/json' };
-          if (method === 'apiKey') {
-            headers['X-API-Key'] = currentApiKey();
-          } else {
-            headers['Authorization'] = 'Bearer ' + currentToken();
-          }
+          const headers = { 'Content-Type':'application/json' };
+          const apiKey = getEffectiveApiKey();
+          const token  = getEffectiveToken();
     
-          const resp = await fetch(`${API_BASE}/impact`, {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'no-cache',
-            headers
-          });
+          if (apiKey) headers['X-API-Key'] = apiKey;      // prefer API key
+          else if (token) headers['Authorization'] = 'Bearer ' + token;
+    
+          const resp = await fetch(`${API_BASE}/impact`, { method:'GET', mode:'cors', cache:'no-cache', headers });
     
           if (!resp.ok) {
-            const text = await resp.text().catch(()=>'');
+            const text = await resp.text().catch(()=> '');
             throw new Error(`HTTP ${resp.status}: ${text || resp.statusText}`);
           }
     
           const data = await resp.json();
-          if (!data || !data.totals) {
-            throw new Error('Unexpected response shape.');
-          }
+          if (!data || !data.totals) throw new Error('Unexpected response shape.');
     
           status.textContent = '✅ Impact summary loaded';
           out.innerHTML = renderSummary(data.totals);
@@ -1145,32 +1272,18 @@ http://localhost:8000/index.html
           console.error('Impact fetch error:', err);
           status.textContent = '⚠️ ' + (err?.message || 'Failed to fetch impact summary');
         } finally {
-          // Re-enable if creds still present
           updateButtonState();
         }
       }
     
-      document.addEventListener('DOMContentLoaded', function() {
-        // Wire events to (re)enable the button when creds appear
+      document.addEventListener('DOMContentLoaded', function(){
         const btn = document.getElementById('showImpactBtn');
-        const apiKeyInput = document.getElementById('apiKey');
-        const tokenInput  = document.getElementById('authToken');
-        const radios = document.querySelectorAll('input[name="authMethod"]');
-    
         if (btn) btn.addEventListener('click', fetchImpact);
-    
-        [apiKeyInput, tokenInput].forEach(el => {
-          if (el) el.addEventListener('input', updateButtonState);
-        });
-        radios.forEach(r => r.addEventListener('change', updateButtonState));
-    
-        // Initial state
+        attachObservers();
         updateButtonState();
       });
     })();
     </script>
-    
-
 
 </body>
 </html>

@@ -299,7 +299,7 @@ function createChartWithData(stats) {
   // aggregate carbon (grams CO2e)
   const totalCO2g = stats.reduce((sum, s) => sum + (s.total_grams_CO2 || 0), 0);
   const totalWh = stats.reduce((sum, s) => sum + (s.total_watt_hours || 0), 0);
-  const totalTokens = stats.reduce((sum, s) => sum + (s.total_tokens || 0), 0);
+  const totalTokens = stats.reduce((sum, s) => sum + (s.total_tokens_all || 0), 0);
 
 
   // Formatters
