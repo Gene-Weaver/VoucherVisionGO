@@ -34,6 +34,7 @@ from firebase_admin import credentials, auth, firestore
 
 from url_name_parser import extract_filename_from_url
 from impact import estimate_impact
+from anti_bot_fetch import smart_fetch_image_as_filestorage
 
 '''
 ### TO UPDATE FROM MAIN VV REPO
@@ -2059,7 +2060,31 @@ def process_image_by_url():
         try:
             logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch URL: {image_url}")
             # The actual download attempt
-            file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
+            # file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
+            try:
+                allowed = os.environ.get("ALLOWED_IMAGE_DOMAINS", "").split(",") if os.environ.get("ALLOWED_IMAGE_DOMAINS") else None
+                cookie  = os.environ.get("PORTAL_COOKIE")  # optional: e.g., "sessionid=abc123; other=xyz"
+                extra   = {}  # optionally: {"X-Requested-With": "XMLHttpRequest"}
+
+                file_obj, filename_from_url = smart_fetch_image_as_filestorage(
+                    image_url,
+                    max_pixels=5_200_000,
+                    max_retries=3,
+                    connect_timeout=15.0,
+                    read_timeout=90.0,
+                    per_try_base_delay=0.75,
+                    per_try_jitter=0.75,
+                    allowed_domains=allowed,
+                    user_agent=None,        # or set explicitly
+                    extra_headers=extra,    # if the site expects specific headers
+                    cookie=cookie,          # if you have an approved session
+                    logger=logger,
+                )
+                logger.info(f"URL fetched filenam: {filename_from_url}")
+            except:
+                file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
+
+
             logger.info(f"URL image fetched successfully for user: {user_email}")
             # If successful, break the loop and proceed
             break
