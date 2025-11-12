@@ -11,7 +11,7 @@ Here we only include estimates for **Google Cloud** because that is the infrastr
 
 ### Average token counts (typical herbarium specimen)
 **OCR**
-  - Input = 2,00* tokens  
+  - Input = 2,000 tokens  
   - Output = 500 tokens
   - Total = 2,500 tokens  
 

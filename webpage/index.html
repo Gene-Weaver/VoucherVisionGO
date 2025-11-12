@@ -1093,8 +1093,8 @@ http://localhost:8000/index.html
     
     /* Tile cards */
     .impact-tile {
-      flex: 0 0 220px;             /* fixed width per tile */
-      min-width: 200px;
+      flex: 0 0 180px;             /* fixed width per tile */
+      min-width: 150px;
       background: var(--vv-card-bg, #fff);
       border: 1px solid var(--vv-card-border, #e5e7eb);
       border-radius: 12px;
@@ -1104,10 +1104,10 @@ http://localhost:8000/index.html
       transition: transform .15s ease, box-shadow .15s ease;
       scroll-snap-align: start;
     }
-    .impact-tile:hover {
+    /* .impact-tile:hover {
       transform: translateY(-3px);
       box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
+    } */
     .impact-icon {
       font-size: 2rem;
       margin-bottom: 6px;
@@ -1129,7 +1129,7 @@ http://localhost:8000/index.html
     }
     @media (prefers-color-scheme: dark){
       .impact-tile {
-        background: #b8b8b8;
+        background: #e1e0e0;
         border-color: #343434;
       }
       .impact-value { color: #3377ff; }
