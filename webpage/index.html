@@ -20,6 +20,8 @@ http://localhost:8000/index.html
     <!-- Make sure Mapbox JS and CSS are loaded -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- YAML parser for client-side loading of api_cost.yaml -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
@@ -127,6 +129,161 @@ http://localhost:8000/index.html
                     <div id="impactSummary" style="margin-top: 12px;"></div>
                 </div>
 
+                <!-- ===== LLM Cost Calculator & Cost Matrix ===== -->
+                <section id="llmCostSection" class="llm-cost-section">
+                <h2>VoucherVision Cost Calculator</h2>
+                <p class="help-text">
+                    On average, herbarium specimens require less than 4,000 input tokens and produce less than 1,000 output tokens. All values are in $USD per 1,000,000 tokens. Estimated costs do not factor in the cost of hosting the VoucherVisionAPI server.
+                </p>
+
+                <div class="llm-cost-controls">
+                    <div class="llm-cost-control">
+                    <label for="llmModelSelect"><strong>Model</strong></label>
+                    <select id="llmModelSelect">
+                        <option value="">Loading models…</option>
+                    </select>
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmTokensIn"><strong>Tokens In (per image)</strong></label>
+                    <input type="number" id="llmTokensIn" value="4000" min="0" step="50">
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmTokensOut"><strong>Tokens Out (per image)</strong></label>
+                    <input type="number" id="llmTokensOut" value="1000" min="0" step="50">
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmNumImages"><strong>Number of Images</strong></label>
+                    <input type="number" id="llmNumImages" value="1000" min="0" step="100">
+                    </div>
+
+                    <div class="llm-cost-control llm-cost-total">
+                    <label for="llmTotalCost"><strong>Total Cost (estimate)</strong></label>
+                    <input type="text" id="llmTotalCost" value="$0.00" readonly>
+                    </div>
+                </div>
+
+                <details id="llmCostMatrixDetails">
+                    <summary class="llm-summary">
+                        <h3 style="display:inline;">LLM Provider Cost Matrix</h3>
+                    </summary>
+
+                    <p class="help-text" style="margin-top:8px;">
+                        Models are grouped by provider (OpenAI, Azure, Google, Mistral, Hyperbolic, Local, Other).
+                    </p>
+
+                    <div id="llmCostTables" class="llm-cost-grid"></div>
+                </details>
+
+                </section>
+
+                <style>
+                #llmCostMatrixDetails summary {
+                    cursor: pointer;
+                    padding: 8px 0;
+                    list-style: none;
+                }
+
+                /* Hide default disclosure triangle (Chrome) */
+                #llmCostMatrixDetails summary::-webkit-details-marker {
+                    display: none;
+                }
+
+                /* Optional: add your own arrow */
+                #llmCostMatrixDetails summary::after {
+                    content: "▶";
+                    font-size: 0.9rem;
+                    margin-left: 8px;
+                    transition: transform 0.2s ease-in-out;
+                    opacity: 0.7;
+                }
+
+                #llmCostMatrixDetails[open] summary::after {
+                    transform: rotate(90deg);
+                }
+
+                .llm-cost-section {
+                    margin-top: 24px;
+                    padding-top: 16px;
+                    border-top: 1px solid #ddd;
+                }
+
+                .llm-cost-controls {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                    align-items: flex-end;
+                    margin: 12px 0 18px 0;
+                }
+
+                .llm-cost-control {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 140px;
+                }
+
+                .llm-cost-control label {
+                    font-size: 0.9rem;
+                    margin-bottom: 4px;
+                }
+
+                .llm-cost-control input,
+                .llm-cost-control select {
+                    padding: 4px 6px;
+                    font-size: 0.9rem;
+                }
+
+                .llm-cost-total input {
+                    font-weight: bold;
+                }
+
+                .llm-cost-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 16px;
+                    margin-top: 10px;
+                }
+
+                /* Reuse your existing card look where possible */
+                .llm-cost-card {
+                    flex: 1 1 260px;
+                    padding: 12px;
+                }
+
+                .llm-cost-card h4 {
+                    margin-top: 0;
+                    margin-bottom: 8px;
+                    font-size: 1rem;
+                }
+
+                .llm-cost-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 0.85rem;
+                }
+
+                .llm-cost-table th,
+                .llm-cost-table td {
+                    border-bottom: 1px solid #eee;
+                    padding: 4px 6px;
+                    text-align: left;
+                    white-space: nowrap;
+                }
+
+                .llm-cost-table th {
+                    font-weight: 600;
+                }
+
+                .llm-cost-table tbody tr:nth-child(even) {
+                    background: #fafafa;
+                }
+                </style>
+                <!-- ===== END LLM Cost Calculator & Cost Matrix ===== -->
+
+            <section id="settingsSection" class="llm-cost-section">
+            <h2>VoucherVision Settings</h2>
                 <h3>About OCR Engine Options</h3>
                 <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
                     performance characteristics.</p>
@@ -313,6 +470,8 @@ http://localhost:8000/index.html
                     <div id="corsStatus" class="status-display"></div>
                 </div>
             </div>
+            </section>
+
 
             <div class="tabs">
                 <div class="tab active" data-tab="FileUpload">File Upload</div>
@@ -495,6 +654,212 @@ http://localhost:8000/index.html
     <script src="js/batch_processing.js"></script>
     <script src="js/prompt_templates.js"></script>
     <script src="js/changelog_viewer.js"></script>
+
+    <script>
+    (function () {
+        // ---- Helper: classify model key into a provider bucket ----
+        function getProvider(key) {
+        if (key.startsWith('GPT_')) return 'OpenAI';
+        // if (key.startsWith('AZURE_')) return 'Azure OpenAI';
+        if (key.startsWith('GEMINI_') || key.startsWith('PALM2_')) return 'Google';
+        // if (
+        //     key.startsWith('OPEN_') ||
+        //     key.startsWith('MISTRAL_') ||
+        //     key.startsWith('MINISTRAL_') ||
+        //     key.startsWith('PIXTRAL')
+        // ) return 'Mistral';
+        if (key.startsWith('Hyperbolic_')) return 'Hyperbolic';
+        // if (key.startsWith('LOCAL_') || key.indexOf('phyloforfun') !== -1) return 'Local';
+        return 'Other';
+        }
+
+        // Simple "prettifier" for model names
+        function prettyNameFromKey(key) {
+        // Turn GPT_4o_2024_08_06 -> GPT 4o (2024-08-06)
+        let name = key.replace(/_/g, ' ');
+        // Small tweak for dates: 2024 08 06 -> 2024-08-06
+        name = name.replace(/(\d{4}) (\d{2}) (\d{2})/, '$1-$2-$3');
+        return name;
+        }
+
+        function formatPrice(v) {
+        if (typeof v !== 'number' || isNaN(v)) return '';
+        // trim trailing zeros but keep at most 4 decimals
+        const s = v.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');
+        return '$' + s;
+        }
+
+        // ---- Main initializer ----
+        function initLlmCostUI(costData) {
+        const selectEl   = document.getElementById('llmModelSelect');
+        const inEl       = document.getElementById('llmTokensIn');
+        const outEl      = document.getElementById('llmTokensOut');
+        const imgEl      = document.getElementById('llmNumImages');
+        const totalEl    = document.getElementById('llmTotalCost');
+        const tablesEl   = document.getElementById('llmCostTables');
+
+        if (!selectEl || !inEl || !outEl || !imgEl || !totalEl || !tablesEl) {
+            console.warn('[LLM Cost] UI elements not found; skipping setup.');
+            return;
+        }
+
+        // Build model list from YAML data
+        const models = [];
+        for (const key in costData) {
+            if (!Object.prototype.hasOwnProperty.call(costData, key)) continue;
+            const entry = costData[key] || {};
+            const priceIn  = Number(entry.in);
+            const priceOut = Number(entry.out);
+            if (isNaN(priceIn) || isNaN(priceOut)) continue; // skip weird entries
+
+            const provider = getProvider(key);
+            models.push({
+            key,
+            provider,
+            name: prettyNameFromKey(key),
+            in: priceIn,
+            out: priceOut
+            });
+        }
+
+        if (!models.length) {
+            selectEl.innerHTML = '<option value="">No models found in api_cost.yaml</option>';
+            tablesEl.innerHTML =
+            '<div class="vv-card llm-cost-card">No cost data loaded from <code>api_cost.yaml</code>.</div>';
+            return;
+        }
+
+        // Sort models by provider then name
+        models.sort((a, b) => {
+            if (a.provider === b.provider) return a.name.localeCompare(b.name);
+            return a.provider.localeCompare(b.provider);
+        });
+
+        // Map for quick lookup
+        const modelMap = {};
+        models.forEach(m => { modelMap[m.key] = m; });
+
+        // Populate <select>
+        selectEl.innerHTML = '';
+        models.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.key;
+            opt.textContent = `${m.provider}: ${m.name}`;
+            selectEl.appendChild(opt);
+        });
+
+        // Try to default to Gemini 2.0 Flash if present, else first model
+        const geminiKey = models.find(m => m.key === 'GEMINI_2_0_FLASH')?.key;
+        selectEl.value = geminiKey || models[0].key;
+
+        // Build provider-grouped cost tables
+        const byProvider = {};
+        models.forEach(m => {
+            if (!byProvider[m.provider]) byProvider[m.provider] = [];
+            byProvider[m.provider].push(m);
+        });
+
+        const providerOrder = ['OpenAI','Azure OpenAI','Google','Mistral','Hyperbolic','Local','Other'];
+
+        const htmlChunks = [];
+        providerOrder.forEach(provider => {
+            const list = byProvider[provider];
+            if (!list || !list.length) return;
+            list.sort((a, b) => a.name.localeCompare(b.name));
+            htmlChunks.push(`
+            <div class="vv-card llm-cost-card">
+                <h4>${provider}</h4>
+                <table class="llm-cost-table">
+                <thead>
+                    <tr>
+                    <th>Model</th>
+                    <th>Input ($/1M)</th>
+                    <th>Output ($/1M)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${list.map(m => `
+                    <tr>
+                        <td>${m.name}</td>
+                        <td>${formatPrice(m.in)}</td>
+                        <td>${formatPrice(m.out)}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+                </table>
+            </div>
+            `);
+        });
+
+        tablesEl.innerHTML = htmlChunks.join('');
+
+        // ---- Calculator logic (matches Streamlit: cost = (n_in/1e6 * in + n_out/1e6 * out) * n_img) ----
+        function recomputeCost() {
+            const key = selectEl.value;
+            const model = modelMap[key];
+            if (!model) {
+            totalEl.value = '$0.00';
+            return;
+            }
+
+            const nIn   = Number(inEl.value)  || 0;
+            const nOut  = Number(outEl.value) || 0;
+            const nImg  = Number(imgEl.value) || 0;
+
+            const cost =
+            (nIn  / 1_000_000 * model.in) +
+            (nOut / 1_000_000 * model.out);
+
+            const total = cost * nImg;
+            totalEl.value = '$' + total.toFixed(2);
+        }
+
+        // Recompute when anything changes
+        ['change','input'].forEach(evt => {
+            selectEl.addEventListener(evt, recomputeCost);
+            inEl.addEventListener(evt, recomputeCost);
+            outEl.addEventListener(evt, recomputeCost);
+            imgEl.addEventListener(evt, recomputeCost);
+        });
+
+        // Initial computation
+        recomputeCost();
+        }
+
+        // ---- Fetch and parse api_cost.yaml ----
+        document.addEventListener('DOMContentLoaded', function () {
+        const section = document.getElementById('llmCostSection');
+        if (!section) return; // user removed the HTML block
+
+        fetch('./api_cost.yaml')
+            .then(resp => {
+            if (!resp.ok) throw new Error('Failed to load api_cost.yaml: ' + resp.status);
+            return resp.text();
+            })
+            .then(text => {
+            if (typeof jsyaml === 'undefined') {
+                throw new Error('js-yaml not loaded; cannot parse api_cost.yaml');
+            }
+            const data = jsyaml.load(text) || {};
+            initLlmCostUI(data);
+            })
+            .catch(err => {
+            console.error('[LLM Cost] Error loading api_cost.yaml:', err);
+            const tablesEl = document.getElementById('llmCostTables');
+            const selectEl = document.getElementById('llmModelSelect');
+            if (tablesEl) {
+                tablesEl.innerHTML =
+                '<div class="vv-card llm-cost-card">Error loading <code>api_cost.yaml</code>. Please ensure the file is served alongside this page.</div>';
+            }
+            if (selectEl) {
+                selectEl.innerHTML =
+                '<option value="">Error loading api_cost.yaml</option>';
+            }
+            });
+        });
+    })();
+    </script>
+
 
     <!-- Additional initialization script -->
     <script>
