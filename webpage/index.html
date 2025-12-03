@@ -194,6 +194,13 @@ http://localhost:8000/index.html
                         
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
+                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                <input type="checkbox" name="engines" value="gemini-3-pro" unchecked> gemini-3-pro
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
                                 data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
                                 <input type="checkbox" name="engines" value="gemini-2.5-pro" unchecked> gemini-2.5-pro
                             </label>
@@ -210,18 +217,18 @@ http://localhost:8000/index.html
                                 <input type="checkbox" name="engines" value="gemini-2.5-flash" unchecked> gemini-2.5-flash
                             </label>
                         </div>
-                        <div class="checkbox-group">
+                        <!-- <div class="checkbox-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Will be deprecated sometime in 2025 (but it does perform well)">
                                 <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked>gemini-1.5-pro
                             </label>
-                        </div>
-                        <div class="checkbox-group">
+                        </div> -->
+                        <!-- <div class="checkbox-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Very lightweight">
                                 <input type="checkbox" name="engines" value="gemini-2.0-flash-lite" unchecked>gemini-2.0-flash-lite
                             </label>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -253,28 +260,33 @@ http://localhost:8000/index.html
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Use this model">
+                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                <input type="radio" name="llm_model" value="gemini-3-pro"> gemini-3-pro
+                            </label>
+                        </div><div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 2.5 performs well but is very expensive. Please don't run this on large batches for now.">
                                 <input type="radio" name="llm_model" value="gemini-2.5-pro"> gemini-2.5-pro
                             </label>
                         </div>
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="This model is a bit unpredictable">
+                                data-tooltip="Gemini 2.5 flash performs well.">
                                 <input type="radio" name="llm_model" value="gemini-2.5-flash"> gemini-2.5-flash
                             </label>
                         </div>
                         <div class="radio-group">
                             <label  class="custom-tooltip"
-                                data-tooltip="Use this for bulk workloads">
+                                data-tooltip="Use this for bulk workloads. This works well in most cases, except for particularly difficult handwriting.">
                                 <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
                             </label>
                         </div>
-                        <div class="radio-group">
+                        <!-- <div class="radio-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
                                 <input type="radio" name="llm_model" value="gemini-1.5-pro" disabled> gemini-1.5-pro
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

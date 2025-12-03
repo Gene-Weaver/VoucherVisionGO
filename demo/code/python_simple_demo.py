@@ -1,5 +1,5 @@
 import os 
-from client import process_vouchers
+from client_dep2 import process_vouchers
 
 # USE AN ENV VARIABLE
 YOUR_API_KEY_OR_AUTH_TOKEN = os.getenv('VV_API_KEY')

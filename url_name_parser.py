@@ -156,6 +156,7 @@ def extract_filename_from_url(url, timeout=10, debug=False):
 
 if __name__ == "__main__":
     urls = [
+        "https://rmh.uwyo.edu/images/jpeg.php?Image=RM0021232.jpg&Width=2000",
         "https://img.cyverse.org/resize?width=4000&url=https://data.cyverse.org/dav-anon/iplant/projects/magnoliagrandiFLORA/images/specimens/MISS0055041/MISS0055041.JPG",
         "https://id.digitarium.fi/api/C.131915/Preview001.jpg",
         "https://oregonflora.org/imglib/OSU_V/OSC-V-269/OSC-V-269340_med.jpg",

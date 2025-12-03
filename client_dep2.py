@@ -14,6 +14,14 @@ from termcolor import colored
 from tabulate import tabulate
 from tqdm import tqdm
 
+from url_name_parser import extract_filename_from_url
+"""
+
+
+RUN IT FROM THE CLIENT PACKAGE NOT HERE
+
+
+"""
 N_SIZE=100
 N_INDENT=2
 
@@ -57,7 +65,7 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
         return json.dumps(regular_dict, indent=4)
     
 def process_image(fname, server_url, image_path, output_dir, verbose=False, 
-                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False):
+                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False, notebook_mode=False):
     """
     Process an image using the VoucherVision API server
     
@@ -71,7 +79,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         llm_model (str): LLM model to use for creating JSON
         prompt (str): Custom prompt file to use
         auth_token (str): Authentication token for the API (Firebase token or API key)
-        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        ocr_only (bool): Whether to only perform OCR and skip LLM processing
+        notebook_mode (bool): Whether to only perform OCR, skip label collage, and skip LLM processing
 
     Returns:
         dict: The processed results from the server
@@ -97,7 +106,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         
         try:
             # Pass the auth token to the recursive call
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode)
         finally:
             # Clean up the temporary file
             os.remove(temp_file_path)
@@ -118,6 +127,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         data['prompt'] = prompt
     if ocr_only:
         data['ocr_only'] = 'true'
+    if notebook_mode:
+        data['notebook_mode'] = 'true'
 
     # Determine auth header type based on auth_token format
     # API keys are typically alphanumeric strings without periods
@@ -137,6 +148,8 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
             print(f"Sending request to {url}")
             if ocr_only:
                 print("OCR-only mode: Skipping VoucherVision JSON parsing")
+            if notebook_mode:
+                print("Running in notebook mode")
         response = requests.post(url, files=files, data=data, headers=headers)
         
         # Check if the request was successful
@@ -165,7 +178,7 @@ def process_image(fname, server_url, image_path, output_dir, verbose=False,
         # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False):
+def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False, notebook_mode=False):
     """
     Process a single image file and save the results
     
@@ -179,16 +192,17 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         verbose (bool): Whether to print verbose output
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to only perform OCR, skip label collage, and skip LLM processing
        
     Returns:
         dict: The processing results
     """
-    output_file = get_output_filename(image_path, output_dir)
+    output_file, output_file_md = get_output_filename(image_path, output_dir)
     fname = os.path.basename(output_file).split(".")[0]
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode)
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -203,13 +217,51 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         
         if verbose:
             print(f"Individual results saved to: {output_file}")
+
+        # ------------------------------------------------------------------
+        # Notebook mode: save formatted_md (markdown) to a .md file
+        # ------------------------------------------------------------------
+        if notebook_mode:
+            formatted_md = ""
+
+            if isinstance(results, dict):
+                # Top-level formatted_md as in your example JSON
+                formatted_md = results.get("formatted_md", "") or ""
+
+            if formatted_md:
+                md_text = formatted_md.strip()
+
+                # If wrapped in ```markdown ... ``` or ``` ... ```
+                if md_text.startswith("```"):
+                    lines = md_text.splitlines()
+
+                    # Drop opening fence line
+                    if lines and lines[0].startswith("```"):
+                        lines = lines[1:]
+
+                    # Drop closing fence line if present
+                    if lines and lines[-1].strip() == "```":
+                        lines = lines[:-1]
+
+                    md_text = "\n".join(lines).rstrip() + "\n"
+
+                # Write final markdown to the .md file
+                with open(output_file_md, "w", encoding="utf-8") as f_md:
+                    f_md.write(md_text)
+
+                if verbose:
+                    print(f"Notebook-mode markdown saved to: {output_file_md}")
+            else:
+                if verbose:
+                    print("Notebook mode enabled, but no 'formatted_md' found in results; skipping .md save.")
+
         return results
     
     except Exception as e:
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False):
+def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False, notebook_mode=False):
     """
     Process multiple images in parallel
     
@@ -233,6 +285,8 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
     print(f"Processing {len(image_paths)} images with up to {max_workers} parallel workers")
     if ocr_only:
         print("OCR-only mode: Skipping VoucherVision processing")
+    if notebook_mode:
+        print("Running in notebook mode")
 
     # Create a progress bar
     progress_bar = tqdm(total=len(image_paths), desc="Processing", unit="image")
@@ -253,6 +307,7 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
                 False, 
                 auth_token,
                 ocr_only,
+                notebook_mode,
             ): path for path in image_paths
         }
         
@@ -420,20 +475,22 @@ def get_output_filename(input_path, output_dir=None):
     # Extract the base filename without extension
     if input_path.startswith(('http://', 'https://')):
         # For URLs, use the last part of the URL as the filename
-        base_name = os.path.basename(input_path).split('?')[0]  # Remove query params if any
+        base_name = extract_filename_from_url(input_path)
+        # base_name = os.path.basename(input_path).split('?')[0]  # Remove query params if any
     else:
         base_name = os.path.basename(input_path)
     
     # Replace the extension with .json
     name_without_ext = os.path.splitext(base_name)[0]
     output_filename = f"{name_without_ext}.json"
+    output_filename_md = f"{name_without_ext}.md"
     
     # If output directory is specified, join it with the filename
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-        return os.path.join(output_dir, output_filename)
+        return os.path.join(output_dir, output_filename), os.path.join(output_dir, output_filename_md)
     
-    return output_filename
+    return output_filename, output_filename_md
 
 def read_file_list(list_file):
     """
@@ -450,34 +507,157 @@ def read_file_list(list_file):
     # Check file extension
     ext = os.path.splitext(list_file)[1].lower()
     
-    if ext == '.csv':
-        # Handle CSV file
-        with open(list_file, 'r', newline='') as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                if row and row[0].strip():  # Skip empty rows
-                    file_paths.append(row[0].strip())
+    if ext == ".xlsx":
+        try:
+            df = pd.read_excel(list_file, dtype=str)  # ensure all strings
+            # Use first column only
+            first_col = df.columns[0]
+            for val in df[first_col].fillna("").astype(str).tolist():
+                val = val.strip()
+                if val:
+                    file_paths.append(val)
+        except Exception as e:
+            raise RuntimeError(f"Failed to read XLSX file '{list_file}': {e}")
+
+    elif ext == ".csv":
+        try:
+            with open(list_file, "r", newline="", encoding="utf-8") as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if row and row[0].strip():
+                        file_paths.append(row[0].strip())
+        except Exception as e:
+            raise RuntimeError(f"Failed to read CSV file '{list_file}': {e}")
+        
     else:
-        # Handle text file (one path per line)
-        with open(list_file, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if line:  # Skip empty lines
-                    file_paths.append(line)
-    
+        try:
+            with open(list_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    cleaned = line.strip()
+                    if cleaned:
+                        file_paths.append(cleaned)
+        except Exception as e:
+            raise RuntimeError(f"Failed to read text file '{list_file}': {e}")
+
     return file_paths
 
+
+def save_results_to_xlsx(results_list, output_dir):
+    """
+    Save a list of VoucherVision results to an XLSX file using the filename 
+    that's already included in the results. All columns are stored as strings
+    so that Excel does not auto-convert cells.
+    
+    Args:
+        results_list (list): List of dictionaries containing the results
+        output_dir (str): Directory to save the XLSX file
+    """
+    if not results_list:
+        print("No results to save to XLSX")
+        return
+    
+    # Extract formatted_json from each result and add filename
+    vvgo_data = []
+    
+    for i, result in enumerate(results_list):
+        # Debug info for the first few results
+        # if i < 2:
+        #     print(f"\nDebug - Result keys: {list(result.keys() if result else [])}")
+        
+        # Skip if result is empty
+        if not result:
+            continue
+            
+        # Get the filename directly from the result
+        if 'filename' in result:
+            filename = os.path.splitext(os.path.basename(result['filename']))[0]
+        else:
+            # Use index as last resort
+            filename = f"file_{i+1}"
+                
+        # Get the JSON data (try formatted_json first, then vvgo_json)
+        json_data = None
+        json_key = None
+        
+        if 'formatted_json' in result:
+            json_key = 'formatted_json'
+        elif 'vvgo_json' in result:
+            json_key = 'vvgo_json'
+            
+        if json_key:
+            # Get the JSON data in the appropriate format
+            if isinstance(result[json_key], OrderedDict):
+                json_data = result[json_key]
+            elif isinstance(result[json_key], str):
+                # Parse string JSON with OrderedDict
+                try:
+                    json_data = json.loads(result[json_key], object_pairs_hook=OrderedDict)
+                except json.JSONDecodeError:
+                    continue
+            elif isinstance(result[json_key], dict):
+                # Convert regular dict to OrderedDict
+                json_data = OrderedDict(result[json_key])
+            else:
+                json_data = result[json_key]
+            
+            if json_data:
+                # Create a new OrderedDict with filename as the first key
+                data_with_filename = OrderedDict([('filename', filename)])
+                
+                # Add all other keys in their original order
+                for key, value in json_data.items():
+                    data_with_filename[key] = value
+                
+                vvgo_data.append(data_with_filename)
+    
+    if not vvgo_data:
+        print("No VoucherVision JSON data found in results")
+        print("Available keys in results:", [list(r.keys()) for r in results_list[:3] if r])
+        return
+    
+    # Get the order of columns from the first result
+    if vvgo_data and isinstance(vvgo_data[0], OrderedDict):
+        column_order = list(vvgo_data[0].keys())
+    else:
+        column_order = None  # Let pandas decide
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(vvgo_data)
+    
+    # Ensure column order with filename first if we have a specific order
+    if column_order:
+        # Make sure all columns exist in the DataFrame
+        available_columns = [col for col in column_order if col in df.columns]
+        df = df[available_columns]
+    
+    # --- Force all columns to string to avoid Excel auto-conversion ---
+    # Replace NaN with empty string, then cast everything to str
+    df = df.fillna("").astype(str)
+    
+    # Save to XLSX
+    xlsx_path = os.path.join(output_dir, 'results.xlsx')
+    df.to_excel(xlsx_path, index=False, sheet_name='results')
+    print(f"Combined results saved to XLSX: {xlsx_path}")
+    print(f"Total records processed: {len(df)}")
+    
+    # Print column names for verification
+    if not df.empty:
+        print(f"XLSX columns: {', '.join(df.columns.tolist())}")
+
+
+### USE AT YOUR OWN RISK
+### csv when opened in excel may autoconvert column like date. Use the xlsx version. 
 def save_results_to_csv(results_list, output_dir):
     """
-    Save a list of VoucherVision results to a CSV file using the filename 
+    Save a list of VoucherVision results to a XLSX file using the filename 
     that's already included in the results
     
     Args:
         results_list (list): List of dictionaries containing the results
-        output_dir (str): Directory to save the CSV file
+        output_dir (str): Directory to save the XLSX file
     """
     if not results_list:
-        print("No results to save to CSV")
+        print("No results to save to XLSX")
         return
     
     # Extract formatted_json from each result and add filename
@@ -607,7 +787,7 @@ def verify_authentication(server_url, auth_token=None):
     
 def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], llm_model="gemini-2.0-flash",
                     prompt="SLTPvM_default.yaml", image=None, directory=None, 
-                    file_list=None, verbose=False, save_to_csv=False, max_workers=4, auth_token=None, ocr_only=False):
+                    file_list=None, verbose=False, save_to_xlsx=False, max_workers=4, auth_token=None, ocr_only=False, notebook_mode=False):
     """
     Process voucher images through the VoucherVision API.
     
@@ -621,13 +801,13 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         directory (str): Path to a directory containing images to process
         file_list (str): Path to a file containing a list of image paths or URLs
         verbose (bool): Print all output to console
-        save_to_csv (bool): Save all formatted_json results to a CSV file
+        save_to_xlsx (bool): Save all formatted_json results to a XLSX file
         max_workers (int): Maximum number of parallel workers
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
         
     Returns:
-        list: List of processed results if save_to_csv is True, otherwise None
+        list: List of processed results if save_to_xlsx is True, otherwise None
     """
     # First verify authentication before doing anything
     if not verify_authentication(server, auth_token):
@@ -651,16 +831,18 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
     # If in OCR-only mode, inform user
     if ocr_only:
         print("Running in OCR-only mode: Skipping VoucherVision JSON parsing")
+    if notebook_mode:
+        print("Running in notebook mode: Skipping VoucherVision JSON parsing: Skipping label collage")
     
     try:
-        # To store all results if save-to-csv is enabled
+        # To store all results if save-to-xlsx is enabled
         all_results = []
         
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only)
-            if result and save_to_csv:
+            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only, notebook_mode)
+            if result and save_to_xlsx:
                 all_results.append(result)
         
         elif directory:
@@ -704,9 +886,10 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 max_workers,
                 auth_token,
                 ocr_only,
+                notebook_mode,
             )
             
-            if save_to_csv:
+            if save_to_xlsx:
                 all_results.extend(results)
         
         elif file_list:
@@ -731,16 +914,17 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 max_workers,
                 auth_token,
                 ocr_only,
+                notebook_mode,
             )
             
-            if save_to_csv:
+            if save_to_xlsx:
                 all_results.extend(results)
         
-        # Save to CSV if requested
-        if save_to_csv and all_results:
-            save_results_to_csv(all_results, output_dir)
+        # Save to XLSX if requested
+        if save_to_xlsx and all_results:
+            save_results_to_xlsx(all_results, output_dir)
             
-        if save_to_csv:
+        if save_to_xlsx:
             return all_results
         return None
 
@@ -776,7 +960,7 @@ def main():
     input_group.add_argument('--directory',
                              help='Path to a directory containing images to process')
     input_group.add_argument('--file-list',
-                             help='Path to a file containing a list of image paths or URLs (one per line or CSV)')
+                             help='Path to a file containing a list of image paths or URLs (one per line or XLSX)')
     
     parser.add_argument('--engines', nargs='+', default=["gemini-1.5-pro", "gemini-2.0-flash"],
                         help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
@@ -788,12 +972,14 @@ def main():
                         help='Directory to save the output JSON results')
     parser.add_argument('--verbose', action='store_true',
                         help='Print all output to console')
-    parser.add_argument('--save-to-csv', action='store_true',
-                        help='Save all formatted_json results to a CSV file in the output directory')
+    parser.add_argument('--save-to-xlsx', action='store_true',
+                        help='Save all formatted_json results to a XLSX file in the output directory')
     parser.add_argument('--max-workers', type=int, default=4,
                         help='Maximum number of parallel workers (default: 4)')
     parser.add_argument('--ocr-only', action='store_true',
                         help='Only perform OCR and skip VoucherVision processing')
+    parser.add_argument('--notebook-mode', action='store_true',
+                        help='Only perform OCR and skip VoucherVision processing. Also skips label collage, uses full image. Returns OCR as text and a .md')
     
     args = parser.parse_args()
     
@@ -808,10 +994,11 @@ def main():
         directory=args.directory,
         file_list=args.file_list,
         verbose=args.verbose,
-        save_to_csv=args.save_to_csv,
+        save_to_xlsx=args.save_to_xlsx,
         max_workers=args.max_workers,
         auth_token=args.auth_token,
         ocr_only=args.ocr_only,
+        notebook_mode=args.notebook_mode,
     )
 
 
@@ -827,17 +1014,17 @@ if __name__ == "__main__":
 
 # Directory of images:
 # python client.py --server https://vouchervision-go-XXXXXX.app --directory "./demo/images" --output-dir "./demo/results_dir_images" --verbose --max-workers 4
-# python client.py --server https://vouchervision-go-XXXXXX.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_csv" --verbose --prompt "SLTPvM_default_chromosome.yaml" --max-workers 4
+# python client.py --server https://vouchervision-go-XXXXXX.app --directory "./demo/images" --output-dir "./demo/results_dir_images_custom_prompt_save_to_xlsx" --verbose --prompt "SLTPvM_default_chromosome.yaml" --max-workers 4
 
 # List of files:
-# python client.py --server https://vouchervision-go-XXXXXX.app --file-list "./demo/csv/file_list.csv" --output-dir "./demo/results_file_list_csv" --verbose --max-workers 2
+# python client.py --server https://vouchervision-go-XXXXXX.app --file-list "./demo/xlsx/file_list.xlsx" --output-dir "./demo/results_file_list_xlsx" --verbose --max-workers 2
 # python client.py --server https://vouchervision-go-XXXXXX.app --file-list "./demo/txt/file_list.txt" --output-dir "./demo/results_file_list_txt" --verbose --max-workers 4
 
 # Custom prompt:
 # python client.py --server https://vouchervision-go-XXXXXX.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_image_custom_prompt" --verbose --prompt "SLTPvM_default_chromosome.yaml"
 
-# Save results to CSV:
-# python client.py --server https://vouchervision-go-XXXXXX.app --directory ./demo/images --output-dir "./demo/results_dir_images_save_to_csv" --save-to-csv
+# Save results to XLSX:
+# python client.py --server https://vouchervision-go-XXXXXX.app --directory ./demo/images --output-dir "./demo/results_dir_images_save_to_xlsx" --save-to-xlsx
 
 ### Programmatic Example
 '''
@@ -851,7 +1038,7 @@ image="https://swbiodiversity.org/imglib/seinet/sernec/EKY/31234100396/312341003
 directory=None, 
 file_list=None, 
 verbose=True, 
-save_to_csv=True, 
+save_to_xlsx=True, 
 max_workers=4)
 	process_vouchers(server="https://vouchervision-go-XXXXXX.app", 
 output_dir="./output2", 
@@ -860,6 +1047,6 @@ image=None,
 directory="D:/Dropbox/VoucherVisionGO/demo/images", 
 file_list=None, 
 verbose=True, 
-save_to_csv=True, 
+save_to_xlsx=True, 
 max_workers=4)
 '''
