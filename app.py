@@ -1165,7 +1165,7 @@ class VoucherVisionProcessor:
                 self.ocr_engines[model_name] = OCRGeminiProVision(
                     self.api_key, 
                     model_name=model_name, 
-                    max_output_tokens=1024, 
+                    max_output_tokens=32768, 
                     temperature=1.0, 
                     top_p=0.95, 
                     seed=123456, 
@@ -1510,7 +1510,7 @@ class VoucherVisionProcessor:
                         self.ocr_engines[ocr_opt] = OCRGeminiProVision(
                             self.api_key, 
                             model_name=ocr_opt, 
-                            max_output_tokens=1024, 
+                            max_output_tokens=32768, 
                             temperature=1, 
                             top_p=0.95, 
                             seed=123456, 
