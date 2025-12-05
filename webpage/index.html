@@ -26,6 +26,13 @@ http://localhost:8000/index.html
     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
+     <!-- Load external scripts in the correct order -->
+    <script src="js/vouchervisiongo.js" defer></script>
+    <script src="js/api_key_validator.js" defer></script>
+    <script src="js/batch_processing.js" defer></script>
+    <script src="js/prompt_templates.js" defer></script>
+    <script src="js/changelog_viewer.js" defer></script>
+
     <link rel="stylesheet" href="css/vouchervisiongo.css">
     <script>
         // Function to dynamically add Mapbox (optional, already in head)
@@ -139,9 +146,11 @@ http://localhost:8000/index.html
                 <div class="llm-cost-controls">
                     <div class="llm-cost-control">
                     <label for="llmModelSelect"><strong>Model</strong></label>
-                    <select id="llmModelSelect">
-                        <option value="">Loading models…</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select id="llmModelSelect">
+                            <option value="">Loading models…</option>
+                        </select>
+                    </div>
                     </div>
 
                     <div class="llm-cost-control">
@@ -180,10 +189,16 @@ http://localhost:8000/index.html
                 </section>
 
                 <style>
+                /* Existing details/summary styling (Minor adjustment for better summary look) */
                 #llmCostMatrixDetails summary {
                     cursor: pointer;
                     padding: 8px 0;
                     list-style: none;
+                    transition: color 0.2s;
+                }
+
+                #llmCostMatrixDetails summary:hover {
+                    color: #38c700;
                 }
 
                 /* Hide default disclosure triangle (Chrome) */
@@ -191,13 +206,14 @@ http://localhost:8000/index.html
                     display: none;
                 }
 
-                /* Optional: add your own arrow */
+                /* Custom arrow for the summary/details toggle */
                 #llmCostMatrixDetails summary::after {
                     content: "🡻";
-                    font-size: 0.9rem;
+                    font-size: 0.8rem;
                     margin-left: 8px;
                     transition: transform 0.2s ease-in-out;
                     opacity: 0.7;
+                    display: inline-block;
                 }
 
                 #llmCostMatrixDetails[open] summary::after {
@@ -210,9 +226,10 @@ http://localhost:8000/index.html
                     border-top: 1px solid #a7a7a7;
                 }
 
+                /* REVISED: Keeping parent as flexbox and allowing wrapping */
                 .llm-cost-controls {
                     display: flex;
-                    flex-wrap: wrap;
+                    flex-wrap: wrap; /* Allows items to wrap */
                     gap: 12px;
                     align-items: flex-end;
                     margin: 12px 0 18px 0;
@@ -224,20 +241,80 @@ http://localhost:8000/index.html
                     min-width: 140px;
                 }
 
+                /* NEW/FIXED RULE: Force the Model field to take a full row */
+                #llmCostSection .llm-cost-control:has(#llmModelSelect) {
+                    /* flex-basis: 100% forces it to the next line and spans the whole width */
+                    flex-basis: 100%; 
+                    margin-bottom: 12px; /* Adds space before the next row of inputs */
+                    min-width: initial; /* Allows it to shrink if needed (though 100% prevents this) */
+                }
+                /* ---------------------------------------------------- */
+
                 .llm-cost-control label {
                     font-size: 0.9rem;
                     margin-bottom: 4px;
+                    color: #333; /* Darker label for contrast */
                 }
 
+                /* --- START: Modern Input/Select Styling Adjustments --- */
+
+                /* 1. Wrapper for the select element (for custom icon) */
+                .select-wrapper {
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                /* 2. Common styles for all inputs and select fields */
                 .llm-cost-control input,
                 .llm-cost-control select {
-                    padding: 4px 6px;
-                    font-size: 0.9rem;
+                    padding: 8px 10px;
+                    font-size: 0.95rem;
+                    border: 1px solid #ced4da;
+                    border-radius: 6px;
+                    background-color: #f8f9fa;
+                    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                }
+
+                /* 3. Specific styling for the select element */
+                .llm-cost-control select {
+                    /* Hide the default browser dropdown arrow */
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    /* Increase padding on the right to make space for the custom icon */
+                    padding-right: 30px;
+                }
+
+                /* 4. Create the custom down arrow icon */
+                .select-wrapper::after {
+                    content: '▼'; /* Using a standard triangle for better compatibility */
+                    font-size: 0.6em;
+                    color: #495057;
+                    position: absolute;
+                    top: 50%;
+                    right: 12px;
+                    transform: translateY(-50%);
+                    /* Allows mouse clicks to register on the select element underneath */
+                    pointer-events: none;
+                }
+
+                /* Focus and Total Cost Styles */
+                .llm-cost-control input:focus,
+                .llm-cost-control select:focus {
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                    background-color: #fff;
                 }
 
                 .llm-cost-total input {
                     font-weight: bold;
+                    color: #007bff;
+                    background-color: #e9ecef;
+                    cursor: default;
                 }
+                /* --- END: Modern Input/Select Styling Adjustments --- */
 
                 .llm-cost-grid {
                     display: flex;
@@ -250,6 +327,7 @@ http://localhost:8000/index.html
                 .llm-cost-card {
                     flex: 1 1 260px;
                     padding: 12px;
+                    /* Assuming vv-card style is defined elsewhere, if not, add basic card styling here */
                 }
 
                 .llm-cost-card h4 {
@@ -274,11 +352,51 @@ http://localhost:8000/index.html
 
                 .llm-cost-table th {
                     font-weight: 600;
+                    background-color: #f1f1f1;
                 }
 
                 .llm-cost-table tbody tr:nth-child(even) {
                     background: #fafafa;
                 }
+
+                /* --- Dynamic prompt template buttons --- */
+                .prompt-template-btn {
+                    display: inline-block;
+                    padding: 6px 12px;
+                    margin: 5px 8px 5px 0;
+                    font-size: 0.9rem;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    background-color: #f8f8f8; /* Default background */
+                    color: #333;
+                    transition: all 0.2s ease;
+                }
+
+                .prompt-template-btn:hover {
+                    background-color: #e2e6ea;
+                    border-color: #b8bdc1;
+                }
+
+                /* Gemini-3 optimized prompts: purple */
+                .gemini-optimized-btn {
+                    background-color: #6a0dad !important; /* Deep Purple Fill */
+                    color: white !important;              /* White text for contrast */
+                    border-color: #580099 !important;     /* Slightly darker purple border */
+                    font-weight: bold;
+                }
+
+                .gemini-optimized-btn:hover {
+                    background-color: #580099 !important; /* Darker hover state */
+                }
+
+                /* Temporary green flash on selection */
+                .selected-flash {
+                    background-color: #4CAF50 !important;
+                    color: white !important;
+                    border-color: #4CAF50 !important;
+                }
+
+                
                 </style>
                 <!-- ===== END LLM Cost Calculator & Cost Matrix ===== -->
 
@@ -286,21 +404,25 @@ http://localhost:8000/index.html
             <h2>VoucherVision Settings</h2>
                 <h3>About OCR Engine Options</h3>
                 <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
-                    performance characteristics.</p>
+                    performance characteristics. NOTE: The OCR models are instructed to detect handwritten text and stricken text to inform the parsing model of these features. 
+                    This is accomplished by having the OCR model place section signs on either side of stricken text (§stricken text§) and 
+                    guillemet quotes on either side of handwritten text («handwritten text»). These features are removed/cleaned from the API response prior to returning it to you, 
+                    only the parsing LLM sees them. All prompts that want to take advantage of this tool should include the following instructions in their prompt: 
+                    """Redacted or stricken text will have section signs on either side (§stricken text§). Handwritten text will have guillemet quotes on either side («handwritten text»)"""</p>
                 <div
                     style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
                     <p>About the models:</p>
                     <ul>
-                        <li><strong>Gemini 2.5 Pro</strong>: Higher accuracy, especially for handwritten text, can
+                        <li><strong>Gemini 3 Pro</strong>: An extremely capable model. By far the best model for reading handwritten labels, beating out all other OCR solutions. Try the SLTPvM_geolocate prompt! 
+                        </li>
+                        <li><strong>Gemini 2.5 Pro</strong>: High accuracy, especially for handwritten text, can
                             follow complex instructions, like parsing multiple species determinations. Can perform geolocation, 
                             search the internet to validate content, etc.
                         </li>
-                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens
-                        </li>
-                        <li><strong>Gemini 1.5 Pro</strong>: Better at handwriting than Gemini 2.0 Flash, but will be
-                            deprecated in 2025, slower and more expensive than Gemini 2.0 Flash.</li>
-                        <li><strong>Gemini 2.5 Flash</strong>: A bit disappointing at the moment. Handwriting
+                        <li><strong>Gemini 2.5 Flash</strong>: Good, but not as good as 2.0 Flash. Handwriting
                             performance seems worse than Gemini 2.0 Flash</li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens. The workhorse model. Start here. 
+                        </li>
                         <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
                     </ul>
                 </div>
@@ -364,16 +486,17 @@ http://localhost:8000/index.html
                         </div>
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Use this model. You can add another model for even better support">
-                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
-                            </label>
-                        </div>
-                        <div class="checkbox-group">
-                            <label class="custom-tooltip"
                                 data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
                                 <input type="checkbox" name="engines" value="gemini-2.5-flash" unchecked> gemini-2.5-flash
                             </label>
                         </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Use this model. You can add another model for even better support">
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            </label>
+                        </div>
+                        
                         <!-- <div class="checkbox-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Will be deprecated sometime in 2025 (but it does perform well)">
@@ -460,7 +583,8 @@ http://localhost:8000/index.html
                 
                 <div class="form-group">
                     <h3 for="promptTemplate">Prompt Template:</h3>
-                    <input type="text" id="promptTemplate" value="SLTPvM_default_v2.yaml">
+                    <p class="help-text">Gemini-3 optimized prompts are purple</p>
+                    <input type="text" id="promptTemplate" value="SLTPvM_geolocate.yaml">
                     <!-- This is where the prompts buttons will be added -->
                     <div id="promptButtonsArea"></div>
                 </div>
@@ -648,12 +772,7 @@ http://localhost:8000/index.html
     <!-- Include showdown.js for Markdown conversion -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
 
-    <!-- Load external scripts in the correct order -->
-    <script src="js/vouchervisiongo.js"></script>
-    <script src="js/api_key_validator.js"></script>
-    <script src="js/batch_processing.js"></script>
-    <script src="js/prompt_templates.js"></script>
-    <script src="js/changelog_viewer.js"></script>
+   
 
     <script>
     (function () {

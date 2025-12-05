@@ -1,3 +1,10 @@
+// Define the list of prompt templates optimized for Gemini-3
+const optimized_for_gemini_3 = [
+    "SLTPvM_geolocate.yaml",
+    "SLTPvM_geolocate_flag_multispecimen.yaml"
+    // Add more files here as needed
+];
+
 function setupPromptTemplates() {
     console.log('Prompt templates script loaded');
 
@@ -51,26 +58,29 @@ function setupPromptTemplates() {
             const button = document.createElement('button');
             button.textContent = template;
             button.title = template;
-            button.style.padding = '6px 12px';
-            button.style.borderRadius = '4px';
-            button.style.border = '1px solid #ddd';
-            button.style.backgroundColor = '#f8f8f8';
-            button.style.cursor = 'pointer';
-            button.style.transition = 'all 0.2s ease';
 
-            button.addEventListener('click', function() {
+            // Base class for all buttons; all styling now in CSS
+            button.classList.add('prompt-template-btn');
+            button.style.cursor = 'pointer';
+
+            // Robust match for gemini-3 optimized prompts
+            if (optimized_for_gemini_3.some(opt =>
+                template.trim().toLowerCase().endsWith(opt.toLowerCase())
+            )) {
+                button.classList.add('gemini-optimized-btn');
+            }
+
+            button.addEventListener('click', function () {
                 document.getElementById('promptTemplate').value = template;
 
-                const originalBg = button.style.backgroundColor;
                 const originalText = button.textContent;
 
-                button.style.backgroundColor = '#4CAF50';
-                button.style.color = 'white';
+                // Temporary green flash
+                button.classList.add('selected-flash');
                 button.textContent = 'Selected!';
 
                 setTimeout(() => {
-                    button.style.backgroundColor = originalBg;
-                    button.style.color = '';
+                    button.classList.remove('selected-flash');
                     button.textContent = originalText;
                 }, 1000);
             });
@@ -140,7 +150,7 @@ function setupPromptTemplates() {
         fetchTemplates(true);
     }
 
-    refreshButton.addEventListener('click', function() {
+    refreshButton.addEventListener('click', function () {
         console.log('Manual refresh clicked');
         fetchTemplates(true);
     });
