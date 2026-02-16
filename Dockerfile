@@ -24,8 +24,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
 # Copy requirements first for better caching
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip install --no-cache-dir --upgrade pip "setuptools<70" wheel
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --upgrade "setuptools<70"
 
 # Copy the entire application (including submodules)
 COPY . .
