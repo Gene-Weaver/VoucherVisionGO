@@ -1,6 +1,8 @@
 [submodule "vouchervision_main"]
 	path = vouchervision_main
 	url = https://github.com/Gene-Weaver/VoucherVision.git
+	branch = main
 [submodule "TextCollage"]
 	path = TextCollage
 	url = https://github.com/Gene-Weaver/TextCollage.git
+	branch = main
