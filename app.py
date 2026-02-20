@@ -1505,7 +1505,7 @@ class VoucherVisionProcessor:
         """Check if file has allowed extension"""
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
     
-    def perform_ocr(self, file_path, engine_options, ocr_prompt_option):
+    def perform_ocr(self, file_path, engine_options, ocr_prompt_option, user_api_key=None):
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
@@ -1515,23 +1515,32 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt] = {}
             self._log(f"ocr_opt {ocr_opt}", "info")
             
-            if ocr_opt not in self.ocr_engines:
-                # Thread-safe access to OCR engines
-                with self.ocr_engines_lock:
-                    # Second check (inside lock) to prevent race condition
-                    if ocr_opt not in self.ocr_engines:
-                        self._log(f"Lazily initializing new OCR engine for: {ocr_opt}", "info")
-                        self.ocr_engines[ocr_opt] = OCRGeminiProVision(
-                            self.api_key, 
-                            model_name=ocr_opt, 
-                            max_output_tokens=32768, 
-                            temperature=1, 
-                            top_p=0.95, 
-                            seed=123456, 
-                            do_resize_img=False
-                        )
-                
-            OCR_Engine = self.ocr_engines[ocr_opt]
+            if user_api_key:
+                # Per-request throwaway engine - never touches the shared pool
+                OCR_Engine = OCRGeminiProVision(
+                    user_api_key,
+                    model_name=ocr_opt,
+                    max_output_tokens=32768,
+                    temperature=1.0,
+                    top_p=0.95,
+                    seed=123456,
+                    do_resize_img=False
+                )
+            else:
+                # Use the shared, pre-warmed server engine
+                if ocr_opt not in self.ocr_engines:
+                    with self.ocr_engines_lock:
+                        if ocr_opt not in self.ocr_engines:
+                            self.ocr_engines[ocr_opt] = OCRGeminiProVision(
+                                self.api_key,
+                                model_name=ocr_opt,
+                                max_output_tokens=32768,
+                                temperature=1,
+                                top_p=0.95,
+                                seed=123456,
+                                do_resize_img=False
+                            )
+                OCR_Engine = self.ocr_engines[ocr_opt]
             
             # Execute OCR (this API call can run concurrently)
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
@@ -1552,41 +1561,42 @@ class VoucherVisionProcessor:
 
         return ocr_packet, ocr_all, ocr_tokens_total
     
-    def get_thread_local_vv(self, prompt, llm_model_name, include_wfo):
+    def get_thread_local_vv(self, prompt, llm_model_name, include_wfo, user_api_key=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
-        # Always create a new instance when a prompt is explicitly specified
-        if prompt != self.default_prompt or not hasattr(self.thread_local, 'vv'):
-            # Clone the base VoucherVision object for this thread
+        needs_new = (
+            user_api_key is not None
+            or prompt != self.default_prompt
+            or not hasattr(self.thread_local, 'vv')
+        )
+
+        if needs_new:
             self.thread_local.vv = VoucherVision(
-                self.cfg, self.logger, self.dir_home, None, None, None, 
+                self.cfg, self.logger, self.dir_home, None, None, None,
                 is_hf=False, skip_API_keys=True
             )
             self.thread_local.vv.initialize_token_counters()
-            
-            # Set the custom prompt path
             self.thread_local.vv.path_custom_prompts = os.path.join(
-                self.custom_prompts_dir,
-                prompt
+                self.custom_prompts_dir, prompt
             )
             self.thread_local.vv.setup_JSON_dict_structure()
             self.thread_local.prompt = prompt
-            
-            # Create a thread-local LLM model handler
+
             self.thread_local.llm_model = GoogleGeminiHandler(
-                self.cfg, self.logger, llm_model_name, self.thread_local.vv.JSON_dict_structure, 
-                config_vals_for_permutation=None, 
+                self.cfg, self.logger, llm_model_name,
+                self.thread_local.vv.JSON_dict_structure,
+                config_vals_for_permutation=None,
                 exit_early_for_JSON=True,
                 exit_early_with_WFO=include_wfo,
+                api_key=user_api_key,  # None = use env, key = use theirs
             )
-            
             self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
 
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo, LLM_name_cost):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo, LLM_name_cost, user_api_key=None):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
-        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, include_wfo)
+        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, include_wfo, user_api_key=user_api_key)
         
         # Update OCR text for processing
         prompt_text = vv.setup_prompt(ocr_text)
@@ -1608,7 +1618,8 @@ class VoucherVisionProcessor:
                               include_wfo=False,
                               llm_model_name=None, 
                               url_source="",
-                              notebook_mode=False):
+                              notebook_mode=False,
+                              user_api_key=None):
         """
         Process an image from a request file
         ocr_prompt_option=["verbatim_with_annotations", None]
@@ -1714,7 +1725,10 @@ class VoucherVisionProcessor:
                 original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
-                ocr_info, ocr, ocr_tokens_total = self.perform_ocr(collage_temp_path, engine_options, ocr_prompt_option)
+                ocr_info, ocr, ocr_tokens_total = self.perform_ocr(collage_temp_path, 
+                                                                   engine_options, 
+                                                                   ocr_prompt_option,
+                                                                   user_api_key=user_api_key)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if notebook_mode:
@@ -1789,7 +1803,12 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, current_prompt, llm_model_name, include_wfo, LLM_name_cost)
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, 
+                                                                                                            current_prompt, 
+                                                                                                            llm_model_name, 
+                                                                                                            include_wfo, 
+                                                                                                            LLM_name_cost,
+                                                                                                            user_api_key=user_api_key)
                     
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
                     ocr_sanitized = sanitize_for_storage(ocr)
@@ -2001,6 +2020,8 @@ def process_image():
 
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
+    user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
+
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(
         file=file, 
@@ -2010,7 +2031,8 @@ def process_image():
         include_wfo=include_wfo,
         llm_model_name=llm_model_name,
         url_source="",
-        notebook_mode=notebook_mode
+        notebook_mode=notebook_mode,
+        user_api_key=user_gemini_key
     )
     
     # If processing was successful, update usage statistics
@@ -2053,7 +2075,8 @@ def process_image_by_url():
         notebook_mode = data.get('notebook_mode', False)
         include_wfo = data.get('include_wfo', False)
         llm_model_name = data.get('llm_model')
-    
+        user_gemini_key = data.get('gemini_api_key') or None
+
     # Handle form data request
     else:
         if 'image_url' not in request.form:
@@ -2068,6 +2091,7 @@ def process_image_by_url():
         notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+        user_gemini_key = request.form.get('gemini_api_key') or None
 
     file_obj, filename = None, None
     last_exception = None
@@ -2166,7 +2190,8 @@ def process_image_by_url():
             include_wfo=include_wfo,
             llm_model_name=llm_model_name,
             url_source=image_url,
-            notebook_mode=notebook_mode
+            notebook_mode=notebook_mode,
+            user_api_key=user_gemini_key
         )
 
         # Update usage stats
