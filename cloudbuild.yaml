@@ -79,7 +79,7 @@ steps:
   #     - 'managed'
   #     - '--allow-unauthenticated'
 
-  # Step 7: Deploy container image to Cloud Run
+  # Step 7: Deploy container image to Cloud Run  
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -93,13 +93,6 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      # ADD THESE:
-      - '--startup-probe-initial-delay=30'
-      - '--startup-probe-period=10'
-      - '--startup-probe-failure-threshold=5'
-      - '--startup-probe-path=/health'
-      - '--startup-probe-timeout=5'
-      # Prevent traffic hitting a cold instance mid-initialization
       - '--min-instances=1'
 
 # Store images in Artifact Registry
