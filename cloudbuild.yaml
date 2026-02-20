@@ -64,22 +64,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:latest']
 
-  # # Step 7: Deploy container image to Cloud Run
-  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  #   entrypoint: gcloud
-  #   args:
-  #     - 'run'
-  #     - 'deploy'
-  #     - 'vouchervision-go'
-  #     - '--image'
-  #     - 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-run-source-deploy/vouchervisiongo/vouchervision-go:${COMMIT_SHA}'
-  #     - '--region'
-  #     - 'us-central1'
-  #     - '--platform'
-  #     - 'managed'
-  #     - '--allow-unauthenticated'
-
-  # Step 7: Deploy container image to Cloud Run  
+  # Step 7: Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -93,7 +78,6 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
-      - '--min-instances=1'
 
 # Store images in Artifact Registry
 images:
