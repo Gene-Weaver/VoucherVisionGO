@@ -1161,6 +1161,7 @@ class VoucherVisionProcessor:
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
+        self.collage_engine_lock = threading.Lock()
         
         # Get API key for Gemini
         try:
@@ -1656,12 +1657,13 @@ class VoucherVisionProcessor:
 
             collage_resize_method = "gemini"
 
-            if notebook_mode:
-                self._log("NOT Running CollageEngine for pre-processing... Using original image...", "info")
-                collage_json_data = self.collage_engine.run_fake(original_temp_path) 
-            else:
-                self._log("Running CollageEngine for pre-processing...", "info")
-                collage_json_data = self.collage_engine.run(original_temp_path) # TODO collage_resize_method to the run to set the method
+            with self.collage_engine_lock:
+                if notebook_mode:
+                    self._log("NOT Running CollageEngine for pre-processing... Using original image...", "info")
+                    collage_json_data = self.collage_engine.run_fake(original_temp_path)
+                else:
+                    self._log("Running CollageEngine for pre-processing...", "info")
+                    collage_json_data = self.collage_engine.run(original_temp_path)
 
             if collage_json_data['base64image_text_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
