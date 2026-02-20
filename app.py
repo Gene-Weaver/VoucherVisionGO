@@ -28,6 +28,8 @@ from email.mime.multipart import MIMEMultipart
 import textwrap
 from tabulate import tabulate
 import shutil
+from pillow_heif import register_heif_opener
+register_heif_opener()
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
@@ -559,11 +561,17 @@ def process_uploaded_file_with_resize(file, max_pixels=5200000):
         # Check if resize is needed
         width, height = image.size
         current_pixels = width * height
-        
-        if current_pixels <= max_pixels:
-            # No resize needed, reset stream position and return original
+
+        is_heic = original_filename and original_filename.lower().endswith(('.heic', '.heif'))
+        if current_pixels <= max_pixels and not is_heic:
             file.stream.seek(0)
             return file
+
+        
+        # if current_pixels <= max_pixels:
+        #     # No resize needed, reset stream position and return original
+        #     file.stream.seek(0)
+        #     return file
         
         # Resize the image
         resized_image = resize_image_to_max_pixels(image, max_pixels)
@@ -579,13 +587,15 @@ def process_uploaded_file_with_resize(file, max_pixels=5200000):
             image_format = 'JPEG'
         
         # Convert to RGB if necessary for JPEG
-        if image_format == 'JPEG' and resized_image.mode in ('RGBA', 'LA', 'P'):
-            # Create white background for transparency
-            background = Image.new('RGB', resized_image.size, (255, 255, 255))
-            if resized_image.mode == 'P':
-                resized_image = resized_image.convert('RGBA')
-            background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
-            resized_image = background
+        if image_format == 'JPEG':
+            if resized_image.mode in ('RGBA', 'LA', 'P'):
+                background = Image.new('RGB', resized_image.size, (255, 255, 255))
+                if resized_image.mode == 'P':
+                    resized_image = resized_image.convert('RGBA')
+                background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
+                resized_image = background
+            elif resized_image.mode != 'RGB':
+                resized_image = resized_image.convert('RGB')
         
         # Save with high quality
         save_kwargs = {'format': image_format}
@@ -617,7 +627,7 @@ def process_uploaded_file_with_resize(file, max_pixels=5200000):
         # If there's an error, return the original file
         file.stream.seek(0)
         return file
-
+    
 def process_url_image_with_resize(image_url, max_pixels=5000000):
     """
     Download and resize an image from URL if necessary.
@@ -643,8 +653,9 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
         # Check if resize is needed
         width, height = image.size
         current_pixels = width * height
-        
-        if current_pixels <= max_pixels:
+        is_heic = filename and filename.lower().endswith(('.heic', '.heif'))
+
+        if current_pixels <= max_pixels and not is_heic:
             # No resize needed, create FileStorage from original content
             file_obj = FileStorage(
                 stream=io.BytesIO(response.content),
@@ -653,24 +664,28 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
             )
             return file_obj, filename
         
-        # Resize the image
+        # Resize the image (returns original if already within pixel limit)
         resized_image = resize_image_to_max_pixels(image, max_pixels)
         
         # Save resized image to bytes
         img_byte_array = io.BytesIO()
         
-        # Determine format
+        # Determine format - HEIC always converts to JPEG
         image_format = 'JPEG'
         if filename and filename.lower().endswith('.png'):
             image_format = 'PNG'
         
         # Convert to RGB if necessary for JPEG
-        if image_format == 'JPEG' and resized_image.mode in ('RGBA', 'LA', 'P'):
-            background = Image.new('RGB', resized_image.size, (255, 255, 255))
-            if resized_image.mode == 'P':
-                resized_image = resized_image.convert('RGBA')
-            background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
-            resized_image = background
+        if image_format == 'JPEG':
+            if resized_image.mode in ('RGBA', 'LA', 'P'):
+                background = Image.new('RGB', resized_image.size, (255, 255, 255))
+                if resized_image.mode == 'P':
+                    resized_image = resized_image.convert('RGBA')
+                background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
+                resized_image = background
+            elif resized_image.mode != 'RGB':
+                # Catches YCbCr, CMYK, etc. (common in HEIC)
+                resized_image = resized_image.convert('RGB')
         
         # Save with high quality
         save_kwargs = {'format': image_format}
@@ -681,7 +696,7 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
         resized_image.save(img_byte_array, **save_kwargs)
         img_byte_array.seek(0)
         
-        # Update filename if format changed
+        # Update filename if format changed (covers HEIC -> JPEG rename)
         if image_format == 'JPEG' and filename and not filename.lower().endswith(('.jpg', '.jpeg')):
             name_without_ext = os.path.splitext(filename)[0]
             filename = f"{name_without_ext}.jpg"
@@ -698,7 +713,6 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
     except Exception as e:
         logger.error(f"Error processing URL image for resize: {e}")
         raise
-
 
 class SimpleEmailSender:
     """
@@ -1139,7 +1153,7 @@ class VoucherVisionProcessor:
                 self._log(f"Error listing TextCollage contents: {e}", "error")
 
         # Configuration
-        self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff'}
+        self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'heic', 'heif'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
 
         self._log("Starting detailed CollageEngine debugging...", "info")
