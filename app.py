@@ -1620,6 +1620,7 @@ class VoucherVisionProcessor:
                               llm_model_name=None, 
                               url_source="",
                               notebook_mode=False,
+                              skip_label_collage=False,
                               user_api_key=None):
         """
         Process an image from a request file
@@ -1659,7 +1660,10 @@ class VoucherVisionProcessor:
 
             with self.collage_engine_lock:
                 if notebook_mode:
-                    self._log("NOT Running CollageEngine for pre-processing... Using original image...", "info")
+                    self._log("[notebook_mode] NOT Running CollageEngine for pre-processing... Using original image...", "info")
+                    collage_json_data = self.collage_engine.run_fake(original_temp_path)
+                elif skip_label_collage:
+                    self._log("[skip_label_collage] NOT Running CollageEngine for pre-processing... Using original image...", "info")
                     collage_json_data = self.collage_engine.run_fake(original_temp_path)
                 else:
                     self._log("Running CollageEngine for pre-processing...", "info")
@@ -2016,6 +2020,7 @@ def process_image():
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
 
     notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
+    skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
 
     # Get WFO flag from request if specified
     include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
@@ -2034,6 +2039,7 @@ def process_image():
         llm_model_name=llm_model_name,
         url_source="",
         notebook_mode=notebook_mode,
+        skip_label_collage=skip_label_collage,
         user_api_key=user_gemini_key
     )
     
@@ -2075,6 +2081,7 @@ def process_image_by_url():
         prompt = data.get('prompt')
         ocr_only = data.get('ocr_only', False)
         notebook_mode = data.get('notebook_mode', False)
+        skip_label_collage = data.get('skip_label_collage', False)
         include_wfo = data.get('include_wfo', False)
         llm_model_name = data.get('llm_model')
         user_gemini_key = data.get('gemini_api_key') or None
@@ -2091,6 +2098,7 @@ def process_image_by_url():
         prompt = request.form.get('prompt') if 'prompt' in request.form else None
         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
         notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
+        skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
@@ -2193,6 +2201,7 @@ def process_image_by_url():
             llm_model_name=llm_model_name,
             url_source=image_url,
             notebook_mode=notebook_mode,
+            skip_label_collage=skip_label_collage,
             user_api_key=user_gemini_key
         )
 

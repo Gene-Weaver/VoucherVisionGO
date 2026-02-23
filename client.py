@@ -1,10 +1,10 @@
+
 import os
 import sys
 import json
 import time
 import argparse
 import requests
-import glob
 import csv
 import tempfile
 import pandas as pd
@@ -13,8 +13,10 @@ from collections import OrderedDict
 from termcolor import colored
 from tabulate import tabulate
 from tqdm import tqdm
+from requests_toolbelt.multipart import decoder
 
 from url_name_parser import extract_filename_from_url
+
 """
 
 
@@ -22,6 +24,25 @@ RUN IT FROM THE CLIENT PACKAGE NOT HERE
 
 
 """
+N_SIZE=100
+N_INDENT=2
+
+"""
+NOTE:
+    You can use any of the Gemini models, not just those that I specify: https://ai.google.dev/gemini-api/docs/models
+    Just pick the one you want (e.g. gemini-2.5-flash) as long as it supports: Audio, images, videos, and text
+"""
+
+__all__ = [
+    "process_vouchers",
+    "process_vouchers_urls",
+    "process_image",
+    "process_image_file",
+    "process_image_by_url",
+    "save_results_to_xlsx",
+    "save_results_to_csv", # use xlsx if possible
+]
+
 N_SIZE=100
 N_INDENT=2
 
@@ -64,121 +85,146 @@ def ordereddict_to_json(ordereddict_data, output_type="json"):
     else:  # Default to JSON string
         return json.dumps(regular_dict, indent=4)
     
-def process_image(fname, server_url, image_path, output_dir, verbose=False, 
-                  engines=None, llm_model=None, prompt=None, auth_token=None, ocr_only=False, notebook_mode=False):
+def process_image(fname, 
+                  server_url, 
+                  image_path,
+                  output_dir,
+                  verbose=False, 
+                  engines=None, 
+                  llm_model=None, 
+                  prompt=None, 
+                  auth_token=None, 
+                  ocr_only=False, 
+                  notebook_mode=False, 
+                  skip_label_collage=False, 
+                  include_wfo=False,
+                  gemini_api_key=None
+                  ):
     """
-    Process an image using the VoucherVision API server
-    
-    Args:
-        fname (str): Name for the output file
-        server_url (str): URL of the VoucherVision API server
-        image_path (str): Path to the image file or URL of the image
-        output_dir (str): Directory to save output files
-        verbose (bool): Whether to print verbose output
-        engines (list): List of OCR engine options to use
-        llm_model (str): LLM model to use for creating JSON
-        prompt (str): Custom prompt file to use
-        auth_token (str): Authentication token for the API (Firebase token or API key)
-        ocr_only (bool): Whether to only perform OCR and skip LLM processing
-        notebook_mode (bool): Whether to only perform OCR, skip label collage, and skip LLM processing
-
-    Returns:
-        dict: The processed results from the server
+    Process an image using the VoucherVision API server, now with support for multipart responses.
     """
-    # Always verify authentication using the cached verification
+    # This part of the function remains unchanged
     if not verify_authentication(server_url, auth_token):
         print("Aborting. Authentication failed.")
-        return
+        return None
     
-    # Check if the image path is a URL or a local file
+    # This part for handling URLs by downloading them first also remains unchanged
     if image_path.startswith(('http://', 'https://')):
-        # For URL-based images, download them first
         if verbose:
             print(f"Processing image from URL: {image_path}")
         response = requests.get(image_path)
         if response.status_code != 200:
             raise Exception(f"Failed to download image from URL: {response.status_code}")
         
-        # Save to a temp file
         with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp_file:
             temp_file_path = temp_file.name
             temp_file.write(response.content)
         
         try:
-            # Pass the auth token to the recursive call
-            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode)
+            return process_image(fname, server_url, temp_file_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode, include_wfo, gemini_api_key)
         finally:
-            # Clean up the temporary file
             os.remove(temp_file_path)
     
-    # Prepare the request data
+    # This part for preparing the request also remains unchanged
     url = f"{server_url}/process"
-    
-    # Prepare the multipart form data
     files = {'file': open(image_path, 'rb')}
-    
-    # Add engine options and prompt if provided
     data = {}
-    if engines:
-        data['engines'] = engines
-    if llm_model:
-        data['llm_model'] = llm_model
-    if prompt:
-        data['prompt'] = prompt
-    if ocr_only:
-        data['ocr_only'] = 'true'
-    if notebook_mode:
-        data['notebook_mode'] = 'true'
+    if engines: data['engines'] = engines
+    if llm_model: data['llm_model'] = llm_model
+    if prompt: data['prompt'] = prompt
+    if ocr_only: data['ocr_only'] = 'true'
+    if notebook_mode: data['notebook_mode'] = 'true'
+    if skip_label_collage: data['skip_label_collage'] = 'true'
+    if include_wfo: data['include_wfo'] = 'true'
+    if gemini_api_key: data['gemini_api_key'] = gemini_api_key  
 
-    # Determine auth header type based on auth_token format
-    # API keys are typically alphanumeric strings without periods
-    # Firebase tokens are JWT tokens with periods separating sections
     headers = {}
     if auth_token:
         if '.' in auth_token and len(auth_token) > 100:
-            # Likely a Firebase token
             headers["Authorization"] = f"Bearer {auth_token}"
         else:
-            # Likely an API key
             headers["X-API-Key"] = auth_token
     
     try:
-        # Send the request
         if verbose:
             print(f"Sending request to {url}")
-            if ocr_only:
-                print("OCR-only mode: Skipping VoucherVision JSON parsing")
-            if notebook_mode:
-                print("Running in notebook mode")
+        # The request is sent exactly as before. `requests` makes it multipart automatically.
         response = requests.post(url, files=files, data=data, headers=headers)
-        
-        # Check if the request was successful
-        if response.status_code == 200:
-            results = json.loads(response.text, object_pairs_hook=OrderedDict)
-            # If formatted_json is a string that contains JSON, parse it with OrderedDict
-            if 'formatted_json' in results and isinstance(results['formatted_json'], str):
-                try:
-                    # Try to parse it as JSON with order preserved
-                    results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
-                except json.JSONDecodeError:
-                    # Not valid JSON, leave as string
-                    pass
-            results['filename'] = fname  # Add in the filename
-            return results
+
+        # First, check for any HTTP errors
+        response.raise_for_status()
+
+        # Now, handle the successful response based on its content type
+        content_type = response.headers.get('Content-Type', '')
+
+        if 'multipart/form-data' in content_type:
+            if verbose: print(f"Received multipart response for {fname}. Parsing...")
+            
+            # Use the decoder to parse the response
+            multipart_data = decoder.MultipartDecoder.from_response(response)
+            json_part, image_part = None, None
+
+            for part in multipart_data.parts:
+                disposition = part.headers.get(b'Content-Disposition', b'').decode()
+                if 'name="json_data"' in disposition:
+                    json_part = json.loads(part.text, object_pairs_hook=OrderedDict)
+                elif 'name="image"' in disposition:
+                    image_part = part.content
+            
+            if json_part is None:
+                raise ValueError("Multipart response from server did not contain the 'json_data' part.")
+
+            # Save the returned image if it exists
+            if image_part:
+                image_output_path = os.path.join(output_dir, f"{fname}_collage.jpg")
+                with open(image_output_path, 'wb') as img_f:
+                    img_f.write(image_part)
+                if verbose: print(f"Saved collage image to: {image_output_path}")
+
+            results = json_part
+            
+        elif 'application/json' in content_type:
+            # Handle the case where the server sends back only JSON
+             if verbose: print(f"Received standard JSON response for {fname}.")
+             results = json.loads(response.text, object_pairs_hook=OrderedDict)
         else:
-            error_msg = f"Error: {response.status_code}"
+            # Handle unexpected response types
+            raise Exception(f"Unsupported response content type from server: {content_type}")
+        
+        # This final block remains unchanged
+        if 'formatted_json' in results and isinstance(results['formatted_json'], str):
             try:
-                error_details = response.json()
-                error_msg += f" - {error_details.get('error', 'Unknown error')}"
-            except:
-                error_msg += f" - {response.text}"
-            raise Exception(error_msg)
+                results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
+            except json.JSONDecodeError:
+                pass
+        results['filename'] = fname
+        return results
     
+    except requests.exceptions.HTTPError as e:
+        # Catch HTTP errors specifically to provide more detail
+        print(f"HTTP Error processing {fname}: {e.response.status_code} {e.response.reason}")
+        print(f"Server response: {e.response.text}")
+        return None
+    except Exception as e:
+        print(f"An unexpected error occurred while processing {fname}: {e}")
+        return None
     finally:
-        # Close the file
         files['file'].close()
 
-def process_image_file(server_url, image_path, engines, llm_model, prompt, output_dir, verbose, auth_token=None, ocr_only=False, notebook_mode=False):
+def process_image_file(server_url, 
+                       image_path, 
+                       engines, 
+                       llm_model, 
+                       prompt, 
+                       output_dir, 
+                       verbose, 
+                       auth_token=None, 
+                       ocr_only=False, 
+                       notebook_mode=False, 
+                       skip_label_collage=False, 
+                       include_wfo=False, 
+                       gemini_api_key=None
+                       ):
     """
     Process a single image file and save the results
     
@@ -192,7 +238,10 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         verbose (bool): Whether to print verbose output
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
-        notebook_mode (bool): Whether to only perform OCR, skip label collage, and skip LLM processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
        
     Returns:
         dict: The processing results
@@ -202,7 +251,7 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
 
     try:
         # Process the image
-        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode)
+        results = process_image(fname, server_url, image_path, output_dir, verbose, engines, llm_model, prompt, auth_token, ocr_only, notebook_mode, skip_label_collage, include_wfo, gemini_api_key)
 
         # Print summary of results if verbose is enabled
         if verbose:
@@ -261,7 +310,21 @@ def process_image_file(server_url, image_path, engines, llm_model, prompt, outpu
         print(f"Error processing {image_path}: {e}")
         return None
 
-def process_images_parallel(server_url, image_paths, engines, llm_model, prompt, output_dir, verbose, max_workers=4, auth_token=None, ocr_only=False, notebook_mode=False):
+def process_images_parallel(server_url, 
+                            image_paths, 
+                            engines, 
+                            llm_model, 
+                            prompt, 
+                            output_dir, 
+                            verbose, 
+                            max_workers=4, 
+                            auth_token=None, 
+                            ocr_only=False, 
+                            notebook_mode=False, 
+                            skip_label_collage=False, 
+                            include_wfo=False,
+                            gemini_api_key=None
+                            ):
     """
     Process multiple images in parallel
     
@@ -276,6 +339,10 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
         max_workers (int): Maximum number of parallel workers
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
        
     Returns:
         list: List of processing results
@@ -285,8 +352,9 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
     print(f"Processing {len(image_paths)} images with up to {max_workers} parallel workers")
     if ocr_only:
         print("OCR-only mode: Skipping VoucherVision processing")
-    if notebook_mode:
-        print("Running in notebook mode")
+    if include_wfo:
+        print("Running WFO Tool")
+
 
     # Create a progress bar
     progress_bar = tqdm(total=len(image_paths), desc="Processing", unit="image")
@@ -308,6 +376,9 @@ def process_images_parallel(server_url, image_paths, engines, llm_model, prompt,
                 auth_token,
                 ocr_only,
                 notebook_mode,
+                skip_label_collage,
+                include_wfo,
+                gemini_api_key
             ): path for path in image_paths
         }
         
@@ -340,6 +411,20 @@ def print_results_summary(results, fname):
     from termcolor import colored
     from tabulate import tabulate
     import json
+
+    def _truncate_long_string(value: str, max_front: int = 10, max_back: int = 10) -> str:
+        """
+        Return first `max_front` chars + ' ... ' + last `max_back` chars
+        for long strings. Short strings are returned unchanged.
+        """
+        if not isinstance(value, str):
+            return value
+        if len(value) <= max_front + max_back + 3:
+            return value
+        return f"{value[:max_front]} ... {value[-max_back:]}"
+
+
+
     
     print("\n" + "="*N_SIZE)
     print("VOUCHERVISION RESULTS SUMMARY", colored(f"{fname}", 'green', attrs=['bold']))
@@ -453,6 +538,31 @@ def print_results_summary(results, fname):
                 # If not a dict, just print the data
                 print(json.dumps(section_data, indent=N_INDENT, sort_keys=False, cls=OrderedDictJSONEncoder))
         
+        elif section_name == 'collage_info':
+            # Special handling to avoid dumping the full int64/base64 image
+            if isinstance(section_data, dict):
+                safe_collage = {}
+                for key, value in section_data.items():
+                    if key == "base64image_text_collage" and isinstance(value, str):
+                        safe_collage[key] = _truncate_long_string(value, 10, 10)
+                    else:
+                        safe_collage[key] = value
+
+                print(json.dumps(
+                    safe_collage,
+                    indent=N_INDENT,
+                    sort_keys=False,
+                    cls=OrderedDictJSONEncoder
+                ))
+            else:
+                # Fallback: just print as-is (unlikely, but safe)
+                print(json.dumps(
+                    section_data,
+                    indent=N_INDENT,
+                    sort_keys=False,
+                    cls=OrderedDictJSONEncoder
+                ))
+        
         else:
             # Generic handler for any other sections
             try:
@@ -527,7 +637,7 @@ def read_file_list(list_file):
                     if row and row[0].strip():
                         file_paths.append(row[0].strip())
         except Exception as e:
-            raise RuntimeError(f"Failed to read CSV file '{list_file}': {e}")
+            raise RuntimeError(f"Failed to read XLSX file '{list_file}': {e}")
         
     else:
         try:
@@ -538,9 +648,8 @@ def read_file_list(list_file):
                         file_paths.append(cleaned)
         except Exception as e:
             raise RuntimeError(f"Failed to read text file '{list_file}': {e}")
-
+    
     return file_paths
-
 
 def save_results_to_xlsx(results_list, output_dir):
     """
@@ -649,15 +758,15 @@ def save_results_to_xlsx(results_list, output_dir):
 ### csv when opened in excel may autoconvert column like date. Use the xlsx version. 
 def save_results_to_csv(results_list, output_dir):
     """
-    Save a list of VoucherVision results to a XLSX file using the filename 
+    Save a list of VoucherVision results to a CSV file using the filename 
     that's already included in the results
     
     Args:
         results_list (list): List of dictionaries containing the results
-        output_dir (str): Directory to save the XLSX file
+        output_dir (str): Directory to save the CSV file
     """
     if not results_list:
-        print("No results to save to XLSX")
+        print("No results to save to CSV")
         return
     
     # Extract formatted_json from each result and add filename
@@ -785,9 +894,24 @@ def verify_authentication(server_url, auth_token=None):
         print(f"ERROR: Could not connect to server: {str(e)}")
         return False
     
-def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-flash"], llm_model="gemini-2.0-flash",
-                    prompt="SLTPvM_default.yaml", image=None, directory=None, 
-                    file_list=None, verbose=False, save_to_xlsx=False, max_workers=4, auth_token=None, ocr_only=False, notebook_mode=False):
+def process_vouchers(server, 
+                     output_dir, 
+                     engines=["gemini-2.0-flash"],
+                     llm_model="gemini-2.0-flash",
+                     prompt="SLTPvM_full.yaml", 
+                     image=None, 
+                     directory=None, 
+                     file_list=None, 
+                     verbose=False, 
+                     save_to_xlsx=False, 
+                     max_workers=4, 
+                     auth_token=None, 
+                     ocr_only=False, 
+                     notebook_mode=False, 
+                     skip_label_collage=False,
+                     include_wfo=False,
+                     gemini_api_key=None
+                     ):
     """
     Process voucher images through the VoucherVision API.
     
@@ -805,6 +929,10 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         max_workers (int): Maximum number of parallel workers
         auth_token (str): Authentication token for the API
         ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
         
     Returns:
         list: List of processed results if save_to_xlsx is True, otherwise None
@@ -831,8 +959,9 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
     # If in OCR-only mode, inform user
     if ocr_only:
         print("Running in OCR-only mode: Skipping VoucherVision JSON parsing")
-    if notebook_mode:
-        print("Running in notebook mode: Skipping VoucherVision JSON parsing: Skipping label collage")
+    if include_wfo:
+        print("Running in WFO Tool")
+
     
     try:
         # To store all results if save-to-xlsx is enabled
@@ -841,7 +970,19 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         # Process based on the input type
         if image:
             # Single image (no need for parallelization)
-            result = process_image_file(server, image, engines, llm_model, prompt, output_dir, verbose, auth_token, ocr_only, notebook_mode)
+            result = process_image_file(server, 
+                                        image, 
+                                        engines, 
+                                        llm_model,
+                                        prompt, 
+                                        output_dir, 
+                                        verbose, 
+                                        auth_token,
+                                        ocr_only,
+                                        notebook_mode,
+                                        skip_label_collage, 
+                                        include_wfo, 
+                                        gemini_api_key)
             if result and save_to_xlsx:
                 all_results.append(result)
         
@@ -851,7 +992,7 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 raise ValueError(f"Directory not found: {directory}")
             
             # Get all image files in the directory
-            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif', '.JPG', '.JPEG', '.PNG']
+            image_extensions = ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.bmp', '.gif']
             image_files = []
 
             for ext in image_extensions:
@@ -887,6 +1028,9 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 auth_token,
                 ocr_only,
                 notebook_mode,
+                skip_label_collage,
+                include_wfo,
+                gemini_api_key
             )
             
             if save_to_xlsx:
@@ -915,6 +1059,9 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
                 auth_token,
                 ocr_only,
                 notebook_mode,
+                skip_label_collage,
+                include_wfo,
+                gemini_api_key
             )
             
             if save_to_xlsx:
@@ -944,11 +1091,392 @@ def process_vouchers(server, output_dir, engines=["gemini-1.5-pro", "gemini-2.0-
         print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
         print(f"{'-' * N_SIZE}")
 
+def process_image_by_url(server_url, 
+                         image_url, 
+                         engines=None, 
+                         llm_model=None, 
+                         prompt=None, 
+                         verbose=False,
+                         auth_token=None, 
+                         ocr_only=False, 
+                         notebook_mode=False, 
+                         skip_label_collage=False, 
+                         include_wfo=False,
+                         gemini_api_key=None
+                         ):
+    """
+    Process an image from a URL using the VoucherVision API server's process-url endpoint
+    
+    Args:
+        server_url (str): URL of the VoucherVision API server
+        image_url (str): URL of the image to process
+        engines (list): List of OCR engine options to use
+        llm_model (str): LLM model to use for creating JSON
+        prompt (str): Custom prompt file to use
+        verbose (bool): Whether to print verbose output
+        auth_token (str): Authentication token for the API (Firebase token or API key)
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
+
+    Returns:
+        dict: The processed results from the server
+    """
+    # Always verify authentication using the cached verification
+    if not verify_authentication(server_url, auth_token):
+        print("Aborting. Authentication failed.")
+        return None
+    
+    # Prepare the request URL and data
+    url = f"{server_url}/process-url"
+    
+    # Prepare data for the request
+    data = {
+        'image_url': image_url
+    }
+    
+    # Add optional parameters if provided
+    if engines:
+        data['engines'] = engines
+    if llm_model:
+        data['llm_model'] = llm_model
+    if prompt:
+        data['prompt'] = prompt
+    if ocr_only:
+        data['ocr_only'] = True 
+    if notebook_mode:
+        data['notebook_mode'] = True 
+    if skip_label_collage:
+        data['skip_label_collage'] = True 
+    if include_wfo:
+        data['include_wfo'] = True
+    if gemini_api_key:
+        data['gemini_api_key'] = gemini_api_key
+        
+    # Determine auth header type based on auth_token format
+    headers = {
+        'Content-Type': 'application/json'
+    }
+    
+    if auth_token:
+        if '.' in auth_token and len(auth_token) > 100:
+            # Likely a Firebase token
+            headers["Authorization"] = f"Bearer {auth_token}"
+        else:
+            # Likely an API key
+            headers["X-API-Key"] = auth_token
+    
+    if verbose:
+        print(f"Sending URL request to {url}")
+        print(f"Image URL: {image_url}")
+        if ocr_only:
+            print("OCR-only mode: Skipping VoucherVision JSON parsing")
+    
+    try:
+        # Send the request
+        response = requests.post(url, json=data, headers=headers)
+        
+        # Check if the request was successful
+        if response.status_code == 200:
+            results = json.loads(response.text, object_pairs_hook=OrderedDict)
+            
+            # If formatted_json is a string that contains JSON, parse it
+            if 'formatted_json' in results and isinstance(results['formatted_json'], str):
+                try:
+                    # Try to parse it as JSON with order preserved
+                    results['formatted_json'] = json.loads(results['formatted_json'], object_pairs_hook=OrderedDict)
+                except json.JSONDecodeError:
+                    # Not valid JSON, leave as string
+                    pass
+                    
+            # Verify url_source is present
+            if verbose and 'url_source' in results:
+                print(f"URL source in response: {results['url_source']}")
+            elif verbose:
+                print(f"WARNING: url_source not found in response. Keys: {list(results.keys())}")
+                
+            return results
+        else:
+            error_msg = f"Error: {response.status_code}"
+            try:
+                error_details = response.json()
+                error_msg += f" - {error_details.get('error', 'Unknown error')}"
+            except:
+                error_msg += f" - {response.text}"
+            raise Exception(error_msg)
+    
+    except Exception as e:
+        print(f"Error processing image URL: {e}")
+        return None
+
+
+def process_urls_parallel(server_url, 
+                          image_urls, 
+                          engines, 
+                          llm_model, 
+                          prompt, 
+                          output_dir, 
+                          verbose, 
+                          max_workers=4, 
+                          auth_token=None, 
+                          ocr_only=False, 
+                          notebook_mode=False, 
+                          skip_label_collage=False, 
+                          include_wfo=False,
+                          gemini_api_key=None
+                          ):
+    """
+    Process multiple image URLs in parallel
+    
+    Args:
+        server_url (str): URL of the VoucherVision API server
+        image_urls (list): List of image URLs to process
+        engines (list): List of OCR engine options to use
+        llm_model (str): LLM model to use
+        prompt (str): Custom prompt file to use
+        output_dir (str): Directory to save output files
+        verbose (bool): Whether to print verbose output
+        max_workers (int): Maximum number of parallel workers
+        auth_token (str): Authentication token for the API
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
+       
+    Returns:
+        list: List of processing results
+    """
+    results = []
+    
+    print(f"Processing {len(image_urls)} image URLs with up to {max_workers} parallel workers")
+    if ocr_only:
+        print("OCR-only mode: Skipping VoucherVision processing")
+
+    # Create a progress bar
+    progress_bar = tqdm(total=len(image_urls), desc="Processing", unit="image")
+    
+    def process_url(url):
+        """Process a single URL and save the result"""
+        try:
+            # Get output filename from URL
+            output_file = get_output_filename(url, output_dir)
+            filename = os.path.basename(output_file).split('.')[0]
+            
+            # Process the image URL
+            result = process_image_by_url(server_url, 
+                                          url, 
+                                          engines, 
+                                          llm_model, 
+                                          prompt, 
+                                          verbose, 
+                                          auth_token, 
+                                          ocr_only, 
+                                          notebook_mode, 
+                                          skip_label_collage, 
+                                          include_wfo, 
+                                          gemini_api_key
+                                          )
+            
+            if result:
+                # Add filename to result
+                result['filename'] = filename
+                
+                # Save the result
+                with open(output_file, 'w') as f:
+                    json.dump(result, f, indent=2, sort_keys=False, cls=OrderedDictJSONEncoder)
+                
+                if verbose:
+                    print_results_summary(result, filename)
+                    print(f"Individual results saved to: {output_file}")
+                
+                return result
+            return None
+        except Exception as e:
+            print(f"\nError processing URL {url}: {e}")
+            return None
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all tasks
+        futures = [executor.submit(process_url, url) for url in image_urls]
+        
+        # Process as they complete
+        for future in concurrent.futures.as_completed(futures):
+            try:
+                result = future.result()
+                if result:
+                    results.append(result)
+            except Exception as e:
+                print(f"\nUnexpected error: {e}")
+            finally:
+                # Update the progress bar
+                progress_bar.update(1)
+    
+    # Close the progress bar
+    progress_bar.close()
+    
+    return results
+
+
+def process_vouchers_urls(server, output_dir, engines=["gemini-2.0-flash"], llm_model="gemini-2.0-flash",
+                        prompt="SLTPvM_full.yaml", 
+                        image_url=None, 
+                        url_list=None, 
+                        verbose=False, 
+                        save_to_xlsx=False, 
+                        max_workers=4, 
+                        auth_token=None, 
+                        ocr_only=False, 
+                        notebook_mode=False, 
+                        skip_label_collage=False, 
+                        include_wfo=False, 
+                        gemini_api_key=None):
+    """
+    Process voucher images from URLs through the VoucherVision API.
+    
+    Args:
+        server (str): URL of the VoucherVision API server
+        output_dir (str): Directory to save the output JSON results
+        engines (list): OCR engine options to use
+        llm_model (str): LLM model to use for creating JSON
+        prompt (str): Custom prompt file to use
+        image_url (str): Single image URL to process
+        url_list (str): Path to a file containing a list of image URLs
+        verbose (bool): Print all output to console
+        save_to_xlsx (bool): Save all formatted_json results to a XLSX file
+        max_workers (int): Maximum number of parallel workers
+        auth_token (str): Authentication token for the API
+        ocr_only (bool): Whether to only perform OCR and skip VoucherVision processing
+        notebook_mode (bool): Whether to use notebook mode, which returns OCR as markdown
+        skip_label_collage (bool): Skip label collage, use full provided image
+        include_wfo (bool): Whether to validate taxonomy against World Flora Online WFO
+        gemini_api_key (str): Provide your own Gemini API Key obtained from Google AI Studio. If not provided, will use the default VoucherVision Gemini API Key.
+        
+    Returns:
+        list: List of processed results if save_to_xlsx is True, otherwise None
+    """
+    # First verify authentication before doing anything
+    if not verify_authentication(server, auth_token):
+        print("Aborting. Authentication failed.")
+        return None
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Start timing
+    start_time = time.time()
+    
+    # If in OCR-only mode, inform user
+    if ocr_only:
+        print("Running in OCR-only ode: Skipping VoucherVision JSON parsing")
+    if notebook_mode:
+        print("Running in Notebook Mode: Skipping VoucherVision JSON parsing, skipping text collage, using full image for OCR")
+    if skip_label_collage:
+        print("Skipping text collage, using full image for OCR")
+
+    
+    try:
+        # To store all results if save-to-xlsx is enabled
+        all_results = []
+        
+        # Process based on the input type
+        if image_url:
+            # Single image URL
+            output_file = get_output_filename(image_url, output_dir)
+            filename = os.path.basename(output_file).split('.')[0]
+            
+            # Process the image URL
+            result = process_image_by_url(server, 
+                                          image_url, 
+                                          engines, 
+                                          llm_model, 
+                                          prompt, 
+                                          verbose, 
+                                          auth_token, 
+                                          ocr_only, 
+                                          notebook_mode, 
+                                          skip_label_collage, 
+                                          include_wfo, 
+                                          gemini_api_key
+                                          )
+            
+            if result:
+                # Add filename to result
+                result['filename'] = filename
+                
+                # Save the result
+                with open(output_file, 'w') as f:
+                    json.dump(result, f, indent=2, sort_keys=False, cls=OrderedDictJSONEncoder)
+                
+                if verbose:
+                    print_results_summary(result, filename)
+                    print(f"Individual results saved to: {output_file}")
+                
+                if save_to_xlsx:
+                    all_results.append(result)
+        
+        elif url_list:
+            # List of image URLs from a file
+            url_paths = read_file_list(url_list)
+            
+            if not url_paths:
+                print(f"No URLs found in {url_list}")
+                return None
+            
+            print(f"Found {len(url_paths)} URLs to process")
+            
+            # Process URLs in parallel
+            results = process_urls_parallel(
+                server, 
+                url_paths, 
+                engines, 
+                llm_model,
+                prompt, 
+                output_dir, 
+                verbose,
+                max_workers,
+                auth_token,
+                ocr_only,
+                notebook_mode,
+                skip_label_collage,
+                include_wfo,
+                gemini_api_key
+            )
+            
+            if save_to_xlsx:
+                all_results.extend(results)
+        
+        # Save to XLSX if requested
+        if save_to_xlsx and all_results:
+            save_results_to_xlsx(all_results, output_dir)
+            
+        if save_to_xlsx:
+            return all_results
+        return None
+
+    except Exception as e:
+        print(f"Error: {e}")
+        if __name__ == "__main__":
+            sys.exit(1)
+        else:
+            raise
+
+    finally:
+        # End timing and report
+        end_time = time.time()
+        elapsed_seconds = end_time - start_time
+        minutes, seconds = divmod(elapsed_seconds, 60)
+        print(f"\n{'-' * N_SIZE}")
+        print(f"Total operation time: {int(minutes)} minutes and {int(seconds)} seconds")
+        print(f"{'-' * N_SIZE}")
+        
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='VoucherVisionGO Client')
     parser.add_argument('--server', required=True, 
-                        help='URL of the VoucherVision API server (e.g., http://localhost:8080)')
+                        help='URL of the VoucherVision API server https://vouchervision-go-738307415303.us-central1.run.app (e.g., http://localhost:8080)')
     
     parser.add_argument('--auth-token', required=True, 
                         help='Authentication token (https://vouchervision-go-738307415303.us-central1.run.app/login)')
@@ -962,12 +1490,12 @@ def main():
     input_group.add_argument('--file-list',
                              help='Path to a file containing a list of image paths or URLs (one per line or XLSX)')
     
-    parser.add_argument('--engines', nargs='+', default=["gemini-1.5-pro", "gemini-2.0-flash"],
-                        help='OCR engine options to use (default: gemini-1.5-pro gemini-2.0-flash)')
+    parser.add_argument('--engines', nargs='+', default=["gemini-2.0-flash"],
+                        help='OCR engine options to use (default: gemini-2.0-flash)')
     parser.add_argument('--llm-model', default="gemini-2.0-flash",
                         help='OCR engine options to use (default: gemini-2.0-flash)')
-    parser.add_argument('--prompt', default="SLTPvM_default.yaml",
-                        help='Custom prompt file to use (default: SLTPvM_default.yaml)')
+    parser.add_argument('--prompt', default="SLTPvM_full.yaml",
+                        help='Custom prompt file to use (default: SLTPvM_full.yaml)')
     parser.add_argument('--output-dir', required=True,
                         help='Directory to save the output JSON results')
     parser.add_argument('--verbose', action='store_true',
@@ -979,7 +1507,13 @@ def main():
     parser.add_argument('--ocr-only', action='store_true',
                         help='Only perform OCR and skip VoucherVision processing')
     parser.add_argument('--notebook-mode', action='store_true',
-                        help='Only perform OCR and skip VoucherVision processing. Also skips label collage, uses full image. Returns OCR as text and a .md')
+                        help='Only perform OCR, skip text collage, use full image, return OCR as Markdown')
+    parser.add_argument('--skip-label-collage', action='store_true',
+                        help='Skip label text collage, use full image for OCR')
+    parser.add_argument('--include-wfo', action='store_true',
+                        help='Validate taxonomy against World Flora Online')
+    parser.add_argument('--gemini-api-key', default=None,
+                        help='(Optional) Provide your own Gemini API Key obtained from Google AI Studio')
     
     args = parser.parse_args()
     
@@ -999,6 +1533,9 @@ def main():
         auth_token=args.auth_token,
         ocr_only=args.ocr_only,
         notebook_mode=args.notebook_mode,
+        skip_label_collage=args.skip_label_collage,
+        include_wfo = args.include_wfo,
+        gemini_api_key = args.gemini_api_key
     )
 
 
@@ -1007,7 +1544,9 @@ if __name__ == "__main__":
 
 ### Usage examples:
 # Single image:
-# python client.py --server https://vouchervision-go-XXXXXX.app --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image" --verbose
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app/ --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image" --verbose
+
+# python client.py --server https://vouchervision-go-738307415303.us-central1.run.app --auth-token "YOUR_API_KEY_OR_AUTH_TOKEN" --image "./demo/images/MICH_16205594_Poaceae_Jouvea_pilosa.jpg" --output-dir "./demo/results_single_image_multipart" --verbose
 
 # URL image:
 # python client.py --server https://vouchervision-go-XXXXXX.app --image "https://swbiodiversity.org/imglib/h_seinet/seinet/KHD/KHD00041/KHD00041592_lg.jpg" --output-dir "./demo/results_single_url" --verbose
