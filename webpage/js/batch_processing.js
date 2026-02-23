@@ -137,6 +137,9 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             if ($('#includeWfo').is(':checked')) {
                 formData.append('include_wfo', 'true');
             }
+            if ($('#skipLabelCollage').is(':checked')) {
+                formData.append('skip_label_collage', 'true');
+            }
     
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
@@ -594,6 +597,9 @@ async function processBatchImages(files, concurrency, options = {}) {
             // Add WFO validation if selected
             if ($('#includeWfo').is(':checked')) {
                 formData.append('include_wfo', 'true');
+            }
+            if ($('#skipLabelCollage').is(':checked')) {
+                formData.append('skip_label_collage', 'true');
             }
             
             // Add prompt template if specified

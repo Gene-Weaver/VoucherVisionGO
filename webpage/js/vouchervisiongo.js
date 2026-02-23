@@ -608,6 +608,7 @@ async function processImage(sourceType = 'file') {
     if (notebookMode) formData.append('notebook_mode', 'true');
     if (llm_model) formData.append('llm_model', llm_model);
     if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
+    if ($('#skipLabelCollage').is(':checked')) formData.append('skip_label_collage', 'true');
 
     const headers = getAuthHeaders();
     if ('Content-Type' in headers) delete headers['Content-Type'];

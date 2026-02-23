@@ -78,6 +78,8 @@ steps:
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
+      - '--min-instances=0'
+      - '--max-instances=10
 
 # Store images in Artifact Registry
 images:

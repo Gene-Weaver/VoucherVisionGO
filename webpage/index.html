@@ -1186,7 +1186,21 @@ http://localhost:8000/index.html
         <script>
             (function() {
                 // --- Hardcode your working Mapbox token here ---
-                const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGh5bG9mb3JmdW4iLCJhIjoiY2xqN29rYmFiMGI0ZjNlcDFyd243eHE1aSJ9.HWBxNMKGhJ7QUx2JA2RmQg';
+                let MAPBOX_ACCESS_TOKEN = null;
+
+                fetch('./secret_mapbox.yaml')
+                    .then(resp => {
+                        if (!resp.ok) throw new Error('Failed to load secret_mapbox.yaml: ' + resp.status);
+                        return resp.text();
+                    })
+                    .then(text => {
+                        const parsed = jsyaml.load(text);
+                        MAPBOX_ACCESS_TOKEN = parsed.mapbox_access_token;
+                        logDebug('Mapbox token loaded from secret_mapbox.yaml');
+                    })
+                    .catch(err => {
+                        logError('Could not load secret_mapbox.yaml:', err);
+                    });
                 // ---------------------------------------------
         
                 let map = null; // Store the single map instance
@@ -1352,20 +1366,27 @@ http://localhost:8000/index.html
                 }
         
                 document.addEventListener('DOMContentLoaded', function() {
-                    logDebug('DOM Loaded. Waiting slightly before Mapbox Init.');
-                    setTimeout(() => {
-                        logDebug('Attempting Mapbox Init after short delay.');
-                        mapboxLoaded = typeof mapboxgl !== 'undefined';
-                        if (!mapboxLoaded) {
-                            logError("Mapbox GL JS still not loaded after delay. Global map cannot be initialized.");
-                            const mapContainerElement = document.getElementById('global-map-container');
-                            if(mapContainerElement) mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Map library failed to load.</div>';
-                            return;
-                        }
-                        if (!MAPBOX_ACCESS_TOKEN) { logWarn('No MAPBOX_ACCESS_TOKEN found (hardcoded). Map may not work.'); }
-                        initializeGlobalMap();
-                        monitorResults();
-                    }, 150);
+                    fetch('./secret_mapbox.yaml')
+                        .then(resp => {
+                            if (!resp.ok) throw new Error('Failed to load secret_mapbox.yaml');
+                            return resp.text();
+                        })
+                        .then(text => {
+                            MAPBOX_ACCESS_TOKEN = jsyaml.load(text).mapbox_access_token;
+                            logDebug('Mapbox token loaded.');
+                            setTimeout(() => {
+                                mapboxLoaded = typeof mapboxgl !== 'undefined';
+                                if (!mapboxLoaded) {
+                                    logError('Mapbox GL JS not loaded.');
+                                    return;
+                                }
+                                initializeGlobalMap();
+                                monitorResults();
+                            }, 150);
+                        })
+                        .catch(err => {
+                            logError('Could not load Mapbox token:', err);
+                        });
                 });
         
             })();
