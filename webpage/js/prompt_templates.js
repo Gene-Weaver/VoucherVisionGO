@@ -1,5 +1,6 @@
 // Define the list of prompt templates optimized for Gemini-3
 const optimized_for_gemini_3 = [
+    "SLTPvM_full.yaml",
     "SLTPvM_geolocate.yaml",
     "SLTPvM_geolocate_flag_multispecimen.yaml"
     // Add more files here as needed
