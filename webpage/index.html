@@ -27,11 +27,11 @@ http://localhost:8000/index.html
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
      <!-- Load external scripts in the correct order -->
-    <script src="js/vouchervisiongo.js?v=2" defer></script>
-    <script src="js/batch_processing.js?v=2" defer></script>
-    <script src="js/api_key_validator.js?v=2" defer></script>
-    <script src="js/prompt_templates.js?v=2" defer></script>
-    <script src="js/changelog_viewer.js?v=2" defer></script>
+    <script src="js/vouchervisiongo.js?v=3" defer></script>
+    <script src="js/batch_processing.js?v=3" defer></script>
+    <script src="js/api_key_validator.js?v=3" defer></script>
+    <script src="js/prompt_templates.js?v=3" defer></script>
+    <script src="js/changelog_viewer.js?v=3" defer></script>
 
     <link rel="stylesheet" href="css/vouchervisiongo.css">
     <script>
@@ -415,6 +415,8 @@ http://localhost:8000/index.html
                     <ul>
                         <li><strong>Gemini 3 Pro</strong>: An extremely capable model. By far the best model for reading handwritten labels, beating out all other OCR solutions. Try the SLTPvM_geolocate prompt! 
                         </li>
+                        <li><strong>Gemini 3 Flash</strong>: Will replace 2.5 flash in mid 2026.  
+                        </li>
                         <li><strong>Gemini 2.5 Pro</strong>: High accuracy, especially for handwritten text, can
                             follow complex instructions, like parsing multiple species determinations. Can perform geolocation, 
                             search the internet to validate content, etc.
@@ -473,8 +475,15 @@ http://localhost:8000/index.html
                         
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now. This model is still in Google's beta testing and might behave unexpectedly.">
                                 <input type="checkbox" name="engines" value="gemini-3-pro-preview" unchecked> gemini-3-pro-preview
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest verison 3 model. This model is still in Google's beta testing and might behave unexpectedly.">
+                                <input type="checkbox" name="engines" value="gemini-3-flash-preview" unchecked> gemini-3-flash-preview
                             </label>
                         </div>
 
@@ -550,10 +559,17 @@ http://localhost:8000/index.html
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now. This model is still in Google's beta testing and might behave unexpectedly.">
                                 <input type="radio" name="llm_model" value="gemini-3-pro-preview"> gemini-3-pro-preview
                             </label>
-                        </div><div class="radio-group">
+                        </div>
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest verison 3 model. This model is still in Google's beta testing and might behave unexpectedly.">
+                                <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview
+                            </label>
+                        </div>
+                        <div class="radio-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Gemini 2.5 performs well but is very expensive. Please don't run this on large batches for now.">
                                 <input type="radio" name="llm_model" value="gemini-2.5-pro"> gemini-2.5-pro
@@ -878,7 +894,7 @@ http://localhost:8000/index.html
         });
 
         // Try to default to Gemini 2.0 Flash if present, else first model
-        const geminiKey = models.find(m => m.key === 'GEMINI_2_0_FLASH')?.key;
+        const geminiKey = models.find(m => m.key === 'GEMINI_2_5_FLASH')?.key;
         selectEl.value = geminiKey || models[0].key;
 
         // Build provider-grouped cost tables
