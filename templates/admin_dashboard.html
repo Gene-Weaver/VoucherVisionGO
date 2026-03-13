@@ -43,6 +43,7 @@
           <button class="tab-button" data-tab="api-keys">API Keys</button>
           <button class="tab-button" data-tab="admins">Manage Admins</button>
           <button class="tab-button" data-tab="usage-stats">Usage Statistics</button>
+          <button class="tab-button" data-tab="rate-limits">Rate Limits</button>
           <button class="tab-button" data-tab="maintenance">Maintenance</button>
         </div>
         
@@ -176,6 +177,39 @@
           </div>
         </div>
 
+        <!-- Rate Limits Tab -->
+        <div id="rate-limits" class="tab-content">
+          <h3>Gemini Pro Rate Limits</h3>
+          <p>Manage per-user lifetime limits for Gemini Pro model requests. Default limit is 100 requests.</p>
+
+          <div class="search-container">
+            <input type="text" class="search-input" id="rate-limits-search" placeholder="Search by email...">
+          </div>
+
+          <div id="rate-limits-table-container">
+            <div id="rate-limits-loading" class="loading">Loading rate limits...</div>
+            <table id="rate-limits-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Pro Requests Used</th>
+                  <th>Limit</th>
+                  <th>Remaining</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="rate-limits-list">
+                <!-- Rate limits will be listed here -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="rate-limits-pagination" class="pagination">
+            <!-- Pagination buttons will be generated here -->
+          </div>
+        </div>
+
         <!-- Maintenance Tab -->
         <div id="maintenance" class="tab-content">
           <div class="maintenance-container">
@@ -244,5 +278,6 @@
     <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/usage_stats.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/maintenance.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/rate_limits.js') }}"></script>
   </body>
 </html>

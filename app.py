@@ -349,6 +349,103 @@ def validate_api_key(api_key):
         logger.error(f"Error validating API key: {str(e)}")
         return False
 
+
+# ── Gemini Pro rate-limiting helpers ─────────────────────────────────────
+
+GEMINI_PRO_DEFAULT_LIMIT = 100
+
+def is_gemini_pro_model(model_name: str | None) -> bool:
+    """Return True if *model_name* is a Gemini Pro model."""
+    return model_name is not None and "pro" in model_name.lower()
+
+
+def is_pro_request(engine_options: list[str] | None, llm_model_name: str | None) -> bool:
+    """Return True if any model involved in this request is a Gemini Pro model."""
+    if is_gemini_pro_model(llm_model_name):
+        return True
+    if engine_options:
+        for engine in engine_options:
+            if is_gemini_pro_model(engine):
+                return True
+    return False
+
+
+def check_gemini_pro_rate_limit(user_email: str) -> tuple[bool, int, int]:
+    """Check whether *user_email* is within their Gemini Pro usage limit.
+
+    Returns (allowed, current_count, limit).
+    Fields are auto-initialised if missing — no manual Firestore edits needed.
+    """
+    try:
+        doc = db.collection("usage_statistics").document(user_email).get()
+        if not doc.exists:
+            return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+        data = doc.to_dict() or {}
+        count = int(data.get("gemini_pro_usage_count", 0))
+        limit = int(data.get("gemini_pro_usage_limit", GEMINI_PRO_DEFAULT_LIMIT))
+        return (count < limit, count, limit)
+    except Exception as e:
+        logger.error(f"Error checking Gemini Pro rate limit for {user_email}: {e}")
+        # Fail-open so the request isn't silently blocked by a transient error
+        return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+
+
+# ── Daily usage email alerts ────────────────────────────────────────────
+
+DAILY_ALERT_THRESHOLDS = [100, 200, 500]
+
+def _send_daily_usage_alerts(user_email: str, current_day: str, prev_count: int):
+    """Fire admin emails for first-call-of-day and daily volume thresholds.
+
+    *prev_count* is the user's daily count **before** this request was added.
+    """
+    try:
+        from flask import current_app
+        sender = current_app.config.get('email_sender')
+        if not sender or not sender.is_enabled:
+            return
+
+        new_count = prev_count + 1
+
+        # First call of the day
+        if prev_count == 0:
+            sender.send_admin_usage_alert(
+                f"Daily activity: {user_email}",
+                f"<p><strong>{user_email}</strong> made their first API call today "
+                f"(<strong>{current_day}</strong>).</p>",
+            )
+
+        # High-volume thresholds
+        for threshold in DAILY_ALERT_THRESHOLDS:
+            if prev_count < threshold <= new_count:
+                sender.send_admin_usage_alert(
+                    f"High volume: {user_email} hit {threshold} calls today",
+                    f"<p><strong>{user_email}</strong> has made <strong>{new_count}</strong> "
+                    f"API calls today (<strong>{current_day}</strong>), crossing the "
+                    f"{threshold}-call threshold.</p>",
+                )
+    except Exception as e:
+        logger.error(f"Error sending daily usage alert for {user_email}: {e}")
+
+
+def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int):
+    """Notify admin that a user was blocked by the Gemini Pro rate limit."""
+    try:
+        from flask import current_app
+        sender = current_app.config.get('email_sender')
+        if not sender or not sender.is_enabled:
+            return
+        sender.send_admin_usage_alert(
+            f"Rate limit hit: {user_email}",
+            f"<p><strong>{user_email}</strong> attempted to use a Gemini Pro model but has "
+            f"reached their limit (<strong>{count}/{limit}</strong> requests used).</p>"
+            f"<p>You can increase their limit from the <em>Rate Limits</em> tab in the "
+            f"admin dashboard.</p>",
+        )
+    except Exception as e:
+        logger.error(f"Error sending rate-limit alert for {user_email}: {e}")
+
+
 def update_usage_statistics(
     user_email: str,
     engines: list[str] | None = None,
@@ -435,7 +532,8 @@ def update_usage_statistics(
             monthly_usage[current_month] = monthly_usage.get(current_month, 0) + 1
 
             daily_usage = data.get("daily_usage", {})
-            daily_usage[current_day] = daily_usage.get(current_day, 0) + 1
+            prev_daily_count = daily_usage.get(current_day, 0)
+            daily_usage[current_day] = prev_daily_count + 1
 
             ocr_info = data.get("ocr_info", {})
             if engines:
@@ -454,6 +552,13 @@ def update_usage_statistics(
                 "total_grams_CO2": firestore.Increment(gco2),
                 "total_mL_water": firestore.Increment(h2o),
             }
+
+            # Track Gemini Pro usage
+            if is_pro_request(engines if isinstance(engines, list) else None, llm_model_name):
+                increments["gemini_pro_usage_count"] = firestore.Increment(1)
+                # Auto-initialise the limit field for existing users
+                if "gemini_pro_usage_limit" not in data:
+                    increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
 
             user_ref.update({
                 **increments,
@@ -495,9 +600,15 @@ def update_usage_statistics(
                 "backfill_applied_v2": True,  # Nothing to backfill yet
                 "backfill_tokens": backfill_tokens,
                 "last_impact_snapshot": est_impact,
+                "gemini_pro_usage_count": 1 if is_pro_request(engines if isinstance(engines, list) else None, llm_model_name) else 0,
+                "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
             })
 
         logger.info(f"Updated usage statistics for {user_email}")
+
+        # ── Admin email alerts ───────────────────────────────────────
+        _send_daily_usage_alerts(user_email, current_day,
+                                 prev_daily_count if doc.exists else 0)
 
     except Exception as e:
         logger.error(f"Error updating usage statistics: {str(e)}")
@@ -911,9 +1022,41 @@ class SimpleEmailSender:
         # Send to the same email address configured for sending
         # This assumes the admin's email is the same as the sender email
         admin_email = self.from_email
-        
+
         return self.send_email(admin_email, subject, body)
-      
+
+    def send_admin_usage_alert(self, subject_line, detail_html):
+        """Send a usage-related alert email to the admin.
+
+        Args:
+            subject_line (str): Email subject (prefixed with [VoucherVision])
+            detail_html (str): HTML snippet placed inside the alert card body
+        Returns:
+            bool: True if sent successfully
+        """
+        subject = f"[VoucherVision] {subject_line}"
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #e53935;">Usage Alert</h2>
+                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                        {detail_html}
+                    </div>
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin"
+                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Open Admin Dashboard
+                        </a>
+                    </div>
+                    <p>Best regards,<br>VoucherVision Notification System</p>
+                </div>
+            </body>
+        </html>
+        """
+        admin_email = self.from_email
+        return self.send_email(admin_email, subject, body)
+
 def create_initial_admin(email):
     """Create the initial admin user"""
     try:
@@ -2029,10 +2172,28 @@ def process_image():
 
     user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
 
+    # ── Gemini Pro rate-limit gate ───────────────────────────────────
+    if is_pro_request(engine_options, llm_model_name):
+        allowed, count, limit = check_gemini_pro_rate_limit(user_email)
+        if not allowed:
+            logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
+            _send_rate_limit_hit_alert(user_email, count, limit)
+            resp = make_response(jsonify({
+                "error": "Gemini Pro rate limit exceeded",
+                "message": (
+                    f"You have used all {limit} of your Gemini Pro model requests. "
+                    "Contact an administrator to request additional quota."
+                ),
+                "gemini_pro_usage_count": count,
+                "gemini_pro_usage_limit": limit,
+            }), 503)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
+
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(
-        file=file, 
-        engine_options=engine_options, 
+        file=file,
+        engine_options=engine_options,
         prompt=prompt,
         ocr_only=ocr_only,
         include_wfo=include_wfo,
@@ -2102,6 +2263,24 @@ def process_image_by_url():
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
+
+    # ── Gemini Pro rate-limit gate ───────────────────────────────────
+    if is_pro_request(engine_options, llm_model_name):
+        allowed, count, limit = check_gemini_pro_rate_limit(user_email)
+        if not allowed:
+            logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
+            _send_rate_limit_hit_alert(user_email, count, limit)
+            resp = make_response(jsonify({
+                "error": "Gemini Pro rate limit exceeded",
+                "message": (
+                    f"You have used all {limit} of your Gemini Pro model requests. "
+                    "Contact an administrator to request additional quota."
+                ),
+                "gemini_pro_usage_count": count,
+                "gemini_pro_usage_limit": limit,
+            }), 503)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
 
     file_obj, filename = None, None
     last_exception = None
@@ -2439,7 +2618,50 @@ def get_usage_statistics():
     except Exception as e:
         logger.error(f"Error getting usage statistics: {str(e)}")
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
-    
+
+
+@app.route('/admin/rate-limits/<email>', methods=['POST'])
+@authenticated_route
+def update_user_rate_limit(email):
+    """Update Gemini Pro usage limit for a specific user."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    data = request.get_json()
+    if not data or 'gemini_pro_usage_limit' not in data:
+        return jsonify({'error': 'Missing gemini_pro_usage_limit in request body'}), 400
+
+    try:
+        new_limit = int(data['gemini_pro_usage_limit'])
+    except (ValueError, TypeError):
+        return jsonify({'error': 'gemini_pro_usage_limit must be an integer'}), 400
+
+    try:
+        user_ref = db.collection('usage_statistics').document(email)
+        doc = user_ref.get()
+        if not doc.exists:
+            return jsonify({'error': f'No usage record found for {email}'}), 404
+
+        user_ref.update({'gemini_pro_usage_limit': new_limit})
+        logger.info(f"Admin {admin_email} updated Gemini Pro limit for {email} to {new_limit}")
+
+        return jsonify({
+            'status': 'success',
+            'message': f'Updated Gemini Pro limit for {email} to {new_limit}',
+            'email': email,
+            'gemini_pro_usage_limit': new_limit,
+        })
+    except Exception as e:
+        logger.error(f"Error updating rate limit for {email}: {e}")
+        return jsonify({'error': f'Failed to update rate limit: {str(e)}'}), 500
+
+
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])
 @maintenance_mode_middleware
 def cors_test():

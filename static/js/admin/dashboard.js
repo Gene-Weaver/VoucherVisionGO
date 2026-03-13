@@ -144,7 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'usage-stats':
         loadUsageStatistics();
         break;
-      case 'maintenance':  // Add this case
+      case 'rate-limits':
+        loadRateLimits();
+        break;
+      case 'maintenance':
         loadMaintenanceStatus();
         break;
     }
