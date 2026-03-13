@@ -27,11 +27,11 @@ http://localhost:8000/index.html
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
      <!-- Load external scripts in the correct order -->
-    <script src="js/vouchervisiongo.js?v=4" defer></script>
-    <script src="js/batch_processing.js?v=4" defer></script>
-    <script src="js/api_key_validator.js?v=4" defer></script>
-    <script src="js/prompt_templates.js?v=4" defer></script>
-    <script src="js/changelog_viewer.js?v=4" defer></script>
+    <script src="js/vouchervisiongo.js?v=5" defer></script>
+    <script src="js/batch_processing.js?v=5" defer></script>
+    <script src="js/api_key_validator.js?v=5" defer></script>
+    <script src="js/prompt_templates.js?v=5" defer></script>
+    <script src="js/changelog_viewer.js?v=5" defer></script>
 
     <link rel="stylesheet" href="css/vouchervisiongo.css">
     <script>
@@ -413,18 +413,20 @@ http://localhost:8000/index.html
                     style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
                     <p>About the models:</p>
                     <ul>
-                        <li><strong>Gemini 3 Pro</strong>: An extremely capable model. By far the best model for reading handwritten labels, beating out all other OCR solutions. Try the SLTPvM_geolocate prompt! 
+                        <li><strong>Gemini 3.1 Flash Lite</strong>: The fastest and cheapest model. Great for bulk workloads.
                         </li>
-                        <li><strong>Gemini 3 Flash</strong>: Will replace 2.5 flash in mid 2026.  
+                        <li><strong>Gemini 3 Flash</strong>: This model is still in Google's beta testing and might behave unexpectedly.
                         </li>
-                        <li><strong>Gemini 2.5 Pro</strong>: High accuracy, especially for handwritten text, can
-                            follow complex instructions, like parsing multiple species determinations. Can perform geolocation, 
+                        <li><strong>Gemini 3.1 Pro</strong>: An extremely capable model. By far the best model for reading handwritten labels, beating out all other OCR solutions. Try the SLTPvM_geolocate prompt! Please don't run this on large batches for now. By default you will only have <strong>100 free API calls for 'Pro' models</strong>, contact us to increase this limit.
+                        </li>
+                        <!-- <li><strong>Gemini 2.5 Pro</strong>: High accuracy, especially for handwritten text, can
+                            follow complex instructions, like parsing multiple species determinations. Can perform geolocation,
                             search the internet to validate content, etc.
                         </li>
                         <li><strong>Gemini 2.5 Flash</strong>: Good, but not as good as 2.0 Flash. Handwriting
                             performance seems worse than Gemini 2.0 Flash</li>
-                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens. The workhorse model. Start here. 
-                        </li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens. The workhorse model. Start here.
+                        </li> -->
                         <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
                     </ul>
                 </div>
@@ -475,19 +477,26 @@ http://localhost:8000/index.html
                         
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now. This model is still in Google's beta testing and might behave unexpectedly.">
-                                <input type="checkbox" name="engines" value="gemini-3-pro-preview" unchecked> gemini-3-pro-preview
+                                data-tooltip="The fastest and cheapest model. Great for bulk workloads.">
+                                <input type="checkbox" name="engines" value="gemini-3.1-flash-lite-preview" checked> gemini-3.1-flash-lite-preview
                             </label>
                         </div>
 
                         <div class="checkbox-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 flash performs well and is the cheapest verison 3 model. This model is still in Google's beta testing and might behave unexpectedly.">
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest version 3 model.">
                                 <input type="checkbox" name="engines" value="gemini-3-flash-preview" unchecked> gemini-3-flash-preview
                             </label>
                         </div>
 
                         <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3.1 Pro performs exceptionally well but is very expensive. ">
+                                <input type="checkbox" name="engines" value="gemini-3.1-pro-preview" unchecked> gemini-3.1-pro-preview
+                            </label>
+                        </div>
+
+                        <!-- <div class="checkbox-group">
                             <label class="custom-tooltip"
                                 data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
                                 <input type="checkbox" name="engines" value="gemini-2.5-pro" unchecked> gemini-2.5-pro
@@ -504,7 +513,7 @@ http://localhost:8000/index.html
                                 data-tooltip="Use this model. You can add another model for even better support">
                                 <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
                             </label>
-                        </div>
+                        </div> -->
                         
                         <!-- <div class="checkbox-group">
                             <label class="custom-tooltip"
@@ -553,23 +562,29 @@ http://localhost:8000/index.html
                 </div>
 
                 <h3>LLM Model for creating JSON:</h3>
-                <p>Please use gemini-2.0-flash and reserve gemini-2.5-pro for the prompts that are optimized to take full advantage of its capabilities (e.g. SLTPvM_geolocate_flag_multispecimen.yaml).</p>
+                <p>Please use gemini-3.1-flash-lite-preview for bulk workloads and reserve gemini-3.1-pro-preview for the prompts that are optimized to take full advantage of its capabilities (e.g. SLTPvM_geolocate_flag_multispecimen.yaml).</p>
                 <p>SLTPvM_geolocate_flag_multispecimen.yaml will flag sheets that have more than one specimen (barcodes) and will automatically geolocate specimens that lack GPS coordinates in the label text</p>
                 <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
                     <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 performs exceptionally well but is very expensive. Please don't run this on large batches for now. This model is still in Google's beta testing and might behave unexpectedly.">
-                                <input type="radio" name="llm_model" value="gemini-3-pro-preview"> gemini-3-pro-preview
+                                data-tooltip="The fastest and cheapest model. Great for bulk workloads.">
+                                <input type="radio" name="llm_model" value="gemini-3.1-flash-lite-preview" checked> gemini-3.1-flash-lite-preview
                             </label>
                         </div>
                         <div class="radio-group">
                             <label class="custom-tooltip"
-                                data-tooltip="Gemini 3 flash performs well and is the cheapest verison 3 model. This model is still in Google's beta testing and might behave unexpectedly.">
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest version 3 model.">
                                 <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview
                             </label>
                         </div>
                         <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3.1 Pro performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                <input type="radio" name="llm_model" value="gemini-3.1-pro-preview"> gemini-3.1-pro-preview
+                            </label>
+                        </div>
+                        <!-- <div class="radio-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Gemini 2.5 performs well but is very expensive. Please don't run this on large batches for now.">
                                 <input type="radio" name="llm_model" value="gemini-2.5-pro"> gemini-2.5-pro
@@ -584,9 +599,9 @@ http://localhost:8000/index.html
                         <div class="radio-group">
                             <label  class="custom-tooltip"
                                 data-tooltip="Use this for bulk workloads. This works well in most cases, except for particularly difficult handwriting.">
-                                <input type="radio" name="llm_model" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                                <input type="radio" name="llm_model" value="gemini-2.0-flash"> gemini-2.0-flash
                             </label>
-                        </div>
+                        </div> -->
                         <!-- <div class="radio-group">
                             <label class="custom-tooltip"
                                 data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
