@@ -33,6 +33,7 @@ register_heif_opener()
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
+from google.cloud import firestore as _gc_firestore
 
 from url_name_parser import extract_filename_from_url
 from impact import estimate_impact
@@ -371,10 +372,11 @@ def is_pro_request(engine_options: list[str] | None, llm_model_name: str | None)
 
 
 def check_gemini_pro_rate_limit(user_email: str) -> tuple[bool, int, int]:
-    """Check whether *user_email* is within their Gemini Pro usage limit.
+    """Read-only check whether *user_email* is within their Gemini Pro usage limit.
 
     Returns (allowed, current_count, limit).
-    Fields are auto-initialised if missing — no manual Firestore edits needed.
+    NOTE: For gating requests, use check_and_reserve_gemini_pro_quota() instead
+    to avoid race conditions.
     """
     try:
         doc = db.collection("usage_statistics").document(user_email).get()
@@ -386,8 +388,67 @@ def check_gemini_pro_rate_limit(user_email: str) -> tuple[bool, int, int]:
         return (count < limit, count, limit)
     except Exception as e:
         logger.error(f"Error checking Gemini Pro rate limit for {user_email}: {e}")
+        return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+
+
+def check_and_reserve_gemini_pro_quota(user_email: str) -> tuple[bool, int, int]:
+    """Atomically check and increment Gemini Pro usage count.
+
+    Uses a Firestore transaction to prevent concurrent requests from
+    bypassing the limit.  Returns (allowed, count_after, limit).
+    """
+    try:
+        user_ref = db.collection("usage_statistics").document(user_email)
+
+        @_gc_firestore.transactional
+        def _txn(transaction):
+            doc = user_ref.get(transaction=transaction)
+            if not doc.exists:
+                # Brand-new user — allow and initialise count to 1
+                transaction.set(user_ref, {
+                    "gemini_pro_usage_count": 1,
+                    "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
+                }, merge=True)
+                return (True, 1, GEMINI_PRO_DEFAULT_LIMIT)
+
+            data = doc.to_dict() or {}
+            count = int(data.get("gemini_pro_usage_count", 0))
+            limit = int(data.get("gemini_pro_usage_limit", GEMINI_PRO_DEFAULT_LIMIT))
+
+            if count >= limit:
+                return (False, count, limit)
+
+            new_count = count + 1
+            transaction.update(user_ref, {"gemini_pro_usage_count": new_count})
+            return (True, new_count, limit)
+
+        return _txn(db.transaction())
+    except Exception as e:
+        logger.error(f"Error in Gemini Pro rate-limit reservation for {user_email}: {e}")
         # Fail-open so the request isn't silently blocked by a transient error
         return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+
+
+def release_gemini_pro_quota(user_email: str):
+    """Decrement gemini_pro_usage_count by 1 (e.g. after a failed request).
+
+    Safe to call even if the count is already 0 — will not go negative.
+    """
+    try:
+        user_ref = db.collection("usage_statistics").document(user_email)
+
+        @_gc_firestore.transactional
+        def _txn(transaction):
+            doc = user_ref.get(transaction=transaction)
+            if not doc.exists:
+                return
+            count = int((doc.to_dict() or {}).get("gemini_pro_usage_count", 0))
+            if count > 0:
+                transaction.update(user_ref, {"gemini_pro_usage_count": count - 1})
+
+        _txn(db.transaction())
+    except Exception as e:
+        logger.error(f"Error releasing Gemini Pro quota for {user_email}: {e}")
 
 
 # ── Daily usage email alerts ────────────────────────────────────────────
@@ -428,9 +489,35 @@ def _send_daily_usage_alerts(user_email: str, current_day: str, prev_count: int)
         logger.error(f"Error sending daily usage alert for {user_email}: {e}")
 
 
+_RATE_LIMIT_ALERT_COOLDOWN = 300  # seconds (5 minutes)
+
+
 def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int):
-    """Notify admin that a user was blocked by the Gemini Pro rate limit."""
+    """Notify admin that a user was blocked by the Gemini Pro rate limit.
+
+    De-duplicated via Firestore: only one email is sent per user per cooldown
+    window, even if dozens of parallel workers are all rejected simultaneously.
+    Survives server restarts and works across multiple instances.
+    """
     try:
+        user_ref = db.collection("usage_statistics").document(user_email)
+        doc = user_ref.get()
+        if doc.exists:
+            data = doc.to_dict() or {}
+            last_alert = data.get("last_rate_limit_alert_at")
+            if last_alert is not None:
+                # Firestore timestamps come back as datetime objects
+                if hasattr(last_alert, 'timestamp'):
+                    last_alert_ts = last_alert.timestamp()
+                else:
+                    last_alert_ts = float(last_alert)
+                if time.time() - last_alert_ts < _RATE_LIMIT_ALERT_COOLDOWN:
+                    return  # already alerted recently
+
+        # Mark the alert time *before* sending so concurrent requests
+        # that read in the same moment also see it
+        user_ref.set({"last_rate_limit_alert_at": firestore.SERVER_TIMESTAMP}, merge=True)
+
         from flask import current_app
         sender = current_app.config.get('email_sender')
         if not sender or not sender.is_enabled:
@@ -444,6 +531,79 @@ def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int):
         )
     except Exception as e:
         logger.error(f"Error sending rate-limit alert for {user_email}: {e}")
+
+
+def _send_pro_migration_advisory(user_email: str, count: int, limit: int):
+    """Send the user a one-per-day advisory suggesting they migrate away from Pro models.
+
+    Checks Firestore for `last_pro_advisory_date`; if it matches today, the
+    email is suppressed.  Only call this when the user is NOT supplying their
+    own API key.
+    """
+    try:
+        today = datetime.datetime.now().strftime("%Y-%m-%d")
+        user_ref = db.collection("usage_statistics").document(user_email)
+        doc = user_ref.get()
+        if doc.exists:
+            data = doc.to_dict() or {}
+            if data.get("last_pro_advisory_date") == today:
+                return  # already sent today
+
+        # Mark today *before* sending to prevent duplicates from parallel workers
+        user_ref.set({"last_pro_advisory_date": today}, merge=True)
+
+        from flask import current_app
+        sender = current_app.config.get('email_sender')
+        if not sender or not sender.is_enabled:
+            return
+
+        sender.send_email(
+            user_email,
+            "VoucherVision — Gemini Pro usage advisory",
+            textwrap.dedent(f"""\
+            <html><body style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <p>Hello,</p>
+
+            <p>You've used <strong>{count}</strong> of your <strong>{limit}</strong>
+            Gemini&nbsp;Pro model requests on VoucherVision today.</p>
+
+            <p>To help you keep working without interruption, here are two options:</p>
+
+            <h3>Option 1 — Switch to a faster, unlimited model</h3>
+            <p>Consider using <code>gemini-3.1-flash-lite-preview</code> instead.
+            It has <strong>no call limit</strong> on VoucherVision and offers equivalent
+            performance to the Gemini Pro models for transcription tasks.</p>
+
+            <h3>Option 2 — Supply your own Gemini API key</h3>
+            <p>If you prefer to keep using Pro models, you can provide your own
+            Google Gemini API key. This bypasses the server-side quota entirely.</p>
+            <p>Add the <code>gemini_api_key</code> parameter to your requests:</p>
+            <pre style="background: #f4f4f4; padding: 12px; border-radius: 4px;">
+# Python example
+requests.post(
+    "https://&lt;server&gt;/process",
+    data={{
+        "engines": "gemini-3.1-pro-preview",
+        "gemini_api_key": "YOUR_GEMINI_API_KEY",
+        ...
+    }},
+    files={{"file": open("image.jpg", "rb")}},
+)</pre>
+
+            <p>You can obtain an API key from
+            <a href="https://aistudio.google.com/apikey">Google AI Studio</a>.</p>
+
+            <p>For more detailed information and usage examples, see the
+            <a href="https://pypi.org/project/vouchervision-go-client/">VoucherVision GO
+            Python client documentation</a>.</p>
+
+            <p style="color: #666; font-size: 0.9em;">This is an automated
+            one-per-day advisory from the VoucherVision team.</p>
+            </body></html>"""),
+        )
+        logger.info(f"Sent pro-migration advisory to {user_email}")
+    except Exception as e:
+        logger.error(f"Error sending pro-migration advisory to {user_email}: {e}")
 
 
 def update_usage_statistics(
@@ -553,12 +713,10 @@ def update_usage_statistics(
                 "total_mL_water": firestore.Increment(h2o),
             }
 
-            # Track Gemini Pro usage
-            if is_pro_request(engines if isinstance(engines, list) else None, llm_model_name):
-                increments["gemini_pro_usage_count"] = firestore.Increment(1)
-                # Auto-initialise the limit field for existing users
-                if "gemini_pro_usage_limit" not in data:
-                    increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
+            # Auto-initialise the limit field for existing users (count is
+            # now managed by check_and_reserve_gemini_pro_quota)
+            if "gemini_pro_usage_limit" not in data:
+                increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
 
             user_ref.update({
                 **increments,
@@ -584,6 +742,8 @@ def update_usage_statistics(
             if llm_model_name:
                 llm_info[llm_model_name] = 1
 
+            # Use merge=True so we don't overwrite gemini_pro_usage_count
+            # that was already set by check_and_reserve_gemini_pro_quota
             user_ref.set({
                 "user_email": user_email,
                 "first_processed_at": firestore.SERVER_TIMESTAMP,
@@ -600,9 +760,8 @@ def update_usage_statistics(
                 "backfill_applied_v2": True,  # Nothing to backfill yet
                 "backfill_tokens": backfill_tokens,
                 "last_impact_snapshot": est_impact,
-                "gemini_pro_usage_count": 1 if is_pro_request(engines if isinstance(engines, list) else None, llm_model_name) else 0,
                 "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
-            })
+            }, merge=True)
 
         logger.info(f"Updated usage statistics for {user_email}")
 
@@ -2172,9 +2331,10 @@ def process_image():
 
     user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
 
-    # ── Gemini Pro rate-limit gate ───────────────────────────────────
-    if is_pro_request(engine_options, llm_model_name):
-        allowed, count, limit = check_gemini_pro_rate_limit(user_email)
+    # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+    pro_quota_reserved = False
+    if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
+        allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
         if not allowed:
             logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
             _send_rate_limit_hit_alert(user_email, count, limit)
@@ -2189,6 +2349,7 @@ def process_image():
             }), 503)
             resp.headers.add('Access-Control-Allow-Origin', '*')
             return resp
+        pro_quota_reserved = True
 
     # Process the image using the initialized processor
     results, status_code = app.config['processor'].process_image_request(
@@ -2203,19 +2364,26 @@ def process_image():
         skip_label_collage=skip_label_collage,
         user_api_key=user_gemini_key
     )
-    
+
     # If processing was successful, update usage statistics
     if status_code == 200:
         update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
+        # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
+        if pro_quota_reserved:
+            _, count, limit = check_gemini_pro_rate_limit(user_email)
+            _send_pro_migration_advisory(user_email, count, limit)
     else:
-        update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}", est_impact=None)
+        # Release the reserved pro quota on failure
+        if pro_quota_reserved:
+            release_gemini_pro_quota(user_email)
+        update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
 
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
     response.headers['Content-Type'] = 'application/json'
     response.headers.add('Access-Control-Allow-Origin', '*')
     return response
-    
+
 
 @app.route('/process-url', methods=['POST', 'OPTIONS'])
 @maintenance_mode_middleware
@@ -2264,9 +2432,10 @@ def process_image_by_url():
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
 
-    # ── Gemini Pro rate-limit gate ───────────────────────────────────
-    if is_pro_request(engine_options, llm_model_name):
-        allowed, count, limit = check_gemini_pro_rate_limit(user_email)
+    # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+    pro_quota_reserved = False
+    if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
+        allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
         if not allowed:
             logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
             _send_rate_limit_hit_alert(user_email, count, limit)
@@ -2281,6 +2450,7 @@ def process_image_by_url():
             }), 503)
             resp.headers.add('Access-Control-Allow-Origin', '*')
             return resp
+        pro_quota_reserved = True
 
     file_obj, filename = None, None
     last_exception = None
@@ -2387,9 +2557,15 @@ def process_image_by_url():
         # Update usage stats
         if status_code == 200:
             update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
+            # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
+            if pro_quota_reserved:
+                _, count, limit = check_gemini_pro_rate_limit(user_email)
+                _send_pro_migration_advisory(user_email, count, limit)
         else:
-            # Log that the request failed after a successful download
-            update_usage_statistics(user_email, engines=f"failure_code_{status_code}_{engine_options}", llm_model_name=f"failure_code_{status_code}_{llm_model_name}", est_impact=None)
+            # Release the reserved pro quota on failure
+            if pro_quota_reserved:
+                release_gemini_pro_quota(user_email)
+            update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
 
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
@@ -2399,6 +2575,9 @@ def process_image_by_url():
 
     except Exception as e:
         logger.exception(f"Error during main processing after successful download from URL: {e}")
+        # Release the reserved pro quota on unhandled exception
+        if pro_quota_reserved:
+            release_gemini_pro_quota(user_email)
         return jsonify({'error': str(e)}), 500
     
 
@@ -2618,6 +2797,28 @@ def get_usage_statistics():
     except Exception as e:
         logger.error(f"Error getting usage statistics: {str(e)}")
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
+
+
+@app.route('/admin/test-pro-advisory', methods=['POST'])
+@authenticated_route
+def test_pro_advisory_email():
+    """TEMPORARY: Send the pro-migration advisory email to the calling admin.
+    DELETE THIS ROUTE after verifying the email looks correct.
+    """
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'Not authenticated'}), 401
+    admin_email = user['email']
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Admin access required'}), 403
+
+    # Clear the daily dedup so the email actually sends
+    user_ref = db.collection("usage_statistics").document(admin_email)
+    user_ref.set({"last_pro_advisory_date": ""}, merge=True)
+
+    _send_pro_migration_advisory(admin_email, 42, 100)
+    return jsonify({'status': 'sent', 'to': admin_email})
 
 
 @app.route('/admin/rate-limits/<email>', methods=['POST'])
