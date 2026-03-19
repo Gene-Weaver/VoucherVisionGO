@@ -26,23 +26,11 @@ http://localhost:8000/index.html
     <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
-    <!-- Load external scripts in the correct order.
-         Set VVGO_CACHE_VERSION in one place to bust browser caches. -->
-    <script>window.VVGO_CACHE_VERSION = '9';</script>
-    <script>
-    (function() {
-      var scripts = ['vouchervisiongo','batch_processing','api_key_validator','prompt_templates','changelog_viewer'];
-      var head = document.head;
-      scripts.forEach(function(name) {
-        var s = document.createElement('script');
-        s.src = 'js/' + name + '.js?v=' + window.VVGO_CACHE_VERSION;
-        // async=false on dynamic scripts preserves execution order (like defer)
-        // while still being non-blocking for the HTML parser
-        s.async = false;
-        head.appendChild(s);
-      });
-    })();
-    </script>
+    <script src="js/vouchervisiongo.js?v=10"></script>
+    <script src="js/batch_processing.js?v=10"></script>
+    <script src="js/api_key_validator.js?v=10"></script>
+    <script src="js/prompt_templates.js?v=10"></script>
+    <script src="js/changelog_viewer.js?v=10"></script>
 
     <link rel="stylesheet" href="css/vouchervisiongo.css">
     <script>
