@@ -9,6 +9,10 @@ import io
 import time
 import base64
 import uuid
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", message="urllib3.*doesn't match a supported version")
+warnings.filterwarnings("ignore", message="You are using a Python version")
 import requests
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
@@ -67,10 +71,9 @@ def setup_cloud_logging():
     """Setup structured logging for Google Cloud Run"""
     import json
     import sys
-    
+
     class CloudFormatter(logging.Formatter):
         def format(self, record):
-            # Create structured log entry for Google Cloud Logging
             log_entry = {
                 'timestamp': self.formatTime(record, self.datefmt),
                 'severity': record.levelname,
@@ -80,31 +83,23 @@ def setup_cloud_logging():
                 'function': record.funcName,
                 'line': record.lineno
             }
-            
-            # Add extra fields if present
             if hasattr(record, 'user_id'):
                 log_entry['user_id'] = record.user_id
             if hasattr(record, 'request_id'):
                 log_entry['request_id'] = record.request_id
-                
             return json.dumps(log_entry)
-    
+
     # Configure root logger
     root_logger = logging.getLogger()
-    
-    # Only set up cloud logging if we're in production
+
     if os.environ.get('ENV') == 'production':
-        # Remove existing handlers
         for handler in root_logger.handlers[:]:
             root_logger.removeHandler(handler)
-        
-        # Add cloud-formatted handler
         handler = logging.StreamHandler(sys.stdout)
         handler.setFormatter(CloudFormatter())
         root_logger.addHandler(handler)
         root_logger.setLevel(logging.INFO)
     else:
-        # Development logging - ensure we have a handler
         if not root_logger.handlers:
             handler = logging.StreamHandler(sys.stdout)
             formatter = logging.Formatter(
@@ -113,24 +108,25 @@ def setup_cloud_logging():
             handler.setFormatter(formatter)
             root_logger.addHandler(handler)
             root_logger.setLevel(logging.INFO)
+
+    # Silence noisy third-party loggers
+    for noisy_logger in [
+        'urllib3', 'requests', 'chardet', 'charset_normalizer',
+        'google.api_core', 'google.auth', 'google.cloud',
+        'numexpr', 'numexpr.utils',
+        'matplotlib', 'matplotlib.font_manager',
+        'streamlit', 'streamlit.runtime',
+        'PIL', 'pillow_heif',
+        'grpc', 'grpc._cython',
+        'werkzeug',
+        'firebase_admin',
+    ]:
+        logging.getLogger(noisy_logger).setLevel(logging.WARNING)
 def get_logger(name):
     """Get a logger with appropriate configuration for the environment"""
     logger = logging.getLogger(name)
-    
-    # Ensure logger has a proper level set
-    if logger.level == 0:  # NOTSET
+    if logger.level == 0:
         logger.setLevel(logging.INFO)
-    
-    # Add request context if available
-    try:
-        from flask import request, g
-        if request:
-            # Add request ID for tracing
-            if not hasattr(g, 'request_id'):
-                g.request_id = str(uuid.uuid4())[:8]
-    except:
-        pass
-    
     return logger
 setup_cloud_logging()
 logger = get_logger(__name__)
@@ -220,17 +216,13 @@ try:
         firebase_admin.initialize_app(credential=creds)
         logger.info("Firebase Admin SDK initialized with service account credentials")
     else:
-        # Fallback to default initialization
         project_id = os.environ.get("FIREBASE_PROJECT_ID", "vouchervision-387816")
         firebase_admin.initialize_app(options={"projectId": project_id})
-        logger.info(f"Firebase Admin SDK initialized with default options for project: {project_id}")
-except ValueError as e:
-    # Already initialize
-    logger.info(f"Firebase Admin SDK already initialized: {e}")
+        logger.info(f"Firebase Admin SDK initialized for project: {project_id}")
+except ValueError:
+    pass  # Already initialized
 except Exception as e:
     logger.error(f"Failed to initialize Firebase Admin SDK: {e}")
-    # Log but continue - better to try to operate than to crash completely
-    logger.error(f"Continuing despite initialization error")
 
 # Initialize Firestore client
 db = firestore.client()
@@ -1098,7 +1090,7 @@ def resize_image_to_max_pixels(image, max_pixels=5200000):
     # Resize the image using high-quality resampling
     resized_image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
     
-    logger.info(f"Image resized from {width}x{height} ({current_pixels:,} pixels) to {new_width}x{new_height} ({new_width * new_height:,} pixels)")
+    logger.debug(f"Image resized: {width}x{height} -> {new_width}x{new_height}")
     
     return resized_image
 
@@ -1599,7 +1591,7 @@ def get_user_email_from_request(request):
             if api_key_doc.exists:
                 key_data = api_key_doc.to_dict()
                 user_email = key_data.get('owner', 'unknown')
-                logger.info(f"Request authenticated via API key from user: {user_email}")
+                logger.debug(f"API key auth: {user_email}")
                 return user_email
         
         # Check for Firebase token
@@ -1624,7 +1616,7 @@ def get_user_email_from_request(request):
                 # Get info about the token without full verification
                 decoded_claims = auth.verify_id_token(id_token, check_revoked=False)
                 user_email = decoded_claims.get('email', 'unknown')
-                logger.info(f"Request from Firebase user: {user_email}")
+                logger.debug(f"Firebase auth: {user_email}")
             except Exception as e:
                 logger.error(f"Error getting email from token: {e}")
         
@@ -1655,13 +1647,13 @@ def authenticated_route(f):
         
         if api_key and validate_api_key(api_key):
             # API key is valid
-            logger.info(f"Request authenticated via API key: {api_key[:8]}...")
+            logger.debug(f"Authenticated via API key: {api_key[:8]}...")
             return f(*args, **kwargs)
         
         # Fall back to Firebase token authentication
         user = authenticate_request(request)
         if user:
-            logger.info(f"Request authenticated via Firebase: {user.get('email', 'unknown')}") 
+            logger.debug(f"Authenticated via Firebase: {user.get('email', 'unknown')}")
             return f(*args, **kwargs)
         
         # Neither authentication method succeeded
@@ -1687,15 +1679,15 @@ class RequestThrottler:
         if acquired:
             with self.lock:
                 self.active_count += 1
-                logger.info(f"Request acquired. Active requests: {self.active_count}/{self.max_concurrent}")
+                logger.debug(f"Request acquired. Active: {self.active_count}/{self.max_concurrent}")
         return acquired
-        
+
     def release(self):
         """Release a processing slot"""
         self.semaphore.release()
         with self.lock:
             self.active_count -= 1
-            logger.info(f"Request completed. Active requests: {self.active_count}/{self.max_concurrent}")
+            logger.debug(f"Request released. Active: {self.active_count}/{self.max_concurrent}")
     
     def get_active_count(self):
         """Get the current count of active requests"""
@@ -1706,50 +1698,20 @@ class VoucherVisionProcessor:
     """
     Class to handle VoucherVision processing with initialization done once.
     """
-    def __init__(self, app_logger=None, max_concurrent=32): 
-        print("VoucherVisionProcessor.__init__ called")
-        
-        # Setup logging with console fallback
+    def __init__(self, app_logger=None, max_concurrent=32):
+        # Setup logging
         if app_logger and hasattr(app_logger, 'info'):
             self.logger = app_logger
             self.use_console_fallback = False
         else:
             self.logger = logging.getLogger(__name__)
-            # Check if logger has handlers and proper level
-            if not self.logger.handlers or self.logger.level == 0:
-                self.use_console_fallback = True
-                print("Logger not properly configured, using console fallback")
-            else:
-                self.use_console_fallback = False
-        
-        # Test logging immediately
-        self._log("VoucherVisionProcessor.__init__ - logging test", "info")
-        self._log("VoucherVisionProcessor.__init__ - error level test", "error")
-        
-        print(f"Logger type: {type(self.logger)}")
-        print(f"Logger level: {self.logger.level}")
-        print(f"Logger handlers: {self.logger.handlers}")
+            self.use_console_fallback = not self.logger.handlers and self.logger.level == 0
 
-        model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
-        self._log(f"Looking for model at: {model_path}", "info")
-        self._log(f"TextCollage directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage'))}", "info")
-        self._log(f"Models directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models'))}", "info")
-        self._log(f"OpenVINO directory exists: {os.path.exists(os.path.join(project_root, 'TextCollage', 'models', 'openvino'))}", "info")
-        
-        tc_dir = os.path.join(project_root, "TextCollage")
-        if os.path.exists(tc_dir):
-            try:
-                tc_contents = os.listdir(tc_dir)
-                self._log(f"Contents of TextCollage: {tc_contents}", "info")
-            except Exception as e:
-                self._log(f"Error listing TextCollage contents: {e}", "error")
+        self._log("Initializing VoucherVisionProcessor...", "info")
 
         # Configuration
         self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'heic', 'heif'}
         self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
-
-        self._log("Starting detailed CollageEngine debugging...", "info")
-        print("About to start CollageEngine debugging")
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
@@ -1763,145 +1725,16 @@ class VoucherVisionProcessor:
             self._log(f"Failed to get API key: {e}", "error")
             raise
         
-        # Initialize OCR engines 
+        # OCR engines are lazily initialized on first use (see ocr_engines_lock below)
         self.ocr_engines = {}
         self.ocr_engines_lock = threading.Lock()
-        
-        try:
-            for model_name in ["gemini-1.5-pro", 
-                               "gemini-2.0-flash", 
-                               "gemini-2.5-flash", 
-                               "gemini-2.5-pro", 
-                               "gemini-3-pro-preview",                               
-                               "gemini-3.1-pro-preview",
-                               "gemini-3-flash-preview",
-                               "gemini-3.1-flash-lite-preview",
-                               ]:
-                self.ocr_engines[model_name] = OCRGeminiProVision(
-                    self.api_key, 
-                    model_name=model_name, 
-                    max_output_tokens=32768, 
-                    temperature=1.0, 
-                    top_p=0.95, 
-                    seed=123456, 
-                    do_resize_img=False
-                )
-            self._log(f"Initialized {len(self.ocr_engines)} OCR engines", "info")
-        except Exception as e:
-            self._log(f"Failed to initialize OCR engines: {e}", "error")
-            raise
 
-        # Add comprehensive debugging BEFORE CollageEngine initialization
-        self._log("=" * 60, "info")
-        self._log("DEBUGGING COLLAGE ENGINE INITIALIZATION", "info")
-        self._log("=" * 60, "info")
-        
-        # Debug project root
-        self._log(f"Project root: {project_root}", "info")
-        self._log(f"Current working directory: {os.getcwd()}", "info")
-        
-        try:
-            if os.path.exists(project_root):
-                project_contents = os.listdir(project_root)
-                self._log(f"Contents of project root: {project_contents}", "info")
-            else:
-                self._log("Project root NOT FOUND", "error")
-        except Exception as e:
-            self._log(f"Error listing project root: {e}", "error")
-        
-        # Debug TextCollage path
-        textcollage_path = os.path.join(project_root, "TextCollage")
-        self._log(f"TextCollage path: {textcollage_path}", "info")
-        self._log(f"TextCollage exists: {os.path.exists(textcollage_path)}", "info")
-        
-        if os.path.exists(textcollage_path):
-            try:
-                tc_list = os.listdir(textcollage_path)
-                self._log(f"Contents of TextCollage: {tc_list}", "info")
-            except Exception as e:
-                self._log(f"Error listing TextCollage: {e}", "error")
-            
-            # Check models directory
-            models_path = os.path.join(textcollage_path, "models")
-            self._log(f"Models path: {models_path}", "info")
-            self._log(f"Models exists: {os.path.exists(models_path)}", "info")
-            
-            if os.path.exists(models_path):
-                try:
-                    models_list = os.listdir(models_path)
-                    self._log(f"Contents of models: {models_list}", "info")
-                except Exception as e:
-                    self._log(f"Error listing models: {e}", "error")
-                
-                # Check openvino directory
-                openvino_path = os.path.join(models_path, "openvino")
-                self._log(f"OpenVINO path: {openvino_path}", "info")
-                self._log(f"OpenVINO exists: {os.path.exists(openvino_path)}", "info")
-                
-                if os.path.exists(openvino_path):
-                    try:
-                        openvino_list = os.listdir(openvino_path)
-                        self._log(f"Contents of openvino: {openvino_list}", "info")
-                    except Exception as e:
-                        self._log(f"Error listing openvino: {e}", "error")
-                    
-                    # Check specific model files
-                    xml_path = os.path.join(openvino_path, "best.xml")
-                    bin_path = os.path.join(openvino_path, "best.bin")
-                    self._log(f"best.xml exists: {os.path.exists(xml_path)}", "info")
-                    self._log(f"best.bin exists: {os.path.exists(bin_path)}", "info")
-                    
-                    if os.path.exists(xml_path):
-                        try:
-                            xml_size = os.path.getsize(xml_path)
-                            self._log(f"best.xml size: {xml_size} bytes", "info")
-                        except Exception as e:
-                            self._log(f"Error getting xml size: {e}", "error")
-                    
-                    if os.path.exists(bin_path):
-                        try:
-                            bin_size = os.path.getsize(bin_path)
-                            self._log(f"best.bin size: {bin_size} bytes", "info")
-                        except Exception as e:
-                            self._log(f"Error getting bin size: {e}", "error")
-        
-        self._log("=" * 60, "info")
-
+        # Initialize CollageEngine
         self.collage_engine = None
         try:
-            self._log("Attempting to initialize CollageEngine...", "info")
-            # The model path is relative to the app's root directory
             model_path = os.path.join(project_root, "TextCollage", "models", "openvino", "best.xml")
-            
-            self._log(f"Checking for CollageEngine model at absolute path: {model_path}", "info")
-            parent_dir = os.path.dirname(model_path)
-            if os.path.exists(parent_dir):
-                try:
-                    parent_contents = os.listdir(parent_dir)
-                    self._log(f"Contents of {parent_dir}: {parent_contents}", "info")
-                except Exception as e:
-                    self._log(f"Error listing parent dir: {e}", "error")
-            else:
-                self._log(f"Model parent directory does not exist: {parent_dir}", "warning")
-                # Also check one level up
-                grandparent_dir = os.path.dirname(parent_dir)
-                if os.path.exists(grandparent_dir):
-                    try:
-                        grandparent_contents = os.listdir(grandparent_dir)
-                        self._log(f"Contents of {grandparent_dir}: {grandparent_contents}", "warning")
-                    except Exception as e:
-                        self._log(f"Error listing grandparent dir: {e}", "error")
-
             if not os.path.exists(model_path):
-                 raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
-
-            # Try to import CollageEngine
-            try:
-                from TextCollage.CollageEngine import CollageEngine
-                self._log("CollageEngine import successful", "info")
-            except ImportError as ie:
-                self._log(f"CollageEngine import failed: {ie}", "error")
-                raise
+                raise FileNotFoundError(f"CollageEngine model not found at {model_path}")
 
             self.collage_engine = CollageEngine(
                 model_xml_path=model_path,
@@ -1911,106 +1744,52 @@ class VoucherVisionProcessor:
                 hide_long_objects=False, # Sensible default for clean OCR input
                 draw_overlay=False
             )
-            self._log("CollageEngine initialized successfully.", "info")
+            self._log("CollageEngine initialized", "info")
         except Exception as e:
-            self._log(f"CRITICAL: Failed to initialize CollageEngine. Error: {e}", "error")
-            import traceback
-            self._log(f"Traceback: {traceback.format_exc()}", "error")
-        
-        # Initialize VoucherVision components
+            self._log(f"Failed to initialize CollageEngine: {e}", "error")
+
+        # Load VoucherVision config
         self.config_file = os.path.join(os.path.dirname(__file__), 'VoucherVision.yaml')
-        
-        # Validate config file exists
         if not os.path.exists(self.config_file):
             raise FileNotFoundError(f"Configuration file not found at {self.config_file}")
 
-        # Load configuration
-        try:
-            self.cfg = load_custom_cfg(self.config_file)
-            self._log("VoucherVision config loaded successfully", "info")
-        except Exception as e:
-            self._log(f"Failed to load VoucherVision config: {e}", "error")
-            raise
-        
+        self.cfg = load_custom_cfg(self.config_file)
         self.dir_home = os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main"))
-        self._log(f"VoucherVision home directory: {self.dir_home}", "info")
-        self._log(f"VoucherVision home exists: {os.path.exists(self.dir_home)}", "info")
 
-        try:
-            self.Voucher_Vision = VoucherVision(
-                self.cfg, self.logger, self.dir_home, None, None, None, 
-                is_hf=False, skip_API_keys=True
-            )
-            self._log("VoucherVision instance created successfully", "info")
-        except Exception as e:
-            self._log(f"Failed to create VoucherVision instance: {e}", "error")
-            raise
+        # Initialize VoucherVision
+        self.Voucher_Vision = VoucherVision(
+            self.cfg, self.logger, self.dir_home, None, None, None,
+            is_hf=False, skip_API_keys=True
+        )
+        self.Voucher_Vision.initialize_token_counters()
 
-        try:
-            self.Voucher_Vision.initialize_token_counters()
-            self._log("Token counters initialized", "info")
-        except Exception as e:
-            self._log(f"Failed to initialize token counters: {e}", "error")
-            raise
-        
-        # Default prompt file
+        # Set default prompt
         self.default_prompt = "SLTPvM_default.yaml"
         self.custom_prompts_dir = os.path.join(self.dir_home, 'custom_prompts')
-        self._log(f"Custom prompts directory: {self.custom_prompts_dir}", "info")
-        self._log(f"Custom prompts dir exists: {os.path.exists(self.custom_prompts_dir)}", "info")
-
         self.Voucher_Vision.path_custom_prompts = os.path.join(
-            self.dir_home, 
-            'custom_prompts', 
-            self.default_prompt
+            self.dir_home, 'custom_prompts', self.default_prompt
         )
-        self._log(f"Default prompt path: {self.Voucher_Vision.path_custom_prompts}", "info")
-        self._log(f"Default prompt exists: {os.path.exists(self.Voucher_Vision.path_custom_prompts)}", "info")
 
-        # Initialize LLM model handler
-        try:
-            self.Voucher_Vision.setup_JSON_dict_structure()
-            self._log("JSON dict structure setup completed", "info")
-        except Exception as e:
-            self._log(f"Failed to setup JSON dict structure: {e}", "error")
-            raise
-        
+        # Initialize LLM models
+        self.Voucher_Vision.setup_JSON_dict_structure()
         self.llm_models = {}
-        try:
-            for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-pro-preview"]:
-                self.llm_models[model_name] = GoogleGeminiHandler(
-                    self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure, 
-                    config_vals_for_permutation=None, exit_early_for_JSON=True
-                )
-            self._log(f"Initialized {len(self.llm_models)} LLM models", "info")
-        except Exception as e:
-            self._log(f"Failed to initialize LLM models: {e}", "error")
-            raise
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-pro-preview"]:
+            self.llm_models[model_name] = GoogleGeminiHandler(
+                self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure,
+                config_vals_for_permutation=None, exit_early_for_JSON=True
+            )
+        self._log(f"Initialized {len(self.ocr_engines)} OCR engines, {len(self.llm_models)} LLM models", "info")
 
-        # Thread-local storage for handling per-request VoucherVision instances
         self.thread_local = threading.local()
-        
-        self._log("VoucherVisionProcessor initialization completed successfully", "info")
+        self._log("VoucherVisionProcessor ready", "info")
     
     def _log(self, message, level="info"):
-        """Log with console fallback if logger is not working"""
-        if self.use_console_fallback:
-            print(f"[{level.upper()}] {message}")
-        else:
-            try:
-                if level == "info":
-                    self.logger.info(message)
-                elif level == "warning":
-                    self.logger.warning(message)
-                elif level == "error":
-                    self.logger.error(message)
-                elif level == "debug":
-                    self.logger.debug(message)
-                else:
-                    self.logger.info(message)
-            except:
-                # If logger fails, fall back to console
-                print(f"[{level.upper()}] {message}")
+        """Log a message at the given level"""
+        log_fn = getattr(self.logger, level, self.logger.info)
+        try:
+            log_fn(message)
+        except Exception:
+            pass
     
     def _add_tokens(self, tokens_in, tokens_out, ocr_tokens_total) -> float:
         """
@@ -2560,18 +2339,12 @@ except Exception as e:
 try:
     processor = VoucherVisionProcessor(app.logger)
     app.config['processor'] = processor
-    app.logger.info("VoucherVision processor initialized successfully")
-
     # Initialize email sender
     email_sender = SimpleEmailSender()
     app.config['email_sender'] = email_sender
-    if email_sender.is_enabled:
-        app.logger.info("Email sender initialized successfully")
-        app.logger.info(f"Email configuration: SMTP_SERVER={os.environ.get('SMTP_SERVER')}, " 
-            f"SMTP_USERNAME={'Set' if os.environ.get('SMTP_USERNAME') else 'Not set'}, "
-            f"SMTP_PASSWORD={'Set' if os.environ.get('SMTP_PASSWORD') else 'Not set'}")
-    else:
-        app.logger.warning("Email sender initialized but email sending is disabled due to missing configuration")
+    if not email_sender.is_enabled:
+        app.logger.warning("Email sending disabled (missing SMTP config)")
+    app.logger.info("Application initialized successfully")
 except Exception as e:
     app.logger.error(f"Failed to initialize application components: {str(e)}")
     raise
@@ -2602,14 +2375,16 @@ class GCSElevationLookup:
         # Already a valid file path
         if os.path.isfile(cred):
             return
-        # Looks like inline JSON — write to a temp file
+        # Inline JSON — write to a temp file for GDAL only
+        # (don't overwrite the env var; VoucherVision reads it as raw JSON)
         if cred.lstrip().startswith("{"):
             import tempfile
+            from osgeo import gdal
             fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
             with os.fdopen(fd, "w") as f:
                 f.write(cred)
-            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
-            app.logger.info(f"[elevation] Wrote inline credentials to {path} for GDAL")
+            gdal.SetConfigOption("GOOGLE_APPLICATION_CREDENTIALS", path)
+            app.logger.info("[elevation] Wrote inline credentials to temp file for GDAL")
 
     def _tile_name(self, lat: float, lon: float) -> str:
         lat_deg = int(math.floor(lat))

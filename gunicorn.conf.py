@@ -22,7 +22,7 @@ max_requests_jitter = 20
 loglevel = os.environ.get('LOG_LEVEL', 'info').lower()
 accesslog = '-'  # Log to stdout
 errorlog = '-'   # Log to stderr
-access_log_format = '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s'
+access_log_format = '%(h)s "%(r)s" %(s)s %(b)s %(D)sμs'
 
 # Preload the application
 preload_app = False
