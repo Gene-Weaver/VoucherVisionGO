@@ -2368,20 +2368,33 @@ class GCSElevationLookup:
     @staticmethod
     def _prepare_gdal_credentials():
         """If GOOGLE_APPLICATION_CREDENTIALS holds raw JSON instead of a file
-        path, write it to a temp file and return the path so we can pass it
-        to rasterio.Env (without overwriting the env var)."""
+        path, write it to a temp file and point the env var at the file so
+        GDAL/rasterio never sees the raw JSON string (which it would log).
+
+        CRITICAL: raw credentials must never appear in logs or tracebacks.
+        """
         cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
         if not cred:
             return None
         if os.path.isfile(cred):
             return cred
         if cred.lstrip().startswith("{"):
-            import tempfile
-            fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
-            with os.fdopen(fd, "w") as f:
-                f.write(cred)
-            app.logger.info("[elevation] Wrote inline credentials to temp file for GDAL")
-            return path
+            # Immediately scrub the env var so nothing downstream can leak it
+            os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
+            try:
+                fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
+                with os.fdopen(fd, "w") as f:
+                    f.write(cred)
+                os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
+                app.logger.info("[elevation] Wrote GCS credentials to temp file for GDAL")
+                return path
+            except Exception:
+                # Never log the exception detail — it could contain the key
+                app.logger.error("[elevation] Failed to write GCS credential file")
+                return None
+            finally:
+                # Clear the raw JSON from local scope
+                cred = None  # noqa: F841
         return None
 
     def _tile_name(self, lat: float, lon: float) -> str:
@@ -2418,7 +2431,7 @@ class GCSElevationLookup:
             return ds
 
     def query(self, lat: float, lon: float):
-        """Return elevation in metres as float, or None if tile missing or no-data."""
+        """Return elevation in metres as int, or None if tile missing or no-data."""
         try:
             tile = self._tile_name(lat, lon)
             ds = self._open(tile)
@@ -2427,7 +2440,7 @@ class GCSElevationLookup:
                 return None
             if ds.nodata is not None and val == float(ds.nodata):
                 return None
-            return val
+            return round(val)
         except Exception as e:
             app.logger.warning(f"[elevation] query({lat},{lon}) failed: {e}")
             return None
