@@ -1,3 +1,26 @@
+// Clipboard helper with fallback for non-HTTPS or unsupported browsers
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  textarea.style.top = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  return new Promise((resolve, reject) => {
+    if (document.execCommand('copy')) {
+      resolve();
+    } else {
+      reject(new Error('execCommand copy failed'));
+    }
+    document.body.removeChild(textarea);
+  });
+}
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -110,7 +133,7 @@ function initializeCreateKeyListeners() {
   if (copyKeyBtn) {
     copyKeyBtn.addEventListener('click', () => {
       const keyText = document.getElementById('api-key-display').textContent;
-      navigator.clipboard.writeText(keyText)
+      copyToClipboard(keyText)
         .then(() => {
           document.getElementById('copy-success').style.display = 'block';
           setTimeout(() => {

@@ -606,6 +606,290 @@ requests.post(
         logger.error(f"Error sending pro-migration advisory to {user_email}: {e}")
 
 
+# ── API key expiration notification system ──────────────────────────────
+# Runs at most once per day, triggered lazily on the first request.
+# The daily guard is stored in Firestore (system_config/expiry_check) so it
+# survives instance restarts and prevents duplicate scans across Cloud Run
+# instances.  A local in-memory cache avoids hitting Firestore on every request.
+
+_EXPIRY_WARNING_DAYS = 30  # warn this many days before expiration
+_EXPIRY_CHECK_COLLECTION = "system_config"
+_EXPIRY_CHECK_DOC = "expiry_check"
+_ADMIN_EMAIL = os.environ.get('VOUCHERVISION_API_EMAIL_ADDRESS')
+_expiry_check_lock = threading.Lock()
+_local_expiry_check_date = None  # in-memory cache to skip Firestore reads
+
+
+def _check_api_key_expirations():
+    """Gate for the daily expiry scan.
+
+    Uses a two-layer guard:
+      1. In-memory cache — avoids Firestore read on every request within
+         the same instance.
+      2. Firestore document (system_config/expiry_check) — prevents
+         duplicate scans across multiple Cloud Run instances and survives
+         restarts.
+    """
+    global _local_expiry_check_date
+    today_str = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+
+    # Layer 1: fast in-memory check
+    if _local_expiry_check_date == today_str:
+        return
+
+    # Acquire lock so only one thread in this instance proceeds
+    if not _expiry_check_lock.acquire(blocking=False):
+        return
+    try:
+        # Re-check after lock
+        if _local_expiry_check_date == today_str:
+            return
+
+        # Layer 2: Firestore check (cross-instance)
+        check_ref = db.collection(_EXPIRY_CHECK_COLLECTION).document(_EXPIRY_CHECK_DOC)
+        check_doc = check_ref.get()
+        if check_doc.exists and check_doc.to_dict().get("last_scan_date") == today_str:
+            # Another instance already ran the scan today
+            _local_expiry_check_date = today_str
+            return
+
+        # Claim today's scan in Firestore before starting
+        check_ref.set({"last_scan_date": today_str, "started_at": firestore.SERVER_TIMESTAMP}, merge=True)
+        _local_expiry_check_date = today_str
+    except Exception as e:
+        logger.error(f"Error checking expiry scan guard in Firestore: {e}")
+        return
+    finally:
+        _expiry_check_lock.release()
+
+    # Run the actual scan in a background thread to avoid blocking the request
+    threading.Thread(target=_run_expiry_scan, args=(today_str,), daemon=True).start()
+
+
+def _run_expiry_scan(today_str: str):
+    """Background thread: iterate over active API keys and send notifications."""
+    try:
+        now = datetime.datetime.now(datetime.timezone.utc)
+
+        with app.app_context():
+            sender = app.config.get('email_sender')
+            if not sender or not sender.is_enabled:
+                logger.info("Email sender not available; skipping expiry scan.")
+                return
+
+            # Counters for the admin summary email
+            keys_checked = 0
+            warnings_sent = 0
+            expired_notices_sent = 0
+            already_expired_count = 0
+
+            # Single pass over all active keys
+            all_keys = db.collection('api_keys').where('active', '==', True).stream()
+
+            for doc in all_keys:
+                try:
+                    data = doc.to_dict()
+                    expires_at = data.get('expires_at')
+                    if not expires_at:
+                        continue
+
+                    keys_checked += 1
+
+                    # Normalize to datetime with UTC
+                    if hasattr(expires_at, '_seconds'):
+                        expires_at = datetime.datetime.fromtimestamp(
+                            expires_at._seconds, datetime.timezone.utc
+                        )
+                    elif isinstance(expires_at, datetime.datetime) and expires_at.tzinfo is None:
+                        expires_at = expires_at.replace(tzinfo=datetime.timezone.utc)
+
+                    owner = data.get('owner')
+                    key_name = data.get('name', 'Unnamed Key')
+                    if not owner:
+                        continue
+
+                    days_remaining = (expires_at - now).days
+
+                    if days_remaining < 0:
+                        # Key is expired
+                        already_expired_count += 1
+                        if not data.get('expiry_expired_sent'):
+                            expires_date_str = expires_at.strftime("%B %d, %Y")
+                            _send_expired_email(sender, owner, key_name, doc.id, expires_date_str)
+                            db.collection('api_keys').document(doc.id).set(
+                                {'expiry_expired_sent': today_str}, merge=True
+                            )
+                            expired_notices_sent += 1
+                    elif days_remaining <= _EXPIRY_WARNING_DAYS:
+                        # Key expires within warning window
+                        if data.get('expiry_warning_sent') != today_str:
+                            expires_date_str = expires_at.strftime("%B %d, %Y")
+                            _send_expiry_warning_email(
+                                sender, owner, key_name, doc.id, expires_date_str, days_remaining
+                            )
+                            db.collection('api_keys').document(doc.id).set(
+                                {'expiry_warning_sent': today_str}, merge=True
+                            )
+                            warnings_sent += 1
+                except Exception as e:
+                    logger.error(f"Error checking expiry for key {doc.id[:8]}...: {e}")
+
+            # Send admin summary email
+            _send_expiry_scan_summary(
+                sender, today_str, keys_checked, warnings_sent,
+                expired_notices_sent, already_expired_count
+            )
+
+            # Record completion in Firestore
+            db.collection(_EXPIRY_CHECK_COLLECTION).document(_EXPIRY_CHECK_DOC).set({
+                "last_scan_date": today_str,
+                "completed_at": firestore.SERVER_TIMESTAMP,
+                "keys_checked": keys_checked,
+                "warnings_sent": warnings_sent,
+                "expired_notices_sent": expired_notices_sent,
+                "already_expired_count": already_expired_count,
+            }, merge=True)
+
+        logger.info(
+            f"API key expiration scan completed for {today_str}: "
+            f"{keys_checked} checked, {warnings_sent} warnings sent, "
+            f"{expired_notices_sent} expired notices sent, "
+            f"{already_expired_count} total expired keys"
+        )
+    except Exception as e:
+        logger.error(f"Error during API key expiration scan: {e}")
+
+
+def _send_expiry_scan_summary(sender, today_str, keys_checked, warnings_sent,
+                              expired_notices_sent, already_expired_count):
+    """Send a daily summary of the expiration scan to the admin account."""
+    try:
+        subject = f"VoucherVision — API key expiry scan summary ({today_str})"
+        body = textwrap.dedent(f"""\
+        <html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #4285f4;">Daily API Key Expiration Scan</h2>
+            <p>Date: <strong>{today_str}</strong></p>
+
+            <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+                <tr style="background: #f4f4f4;">
+                    <td style="padding: 10px; border: 1px solid #ddd;">API keys checked</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;"><strong>{keys_checked}</strong></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">30-day warning emails sent today</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;"><strong>{warnings_sent}</strong></td>
+                </tr>
+                <tr style="background: #f4f4f4;">
+                    <td style="padding: 10px; border: 1px solid #ddd;">Expired-key notices sent today</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;"><strong>{expired_notices_sent}</strong></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Total keys currently expired</td>
+                    <td style="padding: 10px; border: 1px solid #ddd; text-align: right;"><strong>{already_expired_count}</strong></td>
+                </tr>
+            </table>
+
+            <p style="color: #666; font-size: 0.9em;">Automated daily scan from VoucherVision.
+            Scan results are also stored in Firestore at
+            <code>system_config/expiry_check</code>.</p>
+        </div>
+        </body></html>""")
+
+        if not _ADMIN_EMAIL:
+            logger.warning("VOUCHERVISION_API_EMAIL_ADDRESS not set; skipping expiry scan summary email")
+            return
+        sender.send_email(_ADMIN_EMAIL, subject, body)
+        logger.info(f"Sent expiry scan summary to admin for {today_str}")
+    except Exception as e:
+        logger.error(f"Error sending expiry scan summary email: {e}")
+
+
+def _send_expiry_warning_email(sender, user_email, key_name, key_id, expires_date, days_remaining):
+    """Send the 'your key expires soon' email."""
+    subject = f"VoucherVision — Your API key expires in {days_remaining} day{'s' if days_remaining != 1 else ''}"
+    body = textwrap.dedent(f"""\
+    <html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #e67e22;">API Key Expiring Soon</h2>
+        <p>Dear {user_email},</p>
+
+        <p>Your VoucherVision API key <strong>{key_name}</strong>
+        (<code>{key_id[:8]}...</code>) will expire on
+        <strong>{expires_date}</strong> ({days_remaining} day{'s' if days_remaining != 1 else ''} from now).</p>
+
+        <p>Once expired, any scripts or applications using this key will receive
+        authentication errors.</p>
+
+        <h3>How to create a new API key</h3>
+        <ol>
+            <li>Go to the <a href="https://vouchervision-go-738307415303.us-central1.run.app/login">VoucherVision login page</a> and sign in with your email and password.</li>
+            <li>On the account overview page, click <strong>Manage API Keys</strong>.</li>
+            <li>Click <strong>Create New Key</strong>, give it a name, and choose an expiry duration.</li>
+            <li>Copy the new key and update it in your scripts (replace the <code>X-API-Key</code> header value).</li>
+        </ol>
+
+        <div style="margin: 30px 0; text-align: center;">
+            <a href="https://vouchervision-go-738307415303.us-central1.run.app/login"
+               style="background-color: #4285f4; color: white; padding: 12px 20px;
+                      text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Log In &amp; Renew Your Key
+            </a>
+        </div>
+
+        <p style="color: #666; font-size: 0.9em;">This is an automated notification from
+        the VoucherVision team. You will receive one reminder per day until the key is
+        renewed or expires.</p>
+    </div>
+    </body></html>""")
+
+    if sender.send_email(user_email, subject, body):
+        logger.info(f"Sent expiry warning to {user_email} for key {key_id[:8]}... ({days_remaining} days left)")
+    else:
+        logger.error(f"Failed to send expiry warning to {user_email} for key {key_id[:8]}...")
+
+
+def _send_expired_email(sender, user_email, key_name, key_id, expires_date):
+    """Send the 'your key has expired' email."""
+    subject = "VoucherVision — Your API key has expired"
+    body = textwrap.dedent(f"""\
+    <html><body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #e74c3c;">API Key Expired</h2>
+        <p>Dear {user_email},</p>
+
+        <p>Your VoucherVision API key <strong>{key_name}</strong>
+        (<code>{key_id[:8]}...</code>) expired on <strong>{expires_date}</strong>
+        and can no longer be used for API requests.</p>
+
+        <p>To continue using the VoucherVision API, please create a new key:</p>
+
+        <ol>
+            <li>Go to the <a href="https://vouchervision-go-738307415303.us-central1.run.app/login">VoucherVision login page</a> and sign in with your email and password.</li>
+            <li>On the account overview page, click <strong>Manage API Keys</strong>.</li>
+            <li>Click <strong>Create New Key</strong>, give it a name, and choose an expiry duration.</li>
+            <li>Copy the new key and update it in your scripts (replace the <code>X-API-Key</code> header value).</li>
+        </ol>
+
+        <div style="margin: 30px 0; text-align: center;">
+            <a href="https://vouchervision-go-738307415303.us-central1.run.app/login"
+               style="background-color: #4285f4; color: white; padding: 12px 20px;
+                      text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Log In &amp; Create a New Key
+            </a>
+        </div>
+
+        <p style="color: #666; font-size: 0.9em;">This is a one-time automated
+        notification from the VoucherVision team.</p>
+    </div>
+    </body></html>""")
+
+    if sender.send_email(user_email, subject, body):
+        logger.info(f"Sent expired notice to {user_email} for key {key_id[:8]}...")
+    else:
+        logger.error(f"Failed to send expired notice to {user_email} for key {key_id[:8]}...")
+
+
 def update_usage_statistics(
     user_email: str,
     engines: list[str] | None = None,
@@ -2275,6 +2559,9 @@ def handle_preflight():
         response.headers.add('Access-Control-Max-Age', '3600')
         return response
 
+    # Lazy daily check: scan API key expirations on the first request of each day
+    _check_api_key_expirations()
+
 @app.route('/auth-check', methods=['GET'])
 @maintenance_mode_middleware
 @authenticated_route
@@ -3184,31 +3471,48 @@ def check_approval_status():
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_dashboard():
     """Admin dashboard for managing user applications"""
-    # For POST requests, get token from form data
-    auth_token = None
+    # For POST requests, validate token and render directly (avoids
+    # third-party cookie issues when embedded in a cross-origin iframe)
     if request.method == 'POST':
         auth_token = request.form.get('auth_token')
         if auth_token:
-            # Store in cookie for future requests
-            response = make_response(redirect('/admin'))
-            response.set_cookie('auth_token', auth_token, httponly=True, secure=True)
-            return response
-    
+            try:
+                decoded = auth.verify_id_token(auth_token)
+                user_email = decoded.get('email')
+                if user_email:
+                    # Check if the user is an admin
+                    admin_doc = db.collection('admins').document(user_email).get()
+                    if not admin_doc.exists:
+                        return redirect('/auth-success')
+
+                    firebase_config = get_firebase_config()
+                    return render_template(
+                        'admin_dashboard.html',
+                        api_key=firebase_config["apiKey"],
+                        auth_domain=firebase_config["authDomain"],
+                        project_id=firebase_config["projectId"],
+                        storage_bucket=firebase_config.get("storageBucket", ""),
+                        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+                        app_id=firebase_config["appId"]
+                    )
+            except Exception as e:
+                logger.warning(f"POST to /admin with invalid token: {e}")
+
     # For GET requests, follow normal authentication
     user = authenticate_request(request)
     if not user or not user.get('email'):
         return jsonify({'error': 'User not properly authenticated'}), 401
-    
+
     user_email = user.get('email')
-    
+
     # Check if the user is an admin
     admin_doc = db.collection('admins').document(user_email).get()
     if not admin_doc.exists:
         # Not an admin - redirect to appropriate page
         return redirect('/auth-success')
-    
+
     firebase_config = get_firebase_config()
-    
+
     # Pass the firebase config and user info to the template
     return render_template(
         'admin_dashboard.html',
@@ -4158,35 +4462,51 @@ def prompts_ui():
 @app.route('/api-key-management', methods=['GET', 'POST'])
 def api_key_management_ui():
     """Web UI for API key management"""
-    # For POST requests, get token from form data and set in cookie
+    # For POST requests, validate the token and render the page directly
+    # (avoids cookie-based redirect which fails in cross-origin iframes due
+    # to third-party cookie blocking with SameSite=Lax)
     if request.method == 'POST':
         auth_token = request.form.get('auth_token')
         if auth_token:
-            logger.info(f"POST to /api-key-management. Setting auth_token cookie and redirecting.")
-            response = make_response(redirect('/api-key-management'))
-            response.set_cookie(
-                'auth_token', 
-                auth_token, 
-                httponly=True, 
-                secure=True, 
-                samesite='Lax',
-                max_age=3600  # 1 hour expiration
-            )
-            return response
+            try:
+                decoded = auth.verify_id_token(auth_token)
+                user_email = decoded.get('email')
+                if user_email:
+                    logger.info(f"POST to /api-key-management. User {user_email} authenticated, rendering page directly.")
+
+                    firebase_config = get_firebase_config()
+                    base_url = request.url_root.rstrip('/')
+                    if base_url.startswith('http:'):
+                        base_url = 'https:' + base_url[5:]
+
+                    return render_template('api_key_management.html',
+                        api_key=firebase_config["apiKey"],
+                        auth_domain=firebase_config["authDomain"],
+                        project_id=firebase_config["projectId"],
+                        storage_bucket=firebase_config.get("storageBucket", ""),
+                        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+                        app_id=firebase_config["appId"],
+                        server_url=base_url
+                    )
+            except Exception as e:
+                logger.warning(f"POST to /api-key-management with invalid token: {e}")
+
+            logger.warning("POST to /api-key-management with invalid auth_token. Redirecting to login.")
+            return redirect('/login')
         else:
             # If no token is provided in the POST, redirect to login.
             logger.warning("POST to /api-key-management without auth_token. Redirecting to login.")
             return redirect('/login')
-    
+
     # For GET requests, use existing authentication mechanism
     user = authenticate_request(request)
     if not user or not user.get('email'):
         logger.warning(f"Unauthenticated GET request to /api-key-management from {request.remote_addr}. Redirecting to login.")
         return redirect('/login')
-    
+
     user_email = user.get('email')
     logger.info(f"User {user_email} accessing API key management UI")
-    
+
     # Get Firebase configuration from Secret Manager
     firebase_config = get_firebase_config()
 
@@ -4195,7 +4515,7 @@ def api_key_management_ui():
     # Force HTTPS
     if base_url.startswith('http:'):
         base_url = 'https:' + base_url[5:]
-    
+
     return render_template('api_key_management.html',
         api_key=firebase_config["apiKey"],
         auth_domain=firebase_config["authDomain"],

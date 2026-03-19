@@ -68,41 +68,45 @@ function getSelectedEngines() {
 // Test CORS support
 async function testCorsSupport() {
     const corsStatusElement = document.getElementById('corsStatus');
-    
+
     try {
-        logDebug(`Testing CORS support for: https://vouchervision-go-738307415303.us-central1.run.app/cors-test`);
-        
-        corsStatusElement.textContent = 'Testing CORS...';
+        // Build auth headers so we actually validate the API key or token
+        const headers = getAuthHeaders();
+
+        logDebug(`Testing authentication against: https://vouchervision-go-738307415303.us-central1.run.app/auth-check`);
+
+        corsStatusElement.textContent = 'Testing authentication...';
         corsStatusElement.className = 'status-display';
-        
-        const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
+
+        const response = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/auth-check', {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            headers: headers
         });
-        
-        logDebug(`CORS test response status: ${response.status}`);
-        
+
+        logDebug(`Auth check response status: ${response.status}`);
+
         if (response.ok) {
             const result = await response.json();
-            corsStatusElement.textContent = 'CORS is properly configured!';
+            corsStatusElement.textContent = 'Authentication successful!';
             corsStatusElement.className = 'status-display cors-success';
-            
-            logDebug('CORS test successful:', result);
+
+            logDebug('Auth check successful:', result);
             return true;
         } else {
-            corsStatusElement.textContent = `CORS test failed: ${response.status}`;
+            const statusMsg = response.status === 401
+                ? 'Invalid API key or token'
+                : `Auth check failed: ${response.status}`;
+            corsStatusElement.textContent = statusMsg;
             corsStatusElement.className = 'status-display cors-error';
-            
-            logDebug(`CORS test failed: ${response.status}`);
+
+            logDebug(`Auth check failed: ${response.status}`);
             return false;
         }
     } catch (error) {
-        corsStatusElement.textContent = `CORS test error: ${error.message}`;
+        corsStatusElement.textContent = `Connection error: ${error.message}`;
         corsStatusElement.className = 'status-display cors-error';
-        
-        logDebug('CORS test error:', error);
+
+        logDebug('Auth check error:', error);
         return false;
     }
 }

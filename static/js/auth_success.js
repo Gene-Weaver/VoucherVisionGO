@@ -1,4 +1,27 @@
-// Add token as hidden input field
+// Clipboard helper with fallback for non-HTTPS or unsupported browsers
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  // Fallback: create a temporary textarea and use execCommand
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  textarea.style.top = '-9999px';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  return new Promise((resolve, reject) => {
+    if (document.execCommand('copy')) {
+      resolve();
+    } else {
+      reject(new Error('execCommand copy failed'));
+    }
+    document.body.removeChild(textarea);
+  });
+}
+
 const TOKEN_REFRESH_INTERVAL = 2700000;
 let tokenRefreshTimer;
 
@@ -160,7 +183,7 @@ function initPage() {
   // Copy token button
   document.getElementById('copy-token-btn').addEventListener('click', function() {
     const token = tokenElement.textContent;
-    navigator.clipboard.writeText(token)
+    copyToClipboard(token)
       .then(() => {
         successElement.textContent = 'Token copied to clipboard!';
         successElement.style.display = 'block';
