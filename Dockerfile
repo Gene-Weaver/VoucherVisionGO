@@ -19,6 +19,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends\
     libsm6 \
     libxrender1 \
     libxext6 \
+    libgdal-dev \
+    gdal-bin \
+    libproj-dev \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements first for better caching

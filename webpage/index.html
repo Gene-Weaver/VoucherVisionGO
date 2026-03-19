@@ -620,6 +620,17 @@ http://localhost:8000/index.html
                         </label>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <h3>COP90 Elevation Lookup:</h3>
+                    <p class="help-text">Automatically derives elevation in meters from the specimen's latitude and longitude using the Copernicus DEM 90m global dataset.</p>
+                    <div class="checkbox-group">
+                        <label class="custom-tooltip"
+                            data-tooltip="Queries COP90 GeoTIFF tiles stored in Google Cloud Storage to return elevation (m) for the transcribed coordinates">
+                            <input type="checkbox" id="useCop90" name="use_cop90" value="true"> Include COP90 elevation
+                        </label>
+                    </div>
+                </div>
                 
                 <div class="form-group">
                     <h3 for="promptTemplate">Prompt Template:</h3>

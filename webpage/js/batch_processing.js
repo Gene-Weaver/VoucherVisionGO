@@ -137,10 +137,13 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             if ($('#includeWfo').is(':checked')) {
                 formData.append('include_wfo', 'true');
             }
+            if ($('#useCop90').is(':checked')) {
+                formData.append('use_cop90', 'true');
+            }
             if ($('#skipLabelCollage').is(':checked')) {
                 formData.append('skip_label_collage', 'true');
             }
-    
+
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
             if (promptTemplate) {
@@ -598,10 +601,13 @@ async function processBatchImages(files, concurrency, options = {}) {
             if ($('#includeWfo').is(':checked')) {
                 formData.append('include_wfo', 'true');
             }
+            if ($('#useCop90').is(':checked')) {
+                formData.append('use_cop90', 'true');
+            }
             if ($('#skipLabelCollage').is(':checked')) {
                 formData.append('skip_label_collage', 'true');
             }
-            
+
             // Add prompt template if specified
             const promptTemplate = $('#promptTemplate').val();
             if (promptTemplate) {

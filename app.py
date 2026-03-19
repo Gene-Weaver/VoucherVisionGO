@@ -1768,7 +1768,15 @@ class VoucherVisionProcessor:
         self.ocr_engines_lock = threading.Lock()
         
         try:
-            for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-pro-preview"]:
+            for model_name in ["gemini-1.5-pro", 
+                               "gemini-2.0-flash", 
+                               "gemini-2.5-flash", 
+                               "gemini-2.5-pro", 
+                               "gemini-3-pro-preview",                               
+                               "gemini-3.1-pro-preview",
+                               "gemini-3-flash-preview",
+                               "gemini-3.1-flash-lite-preview",
+                               ]:
                 self.ocr_engines[model_name] = OCRGeminiProVision(
                     self.api_key, 
                     model_name=model_name, 
@@ -2203,13 +2211,14 @@ class VoucherVisionProcessor:
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
     
-    def process_image_request(self, file, 
-                              engine_options=None, 
-                              ocr_prompt_option=None, 
-                              prompt=None, 
-                              ocr_only=False, 
+    def process_image_request(self, file,
+                              engine_options=None,
+                              ocr_prompt_option=None,
+                              prompt=None,
+                              ocr_only=False,
                               include_wfo=False,
-                              llm_model_name=None, 
+                              use_cop90=False,
+                              llm_model_name=None,
                               url_source="",
                               notebook_mode=False,
                               skip_label_collage=False,
@@ -2342,6 +2351,7 @@ class VoucherVisionProcessor:
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
+                        ("COP90_elevation_m", ""),
                         ("ocr", ocr_plain),
                         ("formatted_json", ""),
                         ("formatted_md", ocr),
@@ -2378,6 +2388,7 @@ class VoucherVisionProcessor:
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", ""),
+                        ("COP90_elevation_m", ""),
                         ("ocr", ocr_sanitized),
                         ("formatted_json", ""),
                         ("formatted_md", ""),
@@ -2423,6 +2434,7 @@ class VoucherVisionProcessor:
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", WFO),
+                        ("COP90_elevation_m", ""),
                         ("ocr", ocr_sanitized),
                         ("formatted_json", vv_results_sanitized),
                         ("formatted_md", ""),
@@ -2445,6 +2457,17 @@ class VoucherVisionProcessor:
                         }),
                     ])
                 
+                if use_cop90:
+                    try:
+                        fj = results.get("formatted_json")
+                        if isinstance(fj, dict):
+                            lat_val = fj.get("decimalLatitude") or fj.get("decimal_latitude")
+                            lon_val = fj.get("decimalLongitude") or fj.get("decimal_longitude")
+                            elev = _elevation_lookup.query(float(lat_val), float(lon_val))
+                            results["COP90_elevation_m"] = elev if elev is not None else ""
+                    except Exception:
+                        pass
+
                 self._log(f"Processing completed successfully", "info")
                 return results, 200
             
@@ -2555,6 +2578,67 @@ except Exception as e:
 
 
 
+class GCSElevationLookup:
+    """
+    Point-sample COP90 GeoTIFFs stored in Google Cloud Storage.
+    Tiles are opened via GDAL's /vsigs/ virtual filesystem — no local copy needed.
+    GDAL uses HTTP range requests so only the relevant raster blocks are fetched per query.
+    """
+    def __init__(self, gcs_bucket: str, gcs_prefix: str = "COP90", cache_size: int = 32):
+        self.bucket = gcs_bucket
+        self.prefix = gcs_prefix.rstrip("/")
+        self._cache = OrderedDict()
+        self._cache_size = cache_size
+        self._lock = threading.Lock()
+
+    def _tile_name(self, lat: float, lon: float) -> str:
+        lat_deg = int(math.floor(lat))
+        lon_deg = int(math.floor(lon))
+        lat_h = "N" if lat_deg >= 0 else "S"
+        lon_h = "E" if lon_deg >= 0 else "W"
+        return (
+            f"Copernicus_DSM_30_{lat_h}{abs(lat_deg):02d}_00"
+            f"_{lon_h}{abs(lon_deg):03d}_00_DEM.tif"
+        )
+
+    def _open(self, tile_name: str):
+        import rasterio
+        path = f"/vsigs/{self.bucket}/{self.prefix}/{tile_name}"
+        with self._lock:
+            if path in self._cache:
+                self._cache.move_to_end(path)
+                return self._cache[path]
+            ds = rasterio.open(path)
+            self._cache[path] = ds
+            self._cache.move_to_end(path)
+            while len(self._cache) > self._cache_size:
+                _, old = self._cache.popitem(last=False)
+                try:
+                    old.close()
+                except Exception:
+                    pass
+            return ds
+
+    def query(self, lat: float, lon: float):
+        """Return elevation in metres as float, or None if tile missing or no-data."""
+        try:
+            tile = self._tile_name(lat, lon)
+            ds = self._open(tile)
+            val = float(next(ds.sample([(lon, lat)]))[0])
+            if math.isnan(val):
+                return None
+            if ds.nodata is not None and val == float(ds.nodata):
+                return None
+            return val
+        except Exception as e:
+            app.logger.warning(f"[elevation] query({lat},{lon}) failed: {e}")
+            return None
+
+
+GCS_ELEVATION_BUCKET = os.environ.get("COP90_GCS_BUCKET", "vouchervision-cop90-rasters")
+_elevation_lookup = GCSElevationLookup(gcs_bucket=GCS_ELEVATION_BUCKET, gcs_prefix="COP90")
+
+
 @app.before_request
 def handle_preflight():
     if request.method == "OPTIONS":
@@ -2619,6 +2703,7 @@ def process_image():
 
     # Get WFO flag from request if specified
     include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
+    use_cop90 = request.form.get('use_cop90', 'false').lower() == 'true'
 
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
 
@@ -2651,6 +2736,7 @@ def process_image():
         prompt=prompt,
         ocr_only=ocr_only,
         include_wfo=include_wfo,
+        use_cop90=use_cop90,
         llm_model_name=llm_model_name,
         url_source="",
         notebook_mode=notebook_mode,
@@ -2705,6 +2791,7 @@ def process_image_by_url():
         notebook_mode = data.get('notebook_mode', False)
         skip_label_collage = data.get('skip_label_collage', False)
         include_wfo = data.get('include_wfo', False)
+        use_cop90 = data.get('use_cop90', False)
         llm_model_name = data.get('llm_model')
         user_gemini_key = data.get('gemini_api_key') or None
 
@@ -2722,6 +2809,7 @@ def process_image_by_url():
         notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
         skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
         include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
+        use_cop90 = request.form.get('use_cop90', 'false').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
 
@@ -2805,6 +2893,7 @@ def process_image_by_url():
             ("prompt", prompt),
             ("ocr_info", {"error": f"Failed to fetch URL: {str(last_exception)}"}),
             ("WFO_info", ""),
+            ("COP90_elevation_m", ""),
             ("ocr", ""),
             ("formatted_json", ""),
             ("parsing_info", OrderedDict([
@@ -2840,6 +2929,7 @@ def process_image_by_url():
             prompt=prompt,
             ocr_only=ocr_only,
             include_wfo=include_wfo,
+            use_cop90=use_cop90,
             llm_model_name=llm_model_name,
             url_source=image_url,
             notebook_mode=notebook_mode,
@@ -3229,6 +3319,29 @@ def health_check():
     response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
     
     return response, 200
+
+
+@app.route('/elevation', methods=['GET'])
+def elevation():
+    """Return COP90 elevation in metres for a given lat/lon coordinate.
+
+    Query params:
+        lat (float): Decimal latitude [-90, 90]
+        lon (float): Decimal longitude [-180, 180]
+
+    Returns JSON: {"lat": ..., "lon": ..., "elevation_m": <float or null>}
+    """
+    lat = request.args.get("lat", type=float)
+    lon = request.args.get("lon", type=float)
+    if lat is None or lon is None:
+        return jsonify({"error": "lat and lon query parameters are required"}), 400
+    if not (-90 <= lat <= 90):
+        return jsonify({"error": "lat must be in [-90, 90]"}), 400
+    if not (-180 <= lon <= 180):
+        return jsonify({"error": "lon must be in [-180, 180]"}), 400
+    elev = _elevation_lookup.query(lat, lon)
+    return jsonify({"lat": lat, "lon": lon, "elevation_m": elev})
+
 
 @app.after_request
 def after_request(response):
