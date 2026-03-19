@@ -27,7 +27,7 @@ http://localhost:8000/index.html
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
     <!-- Load external scripts in the correct order -->
-    <script>window.VVGO_CACHE_VERSION = '7';</script>
+    <script>window.VVGO_CACHE_VERSION = '8';</script>
     <script>
     ['vouchervisiongo','batch_processing','api_key_validator','prompt_templates','changelog_viewer']
       .forEach(function(name) {
@@ -644,13 +644,13 @@ http://localhost:8000/index.html
 
 
             <div class="tabs">
-                <div class="tab active" data-tab="FileUpload">File Upload</div>
-                <div class="tab" data-tab="ImageUrl">Image URL</div>
+                <div class="tab active" data-tab="ImageUrl">Image URL</div>
+                <div class="tab" data-tab="FileUpload">File Upload</div>
                 <div class="tab" data-tab="BatchUrls">Batch URLs</div>
                 <div class="tab" data-tab="BatchFolder">Batch Folder</div>
             </div>
 
-            <div id="FileUpload" class="tab-content active">
+            <div id="FileUpload" class="tab-content">
                 <h2>Test with File Upload</h2>
                 <!-- ... File Upload Input/Button ... -->
                  <div class="form-group file-input-container">
@@ -664,14 +664,36 @@ http://localhost:8000/index.html
                  </div>
             </div>
 
-            <div id="ImageUrl" class="tab-content">
+            <div id="ImageUrl" class="tab-content active">
                 <h2>Test with Image URL</h2>
                 <div class="form-group">
                     <label for="imageUrl">Image URL:</label>
-                    <!-- <input type="text" id="imageUrl" value="https://medialib.naturalis.nl/file/id/L.3800382/format/large" placeholder="Enter image URL"> -->
                     <input type="text" id="imageUrl"
-                        value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg"
+                        value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1122841:MICH-V-1122841/full/res:0/0/native.jpg"
                         placeholder="Enter image URL">
+                    <div style="margin-top: 6px; font-size: 0.85em; color: #666;">
+                        Try these:
+                        <span style="margin-left: 4px;">
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1122841:MICH-V-1122841/full/res:0/0/native.jpg">Jouvea pilosa (Challenging Handwritten Determination)</a>
+                        </span>
+                        &middot;
+                        <span>
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://medialib.naturalis.nl/file/id/L.3800382/format/large">Quercus oxyodon (Printed Text)</a>
+                        </span>
+                        &middot;
+                        <span>
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg">Liriodendron tulipifera (Challenging Handwritten Text)</a>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <button id="testUrlAvailability" class="button">Test URL Availability</button>

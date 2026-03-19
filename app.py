@@ -615,7 +615,6 @@ requests.post(
 _EXPIRY_WARNING_DAYS = 30  # warn this many days before expiration
 _EXPIRY_CHECK_COLLECTION = "system_config"
 _EXPIRY_CHECK_DOC = "expiry_check"
-_ADMIN_EMAIL = os.environ.get('VOUCHERVISION_API_EMAIL_ADDRESS')
 _expiry_check_lock = threading.Lock()
 _local_expiry_check_date = None  # in-memory cache to skip Firestore reads
 
@@ -663,6 +662,8 @@ def _check_api_key_expirations():
         _expiry_check_lock.release()
 
     # Run the actual scan in a background thread to avoid blocking the request
+    admin_email = os.environ.get('VOUCHERVISION_API_EMAIL_ADDRESS')
+    logger.info(f"Starting API key expiration scan for {today_str} (ADMIN_EMAIL={'set' if admin_email else 'NOT SET'})")
     threading.Thread(target=_run_expiry_scan, args=(today_str,), daemon=True).start()
 
 
@@ -721,8 +722,8 @@ def _run_expiry_scan(today_str: str):
                             )
                             expired_notices_sent += 1
                     elif days_remaining <= _EXPIRY_WARNING_DAYS:
-                        # Key expires within warning window
-                        if data.get('expiry_warning_sent') != today_str:
+                        # Key expires within warning window — send ONE warning per key ever
+                        if not data.get('expiry_warning_sent'):
                             expires_date_str = expires_at.strftime("%B %d, %Y")
                             _send_expiry_warning_email(
                                 sender, owner, key_name, doc.id, expires_date_str, days_remaining
@@ -796,11 +797,16 @@ def _send_expiry_scan_summary(sender, today_str, keys_checked, warnings_sent,
         </div>
         </body></html>""")
 
-        if not _ADMIN_EMAIL:
-            logger.warning("VOUCHERVISION_API_EMAIL_ADDRESS not set; skipping expiry scan summary email")
+        admin_email = os.environ.get('VOUCHERVISION_API_EMAIL_ADDRESS')
+        if not admin_email:
+            logger.warning("VOUCHERVISION_API_EMAIL_ADDRESS env var not set; skipping expiry scan summary email")
             return
-        sender.send_email(_ADMIN_EMAIL, subject, body)
-        logger.info(f"Sent expiry scan summary to admin for {today_str}")
+        logger.info(f"Attempting to send expiry scan summary to {admin_email} for {today_str}")
+        result = sender.send_email(admin_email, subject, body)
+        if result:
+            logger.info(f"Sent expiry scan summary to {admin_email} for {today_str}")
+        else:
+            logger.error(f"send_email returned False for expiry scan summary to {admin_email}")
     except Exception as e:
         logger.error(f"Error sending expiry scan summary email: {e}")
 
@@ -837,9 +843,9 @@ def _send_expiry_warning_email(sender, user_email, key_name, key_id, expires_dat
             </a>
         </div>
 
-        <p style="color: #666; font-size: 0.9em;">This is an automated notification from
-        the VoucherVision team. You will receive one reminder per day until the key is
-        renewed or expires.</p>
+        <p style="color: #666; font-size: 0.9em;">This is a one-time automated notification
+        from the VoucherVision team. You will receive one additional notice if the key
+        expires without being renewed.</p>
     </div>
     </body></html>""")
 
