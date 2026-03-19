@@ -2363,28 +2363,26 @@ class GCSElevationLookup:
         self._cache = OrderedDict()
         self._cache_size = cache_size
         self._lock = threading.Lock()
-        self._ensure_gdal_credentials()
+        self._gdal_cred_file = self._prepare_gdal_credentials()
 
     @staticmethod
-    def _ensure_gdal_credentials():
+    def _prepare_gdal_credentials():
         """If GOOGLE_APPLICATION_CREDENTIALS holds raw JSON instead of a file
-        path, write it to a temp file so GDAL's /vsigs/ driver can use it."""
+        path, write it to a temp file and return the path so we can pass it
+        to rasterio.Env (without overwriting the env var)."""
         cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
         if not cred:
-            return
-        # Already a valid file path
+            return None
         if os.path.isfile(cred):
-            return
-        # Inline JSON — write to a temp file for GDAL only
-        # (don't overwrite the env var; VoucherVision reads it as raw JSON)
+            return cred
         if cred.lstrip().startswith("{"):
             import tempfile
-            from osgeo import gdal
             fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
             with os.fdopen(fd, "w") as f:
                 f.write(cred)
-            gdal.SetConfigOption("GOOGLE_APPLICATION_CREDENTIALS", path)
             app.logger.info("[elevation] Wrote inline credentials to temp file for GDAL")
+            return path
+        return None
 
     def _tile_name(self, lat: float, lon: float) -> str:
         lat_deg = int(math.floor(lat))
@@ -2398,12 +2396,17 @@ class GCSElevationLookup:
 
     def _open(self, tile_name: str):
         import rasterio
+        import rasterio.env
         path = f"/vsigs/{self.bucket}/{self.prefix}/{tile_name}"
         with self._lock:
             if path in self._cache:
                 self._cache.move_to_end(path)
                 return self._cache[path]
-            ds = rasterio.open(path)
+            env_opts = {}
+            if self._gdal_cred_file:
+                env_opts["GOOGLE_APPLICATION_CREDENTIALS"] = self._gdal_cred_file
+            with rasterio.Env(**env_opts):
+                ds = rasterio.open(path)
             self._cache[path] = ds
             self._cache.move_to_end(path)
             while len(self._cache) > self._cache_size:
