@@ -1,23 +1,40 @@
-// Clipboard helper with fallback for non-HTTPS or unsupported browsers
+// Clipboard helper with multiple fallbacks for cross-origin iframes
 function copyToClipboard(text) {
-  if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(text);
+  if (navigator.clipboard) {
+    return navigator.clipboard.writeText(text).catch(function() {
+      return _execCommandCopy(text);
+    });
   }
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.left = '-9999px';
-  textarea.style.top = '-9999px';
-  document.body.appendChild(textarea);
-  textarea.focus();
-  textarea.select();
-  return new Promise((resolve, reject) => {
-    if (document.execCommand('copy')) {
+  return _execCommandCopy(text);
+}
+
+function _execCommandCopy(text) {
+  return new Promise(function(resolve, reject) {
+    var textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '0';
+    textarea.style.top = '0';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) { /* blocked */ }
+    document.body.removeChild(textarea);
+    if (ok) {
       resolve();
     } else {
-      reject(new Error('execCommand copy failed'));
+      var keyEl = document.getElementById('api-key-display');
+      if (keyEl) {
+        var range = document.createRange();
+        range.selectNodeContents(keyEl);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+      reject(new Error('Clipboard blocked by browser policy. The key text has been selected — press Ctrl+C to copy.'));
     }
-    document.body.removeChild(textarea);
   });
 }
 
