@@ -89,25 +89,21 @@ def setup_cloud_logging():
                 log_entry['request_id'] = record.request_id
             return json.dumps(log_entry)
 
-    # Configure root logger
+    # Configure root logger — clear ALL existing handlers first to prevent
+    # duplicate log lines from gunicorn/flask/root all writing to stdout.
     root_logger = logging.getLogger()
+    for handler in root_logger.handlers[:]:
+        root_logger.removeHandler(handler)
 
+    handler = logging.StreamHandler(sys.stdout)
     if os.environ.get('ENV') == 'production':
-        for handler in root_logger.handlers[:]:
-            root_logger.removeHandler(handler)
-        handler = logging.StreamHandler(sys.stdout)
         handler.setFormatter(CloudFormatter())
-        root_logger.addHandler(handler)
-        root_logger.setLevel(logging.INFO)
     else:
-        if not root_logger.handlers:
-            handler = logging.StreamHandler(sys.stdout)
-            formatter = logging.Formatter(
-                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-            )
-            handler.setFormatter(formatter)
-            root_logger.addHandler(handler)
-            root_logger.setLevel(logging.INFO)
+        handler.setFormatter(logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        ))
+    root_logger.addHandler(handler)
+    root_logger.setLevel(logging.INFO)
 
     # Silence noisy third-party loggers
     for noisy_logger in [
@@ -4830,11 +4826,13 @@ if __name__ == '__main__':
     logger.info('VoucherVision service is starting up directly (not under Gunicorn)...')
     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
 else:
-    # When running under Gunicorn, let Gunicorn handle logging configuration
-    # Just ensure our logger uses the same level as Gunicorn
+    # Under Gunicorn: use gunicorn's handler as the single root handler
+    # to avoid duplicate log lines from multiple handlers
     gunicorn_logger = logging.getLogger('gunicorn.error')
-    if gunicorn_logger.handlers:
-        # Set our logger to use the same level as Gunicorn
-        logger.setLevel(gunicorn_logger.level)
-        # Don't replace handlers - let the logging hierarchy work naturally
-        logger.info('VoucherVision service is starting up under Gunicorn...')
+    root = logging.getLogger()
+    root.handlers = gunicorn_logger.handlers
+    root.setLevel(gunicorn_logger.level)
+    # Stop Flask from adding its own handler
+    app.logger.handlers = []
+    app.logger.propagate = True
+    logger.info('VoucherVision service starting under Gunicorn')
