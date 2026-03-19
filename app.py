@@ -2590,6 +2590,26 @@ class GCSElevationLookup:
         self._cache = OrderedDict()
         self._cache_size = cache_size
         self._lock = threading.Lock()
+        self._ensure_gdal_credentials()
+
+    @staticmethod
+    def _ensure_gdal_credentials():
+        """If GOOGLE_APPLICATION_CREDENTIALS holds raw JSON instead of a file
+        path, write it to a temp file so GDAL's /vsigs/ driver can use it."""
+        cred = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
+        if not cred:
+            return
+        # Already a valid file path
+        if os.path.isfile(cred):
+            return
+        # Looks like inline JSON — write to a temp file
+        if cred.lstrip().startswith("{"):
+            import tempfile
+            fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
+            with os.fdopen(fd, "w") as f:
+                f.write(cred)
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
+            app.logger.info(f"[elevation] Wrote inline credentials to {path} for GDAL")
 
     def _tile_name(self, lat: float, lon: float) -> str:
         lat_deg = int(math.floor(lat))

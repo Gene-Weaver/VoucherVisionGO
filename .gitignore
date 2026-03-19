@@ -1,3 +1,6 @@
+# Claude Code
+.claude/
+
 # Files
 PRIVATE_DATA.yaml
 LeafMachine2_TRAINING_ONLY.yaml
