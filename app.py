@@ -1940,9 +1940,11 @@ class VoucherVisionProcessor:
     def get_thread_local_vv(self, prompt, llm_model_name, include_wfo, user_api_key=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         needs_new = (
-            user_api_key is not None
-            or prompt != self.default_prompt
-            or not hasattr(self.thread_local, 'vv')
+            not hasattr(self.thread_local, 'vv')
+            or user_api_key is not None
+            or prompt != getattr(self.thread_local, 'prompt', None)
+            or llm_model_name != getattr(self.thread_local, 'llm_model_name', None)
+            or include_wfo != getattr(self.thread_local, 'include_wfo', None)
         )
 
         if needs_new:
@@ -1956,6 +1958,8 @@ class VoucherVisionProcessor:
             )
             self.thread_local.vv.setup_JSON_dict_structure()
             self.thread_local.prompt = prompt
+            self.thread_local.llm_model_name = llm_model_name
+            self.thread_local.include_wfo = include_wfo
 
             self.thread_local.llm_model = GoogleGeminiHandler(
                 self.cfg, self.logger, llm_model_name,
