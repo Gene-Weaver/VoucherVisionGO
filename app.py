@@ -3150,6 +3150,27 @@ def health_check():
     return response, 200
 
 
+@app.route('/api-costs', methods=['GET', 'OPTIONS'])
+def api_costs():
+    """Return the api_cost.yaml contents as JSON for the cost calculator."""
+    if request.method == 'OPTIONS':
+        response = make_response()
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+        return response, 200
+
+    try:
+        yaml_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), "vouchervision_main")), 'api_cost', 'api_cost.yaml')
+        with open(yaml_path, 'r') as f:
+            cost_data = yaml.safe_load(f)
+        response = make_response(jsonify(cost_data))
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route('/elevation', methods=['GET'])
 def elevation():
     """Return COP90 elevation in metres for a given lat/lon coordinate.

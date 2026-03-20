@@ -91,15 +91,16 @@
     document.addEventListener('DOMContentLoaded', function () {
         const section = document.getElementById('llmCostSection');
         if (!section) return;
-        fetch('./api_cost.yaml')
-            .then(resp => { if (!resp.ok) throw new Error('Failed to load api_cost.yaml: ' + resp.status); return resp.text(); })
-            .then(text => { const data = jsyaml.load(text) || {}; initLlmCostUI(data); })
+        const apiBase = window.VVGO_API_BASE || location.origin;
+        fetch(apiBase + '/api-costs', { method: 'GET', mode: 'cors', cache: 'no-cache' })
+            .then(resp => { if (!resp.ok) throw new Error('Failed to load cost data: ' + resp.status); return resp.json(); })
+            .then(data => { initLlmCostUI(data || {}); })
             .catch(err => {
-                console.error('[LLM Cost] Error loading api_cost.yaml:', err);
+                console.error('[LLM Cost] Error loading cost data:', err);
                 const tablesEl = document.getElementById('llmCostTables');
                 const selectEl = document.getElementById('llmModelSelect');
-                if (tablesEl) tablesEl.innerHTML = '<div class="vv-card llm-cost-card">Error loading <code>api_cost.yaml</code>.</div>';
-                if (selectEl) selectEl.innerHTML = '<option value="">Error loading api_cost.yaml</option>';
+                if (tablesEl) tablesEl.innerHTML = '<div class="vv-card llm-cost-card">Error loading cost data.</div>';
+                if (selectEl) selectEl.innerHTML = '<option value="">Error loading cost data</option>';
             });
     });
 })();
