@@ -2361,11 +2361,43 @@ class GCSElevationLookup:
         self._lock = threading.Lock()
         self._gdal_cred_file = self._prepare_gdal_credentials()
 
+        # Configure GDAL via rasterio to use our temp file and suppress
+        # GDAL's error logging (which would leak raw credentials)
+        import rasterio
+        gdal_opts = {"CPL_LOG": os.devnull}
+        if self._gdal_cred_file:
+            gdal_opts["GOOGLE_APPLICATION_CREDENTIALS"] = self._gdal_cred_file
+        self._rasterio_env = rasterio.Env(**gdal_opts)
+        self._rasterio_env.__enter__()
+        import atexit
+        atexit.register(self.close)
+
+    def close(self):
+        """Clean up rasterio env, cached datasets, and temp credential file."""
+        with self._lock:
+            for ds in self._cache.values():
+                try:
+                    ds.close()
+                except Exception:
+                    pass
+            self._cache.clear()
+        try:
+            self._rasterio_env.__exit__(None, None, None)
+        except Exception:
+            pass
+        if self._gdal_cred_file and self._gdal_cred_file.startswith(tempfile.gettempdir()):
+            try:
+                os.remove(self._gdal_cred_file)
+            except OSError:
+                pass
+
     @staticmethod
     def _prepare_gdal_credentials():
-        """If GOOGLE_APPLICATION_CREDENTIALS holds raw JSON instead of a file
-        path, write it to a temp file and point the env var at the file so
-        GDAL/rasterio never sees the raw JSON string (which it would log).
+        """Write raw JSON credentials to a temp file for GDAL/rasterio.
+
+        GOOGLE_APPLICATION_CREDENTIALS is left UNTOUCHED (VoucherVision's
+        get_google_credentials() reads it and expects raw JSON).
+        The returned file path is passed to rasterio.Env() only.
 
         CRITICAL: raw credentials must never appear in logs or tracebacks.
         """
@@ -2375,21 +2407,16 @@ class GCSElevationLookup:
         if os.path.isfile(cred):
             return cred
         if cred.lstrip().startswith("{"):
-            # Immediately scrub the env var so nothing downstream can leak it
-            os.environ.pop("GOOGLE_APPLICATION_CREDENTIALS", None)
             try:
                 fd, path = tempfile.mkstemp(suffix=".json", prefix="gdal_gcs_cred_")
                 with os.fdopen(fd, "w") as f:
                     f.write(cred)
-                os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
                 app.logger.info("[elevation] Wrote GCS credentials to temp file for GDAL")
                 return path
             except Exception:
-                # Never log the exception detail — it could contain the key
                 app.logger.error("[elevation] Failed to write GCS credential file")
                 return None
             finally:
-                # Clear the raw JSON from local scope
                 cred = None  # noqa: F841
         return None
 
@@ -2405,17 +2432,12 @@ class GCSElevationLookup:
 
     def _open(self, tile_name: str):
         import rasterio
-        import rasterio.env
         path = f"/vsigs/{self.bucket}/{self.prefix}/{tile_name}"
         with self._lock:
             if path in self._cache:
                 self._cache.move_to_end(path)
                 return self._cache[path]
-            env_opts = {}
-            if self._gdal_cred_file:
-                env_opts["GOOGLE_APPLICATION_CREDENTIALS"] = self._gdal_cred_file
-            with rasterio.Env(**env_opts):
-                ds = rasterio.open(path)
+            ds = rasterio.open(path)
             self._cache[path] = ds
             self._cache.move_to_end(path)
             while len(self._cache) > self._cache_size:
@@ -2437,8 +2459,8 @@ class GCSElevationLookup:
             if ds.nodata is not None and val == float(ds.nodata):
                 return None
             return round(val)
-        except Exception as e:
-            app.logger.warning(f"[elevation] query({lat},{lon}) failed: {e}")
+        except Exception:
+            app.logger.warning(f"[elevation] query({lat},{lon}) failed")
             return None
 
 
