@@ -100,3 +100,39 @@ body {
   .toggle-link a:hover {
     text-decoration: underline;
   }
+
+  /* ===== Dark Mode ===== */
+  body.dark-mode {
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+  }
+  body.dark-mode .container {
+    background-color: #141414;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    color: #e0e0e0;
+  }
+  body.dark-mode .header h2 {
+    color: #66BB6A;
+  }
+  body.dark-mode .header p {
+    color: #aaa;
+  }
+  body.dark-mode label {
+    color: #ccc;
+  }
+  body.dark-mode .form-control {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: #e0e0e0;
+  }
+  body.dark-mode .error-message {
+    background-color: #2a1010;
+    color: #ef5350;
+  }
+  body.dark-mode .success-message {
+    background-color: #1a2e1a;
+    color: #66BB6A;
+  }
+  body.dark-mode .toggle-link a {
+    color: #66BB6A;
+  }

@@ -3,6 +3,17 @@
 <head>
     <title>VoucherVision Prompt Templates</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/prompts_ui.css') }}">
+    <script>
+        if (new URLSearchParams(window.location.search).get('dark') === '1') {
+            document.documentElement.classList.add('dark-mode');
+            document.addEventListener('DOMContentLoaded', function() { document.body.classList.add('dark-mode'); });
+        }
+        window.addEventListener('message', function(e) {
+            if (e.data && typeof e.data.vvgoDarkMode === 'boolean') {
+                document.body.classList.toggle('dark-mode', e.data.vvgoDarkMode);
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="header">

@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function() {
     promptsLink.addEventListener('click', function (e) {
         e.preventDefault(); resetNavigation();
         promptsContent.style.display = 'block'; promptsLink.classList.add('active');
-        promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
+        promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui' + (document.body.classList.contains('dark-mode') ? '?dark=1' : '');
         promptsContent.classList.add('loading');
         promptsFrame.onload = function () { promptsContent.classList.remove('loading'); };
     });
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
     signupLink.addEventListener('click', function (e) {
         e.preventDefault(); resetNavigation();
         signupContent.style.display = 'block'; signupLink.classList.add('active');
-        signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
+        signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup' + (document.body.classList.contains('dark-mode') ? '?dark=1' : '');
         signupContent.classList.add('loading');
         signupFrame.onload = function () { signupContent.classList.remove('loading'); };
     });
@@ -602,3 +602,40 @@ if (ENABLE_API_CHECK) {
         else { createStatusIndicator(); startStatusMonitoring(); }
     })();
 }
+
+// ===================================================================
+// Dark Mode Toggle
+// ===================================================================
+(function () {
+    function applyDarkMode(enabled) {
+        document.body.classList.toggle('dark-mode', enabled);
+        try { localStorage.setItem('vvgo-dark-mode', enabled ? '1' : '0'); } catch (e) {}
+        // Sync dark mode to any loaded iframes via postMessage
+        var iframes = document.querySelectorAll('iframe');
+        for (var i = 0; i < iframes.length; i++) {
+            try { iframes[i].contentWindow.postMessage({ vvgoDarkMode: enabled }, '*'); } catch (e) {}
+        }
+    }
+
+    function initDarkMode() {
+        var saved = null;
+        try { saved = localStorage.getItem('vvgo-dark-mode'); } catch (e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var enabled = saved === '1' || (saved === null && prefersDark);
+        applyDarkMode(enabled);
+
+        var btn = document.getElementById('darkModeToggle');
+        if (btn) {
+            btn.addEventListener('click', function () {
+                var isDark = document.body.classList.contains('dark-mode');
+                applyDarkMode(!isDark);
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDarkMode);
+    } else {
+        initDarkMode();
+    }
+})();
