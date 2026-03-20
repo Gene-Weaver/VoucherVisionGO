@@ -237,3 +237,20 @@ body.dark-mode .section-heading {
     border-bottom-color: #2a2a2a;
     color: #e0e0e0;
 }
+body.dark-mode ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+body.dark-mode ::-webkit-scrollbar-track {
+    background: #111;
+}
+body.dark-mode ::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+html.dark-mode {
+    scrollbar-color: #333 #111;
+}
