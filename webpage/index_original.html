@@ -1,0 +1,1879 @@
+<!-- 
+To test, in terminal run this to start a local server:
+python -m http.server 8000
+
+Then in a browser open:
+http://localhost:8000/webpage/index.html 
+
+OR 
+
+http://localhost:8000/index.html 
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoucherVision API</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Make sure Mapbox JS and CSS are loaded -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css" rel="stylesheet" />
+    <!-- YAML parser for client-side loading of api_cost.yaml -->
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+    <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
+
+    <script src="js/vouchervisiongo.js?v=11"></script>
+    <script src="js/batch_processing.js?v=11"></script>
+    <script src="js/api_key_validator.js?v=11"></script>
+    <script src="js/prompt_templates.js?v=11"></script>
+    <script src="js/changelog_viewer.js?v=11"></script>
+
+    <link rel="stylesheet" href="css/vouchervisiongo.css">
+    <script>
+        // Function to dynamically add Mapbox (optional, already in head)
+        function addMapboxToHead() {
+            if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
+                const mapboxScript = document.createElement('script');
+                mapboxScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js';
+                document.head.appendChild(mapboxScript);
+            }
+            if (!document.querySelector('link[href*="mapbox-gl.css"]')) {
+                const mapboxCss = document.createElement('link');
+                mapboxCss.rel = 'stylesheet';
+                mapboxCss.href = 'https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css';
+                document.head.appendChild(mapboxCss);
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="img/logo.png" alt="Logo" class="logo">
+                <h2>VoucherVisionGO API</h2>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <div class="nav-bar">
+            <ul>
+                <li><a href="#" id="homeLink" class="active">Home</a></li>
+                <li><a href="#" id="readmeLink">About</a></li>
+                <li><a href="#" id="promptsLink">Available Prompts</a></li>
+                <li><a href="#" id="impactLink">Impact</a></li>
+                <li><a href="#" id="changelogLink">Changelog</a></li>
+                <li class="nav-right"><a href="#" id="signupLink">Sign up / Login</a></li>
+            </ul>
+        </div>
+
+        <!-- README Content Section (initially hidden) -->
+        <div id="readmeContent" class="readme-section" style="display: none;"></div>
+
+        <!-- Prompts Content Section (initially hidden) -->
+        <div id="promptsContent" class="prompts-section" style="display: none;">
+            <iframe id="promptsFrame" src="about:blank" frameborder="0"></iframe>
+        </div>
+        
+        <div id="impactContent" class="readme-section" style="display: none;"></div>
+
+        <div id="changelogContent" class="changelog-section" style="display: none;">
+            <!-- This will be populated by JS -->
+        </div>
+
+        <!-- Signup/Login Content Section (initially hidden) -->
+        <div id="signupContent" class="signup-section" style="display: none;">
+            <iframe id="signupFrame" src="about:blank" frameborder="0"></iframe>
+        </div>
+
+        <!-- Main App Content (initially visible) -->
+        <div id="mainContent">
+            <!-- Settings section moved above the tabs -->
+            <div id="Settings" class="settings-panel">
+                <h2>API Settings</h2>
+
+                <!-- Authentication Method Selection -->
+                <div class="form-group">
+                    <label>Authentication Method:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="authMethod" value="apiKey" checked> API Key
+                        </label>
+                        <label>
+                            <input type="radio" name="authMethod" value="token"> Auth Token
+                        </label>
+                    </div>
+                </div>
+
+                <!-- API Key Fields -->
+                <div id="apiKeyFields" class="form-group">
+                    <label for="apiKey">API Key:</label>
+                    <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
+                    <!-- Buttons will be added by our JavaScript -->
+                </div>
+
+                <!-- Auth Token Fields -->
+                <div id="tokenFields" class="form-group" style="display: none;">
+                    <label for="authToken">Auth Token:</label>
+                    <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
+                    <button id="clearTokenButton" class="button"
+                        style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
+                </div>
+                
+                <h3>Display Water, CO₂, Energy Usage</h3>
+                <p class="help-text">This displays impact associated with your API key. All API responses contain this information so you can track your usage in a more granular manner. Please consult the "Impact" page for more information about how these metrics are calculated. </p>
+                <!-- Impact summary button + output -->
+                <div id="impactControls" class="form-group" style="margin-top: 10px;">
+                    <button id="showImpactBtn" class="button" disabled>Show My Impact</button>
+                    <div id="impactStatus" class="status-display" style="margin-top: 8px;"></div>
+                    <div id="impactSummary" style="margin-top: 12px;"></div>
+                </div>
+
+                <!-- ===== LLM Cost Calculator & Cost Matrix ===== -->
+                <section id="llmCostSection" class="llm-cost-section">
+                <h2>VoucherVision Cost Calculator</h2>
+                <p class="help-text">
+                    On average, herbarium specimens require less than 4,000 input tokens and produce less than 1,000 output tokens. All values are in $USD per 1,000,000 tokens. Estimated costs do not factor in the cost of hosting the VoucherVisionAPI server.
+                </p>
+
+                <div class="llm-cost-controls">
+                    <div class="llm-cost-control">
+                    <label for="llmModelSelect"><strong>Model</strong></label>
+                    <div class="select-wrapper">
+                        <select id="llmModelSelect">
+                            <option value="">Loading models…</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmTokensIn"><strong>Tokens In (per image)</strong></label>
+                    <input type="number" id="llmTokensIn" value="4000" min="0" step="50">
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmTokensOut"><strong>Tokens Out (per image)</strong></label>
+                    <input type="number" id="llmTokensOut" value="1000" min="0" step="50">
+                    </div>
+
+                    <div class="llm-cost-control">
+                    <label for="llmNumImages"><strong>Number of Images</strong></label>
+                    <input type="number" id="llmNumImages" value="1000" min="0" step="100">
+                    </div>
+
+                    <div class="llm-cost-control llm-cost-total">
+                    <label for="llmTotalCost"><strong>Total Cost (estimate)</strong></label>
+                    <input type="text" id="llmTotalCost" value="$0.00" readonly>
+                    </div>
+                </div>
+
+                <details id="llmCostMatrixDetails">
+                    <summary class="llm-summary">
+                        <h3 style="display:inline;">LLM Provider Cost Matrix</h3>
+                    </summary>
+
+                    <p class="help-text" style="margin-top:8px;">
+                        Models are grouped by provider (OpenAI, Azure, Google, Mistral, Hyperbolic, Local, Other).
+                    </p>
+
+                    <div id="llmCostTables" class="llm-cost-grid"></div>
+                </details>
+
+                </section>
+
+                <style>
+                /* Existing details/summary styling (Minor adjustment for better summary look) */
+                #llmCostMatrixDetails summary {
+                    cursor: pointer;
+                    padding: 8px 0;
+                    list-style: none;
+                    transition: color 0.2s;
+                }
+
+                #llmCostMatrixDetails summary:hover {
+                    color: #38c700;
+                }
+
+                /* Hide default disclosure triangle (Chrome) */
+                #llmCostMatrixDetails summary::-webkit-details-marker {
+                    display: none;
+                }
+
+                /* Custom arrow for the summary/details toggle */
+                #llmCostMatrixDetails summary::after {
+                    content: "🡻";
+                    font-size: 0.8rem;
+                    margin-left: 8px;
+                    transition: transform 0.2s ease-in-out;
+                    opacity: 0.7;
+                    display: inline-block;
+                }
+
+                #llmCostMatrixDetails[open] summary::after {
+                    transform: rotate(90deg);
+                }
+
+                .llm-cost-section {
+                    margin-top: 24px;
+                    padding-top: 16px;
+                    border-top: 1px solid #a7a7a7;
+                }
+
+                /* REVISED: Keeping parent as flexbox and allowing wrapping */
+                .llm-cost-controls {
+                    display: flex;
+                    flex-wrap: wrap; /* Allows items to wrap */
+                    gap: 12px;
+                    align-items: flex-end;
+                    margin: 12px 0 18px 0;
+                }
+
+                .llm-cost-control {
+                    display: flex;
+                    flex-direction: column;
+                    min-width: 140px;
+                }
+
+                /* NEW/FIXED RULE: Force the Model field to take a full row */
+                #llmCostSection .llm-cost-control:has(#llmModelSelect) {
+                    /* flex-basis: 100% forces it to the next line and spans the whole width */
+                    flex-basis: 100%; 
+                    margin-bottom: 12px; /* Adds space before the next row of inputs */
+                    min-width: initial; /* Allows it to shrink if needed (though 100% prevents this) */
+                }
+                /* ---------------------------------------------------- */
+
+                .llm-cost-control label {
+                    font-size: 0.9rem;
+                    margin-bottom: 4px;
+                    color: #333; /* Darker label for contrast */
+                }
+
+                /* --- START: Modern Input/Select Styling Adjustments --- */
+
+                /* 1. Wrapper for the select element (for custom icon) */
+                .select-wrapper {
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                }
+
+                /* 2. Common styles for all inputs and select fields */
+                .llm-cost-control input,
+                .llm-cost-control select {
+                    padding: 8px 10px;
+                    font-size: 0.95rem;
+                    border: 1px solid #ced4da;
+                    border-radius: 6px;
+                    background-color: #f8f9fa;
+                    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                }
+
+                /* 3. Specific styling for the select element */
+                .llm-cost-control select {
+                    /* Hide the default browser dropdown arrow */
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    /* Increase padding on the right to make space for the custom icon */
+                    padding-right: 30px;
+                }
+
+                /* 4. Create the custom down arrow icon */
+                .select-wrapper::after {
+                    content: '▼'; /* Using a standard triangle for better compatibility */
+                    font-size: 0.6em;
+                    color: #495057;
+                    position: absolute;
+                    top: 50%;
+                    right: 12px;
+                    transform: translateY(-50%);
+                    /* Allows mouse clicks to register on the select element underneath */
+                    pointer-events: none;
+                }
+
+                /* Focus and Total Cost Styles */
+                .llm-cost-control input:focus,
+                .llm-cost-control select:focus {
+                    border-color: #80bdff;
+                    outline: 0;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+                    background-color: #fff;
+                }
+
+                .llm-cost-total input {
+                    font-weight: bold;
+                    color: #007bff;
+                    background-color: #e9ecef;
+                    cursor: default;
+                }
+                /* --- END: Modern Input/Select Styling Adjustments --- */
+
+                .llm-cost-grid {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 16px;
+                    margin-top: 10px;
+                }
+
+                /* Reuse your existing card look where possible */
+                .llm-cost-card {
+                    flex: 1 1 260px;
+                    padding: 12px;
+                    /* Assuming vv-card style is defined elsewhere, if not, add basic card styling here */
+                }
+
+                .llm-cost-card h4 {
+                    margin-top: 0;
+                    margin-bottom: 8px;
+                    font-size: 1rem;
+                }
+
+                .llm-cost-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 0.85rem;
+                }
+
+                .llm-cost-table th,
+                .llm-cost-table td {
+                    border-bottom: 1px solid #eee;
+                    padding: 4px 6px;
+                    text-align: left;
+                    white-space: nowrap;
+                }
+
+                .llm-cost-table th {
+                    font-weight: 600;
+                    background-color: #f1f1f1;
+                }
+
+                .llm-cost-table tbody tr:nth-child(even) {
+                    background: #fafafa;
+                }
+
+                /* --- Dynamic prompt template buttons --- */
+                .prompt-template-btn {
+                    display: inline-block;
+                    padding: 6px 12px;
+                    margin: 5px 8px 5px 0;
+                    font-size: 0.9rem;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    background-color: #f8f8f8; /* Default background */
+                    color: #333;
+                    transition: all 0.2s ease;
+                }
+
+                .prompt-template-btn:hover {
+                    background-color: #e2e6ea;
+                    border-color: #b8bdc1;
+                }
+
+                /* Gemini-3 optimized prompts: purple */
+                .gemini-optimized-btn {
+                    background-color: #6a0dad !important; /* Deep Purple Fill */
+                    color: white !important;              /* White text for contrast */
+                    border-color: #580099 !important;     /* Slightly darker purple border */
+                    font-weight: bold;
+                }
+
+                .gemini-optimized-btn:hover {
+                    background-color: #580099 !important; /* Darker hover state */
+                }
+
+                /* Temporary green flash on selection */
+                .selected-flash {
+                    background-color: #4CAF50 !important;
+                    color: white !important;
+                    border-color: #4CAF50 !important;
+                }
+
+                
+                </style>
+                <!-- ===== END LLM Cost Calculator & Cost Matrix ===== -->
+
+            <section id="settingsSection" class="llm-cost-section">
+            <h2>VoucherVision Settings</h2>
+                <h3>About OCR Engine Options</h3>
+                <p class="help-text">Select one or two OCR engines below. Each engine has different capabilities and
+                    performance characteristics. NOTE: The OCR models are instructed to detect handwritten text and stricken text to inform the parsing model of these features. 
+                    This is accomplished by having the OCR model place section signs on either side of stricken text (§stricken text§) and 
+                    guillemet quotes on either side of handwritten text («handwritten text»). These features are removed/cleaned from the API response prior to returning it to you, 
+                    only the parsing LLM sees them. All prompts that want to take advantage of this tool should include the following instructions in their prompt: 
+                    """Redacted or stricken text will have section signs on either side (§stricken text§). Handwritten text will have guillemet quotes on either side («handwritten text»)"""</p>
+                <div
+                    style="background-color: #e8f5e9; border: 1px solid #c8e6c9; border-left: 4px solid #4CAF50; border-radius: 4px; padding: 15px; margin: 15px 0;">
+                    <p>About the models:</p>
+                    <ul>
+                        <li><strong>Gemini 3.1 Flash Lite</strong>: The fastest and cheapest model. Great for bulk workloads.
+                        </li>
+                        <li><strong>Gemini 3 Flash</strong>: This model is still in Google's beta testing and might behave unexpectedly.
+                        </li>
+                        <li><strong>Gemini 3.1 Pro</strong>: An extremely capable model. By far the best model for reading handwritten labels, beating out all other OCR solutions. Try the SLTPvM_geolocate prompt! Please don't run this on large batches for now. By default you will only have <strong>100 free API calls for 'Pro' models</strong>, contact us to increase this limit.
+                        </li>
+                        <!-- <li><strong>Gemini 2.5 Pro</strong>: High accuracy, especially for handwritten text, can
+                            follow complex instructions, like parsing multiple species determinations. Can perform geolocation,
+                            search the internet to validate content, etc.
+                        </li>
+                        <li><strong>Gemini 2.5 Flash</strong>: Good, but not as good as 2.0 Flash. Handwriting
+                            performance seems worse than Gemini 2.0 Flash</li>
+                        <li><strong>Gemini 2.0 Flash</strong>: Fast processing with good accuracy for most specimens. The workhorse model. Start here.
+                        </li> -->
+                        <li><strong>OCR Only</strong>: Extract text only (check box below)</li>
+                    </ul>
+                </div>
+
+                <h3>OCR Engines (can select one or multiple):</h3>
+                <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
+                    <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
+                        <style>
+                            /* Tooltip container */
+                            .custom-tooltip {
+                                position: relative;
+                                display: inline-block;
+                            }
+
+                            /* Tooltip text - hidden by default */
+                            .custom-tooltip:hover::after {
+                                content: attr(data-tooltip);
+                                visibility: visible;
+                                width: 240px;
+                                background-color: #4CAF50;
+                                color: #fff;
+                                text-align: center;
+                                padding: 5px 0;
+                                border-radius: 6px;
+
+                                /* Position the tooltip text */
+                                position: absolute;
+                                z-index: 100;
+                                top: 0;
+                                left: 110%;
+                            }
+
+                            /* Tooltip arrow */
+                            .custom-tooltip:hover::before {
+                                content: "";
+                                visibility: visible;
+                                position: absolute;
+                                top: 50%;
+                                right: -10px;
+                                /* Position to the right of the element */
+                                margin-top: -5px;
+                                border-width: 5px;
+                                border-style: solid;
+                                border-color: transparent transparent transparent #4CAF50;
+                                z-index: 101;
+                            }
+                        </style>
+                        
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="The fastest and cheapest model. Great for bulk workloads.">
+                                <input type="checkbox" name="engines" value="gemini-3.1-flash-lite-preview" checked> gemini-3.1-flash-lite-preview
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest version 3 model.">
+                                <input type="checkbox" name="engines" value="gemini-3-flash-preview" unchecked> gemini-3-flash-preview
+                            </label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3.1 Pro performs exceptionally well but is very expensive. ">
+                                <input type="checkbox" name="engines" value="gemini-3.1-pro-preview" unchecked> gemini-3.1-pro-preview
+                            </label>
+                        </div>
+
+                        <!-- <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
+                                <input type="checkbox" name="engines" value="gemini-2.5-pro" unchecked> gemini-2.5-pro
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="The 2.5 models are currently Experimental models from Google, sometimes they fail to return OCR right now. That should get better later">
+                                <input type="checkbox" name="engines" value="gemini-2.5-flash" unchecked> gemini-2.5-flash
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Use this model. You can add another model for even better support">
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash" checked> gemini-2.0-flash
+                            </label>
+                        </div> -->
+                        
+                        <!-- <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Will be deprecated sometime in 2025 (but it does perform well)">
+                                <input type="checkbox" name="engines" value="gemini-1.5-pro" unchecked>gemini-1.5-pro
+                            </label>
+                        </div> -->
+                        <!-- <div class="checkbox-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Very lightweight">
+                                <input type="checkbox" name="engines" value="gemini-2.0-flash-lite" unchecked>gemini-2.0-flash-lite
+                            </label>
+                        </div> -->
+
+                    </div>
+
+                    <div style="margin-top: 0px;"> <!-- Aligned with the OCR Engines label -->
+                        <div
+                            style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
+                            <label>
+                                <input type="checkbox" id="ocrOnly"> OCR Only Mode
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <div
+                            style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
+                            <label>
+                                <input type="checkbox" id="notebookMode"> Notebook Mode
+                            </label>
+                            <p class="help-text">Bypasses TextCollage and uses the uploaded image directly. Produces markdown files.</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <div
+                            style="background-color: #f8f8f8; border: 1px solid #ddd; border-radius: 4px; padding: 15px; width: 50%;">
+                            <label>
+                                <input type="checkbox" id="skipLabelCollage"> Skip Label Collage
+                            </label>
+                            <p class="help-text">Bypasses TextCollage and uses the uploaded image directly.</p>
+                        </div>
+                    </div>
+                      
+                </div>
+
+                <h3>LLM Model for creating JSON:</h3>
+                <p>Please use gemini-3.1-flash-lite-preview for bulk workloads and reserve gemini-3.1-pro-preview for the prompts that are optimized to take full advantage of its capabilities (e.g. SLTPvM_geolocate_flag_multispecimen.yaml).</p>
+                <p>SLTPvM_geolocate_flag_multispecimen.yaml will flag sheets that have more than one specimen (barcodes) and will automatically geolocate specimens that lack GPS coordinates in the label text</p>
+                <div style="display: table; width: 100%; table-layout: fixed; margin-bottom: 20px;">
+                    <div style="display: table-cell; width: 50%; padding-right: 20px; vertical-align: top;">
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="The fastest and cheapest model. Great for bulk workloads.">
+                                <input type="radio" name="llm_model" value="gemini-3.1-flash-lite-preview" checked> gemini-3.1-flash-lite-preview
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3 flash performs well and is the cheapest version 3 model.">
+                                <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 3.1 Pro performs exceptionally well but is very expensive. Please don't run this on large batches for now.">
+                                <input type="radio" name="llm_model" value="gemini-3.1-pro-preview"> gemini-3.1-pro-preview
+                            </label>
+                        </div>
+                        <!-- <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 2.5 performs well but is very expensive. Please don't run this on large batches for now.">
+                                <input type="radio" name="llm_model" value="gemini-2.5-pro"> gemini-2.5-pro
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Gemini 2.5 flash performs well.">
+                                <input type="radio" name="llm_model" value="gemini-2.5-flash"> gemini-2.5-flash
+                            </label>
+                        </div>
+                        <div class="radio-group">
+                            <label  class="custom-tooltip"
+                                data-tooltip="Use this for bulk workloads. This works well in most cases, except for particularly difficult handwriting.">
+                                <input type="radio" name="llm_model" value="gemini-2.0-flash"> gemini-2.0-flash
+                            </label>
+                        </div> -->
+                        <!-- <div class="radio-group">
+                            <label class="custom-tooltip"
+                                data-tooltip="Disabled because it will be deprecated sometime in 2025 (but it does perform well)">
+                                <input type="radio" name="llm_model" value="gemini-1.5-pro" disabled> gemini-1.5-pro
+                            </label>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3>World Flora Online (WFO) Validation:</h3>
+                    <p class="help-text">Enable taxonomic validation against the World Flora Online database for plant specimens. This adds botanical name verification and taxonomic information to the results.</p>
+                    <div class="checkbox-group">
+                        <label class="custom-tooltip"
+                            data-tooltip="Validates plant names against World Flora Online database and provides taxonomic corrections">
+                            <input type="checkbox" id="includeWfo" name="include_wfo" value="true"> Include WFO validation
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3>COP90 Elevation Lookup:</h3>
+                    <p class="help-text">Automatically derives elevation in meters from the specimen's latitude and longitude using the Copernicus DEM 90m global dataset.</p>
+                    <div class="checkbox-group">
+                        <label class="custom-tooltip"
+                            data-tooltip="Queries COP90 GeoTIFF tiles stored in Google Cloud Storage to return elevation (m) for the transcribed coordinates">
+                            <input type="checkbox" id="useCop90" name="use_cop90" value="true"> Include COP90 elevation
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <h3 for="promptTemplate">Prompt Template:</h3>
+                    <p class="help-text">Gemini-3 optimized prompts are purple</p>
+                    <input type="text" id="promptTemplate" value="SLTPvM_geolocate.yaml">
+                    <!-- This is where the prompts buttons will be added -->
+                    <div id="promptButtonsArea"></div>
+                </div>
+
+                <div class="form-group">
+                    <button id="testCorsButton" class="button">Test CORS Support</button>
+                    <div id="corsStatus" class="status-display"></div>
+                </div>
+            </div>
+            </section>
+
+
+            <div class="tabs">
+                <div class="tab active" data-tab="ImageUrl">Image URL</div>
+                <div class="tab" data-tab="FileUpload">File Upload</div>
+                <div class="tab" data-tab="BatchUrls">Batch URLs</div>
+                <div class="tab" data-tab="BatchFolder">Batch Folder</div>
+            </div>
+
+            <div id="FileUpload" class="tab-content">
+                <h2>Test with File Upload</h2>
+                <!-- ... File Upload Input/Button ... -->
+                 <div class="form-group file-input-container">
+                     <label for="fileInput">Select an image file:</label>
+                     <input type="file" id="fileInput" accept="image/*">
+                     <img id="imagePreview" class="file-preview" src="#" alt="Image Preview">
+                 </div>
+                 <button id="uploadButton" class="button">Upload and Process</button>
+                 <div id="fileResults" class="results">
+                    <div id="fileJsonResults" class="json-results"></div> <!-- Results appear here -->
+                 </div>
+            </div>
+
+            <div id="ImageUrl" class="tab-content active">
+                <h2>Test with Image URL</h2>
+                <div class="form-group">
+                    <label for="imageUrl">Image URL:</label>
+                    <input type="text" id="imageUrl"
+                        value="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1122841:MICH-V-1122841/full/res:0/0/native.jpg"
+                        placeholder="Enter image URL">
+                    <div style="margin-top: 6px; font-size: 0.85em; color: #666;">
+                        Try these:
+                        <span style="margin-left: 4px;">
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1122841:MICH-V-1122841/full/res:0/0/native.jpg">Jouvea pilosa (Challenging Handwritten Determination)</a>
+                        </span>
+                        &middot;
+                        <span>
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://medialib.naturalis.nl/file/id/L.3800382/format/large">Quercus oxyodon (Printed Text)</a>
+                        </span>
+                        &middot;
+                        <span>
+                            <button onclick="document.getElementById('imageUrl').value=this.nextElementSibling.dataset.url;"
+                                style="cursor:pointer; border:none; background:none; padding:0 2px; font-size:0.9em;" title="Copy to input">&#128203;</button><a
+                                href="#" onclick="document.getElementById('imageUrl').value=this.dataset.url; return false;"
+                                data-url="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg">Liriodendron tulipifera (Challenging Handwritten Text)</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button id="testUrlAvailability" class="button">Test URL Availability</button>
+                    <span id="urlTestResult"></span>
+                </div>
+                <button id="processUrlButton" class="button">Process URL</button>
+                <div id="urlResults" class="results">
+                    <div id="urlJsonResults" class="json-results"></div>
+                </div>
+            </div>
+
+            <!-- New tab for Batch URL Processing -->
+            <div id="BatchUrls" class="tab-content">
+                <h2>Batch Process URLs</h2>
+                <div class="form-group">
+                    <label>Upload URL List:</label>
+                    <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs
+                        in a column.</p>
+                    <input type="file" id="batchUrlFileInput" accept=".txt,.csv">
+                    <div id="urlFilePreview" class="file-list"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="csvUrlColumn">CSV URL Column Name (if using CSV):</label>
+                    <input type="text" id="csvUrlColumn" value="url" placeholder="Enter column name containing URLs">
+                </div>
+
+                <div class="form-group">
+                    <p>Example CSV file format:</p>
+                    <table class="csv-example">
+                        <thead>
+                            <tr>
+                                <th>url</th>
+                                <th>description</th>
+                                <th>category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>https://example.com/image1.jpg</td>
+                                <td>Specimen 1</td>
+                                <td>Category A</td>
+                            </tr>
+                            <tr>
+                                <td>https://example.com/image2.jpg</td>
+                                <td>Specimen 2</td>
+                                <td>Category B</td>
+                            </tr>
+                            <tr>
+                                <td>https://example.com/image3.jpg</td>
+                                <td>Specimen 3</td>
+                                <td>Category C</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="saveBatchToCsv" checked disabled> Save results to CSV
+                        </label>
+                    </div>
+                </div>
+
+                <div class="batch-controls">
+                    <div class="concurrency-selector">
+                        <label for="concurrencySlider">Concurrent requests:</label>
+                        <input type="range" id="concurrencySlider" min="1" max="32" value="8">
+                        <span id="concurrencyValue">8</span>
+                    </div>
+                    <button id="processBatchUrlsButton" class="button">Process URLs</button>
+                </div>
+
+                <div class="batch-progress" style="display: none;">
+                    <div class="progress-bar"></div>
+                    <div class="progress-stats">
+                        <span class="progress-text">Processing...</span>
+                        <span class="progress-count">0/0</span>
+                    </div>
+                </div>
+
+                <div class="url-preview-gallery"></div>
+                <div id="batchUrlResults" class="batch-results">
+                    <div id="batchUrlJsonResults" class="json-results"></div>
+                </div>
+            </div>
+
+            <!-- New tab for Batch Folder Processing -->
+            <div id="BatchFolder" class="tab-content">
+                <h2>Batch Process Local Images</h2>
+
+                <div class="folder-drop-zone" id="imageFolderDropZone">
+                    <p>Drop image files here or</p>
+                    <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
+                    <div id="selectedFilesList" class="file-list"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" id="saveImageBatchToCsv" checked disabled> Save results to CSV
+                        </label>
+                    </div>
+                </div>
+
+                <div class="batch-controls">
+                    <div class="concurrency-selector">
+                        <label for="imageConcurrencySlider">Concurrent requests:</label>
+                        <input type="range" id="imageConcurrencySlider" min="1" max="32" value="8">
+                        <span id="imageConcurrencyValue">8</span>
+                    </div>
+                    <button id="processBatchImagesButton" class="button">Process Images</button>
+                </div>
+
+                <div class="batch-progress" style="display: none;">
+                    <div class="progress-bar"></div>
+                    <div class="progress-stats">
+                        <span class="progress-text">Processing...</span>
+                        <span class="progress-count">0/0</span>
+                    </div>
+                </div>
+
+                <div id="batchImageResults" class="batch-results">
+                    <div id="batchImageJsonResults" class="json-results"></div>
+                </div>
+            </div>
+
+            <!-- ===== NEW Global Map Section ===== -->
+            <div class="global-map-section" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9;">
+                <h3 style="margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">🗺️ Specimen Location Map (Last Processed)</h3>
+                <div class="coord-status invalid" id="global-map-coord-status">⚠️ Waiting for results with coordinates...</div>
+                <div id="global-map-container" style="width: 100%; height: 450px; border-radius: 8px; margin-top: 10px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"></div>
+           </div>
+           <!-- ================================ -->
+
+            <div class="debug-section">
+                <h3>Debug Information</h3>
+                <div id="debugInfo" class="logs"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include showdown.js for Markdown conversion -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+
+   
+
+    <script>
+    (function () {
+        // ---- Helper: classify model key into a provider bucket ----
+        function getProvider(key) {
+        if (key.startsWith('GPT_')) return 'OpenAI';
+        // if (key.startsWith('AZURE_')) return 'Azure OpenAI';
+        if (key.startsWith('GEMINI_') || key.startsWith('PALM2_')) return 'Google';
+        // if (
+        //     key.startsWith('OPEN_') ||
+        //     key.startsWith('MISTRAL_') ||
+        //     key.startsWith('MINISTRAL_') ||
+        //     key.startsWith('PIXTRAL')
+        // ) return 'Mistral';
+        if (key.startsWith('Hyperbolic_')) return 'Hyperbolic';
+        // if (key.startsWith('LOCAL_') || key.indexOf('phyloforfun') !== -1) return 'Local';
+        return 'Other';
+        }
+
+        // Simple "prettifier" for model names
+        function prettyNameFromKey(key) {
+        // Turn GPT_4o_2024_08_06 -> GPT 4o (2024-08-06)
+        let name = key.replace(/_/g, ' ');
+        // Small tweak for dates: 2024 08 06 -> 2024-08-06
+        name = name.replace(/(\d{4}) (\d{2}) (\d{2})/, '$1-$2-$3');
+        return name;
+        }
+
+        function formatPrice(v) {
+        if (typeof v !== 'number' || isNaN(v)) return '';
+        // trim trailing zeros but keep at most 4 decimals
+        const s = v.toFixed(4).replace(/0+$/,'').replace(/\.$/,'');
+        return '$' + s;
+        }
+
+        // ---- Main initializer ----
+        function initLlmCostUI(costData) {
+        const selectEl   = document.getElementById('llmModelSelect');
+        const inEl       = document.getElementById('llmTokensIn');
+        const outEl      = document.getElementById('llmTokensOut');
+        const imgEl      = document.getElementById('llmNumImages');
+        const totalEl    = document.getElementById('llmTotalCost');
+        const tablesEl   = document.getElementById('llmCostTables');
+
+        if (!selectEl || !inEl || !outEl || !imgEl || !totalEl || !tablesEl) {
+            console.warn('[LLM Cost] UI elements not found; skipping setup.');
+            return;
+        }
+
+        // Build model list from YAML data
+        const models = [];
+        for (const key in costData) {
+            if (!Object.prototype.hasOwnProperty.call(costData, key)) continue;
+            const entry = costData[key] || {};
+            const priceIn  = Number(entry.in);
+            const priceOut = Number(entry.out);
+            if (isNaN(priceIn) || isNaN(priceOut)) continue; // skip weird entries
+
+            const provider = getProvider(key);
+            models.push({
+            key,
+            provider,
+            name: prettyNameFromKey(key),
+            in: priceIn,
+            out: priceOut
+            });
+        }
+
+        if (!models.length) {
+            selectEl.innerHTML = '<option value="">No models found in api_cost.yaml</option>';
+            tablesEl.innerHTML =
+            '<div class="vv-card llm-cost-card">No cost data loaded from <code>api_cost.yaml</code>.</div>';
+            return;
+        }
+
+        // Sort models by provider then name
+        models.sort((a, b) => {
+            if (a.provider === b.provider) return a.name.localeCompare(b.name);
+            return a.provider.localeCompare(b.provider);
+        });
+
+        // Map for quick lookup
+        const modelMap = {};
+        models.forEach(m => { modelMap[m.key] = m; });
+
+        // Populate <select>
+        selectEl.innerHTML = '';
+        models.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.key;
+            opt.textContent = `${m.provider}: ${m.name}`;
+            selectEl.appendChild(opt);
+        });
+
+        // Try to default to Gemini 2.0 Flash if present, else first model
+        const geminiKey = models.find(m => m.key === 'GEMINI_2_5_FLASH')?.key;
+        selectEl.value = geminiKey || models[0].key;
+
+        // Build provider-grouped cost tables
+        const byProvider = {};
+        models.forEach(m => {
+            if (!byProvider[m.provider]) byProvider[m.provider] = [];
+            byProvider[m.provider].push(m);
+        });
+
+        const providerOrder = ['OpenAI','Azure OpenAI','Google','Mistral','Hyperbolic','Local','Other'];
+
+        const htmlChunks = [];
+        providerOrder.forEach(provider => {
+            const list = byProvider[provider];
+            if (!list || !list.length) return;
+            list.sort((a, b) => a.name.localeCompare(b.name));
+            htmlChunks.push(`
+            <div class="vv-card llm-cost-card">
+                <h4>${provider}</h4>
+                <table class="llm-cost-table">
+                <thead>
+                    <tr>
+                    <th>Model</th>
+                    <th>Input ($/1M)</th>
+                    <th>Output ($/1M)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${list.map(m => `
+                    <tr>
+                        <td>${m.name}</td>
+                        <td>${formatPrice(m.in)}</td>
+                        <td>${formatPrice(m.out)}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+                </table>
+            </div>
+            `);
+        });
+
+        tablesEl.innerHTML = htmlChunks.join('');
+
+        // ---- Calculator logic (matches Streamlit: cost = (n_in/1e6 * in + n_out/1e6 * out) * n_img) ----
+        function recomputeCost() {
+            const key = selectEl.value;
+            const model = modelMap[key];
+            if (!model) {
+            totalEl.value = '$0.00';
+            return;
+            }
+
+            const nIn   = Number(inEl.value)  || 0;
+            const nOut  = Number(outEl.value) || 0;
+            const nImg  = Number(imgEl.value) || 0;
+
+            const cost =
+            (nIn  / 1_000_000 * model.in) +
+            (nOut / 1_000_000 * model.out);
+
+            const total = cost * nImg;
+            totalEl.value = '$' + total.toFixed(2);
+        }
+
+        // Recompute when anything changes
+        ['change','input'].forEach(evt => {
+            selectEl.addEventListener(evt, recomputeCost);
+            inEl.addEventListener(evt, recomputeCost);
+            outEl.addEventListener(evt, recomputeCost);
+            imgEl.addEventListener(evt, recomputeCost);
+        });
+
+        // Initial computation
+        recomputeCost();
+        }
+
+        // ---- Fetch and parse api_cost.yaml ----
+        document.addEventListener('DOMContentLoaded', function () {
+        const section = document.getElementById('llmCostSection');
+        if (!section) return; // user removed the HTML block
+
+        fetch('./api_cost.yaml')
+            .then(resp => {
+            if (!resp.ok) throw new Error('Failed to load api_cost.yaml: ' + resp.status);
+            return resp.text();
+            })
+            .then(text => {
+            if (typeof jsyaml === 'undefined') {
+                throw new Error('js-yaml not loaded; cannot parse api_cost.yaml');
+            }
+            const data = jsyaml.load(text) || {};
+            initLlmCostUI(data);
+            })
+            .catch(err => {
+            console.error('[LLM Cost] Error loading api_cost.yaml:', err);
+            const tablesEl = document.getElementById('llmCostTables');
+            const selectEl = document.getElementById('llmModelSelect');
+            if (tablesEl) {
+                tablesEl.innerHTML =
+                '<div class="vv-card llm-cost-card">Error loading <code>api_cost.yaml</code>. Please ensure the file is served alongside this page.</div>';
+            }
+            if (selectEl) {
+                selectEl.innerHTML =
+                '<option value="">Error loading api_cost.yaml</option>';
+            }
+            });
+        });
+    })();
+    </script>
+
+
+    <!-- Additional initialization script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image preview functionality
+            document.getElementById('fileInput').addEventListener('change', function (event) {
+                const imagePreview = document.getElementById('imagePreview');
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.style.display = 'block';
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    imagePreview.style.display = 'none';
+                }
+            });
+
+            // Navigation functionality
+            const homeLink = document.getElementById('homeLink');
+            const readmeLink = document.getElementById('readmeLink');
+            const promptsLink = document.getElementById('promptsLink');
+            const impactLink = document.getElementById('impactLink');
+            const changelogLink = document.getElementById('changelogLink');
+            const signupLink = document.getElementById('signupLink');
+            const mainContent = document.getElementById('mainContent');
+            const readmeContent = document.getElementById('readmeContent');
+            const promptsContent = document.getElementById('promptsContent');
+            const changelogContent = document.getElementById('changelogContent');
+            const signupContent = document.getElementById('signupContent');
+            const promptsFrame = document.getElementById('promptsFrame');
+            const signupFrame = document.getElementById('signupFrame');
+
+            // Load README content
+            fetch('./README.md')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Convert markdown to HTML
+                    const converter = new showdown.Converter({
+                        tables: true,
+                        tasklists: true,
+                        strikethrough: true,
+                        ghCodeBlocks: true
+                    });
+                    const html = converter.makeHtml(data);
+                    readmeContent.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error fetching README:', error);
+                    readmeContent.innerHTML = '<div class="error">Error loading README file. Please make sure README.md exists and is accessible.</div>';
+                });
+
+            // Load impact content (convert IMPACT.md → HTML like README)
+            function loadImpact() {
+                const impactContent = document.getElementById('impactContent');
+                const impactFrame = document.getElementById('impactFrame'); // optional: hide if you’re no longer using it
+
+                // Show loading state
+                impactContent.classList.add('loading');
+
+                fetch('./IMPACT.md')
+                    .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                    })
+                    .then(data => {
+                    const converter = new showdown.Converter({
+                        tables: true,
+                        tasklists: true,
+                        strikethrough: true,
+                        ghCodeBlocks: true
+                    });
+                    const html = converter.makeHtml(data);
+                    impactContent.innerHTML = html;  // inject converted HTML directly
+                    })
+                    .catch(error => {
+                    console.error('Error fetching IMPACT.md:', error);
+                    impactContent.innerHTML =
+                        '<div class="error">Error loading IMPACT.md. Please make sure IMPACT.md exists and is accessible.</div>';
+                    })
+                    .finally(() => {
+                    impactContent.classList.remove('loading');
+                });
+            }
+
+            // Function to reset all navigation states
+            function resetNavigation() {
+                // Hide all content sections
+                mainContent.style.display = 'none';
+                readmeContent.style.display = 'none';
+                promptsContent.style.display = 'none';
+                impactContent.style.display = 'none';
+                changelogContent.style.display = 'none';
+                signupContent.style.display = 'none';
+
+                // Remove active class from all nav links
+                homeLink.classList.remove('active');
+                readmeLink.classList.remove('active');
+                promptsLink.classList.remove('active');
+                impactLink.classList.remove('active');
+                changelogLink.classList.remove('active');
+                signupLink.classList.remove('active');
+
+                // Reset iframes to reduce resource usage when not visible
+                promptsFrame.src = 'about:blank';
+                signupFrame.src = 'about:blank';
+            }
+
+            // Handle home link click
+            homeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                mainContent.style.display = 'block';
+                homeLink.classList.add('active');
+            });
+
+            // Handle README link click
+            readmeLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                readmeContent.style.display = 'block';
+                readmeLink.classList.add('active');
+            });
+
+            // Handle prompts link click
+            promptsLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                promptsContent.style.display = 'block';
+                promptsLink.classList.add('active');
+
+                // Load the prompts UI in the iframe
+                promptsFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/prompts-ui';
+
+                // Show loading indicator
+                promptsContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                promptsFrame.onload = function () {
+                    promptsContent.classList.remove('loading');
+                };
+            });
+
+            // Handle impact link click
+            impactLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                impactContent.style.display = 'block';
+                impactLink.classList.add('active');
+                loadImpact();           // <-- load from IMPACT.md
+            });
+
+
+            changelogLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                changelogContent.style.display = 'block';
+                changelogLink.classList.add('active');
+                // The changelog script will handle fetching/displaying the content
+            });
+
+            // Handle signup link click
+            signupLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                resetNavigation();
+                signupContent.style.display = 'block';
+                signupLink.classList.add('active');
+
+                // Load the signup page in the iframe
+                signupFrame.src = 'https://vouchervision-go-738307415303.us-central1.run.app/signup';
+
+                // Show loading indicator
+                signupContent.classList.add('loading');
+
+                // Remove loading indicator when iframe is loaded
+                signupFrame.onload = function () {
+                    signupContent.classList.remove('loading');
+                };
+            });
+
+            // Add manual check for LLM model selections to log them
+            document.querySelectorAll('input[name="llm_model"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    console.log(`LLM model changed to: ${this.value}`);
+                    logDebug(`LLM model selection changed to: ${this.value}`);
+                });
+            });
+        });
+    </script>
+    <!-- MAPBOX_TOKEN_PLACEHOLDER -->
+    <script>
+        // This empty script will be replaced by the server with the actual Mapbox integration
+        // DO NOT MODIFY THIS COMMENT OR LINE - it's used by the server to inject the token
+    </script>
+
+        <!-- START: Embedded Mapbox Initialization Script (FINAL FIX) -->
+        <script>
+            (function() {
+                // --- Hardcode your working Mapbox token here ---
+                let MAPBOX_ACCESS_TOKEN = null;
+
+                fetch('./secret_mapbox.yaml')
+                    .then(resp => {
+                        if (!resp.ok) throw new Error('Failed to load secret_mapbox.yaml: ' + resp.status);
+                        return resp.text();
+                    })
+                    .then(text => {
+                        const parsed = jsyaml.load(text);
+                        MAPBOX_ACCESS_TOKEN = parsed.mapbox_access_token;
+                        logDebug('Mapbox token loaded from secret_mapbox.yaml');
+                    })
+                    .catch(err => {
+                        logError('Could not load secret_mapbox.yaml:', err);
+                    });
+                // ---------------------------------------------
+        
+                let map = null; // Store the single map instance
+                let mapboxLoaded = typeof mapboxgl !== 'undefined';
+        
+                function logDebug(message, ...args) { console.log(`[Map Debug] ${message}`, ...args); }
+                function logError(message, ...args) { console.error(`[Map Error] ${message}`, ...args); }
+        
+                logDebug('Initial Mapbox GL JS loaded status:', mapboxLoaded);
+        
+                // --- Function to create or update the SINGLE map (NO CHANGE) ---
+                function createOrUpdateGlobalMap(data) {
+                    logDebug(">>> createOrUpdateGlobalMap called. Current map instance:", map ? 'Exists' : 'null');
+                    const mapContainerElement = document.getElementById('global-map-container');
+                    const statusElement = document.getElementById('global-map-coord-status');
+        
+                    if (!mapContainerElement || !statusElement) {
+                        logError('Global map container or status element not found.');
+                        return;
+                    }
+                    if (typeof mapboxgl === 'undefined') {
+                            logError('Mapbox GL JS not available for global map.');
+                            mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox GL JS library not loaded.</div>';
+                            return;
+                    }
+                    mapboxLoaded = true;
+                    if (!MAPBOX_ACCESS_TOKEN) {
+                            logError('Mapbox token missing for global map.');
+                            mapContainerElement.innerHTML = '<div style="padding: 20px; text-align: center; color: #d32f2f;">Mapbox token missing.</div>';
+                            return;
+                    }
+                    mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
+        
+                    let lat = 0, lng = 0, hasValidCoordinates = false;
+                    let sourceData = data;
+                    // *** FIX: Check for the full JSON response structure ***
+                    if (data && data.filename) { sourceData = data; logDebug("Using data from the full API response wrapper."); }
+                    const formattedJson = sourceData ? sourceData.formatted_json || null : null;
+                    logDebug("Data used for coordinates:", formattedJson);
+        
+                    if (formattedJson && formattedJson.decimalLatitude && formattedJson.decimalLongitude) {
+                        lat = parseFloat(formattedJson.decimalLatitude);
+                        lng = parseFloat(formattedJson.decimalLongitude);
+                        hasValidCoordinates = !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
+                        logDebug(`Parsed Coords: lat=${lat}, lng=${lng}`);
+                    } else { logDebug("No valid decimalLatitude/decimalLongitude found in formattedJson."); }
+                    logDebug(`Coordinate Validity Check: hasValidCoordinates = ${hasValidCoordinates}`);
+        
+                    statusElement.className = 'coord-status ' + (hasValidCoordinates ? 'valid' : 'invalid');
+                    statusElement.innerHTML = hasValidCoordinates ? `✅ Coordinates found: ${lat.toFixed(4)}, ${lng.toFixed(4)}` : (data ? '⚠️ No valid coordinates in last result. Showing world view.' : '⚠️ Waiting for results with coordinates...');
+        
+                    if (map && typeof map.remove === 'function') {
+                            logDebug('Attempting to update existing global map.');
+                            try {
+                            if (map.marker) { logDebug("Removing existing marker."); map.marker.remove(); map.marker = null; }
+                            else { logDebug("No existing marker to remove."); }
+                            const targetCenter = hasValidCoordinates ? [lng, lat] : [0, 0];
+                            const targetZoom = hasValidCoordinates ? 10 : 1;
+                            logDebug(`Flying map to center: [${targetCenter.join(', ')}], zoom: ${targetZoom}`);
+                            map.flyTo({ center: targetCenter, zoom: targetZoom, essential: true });
+                            if (hasValidCoordinates) {
+                                const popupContent = createPopupContent(formattedJson);
+                                logDebug("Adding new marker.");
+                                setTimeout(() => {
+                                        if (map && map.addControl) {
+                                            map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                                            logDebug("Marker added.");
+                                        } else { logDebug("Map removed before marker could be added."); }
+                                }, 50);
+                            }
+                                logDebug("Requesting map resize.");
+                                requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                            } catch(updateError) { logError("Error during map update (flyTo/marker):", updateError); }
+                    } else {
+                            if (mapContainerElement.classList.contains('mapboxgl-map')) { console.warn('Global map looks initialized but instance is missing/invalid.'); return; }
+                        logDebug('Creating global map (should only happen once on init)');
+                        mapContainerElement.innerHTML = '';
+                        try {
+                            map = new mapboxgl.Map({ container: 'global-map-container', style: 'mapbox://styles/mapbox/outdoors-v12', center: [0, 0], zoom: 1 });
+                            map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+                            map.on('load', () => {
+                                logDebug('Global map loaded.');
+                                if (hasValidCoordinates) {
+                                        const popupContent = createPopupContent(formattedJson);
+                                        map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(popupContent)).addTo(map);
+                                }
+                                requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                            });
+                            map.on('error', (e) => {
+                                logError('Global Mapbox error:', e);
+                                mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error loading map: ${e.error ? e.error.message : 'Unknown error'}</div>`;
+                                map = null;
+                            });
+                        } catch (initError) {
+                            logError('Error initializing global map:', initError);
+                            mapContainerElement.innerHTML = `<div style="padding: 20px; text-align: center; color: #d32f2f;">Error initializing map: ${initError.message}</div>`;
+                            map = null;
+                        }
+                    }
+                }
+        
+                function createPopupContent(formattedJson) {
+                    if (!formattedJson) return 'No details available.';
+                    let content = `<strong>${formattedJson.scientificName || 'Unknown specimen'}</strong><br>`;
+                    if (formattedJson.collectionDate) content += `Date: ${formattedJson.collectionDate}<br>`;
+                    if (formattedJson.collectedBy) content += `Collector: ${formattedJson.collectedBy}<br>`;
+                    if (formattedJson.locality) content += `<small>Locality: ${formattedJson.locality.substring(0, 100)}...</small>`;
+                    return content;
+                }
+        
+                function initializeGlobalMap() {
+                    if (!mapboxLoaded) { console.warn('Embedded Script: Mapbox GL JS not loaded, cannot init global map yet.'); return; }
+                    logDebug('Initializing global map with null data.');
+                    createOrUpdateGlobalMap(null);
+                }
+        
+                function monitorResults() {
+                    logDebug('Setting up MutationObservers for results (TARGETING PARENT)');
+                    const resultContainerIds = ['fileResults', 'urlResults', 'batchUrlResults', 'batchImageResults'];
+                    resultContainerIds.forEach(function(containerId) {
+                        const container = document.getElementById(containerId);
+                        if (container) {
+                            watchContainer(container);
+                        } else {
+                            console.warn('Embedded Script: PARENT Result container not found for monitoring:', containerId);
+                        }
+                    });
+                }
+        
+                // *** FIX: Simplified the observer callback logic ***
+                function watchContainer(container) {
+                    const observer = new MutationObserver(function(mutationsList) {
+                        // The mutation itself is the trigger. No need to inspect it deeply.
+                        // The check function is robust enough to handle cases where no JSON is present.
+                        logDebug("MutationObserver fired for:", container.id || container.className, ". Checking for JSON content.");
+                        checkParentContainerForJson(container);
+                    });
+                    observer.observe(container, { childList: true, subtree: true });
+                    logDebug('MutationObserver attached to PARENT:', container.id || container.className);
+                }
+        
+                function checkParentContainerForJson(parentContainer) {
+                    const jsonContentElement = parentContainer.querySelector('.json-content');
+        
+                    if (jsonContentElement) {
+                        const contentSample = jsonContentElement.textContent.substring(0, 300);
+                        logDebug(`Found .json-content inside ${parentContainer.id || parentContainer.className}. Content starts: "${contentSample}..."`);
+                        setTimeout(() => {
+                            try {
+                                const currentContent = jsonContentElement.textContent;
+                                if (!currentContent.trim()) { logDebug("JSON content is empty after delay, skipping parse."); return; }
+                                const jsonData = JSON.parse(currentContent);
+                                logDebug('JSON parsed successfully. Calling createOrUpdateGlobalMap.');
+                                createOrUpdateGlobalMap(jsonData);
+                            } catch (e) {
+                                logError(`Could not parse JSON from .json-content in ${parentContainer.id || parentContainer.className}. Error:`, e);
+                                logError('Problematic content:', jsonContentElement.textContent);
+                            }
+                        }, 50);
+                    } else {
+                        logDebug(`No .json-content element found inside the mutated container: ${parentContainer.id || parentContainer.className}`);
+                    }
+                }
+        
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('./secret_mapbox.yaml')
+                        .then(resp => {
+                            if (!resp.ok) throw new Error('Failed to load secret_mapbox.yaml');
+                            return resp.text();
+                        })
+                        .then(text => {
+                            MAPBOX_ACCESS_TOKEN = jsyaml.load(text).mapbox_access_token;
+                            logDebug('Mapbox token loaded.');
+                            setTimeout(() => {
+                                mapboxLoaded = typeof mapboxgl !== 'undefined';
+                                if (!mapboxLoaded) {
+                                    logError('Mapbox GL JS not loaded.');
+                                    return;
+                                }
+                                initializeGlobalMap();
+                                monitorResults();
+                            }, 150);
+                        })
+                        .catch(err => {
+                            logError('Could not load Mapbox token:', err);
+                        });
+                });
+        
+            })();
+            </script>
+            <!-- END: Embedded Mapbox Initialization Script -->
+
+    <!-- API Status Indicator Script -->
+    <script>
+    // Global flag to enable/disable the API status checker
+    const ENABLE_API_CHECK = false;
+
+    if (ENABLE_API_CHECK) {
+        // --- Original API Status Checker Code ---
+        (function() {
+            let statusCheckInterval;
+            let isCheckingStatus = false;
+            
+            function createStatusIndicator() {
+                const statusContainer = document.createElement('div');
+                statusContainer.id = 'api-status-indicator';
+                statusContainer.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    background: rgba(255, 255, 255, 0.95);
+                    border: 1px solid #ddd;
+                    border-radius: 20px;
+                    padding: 8px 12px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                    z-index: 1000;
+                    transition: all 0.3s ease;
+                    backdrop-filter: blur(5px);
+                    max-width: 200px;
+                    text-align: center;
+                    cursor: pointer;
+                `;
+                
+                statusContainer.addEventListener('click', function() {
+                    if (!isCheckingStatus) {
+                        checkAPIStatus();
+                    }
+                });
+                
+                statusContainer.title = 'Click to refresh API status';
+                
+                document.body.insertBefore(statusContainer, document.body.firstChild);
+                
+                return statusContainer;
+            }
+            
+            function updateStatusDisplay(isAvailable, isChecking = false) {
+                const container = document.getElementById('api-status-indicator');
+                if (!container) return;
+                
+                if (isChecking) {
+                    container.innerHTML = '🔍 <span style="color: #666;">Checking API...</span>';
+                    container.style.borderColor = '#ccc';
+                    container.style.backgroundColor = 'rgba(248, 249, 250, 0.95)';
+                    return;
+                }
+                
+                if (isAvailable) {
+                    container.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
+                    container.style.borderColor = '#4CAF50';
+                    container.style.backgroundColor = 'rgba(232, 245, 233, 0.95)';
+                } else {
+                    container.innerHTML = '🚧 <span style="color: #FF9800;">VVGO API: Down for Maintenance</span>';
+                    container.style.borderColor = '#FF9800';
+                    container.style.backgroundColor = 'rgba(255, 243, 224, 0.95)';
+                }
+            }
+            
+            async function checkAPIStatus() {
+                if (isCheckingStatus) return;
+                
+                isCheckingStatus = true;
+                updateStatusDisplay(false, true);
+                
+                try {
+                    const healthResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', {
+                        method: 'GET',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    });
+                    
+                    if (healthResponse.ok) {
+                        const healthData = await healthResponse.json();
+                        console.log('API Health Check:', healthData);
+                        
+                        if (healthData.maintenance_mode === true) {
+                            updateStatusDisplay(false);
+                            console.log('API Status: Maintenance mode active (from health check)');
+                            return;
+                        }
+                        
+                        const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', {
+                            method: 'GET',
+                            mode: 'cors',
+                            cache: 'no-cache'
+                        });
+                        
+                        if (corsResponse.status === 503) {
+                            updateStatusDisplay(false);
+                            console.log('API Status: Maintenance mode detected (503 from cors-test)');
+                        } else if (corsResponse.ok) {
+                            updateStatusDisplay(true);
+                            console.log('API Status: Available');
+                        } else {
+                            updateStatusDisplay(true);
+                            console.log('API Status: Available (cors-test returned', corsResponse.status, ')');
+                        }
+                    } else {
+                        updateStatusDisplay(false);
+                        console.log('API Status: Health check failed', healthResponse.status);
+                    }
+                } catch (error) {
+                    updateStatusDisplay(false);
+                    console.log('API Status: Network error', error.message);
+                } finally {
+                    isCheckingStatus = false;
+                }
+            }
+            
+            function startStatusMonitoring() {
+                setTimeout(checkAPIStatus, 1500);
+                statusCheckInterval = setInterval(checkAPIStatus, 30000);
+                document.addEventListener('visibilitychange', function() {
+                    if (!document.hidden && !isCheckingStatus) {
+                        setTimeout(checkAPIStatus, 500);
+                    }
+                });
+            }
+            
+            function stopStatusMonitoring() {
+                if (statusCheckInterval) {
+                    clearInterval(statusCheckInterval);
+                    statusCheckInterval = null;
+                }
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    createStatusIndicator();
+                    startStatusMonitoring();
+                });
+            } else {
+                createStatusIndicator();
+                startStatusMonitoring();
+            }
+            
+            window.addEventListener('beforeunload', stopStatusMonitoring);
+            
+            window.VVGOStatus = {
+                check: checkAPIStatus,
+                start: startStatusMonitoring,
+                stop: stopStatusMonitoring
+            };
+        })();
+    } else {
+        // --- Fallback behavior when API check is disabled ---
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create the status indicator container
+            const statusContainer = document.createElement('div');
+            statusContainer.id = 'api-status-indicator';
+            statusContainer.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                background: rgba(232, 245, 233, 0.95);
+                border: 1px solid #4CAF50;
+                border-radius: 20px;
+                padding: 8px 12px;
+                font-size: 12px;
+                font-weight: 500;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(5px);
+                max-width: 200px;
+                text-align: center;
+            `;
+            // Set a static "Available" message without performing any checks
+            statusContainer.innerHTML = '✅ <span style="color: #4CAF50;">VVGO API: Available</span>';
+            
+            // Insert at the beginning of body
+            document.body.insertBefore(statusContainer, document.body.firstChild);
+            
+            console.log("API status check is disabled. Displaying static 'Available' indicator.");
+        });
+    }
+    </script>
+
+
+
+<style>
+    /* Layout container */
+    .vv-grid {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;           /* keep single row */
+      overflow-x: auto;            /* allow horizontal scroll if too many */
+      gap: 16px;
+      padding-bottom: 10px;        /* space below for scrollbar */
+      scroll-snap-type: x mandatory;
+    }
+    .vv-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .vv-grid::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 4px;
+    }
+    .vv-grid::-webkit-scrollbar-thumb:hover {
+      background: #999;
+    }
+    
+    /* Tile cards */
+    .impact-tile {
+      flex: 0 0 180px;             /* fixed width per tile */
+      min-width: 150px;
+      background: var(--vv-card-bg, #fff);
+      border: 1px solid var(--vv-card-border, #e5e7eb);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform .15s ease, box-shadow .15s ease;
+      scroll-snap-align: start;
+    }
+    /* .impact-tile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    } */
+    .impact-icon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+    .impact-label {
+      font-size: 0.9rem;
+      color: var(--vv-muted, #000000);
+      margin-bottom: 2px;
+    }
+    .impact-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--vv-text, #111);
+      margin-bottom: 4px;
+    }
+    .impact-sub {
+      font-size: 0.8rem;
+      color: var(--vv-soft, #000000);
+    }
+    @media (prefers-color-scheme: dark){
+      .impact-tile {
+        background: #e1e0e0;
+        border-color: #343434;
+      }
+      .impact-value { color: #3377ff; }
+    }
+    </style>    
+    <script>
+    (function() {
+      const API_BASE = window.VVGO_API_BASE || location.origin; 
+    
+      // ---------- Formatters (unchanged) ----------
+      function fmtCO2(g){ if(g>=1e9)return(g/1e9).toFixed(2)+' kt CO₂e'; if(g>=1e6)return(g/1e6).toFixed(2)+' t CO₂e'; if(g>=1e3)return((g/1e3).toLocaleString(undefined,{maximumFractionDigits:1}))+' kg CO₂e'; return Math.round(g).toLocaleString()+' g CO₂e'; }
+      function fmtWh(wh){ if(wh>=1e6)return(wh/1e6).toFixed(2)+' MWh'; if(wh>=1e3)return(wh/1e3).toFixed(2)+' kWh'; return (wh>=100?wh.toLocaleString(undefined,{maximumFractionDigits:0}):wh.toLocaleString(undefined,{maximumFractionDigits:1}))+' Wh'; }
+      function fmtTokens(n){ if(n>=1_000_000_000)return(n/1_000_000_000).toFixed(2)+'B'; if(n>=1_000_000)return(n/1_000_000).toFixed(2)+'M'; if(n>=1_000)return(n/1_000).toFixed(2)+'K'; return String(n); }
+      function fmtVolumeML(ml){ if(ml>=1e6)return(ml/1e6).toFixed(2)+' m³'; if(ml>=1e3)return(ml/1e3).toFixed(2)+' L'; return Math.round(ml).toLocaleString()+' mL'; }
+    
+      // ---------- Render (theme-matched) ----------
+      function renderSummary(t) {
+        // Data ready
+        const items = [
+            {
+            label: 'Images Processed',
+            value: Number(t.total_images_processed || 0).toLocaleString(),
+            sub: 'All time',
+            icon: '🖼️'
+            },
+            {
+            label: 'Total Tokens',
+            value: fmtTokens(t.total_tokens_all || 0),
+            sub: 'Prompt + completion',
+            icon: '🔠'
+            },
+            {
+            label: 'Energy Used',
+            value: fmtWh(t.total_watt_hours || 0),
+            sub: 'Aggregated Wh',
+            icon: '⚡'
+            },
+            {
+            label: 'Estimated CO₂e',
+            value: fmtCO2(t.total_grams_CO2 || 0),
+            sub: 'Sum across usage',
+            icon: '🌍'
+            },
+            {
+            label: 'Water (est.)',
+            value: fmtVolumeML(t.total_mL_water || 0),
+            sub: 'Lifecycle estimate',
+            icon: '💧'
+            },
+        ];
+
+        // Tile grid
+        return `
+            <div class="vv-grid">
+            ${items.map(i => `
+                <div class="vv-card impact-tile">
+                <div class="impact-icon">${i.icon}</div>
+                <div class="impact-label">${i.label}</div>
+                <div class="impact-value">${i.value}</div>
+                <div class="impact-sub">${i.sub}</div>
+                </div>
+            `).join('')}
+            </div>
+        `;
+        }
+
+    
+      // ---------- Borrow from api_key_validator.js ----------
+      // Actual API key/token are saved in dataset OR localStorage by your validator.
+      function getEffectiveApiKey(){
+        const el = document.getElementById('apiKey');
+        const fromDataset = (el?.dataset?.apiKey || '').trim();
+        if (fromDataset) return fromDataset;
+        const stored = (localStorage.getItem('vouchervision_api_key') || '').trim();
+        return stored;
+      }
+      function getEffectiveToken(){
+        const el = document.getElementById('authToken');
+        const fromDataset = (el?.dataset?.authToken || '').trim();
+        if (fromDataset) return fromDataset;
+        const stored = (localStorage.getItem('vouchervision_auth_token') || '').trim();
+        return stored;
+      }
+    
+      // Enable button if *either* API key or token is present.
+      function updateButtonState(){
+        const btn = document.getElementById('showImpactBtn');
+        if (!btn) return;
+        // Reuse your validator’s checks when available:
+        const apiReady  = (typeof isApiKeySet === 'function') ? isApiKeySet() : !!getEffectiveApiKey();
+        const tokReady  = (typeof isAuthTokenSet === 'function') ? isAuthTokenSet() : !!getEffectiveToken();
+        btn.disabled = !(apiReady || tokReady);
+      }
+    
+      // Keep in sync with validator updates
+      function attachObservers(){
+        const watchIds = ['apiKey','authToken'];
+        watchIds.forEach(id => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          new MutationObserver(updateButtonState).observe(el, { attributes:true });
+        });
+        window.addEventListener('storage', updateButtonState);
+        // After the validator initializes (it runs on $(document).ready), recheck:
+        setTimeout(updateButtonState, 300); // minor delay so validator can populate dataset/localStorage
+      }
+    
+      // ---------- Fetch & render ----------
+      async function fetchImpact(){
+        const btn = document.getElementById('showImpactBtn');
+        const status = document.getElementById('impactStatus');
+        const out = document.getElementById('impactSummary');
+        if (!btn || !status || !out) return;
+    
+        btn.disabled = true;
+        status.textContent = 'Fetching impact summary…';
+        out.innerHTML = '';
+    
+        try {
+          const headers = { 'Content-Type':'application/json' };
+          const apiKey = getEffectiveApiKey();
+          const token  = getEffectiveToken();
+    
+          if (apiKey) headers['X-API-Key'] = apiKey;      // prefer API key
+          else if (token) headers['Authorization'] = 'Bearer ' + token;
+    
+          const resp = await fetch(`${API_BASE}/impact`, { method:'GET', mode:'cors', cache:'no-cache', headers });
+    
+          if (!resp.ok) {
+            const text = await resp.text().catch(()=> '');
+            throw new Error(`HTTP ${resp.status}: ${text || resp.statusText}`);
+          }
+    
+          const data = await resp.json();
+          if (!data || !data.totals) throw new Error('Unexpected response shape.');
+    
+          status.textContent = '✅ Impact summary loaded';
+          out.innerHTML = renderSummary(data.totals);
+        } catch (err) {
+          console.error('Impact fetch error:', err);
+          status.textContent = '⚠️ ' + (err?.message || 'Failed to fetch impact summary');
+        } finally {
+          updateButtonState();
+        }
+      }
+    
+      document.addEventListener('DOMContentLoaded', function(){
+        const btn = document.getElementById('showImpactBtn');
+        if (btn) btn.addEventListener('click', fetchImpact);
+        attachObservers();
+        updateButtonState();
+      });
+    })();
+    </script>
+
+</body>
+</html>

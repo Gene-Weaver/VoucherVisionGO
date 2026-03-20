@@ -1551,14 +1551,14 @@ $(document).ready(function() {
         }
         
         // Disable the process button
-        $(this).prop('disabled', true).text('Processing...');
-        
+        setButtonProcessing(this, true);
+
         // Get concurrency setting
         const concurrency = parseInt($('#concurrencySlider').val(), 10);
-        
+
         // Check if save to CSV is requested
         const saveToCSV = $('#saveBatchToCsv').is(':checked');
-        
+
         try {
             // Process the URLs
             await processBatchUrls(parsedData.urls, concurrency, { saveToCSV });
@@ -1567,7 +1567,7 @@ $(document).ready(function() {
             alert(`Processing error: ${error.message}`);
         } finally {
             // Re-enable the process button
-            $(this).prop('disabled', false).text('Process URLs');
+            setButtonProcessing(this, false);
         }
     });
     
@@ -1601,14 +1601,14 @@ $(document).ready(function() {
         }
         
         // Disable the process button
-        $(this).prop('disabled', true).text('Processing...');
-        
+        setButtonProcessing(this, true);
+
         // Get concurrency setting
         const concurrency = parseInt($('#imageConcurrencySlider').val(), 10);
-        
+
         // Check if save to CSV is requested
         const saveToCSV = $('#saveImageBatchToCsv').is(':checked');
-        
+
         try {
             // Process the images
             await processBatchImages(imageFiles, concurrency, { saveToCSV });
@@ -1617,7 +1617,7 @@ $(document).ready(function() {
             alert(`Processing error: ${error.message}`);
         } finally {
             // Re-enable the process button
-            $(this).prop('disabled', false).text('Process Images');
+            setButtonProcessing(this, false);
         }
     });
 });

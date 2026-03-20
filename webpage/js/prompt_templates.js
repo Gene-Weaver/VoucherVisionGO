@@ -9,25 +9,17 @@ const optimized_for_gemini_3 = [
 function setupPromptTemplates() {
     console.log('Prompt templates script loaded');
 
-    const promptTemplateGroup = document.querySelector('.form-group h3[for="promptTemplate"]')?.parentElement;
-    if (!promptTemplateGroup) {
-        console.error('Could not find prompt template group on first try. Retrying...');
-        setTimeout(setupPromptTemplates, 200);  // retry slightly slower
-        return;
-    }
-
-    console.log('Found prompt template group, injecting buttons');
-
-    // 🛠️ Instead of overwriting the whole promptTemplateGroup, we now find the new #promptButtonsArea inside it
     const promptArea = document.getElementById('promptButtonsArea');
     if (!promptArea) {
-        console.error('Prompt Buttons Area not found!');
+        console.error('Could not find promptButtonsArea. Retrying...');
+        setTimeout(setupPromptTemplates, 200);
         return;
     }
 
+    console.log('Found prompt buttons area, injecting buttons');
+
     promptArea.innerHTML = `
-        <button id="refreshPromptsBtn" class="button" style="margin-bottom: 10px;">Refresh Prompts</button>
-        <div id="promptCount" style="font-size: 14px; margin-bottom: 5px;"></div>
+        <div id="promptCount" style="font-size: 14px; margin-bottom: 5px; display:flex; justify-content:space-between; align-items:center;"></div>
         <div id="templateButtonsContainer" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;
              max-height: 150px; overflow-y: auto; padding: 5px; border: 1px solid #eee; border-radius: 4px;"></div>
     `;
@@ -51,7 +43,7 @@ function setupPromptTemplates() {
 
     function createButtons(templates) {
         buttonsContainer.innerHTML = '';
-        countDisplay.textContent = `Available Prompts: ${templates.length}`;
+        countDisplay.innerHTML = `<span>Available Prompts: ${templates.length}</span><span style="color:#6a0dad; font-weight:bold; font-size:0.85em;">Gemini-3 optimized prompts are purple</span>`;
 
         templates.sort((a, b) => a.localeCompare(b));
 

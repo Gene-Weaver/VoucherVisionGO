@@ -1,5 +1,93 @@
 // VoucherVision API Test Scripts
 
+// Animated processing loader
+const VV_LOADER_MESSAGES = [
+    'Reading specimen label\u2026',
+    'Analyzing handwriting\u2026',
+    'Parsing collector info\u2026',
+    'Extracting locality data\u2026',
+    'Structuring results\u2026',
+    'Verifying taxonomy\u2026',
+    'Deciphering dates\u2026',
+    'Almost there\u2026',
+];
+
+function vvLoaderHTML() {
+    return `<div class="vv-loader">
+        <div class="vv-loader-leaf">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="vv-loader-text"><span>${VV_LOADER_MESSAGES[0]}</span></div>
+    </div>`;
+}
+
+// Cycle through loader messages
+let _vvLoaderInterval = null;
+function startLoaderCycle(container) {
+    let idx = 0;
+    _vvLoaderInterval = setInterval(() => {
+        idx = (idx + 1) % VV_LOADER_MESSAGES.length;
+        const txt = container.querySelector('.vv-loader-text span');
+        if (txt) {
+            txt.style.opacity = '0';
+            setTimeout(() => {
+                txt.textContent = VV_LOADER_MESSAGES[idx];
+                txt.style.opacity = '1';
+            }, 300);
+        }
+    }, 3000);
+}
+function stopLoaderCycle() {
+    if (_vvLoaderInterval) { clearInterval(_vvLoaderInterval); _vvLoaderInterval = null; }
+}
+
+function setButtonProcessing(selector, processing) {
+    const btn = $(selector);
+    if (processing) {
+        btn.prop('disabled', true).addClass('vv-processing').attr('data-processing-text', 'Processing\u2026');
+    } else {
+        btn.prop('disabled', false).removeClass('vv-processing').removeAttr('data-processing-text').text('Run VoucherVision');
+    }
+}
+
+// ── Result history (single-image runs) ──
+const resultHistory = [];  // [{label, html, data}]
+let activeResultIndex = -1;
+
+function addResultToHistory(label, html, data) {
+    resultHistory.push({ label, html, data });
+    activeResultIndex = resultHistory.length - 1;
+    renderHistoryDropdown();
+    showResultByIndex(activeResultIndex);
+}
+
+function renderHistoryDropdown() {
+    const bar = document.getElementById('resultHistoryBar');
+    const sel = document.getElementById('resultHistorySelect');
+    if (!bar || !sel) return;
+    if (resultHistory.length <= 1) {
+        bar.style.display = 'none';
+        return;
+    }
+    bar.style.display = 'flex';
+    sel.innerHTML = resultHistory.map((r, i) =>
+        `<option value="${i}"${i === activeResultIndex ? ' selected' : ''}>${r.label}</option>`
+    ).join('');
+}
+
+function showResultByIndex(idx) {
+    if (idx < 0 || idx >= resultHistory.length) return;
+    activeResultIndex = idx;
+    const entry = resultHistory[idx];
+    $('#singleResults').html(entry.html);
+    // Re-wire tab switching inside results
+    setupResultsInteractions('single');
+    // Update map to match the active result
+    if (window.updateMapFromData) {
+        window.updateMapFromData(entry.data);
+    }
+}
+
 // Tab functionality
 function openTab(evt, tabName) {
     // Hide all tab content
@@ -111,42 +199,6 @@ async function testCorsSupport() {
     }
 }
 
-// Test URL availability
-async function testUrlAvailability() {
-    const imageUrl = $('#imageUrl').val();
-    if (!imageUrl) {
-        $('#urlTestResult').html('<span class="error">Please enter a URL</span>');
-        return;
-    }
-
-    $('#urlTestResult').html('<span class="loading">Testing...</span>');
-    
-    logDebug(`Testing URL availability: ${imageUrl}`);
-
-    // Use fetch with CORS mode to test URL availability
-    try {
-        const response = await fetch(imageUrl, { 
-            method: 'HEAD',
-            mode: 'no-cors' // This is important for cross-origin requests
-        });
-        
-        // If we get here, the URL exists and can be accessed
-        $('#urlTestResult').html('<span class="success">URL is accessible!</span>');
-        logDebug('URL test success');
-        
-        // Show image preview
-        $('#urlResults').html(`
-            <div style="margin-top: 20px;">
-                <h3>Image Preview:</h3>
-                <img src="${imageUrl}" style="max-width: 100%; max-height: 300px;" />
-            </div>
-        `);
-    } catch (error) {
-        $('#urlTestResult').html(`<span class="error">Error accessing URL: ${error.message}</span>`);
-        logDebug('URL test failed', error);
-    }
-}
-
 // Get authentication headers based on the selected auth method
 function getAuthHeaders() {
     const headers = {
@@ -216,9 +268,13 @@ $(document).ready(function() {
     });
 
     $('#testCorsButton').click(testCorsSupport);
-    $('#testUrlAvailability').click(testUrlAvailability);
     $('#uploadButton').click(() => processImage('file'));
     $('#processUrlButton').click(() => processImage('url'));
+
+    // Result history dropdown
+    $('#resultHistorySelect').on('change', function() {
+        showResultByIndex(parseInt(this.value, 10));
+    });
 
     $('input[name="authMethod"]').change(toggleAuthFields);
     toggleAuthFields();
@@ -405,14 +461,19 @@ async function processImage(sourceType = 'file') {
         ? 'https://vouchervision-go-738307415303.us-central1.run.app/process'
         : 'https://vouchervision-go-738307415303.us-central1.run.app/process-url';
 
-    // Disable buttons during processing
+    // Determine a human-readable label for this run
+    let resultLabel;
     if (sourceType === 'file') {
-        $('#uploadButton').prop('disabled', true).text('Processing...');
-        $('#fileResults').html('<p class="loading">Processing... Please wait.</p>');
+        resultLabel = document.getElementById('fileInput').files[0].name;
     } else {
-        $('#processUrlButton').prop('disabled', true).text('Processing...');
-        $('#urlResults').html('<p class="loading">Processing... Please wait.</p>');
+        resultLabel = $('#imageUrl').val();
     }
+
+    // Disable buttons & show animated loader during processing
+    const buttonSelector = (sourceType === 'file') ? '#uploadButton' : '#processUrlButton';
+    setButtonProcessing(buttonSelector, true);
+    $('#singleResults').html(vvLoaderHTML());
+    startLoaderCycle($('#singleResults')[0]);
 
     // Debug log
     const formDataEntries = [];
@@ -440,79 +501,141 @@ async function processImage(sourceType = 'file') {
         logDebug('API response success', data);
 
         // Create split layout for results
-        let resultsHTML = createSplitResultsLayout(data);
+        const resultsHTML = createSplitResultsLayout(data);
 
-        if (sourceType === 'file') {
-            $('#fileResults').html(resultsHTML);
-        } else {
-            $('#urlResults').html(resultsHTML);
-        }
-
-        // Set up interactive features after DOM is updated
-        setupResultsInteractions(sourceType);
+        // Add to history and display
+        addResultToHistory(resultLabel, resultsHTML, data);
 
     } catch (error) {
         logDebug('API response error', { error: error.toString() });
-
-        if (sourceType === 'file') {
-            $('#fileResults').html(`
-                <h3 class="error">Error:</h3>
-                <p>${error.message}</p>
-            `);
-        } else {
-            $('#urlResults').html(`
-                <h3 class="error">Error:</h3>
-                <p>${error.message}</p>
-            `);
-        }
+        $('#singleResults').html(`
+            <h3 class="error">Error:</h3>
+            <p>${error.message}</p>
+        `);
     } finally {
-        if (sourceType === 'file') {
-            $('#uploadButton').prop('disabled', false).text('Upload and Process');
-        } else {
-            $('#processUrlButton').prop('disabled', false).text('Process URL');
-        }
+        stopLoaderCycle();
+        setButtonProcessing(buttonSelector, false);
     }
 }
 
 
+// Build the formatted summary tab content from API response data
+function buildFormattedSummary(data) {
+    let sections = '';
+
+    // OCR text
+    if (data.ocr) {
+        sections += `
+            <div class="formatted-section">
+                <h4>OCR Text</h4>
+                <pre class="formatted-value">${typeof data.ocr === 'string' ? data.ocr.replace(/</g, '&lt;').replace(/>/g, '&gt;') : JSON.stringify(data.ocr, null, 2)}</pre>
+            </div>`;
+    }
+
+    // Formatted JSON (parsed label fields)
+    if (data.formatted_json && typeof data.formatted_json === 'object' && Object.keys(data.formatted_json).length > 0) {
+        let tableRows = '';
+        for (const [key, val] of Object.entries(data.formatted_json)) {
+            const display = (val === null || val === undefined || val === '') ? '<span style="color:#999;">—</span>' : String(val).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            tableRows += `<tr><td style="font-weight:600; white-space:nowrap; vertical-align:top; padding:4px 12px 4px 0;">${key}</td><td style="padding:4px 0;">${display}</td></tr>`;
+        }
+        sections += `
+            <div class="formatted-section">
+                <h4>Parsed Label Fields</h4>
+                <table style="width:100%; border-collapse:collapse; font-size:0.92rem;">${tableRows}</table>
+            </div>`;
+    }
+
+    // Formatted markdown
+    if (data.formatted_md && typeof data.formatted_md === 'string' && data.formatted_md.trim()) {
+        sections += `
+            <div class="formatted-section">
+                <h4>Formatted Markdown</h4>
+                <pre class="formatted-value">${data.formatted_md.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+            </div>`;
+    }
+
+    if (!sections) {
+        sections = '<p style="color:#888;">No formatted data available.</p>';
+    }
+
+    return sections;
+}
+
+// Build the Data Enrichment tab content (WFO + COP90)
+function buildEnrichmentSummary(data) {
+    let sections = '';
+
+    // WFO info
+    if (data.WFO_info && typeof data.WFO_info === 'object' && Object.keys(data.WFO_info).length > 0) {
+        let wfoRows = '';
+        for (const [key, val] of Object.entries(data.WFO_info)) {
+            const display = (val === null || val === undefined || val === '') ? '<span style="color:#999;">\u2014</span>' : String(val).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            wfoRows += `<tr><td style="font-weight:600; white-space:nowrap; vertical-align:top; padding:4px 12px 4px 0;">${key}</td><td style="padding:4px 0;">${display}</td></tr>`;
+        }
+        sections += `
+            <div class="formatted-section">
+                <h4>WFO Validation</h4>
+                <table style="width:100%; border-collapse:collapse; font-size:0.92rem;">${wfoRows}</table>
+            </div>`;
+    }
+
+    // COP90 elevation
+    if (data.COP90_elevation_m !== undefined && data.COP90_elevation_m !== null) {
+        sections += `
+            <div class="formatted-section">
+                <h4>COP90 Elevation</h4>
+                <p style="font-size:1.1rem; font-weight:600; margin:4px 0;">${data.COP90_elevation_m} m</p>
+            </div>`;
+    }
+
+    if (!sections) {
+        sections = '<p style="color:#888;">No enrichment data available. Enable WFO validation or COP90 elevation in Step 4.</p>';
+    }
+
+    return sections;
+}
+
 // Create split layout with JSON on left and image on right
 function createSplitResultsLayout(data) {
     const hasCollageImage = data.collage_info && data.collage_info.base64image_text_collage;
-    
+    const hasMd = $('#notebookMode').is(':checked') && typeof data.formatted_md === 'string' && data.formatted_md.trim();
+
     let html = `
-        <h3 class="success">Results:</h3>
         <div class="split-results-container">
             <div class="json-result-container">
-                <h4>API Response</h4>
                 <div class="json-controls">
                     <button class="button copy-btn" onclick="copyJsonToClipboard()">Copy JSON</button>
                     <button class="button download-btn" onclick="downloadJson()">Download JSON</button>
-                    ${
-                        // Show the Markdown download button ONLY if:
-                        //  - Notebook Mode checkbox is checked on the page
-                        //  - and the response includes a non-empty 'ocr' string
-                        ($('#notebookMode').is(':checked') && typeof data.formatted_md === 'string' && data.formatted_md.trim())
-                            ? `<button class="button download-btn" onclick="downloadFormattedMarkdown()">Download Markdown (.md)</button>`
-                            : ``
-                    }
+                    ${hasMd ? `<button class="button download-btn" onclick="downloadFormattedMarkdown()">Download Markdown (.md)</button>` : ``}
                 </div>
-                <details open>
-                    <summary>Full JSON Response</summary>
+                <div class="result-tabs">
+                    <div class="result-tab active" data-result-tab="formatted">Formatted</div>
+                    <div class="result-tab" data-result-tab="enrichment">Data Enrichment</div>
+                    <div class="result-tab" data-result-tab="rawjson">Full API Response</div>
+                </div>
+                <div class="result-tab-content active" id="resultTabFormatted">
+                    ${buildFormattedSummary(data)}
+                </div>
+                <div class="result-tab-content" id="resultTabEnrichment">
+                    ${buildEnrichmentSummary(data)}
+                </div>
+                <div class="result-tab-content" id="resultTabRawJson">
                     <div class="json-content">${JSON.stringify(data, null, 2)}</div>
-                </details>
+                </div>
             </div>
     `;
-    
+
     // Add image container on the right
     html += `
             <div class="image-result-container">
                 <h4>Text Collage</h4>
     `;
-    
+
     if (hasCollageImage) {
         html += `
-                <img src="data:image/jpeg;base64,${data.collage_info.base64image_text_collage}" 
-                     class="processed-image" 
+                <img src="data:image/jpeg;base64,${data.collage_info.base64image_text_collage}"
+                     class="processed-image"
                      alt="Processed Collage"
                      onclick="openImageModal(this)" />
                 <div class="image-actions">
@@ -526,23 +649,33 @@ function createSplitResultsLayout(data) {
                 </div>
         `;
     }
-    
+
     html += `
             </div>
         </div>
     `;
-    
+
     return html;
 }
 
 // Set up interactive features for the results
-function setupResultsInteractions(sourceType) {
-    // Store the current data for copy/download functions
-    const resultsContainer = sourceType === 'file' ? '#fileResults' : '#urlResults';
+function setupResultsInteractions() {
+    const resultsContainer = '#singleResults';
     const jsonContent = $(resultsContainer + ' .json-content').text();
-    
+
     // Store data in a global variable for access by other functions
-    window.currentResultData = JSON.parse(jsonContent);
+    try { window.currentResultData = JSON.parse(jsonContent); } catch(_) {}
+
+    // Wire up result tab switching (Formatted / Raw JSON)
+    $(resultsContainer + ' .result-tab').off('click').on('click', function() {
+        const parent = $(this).closest('.json-result-container');
+        parent.find('.result-tab').removeClass('active');
+        parent.find('.result-tab-content').removeClass('active');
+        $(this).addClass('active');
+        const tabId = $(this).data('result-tab');
+        const tabMap = { formatted: '#resultTabFormatted', enrichment: '#resultTabEnrichment', rawjson: '#resultTabRawJson' };
+        parent.find(tabMap[tabId] || '#resultTabFormatted').addClass('active');
+    });
 }
 
 // Copy JSON to clipboard
@@ -643,6 +776,111 @@ function downloadCollageImage(base64Data) {
     document.body.removeChild(link);
 }
 
+// Step Info Popup data and functions
+const STEP_INFO = {
+    step1: {
+        title: 'Model & Mode Selection',
+        number: '1',
+        sections: [
+            { title: 'Recommendations', body: 'Use <strong><code>gemini-3.1-flash-lite-preview</code></strong> for both OCR and parsing\u2014it performs comparably to more expensive models at a fraction of the cost.<br><br><strong><code>gemini-3.1-pro-preview</code></strong> is limited to 100 calls per user.' },
+            { title: 'OCR', body: 'VoucherVision uses vision language models to perform optical character recognition (OCR). Generally, this is the accuracy-limiting step: if the OCR text is inaccurate, parsing will inevitably struggle as well. Prior to the Gemini 3.1 model family, we recommended using Gemini Pro models for OCR and Flash models for parsing. However, we now recommend <code>gemini-3.1-flash-lite-preview</code> for both steps due to its exceptional cost-to-performance ratio.<br><br>OCR models also detect handwritten text (\u00ABhandwritten\u00BB) and stricken text (\u00A7stricken\u00A7) using these special characters to inform the parsing LLM, but are removed from the final API response.' },
+            { title: 'LLMs', body: 'The selected LLM parses unstructured OCR text into structured JSON, which can then be transformed into a spreadsheet. Generally, <code>gemini-3.1-flash-lite-preview</code> is quite capable for this task. Gemini Pro models should be reserved for particularly challenging or atypical prompts.' },
+            { title: 'Processing Options', body: 'VoucherVision supports several alternative modes. <strong>OCR Only Mode</strong> returns raw OCR text without JSON parsing. <strong>Notebook Mode</strong> is experimental and designed for full-page text images like field notebooks\u2014it returns Markdown files instead of JSON. <strong>Skip Label Collage</strong> should be used if your image is primarily text or if you observe the Text Collage cutting off parts of the text.' }
+        ]
+    },
+    step2: {
+        title: 'Data Enrichment',
+        number: '2',
+        sections: [
+            { title: 'What is data enrichment?', body: 'Data enrichment adds supplemental information from third-party sources. These are returned as additional fields in the JSON response and do not override any of the actual label text. You can use this information for post-processing or quality control.' },
+            { title: 'World Flora Online', body: 'Validates plant names against the <a href="https://www.worldfloraonline.org/" target="_blank">World Flora Online</a> (WFO) taxonomic backbone and provides taxonomic corrections, accepted name status, and classification hierarchy.' },
+            { title: 'Copernicus GLO-90 Elevation', body: 'Returns elevation (m) from specimen coordinates using the Copernicus GLO-90 Digital Surface Model (90 m resolution), derived from the TanDEM-X mission (DLR/Airbus) and distributed by ESA via <a href="https://portal.opentopography.org/raster?opentopoID=OTSDEM.032021.4326.1" target="_blank">OpenTopography</a>.<br><br><span style="font-size:0.85em; color:#666;">Contains modified Copernicus data (2011\u20132015). \u00a9 DLR e.V. 2010\u20132014 and \u00a9 Airbus Defence and Space GmbH 2014\u20132018, provided under Copernicus by the European Union and ESA.</span>' }
+        ]
+    },
+    step3: {
+        title: 'Prompt Template',
+        number: '3',
+        sections: [
+            { title: 'What are prompt templates?', body: "Prompt templates provide VoucherVision with instructions on how to parse the unstructured OCR text into your desired field names. You can browse the available prompts by clicking <strong>Available Prompts</strong> at the top of the page. We regularly modify and customize prompts for users. If you want something different, please reach out to the VoucherVision team and we'll make it happen." }
+        ]
+    },
+    step4: {
+        title: 'Process Images',
+        number: '4',
+        sections: [
+            { title: 'Selecting images to transcribe with VoucherVision', body: 'This website is designed to get you familiar with VoucherVision or to run a few images at a time. If you want to run VoucherVision regularly or for large batches (more than a few hundred images), you should use the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong> or call the API directly. Learn more on the <strong>About</strong> page.' }
+        ]
+    },
+    step5: {
+        title: 'VoucherVision Results',
+        number: '5',
+        sections: [
+            { title: 'What do I do with the VoucherVision output?', body: 'On this webpage, you can download the JSON output. However, VoucherVision is designed to export data directly to spreadsheets. For regular use or large batches, please use the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong> to call the API\u2014it will make your life easier! Please ask the VoucherVision team for reference Python scripts if you want help.' },
+            { title: 'Text Collage', body: 'Every VoucherVision response contains a base-64 image (in the field <code>base64image_text_collage</code>) that you can save to a .jpg file later. If you used the <strong>Text Collage</strong>, this will be the collage image. If you used <strong>Notebook Mode</strong> or skipped the Text Collage, it will be the full input image (but possibly resized).' },
+            { title: 'Bounding Boxes', body: 'The API response also includes the bounding boxes (<code>position_original</code>) of <strong>LeafMachine2</strong> archival classes of the objects found in the image, e.g. ruler, barcode, label, colorcard, envelope, weights, etc.' }
+        ]
+    }
+};
+
+function openStepInfoPopup(stepKey) {
+    const info = STEP_INFO[stepKey];
+    if (!info) return;
+
+    const sectionsHTML = info.sections.map(s =>
+        `<div class="step-info-section"><h4>${s.title}</h4><p>${s.body}</p></div>`
+    ).join('');
+
+    const overlay = document.createElement('div');
+    overlay.className = 'step-info-overlay';
+    overlay.innerHTML = `
+        <div class="step-info-popup">
+            <div class="step-info-popup-header">
+                <span class="step-number">${info.number}</span>
+                <h3>${info.title}</h3>
+                <button class="step-info-popup-close" onclick="closeStepInfoPopup()">×</button>
+            </div>
+            <div class="step-info-popup-body">
+                ${sectionsHTML}
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    window._stepInfoOverlay = overlay;
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeStepInfoPopup();
+    });
+
+    window._stepInfoEscHandler = function(e) {
+        if (e.key === 'Escape') closeStepInfoPopup();
+    };
+    document.addEventListener('keydown', window._stepInfoEscHandler);
+}
+
+function closeStepInfoPopup() {
+    if (window._stepInfoOverlay) {
+        document.body.removeChild(window._stepInfoOverlay);
+        window._stepInfoOverlay = null;
+    }
+    if (window._stepInfoEscHandler) {
+        document.removeEventListener('keydown', window._stepInfoEscHandler);
+        window._stepInfoEscHandler = null;
+    }
+}
+
+// Download the Step 4 preview image
+function downloadPreviewImage() {
+    const src = window._step4PreviewSrc;
+    if (!src) return;
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = 'vouchervision_preview_' + Date.now() + '.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 // Open image in modal for full-size viewing
 function openImageModal(img) {
     const modal = document.createElement('div');
@@ -651,20 +889,44 @@ function openImageModal(img) {
         <div class="image-modal-content">
             <button class="image-modal-close" onclick="closeImageModal()">×</button>
             <img src="${img.src}" alt="Full Size Image" class="image-modal-img">
+            <div class="image-modal-actions">
+                <button class="button" onclick="downloadModalImage()">Download Image</button>
+            </div>
         </div>
     `;
-    
+
+    // Store src for modal download
+    window._modalImageSrc = img.src;
+
     document.body.appendChild(modal);
-    
+
     // Close modal when clicking outside the image
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             closeImageModal();
         }
     });
-    
+
+    // Close on Escape key
+    window._modalEscHandler = function(e) {
+        if (e.key === 'Escape') closeImageModal();
+    };
+    document.addEventListener('keydown', window._modalEscHandler);
+
     // Store reference to modal for closing
     window.currentImageModal = modal;
+}
+
+// Download image from modal
+function downloadModalImage() {
+    const src = window._modalImageSrc;
+    if (!src) return;
+    const link = document.createElement('a');
+    link.href = src;
+    link.download = 'vouchervision_image_' + Date.now() + '.jpg';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Close image modal
@@ -673,6 +935,11 @@ function closeImageModal() {
         document.body.removeChild(window.currentImageModal);
         window.currentImageModal = null;
     }
+    if (window._modalEscHandler) {
+        document.removeEventListener('keydown', window._modalEscHandler);
+        window._modalEscHandler = null;
+    }
+    window._modalImageSrc = null;
 }
 
 // Show temporary message

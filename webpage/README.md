@@ -16,6 +16,7 @@ The VoucherVisionGO API provides access to the best OCR/LLM combination for AI t
 
 This webpage is not the only way to use the VoucherVisionGO API. You can...
 - Install the client from [PyPI](https://pypi.org/project/vouchervision-go-client/) where we provide some helper functions to make it easier to integrate into Python projects
+  > **PyPI will always have the most up-to-date usage guide for the VoucherVisionGO API.**
 - Clone the [VoucherVisionGO-client repo](https://github.com/Gene-Weaver/VoucherVisionGO-client) and integrate the client code directly
 - Inspect the [code for this website](https://github.com/Gene-Weaver/VoucherVisionGO/tree/main/webpage) to see some options for interacting with the API
 - Make your own GET/POST requests using guides in the [GitHub](https://github.com/Gene-Weaver/VoucherVisionGO-client) or [PyPI](https://pypi.org/project/vouchervision-go-client/) docs

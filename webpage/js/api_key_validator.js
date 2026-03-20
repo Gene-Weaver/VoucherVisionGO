@@ -344,14 +344,12 @@ function maskAuthToken(token) {
 function disableButtons() {
     document.getElementById('uploadButton').disabled = true;
     document.getElementById('processUrlButton').disabled = true;
-    document.getElementById('testUrlAvailability').disabled = true;
 }
 
 // Function to enable all action buttons
 function enableButtons() {
     document.getElementById('uploadButton').disabled = false;
     document.getElementById('processUrlButton').disabled = false;
-    document.getElementById('testUrlAvailability').disabled = false;
 }
 
 // Check the current authentication method and initialize accordingly
@@ -634,7 +632,7 @@ $(document).ready(function() {
     });
     
     // Intercept all action button clicks to verify authentication is set
-    const actionButtons = ['uploadButton', 'processUrlButton', 'testUrlAvailability'];
+    const actionButtons = ['uploadButton', 'processUrlButton'];
     
     actionButtons.forEach(buttonId => {
         const originalButton = document.getElementById(buttonId);
