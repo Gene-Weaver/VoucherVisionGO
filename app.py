@@ -2203,6 +2203,8 @@ class VoucherVisionProcessor:
                                                                                                        user_api_key=user_api_key)
 
                     # WFO taxonomy lookup (runs in app.py, not inside the LLM pipeline)
+                    # TODO: update certifi in the Docker image to fix SSL verification for WFO API requests
+                    # (currently using verify=False in tool_taxonomy_WFO.py as a workaround)
                     WFO = ""
                     if include_wfo and isinstance(vv_results, dict):
                         try:
