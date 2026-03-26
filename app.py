@@ -2033,6 +2033,10 @@ class VoucherVisionProcessor:
             original_temp_path = os.path.join(temp_dir, f"original_{secure_filename(file.filename)}")
             file.save(original_temp_path)
 
+            # Encode the (possibly resized) original image as base64 for the response
+            with open(original_temp_path, 'rb') as f_orig:
+                base64image_input_resized = base64.b64encode(f_orig.read()).decode('utf-8')
+
             if not self.collage_engine:
                 return {'error': 'Collage Engine is not available on the server.'}, 503
 
@@ -2048,6 +2052,8 @@ class VoucherVisionProcessor:
                 else:
                     self._log("Running CollageEngine for pre-processing...", "info")
                     collage_json_data = self.collage_engine.run(original_temp_path)
+
+            collage_json_data['base64image_input_resized'] = base64image_input_resized
 
             if collage_json_data['base64image_text_collage'] is None:
                 raise RuntimeError("CollageEngine failed to produce an image.")
