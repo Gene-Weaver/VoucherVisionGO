@@ -145,6 +145,7 @@ try:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
+    from vouchervision.tool_taxonomy_WFO import WFONameMatcher # type: ignore
     from TextCollage.CollageEngine import CollageEngine # type: ignore
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
@@ -155,7 +156,8 @@ except Exception as e:
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
-    from TextCollage.CollageEngine import CollageEngine 
+    from vouchervision_main.vouchervision.tool_taxonomy_WFO import WFONameMatcher
+    from TextCollage.CollageEngine import CollageEngine
 
     
 
@@ -1937,14 +1939,13 @@ class VoucherVisionProcessor:
 
         return ocr_packet, ocr_all, ocr_tokens_total
     
-    def get_thread_local_vv(self, prompt, llm_model_name, include_wfo, user_api_key=None):
+    def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         needs_new = (
             not hasattr(self.thread_local, 'vv')
             or user_api_key is not None
             or prompt != getattr(self.thread_local, 'prompt', None)
             or llm_model_name != getattr(self.thread_local, 'llm_model_name', None)
-            or include_wfo != getattr(self.thread_local, 'include_wfo', None)
         )
 
         if needs_new:
@@ -1959,36 +1960,34 @@ class VoucherVisionProcessor:
             self.thread_local.vv.setup_JSON_dict_structure()
             self.thread_local.prompt = prompt
             self.thread_local.llm_model_name = llm_model_name
-            self.thread_local.include_wfo = include_wfo
 
             self.thread_local.llm_model = GoogleGeminiHandler(
                 self.cfg, self.logger, llm_model_name,
                 self.thread_local.vv.JSON_dict_structure,
                 config_vals_for_permutation=None,
                 exit_early_for_JSON=True,
-                exit_early_with_WFO=include_wfo,
                 api_key=user_api_key,  # None = use env, key = use theirs
             )
             self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
 
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, include_wfo, LLM_name_cost, user_api_key=None):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, LLM_name_cost, user_api_key=None):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
-        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, include_wfo, user_api_key=user_api_key)
-        
+        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, user_api_key=user_api_key)
+
         # Update OCR text for processing
         prompt_text = vv.setup_prompt(ocr_text)
-        
+
         # Call the LLM to process the OCR text
-        response_candidate, nt_in, nt_out, WFO, _, _ = llm_model.call_llm_api_GoogleGemini(
+        response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
         self._log(f"response_candidate\n{response_candidate}", "info")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
-        return response_candidate, nt_in, nt_out, cost_in, cost_out, WFO
+        return response_candidate, nt_in, nt_out, cost_in, cost_out
     
     def process_image_request(self, file,
                               engine_options=None,
@@ -2197,13 +2196,23 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out, WFO = self.process_voucher_vision(ocr, 
-                                                                                                            current_prompt, 
-                                                                                                            llm_model_name, 
-                                                                                                            include_wfo, 
-                                                                                                            LLM_name_cost,
-                                                                                                            user_api_key=user_api_key)
-                    
+                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr,
+                                                                                                       current_prompt,
+                                                                                                       llm_model_name,
+                                                                                                       LLM_name_cost,
+                                                                                                       user_api_key=user_api_key)
+
+                    # WFO taxonomy lookup (runs in app.py, not inside the LLM pipeline)
+                    WFO = ""
+                    if include_wfo and isinstance(vv_results, dict):
+                        try:
+                            matcher = WFONameMatcher(tool_WFO=True)
+                            _, WFO = matcher.check_WFO(vv_results, replace_if_success_wfo=False)
+                            self._log(f"WFO Record: {WFO}", "info")
+                        except Exception as e:
+                            self._log(f"WFO lookup failed: {e}", "error")
+                            WFO = WFONameMatcher(tool_WFO=True).NULL_DICT
+
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
                     ocr_sanitized = sanitize_for_storage(ocr)
                     vv_results_sanitized = self._sanitize_formatted_json(vv_results)   

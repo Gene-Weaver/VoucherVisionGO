@@ -108,6 +108,116 @@ http://localhost:8000/index2.html
         <!-- ===== Main App Content ===== -->
         <div id="mainContent">
 
+            <!-- Editor Promo Card (marching ants border) -->
+            <style>
+                @keyframes marching-ants-editor {
+                    0% {
+                        background-position: 0 0, 0 100%, 0 0, 100% 0;
+                    }
+                    100% {
+                        background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px;
+                    }
+                }
+                @keyframes editor-fade-in {
+                    from { opacity: 0; transform: translateY(-8px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                .editor-promo {
+                    animation: editor-fade-in 0.6s ease-out;
+                    margin: 12px 0;
+                    padding: 7px;
+                    background-color: #e8e8e8;
+                    background-image:
+                        linear-gradient(to right, #6a0dad 50%, transparent 50%),
+                        linear-gradient(to right, #6a0dad 50%, transparent 50%),
+                        linear-gradient(to bottom, #6a0dad 50%, transparent 50%),
+                        linear-gradient(to bottom, #6a0dad 50%, transparent 50%);
+                    background-size: 20px 3px, 20px 3px, 3px 20px, 3px 20px;
+                    background-position: 0 0, 0 100%, 0 0, 100% 0;
+                    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+                    animation: marching-ants-editor 1.5s linear infinite, editor-fade-in 0.6s ease-out;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    position: relative;
+                }
+                .editor-promo-inner {
+                    padding: 14px 20px;
+                    border-radius: 7px;
+                    background: #e8e8e8;
+                    display: flex;
+                    align-items: center;
+                    gap: 16px;
+                    transition: background 0.3s ease;
+                }
+                .editor-promo:hover .editor-promo-inner {
+                    background: #f0f0f0;
+                }
+                .editor-promo-icon {
+                    font-size: 28px;
+                    flex-shrink: 0;
+                }
+                .editor-promo-text {
+                    flex: 1;
+                }
+                .editor-promo-title {
+                    font-size: 15px;
+                    font-weight: 700;
+                    color: #6a0dad;
+                    margin-bottom: 3px;
+                }
+                .editor-promo-desc {
+                    font-size: 12px;
+                    color: #555;
+                    line-height: 1.4;
+                }
+                .editor-promo-btn {
+                    padding: 8px 18px;
+                    background: #6a0dad;
+                    color: #fff;
+                    border: none;
+                    border-radius: 6px;
+                    font-size: 13px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    white-space: nowrap;
+                    transition: background 0.2s;
+                }
+                .editor-promo-btn:hover { background: #7b1fbf; }
+                .editor-promo-close {
+                    position: absolute;
+                    top: 4px;
+                    right: 8px;
+                    font-size: 16px;
+                    color: #999;
+                    cursor: pointer;
+                    background: none;
+                    border: none;
+                    padding: 2px 6px;
+                    line-height: 1;
+                    z-index: 1;
+                }
+                .editor-promo-close:hover { color: #333; }
+
+                /* Dark mode */
+                [data-theme="dark"] .editor-promo { background-color: #2a2a2a; }
+                [data-theme="dark"] .editor-promo-inner { background: #2a2a2a; }
+                [data-theme="dark"] .editor-promo:hover .editor-promo-inner { background: #333; }
+                [data-theme="dark"] .editor-promo-desc { color: #999; }
+                [data-theme="dark"] .editor-promo-close { color: #666; }
+                [data-theme="dark"] .editor-promo-close:hover { color: #ccc; }
+            </style>
+            <div class="editor-promo" id="editorPromo" onclick="window.open('editor-demo.html','_blank')">
+                <button class="editor-promo-close" onclick="event.stopPropagation(); document.getElementById('editorPromo').style.display='none';">&times;</button>
+                <div class="editor-promo-inner">
+                    <div class="editor-promo-icon">&#9889;</div>
+                    <div class="editor-promo-text">
+                        <div class="editor-promo-title">NEW &mdash; VoucherVisionGO Editor</div>
+                        <div class="editor-promo-desc">Review, verify, and export your transcriptions with a zero-trust acceptance workflow. Available for Mac, Windows, and Linux.</div>
+                    </div>
+                    <button class="editor-promo-btn" onclick="event.stopPropagation(); window.open('editor-demo.html','_blank');">Try the Demo</button>
+                </div>
+            </div>
+
             <!-- Main Settings Tabs -->
             <div class="main-tabs">
                 <div class="main-tab active" data-main-tab="vvSettings">VoucherVision</div>
