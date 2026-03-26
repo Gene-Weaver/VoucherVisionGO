@@ -1,6 +1,10 @@
 # Claude Code
 .claude/
 
+# WFO backbone data (built locally, baked into Docker image)
+WFO_uber/uber_*/
+wfo_backbone.db
+
 # Files
 PRIVATE_DATA.yaml
 LeafMachine2_TRAINING_ONLY.yaml

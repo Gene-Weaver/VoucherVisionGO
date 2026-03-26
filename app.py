@@ -145,7 +145,6 @@ try:
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
     from vouchervision.general_utils import calculate_cost # type: ignore
-    from vouchervision.tool_taxonomy_WFO import WFONameMatcher # type: ignore
     from TextCollage.CollageEngine import CollageEngine # type: ignore
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
@@ -156,8 +155,9 @@ except Exception as e:
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
     from vouchervision_main.vouchervision.general_utils import calculate_cost
-    from vouchervision_main.vouchervision.tool_taxonomy_WFO import WFONameMatcher
     from TextCollage.CollageEngine import CollageEngine
+
+from wfo_local_lookup import WFOLocalLookup
 
     
 
@@ -2202,18 +2202,15 @@ class VoucherVisionProcessor:
                                                                                                        LLM_name_cost,
                                                                                                        user_api_key=user_api_key)
 
-                    # WFO taxonomy lookup (runs in app.py, not inside the LLM pipeline)
-                    # TODO: update certifi in the Docker image to fix SSL verification for WFO API requests
-                    # (currently using verify=False in tool_taxonomy_WFO.py as a workaround)
+                    # WFO taxonomy lookup (local SQLite database)
                     WFO = ""
-                    if include_wfo and isinstance(vv_results, dict):
+                    if include_wfo and _wfo_lookup and isinstance(vv_results, dict):
                         try:
-                            matcher = WFONameMatcher(tool_WFO=True)
-                            _, WFO = matcher.check_WFO(vv_results, replace_if_success_wfo=False)
+                            WFO = _wfo_lookup.check_wfo(vv_results, replace_if_success_wfo=False)
                             self._log(f"WFO Record: {WFO}", "info")
                         except Exception as e:
                             self._log(f"WFO lookup failed: {e}", "error")
-                            WFO = WFONameMatcher(tool_WFO=True).NULL_DICT
+                            WFO = _wfo_lookup.NULL_DICT
 
                     ocr_info_sanitized = sanitize_excel_record(ocr_info)
                     ocr_sanitized = sanitize_for_storage(ocr)
@@ -2487,6 +2484,18 @@ class GCSElevationLookup:
 
 GCS_ELEVATION_BUCKET = os.environ.get("COP90_GCS_BUCKET", "vouchervision-cop90-rasters")
 _elevation_lookup = GCSElevationLookup(gcs_bucket=GCS_ELEVATION_BUCKET, gcs_prefix="COP90")
+
+# WFO local taxonomy lookup
+WFO_DB_PATH = os.path.join(os.path.dirname(__file__), "wfo_backbone.db")
+_wfo_lookup = None
+if os.path.exists(WFO_DB_PATH):
+    try:
+        _wfo_lookup = WFOLocalLookup(WFO_DB_PATH)
+        logger.info(f"WFO local database loaded from {WFO_DB_PATH}")
+    except Exception as e:
+        logger.error(f"Failed to load WFO database: {e}")
+else:
+    logger.warning(f"WFO database not found at {WFO_DB_PATH} — WFO lookups will be disabled")
 
 
 @app.before_request
