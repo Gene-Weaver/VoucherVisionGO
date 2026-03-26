@@ -24,13 +24,17 @@ python build_wfo_db.py --source uber_YYYY_MM --output ../wfo_backbone.db
 
 This takes 2-5 minutes and produces `wfo_backbone.db` in the VoucherVisionGO repo root.
 
-### 4. Rebuild the Docker image
+### 4. Upload to GCS
+
+The database is too large for GitHub. It is stored in a GCS bucket and downloaded during Cloud Build.
 
 ```bash
-# wfo_backbone.db is included via COPY . . in the Dockerfile
-# Docker layer caching skips this if the .db file hasn't changed
-gcloud builds submit ...
+gsutil cp ../wfo_backbone.db gs://vouchervision-wfo-backbone/wfo_backbone.db
 ```
+
+### 5. Deploy
+
+Cloud Build automatically downloads `wfo_backbone.db` from `gs://vouchervision-wfo-backbone/` before building the Docker image (see `cloudbuild.yaml` step 3). No other action needed — just push to GitHub and the build will pick up the latest DB from GCS.
 
 ## Data License
 

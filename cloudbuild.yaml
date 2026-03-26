@@ -35,7 +35,12 @@ steps:
         ls -la TextCollage/models/ || echo "models not found"
         ls -la TextCollage/models/openvino/ || echo "openvino not found"
 
-  # Step 3: Build the Docker image using the caching strategy from Step 1.
+  # Step 3: Download WFO backbone database from GCS (not stored in git due to size)
+  - name: 'gcr.io/cloud-builders/gsutil'
+    id: download-wfo-db
+    args: ['cp', 'gs://vouchervision-wfo-backbone/wfo_backbone.db', '/workspace/wfo_backbone.db']
+
+  # Step 4: Build the Docker image using the caching strategy from Step 1.
   - name: 'gcr.io/cloud-builders/docker'
     id: build
     entrypoint: 'bash'
