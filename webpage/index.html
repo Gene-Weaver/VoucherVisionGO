@@ -342,8 +342,8 @@ http://localhost:8000/index2.html
 
                         <div id="FileUpload" class="tab-content">
                              <div class="form-group file-input-container">
-                                 <label for="fileInput">Select an image file:</label>
-                                 <input type="file" id="fileInput" accept="image/*">
+                                 <label for="fileInput">Select an image or PDF file:</label>
+                                 <input type="file" id="fileInput" accept="image/*,.pdf,application/pdf">
                              </div>
                              <button id="uploadButton" class="button">Run VoucherVision</button>
                         </div>
@@ -441,8 +441,8 @@ http://localhost:8000/index2.html
                         <!-- Batch Folder Processing -->
                         <div id="BatchFolder" class="tab-content">
                             <div class="folder-drop-zone" id="imageFolderDropZone">
-                                <p>Drop image files here or</p>
-                                <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
+                                <p>Drop image or PDF files here or</p>
+                                <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*,.pdf,application/pdf">
                                 <div id="selectedFilesList" class="file-list"></div>
                             </div>
 

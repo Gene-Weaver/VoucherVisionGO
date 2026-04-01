@@ -32,6 +32,7 @@ from email.mime.multipart import MIMEMultipart
 import textwrap
 from tabulate import tabulate
 import shutil
+import fitz  # PyMuPDF - PDF to image conversion
 from pillow_heif import register_heif_opener
 register_heif_opener()
 
@@ -1092,6 +1093,40 @@ def resize_image_to_max_pixels(image, max_pixels=5200000):
     
     return resized_image
 
+MAX_PDF_PAGES = 200
+
+def convert_pdf_to_page_images(pdf_bytes, pdf_filename, dpi=150):
+    """
+    Convert each page of a PDF to an in-memory JPEG FileStorage object.
+
+    Args:
+        pdf_bytes: Raw bytes of the PDF file.
+        pdf_filename: Original filename (e.g., "specimen.pdf").
+        dpi: Rendering resolution. 150 balances OCR quality vs size.
+
+    Returns:
+        List of FileStorage objects, one per page, named like
+        {pdf_stem}__page_0001.jpg, {pdf_stem}__page_0002.jpg, etc.
+    """
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    page_files = []
+    base_name = os.path.splitext(pdf_filename)[0]
+
+    for page_num in range(len(doc)):
+        page = doc.load_page(page_num)
+        pix = page.get_pixmap(dpi=dpi)
+        img_bytes = pix.tobytes("jpeg")
+        page_filename = f"{base_name}__page_{page_num + 1:04d}.jpg"
+        file_obj = FileStorage(
+            stream=io.BytesIO(img_bytes),
+            filename=page_filename,
+            content_type='image/jpeg'
+        )
+        page_files.append(file_obj)
+
+    doc.close()
+    return page_files
+
 def process_uploaded_file_with_resize(file, max_pixels=5200000):
     """
     Process an uploaded file, resize if necessary, and return a new file-like object.
@@ -1708,8 +1743,8 @@ class VoucherVisionProcessor:
         self._log("Initializing VoucherVisionProcessor...", "info")
 
         # Configuration
-        self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'heic', 'heif'}
-        self.MAX_CONTENT_LENGTH = 25 * 1024 * 1024  # 25MB max upload size
+        self.ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tif', 'tiff', 'heic', 'heif', 'pdf'}
+        self.MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB max upload size (increased for multi-page PDFs)
         
         # Initialize request throttler
         self.throttler = RequestThrottler(max_concurrent)
@@ -1988,7 +2023,62 @@ class VoucherVisionProcessor:
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
 
         return response_candidate, nt_in, nt_out, cost_in, cost_out
-    
+
+    def process_pdf_request(self, file, **kwargs):
+        """
+        Process a PDF file by converting each page to a JPG and running
+        the standard image pipeline on each page.
+
+        Returns (result_dict, status_code) where result_dict contains
+        a 'pages' list with per-page results.
+        """
+        pdf_bytes = file.read()
+        pdf_filename = file.filename
+
+        try:
+            page_files = convert_pdf_to_page_images(pdf_bytes, pdf_filename, dpi=150)
+        except Exception as e:
+            self._log(f"PDF conversion failed for {pdf_filename}: {e}", "error")
+            return {'error': f'Failed to convert PDF: {str(e)}'}, 400
+
+        if not page_files:
+            return {'error': 'PDF contains no pages'}, 400
+        if len(page_files) > MAX_PDF_PAGES:
+            return {'error': f'PDF has {len(page_files)} pages, maximum allowed is {MAX_PDF_PAGES}'}, 400
+
+        self._log(f"PDF '{pdf_filename}' has {len(page_files)} pages, processing each as a separate image", "info")
+
+        page_results = []
+        for page_file in page_files:
+            # Resize each page-image just like a normal upload
+            try:
+                page_file = process_uploaded_file_with_resize(page_file, max_pixels=5200000)
+            except Exception as e:
+                self._log(f"Resize failed for {page_file.filename}: {e}", "error")
+                page_results.append({
+                    'filename': page_file.filename,
+                    'error': f'Image resize failed: {str(e)}',
+                    'status_code': 500
+                })
+                continue
+
+            result, status_code = self.process_image_request(file=page_file, **kwargs)
+            if status_code != 200:
+                page_results.append({
+                    'filename': page_file.filename,
+                    'error': result.get('error', 'Unknown error'),
+                    'status_code': status_code
+                })
+            else:
+                result['filename'] = page_file.filename
+                page_results.append(result)
+
+        return OrderedDict([
+            ('source_pdf', pdf_filename),
+            ('page_count', len(page_files)),
+            ('pages', page_results),
+        ]), 200
+
     def process_image_request(self, file,
                               engine_options=None,
                               ocr_prompt_option=None,
@@ -2537,60 +2627,20 @@ def process_image():
     user_email = get_user_email_from_request(request)
 
     file = request.files['file']
-    
-    # NEW: Resize the image if it's too large (>5 megapixels)
-    try:
-        file = process_uploaded_file_with_resize(file, max_pixels=5200000)
-        logger.info(f"Image processed and resized if necessary for user: {user_email}")
-    except Exception as e:
-        logger.error(f"Error processing image for resize: {e}")
-        response = make_response(jsonify({'error': f'Error processing image: {str(e)}'}), 500)
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
-    
-    # Get engine options from request if specified
+
+    # Parse all form parameters before branching on file type
     engine_options = request.form.getlist('engines') if 'engines' in request.form else None
-
-    # Get prompt from request if specified, otherwise None (use default)
     prompt = request.form.get('prompt') if 'prompt' in request.form else None
-
-    # Get ocr_only flag from request if specified
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
-
     notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
     skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
-
-    # Get WFO flag from request if specified
     include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'false').lower() == 'true'
-
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
-
     user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
 
-    # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
-    pro_quota_reserved = False
-    if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
-        allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
-        if not allowed:
-            logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
-            _send_rate_limit_hit_alert(user_email, count, limit)
-            resp = make_response(jsonify({
-                "error": "Gemini Pro rate limit exceeded",
-                "message": (
-                    f"You have used all {limit} of your Gemini Pro model requests. "
-                    "Contact an administrator to request additional quota."
-                ),
-                "gemini_pro_usage_count": count,
-                "gemini_pro_usage_limit": limit,
-            }), 503)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
-        pro_quota_reserved = True
-
-    # Process the image using the initialized processor
-    results, status_code = app.config['processor'].process_image_request(
-        file=file,
+    # Common kwargs for process_image_request / process_pdf_request
+    process_kwargs = dict(
         engine_options=engine_options,
         prompt=prompt,
         ocr_only=ocr_only,
@@ -2600,21 +2650,76 @@ def process_image():
         url_source="",
         notebook_mode=notebook_mode,
         skip_label_collage=skip_label_collage,
-        user_api_key=user_gemini_key
+        user_api_key=user_gemini_key,
     )
 
-    # If processing was successful, update usage statistics
-    if status_code == 200:
-        update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
-        # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
-        if pro_quota_reserved:
-            _, count, limit = check_gemini_pro_rate_limit(user_email)
-            _send_pro_migration_advisory(user_email, count, limit)
+    # Detect PDF by extension
+    is_pdf = file.filename and file.filename.lower().endswith('.pdf')
+
+    if is_pdf:
+        # PDF branch: convert pages to JPGs internally, skip resize here
+        logger.info(f"PDF upload detected for user: {user_email}, filename: {file.filename}")
+
+        # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+        # For PDFs, quota is checked per-page inside process_image_request
+        # so we skip the single-slot reservation here.
+        results, status_code = app.config['processor'].process_pdf_request(
+            file=file, **process_kwargs
+        )
+
+        # Update usage statistics for each successful page
+        if status_code == 200:
+            for page_result in results.get('pages', []):
+                if 'impact' in page_result:
+                    update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=page_result['impact'])
+
     else:
-        # Release the reserved pro quota on failure
-        if pro_quota_reserved:
-            release_gemini_pro_quota(user_email)
-        update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
+        # Image branch: resize then process (existing flow)
+        try:
+            file = process_uploaded_file_with_resize(file, max_pixels=5200000)
+            logger.info(f"Image processed and resized if necessary for user: {user_email}")
+        except Exception as e:
+            logger.error(f"Error processing image for resize: {e}")
+            response = make_response(jsonify({'error': f'Error processing image: {str(e)}'}), 500)
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
+
+        # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+        pro_quota_reserved = False
+        if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
+            allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
+            if not allowed:
+                logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
+                _send_rate_limit_hit_alert(user_email, count, limit)
+                resp = make_response(jsonify({
+                    "error": "Gemini Pro rate limit exceeded",
+                    "message": (
+                        f"You have used all {limit} of your Gemini Pro model requests. "
+                        "Contact an administrator to request additional quota."
+                    ),
+                    "gemini_pro_usage_count": count,
+                    "gemini_pro_usage_limit": limit,
+                }), 503)
+                resp.headers.add('Access-Control-Allow-Origin', '*')
+                return resp
+            pro_quota_reserved = True
+
+        results, status_code = app.config['processor'].process_image_request(
+            file=file, **process_kwargs
+        )
+
+        # If processing was successful, update usage statistics
+        if status_code == 200:
+            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
+            # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
+            if pro_quota_reserved:
+                _, count, limit = check_gemini_pro_rate_limit(user_email)
+                _send_pro_migration_advisory(user_email, count, limit)
+        else:
+            # Release the reserved pro quota on failure
+            if pro_quota_reserved:
+                release_gemini_pro_quota(user_email)
+            update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
 
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)

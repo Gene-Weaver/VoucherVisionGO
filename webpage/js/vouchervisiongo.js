@@ -808,7 +808,8 @@ const STEP_INFO = {
         title: 'Process Images',
         number: '4',
         sections: [
-            { title: 'Selecting images to transcribe with VoucherVision', body: 'This website is designed to get you familiar with VoucherVision or to run a few images at a time. If you want to run VoucherVision regularly or for large batches (more than a few hundred images), you should use the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong> or call the API directly. Learn more on the <strong>About</strong> page.' }
+            { title: 'Selecting images to transcribe with VoucherVision', body: 'This website is designed to get you familiar with VoucherVision or to run a few images at a time. If you want to run VoucherVision regularly or for large batches (more than a few hundred images), you should use the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong> or call the API directly. Learn more on the <strong>About</strong> page.' },
+            { title: 'PDF Support', body: 'You can upload PDF files directly\u2014each page is automatically converted to a JPG and processed as a separate specimen image. Multi-page PDFs (up to 200 pages) are fully supported. All processing options (Text Collage, Notebook Mode, Skip Label Collage) apply to each page individually. For large PDFs, we recommend using the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong>, which converts pages locally and processes them in parallel for much faster results.' }
         ]
     },
     step5: {
