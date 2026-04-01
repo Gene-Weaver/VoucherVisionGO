@@ -394,6 +394,48 @@ $(document).ready(function() {
 // });
 
 
+// Count pages in a PDF file using PDF.js (returns 0 if not available)
+async function countPdfPages(file) {
+    if (!window.pdfjsLib) return 0;
+    try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        return pdf.numPages;
+    } catch (e) {
+        console.warn('Could not count PDF pages:', e);
+        return 0;
+    }
+}
+
+// Build PDF progress UI
+function buildPdfProgressHTML(pageCount, fileName) {
+    return `
+        <div class="pdf-progress-container">
+            <div class="pdf-progress-warning">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>Please use the <a href="https://pypi.org/project/vouchervision-go-client/" target="_blank"><strong>Python package</strong></a> for processing PDFs &mdash; it converts pages locally and processes them in parallel, making it <strong>much faster</strong>.</span>
+            </div>
+            <div class="pdf-progress-header">
+                <span class="pdf-progress-filename">${fileName}</span>
+                <span class="pdf-progress-status">Processing page <strong>0</strong> of <strong>${pageCount}</strong>...</span>
+            </div>
+            <div class="pdf-progress-bar-track">
+                <div class="pdf-progress-bar-fill" style="width: 0%;"></div>
+            </div>
+            <div class="pdf-progress-detail">Pages are processed sequentially on the server. This may take a while.</div>
+        </div>
+    `;
+}
+
+// Update PDF progress bar (called with simulated progress during fetch)
+function updatePdfProgress(currentPage, totalPages) {
+    const pct = totalPages > 0 ? Math.round((currentPage / totalPages) * 100) : 0;
+    $('.pdf-progress-bar-fill').css('width', pct + '%');
+    $('.pdf-progress-status').html(`Processing page <strong>${currentPage}</strong> of <strong>${totalPages}</strong>...`);
+}
+
 // Universal Image Processor
 async function processImage(sourceType = 'file') {
     const authMethod = $('input[name="authMethod"]:checked').val();
@@ -425,13 +467,23 @@ async function processImage(sourceType = 'file') {
 
     const formData = new FormData();
 
+    // Detect if we're uploading a PDF
+    let isPdf = false;
+    let pdfPageCount = 0;
+
     if (sourceType === 'file') {
         const fileInput = document.getElementById('fileInput');
         if (!fileInput.files || fileInput.files.length === 0) {
             alert('Please select a file first');
             return;
         }
-        formData.append('file', fileInput.files[0]);
+        const file = fileInput.files[0];
+        formData.append('file', file);
+
+        if (file.name.toLowerCase().endsWith('.pdf')) {
+            isPdf = true;
+            pdfPageCount = await countPdfPages(file);
+        }
     } else if (sourceType === 'url') {
         const imageUrl = $('#imageUrl').val();
         if (!imageUrl) {
@@ -457,7 +509,7 @@ async function processImage(sourceType = 'file') {
     if ('Content-Type' in headers) delete headers['Content-Type'];
 
     // Choose the correct endpoint
-    const endpoint = (sourceType === 'file') 
+    const endpoint = (sourceType === 'file')
         ? 'https://vouchervision-go-738307415303.us-central1.run.app/process'
         : 'https://vouchervision-go-738307415303.us-central1.run.app/process-url';
 
@@ -472,8 +524,25 @@ async function processImage(sourceType = 'file') {
     // Disable buttons & show animated loader during processing
     const buttonSelector = (sourceType === 'file') ? '#uploadButton' : '#processUrlButton';
     setButtonProcessing(buttonSelector, true);
-    $('#singleResults').html(vvLoaderHTML());
-    startLoaderCycle($('#singleResults')[0]);
+
+    // Show PDF progress bar or standard loader
+    if (isPdf && pdfPageCount > 0) {
+        $('#singleResults').html(buildPdfProgressHTML(pdfPageCount, resultLabel));
+        // Simulate progress: estimate ~15s per page on the server
+        let simPage = 0;
+        window._pdfProgressInterval = setInterval(() => {
+            if (simPage < pdfPageCount) {
+                simPage++;
+                updatePdfProgress(simPage, pdfPageCount);
+            }
+        }, 15000);
+    } else if (isPdf) {
+        // PDF but couldn't count pages
+        $('#singleResults').html(buildPdfProgressHTML('?', resultLabel));
+    } else {
+        $('#singleResults').html(vvLoaderHTML());
+        startLoaderCycle($('#singleResults')[0]);
+    }
 
     // Debug log
     const formDataEntries = [];
@@ -483,11 +552,18 @@ async function processImage(sourceType = 'file') {
     logDebug('FINAL FormData contents', formDataEntries);
 
     try {
+        // Use a long timeout for PDFs (10 min) since pages are processed sequentially
+        const controller = new AbortController();
+        const timeoutMs = isPdf ? 600000 : 120000;
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
         const response = await fetch(endpoint, {
             method: 'POST',
             headers: headers,
             body: formData,
+            signal: controller.signal,
         });
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             const errorText = await response.text();
@@ -500,19 +576,72 @@ async function processImage(sourceType = 'file') {
         const data = await response.json();
         logDebug('API response success', data);
 
-        // Create split layout for results
-        const resultsHTML = createSplitResultsLayout(data);
+        // Handle multi-page PDF response
+        if (data.pages && Array.isArray(data.pages)) {
+            // Clear progress UI
+            if (window._pdfProgressInterval) {
+                clearInterval(window._pdfProgressInterval);
+                window._pdfProgressInterval = null;
+            }
+            updatePdfProgress(data.page_count || data.pages.length, data.page_count || data.pages.length);
+            $('.pdf-progress-status').html(`<strong>Complete!</strong> Processed ${data.pages.length} pages from ${data.source_pdf || resultLabel}`);
+            $('.pdf-progress-detail').text('');
 
-        // Add to history and display
-        addResultToHistory(resultLabel, resultsHTML, data);
+            // Treat each page as a separate specimen result
+            const successPages = data.pages.filter(p => !p.error);
+            const errorPages = data.pages.filter(p => p.error);
+
+            if (errorPages.length > 0) {
+                logDebug(`PDF processing: ${errorPages.length} page(s) had errors`, errorPages);
+            }
+
+            // Add each successful page to the result history as a separate specimen
+            for (const pageData of successPages) {
+                const pageLabel = pageData.filename || `${resultLabel} (page)`;
+                const pageHTML = createSplitResultsLayout(pageData);
+                addResultToHistory(pageLabel, pageHTML, pageData);
+            }
+
+            // Show errors for failed pages
+            if (errorPages.length > 0) {
+                let errorSummary = `<div class="pdf-page-errors"><h4>${errorPages.length} page(s) failed:</h4><ul>`;
+                for (const ep of errorPages) {
+                    errorSummary += `<li><strong>${ep.filename || 'Unknown page'}</strong>: ${ep.error}</li>`;
+                }
+                errorSummary += '</ul></div>';
+                $('#singleResults').append(errorSummary);
+            }
+
+            // If no pages succeeded, show a message
+            if (successPages.length === 0) {
+                $('#singleResults').html(`
+                    <h3 class="error">Error:</h3>
+                    <p>All ${data.pages.length} pages failed to process.</p>
+                `);
+            }
+        } else {
+            // Standard single-image response
+            const resultsHTML = createSplitResultsLayout(data);
+            addResultToHistory(resultLabel, resultsHTML, data);
+        }
 
     } catch (error) {
         logDebug('API response error', { error: error.toString() });
+        let errorMsg = error.message;
+        if (error.name === 'AbortError') {
+            errorMsg = isPdf
+                ? 'Request timed out. The PDF may have too many pages for the web interface. Please use the Python package for large PDFs.'
+                : 'Request timed out. Please try again.';
+        }
         $('#singleResults').html(`
             <h3 class="error">Error:</h3>
-            <p>${error.message}</p>
+            <p>${errorMsg}</p>
         `);
     } finally {
+        if (window._pdfProgressInterval) {
+            clearInterval(window._pdfProgressInterval);
+            window._pdfProgressInterval = null;
+        }
         stopLoaderCycle();
         setButtonProcessing(buttonSelector, false);
     }

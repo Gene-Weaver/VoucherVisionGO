@@ -1,5 +1,6 @@
 # Claude Code
 .claude/
+*.tmp.*
 
 # WFO backbone data (built locally, baked into Docker image)
 WFO_uber/uber_*/
