@@ -1227,6 +1227,13 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
     try:        
         # Download the image
         response = requests.get(image_url, stream=True, timeout=60)
+        if response.status_code == 403:
+            logger.error(
+                f"403 Forbidden for {image_url}\n"
+                f"  Response Headers: {dict(response.headers)}\n"
+                f"  Response Body (first 500 chars): {response.text[:500]}\n"
+                f"  Request User-Agent: {response.request.headers.get('User-Agent', 'N/A')}"
+            )
         response.raise_for_status()
         
         # Get filename from URL
