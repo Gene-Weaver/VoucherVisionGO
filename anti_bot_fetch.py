@@ -194,6 +194,14 @@ def smart_fetch_image_as_filestorage(
                 _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
                 continue
 
+            if resp.status_code == 403:
+                if logger:
+                    logger.error(
+                        f"403 Forbidden for {url}\n"
+                        f"  Response Headers: {dict(resp.headers)}\n"
+                        f"  Response Body (first 500 chars): {resp.text[:500]}\n"
+                        f"  Request User-Agent: {headers.get('User-Agent', 'N/A')}"
+                    )
             resp.raise_for_status()
 
             # Content-type check (be lenient: some servers omit it)
