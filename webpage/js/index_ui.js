@@ -21,13 +21,16 @@
         return '$' + s;
     }
     function initLlmCostUI(costData) {
-        const selectEl = document.getElementById('llmModelSelect');
-        const inEl = document.getElementById('llmTokensIn');
-        const outEl = document.getElementById('llmTokensOut');
+        const ocrSelectEl = document.getElementById('ocrModelSelect');
+        const ocrInEl = document.getElementById('ocrTokensIn');
+        const ocrOutEl = document.getElementById('ocrTokensOut');
+        const parseSelectEl = document.getElementById('parseModelSelect');
+        const parseInEl = document.getElementById('parseTokensIn');
+        const parseOutEl = document.getElementById('parseTokensOut');
         const imgEl = document.getElementById('llmNumImages');
         const totalEl = document.getElementById('llmTotalCost');
         const tablesEl = document.getElementById('llmCostTables');
-        if (!selectEl || !inEl || !outEl || !imgEl || !totalEl || !tablesEl) return;
+        if (!ocrSelectEl || !parseSelectEl || !ocrInEl || !ocrOutEl || !parseInEl || !parseOutEl || !imgEl || !totalEl || !tablesEl) return;
 
         const models = [];
         for (const key in costData) {
@@ -39,7 +42,8 @@
             models.push({ key, provider: getProvider(key), name: prettyNameFromKey(key), in: priceIn, out: priceOut });
         }
         if (!models.length) {
-            selectEl.innerHTML = '<option value="">No models found in api_cost.yaml</option>';
+            ocrSelectEl.innerHTML = '<option value="">No models found</option>';
+            parseSelectEl.innerHTML = '<option value="">No models found</option>';
             tablesEl.innerHTML = '<div class="vv-card llm-cost-card">No cost data loaded.</div>';
             return;
         }
@@ -47,16 +51,30 @@
         const modelMap = {};
         models.forEach(m => { modelMap[m.key] = m; });
 
-        selectEl.innerHTML = '';
-        models.forEach(m => {
-            const opt = document.createElement('option');
-            opt.value = m.key;
-            opt.textContent = `${m.provider}: ${m.name}`;
-            selectEl.appendChild(opt);
+        // Populate both dropdowns
+        [ocrSelectEl, parseSelectEl].forEach(sel => {
+            sel.innerHTML = '';
+            models.forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m.key;
+                opt.textContent = `${m.provider}: ${m.name}`;
+                sel.appendChild(opt);
+            });
         });
-        const geminiKey = models.find(m => m.key === 'GEMINI_3_1_FLASH_LITE')?.key;
-        selectEl.value = geminiKey || models[0].key;
 
+        // Default OCR model: heavier vision model
+        const ocrDefault = models.find(m => m.key === 'GEMINI_3_1_PRO')?.key
+            || models.find(m => m.key.includes('PRO'))?.key
+            || models[0].key;
+        ocrSelectEl.value = ocrDefault;
+
+        // Default Parsing model: fast/cheap model
+        const parseDefault = models.find(m => m.key === 'GEMINI_3_1_FLASH_LITE')?.key
+            || models.find(m => m.key.includes('FLASH_LITE'))?.key
+            || models[0].key;
+        parseSelectEl.value = parseDefault;
+
+        // Cost matrix table
         const byProvider = {};
         models.forEach(m => { if (!byProvider[m.provider]) byProvider[m.provider] = []; byProvider[m.provider].push(m); });
         const providerOrder = ['OpenAI','Azure OpenAI','Google','Mistral','Hyperbolic','Local','Other'];
@@ -69,21 +87,53 @@
         });
         tablesEl.innerHTML = htmlChunks.join('');
 
-        function recomputeCost() {
-            const key = selectEl.value;
-            const model = modelMap[key];
-            if (!model) { totalEl.value = '$0.00'; return; }
-            const nIn = Number(inEl.value) || 0;
-            const nOut = Number(outEl.value) || 0;
-            const nImg = Number(imgEl.value) || 0;
-            const cost = (nIn / 1_000_000 * model.in) + (nOut / 1_000_000 * model.out);
-            totalEl.value = '$' + (cost * nImg).toFixed(2);
+        // Check if a token field is at its default (high) value
+        function isDefault(el) {
+            return el.dataset.defaultHigh && Number(el.value) === Number(el.dataset.defaultHigh);
         }
+
+        // Are ALL four token fields at their defaults?
+        function allDefaults() {
+            return isDefault(ocrInEl) && isDefault(ocrOutEl) && isDefault(parseInEl) && isDefault(parseOutEl);
+        }
+
+        function calcCostForStage(model, tokIn, tokOut) {
+            if (!model) return 0;
+            return (tokIn / 1_000_000 * model.in) + (tokOut / 1_000_000 * model.out);
+        }
+
+        function recomputeCost() {
+            const ocrModel = modelMap[ocrSelectEl.value];
+            const parseModel = modelMap[parseSelectEl.value];
+            const nImg = Number(imgEl.value) || 0;
+
+            if (allDefaults()) {
+                // Range mode: low (typical) to high (worst-case)
+                const lowOcrIn = Number(ocrInEl.dataset.defaultLow);
+                const lowOcrOut = Number(ocrOutEl.dataset.defaultLow);
+                const lowParseIn = Number(parseInEl.dataset.defaultLow);
+                const lowParseOut = Number(parseOutEl.dataset.defaultLow);
+
+                const highOcrIn = Number(ocrInEl.value);
+                const highOcrOut = Number(ocrOutEl.value);
+                const highParseIn = Number(parseInEl.value);
+                const highParseOut = Number(parseOutEl.value);
+
+                const costLow = (calcCostForStage(ocrModel, lowOcrIn, lowOcrOut) + calcCostForStage(parseModel, lowParseIn, lowParseOut)) * nImg;
+                const costHigh = (calcCostForStage(ocrModel, highOcrIn, highOcrOut) + calcCostForStage(parseModel, highParseIn, highParseOut)) * nImg;
+
+                totalEl.textContent = '$' + costLow.toFixed(2) + ' – $' + costHigh.toFixed(2);
+            } else {
+                // Exact mode: user changed at least one token field
+                const cost = (calcCostForStage(ocrModel, Number(ocrInEl.value), Number(ocrOutEl.value))
+                    + calcCostForStage(parseModel, Number(parseInEl.value), Number(parseOutEl.value))) * nImg;
+                totalEl.textContent = '$' + cost.toFixed(2);
+            }
+        }
+
+        const allInputs = [ocrSelectEl, ocrInEl, ocrOutEl, parseSelectEl, parseInEl, parseOutEl, imgEl];
         ['change','input'].forEach(evt => {
-            selectEl.addEventListener(evt, recomputeCost);
-            inEl.addEventListener(evt, recomputeCost);
-            outEl.addEventListener(evt, recomputeCost);
-            imgEl.addEventListener(evt, recomputeCost);
+            allInputs.forEach(el => el.addEventListener(evt, recomputeCost));
         });
         recomputeCost();
     }
@@ -98,9 +148,11 @@
             .catch(err => {
                 console.error('[LLM Cost] Error loading cost data:', err);
                 const tablesEl = document.getElementById('llmCostTables');
-                const selectEl = document.getElementById('llmModelSelect');
+                const ocrSel = document.getElementById('ocrModelSelect');
+                const parseSel = document.getElementById('parseModelSelect');
                 if (tablesEl) tablesEl.innerHTML = '<div class="vv-card llm-cost-card">Error loading cost data.</div>';
-                if (selectEl) selectEl.innerHTML = '<option value="">Error loading cost data</option>';
+                if (ocrSel) ocrSel.innerHTML = '<option value="">Error loading cost data</option>';
+                if (parseSel) parseSel.innerHTML = '<option value="">Error loading cost data</option>';
             });
     });
 })();

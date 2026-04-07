@@ -16,6 +16,14 @@ http://localhost:8000/index2.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VoucherVision API</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4RC4NS3NN2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4RC4NS3NN2');
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/2.15.0/mapbox-gl.css" rel="stylesheet" />
@@ -25,14 +33,14 @@ http://localhost:8000/index2.html
     <script>if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
-    <script src="js/index_ui.js?v=32"></script>
-    <script src="js/vouchervisiongo.js?v=32"></script>
-    <script src="js/batch_processing.js?v=32"></script>
-    <script src="js/api_key_validator.js?v=32"></script>
-    <script src="js/prompt_templates.js?v=32"></script>
-    <script src="js/changelog_viewer.js?v=32"></script>
+    <script src="js/index_ui.js?v=34"></script>
+    <script src="js/vouchervisiongo.js?v=34"></script>
+    <script src="js/batch_processing.js?v=34"></script>
+    <script src="js/api_key_validator.js?v=34"></script>
+    <script src="js/prompt_templates.js?v=34"></script>
+    <script src="js/changelog_viewer.js?v=34"></script>
 
-    <link rel="stylesheet" href="css/vouchervisiongo.css?v=32">
+    <link rel="stylesheet" href="css/vouchervisiongo.css?v=34">
     <script>
         function addMapboxToHead() {
             if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
@@ -567,28 +575,59 @@ http://localhost:8000/index2.html
                 <section id="llmCostSection">
                     <div class="cost-calc-header">
                         <h2>Cost Calculator</h2>
-                        <p class="help-text">Herbarium specimens typically use &lt;4,000 input and &lt;1,000 output tokens. Prices are per 1M tokens (USD). Server hosting costs not included.</p>
+                        <p class="help-text">Estimates based on herbarium specimen benchmarks. Default tokens show a cost range (typical – worst-case). Prices are per 1M tokens (USD). Server hosting costs not included.</p>
                     </div>
 
                     <div class="cost-calc-layout">
                         <div class="cost-calc-inputs">
-                            <div class="cost-calc-model">
-                                <label for="llmModelSelect">Model</label>
-                                <div class="select-wrapper">
-                                    <select id="llmModelSelect">
-                                        <option value="">Loading models...</option>
-                                    </select>
+                            <!-- OCR Stage -->
+                            <div class="cost-calc-stage">
+                                <div class="cost-calc-stage-label">OCR Stage</div>
+                                <div class="cost-calc-model">
+                                    <label for="ocrModelSelect">OCR Model</label>
+                                    <div class="select-wrapper">
+                                        <select id="ocrModelSelect">
+                                            <option value="">Loading models...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="cost-calc-fields">
+                                    <div class="cost-calc-field">
+                                        <label for="ocrTokensIn">Tokens In <span class="field-hint">per image</span></label>
+                                        <input type="number" id="ocrTokensIn" value="1500" min="0" step="50" data-default-low="1300" data-default-high="1500">
+                                    </div>
+                                    <div class="cost-calc-field">
+                                        <label for="ocrTokensOut">Tokens Out <span class="field-hint">per image</span></label>
+                                        <input type="number" id="ocrTokensOut" value="1000" min="0" step="50" data-default-low="150" data-default-high="1000">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="cost-calc-fields">
-                                <div class="cost-calc-field">
-                                    <label for="llmTokensIn">Tokens In <span class="field-hint">per image</span></label>
-                                    <input type="number" id="llmTokensIn" value="4000" min="0" step="50">
+
+                            <!-- Parsing Stage -->
+                            <div class="cost-calc-stage">
+                                <div class="cost-calc-stage-label">Parsing Stage</div>
+                                <div class="cost-calc-model">
+                                    <label for="parseModelSelect">Parsing Model</label>
+                                    <div class="select-wrapper">
+                                        <select id="parseModelSelect">
+                                            <option value="">Loading models...</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="cost-calc-field">
-                                    <label for="llmTokensOut">Tokens Out <span class="field-hint">per image</span></label>
-                                    <input type="number" id="llmTokensOut" value="1000" min="0" step="50">
+                                <div class="cost-calc-fields">
+                                    <div class="cost-calc-field">
+                                        <label for="parseTokensIn">Tokens In <span class="field-hint">per image</span></label>
+                                        <input type="number" id="parseTokensIn" value="3000" min="0" step="50" data-default-low="2350" data-default-high="3000">
+                                    </div>
+                                    <div class="cost-calc-field">
+                                        <label for="parseTokensOut">Tokens Out <span class="field-hint">per image</span></label>
+                                        <input type="number" id="parseTokensOut" value="1000" min="0" step="50" data-default-low="650" data-default-high="1000">
+                                    </div>
                                 </div>
+                            </div>
+
+                            <!-- Shared: Images -->
+                            <div class="cost-calc-fields cost-calc-images-row">
                                 <div class="cost-calc-field">
                                     <label for="llmNumImages">Images</label>
                                     <input type="number" id="llmNumImages" value="1000" min="0" step="100">
@@ -598,7 +637,7 @@ http://localhost:8000/index2.html
 
                         <div class="cost-calc-result">
                             <span class="cost-calc-result-label">Estimated Total</span>
-                            <input type="text" id="llmTotalCost" value="$0.00" readonly>
+                            <span id="llmTotalCost" class="cost-calc-total-display">$0.00</span>
                         </div>
                     </div>
 

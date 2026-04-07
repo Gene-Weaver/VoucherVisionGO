@@ -423,8 +423,14 @@ body.dark-mode .cost-calc-result {
 body.dark-mode .cost-calc-result-label {
     color: #999;
 }
-body.dark-mode .cost-calc-result input#llmTotalCost {
+body.dark-mode .cost-calc-total-display {
     color: #66BB6A;
+}
+body.dark-mode .cost-calc-stage {
+    border-color: #333;
+}
+body.dark-mode .cost-calc-stage-label {
+    color: #666;
 }
 body.dark-mode .cost-calc-model label,
 body.dark-mode .cost-calc-field label {
@@ -2358,12 +2364,15 @@ pre {
     margin-bottom: 24px;
 }
 .cost-calc-inputs {
-    flex: 1 1 360px; display: flex; flex-direction: column; gap: 16px;
+    flex: 1 1 420px; display: flex; flex-direction: column; gap: 16px;
     background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 10px; padding: 20px;
 }
+.cost-calc-stage { border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px 16px 16px; }
+.cost-calc-stage-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 10px; }
 .cost-calc-model { display: flex; flex-direction: column; }
 .cost-calc-model label { font-size: 0.85rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-.cost-calc-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cost-calc-fields { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 10px; }
+.cost-calc-images-row { grid-template-columns: 1fr; max-width: 200px; }
 .cost-calc-field { display: flex; flex-direction: column; }
 .cost-calc-field label { font-size: 0.85rem; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
 .cost-calc-field .field-hint { font-weight: 400; text-transform: none; letter-spacing: 0; color: #999; font-size: 0.8rem; }
@@ -2393,14 +2402,16 @@ pre {
     font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
     color: #666; margin-bottom: 8px;
 }
-.cost-calc-result input#llmTotalCost {
-    font-size: 2.2rem; font-weight: 700; color: #2e7d32; background: transparent;
-    border: none; text-align: center; width: 100%; padding: 0; outline: none; cursor: default;
+.cost-calc-total-display {
+    font-size: 2rem; font-weight: 700; color: #2e7d32;
+    text-align: center; width: 100%; white-space: nowrap;
 }
 
 @media (max-width: 640px) {
     .cost-calc-fields { grid-template-columns: 1fr; }
+    .cost-calc-images-row { max-width: none; }
     .cost-calc-result { flex-basis: 100%; }
+    .cost-calc-total-display { font-size: 1.5rem; }
 }
 
 #llmCostMatrixDetails { margin-top: 4px; }
