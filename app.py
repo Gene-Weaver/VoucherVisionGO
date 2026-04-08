@@ -2643,8 +2643,8 @@ def process_image():
     ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
     notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
     skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
-    include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
-    include_cop90 = request.form.get('include_cop90', 'false').lower() == 'true'
+    include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
+    include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
     user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
 
@@ -2763,8 +2763,8 @@ def process_image_by_url():
         ocr_only = data.get('ocr_only', False)
         notebook_mode = data.get('notebook_mode', False)
         skip_label_collage = data.get('skip_label_collage', False)
-        include_wfo = data.get('include_wfo', False)
-        include_cop90 = data.get('include_cop90', False)
+        include_wfo = data.get('include_wfo', True)
+        include_cop90 = data.get('include_cop90', True)
         llm_model_name = data.get('llm_model')
         user_gemini_key = data.get('gemini_api_key') or None
 
@@ -2781,8 +2781,8 @@ def process_image_by_url():
         ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
         notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
         skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
-        include_wfo = request.form.get('include_wfo', 'false').lower() == 'true'
-        include_cop90 = request.form.get('include_cop90', 'false').lower() == 'true'
+        include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
+        include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
 
