@@ -384,7 +384,7 @@ def release_gemini_pro_quota(user_email: str):
 
 # ── Daily usage email alerts ────────────────────────────────────────────
 
-DAILY_ALERT_THRESHOLDS = [100, 200, 500]
+DAILY_ALERT_THRESHOLDS = [100, 500, 1000, 2000, 5000]
 
 def _send_daily_usage_alerts(user_email: str, current_day: str, prev_count: int):
     """Fire admin emails for first-call-of-day and daily volume thresholds.
