@@ -144,6 +144,9 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'usage-stats':
         loadUsageStatistics();
         break;
+      case 'new-users':
+        loadNewUsers();
+        break;
       case 'rate-limits':
         loadRateLimits();
         break;

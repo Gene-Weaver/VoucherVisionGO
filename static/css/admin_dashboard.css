@@ -341,3 +341,47 @@ body {
     background-color: #f5f5f5;
   }
 
+  /* New Users Tab */
+  .nu-controls {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nu-control-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nu-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-right: 4px;
+  }
+
+  .nu-bin-btn,
+  .nu-tf-btn {
+    padding: 5px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .nu-bin-btn:hover,
+  .nu-tf-btn:hover {
+    background: #f0f0f0;
+  }
+
+  .nu-bin-btn.active,
+  .nu-tf-btn.active {
+    background: #4285f4;
+    color: #fff;
+    border-color: #4285f4;
+  }
+

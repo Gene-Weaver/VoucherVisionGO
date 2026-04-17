@@ -195,74 +195,138 @@ function formatTimestamp(timestamp) {
   return 'N/A';
 }
 
-// Process data for chart
+// Usage chart state
+let usageBin = 'day';
+let usageTimeframe = '30d';
+let usageChartInstance = null;
+
+// Process data for chart with configurable binning and timeframe
 function processChartData(stats) {
   const userColors = createUserColorMap(stats);
   const users = stats.map(stat => stat.user_email || 'Unknown');
 
-  // Get date range for the last 30 days
-  const today = new Date();
-  const dates = [];
-  const dateLabels = [];
-
-  for (let i = 29; i >= 0; i--) {
-    const date = new Date();
-    date.setDate(today.getDate() - i);
-    const dateStr = date.toISOString().split('T')[0]; // YYYY-MM-DD format
-    dates.push(dateStr);
-
-    // Create readable format for x-axis labels
-    const month = date.toLocaleString('default', { month: 'short' });
-    const day = date.getDate();
-    dateLabels.push(`${month} ${day}`);
-  }
-
-  // Initialize data for each user
-  const dailyData = {};
-  users.forEach(email => {
-    dailyData[email] = {};
-    dates.forEach(date => {
-      dailyData[email][date] = 0;
-    });
-  });
-
-  // Fill in actual data
-  stats.forEach(stat => {
-    const email = stat.user_email || 'Unknown';
-
-    if (stat.daily_usage) {
-      Object.entries(stat.daily_usage).forEach(([date, count]) => {
-        if (dates.includes(date)) {
-          dailyData[email][date] = count;
+  const now = new Date();
+  let rangeStart;
+  switch (usageTimeframe) {
+    case '30d': rangeStart = new Date(now); rangeStart.setDate(now.getDate() - 30); break;
+    case '90d': rangeStart = new Date(now); rangeStart.setDate(now.getDate() - 90); break;
+    case '6m':  rangeStart = new Date(now); rangeStart.setMonth(now.getMonth() - 6); break;
+    case '1y':  rangeStart = new Date(now); rangeStart.setFullYear(now.getFullYear() - 1); break;
+    case 'all':
+      // Find earliest daily_usage date across all users
+      let earliest = now;
+      stats.forEach(stat => {
+        if (stat.daily_usage) {
+          Object.keys(stat.daily_usage).forEach(d => {
+            const dt = new Date(d);
+            if (dt < earliest) earliest = dt;
+          });
         }
       });
-    } else {
-      // Generate sample data if none exists
-      generateSampleData(dailyData, email, dates, stat.total_images_processed || 0);
-    }
+      rangeStart = earliest;
+      break;
+    default: rangeStart = new Date(now); rangeStart.setDate(now.getDate() - 30);
+  }
+
+  // Build bins using the shared helper from new_users.js if available, else inline
+  const bins = usageBuildBins(rangeStart, now, usageBin);
+
+  // Initialize data for each user per bin
+  const binnedData = {};
+  users.forEach(email => {
+    binnedData[email] = new Array(bins.length).fill(0);
   });
 
-  // Prepare chart data
-  const chartData = [];
-  dates.forEach((date, index) => {
-    const dataPoint = {
-      date: date,
-      label: dateLabels[index]
-    };
-
-    users.forEach(email => {
-      dataPoint[email] = dailyData[email][date];
+  // Assign daily_usage counts into bins
+  stats.forEach(stat => {
+    const email = stat.user_email || 'Unknown';
+    if (!stat.daily_usage) return;
+    Object.entries(stat.daily_usage).forEach(([dateStr, count]) => {
+      const d = new Date(dateStr);
+      if (d < rangeStart) return;
+      for (let i = bins.length - 1; i >= 0; i--) {
+        if (d >= bins[i].start) {
+          binnedData[email][i] += count;
+          break;
+        }
+      }
     });
-
-    chartData.push(dataPoint);
   });
 
-  return {
-    chartData,
-    userColors,
-    users,
-    dateLabels
-  };
+  const dateLabels = bins.map(b => b.label);
+
+  // Build chartData array (for compatibility with downstream code)
+  const chartData = bins.map((bin, idx) => {
+    const point = { date: bin.label, label: bin.label };
+    users.forEach(email => { point[email] = binnedData[email][idx]; });
+    return point;
+  });
+
+  return { chartData, userColors, users, dateLabels };
+}
+
+function usageBuildBins(start, end, binType) {
+  const bins = [];
+  const cur = new Date(start);
+
+  switch (binType) {
+    case 'day':   cur.setHours(0,0,0,0); break;
+    case 'week':  cur.setHours(0,0,0,0); cur.setDate(cur.getDate() - cur.getDay()); break;
+    case 'month': cur.setDate(1); cur.setHours(0,0,0,0); break;
+    case 'year':  cur.setMonth(0,1); cur.setHours(0,0,0,0); break;
+  }
+
+  while (cur <= end) {
+    const binStart = new Date(cur);
+    let label;
+    switch (binType) {
+      case 'day':
+        label = cur.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        cur.setDate(cur.getDate() + 1); break;
+      case 'week':
+        label = 'W' + cur.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        cur.setDate(cur.getDate() + 7); break;
+      case 'month':
+        label = cur.toLocaleDateString(undefined, { month: 'short', year: '2-digit' });
+        cur.setMonth(cur.getMonth() + 1); break;
+      case 'year':
+        label = cur.getFullYear().toString();
+        cur.setFullYear(cur.getFullYear() + 1); break;
+    }
+    bins.push({ start: binStart, label });
+  }
+  return bins;
+}
+
+function getUsageChartTitle() {
+  const binLabels = { day: 'Daily', week: 'Weekly', month: 'Monthly', year: 'Yearly' };
+  const tfLabels = { '30d': 'Last 30 Days', '90d': 'Last 90 Days', '6m': 'Last 6 Months', '1y': 'Last Year', 'all': 'All Time' };
+  return `${binLabels[usageBin]} Image Processing (${tfLabels[usageTimeframe]})`;
+}
+
+function setupUsageChartControls() {
+  document.querySelectorAll('.us-bin-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.us-bin-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      usageBin = btn.dataset.bin;
+      if (window.allStats) createChartWithData(window.allStats);
+    });
+  });
+  document.querySelectorAll('.us-tf-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.us-tf-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      usageTimeframe = btn.dataset.tf;
+      if (window.allStats) createChartWithData(window.allStats);
+    });
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupUsageChartControls);
+} else {
+  setupUsageChartControls();
 }
 
 // Generate sample data for demo purposes
@@ -360,24 +424,16 @@ function createChartWithData(stats) {
   `;
   // -------------------------------------------------------------
 
-  // Create legend items
-  const legendItems = users.map(email => {
-    return `
-      <div class="legend-item">
-        <span class="color-box" style="display: inline-block; width: 12px; height: 12px; background-color: ${userColors[email]}; margin-right: 5px; border-radius: 2px;"></span>
-        <span class="legend-label">${formatEmail(email)}</span>
-      </div>`;
-  }).join('\n');
+  // Show controls
+  const controls = document.getElementById('usage-chart-controls');
+  if (controls) controls.style.display = 'flex';
 
-  // Create chart HTML
+  // Create chart HTML (no per-user legend)
   chartContainer.innerHTML = `
     ${widgetsHtml}
     <div style="width: 100%; margin-bottom: 30px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-        <h3 style="margin: 0;">Daily Image Processing (Last 30 Days)</h3>
-        <div class="chart-legend" style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 12px;">
-          ${legendItems}
-        </div>
+      <div style="margin-bottom: 10px;">
+        <h3 id="usage-chart-title" style="margin: 0;">${getUsageChartTitle()}</h3>
       </div>
       <div style="width: 100%; height: 200px;">
         <canvas id="usageChart"></canvas>
@@ -385,7 +441,12 @@ function createChartWithData(stats) {
     </div>
   `;
 
-  // Create the chart
+  // Destroy previous chart instance
+  if (usageChartInstance) {
+    usageChartInstance.destroy();
+    usageChartInstance = null;
+  }
+
   const ctx = document.getElementById('usageChart').getContext('2d');
 
   // Prepare datasets
@@ -398,8 +459,7 @@ function createChartWithData(stats) {
     };
   });
 
-  // Create the chart
-  new Chart(ctx, {
+  usageChartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: dateLabels,
@@ -409,32 +469,19 @@ function createChartWithData(stats) {
       responsive: true,
       maintainAspectRatio: false,
       plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false
-        }
+        legend: { display: false },
+        tooltip: { mode: 'index', intersect: false }
       },
       scales: {
         x: {
           stacked: true,
-          grid: {
-            display: false
-          },
-          ticks: {
-            maxRotation: 0,
-            autoSkip: true,
-            maxTicksLimit: 10
-          }
+          grid: { display: false },
+          ticks: { maxRotation: 0, autoSkip: true, maxTicksLimit: 15 }
         },
         y: {
           stacked: true,
           beginAtZero: true,
-          grid: {
-            color: 'rgba(0, 0, 0, 0.1)'
-          }
+          grid: { color: 'rgba(0, 0, 0, 0.1)' }
         }
       }
     }

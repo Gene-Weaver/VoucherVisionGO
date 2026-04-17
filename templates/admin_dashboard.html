@@ -43,6 +43,7 @@
           <button class="tab-button" data-tab="api-keys">API Keys</button>
           <button class="tab-button" data-tab="admins">Manage Admins</button>
           <button class="tab-button" data-tab="usage-stats">Usage Statistics</button>
+          <button class="tab-button" data-tab="new-users">New Users</button>
           <button class="tab-button" data-tab="rate-limits">Rate Limits</button>
         </div>
         
@@ -146,7 +147,25 @@
         <!-- Usage Statistics Tab -->
         <div id="usage-stats" class="tab-content">
           <h3>Image Processing Usage</h3>
-          
+
+          <div id="usage-chart-controls" class="nu-controls" style="display:none; margin-bottom:12px;">
+            <div class="nu-control-group">
+              <span class="nu-label">Bin:</span>
+              <button class="us-bin-btn nu-bin-btn active" data-bin="day">Day</button>
+              <button class="us-bin-btn nu-bin-btn" data-bin="week">Week</button>
+              <button class="us-bin-btn nu-bin-btn" data-bin="month">Month</button>
+              <button class="us-bin-btn nu-bin-btn" data-bin="year">Year</button>
+            </div>
+            <div class="nu-control-group">
+              <span class="nu-label">Timeframe:</span>
+              <button class="us-tf-btn nu-tf-btn active" data-tf="30d">30 Days</button>
+              <button class="us-tf-btn nu-tf-btn" data-tf="90d">90 Days</button>
+              <button class="us-tf-btn nu-tf-btn" data-tf="6m">6 Months</button>
+              <button class="us-tf-btn nu-tf-btn" data-tf="1y">1 Year</button>
+              <button class="us-tf-btn nu-tf-btn" data-tf="all">All Time</button>
+            </div>
+          </div>
+
           <div class="search-container">
             <input type="text" class="search-input" id="usage-search" placeholder="Search by email...">
           </div>
@@ -173,6 +192,34 @@
           
           <div id="usage-pagination" class="pagination">
             <!-- Pagination buttons will be generated here -->
+          </div>
+        </div>
+
+        <!-- New Users Tab -->
+        <div id="new-users" class="tab-content">
+          <h3>User Acquisition</h3>
+          <div id="new-users-container">
+            <div id="new-users-loading" class="loading">Loading user data...</div>
+            <div id="new-users-controls" class="nu-controls" style="display:none;">
+              <div class="nu-control-group">
+                <span class="nu-label">Bin:</span>
+                <button class="nu-bin-btn" data-bin="day">Day</button>
+                <button class="nu-bin-btn active" data-bin="week">Week</button>
+                <button class="nu-bin-btn" data-bin="month">Month</button>
+                <button class="nu-bin-btn" data-bin="year">Year</button>
+              </div>
+              <div class="nu-control-group">
+                <span class="nu-label">Timeframe:</span>
+                <button class="nu-tf-btn" data-tf="30d">30 Days</button>
+                <button class="nu-tf-btn" data-tf="90d">90 Days</button>
+                <button class="nu-tf-btn active" data-tf="6m">6 Months</button>
+                <button class="nu-tf-btn" data-tf="1y">1 Year</button>
+                <button class="nu-tf-btn" data-tf="all">All Time</button>
+              </div>
+            </div>
+            <div id="new-users-chart-wrap" style="display:none; width:100%; height:350px; margin-top:16px;">
+              <canvas id="newUsersCanvas"></canvas>
+            </div>
           </div>
         </div>
 
@@ -227,6 +274,7 @@
     <script src="{{ url_for('static', filename='js/admin/api_keys.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/usage_stats.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/new_users.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/rate_limits.js') }}"></script>
   </body>
 </html>
