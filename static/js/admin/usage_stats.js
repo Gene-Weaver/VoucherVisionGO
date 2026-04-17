@@ -470,7 +470,13 @@ function createChartWithData(stats) {
       maintainAspectRatio: false,
       plugins: {
         legend: { display: false },
-        tooltip: { mode: 'index', intersect: false }
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          filter: function(tooltipItem) {
+            return tooltipItem.raw > 0;
+          }
+        }
       },
       scales: {
         x: {
