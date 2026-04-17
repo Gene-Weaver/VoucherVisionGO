@@ -147,9 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'rate-limits':
         loadRateLimits();
         break;
-      case 'maintenance':
-        loadMaintenanceStatus();
-        break;
     }
   }
 

@@ -554,7 +554,7 @@ async function processImage(sourceType = 'file') {
     try {
         // Use a long timeout for PDFs (10 min) since pages are processed sequentially
         const controller = new AbortController();
-        const timeoutMs = isPdf ? 600000 : 120000;
+        const timeoutMs = isPdf ? 1800000 : 300000;
         const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
         const response = await fetch(endpoint, {
@@ -567,9 +567,6 @@ async function processImage(sourceType = 'file') {
 
         if (!response.ok) {
             const errorText = await response.text();
-            if (response.status === 503) {
-                throw new Error('API is temporarily down for maintenance');
-            }
             throw new Error(`API error: ${response.status} ${response.statusText}`);
         }
 

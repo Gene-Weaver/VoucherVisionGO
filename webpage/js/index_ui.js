@@ -638,10 +638,8 @@ if (ENABLE_API_CHECK) {
                 const healthResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/health', { method: 'GET', mode: 'cors', cache: 'no-cache', headers: { 'Content-Type': 'application/json' } });
                 if (healthResponse.ok) {
                     const healthData = await healthResponse.json();
-                    if (healthData.maintenance_mode === true) { updateStatusDisplay(false); return; }
                     const corsResponse = await fetch('https://vouchervision-go-738307415303.us-central1.run.app/cors-test', { method: 'GET', mode: 'cors', cache: 'no-cache' });
-                    if (corsResponse.status === 503) updateStatusDisplay(false);
-                    else updateStatusDisplay(true);
+                    updateStatusDisplay(corsResponse.ok);
                 } else { updateStatusDisplay(false); }
             } catch (error) { updateStatusDisplay(false); }
             finally { isCheckingStatus = false; }

@@ -228,68 +228,6 @@ except Exception as e:
 # Initialize Firestore client
 db = firestore.client()
 
-def get_maintenance_status():
-    """Get current maintenance status from Firestore"""
-    try:
-        maintenance_doc = db.collection('system_config').document('maintenance').get()
-        if maintenance_doc.exists:
-            data = maintenance_doc.to_dict()
-            return data.get('enabled', False)
-        else:
-            # If document doesn't exist, create it with default value
-            db.collection('system_config').document('maintenance').set({
-                'enabled': False,
-                'last_updated': firestore.SERVER_TIMESTAMP,
-                'updated_by': 'System'
-            })
-            return False
-    except Exception as e:
-        logger.error(f"Error getting maintenance status from Firestore: {str(e)}")
-        # Default to False if there's an error
-        return False
-
-def set_maintenance_status(enabled, updated_by='System'):
-    """Set maintenance status in Firestore"""
-    try:
-        maintenance_data = {
-            'enabled': enabled,
-            'last_updated': firestore.SERVER_TIMESTAMP,
-            'updated_by': updated_by
-        }
-        
-        db.collection('system_config').document('maintenance').set(maintenance_data)
-        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'} by {updated_by}")
-        return True
-    except Exception as e:
-        logger.error(f"Error setting maintenance status in Firestore: {str(e)}")
-        return False
-
-def maintenance_mode_middleware(f):
-    """Decorator to check maintenance mode before executing route"""
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        # Skip maintenance check for admin routes, health checks, and maintenance status endpoints
-        if (request.endpoint and 
-            (request.endpoint.startswith('admin') or 
-             request.endpoint in ['health_check', 'get_maintenance_status_endpoint', 'set_maintenance_mode_endpoint'])):
-            return f(*args, **kwargs)
-        
-        # Check if maintenance mode is enabled (now from Firestore)
-        if get_maintenance_status():
-            response = jsonify({
-                'error': 'VoucherVisionGO API Temporarily Unavailable',
-                'message': 'The API is temporarily down for maintenance, please try again later. Visit https://leafmachine.org/vouchervisiongo/ for more information.'
-            })
-            response.status_code = 503
-            # Ensure CORS headers are added to maintenance responses
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key,Accept')
-            response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE')
-            return response
-        
-        return f(*args, **kwargs)
-    return decorated_function
-
 def validate_api_key(api_key):
     """Validate an API key against the Firestore database """
     try:
@@ -2611,7 +2549,6 @@ def handle_preflight():
     _check_api_key_expirations()
 
 @app.route('/auth-check', methods=['GET'])
-@maintenance_mode_middleware
 @authenticated_route
 def auth_check():
     """Simple endpoint to verify authentication status"""
@@ -2622,7 +2559,6 @@ def auth_check():
     }), 200
     
 @app.route('/process', methods=['POST', 'OPTIONS'])
-@maintenance_mode_middleware
 @authenticated_route
 def process_image():
     """API endpoint to process an image with explicit CORS headers and automatic resizing"""
@@ -2738,7 +2674,6 @@ def process_image():
 
 
 @app.route('/process-url', methods=['POST', 'OPTIONS'])
-@maintenance_mode_middleware
 @authenticated_route
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
@@ -3220,14 +3155,12 @@ def update_user_rate_limit(email):
 
 
 @app.route('/cors-test', methods=['GET', 'OPTIONS'])
-@maintenance_mode_middleware
 def cors_test():
-    """Simple endpoint to test CORS configuration and maintenance status"""
+    """Simple endpoint to test CORS configuration"""
     return jsonify({
         'status': 'ok',
         'cors': 'enabled',
-        'message': 'If you can see this response in your browser or JavaScript app, CORS is working correctly.',
-        'maintenance_mode': False  # If this endpoint responds, maintenance is not active
+        'message': 'If you can see this response in your browser or JavaScript app, CORS is working correctly.'
     })
 
 @app.route('/test_json_order', methods=['GET'])
@@ -3244,7 +3177,7 @@ def test_json_order():
 
 @app.route('/health', methods=['GET', 'OPTIONS'])
 def health_check():
-    """Health check endpoint that bypasses maintenance mode and reports status"""
+    """Health check endpoint that reports server status"""
     
     # Handle OPTIONS preflight request for CORS
     if request.method == 'OPTIONS':
@@ -3259,31 +3192,13 @@ def health_check():
     active_requests = app.config['processor'].throttler.get_active_count()
     max_requests = app.config['processor'].throttler.max_concurrent
     
-    # Check maintenance status from Firestore
-    maintenance_status = get_maintenance_status()
-    
-    # Get maintenance info if available
-    maintenance_info = {}
-    try:
-        maintenance_doc = db.collection('system_config').document('maintenance').get()
-        if maintenance_doc.exists:
-            data = maintenance_doc.to_dict()
-            maintenance_info = {
-                'last_updated': data.get('last_updated'),
-                'updated_by': data.get('updated_by', 'Unknown')
-            }
-    except Exception as e:
-        logger.warning(f"Could not get maintenance info: {str(e)}")
-    
-    # Create the response with all the original functionality
+    # Create the response
     response = jsonify({
         'status': 'ok',
         'active_requests': active_requests,
         'max_concurrent_requests': max_requests,
         'server_load': f"{(active_requests / max_requests) * 100:.1f}%",
-        'maintenance_mode': maintenance_status,
-        'maintenance_info': maintenance_info,
-        'api_status': 'maintenance' if maintenance_status else 'available'
+        'api_status': 'available'
     })
     
     # Ensure CORS headers are present on the actual response
@@ -4886,88 +4801,6 @@ def revoke_api_key(key_id):
         logger.error(f"Error revoking API key: {str(e)}")
         return jsonify({'error': f'Failed to revoke API key: {str(e)}'}), 500
     
-@app.route('/admin/maintenance-status', methods=['GET'])
-@authenticated_route
-def get_maintenance_status_endpoint():
-    """Get current maintenance status (admin only)"""
-    # Get the authenticated user from the token
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
-        return jsonify({'error': 'User not properly authenticated'}), 401
-    
-    admin_email = user.get('email')
-    
-    # Check if the user is an admin
-    admin_doc = db.collection('admins').document(admin_email).get()
-    if not admin_doc.exists:
-        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
-    
-    try:
-        maintenance_enabled = get_maintenance_status()
-        
-        # Also get additional maintenance info from Firestore
-        maintenance_doc = db.collection('system_config').document('maintenance').get()
-        maintenance_info = {}
-        if maintenance_doc.exists:
-            data = maintenance_doc.to_dict()
-            maintenance_info = {
-                'last_updated': data.get('last_updated'),
-                'updated_by': data.get('updated_by', 'Unknown')
-            }
-        
-        return jsonify({
-            'status': 'success',
-            'maintenance_enabled': maintenance_enabled,
-            'maintenance_info': maintenance_info
-        })
-    except Exception as e:
-        logger.error(f"Error getting maintenance status: {str(e)}")
-        return jsonify({'error': f'Failed to get maintenance status: {str(e)}'}), 500
-
-@app.route('/admin/maintenance-mode', methods=['POST'])
-@authenticated_route
-def set_maintenance_mode_endpoint():
-    """Set maintenance mode status (admin only)"""
-    # Get the authenticated user from the token
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
-        return jsonify({'error': 'User not properly authenticated'}), 401
-    
-    admin_email = user.get('email')
-    
-    # Check if the user is an admin
-    admin_doc = db.collection('admins').document(admin_email).get()
-    if not admin_doc.exists:
-        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
-    
-    try:
-        # Get data from request
-        data = request.get_json() or {}
-        enabled = data.get('enabled', False)
-        
-        # Validate the input
-        if not isinstance(enabled, bool):
-            return jsonify({'error': 'enabled must be a boolean value'}), 400
-        
-        # Set maintenance mode in Firestore
-        success = set_maintenance_status(enabled, admin_email)
-        
-        if not success:
-            return jsonify({'error': 'Failed to update maintenance status in database'}), 500
-        
-        # Log the action
-        logger.info(f"Maintenance mode {'enabled' if enabled else 'disabled'} by {admin_email}")
-        
-        return jsonify({
-            'status': 'success',
-            'message': f"Maintenance mode {'enabled' if enabled else 'disabled'}",
-            'maintenance_enabled': enabled
-        })
-        
-    except Exception as e:
-        logger.error(f"Error setting maintenance mode: {str(e)}")
-        return jsonify({'error': f'Failed to set maintenance mode: {str(e)}'}), 500
-
 @app.route('/changelog', methods=['GET'])
 def get_changelog():
     """API endpoint to get the application changelog from a YAML file."""
