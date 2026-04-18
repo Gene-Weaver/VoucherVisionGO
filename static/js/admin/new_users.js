@@ -6,11 +6,31 @@ let newUsersData = null;
 let currentBin = 'week';
 let currentTimeframe = '6m';
 
+function ensureChartJsLoaded() {
+  return new Promise((resolve, reject) => {
+    if (typeof Chart !== 'undefined') return resolve();
+    const existing = document.querySelector('script[data-chartjs-fallback]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve());
+      existing.addEventListener('error', () => reject(new Error('Chart.js failed to load')));
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js';
+    script.dataset.chartjsFallback = '1';
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error('Chart.js failed to load'));
+    document.head.appendChild(script);
+  });
+}
+
 async function loadNewUsers() {
   const container = document.getElementById('new-users-container');
   const loading = document.getElementById('new-users-loading');
 
   try {
+    await ensureChartJsLoaded();
+
     if (!newUsersData) {
       const idToken = await firebase.auth().currentUser.getIdToken();
       const response = await fetch('/admin/applications', {

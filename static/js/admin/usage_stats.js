@@ -33,7 +33,11 @@ async function loadUsageStatistics() {
         // Save statistics globally for reuse
         window.allStats = data.usage_statistics;
 
-        // First, create the chart container (the summary widgets are rendered inside the chart container)
+        // Remove any existing chart container before creating a new one
+        const existingChartContainer = document.getElementById('daily-usage-chart-container');
+        if (existingChartContainer) existingChartContainer.remove();
+
+        // Create the chart container (the summary widgets are rendered inside the chart container)
         const chartContainerDiv = document.createElement('div');
         chartContainerDiv.id = 'daily-usage-chart-container';
         chartContainerDiv.style.marginBottom = '30px';
