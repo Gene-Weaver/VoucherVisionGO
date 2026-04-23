@@ -3110,13 +3110,12 @@ def get_cost_analytics():
 
     try:
         import cost_analytics
-        from google.cloud import storage
 
         usage_docs = []
         for stat_doc in db.collection('usage_statistics').stream():
             usage_docs.append(stat_doc.to_dict())
 
-        storage_client = storage.Client()
+        storage_client = cost_analytics.build_storage_client()
         report = cost_analytics.load_report_from_gcs(storage_client, usage_docs)
         report['status'] = 'success'
         return jsonify(report)

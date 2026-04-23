@@ -10,13 +10,48 @@ from __future__ import annotations
 
 import csv
 import io
+import json
 import logging
+import os
 import re
 import threading
 from collections import defaultdict
 from datetime import datetime
 
 logger = logging.getLogger(__name__)
+
+
+def build_storage_client():
+    """Return a google.cloud.storage.Client that works in this deployment.
+
+    On Cloud Run the env var `GOOGLE_APPLICATION_CREDENTIALS` sometimes holds
+    the raw service-account JSON (not a file path), and `firebase-admin-key`
+    holds the same JSON under a different name. Default ADC blows up when it
+    tries to open the JSON as a file, so build explicit credentials.
+    """
+    from google.cloud import storage
+    from google.oauth2 import service_account
+
+    for var in ("GOOGLE_APPLICATION_CREDENTIALS", "firebase-admin-key"):
+        raw = os.environ.get(var, "")
+        if not raw:
+            continue
+        # If it's an existing file path, let ADC handle it normally.
+        if os.path.isfile(raw):
+            return storage.Client()
+        # Otherwise try to parse as JSON content.
+        stripped = raw.lstrip()
+        if stripped.startswith("{"):
+            try:
+                info = json.loads(raw)
+                creds = service_account.Credentials.from_service_account_info(info)
+                project = info.get("project_id")
+                return storage.Client(project=project, credentials=creds)
+            except Exception as e:
+                logger.warning("Failed to parse %s as service-account JSON: %s", var, e)
+
+    # Last resort: metadata server / ADC.
+    return storage.Client()
 
 INVOICE_BUCKET = "vouchervision-cop90-rasters"
 INVOICE_PREFIX = "invoices/"
