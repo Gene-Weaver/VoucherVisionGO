@@ -21,13 +21,20 @@ from datetime import datetime
 logger = logging.getLogger(__name__)
 
 
+class _CredentialError(Exception):
+    """Raised for credential problems; message is always sanitized."""
+
+
 def build_storage_client():
     """Return a google.cloud.storage.Client that works in this deployment.
 
     On Cloud Run the env var `GOOGLE_APPLICATION_CREDENTIALS` sometimes holds
     the raw service-account JSON (not a file path), and `firebase-admin-key`
     holds the same JSON under a different name. Default ADC blows up when it
-    tries to open the JSON as a file, so build explicit credentials.
+    tries to open the JSON as a file — and the resulting exception message
+    embeds the raw JSON (including the private key). This function never lets
+    an underlying exception propagate with credential content in it; any
+    failure surfaces as a sanitized _CredentialError.
     """
     from google.cloud import storage
     from google.oauth2 import service_account
@@ -36,22 +43,40 @@ def build_storage_client():
         raw = os.environ.get(var, "")
         if not raw:
             continue
-        # If it's an existing file path, let ADC handle it normally.
+        # If it's an existing file path, let ADC load it.
         if os.path.isfile(raw):
-            return storage.Client()
-        # Otherwise try to parse as JSON content.
-        stripped = raw.lstrip()
-        if stripped.startswith("{"):
+            try:
+                return storage.Client()
+            except Exception:
+                # Don't log or re-raise with content — raise a sanitized error.
+                logger.error("storage.Client() failed reading credentials file")
+                raise _CredentialError("storage.Client init failed (file-path credentials)")
+        # Otherwise try to parse as inline JSON content.
+        if raw.lstrip().startswith("{"):
             try:
                 info = json.loads(raw)
+            except Exception:
+                logger.error("Failed to json.loads credentials env var %s", var)
+                raise _CredentialError(f"Credentials env var {var} is not valid JSON")
+            try:
                 creds = service_account.Credentials.from_service_account_info(info)
-                project = info.get("project_id")
+            except Exception:
+                logger.error("from_service_account_info rejected credentials in %s", var)
+                raise _CredentialError(f"Credentials env var {var} is not a valid service-account JSON")
+            project = info.get("project_id")
+            try:
                 return storage.Client(project=project, credentials=creds)
-            except Exception as e:
-                logger.warning("Failed to parse %s as service-account JSON: %s", var, e)
+            except Exception:
+                logger.error("storage.Client() failed with explicit service-account credentials")
+                raise _CredentialError("storage.Client init failed (inline credentials)")
 
-    # Last resort: metadata server / ADC.
-    return storage.Client()
+    # Last resort: metadata-server ADC. If this fails, scrub the exception so
+    # no env-var content can leak into the caller's logs or HTTP response.
+    try:
+        return storage.Client()
+    except Exception:
+        logger.error("storage.Client() ADC fallback failed")
+        raise _CredentialError("storage.Client init failed (ADC fallback)")
 
 INVOICE_BUCKET = "vouchervision-cop90-rasters"
 INVOICE_PREFIX = "invoices/"

@@ -3120,9 +3120,15 @@ def get_cost_analytics():
         report['status'] = 'success'
         return jsonify(report)
 
-    except Exception as e:
-        logger.error(f"Error building cost analytics: {str(e)}", exc_info=True)
-        return jsonify({'error': f'Failed to build cost analytics: {str(e)}'}), 500
+    except cost_analytics._CredentialError:
+        # Message is already sanitized; still do not include it in the response.
+        logger.error("Cost analytics: credential error (see prior log lines)")
+        return jsonify({'error': 'Cost analytics credential error (see server logs)'}), 500
+    except Exception:
+        # Never interpolate the exception into the log or response body — upstream
+        # libraries sometimes embed raw credential JSON in exception messages.
+        logger.exception("Cost analytics: unexpected error")
+        return jsonify({'error': 'Failed to build cost analytics (see server logs)'}), 500
 
 
 @app.route('/admin/test-pro-advisory', methods=['POST'])
