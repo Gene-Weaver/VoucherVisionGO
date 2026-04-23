@@ -150,6 +150,9 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'rate-limits':
         loadRateLimits();
         break;
+      case 'cost-analytics':
+        loadCostAnalytics();
+        break;
     }
   }
 

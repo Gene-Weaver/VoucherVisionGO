@@ -3090,6 +3090,42 @@ def get_usage_statistics():
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
 
 
+@app.route('/admin/cost-analytics', methods=['GET'])
+@authenticated_route
+def get_cost_analytics():
+    """Return merged GCP-invoice + Firestore-usage cost report for the admin dashboard.
+
+    Invoices are read from gs://vouchervision-cop90-rasters/invoices/*.csv.
+    Firestore usage_statistics is queried for per-user specimen + model counts.
+    Response is cached for ~60s keyed on invoice blob etags.
+    """
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        import cost_analytics
+        from google.cloud import storage
+
+        usage_docs = []
+        for stat_doc in db.collection('usage_statistics').stream():
+            usage_docs.append(stat_doc.to_dict())
+
+        storage_client = storage.Client()
+        report = cost_analytics.load_report_from_gcs(storage_client, usage_docs)
+        report['status'] = 'success'
+        return jsonify(report)
+
+    except Exception as e:
+        logger.error(f"Error building cost analytics: {str(e)}", exc_info=True)
+        return jsonify({'error': f'Failed to build cost analytics: {str(e)}'}), 500
+
+
 @app.route('/admin/test-pro-advisory', methods=['POST'])
 @authenticated_route
 def test_pro_advisory_email():
