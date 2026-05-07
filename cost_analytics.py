@@ -144,11 +144,23 @@ def extract_token_direction(sku_description: str) -> str | None:
 
 _LLM_SERVICES = {"Gemini API", "Vertex AI"}
 
+# SKUs on the LLM services that don't mention "gemini" but are still LLM
+# inference charges (tools used by Gemini during generation).
+_LLM_SERVICE_EXTRA_PATTERNS = (
+    re.compile(r"llm\s+grounding", re.I),          # Vertex AI: search grounding
+    re.compile(r"grounding\s+with\s+(google|search)", re.I),
+    re.compile(r"search\s+tool", re.I),
+)
+
 
 def classify_sku(service_description: str, sku_description: str) -> str:
-    """Return 'llm' if this is Gemini inference, otherwise 'overhead'."""
-    if service_description in _LLM_SERVICES and extract_model_from_sku(sku_description):
-        return "llm"
+    """Return 'llm' if this is Gemini inference (incl. tool-use), else 'overhead'."""
+    if service_description in _LLM_SERVICES:
+        if extract_model_from_sku(sku_description):
+            return "llm"
+        for pat in _LLM_SERVICE_EXTRA_PATTERNS:
+            if pat.search(sku_description):
+                return "llm"
     return "overhead"
 
 
@@ -236,6 +248,9 @@ def parse_invoice_csv(source) -> dict:
         category = classify_sku(service, sku_desc)
         model = extract_model_from_sku(sku_desc) if category == "llm" else None
         direction = extract_token_direction(sku_desc) if category == "llm" else None
+        # LLM SKUs without a model are tool-use charges (search grounding,
+        # etc.) — not an "unclassified" warning.
+        is_tool = (category == "llm") and (model is None)
 
         line_items.append({
             "service_description": service,
@@ -250,6 +265,7 @@ def parse_invoice_csv(source) -> dict:
             "category": category,
             "model": model,
             "direction": direction,
+            "is_tool": is_tool,
         })
 
     total_llm = sum(li["unrounded_cost_usd"] for li in line_items if li["category"] == "llm")
@@ -336,6 +352,7 @@ def build_monthly_cost_report(invoices: list[dict],
         per_model_tokens: dict[str, int] = defaultdict(int)
         per_model_direction_cost: dict[str, dict[str, float]] = defaultdict(lambda: defaultdict(float))
         overhead_breakdown: dict[str, float] = defaultdict(float)
+        tool_cost: dict[str, float] = defaultdict(float)
         unclassified: list[dict] = []
 
         total_cost = 0.0
@@ -354,6 +371,8 @@ def build_monthly_cost_report(invoices: list[dict],
                             per_model_tokens[li["model"]] += int(li["usage_amount"])
                         if li["direction"]:
                             per_model_direction_cost[li["model"]][li["direction"]] += li["unrounded_cost_usd"]
+                    elif li.get("is_tool"):
+                        tool_cost[li["sku_description"]] += li["unrounded_cost_usd"]
                     else:
                         unclassified.append({"sku": li["sku_description"], "cost": li["unrounded_cost_usd"]})
                 else:
@@ -463,6 +482,10 @@ def build_monthly_cost_report(invoices: list[dict],
             "per_user_count": len(per_user_rows),
             "overhead_breakdown": sorted(
                 [{"sku": sku, "cost": round(c, 4)} for sku, c in overhead_breakdown.items()],
+                key=lambda r: r["cost"], reverse=True,
+            ),
+            "tool_breakdown": sorted(
+                [{"sku": sku, "cost": round(c, 4)} for sku, c in tool_cost.items()],
                 key=lambda r: r["cost"], reverse=True,
             ),
             "unclassified_skus": unclassified,
@@ -584,7 +607,7 @@ def _audit_cli(paths: list[str]) -> int:
         llm_total += inv["total_llm_cost"]
         for li in inv["line_items"]:
             seen[li["sku_description"]] += li["unrounded_cost_usd"]
-            if li["category"] == "llm" and not li["model"]:
+            if li["category"] == "llm" and not li["model"] and not li.get("is_tool"):
                 unclassified[li["sku_description"]] += li["unrounded_cost_usd"]
         print(f"{os.path.basename(f):80s} {inv['billing_period']} "
               f"total=${inv['total_cost']:>9.2f} llm=${inv['total_llm_cost']:>9.2f} "
