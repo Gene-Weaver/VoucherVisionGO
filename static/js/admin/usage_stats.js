@@ -333,6 +333,68 @@ if (document.readyState === 'loading') {
   setupUsageChartControls();
 }
 
+async function runUsageBackfill() {
+  const btn = document.getElementById('backfill-usage-btn');
+  const status = document.getElementById('backfill-usage-status');
+  if (!btn) return;
+
+  if (!confirm(
+    'Backfill missing user_email fields and apply the historical impact rollup ' +
+    'to all usage_statistics docs? This is idempotent and safe to re-run.'
+  )) return;
+
+  btn.disabled = true;
+  if (status) status.textContent = 'Running…';
+
+  try {
+    const idToken = await firebase.auth().currentUser.getIdToken();
+    const response = await fetch('/admin/backfill-usage-statistics', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!response.ok || data.error) {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+
+    const summary =
+      `Scanned ${data.docs_scanned} · ` +
+      `Emails filled ${data.emails_filled} · ` +
+      `Impacts backfilled ${data.impacts_backfilled}` +
+      (data.errors && data.errors.length ? ` · Errors ${data.errors.length}` : '');
+    if (status) status.textContent = summary;
+
+    if (data.errors && data.errors.length) {
+      console.warn('Backfill errors:', data.errors);
+    }
+
+    // Refresh the table/chart so the new emails and totals show up immediately.
+    if (typeof loadUsageStatistics === 'function') {
+      loadUsageStatistics();
+    }
+  } catch (err) {
+    console.error('Backfill failed:', err);
+    if (status) status.textContent = `Failed: ${err.message}`;
+    alert(`Backfill failed: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function setupUsageBackfillButton() {
+  const btn = document.getElementById('backfill-usage-btn');
+  if (btn) btn.addEventListener('click', runUsageBackfill);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupUsageBackfillButton);
+} else {
+  setupUsageBackfillButton();
+}
+
 // Generate sample data for demo purposes
 function generateSampleData(dailyData, email, dates, totalImages) {
   // Skip if no total images

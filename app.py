@@ -827,6 +827,60 @@ def _send_expired_email(sender, user_email, key_name, key_id, expires_date):
         logger.error(f"Failed to send expired notice to {user_email} for key {key_id[:8]}...")
 
 
+def _apply_impact_backfill(user_ref, data: dict, backfill_tokens: int = 5000) -> dict:
+    """Idempotently apply the one-time historical impact rollup to a usage_statistics doc.
+
+    Estimates: total_images_processed * estimate_impact(backfill_tokens). Writes the
+    increments + sets backfill_applied_v2=True. Safe to call repeatedly: a no-op
+    once the flag is set or if the doc has no prior usage.
+    """
+    if bool(data.get("backfill_applied_v2", False)):
+        return {"applied": False, "reason": "already_applied"}
+
+    total_uses = int(data.get("total_images_processed", 0) or 0)
+    if total_uses <= 0:
+        user_ref.update({
+            "backfill_applied_v2": True,
+            "backfill_tokens": backfill_tokens,
+        })
+        return {"applied": False, "reason": "no_prior_uses"}
+
+    try:
+        default_impact = estimate_impact(backfill_tokens)
+    except Exception as e:
+        logger.error(f"Backfill estimate_impact({backfill_tokens}) failed: {e}")
+        default_impact = {}
+
+    wh_per = float(default_impact.get("estimate_watt_hours", 0.0))
+    gco2_per = float(default_impact.get("estimate_grams_CO2", 0.0))
+    h2o_per = float(default_impact.get("estimate_milliliters_water",
+                                       default_impact.get("estimate_mL_water", 0.0)))
+
+    wh_total = wh_per * total_uses
+    gco2_total = gco2_per * total_uses
+    h2o_total = h2o_per * total_uses
+    tokens_total = backfill_tokens * total_uses
+
+    user_ref.update({
+        "total_watt_hours": firestore.Increment(wh_total),
+        "total_grams_CO2": firestore.Increment(gco2_total),
+        "total_mL_water": firestore.Increment(h2o_total),
+        "total_tokens_all": firestore.Increment(tokens_total),
+        "backfill_applied_v2": True,
+        "backfill_method": "total_images_processed * estimate_impact(5000)",
+        "backfill_snapshot": default_impact,
+        "backfill_tokens": backfill_tokens,
+    })
+    return {
+        "applied": True,
+        "total_uses": total_uses,
+        "tokens_added": tokens_total,
+        "wh_added": wh_total,
+        "gco2_added": gco2_total,
+        "h2o_added": h2o_total,
+    }
+
+
 def update_usage_statistics(
     user_email: str,
     engines: list[str] | None = None,
@@ -874,39 +928,13 @@ def update_usage_statistics(
         if doc.exists:
             data = doc.to_dict() or {}
 
-            # --- ONE-TIME BACKFILL ---
-            backfill_done = bool(data.get("backfill_applied_v2", False))
-            if not backfill_done:
-                total_uses = int(data.get("total_images_processed", 0) or 0)
-                if total_uses > 0:
-                    try:
-                        default_impact = estimate_impact(backfill_tokens)
-                    except Exception as e:
-                        logger.error(f"Backfill estimate_impact({backfill_tokens}) failed: {e}")
-                        default_impact = {}
-
-                    wh_per = float(default_impact.get("estimate_watt_hours", 0.0))
-                    gco2_per = float(default_impact.get("estimate_grams_CO2", 0.0))
-                    h2o_per = float(default_impact.get("estimate_milliliters_water",
-                                                       default_impact.get("estimate_mL_water", 0.0)))
-
-                    # total_images_processed * per-usage estimate
-                    wh_total = wh_per * total_uses
-                    gco2_total = gco2_per * total_uses
-                    h2o_total = h2o_per * total_uses
-
-                    t_all = t_all + (backfill_tokens * total_uses)
-
-                    user_ref.update({
-                        "total_watt_hours": firestore.Increment(wh_total),
-                        "total_grams_CO2": firestore.Increment(gco2_total),
-                        "total_mL_water": firestore.Increment(h2o_total),
-                        "backfill_applied_v2": True,
-                        "backfill_method": "total_images_processed * estimate_impact(5000)",
-                        "backfill_snapshot": default_impact,
-                        "backfill_tokens": backfill_tokens,
-                    })
-                    logger.info(f"Applied backfill for {user_email}: {total_uses} × {backfill_tokens} tokens.")
+            # One-time historical backfill (idempotent; helper handles the gate).
+            bf = _apply_impact_backfill(user_ref, data, backfill_tokens=backfill_tokens)
+            if bf.get("applied"):
+                logger.info(
+                    f"Applied backfill for {user_email}: "
+                    f"{bf['total_uses']} × {backfill_tokens} tokens."
+                )
 
             # --- Update fine-grain per-request data ---
             monthly_usage = data.get("monthly_usage", {})
@@ -941,6 +969,7 @@ def update_usage_statistics(
 
             user_ref.update({
                 **increments,
+                "user_email": user_email,
                 "last_processed_at": firestore.SERVER_TIMESTAMP,
                 "monthly_usage": monthly_usage,
                 "daily_usage": daily_usage,
@@ -3056,7 +3085,12 @@ def get_usage_statistics():
         stats_list = []
         for stat_doc in stats_ref:
             stat_data = stat_doc.to_dict()
-            
+
+            # The Firestore doc ID is the user's email. Older docs (pre-carbon-impact
+            # commit) don't carry user_email in the body, so fall back to the doc ID
+            # to avoid rendering "Unknown" in the dashboard.
+            stat_data.setdefault('user_email', stat_doc.id)
+
             # Format timestamps for display
             if 'last_processed_at' in stat_data and hasattr(stat_data['last_processed_at'], '_seconds'):
                 stat_data['last_processed_at'] = {
@@ -3088,6 +3122,73 @@ def get_usage_statistics():
     except Exception as e:
         logger.error(f"Error getting usage statistics: {str(e)}")
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
+
+
+@app.route('/admin/backfill-usage-statistics', methods=['POST'])
+@authenticated_route
+def backfill_usage_statistics():
+    """Bulk one-shot backfill across all usage_statistics docs.
+
+    Two independent, idempotent fixes applied per doc:
+      1. Set user_email field from doc.id when missing (legacy docs).
+      2. Apply the historical impact rollup (water/CO2/Wh/tokens) when
+         backfill_applied_v2 is False and total_images_processed > 0.
+
+    Returns a JSON summary. Safe to re-run.
+    """
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    docs_scanned = 0
+    emails_filled = 0
+    impacts_backfilled = 0
+    impacts_marked_no_op = 0
+    errors = []
+
+    try:
+        for stat_doc in db.collection('usage_statistics').stream():
+            docs_scanned += 1
+            try:
+                data = stat_doc.to_dict() or {}
+                user_ref = stat_doc.reference
+
+                # Fix 1: backfill missing user_email from the doc ID.
+                if not data.get('user_email'):
+                    user_ref.update({"user_email": stat_doc.id})
+                    data['user_email'] = stat_doc.id
+                    emails_filled += 1
+
+                # Fix 2: apply impact backfill (helper is idempotent).
+                bf = _apply_impact_backfill(user_ref, data, backfill_tokens=5000)
+                if bf.get('applied'):
+                    impacts_backfilled += 1
+                elif bf.get('reason') == 'no_prior_uses':
+                    impacts_marked_no_op += 1
+            except Exception as e:
+                logger.error(f"Bulk backfill error for {stat_doc.id}: {e}")
+                errors.append({"doc_id": stat_doc.id, "error": str(e)})
+
+        logger.info(
+            f"Bulk backfill complete: scanned={docs_scanned} "
+            f"emails_filled={emails_filled} impacts_backfilled={impacts_backfilled} "
+            f"errors={len(errors)} (admin={admin_email})"
+        )
+        return jsonify({
+            'status': 'success',
+            'docs_scanned': docs_scanned,
+            'emails_filled': emails_filled,
+            'impacts_backfilled': impacts_backfilled,
+            'impacts_marked_no_op': impacts_marked_no_op,
+            'errors': errors,
+        })
+    except Exception as e:
+        logger.error(f"Bulk backfill failed: {e}")
+        return jsonify({'error': f'Bulk backfill failed: {e}'}), 500
 
 
 @app.route('/admin/cost-analytics', methods=['GET'])

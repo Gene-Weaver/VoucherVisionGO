@@ -385,3 +385,30 @@ body {
     border-color: #4285f4;
   }
 
+  .us-action-btn {
+    padding: 6px 14px;
+    border: 1px solid #4285f4;
+    border-radius: 4px;
+    background: #fff;
+    color: #4285f4;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .us-action-btn:hover:not(:disabled) {
+    background: #4285f4;
+    color: #fff;
+  }
+
+  .us-action-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .us-action-status {
+    font-size: 13px;
+    color: #555;
+  }
+
