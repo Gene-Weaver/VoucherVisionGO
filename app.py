@@ -2248,9 +2248,9 @@ class VoucherVisionProcessor:
                 # Get engine options (default to gemini models if not specified)
                 if engine_options is None:
                     if ocr_only:
-                        engine_options = ["gemini-2.0-flash"]
+                        engine_options = ["gemini-3.1-flash-lite-preview"]
                     else:
-                        engine_options = ["gemini-2.0-flash"]
+                        engine_options = ["gemini-3.1-flash-lite-preview"]
 
                 if ocr_prompt_option is None:
                     if notebook_mode:
@@ -2262,7 +2262,7 @@ class VoucherVisionProcessor:
 
                 # Simpler alternative approach
                 if llm_model_name is None:
-                    llm_model_name = "gemini-2.0-flash"
+                    llm_model_name = "gemini-3.1-flash-lite-preview"
 
                 # Direct mapping from API model names to cost constants
                 api_to_cost_mapping = {
@@ -2271,8 +2271,10 @@ class VoucherVisionProcessor:
                     "gemini-1.5-pro": "GEMINI_1_5_PRO",
                     "gemini-2.5-flash": "GEMINI_2_5_FLASH",
                     "gemini-2.5-pro": "GEMINI_2_5_PRO",
-                    # "gemini-3-pro": "GEMINI_3_PRO",
                     "gemini-3-pro-preview": "GEMINI_3_PRO",
+                    "gemini-3-flash-preview": "GEMINI_3_FLASH",
+                    "gemini-3.1-pro-preview": "GEMINI_3_1_PRO",
+                    "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
                 }
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
