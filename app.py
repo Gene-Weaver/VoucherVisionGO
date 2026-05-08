@@ -286,6 +286,67 @@ def validate_api_key(api_key):
 
 GEMINI_PRO_DEFAULT_LIMIT = 100
 
+# Regions where Vertex AI hosts Gemini and where users may direct their
+# vertex_project=<their-project>&vertex_region=<region> requests. Limited to
+# this allow-list so a typo surfaces as a clear 400 instead of an opaque 404
+# from Vertex. Source: cloud.google.com/vertex-ai/generative-ai/docs/learn/locations
+VERTEX_ALLOWED_REGIONS = frozenset({
+    "us-central1", "us-east4", "us-west1",
+    "europe-west1", "europe-west4", "europe-west3", "europe-west2", "europe-southwest1",
+    "asia-northeast1", "asia-southeast1", "asia-south1",
+    "australia-southeast1",
+    "me-central1", "me-central2",
+    "northamerica-northeast1", "southamerica-east1",
+    "global",
+})
+
+
+def _is_vertex_permission_error(exc):
+    """Heuristic: did the underlying Gemini call fail because the user's project
+    didn't grant the runtime SA Vertex AI permissions, or because the user typed
+    the project ID wrong?"""
+    msg = str(exc).upper()
+    if "PERMISSION_DENIED" in msg or "PERMISSION DENIED" in msg:
+        return True
+    if " 403" in msg or "STATUS: 403" in msg or "CODE: 403" in msg:
+        return True
+    if "AIPLATFORM" in msg and "DENIED" in msg:
+        return True
+    return False
+
+
+def _vertex_permission_error_message(project):
+    return (
+        f"Vertex AI call denied for project '{project}'. Verify that you "
+        f"granted role 'roles/aiplatform.user' (Vertex AI User) to the "
+        f"VoucherVisionGO service account "
+        f"'vouchervision-vertex@vouchervision-387816.iam.gserviceaccount.com' "
+        f"on that project, and that the Vertex AI API is enabled. "
+        f"See the docs for setup steps."
+    )
+
+
+def _validate_vertex_params(api_key, project, region):
+    """Validate the user-supplied auth params for a /process[-url] request.
+
+    Returns (error_message, status_code) on failure, or (None, None) when valid.
+    Enforces: at most one of {api_key, project} is set; project ↔ region must
+    be supplied together; region must be on the allow-list.
+    """
+    if project and api_key:
+        return ("Pass either gemini_api_key OR vertex_project, not both.", 400)
+    if project and not region:
+        return ("vertex_project requires vertex_region.", 400)
+    if region and not project:
+        return ("vertex_region requires vertex_project.", 400)
+    if region and region not in VERTEX_ALLOWED_REGIONS:
+        return (
+            f"vertex_region '{region}' is not a supported Vertex AI region. "
+            f"Supported: {sorted(VERTEX_ALLOWED_REGIONS)}",
+            400,
+        )
+    return (None, None)
+
 def is_gemini_pro_model(model_name: str | None) -> bool:
     """Return True if *model_name* is a Gemini Pro model."""
     return model_name is not None and "pro" in model_name.lower()
@@ -523,6 +584,28 @@ requests.post(
 
             <p>You can obtain an API key from
             <a href="https://aistudio.google.com/apikey">Google AI Studio</a>.</p>
+
+            <h3>Option 3 — Bill Gemini directly to your Google Cloud project (Vertex AI)</h3>
+            <p>If Google AI Studio is not available in your region, or you prefer
+            to use Vertex AI, you can have Gemini calls billed to your own GCP
+            project instead. One-time setup: enable the Vertex AI API on a project
+            of yours, then in that project's IAM grant the
+            <strong>Vertex AI User</strong> role to
+            <code>vouchervision-vertex@vouchervision-387816.iam.gserviceaccount.com</code>.</p>
+            <p>Then pass <code>vertex_project</code> and <code>vertex_region</code>
+            instead of <code>gemini_api_key</code>:</p>
+            <pre style="background: #f4f4f4; padding: 12px; border-radius: 4px;">
+# Python example
+requests.post(
+    "https://&lt;server&gt;/process",
+    data={{
+        "engines": "gemini-3.1-pro-preview",
+        "vertex_project": "your-gcp-project-id",
+        "vertex_region": "us-central1",
+        ...
+    }},
+    files={{"file": open("image.jpg", "rb")}},
+)</pre>
 
             <p>For more detailed information and usage examples, see the
             <a href="https://pypi.org/project/vouchervision-go-client/">VoucherVision GO
@@ -1894,17 +1977,31 @@ class VoucherVisionProcessor:
         """Check if file has allowed extension"""
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
     
-    def perform_ocr(self, file_path, engine_options, ocr_prompt_option, user_api_key=None):
+    def perform_ocr(self, file_path, engine_options, ocr_prompt_option, user_api_key=None,
+                    user_vertex_project=None, user_vertex_region=None):
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
         ocr_tokens_total = 0
-        
+
         for i, ocr_opt in enumerate(engine_options):
             ocr_packet[ocr_opt] = {}
             self._log(f"ocr_opt {ocr_opt}", "info")
-            
-            if user_api_key:
+
+            if user_vertex_project:
+                # Per-request throwaway engine billed to the user's GCP project
+                OCR_Engine = OCRGeminiProVision(
+                    None,
+                    model_name=ocr_opt,
+                    max_output_tokens=32768,
+                    temperature=1.0,
+                    top_p=0.95,
+                    seed=123456,
+                    do_resize_img=False,
+                    vertex_project=user_vertex_project,
+                    vertex_region=user_vertex_region,
+                )
+            elif user_api_key:
                 # Per-request throwaway engine - never touches the shared pool
                 OCR_Engine = OCRGeminiProVision(
                     user_api_key,
@@ -1950,11 +2047,13 @@ class VoucherVisionProcessor:
 
         return ocr_packet, ocr_all, ocr_tokens_total
     
-    def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None):
+    def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None,
+                            user_vertex_project=None, user_vertex_region=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         needs_new = (
             not hasattr(self.thread_local, 'vv')
             or user_api_key is not None
+            or user_vertex_project is not None
             or prompt != getattr(self.thread_local, 'prompt', None)
             or llm_model_name != getattr(self.thread_local, 'llm_model_name', None)
         )
@@ -1978,15 +2077,23 @@ class VoucherVisionProcessor:
                 config_vals_for_permutation=None,
                 exit_early_for_JSON=True,
                 api_key=user_api_key,  # None = use env, key = use theirs
+                vertex_project=user_vertex_project,
+                vertex_region=user_vertex_region,
             )
             self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
 
         return self.thread_local.vv, self.thread_local.llm_model
     
-    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, LLM_name_cost, user_api_key=None):
+    def process_voucher_vision(self, ocr_text, prompt, llm_model_name, LLM_name_cost, user_api_key=None,
+                               user_vertex_project=None, user_vertex_region=None):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
-        vv, llm_model = self.get_thread_local_vv(prompt, llm_model_name, user_api_key=user_api_key)
+        vv, llm_model = self.get_thread_local_vv(
+            prompt, llm_model_name,
+            user_api_key=user_api_key,
+            user_vertex_project=user_vertex_project,
+            user_vertex_region=user_vertex_region,
+        )
 
         # Update OCR text for processing
         prompt_text = vv.setup_prompt(ocr_text)
@@ -2066,7 +2173,9 @@ class VoucherVisionProcessor:
                               url_source="",
                               notebook_mode=False,
                               skip_label_collage=False,
-                              user_api_key=None):
+                              user_api_key=None,
+                              user_vertex_project=None,
+                              user_vertex_region=None):
         """
         Process an image from a request file
         ocr_prompt_option=["verbatim_with_annotations", None]
@@ -2182,10 +2291,12 @@ class VoucherVisionProcessor:
                 original_filename = os.path.basename(file.filename)
                 
                 # Perform OCR
-                ocr_info, ocr, ocr_tokens_total = self.perform_ocr(collage_temp_path, 
-                                                                   engine_options, 
+                ocr_info, ocr, ocr_tokens_total = self.perform_ocr(collage_temp_path,
+                                                                   engine_options,
                                                                    ocr_prompt_option,
-                                                                   user_api_key=user_api_key)
+                                                                   user_api_key=user_api_key,
+                                                                   user_vertex_project=user_vertex_project,
+                                                                   user_vertex_region=user_vertex_region)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if notebook_mode:
@@ -2266,7 +2377,9 @@ class VoucherVisionProcessor:
                                                                                                        current_prompt,
                                                                                                        llm_model_name,
                                                                                                        LLM_name_cost,
-                                                                                                       user_api_key=user_api_key)
+                                                                                                       user_api_key=user_api_key,
+                                                                                                       user_vertex_project=user_vertex_project,
+                                                                                                       user_vertex_region=user_vertex_region)
 
                     # WFO taxonomy lookup (local SQLite database)
                     WFO = ""
@@ -2334,6 +2447,8 @@ class VoucherVisionProcessor:
                 self._log(f"Error processing request: {e}", "error")
                 import traceback
                 self._log(f"Traceback: {traceback.format_exc()}", "error")
+                if user_vertex_project and _is_vertex_permission_error(e):
+                    return {'error': _vertex_permission_error_message(user_vertex_project)}, 403
                 return {'error': str(e)}, 500
             
             finally:
@@ -2612,6 +2727,14 @@ def process_image():
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
     user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
+    user_vertex_project = request.form.get('vertex_project') or None
+    user_vertex_region = request.form.get('vertex_region') or None
+
+    err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
+    if err:
+        resp = make_response(jsonify({'error': err}), err_status)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
 
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
@@ -2625,6 +2748,8 @@ def process_image():
         notebook_mode=notebook_mode,
         skip_label_collage=skip_label_collage,
         user_api_key=user_gemini_key,
+        user_vertex_project=user_vertex_project,
+        user_vertex_region=user_vertex_region,
     )
 
     # Detect PDF by extension
@@ -2658,9 +2783,10 @@ def process_image():
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 
-        # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+        # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
         pro_quota_reserved = False
-        if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
+        user_pays = bool(user_gemini_key) or bool(user_vertex_project)
+        if is_pro_request(engine_options, llm_model_name) and not user_pays:
             allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
             if not allowed:
                 logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
@@ -2731,6 +2857,8 @@ def process_image_by_url():
         include_cop90 = data.get('include_cop90', True)
         llm_model_name = data.get('llm_model')
         user_gemini_key = data.get('gemini_api_key') or None
+        user_vertex_project = data.get('vertex_project') or None
+        user_vertex_region = data.get('vertex_region') or None
 
     # Handle form data request
     else:
@@ -2749,10 +2877,19 @@ def process_image_by_url():
         include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
         user_gemini_key = request.form.get('gemini_api_key') or None
+        user_vertex_project = request.form.get('vertex_project') or None
+        user_vertex_region = request.form.get('vertex_region') or None
 
-    # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
+    err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
+    if err:
+        resp = make_response(jsonify({'error': err}), err_status)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     pro_quota_reserved = False
-    if is_pro_request(engine_options, llm_model_name) and not user_gemini_key:
+    user_pays = bool(user_gemini_key) or bool(user_vertex_project)
+    if is_pro_request(engine_options, llm_model_name) and not user_pays:
         allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
         if not allowed:
             logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
@@ -2871,7 +3008,9 @@ def process_image_by_url():
             url_source=image_url,
             notebook_mode=notebook_mode,
             skip_label_collage=skip_label_collage,
-            user_api_key=user_gemini_key
+            user_api_key=user_gemini_key,
+            user_vertex_project=user_vertex_project,
+            user_vertex_region=user_vertex_region,
         )
 
         # Update usage stats
