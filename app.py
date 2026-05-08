@@ -2248,9 +2248,9 @@ class VoucherVisionProcessor:
                 # Get engine options (default to gemini models if not specified)
                 if engine_options is None:
                     if ocr_only:
-                        engine_options = ["gemini-3.1-flash-lite-preview"]
+                        engine_options = ["gemini-2.5-flash"]
                     else:
-                        engine_options = ["gemini-3.1-flash-lite-preview"]
+                        engine_options = ["gemini-2.5-flash"]
 
                 if ocr_prompt_option is None:
                     if notebook_mode:
@@ -2262,7 +2262,7 @@ class VoucherVisionProcessor:
 
                 # Simpler alternative approach
                 if llm_model_name is None:
-                    llm_model_name = "gemini-3.1-flash-lite-preview"
+                    llm_model_name = "gemini-2.5-flash"
 
                 # Direct mapping from API model names to cost constants
                 api_to_cost_mapping = {
