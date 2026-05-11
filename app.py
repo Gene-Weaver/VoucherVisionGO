@@ -992,12 +992,17 @@ def _apply_impact_backfill(user_ref, data: dict, backfill_tokens: int = 5000) ->
     }
 
 
+AUTH_METHODS = ("server", "user_gemini", "user_vertex")
+
+
 def update_usage_statistics(
     user_email: str,
     engines: list[str] | None = None,
     llm_model_name: str | None = None,
     est_impact: dict | None = None,
     *,
+    auth_method: str | None = None,
+    request_cost_usd: float = 0.0,
     backfill_tokens: int = 5000,
 ):
     """Update usage statistics for a user in Firestore, preserving original behavior,
@@ -1073,6 +1078,14 @@ def update_usage_statistics(
                 "total_mL_water": firestore.Increment(h2o),
             }
 
+            if auth_method in AUTH_METHODS:
+                increments[f"auth_method_usage.{auth_method}"] = firestore.Increment(1)
+                increments[f"auth_method_monthly.{current_month}.{auth_method}"] = firestore.Increment(1)
+                if request_cost_usd and request_cost_usd > 0:
+                    increments["cost_total_usd"] = firestore.Increment(float(request_cost_usd))
+                    increments[f"cost_by_auth_method.{auth_method}"] = firestore.Increment(float(request_cost_usd))
+                    increments[f"cost_monthly_by_auth.{current_month}.{auth_method}"] = firestore.Increment(float(request_cost_usd))
+
             # Auto-initialise the limit field for existing users (count is
             # now managed by check_and_reserve_gemini_pro_quota)
             if "gemini_pro_usage_limit" not in data:
@@ -1103,6 +1116,22 @@ def update_usage_statistics(
             if llm_model_name:
                 llm_info[llm_model_name] = 1
 
+            # Seed auth-method + cost maps so the doc shape is predictable
+            # from the first request. The selected method gets a 1 (and the
+            # request's cost, if any); the other two are pinned to 0.
+            auth_method_usage = {m: 0 for m in AUTH_METHODS}
+            auth_method_monthly = {current_month: {m: 0 for m in AUTH_METHODS}}
+            cost_by_auth_method = {m: 0.0 for m in AUTH_METHODS}
+            cost_monthly_by_auth = {current_month: {m: 0.0 for m in AUTH_METHODS}}
+            cost_total_usd = 0.0
+            if auth_method in AUTH_METHODS:
+                auth_method_usage[auth_method] = 1
+                auth_method_monthly[current_month][auth_method] = 1
+                if request_cost_usd and request_cost_usd > 0:
+                    cost_total_usd = float(request_cost_usd)
+                    cost_by_auth_method[auth_method] = float(request_cost_usd)
+                    cost_monthly_by_auth[current_month][auth_method] = float(request_cost_usd)
+
             # Use merge=True so we don't overwrite gemini_pro_usage_count
             # that was already set by check_and_reserve_gemini_pro_quota
             user_ref.set({
@@ -1118,6 +1147,11 @@ def update_usage_statistics(
                 "total_watt_hours": wh,
                 "total_grams_CO2": gco2,
                 "total_mL_water": h2o,
+                "auth_method_usage": auth_method_usage,
+                "auth_method_monthly": auth_method_monthly,
+                "cost_total_usd": cost_total_usd,
+                "cost_by_auth_method": cost_by_auth_method,
+                "cost_monthly_by_auth": cost_monthly_by_auth,
                 "backfill_applied_v2": True,  # Nothing to backfill yet
                 "backfill_tokens": backfill_tokens,
                 "last_impact_snapshot": est_impact,
@@ -2191,10 +2225,20 @@ class VoucherVisionProcessor:
                 result['filename'] = page_file.filename
                 page_results.append(result)
 
+        # Sum estimated cost across all successful pages so the route handler
+        # can persist a single total for the request (not just the last page).
+        pdf_cost_total_usd = 0.0
+        for r in page_results:
+            try:
+                pdf_cost_total_usd += float(r.get("total_request_cost_usd", 0.0) or 0.0)
+            except (TypeError, ValueError):
+                pass
+
         return OrderedDict([
             ('source_pdf', pdf_filename),
             ('page_count', len(page_files)),
             ('pages', page_results),
+            ('total_request_cost_usd', pdf_cost_total_usd),
         ]), 200
 
     def process_image_request(self, file,
@@ -2476,6 +2520,22 @@ class VoucherVisionProcessor:
                             results["COP90_elevation_m"] = elev if elev is not None else ""
                     except Exception:
                         pass
+
+                # Aggregate the per-request estimated cost so the route handler
+                # can persist it on the user's usage doc. OCR costs come from
+                # each engine in ocr_info; LLM cost comes from parsing_info.
+                # Token-derived estimate, not authoritative billing.
+                try:
+                    ocr_cost_sum = 0.0
+                    for v in (results.get("ocr_info") or {}).values():
+                        if isinstance(v, dict):
+                            ocr_cost_sum += float(v.get("total_cost", 0.0) or 0.0)
+                    parsing = results.get("parsing_info") or {}
+                    parsing_cost = float(parsing.get("cost_in", 0.0) or 0.0) + float(parsing.get("cost_out", 0.0) or 0.0)
+                    results["total_request_cost_usd"] = ocr_cost_sum + parsing_cost
+                except Exception as cost_err:
+                    self._log(f"Could not compute total_request_cost_usd: {cost_err}", "warning")
+                    results["total_request_cost_usd"] = 0.0
 
                 self._log(f"Processing completed successfully", "info")
                 return results, 200
@@ -2779,6 +2839,16 @@ def process_image():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
+    # Classify which of the three payment paths this request uses, for usage
+    # tracking. "server" = VVGO's env API_KEY pays, "user_gemini" = the user's
+    # AI Studio key pays, "user_vertex" = the user's GCP project pays.
+    if user_vertex_project:
+        auth_method = "user_vertex"
+    elif user_gemini_key:
+        auth_method = "user_gemini"
+    else:
+        auth_method = "server"
+
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
         engine_options=engine_options,
@@ -2813,7 +2883,14 @@ def process_image():
         if status_code == 200:
             for page_result in results.get('pages', []):
                 if 'impact' in page_result:
-                    update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=page_result['impact'])
+                    update_usage_statistics(
+                        user_email,
+                        engines=engine_options,
+                        llm_model_name=llm_model_name,
+                        est_impact=page_result['impact'],
+                        auth_method=auth_method,
+                        request_cost_usd=float(page_result.get('total_request_cost_usd', 0.0) or 0.0),
+                    )
 
     else:
         # Image branch: resize then process (existing flow)
@@ -2853,7 +2930,14 @@ def process_image():
 
         # If processing was successful, update usage statistics
         if status_code == 200:
-            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
+            update_usage_statistics(
+                user_email,
+                engines=engine_options,
+                llm_model_name=llm_model_name,
+                est_impact=results["impact"],
+                auth_method=auth_method,
+                request_cost_usd=float(results.get("total_request_cost_usd", 0.0) or 0.0),
+            )
             # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
             if pro_quota_reserved:
                 _, count, limit = check_gemini_pro_rate_limit(user_email)
@@ -2862,7 +2946,14 @@ def process_image():
             # Release the reserved pro quota on failure
             if pro_quota_reserved:
                 release_gemini_pro_quota(user_email)
-            update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
+            update_usage_statistics(
+                user_email,
+                engines=[f"failure_code_{status_code}"] if engine_options else None,
+                llm_model_name=f"failure_code_{status_code}" if llm_model_name else None,
+                est_impact=None,
+                auth_method=auth_method,
+                request_cost_usd=0.0,
+            )
 
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -2928,6 +3019,15 @@ def process_image_by_url():
         resp = make_response(jsonify({'error': err}), err_status)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
+
+    # Classify which of the three payment paths this request uses, for usage
+    # tracking.
+    if user_vertex_project:
+        auth_method = "user_vertex"
+    elif user_gemini_key:
+        auth_method = "user_gemini"
+    else:
+        auth_method = "server"
 
     # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     pro_quota_reserved = False
@@ -3058,7 +3158,14 @@ def process_image_by_url():
 
         # Update usage stats
         if status_code == 200:
-            update_usage_statistics(user_email, engines=engine_options, llm_model_name=llm_model_name, est_impact=results["impact"])
+            update_usage_statistics(
+                user_email,
+                engines=engine_options,
+                llm_model_name=llm_model_name,
+                est_impact=results["impact"],
+                auth_method=auth_method,
+                request_cost_usd=float(results.get("total_request_cost_usd", 0.0) or 0.0),
+            )
             # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
             if pro_quota_reserved:
                 _, count, limit = check_gemini_pro_rate_limit(user_email)
@@ -3067,7 +3174,14 @@ def process_image_by_url():
             # Release the reserved pro quota on failure
             if pro_quota_reserved:
                 release_gemini_pro_quota(user_email)
-            update_usage_statistics(user_email, engines=[f"failure_code_{status_code}"] if engine_options else None, llm_model_name=f"failure_code_{status_code}" if llm_model_name else None, est_impact=None)
+            update_usage_statistics(
+                user_email,
+                engines=[f"failure_code_{status_code}"] if engine_options else None,
+                llm_model_name=f"failure_code_{status_code}" if llm_model_name else None,
+                est_impact=None,
+                auth_method=auth_method,
+                request_cost_usd=0.0,
+            )
 
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'

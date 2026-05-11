@@ -6,6 +6,9 @@ let costAnalyticsState = {
   report: null,
   selectedMonth: null,
   dailyTimeframe: 'month', // 'month' | '90d' | 'all'
+  // Token-derived estimates from per-user usage_statistics docs.
+  // Populated alongside `report` (which is invoice-derived).
+  authSplit: null,
 };
 
 let costCharts = {
@@ -13,7 +16,55 @@ let costCharts = {
   perModel: null,
   rate: null,
   daily: null,
+  split: null,
 };
+
+const COST_AUTH_METHOD_COLORS = {
+  server:      '#4285f4',
+  user_gemini: '#fbbc05',
+  user_vertex: '#34a853',
+};
+
+const COST_AUTH_METHOD_LABELS = {
+  server:      'VVGO server',
+  user_gemini: 'User AI Studio',
+  user_vertex: 'User Vertex',
+};
+
+// Aggregate auth_method_usage / cost_by_auth_method / cost_monthly_by_auth
+// across every user's usage_statistics doc. Returns:
+//   {
+//     all_time: { server, user_gemini, user_vertex, vvgo_pays, users_pay },
+//     monthly: { "YYYY-MM": { server, user_gemini, user_vertex } },
+//     months: ["YYYY-MM", ...] sorted ascending,
+//   }
+// All values are floats (USD) for cost or ints for counts.
+function aggregateAuthCostSplit(stats) {
+  const allTime = { server: 0, user_gemini: 0, user_vertex: 0 };
+  const monthly = {};
+  (stats || []).forEach(s => {
+    const byMethod = s.cost_by_auth_method || {};
+    allTime.server      += Number(byMethod.server || 0);
+    allTime.user_gemini += Number(byMethod.user_gemini || 0);
+    allTime.user_vertex += Number(byMethod.user_vertex || 0);
+    const monthlyMap = s.cost_monthly_by_auth || {};
+    Object.entries(monthlyMap).forEach(([month, methods]) => {
+      const bucket = monthly[month] = monthly[month] || { server: 0, user_gemini: 0, user_vertex: 0 };
+      bucket.server      += Number((methods || {}).server || 0);
+      bucket.user_gemini += Number((methods || {}).user_gemini || 0);
+      bucket.user_vertex += Number((methods || {}).user_vertex || 0);
+    });
+  });
+  return {
+    all_time: {
+      ...allTime,
+      vvgo_pays: allTime.server,
+      users_pay: allTime.user_gemini + allTime.user_vertex,
+    },
+    monthly,
+    months: Object.keys(monthly).sort(),
+  };
+}
 
 async function loadCostAnalytics() {
   const container = document.getElementById('cost-analytics-container');
@@ -22,20 +73,36 @@ async function loadCostAnalytics() {
 
   try {
     const idToken = await firebase.auth().currentUser.getIdToken();
-    const response = await fetch('/admin/cost-analytics', {
-      headers: { 'Authorization': `Bearer ${idToken}` },
-    });
-    if (!response.ok) {
-      throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+    // Fetch invoice-derived report and per-user usage stats in parallel.
+    // The first powers the existing GCP-billing views; the second feeds the
+    // new auth-method cost split (token-derived estimates).
+    const [reportResp, usageResp] = await Promise.all([
+      fetch('/admin/cost-analytics',     { headers: { 'Authorization': `Bearer ${idToken}` } }),
+      fetch('/admin/usage-statistics',   { headers: { 'Authorization': `Bearer ${idToken}` } }),
+    ]);
+    if (!reportResp.ok) {
+      throw new Error(`Server returned ${reportResp.status}: ${reportResp.statusText}`);
     }
-    const data = await response.json();
+    const data = await reportResp.json();
     if (data.status !== 'success') {
       throw new Error(data.error || 'Unknown error');
     }
-
     costAnalyticsState.report = data;
     const months = data.months || [];
     costAnalyticsState.selectedMonth = months.length ? months[months.length - 1] : null;
+
+    // Auth-method split is best-effort: if usage fetch fails (or admin lacks
+    // permission for some reason), the invoice charts still render.
+    try {
+      if (usageResp.ok) {
+        const usageJson = await usageResp.json();
+        if (usageJson.status === 'success') {
+          costAnalyticsState.authSplit = aggregateAuthCostSplit(usageJson.usage_statistics || []);
+        }
+      }
+    } catch (e) {
+      console.warn('Auth-method split fetch failed; continuing without it.', e);
+    }
 
     // Ensure Chart.js is loaded (reuse the loader pattern from usage_stats.js).
     if (typeof Chart === 'undefined') {
@@ -144,6 +211,16 @@ function renderCostAnalytics() {
         <div class="value">${fmtInt(all.total_specimens)}</div>
         <div class="sub">${months.length} month${months.length === 1 ? '' : 's'} of invoices</div>
       </div>
+      <div class="cost-kpi" title="Token-derived estimate from api_cost.yaml; not authoritative billing. Reconcile against the invoice-derived charts above.">
+        <div class="label">VVGO pays (est., all-time)</div>
+        <div class="value">${fmtUSD((costAnalyticsState.authSplit || {}).all_time && costAnalyticsState.authSplit.all_time.vvgo_pays)}</div>
+        <div class="sub">Server-pays requests (token-derived)</div>
+      </div>
+      <div class="cost-kpi" title="Sum of user AI Studio + user Vertex estimated cost. These requests bill the user's account, not VVGO.">
+        <div class="label">Users pay (est., all-time)</div>
+        <div class="value">${fmtUSD((costAnalyticsState.authSplit || {}).all_time && costAnalyticsState.authSplit.all_time.users_pay)}</div>
+        <div class="sub">User AI Studio + user Vertex (token-derived)</div>
+      </div>
     </div>
 
     <div class="cost-month-select">
@@ -164,7 +241,21 @@ function renderCostAnalytics() {
     <div class="cost-section">
       <h4>Monthly trend</h4>
       <canvas id="cost-monthly-chart" class="cost-chart"></canvas>
-      <div class="cost-note">Stacked bars = LLM vs overhead per month. Line = $/specimen.</div>
+      <div class="cost-note">Stacked bars = LLM vs overhead per month. Line = $/specimen.
+        Invoice-derived; reflects only inference VVGO paid for. User-paid usage is in
+        the <em>Estimated cost split</em> chart below.</div>
+    </div>
+
+    <div class="cost-section">
+      <h4>Estimated cost split by payment method (per month)</h4>
+      <canvas id="cost-split-chart" class="cost-chart"></canvas>
+      <div class="cost-note">
+        Token-derived estimates from <code>api_cost.yaml</code>, summed across all users'
+        <code>cost_monthly_by_auth</code> fields. Server-pays here should be in the same
+        ballpark as the invoice-derived LLM bars above; the other two series are user-paid
+        and don't appear on VVGO's invoice. Populated from each user's next request after
+        the auth-method tracker shipped — historical requests are not backfilled.
+      </div>
     </div>
 
     <div class="cost-section cost-two-col">
@@ -250,6 +341,52 @@ function renderCostAnalytics() {
   renderPerModelChart();
   renderRateChart();
   renderDailyChart();
+  renderCostSplitChart();
+}
+
+function renderCostSplitChart() {
+  destroyChart('split');
+  const canvas = document.getElementById('cost-split-chart');
+  if (!canvas) return;
+  const split = costAnalyticsState.authSplit;
+  if (!split || !split.months.length) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.parentNode.insertAdjacentHTML(
+      'beforeend',
+      '<div class="cost-note">No auth-method data yet — waiting for new requests after deploy.</div>'
+    );
+    return;
+  }
+  const labels = split.months;
+  const seriesFor = (method) => labels.map(m => Number(split.monthly[m][method] || 0));
+  costCharts.split = new Chart(canvas.getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: COST_AUTH_METHOD_LABELS.server,      backgroundColor: COST_AUTH_METHOD_COLORS.server,      data: seriesFor('server'),      stack: 'cost' },
+        { label: COST_AUTH_METHOD_LABELS.user_gemini, backgroundColor: COST_AUTH_METHOD_COLORS.user_gemini, data: seriesFor('user_gemini'), stack: 'cost' },
+        { label: COST_AUTH_METHOD_LABELS.user_vertex, backgroundColor: COST_AUTH_METHOD_COLORS.user_vertex, data: seriesFor('user_vertex'), stack: 'cost' },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.dataset.label}: ${fmtUSD(ctx.parsed.y)}`,
+          },
+        },
+      },
+      scales: {
+        x: { stacked: true, grid: { display: false } },
+        y: { stacked: true, beginAtZero: true, ticks: { callback: (v) => fmtUSD(v) } },
+      },
+    },
+  });
 }
 
 function destroyChart(key) {

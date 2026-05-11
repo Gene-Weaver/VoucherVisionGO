@@ -1,3 +1,108 @@
+// Color tokens for the three payment paths recorded in
+// usage_statistics.auth_method_usage. Used by both the per-user "By Method"
+// badges and the platform-wide doughnut.
+const AUTH_METHOD_COLORS = {
+  server:      '#4285f4', // VVGO pays
+  user_gemini: '#fbbc05', // user's AI Studio key
+  user_vertex: '#34a853', // user's Vertex project
+};
+
+const AUTH_METHOD_LABELS = {
+  server:      'VVGO server',
+  user_gemini: 'AI Studio key (user)',
+  user_vertex: 'Vertex project (user)',
+};
+
+function renderAuthMethodBadges(stat) {
+  const m = (stat && stat.auth_method_usage) || {};
+  const s = Number(m.server || 0);
+  const g = Number(m.user_gemini || 0);
+  const v = Number(m.user_vertex || 0);
+  const badge = (color, letter, count, title) =>
+    `<span title="${title}: ${count}" style="display:inline-block;padding:1px 6px;margin-right:4px;` +
+    `border-radius:8px;background:${color};color:#fff;font-size:11px;font-weight:600;">${letter}:${count}</span>`;
+  return (
+    badge(AUTH_METHOD_COLORS.server,      'S', s, AUTH_METHOD_LABELS.server) +
+    badge(AUTH_METHOD_COLORS.user_gemini, 'G', g, AUTH_METHOD_LABELS.user_gemini) +
+    badge(AUTH_METHOD_COLORS.user_vertex, 'V', v, AUTH_METHOD_LABELS.user_vertex)
+  );
+}
+
+let authMethodDoughnutInstance = null;
+function renderAuthMethodDoughnut(stats) {
+  // Inserts (or refreshes) a small doughnut showing platform-wide method mix,
+  // anchored above the daily-usage chart container.
+  const anchor = document.getElementById('daily-usage-chart-container');
+  if (!anchor || typeof Chart === 'undefined') return;
+
+  let totals = { server: 0, user_gemini: 0, user_vertex: 0 };
+  stats.forEach(s => {
+    const m = s.auth_method_usage || {};
+    totals.server      += Number(m.server || 0);
+    totals.user_gemini += Number(m.user_gemini || 0);
+    totals.user_vertex += Number(m.user_vertex || 0);
+  });
+  const grand = totals.server + totals.user_gemini + totals.user_vertex;
+
+  let card = document.getElementById('auth-method-mix-card');
+  if (!card) {
+    card = document.createElement('div');
+    card.id = 'auth-method-mix-card';
+    card.style.cssText =
+      'background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px;' +
+      'box-shadow:0 1px 2px rgba(0,0,0,0.05);margin-bottom:16px;display:flex;' +
+      'gap:18px;align-items:center;';
+    card.innerHTML = `
+      <div style="width:140px;height:140px;flex:0 0 auto;">
+        <canvas id="authMethodDoughnut"></canvas>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:12px;color:#6b7280;margin-bottom:2px;">Requests by payment method</div>
+        <div style="font-size:20px;font-weight:700;margin-bottom:6px;" id="auth-method-mix-total"></div>
+        <div id="auth-method-mix-legend" style="font-size:13px;color:#374151;line-height:1.6;"></div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:6px;">
+          S = VVGO server pays · G = user AI Studio key · V = user Vertex project.
+          Populated from each user's next request onward.
+        </div>
+      </div>
+    `;
+    anchor.parentNode.insertBefore(card, anchor);
+  }
+
+  document.getElementById('auth-method-mix-total').textContent =
+    `${Number(grand).toLocaleString()} requests tracked`;
+
+  const fmtPct = (n) => grand ? `${((n / grand) * 100).toFixed(1)}%` : '0%';
+  document.getElementById('auth-method-mix-legend').innerHTML = `
+    <div><span style="display:inline-block;width:10px;height:10px;background:${AUTH_METHOD_COLORS.server};margin-right:6px;border-radius:2px;"></span>${AUTH_METHOD_LABELS.server}: <b>${totals.server.toLocaleString()}</b> (${fmtPct(totals.server)})</div>
+    <div><span style="display:inline-block;width:10px;height:10px;background:${AUTH_METHOD_COLORS.user_gemini};margin-right:6px;border-radius:2px;"></span>${AUTH_METHOD_LABELS.user_gemini}: <b>${totals.user_gemini.toLocaleString()}</b> (${fmtPct(totals.user_gemini)})</div>
+    <div><span style="display:inline-block;width:10px;height:10px;background:${AUTH_METHOD_COLORS.user_vertex};margin-right:6px;border-radius:2px;"></span>${AUTH_METHOD_LABELS.user_vertex}: <b>${totals.user_vertex.toLocaleString()}</b> (${fmtPct(totals.user_vertex)})</div>
+  `;
+
+  if (authMethodDoughnutInstance) {
+    authMethodDoughnutInstance.destroy();
+    authMethodDoughnutInstance = null;
+  }
+  const ctx = document.getElementById('authMethodDoughnut').getContext('2d');
+  authMethodDoughnutInstance = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: [AUTH_METHOD_LABELS.server, AUTH_METHOD_LABELS.user_gemini, AUTH_METHOD_LABELS.user_vertex],
+      datasets: [{
+        data: [totals.server, totals.user_gemini, totals.user_vertex],
+        backgroundColor: [AUTH_METHOD_COLORS.server, AUTH_METHOD_COLORS.user_gemini, AUTH_METHOD_COLORS.user_vertex],
+        borderWidth: 0,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '60%',
+      plugins: { legend: { display: false } },
+    },
+  });
+}
+
 // Function to load usage statistics
 async function loadUsageStatistics() {
   const usageContainer = document.getElementById('usage-table-container');
@@ -46,6 +151,9 @@ async function loadUsageStatistics() {
         // Process and render the daily usage chart (this will also render the new Total widgets above it)
         createUsageChart(data.usage_statistics);
 
+        // Platform-wide auth-method mix doughnut, anchored above the chart.
+        renderAuthMethodDoughnut(data.usage_statistics);
+
         // Display usage statistics table
         tableElem.style.display = 'table';
 
@@ -93,6 +201,7 @@ async function loadUsageStatistics() {
             <td>${stat.total_images_processed || 0}</td>
             <td>${currentMonthUsage}</td>
             <td>${prevMonthUsage}</td>
+            <td>${renderAuthMethodBadges(stat)}</td>
             <td>${firstUsed}</td>
             <td>${lastUsed}</td>
             <td>
@@ -635,6 +744,7 @@ function updateUsageTable(filteredStats) {
       <td>${stat.total_images_processed || 0}</td>
       <td>${currentMonthUsage}</td>
       <td>${prevMonthUsage}</td>
+      <td>${renderAuthMethodBadges(stat)}</td>
       <td>${firstUsed}</td>
       <td>${lastUsed}</td>
       <td>
@@ -1092,6 +1202,33 @@ function showUserUsageDetails(email, allStats) {
     </div>
   ` : '';
 
+  // Per-method counts & estimated cost split for this user.
+  const amU = userStat.auth_method_usage || {};
+  const amC = userStat.cost_by_auth_method || {};
+  const usdFmt = (n) =>
+    `$${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 4 })}`;
+  const totalCost = Number(userStat.cost_total_usd || 0);
+  const authMethodSection = `
+    <div class="details-section">
+      <h4>Payment method breakdown</h4>
+      <table class="details-table">
+        <thead>
+          <tr><th>Method</th><th>Requests</th><th>Est. cost (USD)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>${AUTH_METHOD_LABELS.server}</td><td>${Number(amU.server || 0).toLocaleString()}</td><td>${usdFmt(amC.server)}</td></tr>
+          <tr><td>${AUTH_METHOD_LABELS.user_gemini}</td><td>${Number(amU.user_gemini || 0).toLocaleString()}</td><td>${usdFmt(amC.user_gemini)}</td></tr>
+          <tr><td>${AUTH_METHOD_LABELS.user_vertex}</td><td>${Number(amU.user_vertex || 0).toLocaleString()}</td><td>${usdFmt(amC.user_vertex)}</td></tr>
+          <tr style="font-weight:600;background:#f9fafb;"><td>Total</td><td>${Number(userStat.total_images_processed || 0).toLocaleString()}</td><td>${usdFmt(totalCost)}</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#9ca3af;margin-top:6px;">
+        Cost is token-derived estimate from <code>api_cost.yaml</code>, not authoritative billing.
+        Only requests received after the auth-method tracker shipped contribute.
+      </p>
+    </div>
+  `;
+
   modal.innerHTML = `
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -1103,6 +1240,8 @@ function showUserUsageDetails(email, allStats) {
         <p>First Used: ${firstUsed}</p>
         <p>Last Used: ${lastUsed}</p>
       </div>
+
+      ${authMethodSection}
 
       ${dailyUsageSection}
 
