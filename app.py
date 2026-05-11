@@ -326,6 +326,34 @@ def _vertex_permission_error_message(project):
     )
 
 
+def _is_vertex_model_not_found_error(exc):
+    """Heuristic: did the underlying Gemini call fail because the requested
+    model isn't published in the requested region's catalog? Most common
+    cause today: gemini-3.x previews are only in the 'global' catalog."""
+    msg = str(exc).upper()
+    has_404 = (
+        "NOT_FOUND" in msg
+        or " 404" in msg
+        or "STATUS: 404" in msg
+        or "CODE: 404" in msg
+    )
+    return has_404 and ("PUBLISHER MODEL" in msg or "AIPLATFORM" in msg)
+
+
+def _vertex_model_not_found_message(project, region, model):
+    hint = ""
+    if model and "gemini-3" in str(model).lower() and region != "global":
+        hint = (
+            " Gemini 3.x preview models are currently published only in the "
+            "'global' catalog on Vertex AI — retry with vertex_region=global."
+        )
+    return (
+        f"Vertex AI does not have model '{model}' available in region "
+        f"'{region}' for project '{project}'.{hint} "
+        f"Check Model Garden in your project for the authoritative model list."
+    )
+
+
 def _validate_vertex_params(api_key, project, region):
     """Validate the user-supplied auth params for a /process[-url] request.
 
@@ -2458,6 +2486,12 @@ class VoucherVisionProcessor:
                 self._log(f"Traceback: {traceback.format_exc()}", "error")
                 if user_vertex_project and _is_vertex_permission_error(e):
                     return {'error': _vertex_permission_error_message(user_vertex_project)}, 403
+                if user_vertex_project and _is_vertex_model_not_found_error(e):
+                    return {
+                        'error': _vertex_model_not_found_message(
+                            user_vertex_project, user_vertex_region, llm_model_name
+                        )
+                    }, 404
                 return {'error': str(e)}, 500
             
             finally:
