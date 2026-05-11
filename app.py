@@ -2050,12 +2050,20 @@ class VoucherVisionProcessor:
     def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None,
                             user_vertex_project=None, user_vertex_region=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
+        # Cache key includes every input that changes the LLM handler's identity.
+        # Keying on these (rather than just "did this request bring creds")
+        # prevents a previously per-user handler from being silently reused on a
+        # later no-credentials request.
+        incoming_key = (
+            user_api_key,
+            user_vertex_project,
+            user_vertex_region,
+            prompt,
+            llm_model_name,
+        )
         needs_new = (
             not hasattr(self.thread_local, 'vv')
-            or user_api_key is not None
-            or user_vertex_project is not None
-            or prompt != getattr(self.thread_local, 'prompt', None)
-            or llm_model_name != getattr(self.thread_local, 'llm_model_name', None)
+            or getattr(self.thread_local, 'cache_key', None) != incoming_key
         )
 
         if needs_new:
@@ -2068,8 +2076,6 @@ class VoucherVisionProcessor:
                 self.custom_prompts_dir, prompt
             )
             self.thread_local.vv.setup_JSON_dict_structure()
-            self.thread_local.prompt = prompt
-            self.thread_local.llm_model_name = llm_model_name
 
             self.thread_local.llm_model = GoogleGeminiHandler(
                 self.cfg, self.logger, llm_model_name,
@@ -2080,6 +2086,7 @@ class VoucherVisionProcessor:
                 vertex_project=user_vertex_project,
                 vertex_region=user_vertex_region,
             )
+            self.thread_local.cache_key = incoming_key
             self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
 
         return self.thread_local.vv, self.thread_local.llm_model
