@@ -46,6 +46,7 @@
           <button class="tab-button" data-tab="new-users">New Users</button>
           <button class="tab-button" data-tab="rate-limits">Rate Limits</button>
           <button class="tab-button" data-tab="cost-analytics">Cost Analytics</button>
+          <button class="tab-button" data-tab="event-analytics">Event Analytics</button>
         </div>
         
         <!-- User Applications Tab -->
@@ -273,6 +274,13 @@
           </div>
         </div>
 
+        <div id="event-analytics" class="tab-content">
+          <h3>Event Analytics</h3>
+          <div id="event-analytics-container">
+            <div id="event-analytics-loading" class="loading">Loading event analytics…</div>
+          </div>
+        </div>
+
       </div>
     </div>
     
@@ -294,5 +302,6 @@
     <script src="{{ url_for('static', filename='js/admin/new_users.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/rate_limits.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/cost_analytics.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/event_analytics.js') }}"></script>
   </body>
 </html>

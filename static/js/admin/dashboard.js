@@ -153,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'cost-analytics':
         loadCostAnalytics();
         break;
+      case 'event-analytics':
+        loadEventAnalytics();
+        break;
     }
   }
 

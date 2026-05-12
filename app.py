@@ -10,6 +10,7 @@ import time
 import base64
 import uuid
 import warnings
+from urllib.parse import urlparse
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message="urllib3.*doesn't match a supported version")
 warnings.filterwarnings("ignore", message="You are using a Python version")
@@ -411,6 +412,36 @@ def _lookup_request_value(container, field_name):
     return None
 
 
+def _get_api_key_from_request(req):
+    return req.headers.get('X-API-Key') or req.args.get('api_key')
+
+
+def _get_id_token_from_request(req):
+    auth_header = req.headers.get('Authorization', '')
+    if auth_header.startswith('Bearer '):
+        return auth_header.split('Bearer ')[1]
+    return req.args.get('token') or req.cookies.get('auth_token')
+
+
+def get_request_auth_details(req) -> dict:
+    """Return safe auth identity metadata for analytics."""
+    api_key = _get_api_key_from_request(req)
+    api_key_owner = None
+    if api_key:
+        try:
+            api_key_doc = db.collection('api_keys').document(api_key).get()
+            if api_key_doc.exists:
+                api_key_owner = (api_key_doc.to_dict() or {}).get('owner')
+        except Exception as e:
+            logger.error(f"Error resolving API key owner for analytics: {e}")
+
+    authenticated_via = 'api_key' if api_key else 'firebase'
+    return {
+        "authenticated_via": authenticated_via,
+        "api_key_owner": api_key_owner,
+    }
+
+
 def get_payment_auth_context(req):
     """Resolve per-request Gemini/Vertex billing inputs across form, JSON, and query params."""
     json_body = req.get_json(silent=True) if req.is_json else {}
@@ -441,6 +472,37 @@ def get_payment_auth_context(req):
         "vertex_project": vertex_project,
         "vertex_region": vertex_region,
         "auth_method": auth_method,
+    }
+
+
+def build_request_analytics_context(
+    req,
+    *,
+    user_email: str,
+    endpoint: str,
+    auth_ctx: dict,
+    request_id: str,
+    prompt: str | None,
+    ocr_only: bool,
+    notebook_mode: bool,
+    include_wfo: bool,
+    include_cop90: bool,
+    llm_model_name: str | None,
+):
+    auth_details = get_request_auth_details(req)
+    return {
+        "request_id": request_id,
+        "user_email": user_email,
+        "endpoint": endpoint,
+        "authenticated_via": auth_details["authenticated_via"],
+        "api_key_owner": auth_details["api_key_owner"],
+        "auth_method": auth_ctx.get("auth_method"),
+        "prompt": prompt,
+        "ocr_only": bool(ocr_only),
+        "notebook_mode": bool(notebook_mode),
+        "include_wfo": bool(include_wfo),
+        "include_cop90": bool(include_cop90),
+        "llm_model_name": llm_model_name,
     }
 
 def is_gemini_pro_model(model_name: str | None) -> bool:
@@ -1089,6 +1151,486 @@ def _normalize_auth_method_monthly(raw_map, current_month, caster):
             monthly[str(month)] = _normalize_auth_method_totals(raw_bucket, caster)
     monthly.setdefault(current_month, _empty_auth_method_bucket(caster))
     return monthly
+
+
+USAGE_EVENT_DIMENSIONS = (
+    "auth_method",
+    "ocr_model",
+    "parsing_model",
+    "endpoint",
+    "source_type",
+    "prompt",
+    "ocr_only",
+    "notebook_mode",
+    "success",
+)
+
+
+def _coerce_int(value, default=0):
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return default
+
+
+def _coerce_float(value, default=0.0):
+    try:
+        return float(value or 0.0)
+    except (TypeError, ValueError):
+        return default
+
+
+def _safe_url_host(url_value: str | None) -> str | None:
+    if not url_value:
+        return None
+    try:
+        return urlparse(url_value).netloc or None
+    except Exception:
+        return None
+
+
+def _sanitize_error_message(value) -> str | None:
+    if value in (None, ""):
+        return None
+    text = str(value).strip()
+    return text[:500] if text else None
+
+
+def _infer_success_from_result(result: dict | None, status_code: int) -> bool:
+    if status_code != 200:
+        return False
+    if not isinstance(result, dict):
+        return False
+    success_payload = result.get("success")
+    if isinstance(success_payload, dict):
+        image_available = str(success_payload.get("image_available", "")).lower()
+        ocr_ok = str(success_payload.get("ocr", "")).lower()
+        llm_ok = str(success_payload.get("llm", "")).lower()
+        if image_available == "false":
+            return False
+        return ocr_ok == "true" or llm_ok == "true"
+    return "impact" in result or "ocr_info" in result
+
+
+def _derive_error_type(result: dict | None, status_code: int, source_type: str, success: bool) -> str | None:
+    if success:
+        return None
+    if source_type == "url" and status_code == 200:
+        return "fetch_failure"
+    if status_code == 400:
+        return "validation_failure"
+    if status_code == 403:
+        return "vertex_permission"
+    if status_code >= 500:
+        return "processing_failure"
+    return "request_failure"
+
+
+def _extract_event_error_message(result: dict | None) -> str | None:
+    if not isinstance(result, dict):
+        return None
+    if result.get("error"):
+        return _sanitize_error_message(result.get("error"))
+    collage_info = result.get("collage_info")
+    if isinstance(collage_info, dict) and collage_info.get("error"):
+        return _sanitize_error_message(collage_info.get("error"))
+    ocr_info = result.get("ocr_info")
+    if isinstance(ocr_info, dict) and ocr_info.get("error"):
+        return _sanitize_error_message(ocr_info.get("error"))
+    return None
+
+
+def _extract_ocr_analytics(ocr_info_raw) -> tuple[dict, list[str], dict]:
+    sanitized = {}
+    ocr_models = []
+    totals = {
+        "ocr_tokens_in_total": 0,
+        "ocr_tokens_out_total": 0,
+        "ocr_tokens_total": 0,
+        "ocr_cost_total_usd": 0.0,
+    }
+    if not isinstance(ocr_info_raw, dict):
+        return sanitized, ocr_models, totals
+
+    for model_name, payload in ocr_info_raw.items():
+        if not isinstance(payload, dict):
+            if model_name == "error":
+                sanitized["error"] = _sanitize_error_message(payload)
+            continue
+        ocr_models.append(model_name)
+        tokens_in = _coerce_int(payload.get("tokens_in"))
+        tokens_out = _coerce_int(payload.get("tokens_out"))
+        total_tokens = tokens_in + tokens_out
+        cost_in = _coerce_float(payload.get("cost_in"))
+        cost_out = _coerce_float(payload.get("cost_out"))
+        total_cost = _coerce_float(payload.get("total_cost"), cost_in + cost_out)
+        sanitized[model_name] = {
+            "tokens_in": tokens_in,
+            "tokens_out": tokens_out,
+            "total_tokens": total_tokens,
+            "cost_in": cost_in,
+            "cost_out": cost_out,
+            "total_cost": total_cost,
+            "rates_in": _coerce_float(payload.get("rates_in")),
+            "rates_out": _coerce_float(payload.get("rates_out")),
+        }
+        totals["ocr_tokens_in_total"] += tokens_in
+        totals["ocr_tokens_out_total"] += tokens_out
+        totals["ocr_tokens_total"] += total_tokens
+        totals["ocr_cost_total_usd"] += total_cost
+
+    if "error" in ocr_info_raw and "error" not in sanitized:
+        sanitized["error"] = _sanitize_error_message(ocr_info_raw.get("error"))
+
+    return sanitized, sorted(ocr_models), totals
+
+
+def _extract_parsing_analytics(parsing_info_raw) -> tuple[dict, dict]:
+    parsing_info_raw = parsing_info_raw if isinstance(parsing_info_raw, dict) else {}
+    model_name = parsing_info_raw.get("model") or ""
+    tokens_in = _coerce_int(parsing_info_raw.get("input"))
+    tokens_out = _coerce_int(parsing_info_raw.get("output"))
+    total_tokens = tokens_in + tokens_out
+    cost_in = _coerce_float(parsing_info_raw.get("cost_in"))
+    cost_out = _coerce_float(parsing_info_raw.get("cost_out"))
+    total_cost = cost_in + cost_out
+    sanitized = {
+        "model": model_name,
+        "input": tokens_in,
+        "output": tokens_out,
+        "total_tokens": total_tokens,
+        "cost_in": cost_in,
+        "cost_out": cost_out,
+        "total_cost": total_cost,
+    }
+    convenience = {
+        "parsing_model": model_name or None,
+        "parsing_tokens_in": tokens_in,
+        "parsing_tokens_out": tokens_out,
+        "parsing_tokens_total": total_tokens,
+        "parsing_cost_total_usd": total_cost,
+    }
+    return sanitized, convenience
+
+
+def sanitize_usage_event(event: dict) -> dict:
+    """Strip repo/user-content fields that are unnecessary or risky for analytics."""
+    blocked_keys = {
+        "ocr",
+        "formatted_json",
+        "formatted_md",
+        "collage_info",
+        "base64_image",
+    }
+    sanitized = {}
+    for key, value in (event or {}).items():
+        if key in blocked_keys:
+            continue
+        sanitized[key] = value
+    return sanitized
+
+
+def build_usage_event(
+    *,
+    analytics_ctx: dict,
+    result: dict,
+    status_code: int,
+    source_type: str,
+    filename: str | None = None,
+    url_source: str | None = None,
+    source_pdf: str | None = None,
+    page_index: int | None = None,
+    page_count: int | None = None,
+    success: bool | None = None,
+    include_in_rollup: bool = True,
+    error_type: str | None = None,
+    error_message_safe: str | None = None,
+):
+    result = result if isinstance(result, dict) else {}
+    success = _infer_success_from_result(result, status_code) if success is None else bool(success)
+    ocr_info, ocr_models, ocr_totals = _extract_ocr_analytics(result.get("ocr_info"))
+    parsing_info, parsing_totals = _extract_parsing_analytics(result.get("parsing_info"))
+    impact = result.get("impact") if isinstance(result.get("impact"), dict) else {}
+
+    total_tokens_all = _coerce_int(
+        impact.get(
+            "total_tokens_all",
+            ocr_totals["ocr_tokens_total"] + parsing_totals["parsing_tokens_total"],
+        )
+    )
+    total_request_cost_usd = _coerce_float(
+        result.get(
+            "total_request_cost_usd",
+            ocr_totals["ocr_cost_total_usd"] + parsing_totals["parsing_cost_total_usd"],
+        )
+    )
+
+    safe_error_message = (
+        _sanitize_error_message(error_message_safe)
+        or _extract_event_error_message(result)
+    )
+    derived_error_type = error_type or _derive_error_type(result, status_code, source_type, success)
+
+    event = {
+        "event_id": str(uuid.uuid4()),
+        "request_id": analytics_ctx["request_id"],
+        "parent_request_id": analytics_ctx["request_id"],
+        "user_email": analytics_ctx["user_email"],
+        "api_key_owner": analytics_ctx.get("api_key_owner"),
+        "authenticated_via": analytics_ctx.get("authenticated_via"),
+        "auth_method": analytics_ctx.get("auth_method"),
+        "endpoint": analytics_ctx.get("endpoint"),
+        "source_type": source_type,
+        "source_pdf": source_pdf,
+        "page_index": page_index,
+        "page_count": page_count,
+        "filename": filename or result.get("filename"),
+        "url_host": _safe_url_host(url_source or result.get("url_source")),
+        "prompt": analytics_ctx.get("prompt"),
+        "ocr_only": bool(analytics_ctx.get("ocr_only")),
+        "notebook_mode": bool(analytics_ctx.get("notebook_mode")),
+        "include_wfo": bool(analytics_ctx.get("include_wfo")),
+        "include_cop90": bool(analytics_ctx.get("include_cop90")),
+        "success": success,
+        "status_code": int(status_code),
+        "error_type": derived_error_type,
+        "error_message_safe": safe_error_message,
+        "ocr_models": ocr_models,
+        "ocr_info": ocr_info,
+        "parsing_model": parsing_totals["parsing_model"],
+        "parsing_info": parsing_info,
+        "ocr_tokens_in_total": ocr_totals["ocr_tokens_in_total"],
+        "ocr_tokens_out_total": ocr_totals["ocr_tokens_out_total"],
+        "ocr_tokens_total": ocr_totals["ocr_tokens_total"],
+        "ocr_cost_total_usd": round(ocr_totals["ocr_cost_total_usd"], 10),
+        "parsing_tokens_in": parsing_totals["parsing_tokens_in"],
+        "parsing_tokens_out": parsing_totals["parsing_tokens_out"],
+        "parsing_tokens_total": parsing_totals["parsing_tokens_total"],
+        "parsing_cost_total_usd": round(parsing_totals["parsing_cost_total_usd"], 10),
+        "total_tokens_all": total_tokens_all,
+        "total_request_cost_usd": total_request_cost_usd,
+        "impact": impact,
+        "total_watt_hours": _coerce_float(impact.get("estimate_watt_hours")),
+        "total_grams_CO2": _coerce_float(impact.get("estimate_grams_CO2")),
+        "total_mL_water": _coerce_float(
+            impact.get("estimate_milliliters_water", impact.get("estimate_mL_water"))
+        ),
+        "include_in_rollup": bool(include_in_rollup),
+        "created_at": firestore.SERVER_TIMESTAMP,
+    }
+    return sanitize_usage_event(event)
+
+
+def record_usage_event(event: dict) -> dict:
+    event_payload = sanitize_usage_event(dict(event or {}))
+    event_payload.setdefault("event_id", str(uuid.uuid4()))
+    event_payload.setdefault("created_at", firestore.SERVER_TIMESTAMP)
+    db.collection("usage_events").document(event_payload["event_id"]).set(event_payload)
+    return event_payload
+
+
+def record_usage_events(events: list[dict]) -> list[dict]:
+    batch = db.batch()
+    recorded = []
+    for event in events or []:
+        payload = sanitize_usage_event(dict(event or {}))
+        payload.setdefault("event_id", str(uuid.uuid4()))
+        payload.setdefault("created_at", firestore.SERVER_TIMESTAMP)
+        batch.set(db.collection("usage_events").document(payload["event_id"]), payload)
+        recorded.append(payload)
+    if recorded:
+        batch.commit()
+    return recorded
+
+
+def persist_usage_events_and_rollups(events: list[dict], *, route_label: str) -> list[dict]:
+    """Write events first, then project them into usage_statistics."""
+    recorded = record_usage_events(events)
+    for event in recorded:
+        try:
+            update_usage_statistics_from_event(event)
+        except Exception:
+            logger.exception(
+                "Rollup projection failed after usage_events write route=%s request_id=%s event_id=%s",
+                route_label,
+                event.get("request_id"),
+                event.get("event_id"),
+            )
+    return recorded
+
+
+def update_usage_statistics_from_event(event: dict, *, backfill_tokens: int = 5000):
+    """Project one normalized usage event into the legacy usage_statistics doc."""
+    if not event or not event.get("include_in_rollup", True):
+        return
+
+    user_email = event.get("user_email")
+    if not user_email or user_email == 'unknown':
+        logger.warning("Cannot track usage for unknown user")
+        return
+
+    try:
+        now = datetime.datetime.now()
+        current_month = now.strftime("%Y-%m")
+        current_day = now.strftime("%Y-%m-%d")
+
+        t_all = _coerce_int(event.get("total_tokens_all"))
+        wh = _coerce_float(event.get("total_watt_hours"))
+        gco2 = _coerce_float(event.get("total_grams_CO2"))
+        h2o = _coerce_float(event.get("total_mL_water"))
+        request_cost_usd = _coerce_float(event.get("total_request_cost_usd"))
+        auth_method = event.get("auth_method")
+        ocr_models = event.get("ocr_models") if isinstance(event.get("ocr_models"), list) else []
+        llm_model_name = event.get("parsing_model")
+
+        user_ref = db.collection("usage_statistics").document(user_email)
+        doc = user_ref.get()
+
+        if doc.exists:
+            data = doc.to_dict() or {}
+
+            bf = _apply_impact_backfill(user_ref, data, backfill_tokens=backfill_tokens)
+            if bf.get("applied"):
+                logger.info(
+                    f"Applied backfill for {user_email}: "
+                    f"{bf['total_uses']} × {backfill_tokens} tokens."
+                )
+
+            monthly_usage = data.get("monthly_usage", {})
+            monthly_usage[current_month] = monthly_usage.get(current_month, 0) + 1
+
+            daily_usage = data.get("daily_usage", {})
+            prev_daily_count = daily_usage.get(current_day, 0)
+            daily_usage[current_day] = prev_daily_count + 1
+
+            ocr_info = data.get("ocr_info", {})
+            for engine in ocr_models:
+                if engine:
+                    ocr_info[engine] = ocr_info.get(engine, 0) + 1
+
+            llm_info = data.get("llm_info", {})
+            if llm_model_name:
+                llm_info[llm_model_name] = llm_info.get(llm_model_name, 0) + 1
+
+            auth_method_usage = _normalize_auth_method_totals(
+                data.get("auth_method_usage"), int
+            )
+            auth_method_monthly = _normalize_auth_method_monthly(
+                data.get("auth_method_monthly"), current_month, int
+            )
+            cost_by_auth_method = _normalize_auth_method_totals(
+                data.get("cost_by_auth_method"), float
+            )
+            cost_monthly_by_auth = _normalize_auth_method_monthly(
+                data.get("cost_monthly_by_auth"), current_month, float
+            )
+
+            cost_total_usd = _coerce_auth_metric(data.get("cost_total_usd"), float)
+            if auth_method in AUTH_METHODS:
+                auth_method_usage[auth_method] += 1
+                auth_method_monthly[current_month][auth_method] += 1
+                if request_cost_usd > 0:
+                    cost_total_usd += request_cost_usd
+                    cost_by_auth_method[auth_method] += request_cost_usd
+                    cost_monthly_by_auth[current_month][auth_method] += request_cost_usd
+
+            increments = {
+                "total_images_processed": firestore.Increment(1),
+                "total_tokens_all": firestore.Increment(t_all),
+                "total_watt_hours": firestore.Increment(wh),
+                "total_grams_CO2": firestore.Increment(gco2),
+                "total_mL_water": firestore.Increment(h2o),
+            }
+
+            if "gemini_pro_usage_limit" not in data:
+                increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
+
+            user_ref.update({
+                **increments,
+                "user_email": user_email,
+                "last_processed_at": firestore.SERVER_TIMESTAMP,
+                "monthly_usage": monthly_usage,
+                "daily_usage": daily_usage,
+                "ocr_info": ocr_info,
+                "llm_info": llm_info,
+                "auth_method_usage": auth_method_usage,
+                "auth_method_monthly": auth_method_monthly,
+                "cost_total_usd": cost_total_usd,
+                "cost_by_auth_method": cost_by_auth_method,
+                "cost_monthly_by_auth": cost_monthly_by_auth,
+                "last_auth_method": auth_method or "unknown",
+                "last_event_id": event.get("event_id"),
+                "last_request_id": event.get("request_id"),
+                "last_impact_snapshot": event.get("impact") or {},
+            })
+
+        else:
+            monthly_usage = {current_month: 1}
+            daily_usage = {current_day: 1}
+
+            ocr_info = {}
+            for engine in ocr_models:
+                if engine:
+                    ocr_info[engine] = 1
+
+            llm_info = {}
+            if llm_model_name:
+                llm_info[llm_model_name] = 1
+
+            auth_method_usage = _empty_auth_method_bucket(int)
+            auth_method_monthly = {current_month: _empty_auth_method_bucket(int)}
+            cost_by_auth_method = _empty_auth_method_bucket(float)
+            cost_monthly_by_auth = {current_month: _empty_auth_method_bucket(float)}
+            cost_total_usd = 0.0
+            if auth_method in AUTH_METHODS:
+                auth_method_usage[auth_method] = 1
+                auth_method_monthly[current_month][auth_method] = 1
+                if request_cost_usd > 0:
+                    cost_total_usd = request_cost_usd
+                    cost_by_auth_method[auth_method] = request_cost_usd
+                    cost_monthly_by_auth[current_month][auth_method] = request_cost_usd
+
+            user_ref.set({
+                "user_email": user_email,
+                "first_processed_at": firestore.SERVER_TIMESTAMP,
+                "last_processed_at": firestore.SERVER_TIMESTAMP,
+                "total_images_processed": 1,
+                "monthly_usage": monthly_usage,
+                "daily_usage": daily_usage,
+                "ocr_info": ocr_info,
+                "llm_info": llm_info,
+                "total_tokens_all": t_all,
+                "total_watt_hours": wh,
+                "total_grams_CO2": gco2,
+                "total_mL_water": h2o,
+                "auth_method_usage": auth_method_usage,
+                "auth_method_monthly": auth_method_monthly,
+                "cost_total_usd": cost_total_usd,
+                "cost_by_auth_method": cost_by_auth_method,
+                "cost_monthly_by_auth": cost_monthly_by_auth,
+                "last_auth_method": auth_method or "unknown",
+                "backfill_applied_v2": True,
+                "backfill_tokens": backfill_tokens,
+                "last_impact_snapshot": event.get("impact") or {},
+                "last_event_id": event.get("event_id"),
+                "last_request_id": event.get("request_id"),
+                "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
+            }, merge=True)
+
+        logger.info(
+            "Updated usage statistics from event %s for %s",
+            event.get("event_id"),
+            user_email,
+        )
+
+        _send_daily_usage_alerts(
+            user_email,
+            current_day,
+            prev_daily_count if doc.exists else 0,
+        )
+
+    except Exception as e:
+        logger.error(f"Error updating usage statistics from event: {str(e)}")
 
 
 def update_usage_statistics(
@@ -1812,17 +2354,7 @@ def create_initial_admin(email):
 # Authentication middleware function
 def authenticate_request(request):
     """Verify Firebase ID token from various sources."""
-    # Check in Authorization header
-    auth_header = request.headers.get('Authorization', '')
-    id_token = None
-    
-    if auth_header.startswith('Bearer '):
-        id_token = auth_header.split('Bearer ')[1]
-    
-    # If not in query, check in cookies
-    if not id_token:
-        id_token = request.cookies.get('auth_token')
-    
+    id_token = _get_id_token_from_request(request)
     if not id_token:
         return None
         
@@ -1848,13 +2380,7 @@ def get_user_email_from_request(request):
     user_email = 'unknown'
     
     try:
-        # Check for API key first in header
-        api_key = request.headers.get('X-API-Key')
-        
-        # Also check for API key in query parameters
-        if not api_key:
-            api_key = request.args.get('api_key')
-        
+        api_key = _get_api_key_from_request(request)
         if api_key:
             # Get the API key document
             api_key_doc = db.collection('api_keys').document(api_key).get()
@@ -1865,21 +2391,7 @@ def get_user_email_from_request(request):
                 logger.debug(f"API key auth: {user_email}")
                 return user_email
         
-        # Check for Firebase token
-        auth_header = request.headers.get('Authorization', '')
-        id_token = None
-        
-        if auth_header.startswith('Bearer '):
-            id_token = auth_header.split('Bearer ')[1]
-        
-        # If not in header, check in query parameters
-        if not id_token:
-            id_token = request.args.get('token')
-        
-        # If not in query, check in cookies
-        if not id_token:
-            id_token = request.cookies.get('auth_token')
-        
+        id_token = _get_id_token_from_request(request)
         if id_token:
             # Just get the email from the token without re-validating
             # This relies on the authenticate_request middleware having already validated the token
@@ -1910,11 +2422,7 @@ def authenticated_route(f):
             
         # For non-OPTIONS requests, proceed with authentication
         # Check for API key first in header
-        api_key = request.headers.get('X-API-Key')
-        
-        # Also check for API key in query parameters (for easier testing)
-        if not api_key:
-            api_key = request.args.get('api_key')
+        api_key = _get_api_key_from_request(request)
         
         if api_key and validate_api_key(api_key):
             # API key is valid
@@ -2965,6 +3473,20 @@ def process_image():
         bool(user_vertex_project),
         bool(user_gemini_key),
     )
+    request_id = str(uuid.uuid4())
+    analytics_ctx = build_request_analytics_context(
+        request,
+        user_email=user_email,
+        endpoint="/process",
+        auth_ctx=payment_auth,
+        request_id=request_id,
+        prompt=prompt,
+        ocr_only=ocr_only,
+        notebook_mode=notebook_mode,
+        include_wfo=include_wfo,
+        include_cop90=include_cop90,
+        llm_model_name=llm_model_name,
+    )
 
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
@@ -2996,17 +3518,31 @@ def process_image():
             file=file, **process_kwargs
         )
 
-        # Update usage statistics for each successful page
         if status_code == 200:
-            for page_result in results.get('pages', []):
-                if 'impact' in page_result:
-                    update_usage_statistics(
-                        user_email,
-                        engines=engine_options,
-                        llm_model_name=llm_model_name,
-                        est_impact=page_result['impact'],
-                        auth_method=auth_method,
-                        request_cost_usd=float(page_result.get('total_request_cost_usd', 0.0) or 0.0),
+            page_events = []
+            page_count = _coerce_int(results.get('page_count'))
+            for idx, page_result in enumerate(results.get('pages', []), start=1):
+                page_status_code = _coerce_int(page_result.get('status_code'), 200)
+                page_events.append(
+                    build_usage_event(
+                        analytics_ctx=analytics_ctx,
+                        result=page_result,
+                        status_code=page_status_code,
+                        source_type="pdf_page",
+                        filename=page_result.get("filename"),
+                        source_pdf=results.get("source_pdf"),
+                        page_index=idx,
+                        page_count=page_count,
+                        include_in_rollup="impact" in page_result,
+                    )
+                )
+            if page_events:
+                try:
+                    persist_usage_events_and_rollups(page_events, route_label="/process:pdf")
+                except Exception:
+                    logger.exception(
+                        "usage_events write failed route=/process request_id=%s; skipped rollup mutation",
+                        request_id,
                     )
 
     else:
@@ -3045,16 +3581,23 @@ def process_image():
             file=file, **process_kwargs
         )
 
-        # If processing was successful, update usage statistics
+        event = build_usage_event(
+            analytics_ctx=analytics_ctx,
+            result=results,
+            status_code=status_code,
+            source_type="upload",
+            filename=getattr(file, "filename", None),
+            include_in_rollup=True,
+        )
+
         if status_code == 200:
-            update_usage_statistics(
-                user_email,
-                engines=engine_options,
-                llm_model_name=llm_model_name,
-                est_impact=results["impact"],
-                auth_method=auth_method,
-                request_cost_usd=float(results.get("total_request_cost_usd", 0.0) or 0.0),
-            )
+            try:
+                persist_usage_events_and_rollups([event], route_label="/process:upload")
+            except Exception:
+                logger.exception(
+                    "usage_events write failed route=/process request_id=%s; skipped rollup mutation",
+                    request_id,
+                )
             # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
             if pro_quota_reserved:
                 _, count, limit = check_gemini_pro_rate_limit(user_email)
@@ -3063,14 +3606,13 @@ def process_image():
             # Release the reserved pro quota on failure
             if pro_quota_reserved:
                 release_gemini_pro_quota(user_email)
-            update_usage_statistics(
-                user_email,
-                engines=[f"failure_code_{status_code}"] if engine_options else None,
-                llm_model_name=f"failure_code_{status_code}" if llm_model_name else None,
-                est_impact=None,
-                auth_method=auth_method,
-                request_cost_usd=0.0,
-            )
+            try:
+                persist_usage_events_and_rollups([event], route_label="/process:upload")
+            except Exception:
+                logger.exception(
+                    "usage_events write failed route=/process request_id=%s; skipped rollup mutation",
+                    request_id,
+                )
 
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
@@ -3147,6 +3689,20 @@ def process_image_by_url():
         bool(user_vertex_project),
         bool(user_gemini_key),
     )
+    request_id = str(uuid.uuid4())
+    analytics_ctx = build_request_analytics_context(
+        request,
+        user_email=user_email,
+        endpoint="/process-url",
+        auth_ctx=payment_auth,
+        request_id=request_id,
+        prompt=prompt,
+        ocr_only=ocr_only,
+        notebook_mode=notebook_mode,
+        include_wfo=include_wfo,
+        include_cop90=include_cop90,
+        llm_model_name=llm_model_name,
+    )
 
     # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     pro_quota_reserved = False
@@ -3196,6 +3752,7 @@ def process_image_by_url():
                     cookie=cookie,          # if you have an approved session
                     logger=logger,
                 )
+                filename = filename_from_url
                 logger.info(f"URL fetched filenam: {filename_from_url}")
             except:
                 file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
@@ -3252,6 +3809,25 @@ def process_image_by_url():
         ])
         
         # Return this structure with a 200 OK status
+        failure_event = build_usage_event(
+            analytics_ctx=analytics_ctx,
+            result=error_response_data,
+            status_code=200,
+            source_type="url",
+            filename=extract_filename_from_url(image_url),
+            url_source=image_url,
+            success=False,
+            include_in_rollup=False,
+            error_type="fetch_failure",
+            error_message_safe=str(last_exception),
+        )
+        try:
+            record_usage_event(failure_event)
+        except Exception:
+            logger.exception(
+                "usage_events write failed route=/process-url request_id=%s; skipped rollup mutation",
+                request_id,
+            )
         response = make_response(json.dumps(error_response_data, cls=OrderedJsonEncoder), 200)
         response.headers['Content-Type'] = 'application/json'
         response.headers.add('Access-Control-Allow-Origin', '*')
@@ -3275,16 +3851,24 @@ def process_image_by_url():
             user_vertex_region=user_vertex_region,
         )
 
-        # Update usage stats
+        event = build_usage_event(
+            analytics_ctx=analytics_ctx,
+            result=results,
+            status_code=status_code,
+            source_type="url",
+            filename=getattr(file_obj, "filename", None) or filename,
+            url_source=image_url,
+            include_in_rollup=True,
+        )
+
         if status_code == 200:
-            update_usage_statistics(
-                user_email,
-                engines=engine_options,
-                llm_model_name=llm_model_name,
-                est_impact=results["impact"],
-                auth_method=auth_method,
-                request_cost_usd=float(results.get("total_request_cost_usd", 0.0) or 0.0),
-            )
+            try:
+                persist_usage_events_and_rollups([event], route_label="/process-url")
+            except Exception:
+                logger.exception(
+                    "usage_events write failed route=/process-url request_id=%s; skipped rollup mutation",
+                    request_id,
+                )
             # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
             if pro_quota_reserved:
                 _, count, limit = check_gemini_pro_rate_limit(user_email)
@@ -3293,14 +3877,13 @@ def process_image_by_url():
             # Release the reserved pro quota on failure
             if pro_quota_reserved:
                 release_gemini_pro_quota(user_email)
-            update_usage_statistics(
-                user_email,
-                engines=[f"failure_code_{status_code}"] if engine_options else None,
-                llm_model_name=f"failure_code_{status_code}" if llm_model_name else None,
-                est_impact=None,
-                auth_method=auth_method,
-                request_cost_usd=0.0,
-            )
+            try:
+                persist_usage_events_and_rollups([event], route_label="/process-url")
+            except Exception:
+                logger.exception(
+                    "usage_events write failed route=/process-url request_id=%s; skipped rollup mutation",
+                    request_id,
+                )
 
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
@@ -3477,6 +4060,286 @@ def api_demo_page():
         project_id=firebase_config["projectId"]
     )
 
+
+def _parse_bool_query_arg(name: str):
+    raw = request.args.get(name)
+    if raw is None:
+        return None
+    lowered = raw.strip().lower()
+    if lowered in {"true", "1", "yes"}:
+        return True
+    if lowered in {"false", "0", "no"}:
+        return False
+    return None
+
+
+def _parse_date_query_arg(name: str, *, end_exclusive: bool = False):
+    raw = request.args.get(name)
+    if not raw:
+        return None
+    try:
+        parsed = datetime.datetime.strptime(raw.strip(), "%Y-%m-%d")
+        if end_exclusive:
+            parsed += datetime.timedelta(days=1)
+        return parsed
+    except ValueError:
+        return None
+
+
+def _firestore_timestamp_to_datetime(value):
+    if value is None:
+        return None
+    if isinstance(value, datetime.datetime):
+        return value if value.tzinfo else value.replace(tzinfo=datetime.timezone.utc)
+    if hasattr(value, "to_datetime"):
+        try:
+            return value.to_datetime()
+        except Exception:
+            return None
+    if hasattr(value, "_seconds"):
+        try:
+            return datetime.datetime.fromtimestamp(value._seconds, tz=datetime.timezone.utc)
+        except Exception:
+            return None
+    return None
+
+
+def _format_event_timestamp(value):
+    dt = _firestore_timestamp_to_datetime(value)
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        return dt.isoformat() + "Z"
+    return dt.astimezone(datetime.timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _serialize_usage_event(event_doc_or_dict):
+    if hasattr(event_doc_or_dict, "to_dict"):
+        payload = event_doc_or_dict.to_dict() or {}
+        payload.setdefault("event_id", getattr(event_doc_or_dict, "id", None))
+    else:
+        payload = dict(event_doc_or_dict or {})
+
+    payload["created_at"] = _format_event_timestamp(payload.get("created_at"))
+    payload["total_request_cost_usd"] = _coerce_float(payload.get("total_request_cost_usd"))
+    payload["total_tokens_all"] = _coerce_int(payload.get("total_tokens_all"))
+    payload["total_watt_hours"] = _coerce_float(payload.get("total_watt_hours"))
+    payload["total_grams_CO2"] = _coerce_float(payload.get("total_grams_CO2"))
+    payload["total_mL_water"] = _coerce_float(payload.get("total_mL_water"))
+    payload["page_index"] = _coerce_int(payload.get("page_index")) if payload.get("page_index") else None
+    payload["page_count"] = _coerce_int(payload.get("page_count")) if payload.get("page_count") else None
+    payload["ocr_models"] = payload.get("ocr_models") if isinstance(payload.get("ocr_models"), list) else []
+    payload["success"] = bool(payload.get("success"))
+    payload["ocr_only"] = bool(payload.get("ocr_only"))
+    payload["notebook_mode"] = bool(payload.get("notebook_mode"))
+    return payload
+
+
+def _build_usage_events_query(
+    *,
+    user_email: str | None = None,
+    auth_method: str | None = None,
+    endpoint: str | None = None,
+    source_type: str | None = None,
+    success: bool | None = None,
+    ocr_only: bool | None = None,
+    notebook_mode: bool | None = None,
+    parsing_model: str | None = None,
+    ocr_model: str | None = None,
+    prompt: str | None = None,
+    date_from=None,
+    date_to=None,
+    order_desc: bool = True,
+):
+    query = db.collection("usage_events")
+    if user_email:
+        query = query.where("user_email", "==", user_email)
+    if auth_method:
+        query = query.where("auth_method", "==", auth_method)
+    if endpoint:
+        query = query.where("endpoint", "==", endpoint)
+    if source_type:
+        query = query.where("source_type", "==", source_type)
+    if success is not None:
+        query = query.where("success", "==", success)
+    if ocr_only is not None:
+        query = query.where("ocr_only", "==", ocr_only)
+    if notebook_mode is not None:
+        query = query.where("notebook_mode", "==", notebook_mode)
+    if parsing_model:
+        query = query.where("parsing_model", "==", parsing_model)
+    if ocr_model:
+        query = query.where("ocr_models", "array_contains", ocr_model)
+    if prompt:
+        query = query.where("prompt", "==", prompt)
+    if date_from:
+        query = query.where("created_at", ">=", date_from)
+    if date_to:
+        query = query.where("created_at", "<", date_to)
+    direction = firestore.Query.DESCENDING if order_desc else firestore.Query.ASCENDING
+    return query.order_by("created_at", direction=direction)
+
+
+def _get_usage_event_filters_from_request():
+    return {
+        "user_email": request.args.get("user_email") or None,
+        "auth_method": request.args.get("auth_method") or None,
+        "endpoint": request.args.get("endpoint") or None,
+        "source_type": request.args.get("source_type") or None,
+        "success": _parse_bool_query_arg("success"),
+        "ocr_only": _parse_bool_query_arg("ocr_only"),
+        "notebook_mode": _parse_bool_query_arg("notebook_mode"),
+        "parsing_model": request.args.get("parsing_model") or None,
+        "ocr_model": request.args.get("ocr_model") or None,
+        "prompt": request.args.get("prompt") or None,
+        "date_from": _parse_date_query_arg("date_from"),
+        "date_to": _parse_date_query_arg("date_to", end_exclusive=True),
+    }
+
+
+def _dimension_value_for_event(event: dict, dimension: str, value: str | None = None):
+    if dimension == "ocr_model":
+        models = event.get("ocr_models") if isinstance(event.get("ocr_models"), list) else []
+        return models if value is None else value in models
+    if dimension in {"ocr_only", "notebook_mode", "success"}:
+        current = bool(event.get(dimension))
+        if value is None:
+            return current
+        wanted = str(value).strip().lower() in {"true", "1", "yes"}
+        return current == wanted
+    current = event.get(dimension)
+    if value is None:
+        return current
+    return current == value
+
+
+def _fetch_usage_events_for_overview(scope: str, dimension: str | None, value: str | None):
+    filters = _get_usage_event_filters_from_request()
+    if scope == "user":
+        filters["user_email"] = request.args.get("user_email") or filters["user_email"]
+    elif scope == "dimension" and dimension:
+        if dimension == "ocr_model":
+            filters["ocr_model"] = value
+        elif dimension in {"ocr_only", "notebook_mode", "success"}:
+            filters[dimension] = str(value).strip().lower() in {"true", "1", "yes"}
+        else:
+            filters[dimension] = value
+
+    query = _build_usage_events_query(**filters, order_desc=True)
+    return [doc.to_dict() | {"event_id": doc.id} for doc in query.stream()]
+
+
+def _summarize_usage_events(events: list[dict]) -> dict:
+    daily = {}
+    weekly = {}
+    auth_method_split = {}
+    ocr_model_mix = {}
+    parsing_model_mix = {}
+    success_count = 0
+    failure_count = 0
+    total_cost = 0.0
+    total_tokens = 0
+    total_pdf_pages = 0
+    unique_users = set()
+    first_tracked_event_at = None
+    recent_sorted = sorted(
+        events,
+        key=lambda e: _firestore_timestamp_to_datetime(e.get("created_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
+        reverse=True,
+    )
+
+    for event in events:
+        dt = _firestore_timestamp_to_datetime(event.get("created_at"))
+        if dt:
+            day_key = dt.strftime("%Y-%m-%d")
+            iso_year, iso_week, _ = dt.isocalendar()
+            week_key = f"{iso_year}-W{iso_week:02d}"
+            day_bucket = daily.setdefault(day_key, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+            week_bucket = weekly.setdefault(week_key, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+            if first_tracked_event_at is None or dt < first_tracked_event_at:
+                first_tracked_event_at = dt
+        else:
+            day_bucket = None
+            week_bucket = None
+
+        success = bool(event.get("success"))
+        if success:
+            success_count += 1
+        else:
+            failure_count += 1
+
+        cost = _coerce_float(event.get("total_request_cost_usd"))
+        tokens = _coerce_int(event.get("total_tokens_all"))
+        total_cost += cost
+        total_tokens += tokens
+        if event.get("source_type") == "pdf_page":
+            total_pdf_pages += 1
+
+        user_email = event.get("user_email")
+        if user_email:
+            unique_users.add(user_email)
+
+        if day_bucket is not None:
+            day_bucket["events"] += 1
+            day_bucket["cost_usd"] += cost
+            day_bucket["tokens"] += tokens
+        if week_bucket is not None:
+            week_bucket["events"] += 1
+            week_bucket["cost_usd"] += cost
+            week_bucket["tokens"] += tokens
+
+        auth_key = event.get("auth_method") or "unknown"
+        auth_bucket = auth_method_split.setdefault(auth_key, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+        auth_bucket["events"] += 1
+        auth_bucket["cost_usd"] += cost
+        auth_bucket["tokens"] += tokens
+
+        for model_name, ocr_payload in (event.get("ocr_info") or {}).items():
+            if model_name == "error" or not isinstance(ocr_payload, dict):
+                continue
+            model_bucket = ocr_model_mix.setdefault(model_name, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+            model_bucket["events"] += 1
+            model_bucket["cost_usd"] += _coerce_float(ocr_payload.get("total_cost"))
+            model_bucket["tokens"] += _coerce_int(ocr_payload.get("total_tokens"))
+
+        parsing_model = event.get("parsing_model") or "none"
+        parsing_bucket = parsing_model_mix.setdefault(parsing_model, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+        parsing_bucket["events"] += 1
+        parsing_bucket["cost_usd"] += _coerce_float(event.get("parsing_cost_total_usd"))
+        parsing_bucket["tokens"] += _coerce_int(event.get("parsing_tokens_total"))
+
+    return {
+        "headline": {
+            "total_events": len(events),
+            "success_count": success_count,
+            "failure_count": failure_count,
+            "total_cost_usd": round(total_cost, 10),
+            "average_cost_usd": round(total_cost / len(events), 10) if events else 0.0,
+            "total_tokens_all": total_tokens,
+            "total_pdf_pages": total_pdf_pages,
+            "unique_users": len(unique_users),
+        },
+        "timeseries": {
+            "daily": [
+                {"date": key, **value}
+                for key, value in sorted(daily.items())
+            ],
+            "weekly": [
+                {"week": key, **value}
+                for key, value in sorted(weekly.items())
+            ],
+        },
+        "auth_method_split": auth_method_split,
+        "ocr_model_mix": ocr_model_mix,
+        "parsing_model_mix": parsing_model_mix,
+        "recent_events": [
+            _serialize_usage_event(event)
+            for event in recent_sorted[:25]
+        ],
+        "first_tracked_event_at": _format_event_timestamp(first_tracked_event_at),
+    }
+
+
 @app.route('/admin/usage-statistics', methods=['GET'])
 @authenticated_route
 def get_usage_statistics():
@@ -3537,6 +4400,169 @@ def get_usage_statistics():
     except Exception as e:
         logger.error(f"Error getting usage statistics: {str(e)}")
         return jsonify({'error': f'Failed to get usage statistics: {str(e)}'}), 500
+
+
+@app.route('/admin/usage-events', methods=['GET'])
+@authenticated_route
+def get_usage_events():
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        filters = _get_usage_event_filters_from_request()
+        limit = max(1, min(_coerce_int(request.args.get("limit"), 50), 200))
+        cursor = request.args.get("cursor")
+
+        query = _build_usage_events_query(**filters, order_desc=True)
+        if cursor:
+            cursor_doc = db.collection("usage_events").document(cursor).get()
+            if cursor_doc.exists:
+                query = query.start_after(cursor_doc)
+        docs = list(query.limit(limit + 1).stream())
+        has_more = len(docs) > limit
+        docs = docs[:limit]
+        events = [_serialize_usage_event(doc) for doc in docs]
+        next_cursor = events[-1]["event_id"] if has_more and events else None
+
+        return jsonify({
+            "status": "success",
+            "count": len(events),
+            "events": events,
+            "next_cursor": next_cursor,
+        })
+    except Exception as e:
+        logger.error(f"Error getting usage events: {str(e)}")
+        return jsonify({'error': f'Failed to get usage events: {str(e)}'}), 500
+
+
+@app.route('/admin/usage-events/facets', methods=['GET'])
+@authenticated_route
+def get_usage_event_facets():
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        filters = _get_usage_event_filters_from_request()
+        query = _build_usage_events_query(**filters, order_desc=False)
+        facets = {
+            "users": set(),
+            "ocr_models": set(),
+            "parsing_models": set(),
+            "prompts": set(),
+            "endpoints": set(),
+            "source_types": set(),
+            "auth_methods": set(),
+        }
+
+        for doc in query.stream():
+            event = doc.to_dict() or {}
+            if event.get("user_email"):
+                facets["users"].add(event["user_email"])
+            if event.get("parsing_model"):
+                facets["parsing_models"].add(event["parsing_model"])
+            if event.get("prompt"):
+                facets["prompts"].add(event["prompt"])
+            if event.get("endpoint"):
+                facets["endpoints"].add(event["endpoint"])
+            if event.get("source_type"):
+                facets["source_types"].add(event["source_type"])
+            if event.get("auth_method"):
+                facets["auth_methods"].add(event["auth_method"])
+            for model_name in event.get("ocr_models") or []:
+                if model_name:
+                    facets["ocr_models"].add(model_name)
+
+        earliest_docs = list(
+            db.collection("usage_events")
+            .order_by("created_at", direction=firestore.Query.ASCENDING)
+            .limit(1)
+            .stream()
+        )
+        first_tracked_event_at = None
+        if earliest_docs:
+            first_tracked_event_at = _format_event_timestamp(
+                (earliest_docs[0].to_dict() or {}).get("created_at")
+            )
+
+        return jsonify({
+            "status": "success",
+            "dimensions": list(USAGE_EVENT_DIMENSIONS),
+            "facets": {key: sorted(values) for key, values in facets.items()},
+            "first_tracked_event_at": first_tracked_event_at,
+            "tracking_note": "Event-level analytics are forward-only from this feature's deployment.",
+        })
+    except Exception as e:
+        logger.error(f"Error getting usage event facets: {str(e)}")
+        return jsonify({'error': f'Failed to get usage event facets: {str(e)}'}), 500
+
+
+@app.route('/admin/usage-events/overview', methods=['GET'])
+@authenticated_route
+def get_usage_events_overview():
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        scope = request.args.get("scope", "user")
+        if scope not in {"user", "dimension"}:
+            return jsonify({"error": "scope must be 'user' or 'dimension'"}), 400
+
+        dimension = request.args.get("dimension")
+        value = request.args.get("value")
+        if scope == "user" and not (request.args.get("user_email") or "").strip():
+            return jsonify({"error": "user_email is required for scope=user"}), 400
+        if scope == "dimension":
+            if dimension not in USAGE_EVENT_DIMENSIONS:
+                return jsonify({"error": "Unsupported dimension"}), 400
+            if value in (None, ""):
+                return jsonify({"error": "value is required for scope=dimension"}), 400
+
+        events = _fetch_usage_events_for_overview(scope, dimension, value)
+        summary = _summarize_usage_events(events)
+
+        return jsonify({
+            "status": "success",
+            "scope": scope,
+            "dimension": dimension,
+            "value": value,
+            "filters": {
+                key: request.args.get(key)
+                for key in (
+                    "user_email",
+                    "auth_method",
+                    "endpoint",
+                    "source_type",
+                    "success",
+                    "ocr_only",
+                    "notebook_mode",
+                    "parsing_model",
+                    "ocr_model",
+                    "prompt",
+                    "date_from",
+                    "date_to",
+                )
+                if request.args.get(key) is not None
+            },
+            **summary,
+        })
+    except Exception as e:
+        logger.error(f"Error building usage event overview: {str(e)}")
+        return jsonify({'error': f'Failed to build usage event overview: {str(e)}'}), 500
 
 
 @app.route('/admin/backfill-usage-statistics', methods=['POST'])

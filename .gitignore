@@ -4,6 +4,8 @@
 
 # Local engineering notes (not for repo)
 notes_for_passing_vertex_creds_to_server.md
+plan_for_event_level_metrics.md
+usage_events_firestore_indexes.md
 
 # WFO backbone data (built locally, baked into Docker image)
 WFO_uber/uber_*/
