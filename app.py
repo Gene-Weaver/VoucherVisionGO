@@ -49,6 +49,7 @@ from google.cloud import storage
 from google.cloud.firestore_v1.base_query import FieldFilter
 from google.auth.transport.requests import AuthorizedSession, Request as GoogleAuthRequest
 from google.oauth2 import id_token as google_id_token
+from google.oauth2 import service_account
 import google.auth
 
 from url_name_parser import extract_filename_from_url
@@ -1322,6 +1323,16 @@ def _sanitize_error_message(value) -> str | None:
     if value in (None, ""):
         return None
     text = str(value).strip()
+    sensitive_markers = (
+        '"type": "service_account"',
+        '"private_key"',
+        '"private_key_id"',
+        "-----BEGIN PRIVATE KEY-----",
+        "-----END PRIVATE KEY-----",
+        "GOOGLE_APPLICATION_CREDENTIALS",
+    )
+    if any(marker in text for marker in sensitive_markers):
+        return "Sensitive credential details were redacted."
     return text[:500] if text else None
 
 
@@ -2489,8 +2500,51 @@ def _pdf_job_expiration_time() -> datetime.datetime:
     return _now_utc() + datetime.timedelta(days=PDF_JOB_RETENTION_DAYS)
 
 
+class _CredentialError(Exception):
+    """Raised for credential problems with a sanitized message."""
+
+
+_PDF_JOB_STORAGE_CLIENT = None
+
+
+def _build_storage_client():
+    """Return a storage client without ever surfacing raw credential content."""
+    credential_project = PDF_JOB_PROJECT_ID or None
+
+    for var in ("GOOGLE_APPLICATION_CREDENTIALS", "firebase-admin-key"):
+        raw = os.environ.get(var, "")
+        if not raw:
+            continue
+        if os.path.isfile(raw):
+            try:
+                return storage.Client(project=credential_project) if credential_project else storage.Client()
+            except Exception:
+                logger.error("storage.Client() failed reading credentials file from %s", var)
+                raise _CredentialError("Cloud Storage client initialization failed.")
+        if raw.lstrip().startswith("{"):
+            try:
+                info = json.loads(raw)
+                creds = service_account.Credentials.from_service_account_info(info)
+                project = credential_project or info.get("project_id")
+                return storage.Client(project=project, credentials=creds)
+            except _CredentialError:
+                raise
+            except Exception:
+                logger.error("storage.Client() failed reading inline service-account credentials from %s", var)
+                raise _CredentialError("Cloud Storage client initialization failed.")
+
+    try:
+        return storage.Client(project=credential_project) if credential_project else storage.Client()
+    except Exception:
+        logger.error("storage.Client() ADC fallback failed")
+        raise _CredentialError("Cloud Storage client initialization failed.")
+
+
 def _get_storage_client():
-    return storage.Client(project=PDF_JOB_PROJECT_ID) if PDF_JOB_PROJECT_ID else storage.Client()
+    global _PDF_JOB_STORAGE_CLIENT
+    if _PDF_JOB_STORAGE_CLIENT is None:
+        _PDF_JOB_STORAGE_CLIENT = _build_storage_client()
+    return _PDF_JOB_STORAGE_CLIENT
 
 
 def _get_pdf_job_bucket_name() -> str:
@@ -4781,7 +4835,8 @@ def process_pdf_async():
     try:
         pdf_bytes = file.read()
     except Exception as e:
-        resp = make_response(jsonify({'error': f'Unable to read uploaded PDF: {e}'}), 400)
+        logger.exception("Unable to read uploaded PDF for async processing")
+        resp = make_response(jsonify({'error': 'Unable to read the uploaded PDF.'}), 400)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
@@ -4815,7 +4870,7 @@ def process_pdf_async():
         _upload_pdf_job_bytes(original_blob_path, pdf_bytes, content_type="application/pdf")
     except Exception as e:
         logger.exception("Failed to upload PDF job source %s", job_id)
-        resp = make_response(jsonify({'error': f'Failed to store PDF for async processing: {e}'}), 500)
+        resp = make_response(jsonify({'error': 'Failed to store PDF for async processing.'}), 500)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
@@ -4867,7 +4922,7 @@ def process_pdf_async():
     except Exception as e:
         logger.exception("Failed to enqueue split task for PDF job %s", job_id)
         _mark_pdf_job_failed(job_id, f"Queue submission failed: {e}", phase="queue_error")
-        resp = make_response(jsonify({'error': f'Unable to queue PDF job: {e}'}), 500)
+        resp = make_response(jsonify({'error': 'Unable to queue PDF job.'}), 500)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
@@ -4982,7 +5037,7 @@ def download_pdf_job_bundle(job_id):
         return jsonify({'error': 'The ZIP bundle is no longer available.'}), 410
     except Exception as e:
         logger.exception("Failed to download PDF job bundle %s", job_id)
-        return jsonify({'error': f'Unable to download ZIP bundle: {e}'}), 500
+        return jsonify({'error': 'Unable to download ZIP bundle.'}), 500
 
     basename = Path(job_data.get("source_pdf_filename") or f"{job_id}.pdf").stem
     download_name = f"{basename}_VoucherVisionGO.zip"
@@ -5068,7 +5123,7 @@ def internal_split_pdf_job(job_id):
     except Exception as e:
         logger.exception("Failed to split async PDF job %s", job_id)
         _mark_pdf_job_failed(job_id, str(e), phase="splitting")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to split the PDF job.'}), 500
 
 
 @app.route('/internal/pdf-jobs/<job_id>/pages/<int:page_index>/process', methods=['POST'])
@@ -5197,7 +5252,7 @@ def internal_process_pdf_job_page(job_id, page_index):
             success=False,
             include_in_rollup=False,
             error_type="processing_failure",
-            error_message_safe=str(e),
+            error_message_safe=_sanitize_error_message(str(e)) or "Page processing failed.",
         )
         try:
             record_usage_event(failure_event)
@@ -5217,7 +5272,7 @@ def internal_process_pdf_job_page(job_id, page_index):
             merge=True,
         )
         _refresh_pdf_job_counters(job_id)
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to process the PDF job page.'}), 500
 
 
 @app.route('/internal/pdf-jobs/<job_id>/finalize', methods=['POST'])
@@ -5344,7 +5399,7 @@ def internal_finalize_pdf_job(job_id):
     except Exception as e:
         logger.exception("Failed to finalize PDF job %s", job_id)
         _mark_pdf_job_failed(job_id, str(e), phase="finalizing")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to finalize the PDF job.'}), 500
 
 
 @app.route('/internal/pdf-jobs/<job_id>/send-email', methods=['POST'])
@@ -5374,7 +5429,7 @@ def internal_send_pdf_job_email(job_id):
             },
             merge=True,
         )
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': 'Failed to send the PDF job email.'}), 500
 
 
 @app.route('/impact', methods=['GET'])
