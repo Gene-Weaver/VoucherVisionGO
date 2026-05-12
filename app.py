@@ -5199,9 +5199,6 @@ def internal_process_pdf_job_page(job_id, page_index):
             **_build_pdf_job_process_kwargs(job_data),
         )
 
-        result_blob_path = _pdf_job_blob_path(job_id, "results", f"page_{page_index:04d}.json")
-        _upload_pdf_job_json(result_blob_path, results)
-
         event = build_usage_event(
             analytics_ctx=_build_pdf_job_analytics_context(job_data),
             result=results,
@@ -5227,6 +5224,11 @@ def internal_process_pdf_job_page(job_id, page_index):
         if page_status != "completed" and quota_reserved:
             release_gemini_pro_quota(job_data.get("user_email"))
             quota_reserved = False
+
+        page_stem = os.path.splitext(page_data.get("filename") or f"page_{page_index:04d}.jpg")[0]
+        result_filename = f"{page_stem}.json" if page_status == "completed" else f"{page_stem}_FAILED.json"
+        result_blob_path = _pdf_job_blob_path(job_id, "results", result_filename)
+        _upload_pdf_job_json(result_blob_path, results)
 
         page_ref.set(
             {
@@ -5294,11 +5296,21 @@ def internal_process_pdf_job_page(job_id, page_index):
                 job_data.get("request_id"),
                 page_index,
             )
+        failure_blob_path = None
+        try:
+            failure_stem = os.path.splitext(page_data.get("filename") or f"page_{page_index:04d}.jpg")[0]
+            failure_blob_path = _pdf_job_blob_path(job_id, "results", f"{failure_stem}_FAILED.json")
+            _upload_pdf_job_json(failure_blob_path, failure_result)
+        except Exception:
+            logger.exception("Failed to upload failure result for PDF job %s page %s", job_id, page_index)
+            failure_blob_path = None
+
         page_ref.set(
             {
                 "status": "failed",
                 "status_code": 500,
                 "error_message": _sanitize_error_message(str(e)),
+                "result_blob_path": failure_blob_path,
                 "updated_at": firestore.SERVER_TIMESTAMP,
             },
             merge=True,
@@ -5372,18 +5384,21 @@ def internal_finalize_pdf_job(job_id):
             zip_file.writestr("results.xlsx", xlsx_bytes)
             for page in pages:
                 result_blob_path = page.get("result_blob_path")
-                page_label = f"page_{_coerce_int(page.get('page_index')):04d}"
+                page_stem = os.path.splitext(
+                    page.get("filename") or f"page_{_coerce_int(page.get('page_index')):04d}.jpg"
+                )[0]
                 if result_blob_path:
                     try:
+                        zip_entry_name = os.path.basename(result_blob_path) or f"{page_stem}.json"
                         zip_file.writestr(
-                            f"results/{page_label}.json",
+                            f"results/{zip_entry_name}",
                             _download_pdf_job_bytes(result_blob_path),
                         )
                         continue
                     except Exception:
                         logger.exception("Unable to include page result %s in ZIP", result_blob_path)
                 zip_file.writestr(
-                    f"results/{page_label}_error.json",
+                    f"results/{page_stem}_FAILED.json",
                     json.dumps(
                         {
                             "page_index": _coerce_int(page.get("page_index")),
