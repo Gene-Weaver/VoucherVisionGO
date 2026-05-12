@@ -36,7 +36,7 @@ class UsageEventHelpersTest(unittest.TestCase):
                 },
             },
             "parsing_info": {
-                "model": "gemini-3.1-flash-lite-preview",
+                "model": "gemini-3.1-flash-lite",
                 "input": 25,
                 "output": 75,
                 "cost_in": 0.005,
@@ -124,7 +124,7 @@ class UsageEventHelpersTest(unittest.TestCase):
                 "total_request_cost_usd": 0.10,
                 "total_tokens_all": 100,
                 "ocr_info": {"gemini-2.5-flash": {"total_cost": 0.02, "total_tokens": 30}},
-                "parsing_model": "gemini-3.1-flash-lite-preview",
+                "parsing_model": "gemini-3.1-flash-lite",
                 "parsing_cost_total_usd": 0.08,
                 "parsing_tokens_total": 70,
             },

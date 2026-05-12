@@ -42,6 +42,7 @@ register_heif_opener()
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
 from google.cloud import firestore as _gc_firestore
+from google.cloud.firestore_v1.base_query import FieldFilter
 
 from url_name_parser import extract_filename_from_url
 from impact import estimate_impact
@@ -720,7 +721,7 @@ def _send_pro_migration_advisory(user_email: str, count: int, limit: int):
             <p>To help you keep working without interruption, here are two options:</p>
 
             <h3>Option 1 — Switch to a faster, unlimited model</h3>
-            <p>Consider using <code>gemini-3.1-flash-lite-preview</code> instead.
+            <p>Consider using <code>gemini-3.1-flash-lite</code> instead.
             It has <strong>no call limit</strong> on VoucherVision and offers equivalent
             performance to the Gemini Pro models for transcription tasks.</p>
 
@@ -2977,8 +2978,13 @@ class VoucherVisionProcessor:
                     "gemini-2.5-pro": "GEMINI_2_5_PRO",
                     "gemini-3-pro-preview": "GEMINI_3_PRO",
                     "gemini-3-flash-preview": "GEMINI_3_FLASH",
+                    "gemini-3-flash": "GEMINI_3_FLASH",
+
                     "gemini-3.1-pro-preview": "GEMINI_3_1_PRO",
+                    "gemini-3.1-pro": "GEMINI_3_1_PRO",
+                    
                     "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
+                    "gemini-3.1-flash-lite": "GEMINI_3_1_FLASH_LITE",
                 }
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
@@ -4153,29 +4159,29 @@ def _build_usage_events_query(
 ):
     query = db.collection("usage_events")
     if user_email:
-        query = query.where("user_email", "==", user_email)
+        query = query.where(filter=FieldFilter("user_email", "==", user_email))
     if auth_method:
-        query = query.where("auth_method", "==", auth_method)
+        query = query.where(filter=FieldFilter("auth_method", "==", auth_method))
     if endpoint:
-        query = query.where("endpoint", "==", endpoint)
+        query = query.where(filter=FieldFilter("endpoint", "==", endpoint))
     if source_type:
-        query = query.where("source_type", "==", source_type)
+        query = query.where(filter=FieldFilter("source_type", "==", source_type))
     if success is not None:
-        query = query.where("success", "==", success)
+        query = query.where(filter=FieldFilter("success", "==", success))
     if ocr_only is not None:
-        query = query.where("ocr_only", "==", ocr_only)
+        query = query.where(filter=FieldFilter("ocr_only", "==", ocr_only))
     if notebook_mode is not None:
-        query = query.where("notebook_mode", "==", notebook_mode)
+        query = query.where(filter=FieldFilter("notebook_mode", "==", notebook_mode))
     if parsing_model:
-        query = query.where("parsing_model", "==", parsing_model)
+        query = query.where(filter=FieldFilter("parsing_model", "==", parsing_model))
     if ocr_model:
-        query = query.where("ocr_models", "array_contains", ocr_model)
+        query = query.where(filter=FieldFilter("ocr_models", "array_contains", ocr_model))
     if prompt:
-        query = query.where("prompt", "==", prompt)
+        query = query.where(filter=FieldFilter("prompt", "==", prompt))
     if date_from:
-        query = query.where("created_at", ">=", date_from)
+        query = query.where(filter=FieldFilter("created_at", ">=", date_from))
     if date_to:
-        query = query.where("created_at", "<", date_to)
+        query = query.where(filter=FieldFilter("created_at", "<", date_to))
     direction = firestore.Query.DESCENDING if order_desc else firestore.Query.ASCENDING
     return query.order_by("created_at", direction=direction)
 
@@ -4213,6 +4219,52 @@ def _dimension_value_for_event(event: dict, dimension: str, value: str | None = 
     return current == value
 
 
+def _event_matches_filters(event: dict, filters: dict) -> bool:
+    if filters.get("user_email") and event.get("user_email") != filters["user_email"]:
+        return False
+    if filters.get("auth_method") and event.get("auth_method") != filters["auth_method"]:
+        return False
+    if filters.get("endpoint") and event.get("endpoint") != filters["endpoint"]:
+        return False
+    if filters.get("source_type") and event.get("source_type") != filters["source_type"]:
+        return False
+    if filters.get("success") is not None and bool(event.get("success")) != filters["success"]:
+        return False
+    if filters.get("ocr_only") is not None and bool(event.get("ocr_only")) != filters["ocr_only"]:
+        return False
+    if filters.get("notebook_mode") is not None and bool(event.get("notebook_mode")) != filters["notebook_mode"]:
+        return False
+    if filters.get("parsing_model") and event.get("parsing_model") != filters["parsing_model"]:
+        return False
+    if filters.get("prompt") and event.get("prompt") != filters["prompt"]:
+        return False
+    if filters.get("ocr_model"):
+        models = event.get("ocr_models") if isinstance(event.get("ocr_models"), list) else []
+        if filters["ocr_model"] not in models:
+            return False
+
+    created_at = _firestore_timestamp_to_datetime(event.get("created_at"))
+    if filters.get("date_from") and (created_at is None or created_at < filters["date_from"].replace(tzinfo=datetime.timezone.utc)):
+        return False
+    if filters.get("date_to") and (created_at is None or created_at >= filters["date_to"].replace(tzinfo=datetime.timezone.utc)):
+        return False
+    return True
+
+
+def _load_usage_events_filtered(filters: dict, *, order_desc: bool = True):
+    docs = db.collection("usage_events").stream()
+    events = []
+    for doc in docs:
+        event = (doc.to_dict() or {}) | {"event_id": doc.id}
+        if _event_matches_filters(event, filters):
+            events.append(event)
+    events.sort(
+        key=lambda e: _firestore_timestamp_to_datetime(e.get("created_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
+        reverse=order_desc,
+    )
+    return events
+
+
 def _fetch_usage_events_for_overview(scope: str, dimension: str | None, value: str | None):
     filters = _get_usage_event_filters_from_request()
     if scope == "user":
@@ -4225,8 +4277,7 @@ def _fetch_usage_events_for_overview(scope: str, dimension: str | None, value: s
         else:
             filters[dimension] = value
 
-    query = _build_usage_events_query(**filters, order_desc=True)
-    return [doc.to_dict() | {"event_id": doc.id} for doc in query.stream()]
+    return _load_usage_events_filtered(filters, order_desc=True)
 
 
 def _summarize_usage_events(events: list[dict]) -> dict:
@@ -4418,15 +4469,17 @@ def get_usage_events():
         limit = max(1, min(_coerce_int(request.args.get("limit"), 50), 200))
         cursor = request.args.get("cursor")
 
-        query = _build_usage_events_query(**filters, order_desc=True)
+        all_events = _load_usage_events_filtered(filters, order_desc=True)
+        start_idx = 0
         if cursor:
-            cursor_doc = db.collection("usage_events").document(cursor).get()
-            if cursor_doc.exists:
-                query = query.start_after(cursor_doc)
-        docs = list(query.limit(limit + 1).stream())
-        has_more = len(docs) > limit
-        docs = docs[:limit]
-        events = [_serialize_usage_event(doc) for doc in docs]
+            for idx, event in enumerate(all_events):
+                if event.get("event_id") == cursor:
+                    start_idx = idx + 1
+                    break
+        page_events = all_events[start_idx:start_idx + limit + 1]
+        has_more = len(page_events) > limit
+        page_events = page_events[:limit]
+        events = [_serialize_usage_event(event) for event in page_events]
         next_cursor = events[-1]["event_id"] if has_more and events else None
 
         return jsonify({
@@ -4453,7 +4506,6 @@ def get_usage_event_facets():
 
     try:
         filters = _get_usage_event_filters_from_request()
-        query = _build_usage_events_query(**filters, order_desc=False)
         facets = {
             "users": set(),
             "ocr_models": set(),
@@ -4464,8 +4516,7 @@ def get_usage_event_facets():
             "auth_methods": set(),
         }
 
-        for doc in query.stream():
-            event = doc.to_dict() or {}
+        for event in _load_usage_events_filtered(filters, order_desc=False):
             if event.get("user_email"):
                 facets["users"].add(event["user_email"])
             if event.get("parsing_model"):
