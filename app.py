@@ -2720,7 +2720,28 @@ def _send_pdf_job_completion_email(job_data: dict) -> bool:
 
 
 def _get_google_authorized_session() -> AuthorizedSession:
-    credentials, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+    for var in ("GOOGLE_APPLICATION_CREDENTIALS", "firebase-admin-key"):
+        raw = os.environ.get(var, "")
+        if not raw:
+            continue
+        if os.path.isfile(raw):
+            break
+        if raw.lstrip().startswith("{"):
+            try:
+                info = json.loads(raw)
+                creds = service_account.Credentials.from_service_account_info(info, scopes=scopes)
+                return AuthorizedSession(creds)
+            except _CredentialError:
+                raise
+            except Exception:
+                logger.error("Authorized session init failed reading inline credentials from %s", var)
+                raise _CredentialError("Cloud Tasks client initialization failed.")
+    try:
+        credentials, _ = google.auth.default(scopes=scopes)
+    except Exception:
+        logger.error("Authorized session ADC fallback failed")
+        raise _CredentialError("Cloud Tasks client initialization failed.")
     return AuthorizedSession(credentials)
 
 
