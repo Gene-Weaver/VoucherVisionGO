@@ -5304,7 +5304,7 @@ def internal_process_pdf_job_page(job_id, page_index):
             merge=True,
         )
         _refresh_pdf_job_counters(job_id)
-        return jsonify({'error': 'Failed to process the PDF job page.'}), 500
+        return jsonify({'ok': True, 'status': 'failed', 'error': _sanitize_error_message(str(e))}), 200
 
 
 @app.route('/internal/pdf-jobs/<job_id>/finalize', methods=['POST'])
