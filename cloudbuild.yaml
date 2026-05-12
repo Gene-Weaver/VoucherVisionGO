@@ -85,6 +85,7 @@ steps:
       - '--allow-unauthenticated'
       - '--min-instances=0'
       - '--max-instances=100'
+      - '--cpu=2'
 
 # Store images in Artifact Registry
 images:

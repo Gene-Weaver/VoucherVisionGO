@@ -5326,6 +5326,9 @@ def internal_finalize_pdf_job(job_id):
     if not job_data:
         return jsonify({'error': 'PDF job not found.'}), 404
 
+    if job_data.get("status") in {"completed", "completed_with_errors"} and job_data.get("bundle_blob_path"):
+        return jsonify({'ok': True, 'status': job_data.get("status"), 'already_finalized': True}), 200
+
     try:
         pages = _load_pdf_job_pages(job_id)
         successful_outputs = []
@@ -5455,6 +5458,9 @@ def internal_send_pdf_job_email(job_id):
     job_data = _get_pdf_job_or_404(job_id)
     if not job_data:
         return jsonify({'error': 'PDF job not found.'}), 404
+
+    if job_data.get("email_status") == "sent":
+        return jsonify({'ok': True, 'email_sent': True, 'already_sent': True}), 200
 
     try:
         email_sent = _send_pdf_job_completion_email(job_data)
