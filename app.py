@@ -541,6 +541,12 @@ def get_payment_auth_context(req):
         vertex_project = vertex_project or _lookup_request_value(source, "vertex_project")
         vertex_region = vertex_region or _lookup_request_value(source, "vertex_region")
 
+    # vertex_region without vertex_project is treated as server auth — clients
+    # commonly send vertex_region=global as a default, and it shouldn't force
+    # them into user-Vertex mode unless they also supply a project.
+    if vertex_region and not vertex_project:
+        vertex_region = None
+
     if vertex_project:
         auth_method = "user_vertex"
     elif gemini_api_key:

@@ -123,56 +123,107 @@ Click **Save**.
 
 ---
 
-## Step 5 — Link the project in VoucherVisionGO
+## Step 5 — Link the project to your VoucherVisionGO account
 
-Open the VoucherVisionGO **API Key Management** page while signed into the same
-account that owns your VVGO API key. In the **Linked Google Cloud Projects
-(Vertex AI)** section, click **Link a Google Cloud Project** and enter the
-**Project ID** from Step 1.
+Now that Google Cloud is configured, you need to tell VoucherVisionGO which
+Google Cloud project ID it should accept from your account. Without this link,
+any `/process` request with `vertex_project=…` will be rejected even if the
+IAM grant from Step 4 is correct.
 
-This stores the binding between your VoucherVisionGO account and your Google
-Cloud project ID. VoucherVisionGO does **not** store your Google Cloud
-credentials.
+**Important rules:**
 
-If an administrator is setting this up for you, they can also create the
-binding from the admin dashboard.
+- A Google Cloud project ID can be linked to **exactly one** VoucherVisionGO
+  account. If someone else has already linked it, you'll see an error when
+  you try.
+- Either you (from API Key Management) or a VoucherVisionGO administrator can
+  unlink the project at any time. Unlinking takes effect immediately — the
+  next `/process` request using that `vertex_project` returns 403.
+- VoucherVisionGO does **not** store any Google Cloud credentials. The only
+  thing being stored is the binding between your VVGO account email and the
+  project ID string.
+
+### 5a — Sign in to VoucherVisionGO
+
+Go to the VoucherVisionGO web app and sign in with the same account
+that owns your VVGO API key. You should see the "Authentication Successful"
+page.
+
+![Signed in to VoucherVisionGO](vvgo_login.png)
+
+### 5b — Open API Key Management
+
+Scroll down to the **API Key Management** section and click **Manage API Keys**.
+
+![Click Manage API Keys](vvgo_open_api_key_manager.png)
+
+### 5c — Find the Linked Google Cloud Projects section
+
+On the API Key Management page you'll see your existing API keys at the top
+and a new section below titled **Linked Google Cloud Projects (Vertex AI)**.
+If you haven't linked a project yet, the table will say "You have not linked
+any Google Cloud projects yet."
+
+Click **Link a Google Cloud Project**.
+
+![API Key Management with empty Linked Google Cloud Projects section](vvgo_api_key_manager.png)
+
+### 5d — Enter your Google Cloud project ID
+
+In the modal, paste the **Project ID** from Step 1 (e.g. `testing-vvgo`,
+*not* the display name). Optionally add a nickname to help you remember which
+project this is — useful if you link more than one. Click **Link Project**.
+
+![Link a Google Cloud Project modal](vvgo_link.png)
+
+The project now appears in the table with status **Active**.
+
+![Linked project listed as Active](vvgo_linked.png)
+
+### What if the project is already linked?
+
+If another VoucherVisionGO account has already linked this project ID, you'll
+see:
+
+> Vertex project 'your-project-id' already linked to another VoucherVisionGO
+> account.
+
+![Error: project already linked to another account](vvgo_already_linked.png)
+
+This is by design — one Google Cloud project ID maps to one VoucherVisionGO
+email account. If you believe the project is yours and was claimed by mistake,
+contact a VoucherVisionGO administrator to unlink it.
+
+### Unlinking later
+
+To stop allowing API calls against your project, click **Revoke** in the
+Actions column on the linked-projects table. The next `/process` call with
+that `vertex_project` value will return a 403. You can re-link the same
+project later from the same VVGO account; that reactivates the binding.
+
+VoucherVisionGO administrators can also unlink any project on your behalf
+(for example, if you've lost access to your VVGO account).
 
 ---
 
 ## Step 6 — Call the VoucherVisionGO API with your project
 
-Pass `vertex_project` (your Project ID from Step 1) and `vertex_region` to
-`/process` or `/process-url`. Do **not** also pass `gemini_api_key` — pick one
-auth method per request.
+Pass `vertex_project` (your Project ID from Step 1) and `vertex_region=global`
+to `/process` or `/process-url`. Do **not** also pass `gemini_api_key` — pick
+one auth method per request.
 
-### Default models (`gemini-2.5-flash` and the rest of the 2.5 family)
+**Always use `vertex_region=global`.** This works for the entire Gemini model
+family on Vertex AI, including gemini-2.5 and the gemini-3 previews, and
+matches the recommended path for all VoucherVisionGO users.
 
 ```bash
 curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
   -H "X-API-Key: <your VVGO API key>" \
   -F "file=@image.jpg" \
   -F "vertex_project=your-project-id" \
-  -F "vertex_region=us-central1"
+  -F "vertex_region=global"
 ```
 
-Allowed `vertex_region` values (Vertex AI locations where Gemini is hosted):
-
-```
-us-central1, us-east4, us-west1,
-europe-west1, europe-west2, europe-west3, europe-west4, europe-southwest1,
-asia-northeast1, asia-southeast1, asia-south1,
-australia-southeast1,
-me-central1, me-central2,
-northamerica-northeast1, southamerica-east1,
-global
-```
-
-### Gemini-3 preview models — **must** use `vertex_region=global`
-
-Gemini-3 previews (`gemini-3-pro-preview`, `gemini-3.1-pro-preview`,
-`gemini-3-flash-preview`, `gemini-3.1-flash-lite`) are currently
-published only in the `global` Vertex AI catalog. Passing a regional value here
-will return a 404.
+For a gemini-3 preview model, add the engine + llm_model flags:
 
 ```bash
 curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
@@ -194,7 +245,7 @@ requests.post(
     headers={"X-API-Key": "<your VVGO API key>"},
     data={
         "vertex_project": "your-project-id",
-        "vertex_region": "us-central1",
+        "vertex_region": "global",
     },
     files={"file": open("image.jpg", "rb")},
 )
@@ -213,11 +264,20 @@ project — recheck the IAM grant and the Project ID you passed.
 
 ## Revoke access later
 
-If you want to stop the VoucherVisionGO server from billing your project,
-return to **IAM & admin → IAM**, find the row for
+There are two independent ways to stop VoucherVisionGO from billing your
+project. Either one is sufficient on its own.
+
+**Option A — Unlink in VoucherVisionGO (recommended).** Open API Key
+Management, find the project in the Linked Google Cloud Projects table, and
+click **Revoke**. The next `/process` call returns 403 immediately.
+
+**Option B — Revoke the IAM grant in Google Cloud.** Open **IAM & admin →
+IAM**, find the row for
 `vouchervision-vertex@vouchervision-387816.iam.gserviceaccount.com`, click the
-trash icon next to it, and save. The next API call with that `vertex_project`
-will fail with a 403.
+trash icon next to it, and save. Vertex AI itself will then refuse the call.
+
+Use Option A if you might want to re-enable later — re-linking from the same
+VVGO account reactivates the binding without re-doing the IAM grant.
 
 ---
 
@@ -264,5 +324,5 @@ Both flags must be supplied together.
 
 ### `400 vertex_region '<value>' is not a supported Vertex AI region.`
 
-Typo in the region name. See the allowed list in Step 5. Note the value is
-`us-central1`, not `us-central-1`.
+Typo in the region name. Use `vertex_region=global` — it works for every
+supported Gemini model and matches the examples in Step 6.
