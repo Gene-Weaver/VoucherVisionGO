@@ -41,6 +41,25 @@ body {
     width: 100%;
     margin-top: 20px;
   }
+
+  .resource-section {
+    margin-top: 32px;
+    border-top: 1px solid #eee;
+    padding-top: 24px;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .section-help {
+    margin: 6px 0 0;
+    color: #555;
+    max-width: 700px;
+  }
   
   .key-table th {
     text-align: left;
@@ -177,6 +196,24 @@ body {
     padding: 3px 8px;
     border-radius: 12px;
     font-size: 12px;
+  }
+
+  @media (max-width: 768px) {
+    .section-header,
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .container {
+      margin: 20px;
+      padding: 20px;
+    }
+
+    .modal-content {
+      width: calc(100% - 32px);
+      margin: 40px auto;
+    }
   }
   
   .form-group {

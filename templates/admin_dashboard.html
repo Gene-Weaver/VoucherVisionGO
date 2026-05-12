@@ -41,6 +41,7 @@
         <div class="tab-buttons">
           <button class="tab-button active" data-tab="user-applications">User Applications</button>
           <button class="tab-button" data-tab="api-keys">API Keys</button>
+          <button class="tab-button" data-tab="vertex-projects">Vertex Projects</button>
           <button class="tab-button" data-tab="admins">Manage Admins</button>
           <button class="tab-button" data-tab="usage-stats">Usage Statistics</button>
           <button class="tab-button" data-tab="new-users">New Users</button>
@@ -116,6 +117,43 @@
           </div>
           
           <div id="api-keys-pagination" class="pagination">
+            <!-- Pagination buttons will be generated here -->
+          </div>
+        </div>
+
+        <div id="vertex-projects" class="tab-content">
+          <div class="table-header-actions">
+            <div>
+              <h3>Vertex Project Bindings</h3>
+              <p class="table-subtitle">Only the linked VoucherVisionGO account may use a project ID with <code>vertex_project</code>.</p>
+            </div>
+            <button id="admin-link-project-btn" class="btn-primary">Link Project for User</button>
+          </div>
+
+          <div class="search-container">
+            <input type="text" class="search-input" id="vertex-project-search" placeholder="Search by owner email, nickname, or project ID...">
+          </div>
+
+          <div id="vertex-projects-table-container">
+            <div id="vertex-projects-loading" class="loading">Loading Vertex project bindings...</div>
+            <table id="vertex-projects-table" style="display: none;">
+              <thead>
+                <tr>
+                  <th>Owner</th>
+                  <th>Project ID</th>
+                  <th>Nickname</th>
+                  <th>Linked</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="vertex-projects-list">
+                <!-- Vertex projects will be listed here -->
+              </tbody>
+            </table>
+          </div>
+
+          <div id="vertex-projects-pagination" class="pagination">
             <!-- Pagination buttons will be generated here -->
           </div>
         </div>
@@ -292,11 +330,15 @@
     
     <!-- Revoke API Key Modal -->
     {% include 'admin/revoke_key_modal.html' %}
+
+    <!-- Revoke Vertex Project Modal -->
+    {% include 'admin/revoke_project_modal.html' %}
     
     <!-- Main dashboard scripts -->
     <script src="{{ url_for('static', filename='js/admin/dashboard.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/applications.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/api_keys.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/vertex_projects.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/usage_stats.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/new_users.js') }}"></script>

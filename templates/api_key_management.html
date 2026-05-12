@@ -45,6 +45,38 @@
           </tbody>
         </table>
       </div>
+
+      <div id="projects-section" class="resource-section">
+        <div class="section-header">
+          <div>
+            <h3>Linked Google Cloud Projects (Vertex AI)</h3>
+            <p class="section-help">
+              Link the Google Cloud project IDs you want to use with
+              <code>vertex_project</code>. Requests billed through Vertex AI
+              will only be accepted when the project is linked to this account.
+            </p>
+          </div>
+          <button id="link-project-btn" class="btn-create">Link a Google Cloud Project</button>
+        </div>
+
+        <div id="projects-loading" class="loading">Loading your linked projects...</div>
+        <div id="projects-error-message" class="error-message"></div>
+        <div id="no-projects" class="no-keys" style="display: none;">You have not linked any Google Cloud projects yet.</div>
+        <table id="projects-table" class="key-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>Nickname</th>
+              <th>Project ID</th>
+              <th>Linked</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="projects-list">
+            <!-- Vertex projects will be listed here -->
+          </tbody>
+        </table>
+      </div>
       
       <!-- Create Key Modal -->
       <div id="create-key-modal" class="modal">
@@ -81,12 +113,41 @@
           <div id="form-error" class="error-message"></div>
         </div>
       </div>
+
+      <div id="link-project-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>Link a Google Cloud Project</h3>
+          <p>
+            Enter the Google Cloud project ID you granted Vertex AI access to.
+            This does not store Google credentials; it stores the project ID
+            binding for your VoucherVisionGO account.
+          </p>
+
+          <form id="link-project-form">
+            <div class="form-group">
+              <label for="vertex-project-id">Project ID</label>
+              <input type="text" id="vertex-project-id" class="form-control" placeholder="e.g., herbarium-imaging-prod">
+            </div>
+
+            <div class="form-group">
+              <label for="vertex-project-nickname">Nickname (Optional)</label>
+              <input type="text" id="vertex-project-nickname" class="form-control" placeholder="e.g., Lab billing project">
+            </div>
+
+            <button type="submit" class="btn-create">Link Project</button>
+          </form>
+
+          <div id="link-project-error" class="error-message"></div>
+          <div id="link-project-success" class="success-message"></div>
+        </div>
+      </div>
       
       <!-- No API Key Permission Warning -->
       <div id="no-permission" class="alert alert-warning" style="display: none;">
-        <h4>API Key Creation Not Allowed</h4>
-        <p>Your account does not have permission to create API keys for programmatic access.</p>
-        <p>API keys allow access to the VoucherVision API without browser authentication, which is a privileged operation.</p>
+        <h4>Programmatic Access Not Allowed</h4>
+        <p>Your account does not have permission to create API keys or link Google Cloud projects for programmatic access.</p>
+        <p>These features enable direct API usage outside the browser and are reserved for approved accounts.</p>
         <p>Please contact an administrator if you need this level of access for your integration.</p>
       </div>
       

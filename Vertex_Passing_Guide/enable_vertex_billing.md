@@ -17,7 +17,9 @@ public service account. You grant that service account the **Vertex AI User**
 role on *your* project. 
 
 The VoucherVisionGO server then calls Vertex AI on your behalf, billing
-follows the project ID that you provide in your API call. You should treat this project name as if it were a sensitive API key; don't share it, don't make it public, treat it like a password. 
+follows the project ID that you provide in your API call. VoucherVisionGO now
+requires that the project ID be linked to your VVGO account before API calls
+using `vertex_project` will be accepted.
 
 We never see or store your Google Cloud credentials. This process is called "cross-project Service Account delegation," please reach out if you have any questions. 
 
@@ -121,7 +123,23 @@ Click **Save**.
 
 ---
 
-## Step 5 — Call the VoucherVisionGO API with your project
+## Step 5 — Link the project in VoucherVisionGO
+
+Open the VoucherVisionGO **API Key Management** page while signed into the same
+account that owns your VVGO API key. In the **Linked Google Cloud Projects
+(Vertex AI)** section, click **Link a Google Cloud Project** and enter the
+**Project ID** from Step 1.
+
+This stores the binding between your VoucherVisionGO account and your Google
+Cloud project ID. VoucherVisionGO does **not** store your Google Cloud
+credentials.
+
+If an administrator is setting this up for you, they can also create the
+binding from the admin dashboard.
+
+---
+
+## Step 6 — Call the VoucherVisionGO API with your project
 
 Pass `vertex_project` (your Project ID from Step 1) and `vertex_region` to
 `/process` or `/process-url`. Do **not** also pass `gemini_api_key` — pick one
@@ -204,6 +222,16 @@ will fail with a 403.
 ---
 
 ## Troubleshooting
+
+### `403 Vertex project '<your-project>' is not linked...`
+
+The VoucherVisionGO account making the request does not own the linked project
+binding.
+
+- Link the project in **API Key Management** first.
+- Make sure the same VVGO account owns both the API key and the linked project.
+- If the project was revoked, link it again or ask an administrator to restore
+  it.
 
 ### `403 Vertex AI call denied for project '<your-project>'`
 

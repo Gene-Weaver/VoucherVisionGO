@@ -1,0 +1,52 @@
+<div id="revoke-project-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Revoke Vertex Project</h3>
+
+    <div class="user-details">
+      <p><strong>Owner:</strong> <span id="project-owner-email"></span></p>
+      <p><strong>Project ID:</strong> <span id="project-id-display"></span></p>
+      <p><strong>Nickname:</strong> <span id="project-nickname-display"></span></p>
+      <p><strong>Linked:</strong> <span id="project-created-display"></span></p>
+    </div>
+
+    <div class="alert alert-danger">
+      <p><strong>Warning:</strong> Revoking this binding immediately blocks API requests that use this <code>vertex_project</code>.</p>
+    </div>
+
+    <div id="revoke-project-error" class="alert alert-danger" style="display: none;"></div>
+    <div id="revoke-project-success" class="alert alert-success" style="display: none;"></div>
+
+    <button id="confirm-revoke-project-btn" class="btn-danger">Revoke Project</button>
+    <button id="cancel-revoke-project-btn" class="btn-secondary">Cancel</button>
+  </div>
+</div>
+
+<div id="admin-link-project-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h3>Link Project for User</h3>
+    <p>Create or reactivate a Vertex project binding on behalf of a user.</p>
+
+    <div class="form-group">
+      <label for="admin-project-owner-email">Owner Email</label>
+      <input type="email" id="admin-project-owner-email" class="form-control" placeholder="user@example.org">
+    </div>
+
+    <div class="form-group">
+      <label for="admin-project-id">Project ID</label>
+      <input type="text" id="admin-project-id" class="form-control" placeholder="example-project-id">
+    </div>
+
+    <div class="form-group">
+      <label for="admin-project-nickname">Nickname (Optional)</label>
+      <input type="text" id="admin-project-nickname" class="form-control" placeholder="Optional label">
+    </div>
+
+    <div id="admin-link-project-error" class="alert alert-danger" style="display: none;"></div>
+    <div id="admin-link-project-success" class="alert alert-success" style="display: none;"></div>
+
+    <button id="confirm-admin-link-project-btn" class="btn-primary">Link Project</button>
+    <button id="cancel-admin-link-project-btn" class="btn-secondary">Cancel</button>
+  </div>
+</div>

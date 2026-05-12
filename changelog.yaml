@@ -1,3 +1,10 @@
+- version: "0.5.1"
+  date: "2026-05-12"
+  changes:
+    - type: "Feature"
+      description: "Added user and admin workflows for linking Google Cloud Vertex AI project IDs to VoucherVisionGO accounts."
+    - type: "Security"
+      description: "Requests that use vertex_project are now validated against the authenticated VoucherVisionGO account before processing."
 - version: "0.5.0"
   date: "2024-07-02"
   changes:

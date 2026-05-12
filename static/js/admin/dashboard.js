@@ -31,11 +31,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const itemsPerPage = 10;
   let currentApplicationsPage = 1;
   let currentApiKeysPage = 1;
+  let currentVertexProjectsPage = 1;
   let currentAdminsPage = 1;
   let filteredApplications = [];
   let filteredApiKeys = [];
+  let filteredVertexProjects = [];
   let allApplications = [];
   let allApiKeys = [];
+  let allVertexProjects = [];
   let allAdmins = [];
   let currentStatusFilter = 'all';
 
@@ -100,6 +103,19 @@ document.addEventListener('DOMContentLoaded', function() {
           renderApiKeysPage(1);
         });
       }
+
+      const vertexProjectSearch = document.getElementById('vertex-project-search');
+      if (vertexProjectSearch) {
+        vertexProjectSearch.addEventListener('input', () => {
+          const searchTerm = vertexProjectSearch.value.toLowerCase();
+          window.filteredVertexProjects = window.allVertexProjects.filter(project => {
+            return (project.owner_email || '').toLowerCase().includes(searchTerm) ||
+              (project.project_id || '').toLowerCase().includes(searchTerm) ||
+              (project.nickname || '').toLowerCase().includes(searchTerm);
+          });
+          renderVertexProjectsPage(1);
+        });
+      }
       
       // Setup modal event listeners
       setupModals();
@@ -137,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function() {
         break;
       case 'api-keys':
         loadApiKeys();
+        break;
+      case 'vertex-projects':
+        loadVertexProjectsAdmin();
         break;
       case 'admins':
         loadAdmins();
@@ -248,10 +267,13 @@ document.addEventListener('DOMContentLoaded', function() {
   window.itemsPerPage = itemsPerPage;
   window.filteredApplications = filteredApplications;
   window.filteredApiKeys = filteredApiKeys;
+  window.filteredVertexProjects = filteredVertexProjects;
   window.allApplications = allApplications;
   window.allApiKeys = allApiKeys;
+  window.allVertexProjects = allVertexProjects;
   window.allAdmins = allAdmins;
   window.currentApplicationsPage = currentApplicationsPage;
   window.currentApiKeysPage = currentApiKeysPage;
+  window.currentVertexProjectsPage = currentVertexProjectsPage;
   window.currentAdminsPage = currentAdminsPage;
 });

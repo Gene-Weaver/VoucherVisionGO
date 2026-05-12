@@ -130,6 +130,19 @@ body {
   .tab-content.active {
     display: block;
   }
+
+  .table-header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .table-subtitle {
+    margin: 4px 0 0;
+    color: #666;
+  }
   
   table {
     width: 100%;
@@ -146,6 +159,13 @@ body {
     background-color: #f8f9fa;
     color: #333;
     font-weight: bold;
+  }
+
+  code {
+    background-color: #f1f3f4;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #333;
   }
   
   .badge {

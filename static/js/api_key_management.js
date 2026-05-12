@@ -80,11 +80,13 @@ function initPage() {
             // User has permission, initialize API key management functionality
             initializeCreateKeyListeners();
             loadApiKeys(user);
+            loadVertexProjects(user);
           } else {
             // Show no permission message
             document.getElementById('no-permission').style.display = 'block';
             document.getElementById('create-key-btn').style.display = 'none';
             document.getElementById('keys-container').style.display = 'none';
+            document.getElementById('projects-section').style.display = 'none';
           }
         })
         .catch(error => {
@@ -117,12 +119,22 @@ function initializeCreateKeyListeners() {
       document.getElementById('create-key-modal').style.display = 'block';
     });
   }
+
+  const linkProjectBtn = document.getElementById('link-project-btn');
+  if (linkProjectBtn) {
+    linkProjectBtn.addEventListener('click', () => {
+      document.getElementById('link-project-error').style.display = 'none';
+      document.getElementById('link-project-success').style.display = 'none';
+      document.getElementById('link-project-modal').style.display = 'block';
+    });
+  }
   
   // Close buttons
   document.querySelectorAll('.close').forEach(btn => {
     btn.addEventListener('click', () => {
       document.getElementById('create-key-modal').style.display = 'none';
       document.getElementById('display-key-modal').style.display = 'none';
+      document.getElementById('link-project-modal').style.display = 'none';
     });
   });
   
@@ -134,6 +146,9 @@ function initializeCreateKeyListeners() {
     if (event.target === document.getElementById('display-key-modal')) {
       document.getElementById('display-key-modal').style.display = 'none';
     }
+    if (event.target === document.getElementById('link-project-modal')) {
+      document.getElementById('link-project-modal').style.display = 'none';
+    }
   });
   
   // Create key form submission
@@ -142,6 +157,14 @@ function initializeCreateKeyListeners() {
     createKeyForm.addEventListener('submit', (e) => {
       e.preventDefault();
       createApiKey();
+    });
+  }
+
+  const linkProjectForm = document.getElementById('link-project-form');
+  if (linkProjectForm) {
+    linkProjectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      linkVertexProject();
     });
   }
   
@@ -411,6 +434,169 @@ async function revokeApiKey(keyId) {
     }
   } catch (error) {
     console.error('Error revoking API key:', error);
+    alert(`Error: ${error.message}`);
+  }
+}
+
+async function loadVertexProjects(user) {
+  const loadingElem = document.getElementById('projects-loading');
+  const errorElem = document.getElementById('projects-error-message');
+  const noProjectsElem = document.getElementById('no-projects');
+  const tableElem = document.getElementById('projects-table');
+  const listElem = document.getElementById('projects-list');
+
+  try {
+    const idToken = await user.getIdToken();
+    const response = await fetch('/vertex-projects', {
+      headers: {
+        'Authorization': `Bearer ${idToken}`
+      }
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `Server returned ${response.status}`);
+    }
+
+    const data = await response.json();
+    loadingElem.style.display = 'none';
+    errorElem.style.display = 'none';
+
+    if (data.status !== 'success') {
+      throw new Error(data.error || 'Failed to load Vertex projects');
+    }
+
+    listElem.innerHTML = '';
+    if (!data.count) {
+      noProjectsElem.style.display = 'block';
+      tableElem.style.display = 'none';
+      return;
+    }
+
+    noProjectsElem.style.display = 'none';
+    tableElem.style.display = 'table';
+
+    data.vertex_projects.forEach(project => {
+      const row = document.createElement('tr');
+
+      const nicknameCell = document.createElement('td');
+      nicknameCell.textContent = project.nickname || '-';
+      row.appendChild(nicknameCell);
+
+      const projectIdCell = document.createElement('td');
+      const projectIdCode = document.createElement('code');
+      projectIdCode.textContent = project.project_id || '';
+      projectIdCell.appendChild(projectIdCode);
+      row.appendChild(projectIdCell);
+
+      const createdCell = document.createElement('td');
+      createdCell.textContent = formatFirestoreDate(project.created_at);
+      row.appendChild(createdCell);
+
+      const statusCell = document.createElement('td');
+      const statusBadge = document.createElement('span');
+      statusBadge.className = project.active ? 'badge-active' : 'badge-inactive';
+      statusBadge.textContent = project.active ? 'Active' : 'Revoked';
+      statusCell.appendChild(statusBadge);
+      row.appendChild(statusCell);
+
+      const actionsCell = document.createElement('td');
+      if (project.active) {
+        const revokeBtn = document.createElement('button');
+        revokeBtn.className = 'btn-revoke btn-revoke-project';
+        revokeBtn.textContent = 'Revoke';
+        const projectId = project.project_id;
+        revokeBtn.addEventListener('click', async () => {
+          if (confirm(`Revoke linked project "${projectId}"? Requests using this vertex_project will be blocked.`)) {
+            await revokeVertexProject(projectId);
+          }
+        });
+        actionsCell.appendChild(revokeBtn);
+      }
+      row.appendChild(actionsCell);
+
+      listElem.appendChild(row);
+    });
+  } catch (error) {
+    console.error('Error loading Vertex projects:', error);
+    loadingElem.style.display = 'none';
+    tableElem.style.display = 'none';
+    errorElem.textContent = `Error: ${error.message}`;
+    errorElem.style.display = 'block';
+  }
+}
+
+async function linkVertexProject() {
+  const errorElem = document.getElementById('link-project-error');
+  const successElem = document.getElementById('link-project-success');
+  const projectId = document.getElementById('vertex-project-id').value.trim();
+  const nickname = document.getElementById('vertex-project-nickname').value.trim();
+
+  try {
+    errorElem.style.display = 'none';
+    successElem.style.display = 'none';
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      throw new Error('You must be logged in to link a project');
+    }
+
+    const idToken = await user.getIdToken();
+    const response = await fetch('/vertex-projects/link', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        project_id: projectId,
+        nickname: nickname
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+
+    successElem.textContent = data.message || 'Project linked successfully.';
+    successElem.style.display = 'block';
+    document.getElementById('link-project-form').reset();
+    await loadVertexProjects(user);
+    setTimeout(() => {
+      document.getElementById('link-project-modal').style.display = 'none';
+      successElem.style.display = 'none';
+    }, 1200);
+  } catch (error) {
+    console.error('Error linking Vertex project:', error);
+    errorElem.textContent = error.message;
+    errorElem.style.display = 'block';
+  }
+}
+
+async function revokeVertexProject(projectId) {
+  try {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+      throw new Error('You must be logged in to revoke a project');
+    }
+
+    const idToken = await user.getIdToken();
+    const response = await fetch(`/vertex-projects/${encodeURIComponent(projectId)}/revoke`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken}`
+      }
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+
+    await loadVertexProjects(user);
+  } catch (error) {
+    console.error('Error revoking Vertex project:', error);
     alert(`Error: ${error.message}`);
   }
 }

@@ -41,6 +41,7 @@ register_heif_opener()
 
 import firebase_admin
 from firebase_admin import credentials, auth, firestore
+from google.api_core import exceptions as google_exceptions
 from google.cloud import firestore as _gc_firestore
 from google.cloud.firestore_v1.base_query import FieldFilter
 
@@ -311,6 +312,8 @@ VERTEX_ALLOWED_REGIONS = frozenset({
     "global",
 })
 
+VERTEX_PROJECT_ID_PATTERN = re.compile(r"^[a-z][a-z0-9-]{4,28}[a-z0-9]$")
+
 
 def _is_vertex_permission_error(exc):
     """Heuristic: did the underlying Gemini call fail because the user's project
@@ -333,7 +336,9 @@ def _vertex_permission_error_message(project):
         f"VoucherVisionGO service account "
         f"'vouchervision-vertex@vouchervision-387816.iam.gserviceaccount.com' "
         f"on that project, and that the Vertex AI API is enabled. "
-        f"See the docs for setup steps."
+        f"If the project was linked in VoucherVisionGO, double-check that "
+        f"the linked project ID is correct and relink it in API Key "
+        f"Management if needed. See the docs for setup steps."
     )
 
 
@@ -385,6 +390,81 @@ def _validate_vertex_params(api_key, project, region):
             400,
         )
     return (None, None)
+
+
+def _normalize_vertex_project_id(project_id: str | None) -> str | None:
+    if project_id is None:
+        return None
+    if not isinstance(project_id, str):
+        project_id = str(project_id)
+    project_id = project_id.strip().lower()
+    return project_id or None
+
+
+def _normalize_email_identity(email: str | None) -> str | None:
+    if email is None:
+        return None
+    if not isinstance(email, str):
+        email = str(email)
+    email = email.strip().lower()
+    return email or None
+
+
+def _validate_vertex_project_id(project_id: str | None) -> tuple[str | None, str | None]:
+    normalized = _normalize_vertex_project_id(project_id)
+    if not normalized:
+        return None, "Project ID is required."
+    if not VERTEX_PROJECT_ID_PATTERN.match(normalized):
+        return None, (
+            "Project ID must be a valid Google Cloud project ID: 6-30 "
+            "characters, lowercase letters/numbers/hyphens, starting with "
+            "a letter and not ending with a hyphen."
+        )
+    return normalized, None
+
+
+def _serialize_vertex_project(project_doc_or_dict):
+    if hasattr(project_doc_or_dict, "to_dict"):
+        payload = project_doc_or_dict.to_dict() or {}
+        payload.setdefault("project_id", getattr(project_doc_or_dict, "id", None))
+    else:
+        payload = dict(project_doc_or_dict or {})
+
+    payload["project_id"] = payload.get("project_id")
+    payload["owner_email"] = payload.get("owner_email")
+    payload["nickname"] = payload.get("nickname") or ""
+    payload["active"] = bool(payload.get("active"))
+    payload["status"] = "Active" if payload["active"] else "Revoked"
+    for field_name in ("created_at", "updated_at", "revoked_at"):
+        payload[field_name] = _format_event_timestamp(payload.get(field_name))
+    return payload
+
+
+def _validate_vertex_project_binding(project_id: str, caller_email: str) -> str | None:
+    normalized_project_id, validation_error = _validate_vertex_project_id(project_id)
+    if validation_error:
+        return validation_error
+    caller_email = _normalize_email_identity(caller_email)
+    if not caller_email or caller_email == "unknown":
+        return "Cannot resolve caller identity for Vertex project binding check."
+
+    project_doc = db.collection("vertex_projects").document(normalized_project_id).get()
+    if not project_doc.exists:
+        return (
+            f"Vertex project '{normalized_project_id}' is not linked to any "
+            f"VoucherVisionGO account. Link it in API Key Management before "
+            f"calling the API."
+        )
+
+    project_data = project_doc.to_dict() or {}
+    if not bool(project_data.get("active")):
+        return f"Vertex project '{normalized_project_id}' link has been revoked."
+    if _normalize_email_identity(project_data.get("owner_email")) != caller_email:
+        return (
+            f"Vertex project '{normalized_project_id}' is not linked to your "
+            f"VoucherVisionGO account."
+        )
+    return None
 
 
 PAYMENT_AUTH_PARAM_ALIASES = {
@@ -2409,6 +2489,149 @@ def get_user_email_from_request(request):
     
     return user_email
 
+
+def _is_admin_email(user_email: str) -> bool:
+    user_email = _normalize_email_identity(user_email)
+    if not user_email:
+        return False
+    admin_doc = db.collection("admins").document(user_email).get()
+    return admin_doc.exists
+
+
+def _get_api_key_access_state(user_email: str) -> dict:
+    user_email = _normalize_email_identity(user_email)
+    if not user_email:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "status_code": 401,
+            "error": "User not properly authenticated",
+            "code": "not_authenticated",
+        }
+
+    if _is_admin_email(user_email):
+        return {
+            "allowed": True,
+            "is_admin": True,
+            "is_approved": True,
+            "has_api_key_access": True,
+        }
+
+    app_doc = db.collection("user_applications").document(user_email).get()
+    if not app_doc.exists:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "status_code": 404,
+            "error": "User application not found",
+            "code": "application_not_found",
+        }
+
+    app_data = app_doc.to_dict() or {}
+    is_approved = app_data.get("status") == "approved"
+    has_api_key_access = bool(app_data.get("api_key_access", False))
+    if not is_approved:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "is_approved": False,
+            "has_api_key_access": has_api_key_access,
+            "status_code": 403,
+            "error": "Your account is not approved yet",
+            "code": "not_approved",
+        }
+
+    if not has_api_key_access:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "is_approved": True,
+            "has_api_key_access": False,
+            "status_code": 403,
+            "error": "You do not have permission to create API keys. Please contact an administrator.",
+            "code": "no_api_key_permission",
+        }
+
+    return {
+        "allowed": True,
+        "is_admin": False,
+        "is_approved": True,
+        "has_api_key_access": True,
+    }
+
+
+def _claim_or_reactivate_vertex_project(
+    *,
+    project_id: str,
+    owner_email: str,
+    actor_email: str,
+    nickname: str = "",
+) -> tuple[dict, int]:
+    owner_email = _normalize_email_identity(owner_email)
+    actor_email = _normalize_email_identity(actor_email)
+    project_ref = db.collection("vertex_projects").document(project_id)
+    create_payload = {
+        "project_id": project_id,
+        "owner_email": owner_email,
+        "nickname": nickname,
+        "active": True,
+        "created_at": firestore.SERVER_TIMESTAMP,
+        "created_by_actor": actor_email,
+        "updated_at": firestore.SERVER_TIMESTAMP,
+        "revoked_at": None,
+        "revoked_by": None,
+    }
+
+    try:
+        project_ref.create(create_payload)
+        project_doc = project_ref.get()
+        return {
+            "status": "success",
+            "message": f"Linked Vertex project '{project_id}'.",
+            "project": _serialize_vertex_project(project_doc),
+        }, 201
+    except google_exceptions.AlreadyExists:
+        project_doc = project_ref.get()
+
+    if not project_doc.exists:
+        raise RuntimeError(f"Vertex project '{project_id}' exists but could not be fetched after create conflict.")
+
+    project_data = project_doc.to_dict() or {}
+    if project_data.get("owner_email") != owner_email:
+        return {
+            "error": (
+                f"Vertex project '{project_id}' is already linked to another "
+                f"VoucherVisionGO account."
+            )
+        }, 409
+
+    update_payload = {
+        "nickname": nickname,
+        "updated_at": firestore.SERVER_TIMESTAMP,
+    }
+
+    if bool(project_data.get("active")):
+        project_ref.update(update_payload)
+        project_doc = project_ref.get()
+        return {
+            "status": "success",
+            "message": f"Vertex project '{project_id}' is already linked to your account.",
+            "project": _serialize_vertex_project(project_doc),
+        }, 200
+
+    update_payload.update({
+        "active": True,
+        "revoked_at": None,
+        "revoked_by": None,
+    })
+    project_ref.update(update_payload)
+    project_doc = project_ref.get()
+    return {
+        "status": "success",
+        "message": f"Reactivated Vertex project '{project_id}'.",
+        "project": _serialize_vertex_project(project_doc),
+    }, 200
+
 def authenticated_route(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -3470,6 +3693,17 @@ def process_image():
         resp = make_response(jsonify({'error': err}), err_status)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
+    if user_vertex_project:
+        user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
+        if project_error:
+            resp = make_response(jsonify({'error': project_error}), 400)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
+        binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
+        if binding_error:
+            resp = make_response(jsonify({'error': binding_error}), 403)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
 
     auth_method = payment_auth["auth_method"]
     logger.info(
@@ -3686,6 +3920,17 @@ def process_image_by_url():
         resp = make_response(jsonify({'error': err}), err_status)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
+    if user_vertex_project:
+        user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
+        if project_error:
+            resp = make_response(jsonify({'error': project_error}), 400)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
+        binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
+        if binding_error:
+            resp = make_response(jsonify({'error': binding_error}), 403)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
 
     auth_method = payment_auth["auth_method"]
     logger.info(
@@ -5505,6 +5750,120 @@ def admin_revoke_api_key(key_id):
         logger.error(f"Error revoking API key: {str(e)}")
         return jsonify({'error': f'Failed to revoke API key: {str(e)}'}), 500
 
+
+@app.route('/admin/vertex-projects', methods=['GET'])
+@authenticated_route
+def list_all_vertex_projects():
+    """List all Vertex project bindings (admin only)."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = _normalize_email_identity(user.get('email'))
+    if not _is_admin_email(admin_email):
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        project_docs = db.collection('vertex_projects').stream()
+        projects = [_serialize_vertex_project(doc) for doc in project_docs]
+        projects.sort(
+            key=lambda project: (
+                project.get('created_at') or '',
+                project.get('owner_email') or '',
+                project.get('project_id') or '',
+            ),
+            reverse=True,
+        )
+        return jsonify({
+            'status': 'success',
+            'count': len(projects),
+            'vertex_projects': projects,
+        })
+    except Exception as e:
+        logger.error(f"Error listing all vertex projects: {str(e)}")
+        return jsonify({'error': f'Failed to list Vertex projects: {str(e)}'}), 500
+
+
+@app.route('/admin/vertex-projects', methods=['POST'])
+@authenticated_route
+def admin_create_vertex_project():
+    """Create or reactivate a Vertex project binding on behalf of a user."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = _normalize_email_identity(user.get('email'))
+    if not _is_admin_email(admin_email):
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        data = request.get_json() or {}
+        owner_email = _clean_optional_request_value(data.get('owner_email'))
+        if not owner_email:
+            return jsonify({'error': 'Owner email is required.'}), 400
+        owner_email = owner_email.strip().lower()
+
+        normalized_project_id, validation_error = _validate_vertex_project_id(data.get('project_id'))
+        if validation_error:
+            return jsonify({'error': validation_error}), 400
+
+        nickname = _clean_optional_request_value(data.get('nickname')) or ''
+        if len(nickname) > 100:
+            return jsonify({'error': 'Nickname must be 100 characters or fewer.'}), 400
+
+        payload, status_code = _claim_or_reactivate_vertex_project(
+            project_id=normalized_project_id,
+            owner_email=owner_email,
+            actor_email=admin_email,
+            nickname=nickname,
+        )
+        return jsonify(payload), status_code
+    except Exception as e:
+        logger.error(f"Error creating admin vertex project binding: {str(e)}")
+        return jsonify({'error': f'Failed to create Vertex project binding: {str(e)}'}), 500
+
+
+@app.route('/admin/vertex-projects/<project_id>/revoke', methods=['POST'])
+@authenticated_route
+def admin_revoke_vertex_project(project_id):
+    """Revoke any Vertex project binding (admin only)."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = _normalize_email_identity(user.get('email'))
+    if not _is_admin_email(admin_email):
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    normalized_project_id, validation_error = _validate_vertex_project_id(project_id)
+    if validation_error:
+        return jsonify({'error': validation_error}), 400
+
+    try:
+        project_ref = db.collection('vertex_projects').document(normalized_project_id)
+        project_doc = project_ref.get()
+        if not project_doc.exists:
+            return jsonify({'error': 'Vertex project not found'}), 404
+
+        project_data = project_doc.to_dict() or {}
+        if not bool(project_data.get('active')):
+            return jsonify({'error': 'Vertex project is already revoked'}), 400
+
+        project_ref.update({
+            'active': False,
+            'revoked_at': firestore.SERVER_TIMESTAMP,
+            'revoked_by': admin_email,
+            'updated_at': firestore.SERVER_TIMESTAMP,
+        })
+
+        return jsonify({
+            'status': 'success',
+            'message': f"Vertex project '{normalized_project_id}' has been revoked.",
+        })
+    except Exception as e:
+        logger.error(f"Error revoking admin vertex project binding: {str(e)}")
+        return jsonify({'error': f'Failed to revoke Vertex project: {str(e)}'}), 500
+
 @app.route('/admin/list-admins', methods=['GET'])
 @authenticated_route
 def list_admins():
@@ -6252,40 +6611,26 @@ def create_api_key():
     if not user or not user.get('email'):
         return jsonify({'error': 'User not properly authenticated'}), 401
     
-    user_email = user.get('email')
+    user_email = _normalize_email_identity(user.get('email'))
     
     try:
-        # Check if the user is an admin first (admins always have API key access)
-        admin_doc = db.collection('admins').document(user_email).get()
-        is_admin = admin_doc.exists
-        
-        if not is_admin:
-            # Check if the user has API key access permission
-            app_doc = db.collection('user_applications').document(user_email).get()
-            
-            if not app_doc.exists:
-                logger.warning(f"User {user_email} attempted to create API key but has no application record")
-                return jsonify({'error': 'User application not found'}), 404
-            
-            app_data = app_doc.to_dict()
-            
-            # Verify the user is approved and has API key access
-            if app_data.get('status') != 'approved':
-                logger.warning(f"User {user_email} attempted to create API key but is not approved")
-                return jsonify({'error': 'Your account is not approved yet'}), 403
-            
-            has_api_key_access = bool(app_data.get('api_key_access', False))
-            
-            if not has_api_key_access:
-                logger.warning(f"User {user_email} attempted to create API key but does not have API key permission")
-                return jsonify({
-                    'error': 'You do not have permission to create API keys. Please contact an administrator.',
-                    'code': 'no_api_key_permission'
-                }), 403
-                
-            logger.info(f"User {user_email} authorized to create API key (non-admin with permission)")
-        else:
-            logger.info(f"User {user_email} authorized to create API key (admin)")
+        access_state = _get_api_key_access_state(user_email)
+        if not access_state.get('allowed'):
+            logger.warning(
+                "User %s attempted to create API key without permission code=%s",
+                user_email,
+                access_state.get('code'),
+            )
+            return jsonify({
+                'error': access_state.get('error', 'Unauthorized'),
+                'code': access_state.get('code')
+            }), access_state.get('status_code', 403)
+
+        logger.info(
+            "User %s authorized to create API key (%s)",
+            user_email,
+            "admin" if access_state.get('is_admin') else "approved user",
+        )
         
         # Get data from request
         data = request.get_json() or {}
@@ -6333,6 +6678,130 @@ def create_api_key():
         logger.error(f"Error creating API key: {str(e)}")
         return jsonify({'error': f'Failed to create API key: {str(e)}'}), 500
 
+
+@app.route('/vertex-projects', methods=['GET'])
+@authenticated_route
+def list_vertex_projects():
+    """List Vertex project bindings for the authenticated user."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    user_email = _normalize_email_identity(user.get('email'))
+    access_state = _get_api_key_access_state(user_email)
+    if not access_state.get('allowed'):
+        return jsonify({
+            'error': access_state.get('error', 'Unauthorized'),
+            'code': access_state.get('code'),
+        }), access_state.get('status_code', 403)
+
+    try:
+        project_docs = db.collection('vertex_projects').where(
+            filter=FieldFilter('owner_email', '==', user_email)
+        ).stream()
+        projects = [_serialize_vertex_project(doc) for doc in project_docs]
+        projects.sort(
+            key=lambda project: (
+                project.get('created_at') or '',
+                project.get('project_id') or '',
+            ),
+            reverse=True,
+        )
+        return jsonify({
+            'status': 'success',
+            'count': len(projects),
+            'vertex_projects': projects,
+        })
+    except Exception as e:
+        logger.error(f"Error listing vertex projects for {user_email}: {str(e)}")
+        return jsonify({'error': f'Failed to list Vertex projects: {str(e)}'}), 500
+
+
+@app.route('/vertex-projects/link', methods=['POST'])
+@authenticated_route
+def link_vertex_project():
+    """Link a Google Cloud project ID to the authenticated user."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    user_email = _normalize_email_identity(user.get('email'))
+    access_state = _get_api_key_access_state(user_email)
+    if not access_state.get('allowed'):
+        return jsonify({
+            'error': access_state.get('error', 'Unauthorized'),
+            'code': access_state.get('code'),
+        }), access_state.get('status_code', 403)
+
+    try:
+        data = request.get_json() or {}
+        normalized_project_id, validation_error = _validate_vertex_project_id(data.get('project_id'))
+        if validation_error:
+            return jsonify({'error': validation_error}), 400
+
+        nickname = _clean_optional_request_value(data.get('nickname')) or ''
+        if len(nickname) > 100:
+            return jsonify({'error': 'Nickname must be 100 characters or fewer.'}), 400
+
+        payload, status_code = _claim_or_reactivate_vertex_project(
+            project_id=normalized_project_id,
+            owner_email=user_email,
+            actor_email=user_email,
+            nickname=nickname,
+        )
+        return jsonify(payload), status_code
+    except Exception as e:
+        logger.error(f"Error linking vertex project for {user_email}: {str(e)}")
+        return jsonify({'error': f'Failed to link Vertex project: {str(e)}'}), 500
+
+
+@app.route('/vertex-projects/<project_id>/revoke', methods=['POST'])
+@authenticated_route
+def revoke_vertex_project(project_id):
+    """Revoke a linked Vertex project owned by the authenticated user."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    user_email = _normalize_email_identity(user.get('email'))
+    access_state = _get_api_key_access_state(user_email)
+    if not access_state.get('allowed'):
+        return jsonify({
+            'error': access_state.get('error', 'Unauthorized'),
+            'code': access_state.get('code'),
+        }), access_state.get('status_code', 403)
+
+    normalized_project_id, validation_error = _validate_vertex_project_id(project_id)
+    if validation_error:
+        return jsonify({'error': validation_error}), 400
+
+    try:
+        project_ref = db.collection('vertex_projects').document(normalized_project_id)
+        project_doc = project_ref.get()
+        if not project_doc.exists:
+            return jsonify({'error': 'Vertex project not found'}), 404
+
+        project_data = project_doc.to_dict() or {}
+        if _normalize_email_identity(project_data.get('owner_email')) != user_email:
+            return jsonify({'error': 'You do not have permission to revoke this Vertex project'}), 403
+        if not bool(project_data.get('active')):
+            return jsonify({'error': 'Vertex project is already revoked'}), 400
+
+        project_ref.update({
+            'active': False,
+            'revoked_at': firestore.SERVER_TIMESTAMP,
+            'revoked_by': user_email,
+            'updated_at': firestore.SERVER_TIMESTAMP,
+        })
+
+        return jsonify({
+            'status': 'success',
+            'message': f"Vertex project '{normalized_project_id}' revoked successfully.",
+        })
+    except Exception as e:
+        logger.error(f"Error revoking vertex project for {user_email}: {str(e)}")
+        return jsonify({'error': f'Failed to revoke Vertex project: {str(e)}'}), 500
+
 @app.route('/check-api-key-permission', methods=['GET'])
 @authenticated_route
 def check_api_key_permission():
@@ -6345,50 +6814,30 @@ def check_api_key_permission():
     user_email = user.get('email')
     
     try:
-        # Check if the user is an admin first (admins always have API key access)
-        admin_doc = db.collection('admins').document(user_email).get()
-        is_admin = admin_doc.exists
-        
-        if is_admin:
-            # Admins always have API key access
-            return jsonify({
-                'status': 'success',
-                'has_api_key_permission': True,
-                'is_admin': True
-            })
-        
-        # Check regular user permissions
-        app_doc = db.collection('user_applications').document(user_email).get()
-        
-        if not app_doc.exists:
-            return jsonify({
-                'status': 'error',
-                'has_api_key_permission': False,
-                'message': 'User application not found'
-            }), 404
-        
-        app_data = app_doc.to_dict()
-        
-        # Check if approved and has API key access
-        is_approved = app_data.get('status') == 'approved'
-        has_api_key_access = app_data.get('api_key_access', False)
-        
-        # Make sure we use boolean values for clarity
-        has_api_key_access = bool(has_api_key_access)
-        
-        logger.info(f"User {user_email} API key permission check: approved={is_approved}, has_api_key_access={has_api_key_access}")
-        
-        return jsonify({
-            'status': 'success',
-            'has_api_key_permission': is_approved and has_api_key_access,
-            'is_approved': is_approved,
-            'is_admin': False,
+        access_state = _get_api_key_access_state(user_email)
+        logger.info(
+            "User %s API key permission check: allowed=%s is_admin=%s code=%s",
+            user_email,
+            access_state.get('allowed'),
+            access_state.get('is_admin'),
+            access_state.get('code'),
+        )
+        payload = {
+            'status': 'success' if access_state.get('allowed') else 'error',
+            'has_api_key_permission': bool(access_state.get('allowed')),
+            'is_approved': bool(access_state.get('is_approved', access_state.get('allowed'))),
+            'is_admin': bool(access_state.get('is_admin')),
             'debug_info': {
                 'email': user_email,
-                'approved': is_approved,
-                'api_key_access': has_api_key_access
+                'approved': bool(access_state.get('is_approved', access_state.get('allowed'))),
+                'api_key_access': bool(access_state.get('has_api_key_access', access_state.get('allowed'))),
             }
-        })
+        }
+        if not access_state.get('allowed'):
+            payload['message'] = access_state.get('error')
+            payload['code'] = access_state.get('code')
+            return jsonify(payload), access_state.get('status_code', 403)
+        return jsonify(payload)
         
     except Exception as e:
         logger.error(f"Error checking API key permission: {str(e)}")
