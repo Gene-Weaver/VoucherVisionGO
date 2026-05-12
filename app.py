@@ -147,7 +147,7 @@ try:
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
-    from vouchervision.general_utils import calculate_cost # type: ignore
+    from vouchervision.general_utils_slim import calculate_cost # type: ignore
     from TextCollage.CollageEngine import CollageEngine # type: ignore
 except Exception as e:
     logger.error(f"Import ERROR: {e}")
@@ -157,7 +157,7 @@ except Exception as e:
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
-    from vouchervision_main.vouchervision.general_utils import calculate_cost
+    from vouchervision_main.vouchervision.general_utils_slim import calculate_cost
     from TextCollage.CollageEngine import CollageEngine
 
 from wfo_local_lookup import WFOLocalLookup
