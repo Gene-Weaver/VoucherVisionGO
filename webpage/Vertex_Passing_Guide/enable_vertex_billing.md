@@ -212,8 +212,27 @@ to `/process` or `/process-url`. Do **not** also pass `gemini_api_key` — pick
 one auth method per request.
 
 **Always use `vertex_region=global`.** This works for the entire Gemini model
-family on Vertex AI, including gemini-2.5 and the gemini-3 previews, and
+family on Vertex AI and
 matches the recommended path for all VoucherVisionGO users.
+
+Using the VoucherVision Python package:
+
+```python
+from VoucherVision import process_vouchers
+
+process_vouchers(
+    server="https://vouchervision-go-738307415303.us-central1.run.app/",
+    output_dir="./output",
+    image="path/to/image.jpg",
+    auth_token="<your VVGO API key>",
+    vertex_project="your-project-id",   # vertex_region defaults to "global"
+)
+```
+
+See the [vouchervision-go-client README](https://pypi.org/project/vouchervision-go-client/)
+for the full set of parameters (batch processing, URL inputs, output options).
+
+Or with curl directly:
 
 ```bash
 curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
@@ -223,7 +242,7 @@ curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process"
   -F "vertex_region=global"
 ```
 
-For a gemini-3 preview model, add the engine + llm_model flags:
+For a gemini-3 model, add the engine + llm_model flags:
 
 ```bash
 curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
@@ -233,22 +252,6 @@ curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process"
   -F "llm_model=gemini-3.1-pro-preview" \
   -F "vertex_project=your-project-id" \
   -F "vertex_region=global"
-```
-
-Python via `requests`:
-
-```python
-import requests
-
-requests.post(
-    "https://vouchervision-go-738307415303.us-central1.run.app/process",
-    headers={"X-API-Key": "<your VVGO API key>"},
-    data={
-        "vertex_project": "your-project-id",
-        "vertex_region": "global",
-    },
-    files={"file": open("image.jpg", "rb")},
-)
 ```
 
 ---

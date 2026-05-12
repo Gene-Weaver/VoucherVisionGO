@@ -107,6 +107,22 @@ function openTab(evt, tabName) {
     evt.currentTarget.classList.add("active");
 }
 
+function switchToPdfJobsTab() {
+    const pdfTab = document.querySelector('.tab[data-tab="PDFJobs"]');
+    if (pdfTab) {
+        pdfTab.click();
+    }
+}
+
+function looksLikePdfUrl(url) {
+    try {
+        const parsed = new URL(url);
+        return (parsed.pathname || '').toLowerCase().endsWith('.pdf');
+    } catch (_) {
+        return /\.pdf(?:$|[?#])/i.test(String(url || ''));
+    }
+}
+
 // Logger function for debug info
 function logDebug(message, data = null) {
     const timestamp = new Date().toISOString();
@@ -467,10 +483,6 @@ async function processImage(sourceType = 'file') {
 
     const formData = new FormData();
 
-    // Detect if we're uploading a PDF
-    let isPdf = false;
-    let pdfPageCount = 0;
-
     if (sourceType === 'file') {
         const fileInput = document.getElementById('fileInput');
         if (!fileInput.files || fileInput.files.length === 0) {
@@ -478,16 +490,21 @@ async function processImage(sourceType = 'file') {
             return;
         }
         const file = fileInput.files[0];
-        formData.append('file', file);
-
         if (file.name.toLowerCase().endsWith('.pdf')) {
-            isPdf = true;
-            pdfPageCount = await countPdfPages(file);
+            alert('PDFs now use the PDF Jobs tab.');
+            switchToPdfJobsTab();
+            return;
         }
+        formData.append('file', file);
     } else if (sourceType === 'url') {
         const imageUrl = $('#imageUrl').val();
         if (!imageUrl) {
             alert('Please enter an image URL');
+            return;
+        }
+        if (looksLikePdfUrl(imageUrl)) {
+            alert('PDF URLs are not accepted here. PDFs now use the PDF Jobs tab.');
+            switchToPdfJobsTab();
             return;
         }
         formData.append('image_url', imageUrl);
@@ -525,24 +542,8 @@ async function processImage(sourceType = 'file') {
     const buttonSelector = (sourceType === 'file') ? '#uploadButton' : '#processUrlButton';
     setButtonProcessing(buttonSelector, true);
 
-    // Show PDF progress bar or standard loader
-    if (isPdf && pdfPageCount > 0) {
-        $('#singleResults').html(buildPdfProgressHTML(pdfPageCount, resultLabel));
-        // Simulate progress: estimate ~15s per page on the server
-        let simPage = 0;
-        window._pdfProgressInterval = setInterval(() => {
-            if (simPage < pdfPageCount) {
-                simPage++;
-                updatePdfProgress(simPage, pdfPageCount);
-            }
-        }, 15000);
-    } else if (isPdf) {
-        // PDF but couldn't count pages
-        $('#singleResults').html(buildPdfProgressHTML('?', resultLabel));
-    } else {
-        $('#singleResults').html(vvLoaderHTML());
-        startLoaderCycle($('#singleResults')[0]);
-    }
+    $('#singleResults').html(vvLoaderHTML());
+    startLoaderCycle($('#singleResults')[0]);
 
     // Debug log
     const formDataEntries = [];
@@ -552,9 +553,8 @@ async function processImage(sourceType = 'file') {
     logDebug('FINAL FormData contents', formDataEntries);
 
     try {
-        // Use a long timeout for PDFs (10 min) since pages are processed sequentially
         const controller = new AbortController();
-        const timeoutMs = isPdf ? 1800000 : 300000;
+        const timeoutMs = 300000;
         const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
         const response = await fetch(endpoint, {
@@ -573,72 +573,20 @@ async function processImage(sourceType = 'file') {
         const data = await response.json();
         logDebug('API response success', data);
 
-        // Handle multi-page PDF response
-        if (data.pages && Array.isArray(data.pages)) {
-            // Clear progress UI
-            if (window._pdfProgressInterval) {
-                clearInterval(window._pdfProgressInterval);
-                window._pdfProgressInterval = null;
-            }
-            updatePdfProgress(data.page_count || data.pages.length, data.page_count || data.pages.length);
-            $('.pdf-progress-status').html(`<strong>Complete!</strong> Processed ${data.pages.length} pages from ${data.source_pdf || resultLabel}`);
-            $('.pdf-progress-detail').text('');
-
-            // Treat each page as a separate specimen result
-            const successPages = data.pages.filter(p => !p.error);
-            const errorPages = data.pages.filter(p => p.error);
-
-            if (errorPages.length > 0) {
-                logDebug(`PDF processing: ${errorPages.length} page(s) had errors`, errorPages);
-            }
-
-            // Add each successful page to the result history as a separate specimen
-            for (const pageData of successPages) {
-                const pageLabel = pageData.filename || `${resultLabel} (page)`;
-                const pageHTML = createSplitResultsLayout(pageData);
-                addResultToHistory(pageLabel, pageHTML, pageData);
-            }
-
-            // Show errors for failed pages
-            if (errorPages.length > 0) {
-                let errorSummary = `<div class="pdf-page-errors"><h4>${errorPages.length} page(s) failed:</h4><ul>`;
-                for (const ep of errorPages) {
-                    errorSummary += `<li><strong>${ep.filename || 'Unknown page'}</strong>: ${ep.error}</li>`;
-                }
-                errorSummary += '</ul></div>';
-                $('#singleResults').append(errorSummary);
-            }
-
-            // If no pages succeeded, show a message
-            if (successPages.length === 0) {
-                $('#singleResults').html(`
-                    <h3 class="error">Error:</h3>
-                    <p>All ${data.pages.length} pages failed to process.</p>
-                `);
-            }
-        } else {
-            // Standard single-image response
-            const resultsHTML = createSplitResultsLayout(data);
-            addResultToHistory(resultLabel, resultsHTML, data);
-        }
+        const resultsHTML = createSplitResultsLayout(data);
+        addResultToHistory(resultLabel, resultsHTML, data);
 
     } catch (error) {
         logDebug('API response error', { error: error.toString() });
         let errorMsg = error.message;
         if (error.name === 'AbortError') {
-            errorMsg = isPdf
-                ? 'Request timed out. The PDF may have too many pages for the web interface. Please use the Python package for large PDFs.'
-                : 'Request timed out. Please try again.';
+            errorMsg = 'Request timed out. Please try again.';
         }
         $('#singleResults').html(`
             <h3 class="error">Error:</h3>
             <p>${errorMsg}</p>
         `);
     } finally {
-        if (window._pdfProgressInterval) {
-            clearInterval(window._pdfProgressInterval);
-            window._pdfProgressInterval = null;
-        }
         stopLoaderCycle();
         setButtonProcessing(buttonSelector, false);
     }
@@ -935,7 +883,7 @@ const STEP_INFO = {
         number: '4',
         sections: [
             { title: 'Selecting images to transcribe with VoucherVision', body: 'This website is designed to get you familiar with VoucherVision or to run a few images at a time. If you want to run VoucherVision regularly or for large batches (more than a few hundred images), you should use the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong> or call the API directly. Learn more on the <strong>About</strong> page.' },
-            { title: 'PDF Support', body: 'You can upload PDF files directly\u2014each page is automatically converted to a JPG and processed as a separate specimen image. Multi-page PDFs (up to 200 pages) are fully supported. All processing options (Text Collage, Notebook Mode, Skip Label Collage) apply to each page individually. For large PDFs, we recommend using the <strong><a href="https://pypi.org/project/vouchervision-go-client/" target="_blank">Python package</a></strong>, which converts pages locally and processes them in parallel for much faster results.' }
+            { title: 'PDF Support', body: 'PDFs now use the dedicated <strong>PDF Jobs</strong> tab. The website uploads the PDF once, processes pages asynchronously on the server, builds a ZIP/XLSX bundle, and emails you a download link when it finishes. Results stay available for <strong>1 week</strong>. The Python client is still a great option for power users who want local control or very high throughput.' }
         ]
     },
     step5: {

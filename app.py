@@ -9,8 +9,10 @@ import io
 import time
 import base64
 import uuid
+import zipfile
 import warnings
 from urllib.parse import urlparse
+from urllib.parse import quote
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message="urllib3.*doesn't match a supported version")
 warnings.filterwarnings("ignore", message="You are using a Python version")
@@ -43,7 +45,11 @@ import firebase_admin
 from firebase_admin import credentials, auth, firestore
 from google.api_core import exceptions as google_exceptions
 from google.cloud import firestore as _gc_firestore
+from google.cloud import storage
 from google.cloud.firestore_v1.base_query import FieldFilter
+from google.auth.transport.requests import AuthorizedSession, Request as GoogleAuthRequest
+from google.oauth2 import id_token as google_id_token
+import google.auth
 
 from url_name_parser import extract_filename_from_url
 from impact import estimate_impact
@@ -239,6 +245,42 @@ except Exception as e:
 
 # Initialize Firestore client
 db = firestore.client()
+
+PDF_JOB_RETENTION_DAYS = 7
+PDF_JOB_RETENTION_SECONDS = PDF_JOB_RETENTION_DAYS * 24 * 60 * 60
+PDF_JOB_ALLOWED_SOURCE_TYPES = {"server", "user_vertex"}
+PDF_JOB_CONTROL_QUEUE = os.environ.get("PDF_JOBS_CONTROL_QUEUE", "pdf-control")
+PDF_JOB_PAGE_QUEUE = os.environ.get("PDF_JOBS_PAGE_QUEUE", "pdf-pages")
+PDF_JOB_QUEUE_LOCATION = os.environ.get("PDF_JOBS_QUEUE_LOCATION", "us-central1")
+PDF_JOB_BUCKET = (
+    os.environ.get("PDF_JOBS_GCS_BUCKET")
+    or os.environ.get("FIREBASE_STORAGE_BUCKET")
+    or get_firebase_config().get("storageBucket")
+)
+PDF_JOB_PREFIX = os.environ.get("PDF_JOBS_GCS_PREFIX", "pdf-jobs").strip("/") or "pdf-jobs"
+PDF_JOB_MAX_PAGES = int(os.environ.get("PDF_JOB_MAX_PAGES", "200"))
+PDF_JOB_MAX_LIST = int(os.environ.get("PDF_JOB_MAX_LIST", "25"))
+PDF_JOB_INTERNAL_SECRET = os.environ.get("PDF_JOBS_INTERNAL_SECRET")
+PDF_JOB_TASK_SERVICE_ACCOUNT = os.environ.get("PDF_JOBS_TASK_SERVICE_ACCOUNT_EMAIL")
+PDF_JOB_PUBLIC_BASE_URL = os.environ.get("PDF_JOBS_PUBLIC_BASE_URL", "").rstrip("/")
+PDF_JOB_TASK_TARGET_BASE_URL = os.environ.get("PDF_JOBS_TASK_TARGET_BASE_URL", "").rstrip("/")
+
+
+def _get_default_project_id() -> str | None:
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("GCP_PROJECT")
+    if project_id:
+        return project_id
+    project_id = os.environ.get("FIREBASE_PROJECT_ID")
+    if project_id:
+        return project_id
+    try:
+        _, project_id = google.auth.default()
+        return project_id
+    except Exception:
+        return None
+
+
+PDF_JOB_PROJECT_ID = _get_default_project_id()
 
 def validate_api_key(api_key):
     """Validate an API key against the Firestore database """
@@ -2438,6 +2480,518 @@ def create_initial_admin(email):
         logger.error(f"Error creating initial admin: {str(e)}")
         raise
 
+
+def _now_utc() -> datetime.datetime:
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
+def _pdf_job_expiration_time() -> datetime.datetime:
+    return _now_utc() + datetime.timedelta(days=PDF_JOB_RETENTION_DAYS)
+
+
+def _get_storage_client():
+    return storage.Client(project=PDF_JOB_PROJECT_ID) if PDF_JOB_PROJECT_ID else storage.Client()
+
+
+def _get_pdf_job_bucket_name() -> str:
+    bucket_name = (PDF_JOB_BUCKET or "").replace("gs://", "").strip("/")
+    if not bucket_name:
+        raise RuntimeError(
+            "PDF async jobs are not configured: missing PDF_JOBS_GCS_BUCKET/FIREBASE_STORAGE_BUCKET."
+        )
+    return bucket_name
+
+
+def _pdf_job_blob_path(job_id: str, *parts: str) -> str:
+    clean_parts = [str(part).strip("/") for part in parts if str(part).strip("/")]
+    return "/".join([PDF_JOB_PREFIX, job_id] + clean_parts)
+
+
+def _upload_pdf_job_bytes(blob_path: str, payload: bytes, *, content_type: str) -> str:
+    bucket = _get_storage_client().bucket(_get_pdf_job_bucket_name())
+    blob = bucket.blob(blob_path)
+    blob.upload_from_string(payload, content_type=content_type)
+    return blob_path
+
+
+def _upload_pdf_job_json(blob_path: str, payload: dict | list) -> str:
+    data = json.dumps(payload, cls=OrderedJsonEncoder, ensure_ascii=False, indent=2).encode("utf-8")
+    return _upload_pdf_job_bytes(blob_path, data, content_type="application/json")
+
+
+def _download_pdf_job_bytes(blob_path: str) -> bytes:
+    bucket = _get_storage_client().bucket(_get_pdf_job_bucket_name())
+    blob = bucket.blob(blob_path)
+    if not blob.exists():
+        raise FileNotFoundError(blob_path)
+    return blob.download_as_bytes()
+
+
+def _delete_pdf_job_prefix(job_id: str):
+    try:
+        bucket = _get_storage_client().bucket(_get_pdf_job_bucket_name())
+        prefix = _pdf_job_blob_path(job_id)
+        blobs = list(bucket.list_blobs(prefix=prefix))
+        for blob in blobs:
+            blob.delete()
+    except Exception as e:
+        logger.warning(f"Unable to delete PDF job artifacts for {job_id}: {e}")
+
+
+def _serialize_pdf_job(job_doc_or_dict):
+    if hasattr(job_doc_or_dict, "to_dict"):
+        payload = job_doc_or_dict.to_dict() or {}
+        payload.setdefault("job_id", getattr(job_doc_or_dict, "id", None))
+    else:
+        payload = dict(job_doc_or_dict or {})
+
+    for field_name in (
+        "created_at",
+        "updated_at",
+        "started_at",
+        "finished_at",
+        "expires_at",
+        "finalize_enqueued_at",
+        "email_sent_at",
+    ):
+        payload[field_name] = _format_event_timestamp(payload.get(field_name))
+
+    payload["page_count"] = _coerce_int(payload.get("page_count"))
+    payload["completed_pages"] = _coerce_int(payload.get("completed_pages"))
+    payload["successful_pages"] = _coerce_int(payload.get("successful_pages"))
+    payload["failed_pages"] = _coerce_int(payload.get("failed_pages"))
+    payload["progress_percent"] = min(
+        100,
+        round(
+            (
+                _coerce_int(payload.get("completed_pages"))
+                / max(_coerce_int(payload.get("page_count")), 1)
+            ) * 100
+        ) if _coerce_int(payload.get("page_count")) else 0,
+    )
+    return payload
+
+
+def _serialize_pdf_job_page(page_doc_or_dict):
+    if hasattr(page_doc_or_dict, "to_dict"):
+        payload = page_doc_or_dict.to_dict() or {}
+        payload.setdefault("page_id", getattr(page_doc_or_dict, "id", None))
+    else:
+        payload = dict(page_doc_or_dict or {})
+
+    for field_name in ("created_at", "updated_at", "expires_at"):
+        payload[field_name] = _format_event_timestamp(payload.get(field_name))
+    payload["page_index"] = _coerce_int(payload.get("page_index"))
+    payload["attempt_count"] = _coerce_int(payload.get("attempt_count"))
+    payload["status_code"] = _coerce_int(payload.get("status_code"))
+    payload["total_request_cost_usd"] = _coerce_float(payload.get("total_request_cost_usd"))
+    payload["total_tokens_all"] = _coerce_int(payload.get("total_tokens_all"))
+    return payload
+
+
+def _resolve_pdf_job_public_base_url() -> str:
+    if PDF_JOB_PUBLIC_BASE_URL:
+        return PDF_JOB_PUBLIC_BASE_URL
+    try:
+        return request.host_url.rstrip("/")
+    except RuntimeError:
+        return ""
+
+
+def _resolve_pdf_job_task_base_url() -> str:
+    if PDF_JOB_TASK_TARGET_BASE_URL:
+        return PDF_JOB_TASK_TARGET_BASE_URL
+    try:
+        return request.host_url.rstrip("/")
+    except RuntimeError:
+        return ""
+
+
+def _build_pdf_job_download_url(job_data: dict) -> str | None:
+    base_url = (job_data.get("public_base_url") or "").rstrip("/")
+    job_id = job_data.get("job_id")
+    token = job_data.get("download_token")
+    if not (base_url and job_id and token):
+        return None
+    return f"{base_url}/pdf-jobs/{quote(str(job_id))}/download?token={quote(str(token))}"
+
+
+def _build_pdf_job_email_body(job_data: dict) -> str:
+    download_url = _build_pdf_job_download_url(job_data) or "#"
+    filename = job_data.get("source_pdf_filename") or "your PDF"
+    expires_at = _format_event_timestamp(job_data.get("expires_at")) or "in 1 week"
+    page_count = _coerce_int(job_data.get("page_count"))
+    success_count = _coerce_int(job_data.get("successful_pages"))
+    failed_count = _coerce_int(job_data.get("failed_pages"))
+    status = job_data.get("status") or "completed"
+    return f"""
+    <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 640px; margin: 0 auto; padding: 24px;">
+                <h2 style="color: #2E7D32;">Your VoucherVision PDF Job Is Ready</h2>
+                <p><strong>{filename}</strong> has finished processing.</p>
+                <div style="background:#f5f5f5; border-radius:8px; padding:16px; margin:18px 0;">
+                    <p style="margin:0 0 8px 0;"><strong>Status:</strong> {status}</p>
+                    <p style="margin:0 0 8px 0;"><strong>Pages:</strong> {page_count}</p>
+                    <p style="margin:0 0 8px 0;"><strong>Successful pages:</strong> {success_count}</p>
+                    <p style="margin:0;"><strong>Failed pages:</strong> {failed_count}</p>
+                </div>
+                <div style="margin: 28px 0; text-align: center;">
+                    <a href="{download_url}"
+                       style="background-color:#2E7D32; color:white; padding:12px 18px; text-decoration:none; border-radius:6px; font-weight:bold;">
+                        Download ZIP Bundle
+                    </a>
+                </div>
+                <p>This download is available for <strong>1 week</strong>.</p>
+                <p><strong>Expires:</strong> {expires_at}</p>
+                <p>You can also review the job status from the PDF Jobs tab on the VoucherVisionGO website.</p>
+                <p>Best regards,<br>The VoucherVision Team</p>
+            </div>
+        </body>
+    </html>
+    """
+
+
+def _send_pdf_job_completion_email(job_data: dict) -> bool:
+    sender = app.config.get("email_sender")
+    if not sender:
+        logger.warning("PDF job email skipped: email sender missing")
+        return False
+    user_email = _normalize_email_identity(job_data.get("user_email"))
+    if not user_email:
+        logger.warning("PDF job email skipped: missing user_email")
+        return False
+    subject = f"Your VoucherVision PDF results are ready: {job_data.get('source_pdf_filename') or job_data.get('job_id')}"
+    return sender.send_email(user_email, subject, _build_pdf_job_email_body(job_data))
+
+
+def _get_google_authorized_session() -> AuthorizedSession:
+    credentials, _ = google.auth.default(scopes=["https://www.googleapis.com/auth/cloud-platform"])
+    return AuthorizedSession(credentials)
+
+
+def _enqueue_cloud_task(queue_name: str, target_url: str, payload: dict, *, delay_seconds: int = 0) -> dict:
+    if not PDF_JOB_PROJECT_ID:
+        raise RuntimeError("Cannot enqueue PDF jobs: missing Google Cloud project ID.")
+    if not target_url:
+        raise RuntimeError("Cannot enqueue PDF jobs: missing target URL.")
+
+    task_url = (
+        f"https://cloudtasks.googleapis.com/v2/projects/{PDF_JOB_PROJECT_ID}"
+        f"/locations/{PDF_JOB_QUEUE_LOCATION}/queues/{queue_name}/tasks"
+    )
+    headers = {"Content-Type": "application/json"}
+    if PDF_JOB_INTERNAL_SECRET:
+        headers["X-Pdf-Task-Secret"] = PDF_JOB_INTERNAL_SECRET
+
+    http_request = {
+        "httpMethod": "POST",
+        "url": target_url,
+        "headers": headers,
+        "body": base64.b64encode(json.dumps(payload).encode("utf-8")).decode("utf-8"),
+    }
+    if PDF_JOB_TASK_SERVICE_ACCOUNT:
+        http_request["oidcToken"] = {
+            "serviceAccountEmail": PDF_JOB_TASK_SERVICE_ACCOUNT,
+            "audience": target_url,
+        }
+
+    task = {"httpRequest": http_request}
+    if delay_seconds > 0:
+        run_at = _now_utc() + datetime.timedelta(seconds=delay_seconds)
+        task["scheduleTime"] = {"seconds": int(run_at.timestamp())}
+
+    session = _get_google_authorized_session()
+    response = session.post(task_url, json={"task": task}, timeout=30)
+    response.raise_for_status()
+    return response.json()
+
+
+def _enqueue_pdf_split_task(job_data: dict):
+    target = f"{(job_data.get('task_base_url') or '').rstrip('/')}/internal/pdf-jobs/{job_data['job_id']}/split"
+    return _enqueue_cloud_task(PDF_JOB_CONTROL_QUEUE, target, {"job_id": job_data["job_id"]})
+
+
+def _enqueue_pdf_page_task(job_data: dict, page_index: int):
+    target = (
+        f"{(job_data.get('task_base_url') or '').rstrip('/')}/internal/pdf-jobs/"
+        f"{job_data['job_id']}/pages/{int(page_index)}/process"
+    )
+    return _enqueue_cloud_task(
+        PDF_JOB_PAGE_QUEUE,
+        target,
+        {"job_id": job_data["job_id"], "page_index": int(page_index)},
+    )
+
+
+def _enqueue_pdf_finalize_task(job_data: dict):
+    target = f"{(job_data.get('task_base_url') or '').rstrip('/')}/internal/pdf-jobs/{job_data['job_id']}/finalize"
+    return _enqueue_cloud_task(PDF_JOB_CONTROL_QUEUE, target, {"job_id": job_data["job_id"]})
+
+
+def _enqueue_pdf_email_task(job_data: dict):
+    target = f"{(job_data.get('task_base_url') or '').rstrip('/')}/internal/pdf-jobs/{job_data['job_id']}/send-email"
+    return _enqueue_cloud_task(PDF_JOB_CONTROL_QUEUE, target, {"job_id": job_data["job_id"]})
+
+
+def _verify_internal_pdf_task_request() -> tuple[bool, str | None]:
+    if not request.headers.get("X-CloudTasks-TaskName"):
+        return False, "Missing Cloud Tasks headers."
+
+    if PDF_JOB_INTERNAL_SECRET:
+        supplied_secret = request.headers.get("X-Pdf-Task-Secret")
+        if supplied_secret != PDF_JOB_INTERNAL_SECRET:
+            return False, "Invalid internal task secret."
+
+    if PDF_JOB_TASK_SERVICE_ACCOUNT:
+        auth_header = request.headers.get("Authorization", "")
+        if not auth_header.startswith("Bearer "):
+            return False, "Missing task bearer token."
+        token = auth_header.split("Bearer ", 1)[1]
+        try:
+            claims = google_id_token.verify_token(
+                token,
+                GoogleAuthRequest(),
+                audience=request.base_url,
+            )
+        except Exception as e:
+            return False, f"Task token verification failed: {e}"
+        if claims.get("email") != PDF_JOB_TASK_SERVICE_ACCOUNT:
+            return False, "Unexpected task service account."
+
+    return True, None
+
+
+def internal_pdf_task_route(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        ok, error_message = _verify_internal_pdf_task_request()
+        if not ok:
+            logger.warning("Rejected internal PDF task request: %s", error_message)
+            return jsonify({"error": error_message}), 403
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+def _get_pdf_job_doc(job_id: str):
+    return db.collection("pdf_jobs").document(job_id).get()
+
+
+def _get_pdf_job_or_404(job_id: str) -> dict | None:
+    job_doc = _get_pdf_job_doc(job_id)
+    if not job_doc.exists:
+        return None
+    payload = job_doc.to_dict() or {}
+    payload["job_id"] = job_doc.id
+    return payload
+
+
+def _is_pdf_job_expired(job_data: dict | None) -> bool:
+    if not job_data:
+        return False
+    expires_at = _firestore_timestamp_to_datetime(job_data.get("expires_at"))
+    if not expires_at:
+        return False
+    return expires_at <= _now_utc()
+
+
+def _delete_pdf_job_firestore(job_id: str):
+    pages = list(db.collection("pdf_jobs").document(job_id).collection("pages").stream())
+    if pages:
+        batch = db.batch()
+        for page_doc in pages:
+            batch.delete(page_doc.reference)
+        batch.commit()
+    db.collection("pdf_jobs").document(job_id).delete()
+
+
+def _purge_expired_pdf_job(job_id: str):
+    _delete_pdf_job_prefix(job_id)
+    _delete_pdf_job_firestore(job_id)
+
+
+def _assert_pdf_job_owner_or_admin(job_data: dict, user_email: str) -> tuple[bool, str | None]:
+    user_email = _normalize_email_identity(user_email)
+    owner_email = _normalize_email_identity(job_data.get("user_email"))
+    if user_email and owner_email and user_email == owner_email:
+        return True, None
+    if user_email and _is_admin_email(user_email):
+        return True, None
+    return False, "You do not have access to this PDF job."
+
+
+def _build_pdf_job_analytics_context(job_data: dict) -> dict:
+    analytics_ctx = dict(job_data.get("analytics_ctx") or {})
+    analytics_ctx.setdefault("request_id", job_data.get("request_id"))
+    analytics_ctx.setdefault("user_email", job_data.get("user_email"))
+    analytics_ctx.setdefault("endpoint", "/process-pdf-async")
+    analytics_ctx.setdefault("auth_method", job_data.get("auth_method"))
+    analytics_ctx.setdefault("authenticated_via", job_data.get("authenticated_via"))
+    analytics_ctx.setdefault("api_key_owner", job_data.get("api_key_owner"))
+    analytics_ctx.setdefault("prompt", job_data.get("prompt"))
+    analytics_ctx.setdefault("ocr_only", bool(job_data.get("ocr_only")))
+    analytics_ctx.setdefault("notebook_mode", bool(job_data.get("notebook_mode")))
+    analytics_ctx.setdefault("include_wfo", bool(job_data.get("include_wfo", True)))
+    analytics_ctx.setdefault("include_cop90", bool(job_data.get("include_cop90", True)))
+    analytics_ctx.setdefault("llm_model_name", job_data.get("llm_model_name"))
+    return analytics_ctx
+
+
+def _build_pdf_job_process_kwargs(job_data: dict) -> dict:
+    return {
+        "engine_options": list(job_data.get("engine_options") or []),
+        "prompt": job_data.get("prompt"),
+        "ocr_only": bool(job_data.get("ocr_only")),
+        "include_wfo": bool(job_data.get("include_wfo", True)),
+        "include_cop90": bool(job_data.get("include_cop90", True)),
+        "llm_model_name": job_data.get("llm_model_name"),
+        "url_source": "",
+        "notebook_mode": bool(job_data.get("notebook_mode")),
+        "skip_label_collage": bool(job_data.get("skip_label_collage")),
+        "user_api_key": None,
+        "user_vertex_project": job_data.get("user_vertex_project"),
+        "user_vertex_region": job_data.get("user_vertex_region"),
+    }
+
+
+def _create_pdf_job_xlsx_bytes(page_outputs: list[dict]) -> bytes:
+    from openpyxl import Workbook
+
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "results"
+
+    all_fields = []
+    seen_fields = set()
+    for page_output in page_outputs:
+        formatted_json = page_output.get("formatted_json")
+        if isinstance(formatted_json, dict):
+            for key in formatted_json.keys():
+                if key not in seen_fields:
+                    seen_fields.add(key)
+                    all_fields.append(key)
+
+    headers = ["page_index", "filename"] + all_fields
+    sheet.append(headers)
+
+    for page_output in page_outputs:
+        formatted_json = page_output.get("formatted_json") if isinstance(page_output.get("formatted_json"), dict) else {}
+        row = [
+            _coerce_int(page_output.get("page_index")),
+            page_output.get("filename") or "",
+        ]
+        for field_name in all_fields:
+            value = formatted_json.get(field_name, "")
+            row.append("" if value is None else str(value))
+        sheet.append(row)
+
+    buffer = io.BytesIO()
+    workbook.save(buffer)
+    return buffer.getvalue()
+
+
+def _load_pdf_job_pages(job_id: str) -> list[dict]:
+    pages = []
+    for page_doc in db.collection("pdf_jobs").document(job_id).collection("pages").stream():
+        payload = page_doc.to_dict() or {}
+        payload["page_id"] = page_doc.id
+        pages.append(payload)
+    return sorted(pages, key=lambda item: _coerce_int(item.get("page_index")))
+
+
+def _mark_pdf_job_failed(job_id: str, error_message: str, *, phase: str) -> dict | None:
+    job_ref = db.collection("pdf_jobs").document(job_id)
+    job_ref.set(
+        {
+            "status": "failed",
+            "phase": phase,
+            "error_summary": _sanitize_error_message(error_message),
+            "updated_at": firestore.SERVER_TIMESTAMP,
+            "finished_at": firestore.SERVER_TIMESTAMP,
+        },
+        merge=True,
+    )
+    return _get_pdf_job_or_404(job_id)
+
+
+def _maybe_enqueue_pdf_finalize(job_data: dict) -> bool:
+    job_id = job_data["job_id"]
+    job_ref = db.collection("pdf_jobs").document(job_id)
+
+    @_gc_firestore.transactional
+    def _txn(transaction):
+        current_doc = job_ref.get(transaction=transaction)
+        if not current_doc.exists:
+            return False
+        current_data = current_doc.to_dict() or {}
+        if current_data.get("finalize_enqueued_at"):
+            return False
+        if current_data.get("status") not in {"running", "finalizing"}:
+            return False
+        page_count = _coerce_int(current_data.get("page_count"))
+        terminal_count = _coerce_int(current_data.get("successful_pages")) + _coerce_int(current_data.get("failed_pages"))
+        if page_count <= 0 or terminal_count < page_count:
+            return False
+        transaction.update(
+            job_ref,
+            {
+                "status": "finalizing",
+                "phase": "finalizing",
+                "updated_at": firestore.SERVER_TIMESTAMP,
+                "finalize_enqueued_at": firestore.SERVER_TIMESTAMP,
+            },
+        )
+        return True
+
+    should_enqueue = _txn(db.transaction())
+    if should_enqueue:
+        refreshed = _get_pdf_job_or_404(job_id)
+        if refreshed:
+            _enqueue_pdf_finalize_task(refreshed)
+    return should_enqueue
+
+
+def _refresh_pdf_job_counters(job_id: str) -> dict | None:
+    pages = _load_pdf_job_pages(job_id)
+    page_count = len(pages)
+    successful_pages = sum(1 for page in pages if page.get("status") == "completed")
+    failed_pages = sum(1 for page in pages if page.get("status") == "failed")
+    completed_pages = successful_pages + failed_pages
+    job_ref = db.collection("pdf_jobs").document(job_id)
+    status = "running"
+    phase = "processing_pages"
+    if page_count and completed_pages >= page_count:
+        status = "finalizing"
+        phase = "finalizing"
+    job_ref.set(
+        {
+            "page_count": page_count,
+            "successful_pages": successful_pages,
+            "failed_pages": failed_pages,
+            "completed_pages": completed_pages,
+            "status": status,
+            "phase": phase,
+            "updated_at": firestore.SERVER_TIMESTAMP,
+        },
+        merge=True,
+    )
+    job_data = _get_pdf_job_or_404(job_id)
+    if job_data:
+        _maybe_enqueue_pdf_finalize(job_data)
+    return job_data
+
+
+def _reserve_pdf_page_pro_quota_if_needed(job_data: dict) -> tuple[bool, bool, int, int]:
+    user_email = _normalize_email_identity(job_data.get("user_email"))
+    if not user_email:
+        return True, False, 0, GEMINI_PRO_DEFAULT_LIMIT
+    user_pays = bool(job_data.get("user_vertex_project"))
+    if user_pays or not is_pro_request(job_data.get("engine_options"), job_data.get("llm_model_name")):
+        return True, False, 0, GEMINI_PRO_DEFAULT_LIMIT
+    allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
+    return allowed, True, count, limit
+
 # Authentication middleware function
 def authenticate_request(request):
     """Verify Firebase ID token from various sources."""
@@ -4155,6 +4709,673 @@ def process_image_by_url():
             release_gemini_pro_quota(user_email)
         return jsonify({'error': str(e)}), 500
     
+
+@app.route('/process-pdf-async', methods=['POST', 'OPTIONS'])
+@authenticated_route
+def process_pdf_async():
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    if not user_email or user_email == 'unknown':
+        resp = make_response(jsonify({'error': 'Unable to resolve the authenticated user.'}), 401)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    if 'file' not in request.files:
+        resp = make_response(jsonify({'error': 'No PDF file provided.'}), 400)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    file = request.files['file']
+    filename = secure_filename(file.filename or "")
+    if not filename.lower().endswith('.pdf'):
+        resp = make_response(jsonify({'error': 'Only PDF uploads are supported for async PDF jobs.'}), 400)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    engine_options = request.form.getlist('engines') if 'engines' in request.form else None
+    prompt = request.form.get('prompt') if 'prompt' in request.form else None
+    ocr_only = request.form.get('ocr_only', 'false').lower() == 'true'
+    notebook_mode = request.form.get('notebook_mode', 'false').lower() == 'true'
+    skip_label_collage = request.form.get('skip_label_collage', 'false').lower() == 'true'
+    include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
+    include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
+    llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+    payment_auth = get_payment_auth_context(request)
+    user_gemini_key = payment_auth["gemini_api_key"]
+    user_vertex_project = payment_auth["vertex_project"]
+    user_vertex_region = payment_auth["vertex_region"]
+
+    err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
+    if err:
+        resp = make_response(jsonify({'error': err}), err_status)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    if user_gemini_key:
+        resp = make_response(
+            jsonify({'error': 'Async PDF jobs do not support gemini_api_key yet. Use server billing or a linked Vertex project.'}),
+            400,
+        )
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    if user_vertex_project:
+        user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
+        if project_error:
+            resp = make_response(jsonify({'error': project_error}), 400)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
+        binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
+        if binding_error:
+            resp = make_response(jsonify({'error': binding_error}), 403)
+            resp.headers.add('Access-Control-Allow-Origin', '*')
+            return resp
+
+    if payment_auth["auth_method"] not in PDF_JOB_ALLOWED_SOURCE_TYPES:
+        resp = make_response(
+            jsonify({'error': f"Async PDF jobs support only {sorted(PDF_JOB_ALLOWED_SOURCE_TYPES)} billing modes."}),
+            400,
+        )
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    try:
+        pdf_bytes = file.read()
+    except Exception as e:
+        resp = make_response(jsonify({'error': f'Unable to read uploaded PDF: {e}'}), 400)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    if not pdf_bytes:
+        resp = make_response(jsonify({'error': 'The uploaded PDF is empty.'}), 400)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    request_id = str(uuid.uuid4())
+    analytics_ctx = build_request_analytics_context(
+        request,
+        user_email=user_email,
+        endpoint="/process-pdf-async",
+        auth_ctx=payment_auth,
+        request_id=request_id,
+        prompt=prompt,
+        ocr_only=ocr_only,
+        notebook_mode=notebook_mode,
+        include_wfo=include_wfo,
+        include_cop90=include_cop90,
+        llm_model_name=llm_model_name,
+    )
+
+    job_id = str(uuid.uuid4())
+    expires_at = _pdf_job_expiration_time()
+    public_base_url = _resolve_pdf_job_public_base_url()
+    task_base_url = _resolve_pdf_job_task_base_url()
+    original_blob_path = _pdf_job_blob_path(job_id, "original", filename)
+
+    try:
+        _upload_pdf_job_bytes(original_blob_path, pdf_bytes, content_type="application/pdf")
+    except Exception as e:
+        logger.exception("Failed to upload PDF job source %s", job_id)
+        resp = make_response(jsonify({'error': f'Failed to store PDF for async processing: {e}'}), 500)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    job_payload = {
+        "job_id": job_id,
+        "request_id": request_id,
+        "user_email": user_email,
+        "status": "queued",
+        "phase": "queued",
+        "source_pdf_filename": filename,
+        "original_pdf_blob_path": original_blob_path,
+        "page_count": 0,
+        "completed_pages": 0,
+        "successful_pages": 0,
+        "failed_pages": 0,
+        "engine_options": list(engine_options or []),
+        "prompt": prompt,
+        "ocr_only": bool(ocr_only),
+        "notebook_mode": bool(notebook_mode),
+        "skip_label_collage": bool(skip_label_collage),
+        "include_wfo": bool(include_wfo),
+        "include_cop90": bool(include_cop90),
+        "llm_model_name": llm_model_name,
+        "auth_method": payment_auth["auth_method"],
+        "user_vertex_project": user_vertex_project,
+        "user_vertex_region": user_vertex_region,
+        "authenticated_via": analytics_ctx.get("authenticated_via"),
+        "api_key_owner": analytics_ctx.get("api_key_owner"),
+        "analytics_ctx": analytics_ctx,
+        "download_token": uuid.uuid4().hex,
+        "public_base_url": public_base_url,
+        "task_base_url": task_base_url,
+        "bundle_blob_path": None,
+        "xlsx_blob_path": None,
+        "manifest_blob_path": None,
+        "email_status": "pending",
+        "error_summary": None,
+        "created_at": firestore.SERVER_TIMESTAMP,
+        "updated_at": firestore.SERVER_TIMESTAMP,
+        "started_at": None,
+        "finished_at": None,
+        "expires_at": expires_at,
+    }
+
+    db.collection("pdf_jobs").document(job_id).set(job_payload)
+
+    try:
+        _enqueue_pdf_split_task(job_payload)
+    except Exception as e:
+        logger.exception("Failed to enqueue split task for PDF job %s", job_id)
+        _mark_pdf_job_failed(job_id, f"Queue submission failed: {e}", phase="queue_error")
+        resp = make_response(jsonify({'error': f'Unable to queue PDF job: {e}'}), 500)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    response_payload = _serialize_pdf_job(_get_pdf_job_doc(job_id))
+    response_payload["status_url"] = f"{public_base_url}/pdf-jobs/{job_id}" if public_base_url else f"/pdf-jobs/{job_id}"
+    resp = make_response(json.dumps(response_payload, cls=OrderedJsonEncoder), 202)
+    resp.headers['Content-Type'] = 'application/json'
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
+
+
+@app.route('/pdf-jobs', methods=['GET', 'OPTIONS'])
+@authenticated_route
+def list_pdf_jobs():
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    limit = min(max(_coerce_int(request.args.get("limit"), 10), 1), PDF_JOB_MAX_LIST)
+    jobs = []
+    expired_job_ids = []
+
+    for job_doc in db.collection("pdf_jobs").stream():
+        payload = job_doc.to_dict() or {}
+        payload["job_id"] = job_doc.id
+        if _normalize_email_identity(payload.get("user_email")) != user_email and not _is_admin_email(user_email):
+            continue
+        if _is_pdf_job_expired(payload):
+            expired_job_ids.append(job_doc.id)
+            continue
+        jobs.append(payload)
+
+    for job_id in expired_job_ids:
+        _purge_expired_pdf_job(job_id)
+
+    jobs.sort(
+        key=lambda item: _firestore_timestamp_to_datetime(item.get("created_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
+        reverse=True,
+    )
+    serialized_jobs = []
+    for job in jobs[:limit]:
+        serialized = _serialize_pdf_job(job)
+        serialized["download_url"] = _build_pdf_job_download_url(job)
+        serialized_jobs.append(serialized)
+    payload = {"jobs": serialized_jobs}
+    resp = make_response(json.dumps(payload, cls=OrderedJsonEncoder), 200)
+    resp.headers['Content-Type'] = 'application/json'
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
+
+
+@app.route('/pdf-jobs/<job_id>', methods=['GET', 'OPTIONS'])
+@authenticated_route
+def get_pdf_job(job_id):
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        resp = make_response(jsonify({'error': 'PDF job not found.'}), 404)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+    if _is_pdf_job_expired(job_data):
+        _purge_expired_pdf_job(job_id)
+        resp = make_response(jsonify({'error': 'PDF job has expired.'}), 410)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    allowed, error_message = _assert_pdf_job_owner_or_admin(job_data, user_email)
+    if not allowed:
+        resp = make_response(jsonify({'error': error_message}), 403)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    pages = [_serialize_pdf_job_page(page) for page in _load_pdf_job_pages(job_id)]
+    payload = {
+        "job": {
+            **_serialize_pdf_job(job_data),
+            "download_url": _build_pdf_job_download_url(job_data),
+        },
+        "pages": pages,
+        "download_url": _build_pdf_job_download_url(job_data),
+    }
+    resp = make_response(json.dumps(payload, cls=OrderedJsonEncoder), 200)
+    resp.headers['Content-Type'] = 'application/json'
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
+
+
+@app.route('/pdf-jobs/<job_id>/download', methods=['GET'])
+def download_pdf_job_bundle(job_id):
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        return jsonify({'error': 'PDF job not found.'}), 404
+    if _is_pdf_job_expired(job_data):
+        _purge_expired_pdf_job(job_id)
+        return jsonify({'error': 'PDF job has expired.'}), 410
+
+    token = request.args.get("token")
+    token_authorized = bool(token and token == job_data.get("download_token"))
+
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    owner_authorized = False
+    if user_email and user_email != 'unknown':
+        owner_authorized, _ = _assert_pdf_job_owner_or_admin(job_data, user_email)
+
+    if not token_authorized and not owner_authorized:
+        return jsonify({'error': 'You do not have access to this PDF job download.'}), 403
+
+    bundle_blob_path = job_data.get("bundle_blob_path")
+    if not bundle_blob_path:
+        return jsonify({'error': 'The ZIP bundle is not ready yet.'}), 409
+
+    try:
+        bundle_bytes = _download_pdf_job_bytes(bundle_blob_path)
+    except FileNotFoundError:
+        return jsonify({'error': 'The ZIP bundle is no longer available.'}), 410
+    except Exception as e:
+        logger.exception("Failed to download PDF job bundle %s", job_id)
+        return jsonify({'error': f'Unable to download ZIP bundle: {e}'}), 500
+
+    basename = Path(job_data.get("source_pdf_filename") or f"{job_id}.pdf").stem
+    download_name = f"{basename}_VoucherVisionGO.zip"
+    response = make_response(bundle_bytes)
+    response.headers['Content-Type'] = 'application/zip'
+    response.headers['Content-Disposition'] = f'attachment; filename="{download_name}"'
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@app.route('/internal/pdf-jobs/<job_id>/split', methods=['POST'])
+@internal_pdf_task_route
+def internal_split_pdf_job(job_id):
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        return jsonify({'error': 'PDF job not found.'}), 404
+
+    try:
+        db.collection("pdf_jobs").document(job_id).set(
+            {
+                "status": "running",
+                "phase": "splitting",
+                "started_at": firestore.SERVER_TIMESTAMP,
+                "updated_at": firestore.SERVER_TIMESTAMP,
+                "error_summary": None,
+            },
+            merge=True,
+        )
+        pdf_bytes = _download_pdf_job_bytes(job_data["original_pdf_blob_path"])
+        page_files = convert_pdf_to_page_images(pdf_bytes, job_data["source_pdf_filename"])
+
+        if len(page_files) > PDF_JOB_MAX_PAGES:
+            _mark_pdf_job_failed(
+                job_id,
+                f"PDF has {len(page_files)} pages, exceeding the limit of {PDF_JOB_MAX_PAGES}.",
+                phase="splitting",
+            )
+            return jsonify({'error': 'PDF exceeds the maximum supported page count.'}), 400
+
+        expires_at = job_data.get("expires_at") or _pdf_job_expiration_time()
+        batch = db.batch()
+        for page_index, page_file in enumerate(page_files, start=1):
+            page_file.stream.seek(0)
+            page_bytes = page_file.read()
+            page_blob_path = _pdf_job_blob_path(job_id, "pages", page_file.filename)
+            _upload_pdf_job_bytes(page_blob_path, page_bytes, content_type="image/jpeg")
+            page_ref = db.collection("pdf_jobs").document(job_id).collection("pages").document(f"{page_index:04d}")
+            batch.set(
+                page_ref,
+                {
+                    "page_index": page_index,
+                    "status": "queued",
+                    "attempt_count": 0,
+                    "filename": page_file.filename,
+                    "page_image_blob_path": page_blob_path,
+                    "result_blob_path": None,
+                    "status_code": 0,
+                    "error_message": None,
+                    "total_request_cost_usd": 0.0,
+                    "total_tokens_all": 0,
+                    "created_at": firestore.SERVER_TIMESTAMP,
+                    "updated_at": firestore.SERVER_TIMESTAMP,
+                    "expires_at": expires_at,
+                },
+            )
+        batch.commit()
+
+        db.collection("pdf_jobs").document(job_id).set(
+            {
+                "page_count": len(page_files),
+                "status": "running",
+                "phase": "processing_pages",
+                "updated_at": firestore.SERVER_TIMESTAMP,
+            },
+            merge=True,
+        )
+        refreshed = _get_pdf_job_or_404(job_id)
+        if refreshed:
+            for page_index in range(1, len(page_files) + 1):
+                _enqueue_pdf_page_task(refreshed, page_index)
+
+        return jsonify({'ok': True, 'page_count': len(page_files)}), 200
+    except Exception as e:
+        logger.exception("Failed to split async PDF job %s", job_id)
+        _mark_pdf_job_failed(job_id, str(e), phase="splitting")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/internal/pdf-jobs/<job_id>/pages/<int:page_index>/process', methods=['POST'])
+@internal_pdf_task_route
+def internal_process_pdf_job_page(job_id, page_index):
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        return jsonify({'error': 'PDF job not found.'}), 404
+
+    page_ref = db.collection("pdf_jobs").document(job_id).collection("pages").document(f"{page_index:04d}")
+    page_doc = page_ref.get()
+    if not page_doc.exists:
+        return jsonify({'error': 'PDF job page not found.'}), 404
+    page_data = page_doc.to_dict() or {}
+
+    page_ref.set(
+        {
+            "status": "running",
+            "attempt_count": firestore.Increment(1),
+            "updated_at": firestore.SERVER_TIMESTAMP,
+        },
+        merge=True,
+    )
+
+    quota_reserved = False
+    try:
+        allowed, quota_reserved, count, limit = _reserve_pdf_page_pro_quota_if_needed(job_data)
+        if not allowed:
+            raise RuntimeError(
+                f"Gemini Pro rate limit exceeded for {job_data.get('user_email')}: {count}/{limit}."
+            )
+
+        page_bytes = _download_pdf_job_bytes(page_data["page_image_blob_path"])
+        file_obj = FileStorage(
+            stream=BytesIO(page_bytes),
+            filename=page_data.get("filename") or f"page_{page_index:04d}.jpg",
+            content_type="image/jpeg",
+        )
+        results, status_code = app.config['processor'].process_image_request(
+            file=file_obj,
+            **_build_pdf_job_process_kwargs(job_data),
+        )
+
+        result_blob_path = _pdf_job_blob_path(job_id, "results", f"page_{page_index:04d}.json")
+        _upload_pdf_job_json(result_blob_path, results)
+
+        event = build_usage_event(
+            analytics_ctx=_build_pdf_job_analytics_context(job_data),
+            result=results,
+            status_code=status_code,
+            source_type="pdf_page",
+            filename=page_data.get("filename"),
+            source_pdf=job_data.get("source_pdf_filename"),
+            page_index=page_index,
+            page_count=_coerce_int(job_data.get("page_count")),
+            include_in_rollup="impact" in (results or {}),
+        )
+
+        try:
+            persist_usage_events_and_rollups([event], route_label="/process-pdf-async:page")
+        except Exception:
+            logger.exception(
+                "usage_events write failed route=/process-pdf-async request_id=%s page=%s",
+                job_data.get("request_id"),
+                page_index,
+            )
+
+        page_status = "completed" if event.get("success") else "failed"
+        if page_status != "completed" and quota_reserved:
+            release_gemini_pro_quota(job_data.get("user_email"))
+            quota_reserved = False
+
+        page_ref.set(
+            {
+                "status": page_status,
+                "result_blob_path": result_blob_path,
+                "status_code": status_code,
+                "error_message": event.get("error_message_safe"),
+                "total_request_cost_usd": event.get("total_request_cost_usd"),
+                "total_tokens_all": event.get("total_tokens_all"),
+                "updated_at": firestore.SERVER_TIMESTAMP,
+            },
+            merge=True,
+        )
+        _refresh_pdf_job_counters(job_id)
+        return jsonify({'ok': True, 'status': page_status}), 200
+    except Exception as e:
+        logger.exception("Failed to process PDF job %s page %s", job_id, page_index)
+        if quota_reserved:
+            release_gemini_pro_quota(job_data.get("user_email"))
+        failure_result = OrderedDict([
+            ("filename", page_data.get("filename") or f"page_{page_index:04d}.jpg"),
+            ("prompt", job_data.get("prompt")),
+            ("ocr_info", {"error": _sanitize_error_message(str(e)) or "Page processing failed."}),
+            ("WFO_info", ""),
+            ("COP90_elevation_m", ""),
+            ("ocr", ""),
+            ("formatted_json", ""),
+            ("parsing_info", OrderedDict([
+                ("model", job_data.get("llm_model_name") or ""),
+                ("input", 0),
+                ("output", 0),
+                ("cost_in", 0),
+                ("cost_out", 0),
+            ])),
+            ("impact", {}),
+            ("collage_info", {"error": "Page processing failed."}),
+            ("collage_image_format", ""),
+            ("success", {
+                "image_available": "True",
+                "text_collage": "False",
+                "text_collage_resize": "False",
+                "ocr": "False",
+                "llm": "False",
+            }),
+        ])
+        failure_event = build_usage_event(
+            analytics_ctx=_build_pdf_job_analytics_context(job_data),
+            result=failure_result,
+            status_code=500,
+            source_type="pdf_page",
+            filename=page_data.get("filename"),
+            source_pdf=job_data.get("source_pdf_filename"),
+            page_index=page_index,
+            page_count=_coerce_int(job_data.get("page_count")),
+            success=False,
+            include_in_rollup=False,
+            error_type="processing_failure",
+            error_message_safe=str(e),
+        )
+        try:
+            record_usage_event(failure_event)
+        except Exception:
+            logger.exception(
+                "usage_events write failed route=/process-pdf-async request_id=%s page=%s failure",
+                job_data.get("request_id"),
+                page_index,
+            )
+        page_ref.set(
+            {
+                "status": "failed",
+                "status_code": 500,
+                "error_message": _sanitize_error_message(str(e)),
+                "updated_at": firestore.SERVER_TIMESTAMP,
+            },
+            merge=True,
+        )
+        _refresh_pdf_job_counters(job_id)
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/internal/pdf-jobs/<job_id>/finalize', methods=['POST'])
+@internal_pdf_task_route
+def internal_finalize_pdf_job(job_id):
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        return jsonify({'error': 'PDF job not found.'}), 404
+
+    try:
+        pages = _load_pdf_job_pages(job_id)
+        successful_outputs = []
+        manifest_pages = []
+
+        for page in pages:
+            page_summary = {
+                "page_index": _coerce_int(page.get("page_index")),
+                "filename": page.get("filename"),
+                "status": page.get("status"),
+                "status_code": _coerce_int(page.get("status_code")),
+                "error_message": page.get("error_message"),
+                "result_blob_path": page.get("result_blob_path"),
+            }
+            manifest_pages.append(page_summary)
+
+            result_blob_path = page.get("result_blob_path")
+            if page.get("status") == "completed" and result_blob_path:
+                try:
+                    result_payload = json.loads(_download_pdf_job_bytes(result_blob_path).decode("utf-8"))
+                except Exception as e:
+                    logger.warning("Unable to load page result for job %s page %s: %s", job_id, page.get("page_index"), e)
+                    continue
+                result_payload["page_index"] = _coerce_int(page.get("page_index"))
+                result_payload.setdefault("filename", page.get("filename"))
+                successful_outputs.append(result_payload)
+
+        manifest = {
+            "job_id": job_id,
+            "request_id": job_data.get("request_id"),
+            "source_pdf_filename": job_data.get("source_pdf_filename"),
+            "status": "completed_with_errors" if _coerce_int(job_data.get("failed_pages")) else "completed",
+            "page_count": len(pages),
+            "successful_pages": sum(1 for page in pages if page.get("status") == "completed"),
+            "failed_pages": sum(1 for page in pages if page.get("status") == "failed"),
+            "created_at": _format_event_timestamp(job_data.get("created_at")),
+            "expires_at": _format_event_timestamp(job_data.get("expires_at")),
+            "pages": manifest_pages,
+        }
+
+        manifest_blob_path = _pdf_job_blob_path(job_id, "bundle", "manifest.json")
+        xlsx_blob_path = _pdf_job_blob_path(job_id, "bundle", "results.xlsx")
+        bundle_blob_path = _pdf_job_blob_path(job_id, "bundle", "results.zip")
+
+        _upload_pdf_job_json(manifest_blob_path, manifest)
+        xlsx_bytes = _create_pdf_job_xlsx_bytes(successful_outputs)
+        _upload_pdf_job_bytes(
+            xlsx_blob_path,
+            xlsx_bytes,
+            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        )
+
+        zip_buffer = io.BytesIO()
+        with zipfile.ZipFile(zip_buffer, "w", compression=zipfile.ZIP_DEFLATED) as zip_file:
+            zip_file.writestr("manifest.json", json.dumps(manifest, cls=OrderedJsonEncoder, ensure_ascii=False, indent=2))
+            zip_file.writestr("results.xlsx", xlsx_bytes)
+            for page in pages:
+                result_blob_path = page.get("result_blob_path")
+                page_label = f"page_{_coerce_int(page.get('page_index')):04d}"
+                if result_blob_path:
+                    try:
+                        zip_file.writestr(
+                            f"results/{page_label}.json",
+                            _download_pdf_job_bytes(result_blob_path),
+                        )
+                        continue
+                    except Exception:
+                        logger.exception("Unable to include page result %s in ZIP", result_blob_path)
+                zip_file.writestr(
+                    f"results/{page_label}_error.json",
+                    json.dumps(
+                        {
+                            "page_index": _coerce_int(page.get("page_index")),
+                            "filename": page.get("filename"),
+                            "status": page.get("status"),
+                            "error_message": page.get("error_message"),
+                        },
+                        ensure_ascii=False,
+                        indent=2,
+                    ),
+                )
+        _upload_pdf_job_bytes(bundle_blob_path, zip_buffer.getvalue(), content_type="application/zip")
+
+        final_status = "completed_with_errors" if manifest["failed_pages"] else "completed"
+        db.collection("pdf_jobs").document(job_id).set(
+            {
+                "status": final_status,
+                "phase": "completed",
+                "bundle_blob_path": bundle_blob_path,
+                "xlsx_blob_path": xlsx_blob_path,
+                "manifest_blob_path": manifest_blob_path,
+                "updated_at": firestore.SERVER_TIMESTAMP,
+                "finished_at": firestore.SERVER_TIMESTAMP,
+                "email_status": "queued",
+            },
+            merge=True,
+        )
+        refreshed = _get_pdf_job_or_404(job_id)
+        if refreshed:
+            try:
+                _enqueue_pdf_email_task(refreshed)
+            except Exception as e:
+                logger.exception("Failed to enqueue PDF completion email for job %s", job_id)
+                db.collection("pdf_jobs").document(job_id).set(
+                    {
+                        "email_status": "failed",
+                        "updated_at": firestore.SERVER_TIMESTAMP,
+                        "error_summary": _sanitize_error_message(
+                            refreshed.get("error_summary") or f"Email queue error: {e}"
+                        ),
+                    },
+                    merge=True,
+                )
+        return jsonify({'ok': True, 'status': final_status}), 200
+    except Exception as e:
+        logger.exception("Failed to finalize PDF job %s", job_id)
+        _mark_pdf_job_failed(job_id, str(e), phase="finalizing")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/internal/pdf-jobs/<job_id>/send-email', methods=['POST'])
+@internal_pdf_task_route
+def internal_send_pdf_job_email(job_id):
+    job_data = _get_pdf_job_or_404(job_id)
+    if not job_data:
+        return jsonify({'error': 'PDF job not found.'}), 404
+
+    try:
+        email_sent = _send_pdf_job_completion_email(job_data)
+        db.collection("pdf_jobs").document(job_id).set(
+            {
+                "email_status": "sent" if email_sent else "failed",
+                "email_sent_at": firestore.SERVER_TIMESTAMP if email_sent else None,
+                "updated_at": firestore.SERVER_TIMESTAMP,
+            },
+            merge=True,
+        )
+        return jsonify({'ok': True, 'email_sent': email_sent}), 200
+    except Exception as e:
+        logger.exception("Failed to send PDF job email %s", job_id)
+        db.collection("pdf_jobs").document(job_id).set(
+            {
+                "email_status": "failed",
+                "updated_at": firestore.SERVER_TIMESTAMP,
+            },
+            merge=True,
+        )
+        return jsonify({'error': str(e)}), 500
+
 
 @app.route('/impact', methods=['GET'])
 @authenticated_route

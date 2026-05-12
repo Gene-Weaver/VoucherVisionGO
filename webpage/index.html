@@ -33,14 +33,15 @@ http://localhost:8000/index2.html
     <script>if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
-    <script src="js/index_ui.js?v=38"></script>
-    <script src="js/vouchervisiongo.js?v=38"></script>
-    <script src="js/batch_processing.js?v=38"></script>
-    <script src="js/api_key_validator.js?v=38"></script>
+    <script src="js/index_ui.js?v=39"></script>
+    <script src="js/vouchervisiongo.js?v=39"></script>
+    <script src="js/batch_processing.js?v=39"></script>
+    <script src="js/pdf_jobs.js?v=39"></script>
+    <script src="js/api_key_validator.js?v=39"></script>
     <script src="js/prompt_templates.js?v=38"></script>
     <script src="js/changelog_viewer.js?v=38"></script>
 
-    <link rel="stylesheet" href="css/vouchervisiongo.css?v=38">
+    <link rel="stylesheet" href="css/vouchervisiongo.css?v=40">
     <script>
         function addMapboxToHead() {
             if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
@@ -368,12 +369,14 @@ http://localhost:8000/index2.html
                             <div class="tab" data-tab="FileUpload">File Upload</div>
                             <div class="tab" data-tab="BatchUrls">Batch URLs</div>
                             <div class="tab" data-tab="BatchFolder">Batch Folder</div>
+                            <div class="tab" data-tab="PDFJobs">PDF Jobs</div>
                         </div>
 
                         <div id="FileUpload" class="tab-content">
                              <div class="form-group file-input-container">
-                                 <label for="fileInput">Select an image or PDF file:</label>
-                                 <input type="file" id="fileInput" accept="image/*,.pdf,application/pdf">
+                                 <label for="fileInput">Select an image file:</label>
+                                 <input type="file" id="fileInput" accept="image/*">
+                                 <p class="pdf-routing-note">PDFs now use the PDF Jobs tab.</p>
                              </div>
                              <button id="uploadButton" class="button">Run VoucherVision</button>
                         </div>
@@ -408,6 +411,7 @@ http://localhost:8000/index2.html
                                             data-url="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1500329:MICH-V-1500329/full/res:0/0/native.jpg">Liriodendron tulipifera (Challenging Handwritten Text)</a>
                                     </span>
                                 </div>
+                                <p class="pdf-routing-note">PDFs now use the PDF Jobs tab.</p>
                             </div>
                             <button id="processUrlButton" class="button">Run VoucherVision</button>
                         </div>
@@ -417,6 +421,7 @@ http://localhost:8000/index2.html
                             <div class="form-group">
                                 <label>Upload URL List:</label>
                                 <p class="help-text">Upload a text file (.txt) with one URL per line or a CSV file (.csv) with URLs in a column.</p>
+                                <p class="pdf-routing-note">PDF URLs are not accepted here. PDFs now use the PDF Jobs tab.</p>
                                 <input type="file" id="batchUrlFileInput" accept=".txt,.csv">
                                 <div id="urlFilePreview" class="file-list"></div>
                             </div>
@@ -471,8 +476,9 @@ http://localhost:8000/index2.html
                         <!-- Batch Folder Processing -->
                         <div id="BatchFolder" class="tab-content">
                             <div class="folder-drop-zone" id="imageFolderDropZone">
-                                <p>Drop image or PDF files here or</p>
-                                <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*,.pdf,application/pdf">
+                                <p>Drop image files here or</p>
+                                <input type="file" id="imageFolderInput" webkitdirectory directory multiple accept="image/*">
+                                <p class="pdf-routing-note">PDFs now use the PDF Jobs tab.</p>
                                 <div id="selectedFilesList" class="file-list"></div>
                             </div>
 
@@ -501,6 +507,44 @@ http://localhost:8000/index2.html
                                 </div>
                             </div>
 
+                        </div>
+
+                        <div id="PDFJobs" class="tab-content">
+                            <div class="form-group file-input-container">
+                                <label for="pdfJobFileInput">Select a PDF file:</label>
+                                <input type="file" id="pdfJobFileInput" accept=".pdf,application/pdf">
+                                <p class="help-text">PDF uploads run asynchronously, build a ZIP/XLSX bundle, and email you a download link when ready.</p>
+                                <p class="pdf-routing-note">Available for 1 week after processing completes.</p>
+                            </div>
+                            <button id="submitPdfJobButton" class="button">Start PDF Job</button>
+
+                            <div id="pdfJobStatus" class="pdf-job-status empty">
+                                <p>No PDF job running right now.</p>
+                            </div>
+
+                            <div class="pdf-jobs-recent">
+                                <div class="pdf-jobs-recent-header">
+                                    <h4>Recent PDF Jobs</h4>
+                                    <button id="refreshPdfJobsButton" class="button secondary-button">Refresh</button>
+                                </div>
+                                <table class="pdf-jobs-table">
+                                    <thead>
+                                        <tr>
+                                            <th>PDF</th>
+                                            <th>Status</th>
+                                            <th>Pages</th>
+                                            <th>Email</th>
+                                            <th>Expires</th>
+                                            <th>Download</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="pdfJobsTableBody">
+                                        <tr>
+                                            <td colspan="6" class="pdf-jobs-empty">No PDF jobs yet.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -587,6 +631,11 @@ http://localhost:8000/index2.html
                             style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
                     </div>
 
+                    <!-- Vertex AI billing setup guide -->
+                    <hr style="margin: 28px 0; border: none; border-top: 1px solid #ddd;">
+                    <div id="vertexBillingGuide" class="readme-section" style="box-shadow:none; padding:0;">
+                        <p class="help-text">Loading Vertex AI billing setup guide...</p>
+                    </div>
                 </div>
             </div>
 

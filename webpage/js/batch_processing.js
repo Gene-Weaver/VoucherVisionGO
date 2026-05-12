@@ -109,6 +109,9 @@ async function processBatchUrls(urls, concurrency, options = {}) {
         const url = urlData.url;
         try {
             logDebug(`Processing URL: ${url}`);
+            if (typeof looksLikePdfUrl === 'function' && looksLikePdfUrl(url)) {
+                throw new Error('PDF URLs are not accepted here. Use the PDF Jobs tab.');
+            }
     
             // Get authentication headers
             const headers = getAuthHeaders();
@@ -1407,6 +1410,18 @@ $(document).ready(function() {
                             </ul>
                         `);
                     }
+
+                    const pdfUrls = parsedData.urls.filter(item =>
+                        typeof looksLikePdfUrl === 'function' && looksLikePdfUrl(item.url)
+                    );
+                    if (pdfUrls.length > 0) {
+                        $('#urlFilePreview').html(`
+                            <p class="error"><strong>PDF URLs detected:</strong> ${pdfUrls.length} URL(s) point to PDFs. Batch URLs is image-only. Use the PDF Jobs tab for PDFs.</p>
+                        `);
+                        $('#processBatchUrlsButton').prop('disabled', true);
+                        $('#batchUrlFileInput')[0].parsedData = null;
+                        return;
+                    }
                     
                     // Store parsed data for later use
                     $('#batchUrlFileInput')[0].parsedData = parsedData;
@@ -1491,6 +1506,8 @@ $(document).ready(function() {
     
     // Process image files (from drop or input)
     function handleImageFiles(files) {
+        const fileList = Array.from(files);
+        const pdfFiles = fileList.filter(file => file.name && file.name.toLowerCase().endsWith('.pdf'));
         const imageFiles = Array.from(files).filter(file => {
             const fileType = file.type.toLowerCase();
             return fileType.startsWith('image/');
@@ -1498,7 +1515,7 @@ $(document).ready(function() {
         
         if (imageFiles.length === 0) {
             $('#selectedFilesList').html(`
-                <p class="error">No image files found. Please select image files.</p>
+                <p class="error">No image files found. Please select image files. PDFs now use the PDF Jobs tab.</p>
             `);
             $('#processBatchImagesButton').prop('disabled', true);
             return;
@@ -1510,6 +1527,7 @@ $(document).ready(function() {
         // Display file list
         $('#selectedFilesList').html(`
             <p><strong>Selected ${imageFiles.length} image files:</strong></p>
+            ${pdfFiles.length > 0 ? `<p class="pdf-routing-note">${pdfFiles.length} PDF file(s) were ignored. PDFs now use the PDF Jobs tab.</p>` : ''}
             <ul>
                 ${imageFiles.slice(0, 10).map(file => 
                     `<li>${file.name} (${(file.size / 1024).toFixed(2)} KB)</li>`).join('')}

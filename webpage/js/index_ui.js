@@ -363,6 +363,29 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('impactTabContent').innerHTML = '<div class="error">Error loading IMPACT.md.</div>';
         });
 
+    // Load the Vertex AI billing setup guide into the API Settings tab.
+    // Image refs in the source MD are bare filenames (e.g. cloud_home.png);
+    // rewrite them to the Vertex_Passing_Guide/ subfolder so the static server
+    // serves them from the right place.
+    const vertexBillingEl = document.getElementById('vertexBillingGuide');
+    if (vertexBillingEl) {
+        fetch('./Vertex_Passing_Guide/enable_vertex_billing.md')
+            .then(response => { if (!response.ok) throw new Error('Network response was not ok'); return response.text(); })
+            .then(data => {
+                // Rewrite bare ![alt](xyz.png) refs to point at the subfolder.
+                const rewritten = data.replace(
+                    /!\[([^\]]*)\]\(([^)\/]+\.(?:png|jpe?g|gif|svg|webp))\)/gi,
+                    '![$1](Vertex_Passing_Guide/$2)'
+                );
+                const converter = new showdown.Converter({ tables: true, tasklists: true, strikethrough: true, ghCodeBlocks: true });
+                vertexBillingEl.innerHTML = converter.makeHtml(rewritten);
+            })
+            .catch(error => {
+                console.error('Error fetching Vertex billing guide:', error);
+                vertexBillingEl.innerHTML = '<div class="error">Error loading Vertex AI billing setup guide.</div>';
+            });
+    }
+
     // LLM model change logging
     document.querySelectorAll('input[name="llm_model"]').forEach(radio => {
         radio.addEventListener('change', function() {
