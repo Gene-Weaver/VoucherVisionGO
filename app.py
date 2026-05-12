@@ -2824,13 +2824,24 @@ def _verify_internal_pdf_task_request() -> tuple[bool, str | None]:
             return False, "Missing task bearer token."
         token = auth_header.split("Bearer ", 1)[1]
         try:
-            claims = google_id_token.verify_token(
-                token,
-                GoogleAuthRequest(),
-                audience=request.base_url,
-            )
+            claims = google_id_token.verify_token(token, GoogleAuthRequest())
         except Exception as e:
             return False, f"Task token verification failed: {e}"
+
+        forwarded_proto = request.headers.get("X-Forwarded-Proto", "").split(",")[0].strip()
+        base_url = request.base_url
+        candidates = {base_url}
+        if forwarded_proto in ("http", "https") and "://" in base_url:
+            candidates.add(forwarded_proto + base_url.split("://", 1)[1])
+        if base_url.startswith("http://"):
+            candidates.add("https://" + base_url[len("http://"):])
+        elif base_url.startswith("https://"):
+            candidates.add("http://" + base_url[len("https://"):])
+        if claims.get("aud") not in candidates:
+            return False, (
+                f"Token has wrong audience {claims.get('aud')}, "
+                f"expected one of {sorted(candidates)}"
+            )
         if claims.get("email") != PDF_JOB_TASK_SERVICE_ACCOUNT:
             return False, "Unexpected task service account."
 
