@@ -71,7 +71,7 @@ sys.path.insert(0, text_collage_path)
 
 
 def setup_cloud_logging():
-    """Setup structured logging for Google Cloud Run"""
+    """Setup exactly one logging sink for direct runs or Gunicorn."""
     import json
     import sys
 
@@ -92,21 +92,30 @@ def setup_cloud_logging():
                 log_entry['request_id'] = record.request_id
             return json.dumps(log_entry)
 
-    # Configure root logger — clear ALL existing handlers first to prevent
-    # duplicate log lines from gunicorn/flask/root all writing to stdout.
     root_logger = logging.getLogger()
     for handler in root_logger.handlers[:]:
         root_logger.removeHandler(handler)
+        try:
+            handler.close()
+        except Exception:
+            pass
 
-    handler = logging.StreamHandler(sys.stdout)
-    if os.environ.get('ENV') == 'production':
-        handler.setFormatter(CloudFormatter())
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    if gunicorn_logger.handlers:
+        for handler in gunicorn_logger.handlers:
+            root_logger.addHandler(handler)
+        root_logger.setLevel(gunicorn_logger.level or logging.INFO)
+        gunicorn_logger.propagate = False
     else:
-        handler.setFormatter(logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        ))
-    root_logger.addHandler(handler)
-    root_logger.setLevel(logging.INFO)
+        handler = logging.StreamHandler(sys.stdout)
+        if os.environ.get('ENV') == 'production':
+            handler.setFormatter(CloudFormatter())
+        else:
+            handler.setFormatter(logging.Formatter(
+                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            ))
+        root_logger.addHandler(handler)
+        root_logger.setLevel(logging.INFO)
 
     # Silence noisy third-party loggers
     for noisy_logger in [
@@ -143,7 +152,7 @@ if os.path.exists(vouchervision_main_path):
 try:
     from vouchervision.OCR_Gemini import OCRGeminiProVision # type: ignore
     from vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, markdown_to_simple_text # type: ignore
-    from vouchervision.vouchervision_main import load_custom_cfg # type: ignore
+    from vouchervision.vouchervision_main_slim import load_custom_cfg # type: ignore
     from vouchervision.utils_VoucherVision import VoucherVision # type: ignore
     from vouchervision.LLM_GoogleGemini import GoogleGeminiHandler # type: ignore
     from vouchervision.model_maps import ModelMaps # type: ignore
@@ -153,7 +162,7 @@ except Exception as e:
     logger.error(f"Import ERROR: {e}")
     from vouchervision_main.vouchervision.OCR_Gemini import OCRGeminiProVision
     from vouchervision_main.vouchervision.OCR_sanitize import strip_headers, sanitize_for_storage, sanitize_excel_record, markdown_to_simple_text
-    from vouchervision_main.vouchervision.vouchervision_main import load_custom_cfg
+    from vouchervision_main.vouchervision.vouchervision_main_slim import load_custom_cfg
     from vouchervision_main.vouchervision.utils_VoucherVision import VoucherVision
     from vouchervision_main.vouchervision.LLM_GoogleGemini import GoogleGeminiHandler
     from vouchervision_main.vouchervision.model_maps import ModelMaps
@@ -374,6 +383,65 @@ def _validate_vertex_params(api_key, project, region):
             400,
         )
     return (None, None)
+
+
+PAYMENT_AUTH_PARAM_ALIASES = {
+    "gemini_api_key": ("gemini_api_key", "geminiApiKey"),
+    "vertex_project": ("vertex_project", "vertexProject"),
+    "vertex_region": ("vertex_region", "vertexRegion"),
+}
+
+
+def _clean_optional_request_value(value):
+    if value is None:
+        return None
+    if isinstance(value, str):
+        value = value.strip()
+        return value or None
+    return value
+
+
+def _lookup_request_value(container, field_name):
+    if not container:
+        return None
+    for alias in PAYMENT_AUTH_PARAM_ALIASES[field_name]:
+        value = _clean_optional_request_value(container.get(alias))
+        if value is not None:
+            return value
+    return None
+
+
+def get_payment_auth_context(req):
+    """Resolve per-request Gemini/Vertex billing inputs across form, JSON, and query params."""
+    json_body = req.get_json(silent=True) if req.is_json else {}
+    request_sources = (
+        req.form,
+        json_body or {},
+        req.args,
+    )
+
+    gemini_api_key = None
+    vertex_project = None
+    vertex_region = None
+
+    for source in request_sources:
+        gemini_api_key = gemini_api_key or _lookup_request_value(source, "gemini_api_key")
+        vertex_project = vertex_project or _lookup_request_value(source, "vertex_project")
+        vertex_region = vertex_region or _lookup_request_value(source, "vertex_region")
+
+    if vertex_project:
+        auth_method = "user_vertex"
+    elif gemini_api_key:
+        auth_method = "user_gemini"
+    else:
+        auth_method = "server"
+
+    return {
+        "gemini_api_key": gemini_api_key,
+        "vertex_project": vertex_project,
+        "vertex_region": vertex_region,
+        "auth_method": auth_method,
+    }
 
 def is_gemini_pro_model(model_name: str | None) -> bool:
     """Return True if *model_name* is a Gemini Pro model."""
@@ -995,6 +1063,34 @@ def _apply_impact_backfill(user_ref, data: dict, backfill_tokens: int = 5000) ->
 AUTH_METHODS = ("server", "user_gemini", "user_vertex")
 
 
+def _coerce_auth_metric(value, caster):
+    try:
+        return caster(value or 0)
+    except (TypeError, ValueError):
+        return caster(0)
+
+
+def _empty_auth_method_bucket(caster):
+    return {method: caster(0) for method in AUTH_METHODS}
+
+
+def _normalize_auth_method_totals(raw_map, caster):
+    bucket = _empty_auth_method_bucket(caster)
+    if isinstance(raw_map, dict):
+        for method in AUTH_METHODS:
+            bucket[method] = _coerce_auth_metric(raw_map.get(method), caster)
+    return bucket
+
+
+def _normalize_auth_method_monthly(raw_map, current_month, caster):
+    monthly = {}
+    if isinstance(raw_map, dict):
+        for month, raw_bucket in raw_map.items():
+            monthly[str(month)] = _normalize_auth_method_totals(raw_bucket, caster)
+    monthly.setdefault(current_month, _empty_auth_method_bucket(caster))
+    return monthly
+
+
 def update_usage_statistics(
     user_email: str,
     engines: list[str] | None = None,
@@ -1070,6 +1166,28 @@ def update_usage_statistics(
             if llm_model_name:
                 llm_info[llm_model_name] = llm_info.get(llm_model_name, 0) + 1
 
+            auth_method_usage = _normalize_auth_method_totals(
+                data.get("auth_method_usage"), int
+            )
+            auth_method_monthly = _normalize_auth_method_monthly(
+                data.get("auth_method_monthly"), current_month, int
+            )
+            cost_by_auth_method = _normalize_auth_method_totals(
+                data.get("cost_by_auth_method"), float
+            )
+            cost_monthly_by_auth = _normalize_auth_method_monthly(
+                data.get("cost_monthly_by_auth"), current_month, float
+            )
+
+            cost_total_usd = _coerce_auth_metric(data.get("cost_total_usd"), float)
+            if auth_method in AUTH_METHODS:
+                auth_method_usage[auth_method] += 1
+                auth_method_monthly[current_month][auth_method] += 1
+                if request_cost_usd and request_cost_usd > 0:
+                    cost_total_usd += float(request_cost_usd)
+                    cost_by_auth_method[auth_method] += float(request_cost_usd)
+                    cost_monthly_by_auth[current_month][auth_method] += float(request_cost_usd)
+
             increments = {
                 "total_images_processed": firestore.Increment(1),
                 "total_tokens_all": firestore.Increment(t_all),
@@ -1077,14 +1195,6 @@ def update_usage_statistics(
                 "total_grams_CO2": firestore.Increment(gco2),
                 "total_mL_water": firestore.Increment(h2o),
             }
-
-            if auth_method in AUTH_METHODS:
-                increments[f"auth_method_usage.{auth_method}"] = firestore.Increment(1)
-                increments[f"auth_method_monthly.{current_month}.{auth_method}"] = firestore.Increment(1)
-                if request_cost_usd and request_cost_usd > 0:
-                    increments["cost_total_usd"] = firestore.Increment(float(request_cost_usd))
-                    increments[f"cost_by_auth_method.{auth_method}"] = firestore.Increment(float(request_cost_usd))
-                    increments[f"cost_monthly_by_auth.{current_month}.{auth_method}"] = firestore.Increment(float(request_cost_usd))
 
             # Auto-initialise the limit field for existing users (count is
             # now managed by check_and_reserve_gemini_pro_quota)
@@ -1099,6 +1209,12 @@ def update_usage_statistics(
                 "daily_usage": daily_usage,
                 "ocr_info": ocr_info,
                 "llm_info": llm_info,
+                "auth_method_usage": auth_method_usage,
+                "auth_method_monthly": auth_method_monthly,
+                "cost_total_usd": cost_total_usd,
+                "cost_by_auth_method": cost_by_auth_method,
+                "cost_monthly_by_auth": cost_monthly_by_auth,
+                "last_auth_method": auth_method or "unknown",
             })
 
         else:
@@ -1119,10 +1235,10 @@ def update_usage_statistics(
             # Seed auth-method + cost maps so the doc shape is predictable
             # from the first request. The selected method gets a 1 (and the
             # request's cost, if any); the other two are pinned to 0.
-            auth_method_usage = {m: 0 for m in AUTH_METHODS}
-            auth_method_monthly = {current_month: {m: 0 for m in AUTH_METHODS}}
-            cost_by_auth_method = {m: 0.0 for m in AUTH_METHODS}
-            cost_monthly_by_auth = {current_month: {m: 0.0 for m in AUTH_METHODS}}
+            auth_method_usage = _empty_auth_method_bucket(int)
+            auth_method_monthly = {current_month: _empty_auth_method_bucket(int)}
+            cost_by_auth_method = _empty_auth_method_bucket(float)
+            cost_monthly_by_auth = {current_month: _empty_auth_method_bucket(float)}
             cost_total_usd = 0.0
             if auth_method in AUTH_METHODS:
                 auth_method_usage[auth_method] = 1
@@ -1152,6 +1268,7 @@ def update_usage_statistics(
                 "cost_total_usd": cost_total_usd,
                 "cost_by_auth_method": cost_by_auth_method,
                 "cost_monthly_by_auth": cost_monthly_by_auth,
+                "last_auth_method": auth_method or "unknown",
                 "backfill_applied_v2": True,  # Nothing to backfill yet
                 "backfill_tokens": backfill_tokens,
                 "last_impact_snapshot": est_impact,
@@ -2829,9 +2946,10 @@ def process_image():
     include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
-    user_gemini_key = request.form.get('gemini_api_key') or None  # None = fall back to server key
-    user_vertex_project = request.form.get('vertex_project') or None
-    user_vertex_region = request.form.get('vertex_region') or None
+    payment_auth = get_payment_auth_context(request)
+    user_gemini_key = payment_auth["gemini_api_key"]
+    user_vertex_project = payment_auth["vertex_project"]
+    user_vertex_region = payment_auth["vertex_region"]
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
@@ -2839,15 +2957,14 @@ def process_image():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
-    # Classify which of the three payment paths this request uses, for usage
-    # tracking. "server" = VVGO's env API_KEY pays, "user_gemini" = the user's
-    # AI Studio key pays, "user_vertex" = the user's GCP project pays.
-    if user_vertex_project:
-        auth_method = "user_vertex"
-    elif user_gemini_key:
-        auth_method = "user_gemini"
-    else:
-        auth_method = "server"
+    auth_method = payment_auth["auth_method"]
+    logger.info(
+        "Resolved payment auth for /process user=%s method=%s vertex=%s gemini_key=%s",
+        user_email,
+        auth_method,
+        bool(user_vertex_project),
+        bool(user_gemini_key),
+    )
 
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
@@ -2990,9 +3107,10 @@ def process_image_by_url():
         include_wfo = data.get('include_wfo', True)
         include_cop90 = data.get('include_cop90', True)
         llm_model_name = data.get('llm_model')
-        user_gemini_key = data.get('gemini_api_key') or None
-        user_vertex_project = data.get('vertex_project') or None
-        user_vertex_region = data.get('vertex_region') or None
+        payment_auth = get_payment_auth_context(request)
+        user_gemini_key = payment_auth["gemini_api_key"]
+        user_vertex_project = payment_auth["vertex_project"]
+        user_vertex_region = payment_auth["vertex_region"]
 
     # Handle form data request
     else:
@@ -3010,9 +3128,10 @@ def process_image_by_url():
         include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
         include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
-        user_gemini_key = request.form.get('gemini_api_key') or None
-        user_vertex_project = request.form.get('vertex_project') or None
-        user_vertex_region = request.form.get('vertex_region') or None
+        payment_auth = get_payment_auth_context(request)
+        user_gemini_key = payment_auth["gemini_api_key"]
+        user_vertex_project = payment_auth["vertex_project"]
+        user_vertex_region = payment_auth["vertex_region"]
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
@@ -3020,14 +3139,14 @@ def process_image_by_url():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
-    # Classify which of the three payment paths this request uses, for usage
-    # tracking.
-    if user_vertex_project:
-        auth_method = "user_vertex"
-    elif user_gemini_key:
-        auth_method = "user_gemini"
-    else:
-        auth_method = "server"
+    auth_method = payment_auth["auth_method"]
+    logger.info(
+        "Resolved payment auth for /process-url user=%s method=%s vertex=%s gemini_key=%s",
+        user_email,
+        auth_method,
+        bool(user_vertex_project),
+        bool(user_gemini_key),
+    )
 
     # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     pro_quota_reserved = False
@@ -5274,23 +5393,9 @@ def changelog_ui():
 
 
 if __name__ == '__main__':
-    # Only configure logging when running directly (not under Gunicorn)
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    )
-    
     port = int(os.environ.get('PORT', 8080))
     logger.info('VoucherVision service is starting up directly (not under Gunicorn)...')
     app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
 else:
-    # Under Gunicorn: use gunicorn's handler as the single root handler
-    # to avoid duplicate log lines from multiple handlers
-    gunicorn_logger = logging.getLogger('gunicorn.error')
-    root = logging.getLogger()
-    root.handlers = gunicorn_logger.handlers
-    root.setLevel(gunicorn_logger.level)
-    # Stop Flask from adding its own handler
-    app.logger.handlers = []
     app.logger.propagate = True
     logger.info('VoucherVision service starting under Gunicorn')
