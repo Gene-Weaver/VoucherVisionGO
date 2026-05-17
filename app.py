@@ -8839,6 +8839,48 @@ def list_user_prompts():
         return jsonify({'error': 'Failed to list user prompts'}), 500
 
 
+@app.route('/admin/user-prompts', methods=['GET'])
+@authenticated_route
+def admin_list_all_user_prompts():
+    """Admin-only: list ALL user-generated prompts across all owners.
+
+    By default returns only `active=True` prompts. Pass `?include_inactive=true`
+    to also include soft-deleted records (for audit views).
+    """
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = _normalize_email_identity(user.get('email'))
+    if not admin_email or not _is_admin_email(admin_email):
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    include_inactive = (request.args.get('include_inactive') or '').lower() == 'true'
+
+    try:
+        if include_inactive:
+            docs = list(db.collection('user_prompts').stream())
+        else:
+            docs = list(
+                db.collection('user_prompts')
+                .where(filter=FieldFilter('active', '==', True))
+                .stream()
+            )
+        prompts = [_serialize_user_prompt(d, include_owner=True) for d in docs]
+        prompts.sort(key=lambda p: (p.get('created_at') or ''), reverse=True)
+        return jsonify({
+            'status': 'success',
+            'count': len(prompts),
+            'prompts': prompts,
+        })
+    except Exception as e:
+        logger.error(
+            "Failed to list all user prompts [category=%s]",
+            _user_prompt_error_category(e),
+        )
+        return jsonify({'error': 'Failed to list user prompts'}), 500
+
+
 @app.route('/user-prompts/upload', methods=['POST'])
 @authenticated_route
 def upload_user_prompt():

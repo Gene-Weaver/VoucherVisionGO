@@ -42,6 +42,7 @@
           <button class="tab-button active" data-tab="user-applications">User Applications</button>
           <button class="tab-button" data-tab="api-keys">API Keys</button>
           <button class="tab-button" data-tab="vertex-projects">Vertex Projects</button>
+          <button class="tab-button" data-tab="user-prompts">User Prompts</button>
           <button class="tab-button" data-tab="admins">Manage Admins</button>
           <button class="tab-button" data-tab="usage-stats">Usage Statistics</button>
           <button class="tab-button" data-tab="new-users">New Users</button>
@@ -157,7 +158,76 @@
             <!-- Pagination buttons will be generated here -->
           </div>
         </div>
-        
+
+        <!-- User Prompts Tab -->
+        <div id="user-prompts" class="tab-content">
+          <h3>User-Generated Prompts</h3>
+          <p class="table-subtitle">
+            Grant or revoke the <code>prompt_upload_access</code> privilege per user, and manage every uploaded prompt across all owners.
+          </p>
+
+          <div class="up-admin-section" style="margin: 18px 0; padding: 14px; border: 1px solid #ddd; border-radius: 6px; background: #fafafa;">
+            <h4 style="margin-top:0;">Grant / Revoke Prompt Upload Access</h4>
+            <div style="display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap;">
+              <div style="flex: 1; min-width: 320px;">
+                <label for="up-user-select" style="display:block; font-weight:600; margin-bottom:4px;">User</label>
+                <select id="up-user-select" class="form-control">
+                  <option value="">Loading approved users...</option>
+                </select>
+              </div>
+              <div>
+                <div style="font-size:0.85em; color:#666; margin-bottom:4px;">Current state</div>
+                <span id="up-current-state" class="badge badge-no-api-access">—</span>
+              </div>
+              <div style="display:flex; gap:6px;">
+                <button id="up-grant-btn" class="btn-success" disabled>Grant</button>
+                <button id="up-revoke-btn" class="btn-danger" disabled>Revoke</button>
+              </div>
+            </div>
+            <div id="up-access-status" style="margin-top:10px; font-size:0.9em;"></div>
+          </div>
+
+          <div class="up-admin-section">
+            <div class="table-header-actions">
+              <div>
+                <h4 style="margin:0;">All Uploaded Prompts</h4>
+                <p class="table-subtitle" style="margin:4px 0 0;">View, change status (test/production), or delete any user-generated prompt.</p>
+              </div>
+              <div>
+                <label style="font-weight:normal; font-size:0.9em;">
+                  <input type="checkbox" id="up-include-inactive"> Include soft-deleted
+                </label>
+                <button id="up-refresh-btn" class="btn-secondary" style="margin-left:10px;">Refresh</button>
+              </div>
+            </div>
+
+            <div class="search-container">
+              <input type="text" class="search-input" id="up-prompt-search" placeholder="Search by owner email, filename, or display name...">
+            </div>
+
+            <div id="user-prompts-table-container">
+              <div id="user-prompts-admin-loading" class="loading">Loading prompts...</div>
+              <table id="user-prompts-admin-table" style="display:none;">
+                <thead>
+                  <tr>
+                    <th>Owner</th>
+                    <th>Filename</th>
+                    <th>Display Name</th>
+                    <th>Version</th>
+                    <th>Status</th>
+                    <th>Uploaded</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="user-prompts-admin-list">
+                  <!-- Prompts will be listed here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
         <!-- Admins Tab -->
         <div id="admins" class="tab-content">
           <h3>Admin Management</h3>
@@ -339,6 +409,7 @@
     <script src="{{ url_for('static', filename='js/admin/applications.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/api_keys.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/vertex_projects.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/user_prompts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/admins.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/usage_stats.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin/new_users.js') }}"></script>

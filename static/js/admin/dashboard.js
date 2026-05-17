@@ -157,6 +157,11 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'vertex-projects':
         loadVertexProjectsAdmin();
         break;
+      case 'user-prompts':
+        if (typeof loadAdminUserPrompts === 'function') {
+          loadAdminUserPrompts();
+        }
+        break;
       case 'admins':
         loadAdmins();
         break;
