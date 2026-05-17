@@ -486,6 +486,15 @@ body.dark-mode .template-button:hover {
     background-color: #222;
     border-color: #444;
 }
+body.dark-mode .user-generated-btn {
+    background-color: #B8860B !important;
+    color: #000 !important;
+    border-color: #8B6914 !important;
+}
+body.dark-mode .user-generated-btn:hover {
+    background-color: #8B6914 !important;
+    color: #000 !important;
+}
 body.dark-mode .template-buttons-container,
 body.dark-mode #templateButtonsContainer {
     border-color: #2a2a2a !important;
@@ -2442,6 +2451,8 @@ pre {
 .prompt-template-btn:hover { background-color: #e2e6ea; border-color: #b8bdc1; }
 .gemini-optimized-btn { background-color: #6a0dad !important; color: white !important; border-color: #580099 !important; font-weight: bold; }
 .gemini-optimized-btn:hover { background-color: #580099 !important; }
+.user-generated-btn { background-color: #DAA520 !important; color: #000 !important; border-color: #B8860B !important; font-weight: bold; }
+.user-generated-btn:hover { background-color: #B8860B !important; color: #000 !important; }
 .selected-flash { background-color: #4CAF50 !important; color: white !important; border-color: #4CAF50 !important; }
 
 /* Step 4: 75/25 split — forms left, image preview right */

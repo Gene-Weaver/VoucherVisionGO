@@ -41,30 +41,46 @@ function setupPromptTemplates() {
         countDisplay.textContent = '';
     }
 
-    function createButtons(templates) {
+    function createButtons(prompts) {
         buttonsContainer.innerHTML = '';
-        countDisplay.innerHTML = `<span>Available Prompts: ${templates.length}</span><span style="color:#6a0dad; font-weight:bold; font-size:0.85em;">Gemini-3 optimized prompts are purple</span>`;
+        countDisplay.innerHTML = `<span>Available Prompts: ${prompts.length}</span><span style="font-size:0.85em;"><span style="color:#6a0dad; font-weight:bold;">Gemini-3 optimized</span> &middot; <span style="color:#000; background-color:#DAA520; font-weight:bold; padding: 1px 4px; border-radius: 3px;">User-generated</span></span>`;
 
-        templates.sort((a, b) => a.localeCompare(b));
+        // Sort: built-ins first (alpha), then user-generated (alpha)
+        prompts.sort((a, b) => {
+            const aUser = a && a.is_user_generated ? 1 : 0;
+            const bUser = b && b.is_user_generated ? 1 : 0;
+            if (aUser !== bUser) return aUser - bUser;
+            return (a.filename || '').localeCompare(b.filename || '');
+        });
 
-        templates.forEach(template => {
+        prompts.forEach(prompt => {
+            const filename = prompt.filename || '';
+            const promptRef = prompt.prompt_ref || filename;
+            const isUserGenerated = !!prompt.is_user_generated;
+            const environment = prompt.environment;
+
             const button = document.createElement('button');
-            button.textContent = template;
-            button.title = template;
+            button.textContent = filename;
+            // Tooltip shows the underlying ref + environment for user-generated prompts
+            button.title = isUserGenerated
+                ? `${filename}\n[user-generated, ${environment}]\n${promptRef}`
+                : filename;
 
-            // Base class for all buttons; all styling now in CSS
             button.classList.add('prompt-template-btn');
             button.style.cursor = 'pointer';
+            button.dataset.promptRef = promptRef;
 
-            // Robust match for gemini-3 optimized prompts
-            if (optimized_for_gemini_3.some(opt =>
-                template.trim().toLowerCase().endsWith(opt.toLowerCase())
+            if (isUserGenerated) {
+                button.classList.add('user-generated-btn');
+            } else if (optimized_for_gemini_3.some(opt =>
+                filename.trim().toLowerCase().endsWith(opt.toLowerCase())
             )) {
                 button.classList.add('gemini-optimized-btn');
             }
 
             button.addEventListener('click', function () {
-                document.getElementById('promptTemplate').value = template;
+                // Send the prompt_ref (which is the filename for builtins, UGP__... for user prompts)
+                document.getElementById('promptTemplate').value = promptRef;
 
                 const originalText = button.textContent;
 
@@ -82,6 +98,19 @@ function setupPromptTemplates() {
         });
     }
 
+    function buildPromptsRequestHeaders() {
+        const headers = {};
+        try {
+            const apiKey = (localStorage.getItem('vouchervision_api_key') || '').trim();
+            if (apiKey) headers['X-API-Key'] = apiKey;
+            else {
+                const authToken = (localStorage.getItem('vouchervision_auth_token') || '').trim();
+                if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+            }
+        } catch (e) { /* localStorage unavailable */ }
+        return headers;
+    }
+
     function fetchTemplates(showStatusOnError = false, retries = 5) {
         if (showStatusOnError) {
             showStatus('Loading prompts...');
@@ -89,7 +118,9 @@ function setupPromptTemplates() {
 
         console.log('Fetching prompts from API...');
 
-        fetch('https://vouchervision-go-738307415303.us-central1.run.app/prompts')
+        fetch('https://vouchervision-go-738307415303.us-central1.run.app/prompts', {
+            headers: buildPromptsRequestHeaders()
+        })
             .then(response => {
                 console.log('Fetch response:', response);
                 if (!response.ok) {
@@ -101,14 +132,15 @@ function setupPromptTemplates() {
                 console.log('Received data from server:', data);
 
                 if (data && data.prompts && Array.isArray(data.prompts)) {
-                    const templates = data.prompts
-                        .map(p => p.filename || '')
-                        .filter(name => name.trim() !== '');
+                    const prompts = data.prompts
+                        .filter(p => p && (p.filename || p.prompt_ref));
 
-                    console.log(`Parsed ${templates.length} prompt templates`);
-                    localStorage.setItem('vouchervision_templates', JSON.stringify(templates));
+                    console.log(`Parsed ${prompts.length} prompts`);
+                    try {
+                        localStorage.setItem('vouchervision_templates_v2', JSON.stringify(prompts));
+                    } catch (e) { /* quota / private mode */ }
 
-                    createButtons(templates);
+                    createButtons(prompts);
                 } else {
                     console.error('Invalid data structure:', data);
                     throw new Error('Invalid response format from API');
@@ -127,12 +159,14 @@ function setupPromptTemplates() {
             });
     }
 
-    const cached = localStorage.getItem('vouchervision_templates');
+    const cached = localStorage.getItem('vouchervision_templates_v2');
 
     if (cached) {
         try {
-            const templates = JSON.parse(cached);
-            createButtons(templates);
+            const prompts = JSON.parse(cached);
+            if (Array.isArray(prompts)) {
+                createButtons(prompts);
+            }
 
             fetchTemplates(false);
         } catch (e) {

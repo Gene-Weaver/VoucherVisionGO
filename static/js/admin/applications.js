@@ -79,11 +79,18 @@ function renderApplicationsPage(page) {
     
     // API access badge (only for approved users)
     let apiAccessBadge = '';
+    let promptUploadBadge = '';
     if (app.status === 'approved') {
       if (app.api_key_access === true) {
         apiAccessBadge = '<span class="badge badge-api-access ms-2" title="Has API key permission">🔑</span>';
       } else {
         apiAccessBadge = '<span class="badge badge-no-api-access ms-2" title="No API key permission">🔒</span>';
+      }
+
+      if (app.prompt_upload_access === true) {
+        promptUploadBadge = '<span class="badge badge-api-access ms-2" title="Can upload prompts">📝</span>';
+      } else {
+        promptUploadBadge = '<span class="badge badge-no-api-access ms-2" title="Cannot upload prompts">🚫</span>';
       }
     }
     
@@ -108,7 +115,7 @@ function renderApplicationsPage(page) {
     
     // Status column with API access badge
     const statusCell = document.createElement('td');
-    statusCell.innerHTML = statusBadge + ' ' + apiAccessBadge;
+    statusCell.innerHTML = statusBadge + ' ' + apiAccessBadge + ' ' + promptUploadBadge;
     row.appendChild(statusCell);
     
     // Created column
@@ -169,6 +176,7 @@ function showApplicationDetails(application) {
       <p><strong>Approved By:</strong> ${application.approved_by || 'Unknown'}</p>
       <p><strong>Approved On:</strong> ${statusDate}</p>
       <p><strong>API Key Access:</strong> ${application.api_key_access ? 'Allowed' : 'Not allowed'}</p>
+      <p><strong>Prompt Upload Access:</strong> ${application.prompt_upload_access ? 'Allowed' : 'Not allowed'}</p>
     `;
   } else if (application.status === 'rejected') {
     html += `
@@ -207,11 +215,17 @@ function showApplicationDetails(application) {
     rejectBtn.style.display = 'inline-block';
     document.getElementById('api-key-permission-group').style.display = 'block';
     document.getElementById('allow-api-keys').checked = false;
+    const allowPromptUpload = document.getElementById('allow-prompt-upload');
+    if (allowPromptUpload) allowPromptUpload.checked = false;
   } else if (application.status === 'approved') {
     approveBtn.style.display = 'none';
     rejectBtn.style.display = 'none';
     apiKeyAccessActions.style.display = 'block';
     updateApiKeysCheckbox.checked = application.api_key_access || false;
+    const updatePromptUploadCheckbox = document.getElementById('update-prompt-upload');
+    if (updatePromptUploadCheckbox) {
+      updatePromptUploadCheckbox.checked = application.prompt_upload_access || false;
+    }
   } else {
     approveBtn.style.display = 'none';
     rejectBtn.style.display = 'none';
@@ -224,12 +238,14 @@ function showApplicationDetails(application) {
 // Approve an application
 function approveApplication() {
   if (!currentApplicationEmail) return;
-  
+
   const allowApiKeys = document.getElementById('allow-api-keys').checked;
+  const allowPromptUploadEl = document.getElementById('allow-prompt-upload');
+  const allowPromptUpload = !!(allowPromptUploadEl && allowPromptUploadEl.checked);
   const statusMessage = document.getElementById('application-status-message');
-  
+
   statusMessage.innerHTML = '<div class="loading">Processing...</div>';
-  
+
   // Get Firebase auth token
   firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
     fetch(`/admin/applications/${currentApplicationEmail}/approve`, {
@@ -239,7 +255,8 @@ function approveApplication() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        allow_api_keys: allowApiKeys
+        allow_api_keys: allowApiKeys,
+        allow_prompt_upload: allowPromptUpload
       })
     })
     .then(response => response.json())
@@ -362,6 +379,49 @@ function updateApiKeyAccess() {
   });
 }
 
+// Update prompt-upload access for an approved application
+function updatePromptUploadAccess() {
+  if (!currentApplicationEmail) return;
+
+  const checkbox = document.getElementById('update-prompt-upload');
+  const allowPromptUpload = !!(checkbox && checkbox.checked);
+  const statusMessage = document.getElementById('application-status-message');
+
+  statusMessage.innerHTML = '<div class="loading">Processing...</div>';
+
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+    fetch(`/admin/applications/${currentApplicationEmail}/update-prompt-upload-access`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + idToken,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        allow_prompt_upload: allowPromptUpload
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'success') {
+        statusMessage.innerHTML = '<div class="alert alert-success">Prompt upload permission updated successfully!</div>';
+        setTimeout(() => {
+          document.getElementById('application-modal').style.display = 'none';
+          loadApplications();
+        }, 1500);
+      } else {
+        statusMessage.innerHTML = `<div class="alert alert-danger">Error: ${data.error}</div>`;
+      }
+    })
+    .catch(error => {
+      console.error('Error updating prompt upload access:', error);
+      statusMessage.innerHTML = '<div class="alert alert-danger">Error updating prompt upload permission. Please try again.</div>';
+    });
+  }).catch(function(error) {
+    console.error('Error getting auth token:', error);
+    statusMessage.innerHTML = '<div class="alert alert-danger">Authentication error. Please try logging in again.</div>';
+  });
+}
+
 // Set up event listeners when the document is ready
 document.addEventListener('DOMContentLoaded', function() {
   // Set up approve button
@@ -369,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (approveBtn) {
     approveBtn.addEventListener('click', approveApplication);
   }
-  
+
   // Set up reject button
   const rejectBtn = document.getElementById('reject-btn');
   if (rejectBtn) {
@@ -379,13 +439,13 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('rejection-reason').focus();
     });
   }
-  
+
   // Set up confirm reject button
   const confirmRejectBtn = document.getElementById('confirm-reject-btn');
   if (confirmRejectBtn) {
     confirmRejectBtn.addEventListener('click', rejectApplication);
   }
-  
+
   // Set up cancel reject button
   const cancelRejectBtn = document.getElementById('cancel-reject-btn');
   if (cancelRejectBtn) {
@@ -394,11 +454,17 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('rejection-form').style.display = 'none';
     });
   }
-  
+
   // Set up update API access button
   const updateApiAccessBtn = document.getElementById('update-api-access-btn');
   if (updateApiAccessBtn) {
     updateApiAccessBtn.addEventListener('click', updateApiKeyAccess);
+  }
+
+  // Set up update prompt-upload access button
+  const updatePromptUploadBtn = document.getElementById('update-prompt-upload-btn');
+  if (updatePromptUploadBtn) {
+    updatePromptUploadBtn.addEventListener('click', updatePromptUploadAccess);
   }
 });
 
@@ -409,3 +475,4 @@ window.showApplicationDetails = showApplicationDetails;
 window.approveApplication = approveApplication;
 window.rejectApplication = rejectApplication;
 window.updateApiKeyAccess = updateApiKeyAccess;
+window.updatePromptUploadAccess = updatePromptUploadAccess;

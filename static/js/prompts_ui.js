@@ -16,14 +16,47 @@ function getNestedValue(obj, path, defaultValue = "") {
     return current ?? defaultValue;
 }
 
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function safeDomId(prefix, value) {
+    const cleaned = String(value ?? "")
+        .replace(/[^a-z0-9_-]/gi, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+    return `${prefix}${cleaned || 'value'}`;
+}
+
+function buildPromptsRequestHeaders() {
+    const headers = {};
+    try {
+        const apiKey = (localStorage.getItem('vouchervision_api_key') || '').trim();
+        if (apiKey) {
+            headers['X-API-Key'] = apiKey;
+        } else {
+            const authToken = (localStorage.getItem('vouchervision_auth_token') || '').trim();
+            if (authToken) headers['Authorization'] = `Bearer ${authToken}`;
+        }
+    } catch (e) {
+        // localStorage may be unavailable in some embedded contexts
+    }
+    return headers;
+}
+
 // Function to render hierarchical data
 function renderHierarchical(data, level = 0) {
     if (data === null) return '<span class="tree-value">null</span>';
     if (typeof data !== 'object') {
         if (typeof data === 'string') {
-            return `<span class="tree-value">"${data}"</span>`;
+            return `<span class="tree-value">"${escapeHtml(data)}"</span>`;
         }
-        return `<span class="tree-value">${data}</span>`;
+        return `<span class="tree-value">${escapeHtml(data)}</span>`;
     }
     
     let html = '';
@@ -39,17 +72,18 @@ function renderHierarchical(data, level = 0) {
         Object.keys(data).forEach(key => {
             const value = data[key];
             const isComplex = value !== null && typeof value === 'object';
+            const safeKey = escapeHtml(key);
             
             html += '<div>';
             if (isComplex) {
                 const id = `tree-${level}-${key.replace(/[^a-z0-9]/gi, '')}`;
                 html += `<span class="tree-toggle" data-target="${id}">+</span> `;
-                html += `<span class="tree-key">${key}:</span> `;
+                html += `<span class="tree-key">${safeKey}:</span> `;
                 html += `<div id="${id}" style="display: none;">`;
                 html += renderHierarchical(value, level + 1);
                 html += '</div>';
             } else {
-                html += `<span class="tree-key">${key}:</span> ${renderHierarchical(value, level + 1)}`;
+                html += `<span class="tree-key">${safeKey}:</span> ${renderHierarchical(value, level + 1)}`;
             }
             html += '</div>';
         });
@@ -67,7 +101,7 @@ function removeAllHighlights() {
 }
 
 // Load prompt details
-function loadPromptDetails(filename, rowId) {
+function loadPromptDetails(promptRef, rowId, promptLabel) {
     // Highlight the selected row
     removeAllHighlights();
     const selectedRow = document.getElementById(rowId);
@@ -78,19 +112,21 @@ function loadPromptDetails(filename, rowId) {
     // Show loading in the panel
     const detailsPanel = document.getElementById('detailsPanel');
     detailsPanel.style.display = 'block';
-    document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
+    document.getElementById('detailsTitle').textContent = `Prompt: ${promptLabel}`;
     document.getElementById('promptDetails').innerHTML = '<p>Loading prompt details...</p>';
     document.getElementById('sectionNav').innerHTML = '';
     
     // Scroll to top to show the panel
     window.scrollTo({top: 0, behavior: 'smooth'});
     
-    fetch(`/prompts?prompt=${filename}`)
+    fetch(`/prompts?prompt=${encodeURIComponent(promptRef)}`, {
+        headers: buildPromptsRequestHeaders()
+    })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
                 const prompt = data.prompt;
-                document.getElementById('detailsTitle').textContent = `Prompt: ${filename}`;
+                document.getElementById('detailsTitle').textContent = `Prompt: ${promptLabel}`;
                 
                 // Get the parsed YAML data or raw content
                 let parsedData = null;
@@ -130,7 +166,7 @@ function loadPromptDetails(filename, rowId) {
                 metaFields.forEach(field => {
                     const value = parsedData[field.key] || '';
                     if (value) {
-                        detailsHTML += `<tr><td><strong>${field.label}:</strong></td><td>${value}</td></tr>`;
+                        detailsHTML += `<tr><td><strong>${escapeHtml(field.label)}:</strong></td><td>${escapeHtml(value)}</td></tr>`;
                     }
                 });
                 
@@ -157,7 +193,7 @@ function loadPromptDetails(filename, rowId) {
                             detailsHTML += renderHierarchical(parsedData[section.key]);
                             detailsHTML += `</div>`;
                         } else {
-                            detailsHTML += `<pre>${parsedData[section.key]}</pre>`;
+                            detailsHTML += `<pre>${escapeHtml(parsedData[section.key])}</pre>`;
                         }
                         
                         detailsHTML += `</div>`;
@@ -171,19 +207,19 @@ function loadPromptDetails(filename, rowId) {
                     if (!metaFields.some(field => field.key === key) && 
                         !commonSections.some(section => section.key === key)) {
                         
-                        const sectionId = `section-${key}`;
+                        const sectionId = safeDomId('section-', key);
                         const sectionLabel = key.replace(/_/g, ' ')
                             .replace(/\b\w/g, l => l.toUpperCase());
                         
                         detailsHTML += `<div id="${sectionId}">`;
-                        detailsHTML += `<h3 class="section-heading">${sectionLabel}</h3>`;
+                        detailsHTML += `<h3 class="section-heading">${escapeHtml(sectionLabel)}</h3>`;
                         
                         if (typeof parsedData[key] === 'object') {
                             detailsHTML += `<div class="tree-view">`;
                             detailsHTML += renderHierarchical(parsedData[key]);
                             detailsHTML += `</div>`;
                         } else {
-                            detailsHTML += `<pre>${parsedData[key]}</pre>`;
+                            detailsHTML += `<pre>${escapeHtml(parsedData[key])}</pre>`;
                         }
                         
                         detailsHTML += `</div>`;
@@ -195,14 +231,14 @@ function loadPromptDetails(filename, rowId) {
                 const rawSectionId = 'section-raw';
                 detailsHTML += `<div id="${rawSectionId}">`;
                 detailsHTML += `<h3 class="section-heading">Raw Content</h3>`;
-                detailsHTML += `<pre>${rawContent}</pre>`;
+                detailsHTML += `<pre>${escapeHtml(rawContent)}</pre>`;
                 detailsHTML += `</div>`;
                 sectionLinks.push({id: rawSectionId, label: 'Raw Content'});
                 
                 // Create section navigation
                 let navHtml = '';
                 sectionLinks.forEach((link, index) => {
-                    navHtml += `<a href="#${link.id}">${link.label}</a>`;
+                    navHtml += `<a href="#${escapeHtml(link.id)}">${escapeHtml(link.label)}</a>`;
                     if (index < sectionLinks.length - 1) {
                         navHtml += ' | ';
                     }
@@ -228,18 +264,20 @@ function loadPromptDetails(filename, rowId) {
                     });
                 });
             } else {
-                document.getElementById('promptDetails').innerHTML = `<div class="error">Error: ${data.message}</div>`;
+                document.getElementById('promptDetails').innerHTML = `<div class="error">Error: ${escapeHtml(data.message || 'Unable to load prompt details.')}</div>`;
             }
         })
         .catch(error => {
             console.error('Error fetching prompt details:', error);
-            document.getElementById('promptDetails').innerHTML = `<div class="error">Error loading details: ${error.message}</div>`;
+            document.getElementById('promptDetails').innerHTML = `<div class="error">Error loading details: ${escapeHtml(error.message || 'Unknown error')}</div>`;
         });
 }
 
 // Fetch and display the prompt list when the page loads
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('/prompts')
+    fetch('/prompts', {
+        headers: buildPromptsRequestHeaders()
+    })
         .then(response => response.json())
         .then(data => {
             document.getElementById('loading').style.display = 'none';
@@ -257,26 +295,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     const description = getNestedValue(prompt, 'description');
                     const version = getNestedValue(prompt, 'version');
                     const author = getNestedValue(prompt, 'author');
-                    
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${prompt.filename}</td>
-                        <td>${name}</td>
-                        <td class="description">${description}</td>
-                        <td>${version}</td>
-                        <td>${author}</td>
-                        <td><button class="details-btn" data-filename="${prompt.filename}" data-row-id="${row.id}">View Details</button></td>
-                    `;
-                    
+
+                    const values = [
+                        index + 1,
+                        prompt.filename || '',
+                        name,
+                        description,
+                        version,
+                        author,
+                    ];
+                    values.forEach((value, cellIndex) => {
+                        const cell = document.createElement('td');
+                        if (cellIndex === 3) cell.className = 'description';
+                        cell.textContent = String(value ?? '');
+                        row.appendChild(cell);
+                    });
+
+                    const actionsCell = document.createElement('td');
+                    const detailsButton = document.createElement('button');
+                    detailsButton.className = 'details-btn';
+                    detailsButton.textContent = 'View Details';
+                    detailsButton.dataset.promptRef = prompt.prompt_ref || prompt.filename || '';
+                    detailsButton.dataset.promptLabel = prompt.filename || prompt.prompt_ref || '';
+                    detailsButton.dataset.rowId = row.id;
+                    actionsCell.appendChild(detailsButton);
+                    row.appendChild(actionsCell);
+
                     promptList.appendChild(row);
                 });
                 
                 // Add event listeners to the buttons
                 document.querySelectorAll('.details-btn').forEach(button => {
                     button.addEventListener('click', () => {
-                        const filename = button.getAttribute('data-filename');
+                        const promptRef = button.getAttribute('data-prompt-ref');
+                        const promptLabel = button.getAttribute('data-prompt-label');
                         const rowId = button.getAttribute('data-row-id');
-                        loadPromptDetails(filename, rowId);
+                        loadPromptDetails(promptRef, rowId, promptLabel);
                     });
                 });
             } else {

@@ -77,6 +77,88 @@
           </tbody>
         </table>
       </div>
+
+      <div id="user-prompts-section" class="resource-section" style="display: none;">
+        <div class="section-header">
+          <div>
+            <h3>User-Generated Prompts</h3>
+            <p class="section-help">
+              Upload custom prompt YAML files to make them available in
+              <code>/webpage</code>. Mark a prompt as <strong>production</strong>
+              only when it is finalized for a project &mdash; production prompts
+              are selectable by everyone. <strong>Test</strong> prompts are
+              visible only to you and admins.
+            </p>
+          </div>
+          <button id="upload-prompt-btn" class="btn-create">Upload Prompt YAML</button>
+        </div>
+
+        <div id="user-prompts-loading" class="loading">Loading your prompts...</div>
+        <div id="user-prompts-error-message" class="error-message"></div>
+        <div id="no-user-prompts" class="no-keys" style="display: none;">You have not uploaded any prompts yet.</div>
+        <table id="user-prompts-table" class="key-table" style="display: none;">
+          <thead>
+            <tr>
+              <th>Filename</th>
+              <th>Display Name</th>
+              <th>Status</th>
+              <th>Uploaded</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="user-prompts-list">
+            <!-- User-uploaded prompts will be listed here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div id="no-upload-permission" class="alert alert-warning" style="display: none;">
+        <h4>Prompt Uploads Not Allowed</h4>
+        <p>Your account does not have permission to upload custom prompts.</p>
+        <p>This feature lets approved users add prompt YAML files for use on <code>/webpage</code> without redeploying the server. Please contact an administrator if you need this access.</p>
+      </div>
+
+      <div id="upload-revoked-notice" class="alert alert-warning" style="display: none;">
+        <h4>Prompt Upload Privilege Revoked</h4>
+        <p>You no longer have permission to upload or manage prompts. Contact an administrator if you believe this is in error. Existing prompts you uploaded remain in place; only an administrator can modify or delete them now.</p>
+      </div>
+
+      <!-- Upload User Prompt Modal -->
+      <div id="upload-prompt-modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h3>Upload Prompt YAML</h3>
+          <p>Select a YAML file to upload. It must follow the prompt schema (prompt_name, prompt_version, instructions, rules, mapping, etc.).</p>
+
+          <form id="upload-prompt-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="prompt-file">YAML File</label>
+              <input type="file" id="prompt-file" class="form-control" accept=".yaml,.yml" required>
+            </div>
+
+            <div class="form-group">
+              <label>Initial Status</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="prompt-status" id="prompt-status-test" value="test" checked>
+                <label class="form-check-label" for="prompt-status-test">
+                  <strong>Test</strong> &mdash; only you and admins can see this prompt
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="prompt-status" id="prompt-status-production" value="production">
+                <label class="form-check-label" for="prompt-status-production">
+                  <strong>Production</strong> &mdash; finalized prompt, selectable by everyone on <code>/webpage</code>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-create">Upload Prompt</button>
+          </form>
+
+          <div id="upload-prompt-error" class="error-message"></div>
+          <div id="upload-prompt-success" class="success-message" style="display:none;"></div>
+        </div>
+      </div>
       
       <!-- Create Key Modal -->
       <div id="create-key-modal" class="modal">

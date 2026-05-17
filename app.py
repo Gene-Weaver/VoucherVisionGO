@@ -2592,6 +2592,249 @@ def _delete_pdf_job_prefix(job_id: str):
         logger.warning(f"Unable to delete PDF job artifacts for {job_id}: {e}")
 
 
+# ============================================================================
+# User-generated prompt storage (GCS bucket: vouchervision-cop90-rasters)
+# ============================================================================
+
+USER_PROMPTS_BUCKET = os.environ.get("USER_PROMPTS_BUCKET", "vouchervision-cop90-rasters")
+USER_PROMPTS_PREFIX = os.environ.get("USER_PROMPTS_PREFIX", "user-generated-prompts").strip("/")
+USER_PROMPTS_MAX_BYTES = int(os.environ.get("USER_PROMPTS_MAX_BYTES", str(256 * 1024)))
+USER_PROMPTS_LOCAL_CACHE_DIR = os.environ.get("USER_PROMPTS_CACHE_DIR", "/tmp/vvgo_user_prompts")
+
+
+def _user_prompt_error_category(exc: Exception) -> str:
+    """Return a sanitized error category safe for logs and responses."""
+    if isinstance(exc, _CredentialError):
+        return "credential_error"
+    if isinstance(exc, FileNotFoundError):
+        return "not_found"
+    if isinstance(exc, PermissionError):
+        return "permission_error"
+    return exc.__class__.__name__ or "unknown_error"
+
+
+def _user_prompts_bucket_name() -> str:
+    name = (USER_PROMPTS_BUCKET or "").replace("gs://", "").strip("/")
+    if not name:
+        raise RuntimeError("USER_PROMPTS_BUCKET is not configured.")
+    return name
+
+
+def _email_path_segment(email: str) -> str:
+    """Normalize an email for use as a path segment (lowercase, replace unsafe chars)."""
+    normalized = _normalize_email_identity(email) or ""
+    return re.sub(r"[^a-z0-9._@\-]", "_", normalized.lower())
+
+
+def _user_prompt_blob_path(owner_email: str, prompt_id: str, filename: str) -> str:
+    safe_filename = secure_filename(filename) or "prompt.yaml"
+    return f"{USER_PROMPTS_PREFIX}/{_email_path_segment(owner_email)}/{prompt_id}__{safe_filename}"
+
+
+def _upload_user_prompt_bytes(blob_path: str, payload: bytes) -> str:
+    bucket = _get_storage_client().bucket(_user_prompts_bucket_name())
+    blob = bucket.blob(blob_path)
+    blob.upload_from_string(payload, content_type="application/x-yaml")
+    return blob_path
+
+
+def _download_user_prompt_bytes(blob_path: str) -> bytes:
+    bucket = _get_storage_client().bucket(_user_prompts_bucket_name())
+    blob = bucket.blob(blob_path)
+    if not blob.exists():
+        raise FileNotFoundError(blob_path)
+    return blob.download_as_bytes()
+
+
+def _delete_user_prompt_blob(blob_path: str, *, raise_on_error: bool = False) -> bool:
+    try:
+        bucket = _get_storage_client().bucket(_user_prompts_bucket_name())
+        blob = bucket.blob(blob_path)
+        if blob.exists():
+            blob.delete()
+            return True
+        return False
+    except Exception as e:
+        logger.warning(
+            "Unable to delete user prompt blob %s [category=%s]",
+            blob_path,
+            _user_prompt_error_category(e),
+        )
+        if raise_on_error:
+            raise RuntimeError("User prompt storage delete failed.") from None
+        return False
+
+
+# Top-level YAML keys we require uploaded user prompts to define.
+REQUIRED_USER_PROMPT_KEYS = (
+    "prompt_name",
+    "prompt_version",
+    "prompt_author",
+    "prompt_description",
+    "instructions",
+    "rules",
+    "mapping",
+    "json_formatting_instructions",
+)
+
+
+class UserPromptValidationError(ValueError):
+    """Raised when an uploaded user prompt YAML fails schema validation."""
+
+
+def _validate_user_prompt_yaml(raw_bytes: bytes) -> dict:
+    """Parse + schema-check uploaded YAML. Returns the parsed dict on success.
+
+    Never logs `raw_bytes` content. Raises UserPromptValidationError with a
+    user-safe message on any validation failure.
+    """
+    if not raw_bytes:
+        raise UserPromptValidationError("Uploaded file is empty.")
+    try:
+        parsed = yaml.safe_load(raw_bytes)
+    except yaml.YAMLError as e:
+        raise UserPromptValidationError(f"YAML parse error: {e}") from None
+
+    if not isinstance(parsed, dict):
+        raise UserPromptValidationError("Top-level YAML must be a mapping (key: value pairs).")
+
+    missing = [k for k in REQUIRED_USER_PROMPT_KEYS if k not in parsed]
+    if missing:
+        raise UserPromptValidationError(
+            f"Missing required top-level key(s): {', '.join(missing)}"
+        )
+
+    if not isinstance(parsed.get("rules"), dict):
+        raise UserPromptValidationError("`rules` must be a mapping.")
+    if not isinstance(parsed.get("mapping"), dict):
+        raise UserPromptValidationError("`mapping` must be a mapping.")
+    if not isinstance(parsed.get("instructions"), str) or not parsed["instructions"].strip():
+        raise UserPromptValidationError("`instructions` must be a non-empty string.")
+    if not isinstance(parsed.get("json_formatting_instructions"), str):
+        raise UserPromptValidationError("`json_formatting_instructions` must be a string.")
+    if not isinstance(parsed.get("prompt_name"), str) or not parsed["prompt_name"].strip():
+        raise UserPromptValidationError("`prompt_name` must be a non-empty string.")
+
+    return parsed
+
+
+def _user_prompt_ref(prompt_id: str, filename: str) -> str:
+    """Build the public identifier used by /process and the /webpage picker."""
+    safe_filename = secure_filename(filename) or "prompt.yaml"
+    return f"UGP__{prompt_id}__{safe_filename}"
+
+
+def _parse_user_prompt_ref(prompt_ref: str) -> tuple[str, str] | None:
+    """Return (prompt_id, filename) if `prompt_ref` is a user-generated prompt, else None."""
+    if not isinstance(prompt_ref, str) or not prompt_ref.startswith("UGP__"):
+        return None
+    parts = prompt_ref.split("__", 2)
+    if len(parts) != 3 or not parts[1] or not parts[2]:
+        return None
+    return parts[1], parts[2]
+
+
+def _resolve_user_prompt_local_path(prompt_id: str, caller_email: str | None) -> str:
+    """Materialize a user-generated prompt to a local file path.
+
+    Enforces visibility (production: anyone; test: owner or admin) and
+    soft-delete (active==false treated as not-found). Caches on disk keyed by
+    prompt_id + updated_at so re-uploads invalidate cleanly.
+    """
+    doc_ref = db.collection("user_prompts").document(prompt_id)
+    doc = doc_ref.get()
+    if not doc.exists:
+        raise FileNotFoundError(f"user prompt {prompt_id} not found")
+
+    data = doc.to_dict() or {}
+    if not data.get("active", False):
+        raise FileNotFoundError(f"user prompt {prompt_id} is no longer available")
+
+    status = data.get("status", "test")
+    owner_email = _normalize_email_identity(data.get("owner_email", "")) or ""
+    norm_caller = _normalize_email_identity(caller_email or "") or ""
+    if status != "production":
+        is_owner = bool(norm_caller) and norm_caller == owner_email
+        is_admin = bool(norm_caller) and _is_admin_email(norm_caller)
+        if not (is_owner or is_admin):
+            raise PermissionError(f"user prompt {prompt_id} is not accessible")
+
+    gcs_path = data.get("gcs_path")
+    if not gcs_path:
+        raise FileNotFoundError(f"user prompt {prompt_id} has no storage path")
+
+    updated_at = data.get("updated_at")
+    updated_key = ""
+    try:
+        if updated_at is not None and hasattr(updated_at, "timestamp"):
+            updated_key = str(int(updated_at.timestamp() * 1000))
+        elif isinstance(updated_at, (int, float)):
+            updated_key = str(int(updated_at))
+    except Exception:
+        updated_key = ""
+
+    os.makedirs(USER_PROMPTS_LOCAL_CACHE_DIR, exist_ok=True)
+    filename = data.get("filename") or "prompt.yaml"
+    safe_filename = secure_filename(filename) or "prompt.yaml"
+    cache_name = f"{prompt_id}__{updated_key}__{safe_filename}"
+    cache_path = os.path.join(USER_PROMPTS_LOCAL_CACHE_DIR, cache_name)
+    if os.path.exists(cache_path) and os.path.getsize(cache_path) > 0:
+        return cache_path
+
+    payload = _download_user_prompt_bytes(gcs_path)
+    tmp_path = cache_path + ".tmp"
+    with open(tmp_path, "wb") as fh:
+        fh.write(payload)
+    os.replace(tmp_path, cache_path)
+    return cache_path
+
+
+def _preflight_user_prompt(prompt_ref: str | None, caller_email: str | None) -> tuple[dict | None, int]:
+    """Pre-resolve a UGP__ prompt ref at the route boundary.
+
+    Returns (None, 200) on success or when prompt is not user-generated.
+    Returns (error_payload, status_code) on access/availability errors so the
+    handler can respond with a clean HTTP error before kicking off processing.
+    """
+    if not prompt_ref:
+        return None, 200
+    parsed = _parse_user_prompt_ref(prompt_ref)
+    if parsed is None:
+        return None, 200
+    prompt_id, _filename = parsed
+    try:
+        _resolve_user_prompt_local_path(prompt_id, caller_email)
+        return None, 200
+    except PermissionError:
+        return {'error': "Prompt not found or not accessible."}, 403
+    except FileNotFoundError:
+        return {'error': "Prompt not found or not accessible."}, 404
+    except Exception as e:
+        logger.error(
+            "Failed to preflight user prompt %s [category=%s]",
+            prompt_id,
+            _user_prompt_error_category(e),
+        )
+        return {'error': "Failed to load prompt."}, 500
+
+
+def _resolve_prompt_path(prompt_ref: str | None, custom_prompts_dir: str, caller_email: str | None) -> str:
+    """Resolve `prompt_ref` to a local YAML path on disk.
+
+    - Built-in prompts: returns os.path.join(custom_prompts_dir, prompt_ref).
+    - User-generated (UGP__...): downloads to cache dir and returns that path.
+    - Empty / None: defers to caller-side default handling by returning the dir
+      joined with the empty string (matches prior behavior).
+    """
+    if not prompt_ref:
+        return os.path.join(custom_prompts_dir, "")
+    parsed = _parse_user_prompt_ref(prompt_ref)
+    if parsed is None:
+        return os.path.join(custom_prompts_dir, prompt_ref)
+    prompt_id, _filename = parsed
+    return _resolve_user_prompt_local_path(prompt_id, caller_email)
+
+
 def _serialize_pdf_job(job_doc_or_dict):
     if hasattr(job_doc_or_dict, "to_dict"):
         payload = job_doc_or_dict.to_dict() or {}
@@ -2938,6 +3181,7 @@ def _build_pdf_job_process_kwargs(job_data: dict) -> dict:
         "user_api_key": None,
         "user_vertex_project": job_data.get("user_vertex_project"),
         "user_vertex_region": job_data.get("user_vertex_region"),
+        "caller_email": _normalize_email_identity(job_data.get("user_email")),
     }
 
 
@@ -3204,6 +3448,98 @@ def _get_api_key_access_state(user_email: str) -> dict:
         "is_approved": True,
         "has_api_key_access": True,
     }
+
+
+def _get_prompt_upload_access_state(user_email: str) -> dict:
+    """Mirror of _get_api_key_access_state for prompt_upload_access privilege."""
+    user_email = _normalize_email_identity(user_email)
+    if not user_email:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "status_code": 401,
+            "error": "User not properly authenticated",
+            "code": "not_authenticated",
+        }
+
+    if _is_admin_email(user_email):
+        return {
+            "allowed": True,
+            "is_admin": True,
+            "is_approved": True,
+            "has_prompt_upload_access": True,
+        }
+
+    app_doc = db.collection("user_applications").document(user_email).get()
+    if not app_doc.exists:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "status_code": 404,
+            "error": "User application not found",
+            "code": "application_not_found",
+        }
+
+    app_data = app_doc.to_dict() or {}
+    is_approved = app_data.get("status") == "approved"
+    has_prompt_upload = bool(app_data.get("prompt_upload_access", False))
+    if not is_approved:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "is_approved": False,
+            "has_prompt_upload_access": has_prompt_upload,
+            "status_code": 403,
+            "error": "Your account is not approved yet",
+            "code": "not_approved",
+        }
+
+    if not has_prompt_upload:
+        return {
+            "allowed": False,
+            "is_admin": False,
+            "is_approved": True,
+            "has_prompt_upload_access": False,
+            "status_code": 403,
+            "error": "You do not have permission to upload prompts. Please contact an administrator.",
+            "code": "no_prompt_upload_permission",
+        }
+
+    return {
+        "allowed": True,
+        "is_admin": False,
+        "is_approved": True,
+        "has_prompt_upload_access": True,
+    }
+
+
+def _has_prompt_upload_access(user_email: str) -> bool:
+    state = _get_prompt_upload_access_state(user_email)
+    return bool(state.get("allowed"))
+
+
+def _get_user_email_optional(request) -> str | None:
+    """Return the caller's email if authenticated, else None. Never raises."""
+    try:
+        api_key = _get_api_key_from_request(request)
+        if api_key and validate_api_key(api_key):
+            doc = db.collection("api_keys").document(api_key).get()
+            if doc.exists:
+                owner = (doc.to_dict() or {}).get("owner")
+                if owner:
+                    return _normalize_email_identity(owner)
+        id_token = _get_id_token_from_request(request)
+        if id_token:
+            try:
+                decoded = auth.verify_id_token(id_token, check_revoked=False)
+                email = decoded.get("email")
+                if email:
+                    return _normalize_email_identity(email)
+            except Exception:
+                return None
+    except Exception:
+        return None
+    return None
 
 
 def _claim_or_reactivate_vertex_project(
@@ -3605,17 +3941,22 @@ class VoucherVisionProcessor:
         return ocr_packet, ocr_all, ocr_tokens_total
     
     def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None,
-                            user_vertex_project=None, user_vertex_region=None):
+                            user_vertex_project=None, user_vertex_region=None,
+                            caller_email=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
-        # Cache key includes every input that changes the LLM handler's identity.
-        # Keying on these (rather than just "did this request bring creds")
-        # prevents a previously per-user handler from being silently reused on a
-        # later no-credentials request.
+        # Resolve the prompt path: built-ins resolve to a file in custom_prompts_dir,
+        # user-generated (UGP__...) prompts download from GCS into a local cache.
+        resolved_prompt_path = _resolve_prompt_path(prompt, self.custom_prompts_dir, caller_email)
+
+        # Cache key includes every input that changes the LLM handler's identity,
+        # plus the resolved path so a re-uploaded user prompt (same ref, different
+        # content via updated_at) invalidates the cache.
         incoming_key = (
             user_api_key,
             user_vertex_project,
             user_vertex_region,
             prompt,
+            resolved_prompt_path,
             llm_model_name,
         )
         needs_new = (
@@ -3629,9 +3970,7 @@ class VoucherVisionProcessor:
                 is_hf=False, skip_API_keys=True
             )
             self.thread_local.vv.initialize_token_counters()
-            self.thread_local.vv.path_custom_prompts = os.path.join(
-                self.custom_prompts_dir, prompt
-            )
+            self.thread_local.vv.path_custom_prompts = resolved_prompt_path
             self.thread_local.vv.setup_JSON_dict_structure()
 
             self.thread_local.llm_model = GoogleGeminiHandler(
@@ -3649,7 +3988,7 @@ class VoucherVisionProcessor:
         return self.thread_local.vv, self.thread_local.llm_model
     
     def process_voucher_vision(self, ocr_text, prompt, llm_model_name, LLM_name_cost, user_api_key=None,
-                               user_vertex_project=None, user_vertex_region=None):
+                               user_vertex_project=None, user_vertex_region=None, caller_email=None):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
         vv, llm_model = self.get_thread_local_vv(
@@ -3657,6 +3996,7 @@ class VoucherVisionProcessor:
             user_api_key=user_api_key,
             user_vertex_project=user_vertex_project,
             user_vertex_region=user_vertex_region,
+            caller_email=caller_email,
         )
 
         # Update OCR text for processing
@@ -3749,7 +4089,8 @@ class VoucherVisionProcessor:
                               skip_label_collage=False,
                               user_api_key=None,
                               user_vertex_project=None,
-                              user_vertex_region=None):
+                              user_vertex_region=None,
+                              caller_email=None):
         """
         Process an image from a request file
         ocr_prompt_option=["verbatim_with_annotations", None]
@@ -3960,7 +4301,8 @@ class VoucherVisionProcessor:
                                                                                                        LLM_name_cost,
                                                                                                        user_api_key=user_api_key,
                                                                                                        user_vertex_project=user_vertex_project,
-                                                                                                       user_vertex_region=user_vertex_region)
+                                                                                                       user_vertex_region=user_vertex_region,
+                                                                                                       caller_email=caller_email)
 
                     # WFO taxonomy lookup (local SQLite database)
                     WFO = ""
@@ -4374,6 +4716,13 @@ def process_image():
         llm_model_name=llm_model_name,
     )
 
+    # Preflight user-generated prompt (clean 4xx if access denied before processing)
+    preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
+    if preflight_error:
+        resp = make_response(jsonify(preflight_error), preflight_code)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
         engine_options=engine_options,
@@ -4388,6 +4737,7 @@ def process_image():
         user_api_key=user_gemini_key,
         user_vertex_project=user_vertex_project,
         user_vertex_region=user_vertex_region,
+        caller_email=user_email,
     )
 
     # Detect PDF by extension
@@ -4601,6 +4951,13 @@ def process_image_by_url():
         llm_model_name=llm_model_name,
     )
 
+    # Preflight user-generated prompt access before fetching the URL
+    preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
+    if preflight_error:
+        resp = make_response(jsonify(preflight_error), preflight_code)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
     # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     pro_quota_reserved = False
     user_pays = bool(user_gemini_key) or bool(user_vertex_project)
@@ -4746,6 +5103,7 @@ def process_image_by_url():
             user_api_key=user_gemini_key,
             user_vertex_project=user_vertex_project,
             user_vertex_region=user_vertex_region,
+            caller_email=user_email,
         )
 
         event = build_usage_event(
@@ -4874,6 +5232,13 @@ def process_pdf_async():
 
     if not pdf_bytes:
         resp = make_response(jsonify({'error': 'The uploaded PDF is empty.'}), 400)
+        resp.headers.add('Access-Control-Allow-Origin', '*')
+        return resp
+
+    # Preflight user-generated prompt access before persisting the job
+    preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
+    if preflight_error:
+        resp = make_response(jsonify(preflight_error), preflight_code)
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
@@ -6830,44 +7195,47 @@ def approve_application(email):
         data = request.get_json() or {}
         # Check if API key creation is allowed for this user
         allow_api_keys = data.get('allow_api_keys', False)
-        
+        allow_prompt_upload = bool(data.get('allow_prompt_upload', False))
+
         # Get the application
         app_doc = db.collection('user_applications').document(email).get()
-        
+
         if not app_doc.exists:
             return jsonify({'error': 'Application not found'}), 404
-        
+
         app_data = app_doc.to_dict()
-        
+
         # Check if already approved
         if app_data.get('status') == 'approved':
             return jsonify({'error': 'Application is already approved'}), 400
-        
+
         # Update the application status
         update_data = {
             'status': 'approved',
             'approved_by': admin_email,
             'approved_at': firestore.SERVER_TIMESTAMP,
             'updated_at': firestore.SERVER_TIMESTAMP,
-            'api_key_access': allow_api_keys  # Add API key permission flag
+            'api_key_access': allow_api_keys,  # Add API key permission flag
+            'prompt_upload_access': allow_prompt_upload,  # User-generated prompt upload flag
         }
-        
+
         db.collection('user_applications').document(email).update(update_data)
-        
+
         # Send email notification
         email_sent = False
         if 'email_sender' in app.config and app.config['email_sender'].is_enabled:
             # Send approval notification
             email_sent = app.config['email_sender'].send_approval_notification(email)
-            
+
             # If API key access is granted, send another notification
             if allow_api_keys:
                 app.config['email_sender'].send_api_key_permission_notification(email)
-        
+
         return jsonify({
             'status': 'success',
             'message': f'Application for {email} has been approved',
             'api_key_access': allow_api_keys,
+            'prompt_upload_access': allow_prompt_upload,
             'email_sent': email_sent
         })
         
@@ -6937,6 +7305,66 @@ def update_api_key_access(email):
     except Exception as e:
         logger.error(f"Error updating API key access: {str(e)}")
         return jsonify({'error': f'Failed to update API key access: {str(e)}'}), 500
+
+
+@app.route('/admin/applications/<email>/update-prompt-upload-access', methods=['POST'])
+@authenticated_route
+def update_prompt_upload_access(email):
+    """Update prompt-upload permission for a user. Admin only."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = _normalize_email_identity(user.get('email'))
+    if not admin_email or not _is_admin_email(admin_email):
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        data = request.get_json() or {}
+        allow_upload = bool(data.get('allow_prompt_upload', False))
+
+        target_email = _normalize_email_identity(email)
+        app_doc = db.collection('user_applications').document(target_email).get()
+        if not app_doc.exists:
+            return jsonify({'error': 'User application not found'}), 404
+
+        app_data = app_doc.to_dict() or {}
+        if app_data.get('status') != 'approved':
+            return jsonify({'error': 'Cannot update prompt upload access for non-approved users'}), 400
+
+        previous = bool(app_data.get('prompt_upload_access', False))
+        if previous == allow_upload:
+            return jsonify({
+                'status': 'success',
+                'message': f"Prompt upload access already {'granted' if allow_upload else 'revoked'} for {target_email}",
+                'prompt_upload_access': allow_upload,
+                'changed': False,
+            })
+
+        db.collection('user_applications').document(target_email).update({
+            'prompt_upload_access': allow_upload,
+            'updated_at': firestore.SERVER_TIMESTAMP,
+            'notes': firestore.ArrayUnion([
+                f"Prompt upload access {'granted' if allow_upload else 'revoked'} by {admin_email} on {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+            ]),
+        })
+
+        logger.info(
+            "prompt_upload_access %s for %s by admin %s",
+            'granted' if allow_upload else 'revoked',
+            target_email,
+            admin_email,
+        )
+
+        return jsonify({
+            'status': 'success',
+            'message': f"Prompt upload access {'granted' if allow_upload else 'revoked'} for {target_email}",
+            'prompt_upload_access': allow_upload,
+            'changed': True,
+        })
+    except Exception as e:
+        logger.error(f"Error updating prompt upload access: {e}")
+        return jsonify({'error': f'Failed to update prompt upload access: {str(e)}'}), 500
 
 
 @app.route('/admin/applications/<email>/reject', methods=['POST'])
@@ -7379,93 +7807,208 @@ def session_expired():
         app_id=firebase_config["appId"]
     )
 
+def _list_visible_user_prompts(caller_email: str | None) -> list[dict]:
+    """Return Firestore-backed user prompts visible to the caller.
+
+    - production prompts: visible to everyone
+    - test prompts: visible to owner or admin only
+    """
+    try:
+        active_q = db.collection('user_prompts').where(filter=FieldFilter('active', '==', True))
+        docs = list(active_q.stream())
+    except Exception as e:
+        logger.warning(
+            "Unable to query user_prompts collection [category=%s]",
+            _user_prompt_error_category(e),
+        )
+        return []
+
+    is_admin = bool(caller_email) and _is_admin_email(caller_email)
+    visible = []
+    for doc in docs:
+        data = doc.to_dict() or {}
+        status = data.get('status', 'test')
+        owner_email = _normalize_email_identity(data.get('owner_email', '')) or ''
+        if status == 'production':
+            allowed = True
+        elif is_admin:
+            allowed = True
+        elif caller_email and caller_email == owner_email:
+            allowed = True
+        else:
+            allowed = False
+        if not allowed:
+            continue
+        show_owner = is_admin or (caller_email and caller_email == owner_email)
+        info = {
+            'filename': data.get('filename'),
+            'name': os.path.splitext(data.get('filename') or '')[0],
+            'prompt_name': data.get('display_name', ''),
+            'version': data.get('version', ''),
+            'author': data.get('author', ''),
+            'institution': data.get('institution', ''),
+            'description': data.get('description', ''),
+            'prompt_ref': data.get('prompt_ref'),
+            'source': 'user',
+            'is_user_generated': True,
+            'environment': status,
+        }
+        if show_owner:
+            info['owner_email'] = owner_email
+        visible.append((doc.id, data, info))
+    return visible
+
+
 @app.route('/prompts', methods=['GET'])
 def list_prompts_api():
-    """API endpoint to list all available prompt templates"""
+    """API endpoint to list all available prompt templates (built-ins + user-generated)."""
     # Get prompt directory
     prompt_dir = os.path.join(project_root, "vouchervision_main", "custom_prompts")
-    
+
     # Determine format type: json (default for API) or html (for web UI)
     format_type = request.args.get('format', 'json')
     view_details = request.args.get('view', 'false').lower() == 'true'
     specific_prompt = request.args.get('prompt')
-    
-    # Get all YAML files
+
+    caller_email = _get_user_email_optional(request)
+
+    # Get all built-in YAML files
     prompt_files = []
     for ext in ['.yaml', '.yml']:
         prompt_files.extend(list(Path(prompt_dir).glob(f'*{ext}')))
-    
-    if not prompt_files:
-        if format_type == 'text':
-            return "No prompt files found.", 404, {'Content-Type': 'text/plain'}
-        else:
-            return jsonify({
-                'status': 'error',
-                'message': f'No prompt files found in {prompt_dir}'
-            }), 404
-    
-    # If a specific prompt was requested
+
+    # Eagerly load visible user prompts (used by both single-lookup and list paths)
+    user_visible = _list_visible_user_prompts(caller_email)
+
+    # Specific-prompt lookup branch
     if specific_prompt:
-        target_file = None
-        for file in prompt_files:
-            if file.name == specific_prompt:
-                target_file = file
-                break
-                
-        if target_file:
-            # Return the prompt content
-            prompt_details = extract_prompt_details(target_file)
-            
-            # Format response based on requested format
+        # User-generated prompt: UGP__<prompt_id>__<filename>.yaml
+        ugp = _parse_user_prompt_ref(specific_prompt)
+        if ugp is not None:
+            prompt_id, _filename = ugp
+            match = next((entry for entry in user_visible if entry[0] == prompt_id), None)
+            if match is None:
+                # Not visible to caller, or doesn't exist
+                msg = f"Prompt '{specific_prompt}' not found or not accessible."
+                if format_type == 'text':
+                    return msg, 404, {'Content-Type': 'text/plain'}
+                return jsonify({'status': 'error', 'message': msg}), 404
+            _id, data, info = match
+            try:
+                payload = _download_user_prompt_bytes(data.get('gcs_path'))
+            except Exception as e:
+                logger.error(
+                    "Failed to fetch user prompt %s from GCS [category=%s]",
+                    prompt_id,
+                    _user_prompt_error_category(e),
+                )
+                return jsonify({'status': 'error', 'message': 'Failed to load prompt content.'}), 500
+            try:
+                parsed = yaml.safe_load(payload)
+                parse_error = None
+            except yaml.YAMLError:
+                parsed = None
+                parse_error = 'Prompt content could not be parsed.'
+            prompt_details = {
+                'raw_content': payload.decode('utf-8', errors='replace'),
+                'parsed_data': parsed,
+            }
+            if parse_error:
+                prompt_details['parse_error'] = parse_error
             if format_type == 'text':
-                # Return plain text version for command line
+                return prompt_details['raw_content'], 200, {'Content-Type': 'text/plain'}
+            return jsonify({
+                'status': 'success',
+                'prompt': {
+                    'filename': info.get('filename') or specific_prompt,
+                    'prompt_ref': specific_prompt,
+                    'source': 'user',
+                    'is_user_generated': True,
+                    'environment': info.get('environment'),
+                    'owner_email': info.get('owner_email'),
+                    'details': prompt_details,
+                },
+            })
+
+        # Built-in prompt by filename
+        target_file = next((f for f in prompt_files if f.name == specific_prompt), None)
+        if target_file:
+            prompt_details = extract_prompt_details(target_file)
+            if format_type == 'text':
                 response_text = format_prompt_as_text(target_file.name, prompt_details)
                 return response_text, 200, {'Content-Type': 'text/plain'}
-            else:
-                # Return JSON structure
-                return jsonify({
-                    'status': 'success',
-                    'prompt': {
-                        'filename': target_file.name,
-                        'details': prompt_details
-                    }
-                })
-        else:
-            # Return error with list of available prompts
-            available_prompts = [file.name for file in prompt_files]
-            
-            if format_type == 'text':
-                return f"Prompt file '{specific_prompt}' not found.\nAvailable prompts: {', '.join(available_prompts)}", 404, {'Content-Type': 'text/plain'}
-            else:
-                return jsonify({
-                    'status': 'error',
-                    'message': f"Prompt file '{specific_prompt}' not found.",
-                    'available_prompts': available_prompts
-                }), 404
-    
-    # Otherwise list all prompts
+            return jsonify({
+                'status': 'success',
+                'prompt': {
+                    'filename': target_file.name,
+                    'prompt_ref': target_file.name,
+                    'source': 'builtin',
+                    'is_user_generated': False,
+                    'details': prompt_details,
+                },
+            })
+
+        # Not found
+        available_prompts = [file.name for file in prompt_files] + [
+            entry[2].get('prompt_ref') for entry in user_visible
+        ]
+        if format_type == 'text':
+            return (
+                f"Prompt '{specific_prompt}' not found.\nAvailable prompts: {', '.join(available_prompts)}",
+                404,
+                {'Content-Type': 'text/plain'},
+            )
+        return jsonify({
+            'status': 'error',
+            'message': f"Prompt '{specific_prompt}' not found.",
+            'available_prompts': available_prompts,
+        }), 404
+
+    # List all prompts
     prompt_info_list = []
     for file in prompt_files:
         info = extract_prompt_info(file)
-        
-        # If view_details is True, include the full prompt content
+        info['source'] = 'builtin'
+        info['is_user_generated'] = False
+        info['prompt_ref'] = info.get('filename')
         if view_details:
             info['details'] = extract_prompt_details(file)
-        
         prompt_info_list.append(info)
-    
-    # Format response based on requested format
+
+    for prompt_id, data, info in user_visible:
+        entry = dict(info)
+        if view_details:
+            try:
+                payload = _download_user_prompt_bytes(data.get('gcs_path'))
+                parsed = yaml.safe_load(payload)
+                entry['details'] = {
+                    'raw_content': payload.decode('utf-8', errors='replace'),
+                    'parsed_data': parsed,
+                }
+            except Exception:
+                entry['details'] = {
+                    'raw_content': '',
+                    'parsed_data': None,
+                    'parse_error': 'Prompt content could not be parsed.',
+                }
+        prompt_info_list.append(entry)
+
+    if not prompt_info_list:
+        if format_type == 'text':
+            return "No prompt files found.", 404, {'Content-Type': 'text/plain'}
+        return jsonify({
+            'status': 'error',
+            'message': 'No prompt files found.',
+        }), 404
+
     if format_type == 'text':
-        # Return a text table for command line
         response_text = format_prompts_as_text_table(prompt_info_list)
         return response_text, 200, {'Content-Type': 'text/plain'}
-    else:
-        # Return JSON structure
-        return jsonify({
-            'status': 'success',
-            'count': len(prompt_files),
-            'prompts': prompt_info_list
-        })
+    return jsonify({
+        'status': 'success',
+        'count': len(prompt_info_list),
+        'prompts': prompt_info_list,
+    })
     
 def format_prompts_as_text_table(prompt_list):
     """
@@ -8178,7 +8721,326 @@ def check_api_key_permission():
         logger.error(f"Error checking API key permission: {str(e)}")
         return jsonify({'error': f'Failed to check API key permission: {str(e)}'}), 500
 
-    
+
+# ============================================================================
+# /account-capabilities — consolidated capability lookup for /api-key-management
+# ============================================================================
+
+@app.route('/account-capabilities', methods=['GET'])
+@authenticated_route
+def account_capabilities():
+    """Return capability flags for the authenticated user in a single call."""
+    user = authenticate_request(request)
+    user_email = None
+    if user and user.get('email'):
+        user_email = _normalize_email_identity(user.get('email'))
+    else:
+        # API-key auth: fall back to lookup by API key owner
+        user_email = _get_user_email_optional(request)
+
+    if not user_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    is_admin = _is_admin_email(user_email)
+    api_state = _get_api_key_access_state(user_email)
+    upload_state = _get_prompt_upload_access_state(user_email)
+
+    is_approved = bool(
+        api_state.get('is_approved', api_state.get('allowed'))
+        or upload_state.get('is_approved', upload_state.get('allowed'))
+    )
+
+    return jsonify({
+        'status': 'success',
+        'email': user_email,
+        'is_admin': is_admin,
+        'is_approved': is_approved,
+        'api_key_access': bool(api_state.get('has_api_key_access', api_state.get('allowed'))),
+        'prompt_upload_access': bool(
+            upload_state.get('has_prompt_upload_access', upload_state.get('allowed'))
+        ),
+    })
+
+
+# ============================================================================
+# /user-prompts — list / upload / status-toggle / delete
+# ============================================================================
+
+def _serialize_user_prompt(doc, *, include_owner: bool) -> dict:
+    data = doc.to_dict() or {}
+    payload = {
+        'prompt_id': doc.id,
+        'filename': data.get('filename'),
+        'prompt_ref': data.get('prompt_ref'),
+        'display_name': data.get('display_name'),
+        'description': data.get('description'),
+        'version': data.get('version'),
+        'author': data.get('author'),
+        'institution': data.get('institution'),
+        'status': data.get('status'),
+        'active': bool(data.get('active', False)),
+        'size_bytes': data.get('size_bytes'),
+    }
+    for ts_field in ('created_at', 'updated_at', 'deleted_at'):
+        ts = data.get(ts_field)
+        if ts is not None and hasattr(ts, 'isoformat'):
+            payload[ts_field] = ts.isoformat()
+        else:
+            payload[ts_field] = ts
+    if include_owner:
+        payload['owner_email'] = data.get('owner_email')
+    return payload
+
+
+@app.route('/user-prompts', methods=['GET'])
+@authenticated_route
+def list_user_prompts():
+    """List the caller's active user-prompts. Admins may pass ?owner=<email>."""
+    user = authenticate_request(request)
+    caller_email = None
+    if user and user.get('email'):
+        caller_email = _normalize_email_identity(user.get('email'))
+    else:
+        caller_email = _get_user_email_optional(request)
+    if not caller_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    is_admin = _is_admin_email(caller_email)
+    target = request.args.get('owner')
+    if target:
+        target = _normalize_email_identity(target)
+        if target != caller_email and not is_admin:
+            return jsonify({'error': 'Unauthorized'}), 403
+    else:
+        target = caller_email
+
+    try:
+        owner_query = db.collection('user_prompts').where(filter=FieldFilter('owner_email', '==', target))
+        query = (
+            owner_query
+            .where(filter=FieldFilter('active', '==', True))
+        )
+        docs = list(query.stream())
+        total_prompt_count = len(list(owner_query.stream()))
+        prompts = [_serialize_user_prompt(d, include_owner=True) for d in docs]
+        prompts.sort(key=lambda p: (p.get('created_at') or ''), reverse=True)
+        return jsonify({
+            'status': 'success',
+            'count': len(prompts),
+            'total_prompt_count': total_prompt_count,
+            'prompts': prompts,
+        })
+    except Exception as e:
+        logger.error(
+            "Failed to list user prompts for %s [category=%s]",
+            target,
+            _user_prompt_error_category(e),
+        )
+        return jsonify({'error': 'Failed to list user prompts'}), 500
+
+
+@app.route('/user-prompts/upload', methods=['POST'])
+@authenticated_route
+def upload_user_prompt():
+    """Upload a new user-generated prompt YAML."""
+    user = authenticate_request(request)
+    caller_email = None
+    if user and user.get('email'):
+        caller_email = _normalize_email_identity(user.get('email'))
+    else:
+        caller_email = _get_user_email_optional(request)
+    if not caller_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    if not _has_prompt_upload_access(caller_email):
+        return jsonify({'error': 'You do not have permission to upload prompts.'}), 403
+
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file provided. Send the YAML as multipart field "file".'}), 400
+
+    file = request.files['file']
+    raw_filename = file.filename or ''
+    if not raw_filename:
+        return jsonify({'error': 'No filename provided'}), 400
+    if not raw_filename.lower().endswith(('.yaml', '.yml')):
+        return jsonify({'error': 'Only .yaml or .yml files are allowed.'}), 400
+
+    safe_filename = secure_filename(raw_filename)
+    if not safe_filename:
+        return jsonify({'error': 'Invalid filename.'}), 400
+
+    payload = file.read()
+    if len(payload) > USER_PROMPTS_MAX_BYTES:
+        return jsonify({
+            'error': f'File exceeds maximum size of {USER_PROMPTS_MAX_BYTES} bytes.'
+        }), 413
+
+    try:
+        parsed = _validate_user_prompt_yaml(payload)
+    except UserPromptValidationError as e:
+        return jsonify({'error': f'Invalid prompt YAML: {e}'}), 400
+
+    requested_status = (request.form.get('status') or 'test').strip().lower()
+    if requested_status not in ('test', 'production'):
+        return jsonify({'error': "status must be 'test' or 'production'."}), 400
+
+    prompt_id = uuid.uuid4().hex[:10]
+    blob_path = _user_prompt_blob_path(caller_email, prompt_id, safe_filename)
+    prompt_ref = _user_prompt_ref(prompt_id, safe_filename)
+
+    try:
+        _upload_user_prompt_bytes(blob_path, payload)
+    except Exception as e:
+        logger.error(
+            "Failed to upload prompt to GCS prompt_id=%s owner=%s gcs=%s [category=%s]",
+            prompt_id,
+            caller_email,
+            blob_path,
+            _user_prompt_error_category(e),
+        )
+        return jsonify({'error': 'Failed to upload prompt to storage.'}), 500
+
+    doc_payload = {
+        'owner_email': caller_email,
+        'filename': safe_filename,
+        'prompt_ref': prompt_ref,
+        'gcs_path': blob_path,
+        'gcs_bucket': _user_prompts_bucket_name(),
+        'display_name': str(parsed.get('prompt_name', '')),
+        'description': str(parsed.get('prompt_description', '')),
+        'version': str(parsed.get('prompt_version', '')),
+        'author': str(parsed.get('prompt_author', '')),
+        'institution': str(parsed.get('prompt_author_institution', '')),
+        'status': requested_status,
+        'active': True,
+        'created_at': firestore.SERVER_TIMESTAMP,
+        'updated_at': firestore.SERVER_TIMESTAMP,
+        'deleted_at': None,
+        'size_bytes': len(payload),
+    }
+
+    try:
+        db.collection('user_prompts').document(prompt_id).set(doc_payload)
+    except Exception as e:
+        logger.error(
+            "Failed to write Firestore record for prompt %s [category=%s]",
+            prompt_id,
+            _user_prompt_error_category(e),
+        )
+        _delete_user_prompt_blob(blob_path)
+        return jsonify({'error': 'Failed to persist prompt record.'}), 500
+
+    logger.info(
+        "user_prompt uploaded prompt_id=%s owner=%s gcs=%s status=%s size=%d",
+        prompt_id, caller_email, blob_path, requested_status, len(payload),
+    )
+
+    doc = db.collection('user_prompts').document(prompt_id).get()
+    return jsonify({
+        'status': 'success',
+        'message': 'Prompt uploaded successfully.',
+        'prompt': _serialize_user_prompt(doc, include_owner=True),
+    }), 201
+
+
+def _load_user_prompt_for_mutation(prompt_id: str, caller_email: str):
+    """Return (doc_ref, doc_data, error_response_or_None, status_code)."""
+    doc_ref = db.collection('user_prompts').document(prompt_id)
+    doc = doc_ref.get()
+    if not doc.exists:
+        return doc_ref, None, ({'error': 'Prompt not found.'}, 404)
+    data = doc.to_dict() or {}
+    if not data.get('active', False):
+        return doc_ref, data, ({'error': 'Prompt is no longer available.'}, 404)
+    is_admin = _is_admin_email(caller_email)
+    is_owner = _normalize_email_identity(data.get('owner_email', '')) == caller_email
+    if not (is_owner or is_admin):
+        return doc_ref, data, ({'error': 'You do not have permission to modify this prompt.'}, 403)
+    if is_owner and not is_admin and not _has_prompt_upload_access(caller_email):
+        return doc_ref, data, (
+            {'error': 'Your prompt upload privilege has been revoked. Contact an administrator.'},
+            403,
+        )
+    return doc_ref, data, None
+
+
+@app.route('/user-prompts/<prompt_id>/status', methods=['POST'])
+@authenticated_route
+def update_user_prompt_status(prompt_id: str):
+    """Toggle a user-prompt between 'test' and 'production'."""
+    user = authenticate_request(request)
+    caller_email = None
+    if user and user.get('email'):
+        caller_email = _normalize_email_identity(user.get('email'))
+    else:
+        caller_email = _get_user_email_optional(request)
+    if not caller_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    body = request.get_json() or {}
+    new_status = (body.get('status') or '').strip().lower()
+    if new_status not in ('test', 'production'):
+        return jsonify({'error': "status must be 'test' or 'production'."}), 400
+
+    doc_ref, _data, error = _load_user_prompt_for_mutation(prompt_id, caller_email)
+    if error:
+        payload, code = error
+        return jsonify(payload), code
+
+    doc_ref.update({
+        'status': new_status,
+        'updated_at': firestore.SERVER_TIMESTAMP,
+    })
+    logger.info(
+        "user_prompt status changed prompt_id=%s by=%s new_status=%s",
+        prompt_id, caller_email, new_status,
+    )
+    doc = doc_ref.get()
+    return jsonify({
+        'status': 'success',
+        'message': f"Prompt status updated to {new_status}.",
+        'prompt': _serialize_user_prompt(doc, include_owner=True),
+    })
+
+
+@app.route('/user-prompts/<prompt_id>', methods=['DELETE'])
+@authenticated_route
+def delete_user_prompt(prompt_id: str):
+    """Soft-delete a user-prompt and remove its GCS blob."""
+    user = authenticate_request(request)
+    caller_email = None
+    if user and user.get('email'):
+        caller_email = _normalize_email_identity(user.get('email'))
+    else:
+        caller_email = _get_user_email_optional(request)
+    if not caller_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    doc_ref, data, error = _load_user_prompt_for_mutation(prompt_id, caller_email)
+    if error:
+        payload, code = error
+        return jsonify(payload), code
+
+    gcs_path = (data or {}).get('gcs_path')
+    if gcs_path:
+        try:
+            _delete_user_prompt_blob(gcs_path, raise_on_error=True)
+        except Exception:
+            return jsonify({'error': 'Failed to delete prompt storage object.'}), 500
+
+    doc_ref.update({
+        'active': False,
+        'deleted_at': firestore.SERVER_TIMESTAMP,
+        'updated_at': firestore.SERVER_TIMESTAMP,
+        'deleted_by': caller_email,
+    })
+    logger.info(
+        "user_prompt deleted prompt_id=%s by=%s gcs=%s",
+        prompt_id, caller_email, gcs_path,
+    )
+    return jsonify({'status': 'success', 'message': 'Prompt deleted.'})
+
+
 @app.route('/api-keys/<key_id>/revoke', methods=['POST'])
 @authenticated_route
 def revoke_api_key(key_id):

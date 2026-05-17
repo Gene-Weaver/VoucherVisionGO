@@ -19,12 +19,21 @@
               Only grant this to trusted users who need to automate API access
             </div>
           </div>
+          <div class="form-check mt-2">
+            <input class="form-check-input" type="checkbox" id="allow-prompt-upload">
+            <label class="form-check-label" for="allow-prompt-upload">
+              Allow user-generated prompt uploads
+            </label>
+            <div class="small text-muted">
+              Lets this user upload prompt YAML files for use on <code>/webpage</code> without redeploying
+            </div>
+          </div>
         </div>
-        
+
         <button id="approve-btn" class="btn-success">Approve</button>
         <button id="reject-btn" class="btn-danger">Reject</button>
       </div>
-      
+
       <!-- For already approved applications -->
       <div id="api-key-access-actions" style="display: none; margin-top: 15px;">
         <h4>API Key Permission</h4>
@@ -37,6 +46,17 @@
           </div>
         </div>
         <button id="update-api-access-btn" class="btn-primary">Update API Key Permission</button>
+
+        <h4 class="mt-3">Prompt Upload Permission</h4>
+        <div class="form-group mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="update-prompt-upload">
+            <label class="form-check-label" for="update-prompt-upload">
+              Allow user-generated prompt uploads
+            </label>
+          </div>
+        </div>
+        <button id="update-prompt-upload-btn" class="btn-primary">Update Prompt Upload Permission</button>
       </div>
       
       <div id="rejection-form" style="display: none;" class="mt-3">
