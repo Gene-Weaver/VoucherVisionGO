@@ -337,9 +337,57 @@ def validate_api_key(api_key):
         return False
 
 
-# ── Gemini Pro rate-limiting helpers ─────────────────────────────────────
+# ── Per-model rate-limiting helpers ─────────────────────────────────────
 
-GEMINI_PRO_DEFAULT_LIMIT = 100
+GEMINI_PRO_DEFAULT_LIMIT = 100           # default for legacy `gemini_pro_usage_limit` counter
+GEMINI_3_5_FLASH_DEFAULT_LIMIT = 100
+
+# Registry of rate-limited model names → default per-user lifetime limit.
+# Add a single entry here to rate-limit a new model. The matching Firestore
+# fields are derived from the model name (e.g. "gemini-3.5-flash" →
+# `gemini_3_5_flash_usage_count` / `gemini_3_5_flash_usage_limit`) unless an
+# override is supplied below to preserve legacy field names.
+RATE_LIMITED_MODELS: dict[str, int] = {
+    # "pro" variants — all share the existing gemini_pro_usage_* counter via
+    # the override below so users' historical pro usage history is preserved.
+    "gemini-3.1-pro-preview": GEMINI_PRO_DEFAULT_LIMIT,
+    "gemini-3.1-pro":         GEMINI_PRO_DEFAULT_LIMIT,
+    "gemini-3-pro-preview":   GEMINI_PRO_DEFAULT_LIMIT,
+    "gemini-2.5-pro":         GEMINI_PRO_DEFAULT_LIMIT,
+    "gemini-1.5-pro":         GEMINI_PRO_DEFAULT_LIMIT,
+    # Net-new rate-limited model — gets its own counter via the derived prefix.
+    "gemini-3.5-flash":       GEMINI_3_5_FLASH_DEFAULT_LIMIT,
+}
+
+# Firestore-field-prefix overrides. Only required for models that should share
+# an existing counter (legacy compat). Models not listed here use a prefix
+# derived from the model name.
+RATE_LIMIT_FIELD_PREFIX: dict[str, str] = {
+    "gemini-3.1-pro-preview": "gemini_pro",
+    "gemini-3.1-pro":         "gemini_pro",
+    "gemini-3-pro-preview":   "gemini_pro",
+    "gemini-2.5-pro":         "gemini_pro",
+    "gemini-1.5-pro":         "gemini_pro",
+}
+
+
+def _rate_limit_field_prefix(model_name: str) -> str:
+    """Return the Firestore field prefix used for *model_name*'s counters.
+
+    Falls back to a sanitized version of the model name when no override is
+    configured.
+    """
+    if model_name in RATE_LIMIT_FIELD_PREFIX:
+        return RATE_LIMIT_FIELD_PREFIX[model_name]
+    return re.sub(r'[^a-z0-9]+', '_', model_name.lower()).strip('_')
+
+
+def _rate_limit_count_field(model_name: str) -> str:
+    return f"{_rate_limit_field_prefix(model_name)}_usage_count"
+
+
+def _rate_limit_limit_field(model_name: str) -> str:
+    return f"{_rate_limit_field_prefix(model_name)}_usage_limit"
 
 # Regions where Vertex AI hosts Gemini and where users may direct their
 # vertex_project=<their-project>&vertex_region=<region> requests. Limited to
@@ -635,85 +683,97 @@ def build_request_analytics_context(
         "llm_model_name": llm_model_name,
     }
 
-def is_gemini_pro_model(model_name: str | None) -> bool:
-    """Return True if *model_name* is a Gemini Pro model."""
-    return model_name is not None and "pro" in model_name.lower()
+def rate_limited_keys_in_request(
+    engine_options: list[str] | None, llm_model_name: str | None
+) -> list[str]:
+    """Return de-duplicated RATE_LIMITED_MODELS keys triggered by this request.
 
-
-def is_pro_request(engine_options: list[str] | None, llm_model_name: str | None) -> bool:
-    """Return True if any model involved in this request is a Gemini Pro model."""
-    if is_gemini_pro_model(llm_model_name):
-        return True
+    Order: llm_model_name first (if rate-limited), then engine_options. Caller
+    uses the returned list both to reserve and to release quota.
+    """
+    keys: list[str] = []
+    seen: set[str] = set()
+    candidates: list[str] = []
+    if llm_model_name:
+        candidates.append(llm_model_name)
     if engine_options:
-        for engine in engine_options:
-            if is_gemini_pro_model(engine):
-                return True
-    return False
+        candidates.extend(engine_options)
+    for name in candidates:
+        if name in RATE_LIMITED_MODELS and name not in seen:
+            seen.add(name)
+            keys.append(name)
+    return keys
 
 
-def check_gemini_pro_rate_limit(user_email: str) -> tuple[bool, int, int]:
-    """Read-only check whether *user_email* is within their Gemini Pro usage limit.
+def check_and_reserve_quotas(
+    user_email: str, model_keys: list[str]
+) -> tuple[bool, dict[str, tuple[int, int]], str | None]:
+    """Atomically reserve quota for every model in *model_keys*.
 
-    Returns (allowed, current_count, limit).
-    NOTE: For gating requests, use check_and_reserve_gemini_pro_quota() instead
-    to avoid race conditions.
+    Returns (allowed, state, exhausted_key):
+    - allowed: True if every model was under its limit and all counters were
+      incremented; False if any counter was at limit (none incremented).
+    - state: { model_key: (count_after_or_current, limit) } for every key.
+    - exhausted_key: the first model key that hit its limit, or None.
     """
-    try:
-        doc = db.collection("usage_statistics").document(user_email).get()
-        if not doc.exists:
-            return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
-        data = doc.to_dict() or {}
-        count = int(data.get("gemini_pro_usage_count", 0))
-        limit = int(data.get("gemini_pro_usage_limit", GEMINI_PRO_DEFAULT_LIMIT))
-        return (count < limit, count, limit)
-    except Exception as e:
-        logger.error(f"Error checking Gemini Pro rate limit for {user_email}: {e}")
-        return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+    if not model_keys:
+        return (True, {}, None)
 
-
-def check_and_reserve_gemini_pro_quota(user_email: str) -> tuple[bool, int, int]:
-    """Atomically check and increment Gemini Pro usage count.
-
-    Uses a Firestore transaction to prevent concurrent requests from
-    bypassing the limit.  Returns (allowed, count_after, limit).
-    """
     try:
         user_ref = db.collection("usage_statistics").document(user_email)
 
         @_gc_firestore.transactional
         def _txn(transaction):
             doc = user_ref.get(transaction=transaction)
-            if not doc.exists:
-                # Brand-new user — allow and initialise count to 1
-                transaction.set(user_ref, {
-                    "gemini_pro_usage_count": 1,
-                    "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
-                }, merge=True)
-                return (True, 1, GEMINI_PRO_DEFAULT_LIMIT)
+            data = (doc.to_dict() or {}) if doc.exists else {}
 
-            data = doc.to_dict() or {}
-            count = int(data.get("gemini_pro_usage_count", 0))
-            limit = int(data.get("gemini_pro_usage_limit", GEMINI_PRO_DEFAULT_LIMIT))
+            # Snapshot the current count/limit for every requested key.
+            snapshot: dict[str, tuple[int, int]] = {}
+            for key in model_keys:
+                count = int(data.get(_rate_limit_count_field(key), 0))
+                limit = int(data.get(_rate_limit_limit_field(key), RATE_LIMITED_MODELS[key]))
+                snapshot[key] = (count, limit)
 
-            if count >= limit:
-                return (False, count, limit)
+            # Reject if any counter is already at its limit.
+            for key in model_keys:
+                count, limit = snapshot[key]
+                if count >= limit:
+                    return (False, snapshot, key)
 
-            new_count = count + 1
-            transaction.update(user_ref, {"gemini_pro_usage_count": new_count})
-            return (True, new_count, limit)
+            # All under limit → increment every counter (and persist the limit
+            # field for new users, so admin views show it from the start).
+            updates: dict[str, int] = {}
+            new_state: dict[str, tuple[int, int]] = {}
+            for key in model_keys:
+                count, limit = snapshot[key]
+                new_count = count + 1
+                updates[_rate_limit_count_field(key)] = new_count
+                updates[_rate_limit_limit_field(key)] = limit
+                new_state[key] = (new_count, limit)
+
+            if doc.exists:
+                transaction.update(user_ref, updates)
+            else:
+                transaction.set(user_ref, updates, merge=True)
+            return (True, new_state, None)
 
         return _txn(db.transaction())
     except Exception as e:
-        logger.error(f"Error in Gemini Pro rate-limit reservation for {user_email}: {e}")
-        # Fail-open so the request isn't silently blocked by a transient error
-        return (True, 0, GEMINI_PRO_DEFAULT_LIMIT)
+        logger.error(f"Error reserving rate-limit quotas for {user_email}: {e}")
+        # Fail-open so the request isn't silently blocked by a transient error.
+        state = {k: (0, RATE_LIMITED_MODELS[k]) for k in model_keys}
+        return (True, state, None)
 
 
-def release_gemini_pro_quota(user_email: str):
-    """Decrement gemini_pro_usage_count by 1 (e.g. after a failed request).
+def release_quotas(user_email: str, model_keys: list[str]) -> None:
+    """Decrement each model_key's usage counter by 1 (e.g. after request failure).
 
-    Safe to call even if the count is already 0 — will not go negative.
+    Safe to call with an empty list and safe to re-run; counters won't go
+    below zero.
     """
+    if not model_keys:
+        return
+
     try:
         user_ref = db.collection("usage_statistics").document(user_email)
 
@@ -722,13 +782,39 @@ def release_gemini_pro_quota(user_email: str):
             doc = user_ref.get(transaction=transaction)
             if not doc.exists:
                 return
-            count = int((doc.to_dict() or {}).get("gemini_pro_usage_count", 0))
-            if count > 0:
-                transaction.update(user_ref, {"gemini_pro_usage_count": count - 1})
+            data = doc.to_dict() or {}
+            updates: dict[str, int] = {}
+            for key in model_keys:
+                field = _rate_limit_count_field(key)
+                count = int(data.get(field, 0))
+                if count > 0:
+                    updates[field] = count - 1
+            if updates:
+                transaction.update(user_ref, updates)
 
         _txn(db.transaction())
     except Exception as e:
-        logger.error(f"Error releasing Gemini Pro quota for {user_email}: {e}")
+        logger.error(f"Error releasing rate-limit quotas for {user_email}: {e}")
+
+
+def read_rate_limit_state(user_email: str) -> dict[str, tuple[int, int]]:
+    """Read-only snapshot returning (count, limit) per rate-limited model.
+
+    Missing fields are filled in with the registry's default limit, so this
+    always returns an entry for every model in RATE_LIMITED_MODELS.
+    """
+    state: dict[str, tuple[int, int]] = {}
+    try:
+        doc = db.collection("usage_statistics").document(user_email).get()
+        data = (doc.to_dict() or {}) if doc.exists else {}
+    except Exception as e:
+        logger.error(f"Error reading rate-limit state for {user_email}: {e}")
+        data = {}
+    for key, default_limit in RATE_LIMITED_MODELS.items():
+        count = int(data.get(_rate_limit_count_field(key), 0))
+        limit = int(data.get(_rate_limit_limit_field(key), default_limit))
+        state[key] = (count, limit)
+    return state
 
 
 # ── Daily usage email alerts ────────────────────────────────────────────
@@ -772,8 +858,8 @@ def _send_daily_usage_alerts(user_email: str, current_day: str, prev_count: int)
 _RATE_LIMIT_ALERT_COOLDOWN = 300  # seconds (5 minutes)
 
 
-def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int):
-    """Notify admin that a user was blocked by the Gemini Pro rate limit.
+def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int, model_name: str | None = None):
+    """Notify admin that a user was blocked by a per-model rate limit.
 
     De-duplicated via Firestore: only one email is sent per user per cooldown
     window, even if dozens of parallel workers are all rejected simultaneously.
@@ -802,9 +888,10 @@ def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int):
         sender = current_app.config.get('email_sender')
         if not sender or not sender.is_enabled:
             return
+        model_phrase = f"<code>{model_name}</code>" if model_name else "a Gemini Pro model"
         sender.send_admin_usage_alert(
             f"Rate limit hit: {user_email}",
-            f"<p><strong>{user_email}</strong> attempted to use a Gemini Pro model but has "
+            f"<p><strong>{user_email}</strong> attempted to use {model_phrase} but has "
             f"reached their limit (<strong>{count}/{limit}</strong> requests used).</p>"
             f"<p>You can increase their limit from the <em>Rate Limits</em> tab in the "
             f"admin dashboard.</p>",
@@ -1682,8 +1769,11 @@ def update_usage_statistics_from_event(event: dict, *, backfill_tokens: int = 50
                 "total_mL_water": firestore.Increment(h2o),
             }
 
-            if "gemini_pro_usage_limit" not in data:
-                increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
+            # Backfill missing per-model rate-limit fields for legacy users.
+            for _model_key, _default_limit in RATE_LIMITED_MODELS.items():
+                _limit_field = _rate_limit_limit_field(_model_key)
+                if _limit_field not in data:
+                    increments[_limit_field] = _default_limit
 
             user_ref.update({
                 **increments,
@@ -1730,7 +1820,7 @@ def update_usage_statistics_from_event(event: dict, *, backfill_tokens: int = 50
                     cost_by_auth_method[auth_method] = request_cost_usd
                     cost_monthly_by_auth[current_month][auth_method] = request_cost_usd
 
-            user_ref.set({
+            initial_doc = {
                 "user_email": user_email,
                 "first_processed_at": firestore.SERVER_TIMESTAMP,
                 "last_processed_at": firestore.SERVER_TIMESTAMP,
@@ -1754,8 +1844,11 @@ def update_usage_statistics_from_event(event: dict, *, backfill_tokens: int = 50
                 "last_impact_snapshot": event.get("impact") or {},
                 "last_event_id": event.get("event_id"),
                 "last_request_id": event.get("request_id"),
-                "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
-            }, merge=True)
+            }
+            # Initialize a default usage limit for every rate-limited model.
+            for _model_key, _default_limit in RATE_LIMITED_MODELS.items():
+                initial_doc[_rate_limit_limit_field(_model_key)] = _default_limit
+            user_ref.set(initial_doc, merge=True)
 
         logger.info(
             "Updated usage statistics from event %s for %s",
@@ -1878,10 +1971,12 @@ def update_usage_statistics(
                 "total_mL_water": firestore.Increment(h2o),
             }
 
-            # Auto-initialise the limit field for existing users (count is
-            # now managed by check_and_reserve_gemini_pro_quota)
-            if "gemini_pro_usage_limit" not in data:
-                increments["gemini_pro_usage_limit"] = GEMINI_PRO_DEFAULT_LIMIT
+            # Auto-initialise per-model usage limits for existing users
+            # (counts are managed by check_and_reserve_quotas).
+            for _model_key, _default_limit in RATE_LIMITED_MODELS.items():
+                _limit_field = _rate_limit_limit_field(_model_key)
+                if _limit_field not in data:
+                    increments[_limit_field] = _default_limit
 
             user_ref.update({
                 **increments,
@@ -1930,9 +2025,9 @@ def update_usage_statistics(
                     cost_by_auth_method[auth_method] = float(request_cost_usd)
                     cost_monthly_by_auth[current_month][auth_method] = float(request_cost_usd)
 
-            # Use merge=True so we don't overwrite gemini_pro_usage_count
-            # that was already set by check_and_reserve_gemini_pro_quota
-            user_ref.set({
+            # Use merge=True so we don't overwrite per-model usage counters
+            # that were already set by check_and_reserve_quotas.
+            initial_doc = {
                 "user_email": user_email,
                 "first_processed_at": firestore.SERVER_TIMESTAMP,
                 "last_processed_at": firestore.SERVER_TIMESTAMP,
@@ -1954,8 +2049,10 @@ def update_usage_statistics(
                 "backfill_applied_v2": True,  # Nothing to backfill yet
                 "backfill_tokens": backfill_tokens,
                 "last_impact_snapshot": est_impact,
-                "gemini_pro_usage_limit": GEMINI_PRO_DEFAULT_LIMIT,
-            }, merge=True)
+            }
+            for _model_key, _default_limit in RATE_LIMITED_MODELS.items():
+                initial_doc[_rate_limit_limit_field(_model_key)] = _default_limit
+            user_ref.set(initial_doc, merge=True)
 
         logger.info(f"Updated usage statistics for {user_email}")
 
@@ -3327,15 +3424,28 @@ def _refresh_pdf_job_counters(job_id: str) -> dict | None:
     return job_data
 
 
-def _reserve_pdf_page_pro_quota_if_needed(job_data: dict) -> tuple[bool, bool, int, int]:
+def _reserve_pdf_page_pro_quota_if_needed(
+    job_data: dict,
+) -> tuple[bool, list[str], str | None, int, int]:
+    """Per-page rate-limit reservation for async PDF processing.
+
+    Returns (allowed, reserved_keys, exhausted_key_or_None, exhausted_count, exhausted_limit).
+    Callers should pass `reserved_keys` to release_quotas() on failure.
+    """
     user_email = _normalize_email_identity(job_data.get("user_email"))
     if not user_email:
-        return True, False, 0, GEMINI_PRO_DEFAULT_LIMIT
+        return True, [], None, 0, GEMINI_PRO_DEFAULT_LIMIT
     user_pays = bool(job_data.get("user_vertex_project"))
-    if user_pays or not is_pro_request(job_data.get("engine_options"), job_data.get("llm_model_name")):
-        return True, False, 0, GEMINI_PRO_DEFAULT_LIMIT
-    allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
-    return allowed, True, count, limit
+    request_keys = rate_limited_keys_in_request(
+        job_data.get("engine_options"), job_data.get("llm_model_name")
+    )
+    if user_pays or not request_keys:
+        return True, [], None, 0, GEMINI_PRO_DEFAULT_LIMIT
+    allowed, state, exhausted = check_and_reserve_quotas(user_email, request_keys)
+    if not allowed:
+        count, limit = state[exhausted]
+        return False, [], exhausted, count, limit
+    return True, request_keys, None, 0, GEMINI_PRO_DEFAULT_LIMIT
 
 # Authentication middleware function
 def authenticate_request(request):
@@ -3773,7 +3883,7 @@ class VoucherVisionProcessor:
         # Initialize LLM models
         self.Voucher_Vision.setup_JSON_dict_structure()
         self.llm_models = {}
-        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-pro-preview"]:
+        for model_name in ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-2.5-flash", "gemini-2.5-pro", "gemini-3-pro-preview", "gemini-3.5-flash"]:
             self.llm_models[model_name] = GoogleGeminiHandler(
                 self.cfg, self.logger, model_name, self.Voucher_Vision.JSON_dict_structure,
                 config_vals_for_permutation=None, exit_early_for_JSON=True
@@ -4208,9 +4318,11 @@ class VoucherVisionProcessor:
 
                     "gemini-3.1-pro-preview": "GEMINI_3_1_PRO",
                     "gemini-3.1-pro": "GEMINI_3_1_PRO",
-                    
+
                     "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
                     "gemini-3.1-flash-lite": "GEMINI_3_1_FLASH_LITE",
+
+                    "gemini-3.5-flash": "GEMINI_3_5_FLASH",
                 }
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
@@ -4808,26 +4920,37 @@ def process_image():
             response.headers.add('Access-Control-Allow-Origin', '*')
             return response
 
-        # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
-        pro_quota_reserved = False
+        # ── Per-model rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
+        reserved_keys: list[str] = []
         user_pays = bool(user_gemini_key) or bool(user_vertex_project)
-        if is_pro_request(engine_options, llm_model_name) and not user_pays:
-            allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
-            if not allowed:
-                logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
-                _send_rate_limit_hit_alert(user_email, count, limit)
-                resp = make_response(jsonify({
-                    "error": "Gemini Pro rate limit exceeded",
-                    "message": (
-                        f"You have used all {limit} of your Gemini Pro model requests. "
-                        "Contact an administrator to request additional quota."
-                    ),
-                    "gemini_pro_usage_count": count,
-                    "gemini_pro_usage_limit": limit,
-                }), 503)
-                resp.headers.add('Access-Control-Allow-Origin', '*')
-                return resp
-            pro_quota_reserved = True
+        if not user_pays:
+            request_keys = rate_limited_keys_in_request(engine_options, llm_model_name)
+            if request_keys:
+                allowed, state, exhausted = check_and_reserve_quotas(user_email, request_keys)
+                if not allowed:
+                    ex_count, ex_limit = state[exhausted]
+                    logger.warning(
+                        f"Rate limit hit for {user_email} on {exhausted}: {ex_count}/{ex_limit}"
+                    )
+                    _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                    # Legacy fields preserved for old clients.
+                    pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
+                    pro_count, pro_limit = pro_state
+                    resp = make_response(jsonify({
+                        "error": "Rate limit exceeded",
+                        "message": (
+                            f"You have used all {ex_limit} of your {exhausted} requests. "
+                            "Contact an administrator to request additional quota."
+                        ),
+                        "model": exhausted,
+                        "count": ex_count,
+                        "limit": ex_limit,
+                        "gemini_pro_usage_count": pro_count,
+                        "gemini_pro_usage_limit": pro_limit,
+                    }), 503)
+                    resp.headers.add('Access-Control-Allow-Origin', '*')
+                    return resp
+                reserved_keys = request_keys
 
         results, status_code = app.config['processor'].process_image_request(
             file=file, **process_kwargs
@@ -4850,14 +4973,17 @@ def process_image():
                     "usage_events write failed route=/process request_id=%s; skipped rollup mutation",
                     request_id,
                 )
-            # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
-            if pro_quota_reserved:
-                _, count, limit = check_gemini_pro_rate_limit(user_email)
-                _send_pro_migration_advisory(user_email, count, limit)
+            # Advisory email: nudge pro users toward flash-lite / own API key (max 1/day).
+            # Only fires for pro variants, not for other rate-limited models.
+            pro_reserved = [k for k in reserved_keys if _rate_limit_field_prefix(k) == "gemini_pro"]
+            if pro_reserved:
+                pro_state = read_rate_limit_state(user_email).get(pro_reserved[0])
+                if pro_state:
+                    _send_pro_migration_advisory(user_email, pro_state[0], pro_state[1])
         else:
-            # Release the reserved pro quota on failure
-            if pro_quota_reserved:
-                release_gemini_pro_quota(user_email)
+            # Release the reserved per-model quotas on failure
+            if reserved_keys:
+                release_quotas(user_email, reserved_keys)
             try:
                 persist_usage_events_and_rollups([event], route_label="/process:upload")
             except Exception:
@@ -4974,26 +5100,36 @@ def process_image_by_url():
         resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
-    # ── Gemini Pro rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
-    pro_quota_reserved = False
+    # ── Per-model rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
+    reserved_keys: list[str] = []
     user_pays = bool(user_gemini_key) or bool(user_vertex_project)
-    if is_pro_request(engine_options, llm_model_name) and not user_pays:
-        allowed, count, limit = check_and_reserve_gemini_pro_quota(user_email)
-        if not allowed:
-            logger.warning(f"Gemini Pro rate limit hit for {user_email}: {count}/{limit}")
-            _send_rate_limit_hit_alert(user_email, count, limit)
-            resp = make_response(jsonify({
-                "error": "Gemini Pro rate limit exceeded",
-                "message": (
-                    f"You have used all {limit} of your Gemini Pro model requests. "
-                    "Contact an administrator to request additional quota."
-                ),
-                "gemini_pro_usage_count": count,
-                "gemini_pro_usage_limit": limit,
-            }), 503)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
-        pro_quota_reserved = True
+    if not user_pays:
+        request_keys = rate_limited_keys_in_request(engine_options, llm_model_name)
+        if request_keys:
+            allowed, state, exhausted = check_and_reserve_quotas(user_email, request_keys)
+            if not allowed:
+                ex_count, ex_limit = state[exhausted]
+                logger.warning(
+                    f"Rate limit hit for {user_email} on {exhausted}: {ex_count}/{ex_limit}"
+                )
+                _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
+                pro_count, pro_limit = pro_state
+                resp = make_response(jsonify({
+                    "error": "Rate limit exceeded",
+                    "message": (
+                        f"You have used all {ex_limit} of your {exhausted} requests. "
+                        "Contact an administrator to request additional quota."
+                    ),
+                    "model": exhausted,
+                    "count": ex_count,
+                    "limit": ex_limit,
+                    "gemini_pro_usage_count": pro_count,
+                    "gemini_pro_usage_limit": pro_limit,
+                }), 503)
+                resp.headers.add('Access-Control-Allow-Origin', '*')
+                return resp
+            reserved_keys = request_keys
 
     file_obj, filename = None, None
     last_exception = None
@@ -5140,14 +5276,16 @@ def process_image_by_url():
                     "usage_events write failed route=/process-url request_id=%s; skipped rollup mutation",
                     request_id,
                 )
-            # Advisory email: nudge users toward flash-lite / own API key (max 1/day)
-            if pro_quota_reserved:
-                _, count, limit = check_gemini_pro_rate_limit(user_email)
-                _send_pro_migration_advisory(user_email, count, limit)
+            # Advisory email: nudge pro users toward flash-lite / own API key (max 1/day).
+            pro_reserved = [k for k in reserved_keys if _rate_limit_field_prefix(k) == "gemini_pro"]
+            if pro_reserved:
+                pro_state = read_rate_limit_state(user_email).get(pro_reserved[0])
+                if pro_state:
+                    _send_pro_migration_advisory(user_email, pro_state[0], pro_state[1])
         else:
-            # Release the reserved pro quota on failure
-            if pro_quota_reserved:
-                release_gemini_pro_quota(user_email)
+            # Release the reserved per-model quotas on failure
+            if reserved_keys:
+                release_quotas(user_email, reserved_keys)
             try:
                 persist_usage_events_and_rollups([event], route_label="/process-url")
             except Exception:
@@ -5164,9 +5302,9 @@ def process_image_by_url():
 
     except Exception as e:
         logger.exception(f"Error during main processing after successful download from URL: {e}")
-        # Release the reserved pro quota on unhandled exception
-        if pro_quota_reserved:
-            release_gemini_pro_quota(user_email)
+        # Release the reserved per-model quotas on unhandled exception
+        if reserved_keys:
+            release_quotas(user_email, reserved_keys)
         return jsonify({'error': str(e)}), 500
     
 
@@ -5561,12 +5699,12 @@ def internal_process_pdf_job_page(job_id, page_index):
         merge=True,
     )
 
-    quota_reserved = False
+    reserved_keys: list[str] = []
     try:
-        allowed, quota_reserved, count, limit = _reserve_pdf_page_pro_quota_if_needed(job_data)
+        allowed, reserved_keys, exhausted, count, limit = _reserve_pdf_page_pro_quota_if_needed(job_data)
         if not allowed:
             raise RuntimeError(
-                f"Gemini Pro rate limit exceeded for {job_data.get('user_email')}: {count}/{limit}."
+                f"Rate limit exceeded for {job_data.get('user_email')} on {exhausted}: {count}/{limit}."
             )
 
         page_bytes = _download_pdf_job_bytes(page_data["page_image_blob_path"])
@@ -5602,9 +5740,9 @@ def internal_process_pdf_job_page(job_id, page_index):
             )
 
         page_status = "completed" if event.get("success") else "failed"
-        if page_status != "completed" and quota_reserved:
-            release_gemini_pro_quota(job_data.get("user_email"))
-            quota_reserved = False
+        if page_status != "completed" and reserved_keys:
+            release_quotas(job_data.get("user_email"), reserved_keys)
+            reserved_keys = []
 
         page_stem = os.path.splitext(page_data.get("filename") or f"page_{page_index:04d}.jpg")[0]
         result_filename = f"{page_stem}.json" if page_status == "completed" else f"{page_stem}_FAILED.json"
@@ -5627,8 +5765,8 @@ def internal_process_pdf_job_page(job_id, page_index):
         return jsonify({'ok': True, 'status': page_status}), 200
     except Exception as e:
         logger.exception("Failed to process PDF job %s page %s", job_id, page_index)
-        if quota_reserved:
-            release_gemini_pro_quota(job_data.get("user_email"))
+        if reserved_keys:
+            release_quotas(job_data.get("user_email"), reserved_keys)
         failure_result = OrderedDict([
             ("filename", page_data.get("filename") or f"page_{page_index:04d}.jpg"),
             ("prompt", job_data.get("prompt")),
@@ -6710,7 +6848,14 @@ def test_pro_advisory_email():
 @app.route('/admin/rate-limits/<email>', methods=['POST'])
 @authenticated_route
 def update_user_rate_limit(email):
-    """Update Gemini Pro usage limit for a specific user."""
+    """Update per-model usage limits for a specific user.
+
+    Accepts any combination of:
+      - {"gemini_pro_usage_limit": int}
+      - {"gemini_3_5_flash_usage_limit": int}
+      - (or any other registry-derived `{prefix}_usage_limit` field)
+    Updates only the fields supplied; rejects if none of them are valid.
+    """
     user = authenticate_request(request)
     if not user or not user.get('email'):
         return jsonify({'error': 'User not properly authenticated'}), 401
@@ -6720,14 +6865,25 @@ def update_user_rate_limit(email):
     if not admin_doc.exists:
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
 
-    data = request.get_json()
-    if not data or 'gemini_pro_usage_limit' not in data:
-        return jsonify({'error': 'Missing gemini_pro_usage_limit in request body'}), 400
+    data = request.get_json() or {}
 
-    try:
-        new_limit = int(data['gemini_pro_usage_limit'])
-    except (ValueError, TypeError):
-        return jsonify({'error': 'gemini_pro_usage_limit must be an integer'}), 400
+    # Build the set of accepted limit-field names from the registry.
+    accepted_fields = {_rate_limit_limit_field(k) for k in RATE_LIMITED_MODELS.keys()}
+
+    updates: dict[str, int] = {}
+    for field, value in data.items():
+        if field not in accepted_fields:
+            continue
+        try:
+            updates[field] = int(value)
+        except (ValueError, TypeError):
+            return jsonify({'error': f'{field} must be an integer'}), 400
+
+    if not updates:
+        return jsonify({
+            'error': 'Request must include at least one rate-limit field',
+            'accepted_fields': sorted(accepted_fields),
+        }), 400
 
     try:
         user_ref = db.collection('usage_statistics').document(email)
@@ -6735,14 +6891,14 @@ def update_user_rate_limit(email):
         if not doc.exists:
             return jsonify({'error': f'No usage record found for {email}'}), 404
 
-        user_ref.update({'gemini_pro_usage_limit': new_limit})
-        logger.info(f"Admin {admin_email} updated Gemini Pro limit for {email} to {new_limit}")
+        user_ref.update(updates)
+        logger.info(f"Admin {admin_email} updated rate limits for {email}: {updates}")
 
         return jsonify({
             'status': 'success',
-            'message': f'Updated Gemini Pro limit for {email} to {new_limit}',
+            'message': f'Updated rate limits for {email}',
             'email': email,
-            'gemini_pro_usage_limit': new_limit,
+            'updated': updates,
         })
     except Exception as e:
         logger.error(f"Error updating rate limit for {email}: {e}")

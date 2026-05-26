@@ -343,8 +343,8 @@
 
         <!-- Rate Limits Tab -->
         <div id="rate-limits" class="tab-content">
-          <h3>Gemini Pro Rate Limits</h3>
-          <p>Manage per-user lifetime limits for Gemini Pro model requests. Default limit is 100 requests.</p>
+          <h3>Per-Model Rate Limits</h3>
+          <p>Manage per-user lifetime usage limits for rate-limited Gemini models. Each model has its own independent counter; default limit per model is 100 requests.</p>
 
           <div class="search-container">
             <input type="text" class="search-input" id="rate-limits-search" placeholder="Search by email...">
@@ -356,9 +356,8 @@
               <thead>
                 <tr>
                   <th>User</th>
-                  <th>Pro Requests Used</th>
-                  <th>Limit</th>
-                  <th>Remaining</th>
+                  <th>Pro (used / limit / remaining)</th>
+                  <th>3.5-Flash (used / limit / remaining)</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>

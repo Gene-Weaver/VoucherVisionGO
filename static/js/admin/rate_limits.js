@@ -1,8 +1,28 @@
-// Rate Limits tab — manages per-user Gemini Pro usage limits
-// Reuses the /admin/usage-statistics endpoint (which already returns
-// gemini_pro_usage_count and gemini_pro_usage_limit fields).
+// Rate Limits tab — manages per-user, per-model usage limits.
+// Reuses the /admin/usage-statistics endpoint (raw Firestore docs include
+// every {prefix}_usage_count / {prefix}_usage_limit field).
 
 const GEMINI_PRO_DEFAULT_LIMIT = 100;
+const GEMINI_3_5_FLASH_DEFAULT_LIMIT = 100;
+
+// Per-model display config. Keep field names in sync with app.py's
+// RATE_LIMITED_MODELS / RATE_LIMIT_FIELD_PREFIX.
+const RATE_LIMIT_MODELS = [
+  {
+    key: 'pro',
+    label: 'Gemini Pro',
+    countField: 'gemini_pro_usage_count',
+    limitField: 'gemini_pro_usage_limit',
+    defaultLimit: GEMINI_PRO_DEFAULT_LIMIT,
+  },
+  {
+    key: 'flash35',
+    label: 'Gemini 3.5 Flash',
+    countField: 'gemini_3_5_flash_usage_count',
+    limitField: 'gemini_3_5_flash_usage_limit',
+    defaultLimit: GEMINI_3_5_FLASH_DEFAULT_LIMIT,
+  },
+];
 
 let allRateLimits = [];
 let filteredRateLimits = [];
@@ -11,7 +31,6 @@ let currentRateLimitsPage = 1;
 async function loadRateLimits() {
   const loadingElem = document.getElementById('rate-limits-loading');
   const tableElem = document.getElementById('rate-limits-table');
-  const listElem = document.getElementById('rate-limits-list');
 
   loadingElem.style.display = 'block';
   tableElem.style.display = 'none';
@@ -30,32 +49,49 @@ async function loadRateLimits() {
     const data = await response.json();
     loadingElem.style.display = 'none';
 
-    if (data.status === 'success') {
-      // Map to rate-limit-centric objects
-      allRateLimits = data.usage_statistics.map(stat => ({
-        email: stat.user_email || 'Unknown',
-        count: stat.gemini_pro_usage_count || 0,
-        limit: stat.gemini_pro_usage_limit != null ? stat.gemini_pro_usage_limit : GEMINI_PRO_DEFAULT_LIMIT,
-      }));
-
-      // Sort: users closest to (or over) their limit first
-      allRateLimits.sort((a, b) => {
-        const pctA = a.limit > 0 ? a.count / a.limit : 0;
-        const pctB = b.limit > 0 ? b.count / b.limit : 0;
-        return pctB - pctA;
-      });
-
-      filteredRateLimits = [...allRateLimits];
-      renderRateLimitsPage(1);
-    } else {
+    if (data.status !== 'success') {
       throw new Error(data.error || 'Failed to load rate limits');
     }
+
+    // Map each user's stats into a row with per-model {count, limit}.
+    allRateLimits = data.usage_statistics.map(stat => {
+      const row = { email: stat.user_email || 'Unknown', models: {} };
+      RATE_LIMIT_MODELS.forEach(m => {
+        row.models[m.key] = {
+          count: stat[m.countField] || 0,
+          limit: stat[m.limitField] != null ? stat[m.limitField] : m.defaultLimit,
+        };
+      });
+      return row;
+    });
+
+    // Sort: highest utilization across *any* model first.
+    allRateLimits.sort((a, b) => {
+      const pctA = Math.max(...RATE_LIMIT_MODELS.map(m => {
+        const s = a.models[m.key];
+        return s.limit > 0 ? s.count / s.limit : 0;
+      }));
+      const pctB = Math.max(...RATE_LIMIT_MODELS.map(m => {
+        const s = b.models[m.key];
+        return s.limit > 0 ? s.count / s.limit : 0;
+      }));
+      return pctB - pctA;
+    });
+
+    filteredRateLimits = [...allRateLimits];
+    renderRateLimitsPage(1);
   } catch (error) {
     console.error('Error loading rate limits:', error);
     loadingElem.style.display = 'none';
     document.getElementById('rate-limits-table-container').innerHTML =
       `<p class="error">Error: ${error.message}</p>`;
   }
+}
+
+function statusBadge(maxPct) {
+  if (maxPct >= 100) return { cls: 'status-rejected', text: 'Exceeded' };
+  if (maxPct >= 80) return { cls: 'status-pending', text: 'Near limit' };
+  return { cls: 'status-approved', text: 'OK' };
 }
 
 function renderRateLimitsPage(page) {
@@ -81,52 +117,71 @@ function renderRateLimitsPage(page) {
   const pageItems = filteredRateLimits.slice(start, start + perPage);
 
   pageItems.forEach(user => {
-    const remaining = Math.max(0, user.limit - user.count);
-    const pct = user.limit > 0 ? (user.count / user.limit) * 100 : 0;
+    // Per-model state
+    const cells = {};
+    let maxPct = 0;
+    RATE_LIMIT_MODELS.forEach(m => {
+      const s = user.models[m.key];
+      const remaining = Math.max(0, s.limit - s.count);
+      const pct = s.limit > 0 ? (s.count / s.limit) * 100 : 0;
+      if (pct > maxPct) maxPct = pct;
+      cells[m.key] = { ...s, remaining, pct };
+    });
 
-    let statusClass, statusText;
-    if (pct >= 100) {
-      statusClass = 'status-rejected';
-      statusText = 'Exceeded';
-    } else if (pct >= 80) {
-      statusClass = 'status-pending';
-      statusText = 'Near limit';
-    } else {
-      statusClass = 'status-approved';
-      statusText = 'OK';
-    }
+    const status = statusBadge(maxPct);
+
+    // Build per-model summary cell content + edit button
+    const buildModelCell = (m) => {
+      const c = cells[m.key];
+      return `${c.count} / ${c.limit} / ${c.remaining}`;
+    };
 
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${user.email}</td>
-      <td>${user.count}</td>
-      <td>${user.limit}</td>
-      <td>${remaining}</td>
-      <td><span class="${statusClass}">${statusText}</span></td>
+      <td>${buildModelCell(RATE_LIMIT_MODELS[0])}</td>
+      <td>${buildModelCell(RATE_LIMIT_MODELS[1])}</td>
+      <td><span class="${status.cls}">${status.text}</span></td>
       <td>
-        <button class="btn-primary btn-edit-limit" data-email="${user.email}" data-limit="${user.limit}">Edit Limit</button>
+        <button class="btn-primary btn-edit-limit"
+                data-email="${user.email}"
+                data-model-key="${RATE_LIMIT_MODELS[0].key}"
+                data-model-label="${RATE_LIMIT_MODELS[0].label}"
+                data-field="${RATE_LIMIT_MODELS[0].limitField}"
+                data-limit="${cells.pro.limit}">Edit Pro</button>
+        <button class="btn-primary btn-edit-limit"
+                data-email="${user.email}"
+                data-model-key="${RATE_LIMIT_MODELS[1].key}"
+                data-model-label="${RATE_LIMIT_MODELS[1].label}"
+                data-field="${RATE_LIMIT_MODELS[1].limitField}"
+                data-limit="${cells.flash35.limit}">Edit 3.5-Flash</button>
       </td>
     `;
     listElem.appendChild(row);
   });
 
-  // Pagination
   if (typeof window.generatePagination === 'function') {
     window.generatePagination(filteredRateLimits.length, page, 'rate-limits-pagination', renderRateLimitsPage);
   }
 
-  // Attach edit handlers
   document.querySelectorAll('.btn-edit-limit').forEach(btn => {
     btn.addEventListener('click', (e) => {
-      const email = e.target.getAttribute('data-email');
-      const currentLimit = e.target.getAttribute('data-limit');
-      showEditLimitPrompt(email, currentLimit);
+      const t = e.target;
+      const email = t.getAttribute('data-email');
+      const modelKey = t.getAttribute('data-model-key');
+      const modelLabel = t.getAttribute('data-model-label');
+      const field = t.getAttribute('data-field');
+      const currentLimit = t.getAttribute('data-limit');
+      showEditLimitPrompt(email, modelKey, modelLabel, field, currentLimit);
     });
   });
 }
 
-async function showEditLimitPrompt(email, currentLimit) {
-  const newLimit = prompt(`Set new Gemini Pro request limit for:\n${email}\n\nCurrent limit: ${currentLimit}`, currentLimit);
+async function showEditLimitPrompt(email, modelKey, modelLabel, field, currentLimit) {
+  const newLimit = prompt(
+    `Set new ${modelLabel} request limit for:\n${email}\n\nCurrent limit: ${currentLimit}`,
+    currentLimit
+  );
 
   if (newLimit === null) return; // cancelled
 
@@ -139,23 +194,27 @@ async function showEditLimitPrompt(email, currentLimit) {
   try {
     const idToken = await firebase.auth().currentUser.getIdToken();
 
+    const body = {};
+    body[field] = parsed;
+
     const response = await fetch(`/admin/rate-limits/${encodeURIComponent(email)}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ gemini_pro_usage_limit: parsed }),
+      body: JSON.stringify(body),
     });
 
     const data = await response.json();
 
     if (response.ok && data.status === 'success') {
-      // Update local data
-      const entry = allRateLimits.find(u => u.email === email);
-      if (entry) entry.limit = parsed;
-      const filtered = filteredRateLimits.find(u => u.email === email);
-      if (filtered) filtered.limit = parsed;
+      const updateLocal = (collection) => {
+        const entry = collection.find(u => u.email === email);
+        if (entry && entry.models[modelKey]) entry.models[modelKey].limit = parsed;
+      };
+      updateLocal(allRateLimits);
+      updateLocal(filteredRateLimits);
       renderRateLimitsPage(currentRateLimitsPage);
     } else {
       alert('Error: ' + (data.error || data.message || 'Unknown error'));
