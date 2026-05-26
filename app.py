@@ -6845,6 +6845,85 @@ def test_pro_advisory_email():
     return jsonify({'status': 'sent', 'to': admin_email})
 
 
+def _humanize_counter_prefix(prefix: str) -> str:
+    """Turn a Firestore field prefix into a human-friendly counter label.
+
+    Examples:
+      "gemini_pro"        -> "Gemini Pro"
+      "gemini_3_5_flash"  -> "Gemini 3.5 Flash"
+      "gemini_3_5_flash_lite" -> "Gemini 3.5 Flash Lite"
+
+    Adjacent numeric tokens are joined with a dot (e.g. "3_5" -> "3.5"); other
+    tokens are title-cased.
+    """
+    tokens = [t for t in (prefix or "").split("_") if t]
+    if not tokens:
+        return prefix or ""
+    parts: list[str] = []
+    i = 0
+    while i < len(tokens):
+        tok = tokens[i]
+        if tok.isdigit():
+            # Collapse consecutive digit tokens into a dotted number ("3_5" -> "3.5")
+            run = [tok]
+            j = i + 1
+            while j < len(tokens) and tokens[j].isdigit():
+                run.append(tokens[j])
+                j += 1
+            parts.append(".".join(run))
+            i = j
+        else:
+            parts.append(tok[:1].upper() + tok[1:])
+            i += 1
+    return " ".join(parts)
+
+
+@app.route('/admin/rate-limit-config', methods=['GET'])
+@authenticated_route
+def get_rate_limit_config():
+    """Admin-only: deduplicated list of rate-limit counters.
+
+    Built from RATE_LIMITED_MODELS + RATE_LIMIT_FIELD_PREFIX. Each entry
+    describes one Firestore counter (multiple model names may share a counter
+    via the field-prefix override mechanism), so the admin UI can render one
+    sub-tab per counter and adding a new model to the registry produces a new
+    sub-tab with zero frontend changes.
+    """
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    admin_doc = db.collection('admins').document(admin_email).get()
+    if not admin_doc.exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    counters: dict[str, dict] = {}
+    for model_name, default_limit in RATE_LIMITED_MODELS.items():
+        prefix = _rate_limit_field_prefix(model_name)
+        entry = counters.get(prefix)
+        if entry is None:
+            entry = {
+                "key": prefix,
+                "label": _humanize_counter_prefix(prefix),
+                "count_field": _rate_limit_count_field(model_name),
+                "limit_field": _rate_limit_limit_field(model_name),
+                "default_limit": int(default_limit),
+                "model_names": [],
+            }
+            counters[prefix] = entry
+        entry["model_names"].append(model_name)
+        # Surface the highest default_limit seen across variants sharing the
+        # counter (in practice they all match, but be defensive).
+        if int(default_limit) > entry["default_limit"]:
+            entry["default_limit"] = int(default_limit)
+
+    return jsonify({
+        "status": "success",
+        "counters": list(counters.values()),
+    })
+
+
 @app.route('/admin/rate-limits/<email>', methods=['POST'])
 @authenticated_route
 def update_user_rate_limit(email):

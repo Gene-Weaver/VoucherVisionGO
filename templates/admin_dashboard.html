@@ -344,7 +344,12 @@
         <!-- Rate Limits Tab -->
         <div id="rate-limits" class="tab-content">
           <h3>Per-Model Rate Limits</h3>
-          <p>Manage per-user lifetime usage limits for rate-limited Gemini models. Each model has its own independent counter; default limit per model is 100 requests.</p>
+          <p>Manage per-user lifetime usage limits, one counter at a time. Each tab below corresponds to one Firestore counter — multiple model names may share the same counter.</p>
+
+          <div id="rl-counter-tabs" class="rl-counter-tabs nu-controls" style="margin-bottom:8px; display:none;">
+            <!-- Counter sub-tab buttons populated by rate_limits.js -->
+          </div>
+          <p id="rl-counter-description" class="table-subtitle" style="margin-top:0;"></p>
 
           <div class="search-container">
             <input type="text" class="search-input" id="rate-limits-search" placeholder="Search by email...">
@@ -356,14 +361,15 @@
               <thead>
                 <tr>
                   <th>User</th>
-                  <th>Pro (used / limit / remaining)</th>
-                  <th>3.5-Flash (used / limit / remaining)</th>
+                  <th>Used</th>
+                  <th>Limit</th>
+                  <th>Remaining</th>
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody id="rate-limits-list">
-                <!-- Rate limits will be listed here -->
+                <!-- Rate limits for the active counter will be listed here -->
               </tbody>
             </table>
           </div>
