@@ -2626,9 +2626,34 @@ def _email_path_segment(email: str) -> str:
     return re.sub(r"[^a-z0-9._@\-]", "_", normalized.lower())
 
 
-def _user_prompt_blob_path(owner_email: str, prompt_id: str, filename: str) -> str:
+_BUILTIN_PROMPT_FILENAMES_CACHE: set[str] | None = None
+
+
+def _builtin_prompt_filenames() -> set[str]:
+    """Return the set of YAML filenames baked into the docker image.
+
+    The built-in prompt directory is immutable at runtime (it's baked into the
+    container), so we cache the listing on first access.
+    """
+    global _BUILTIN_PROMPT_FILENAMES_CACHE
+    if _BUILTIN_PROMPT_FILENAMES_CACHE is None:
+        prompt_dir = Path(project_root) / "vouchervision_main" / "custom_prompts"
+        names: set[str] = set()
+        try:
+            for ext in ('.yaml', '.yml'):
+                for f in prompt_dir.glob(f'*{ext}'):
+                    names.add(f.name)
+        except Exception:
+            # If the directory is missing, just return an empty set; the
+            # upload-collision check becomes a no-op which is still safe.
+            names = set()
+        _BUILTIN_PROMPT_FILENAMES_CACHE = names
+    return _BUILTIN_PROMPT_FILENAMES_CACHE
+
+
+def _user_prompt_blob_path(owner_email: str, filename: str) -> str:
     safe_filename = secure_filename(filename) or "prompt.yaml"
-    return f"{USER_PROMPTS_PREFIX}/{_email_path_segment(owner_email)}/{prompt_id}__{safe_filename}"
+    return f"{USER_PROMPTS_PREFIX}/{_email_path_segment(owner_email)}/{safe_filename}"
 
 
 def _upload_user_prompt_bytes(blob_path: str, payload: bytes) -> str:
@@ -2718,37 +2743,25 @@ def _validate_user_prompt_yaml(raw_bytes: bytes) -> dict:
     return parsed
 
 
-def _user_prompt_ref(prompt_id: str, filename: str) -> str:
-    """Build the public identifier used by /process and the /webpage picker."""
-    safe_filename = secure_filename(filename) or "prompt.yaml"
-    return f"UGP__{prompt_id}__{safe_filename}"
+def _resolve_user_prompt_local_path(filename: str, caller_email: str | None) -> str:
+    """Materialize a user-generated prompt (looked up by filename) to a local path.
 
-
-def _parse_user_prompt_ref(prompt_ref: str) -> tuple[str, str] | None:
-    """Return (prompt_id, filename) if `prompt_ref` is a user-generated prompt, else None."""
-    if not isinstance(prompt_ref, str) or not prompt_ref.startswith("UGP__"):
-        return None
-    parts = prompt_ref.split("__", 2)
-    if len(parts) != 3 or not parts[1] or not parts[2]:
-        return None
-    return parts[1], parts[2]
-
-
-def _resolve_user_prompt_local_path(prompt_id: str, caller_email: str | None) -> str:
-    """Materialize a user-generated prompt to a local file path.
-
-    Enforces visibility (production: anyone; test: owner or admin) and
-    soft-delete (active==false treated as not-found). Caches on disk keyed by
-    prompt_id + updated_at so re-uploads invalidate cleanly.
+    Enforces visibility (production: anyone; test: owner or admin) and soft-delete
+    (active==false treated as not-found). Caches on disk keyed by filename + the
+    Firestore doc's updated_at so re-uploads invalidate the cache cleanly.
     """
-    doc_ref = db.collection("user_prompts").document(prompt_id)
+    safe_filename = secure_filename(filename) or ""
+    if not safe_filename:
+        raise FileNotFoundError("empty user-prompt filename")
+
+    doc_ref = db.collection("user_prompts").document(safe_filename)
     doc = doc_ref.get()
     if not doc.exists:
-        raise FileNotFoundError(f"user prompt {prompt_id} not found")
+        raise FileNotFoundError(f"user prompt {safe_filename} not found")
 
     data = doc.to_dict() or {}
     if not data.get("active", False):
-        raise FileNotFoundError(f"user prompt {prompt_id} is no longer available")
+        raise FileNotFoundError(f"user prompt {safe_filename} is no longer available")
 
     status = data.get("status", "test")
     owner_email = _normalize_email_identity(data.get("owner_email", "")) or ""
@@ -2757,11 +2770,11 @@ def _resolve_user_prompt_local_path(prompt_id: str, caller_email: str | None) ->
         is_owner = bool(norm_caller) and norm_caller == owner_email
         is_admin = bool(norm_caller) and _is_admin_email(norm_caller)
         if not (is_owner or is_admin):
-            raise PermissionError(f"user prompt {prompt_id} is not accessible")
+            raise PermissionError(f"user prompt {safe_filename} is not accessible")
 
     gcs_path = data.get("gcs_path")
     if not gcs_path:
-        raise FileNotFoundError(f"user prompt {prompt_id} has no storage path")
+        raise FileNotFoundError(f"user prompt {safe_filename} has no storage path")
 
     updated_at = data.get("updated_at")
     updated_key = ""
@@ -2774,9 +2787,7 @@ def _resolve_user_prompt_local_path(prompt_id: str, caller_email: str | None) ->
         updated_key = ""
 
     os.makedirs(USER_PROMPTS_LOCAL_CACHE_DIR, exist_ok=True)
-    filename = data.get("filename") or "prompt.yaml"
-    safe_filename = secure_filename(filename) or "prompt.yaml"
-    cache_name = f"{prompt_id}__{updated_key}__{safe_filename}"
+    cache_name = f"{updated_key}__{safe_filename}"
     cache_path = os.path.join(USER_PROMPTS_LOCAL_CACHE_DIR, cache_name)
     if os.path.exists(cache_path) and os.path.getsize(cache_path) > 0:
         return cache_path
@@ -2790,20 +2801,24 @@ def _resolve_user_prompt_local_path(prompt_id: str, caller_email: str | None) ->
 
 
 def _preflight_user_prompt(prompt_ref: str | None, caller_email: str | None) -> tuple[dict | None, int]:
-    """Pre-resolve a UGP__ prompt ref at the route boundary.
+    """Pre-resolve a user-generated prompt at the route boundary.
 
-    Returns (None, 200) on success or when prompt is not user-generated.
-    Returns (error_payload, status_code) on access/availability errors so the
-    handler can respond with a clean HTTP error before kicking off processing.
+    Returns (None, 200) on success or when prompt is empty / resolves to a
+    built-in. Returns (error_payload, status_code) on access/availability errors
+    so the handler can respond with a clean HTTP error before kicking off
+    processing.
+
+    Built-in prompts short-circuit to success without any Firestore lookup,
+    matching the resolver's disk-first decision below.
     """
     if not prompt_ref:
         return None, 200
-    parsed = _parse_user_prompt_ref(prompt_ref)
-    if parsed is None:
+    # Built-in short-circuit: if the filename matches a YAML in the docker image,
+    # no Firestore lookup is needed.
+    if prompt_ref in _builtin_prompt_filenames():
         return None, 200
-    prompt_id, _filename = parsed
     try:
-        _resolve_user_prompt_local_path(prompt_id, caller_email)
+        _resolve_user_prompt_local_path(prompt_ref, caller_email)
         return None, 200
     except PermissionError:
         return {'error': "Prompt not found or not accessible."}, 403
@@ -2812,27 +2827,27 @@ def _preflight_user_prompt(prompt_ref: str | None, caller_email: str | None) -> 
     except Exception as e:
         logger.error(
             "Failed to preflight user prompt %s [category=%s]",
-            prompt_id,
+            prompt_ref,
             _user_prompt_error_category(e),
         )
         return {'error': "Failed to load prompt."}, 500
 
 
 def _resolve_prompt_path(prompt_ref: str | None, custom_prompts_dir: str, caller_email: str | None) -> str:
-    """Resolve `prompt_ref` to a local YAML path on disk.
+    """Resolve `prompt_ref` (a bare filename) to a local YAML path on disk.
 
-    - Built-in prompts: returns os.path.join(custom_prompts_dir, prompt_ref).
-    - User-generated (UGP__...): downloads to cache dir and returns that path.
-    - Empty / None: defers to caller-side default handling by returning the dir
-      joined with the empty string (matches prior behavior).
+    Resolution order:
+    1. Empty / None → return `<custom_prompts_dir>/` (preserves prior behavior).
+    2. Built-in file on disk → return that path.
+    3. Otherwise → look up the filename in Firestore `user_prompts` and
+       materialize the GCS-stored YAML into the local cache.
     """
     if not prompt_ref:
         return os.path.join(custom_prompts_dir, "")
-    parsed = _parse_user_prompt_ref(prompt_ref)
-    if parsed is None:
-        return os.path.join(custom_prompts_dir, prompt_ref)
-    prompt_id, _filename = parsed
-    return _resolve_user_prompt_local_path(prompt_id, caller_email)
+    builtin_path = os.path.join(custom_prompts_dir, prompt_ref)
+    if os.path.exists(builtin_path):
+        return builtin_path
+    return _resolve_user_prompt_local_path(prompt_ref, caller_email)
 
 
 def _serialize_pdf_job(job_doc_or_dict):
@@ -3944,8 +3959,9 @@ class VoucherVisionProcessor:
                             user_vertex_project=None, user_vertex_region=None,
                             caller_email=None):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
-        # Resolve the prompt path: built-ins resolve to a file in custom_prompts_dir,
-        # user-generated (UGP__...) prompts download from GCS into a local cache.
+        # Resolve the prompt path: built-ins on disk take priority; otherwise
+        # the filename is looked up in Firestore and the GCS-stored YAML is
+        # materialized into a local cache.
         resolved_prompt_path = _resolve_prompt_path(prompt, self.custom_prompts_dir, caller_email)
 
         # Cache key includes every input that changes the LLM handler's identity,
@@ -7840,15 +7856,19 @@ def _list_visible_user_prompts(caller_email: str | None) -> list[dict]:
         if not allowed:
             continue
         show_owner = is_admin or (caller_email and caller_email == owner_email)
+        filename = data.get('filename') or doc.id
         info = {
-            'filename': data.get('filename'),
-            'name': os.path.splitext(data.get('filename') or '')[0],
+            'filename': filename,
+            'name': os.path.splitext(filename)[0],
             'prompt_name': data.get('display_name', ''),
             'version': data.get('version', ''),
             'author': data.get('author', ''),
             'institution': data.get('institution', ''),
             'description': data.get('description', ''),
-            'prompt_ref': data.get('prompt_ref'),
+            # prompt_ref is the bare filename now (same as doc.id under the new
+            # scheme). Always derive it server-side rather than trusting whatever
+            # the stored field says.
+            'prompt_ref': filename,
             'source': 'user',
             'is_user_generated': True,
             'environment': status,
@@ -7880,26 +7900,37 @@ def list_prompts_api():
     # Eagerly load visible user prompts (used by both single-lookup and list paths)
     user_visible = _list_visible_user_prompts(caller_email)
 
-    # Specific-prompt lookup branch
+    # Specific-prompt lookup branch.
+    # Resolution order: try built-in by filename first; if not found, look up
+    # the same name in the visible-user-prompts set.
     if specific_prompt:
-        # User-generated prompt: UGP__<prompt_id>__<filename>.yaml
-        ugp = _parse_user_prompt_ref(specific_prompt)
-        if ugp is not None:
-            prompt_id, _filename = ugp
-            match = next((entry for entry in user_visible if entry[0] == prompt_id), None)
-            if match is None:
-                # Not visible to caller, or doesn't exist
-                msg = f"Prompt '{specific_prompt}' not found or not accessible."
-                if format_type == 'text':
-                    return msg, 404, {'Content-Type': 'text/plain'}
-                return jsonify({'status': 'error', 'message': msg}), 404
+        target_file = next((f for f in prompt_files if f.name == specific_prompt), None)
+        if target_file:
+            prompt_details = extract_prompt_details(target_file)
+            if format_type == 'text':
+                response_text = format_prompt_as_text(target_file.name, prompt_details)
+                return response_text, 200, {'Content-Type': 'text/plain'}
+            return jsonify({
+                'status': 'success',
+                'prompt': {
+                    'filename': target_file.name,
+                    'prompt_ref': target_file.name,
+                    'source': 'builtin',
+                    'is_user_generated': False,
+                    'details': prompt_details,
+                },
+            })
+
+        # User-generated by filename (doc.id == filename under the new scheme).
+        match = next((entry for entry in user_visible if entry[0] == specific_prompt), None)
+        if match is not None:
             _id, data, info = match
             try:
                 payload = _download_user_prompt_bytes(data.get('gcs_path'))
             except Exception as e:
                 logger.error(
                     "Failed to fetch user prompt %s from GCS [category=%s]",
-                    prompt_id,
+                    specific_prompt,
                     _user_prompt_error_category(e),
                 )
                 return jsonify({'status': 'error', 'message': 'Failed to load prompt content.'}), 500
@@ -7930,25 +7961,7 @@ def list_prompts_api():
                 },
             })
 
-        # Built-in prompt by filename
-        target_file = next((f for f in prompt_files if f.name == specific_prompt), None)
-        if target_file:
-            prompt_details = extract_prompt_details(target_file)
-            if format_type == 'text':
-                response_text = format_prompt_as_text(target_file.name, prompt_details)
-                return response_text, 200, {'Content-Type': 'text/plain'}
-            return jsonify({
-                'status': 'success',
-                'prompt': {
-                    'filename': target_file.name,
-                    'prompt_ref': target_file.name,
-                    'source': 'builtin',
-                    'is_user_generated': False,
-                    'details': prompt_details,
-                },
-            })
-
-        # Not found
+        # Not found in either source
         available_prompts = [file.name for file in prompt_files] + [
             entry[2].get('prompt_ref') for entry in user_visible
         ]
@@ -8768,10 +8781,13 @@ def account_capabilities():
 
 def _serialize_user_prompt(doc, *, include_owner: bool) -> dict:
     data = doc.to_dict() or {}
+    # Under the new scheme the doc ID *is* the filename and *is* the prompt_ref.
+    # Derive both from the doc so we never emit a stale stored value.
+    filename = data.get('filename') or doc.id
     payload = {
         'prompt_id': doc.id,
-        'filename': data.get('filename'),
-        'prompt_ref': data.get('prompt_ref'),
+        'filename': filename,
+        'prompt_ref': filename,
         'display_name': data.get('display_name'),
         'description': data.get('description'),
         'version': data.get('version'),
@@ -8926,16 +8942,27 @@ def upload_user_prompt():
     if requested_status not in ('test', 'production'):
         return jsonify({'error': "status must be 'test' or 'production'."}), 400
 
-    prompt_id = uuid.uuid4().hex[:10]
-    blob_path = _user_prompt_blob_path(caller_email, prompt_id, safe_filename)
-    prompt_ref = _user_prompt_ref(prompt_id, safe_filename)
+    # Global filename uniqueness: reject collisions with built-ins or with any
+    # active user-generated prompt.
+    if safe_filename in _builtin_prompt_filenames():
+        return jsonify({
+            'error': 'A built-in prompt with that filename already exists. Pick a different name.'
+        }), 409
+
+    doc_ref = db.collection('user_prompts').document(safe_filename)
+    existing = doc_ref.get()
+    if existing.exists and (existing.to_dict() or {}).get('active', False):
+        return jsonify({
+            'error': 'Another user-generated prompt already uses that filename.'
+        }), 409
+
+    blob_path = _user_prompt_blob_path(caller_email, safe_filename)
 
     try:
         _upload_user_prompt_bytes(blob_path, payload)
     except Exception as e:
         logger.error(
-            "Failed to upload prompt to GCS prompt_id=%s owner=%s gcs=%s [category=%s]",
-            prompt_id,
+            "Failed to upload prompt to GCS owner=%s gcs=%s [category=%s]",
             caller_email,
             blob_path,
             _user_prompt_error_category(e),
@@ -8945,7 +8972,7 @@ def upload_user_prompt():
     doc_payload = {
         'owner_email': caller_email,
         'filename': safe_filename,
-        'prompt_ref': prompt_ref,
+        'prompt_ref': safe_filename,
         'gcs_path': blob_path,
         'gcs_bucket': _user_prompts_bucket_name(),
         'display_name': str(parsed.get('prompt_name', '')),
@@ -8957,27 +8984,30 @@ def upload_user_prompt():
         'active': True,
         'created_at': firestore.SERVER_TIMESTAMP,
         'updated_at': firestore.SERVER_TIMESTAMP,
+        # Explicitly clear soft-delete fields in case we are overwriting a
+        # previously soft-deleted record with the same filename (name reclaim).
         'deleted_at': None,
+        'deleted_by': None,
         'size_bytes': len(payload),
     }
 
     try:
-        db.collection('user_prompts').document(prompt_id).set(doc_payload)
+        doc_ref.set(doc_payload)
     except Exception as e:
         logger.error(
             "Failed to write Firestore record for prompt %s [category=%s]",
-            prompt_id,
+            safe_filename,
             _user_prompt_error_category(e),
         )
         _delete_user_prompt_blob(blob_path)
         return jsonify({'error': 'Failed to persist prompt record.'}), 500
 
     logger.info(
-        "user_prompt uploaded prompt_id=%s owner=%s gcs=%s status=%s size=%d",
-        prompt_id, caller_email, blob_path, requested_status, len(payload),
+        "user_prompt uploaded filename=%s owner=%s gcs=%s status=%s size=%d",
+        safe_filename, caller_email, blob_path, requested_status, len(payload),
     )
 
-    doc = db.collection('user_prompts').document(prompt_id).get()
+    doc = doc_ref.get()
     return jsonify({
         'status': 'success',
         'message': 'Prompt uploaded successfully.',
