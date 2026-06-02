@@ -3180,8 +3180,11 @@ def _verify_internal_pdf_task_request() -> tuple[bool, str | None]:
         token = auth_header.split("Bearer ", 1)[1]
         try:
             claims = google_id_token.verify_token(token, GoogleAuthRequest())
-        except Exception as e:
-            return False, f"Task token verification failed: {e}"
+        except Exception:
+            # Do not include the exception text in the response or the log —
+            # google.auth puts the raw token in the message on failure.
+            logger.exception("Cloud Tasks OIDC token verification failed")
+            return False, "Task token verification failed."
 
         forwarded_proto = request.headers.get("X-Forwarded-Proto", "").split(",")[0].strip()
         base_url = request.base_url
@@ -3458,9 +3461,18 @@ def authenticate_request(request):
         # Verify the token
         decoded_token = auth.verify_id_token(id_token)
         return decoded_token
-    except Exception as e:
-        logger.error(f"Error verifying token: {e}")
-        return None
+    except auth.ExpiredIdTokenError:
+        logger.warning("Firebase token rejected: expired")
+    except auth.RevokedIdTokenError:
+        logger.warning("Firebase token rejected: revoked")
+    except auth.InvalidIdTokenError:
+        logger.warning("Firebase token rejected: invalid")
+    except Exception:
+        # Never f-string the exception here — Firebase Admin embeds the raw
+        # token in InvalidIdTokenError messages (e.g. "Wrong number of
+        # segments in token: b'...'") and Cloud Logging would persist it.
+        logger.exception("Unexpected error during Firebase token verification")
+    return None
 
 def get_user_email_from_request(request):
     """
@@ -3496,8 +3508,16 @@ def get_user_email_from_request(request):
                 decoded_claims = auth.verify_id_token(id_token, check_revoked=False)
                 user_email = decoded_claims.get('email', 'unknown')
                 logger.debug(f"Firebase auth: {user_email}")
-            except Exception as e:
-                logger.error(f"Error getting email from token: {e}")
+            except auth.ExpiredIdTokenError:
+                logger.warning("Firebase token rejected while resolving email: expired")
+            except auth.RevokedIdTokenError:
+                logger.warning("Firebase token rejected while resolving email: revoked")
+            except auth.InvalidIdTokenError:
+                logger.warning("Firebase token rejected while resolving email: invalid")
+            except Exception:
+                # See note in authenticate_request: never log the exception
+                # text here, it contains the raw token on InvalidIdTokenError.
+                logger.exception("Unexpected error resolving email from Firebase token")
         
     except Exception as e:
         logger.error(f"Error getting user email: {e}")
@@ -6107,8 +6127,17 @@ def api_demo_page():
                 )
                 
                 return response
-            except Exception as e:
-                logger.error(f"Error verifying token in /api-demo POST: {str(e)}")
+            except auth.ExpiredIdTokenError:
+                logger.warning("/api-demo POST rejected: token expired")
+                return redirect('/login')
+            except auth.RevokedIdTokenError:
+                logger.warning("/api-demo POST rejected: token revoked")
+                return redirect('/login')
+            except auth.InvalidIdTokenError:
+                logger.warning("/api-demo POST rejected: token invalid")
+                return redirect('/login')
+            except Exception:
+                logger.exception("Unexpected error verifying token in /api-demo POST")
                 return redirect('/login')
         else:
             return redirect('/login')
@@ -7353,8 +7382,10 @@ def admin_dashboard():
                         messaging_sender_id=firebase_config.get("messagingSenderId", ""),
                         app_id=firebase_config["appId"]
                     )
-            except Exception as e:
-                logger.warning(f"POST to /admin with invalid token: {e}")
+            except (auth.ExpiredIdTokenError, auth.RevokedIdTokenError, auth.InvalidIdTokenError):
+                logger.warning("POST to /admin with invalid Firebase token")
+            except Exception:
+                logger.exception("Unexpected error verifying token in /admin POST")
 
     # For GET requests, follow normal authentication
     user = authenticate_request(request)
@@ -8635,8 +8666,10 @@ def api_key_management_ui():
                         app_id=firebase_config["appId"],
                         server_url=base_url
                     )
-            except Exception as e:
-                logger.warning(f"POST to /api-key-management with invalid token: {e}")
+            except (auth.ExpiredIdTokenError, auth.RevokedIdTokenError, auth.InvalidIdTokenError):
+                logger.warning("POST to /api-key-management with invalid Firebase token")
+            except Exception:
+                logger.exception("Unexpected error verifying token in /api-key-management POST")
 
             logger.warning("POST to /api-key-management with invalid auth_token. Redirecting to login.")
             return redirect('/login')
