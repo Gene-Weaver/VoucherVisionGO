@@ -2555,7 +2555,7 @@ def create_initial_admin(email):
         admin_doc = db.collection('admins').document(email).get()
         
         if admin_doc.exists:
-            logger.info(f"Admin {email} already exists")
+            logger.info("Default admin account already created")
             return
         
         # Create admin record
@@ -2582,7 +2582,7 @@ def create_initial_admin(email):
         
         db.collection('user_applications').document(email).set(app_data)
         
-        logger.info(f"Created initial admin: {email}")
+        logger.info("Default admin account created")
         
     except Exception as e:
         logger.error(f"Error creating initial admin: {str(e)}")
