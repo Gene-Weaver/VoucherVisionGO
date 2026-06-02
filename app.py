@@ -370,6 +370,33 @@ RATE_LIMIT_FIELD_PREFIX: dict[str, str] = {
     "gemini-1.5-pro":         "gemini_pro",
 }
 
+# ── "General access" shared bin ─────────────────────────────────────────
+# Default 10000/user, shared counter across every Flash model the service
+# accepts plus a catch-all sentinel for unrecognized models. Lifecycle
+# notifications go to a dedicated low-volume path (admin + user), NOT the
+# per-model rate-limit alert used by pro/3.5-flash.
+GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT = 10000
+GEMINI_GENERAL_ACCESS_PREFIX = "gemini_general_access"
+GENERAL_ACCESS_MODELS: tuple[str, ...] = (
+    "gemini-2.0-flash",
+    "gemini-1.5-flash",
+    "gemini-2.5-flash",
+    "gemini-3-flash-preview",
+    "gemini-3-flash",
+    "gemini-3.1-flash-lite-preview",
+    "gemini-3.1-flash-lite",
+)
+# Sentinel for fallthrough — any llm_model_name not in RATE_LIMITED_MODELS
+# is bucketed here so unrecognized/future models still count toward the
+# shared cap.
+GEMINI_GENERAL_ACCESS_SENTINEL = "gemini-general-access"
+
+for _m in GENERAL_ACCESS_MODELS:
+    RATE_LIMITED_MODELS[_m] = GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT
+    RATE_LIMIT_FIELD_PREFIX[_m] = GEMINI_GENERAL_ACCESS_PREFIX
+RATE_LIMITED_MODELS[GEMINI_GENERAL_ACCESS_SENTINEL] = GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT
+RATE_LIMIT_FIELD_PREFIX[GEMINI_GENERAL_ACCESS_SENTINEL] = GEMINI_GENERAL_ACCESS_PREFIX
+
 
 def _rate_limit_field_prefix(model_name: str) -> str:
     """Return the Firestore field prefix used for *model_name*'s counters.
@@ -688,20 +715,25 @@ def rate_limited_keys_in_request(
 ) -> list[str]:
     """Return de-duplicated RATE_LIMITED_MODELS keys triggered by this request.
 
-    Order: llm_model_name first (if rate-limited), then engine_options. Caller
-    uses the returned list both to reserve and to release quota.
+    llm_model_name always lands in *some* bin: a registry hit, or the
+    general-access sentinel when the model is unrecognized. engine_options
+    are registry-only — they keep the historical no-op behavior for OCR
+    strings that aren't LLM model names.
     """
     keys: list[str] = []
     seen: set[str] = set()
-    candidates: list[str] = []
+
     if llm_model_name:
-        candidates.append(llm_model_name)
+        key = llm_model_name if llm_model_name in RATE_LIMITED_MODELS else GEMINI_GENERAL_ACCESS_SENTINEL
+        seen.add(key)
+        keys.append(key)
+
     if engine_options:
-        candidates.extend(engine_options)
-    for name in candidates:
-        if name in RATE_LIMITED_MODELS and name not in seen:
-            seen.add(name)
-            keys.append(name)
+        for name in engine_options:
+            if name in RATE_LIMITED_MODELS and name not in seen:
+                seen.add(name)
+                keys.append(name)
+
     return keys
 
 
@@ -865,6 +897,9 @@ def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int, model_na
     window, even if dozens of parallel workers are all rejected simultaneously.
     Survives server restarts and works across multiple instances.
     """
+    # General-access bin has its own notification path; skip the per-model alert.
+    if model_name and _rate_limit_field_prefix(model_name) == GEMINI_GENERAL_ACCESS_PREFIX:
+        return
     try:
         user_ref = db.collection("usage_statistics").document(user_email)
         doc = user_ref.get()
@@ -898,6 +933,66 @@ def _send_rate_limit_hit_alert(user_email: str, count: int, limit: int, model_na
         )
     except Exception as e:
         logger.error(f"Error sending rate-limit alert for {user_email}: {e}")
+
+
+_GENERAL_ACCESS_ALERT_COOLDOWN = 86400  # seconds (24h) — one notification per day per user
+
+
+def _send_general_access_cap_alert(user_email: str, count: int, limit: int,
+                                   requested_model: str | None):
+    """Fire one admin alert + one user advisory when a user is blocked by the
+    general-access cap. Deduplicated via a Firestore cooldown so repeated
+    503s don't spam either inbox.
+    """
+    try:
+        user_ref = db.collection("usage_statistics").document(user_email)
+        doc = user_ref.get()
+        if doc.exists:
+            data = doc.to_dict() or {}
+            last_alert = data.get("last_general_access_alert_at")
+            if last_alert is not None:
+                last_ts = last_alert.timestamp() if hasattr(last_alert, "timestamp") else float(last_alert)
+                if time.time() - last_ts < _GENERAL_ACCESS_ALERT_COOLDOWN:
+                    return
+        user_ref.set({"last_general_access_alert_at": firestore.SERVER_TIMESTAMP}, merge=True)
+
+        from flask import current_app
+        sender = current_app.config.get("email_sender")
+        if not sender or not sender.is_enabled:
+            return
+
+        # Admin notification — same style as the daily-threshold alerts above.
+        sender.send_admin_usage_alert(
+            f"General-access cap hit: {user_email}",
+            f"<p><strong>{user_email}</strong> reached the general-access shared cap "
+            f"(<strong>{count}/{limit}</strong>) while requesting "
+            f"<code>{requested_model or 'an unknown model'}</code>.</p>"
+            f"<p>Raise their <code>gemini_general_access_usage_limit</code> in the "
+            f"Rate Limits tab if appropriate.</p>",
+        )
+
+        # User-facing advisory — mirrors _send_pro_migration_advisory's tone.
+        sender.send_email(
+            user_email,
+            "VoucherVision — general-access quota reached",
+            textwrap.dedent(f"""\
+            <html><body style="font-family: Arial, sans-serif; line-height: 1.6;">
+            <p>Hello,</p>
+            <p>You've reached the shared general-access quota of <strong>{limit}</strong>
+            requests on VoucherVision (this counter is shared across the standard
+            Gemini Flash models).</p>
+            <p>To continue working, you have two options:</p>
+            <ul>
+              <li>Contact an administrator (reply to this email) to request additional quota.</li>
+              <li>Supply your own Gemini API key on the request &mdash; that path bypasses
+                  VoucherVision's shared quotas entirely.</li>
+            </ul>
+            <p>Thanks for using VoucherVision.</p>
+            </body></html>
+            """),
+        )
+    except Exception:
+        logger.exception(f"Error sending general-access cap alert for {user_email}")
 
 
 def _send_pro_migration_advisory(user_email: str, count: int, limit: int):
@@ -3427,7 +3522,7 @@ def _refresh_pdf_job_counters(job_id: str) -> dict | None:
     return job_data
 
 
-def _reserve_pdf_page_pro_quota_if_needed(
+def _reserve_pdf_page_quota_if_needed(
     job_data: dict,
 ) -> tuple[bool, list[str], str | None, int, int]:
     """Per-page rate-limit reservation for async PDF processing.
@@ -4952,17 +5047,31 @@ def process_image():
                     logger.warning(
                         f"Rate limit hit for {user_email} on {exhausted}: {ex_count}/{ex_limit}"
                     )
-                    _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                    is_general = _rate_limit_field_prefix(exhausted) == GEMINI_GENERAL_ACCESS_PREFIX
+                    if is_general:
+                        _send_general_access_cap_alert(
+                            user_email, ex_count, ex_limit, requested_model=llm_model_name
+                        )
+                        message = (
+                            f"You have used all {ex_limit} of your general-access requests "
+                            "(a shared quota across standard Gemini Flash models). "
+                            "Contact an administrator to request additional quota."
+                        )
+                        display_model = llm_model_name or exhausted
+                    else:
+                        _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                        message = (
+                            f"You have used all {ex_limit} of your {exhausted} requests. "
+                            "Contact an administrator to request additional quota."
+                        )
+                        display_model = exhausted
                     # Legacy fields preserved for old clients.
                     pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
                     pro_count, pro_limit = pro_state
                     resp = make_response(jsonify({
                         "error": "Rate limit exceeded",
-                        "message": (
-                            f"You have used all {ex_limit} of your {exhausted} requests. "
-                            "Contact an administrator to request additional quota."
-                        ),
-                        "model": exhausted,
+                        "message": message,
+                        "model": display_model,
                         "count": ex_count,
                         "limit": ex_limit,
                         "gemini_pro_usage_count": pro_count,
@@ -5132,16 +5241,30 @@ def process_image_by_url():
                 logger.warning(
                     f"Rate limit hit for {user_email} on {exhausted}: {ex_count}/{ex_limit}"
                 )
-                _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                is_general = _rate_limit_field_prefix(exhausted) == GEMINI_GENERAL_ACCESS_PREFIX
+                if is_general:
+                    _send_general_access_cap_alert(
+                        user_email, ex_count, ex_limit, requested_model=llm_model_name
+                    )
+                    message = (
+                        f"You have used all {ex_limit} of your general-access requests "
+                        "(a shared quota across standard Gemini Flash models). "
+                        "Contact an administrator to request additional quota."
+                    )
+                    display_model = llm_model_name or exhausted
+                else:
+                    _send_rate_limit_hit_alert(user_email, ex_count, ex_limit, model_name=exhausted)
+                    message = (
+                        f"You have used all {ex_limit} of your {exhausted} requests. "
+                        "Contact an administrator to request additional quota."
+                    )
+                    display_model = exhausted
                 pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
                 pro_count, pro_limit = pro_state
                 resp = make_response(jsonify({
                     "error": "Rate limit exceeded",
-                    "message": (
-                        f"You have used all {ex_limit} of your {exhausted} requests. "
-                        "Contact an administrator to request additional quota."
-                    ),
-                    "model": exhausted,
+                    "message": message,
+                    "model": display_model,
                     "count": ex_count,
                     "limit": ex_limit,
                     "gemini_pro_usage_count": pro_count,
@@ -5721,8 +5844,18 @@ def internal_process_pdf_job_page(job_id, page_index):
 
     reserved_keys: list[str] = []
     try:
-        allowed, reserved_keys, exhausted, count, limit = _reserve_pdf_page_pro_quota_if_needed(job_data)
+        allowed, reserved_keys, exhausted, count, limit = _reserve_pdf_page_quota_if_needed(job_data)
         if not allowed:
+            # Only the general-access bin notifies from the PDF path; pro/3.5-flash
+            # exhaustion stays silent here (those users would have hit the cap
+            # earlier on the /process gate, which already fires its own alert).
+            if exhausted and _rate_limit_field_prefix(exhausted) == GEMINI_GENERAL_ACCESS_PREFIX:
+                _send_general_access_cap_alert(
+                    job_data.get("user_email"),
+                    count,
+                    limit,
+                    requested_model=job_data.get("llm_model_name"),
+                )
             raise RuntimeError(
                 f"Rate limit exceeded for {job_data.get('user_email')} on {exhausted}: {count}/{limit}."
             )
