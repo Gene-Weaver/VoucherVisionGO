@@ -6984,29 +6984,6 @@ def get_cost_analytics():
         logger.exception("Cost analytics: unexpected error")
         return jsonify({'error': 'Failed to build cost analytics (see server logs)'}), 500
 
-
-@app.route('/admin/test-pro-advisory', methods=['POST'])
-@authenticated_route
-def test_pro_advisory_email():
-    """TEMPORARY: Send the pro-migration advisory email to the calling admin.
-    DELETE THIS ROUTE after verifying the email looks correct.
-    """
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
-        return jsonify({'error': 'Not authenticated'}), 401
-    admin_email = user['email']
-    admin_doc = db.collection('admins').document(admin_email).get()
-    if not admin_doc.exists:
-        return jsonify({'error': 'Admin access required'}), 403
-
-    # Clear the daily dedup so the email actually sends
-    user_ref = db.collection("usage_statistics").document(admin_email)
-    user_ref.set({"last_pro_advisory_date": ""}, merge=True)
-
-    _send_pro_migration_advisory(admin_email, 42, 100)
-    return jsonify({'status': 'sent', 'to': admin_email})
-
-
 def _humanize_counter_prefix(prefix: str) -> str:
     """Turn a Firestore field prefix into a human-friendly counter label.
 

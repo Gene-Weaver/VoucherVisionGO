@@ -38,6 +38,9 @@ function createApiKeyModal() {
     const modalDescription = document.createElement('p');
     modalDescription.innerHTML = 'Please enter your API key to use the VoucherVision API testing tool. If you do not have an API Key or an Authentication Token, <a href="https://vouchervision-go-738307415303.us-central1.run.app/signup" target="_blank">sign up for access</a> or <a href="https://vouchervision-go-738307415303.us-central1.run.app/login" target="_blank">log in to an existing account</a>.';
 
+    const modalSpamNote = document.createElement('p');
+    modalSpamNote.textContent = "If you've already applied, please check your spam folder — our emails are occasionally flagged as spam.";
+
     // Create form elements
     const apiKeyInput = document.createElement('input');
     apiKeyInput.type = 'text';
@@ -144,6 +147,7 @@ function createApiKeyModal() {
 
     modalContent.appendChild(modalTitle);
     modalContent.appendChild(modalDescription);
+    modalContent.appendChild(modalSpamNote);
     modalContent.appendChild(apiKeyInput);
     modalContent.appendChild(buttonContainer);
 

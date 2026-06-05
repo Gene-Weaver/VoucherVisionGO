@@ -86,6 +86,17 @@ body {
     font-size: 14px;
   }
   
+  .spam-note {
+    color: #8a6d00;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff3cd;
+    border: 1px solid #daa520;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
   .toggle-link {
     text-align: center;
     margin-top: 20px;
@@ -132,6 +143,11 @@ body {
   body.dark-mode .success-message {
     background-color: #1a2e1a;
     color: #66BB6A;
+  }
+  body.dark-mode .spam-note {
+    background-color: #2e2510;
+    border-color: #b8860b;
+    color: #e6b800;
   }
   body.dark-mode .toggle-link a {
     color: #66BB6A;
