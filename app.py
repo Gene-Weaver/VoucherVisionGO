@@ -23,7 +23,7 @@ APP_USER_AGENT = "VoucherVisionGO/1.0 (University of Michigan; vouchervision.api
 from io import BytesIO
 from werkzeug.datastructures import FileStorage
 from PIL import Image
-from flask import Flask, request, jsonify, redirect, make_response, render_template
+from flask import Flask, request, jsonify, redirect, make_response, render_template, g
 from flask_cors import CORS
 import logging
 from werkzeug.utils import secure_filename
@@ -275,6 +275,18 @@ def _get_default_project_id() -> str | None:
     project_id = os.environ.get("FIREBASE_PROJECT_ID")
     if project_id:
         return project_id
+    # Cloud Run secrets in this service may contain the credential JSON itself
+    # instead of a filesystem path. Read only the project_id field and never
+    # pass raw JSON to google.auth.default(), which interprets it as a filename.
+    for var in ("GOOGLE_APPLICATION_CREDENTIALS", "firebase-admin-key"):
+        raw = os.environ.get(var, "")
+        if raw.lstrip().startswith("{"):
+            try:
+                project_id = json.loads(raw).get("project_id")
+                if project_id:
+                    return project_id
+            except (TypeError, json.JSONDecodeError):
+                pass
     try:
         _, project_id = google.auth.default()
         return project_id
@@ -652,6 +664,54 @@ PAYMENT_AUTH_PARAM_ALIASES = {
     "vertex_region": ("vertex_region", "vertexRegion"),
 }
 
+# Header equivalents of the body/query params above, for callers (curl, PHP,
+# Symbiota, anything non-Python) that reach for a header first. Body and query
+# values still win — see get_payment_auth_context.
+PAYMENT_AUTH_HEADER_ALIASES = {
+    "gemini_api_key": ("X-Gemini-API-Key",),
+    "vertex_project": ("X-Vertex-Project",),
+    "vertex_region": ("X-Vertex-Region",),
+}
+
+# ── Billing-intent detection ────────────────────────────────────────────
+# A request that *tries* to pay with the caller's own credentials but puts them
+# somewhere we don't read used to fall through to server billing silently (the
+# caller sees HTTP 200 and only discovers the mistake on their Google bill).
+# We instead detect the attempt and hard-fail. Keys below are normalized with
+# _normalize_billing_param_name (lowercased, non-alphanumerics stripped).
+_BILLING_INTENT_NAMES = {
+    # → gemini_api_key
+    "geminiapikey": "gemini_api_key",
+    "geminikey": "gemini_api_key",
+    "googleapikey": "gemini_api_key",
+    "googlegeminiapikey": "gemini_api_key",
+    "aistudiokey": "gemini_api_key",
+    "aistudioapikey": "gemini_api_key",
+    "genaiapikey": "gemini_api_key",
+    # → vertex_project
+    "vertexproject": "vertex_project",
+    "vertexprojectid": "vertex_project",
+    "vertexprojectname": "vertex_project",
+    "gcpproject": "vertex_project",
+    "gcpprojectid": "vertex_project",
+    "googlecloudproject": "vertex_project",
+    # → vertex_region
+    "vertexregion": "vertex_region",
+    "vertexlocation": "vertex_region",
+    "gcpregion": "vertex_region",
+}
+
+# Never flag these — they are VoucherVisionGO's own auth/routing inputs, not
+# attempts to supply Gemini credentials.
+_BILLING_INTENT_EXEMPT = {
+    "apikey", "xapikey", "key", "token", "authtoken", "authorization",
+    "bearer", "idtoken", "accesstoken",
+}
+
+
+def _normalize_billing_param_name(name) -> str:
+    return re.sub(r"[^a-z0-9]+", "", str(name).lower())
+
 
 def _clean_optional_request_value(value):
     if value is None:
@@ -662,10 +722,11 @@ def _clean_optional_request_value(value):
     return value
 
 
-def _lookup_request_value(container, field_name):
+def _lookup_request_value(container, field_name, alias_table=None):
     if not container:
         return None
-    for alias in PAYMENT_AUTH_PARAM_ALIASES[field_name]:
+    aliases = (alias_table or PAYMENT_AUTH_PARAM_ALIASES)[field_name]
+    for alias in aliases:
         value = _clean_optional_request_value(container.get(alias))
         if value is not None:
             return value
@@ -703,22 +764,25 @@ def get_request_auth_details(req) -> dict:
 
 
 def get_payment_auth_context(req):
-    """Resolve per-request Gemini/Vertex billing inputs across form, JSON, and query params."""
+    """Resolve per-request Gemini/Vertex billing inputs across form, JSON, query params, and headers."""
     json_body = req.get_json(silent=True) if req.is_json else {}
+    # (container, alias_table). Headers come last so existing body/query
+    # callers keep their current precedence.
     request_sources = (
-        req.form,
-        json_body or {},
-        req.args,
+        (req.form, None),
+        (json_body or {}, None),
+        (req.args, None),
+        (req.headers, PAYMENT_AUTH_HEADER_ALIASES),
     )
 
     gemini_api_key = None
     vertex_project = None
     vertex_region = None
 
-    for source in request_sources:
-        gemini_api_key = gemini_api_key or _lookup_request_value(source, "gemini_api_key")
-        vertex_project = vertex_project or _lookup_request_value(source, "vertex_project")
-        vertex_region = vertex_region or _lookup_request_value(source, "vertex_region")
+    for source, alias_table in request_sources:
+        gemini_api_key = gemini_api_key or _lookup_request_value(source, "gemini_api_key", alias_table)
+        vertex_project = vertex_project or _lookup_request_value(source, "vertex_project", alias_table)
+        vertex_region = vertex_region or _lookup_request_value(source, "vertex_region", alias_table)
 
     # vertex_region without vertex_project is treated as server auth — clients
     # commonly send vertex_region=global as a default, and it shouldn't force
@@ -733,12 +797,118 @@ def get_payment_auth_context(req):
     else:
         auth_method = "server"
 
+    # Echoed back as X-VV-Billing-Mode so a caller can verify which account a
+    # request was billed to without waiting on a Google bill.
+    try:
+        g.vv_billing_mode = auth_method
+    except Exception:
+        pass
+
     return {
         "gemini_api_key": gemini_api_key,
         "vertex_project": vertex_project,
         "vertex_region": vertex_region,
         "auth_method": auth_method,
     }
+
+
+def detect_unusable_billing_intent(req):
+    """Return (error_payload, status) when the caller appears to be trying to
+    pay with their own Gemini/Vertex credentials but we could not read usable
+    ones. Returns (None, None) for every other request.
+
+    Rationale: an unreadable credential used to be indistinguishable from one
+    that was never supplied. The run proceeded on VoucherVisionGO's shared keys
+    and returned HTTP 200, so the caller only discovered the mistake when their
+    own Google bill stayed at zero. Anything that reads as an *attempt* to
+    self-fund now hard-fails instead of quietly falling back.
+
+    Note: `vertex_region` on its own is deliberately NOT an error. It carries no
+    credential, and clients commonly send `vertex_region=global` as a default;
+    get_payment_auth_context drops it when no project accompanies it.
+    """
+    json_body = req.get_json(silent=True) if req.is_json else {}
+    containers = (
+        ("form field", req.form),
+        ("JSON body field", json_body if isinstance(json_body, dict) else {}),
+        ("query parameter", req.args),
+        ("header", req.headers),
+    )
+
+    # Every spelling we DO read, normalized.
+    recognized = set()
+    for table in (PAYMENT_AUTH_PARAM_ALIASES, PAYMENT_AUTH_HEADER_ALIASES):
+        for aliases in table.values():
+            recognized.update(_normalize_billing_param_name(a) for a in aliases)
+
+    for label, container in containers:
+        if not container:
+            continue
+        try:
+            items = list(container.items())
+        except Exception:
+            continue
+        for raw_name, raw_value in items:
+            norm = _normalize_billing_param_name(raw_name)
+            if not norm:
+                continue
+            # Header spellings carry an "X-" prefix (X-Gemini-API-Key), so also
+            # test the de-prefixed form — otherwise a typo'd header like
+            # "X-Gemini-Key" normalizes to "xgeminikey" and slips through.
+            norms = [norm]
+            if norm.startswith("x") and len(norm) > 1:
+                norms.append(norm[1:])
+            if any(n in _BILLING_INTENT_EXEMPT for n in norms):
+                continue
+            canonical = next(
+                (_BILLING_INTENT_NAMES[n] for n in norms if n in _BILLING_INTENT_NAMES),
+                None,
+            )
+
+            if any(n in recognized for n in norms):
+                # Spelled correctly — only blank/whitespace values are a problem.
+                if _clean_optional_request_value(raw_value) is None:
+                    canonical = canonical or norm
+                    return ({
+                        "error": "Empty billing credential",
+                        "message": (
+                            f"The {label} '{raw_name}' was supplied but is empty. "
+                            f"VoucherVisionGO will not silently fall back to its shared "
+                            f"server keys when you appear to be supplying your own "
+                            f"credentials. Send a non-empty {canonical}, or omit the "
+                            f"parameter entirely to use server billing."
+                        ),
+                        "parameter": canonical,
+                    }, 400)
+                continue
+
+            if canonical:
+                return ({
+                    "error": "Unrecognized billing parameter",
+                    "message": (
+                        f"The {label} '{raw_name}' is not a parameter VoucherVisionGO "
+                        f"reads, so this request would have been billed to the shared "
+                        f"server keys instead of to you. Did you mean '{canonical}'? "
+                        f"Send it as a form field, a JSON body field, or the header "
+                        f"'{PAYMENT_AUTH_HEADER_ALIASES[canonical][0]}'."
+                    ),
+                    "parameter": canonical,
+                }, 400)
+
+    return (None, None)
+
+
+def _billing_intent_error_response(req):
+    """Shared route guard: build the 400 response, or None to continue."""
+    payload, status = detect_unusable_billing_intent(req)
+    if payload is None:
+        return None
+    logger.warning(
+        "Rejected request with unusable billing intent: %s", payload.get("message")
+    )
+    resp = make_response(jsonify(payload), status)
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
 
 
 def build_request_analytics_context(
@@ -1119,7 +1289,15 @@ requests.post(
         ...
     }},
     files={{"file": open("image.jpg", "rb")}},
-)</pre>
+)
+
+# curl equivalent (any language works - these are ordinary form fields)
+curl -X POST "https://&lt;server&gt;/process" \\
+  -H "X-API-Key: YOUR_VVGO_KEY" \\
+  -F "file=@image.jpg" \\
+  -F "engines=gemini-3.1-pro-preview" \\
+  -F "llm_model=gemini-3.1-pro-preview" \\
+  -F "gemini_api_key=YOUR_GEMINI_API_KEY"</pre>
 
             <p>You can obtain an API key from
             <a href="https://aistudio.google.com/apikey">Google AI Studio</a>.</p>
@@ -1140,11 +1318,20 @@ requests.post(
     data={{
         "engines": "gemini-3.1-pro-preview",
         "vertex_project": "your-gcp-project-id",
-        "vertex_region": "us-central1",
+        "vertex_region": "global",
         ...
     }},
     files={{"file": open("image.jpg", "rb")}},
-)</pre>
+)
+
+# curl equivalent
+curl -X POST "https://&lt;server&gt;/process" \\
+  -H "X-API-Key: YOUR_VVGO_KEY" \\
+  -F "file=@image.jpg" \\
+  -F "engines=gemini-3.1-pro-preview" \\
+  -F "llm_model=gemini-3.1-pro-preview" \\
+  -F "vertex_project=your-gcp-project-id" \\
+  -F "vertex_region=global"</pre>
 
             <p>For more detailed information and usage examples, see the
             <a href="https://pypi.org/project/vouchervision-go-client/">VoucherVision GO
@@ -1553,6 +1740,35 @@ EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS = int(
     os.environ.get("EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS", "45")
 )
 EVENT_ANALYTICS_ROLLUP_COLLECTION = "usage_event_daily"
+EVENT_ANALYTICS_GLOBAL_ROLLUP_COLLECTION = "usage_event_global_daily"
+EVENT_ANALYTICS_ROLLUP_STATUS_DOCUMENT = "event_analytics_rollups"
+EVENT_ANALYTICS_ROLLUP_VERSION = 2
+EVENT_ANALYTICS_REBUILD_PAGE_SIZE = max(
+    25,
+    min(int(os.environ.get("EVENT_ANALYTICS_REBUILD_PAGE_SIZE", "150")), 200),
+)
+
+EVENT_ANALYTICS_ROLLUP_SCALAR_FIELDS = (
+    "event_count",
+    "success_count",
+    "failure_count",
+    "total_cost_usd",
+    "total_tokens_all",
+    "total_pdf_pages",
+)
+EVENT_ANALYTICS_ROLLUP_MAP_FIELDS = (
+    "auth_method_counts",
+    "auth_method_costs",
+    "auth_method_tokens",
+    "source_type_counts",
+    "endpoint_counts",
+    "parsing_model_counts",
+    "parsing_model_costs",
+    "parsing_model_tokens",
+    "ocr_model_counts",
+    "ocr_model_costs",
+    "ocr_model_tokens",
+)
 
 
 def _coerce_int(value, default=0):
@@ -1840,6 +2056,14 @@ def _analytics_rollup_doc_id(user_email: str, day_key: str) -> str:
     return f"{_analytics_rollup_user_key(user_email)}_{day_key}"
 
 
+def _versioned_rollup_doc_id(run_id: str | None, base_doc_id: str) -> str:
+    return f"{run_id}__{base_doc_id}" if run_id else base_doc_id
+
+
+def _global_rollup_doc_id(day_key: str) -> str:
+    return day_key
+
+
 def _daily_rollup_values(event: dict) -> tuple[str, dict] | None:
     """Build plain numeric values for one event's per-user/per-day rollup."""
     user_email = str(event.get("user_email") or "").strip().lower()
@@ -1890,58 +2114,99 @@ def _daily_rollup_values(event: dict) -> tuple[str, dict] | None:
     return _analytics_rollup_doc_id(user_email, day_key), payload
 
 
-def update_usage_event_daily_rollups(events: list[dict]) -> int:
-    """Increment compact daily analytics documents for newly recorded events."""
-    grouped = {}
-    scalar_fields = (
-        "event_count", "success_count", "failure_count", "total_cost_usd",
-        "total_tokens_all", "total_pdf_pages",
+def _global_daily_rollup_values(user_values: dict) -> tuple[str, dict]:
+    """Convert one per-user event value into its matching global/day value."""
+    day_key = user_values["date"]
+    user_key = _analytics_rollup_user_key(user_values["user_email"])
+    payload = {
+        "date": day_key,
+        **{field: user_values[field] for field in EVENT_ANALYTICS_ROLLUP_SCALAR_FIELDS},
+        **{
+            field: dict(user_values.get(field) or {})
+            for field in EVENT_ANALYTICS_ROLLUP_MAP_FIELDS
+        },
+        "user_counts": {user_key: 1},
+    }
+    return _global_rollup_doc_id(day_key), payload
+
+
+def _accumulate_rollup_values(grouped: dict, doc_id: str, values: dict) -> None:
+    map_fields = EVENT_ANALYTICS_ROLLUP_MAP_FIELDS + (
+        ("user_counts",) if "user_counts" in values else ()
     )
-    map_fields = (
-        "auth_method_counts", "auth_method_costs", "auth_method_tokens",
-        "source_type_counts", "endpoint_counts", "parsing_model_counts",
-        "parsing_model_costs", "parsing_model_tokens", "ocr_model_counts",
-        "ocr_model_costs", "ocr_model_tokens",
-    )
+    aggregate = grouped.setdefault(doc_id, {
+        "date": values["date"],
+        **({"user_email": values["user_email"]} if values.get("user_email") else {}),
+        **{field: 0 for field in EVENT_ANALYTICS_ROLLUP_SCALAR_FIELDS},
+        **{field: {} for field in map_fields},
+    })
+    for field in EVENT_ANALYTICS_ROLLUP_SCALAR_FIELDS:
+        aggregate[field] += values[field]
+    for field in map_fields:
+        for key, amount in (values.get(field) or {}).items():
+            aggregate[field][key] = aggregate[field].get(key, 0) + amount
+
+
+def _aggregate_events_for_rollups(events: list[dict]) -> tuple[dict, dict, int]:
+    user_grouped = {}
+    global_grouped = {}
+    malformed_events = 0
     for event in events or []:
         rollup = _daily_rollup_values(event)
         if not rollup:
+            malformed_events += 1
             continue
-        doc_id, values = rollup
-        aggregate = grouped.setdefault(doc_id, {
-            "date": values["date"],
-            "user_email": values["user_email"],
-            **{field: 0 for field in scalar_fields},
-            **{field: {} for field in map_fields},
-        })
-        for field in scalar_fields:
-            aggregate[field] += values[field]
-        for field in map_fields:
-            for key, count in values[field].items():
-                aggregate[field][key] = aggregate[field].get(key, 0) + count
+        user_doc_id, user_values = rollup
+        _accumulate_rollup_values(user_grouped, user_doc_id, user_values)
+        global_doc_id, global_values = _global_daily_rollup_values(user_values)
+        _accumulate_rollup_values(global_grouped, global_doc_id, global_values)
+    return user_grouped, global_grouped, malformed_events
 
-    batch = db.batch()
+
+def _rollup_increment_payload(values: dict, run_id: str | None) -> dict:
+    map_fields = EVENT_ANALYTICS_ROLLUP_MAP_FIELDS + (
+        ("user_counts",) if "user_counts" in values else ()
+    )
+    return {
+        "date": values["date"],
+        **({"user_email": values["user_email"]} if values.get("user_email") else {}),
+        **{
+            field: firestore.Increment(values[field])
+            for field in EVENT_ANALYTICS_ROLLUP_SCALAR_FIELDS
+        },
+        **{
+            field: {
+                key: firestore.Increment(amount)
+                for key, amount in (values.get(field) or {}).items()
+            }
+            for field in map_fields
+        },
+        "run_id": run_id,
+        "updated_at": firestore.SERVER_TIMESTAMP,
+        "rollup_version": EVENT_ANALYTICS_ROLLUP_VERSION,
+    }
+
+
+def _write_grouped_rollups(writer, user_grouped: dict, global_grouped: dict, run_id: str | None) -> int:
     writes = 0
-    for doc_id, values in grouped.items():
-        payload = {
-            "date": values["date"],
-            "user_email": values["user_email"],
-            **{field: firestore.Increment(values[field]) for field in scalar_fields},
-            **{
-                field: {key: firestore.Increment(count) for key, count in values[field].items()}
-                for field in map_fields
-            },
-            "updated_at": firestore.SERVER_TIMESTAMP,
-            "rollup_version": 1,
-        }
-        batch.set(
-            db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(doc_id),
-            payload,
+    for doc_id, values in user_grouped.items():
+        writer.set(
+            db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(
+                _versioned_rollup_doc_id(run_id, doc_id)
+            ),
+            _rollup_increment_payload(values, run_id),
             merge=True,
         )
         writes += 1
-    if writes:
-        batch.commit()
+    for doc_id, values in global_grouped.items():
+        writer.set(
+            db.collection(EVENT_ANALYTICS_GLOBAL_ROLLUP_COLLECTION).document(
+                _versioned_rollup_doc_id(run_id, doc_id)
+            ),
+            _rollup_increment_payload(values, run_id),
+            merge=True,
+        )
+        writes += 1
     return writes
 
 
@@ -1968,22 +2233,10 @@ def record_usage_events(events: list[dict]) -> list[dict]:
 
 
 def persist_usage_events_and_rollups(events: list[dict], *, route_label: str) -> list[dict]:
-    """Write events first, then project them into usage_statistics."""
+    """Write raw events and core usage statistics; analytics refresh is admin-driven."""
     recorded = record_usage_events(events)
-    def _write_daily_rollups_best_effort():
-        try:
-            update_usage_event_daily_rollups(recorded)
-        except Exception:
-            logger.exception(
-                "Daily analytics rollup failed route=%s event_count=%s",
-                route_label,
-                len(recorded),
-            )
-
-    # Analytics maintenance must never make specimen processing fail or wait.
-    # Historical gaps can be repaired with the explicit admin rebuild action.
-    if recorded:
-        threading.Thread(target=_write_daily_rollups_best_effort, daemon=True).start()
+    # Cached event analytics are rebuilt only through the explicit, resumable
+    # admin action. Never spawn Firestore maintenance work from processing routes.
     for event in recorded:
         try:
             update_usage_statistics_from_event(event)
@@ -3402,12 +3655,12 @@ def _get_google_authorized_session() -> AuthorizedSession:
                 raise
             except Exception:
                 logger.error("Authorized session init failed reading inline credentials from %s", var)
-                raise _CredentialError("Cloud Tasks client initialization failed.")
+                raise _CredentialError("Google API authorized session initialization failed.")
     try:
         credentials, _ = google.auth.default(scopes=scopes)
     except Exception:
         logger.error("Authorized session ADC fallback failed")
-        raise _CredentialError("Cloud Tasks client initialization failed.")
+        raise _CredentialError("Google API authorized session initialization failed.")
     return AuthorizedSession(credentials)
 
 
@@ -4922,11 +5175,25 @@ app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app, 
      origins=["*"],  # Allow all origins, or specify: ["https://leafmachine.org", "http://localhost:8000"]
      methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-     allow_headers=["Content-Type", "Authorization", "X-API-Key", "Accept"],
+     allow_headers=["Content-Type", "Authorization", "X-API-Key", "Accept",
+                    "X-Gemini-API-Key", "X-Vertex-Project", "X-Vertex-Region"],
      supports_credentials=True,
      send_wildcard=False,
      vary_header=True
 )
+
+@app.after_request
+def _add_billing_mode_header(response):
+    """Echo the resolved billing mode on any route that resolved one."""
+    mode = getattr(g, "vv_billing_mode", None)
+    if mode:
+        response.headers['X-VV-Billing-Mode'] = mode
+        existing = response.headers.get('Access-Control-Expose-Headers')
+        response.headers['Access-Control-Expose-Headers'] = (
+            f"{existing}, X-VV-Billing-Mode" if existing else "X-VV-Billing-Mode"
+        )
+    return response
+
 
 # Create a custom encoder that preserves order
 class OrderedJsonEncoder(json.JSONEncoder):
@@ -5145,6 +5412,10 @@ def process_image():
     user_gemini_key = payment_auth["gemini_api_key"]
     user_vertex_project = payment_auth["vertex_project"]
     user_vertex_region = payment_auth["vertex_region"]
+
+    intent_error = _billing_intent_error_response(request)
+    if intent_error is not None:
+        return intent_error
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
@@ -5408,6 +5679,10 @@ def process_image_by_url():
         user_gemini_key = payment_auth["gemini_api_key"]
         user_vertex_project = payment_auth["vertex_project"]
         user_vertex_region = payment_auth["vertex_region"]
+
+    intent_error = _billing_intent_error_response(request)
+    if intent_error is not None:
+        return intent_error
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
@@ -5711,6 +5986,10 @@ def process_pdf_async():
     user_gemini_key = payment_auth["gemini_api_key"]
     user_vertex_project = payment_auth["vertex_project"]
     user_vertex_region = payment_auth["vertex_region"]
+
+    intent_error = _billing_intent_error_response(request)
+    if intent_error is not None:
+        return intent_error
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
@@ -6739,21 +7018,6 @@ def _event_matches_filters(event: dict, filters: dict) -> bool:
     return True
 
 
-def _load_usage_events_filtered(filters: dict, *, order_desc: bool = True):
-    """Explicit full-collection scan. Never call from the normal analytics path."""
-    docs = db.collection("usage_events").stream()
-    events = []
-    for doc in docs:
-        event = (doc.to_dict() or {}) | {"event_id": doc.id}
-        if _event_matches_filters(event, filters):
-            events.append(event)
-    events.sort(
-        key=lambda e: _firestore_timestamp_to_datetime(e.get("created_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc),
-        reverse=order_desc,
-    )
-    return events
-
-
 def _fetch_usage_events_for_overview(
     scope: str,
     dimension: str | None,
@@ -6773,7 +7037,7 @@ def _fetch_usage_events_for_overview(
             filters[dimension] = value
 
     if full_scan:
-        return _load_usage_events_filtered(filters, order_desc=True), False
+        raise ValueError("Raw full-collection event scans are disabled")
 
     # Keep the Firestore query predictable: the required user/date scope is
     # applied server-side, while optional filters are evaluated only over that
@@ -6798,9 +7062,16 @@ def _fetch_usage_events_for_overview(
 
 
 def _load_daily_rollups(user_email: str, date_from, date_to) -> list[dict] | None:
-    """Load compact daily documents when the historical rebuild is complete."""
-    status_doc = db.collection("system_config").document("event_analytics_rollups").get()
-    if not status_doc.exists or (status_doc.to_dict() or {}).get("status") != "complete":
+    """Load compact per-user daily documents from the active cache version."""
+    status_doc = db.collection("system_config").document(
+        EVENT_ANALYTICS_ROLLUP_STATUS_DOCUMENT
+    ).get()
+    if not status_doc.exists:
+        return None
+    status = status_doc.to_dict() or {}
+    active_run_id = status.get("active_run_id")
+    # Backward compatibility for the original unversioned one-shot rebuild.
+    if not active_run_id and status.get("status") != "complete":
         return None
 
     start_day = date_from.date()
@@ -6811,7 +7082,50 @@ def _load_daily_rollups(user_email: str, date_from, date_to) -> list[dict] | Non
     while current < end_day:
         refs.append(
             db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(
-                f"{user_key}_{current.isoformat()}"
+                _versioned_rollup_doc_id(
+                    active_run_id,
+                    f"{user_key}_{current.isoformat()}",
+                )
+            )
+        )
+        current += datetime.timedelta(days=1)
+
+    rollups = []
+    for offset in range(0, len(refs), 300):
+        for snapshot in db.get_all(refs[offset:offset + 300]):
+            if snapshot.exists:
+                rollups.append(snapshot.to_dict() or {})
+    return rollups
+
+
+def _load_global_daily_rollups() -> list[dict] | None:
+    """Read full-history analytics from the active global/day cache only."""
+    status_doc = db.collection("system_config").document(
+        EVENT_ANALYTICS_ROLLUP_STATUS_DOCUMENT
+    ).get()
+    if not status_doc.exists:
+        return None
+    status = status_doc.to_dict() or {}
+    active_run_id = status.get("active_run_id")
+    first_day_raw = status.get("active_first_day")
+    if not active_run_id:
+        return None
+    if not first_day_raw:
+        return []
+    try:
+        current = datetime.datetime.strptime(first_day_raw, "%Y-%m-%d").date()
+    except (TypeError, ValueError):
+        return None
+
+    active_cutoff = _firestore_timestamp_to_datetime(status.get("active_cutoff"))
+    if not active_cutoff:
+        return None
+    end_day = active_cutoff.date() + datetime.timedelta(days=1)
+    refs = []
+    while current < end_day:
+        refs.append(
+            db.collection(EVENT_ANALYTICS_GLOBAL_ROLLUP_COLLECTION).document(
+                _versioned_rollup_doc_id(active_run_id, current.isoformat())
             )
         )
         current += datetime.timedelta(days=1)
@@ -6842,6 +7156,8 @@ def _summarize_usage_event_rollups(rollups: list[dict]) -> dict:
         "events": 0, "success": 0, "failure": 0, "cost": 0.0,
         "tokens": 0, "pdf_pages": 0,
     }
+    unique_user_keys = set()
+    has_global_user_counts = False
 
     for rollup in sorted(rollups, key=lambda row: row.get("date") or ""):
         event_count = _coerce_int(rollup.get("event_count"))
@@ -6854,6 +7170,10 @@ def _summarize_usage_event_rollups(rollups: list[dict]) -> dict:
         totals["cost"] += cost
         totals["tokens"] += tokens
         totals["pdf_pages"] += _coerce_int(rollup.get("total_pdf_pages"))
+        user_counts = rollup.get("user_counts")
+        if isinstance(user_counts, dict):
+            has_global_user_counts = True
+            unique_user_keys.update(str(key) for key in user_counts)
         if day_key:
             daily.append({"date": day_key, "events": event_count, "cost_usd": cost, "tokens": tokens})
             try:
@@ -6895,7 +7215,11 @@ def _summarize_usage_event_rollups(rollups: list[dict]) -> dict:
             "average_cost_usd": round(totals["cost"] / totals["events"], 10) if totals["events"] else 0.0,
             "total_tokens_all": totals["tokens"],
             "total_pdf_pages": totals["pdf_pages"],
-            "unique_users": 1 if totals["events"] else 0,
+            "unique_users": (
+                len(unique_user_keys)
+                if has_global_user_counts
+                else (1 if totals["events"] else 0)
+            ),
         },
         "timeseries": {
             "daily": daily,
@@ -7100,24 +7424,41 @@ def get_usage_events():
         filters = _get_usage_event_filters_from_request()
         limit = max(1, min(_coerce_int(request.args.get("limit"), 50), 200))
         cursor = request.args.get("cursor")
+        if not filters.get("user_email"):
+            return jsonify({"error": "user_email is required"}), 400
+        if not filters.get("date_from") or not filters.get("date_to"):
+            return jsonify({"error": "date_from and date_to are required"}), 400
 
-        all_events = _load_usage_events_filtered(filters, order_desc=True)
-        start_idx = 0
+        query = _build_usage_events_query(
+            user_email=filters["user_email"],
+            date_from=filters["date_from"],
+            date_to=filters["date_to"],
+            order_desc=True,
+        )
         if cursor:
-            for idx, event in enumerate(all_events):
-                if event.get("event_id") == cursor:
-                    start_idx = idx + 1
-                    break
-        page_events = all_events[start_idx:start_idx + limit + 1]
-        has_more = len(page_events) > limit
-        page_events = page_events[:limit]
-        events = [_serialize_usage_event(event) for event in page_events]
-        next_cursor = events[-1]["event_id"] if has_more and events else None
+            cursor_snapshot = db.collection("usage_events").document(cursor).get()
+            if not cursor_snapshot.exists:
+                return jsonify({"error": "The event cursor no longer exists"}), 400
+            query = query.start_after(cursor_snapshot)
+
+        raw_docs = list(
+            query.limit(limit + 1).stream(
+                timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS
+            )
+        )
+        has_more = len(raw_docs) > limit
+        page_docs = raw_docs[:limit]
+        matching_events = []
+        for doc in page_docs:
+            event = (doc.to_dict() or {}) | {"event_id": doc.id}
+            if _event_matches_filters(event, filters):
+                matching_events.append(_serialize_usage_event(event))
+        next_cursor = page_docs[-1].id if has_more and page_docs else None
 
         return jsonify({
             "status": "success",
-            "count": len(events),
-            "events": events,
+            "count": len(matching_events),
+            "events": matching_events,
             "next_cursor": next_cursor,
         })
     except Exception as e:
@@ -7221,14 +7562,28 @@ def get_usage_events_overview():
         events = []
 
         rollups = None
-        if not full_scan and not has_secondary_filters:
+        if full_scan:
+            rollups = _load_global_daily_rollups()
+            if rollups is None:
+                return jsonify({
+                    "error": (
+                        "Full-history analytics require a completed analytics cache rebuild. "
+                        "Use Build / refresh analytics rollups first."
+                    ),
+                    "code": "analytics_cache_not_ready",
+                }), 409
+            summary = _summarize_usage_event_rollups(rollups)
+            analysis_source = "global_daily_rollups"
+        elif not has_secondary_filters:
             rollups = _load_daily_rollups(
                 (request.args.get("user_email") or "").strip().lower(),
                 date_from,
                 date_to,
             )
 
-        if rollups is not None:
+        if full_scan:
+            pass
+        elif rollups is not None:
             summary = _summarize_usage_event_rollups(rollups)
             analysis_source = "daily_rollups"
         else:
@@ -7236,7 +7591,7 @@ def get_usage_events_overview():
                 scope,
                 dimension,
                 value,
-                full_scan=full_scan,
+                full_scan=False,
             )
             if too_large:
                 return jsonify({
@@ -7260,6 +7615,14 @@ def get_usage_events_overview():
             elapsed_ms,
         )
 
+        cache_as_of = None
+        if analysis_source in {"daily_rollups", "global_daily_rollups"}:
+            cache_status = _event_analytics_status_ref().get()
+            if cache_status.exists:
+                cache_as_of = _format_event_timestamp(
+                    (cache_status.to_dict() or {}).get("active_cutoff")
+                )
+
         return jsonify({
             "status": "success",
             "scope": scope,
@@ -7267,6 +7630,7 @@ def get_usage_events_overview():
             "value": value,
             "full_scan": full_scan,
             "analysis_source": analysis_source,
+            "cache_as_of": cache_as_of,
             "elapsed_ms": elapsed_ms,
             "filters": {
                 key: request.args.get(key)
@@ -7293,102 +7657,329 @@ def get_usage_events_overview():
         return jsonify({'error': f'Failed to build usage event overview: {str(e)}'}), 500
 
 
+def _event_analytics_status_ref():
+    return db.collection("system_config").document(
+        EVENT_ANALYTICS_ROLLUP_STATUS_DOCUMENT
+    )
+
+
+def _extract_firestore_count(result) -> int | None:
+    """Handle the small result-shape differences across Firestore releases."""
+    for row in result or []:
+        values = row if isinstance(row, (list, tuple)) else (row,)
+        for value_obj in values:
+            value = getattr(value_obj, "value", None)
+            if value is None and isinstance(value_obj, dict):
+                value = value_obj.get("value")
+            if value is not None:
+                return _coerce_int(value)
+    return None
+
+
+def _estimate_rebuild_event_count(cutoff: datetime.datetime) -> int | None:
+    try:
+        query = db.collection("usage_events").where(
+            filter=FieldFilter("created_at", "<=", cutoff)
+        )
+        return _extract_firestore_count(
+            query.count(alias="total").get(
+                timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS
+            )
+        )
+    except Exception as exc:
+        logger.warning(
+            "Event analytics count estimate unavailable error_type=%s",
+            type(exc).__name__,
+        )
+        return None
+
+
+def _serialize_event_analytics_rebuild_status(data: dict) -> dict:
+    rebuild_status = data.get("status") or "not_started"
+    scanned = _coerce_int(data.get("rebuild_events_scanned"))
+    estimated_total = data.get("rebuild_estimated_total")
+    estimated_total = (
+        _coerce_int(estimated_total) if estimated_total is not None else None
+    )
+    progress_percent = 0.0
+    if estimated_total:
+        progress_percent = min(100.0, (scanned / estimated_total) * 100.0)
+    elif rebuild_status == "complete":
+        progress_percent = 100.0
+    else:
+        first_dt = _firestore_timestamp_to_datetime(data.get("rebuild_first_event_at"))
+        cursor_dt = _firestore_timestamp_to_datetime(data.get("rebuild_cursor_created_at"))
+        cutoff_dt = _firestore_timestamp_to_datetime(data.get("rebuild_cutoff"))
+        if first_dt and cursor_dt and cutoff_dt and cutoff_dt > first_dt:
+            progress_percent = min(
+                99.0,
+                max(0.0, ((cursor_dt - first_dt) / (cutoff_dt - first_dt)) * 100.0),
+            )
+
+    return {
+        "status": "success",
+        "rebuild_status": rebuild_status,
+        "cache_ready": bool(data.get("active_run_id")),
+        "active_run_id": data.get("active_run_id"),
+        "rebuilding_run_id": data.get("rebuilding_run_id"),
+        "events_scanned": scanned,
+        "estimated_total_events": estimated_total,
+        "rollup_docs_updated": _coerce_int(data.get("rebuild_rollup_docs_updated")),
+        "malformed_events": _coerce_int(data.get("rebuild_malformed_events")),
+        "pages_complete": _coerce_int(data.get("rebuild_pages_complete")),
+        "page_size": EVENT_ANALYTICS_REBUILD_PAGE_SIZE,
+        "progress_percent": round(progress_percent, 1),
+        "started_at": _format_event_timestamp(data.get("rebuild_started_at")),
+        "updated_at": _format_event_timestamp(data.get("rebuild_updated_at")),
+        "completed_at": _format_event_timestamp(data.get("completed_at")),
+        "active_first_day": data.get("active_first_day"),
+    }
+
+
+def _event_analytics_admin_or_error():
+    user = authenticate_request(request)
+    if not user or not user.get("email"):
+        return None, (jsonify({"error": "User not properly authenticated"}), 401)
+    admin_email = user.get("email")
+    if not db.collection("admins").document(admin_email).get().exists:
+        return None, (jsonify({"error": "Unauthorized - Admin access required"}), 403)
+    return admin_email, None
+
+
 @app.route('/admin/rebuild-event-analytics-rollups', methods=['POST'])
 @authenticated_route
 def rebuild_event_analytics_rollups():
-    """Explicit, costly admin operation that rebuilds daily user rollups."""
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
-        return jsonify({'error': 'User not properly authenticated'}), 401
-
-    admin_email = user.get('email')
-    if not db.collection('admins').document(admin_email).get().exists:
-        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
-
-    started = time.monotonic()
-    scalar_fields = (
-        "event_count", "success_count", "failure_count", "total_cost_usd",
-        "total_tokens_all", "total_pdf_pages",
-    )
-    map_fields = (
-        "auth_method_counts", "auth_method_costs", "auth_method_tokens",
-        "source_type_counts", "endpoint_counts", "parsing_model_counts",
-        "parsing_model_costs", "parsing_model_tokens", "ocr_model_counts",
-        "ocr_model_costs", "ocr_model_tokens",
-    )
-    grouped = {}
-    events_scanned = 0
-    malformed_events = 0
+    """Start a versioned rebuild or return the currently resumable rebuild."""
+    admin_email, error_response = _event_analytics_admin_or_error()
+    if error_response:
+        return error_response
 
     try:
-        for doc in db.collection("usage_events").stream(
-            timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS * 4
-        ):
-            events_scanned += 1
-            event = (doc.to_dict() or {}) | {"event_id": doc.id}
-            rollup = _daily_rollup_values(event)
-            if not rollup:
-                malformed_events += 1
-                continue
-            doc_id, values = rollup
-            aggregate = grouped.setdefault(doc_id, {
-                "date": values["date"],
-                "user_email": values["user_email"],
-                **{field: 0 for field in scalar_fields},
-                **{field: {} for field in map_fields},
-            })
-            for field in scalar_fields:
-                aggregate[field] += values[field]
-            for field in map_fields:
-                for key, count in values[field].items():
-                    aggregate[field][key] = aggregate[field].get(key, 0) + count
+        status_ref = _event_analytics_status_ref()
+        existing_snapshot = status_ref.get()
+        existing = (existing_snapshot.to_dict() or {}) if existing_snapshot.exists else {}
+        if existing.get("status") == "rebuilding" and existing.get("rebuilding_run_id"):
+            return jsonify(_serialize_event_analytics_rebuild_status(existing))
 
-        items = list(grouped.items())
-        docs_written = 0
-        # Stay below Firestore's 500-operation batch limit.
-        for offset in range(0, len(items), 400):
-            batch = db.batch()
-            for doc_id, values in items[offset:offset + 400]:
-                payload = {
-                    **values,
-                    "rollup_version": 1,
-                    "rebuilt_at": firestore.SERVER_TIMESTAMP,
-                }
-                batch.set(
-                    db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(doc_id),
-                    payload,
-                )
-                docs_written += 1
-            batch.commit()
-
-        db.collection("system_config").document("event_analytics_rollups").set({
-            "status": "complete",
-            "events_scanned": events_scanned,
-            "rollup_docs_written": docs_written,
-            "malformed_events": malformed_events,
-            "completed_at": firestore.SERVER_TIMESTAMP,
-            "completed_by": admin_email,
-            "rollup_version": 1,
-        }, merge=True)
-
-        elapsed_ms = round((time.monotonic() - started) * 1000)
+        cutoff = datetime.datetime.now(datetime.timezone.utc)
+        run_id = uuid.uuid4().hex
+        estimated_total = _estimate_rebuild_event_count(cutoff)
+        first_docs = list(
+            db.collection("usage_events")
+            .where(filter=FieldFilter("created_at", "<=", cutoff))
+            .order_by("created_at", direction=firestore.Query.ASCENDING)
+            .limit(1)
+            .stream(timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS)
+        )
+        first_event_at = (
+            (first_docs[0].to_dict() or {}).get("created_at")
+            if first_docs else None
+        )
+        payload = {
+            "status": "rebuilding",
+            "rebuilding_run_id": run_id,
+            "rebuild_cutoff": cutoff,
+            "rebuild_cursor_event_id": None,
+            "rebuild_cursor_created_at": None,
+            "rebuild_events_scanned": 0,
+            "rebuild_estimated_total": estimated_total,
+            "rebuild_rollup_docs_updated": 0,
+            "rebuild_malformed_events": 0,
+            "rebuild_pages_complete": 0,
+            "rebuild_first_event_at": first_event_at,
+            "rebuild_first_day": None,
+            "rebuild_last_day": None,
+            "rebuild_started_at": firestore.SERVER_TIMESTAMP,
+            "rebuild_updated_at": firestore.SERVER_TIMESTAMP,
+            "rebuild_started_by": admin_email,
+            "rollup_version": EVENT_ANALYTICS_ROLLUP_VERSION,
+        }
+        status_ref.set(payload, merge=True)
+        refreshed = status_ref.get().to_dict() or payload
         logger.info(
-            "Event analytics rollup rebuild complete admin=%s events=%s docs=%s elapsed_ms=%s",
+            "Event analytics rebuild started admin=%s run_id=%s estimated_events=%s",
             admin_email,
-            events_scanned,
-            docs_written,
-            elapsed_ms,
+            run_id,
+            estimated_total,
+        )
+        return jsonify(_serialize_event_analytics_rebuild_status(refreshed))
+    except Exception as exc:
+        logger.error(
+            "Event analytics rebuild start failed admin=%s error_type=%s",
+            admin_email,
+            type(exc).__name__,
+        )
+        return jsonify({"error": "Could not start the analytics cache rebuild"}), 500
+
+
+@app.route('/admin/rebuild-event-analytics-rollups/status', methods=['GET'])
+@authenticated_route
+def event_analytics_rollup_rebuild_status():
+    admin_email, error_response = _event_analytics_admin_or_error()
+    if error_response:
+        return error_response
+    try:
+        snapshot = _event_analytics_status_ref().get()
+        data = (snapshot.to_dict() or {}) if snapshot.exists else {}
+        return jsonify(_serialize_event_analytics_rebuild_status(data))
+    except Exception as exc:
+        logger.error(
+            "Event analytics rebuild status failed admin=%s error_type=%s",
+            admin_email,
+            type(exc).__name__,
+        )
+        return jsonify({"error": "Could not read analytics rebuild status"}), 500
+
+
+@app.route('/admin/rebuild-event-analytics-rollups/step', methods=['POST'])
+@authenticated_route
+def event_analytics_rollup_rebuild_step():
+    """Process one bounded, retry-safe page of the active historical rebuild."""
+    admin_email, error_response = _event_analytics_admin_or_error()
+    if error_response:
+        return error_response
+
+    status_ref = _event_analytics_status_ref()
+    try:
+        status_snapshot = status_ref.get()
+        status = (status_snapshot.to_dict() or {}) if status_snapshot.exists else {}
+        run_id = status.get("rebuilding_run_id")
+        if status.get("status") != "rebuilding" or not run_id:
+            return jsonify(_serialize_event_analytics_rebuild_status(status))
+
+        expected_page = _coerce_int(status.get("rebuild_pages_complete"))
+        expected_cursor_id = status.get("rebuild_cursor_event_id")
+        cutoff = _firestore_timestamp_to_datetime(status.get("rebuild_cutoff"))
+        if not cutoff:
+            return jsonify({"error": "The rebuild is missing its cutoff timestamp"}), 409
+
+        query = (
+            db.collection("usage_events")
+            .where(filter=FieldFilter("created_at", "<=", cutoff))
+            .order_by("created_at", direction=firestore.Query.ASCENDING)
+        )
+        if expected_cursor_id:
+            cursor_snapshot = db.collection("usage_events").document(expected_cursor_id).get()
+            if not cursor_snapshot.exists:
+                status_ref.update({
+                    "status": "failed",
+                    "rebuild_failure_code": "cursor_missing",
+                    "rebuild_updated_at": firestore.SERVER_TIMESTAMP,
+                    "rebuilding_run_id": firestore.DELETE_FIELD,
+                })
+                return jsonify({
+                    "error": "The saved rebuild cursor no longer exists. Press Build again to start a new version."
+                }), 409
+            query = query.start_after(cursor_snapshot)
+        query = query.limit(EVENT_ANALYTICS_REBUILD_PAGE_SIZE)
+
+        docs = list(query.stream(timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS))
+        if not docs:
+            @_gc_firestore.transactional
+            def _finish(transaction):
+                current_snapshot = status_ref.get(transaction=transaction)
+                current = current_snapshot.to_dict() or {}
+                if (
+                    current.get("status") != "rebuilding"
+                    or current.get("rebuilding_run_id") != run_id
+                    or _coerce_int(current.get("rebuild_pages_complete")) != expected_page
+                    or current.get("rebuild_cursor_event_id") != expected_cursor_id
+                ):
+                    return False
+                first_day = current.get("rebuild_first_day")
+                if not first_day and current.get("rebuild_first_event_at"):
+                    first_dt = _firestore_timestamp_to_datetime(current.get("rebuild_first_event_at"))
+                    first_day = first_dt.strftime("%Y-%m-%d") if first_dt else None
+                transaction.update(status_ref, {
+                    "status": "complete",
+                    "active_run_id": run_id,
+                    "active_first_day": first_day,
+                    "active_last_day": current.get("rebuild_last_day"),
+                    "active_cutoff": current.get("rebuild_cutoff"),
+                    "completed_at": firestore.SERVER_TIMESTAMP,
+                    "completed_by": admin_email,
+                    "rebuild_updated_at": firestore.SERVER_TIMESTAMP,
+                    "rebuilding_run_id": firestore.DELETE_FIELD,
+                })
+                return True
+
+            completed = _finish(db.transaction())
+            refreshed = status_ref.get().to_dict() or status
+            if completed:
+                logger.info(
+                    "Event analytics rebuild complete admin=%s run_id=%s events=%s pages=%s",
+                    admin_email,
+                    run_id,
+                    refreshed.get("rebuild_events_scanned"),
+                    refreshed.get("rebuild_pages_complete"),
+                )
+            return jsonify(_serialize_event_analytics_rebuild_status(refreshed))
+
+        events = [
+            (doc.to_dict() or {}) | {"event_id": doc.id}
+            for doc in docs
+        ]
+        user_grouped, global_grouped, malformed_events = _aggregate_events_for_rollups(events)
+        last_doc = docs[-1]
+        last_created_at = (last_doc.to_dict() or {}).get("created_at")
+        page_days = sorted({
+            values.get("date")
+            for values in user_grouped.values()
+            if values.get("date")
+        })
+        docs_updated = len(user_grouped) + len(global_grouped)
+
+        @_gc_firestore.transactional
+        def _apply_page(transaction):
+            current_snapshot = status_ref.get(transaction=transaction)
+            current = current_snapshot.to_dict() or {}
+            if (
+                current.get("status") != "rebuilding"
+                or current.get("rebuilding_run_id") != run_id
+                or _coerce_int(current.get("rebuild_pages_complete")) != expected_page
+                or current.get("rebuild_cursor_event_id") != expected_cursor_id
+            ):
+                return False
+
+            _write_grouped_rollups(
+                transaction,
+                user_grouped,
+                global_grouped,
+                run_id,
+            )
+            existing_first_day = current.get("rebuild_first_day")
+            existing_last_day = current.get("rebuild_last_day")
+            page_first_day = page_days[0] if page_days else None
+            page_last_day = page_days[-1] if page_days else None
+            transaction.update(status_ref, {
+                "rebuild_cursor_event_id": last_doc.id,
+                "rebuild_cursor_created_at": last_created_at,
+                "rebuild_events_scanned": _coerce_int(current.get("rebuild_events_scanned")) + len(docs),
+                "rebuild_rollup_docs_updated": _coerce_int(current.get("rebuild_rollup_docs_updated")) + docs_updated,
+                "rebuild_malformed_events": _coerce_int(current.get("rebuild_malformed_events")) + malformed_events,
+                "rebuild_pages_complete": expected_page + 1,
+                "rebuild_first_day": min(
+                    day for day in (existing_first_day, page_first_day) if day
+                ) if (existing_first_day or page_first_day) else None,
+                "rebuild_last_day": max(
+                    day for day in (existing_last_day, page_last_day) if day
+                ) if (existing_last_day or page_last_day) else None,
+                "rebuild_updated_at": firestore.SERVER_TIMESTAMP,
+            })
+            return True
+
+        _apply_page(db.transaction())
+        refreshed = status_ref.get().to_dict() or status
+        return jsonify(_serialize_event_analytics_rebuild_status(refreshed))
+    except Exception as exc:
+        logger.error(
+            "Event analytics rebuild step failed admin=%s error_type=%s",
+            admin_email,
+            type(exc).__name__,
         )
         return jsonify({
-            "status": "success",
-            "events_scanned": events_scanned,
-            "rollup_docs_written": docs_written,
-            "malformed_events": malformed_events,
-            "elapsed_ms": elapsed_ms,
-        })
-    except Exception:
-        logger.exception("Event analytics rollup rebuild failed admin=%s", admin_email)
-        return jsonify({"error": "Event analytics rollup rebuild failed; see server logs"}), 500
+            "error": "This analytics rebuild page failed. It is safe to resume from the saved cursor."
+        }), 500
 
 
 @app.route('/admin/ensure-event-analytics-index', methods=['POST'])
@@ -7404,19 +7995,17 @@ def ensure_event_analytics_index():
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
 
     try:
-        credentials_obj, detected_project = google.auth.default(
-            scopes=["https://www.googleapis.com/auth/cloud-platform"]
-        )
+        session = _get_google_authorized_session()
         project_id = (
             os.environ.get("GOOGLE_CLOUD_PROJECT")
             or os.environ.get("GCP_PROJECT")
             or os.environ.get("FIREBASE_PROJECT_ID")
-            or detected_project
+            or getattr(getattr(session, "credentials", None), "project_id", None)
+            or get_firebase_config().get("projectId")
         )
         if not project_id:
             return jsonify({"error": "Could not determine the Google Cloud project ID"}), 500
 
-        session = AuthorizedSession(credentials_obj)
         endpoint = (
             f"https://firestore.googleapis.com/v1/projects/{quote(project_id, safe='')}"
             "/databases/(default)/collectionGroups/usage_events/indexes"
@@ -7456,8 +8045,12 @@ def ensure_event_analytics_index():
             "operation": operation.get("name"),
             "message": "Index creation started. Firestore will finish building it in the background.",
         })
-    except Exception:
-        logger.exception("Could not create or verify Firestore analytics index admin=%s", admin_email)
+    except Exception as exc:
+        logger.error(
+            "Could not create or verify Firestore analytics index admin=%s error_type=%s",
+            admin_email,
+            type(exc).__name__,
+        )
         return jsonify({
             "error": (
                 "Could not create or verify the Firestore index. The Cloud Run service account "

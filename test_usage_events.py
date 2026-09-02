@@ -217,6 +217,67 @@ class UsageEventHelpersTest(unittest.TestCase):
         self.assertEqual(summary["ocr_model_mix"]["gemini-2.5-flash"]["tokens"], 300)
         self.assertEqual(summary["parsing_model_mix"]["gemini-3.1-flash-lite"]["events"], 3)
 
+    def test_global_daily_rollup_tracks_distinct_users_without_emails(self):
+        event = {
+            "created_at": datetime.datetime(2026, 8, 21, 15, 30, tzinfo=datetime.timezone.utc),
+            "user_email": "user@example.org",
+            "auth_method": "server",
+            "source_type": "upload",
+            "endpoint": "/process",
+            "success": True,
+            "ocr_models": [],
+            "total_request_cost_usd": 0.1,
+            "total_tokens_all": 100,
+        }
+
+        _, user_values = app._daily_rollup_values(event)
+        doc_id, global_values = app._global_daily_rollup_values(user_values)
+
+        self.assertEqual(doc_id, "2026-08-21")
+        self.assertEqual(global_values["event_count"], 1)
+        self.assertNotIn("user_email", global_values)
+        self.assertEqual(len(global_values["user_counts"]), 1)
+        self.assertNotIn("user@example.org", global_values["user_counts"])
+
+    def test_aggregate_events_builds_user_and_global_daily_caches(self):
+        now = datetime.datetime(2026, 8, 21, 12, tzinfo=datetime.timezone.utc)
+        base = {
+            "created_at": now,
+            "auth_method": "server",
+            "source_type": "upload",
+            "endpoint": "/process",
+            "success": True,
+            "ocr_models": [],
+            "total_request_cost_usd": 0.1,
+            "total_tokens_all": 100,
+        }
+        events = [
+            {**base, "user_email": "one@example.org"},
+            {**base, "user_email": "two@example.org"},
+        ]
+
+        user_grouped, global_grouped, malformed = app._aggregate_events_for_rollups(events)
+
+        self.assertEqual(len(user_grouped), 2)
+        self.assertEqual(len(global_grouped), 1)
+        self.assertEqual(global_grouped["2026-08-21"]["event_count"], 2)
+        self.assertEqual(len(global_grouped["2026-08-21"]["user_counts"]), 2)
+        self.assertEqual(malformed, 0)
+
+    def test_rebuild_status_reports_estimated_progress(self):
+        status = app._serialize_event_analytics_rebuild_status({
+            "status": "rebuilding",
+            "active_run_id": "active",
+            "rebuilding_run_id": "next",
+            "rebuild_events_scanned": 25,
+            "rebuild_estimated_total": 100,
+            "rebuild_pages_complete": 1,
+        })
+
+        self.assertEqual(status["rebuild_status"], "rebuilding")
+        self.assertTrue(status["cache_ready"])
+        self.assertEqual(status["progress_percent"], 25.0)
+
 
 if __name__ == "__main__":
     unittest.main()

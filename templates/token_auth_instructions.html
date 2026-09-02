@@ -18,6 +18,111 @@
     </div>
     
     <div class="accordion-item">
+        <h5 class="accordion-header" id="heading-billing-token">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-billing-token" aria-expanded="false" aria-controls="collapse-billing-token">
+                Bill Gemini Usage to Your Own Account (Gemini API Key or Vertex AI)
+            </button>
+        </h5>
+        <div id="collapse-billing-token" class="accordion-collapse collapse" aria-labelledby="heading-billing-token" data-bs-parent="#token-examples">
+            <div class="accordion-body">
+                <p>By default, Gemini calls are billed to VoucherVisionGO's shared keys and count
+                against your per-model quota. You can instead have them billed to your own account
+                in one of two ways. Both work from any language &mdash; they are ordinary request
+                parameters, not something specific to the Python client.</p>
+
+                <h6 class="mt-3">Option A &mdash; your own Google AI Studio key</h6>
+                <p>Get a key from <a href="https://aistudio.google.com/apikey" target="_blank">Google AI Studio</a>,
+                then pass it as <code>gemini_api_key</code>:</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "file=@your_image.jpg" \
+  -F "engines=gemini-3.1-flash-lite" \
+  -F "llm_model=gemini-3.1-flash-lite" \
+  -F "gemini_api_key=YOUR_GEMINI_API_KEY"</code></pre>
+                <p class="mb-1">Or as a header, if your HTTP client makes that easier:</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "X-Gemini-API-Key: YOUR_GEMINI_API_KEY" \
+  -F "file=@your_image.jpg" \
+  -F "engines=gemini-3.1-flash-lite" \
+  -F "llm_model=gemini-3.1-flash-lite"</code></pre>
+
+                <h6 class="mt-3">Option B &mdash; your own Google Cloud project (Vertex AI)</h6>
+                <p>Use this if AI Studio keys aren't available in your region, if your institution
+                requires AI costs to land on an institutional Google Cloud account, or if you'd
+                rather not send a long-lived key on every request. Two one-time setup steps:</p>
+                <ol>
+                    <li>In your Google Cloud project, enable the Vertex AI API and grant the
+                    <strong>Vertex AI User</strong> role to
+                    <code>vouchervision-vertex@vouchervision-387816.iam.gserviceaccount.com</code>.
+                    We never see or store your Google Cloud credentials.</li>
+                    <li>Link the project ID to your VoucherVisionGO account under
+                    <strong>API Key Management &rarr; Linked Google Cloud Projects</strong>.
+                    Requests using an unlinked project ID are rejected with HTTP 403.</li>
+                </ol>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -F "file=@your_image.jpg" \
+  -F "engines=gemini-3.1-flash-lite" \
+  -F "llm_model=gemini-3.1-flash-lite" \
+  -F "vertex_project=your-gcp-project-id" \
+  -F "vertex_region=global"</code></pre>
+                <p class="mb-1">Header form:</p>
+                <pre><code>curl -X POST "{{ server_url }}/process" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "X-Vertex-Project: your-gcp-project-id" \
+  -H "X-Vertex-Region: global" \
+  -F "file=@your_image.jpg" \
+  -F "engines=gemini-3.1-flash-lite" \
+  -F "llm_model=gemini-3.1-flash-lite"</code></pre>
+                <p>Use <code>vertex_region=global</code> unless you have a specific reason not to
+                &mdash; regional endpoints do not carry every model.</p>
+
+                <h6 class="mt-3">Python</h6>
+                <pre><code>import requests
+
+requests.post(
+    "{{ server_url }}/process",
+    headers={"Authorization": f"Bearer {token}"},
+    files={"file": open("your_image.jpg", "rb")},
+    data={
+        "engines": "gemini-3.1-flash-lite",
+        "llm_model": "gemini-3.1-flash-lite",
+        "gemini_api_key": "YOUR_GEMINI_API_KEY",
+        # ...or, for Vertex AI:
+        # "vertex_project": "your-gcp-project-id",
+        # "vertex_region": "global",
+    },
+)</code></pre>
+
+                <h6 class="mt-3">JavaScript</h6>
+                <pre><code>const formData = new FormData();
+formData.append('file', imageFile);
+formData.append('engines', 'gemini-3.1-flash-lite');
+formData.append('llm_model', 'gemini-3.1-flash-lite');
+formData.append('gemini_api_key', 'YOUR_GEMINI_API_KEY');
+
+const response = await fetch('{{ server_url }}/process', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}` },
+    body: formData
+});</code></pre>
+
+                <h6 class="mt-3">Confirming which account was billed</h6>
+                <p>Every response carries an <code>X-VV-Billing-Mode</code> header whose value is
+                <code>user_gemini</code>, <code>user_vertex</code>, or <code>server</code>. Check it
+                to confirm your credentials were actually picked up.</p>
+                <p>If you supply a credential the server can't read &mdash; a misspelled parameter
+                name, or an empty value &mdash; the request is rejected with HTTP 400 rather than
+                quietly falling back to VoucherVisionGO's shared keys. A credential that is read but
+                invalid or over quota surfaces the error from Google; it is never retried on our keys.</p>
+                <p><strong>Note:</strong> <code>/process-pdf-async</code> does not yet accept
+                <code>gemini_api_key</code>. Use Vertex AI (Option B) for async PDF jobs.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
         <h5 class="accordion-header" id="heading-python-token">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-python-token" aria-expanded="false" aria-controls="collapse-python-token">
                 Python Example

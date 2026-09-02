@@ -2,6 +2,7 @@ let eventAnalyticsState = {
   loaded: false,
   shellRendered: false,
   running: false,
+  rebuildRunning: false,
   requestController: null,
 };
 
@@ -174,8 +175,9 @@ function renderEventAnalyticsShell() {
 
       <label class="ea-full-scan-option">
         <input type="checkbox" id="ea-full-scan">
-        <span><strong>Full database scan</strong> — ignores the user and date fields. This reads every
-        usage event, can be slow and costly, and may temporarily consume Cloud Run resources.</span>
+        <span><strong>All users / full cached history</strong> — ignores the user and date fields and
+        reads the compact global daily cache. If the cache has not been built yet, the request will
+        stop and ask you to run the costly historical rebuild first.</span>
       </label>
 
       <div class="ea-actions">
@@ -188,18 +190,24 @@ function renderEventAnalyticsShell() {
 
     <div class="ea-panel ea-maintenance-panel">
       <h4>Analytics rollup index</h4>
-      <p>New events update compact daily per-user rollups automatically. Use this maintenance action
-      once after deployment to build historical rollups. It scans all existing usage events and may
-      incur Firestore read charges.</p>
+      <p>The dashboard reads compact per-user and global daily cache documents. Refreshing the cache
+      reads raw usage events in small, resumable pages and may incur Firestore charges. Processing
+      requests never perform this maintenance work. Progress is saved in Firestore, so it is safe to
+      close this page and resume later.</p>
       <button type="button" id="ea-ensure-index-btn" class="btn btn-secondary">Create / verify Firestore query index</button>
       <span id="ea-ensure-index-status"></span>
       <br><br>
-      <button type="button" id="ea-rebuild-rollups-btn" class="btn btn-secondary">Build / refresh analytics rollups</button>
+      <button type="button" id="ea-rebuild-rollups-btn" class="btn btn-secondary">Build / resume analytics cache</button>
       <span id="ea-rebuild-rollups-status"></span>
+      <div id="ea-rebuild-progress" class="ea-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div id="ea-rebuild-progress-bar" class="ea-progress-bar"></div>
+      </div>
+      <div id="ea-rebuild-progress-detail" class="ea-progress-detail">Cache status has not been checked.</div>
     </div>
   `;
 
   bindEventAnalyticsControls();
+  loadEventAnalyticsRebuildStatus();
 }
 
 function markEventAnalyticsDirty() {
@@ -481,7 +489,7 @@ async function performEventAnalytics() {
     return;
   }
   if (fullScan && !confirm(
-    'This will read the entire usage_events collection. It can be slow, costly, and resource intensive. Continue?'
+    'Analyze all users and all dates from the cached global daily summaries? Continue?'
   )) return;
 
   eventAnalyticsState.running = true;
@@ -489,7 +497,7 @@ async function performEventAnalytics() {
     button.disabled = true;
     button.textContent = 'Performing analytics…';
   }
-  if (message) message.textContent = fullScan ? 'Running costly full scan…' : 'Querying selected user and dates…';
+  if (message) message.textContent = fullScan ? 'Reading cached full-history summaries…' : 'Querying selected user and dates…';
   summary.innerHTML = '<div class="loading">Loading event overview…</div>';
 
   try {
@@ -513,8 +521,13 @@ async function performEventAnalytics() {
     renderEventAnalyticsSummary(data);
     eventAnalyticsState.loaded = true;
     if (message) {
-      const sourceLabel = data.analysis_source === 'daily_rollups' ? 'daily rollups' : 'raw events';
-      message.textContent = `Complete from ${sourceLabel}: ${fmtEventCount(data.headline?.total_events)} events in ${fmtEventCount(data.elapsed_ms)} ms.`;
+      const sourceLabel = data.analysis_source === 'global_daily_rollups'
+        ? 'global daily cache'
+        : (data.analysis_source === 'daily_rollups' ? 'daily rollups' : 'raw events');
+      const freshness = data.cache_as_of
+        ? ` Cache snapshot: ${new Date(data.cache_as_of).toLocaleString()}.`
+        : '';
+      message.textContent = `Complete from ${sourceLabel}: ${fmtEventCount(data.headline?.total_events)} events in ${fmtEventCount(data.elapsed_ms)} ms.${freshness}`;
     }
   } catch (error) {
     console.error('Error loading event analytics:', error);
@@ -529,37 +542,108 @@ async function performEventAnalytics() {
   }
 }
 
+function renderEventAnalyticsRebuildStatus(data) {
+  const button = document.getElementById('ea-rebuild-rollups-btn');
+  const status = document.getElementById('ea-rebuild-rollups-status');
+  const progress = document.getElementById('ea-rebuild-progress');
+  const progressBar = document.getElementById('ea-rebuild-progress-bar');
+  const detail = document.getElementById('ea-rebuild-progress-detail');
+  if (!data) return;
+
+  const percent = Math.max(0, Math.min(100, Number(data.progress_percent || 0)));
+  if (progress) progress.setAttribute('aria-valuenow', String(percent));
+  if (progressBar) progressBar.style.width = `${percent}%`;
+
+  const totalLabel = data.estimated_total_events == null
+    ? 'total being estimated by date position'
+    : `${fmtEventCount(data.estimated_total_events)} estimated historical events`;
+  if (detail) {
+    detail.textContent = `${percent.toFixed(1)}% — ${fmtEventCount(data.events_scanned)} processed of ${totalLabel}; ` +
+      `${fmtEventCount(data.pages_complete)} pages; ${fmtEventCount(data.rollup_docs_updated)} cache updates.`;
+  }
+
+  if (data.rebuild_status === 'rebuilding') {
+    if (status) status.textContent = eventAnalyticsState.rebuildRunning
+      ? 'Rebuild running. Keep this tab open, or close it and resume later.'
+      : 'A saved rebuild is ready to resume.';
+    if (button && !eventAnalyticsState.rebuildRunning) button.textContent = 'Resume analytics cache rebuild';
+  } else if (data.cache_ready) {
+    if (status) status.textContent = `Cache ready. Last completed ${data.completed_at || 'recently'}.`;
+    if (button && !eventAnalyticsState.rebuildRunning) button.textContent = 'Refresh analytics cache';
+  } else {
+    if (status) status.textContent = 'The historical analytics cache has not been built.';
+    if (button && !eventAnalyticsState.rebuildRunning) button.textContent = 'Build analytics cache';
+  }
+}
+
+async function loadEventAnalyticsRebuildStatus() {
+  try {
+    const idToken = await firebase.auth().currentUser.getIdToken();
+    const response = await fetch('/admin/rebuild-event-analytics-rollups/status', {
+      headers: { 'Authorization': `Bearer ${idToken}` },
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+    renderEventAnalyticsRebuildStatus(data);
+  } catch (error) {
+    const status = document.getElementById('ea-rebuild-rollups-status');
+    if (status) status.textContent = `Could not read cache status: ${error.message}`;
+  }
+}
+
 async function rebuildEventAnalyticsRollups() {
   const button = document.getElementById('ea-rebuild-rollups-btn');
   const status = document.getElementById('ea-rebuild-rollups-status');
-  if (!button) return;
+  if (!button || eventAnalyticsState.rebuildRunning) return;
   if (!confirm(
-    'Build or refresh daily analytics rollups by scanning every existing usage event? This is costly but safe to re-run.'
+    'Build or refresh the cached analytics in small pages? The initial historical pass reads every usage event and can incur Firestore charges.'
   )) return;
 
+  eventAnalyticsState.rebuildRunning = true;
   button.disabled = true;
-  if (status) status.textContent = 'Building rollups… keep this page open.';
+  button.textContent = 'Building cache…';
+  if (status) status.textContent = 'Starting or resuming the saved rebuild…';
   try {
     const idToken = await firebase.auth().currentUser.getIdToken();
-    const response = await fetch('/admin/rebuild-event-analytics-rollups', {
+    let response = await fetch('/admin/rebuild-event-analytics-rollups', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${idToken}`,
         'Content-Type': 'application/json',
       },
     });
-    const data = await response.json();
+    let data = await response.json();
     if (!response.ok || data.status !== 'success') {
       throw new Error(data.error || `Server returned ${response.status}`);
     }
-    if (status) status.textContent =
-      `Complete: scanned ${fmtEventCount(data.events_scanned)} events and wrote ` +
-      `${fmtEventCount(data.rollup_docs_written)} daily rollups.`;
+    renderEventAnalyticsRebuildStatus(data);
+
+    while (data.rebuild_status === 'rebuilding') {
+      const stepToken = await firebase.auth().currentUser.getIdToken();
+      response = await fetch('/admin/rebuild-event-analytics-rollups/step', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${stepToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      data = await response.json();
+      if (!response.ok || data.status !== 'success') {
+        throw new Error(data.error || `Server returned ${response.status}`);
+      }
+      renderEventAnalyticsRebuildStatus(data);
+      await new Promise(resolve => window.setTimeout(resolve, 25));
+    }
+    renderEventAnalyticsRebuildStatus(data);
   } catch (error) {
     console.error('Event analytics rollup rebuild failed:', error);
-    if (status) status.textContent = `Failed: ${error.message}`;
+    if (status) status.textContent = `Paused: ${error.message} Press Resume to continue from the saved cursor.`;
   } finally {
+    eventAnalyticsState.rebuildRunning = false;
     button.disabled = false;
+    await loadEventAnalyticsRebuildStatus();
   }
 }
 
