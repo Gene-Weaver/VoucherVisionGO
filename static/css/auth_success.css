@@ -33,6 +33,47 @@ h1 {
   padding: 20px;
   margin-bottom: 20px;
 }
+.quota-container {
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.quota-description {
+  color: #6c757d;
+  margin-bottom: 14px;
+}
+.quota-table-wrapper {
+  overflow-x: auto;
+}
+.quota-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+.quota-table th,
+.quota-table td {
+  border: 1px solid #dee2e6;
+  padding: 10px 12px;
+  text-align: right;
+}
+.quota-table th:first-child,
+.quota-table td:first-child {
+  text-align: left;
+}
+.quota-table thead th {
+  background-color: #e9f5ff;
+  color: #333;
+}
+.quota-loading {
+  color: #6c757d;
+  text-align: center !important;
+}
+.quota-error {
+  color: #dc3545;
+  margin: 10px 0 0;
+  font-size: 14px;
+}
 pre {
   white-space: pre-wrap;
   word-break: break-all;

@@ -40,6 +40,29 @@
         </div>
       </div>
       
+      <section class="quota-container" aria-labelledby="quota-heading">
+        <h3 id="quota-heading">Your Model Quotas</h3>
+        <p class="quota-description">Current usage and request limits for server-funded Gemini models.</p>
+        <div class="quota-table-wrapper">
+          <table class="quota-table">
+            <thead>
+              <tr>
+                <th scope="col">Model category</th>
+                <th scope="col">Used</th>
+                <th scope="col">Limit</th>
+                <th scope="col">Remaining</th>
+              </tr>
+            </thead>
+            <tbody id="quota-table-body">
+              <tr>
+                <td colspan="4" class="quota-loading">Loading your quotas...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="quota-error" class="quota-error" role="alert" hidden></p>
+      </section>
+
       <div class="token-container">
         <h3>Your API Authentication Token</h3>
         <p>Use this token in your API requests by setting the Authorization header to: <code>Bearer YOUR_TOKEN</code></p>

@@ -1,10 +1,8 @@
 let eventAnalyticsState = {
   loaded: false,
-  facets: null,
-  mode: 'user',
-  dimension: 'auth_method',
-  selectedUser: '',
-  selectedValue: '',
+  shellRendered: false,
+  running: false,
+  requestController: null,
 };
 
 let eventAnalyticsCharts = {
@@ -14,16 +12,6 @@ let eventAnalyticsCharts = {
   ocr: null,
   parsing: null,
 };
-
-const EVENT_DIMENSION_OPTIONS = [
-  { value: 'auth_method', label: 'Auth Method' },
-  { value: 'ocr_model', label: 'OCR Model' },
-  { value: 'parsing_model', label: 'Parsing Model' },
-  { value: 'endpoint', label: 'Endpoint' },
-  { value: 'source_type', label: 'Source Type' },
-  { value: 'prompt', label: 'Prompt' },
-  { value: 'success', label: 'Success Flag' },
-];
 
 const EVENT_AUTH_COLORS = {
   server: '#4285f4',
@@ -77,28 +65,6 @@ function ensureEventChartJs() {
   });
 }
 
-function getFacetValuesForDimension(dimension) {
-  const facets = (eventAnalyticsState.facets || {}).facets || {};
-  switch (dimension) {
-    case 'auth_method':
-      return facets.auth_methods || [];
-    case 'ocr_model':
-      return facets.ocr_models || [];
-    case 'parsing_model':
-      return facets.parsing_models || [];
-    case 'endpoint':
-      return facets.endpoints || [];
-    case 'source_type':
-      return facets.source_types || [];
-    case 'prompt':
-      return facets.prompts || [];
-    case 'success':
-      return ['true', 'false'];
-    default:
-      return [];
-  }
-}
-
 function buildEventAnalyticsQuery(baseParams = {}) {
   const params = new URLSearchParams();
   Object.entries(baseParams).forEach(([key, value]) => {
@@ -111,151 +77,156 @@ function buildEventAnalyticsQuery(baseParams = {}) {
   const dateTo = document.getElementById('ea-date-to')?.value;
   const authMethod = document.getElementById('ea-secondary-auth')?.value;
   const sourceType = document.getElementById('ea-secondary-source')?.value;
+  const ocrModel = document.getElementById('ea-ocr-model')?.value.trim();
+  const parsingModel = document.getElementById('ea-parsing-model')?.value.trim();
+  const endpoint = document.getElementById('ea-endpoint')?.value.trim();
+  const prompt = document.getElementById('ea-prompt')?.value.trim();
+  const success = document.getElementById('ea-success')?.value;
 
   if (dateFrom) params.set('date_from', dateFrom);
   if (dateTo) params.set('date_to', dateTo);
   if (authMethod) params.set('auth_method', authMethod);
   if (sourceType) params.set('source_type', sourceType);
+  if (ocrModel) params.set('ocr_model', ocrModel);
+  if (parsingModel) params.set('parsing_model', parsingModel);
+  if (endpoint) params.set('endpoint', endpoint);
+  if (prompt) params.set('prompt', prompt);
+  if (success) params.set('success', success);
 
   return params;
 }
 
+function eventAnalyticsDefaultDates() {
+  const dateTo = new Date();
+  const dateFrom = new Date(dateTo);
+  dateFrom.setDate(dateFrom.getDate() - 29);
+  const format = value => value.toISOString().slice(0, 10);
+  return { dateFrom: format(dateFrom), dateTo: format(dateTo) };
+}
+
 function renderEventAnalyticsShell() {
   const container = document.getElementById('event-analytics-container');
-  const facets = eventAnalyticsState.facets || {};
-  const firstTracked = facets.first_tracked_event_at
-    ? new Date(facets.first_tracked_event_at).toLocaleString()
-    : 'after deployment';
+  const defaults = eventAnalyticsDefaultDates();
 
   container.innerHTML = `
     <div class="ea-banner">
-      Event-level analytics are forward-only. This view includes requests tracked from
-      <strong>${escapeEventHtml(firstTracked)}</strong> onward; older history remains in aggregate rollups.
+      Opening this tab does not query Firestore. Choose a user and date range, then explicitly
+      press <strong>Perform analytics</strong>.
     </div>
 
     <div class="ea-controls">
-      <div class="ea-mode-toggle">
-        <button type="button" class="ea-toggle-btn ${eventAnalyticsState.mode === 'user' ? 'active' : ''}" data-mode="user">User Overview</button>
-        <button type="button" class="ea-toggle-btn ${eventAnalyticsState.mode === 'dimension' ? 'active' : ''}" data-mode="dimension">Metadata Overview</button>
-      </div>
-
       <div class="ea-control-grid">
         <label class="ea-control">
-          <span>Mode Target</span>
-          <select id="ea-target-select"></select>
-        </label>
-        <label class="ea-control ${eventAnalyticsState.mode === 'dimension' ? '' : 'ea-hidden'}" id="ea-dimension-wrap">
-          <span>Dimension</span>
-          <select id="ea-dimension-select">
-            ${EVENT_DIMENSION_OPTIONS.map(option => `
-              <option value="${option.value}" ${option.value === eventAnalyticsState.dimension ? 'selected' : ''}>
-                ${escapeEventHtml(option.label)}
-              </option>
-            `).join('')}
-          </select>
+          <span>User email *</span>
+          <input type="email" id="ea-user-email" placeholder="user@example.org" autocomplete="off">
         </label>
         <label class="ea-control">
           <span>Date From</span>
-          <input type="date" id="ea-date-from">
+          <input type="date" id="ea-date-from" value="${defaults.dateFrom}">
         </label>
         <label class="ea-control">
           <span>Date To</span>
-          <input type="date" id="ea-date-to">
+          <input type="date" id="ea-date-to" value="${defaults.dateTo}">
         </label>
         <label class="ea-control">
           <span>Secondary Auth Filter</span>
           <select id="ea-secondary-auth">
             <option value="">All auth methods</option>
-            ${((facets.facets || {}).auth_methods || []).map(value => `<option value="${escapeEventHtml(value)}">${escapeEventHtml(value)}</option>`).join('')}
+            <option value="server">Server</option>
+            <option value="user_gemini">User Gemini</option>
+            <option value="user_vertex">User Vertex</option>
           </select>
         </label>
         <label class="ea-control">
           <span>Secondary Source Filter</span>
           <select id="ea-secondary-source">
             <option value="">All source types</option>
-            ${((facets.facets || {}).source_types || []).map(value => `<option value="${escapeEventHtml(value)}">${escapeEventHtml(value)}</option>`).join('')}
+            <option value="upload">Upload</option>
+            <option value="url">URL</option>
+            <option value="pdf_page">PDF page</option>
+          </select>
+        </label>
+        <label class="ea-control">
+          <span>OCR Model (optional)</span>
+          <input type="text" id="ea-ocr-model" placeholder="Exact model name">
+        </label>
+        <label class="ea-control">
+          <span>Parsing Model (optional)</span>
+          <input type="text" id="ea-parsing-model" placeholder="Exact model name">
+        </label>
+        <label class="ea-control">
+          <span>Endpoint (optional)</span>
+          <input type="text" id="ea-endpoint" placeholder="/process-url">
+        </label>
+        <label class="ea-control">
+          <span>Prompt (optional)</span>
+          <input type="text" id="ea-prompt" placeholder="Exact prompt name">
+        </label>
+        <label class="ea-control">
+          <span>Success</span>
+          <select id="ea-success">
+            <option value="">Success and failure</option>
+            <option value="true">Success only</option>
+            <option value="false">Failure only</option>
           </select>
         </label>
       </div>
+
+      <label class="ea-full-scan-option">
+        <input type="checkbox" id="ea-full-scan">
+        <span><strong>Full database scan</strong> — ignores the user and date fields. This reads every
+        usage event, can be slow and costly, and may temporarily consume Cloud Run resources.</span>
+      </label>
+
+      <div class="ea-actions">
+        <button type="button" id="ea-perform-btn" class="btn btn-primary">Perform analytics</button>
+        <span id="ea-validation-message"></span>
+      </div>
     </div>
 
-    <div id="ea-summary"></div>
+    <div id="ea-summary" class="ea-panel">No analytics query has been performed.</div>
+
+    <div class="ea-panel ea-maintenance-panel">
+      <h4>Analytics rollup index</h4>
+      <p>New events update compact daily per-user rollups automatically. Use this maintenance action
+      once after deployment to build historical rollups. It scans all existing usage events and may
+      incur Firestore read charges.</p>
+      <button type="button" id="ea-ensure-index-btn" class="btn btn-secondary">Create / verify Firestore query index</button>
+      <span id="ea-ensure-index-status"></span>
+      <br><br>
+      <button type="button" id="ea-rebuild-rollups-btn" class="btn btn-secondary">Build / refresh analytics rollups</button>
+      <span id="ea-rebuild-rollups-status"></span>
+    </div>
   `;
 
   bindEventAnalyticsControls();
-  populateEventAnalyticsTargetSelect();
 }
 
-function populateEventAnalyticsTargetSelect() {
-  const select = document.getElementById('ea-target-select');
-  if (!select) return;
-
-  let options = [];
-  if (eventAnalyticsState.mode === 'user') {
-    options = ((eventAnalyticsState.facets || {}).facets || {}).users || [];
-    if ((!eventAnalyticsState.selectedUser || !options.includes(eventAnalyticsState.selectedUser)) && options.length) {
-      eventAnalyticsState.selectedUser = options[0];
-    }
-    select.innerHTML = options.map(value => `
-      <option value="${escapeEventHtml(value)}" ${value === eventAnalyticsState.selectedUser ? 'selected' : ''}>
-        ${escapeEventHtml(value)}
-      </option>
-    `).join('');
-  } else {
-    options = getFacetValuesForDimension(eventAnalyticsState.dimension);
-    if ((!eventAnalyticsState.selectedValue || !options.map(String).includes(String(eventAnalyticsState.selectedValue))) && options.length) {
-      eventAnalyticsState.selectedValue = options[0];
-    }
-    select.innerHTML = options.map(value => `
-      <option value="${escapeEventHtml(value)}" ${String(value) === String(eventAnalyticsState.selectedValue) ? 'selected' : ''}>
-        ${escapeEventHtml(value)}
-      </option>
-    `).join('');
+function markEventAnalyticsDirty() {
+  const message = document.getElementById('ea-validation-message');
+  if (eventAnalyticsState.loaded && message) {
+    message.textContent = 'Filters changed. Press Perform analytics to update the results.';
   }
 }
 
 function bindEventAnalyticsControls() {
-  document.querySelectorAll('.ea-toggle-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      eventAnalyticsState.mode = btn.dataset.mode;
-      if (eventAnalyticsState.mode === 'dimension') {
-        eventAnalyticsState.selectedValue = '';
-      }
-      renderEventAnalyticsShell();
-      await refreshEventAnalyticsOverview();
-    });
+  const filterIds = [
+    'ea-user-email', 'ea-date-from', 'ea-date-to', 'ea-secondary-auth',
+    'ea-secondary-source', 'ea-ocr-model', 'ea-parsing-model', 'ea-endpoint',
+    'ea-prompt', 'ea-success',
+  ];
+  filterIds.forEach(id => {
+    document.getElementById(id)?.addEventListener('change', markEventAnalyticsDirty);
   });
 
-  const dimensionSelect = document.getElementById('ea-dimension-select');
-  if (dimensionSelect) {
-    dimensionSelect.addEventListener('change', async (event) => {
-      eventAnalyticsState.dimension = event.target.value;
-      eventAnalyticsState.selectedValue = '';
-      populateEventAnalyticsTargetSelect();
-      await refreshEventAnalyticsOverview();
-    });
-  }
-
-  const targetSelect = document.getElementById('ea-target-select');
-  if (targetSelect) {
-    targetSelect.addEventListener('change', async (event) => {
-      if (eventAnalyticsState.mode === 'user') {
-        eventAnalyticsState.selectedUser = event.target.value;
-      } else {
-        eventAnalyticsState.selectedValue = event.target.value;
-      }
-      await refreshEventAnalyticsOverview();
-    });
-  }
-
-  ['ea-date-from', 'ea-date-to', 'ea-secondary-auth', 'ea-secondary-source'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener('change', async () => {
-        await refreshEventAnalyticsOverview();
-      });
-    }
+  document.getElementById('ea-full-scan')?.addEventListener('change', event => {
+    const disabled = event.target.checked;
+    filterIds.forEach(id => { document.getElementById(id).disabled = disabled; });
+    markEventAnalyticsDirty();
   });
+  document.getElementById('ea-perform-btn')?.addEventListener('click', performEventAnalytics);
+  document.getElementById('ea-ensure-index-btn')?.addEventListener('click', ensureEventAnalyticsIndex);
+  document.getElementById('ea-rebuild-rollups-btn')?.addEventListener('click', rebuildEventAnalyticsRollups);
 }
 
 function renderEventAnalyticsSummary(data) {
@@ -362,7 +333,9 @@ function renderEventAnalyticsSummary(data) {
                 <td>${fmtEventUSD(event.total_request_cost_usd)}</td>
                 <td>${fmtEventCount(event.total_tokens_all)}</td>
               </tr>
-            `).join('') || '<tr><td colspan="9">No matching events found.</td></tr>'}
+            `).join('') || `<tr><td colspan="9">${data.analysis_source === 'daily_rollups'
+              ? 'Raw recent-event rows are omitted in the rollup-optimized view.'
+              : 'No matching events found.'}</td></tr>`}
           </tbody>
         </table>
       </div>
@@ -483,74 +456,150 @@ function renderEventAnalyticsCharts(data, ocrRows, parsingRows) {
   });
 }
 
-async function refreshEventAnalyticsOverview() {
+async function performEventAnalytics() {
   const summary = document.getElementById('ea-summary');
   if (!summary) return;
-  if (eventAnalyticsState.mode === 'user' && !eventAnalyticsState.selectedUser) {
-    summary.innerHTML = '<div class="ea-panel">No tracked users yet. Event analytics will populate as new requests are recorded.</div>';
+  if (eventAnalyticsState.running) return;
+
+  const fullScan = document.getElementById('ea-full-scan')?.checked === true;
+  const userEmail = document.getElementById('ea-user-email')?.value.trim();
+  const dateFrom = document.getElementById('ea-date-from')?.value;
+  const dateTo = document.getElementById('ea-date-to')?.value;
+  const message = document.getElementById('ea-validation-message');
+  const button = document.getElementById('ea-perform-btn');
+
+  if (!fullScan && !userEmail) {
+    message.textContent = 'Enter a user email before performing analytics.';
     return;
   }
-  if (eventAnalyticsState.mode === 'dimension' && !eventAnalyticsState.selectedValue) {
-    summary.innerHTML = '<div class="ea-panel">No values are available for this metadata dimension yet.</div>';
+  if (!fullScan && (!dateFrom || !dateTo)) {
+    message.textContent = 'Select both a start date and an end date.';
     return;
   }
+  if (!fullScan && dateFrom > dateTo) {
+    message.textContent = 'Date From must be on or before Date To.';
+    return;
+  }
+  if (fullScan && !confirm(
+    'This will read the entire usage_events collection. It can be slow, costly, and resource intensive. Continue?'
+  )) return;
+
+  eventAnalyticsState.running = true;
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Performing analytics…';
+  }
+  if (message) message.textContent = fullScan ? 'Running costly full scan…' : 'Querying selected user and dates…';
   summary.innerHTML = '<div class="loading">Loading event overview…</div>';
 
-  const idToken = await firebase.auth().currentUser.getIdToken();
-  const baseParams = eventAnalyticsState.mode === 'user'
-    ? { scope: 'user', user_email: eventAnalyticsState.selectedUser }
-    : {
-        scope: 'dimension',
-        dimension: eventAnalyticsState.dimension,
-        value: eventAnalyticsState.selectedValue,
-      };
-  const params = buildEventAnalyticsQuery(baseParams);
-
-  const response = await fetch(`/admin/usage-events/overview?${params.toString()}`, {
-    headers: { 'Authorization': `Bearer ${idToken}` },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-  }
-
-  const data = await response.json();
-  if (data.status !== 'success') {
-    throw new Error(data.error || 'Failed to load event overview');
-  }
-
-  renderEventAnalyticsSummary(data);
-}
-
-async function loadEventAnalytics() {
-  const container = document.getElementById('event-analytics-container');
-  if (!container) return;
-
   try {
-    await ensureEventChartJs();
+    if (eventAnalyticsState.requestController) eventAnalyticsState.requestController.abort();
+    eventAnalyticsState.requestController = new AbortController();
     const idToken = await firebase.auth().currentUser.getIdToken();
+    const params = fullScan
+      ? new URLSearchParams({ scope: 'user', full_scan: 'true' })
+      : buildEventAnalyticsQuery({ scope: 'user', user_email: userEmail });
 
-    if (!eventAnalyticsState.facets) {
-      const response = await fetch('/admin/usage-events/facets', {
-        headers: { 'Authorization': `Bearer ${idToken}` },
-      });
-      if (!response.ok) {
-        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
-      }
-      const data = await response.json();
-      if (data.status !== 'success') {
-        throw new Error(data.error || 'Failed to load usage event facets');
-      }
-      eventAnalyticsState.facets = data;
+    const response = await fetch(`/admin/usage-events/overview?${params.toString()}`, {
+      headers: { 'Authorization': `Bearer ${idToken}` },
+      signal: eventAnalyticsState.requestController.signal,
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.error || `Server returned ${response.status}`);
     }
 
-    renderEventAnalyticsShell();
-    await refreshEventAnalyticsOverview();
+    await ensureEventChartJs();
+    renderEventAnalyticsSummary(data);
     eventAnalyticsState.loaded = true;
+    if (message) {
+      const sourceLabel = data.analysis_source === 'daily_rollups' ? 'daily rollups' : 'raw events';
+      message.textContent = `Complete from ${sourceLabel}: ${fmtEventCount(data.headline?.total_events)} events in ${fmtEventCount(data.elapsed_ms)} ms.`;
+    }
   } catch (error) {
     console.error('Error loading event analytics:', error);
-    container.innerHTML = `<div class="alert alert-danger">Error loading event analytics: ${escapeEventHtml(error.message)}</div>`;
+    summary.innerHTML = `<div class="alert alert-danger">Error loading event analytics: ${escapeEventHtml(error.message)}</div>`;
+    if (message) message.textContent = 'Analytics failed.';
+  } finally {
+    eventAnalyticsState.running = false;
+    if (button) {
+      button.disabled = false;
+      button.textContent = 'Perform analytics';
+    }
   }
+}
+
+async function rebuildEventAnalyticsRollups() {
+  const button = document.getElementById('ea-rebuild-rollups-btn');
+  const status = document.getElementById('ea-rebuild-rollups-status');
+  if (!button) return;
+  if (!confirm(
+    'Build or refresh daily analytics rollups by scanning every existing usage event? This is costly but safe to re-run.'
+  )) return;
+
+  button.disabled = true;
+  if (status) status.textContent = 'Building rollups… keep this page open.';
+  try {
+    const idToken = await firebase.auth().currentUser.getIdToken();
+    const response = await fetch('/admin/rebuild-event-analytics-rollups', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+    if (status) status.textContent =
+      `Complete: scanned ${fmtEventCount(data.events_scanned)} events and wrote ` +
+      `${fmtEventCount(data.rollup_docs_written)} daily rollups.`;
+  } catch (error) {
+    console.error('Event analytics rollup rebuild failed:', error);
+    if (status) status.textContent = `Failed: ${error.message}`;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function ensureEventAnalyticsIndex() {
+  const button = document.getElementById('ea-ensure-index-btn');
+  const status = document.getElementById('ea-ensure-index-status');
+  if (!button) return;
+  if (!confirm(
+    'Create or verify the managed Firestore index used by filtered event analytics? Index creation runs in the background.'
+  )) return;
+
+  button.disabled = true;
+  if (status) status.textContent = 'Checking Firestore index…';
+  try {
+    const idToken = await firebase.auth().currentUser.getIdToken();
+    const response = await fetch('/admin/ensure-event-analytics-index', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${idToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+    if (status) status.textContent = `${data.message} State: ${data.index_state}.`;
+  } catch (error) {
+    console.error('Firestore analytics index setup failed:', error);
+    if (status) status.textContent = `Failed: ${error.message}`;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function loadEventAnalytics() {
+  const container = document.getElementById('event-analytics-container');
+  if (!container || eventAnalyticsState.shellRendered) return;
+  renderEventAnalyticsShell();
+  eventAnalyticsState.shellRendered = true;
 }
 
 window.loadEventAnalytics = loadEventAnalytics;

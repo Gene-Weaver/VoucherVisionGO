@@ -153,6 +153,70 @@ class UsageEventHelpersTest(unittest.TestCase):
         self.assertIn("server", summary["auth_method_split"])
         self.assertIn("gemini-2.5-flash", summary["ocr_model_mix"])
 
+    def test_summarize_usage_events_tolerates_malformed_ocr_info(self):
+        event = {
+            "event_id": "malformed",
+            "created_at": datetime.datetime(2026, 5, 12, tzinfo=datetime.timezone.utc),
+            "user_email": "one@example.org",
+            "success": True,
+            "ocr_info": "legacy malformed value",
+        }
+
+        summary = app._summarize_usage_events([event])
+
+        self.assertEqual(summary["headline"]["total_events"], 1)
+        self.assertEqual(summary["ocr_model_mix"], {})
+
+    def test_daily_rollup_values_are_scoped_by_user_and_day(self):
+        event = {
+            "created_at": datetime.datetime(2026, 8, 21, 15, 30, tzinfo=datetime.timezone.utc),
+            "user_email": "USER@example.org",
+            "auth_method": "server",
+            "source_type": "pdf_page",
+            "endpoint": "/process-pdf-async",
+            "success": False,
+            "ocr_models": ["gemini-2.5-flash"],
+            "parsing_model": "gemini-3.1-flash-lite",
+            "total_request_cost_usd": 0.25,
+            "total_tokens_all": 500,
+        }
+
+        doc_id, values = app._daily_rollup_values(event)
+
+        self.assertTrue(doc_id.endswith("_2026-08-21"))
+        self.assertEqual(values["user_email"], "user@example.org")
+        self.assertEqual(values["event_count"], 1)
+        self.assertEqual(values["failure_count"], 1)
+        self.assertEqual(values["total_pdf_pages"], 1)
+        self.assertEqual(values["ocr_model_counts"]["gemini-2.5-flash"], 1)
+
+    def test_summarize_daily_rollups_preserves_model_metrics(self):
+        rollups = [{
+            "date": "2026-08-21",
+            "event_count": 3,
+            "success_count": 2,
+            "failure_count": 1,
+            "total_cost_usd": 0.75,
+            "total_tokens_all": 1500,
+            "total_pdf_pages": 2,
+            "auth_method_counts": {"server": 3},
+            "auth_method_costs": {"server": 0.75},
+            "auth_method_tokens": {"server": 1500},
+            "ocr_model_counts": {"gemini-2.5-flash": 3},
+            "ocr_model_costs": {"gemini-2.5-flash": 0.15},
+            "ocr_model_tokens": {"gemini-2.5-flash": 300},
+            "parsing_model_counts": {"gemini-3.1-flash-lite": 3},
+            "parsing_model_costs": {"gemini-3.1-flash-lite": 0.60},
+            "parsing_model_tokens": {"gemini-3.1-flash-lite": 1200},
+        }]
+
+        summary = app._summarize_usage_event_rollups(rollups)
+
+        self.assertEqual(summary["headline"]["total_events"], 3)
+        self.assertEqual(summary["headline"]["total_pdf_pages"], 2)
+        self.assertEqual(summary["ocr_model_mix"]["gemini-2.5-flash"]["tokens"], 300)
+        self.assertEqual(summary["parsing_model_mix"]["gemini-3.1-flash-lite"]["events"], 3)
+
 
 if __name__ == "__main__":
     unittest.main()

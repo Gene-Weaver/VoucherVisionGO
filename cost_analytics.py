@@ -85,10 +85,17 @@ INVOICE_PREFIX = "invoices/"
 # longer / more specific names are tried first so "gemini 3.1 flash lite"
 # wins over "gemini 3" etc.
 _MODEL_PATTERNS: list[tuple[str, re.Pattern]] = [
-    ("gemini-3.1-flash-lite", re.compile(r"gemini\s*3\.1\s*flash\s*lite", re.I)),
+    ("gemini-3.8-flash",      re.compile(r"gemini\s*3\.8\s*flash", re.I)),
+    ("gemini-3.7-flash",      re.compile(r"gemini\s*3\.7\s*flash", re.I)),
+    ("gemini-3.6-flash",      re.compile(r"gemini\s*3\.6\s*flash", re.I)),
+    ("gemini-3.5-flash-lite", re.compile(r"gemini\s*3\.5\s*flash[\s-]*lite", re.I)),
+    ("gemini-3.5-flash",      re.compile(r"gemini\s*3\.5\s*flash", re.I)),
+    ("gemini-3.1-flash-lite", re.compile(r"gemini\s*3\.1\s*flash[\s-]*lite", re.I)),
+    ("gemini-3.1-pro",        re.compile(r"gemini\s*3\.1\s*pro", re.I)),
     ("gemini-3-pro",          re.compile(r"gemini\s*3\s*pro", re.I)),
     ("gemini-3-flash",        re.compile(r"gemini\s*3\s*flash", re.I)),
     ("gemini-3",              re.compile(r"gemini\s*3(?!\.|\s*\d)", re.I)),
+    ("gemini-2.5-flash-lite", re.compile(r"gemini\s*2\.5\s*flash[\s-]*lite", re.I)),
     ("gemini-2.5-pro",        re.compile(r"gemini\s*2\.5\s*pro", re.I)),
     ("gemini-2.5-flash",      re.compile(r"gemini\s*2\.5\s*flash", re.I)),
     ("gemini-2.0-flash",      re.compile(r"gemini\s*2\.0\s*flash", re.I)),
@@ -100,6 +107,7 @@ _MODEL_PATTERNS: list[tuple[str, re.Pattern]] = [
 FIRESTORE_MODEL_ALIASES: dict[str, str] = {
     "gemini-3-pro-preview": "gemini-3-pro",
     "gemini-3-pro-preview-short": "gemini-3-pro",
+    "gemini-3.1-pro-preview": "gemini-3.1-pro",
     "gemini-3-flash-preview": "gemini-3-flash",
     "gemini-3.1-flash-lite-preview": "gemini-3.1-flash-lite",
 }

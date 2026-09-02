@@ -9,6 +9,7 @@ import io
 import time
 import base64
 import uuid
+import hashlib
 import zipfile
 import warnings
 from urllib.parse import urlparse
@@ -340,7 +341,8 @@ def validate_api_key(api_key):
 # ── Per-model rate-limiting helpers ─────────────────────────────────────
 
 GEMINI_PRO_DEFAULT_LIMIT = 100           # default for legacy `gemini_pro_usage_limit` counter
-GEMINI_3_5_FLASH_DEFAULT_LIMIT = 100
+GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT = 100
+GEMINI_UNKNOWN_PAID_DEFAULT_LIMIT = 100
 
 # Registry of rate-limited model names → default per-user lifetime limit.
 # Add a single entry here to rate-limit a new model. The matching Firestore
@@ -355,8 +357,15 @@ RATE_LIMITED_MODELS: dict[str, int] = {
     "gemini-3-pro-preview":   GEMINI_PRO_DEFAULT_LIMIT,
     "gemini-2.5-pro":         GEMINI_PRO_DEFAULT_LIMIT,
     "gemini-1.5-pro":         GEMINI_PRO_DEFAULT_LIMIT,
-    # Net-new rate-limited model — gets its own counter via the derived prefix.
-    "gemini-3.5-flash":       GEMINI_3_5_FLASH_DEFAULT_LIMIT,
+    # Higher-cost Flash variants share one restricted-Flash allowance. The
+    # Firestore prefix override below intentionally retains the existing 3.5
+    # Flash counter so live usage history is not discarded during deployment.
+    "gemini-3-flash-preview": GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
+    "gemini-3-flash":         GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
+    "gemini-3.5-flash":       GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
+    "gemini-3.6-flash":       GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
+    "gemini-3.7-flash":       GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
+    "gemini-3.8-flash":       GEMINI_RESTRICTED_FLASH_DEFAULT_LIMIT,
 }
 
 # Firestore-field-prefix overrides. Only required for models that should share
@@ -368,34 +377,59 @@ RATE_LIMIT_FIELD_PREFIX: dict[str, str] = {
     "gemini-3-pro-preview":   "gemini_pro",
     "gemini-2.5-pro":         "gemini_pro",
     "gemini-1.5-pro":         "gemini_pro",
+    "gemini-3-flash-preview": "gemini_3_5_flash",
+    "gemini-3-flash":         "gemini_3_5_flash",
+    "gemini-3.5-flash":       "gemini_3_5_flash",
+    "gemini-3.6-flash":       "gemini_3_5_flash",
+    "gemini-3.7-flash":       "gemini_3_5_flash",
+    "gemini-3.8-flash":       "gemini_3_5_flash",
 }
 
 # ── "General access" shared bin ─────────────────────────────────────────
-# Default 10000/user, shared counter across every Flash model the service
-# accepts plus a catch-all sentinel for unrecognized models. Lifecycle
-# notifications go to a dedicated low-volume path (admin + user), NOT the
-# per-model rate-limit alert used by pro/3.5-flash.
-GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT = 10000
+# Default 1000/user, shared counter across every Flash model the service
+# accepts. Lifecycle notifications go to a dedicated low-volume path (admin +
+# user), NOT the per-model rate-limit alert used by Pro/restricted models.
+# As of 2026-09-01 we define general access models as models with an
+# input token price of less than 0.50/million tokens
+GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT = 1000
 GEMINI_GENERAL_ACCESS_PREFIX = "gemini_general_access"
 GENERAL_ACCESS_MODELS: tuple[str, ...] = (
     "gemini-2.0-flash",
     "gemini-1.5-flash",
     "gemini-2.5-flash",
-    "gemini-3-flash-preview",
-    "gemini-3-flash",
+    "gemini-2.5-flash-lite",
     "gemini-3.1-flash-lite-preview",
     "gemini-3.1-flash-lite",
+    "gemini-3.5-flash-lite",
 )
-# Sentinel for fallthrough — any llm_model_name not in RATE_LIMITED_MODELS
-# is bucketed here so unrecognized/future models still count toward the
-# shared cap.
-GEMINI_GENERAL_ACCESS_SENTINEL = "gemini-general-access"
 
 for _m in GENERAL_ACCESS_MODELS:
     RATE_LIMITED_MODELS[_m] = GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT
     RATE_LIMIT_FIELD_PREFIX[_m] = GEMINI_GENERAL_ACCESS_PREFIX
-RATE_LIMITED_MODELS[GEMINI_GENERAL_ACCESS_SENTINEL] = GEMINI_GENERAL_ACCESS_DEFAULT_LIMIT
-RATE_LIMIT_FIELD_PREFIX[GEMINI_GENERAL_ACCESS_SENTINEL] = GEMINI_GENERAL_ACCESS_PREFIX
+
+# Unknown/future Gemini model IDs must never inherit the inexpensive general-
+# access allowance. They receive a small, separate paid-model allowance until
+# their price and category are reviewed explicitly.
+GEMINI_UNKNOWN_PAID_SENTINEL = "gemini-unknown-paid"
+GEMINI_UNKNOWN_PAID_PREFIX = "gemini_unknown_paid"
+RATE_LIMITED_MODELS[GEMINI_UNKNOWN_PAID_SENTINEL] = GEMINI_UNKNOWN_PAID_DEFAULT_LIMIT
+RATE_LIMIT_FIELD_PREFIX[GEMINI_UNKNOWN_PAID_SENTINEL] = GEMINI_UNKNOWN_PAID_PREFIX
+
+RATE_LIMIT_LABELS = {
+    "gemini_pro": "Gemini Pro",
+    "gemini_3_5_flash": "Restricted Flash",
+    GEMINI_GENERAL_ACCESS_PREFIX: "General Access",
+    GEMINI_UNKNOWN_PAID_PREFIX: "Unknown Paid Gemini",
+}
+
+# Only these three normal user-selectable quota buckets are shown on the
+# authenticated user page. Unknown/future model protection remains an admin-
+# facing safety bucket and is not presented as a model choice.
+USER_VISIBLE_QUOTA_BUCKETS = (
+    ("general_access", "General Access", "gemini-3.1-flash-lite"),
+    ("restricted_flash", "Restricted Flash", "gemini-3.5-flash"),
+    ("gemini_pro", "Gemini Pro", "gemini-3.1-pro-preview"),
+)
 
 
 def _rate_limit_field_prefix(model_name: str) -> str:
@@ -415,6 +449,33 @@ def _rate_limit_count_field(model_name: str) -> str:
 
 def _rate_limit_limit_field(model_name: str) -> str:
     return f"{_rate_limit_field_prefix(model_name)}_usage_limit"
+
+
+def build_user_quota_summary(usage_data: dict | None) -> list[dict]:
+    """Build the three user-visible quota rows from one usage document."""
+    usage_data = usage_data or {}
+    rows = []
+    for key, label, representative_model in USER_VISIBLE_QUOTA_BUCKETS:
+        default_limit = RATE_LIMITED_MODELS[representative_model]
+        try:
+            usage = max(0, int(usage_data.get(_rate_limit_count_field(representative_model), 0)))
+        except (TypeError, ValueError):
+            usage = 0
+        try:
+            limit = max(
+                0,
+                int(usage_data.get(_rate_limit_limit_field(representative_model), default_limit)),
+            )
+        except (TypeError, ValueError):
+            limit = default_limit
+        rows.append({
+            "key": key,
+            "label": label,
+            "usage": usage,
+            "limit": limit,
+            "remaining": max(0, limit - usage),
+        })
+    return rows
 
 # Regions where Vertex AI hosts Gemini and where users may direct their
 # vertex_project=<their-project>&vertex_region=<region> requests. Limited to
@@ -715,24 +776,32 @@ def rate_limited_keys_in_request(
 ) -> list[str]:
     """Return de-duplicated RATE_LIMITED_MODELS keys triggered by this request.
 
-    llm_model_name always lands in *some* bin: a registry hit, or the
-    general-access sentinel when the model is unrecognized. engine_options
-    are registry-only — they keep the historical no-op behavior for OCR
-    strings that aren't LLM model names.
+    Known models use their configured bucket. Unknown Gemini model IDs use the
+    conservative unknown-paid bucket; non-Gemini engines are outside this
+    quota system. Keys are de-duplicated by Firestore counter, so using two
+    models from one shared bucket in a request consumes one request allowance.
     """
     keys: list[str] = []
-    seen: set[str] = set()
+    seen_prefixes: set[str] = set()
 
-    if llm_model_name:
-        key = llm_model_name if llm_model_name in RATE_LIMITED_MODELS else GEMINI_GENERAL_ACCESS_SENTINEL
-        seen.add(key)
-        keys.append(key)
+    def add_model(name: str | None):
+        normalized = str(name or "").strip().lower()
+        if not normalized:
+            return
+        if normalized in RATE_LIMITED_MODELS:
+            key = normalized
+        elif normalized.startswith("gemini-"):
+            key = GEMINI_UNKNOWN_PAID_SENTINEL
+        else:
+            return
+        prefix = _rate_limit_field_prefix(key)
+        if prefix not in seen_prefixes:
+            seen_prefixes.add(prefix)
+            keys.append(key)
 
-    if engine_options:
-        for name in engine_options:
-            if name in RATE_LIMITED_MODELS and name not in seen:
-                seen.add(name)
-                keys.append(name)
+    add_model(llm_model_name)
+    for name in engine_options or []:
+        add_model(name)
 
     return keys
 
@@ -1477,6 +1546,14 @@ USAGE_EVENT_DIMENSIONS = (
     "success",
 )
 
+EVENT_ANALYTICS_MAX_FILTERED_EVENTS = int(
+    os.environ.get("EVENT_ANALYTICS_MAX_FILTERED_EVENTS", "10000")
+)
+EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS = int(
+    os.environ.get("EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS", "45")
+)
+EVENT_ANALYTICS_ROLLUP_COLLECTION = "usage_event_daily"
+
 
 def _coerce_int(value, default=0):
     try:
@@ -1743,6 +1820,131 @@ def build_usage_event(
     return sanitize_usage_event(event)
 
 
+def _usage_event_datetime(event: dict) -> datetime.datetime:
+    """Return a stable UTC datetime for a persisted or newly-built event."""
+    value = event.get("created_at") if isinstance(event, dict) else None
+    parsed = _firestore_timestamp_to_datetime(value)
+    if parsed is None:
+        parsed = datetime.datetime.now(datetime.timezone.utc)
+    elif parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=datetime.timezone.utc)
+    return parsed.astimezone(datetime.timezone.utc)
+
+
+def _analytics_rollup_user_key(user_email: str) -> str:
+    return hashlib.sha256(user_email.strip().lower().encode("utf-8")).hexdigest()[:20]
+
+
+def _analytics_rollup_doc_id(user_email: str, day_key: str) -> str:
+    # Hash first makes one user's documents a contiguous document-ID range.
+    return f"{_analytics_rollup_user_key(user_email)}_{day_key}"
+
+
+def _daily_rollup_values(event: dict) -> tuple[str, dict] | None:
+    """Build plain numeric values for one event's per-user/per-day rollup."""
+    user_email = str(event.get("user_email") or "").strip().lower()
+    if not user_email or user_email == "unknown":
+        return None
+
+    day_key = _usage_event_datetime(event).strftime("%Y-%m-%d")
+    success = bool(event.get("success"))
+    auth_method = str(event.get("auth_method") or "unknown")
+    source_type = str(event.get("source_type") or "unknown")
+    endpoint = str(event.get("endpoint") or "unknown")
+    parsing_model = str(event.get("parsing_model") or "none")
+    ocr_models = event.get("ocr_models") if isinstance(event.get("ocr_models"), list) else []
+    total_cost = _coerce_float(event.get("total_request_cost_usd"))
+    total_tokens = _coerce_int(event.get("total_tokens_all"))
+    ocr_info = event.get("ocr_info") if isinstance(event.get("ocr_info"), dict) else {}
+    ocr_model_costs = {}
+    ocr_model_tokens = {}
+    for model, model_payload in ocr_info.items():
+        if model == "error" or not isinstance(model_payload, dict):
+            continue
+        ocr_model_costs[str(model)] = _coerce_float(model_payload.get("total_cost"))
+        ocr_model_tokens[str(model)] = _coerce_int(model_payload.get("total_tokens"))
+    parsing_cost = _coerce_float(event.get("parsing_cost_total_usd"))
+    parsing_tokens = _coerce_int(event.get("parsing_tokens_total"))
+
+    payload = {
+        "date": day_key,
+        "user_email": user_email,
+        "event_count": 1,
+        "success_count": 1 if success else 0,
+        "failure_count": 0 if success else 1,
+        "total_cost_usd": total_cost,
+        "total_tokens_all": total_tokens,
+        "total_pdf_pages": 1 if event.get("source_type") == "pdf_page" else 0,
+        "auth_method_counts": {auth_method: 1},
+        "auth_method_costs": {auth_method: total_cost},
+        "auth_method_tokens": {auth_method: total_tokens},
+        "source_type_counts": {source_type: 1},
+        "endpoint_counts": {endpoint: 1},
+        "parsing_model_counts": {parsing_model: 1},
+        "parsing_model_costs": {parsing_model: parsing_cost},
+        "parsing_model_tokens": {parsing_model: parsing_tokens},
+        "ocr_model_counts": {str(model): 1 for model in ocr_models if model},
+        "ocr_model_costs": ocr_model_costs,
+        "ocr_model_tokens": ocr_model_tokens,
+    }
+    return _analytics_rollup_doc_id(user_email, day_key), payload
+
+
+def update_usage_event_daily_rollups(events: list[dict]) -> int:
+    """Increment compact daily analytics documents for newly recorded events."""
+    grouped = {}
+    scalar_fields = (
+        "event_count", "success_count", "failure_count", "total_cost_usd",
+        "total_tokens_all", "total_pdf_pages",
+    )
+    map_fields = (
+        "auth_method_counts", "auth_method_costs", "auth_method_tokens",
+        "source_type_counts", "endpoint_counts", "parsing_model_counts",
+        "parsing_model_costs", "parsing_model_tokens", "ocr_model_counts",
+        "ocr_model_costs", "ocr_model_tokens",
+    )
+    for event in events or []:
+        rollup = _daily_rollup_values(event)
+        if not rollup:
+            continue
+        doc_id, values = rollup
+        aggregate = grouped.setdefault(doc_id, {
+            "date": values["date"],
+            "user_email": values["user_email"],
+            **{field: 0 for field in scalar_fields},
+            **{field: {} for field in map_fields},
+        })
+        for field in scalar_fields:
+            aggregate[field] += values[field]
+        for field in map_fields:
+            for key, count in values[field].items():
+                aggregate[field][key] = aggregate[field].get(key, 0) + count
+
+    batch = db.batch()
+    writes = 0
+    for doc_id, values in grouped.items():
+        payload = {
+            "date": values["date"],
+            "user_email": values["user_email"],
+            **{field: firestore.Increment(values[field]) for field in scalar_fields},
+            **{
+                field: {key: firestore.Increment(count) for key, count in values[field].items()}
+                for field in map_fields
+            },
+            "updated_at": firestore.SERVER_TIMESTAMP,
+            "rollup_version": 1,
+        }
+        batch.set(
+            db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(doc_id),
+            payload,
+            merge=True,
+        )
+        writes += 1
+    if writes:
+        batch.commit()
+    return writes
+
+
 def record_usage_event(event: dict) -> dict:
     event_payload = sanitize_usage_event(dict(event or {}))
     event_payload.setdefault("event_id", str(uuid.uuid4()))
@@ -1768,6 +1970,20 @@ def record_usage_events(events: list[dict]) -> list[dict]:
 def persist_usage_events_and_rollups(events: list[dict], *, route_label: str) -> list[dict]:
     """Write events first, then project them into usage_statistics."""
     recorded = record_usage_events(events)
+    def _write_daily_rollups_best_effort():
+        try:
+            update_usage_event_daily_rollups(recorded)
+        except Exception:
+            logger.exception(
+                "Daily analytics rollup failed route=%s event_count=%s",
+                route_label,
+                len(recorded),
+            )
+
+    # Analytics maintenance must never make specimen processing fail or wait.
+    # Historical gaps can be repaired with the explicit admin rebuild action.
+    if recorded:
+        threading.Thread(target=_write_daily_rollups_best_effort, daemon=True).start()
     for event in recorded:
         try:
             update_usage_statistics_from_event(event)
@@ -4425,6 +4641,7 @@ class VoucherVisionProcessor:
                     "gemini-2.0-flash": "GEMINI_2_0_FLASH",
                     "gemini-1.5-flash": "GEMINI_1_5_FLASH",
                     "gemini-1.5-pro": "GEMINI_1_5_PRO",
+                    "gemini-2.5-flash-lite": "GEMINI_2_5_FLASH_LITE",
                     "gemini-2.5-flash": "GEMINI_2_5_FLASH",
                     "gemini-2.5-pro": "GEMINI_2_5_PRO",
                     "gemini-3-pro-preview": "GEMINI_3_PRO",
@@ -4437,11 +4654,21 @@ class VoucherVisionProcessor:
                     "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
                     "gemini-3.1-flash-lite": "GEMINI_3_1_FLASH_LITE",
 
+                    "gemini-3.5-flash-lite": "GEMINI_3_5_FLASH_LITE",
                     "gemini-3.5-flash": "GEMINI_3_5_FLASH",
+                    "gemini-3.6-flash": "GEMINI_3_6_FLASH",
+                    "gemini-3.7-flash": "GEMINI_3_7_FLASH",
+                    "gemini-3.8-flash": "GEMINI_3_8_FLASH",
+                    "gemma-4-26b-a4b-it": "GEMMA_4_26B_A4B_IT",
+                    "gemma-4-31b-it": "GEMMA_4_31B_IT",
                 }
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
-                LLM_name_cost = api_to_cost_mapping.get(llm_model_name, "GEMINI_2_0_FLASH")
+                LLM_name_cost = api_to_cost_mapping.get(llm_model_name)
+                if LLM_name_cost is None:
+                    raise ValueError(
+                        f"Unsupported parsing model '{llm_model_name}': no cost mapping is configured"
+                    )
                 self._log(f"Mapped to cost constant: {LLM_name_cost}", "info")
 
                 # Use default prompt if none specified
@@ -6449,7 +6676,7 @@ def _build_usage_events_query(
 
 def _get_usage_event_filters_from_request():
     return {
-        "user_email": request.args.get("user_email") or None,
+        "user_email": (request.args.get("user_email") or "").strip().lower() or None,
         "auth_method": request.args.get("auth_method") or None,
         "endpoint": request.args.get("endpoint") or None,
         "source_type": request.args.get("source_type") or None,
@@ -6513,6 +6740,7 @@ def _event_matches_filters(event: dict, filters: dict) -> bool:
 
 
 def _load_usage_events_filtered(filters: dict, *, order_desc: bool = True):
+    """Explicit full-collection scan. Never call from the normal analytics path."""
     docs = db.collection("usage_events").stream()
     events = []
     for doc in docs:
@@ -6526,7 +6754,13 @@ def _load_usage_events_filtered(filters: dict, *, order_desc: bool = True):
     return events
 
 
-def _fetch_usage_events_for_overview(scope: str, dimension: str | None, value: str | None):
+def _fetch_usage_events_for_overview(
+    scope: str,
+    dimension: str | None,
+    value: str | None,
+    *,
+    full_scan: bool = False,
+):
     filters = _get_usage_event_filters_from_request()
     if scope == "user":
         filters["user_email"] = request.args.get("user_email") or filters["user_email"]
@@ -6538,7 +6772,141 @@ def _fetch_usage_events_for_overview(scope: str, dimension: str | None, value: s
         else:
             filters[dimension] = value
 
-    return _load_usage_events_filtered(filters, order_desc=True)
+    if full_scan:
+        return _load_usage_events_filtered(filters, order_desc=True), False
+
+    # Keep the Firestore query predictable: the required user/date scope is
+    # applied server-side, while optional filters are evaluated only over that
+    # already-bounded result set. This avoids a combinatorial index matrix.
+    query = _build_usage_events_query(
+        user_email=filters["user_email"],
+        date_from=filters["date_from"],
+        date_to=filters["date_to"],
+        order_desc=True,
+    ).limit(EVENT_ANALYTICS_MAX_FILTERED_EVENTS + 1)
+
+    events = []
+    docs_seen = 0
+    for doc in query.stream(timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS):
+        docs_seen += 1
+        event = (doc.to_dict() or {}) | {"event_id": doc.id}
+        if _event_matches_filters(event, filters):
+            events.append(event)
+
+    too_large = docs_seen > EVENT_ANALYTICS_MAX_FILTERED_EVENTS
+    return events[:EVENT_ANALYTICS_MAX_FILTERED_EVENTS], too_large
+
+
+def _load_daily_rollups(user_email: str, date_from, date_to) -> list[dict] | None:
+    """Load compact daily documents when the historical rebuild is complete."""
+    status_doc = db.collection("system_config").document("event_analytics_rollups").get()
+    if not status_doc.exists or (status_doc.to_dict() or {}).get("status") != "complete":
+        return None
+
+    start_day = date_from.date()
+    end_day = date_to.date()  # exclusive
+    user_key = _analytics_rollup_user_key(user_email)
+    refs = []
+    current = start_day
+    while current < end_day:
+        refs.append(
+            db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(
+                f"{user_key}_{current.isoformat()}"
+            )
+        )
+        current += datetime.timedelta(days=1)
+
+    rollups = []
+    for offset in range(0, len(refs), 300):
+        for snapshot in db.get_all(refs[offset:offset + 300]):
+            if snapshot.exists:
+                rollups.append(snapshot.to_dict() or {})
+    return rollups
+
+
+def _merge_metric_map(target: dict, counts: dict, costs: dict, tokens: dict):
+    for key, count in (counts or {}).items():
+        bucket = target.setdefault(str(key), {"events": 0, "cost_usd": 0.0, "tokens": 0})
+        bucket["events"] += _coerce_int(count)
+        bucket["cost_usd"] += _coerce_float((costs or {}).get(key))
+        bucket["tokens"] += _coerce_int((tokens or {}).get(key))
+
+
+def _summarize_usage_event_rollups(rollups: list[dict]) -> dict:
+    daily = []
+    weekly = {}
+    auth_method_split = {}
+    ocr_model_mix = {}
+    parsing_model_mix = {}
+    totals = {
+        "events": 0, "success": 0, "failure": 0, "cost": 0.0,
+        "tokens": 0, "pdf_pages": 0,
+    }
+
+    for rollup in sorted(rollups, key=lambda row: row.get("date") or ""):
+        event_count = _coerce_int(rollup.get("event_count"))
+        cost = _coerce_float(rollup.get("total_cost_usd"))
+        tokens = _coerce_int(rollup.get("total_tokens_all"))
+        day_key = rollup.get("date")
+        totals["events"] += event_count
+        totals["success"] += _coerce_int(rollup.get("success_count"))
+        totals["failure"] += _coerce_int(rollup.get("failure_count"))
+        totals["cost"] += cost
+        totals["tokens"] += tokens
+        totals["pdf_pages"] += _coerce_int(rollup.get("total_pdf_pages"))
+        if day_key:
+            daily.append({"date": day_key, "events": event_count, "cost_usd": cost, "tokens": tokens})
+            try:
+                day_dt = datetime.datetime.strptime(day_key, "%Y-%m-%d")
+                iso_year, iso_week, _ = day_dt.isocalendar()
+                week_key = f"{iso_year}-W{iso_week:02d}"
+                week = weekly.setdefault(week_key, {"events": 0, "cost_usd": 0.0, "tokens": 0})
+                week["events"] += event_count
+                week["cost_usd"] += cost
+                week["tokens"] += tokens
+            except ValueError:
+                pass
+
+        _merge_metric_map(
+            auth_method_split,
+            rollup.get("auth_method_counts"),
+            rollup.get("auth_method_costs"),
+            rollup.get("auth_method_tokens"),
+        )
+        _merge_metric_map(
+            ocr_model_mix,
+            rollup.get("ocr_model_counts"),
+            rollup.get("ocr_model_costs"),
+            rollup.get("ocr_model_tokens"),
+        )
+        _merge_metric_map(
+            parsing_model_mix,
+            rollup.get("parsing_model_counts"),
+            rollup.get("parsing_model_costs"),
+            rollup.get("parsing_model_tokens"),
+        )
+
+    return {
+        "headline": {
+            "total_events": totals["events"],
+            "success_count": totals["success"],
+            "failure_count": totals["failure"],
+            "total_cost_usd": round(totals["cost"], 10),
+            "average_cost_usd": round(totals["cost"] / totals["events"], 10) if totals["events"] else 0.0,
+            "total_tokens_all": totals["tokens"],
+            "total_pdf_pages": totals["pdf_pages"],
+            "unique_users": 1 if totals["events"] else 0,
+        },
+        "timeseries": {
+            "daily": daily,
+            "weekly": [{"week": key, **value} for key, value in sorted(weekly.items())],
+        },
+        "auth_method_split": auth_method_split,
+        "ocr_model_mix": ocr_model_mix,
+        "parsing_model_mix": parsing_model_mix,
+        "recent_events": [],
+        "first_tracked_event_at": f"{daily[0]['date']}T00:00:00Z" if daily else None,
+    }
 
 
 def _summarize_usage_events(events: list[dict]) -> dict:
@@ -6606,7 +6974,10 @@ def _summarize_usage_events(events: list[dict]) -> dict:
         auth_bucket["cost_usd"] += cost
         auth_bucket["tokens"] += tokens
 
-        for model_name, ocr_payload in (event.get("ocr_info") or {}).items():
+        ocr_info = event.get("ocr_info")
+        if not isinstance(ocr_info, dict):
+            ocr_info = {}
+        for model_name, ocr_payload in ocr_info.items():
             if model_name == "error" or not isinstance(ocr_payload, dict):
                 continue
             model_bucket = ocr_model_mix.setdefault(model_name, {"events": 0, "cost_usd": 0.0, "tokens": 0})
@@ -6766,34 +7137,17 @@ def get_usage_event_facets():
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
 
     try:
-        filters = _get_usage_event_filters_from_request()
+        # Deliberately static: discovering facets by reading every event was the
+        # largest accidental query in the old dashboard.
         facets = {
-            "users": set(),
-            "ocr_models": set(),
-            "parsing_models": set(),
-            "prompts": set(),
-            "endpoints": set(),
-            "source_types": set(),
-            "auth_methods": set(),
+            "users": [],
+            "ocr_models": [],
+            "parsing_models": [],
+            "prompts": [],
+            "endpoints": ["/process", "/process-url", "/process-pdf-async"],
+            "source_types": ["upload", "url", "pdf_page"],
+            "auth_methods": list(AUTH_METHODS),
         }
-
-        for event in _load_usage_events_filtered(filters, order_desc=False):
-            if event.get("user_email"):
-                facets["users"].add(event["user_email"])
-            if event.get("parsing_model"):
-                facets["parsing_models"].add(event["parsing_model"])
-            if event.get("prompt"):
-                facets["prompts"].add(event["prompt"])
-            if event.get("endpoint"):
-                facets["endpoints"].add(event["endpoint"])
-            if event.get("source_type"):
-                facets["source_types"].add(event["source_type"])
-            if event.get("auth_method"):
-                facets["auth_methods"].add(event["auth_method"])
-            for model_name in event.get("ocr_models") or []:
-                if model_name:
-                    facets["ocr_models"].add(model_name)
-
         earliest_docs = list(
             db.collection("usage_events")
             .order_by("created_at", direction=firestore.Query.ASCENDING)
@@ -6809,7 +7163,7 @@ def get_usage_event_facets():
         return jsonify({
             "status": "success",
             "dimensions": list(USAGE_EVENT_DIMENSIONS),
-            "facets": {key: sorted(values) for key, values in facets.items()},
+            "facets": facets,
             "first_tracked_event_at": first_tracked_event_at,
             "tracking_note": "Event-level analytics are forward-only from this feature's deployment.",
         })
@@ -6830,28 +7184,90 @@ def get_usage_events_overview():
         return jsonify({'error': 'Unauthorized - Admin access required'}), 403
 
     try:
+        started = time.monotonic()
+        full_scan = _parse_bool_query_arg("full_scan") is True
         scope = request.args.get("scope", "user")
         if scope not in {"user", "dimension"}:
             return jsonify({"error": "scope must be 'user' or 'dimension'"}), 400
 
         dimension = request.args.get("dimension")
         value = request.args.get("value")
-        if scope == "user" and not (request.args.get("user_email") or "").strip():
+        if not full_scan and scope != "user":
+            return jsonify({"error": "Filtered analytics must use scope=user"}), 400
+        if not full_scan and not (request.args.get("user_email") or "").strip():
             return jsonify({"error": "user_email is required for scope=user"}), 400
+        if not full_scan and (not request.args.get("date_from") or not request.args.get("date_to")):
+            return jsonify({"error": "date_from and date_to are required"}), 400
+        if request.args.get("date_from") and _parse_date_query_arg("date_from") is None:
+            return jsonify({"error": "date_from must use YYYY-MM-DD"}), 400
+        if request.args.get("date_to") and _parse_date_query_arg("date_to", end_exclusive=True) is None:
+            return jsonify({"error": "date_to must use YYYY-MM-DD"}), 400
+        date_from = _parse_date_query_arg("date_from")
+        date_to = _parse_date_query_arg("date_to", end_exclusive=True)
+        if date_from and date_to and date_from >= date_to:
+            return jsonify({"error": "date_from must be on or before date_to"}), 400
         if scope == "dimension":
             if dimension not in USAGE_EVENT_DIMENSIONS:
                 return jsonify({"error": "Unsupported dimension"}), 400
             if value in (None, ""):
                 return jsonify({"error": "value is required for scope=dimension"}), 400
 
-        events = _fetch_usage_events_for_overview(scope, dimension, value)
-        summary = _summarize_usage_events(events)
+        secondary_filter_names = (
+            "auth_method", "endpoint", "source_type", "success", "ocr_only",
+            "notebook_mode", "parsing_model", "ocr_model", "prompt",
+        )
+        has_secondary_filters = any(request.args.get(name) not in (None, "") for name in secondary_filter_names)
+        analysis_source = "raw_events"
+        events = []
+
+        rollups = None
+        if not full_scan and not has_secondary_filters:
+            rollups = _load_daily_rollups(
+                (request.args.get("user_email") or "").strip().lower(),
+                date_from,
+                date_to,
+            )
+
+        if rollups is not None:
+            summary = _summarize_usage_event_rollups(rollups)
+            analysis_source = "daily_rollups"
+        else:
+            events, too_large = _fetch_usage_events_for_overview(
+                scope,
+                dimension,
+                value,
+                full_scan=full_scan,
+            )
+            if too_large:
+                return jsonify({
+                    "error": (
+                        f"This filtered analysis matched more than "
+                        f"{EVENT_ANALYTICS_MAX_FILTERED_EVENTS:,} events. "
+                        "Choose a shorter date range."
+                    ),
+                    "code": "analysis_too_large",
+                    "maximum_events": EVENT_ANALYTICS_MAX_FILTERED_EVENTS,
+                }), 413
+            summary = _summarize_usage_events(events)
+
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        logger.info(
+            "Event analytics completed admin=%s target_user=%s full_scan=%s events=%s elapsed_ms=%s",
+            admin_email,
+            request.args.get("user_email") or "all",
+            full_scan,
+            summary["headline"]["total_events"],
+            elapsed_ms,
+        )
 
         return jsonify({
             "status": "success",
             "scope": scope,
             "dimension": dimension,
             "value": value,
+            "full_scan": full_scan,
+            "analysis_source": analysis_source,
+            "elapsed_ms": elapsed_ms,
             "filters": {
                 key: request.args.get(key)
                 for key in (
@@ -6873,8 +7289,181 @@ def get_usage_events_overview():
             **summary,
         })
     except Exception as e:
-        logger.error(f"Error building usage event overview: {str(e)}")
+        logger.exception("Error building usage event overview")
         return jsonify({'error': f'Failed to build usage event overview: {str(e)}'}), 500
+
+
+@app.route('/admin/rebuild-event-analytics-rollups', methods=['POST'])
+@authenticated_route
+def rebuild_event_analytics_rollups():
+    """Explicit, costly admin operation that rebuilds daily user rollups."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    started = time.monotonic()
+    scalar_fields = (
+        "event_count", "success_count", "failure_count", "total_cost_usd",
+        "total_tokens_all", "total_pdf_pages",
+    )
+    map_fields = (
+        "auth_method_counts", "auth_method_costs", "auth_method_tokens",
+        "source_type_counts", "endpoint_counts", "parsing_model_counts",
+        "parsing_model_costs", "parsing_model_tokens", "ocr_model_counts",
+        "ocr_model_costs", "ocr_model_tokens",
+    )
+    grouped = {}
+    events_scanned = 0
+    malformed_events = 0
+
+    try:
+        for doc in db.collection("usage_events").stream(
+            timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS * 4
+        ):
+            events_scanned += 1
+            event = (doc.to_dict() or {}) | {"event_id": doc.id}
+            rollup = _daily_rollup_values(event)
+            if not rollup:
+                malformed_events += 1
+                continue
+            doc_id, values = rollup
+            aggregate = grouped.setdefault(doc_id, {
+                "date": values["date"],
+                "user_email": values["user_email"],
+                **{field: 0 for field in scalar_fields},
+                **{field: {} for field in map_fields},
+            })
+            for field in scalar_fields:
+                aggregate[field] += values[field]
+            for field in map_fields:
+                for key, count in values[field].items():
+                    aggregate[field][key] = aggregate[field].get(key, 0) + count
+
+        items = list(grouped.items())
+        docs_written = 0
+        # Stay below Firestore's 500-operation batch limit.
+        for offset in range(0, len(items), 400):
+            batch = db.batch()
+            for doc_id, values in items[offset:offset + 400]:
+                payload = {
+                    **values,
+                    "rollup_version": 1,
+                    "rebuilt_at": firestore.SERVER_TIMESTAMP,
+                }
+                batch.set(
+                    db.collection(EVENT_ANALYTICS_ROLLUP_COLLECTION).document(doc_id),
+                    payload,
+                )
+                docs_written += 1
+            batch.commit()
+
+        db.collection("system_config").document("event_analytics_rollups").set({
+            "status": "complete",
+            "events_scanned": events_scanned,
+            "rollup_docs_written": docs_written,
+            "malformed_events": malformed_events,
+            "completed_at": firestore.SERVER_TIMESTAMP,
+            "completed_by": admin_email,
+            "rollup_version": 1,
+        }, merge=True)
+
+        elapsed_ms = round((time.monotonic() - started) * 1000)
+        logger.info(
+            "Event analytics rollup rebuild complete admin=%s events=%s docs=%s elapsed_ms=%s",
+            admin_email,
+            events_scanned,
+            docs_written,
+            elapsed_ms,
+        )
+        return jsonify({
+            "status": "success",
+            "events_scanned": events_scanned,
+            "rollup_docs_written": docs_written,
+            "malformed_events": malformed_events,
+            "elapsed_ms": elapsed_ms,
+        })
+    except Exception:
+        logger.exception("Event analytics rollup rebuild failed admin=%s", admin_email)
+        return jsonify({"error": "Event analytics rollup rebuild failed; see server logs"}), 500
+
+
+@app.route('/admin/ensure-event-analytics-index', methods=['POST'])
+@authenticated_route
+def ensure_event_analytics_index():
+    """Create or verify the managed Firestore composite index without a CLI."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        credentials_obj, detected_project = google.auth.default(
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
+        project_id = (
+            os.environ.get("GOOGLE_CLOUD_PROJECT")
+            or os.environ.get("GCP_PROJECT")
+            or os.environ.get("FIREBASE_PROJECT_ID")
+            or detected_project
+        )
+        if not project_id:
+            return jsonify({"error": "Could not determine the Google Cloud project ID"}), 500
+
+        session = AuthorizedSession(credentials_obj)
+        endpoint = (
+            f"https://firestore.googleapis.com/v1/projects/{quote(project_id, safe='')}"
+            "/databases/(default)/collectionGroups/usage_events/indexes"
+        )
+        response = session.get(endpoint, timeout=30)
+        response.raise_for_status()
+        desired = [("user_email", "ASCENDING"), ("created_at", "DESCENDING")]
+
+        for index in (response.json() or {}).get("indexes", []):
+            fields = [
+                (field.get("fieldPath"), field.get("order"))
+                for field in index.get("fields", [])
+                if field.get("fieldPath") != "__name__"
+            ]
+            if fields == desired:
+                return jsonify({
+                    "status": "success",
+                    "index_state": index.get("state", "UNKNOWN"),
+                    "created": False,
+                    "message": "The Firestore analytics query index already exists.",
+                })
+
+        create_response = session.post(endpoint, json={
+            "queryScope": "COLLECTION",
+            "fields": [
+                {"fieldPath": "user_email", "order": "ASCENDING"},
+                {"fieldPath": "created_at", "order": "DESCENDING"},
+            ],
+        }, timeout=30)
+        create_response.raise_for_status()
+        operation = create_response.json() or {}
+        logger.info("Firestore analytics index creation requested admin=%s", admin_email)
+        return jsonify({
+            "status": "success",
+            "index_state": "CREATING",
+            "created": True,
+            "operation": operation.get("name"),
+            "message": "Index creation started. Firestore will finish building it in the background.",
+        })
+    except Exception:
+        logger.exception("Could not create or verify Firestore analytics index admin=%s", admin_email)
+        return jsonify({
+            "error": (
+                "Could not create or verify the Firestore index. The Cloud Run service account "
+                "may need the datastore.indexAdmin permission; see server logs."
+            )
+        }), 500
 
 
 @app.route('/admin/backfill-usage-statistics', methods=['POST'])
@@ -7044,7 +7633,7 @@ def get_rate_limit_config():
         if entry is None:
             entry = {
                 "key": prefix,
-                "label": _humanize_counter_prefix(prefix),
+                "label": RATE_LIMIT_LABELS.get(prefix, _humanize_counter_prefix(prefix)),
                 "count_field": _rate_limit_count_field(model_name),
                 "limit_field": _rate_limit_limit_field(model_name),
                 "default_limit": int(default_limit),
@@ -7257,6 +7846,29 @@ def auth_success():
         app_id=firebase_config["appId"],
         server_url=base_url
     )
+
+
+@app.route('/user/quota-status', methods=['GET'])
+@authenticated_route
+def get_user_quota_status():
+    """Return only the authenticated user's three normal quota buckets."""
+    user = authenticate_request(request)
+    user_email = _normalize_email_identity((user or {}).get('email'))
+    if not user_email:
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    try:
+        usage_doc = db.collection('usage_statistics').document(user_email).get()
+        usage_data = (usage_doc.to_dict() or {}) if usage_doc.exists else {}
+        response = jsonify({
+            'status': 'success',
+            'quotas': build_user_quota_summary(usage_data),
+        })
+        response.headers['Cache-Control'] = 'no-store'
+        return response
+    except Exception:
+        logger.exception("Failed to load quota status for authenticated user")
+        return jsonify({'error': 'Unable to load quota status'}), 500
 
 @app.route('/check-admin-status', methods=['GET'])
 @authenticated_route

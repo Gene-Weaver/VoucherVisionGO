@@ -104,6 +104,9 @@ function initPage() {
         })
         .then(isApproved => {
           if (isApproved) {
+            // Load the signed-in user's current server-funded model quotas.
+            loadQuotaStatus(user);
+
             // Check if user has API key permission and show API key management button if they do
             checkApiKeyPermission(user)
               .then(hasApiKeyAccess => {
@@ -249,6 +252,46 @@ function initPage() {
       errorElement.style.display = 'block';
     });
   });
+}
+
+// Load the three normal user-visible quota buckets.
+async function loadQuotaStatus(user) {
+  const tableBody = document.getElementById('quota-table-body');
+  const errorElement = document.getElementById('quota-error');
+  if (!tableBody || !errorElement) return;
+
+  try {
+    const idToken = await user.getIdToken();
+    const response = await fetch('/user/quota-status', {
+      cache: 'no-store',
+      headers: { 'Authorization': `Bearer ${idToken}` }
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success' || !Array.isArray(data.quotas)) {
+      throw new Error(data.error || `Quota request failed (${response.status})`);
+    }
+
+    tableBody.replaceChildren();
+    data.quotas.forEach(quota => {
+      const row = document.createElement('tr');
+      [quota.label, quota.usage, quota.limit, quota.remaining].forEach((value, index) => {
+        const cell = document.createElement(index === 0 ? 'th' : 'td');
+        if (index === 0) cell.scope = 'row';
+        cell.textContent = index === 0
+          ? String(value)
+          : Number(value || 0).toLocaleString();
+        row.appendChild(cell);
+      });
+      tableBody.appendChild(row);
+    });
+    errorElement.hidden = true;
+    errorElement.textContent = '';
+  } catch (error) {
+    console.error('Error loading quota status:', error);
+    tableBody.innerHTML = '<tr><td colspan="4" class="quota-loading">Quota information is temporarily unavailable.</td></tr>';
+    errorElement.textContent = 'Could not load your current quotas. Refresh the page to try again.';
+    errorElement.hidden = false;
+  }
 }
 
 // Update token display
