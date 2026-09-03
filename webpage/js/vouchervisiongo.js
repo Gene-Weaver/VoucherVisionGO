@@ -202,11 +202,124 @@ function getSelectedEngines() {
     return engines;
 }
 
+// Keep this set synchronized with GENERAL_ACCESS_MODELS in app.py. Thinking
+// remains an unrestricted API parameter; this policy applies only to the GUI.
+const VVGO_GENERAL_ACCESS_MODELS = new Set([
+    'gemini-2.0-flash',
+    'gemini-1.5-flash',
+    'gemini-2.5-flash',
+    'gemini-2.5-flash-lite',
+    'gemini-3.1-flash-lite-preview',
+    'gemini-3.1-flash-lite',
+    'gemini-3.5-flash-lite',
+]);
+
+function modelsAreGeneralAccess(modelNames) {
+    return modelNames.length === 0
+        || modelNames.every(model => VVGO_GENERAL_ACCESS_MODELS.has(model));
+}
+
+function applyThinkingLevelPolicy(select, policyText, generalAccess, userFunded, stageName) {
+    if (!select) return;
+
+    const allLevelsAvailable = generalAccess || userFunded;
+    const wasRestricted = select.dataset.restrictedByModel === 'true';
+    const mediumOption = select.querySelector('option[value="medium"]');
+    const highOption = select.querySelector('option[value="high"]');
+
+    if (mediumOption) mediumOption.disabled = !allLevelsAvailable;
+    if (highOption) highOption.disabled = !allLevelsAvailable;
+
+    if (!allLevelsAvailable) {
+        if (!wasRestricted && ['low', 'medium', 'high'].includes(select.value)) {
+            select.dataset.generalAccessValue = select.value;
+        }
+        select.value = 'low';
+        select.dataset.restrictedByModel = 'true';
+        select.title = `${stageName} includes a non-general-access model, so only Low is available.`;
+        if (policyText) {
+            policyText.textContent = `${stageName} includes a non-general-access model; thinking is limited to Low.`;
+            policyText.classList.add('restricted');
+        }
+        return;
+    }
+
+    if (wasRestricted) {
+        select.value = select.dataset.generalAccessValue || 'high';
+    }
+    if (!select.value) select.value = 'high';
+    select.dataset.restrictedByModel = 'false';
+    select.title = userFunded
+        ? 'Your Gemini or Vertex account allows Low, Medium, or High thinking for any model.'
+        : 'General-access models allow Low, Medium, or High thinking.';
+    if (policyText) {
+        policyText.textContent = userFunded
+            ? 'Using your Gemini or Vertex account; all thinking levels are available.'
+            : 'General-access models default to High; all levels are available.';
+        policyText.classList.remove('restricted');
+    }
+}
+
+function updatePerformanceCostBadges() {
+    const stageLevels = {
+        ocr: document.getElementById('ocrThinkingLevel')?.value,
+        llm: document.getElementById('llmThinkingLevel')?.value,
+    };
+
+    document.querySelectorAll('.tag-performance-cost[data-performance-stage]').forEach(badge => {
+        badge.hidden = stageLevels[badge.dataset.performanceStage] !== 'low';
+    });
+}
+
+function updateThinkingLevelControls() {
+    const ocrSelect = document.getElementById('ocrThinkingLevel');
+    const llmSelect = document.getElementById('llmThinkingLevel');
+    const selectedLlm = getSelectedModel();
+    const userFunded = getInferencePaymentSettings().method !== 'credits';
+
+    applyThinkingLevelPolicy(
+        ocrSelect,
+        document.getElementById('ocrThinkingLevelPolicy'),
+        modelsAreGeneralAccess(getSelectedEngines()),
+        userFunded,
+        'OCR selection',
+    );
+    applyThinkingLevelPolicy(
+        llmSelect,
+        document.getElementById('llmThinkingLevelPolicy'),
+        modelsAreGeneralAccess(selectedLlm ? [selectedLlm] : []),
+        userFunded,
+        'Parsing selection',
+    );
+    updatePerformanceCostBadges();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('input[name="engines"], input[name="llm_model"]').forEach(input => {
+        input.addEventListener('change', updateThinkingLevelControls);
+    });
+
+    ['ocrThinkingLevel', 'llmThinkingLevel'].forEach(id => {
+        const select = document.getElementById(id);
+        if (!select) return;
+        select.addEventListener('change', function() {
+            if (this.dataset.restrictedByModel !== 'true') {
+                this.dataset.generalAccessValue = this.value;
+            }
+            updatePerformanceCostBadges();
+        });
+    });
+
+    updateThinkingLevelControls();
+});
+
 function appendThinkingLevelFields(formData) {
+    // Re-apply immediately before submission as a guard against stale UI state.
+    updateThinkingLevelControls();
     const ocrLevel = document.getElementById('ocrThinkingLevel');
     const llmLevel = document.getElementById('llmThinkingLevel');
-    formData.append('ocr_thinking_level', ocrLevel ? ocrLevel.value : 'low');
-    formData.append('llm_thinking_level', llmLevel ? llmLevel.value : 'low');
+    formData.append('ocr_thinking_level', ocrLevel ? ocrLevel.value : 'high');
+    formData.append('llm_thinking_level', llmLevel ? llmLevel.value : 'high');
 }
 
 // Test CORS support
@@ -354,6 +467,7 @@ function toggleInferencePaymentFields() {
     const vertexFields = document.getElementById('vertexPaymentFields');
     if (geminiFields) geminiFields.hidden = method !== 'gemini';
     if (vertexFields) vertexFields.hidden = method !== 'vertex';
+    updateThinkingLevelControls();
 }
 
 async function linkVertexProjectFromSettings() {
@@ -845,6 +959,125 @@ function buildEnrichmentSummary(data) {
     return sections;
 }
 
+function escapeResultHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+function formatResultTokenCount(value) {
+    const count = Number(value);
+    return Number.isFinite(count) ? Math.round(count).toLocaleString('en-US') : '\u2014';
+}
+
+function formatResultCost(value) {
+    const cost = Number(value);
+    if (!Number.isFinite(cost)) return '\u2014';
+    return cost.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 6,
+        maximumFractionDigits: 8,
+    });
+}
+
+// Build a per-specimen ledger from the costs returned by the API. These are the
+// server-calculated amounts used for billing, so the browser does not recalculate
+// them from a potentially different price table.
+function buildCostBreakdown(data) {
+    const rows = [];
+    const ocrInfo = data && data.ocr_info;
+
+    if (ocrInfo && typeof ocrInfo === 'object' && !Array.isArray(ocrInfo)) {
+        for (const [model, details] of Object.entries(ocrInfo)) {
+            if (!details || typeof details !== 'object') continue;
+            rows.push({
+                stage: 'OCR',
+                model,
+                tokensIn: details.tokens_in,
+                tokensOut: details.tokens_out,
+                thinkingTokens: details.thinking_tokens,
+                costIn: details.cost_in,
+                costOut: details.cost_out,
+                thinkingCost: details.thinking_cost,
+                totalCost: details.total_cost,
+            });
+        }
+    }
+
+    const parsingInfo = data && data.parsing_info;
+    if (parsingInfo && typeof parsingInfo === 'object' && !Array.isArray(parsingInfo)) {
+        rows.push({
+            stage: 'Parsing',
+            model: parsingInfo.model || '\u2014',
+            tokensIn: parsingInfo.input,
+            tokensOut: parsingInfo.output,
+            thinkingTokens: parsingInfo.thinking_tokens,
+            costIn: parsingInfo.cost_in,
+            costOut: parsingInfo.cost_out,
+            thinkingCost: parsingInfo.thinking_cost,
+            totalCost: parsingInfo.total_cost,
+        });
+    }
+
+    const requestTotal = Number(data && data.total_request_cost_usd);
+    if (rows.length === 0 && !Number.isFinite(requestTotal)) {
+        return '<p class="cost-breakdown-empty">No cost information is available for this specimen.</p>';
+    }
+
+    const tableRows = rows.map(row => `
+        <tr>
+            <td>${escapeResultHtml(row.stage)}</td>
+            <td class="cost-model-name">${escapeResultHtml(row.model)}</td>
+            <td class="cost-number">${formatResultTokenCount(row.tokensIn)}</td>
+            <td class="cost-number">${formatResultTokenCount(row.tokensOut)}</td>
+            <td class="cost-number">${formatResultTokenCount(row.thinkingTokens)}</td>
+            <td class="cost-number">${formatResultCost(row.costIn)}</td>
+            <td class="cost-number">${formatResultCost(row.costOut)}</td>
+            <td class="cost-number">${formatResultCost(row.thinkingCost)}</td>
+            <td class="cost-number cost-row-total">${formatResultCost(row.totalCost)}</td>
+        </tr>`).join('');
+
+    const calculatedTotal = rows.reduce((sum, row) => {
+        const value = Number(row.totalCost);
+        return sum + (Number.isFinite(value) ? value : 0);
+    }, 0);
+    const displayedTotal = Number.isFinite(requestTotal) ? requestTotal : calculatedTotal;
+
+    return `
+        <div class="cost-breakdown-summary">
+            <span>Total specimen cost</span>
+            <strong>${formatResultCost(displayedTotal)}</strong>
+        </div>
+        <div class="cost-breakdown-table-wrap">
+            <table class="cost-breakdown-table">
+                <thead>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Model</th>
+                        <th>Input Tokens</th>
+                        <th>Output Tokens</th>
+                        <th>Thinking Tokens</th>
+                        <th>Input Cost</th>
+                        <th>Output Cost</th>
+                        <th>Thinking Cost</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>${tableRows}</tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="8">Total request cost</th>
+                        <th class="cost-number">${formatResultCost(displayedTotal)}</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>`;
+}
+
 // Create split layout with JSON on left and image on right
 function createSplitResultsLayout(data) {
     const hasCollageImage = data.collage_info && data.collage_info.base64image_text_collage;
@@ -861,6 +1094,7 @@ function createSplitResultsLayout(data) {
                 <div class="result-tabs">
                     <div class="result-tab active" data-result-tab="formatted">Formatted</div>
                     <div class="result-tab" data-result-tab="enrichment">Data Enrichment</div>
+                    <div class="result-tab" data-result-tab="costs">Cost Breakdown</div>
                     <div class="result-tab" data-result-tab="rawjson">Full API Response</div>
                 </div>
                 <div class="result-tab-content active" id="resultTabFormatted">
@@ -868,6 +1102,9 @@ function createSplitResultsLayout(data) {
                 </div>
                 <div class="result-tab-content" id="resultTabEnrichment">
                     ${buildEnrichmentSummary(data)}
+                </div>
+                <div class="result-tab-content" id="resultTabCosts">
+                    ${buildCostBreakdown(data)}
                 </div>
                 <div class="result-tab-content" id="resultTabRawJson">
                     <div class="json-content">${JSON.stringify(data, null, 2)}</div>
@@ -915,14 +1152,19 @@ function setupResultsInteractions() {
     // Store data in a global variable for access by other functions
     try { window.currentResultData = JSON.parse(jsonContent); } catch(_) {}
 
-    // Wire up result tab switching (Formatted / Raw JSON)
+    // Wire up result tab switching
     $(resultsContainer + ' .result-tab').off('click').on('click', function() {
         const parent = $(this).closest('.json-result-container');
         parent.find('.result-tab').removeClass('active');
         parent.find('.result-tab-content').removeClass('active');
         $(this).addClass('active');
         const tabId = $(this).data('result-tab');
-        const tabMap = { formatted: '#resultTabFormatted', enrichment: '#resultTabEnrichment', rawjson: '#resultTabRawJson' };
+        const tabMap = {
+            formatted: '#resultTabFormatted',
+            enrichment: '#resultTabEnrichment',
+            costs: '#resultTabCosts',
+            rawjson: '#resultTabRawJson',
+        };
         parent.find(tabMap[tabId] || '#resultTabFormatted').addClass('active');
     });
 }
@@ -1032,6 +1274,7 @@ const STEP_INFO = {
         number: '1',
         sections: [
             { title: 'Recommendations', body: 'Use <strong><code>gemini-3.1-flash-lite</code></strong> for both OCR and parsing\u2014it performs comparably to more expensive models at a fraction of the cost.<br><br>General-access models share a 1,000-request allowance. Pro models share a separate 100-request allowance. Higher-cost Flash models (<code>gemini-3-flash-preview</code>, <code>gemini-3.5-flash</code>, <code>gemini-3.6-flash</code>, <code>gemini-3.7-flash</code>, and <code>gemini-3.8-flash</code>) share a 100-request restricted-Flash allowance.' },
+            { title: 'Thinking level', body: 'Thinking level controls how much internal reasoning the model may use before producing its answer. Higher levels can improve difficult OCR or parsing results, but they can also consume many more output-priced thinking tokens. When using <strong>VoucherVision Credits</strong>, general-access models can use <strong>Low</strong>, <strong>Medium</strong>, or <strong>High</strong>, while all other models are restricted to <strong>Low</strong>. For the more expensive Flash and Pro tiers, the modest accuracy gains from higher thinking generally do not offset the large increase in cost. If you provide your own Gemini API key or Vertex AI account, all three levels are available for every supported model.<br><br>See the <strong><a href="#thinkingBudgetTitle" onclick="openThinkingBudgetGuide(); return false;">Thinking Budget Testing guide in the Cost Calculator</a></strong> for measured accuracy, token use, and cost comparisons.' },
             { title: 'OCR', body: 'VoucherVision uses vision language models to perform optical character recognition (OCR). Generally, this is the accuracy-limiting step: if the OCR text is inaccurate, parsing will inevitably struggle as well. Prior to the Gemini 3.1 model family, we recommended using Gemini Pro models for OCR and Flash models for parsing. However, we now recommend <code>gemini-3.1-flash-lite</code> for both steps due to its exceptional cost-to-performance ratio.<br><br>OCR models also detect handwritten text (\u00ABhandwritten\u00BB) and stricken text (\u00A7stricken\u00A7) using these special characters to inform the parsing LLM, but are removed from the final API response.' },
             { title: 'LLMs', body: 'The selected LLM parses unstructured OCR text into structured JSON, which can then be transformed into a spreadsheet. Generally, <code>gemini-3.1-flash-lite</code> is quite capable for this task. Gemini Pro models should be reserved for particularly challenging or atypical prompts.' },
             { title: 'Processing Options', body: 'VoucherVision supports several alternative modes. <strong>OCR Only Mode</strong> returns raw OCR text without JSON parsing. <strong>Notebook Mode</strong> is experimental and designed for full-page text images like field notebooks\u2014it returns Markdown files instead of JSON. <strong>Skip Label Collage</strong> should be used if your image is primarily text or if you observe the Text Collage cutting off parts of the text.' }
@@ -1117,6 +1360,17 @@ function closeStepInfoPopup() {
         document.removeEventListener('keydown', window._stepInfoEscHandler);
         window._stepInfoEscHandler = null;
     }
+}
+
+function openThinkingBudgetGuide() {
+    closeStepInfoPopup();
+    const costCalculatorTab = document.querySelector('.main-tab[data-main-tab="costCalc"]');
+    if (costCalculatorTab) costCalculatorTab.click();
+
+    requestAnimationFrame(() => {
+        const guide = document.getElementById('thinkingBudgetTitle');
+        if (guide) guide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
 }
 
 // Download the Step 4 preview image

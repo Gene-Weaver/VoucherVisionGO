@@ -33,15 +33,15 @@ http://localhost:8000/index2.html
     <script>if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
-    <script src="js/index_ui.js?v=48"></script>
-    <script src="js/vouchervisiongo.js?v=47"></script>
-    <script src="js/batch_processing.js?v=47"></script>
-    <script src="js/pdf_jobs.js?v=47"></script>
-    <script src="js/api_key_validator.js?v=45"></script>
-    <script src="js/prompt_templates.js?v=45"></script>
-    <script src="js/changelog_viewer.js?v=45"></script>
+    <script src="js/index_ui.js?v=20260903-2"></script>
+    <script src="js/vouchervisiongo.js?v=20260903-2"></script>
+    <script src="js/batch_processing.js?v=20260903-2"></script>
+    <script src="js/pdf_jobs.js?v=20260903-2"></script>
+    <script src="js/api_key_validator.js?v=20260903-2"></script>
+    <script src="js/prompt_templates.js?v=20260903-2"></script>
+    <script src="js/changelog_viewer.js?v=20260903-2"></script>
 
-    <link rel="stylesheet" href="css/vouchervisiongo.css?v=49">
+    <link rel="stylesheet" href="css/vouchervisiongo.css?v=20260903-2">
     <script>
         function addMapboxToHead() {
             if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
@@ -65,7 +65,7 @@ http://localhost:8000/index2.html
     <div class="container">
         <div class="header">
             <div class="logo-container">
-                <img src="img/logo.png" alt="Logo" class="logo">
+                <img src="img/logo.png?v=20260903-2" alt="Logo" class="logo">
                 <h2>VoucherVisionGO API</h2>
             </div>
             <button id="darkModeToggle" class="dark-mode-toggle" title="Toggle dark mode" aria-label="Toggle dark mode">
@@ -259,67 +259,71 @@ http://localhost:8000/index2.html
                     <div class="settings-card">
                         <h3>OCR Engines</h3>
                         <div class="thinking-level-control">
-                            <label for="ocrThinkingLevel">OCR thinking level</label>
-                            <select id="ocrThinkingLevel" name="ocr_thinking_level">
-                                <option value="low" selected>Low</option>
-                                <option value="medium" disabled>Medium (API only)</option>
-                                <option value="high" disabled>High (API only)</option>
+                            <span class="thinking-level-label-row">
+                                <label for="ocrThinkingLevel">OCR thinking level</label>
+                                <a class="thinking-level-learn-more" href="#thinkingBudgetTitle" onclick="openThinkingBudgetGuide(); return false;">Learn More</a>
+                            </span>
+                            <select id="ocrThinkingLevel" name="ocr_thinking_level" aria-describedby="ocrThinkingLevelPolicy">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high" selected>High</option>
                             </select>
+                            <small id="ocrThinkingLevelPolicy" class="thinking-level-policy">General-access models default to High; all levels are available.</small>
                         </div>
                         <div id="ocrModelOptions" class="compact-group">
                             <div class="checkbox-group">
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-default">Default</span>
+                                    <input type="checkbox" name="engines" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-general-access">General Access</span><span class="model-tag tag-default">Default</span>
                                 </label>
                             </div>
                             <div class="checkbox-group">
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-pro">Pro</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite
+                                    <input type="checkbox" name="engines" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite <span class="model-tag tag-general-access">General Access</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite
+                                    <input type="checkbox" name="engines" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite <span class="model-tag tag-general-access">General Access</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-flash">Flash</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" name="engines" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-flash">Flash</span><span class="model-tag tag-performance-cost" data-performance-stage="ocr" hidden>Best Performance/Cost Balance</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="checkbox" name="engines" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it <span class="model-tag tag-unmetered">Unmetered</span>
                                 </label>
                             </div>
                             <div class="checkbox-group extended-model-option" hidden>
                                 <label>
-                                    <input type="checkbox" name="engines" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it
-                                </label>
-                            </div>
-                            <div class="checkbox-group extended-model-option" hidden>
-                                <label>
-                                    <input type="checkbox" name="engines" value="gemma-4-31b-it"> gemma-4-31b-it
+                                    <input type="checkbox" name="engines" value="gemma-4-31b-it"> gemma-4-31b-it <span class="model-tag tag-unmetered">Unmetered</span>
                                 </label>
                             </div>
                         </div>
@@ -329,67 +333,71 @@ http://localhost:8000/index2.html
                     <div class="settings-card">
                         <h3>LLM Model for Parsing Label Text</h3>
                         <div class="thinking-level-control">
-                            <label for="llmThinkingLevel">LLM thinking level</label>
-                            <select id="llmThinkingLevel" name="llm_thinking_level">
-                                <option value="low" selected>Low</option>
-                                <option value="medium" disabled>Medium (API only)</option>
-                                <option value="high" disabled>High (API only)</option>
+                            <span class="thinking-level-label-row">
+                                <label for="llmThinkingLevel">LLM thinking level</label>
+                                <a class="thinking-level-learn-more" href="#thinkingBudgetTitle" onclick="openThinkingBudgetGuide(); return false;">Learn More</a>
+                            </span>
+                            <select id="llmThinkingLevel" name="llm_thinking_level" aria-describedby="llmThinkingLevelPolicy">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high" selected>High</option>
                             </select>
+                            <small id="llmThinkingLevelPolicy" class="thinking-level-policy">General-access models default to High; all levels are available.</small>
                         </div>
                         <div id="parsingModelOptions" class="compact-group">
                             <div class="radio-group">
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-default">Default</span>
+                                    <input type="radio" name="llm_model" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-general-access">General Access</span><span class="model-tag tag-default">Default</span>
                                 </label>
                             </div>
                             <div class="radio-group">
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-pro">Pro</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite
+                                    <input type="radio" name="llm_model" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite <span class="model-tag tag-general-access">General Access</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite
+                                    <input type="radio" name="llm_model" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite <span class="model-tag tag-general-access">General Access</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-flash">Flash</span>
+                                </label>
+                            </div>
+                            <div class="radio-group">
+                                <label>
+                                    <input type="radio" name="llm_model" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-flash">Flash</span><span class="model-tag tag-performance-cost" data-performance-stage="llm" hidden>Best Performance/Cost Balance</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-flash">Flash</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                    <input type="radio" name="llm_model" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it <span class="model-tag tag-unmetered">Unmetered</span>
                                 </label>
                             </div>
                             <div class="radio-group extended-model-option" hidden>
                                 <label>
-                                    <input type="radio" name="llm_model" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it
-                                </label>
-                            </div>
-                            <div class="radio-group extended-model-option" hidden>
-                                <label>
-                                    <input type="radio" name="llm_model" value="gemma-4-31b-it"> gemma-4-31b-it
+                                    <input type="radio" name="llm_model" value="gemma-4-31b-it"> gemma-4-31b-it <span class="model-tag tag-unmetered">Unmetered</span>
                                 </label>
                             </div>
                         </div>
@@ -793,7 +801,10 @@ http://localhost:8000/index2.html
                 <section id="llmCostSection">
                     <div class="cost-calc-header">
                         <h2>Cost Calculator</h2>
-                        <p class="help-text">Estimates based on herbarium specimen benchmarks. Default tokens show a cost range (typical – worst-case). Prices are per 1M tokens (USD). Server hosting costs not included.</p>
+                        <ul class="help-text cost-calc-notes">
+                            <li>Estimates based on herbarium specimen benchmarks. Default tokens show a cost range (typical – worst-case). Prices are per 1M tokens (USD). Server hosting costs not included.</li>
+                            <li>For general access models, we recommend using “High” thinking. For all other models we recommend “Low” thinking.</li>
+                        </ul>
                     </div>
 
                     <div class="cost-calc-layout">
@@ -801,18 +812,34 @@ http://localhost:8000/index2.html
                             <!-- OCR Stage -->
                             <div class="cost-calc-stage">
                                 <div class="cost-calc-stage-label">OCR Stage</div>
-                                <div class="cost-calc-model">
-                                    <label for="ocrModelSelect">OCR Model</label>
-                                    <div class="select-wrapper">
-                                        <select id="ocrModelSelect">
-                                            <option value="">Loading models...</option>
-                                        </select>
+                                <div class="cost-calc-model-row">
+                                    <div class="cost-calc-model">
+                                        <label for="ocrModelSelect">OCR Model</label>
+                                        <div class="select-wrapper">
+                                            <select id="ocrModelSelect">
+                                                <option value="">Loading models...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="cost-calc-thinking">
+                                        <label for="ocrCalculatorThinkingLevel">Thinking</label>
+                                        <div class="select-wrapper">
+                                            <select id="ocrCalculatorThinkingLevel">
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="cost-calc-fields">
+                                <div class="cost-calc-fields cost-calc-token-fields">
                                     <div class="cost-calc-field">
                                         <label for="ocrTokensIn">Tokens In <span class="field-hint">per image</span></label>
                                         <input type="number" id="ocrTokensIn" value="1500" min="0" step="50" data-default-low="1300" data-default-high="1500">
+                                    </div>
+                                    <div class="cost-calc-field">
+                                        <label for="ocrThinkingTokens">Thinking Tokens <span class="field-hint">per image</span></label>
+                                        <input type="number" id="ocrThinkingTokens" value="0" min="0" step="50" data-auto-value="0">
                                     </div>
                                     <div class="cost-calc-field">
                                         <label for="ocrTokensOut">Tokens Out <span class="field-hint">per image</span></label>
@@ -824,18 +851,34 @@ http://localhost:8000/index2.html
                             <!-- Parsing Stage -->
                             <div class="cost-calc-stage">
                                 <div class="cost-calc-stage-label">Parsing Stage</div>
-                                <div class="cost-calc-model">
-                                    <label for="parseModelSelect">Parsing Model</label>
-                                    <div class="select-wrapper">
-                                        <select id="parseModelSelect">
-                                            <option value="">Loading models...</option>
-                                        </select>
+                                <div class="cost-calc-model-row">
+                                    <div class="cost-calc-model">
+                                        <label for="parseModelSelect">Parsing Model</label>
+                                        <div class="select-wrapper">
+                                            <select id="parseModelSelect">
+                                                <option value="">Loading models...</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="cost-calc-thinking">
+                                        <label for="parseCalculatorThinkingLevel">Thinking</label>
+                                        <div class="select-wrapper">
+                                            <select id="parseCalculatorThinkingLevel">
+                                                <option value="low">Low</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="high">High</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="cost-calc-fields">
+                                <div class="cost-calc-fields cost-calc-token-fields">
                                     <div class="cost-calc-field">
                                         <label for="parseTokensIn">Tokens In <span class="field-hint">per image</span></label>
                                         <input type="number" id="parseTokensIn" value="3000" min="0" step="50" data-default-low="2350" data-default-high="3000">
+                                    </div>
+                                    <div class="cost-calc-field">
+                                        <label for="parseThinkingTokens">Thinking Tokens <span class="field-hint">per image</span></label>
+                                        <input type="number" id="parseThinkingTokens" value="0" min="0" step="50" data-auto-value="0">
                                     </div>
                                     <div class="cost-calc-field">
                                         <label for="parseTokensOut">Tokens Out <span class="field-hint">per image</span></label>
@@ -858,6 +901,72 @@ http://localhost:8000/index2.html
                             <span id="llmTotalCost" class="cost-calc-total-display">$0.00</span>
                         </div>
                     </div>
+
+                    <section class="thinking-budget-section" aria-labelledby="thinkingBudgetTitle">
+                        <h3 id="thinkingBudgetTitle">Thinking Budget Testing</h3>
+                        <p class="thinking-budget-summary">
+                            We tested the same <a href="https://quod.lib.umich.edu/cgi/i/image/api/image/herb00ic:1122841:MICH-V-1122841/full/res:0/0/native.jpg" target="_blank" rel="noopener noreferrer">specimen image</a> with the same thinking level applied to both OCR and LLM parsing. The Jouvea Test measures whether OCR can read the complicated handwriting and whether the parsing model correctly identifies <em>Jouvea pilosa</em> as the specimen’s actual plant name. <em>Distichlis spicata</em> is also prominent on the label and is a tempting but incorrect choice; good models can resolve that ambiguity and pass this image. <code>gemini-3.1-flash-lite</code> on High is the recommended default and serves as the 1.00&times; base-cost case. <code>gemini-3.7-flash</code> on Low provided the best performance/cost tradeoff: it delivered very high performance and passed the Jouvea test for only a fraction more than the base case (1.42&times;, or 42% more). Higher thinking levels often consumed substantially more tokens and money without a proportional accuracy gain; the most expensive passing combination reached 41.35&times; the base cost. Google-hosted Gemma models receive low serving priority, can run very slowly, and produced server failures in this test, so we do not recommend them.
+                        </p>
+                        <p class="thinking-budget-note">
+                            PASS means the returned <code>formatted_json.scientificName</code> contained “Jouvea” (case-insensitive). Costs reflect one specimen; “&mdash;” means no multiplier was available because no billable cost was recorded.
+                        </p>
+                        <div class="thinking-budget-table-wrap">
+                            <table class="thinking-budget-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Model</th>
+                                        <th scope="col">Level</th>
+                                        <th scope="col">HTTP</th>
+                                        <th scope="col">Billing</th>
+                                        <th scope="col">Result</th>
+                                        <th scope="col">Jouvea Test</th>
+                                        <th scope="col">OCR In</th>
+                                        <th scope="col">OCR Out</th>
+                                        <th scope="col">OCR Think</th>
+                                        <th scope="col">LLM In</th>
+                                        <th scope="col">LLM Out</th>
+                                        <th scope="col">LLM Think</th>
+                                        <th scope="col">Think Total</th>
+                                        <th scope="col">Tokens Total</th>
+                                        <th scope="col">Overall Cost (USD)</th>
+                                        <th scope="col">Cost vs. Base</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="thinking-budget-base"><td>gemini-3.1-flash-lite</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>186</td><td>2,502</td><td>2,085</td><td>631</td><td>1,376</td><td>3,878</td><td>8,052</td><td>$0.00788175</td><td><strong>1.00&times;</strong></td></tr>
+                                    <tr class="thinking-budget-recommended"><td>gemini-3.7-flash</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>181</td><td>0</td><td>2,083</td><td>641</td><td>0</td><td>0</td><td>4,177</td><td>$0.01119750</td><td><strong>1.42&times;</strong></td></tr>
+                                    <tr><td>gemini-3.8-flash</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>179</td><td>0</td><td>2,081</td><td>653</td><td>0</td><td>0</td><td>4,185</td><td>$0.01126950</td><td>1.43&times;</td></tr>
+                                    <tr><td>gemini-3.1-pro</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>188</td><td>0</td><td>2,086</td><td>646</td><td>0</td><td>0</td><td>4,192</td><td>$0.01672400</td><td>2.12&times;</td></tr>
+                                    <tr><td>gemini-3-flash-preview</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>220</td><td>2,816</td><td>2,102</td><td>659</td><td>2,998</td><td>5,814</td><td>10,067</td><td>$0.02176600</td><td>2.76&times;</td></tr>
+                                    <tr><td>gemini-3-flash-preview</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>234</td><td>3,718</td><td>2,117</td><td>670</td><td>2,207</td><td>5,925</td><td>10,218</td><td>$0.02218150</td><td>2.81&times;</td></tr>
+                                    <tr><td>gemini-3.6-flash</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>190</td><td>1,064</td><td>2,089</td><td>653</td><td>943</td><td>2,007</td><td>6,211</td><td>$0.02641650</td><td>3.35&times;</td></tr>
+                                    <tr><td>gemini-3.7-flash</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>188</td><td>882</td><td>2,086</td><td>633</td><td>1,617</td><td>2,499</td><td>6,678</td><td>$0.02993700</td><td>3.80&times;</td></tr>
+                                    <tr><td>gemini-3.5-flash</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>221</td><td>1,467</td><td>2,098</td><td>654</td><td>1,849</td><td>3,316</td><td>7,561</td><td>$0.04277400</td><td>5.43&times;</td></tr>
+                                    <tr><td>gemini-3.1-pro</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>203</td><td>0</td><td>2,100</td><td>649</td><td>2,313</td><td>2,313</td><td>6,537</td><td>$0.04472400</td><td>5.67&times;</td></tr>
+                                    <tr><td>gemini-3.6-flash</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>179</td><td>1,497</td><td>2,082</td><td>649</td><td>3,433</td><td>4,930</td><td>9,112</td><td>$0.04821600</td><td>6.12&times;</td></tr>
+                                    <tr><td>gemini-3.1-pro</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>197</td><td>0</td><td>2,095</td><td>646</td><td>3,525</td><td>3,525</td><td>7,735</td><td>$0.05915000</td><td>7.50&times;</td></tr>
+                                    <tr><td>gemini-3.8-flash</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>176</td><td>1,165</td><td>2,079</td><td>649</td><td>6,135</td><td>7,300</td><td>11,476</td><td>$0.06596400</td><td>8.37&times;</td></tr>
+                                    <tr><td>gemini-3.5-flash</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>230</td><td>1,484</td><td>2,118</td><td>679</td><td>5,283</td><td>6,767</td><td>11,066</td><td>$0.07416900</td><td>9.41&times;</td></tr>
+                                    <tr><td>gemini-3.6-flash</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>217</td><td>2,948</td><td>2,104</td><td>643</td><td>5,823</td><td>8,771</td><td>13,007</td><td>$0.07729650</td><td>9.81&times;</td></tr>
+                                    <tr><td>gemini-3.5-flash</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>216</td><td>2,356</td><td>2,099</td><td>661</td><td>5,220</td><td>7,576</td><td>11,824</td><td>$0.08113350</td><td>10.29&times;</td></tr>
+                                    <tr><td>gemini-3.7-flash</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>212</td><td>1,258</td><td>2,098</td><td>645</td><td>8,749</td><td>10,007</td><td>14,234</td><td>$0.08653500</td><td>10.98&times;</td></tr>
+                                    <tr><td>gemini-3.8-flash</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>PASS</strong></td><td>1,272</td><td>199</td><td>6,347</td><td>2,098</td><td>643</td><td>35,588</td><td>41,935</td><td>46,147</td><td>$0.32588250</td><td>41.35&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-26b-a4b-it</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>450</td><td>208</td><td>6,370</td><td>2,093</td><td>614</td><td>4,850</td><td>11,220</td><td>14,585</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-26b-a4b-it</td><td>Low</td><td>500</td><td>Server</td><td>ERR</td><td><strong>FAIL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-26b-a4b-it</td><td>Medium</td><td>500</td><td>Server</td><td>ERR</td><td><strong>FAIL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-31b-it</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>450</td><td>184</td><td>1,978</td><td>2,083</td><td>630</td><td>1,801</td><td>3,779</td><td>7,126</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-31b-it</td><td>Low</td><td>500</td><td>Server</td><td>ERR</td><td><strong>FAIL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemma-4-31b-it</td><td>Medium</td><td>500</td><td>Server</td><td>ERR</td><td><strong>FAIL</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>$0.00000000</td><td>&mdash;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3.1-flash-lite</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>185</td><td>109</td><td>2,083</td><td>633</td><td>90</td><td>199</td><td>4,372</td><td>$0.00236425</td><td>0.30&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3.5-flash-lite</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>184</td><td>0</td><td>2,081</td><td>628</td><td>0</td><td>0</td><td>4,165</td><td>$0.00303590</td><td>0.39&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3.1-flash-lite</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>183</td><td>0</td><td>2,081</td><td>653</td><td>911</td><td>911</td><td>5,100</td><td>$0.00345875</td><td>0.44&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3-flash-preview</td><td>Low</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>179</td><td>0</td><td>2,081</td><td>639</td><td>0</td><td>0</td><td>4,171</td><td>$0.00413050</td><td>0.52&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3.5-flash-lite</td><td>Medium</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>212</td><td>1,683</td><td>2,107</td><td>633</td><td>0</td><td>1,683</td><td>5,907</td><td>$0.00733370</td><td>0.93&times;</td></tr>
+                                    <tr class="thinking-budget-fail"><td>gemini-3.5-flash-lite</td><td>High</td><td>200</td><td>Server</td><td>OK</td><td><strong>FAIL</strong></td><td>1,272</td><td>201</td><td>3,082</td><td>2,098</td><td>644</td><td>4,569</td><td>7,651</td><td>11,866</td><td>$0.02225100</td><td>2.82&times;</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
 
                     <details id="llmCostMatrixDetails">
                         <summary class="llm-summary">

@@ -4,6 +4,80 @@
 
 // ---------- LLM Cost Calculator ----------
 (function () {
+    // Conservative per-specimen estimates derived from the thinking-budget
+    // benchmark. Values include headroom and are intentionally separate for
+    // OCR and parsing. Models absent from this map use zero thinking tokens.
+    const THINKING_TOKEN_ESTIMATES = Object.freeze({
+        GEMINI_3_1_FLASH_LITE: {
+            low: { ocr: 500, llm: 500 },
+            medium: { ocr: 500, llm: 1500 },
+            high: { ocr: 3000, llm: 2000 },
+        },
+        GEMINI_3_5_FLASH_LITE: {
+            low: { ocr: 500, llm: 500 },
+            medium: { ocr: 2000, llm: 500 },
+            high: { ocr: 3500, llm: 5500 },
+        },
+        GEMINI_3_FLASH: {
+            low: { ocr: 500, llm: 500 },
+            medium: { ocr: 3500, llm: 3500 },
+            high: { ocr: 4500, llm: 3500 },
+        },
+        GEMINI_3_5_FLASH: {
+            low: { ocr: 2000, llm: 2500 },
+            medium: { ocr: 2000, llm: 6000 },
+            high: { ocr: 3000, llm: 6000 },
+        },
+        GEMINI_3_6_FLASH: {
+            low: { ocr: 1500, llm: 1500 },
+            medium: { ocr: 2000, llm: 4000 },
+            high: { ocr: 3500, llm: 6500 },
+        },
+        GEMINI_3_7_FLASH: {
+            low: { ocr: 500, llm: 500 },
+            medium: { ocr: 1000, llm: 2000 },
+            high: { ocr: 1500, llm: 10000 },
+        },
+        GEMINI_3_8_FLASH: {
+            low: { ocr: 500, llm: 500 },
+            medium: { ocr: 1500, llm: 7000 },
+            high: { ocr: 7000, llm: 39500 },
+        },
+        GEMINI_3_1_PRO: {
+            low: { ocr: 0, llm: 500 },
+            medium: { ocr: 0, llm: 3000 },
+            high: { ocr: 0, llm: 4000 },
+        },
+        GEMMA_4_26B_A4B_IT: {
+            low: { ocr: 0, llm: 0 },
+            medium: { ocr: 0, llm: 0 },
+            high: { ocr: 7500, llm: 5500 },
+        },
+        GEMMA_4_31B_IT: {
+            low: { ocr: 0, llm: 0 },
+            medium: { ocr: 0, llm: 0 },
+            high: { ocr: 2500, llm: 2000 },
+        },
+    });
+
+    // Cost-table keys corresponding to GENERAL_ACCESS_MODELS in app.py.
+    const GENERAL_ACCESS_COST_KEYS = new Set([
+        'GEMINI_2_0_FLASH',
+        'GEMINI_1_5_FLASH',
+        'GEMINI_2_5_FLASH',
+        'GEMINI_2_5_FLASH_LITE',
+        'GEMINI_3_1_FLASH_LITE',
+        'GEMINI_3_5_FLASH_LITE',
+    ]);
+
+    function getThinkingTokenEstimate(modelKey, level, stage) {
+        return Number(THINKING_TOKEN_ESTIMATES[modelKey]?.[level]?.[stage]) || 0;
+    }
+
+    function getRecommendedThinkingLevel(modelKey) {
+        return GENERAL_ACCESS_COST_KEYS.has(modelKey) ? 'high' : 'low';
+    }
+
     function getProvider(key) {
         if (key.startsWith('GPT_')) return 'OpenAI';
         if (key.startsWith('GEMINI_') || key.startsWith('PALM2_')) return 'Google';
@@ -23,14 +97,20 @@
     function initLlmCostUI(costData) {
         const ocrSelectEl = document.getElementById('ocrModelSelect');
         const ocrInEl = document.getElementById('ocrTokensIn');
+        const ocrThinkingEl = document.getElementById('ocrThinkingTokens');
         const ocrOutEl = document.getElementById('ocrTokensOut');
+        const ocrThinkingLevelEl = document.getElementById('ocrCalculatorThinkingLevel');
         const parseSelectEl = document.getElementById('parseModelSelect');
         const parseInEl = document.getElementById('parseTokensIn');
+        const parseThinkingEl = document.getElementById('parseThinkingTokens');
         const parseOutEl = document.getElementById('parseTokensOut');
+        const parseThinkingLevelEl = document.getElementById('parseCalculatorThinkingLevel');
         const imgEl = document.getElementById('llmNumImages');
         const totalEl = document.getElementById('llmTotalCost');
         const tablesEl = document.getElementById('llmCostTables');
-        if (!ocrSelectEl || !parseSelectEl || !ocrInEl || !ocrOutEl || !parseInEl || !parseOutEl || !imgEl || !totalEl || !tablesEl) return;
+        if (!ocrSelectEl || !parseSelectEl || !ocrInEl || !ocrThinkingEl || !ocrOutEl
+            || !ocrThinkingLevelEl || !parseInEl || !parseThinkingEl || !parseOutEl
+            || !parseThinkingLevelEl || !imgEl || !totalEl || !tablesEl) return;
 
         const models = [];
         for (const key in costData) {
@@ -74,6 +154,20 @@
             || models[0].key;
         parseSelectEl.value = parseDefault;
 
+        function populateThinkingTokens(modelSelect, levelSelect, tokenInput, stage) {
+            const estimate = getThinkingTokenEstimate(modelSelect.value, levelSelect.value, stage);
+            tokenInput.value = String(estimate);
+            tokenInput.dataset.autoValue = String(estimate);
+        }
+
+        function applyRecommendedThinking(modelSelect, levelSelect, tokenInput, stage) {
+            levelSelect.value = getRecommendedThinkingLevel(modelSelect.value);
+            populateThinkingTokens(modelSelect, levelSelect, tokenInput, stage);
+        }
+
+        applyRecommendedThinking(ocrSelectEl, ocrThinkingLevelEl, ocrThinkingEl, 'ocr');
+        applyRecommendedThinking(parseSelectEl, parseThinkingLevelEl, parseThinkingEl, 'llm');
+
         // Cost matrix table
         const byProvider = {};
         models.forEach(m => { if (!byProvider[m.provider]) byProvider[m.provider] = []; byProvider[m.provider].push(m); });
@@ -92,20 +186,28 @@
             return el.dataset.defaultHigh && Number(el.value) === Number(el.dataset.defaultHigh);
         }
 
-        // Are ALL four token fields at their defaults?
-        function allDefaults() {
-            return isDefault(ocrInEl) && isDefault(ocrOutEl) && isDefault(parseInEl) && isDefault(parseOutEl);
+        function isAutoThinkingValue(el) {
+            return Number(el.value) === Number(el.dataset.autoValue);
         }
 
-        function calcCostForStage(model, tokIn, tokOut) {
+        // Are all token fields still using their generated defaults?
+        function allDefaults() {
+            return isDefault(ocrInEl) && isAutoThinkingValue(ocrThinkingEl) && isDefault(ocrOutEl)
+                && isDefault(parseInEl) && isAutoThinkingValue(parseThinkingEl) && isDefault(parseOutEl);
+        }
+
+        function calcCostForStage(model, tokIn, tokOut, thinkingTokens) {
             if (!model) return 0;
-            return (tokIn / 1_000_000 * model.in) + (tokOut / 1_000_000 * model.out);
+            return (tokIn / 1_000_000 * model.in)
+                + ((tokOut + thinkingTokens) / 1_000_000 * model.out);
         }
 
         function recomputeCost() {
             const ocrModel = modelMap[ocrSelectEl.value];
             const parseModel = modelMap[parseSelectEl.value];
             const nImg = Number(imgEl.value) || 0;
+            const ocrThinkingTokens = Number(ocrThinkingEl.value) || 0;
+            const parseThinkingTokens = Number(parseThinkingEl.value) || 0;
 
             if (allDefaults()) {
                 // Range mode: low (typical) to high (worst-case)
@@ -119,19 +221,38 @@
                 const highParseIn = Number(parseInEl.value);
                 const highParseOut = Number(parseOutEl.value);
 
-                const costLow = (calcCostForStage(ocrModel, lowOcrIn, lowOcrOut) + calcCostForStage(parseModel, lowParseIn, lowParseOut)) * nImg;
-                const costHigh = (calcCostForStage(ocrModel, highOcrIn, highOcrOut) + calcCostForStage(parseModel, highParseIn, highParseOut)) * nImg;
+                const costLow = (calcCostForStage(ocrModel, lowOcrIn, lowOcrOut, ocrThinkingTokens)
+                    + calcCostForStage(parseModel, lowParseIn, lowParseOut, parseThinkingTokens)) * nImg;
+                const costHigh = (calcCostForStage(ocrModel, highOcrIn, highOcrOut, ocrThinkingTokens)
+                    + calcCostForStage(parseModel, highParseIn, highParseOut, parseThinkingTokens)) * nImg;
 
                 totalEl.textContent = '$' + costLow.toFixed(2) + ' – $' + costHigh.toFixed(2);
             } else {
                 // Exact mode: user changed at least one token field
-                const cost = (calcCostForStage(ocrModel, Number(ocrInEl.value), Number(ocrOutEl.value))
-                    + calcCostForStage(parseModel, Number(parseInEl.value), Number(parseOutEl.value))) * nImg;
+                const cost = (calcCostForStage(ocrModel, Number(ocrInEl.value), Number(ocrOutEl.value), ocrThinkingTokens)
+                    + calcCostForStage(parseModel, Number(parseInEl.value), Number(parseOutEl.value), parseThinkingTokens)) * nImg;
                 totalEl.textContent = '$' + cost.toFixed(2);
             }
         }
 
-        const allInputs = [ocrSelectEl, ocrInEl, ocrOutEl, parseSelectEl, parseInEl, parseOutEl, imgEl];
+        ocrSelectEl.addEventListener('change', function() {
+            applyRecommendedThinking(ocrSelectEl, ocrThinkingLevelEl, ocrThinkingEl, 'ocr');
+            recomputeCost();
+        });
+        parseSelectEl.addEventListener('change', function() {
+            applyRecommendedThinking(parseSelectEl, parseThinkingLevelEl, parseThinkingEl, 'llm');
+            recomputeCost();
+        });
+        ocrThinkingLevelEl.addEventListener('change', function() {
+            populateThinkingTokens(ocrSelectEl, ocrThinkingLevelEl, ocrThinkingEl, 'ocr');
+            recomputeCost();
+        });
+        parseThinkingLevelEl.addEventListener('change', function() {
+            populateThinkingTokens(parseSelectEl, parseThinkingLevelEl, parseThinkingEl, 'llm');
+            recomputeCost();
+        });
+
+        const allInputs = [ocrInEl, ocrThinkingEl, ocrOutEl, parseInEl, parseThinkingEl, parseOutEl, imgEl];
         ['change','input'].forEach(evt => {
             allInputs.forEach(el => el.addEventListener(evt, recomputeCost));
         });

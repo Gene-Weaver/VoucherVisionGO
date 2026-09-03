@@ -5046,7 +5046,7 @@ class VoucherVisionProcessor:
         self.Voucher_Vision.initialize_token_counters()
 
         # Set default prompt
-        self.default_prompt = "SLTPvM_default.yaml"
+        self.default_prompt = "SLTPvM_full.yaml"
         self.custom_prompts_dir = os.path.join(self.dir_home, 'custom_prompts')
         self.Voucher_Vision.path_custom_prompts = os.path.join(
             self.dir_home, 'custom_prompts', self.default_prompt
