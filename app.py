@@ -6251,10 +6251,10 @@ def process_image():
         except Exception as e:
             logger.error(f"Error processing image for resize: {e}")
             logger.exception("Image preparation failed (request_id=%s)", current_request_id())
-        return _error_response(
-            'INVALID_INPUT',
-            'The uploaded image could not be read. It may be corrupt or an unsupported format.',
-            status=400)
+            return _error_response(
+                'INVALID_INPUT',
+                'The uploaded image could not be read. It may be corrupt or an unsupported format.',
+                status=400)
 
         # ── Per-model rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
         reserved_keys: list[str] = []
