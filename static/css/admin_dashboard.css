@@ -496,6 +496,12 @@ body {
     color: #111827;
   }
 
+  #ea-user-list-status {
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
   .ea-hidden {
     display: none;
   }

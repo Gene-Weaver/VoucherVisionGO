@@ -86,6 +86,9 @@ function isValidUrl(string) {
 
 // Process a batch of URLs with controlled concurrency
 async function processBatchUrls(urls, concurrency, options = {}) {
+    const paymentError = validateInferencePaymentSettings();
+    if (paymentError) throw new Error(paymentError);
+
     const results = [];
     const errors = [];
     const totalCount = urls.length;
@@ -157,6 +160,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
+            appendInferencePaymentFields(formData);
     
             // Remove Content-Type header as it will be set by the browser with form boundary
             if ('Content-Type' in headers) {
@@ -164,10 +168,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             }
     
             // Log what we're sending
-            const formDataEntries = [];
-            for (const pair of formData.entries()) {
-                formDataEntries.push({ key: pair[0], value: pair[1] });
-            }
+            const formDataEntries = getSafeFormDataEntries(formData);
             logDebug(`Request for URL ${url}:`, formDataEntries);
     
             // Make the API request
@@ -555,6 +556,9 @@ function generateResultsCSV(results, errors) {
 
 // Process a batch of local image files
 async function processBatchImages(files, concurrency, options = {}) {
+    const paymentError = validateInferencePaymentSettings();
+    if (paymentError) throw new Error(paymentError);
+
     const results = [];
     const errors = [];
     const totalCount = files.length;
@@ -622,16 +626,10 @@ async function processBatchImages(files, concurrency, options = {}) {
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
+            appendInferencePaymentFields(formData);
             
             // Log what we're sending
-            const formDataEntries = [];
-            for (const pair of formData.entries()) {
-                if (pair[0] !== 'file') {
-                    formDataEntries.push({ key: pair[0], value: pair[1] });
-                } else {
-                    formDataEntries.push({ key: pair[0], value: pair[1].name });
-                }
-            }
+            const formDataEntries = getSafeFormDataEntries(formData);
             logDebug(`Request for file ${file.name}:`, formDataEntries);
             
             // Make the API request

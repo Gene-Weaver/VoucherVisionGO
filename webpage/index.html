@@ -33,15 +33,15 @@ http://localhost:8000/index2.html
     <script>if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
-    <script src="js/index_ui.js?v=45"></script>
-    <script src="js/vouchervisiongo.js?v=45"></script>
-    <script src="js/batch_processing.js?v=45"></script>
-    <script src="js/pdf_jobs.js?v=45"></script>
+    <script src="js/index_ui.js?v=48"></script>
+    <script src="js/vouchervisiongo.js?v=46"></script>
+    <script src="js/batch_processing.js?v=46"></script>
+    <script src="js/pdf_jobs.js?v=46"></script>
     <script src="js/api_key_validator.js?v=45"></script>
     <script src="js/prompt_templates.js?v=45"></script>
     <script src="js/changelog_viewer.js?v=45"></script>
 
-    <link rel="stylesheet" href="css/vouchervisiongo.css?v=45">
+    <link rel="stylesheet" href="css/vouchervisiongo.css?v=48">
     <script>
         function addMapboxToHead() {
             if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
@@ -242,12 +242,23 @@ http://localhost:8000/index2.html
 
                 <!-- Step 1: OCR + LLM + Mode Toggles -->
                 <div class="step-container">
-                <div class="step-header"><span class="step-number">1</span><h3>Model &amp; Mode Selection</h3><a class="step-info-link" href="#" onclick="openStepInfoPopup('step1'); return false;">More Information</a></div>
+                <div class="step-header">
+                    <span class="step-number">1</span>
+                    <h3>Model &amp; Mode Selection</h3>
+                    <div class="step-header-actions">
+                        <label class="model-visibility-toggle" for="showAllModelsToggle">
+                            <input type="checkbox" id="showAllModelsToggle" aria-controls="ocrModelOptions parsingModelOptions" aria-expanded="false">
+                            <span class="model-toggle-track" aria-hidden="true"></span>
+                            <span>Show all models</span>
+                        </label>
+                        <a class="step-info-link" href="#" onclick="openStepInfoPopup('step1'); return false;">More Information</a>
+                    </div>
+                </div>
                 <div class="ocr-llm-row">
                     <!-- OCR Engines -->
                     <div class="settings-card">
                         <h3>OCR Engines</h3>
-                        <div class="compact-group">
+                        <div id="ocrModelOptions" class="compact-group">
                             <div class="checkbox-group">
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-default">Default</span>
@@ -255,52 +266,52 @@ http://localhost:8000/index2.html
                             </div>
                             <div class="checkbox-group">
                                 <label>
+                                    <input type="checkbox" name="engines" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-limited">Rate Limited</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-group extended-model-option" hidden>
+                                <label>
                                     <input type="checkbox" name="engines" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite
                                 </label>
                             </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite
                                 </label>
                             </div>
-                            <div class="checkbox-group">
-                                <label>
-                                    <input type="checkbox" name="engines" value="gemma-4-26b-a4b-it" unchecked> gemma-4-26b-a4b-it
-                                </label>
-                            </div>
-                            <div class="checkbox-group">
-                                <label>
-                                    <input type="checkbox" name="engines" value="gemma-4-31b-it" unchecked> gemma-4-31b-it
-                                </label>
-                            </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="checkbox-group">
-                                <label>
-                                    <input type="checkbox" name="engines" value="gemini-3.1-pro-preview" unchecked> gemini-3.1-pro-preview <span class="model-tag tag-limited">Rate Limited</span>
-                                </label>
-                            </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="checkbox-group">
+                            <div class="checkbox-group extended-model-option" hidden>
                                 <label>
                                     <input type="checkbox" name="engines" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                </label>
+                            </div>
+                            <div class="checkbox-group extended-model-option" hidden>
+                                <label>
+                                    <input type="checkbox" name="engines" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it
+                                </label>
+                            </div>
+                            <div class="checkbox-group extended-model-option" hidden>
+                                <label>
+                                    <input type="checkbox" name="engines" value="gemma-4-31b-it"> gemma-4-31b-it
                                 </label>
                             </div>
                         </div>
@@ -309,7 +320,7 @@ http://localhost:8000/index2.html
                     <!-- LLM Model -->
                     <div class="settings-card">
                         <h3>LLM Model for Parsing Label Text</h3>
-                        <div class="compact-group">
+                        <div id="parsingModelOptions" class="compact-group">
                             <div class="radio-group">
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.1-flash-lite" checked> gemini-3.1-flash-lite <span class="model-tag tag-default">Default</span>
@@ -317,52 +328,52 @@ http://localhost:8000/index2.html
                             </div>
                             <div class="radio-group">
                                 <label>
+                                    <input type="radio" name="llm_model" value="gemini-3.1-pro"> gemini-3.1-pro <span class="model-tag tag-limited">Rate Limited</span>
+                                </label>
+                            </div>
+                            <div class="radio-group extended-model-option" hidden>
+                                <label>
                                     <input type="radio" name="llm_model" value="gemini-2.5-flash-lite"> gemini-2.5-flash-lite
                                 </label>
                             </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.5-flash-lite"> gemini-3.5-flash-lite
                                 </label>
                             </div>
-                            <div class="radio-group">
-                                <label>
-                                    <input type="radio" name="llm_model" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it
-                                </label>
-                            </div>
-                            <div class="radio-group">
-                                <label>
-                                    <input type="radio" name="llm_model" value="gemma-4-31b-it"> gemma-4-31b-it
-                                </label>
-                            </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3-flash-preview"> gemini-3-flash-preview <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="radio-group">
-                                <label>
-                                    <input type="radio" name="llm_model" value="gemini-3.1-pro-preview"> gemini-3.1-pro-preview <span class="model-tag tag-limited">Rate Limited</span>
-                                </label>
-                            </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.5-flash"> gemini-3.5-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.6-flash"> gemini-3.6-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.7-flash"> gemini-3.7-flash <span class="model-tag tag-limited">Rate Limited</span>
                                 </label>
                             </div>
-                            <div class="radio-group">
+                            <div class="radio-group extended-model-option" hidden>
                                 <label>
                                     <input type="radio" name="llm_model" value="gemini-3.8-flash"> gemini-3.8-flash <span class="model-tag tag-limited">Rate Limited</span>
+                                </label>
+                            </div>
+                            <div class="radio-group extended-model-option" hidden>
+                                <label>
+                                    <input type="radio" name="llm_model" value="gemma-4-26b-a4b-it"> gemma-4-26b-a4b-it
+                                </label>
+                            </div>
+                            <div class="radio-group extended-model-option" hidden>
+                                <label>
+                                    <input type="radio" name="llm_model" value="gemma-4-31b-it"> gemma-4-31b-it
                                 </label>
                             </div>
                         </div>
@@ -664,31 +675,93 @@ http://localhost:8000/index2.html
                 <div id="Settings" class="settings-panel" style="border:none; background:transparent; padding:0; margin:0;">
                     <h2>API Settings</h2>
 
-                    <!-- Authentication Method Selection -->
-                    <div class="form-group">
-                        <label>Authentication Method:</label>
-                        <div class="radio-group">
-                            <label>
-                                <input type="radio" name="authMethod" value="apiKey" checked> API Key
-                            </label>
-                            <label>
-                                <input type="radio" name="authMethod" value="token"> Auth Token
-                            </label>
+                    <div id="apiSettingsLayout" class="api-settings-layout quota-hidden">
+                        <div class="api-settings-auth-column">
+                            <!-- Authentication Method Selection -->
+                            <div class="form-group">
+                                <label>Authentication Method:</label>
+                                <div class="radio-group">
+                                    <label>
+                                        <input type="radio" name="authMethod" value="apiKey" checked> API Key
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="authMethod" value="token"> Auth Token
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- API Key Fields -->
+                            <div id="apiKeyFields" class="form-group">
+                                <label for="apiKey">VoucherVision API Key:</label>
+                                <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
+                            </div>
+
+                            <!-- Auth Token Fields -->
+                            <div id="tokenFields" class="form-group" style="display: none;">
+                                <label for="authToken">Auth Token:</label>
+                                <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
+                                <button id="clearTokenButton" class="button"
+                                    style="background-color: #f44336; margin-top: 10px;">Clear Token</button>
+                            </div>
+
+                            <div class="inference-payment-settings">
+                                <div class="form-group">
+                                    <label>Inference Payment Method:</label>
+                                    <div class="radio-group payment-method-options">
+                                        <label>
+                                            <input type="radio" name="inferencePaymentMethod" value="credits" checked>
+                                            VoucherVision Credits
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="inferencePaymentMethod" value="gemini">
+                                            User-Supplied Gemini API Key
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="inferencePaymentMethod" value="vertex">
+                                            User-Supplied Vertex AI Account
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="geminiPaymentFields" class="payment-method-fields" hidden>
+                                    <label for="userGeminiApiKey">Gemini API Key:</label>
+                                    <input type="password" id="userGeminiApiKey" autocomplete="off" spellcheck="false"
+                                        placeholder="Paste your Gemini API key">
+                                    <p class="payment-method-help">Kept only in this open page and sent directly with processing requests. VoucherVisionGO does not store it.</p>
+                                </div>
+
+                                <div id="vertexPaymentFields" class="payment-method-fields" hidden>
+                                    <label for="userVertexProject">Google Cloud Project ID:</label>
+                                    <input type="text" id="userVertexProject" autocomplete="off" spellcheck="false"
+                                        placeholder="your-gcp-project-id">
+                                    <label for="userVertexRegion">Vertex AI Region:</label>
+                                    <input type="text" id="userVertexRegion" value="global" readonly>
+                                    <button type="button" id="linkVertexProjectButton" class="button">Link Vertex Project</button>
+                                    <p id="vertexLinkStatus" class="payment-method-status" role="status"></p>
+                                    <p class="payment-method-help">Linking stores only the project ID association with your VoucherVisionGO account—never Google credentials.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- API Key Fields -->
-                    <div id="apiKeyFields" class="form-group">
-                        <label for="apiKey">API Key:</label>
-                        <input type="text" id="apiKey" value="YOUR_API_KEY" readonly>
-                    </div>
-
-                    <!-- Auth Token Fields -->
-                    <div id="tokenFields" class="form-group" style="display: none;">
-                        <label for="authToken">Auth Token:</label>
-                        <input type="text" id="authToken" placeholder="Enter your Firebase Authentication Token">
-                        <button id="clearTokenButton" class="button"
-                            style="background-color: #f44336; margin-left: 10px;">Clear Token</button>
+                        <section id="apiQuotaPanel" class="api-quota-panel" aria-labelledby="apiQuotaHeading" hidden>
+                            <h3 id="apiQuotaHeading">Your Model Quotas</h3>
+                            <div class="api-quota-table-wrap">
+                                <table class="api-quota-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Quota category</th>
+                                            <th>Used</th>
+                                            <th>Limit</th>
+                                            <th>Remaining</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="apiQuotaTableBody">
+                                        <tr><td colspan="4" class="api-quota-message">Loading quota status…</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p id="apiQuotaStatus" class="api-quota-status" role="status"></p>
+                        </section>
                     </div>
 
                     <!-- Vertex AI billing setup guide -->

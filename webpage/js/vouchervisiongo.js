@@ -252,6 +252,123 @@ function getAuthHeaders() {
     return headers;
 }
 
+// Get and validate the account that should fund Gemini inference. Provider
+// credentials are intentionally read from the live form only and are never
+// placed in localStorage/sessionStorage.
+function getInferencePaymentSettings() {
+    const method = document.querySelector('input[name="inferencePaymentMethod"]:checked')?.value || 'credits';
+    return {
+        method,
+        geminiApiKey: (document.getElementById('userGeminiApiKey')?.value || '').trim(),
+        vertexProject: (document.getElementById('userVertexProject')?.value || '').trim(),
+        vertexRegion: (document.getElementById('userVertexRegion')?.value || 'global').trim() || 'global',
+    };
+}
+
+function validateInferencePaymentSettings(options = {}) {
+    const settings = getInferencePaymentSettings();
+    if (settings.method === 'gemini') {
+        if (options.allowGeminiKey === false) {
+            return 'User-supplied Gemini API keys are not supported for asynchronous PDF jobs. Choose VoucherVision Credits or a User-Supplied Vertex AI Account.';
+        }
+        if (!settings.geminiApiKey) return 'Enter your Gemini API key in the API Settings tab.';
+    }
+    if (settings.method === 'vertex') {
+        if (!settings.vertexProject) return 'Enter and link your Google Cloud Project ID in the API Settings tab.';
+        if (!settings.vertexRegion) return 'Enter a Vertex AI region in the API Settings tab.';
+    }
+    return '';
+}
+
+function appendInferencePaymentFields(formData) {
+    const settings = getInferencePaymentSettings();
+    if (settings.method === 'gemini') {
+        formData.append('gemini_api_key', settings.geminiApiKey);
+    } else if (settings.method === 'vertex') {
+        formData.append('vertex_project', settings.vertexProject);
+        formData.append('vertex_region', settings.vertexRegion);
+    }
+    return settings;
+}
+
+function getSafeFormDataEntries(formData) {
+    const sensitiveFields = new Set(['gemini_api_key']);
+    const entries = [];
+    for (const [key, value] of formData.entries()) {
+        let safeValue;
+        if (sensitiveFields.has(key)) {
+            safeValue = '[REDACTED]';
+        } else if (value instanceof File) {
+            safeValue = value.name;
+        } else {
+            safeValue = value;
+        }
+        entries.push({ key, value: safeValue });
+    }
+    return entries;
+}
+
+function toggleInferencePaymentFields() {
+    const method = getInferencePaymentSettings().method;
+    const geminiFields = document.getElementById('geminiPaymentFields');
+    const vertexFields = document.getElementById('vertexPaymentFields');
+    if (geminiFields) geminiFields.hidden = method !== 'gemini';
+    if (vertexFields) vertexFields.hidden = method !== 'vertex';
+}
+
+async function linkVertexProjectFromSettings() {
+    const projectInput = document.getElementById('userVertexProject');
+    const status = document.getElementById('vertexLinkStatus');
+    const button = document.getElementById('linkVertexProjectButton');
+    const projectId = (projectInput?.value || '').trim();
+    if (!projectId) {
+        if (status) {
+            status.textContent = 'Enter a Google Cloud Project ID first.';
+            status.className = 'payment-method-status error';
+        }
+        return;
+    }
+
+    const headers = getAuthHeaders();
+    if (!headers['X-API-Key'] && !headers.Authorization) {
+        if (status) {
+            status.textContent = 'Provide a valid VoucherVision API key or auth token first.';
+            status.className = 'payment-method-status error';
+        }
+        return;
+    }
+
+    if (button) button.disabled = true;
+    if (status) {
+        status.textContent = 'Linking project…';
+        status.className = 'payment-method-status';
+    }
+    try {
+        const apiBase = window.VVGO_API_BASE || location.origin;
+        const response = await fetch(`${apiBase}/vertex-projects/link`, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-store',
+            headers,
+            body: JSON.stringify({ project_id: projectId }),
+        });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || `Unable to link project (${response.status})`);
+        if (projectInput) projectInput.dataset.linkedProject = projectId;
+        if (status) {
+            status.textContent = payload.message || `Linked ${projectId}.`;
+            status.className = 'payment-method-status success';
+        }
+    } catch (error) {
+        if (status) {
+            status.textContent = error.message || String(error);
+            status.className = 'payment-method-status error';
+        }
+    } finally {
+        if (button) button.disabled = false;
+    }
+}
+
 // Toggle auth method visibility
 function toggleAuthFields() {
     const authMethod = $('input[name="authMethod"]:checked').val();
@@ -294,6 +411,18 @@ $(document).ready(function() {
 
     $('input[name="authMethod"]').change(toggleAuthFields);
     toggleAuthFields();
+
+    $('input[name="inferencePaymentMethod"]').change(toggleInferencePaymentFields);
+    toggleInferencePaymentFields();
+    $('#linkVertexProjectButton').click(linkVertexProjectFromSettings);
+    $('#userVertexProject').on('input', function() {
+        delete this.dataset.linkedProject;
+        const status = document.getElementById('vertexLinkStatus');
+        if (status) {
+            status.textContent = '';
+            status.className = 'payment-method-status';
+        }
+    });
 
     $('#fileInput').change(function() {
         if (this.files && this.files.length > 0) {
@@ -470,6 +599,12 @@ async function processImage(sourceType = 'file') {
         }
     }
 
+    const paymentError = validateInferencePaymentSettings();
+    if (paymentError) {
+        alert(paymentError);
+        return;
+    }
+
     const ocrOnly = $('#ocrOnly').is(':checked');
     const notebookMode = $('#notebookMode').is(':checked');
     const engines = getSelectedEngines();
@@ -521,6 +656,7 @@ async function processImage(sourceType = 'file') {
     if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
     if ($('#includeCop90').is(':checked')) formData.append('include_cop90', 'true');
     if ($('#skipLabelCollage').is(':checked')) formData.append('skip_label_collage', 'true');
+    appendInferencePaymentFields(formData);
 
     const headers = getAuthHeaders();
     if ('Content-Type' in headers) delete headers['Content-Type'];
@@ -546,10 +682,7 @@ async function processImage(sourceType = 'file') {
     startLoaderCycle($('#singleResults')[0]);
 
     // Debug log
-    const formDataEntries = [];
-    for (const pair of formData.entries()) {
-        formDataEntries.push({ key: pair[0], value: pair[1] instanceof File ? pair[1].name : pair[1] });
-    }
+    const formDataEntries = getSafeFormDataEntries(formData);
     logDebug('FINAL FormData contents', formDataEntries);
 
     try {

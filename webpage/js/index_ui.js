@@ -159,6 +159,128 @@
 
 // ---------- Main Tabs, Navigation, Impact, Image Preview ----------
 document.addEventListener('DOMContentLoaded', function() {
+    const showAllModelsToggle = document.getElementById('showAllModelsToggle');
+
+    function updateModelVisibility(showAll) {
+        document.querySelectorAll('.extended-model-option').forEach(option => {
+            option.hidden = !showAll;
+        });
+
+        if (!showAll) {
+            document.querySelectorAll('.extended-model-option input[name="engines"]:checked').forEach(input => {
+                input.checked = false;
+                input.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+
+            const hiddenParsingModel = document.querySelector('.extended-model-option input[name="llm_model"]:checked');
+            if (hiddenParsingModel) {
+                const defaultParsingModel = document.querySelector('input[name="llm_model"][value="gemini-3.1-flash-lite"]');
+                if (defaultParsingModel) {
+                    defaultParsingModel.checked = true;
+                    defaultParsingModel.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
+
+        if (showAllModelsToggle) {
+            showAllModelsToggle.setAttribute('aria-expanded', String(showAll));
+        }
+    }
+
+    if (showAllModelsToggle) {
+        showAllModelsToggle.checked = false;
+        updateModelVisibility(false);
+        showAllModelsToggle.addEventListener('change', function() {
+            updateModelVisibility(this.checked);
+        });
+    }
+
+    let apiQuotaController = null;
+
+    function getApiSettingsKey() {
+        const field = document.getElementById('apiKey');
+        const datasetKey = (field && field.dataset.apiKey || '').trim();
+        const storedKey = (localStorage.getItem('vouchervision_api_key') || '').trim();
+        const key = datasetKey || storedKey;
+        return key && key !== 'YOUR_API_KEY' ? key : '';
+    }
+
+    function escapeQuotaText(value) {
+        return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function hideApiQuotaPanel() {
+        if (apiQuotaController) apiQuotaController.abort();
+        apiQuotaController = null;
+        const layout = document.getElementById('apiSettingsLayout');
+        const panel = document.getElementById('apiQuotaPanel');
+        if (layout) layout.classList.add('quota-hidden');
+        if (panel) panel.hidden = true;
+    }
+
+    async function loadApiQuotaStatus() {
+        const apiKey = getApiSettingsKey();
+        if (!apiKey) {
+            hideApiQuotaPanel();
+            return;
+        }
+
+        const layout = document.getElementById('apiSettingsLayout');
+        const panel = document.getElementById('apiQuotaPanel');
+        const body = document.getElementById('apiQuotaTableBody');
+        const status = document.getElementById('apiQuotaStatus');
+        if (!layout || !panel || !body || !status) return;
+
+        layout.classList.remove('quota-hidden');
+        panel.hidden = false;
+        body.innerHTML = '<tr><td colspan="4" class="api-quota-message">Loading quota status…</td></tr>';
+        status.textContent = '';
+
+        if (apiQuotaController) apiQuotaController.abort();
+        const controller = new AbortController();
+        apiQuotaController = controller;
+        try {
+            const apiBase = window.VVGO_API_BASE || location.origin;
+            const response = await fetch(apiBase + '/user/quota-status', {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-store',
+                headers: { 'X-API-Key': apiKey },
+                signal: controller.signal,
+            });
+            const data = await response.json();
+            if (!response.ok || data.status !== 'success' || !Array.isArray(data.quotas)) {
+                throw new Error(data.error || `Server returned ${response.status}`);
+            }
+            if (apiKey !== getApiSettingsKey()) return;
+
+            body.innerHTML = data.quotas.map(quota => `
+                <tr>
+                    <td>${escapeQuotaText(quota.label)}</td>
+                    <td>${Number(quota.usage || 0).toLocaleString()}</td>
+                    <td>${Number(quota.limit || 0).toLocaleString()}</td>
+                    <td>${Number(quota.remaining || 0).toLocaleString()}</td>
+                </tr>
+            `).join('');
+            status.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+        } catch (error) {
+            if (error.name === 'AbortError') return;
+            body.innerHTML = '<tr><td colspan="4" class="api-quota-message">Quota status is temporarily unavailable.</td></tr>';
+            status.textContent = error.message || 'Could not load quota status.';
+        } finally {
+            if (apiQuotaController === controller) apiQuotaController = null;
+        }
+    }
+
+    function apiSettingsIsActive() {
+        return document.querySelector('.main-tab.active')?.dataset.mainTab === 'apiSettings';
+    }
+
     // Main settings tabs
     document.querySelectorAll('.main-tab').forEach(tab => {
         tab.addEventListener('click', function() {
@@ -166,8 +288,27 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.main-tab-content').forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             document.getElementById(this.dataset.mainTab).classList.add('active');
+            if (this.dataset.mainTab === 'apiSettings') loadApiQuotaStatus();
+            if (typeof window.requestGlobalMapResize === 'function') {
+                window.requestGlobalMapResize();
+            }
         });
     });
+
+    const apiKeyField = document.getElementById('apiKey');
+    if (apiKeyField) {
+        new MutationObserver(function() {
+            if (apiSettingsIsActive()) loadApiQuotaStatus();
+            else if (!getApiSettingsKey()) hideApiQuotaPanel();
+        }).observe(apiKeyField, { attributes: true, attributeFilter: ['data-api-key'] });
+    }
+    window.addEventListener('storage', function(event) {
+        if (event.key !== 'vouchervision_api_key') return;
+        if (apiSettingsIsActive()) loadApiQuotaStatus();
+        else if (!getApiSettingsKey()) hideApiQuotaPanel();
+    });
+    if (apiSettingsIsActive()) loadApiQuotaStatus();
+    else hideApiQuotaPanel();
 
     // Helper: show an image in the Step 4 preview panel
     function showStep4Preview(src) {
@@ -405,9 +546,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let map = null;
     let mapboxLoaded = typeof mapboxgl !== 'undefined';
+    let mapResizeAnimationFrame = null;
+    let mapResizeTimer = null;
+    let mapContainerResizeObserver = null;
 
     function logDebugMap(message, ...args) { console.log(`[Map Debug] ${message}`, ...args); }
     function logErrorMap(message, ...args) { console.error(`[Map Error] ${message}`, ...args); }
+
+    function resizeGlobalMap() {
+        const container = document.getElementById('global-map-container');
+        if (!map || typeof map.resize !== 'function' || !container) return;
+        if (container.offsetWidth === 0 || container.offsetHeight === 0) return;
+        map.resize();
+    }
+
+    function scheduleGlobalMapResize() {
+        if (mapResizeAnimationFrame !== null) {
+            cancelAnimationFrame(mapResizeAnimationFrame);
+        }
+        mapResizeAnimationFrame = requestAnimationFrame(() => {
+            // Wait a second frame so tab/result layout changes have been painted.
+            mapResizeAnimationFrame = requestAnimationFrame(() => {
+                mapResizeAnimationFrame = null;
+                resizeGlobalMap();
+            });
+        });
+
+        if (mapResizeTimer !== null) clearTimeout(mapResizeTimer);
+        // Some result panels continue changing width after their first paint.
+        mapResizeTimer = setTimeout(() => {
+            mapResizeTimer = null;
+            resizeGlobalMap();
+        }, 200);
+    }
+
+    window.requestGlobalMapResize = scheduleGlobalMapResize;
 
     function createOrUpdateGlobalMap(data) {
         const mapContainerElement = document.getElementById('global-map-container');
@@ -444,7 +617,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     }, 50);
                 }
-                requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                scheduleGlobalMapResize();
             } catch(e) { logErrorMap("Error during map update:", e); }
         } else {
             if (mapContainerElement.classList.contains('mapboxgl-map')) return;
@@ -456,7 +629,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (hasValidCoordinates) {
                         map.marker = new mapboxgl.Marker({ color: '#4CAF50' }).setLngLat([lng, lat]).setPopup(new mapboxgl.Popup().setHTML(createPopupContent(formattedJson))).addTo(map);
                     }
-                    requestAnimationFrame(() => { if (map && map.resize) map.resize(); });
+                    scheduleGlobalMapResize();
                 });
                 map.on('error', (e) => {
                     logErrorMap('Global Mapbox error:', e);
@@ -519,6 +692,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.addEventListener('DOMContentLoaded', function() {
+        const mapContainer = document.getElementById('global-map-container');
+        if (mapContainer && typeof ResizeObserver !== 'undefined') {
+            mapContainerResizeObserver = new ResizeObserver(scheduleGlobalMapResize);
+            mapContainerResizeObserver.observe(mapContainer);
+        }
+        window.addEventListener('resize', scheduleGlobalMapResize);
+
         fetch('./secret_mapbox.yaml')
             .then(resp => { if (!resp.ok) throw new Error('Failed to load secret_mapbox.yaml'); return resp.text(); })
             .then(text => {
@@ -528,6 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (!mapboxLoaded) return;
                     initializeGlobalMap();
                     monitorResults();
+                    scheduleGlobalMapResize();
                 }, 150);
             })
             .catch(err => { logErrorMap('Could not load Mapbox token:', err); });

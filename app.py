@@ -427,6 +427,81 @@ GEMINI_UNKNOWN_PAID_PREFIX = "gemini_unknown_paid"
 RATE_LIMITED_MODELS[GEMINI_UNKNOWN_PAID_SENTINEL] = GEMINI_UNKNOWN_PAID_DEFAULT_LIMIT
 RATE_LIMIT_FIELD_PREFIX[GEMINI_UNKNOWN_PAID_SENTINEL] = GEMINI_UNKNOWN_PAID_PREFIX
 
+# Server-side model defaults. Applied at the request edge by
+# resolve_model_defaults() BEFORE quota is calculated — see that function for
+# why the timing matters.
+DEFAULT_MODEL = "gemini-3.1-flash-lite"
+
+# Public model aliases accepted by VoucherVisionGO whose provider-facing IDs
+# differ. Keep the public name in request/response metadata, quota accounting,
+# and cost accounting; use the canonical value only when constructing the
+# Google client that will make the inference call.
+GOOGLE_MODEL_ALIASES = {
+    "gemini-3.1-pro": "gemini-3.1-pro-preview",
+}
+
+
+def google_provider_model_name(model_name: str) -> str:
+    """Return the Google-facing ID for a public VoucherVisionGO model name."""
+    public_name = str(model_name or "").strip()
+    return GOOGLE_MODEL_ALIASES.get(public_name.lower(), public_name)
+
+# API model name → cost constant in api_cost.yaml. Module-level so the default
+# resolver can validate against it and so it is not rebuilt on every request.
+API_TO_COST_MAPPING = {
+    "gemini-2.0-flash": "GEMINI_2_0_FLASH",
+    "gemini-1.5-flash": "GEMINI_1_5_FLASH",
+    "gemini-1.5-pro": "GEMINI_1_5_PRO",
+    "gemini-2.5-flash-lite": "GEMINI_2_5_FLASH_LITE",
+    "gemini-2.5-flash": "GEMINI_2_5_FLASH",
+    "gemini-2.5-pro": "GEMINI_2_5_PRO",
+    "gemini-3-pro-preview": "GEMINI_3_PRO",
+    "gemini-3-flash-preview": "GEMINI_3_FLASH",
+    "gemini-3-flash": "GEMINI_3_FLASH",
+
+    "gemini-3.1-pro-preview": "GEMINI_3_1_PRO",
+    "gemini-3.1-pro": "GEMINI_3_1_PRO",
+
+    "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
+    "gemini-3.1-flash-lite": "GEMINI_3_1_FLASH_LITE",
+
+    "gemini-3.5-flash-lite": "GEMINI_3_5_FLASH_LITE",
+    "gemini-3.5-flash": "GEMINI_3_5_FLASH",
+    "gemini-3.6-flash": "GEMINI_3_6_FLASH",
+    "gemini-3.7-flash": "GEMINI_3_7_FLASH",
+    "gemini-3.8-flash": "GEMINI_3_8_FLASH",
+    "gemma-4-26b-a4b-it": "GEMMA_4_26B_A4B_IT",
+    "gemma-4-31b-it": "GEMMA_4_31B_IT",
+}
+
+
+def resolve_model_defaults(engine_options, llm_model_name, *,
+                           ocr_only=False, notebook_mode=False):
+    """Apply server model defaults, returning (engine_options, llm_model_name).
+
+    MUST run before quota is calculated. Quota keys are derived from model
+    names, so a caller who omits both `engines` and `llm_model` would otherwise
+    produce rate_limited_keys_in_request(None, None) == [] — no reservation —
+    and still receive a fully server-funded run once the processor applied its
+    own defaults further downstream. Keeping one resolver at the edge means the
+    models that are metered are exactly the models that run.
+    """
+    engines = [str(e).strip() for e in (engine_options or []) if str(e).strip()]
+    if not engines:
+        engines = [DEFAULT_MODEL]
+
+    llm = str(llm_model_name or "").strip()
+    if not llm:
+        # A concrete parsing model is always needed downstream for the cost
+        # lookup, even on OCR-only runs where it is never called. Whether it
+        # counts toward quota is decided separately, by
+        # quota_keys_for_request() — this function never rewrites a model the
+        # caller chose.
+        llm = DEFAULT_MODEL
+
+    return engines, llm
+
+
 RATE_LIMIT_LABELS = {
     "gemini_pro": "Gemini Pro",
     "gemini_3_5_flash": "Restricted Flash",
@@ -673,6 +748,40 @@ PAYMENT_AUTH_HEADER_ALIASES = {
     "vertex_region": ("X-Vertex-Region",),
 }
 
+# Public, user-facing labels for who funded a request. The internal
+# auth_method values ("server"/"user_vertex"/"user_gemini") stay as they are —
+# they key the analytics rollups — and this maps them to the wording surfaced
+# in API responses as `payment_inference`.
+PAYMENT_INFERENCE_LABELS = {
+    "server": "VoucherVisionGO_credits",
+    "user_vertex": "user_supplied_vertex_account",
+    "user_gemini": "user_supplied_gemini_key",
+}
+
+# Static for now — there is one public server. Named so a future multi-host
+# deployment can make it dynamic without editing every response envelope.
+RESPONSE_HOST_NAME = "VoucherVisionGO"
+
+
+def _auth_method_for(gemini_api_key, vertex_project):
+    """Internal billing mode for a resolved credential pair.
+
+    Single source of truth for the precedence rule (a Vertex project wins over
+    a Gemini key), so the reported payment_inference can never disagree with
+    the credentials actually used.
+    """
+    if vertex_project:
+        return "user_vertex"
+    if gemini_api_key:
+        return "user_gemini"
+    return "server"
+
+
+def resolve_payment_inference(user_api_key=None, user_vertex_project=None):
+    """User-facing label naming the account that paid for a request."""
+    return PAYMENT_INFERENCE_LABELS[_auth_method_for(user_api_key, user_vertex_project)]
+
+
 # ── Billing-intent detection ────────────────────────────────────────────
 # A request that *tries* to pay with the caller's own credentials but puts them
 # somewhere we don't read used to fall through to server billing silently (the
@@ -790,12 +899,7 @@ def get_payment_auth_context(req):
     if vertex_region and not vertex_project:
         vertex_region = None
 
-    if vertex_project:
-        auth_method = "user_vertex"
-    elif gemini_api_key:
-        auth_method = "user_gemini"
-    else:
-        auth_method = "server"
+    auth_method = _auth_method_for(gemini_api_key, vertex_project)
 
     # Echoed back as X-VV-Billing-Mode so a caller can verify which account a
     # request was billed to without waiting on a Google bill.
@@ -974,6 +1078,24 @@ def rate_limited_keys_in_request(
         add_model(name)
 
     return keys
+
+
+def quota_keys_for_request(
+    engine_options, llm_model_name, *, ocr_only=False, notebook_mode=False
+) -> list[str]:
+    """Quota keys for a request, honoring which models actually get called.
+
+    OCR-only and notebook runs never invoke the parsing model, so counting it
+    would reserve a second bucket for work that never happens. The web UI
+    submits its selected `llm_model` on every request, including OCR-only ones,
+    so an OCR-only run with a Pro engine would otherwise consume both the Pro
+    and General Access allowances.
+
+    The selected model is deliberately left untouched — only its contribution
+    to quota is dropped.
+    """
+    parsing_model = None if (ocr_only or notebook_mode) else llm_model_name
+    return rate_limited_keys_in_request(engine_options, parsing_model)
 
 
 def check_and_reserve_quotas(
@@ -3994,7 +4116,11 @@ def _refresh_pdf_job_counters(job_id: str) -> dict | None:
 def _reserve_pdf_page_quota_if_needed(
     job_data: dict,
 ) -> tuple[bool, list[str], str | None, int, int]:
-    """Per-page rate-limit reservation for async PDF processing.
+    """Per-page rate-limit reservation for PDF processing, sync and async.
+
+    A PDF is N Gemini calls, not one, so quota is reserved a page at a time.
+    Used by the async page task and by process_pdf_request (the synchronous
+    /process upload path).
 
     Returns (allowed, reserved_keys, exhausted_key_or_None, exhausted_count, exhausted_limit).
     Callers should pass `reserved_keys` to release_quotas() on failure.
@@ -4002,9 +4128,13 @@ def _reserve_pdf_page_quota_if_needed(
     user_email = _normalize_email_identity(job_data.get("user_email"))
     if not user_email:
         return True, [], None, 0, GEMINI_PRO_DEFAULT_LIMIT
-    user_pays = bool(job_data.get("user_vertex_project"))
-    request_keys = rate_limited_keys_in_request(
-        job_data.get("engine_options"), job_data.get("llm_model_name")
+    # Async jobs reject user_api_key at submit, so that key is always absent
+    # there; the synchronous path accepts it and must honor it as user-pays.
+    user_pays = bool(job_data.get("user_vertex_project")) or bool(job_data.get("user_api_key"))
+    request_keys = quota_keys_for_request(
+        job_data.get("engine_options"), job_data.get("llm_model_name"),
+        ocr_only=bool(job_data.get("ocr_only")),
+        notebook_mode=bool(job_data.get("notebook_mode")),
     )
     if user_pays or not request_keys:
         return True, [], None, 0, GEMINI_PRO_DEFAULT_LIMIT
@@ -4589,12 +4719,19 @@ class VoucherVisionProcessor:
         for i, ocr_opt in enumerate(engine_options):
             ocr_packet[ocr_opt] = {}
             self._log(f"ocr_opt {ocr_opt}", "info")
+            provider_model_name = google_provider_model_name(ocr_opt)
+            if provider_model_name != ocr_opt:
+                self._log(
+                    f"Translating public OCR model '{ocr_opt}' to Google model "
+                    f"'{provider_model_name}'",
+                    "info",
+                )
 
             if user_vertex_project:
                 # Per-request throwaway engine billed to the user's GCP project
                 OCR_Engine = OCRGeminiProVision(
                     None,
-                    model_name=ocr_opt,
+                    model_name=provider_model_name,
                     max_output_tokens=32768,
                     temperature=1.0,
                     top_p=0.95,
@@ -4607,7 +4744,7 @@ class VoucherVisionProcessor:
                 # Per-request throwaway engine - never touches the shared pool
                 OCR_Engine = OCRGeminiProVision(
                     user_api_key,
-                    model_name=ocr_opt,
+                    model_name=provider_model_name,
                     max_output_tokens=32768,
                     temperature=1.0,
                     top_p=0.95,
@@ -4616,19 +4753,19 @@ class VoucherVisionProcessor:
                 )
             else:
                 # Use the shared, pre-warmed server engine
-                if ocr_opt not in self.ocr_engines:
+                if provider_model_name not in self.ocr_engines:
                     with self.ocr_engines_lock:
-                        if ocr_opt not in self.ocr_engines:
-                            self.ocr_engines[ocr_opt] = OCRGeminiProVision(
+                        if provider_model_name not in self.ocr_engines:
+                            self.ocr_engines[provider_model_name] = OCRGeminiProVision(
                                 self.api_key,
-                                model_name=ocr_opt,
+                                model_name=provider_model_name,
                                 max_output_tokens=32768,
                                 temperature=1,
                                 top_p=0.95,
                                 seed=123456,
                                 do_resize_img=False
                             )
-                OCR_Engine = self.ocr_engines[ocr_opt]
+                OCR_Engine = self.ocr_engines[provider_model_name]
             
             # Execute OCR (this API call can run concurrently)
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
@@ -4658,6 +4795,14 @@ class VoucherVisionProcessor:
         # materialized into a local cache.
         resolved_prompt_path = _resolve_prompt_path(prompt, self.custom_prompts_dir, caller_email)
 
+        provider_model_name = google_provider_model_name(llm_model_name)
+        if provider_model_name != llm_model_name:
+            self._log(
+                f"Translating public parsing model '{llm_model_name}' to Google "
+                f"model '{provider_model_name}'",
+                "info",
+            )
+
         # Cache key includes every input that changes the LLM handler's identity,
         # plus the resolved path so a re-uploaded user prompt (same ref, different
         # content via updated_at) invalidates the cache.
@@ -4667,7 +4812,7 @@ class VoucherVisionProcessor:
             user_vertex_region,
             prompt,
             resolved_prompt_path,
-            llm_model_name,
+            provider_model_name,
         )
         needs_new = (
             not hasattr(self.thread_local, 'vv')
@@ -4684,7 +4829,7 @@ class VoucherVisionProcessor:
             self.thread_local.vv.setup_JSON_dict_structure()
 
             self.thread_local.llm_model = GoogleGeminiHandler(
-                self.cfg, self.logger, llm_model_name,
+                self.cfg, self.logger, provider_model_name,
                 self.thread_local.vv.JSON_dict_structure,
                 config_vals_for_permutation=None,
                 exit_early_for_JSON=True,
@@ -4745,8 +4890,42 @@ class VoucherVisionProcessor:
 
         self._log(f"PDF '{pdf_filename}' has {len(page_files)} pages, processing each as a separate image", "info")
 
+        # ── Per-page rate-limit gate ────────────────────────────────────
+        # A PDF is one Gemini call per page, so it is metered per page, the
+        # same way the async job path meters it. The /process route
+        # deliberately skips its single-slot reservation for PDFs and defers
+        # to this loop.
+        quota_email = _normalize_email_identity(kwargs.get('caller_email'))
+        # Defensive: routes resolve these before metering, but a direct caller
+        # passing None must not produce an empty key set and an unmetered run.
+        quota_engines, quota_llm = resolve_model_defaults(
+            kwargs.get('engine_options'), kwargs.get('llm_model_name'),
+            ocr_only=bool(kwargs.get('ocr_only')),
+            notebook_mode=bool(kwargs.get('notebook_mode')),
+        )
+        quota_ctx = {
+            "user_email": quota_email,
+            "user_api_key": kwargs.get('user_api_key'),
+            "user_vertex_project": kwargs.get('user_vertex_project'),
+            "engine_options": quota_engines,
+            "llm_model_name": quota_llm,
+            "ocr_only": bool(kwargs.get('ocr_only')),
+            "notebook_mode": bool(kwargs.get('notebook_mode')),
+        }
+        # Set once the cap is hit; every remaining page short-circuits to it
+        # rather than re-running an identical Firestore transaction per page.
+        quota_error = None
+
         page_results = []
         for page_file in page_files:
+            if quota_error is not None:
+                page_results.append({
+                    'filename': page_file.filename,
+                    'error': quota_error,
+                    'status_code': 503,
+                })
+                continue
+
             # Resize each page-image just like a normal upload
             try:
                 page_file = process_uploaded_file_with_resize(page_file, max_pixels=5200000)
@@ -4759,8 +4938,55 @@ class VoucherVisionProcessor:
                 })
                 continue
 
+            allowed, reserved_keys, exhausted, count, limit = (
+                _reserve_pdf_page_quota_if_needed(quota_ctx)
+            )
+            if not allowed:
+                self._log(
+                    f"Rate limit hit for {quota_email} on {exhausted} at PDF page "
+                    f"'{page_file.filename}': {count}/{limit}",
+                    "warning",
+                )
+                # PDFs deliberately skip the /process image gate, so this is
+                # the ONLY place a PDF caller can be alerted. Every bucket must
+                # notify here — routing Pro/Restricted Flash to the per-model
+                # alert and General Access to its own low-volume path.
+                bucket_prefix = _rate_limit_field_prefix(exhausted) if exhausted else ""
+                if bucket_prefix == GEMINI_GENERAL_ACCESS_PREFIX:
+                    _send_general_access_cap_alert(
+                        quota_email, count, limit,
+                        requested_model=kwargs.get('llm_model_name'),
+                    )
+                elif exhausted:
+                    _send_rate_limit_hit_alert(
+                        quota_email, count, limit, model_name=exhausted,
+                    )
+                # Name the quota category, not the internal model key — the
+                # shared buckets are not per-model allowances and saying
+                # "all 1000 of your gemini-2.5-flash requests" misleads.
+                bucket_label = RATE_LIMIT_LABELS.get(bucket_prefix, exhausted or "this model")
+                quota_error = (
+                    f"Rate limit exceeded: you have used all {limit} of your "
+                    f"{bucket_label} requests. Remaining pages were not processed. "
+                    f"Contact an administrator to request additional quota."
+                )
+                page_results.append({
+                    'filename': page_file.filename,
+                    'error': quota_error,
+                    'status_code': 503,
+                })
+                continue
+
             result, status_code = self.process_image_request(file=page_file, **kwargs)
             if status_code != 200:
+                # Return the slot on failure, matching the policy the async
+                # page task uses. Note this is generous rather than exact: a
+                # page can fail *after* OCR or parsing already reached Gemini,
+                # so a refunded slot does not prove nothing was spent. Exact
+                # accounting would require tracking whether a provider call
+                # actually started.
+                if reserved_keys:
+                    release_quotas(quota_email, reserved_keys)
                 page_results.append({
                     'filename': page_file.filename,
                     'error': result.get('error', 'Unknown error'),
@@ -4782,6 +5008,10 @@ class VoucherVisionProcessor:
         return OrderedDict([
             ('source_pdf', pdf_filename),
             ('page_count', len(page_files)),
+            ('payment_inference', resolve_payment_inference(
+                kwargs.get('user_api_key'), kwargs.get('user_vertex_project')
+            )),
+            ('host', RESPONSE_HOST_NAME),
             ('pages', page_results),
             ('total_request_cost_usd', pdf_cost_total_usd),
         ]), 200
@@ -4812,6 +5042,9 @@ class VoucherVisionProcessor:
         
         original_temp_path = None
         collage_temp_path = None
+        # Which account funds this request — reported to the caller in every
+        # result envelope below.
+        payment_inference = resolve_payment_inference(user_api_key, user_vertex_project)
         try:
             if notebook_mode:
                 ocr_only = True
@@ -4870,12 +5103,13 @@ class VoucherVisionProcessor:
            
             
             try:
-                # Get engine options (default to gemini models if not specified)
-                if engine_options is None:
-                    if ocr_only:
-                        engine_options = ["gemini-2.5-flash"]
-                    else:
-                        engine_options = ["gemini-2.5-flash"]
+                # Defensive: routes already resolve these before metering quota
+                # (see resolve_model_defaults). Re-running it here is a no-op
+                # for them and keeps direct callers of this method correct.
+                engine_options, llm_model_name = resolve_model_defaults(
+                    engine_options, llm_model_name,
+                    ocr_only=ocr_only, notebook_mode=notebook_mode,
+                )
 
                 if ocr_prompt_option is None:
                     if notebook_mode:
@@ -4885,36 +5119,7 @@ class VoucherVisionProcessor:
                     else:
                         ocr_prompt_option = None
 
-                # Simpler alternative approach
-                if llm_model_name is None:
-                    llm_model_name = "gemini-2.5-flash"
-
-                # Direct mapping from API model names to cost constants
-                api_to_cost_mapping = {
-                    "gemini-2.0-flash": "GEMINI_2_0_FLASH",
-                    "gemini-1.5-flash": "GEMINI_1_5_FLASH",
-                    "gemini-1.5-pro": "GEMINI_1_5_PRO",
-                    "gemini-2.5-flash-lite": "GEMINI_2_5_FLASH_LITE",
-                    "gemini-2.5-flash": "GEMINI_2_5_FLASH",
-                    "gemini-2.5-pro": "GEMINI_2_5_PRO",
-                    "gemini-3-pro-preview": "GEMINI_3_PRO",
-                    "gemini-3-flash-preview": "GEMINI_3_FLASH",
-                    "gemini-3-flash": "GEMINI_3_FLASH",
-
-                    "gemini-3.1-pro-preview": "GEMINI_3_1_PRO",
-                    "gemini-3.1-pro": "GEMINI_3_1_PRO",
-
-                    "gemini-3.1-flash-lite-preview": "GEMINI_3_1_FLASH_LITE",
-                    "gemini-3.1-flash-lite": "GEMINI_3_1_FLASH_LITE",
-
-                    "gemini-3.5-flash-lite": "GEMINI_3_5_FLASH_LITE",
-                    "gemini-3.5-flash": "GEMINI_3_5_FLASH",
-                    "gemini-3.6-flash": "GEMINI_3_6_FLASH",
-                    "gemini-3.7-flash": "GEMINI_3_7_FLASH",
-                    "gemini-3.8-flash": "GEMINI_3_8_FLASH",
-                    "gemma-4-26b-a4b-it": "GEMMA_4_26B_A4B_IT",
-                    "gemma-4-31b-it": "GEMMA_4_31B_IT",
-                }
+                api_to_cost_mapping = API_TO_COST_MAPPING
 
                 self._log(f"Received llm_model_name: '{llm_model_name}' (type: {type(llm_model_name)})", "info")
                 LLM_name_cost = api_to_cost_mapping.get(llm_model_name)
@@ -4954,6 +5159,8 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
+                        ("payment_inference", payment_inference),
+                        ("host", RESPONSE_HOST_NAME),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
                         ("WFO_info", ""),
@@ -4991,6 +5198,8 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
+                        ("payment_inference", payment_inference),
+                        ("host", RESPONSE_HOST_NAME),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", ""),
@@ -5049,6 +5258,8 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
+                        ("payment_inference", payment_inference),
+                        ("host", RESPONSE_HOST_NAME),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info_sanitized),
                         ("WFO_info", WFO),
@@ -5408,6 +5619,12 @@ def process_image():
     include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+
+    # Apply model defaults BEFORE any quota calculation — omitting `engines`
+    # and `llm_model` must not yield an unmetered, server-funded run.
+    engine_options, llm_model_name = resolve_model_defaults(
+        engine_options, llm_model_name, ocr_only=ocr_only, notebook_mode=notebook_mode,
+    )
     payment_auth = get_payment_auth_context(request)
     user_gemini_key = payment_auth["gemini_api_key"]
     user_vertex_project = payment_auth["vertex_project"]
@@ -5489,8 +5706,9 @@ def process_image():
         logger.info(f"PDF upload detected for user: {user_email}, filename: {file.filename}")
 
         # ── Gemini Pro rate-limit gate (skip if user supplies their own key) ──
-        # For PDFs, quota is checked per-page inside process_image_request
-        # so we skip the single-slot reservation here.
+        # For PDFs, quota is metered per page inside process_pdf_request
+        # (one Gemini call per page), so the single-slot reservation used by
+        # the image branch below is deliberately skipped here.
         results, status_code = app.config['processor'].process_pdf_request(
             file=file, **process_kwargs
         )
@@ -5537,7 +5755,10 @@ def process_image():
         reserved_keys: list[str] = []
         user_pays = bool(user_gemini_key) or bool(user_vertex_project)
         if not user_pays:
-            request_keys = rate_limited_keys_in_request(engine_options, llm_model_name)
+            request_keys = quota_keys_for_request(
+                engine_options, llm_model_name,
+                ocr_only=ocr_only, notebook_mode=notebook_mode,
+            )
             if request_keys:
                 allowed, state, exhausted = check_and_reserve_quotas(user_email, request_keys)
                 if not allowed:
@@ -5680,6 +5901,12 @@ def process_image_by_url():
         user_vertex_project = payment_auth["vertex_project"]
         user_vertex_region = payment_auth["vertex_region"]
 
+    # Apply model defaults BEFORE any quota calculation — omitting `engines`
+    # and `llm_model` must not yield an unmetered, server-funded run.
+    engine_options, llm_model_name = resolve_model_defaults(
+        engine_options, llm_model_name, ocr_only=ocr_only, notebook_mode=notebook_mode,
+    )
+
     intent_error = _billing_intent_error_response(request)
     if intent_error is not None:
         return intent_error
@@ -5735,7 +5962,10 @@ def process_image_by_url():
     reserved_keys: list[str] = []
     user_pays = bool(user_gemini_key) or bool(user_vertex_project)
     if not user_pays:
-        request_keys = rate_limited_keys_in_request(engine_options, llm_model_name)
+        request_keys = quota_keys_for_request(
+            engine_options, llm_model_name,
+            ocr_only=ocr_only, notebook_mode=notebook_mode,
+        )
         if request_keys:
             allowed, state, exhausted = check_and_reserve_quotas(user_email, request_keys)
             if not allowed:
@@ -5824,16 +6054,31 @@ def process_image_by_url():
         except Exception as e:
             # Catch other unexpected errors during download/resize
             logger.exception(f"An unexpected error occurred during URL processing on attempt {attempt + 1}: {e}")
+            # No Gemini call was made — give the reserved quota back.
+            if reserved_keys:
+                release_quotas(user_email, reserved_keys)
+                reserved_keys = []
             return jsonify({'error': f'An unexpected server error occurred: {str(e)}'}), 500
     
     # After the loop, check if we ultimately failed
     if file_obj is None and last_exception is not None:
         logger.error(f"All {max_retries} retries failed for URL '{image_url}'. Final error: {last_exception}")
+
+        # The image never downloaded, so no Gemini call was made. Release the
+        # quota reserved before the download loop — otherwise an unreachable
+        # URL permanently burns a slot from the user's lifetime cap.
+        if reserved_keys:
+            release_quotas(user_email, reserved_keys)
+            reserved_keys = []
         
         # Construct the desired empty JSON response for the final failure
         error_response_data = OrderedDict([
             ("filename", extract_filename_from_url(image_url)),
             ("url_source", image_url),
+            ("payment_inference", resolve_payment_inference(
+                user_gemini_key, user_vertex_project
+            )),
+            ("host", RESPONSE_HOST_NAME),
             ("prompt", prompt),
             ("ocr_info", {"error": f"Failed to fetch URL: {str(last_exception)}"}),
             ("WFO_info", ""),
@@ -5982,6 +6227,12 @@ def process_pdf_async():
     include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+
+    # Apply model defaults BEFORE any quota calculation — omitting `engines`
+    # and `llm_model` must not yield an unmetered, server-funded run.
+    engine_options, llm_model_name = resolve_model_defaults(
+        engine_options, llm_model_name, ocr_only=ocr_only, notebook_mode=notebook_mode,
+    )
     payment_auth = get_payment_auth_context(request)
     user_gemini_key = payment_auth["gemini_api_key"]
     user_vertex_project = payment_auth["vertex_project"]
@@ -7513,6 +7764,52 @@ def get_usage_event_facets():
         return jsonify({'error': f'Failed to get usage event facets: {str(e)}'}), 500
 
 
+@app.route('/admin/usage-events/users', methods=['GET'])
+@authenticated_route
+def get_usage_event_users():
+    """Return the compact list of users with at least one usage record."""
+    user = authenticate_request(request)
+    if not user or not user.get('email'):
+        return jsonify({'error': 'User not properly authenticated'}), 401
+
+    admin_email = user.get('email')
+    if not db.collection('admins').document(admin_email).get().exists:
+        return jsonify({'error': 'Unauthorized - Admin access required'}), 403
+
+    try:
+        emails = set()
+        query = (
+            db.collection("usage_statistics")
+            .where(filter=FieldFilter("total_images_processed", ">", 0))
+            .select(["user_email", "total_images_processed"])
+        )
+        for snapshot in query.stream(timeout=EVENT_ANALYTICS_QUERY_TIMEOUT_SECONDS):
+            data = snapshot.to_dict() or {}
+            if _coerce_int(data.get("total_images_processed")) <= 0:
+                continue
+            email = str(data.get("user_email") or snapshot.id or "").strip().lower()
+            if email and email != "unknown":
+                emails.add(email)
+
+        response = jsonify({
+            "status": "success",
+            "count": len(emails),
+            "users": sorted(emails),
+            "checked_at": _format_event_timestamp(
+                datetime.datetime.now(datetime.timezone.utc)
+            ),
+        })
+        response.headers["Cache-Control"] = "no-store"
+        return response
+    except Exception as exc:
+        logger.error(
+            "Could not load event analytics users admin=%s error_type=%s",
+            admin_email,
+            type(exc).__name__,
+        )
+        return jsonify({"error": "Could not load the analytics user list"}), 500
+
+
 @app.route('/admin/usage-events/overview', methods=['GET'])
 @authenticated_route
 def get_usage_events_overview():
@@ -8445,9 +8742,11 @@ def auth_success():
 @authenticated_route
 def get_user_quota_status():
     """Return only the authenticated user's three normal quota buckets."""
-    user = authenticate_request(request)
-    user_email = _normalize_email_identity((user or {}).get('email'))
-    if not user_email:
+    # authenticated_route has already validated either the API key or Firebase
+    # token. Resolve the owner from that same accepted credential so this route
+    # also works from the standalone webpage API Settings panel.
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    if not user_email or user_email == "unknown":
         return jsonify({'error': 'User not properly authenticated'}), 401
 
     try:
@@ -10195,11 +10494,13 @@ def list_vertex_projects():
 @authenticated_route
 def link_vertex_project():
     """Link a Google Cloud project ID to the authenticated user."""
-    user = authenticate_request(request)
-    if not user or not user.get('email'):
+    # authenticated_route accepts either a VoucherVision API key or Firebase
+    # token. Resolve the owner from the same accepted credential so the
+    # standalone webpage can link a project while using its normal API key.
+    user_email = _normalize_email_identity(get_user_email_from_request(request))
+    if not user_email or user_email == 'unknown':
         return jsonify({'error': 'User not properly authenticated'}), 401
 
-    user_email = _normalize_email_identity(user.get('email'))
     access_state = _get_api_key_access_state(user_email)
     if not access_state.get('allowed'):
         return jsonify({

@@ -1152,6 +1152,7 @@ label {
 }
 
 input[type="text"],
+input[type="password"],
 input[type="file"] {
     width: 100%;
     padding: 8px;
@@ -1974,8 +1975,64 @@ pre {
     font-size: 1.05rem;
     color: #333;
 }
-.step-info-link {
+.step-header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
     margin-left: auto;
+    white-space: nowrap;
+}
+.model-visibility-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #4b5563;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
+.model-visibility-toggle input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.model-toggle-track {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 18px;
+    border-radius: 999px;
+    background: #a7a7a7;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.model-toggle-track::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s;
+}
+.model-visibility-toggle input:checked + .model-toggle-track {
+    background: #4CAF50;
+}
+.model-visibility-toggle input:checked + .model-toggle-track::after {
+    transform: translateX(14px);
+}
+.model-visibility-toggle input:focus-visible + .model-toggle-track {
+    outline: 2px solid #2E7D32;
+    outline-offset: 2px;
+}
+.step-info-link {
     font-size: 0.85rem;
     font-weight: 500;
     color: #4CAF50;
@@ -1983,6 +2040,9 @@ pre {
     cursor: pointer;
     white-space: nowrap;
     transition: color 0.2s;
+}
+.step-header > .step-info-link {
+    margin-left: auto;
 }
 .step-info-link:hover {
     color: #2E7D32;
@@ -2177,6 +2237,168 @@ pre {
 }
 .main-tab-content.active {
     display: block;
+}
+
+body.dark-mode .model-visibility-toggle {
+    color: #ccc;
+}
+
+@media (max-width: 620px) {
+    .step-header {
+        flex-wrap: wrap;
+    }
+    .step-header-actions {
+        width: 100%;
+    }
+}
+
+/* API Settings: authentication (30%) + quota status (70%) */
+.api-settings-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+    gap: 24px;
+    align-items: start;
+}
+.api-settings-layout.quota-hidden {
+    grid-template-columns: minmax(0, 1fr);
+}
+.api-settings-auth-column,
+.api-quota-panel {
+    min-width: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 18px;
+}
+.api-quota-panel[hidden] {
+    display: none;
+}
+.inference-payment-settings {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #e0e0e0;
+}
+.payment-method-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+.payment-method-options input[type="radio"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+.payment-method-fields {
+    margin-top: 12px;
+    padding: 14px;
+    border: 1px solid #c8e6c9;
+    border-radius: 6px;
+    background: #f7fbf7;
+}
+.payment-method-fields[hidden] {
+    display: none;
+}
+.payment-method-fields label:not(:first-child) {
+    margin-top: 12px;
+}
+.payment-method-help,
+.payment-method-status {
+    margin: 8px 0 0;
+    color: #667085;
+    font-size: 0.82rem;
+    line-height: 1.4;
+}
+.payment-method-status.success {
+    color: #2E7D32;
+}
+.payment-method-status.error {
+    color: #c62828;
+}
+.api-quota-panel h3 {
+    margin: 0 0 6px;
+    color: #2E7D32;
+}
+.api-quota-panel > p {
+    margin: 0 0 14px;
+    color: #667085;
+    font-size: 0.92rem;
+}
+.api-quota-table-wrap {
+    overflow-x: auto;
+}
+.api-quota-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+.api-quota-table th,
+.api-quota-table td {
+    padding: 11px 12px;
+    border: 1px solid #dfe5e1;
+    text-align: right;
+}
+.api-quota-table th:first-child,
+.api-quota-table td:first-child {
+    text-align: left;
+}
+.api-quota-table thead th {
+    background: #e8f5e9;
+    color: #26382a;
+}
+.api-quota-message {
+    color: #667085;
+    text-align: center !important;
+}
+.api-quota-status {
+    min-height: 1.2em;
+    margin: 9px 0 0 !important;
+    color: #667085;
+    font-size: 0.85rem !important;
+}
+
+body.dark-mode .api-settings-auth-column,
+body.dark-mode .api-quota-panel,
+body.dark-mode .api-quota-table {
+    background: #141414;
+    border-color: #343434;
+    color: #e0e0e0;
+}
+body.dark-mode .inference-payment-settings {
+    border-top-color: #343434;
+}
+body.dark-mode .payment-method-fields {
+    background: #1b241d;
+    border-color: #38533e;
+}
+body.dark-mode .payment-method-help,
+body.dark-mode .payment-method-status {
+    color: #b5b5b5;
+}
+body.dark-mode .payment-method-status.success {
+    color: #81C784;
+}
+body.dark-mode .payment-method-status.error {
+    color: #ef9a9a;
+}
+body.dark-mode .api-quota-table th,
+body.dark-mode .api-quota-table td {
+    border-color: #343434;
+}
+body.dark-mode .api-quota-table thead th {
+    background: #203325;
+    color: #e0e0e0;
+}
+body.dark-mode .api-quota-panel > p,
+body.dark-mode .api-quota-status,
+body.dark-mode .api-quota-message {
+    color: #b5b5b5;
+}
+
+@media (max-width: 850px) {
+    .api-settings-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Side-by-side OCR + LLM layout */

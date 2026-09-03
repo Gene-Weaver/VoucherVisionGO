@@ -3,6 +3,8 @@ let eventAnalyticsState = {
   shellRendered: false,
   running: false,
   rebuildRunning: false,
+  userEmails: [],
+  userEmailsLoading: false,
   requestController: null,
 };
 
@@ -119,7 +121,10 @@ function renderEventAnalyticsShell() {
       <div class="ea-control-grid">
         <label class="ea-control">
           <span>User email *</span>
-          <input type="email" id="ea-user-email" placeholder="user@example.org" autocomplete="off">
+          <select id="ea-user-email">
+            <option value="">Loading users…</option>
+          </select>
+          <small id="ea-user-list-status">Checking for users with usage records…</small>
         </label>
         <label class="ea-control">
           <span>Date From</span>
@@ -235,6 +240,61 @@ function bindEventAnalyticsControls() {
   document.getElementById('ea-perform-btn')?.addEventListener('click', performEventAnalytics);
   document.getElementById('ea-ensure-index-btn')?.addEventListener('click', ensureEventAnalyticsIndex);
   document.getElementById('ea-rebuild-rollups-btn')?.addEventListener('click', rebuildEventAnalyticsRollups);
+}
+
+function renderEventAnalyticsUsers(emails) {
+  const select = document.getElementById('ea-user-email');
+  if (!select) return;
+  const selected = select.value;
+  const normalized = Array.from(new Set((emails || []).filter(Boolean))).sort();
+  const options = ['<option value="">Select a user…</option>'];
+  normalized.forEach(email => {
+    options.push(
+      `<option value="${escapeEventHtml(email)}">${escapeEventHtml(email)}</option>`
+    );
+  });
+  select.innerHTML = options.join('');
+  if (selected && normalized.includes(selected)) select.value = selected;
+}
+
+async function refreshEventAnalyticsUsers() {
+  const status = document.getElementById('ea-user-list-status');
+  if (eventAnalyticsState.userEmails.length) {
+    renderEventAnalyticsUsers(eventAnalyticsState.userEmails);
+  }
+  if (eventAnalyticsState.userEmailsLoading) return;
+
+  eventAnalyticsState.userEmailsLoading = true;
+  if (status) status.textContent = eventAnalyticsState.userEmails.length
+    ? 'Checking for newly active users…'
+    : 'Loading users…';
+  try {
+    const idToken = await firebase.auth().currentUser.getIdToken();
+    const response = await fetch('/admin/usage-events/users', {
+      headers: { 'Authorization': `Bearer ${idToken}` },
+      cache: 'no-store',
+    });
+    const data = await response.json();
+    if (!response.ok || data.status !== 'success') {
+      throw new Error(data.error || `Server returned ${response.status}`);
+    }
+    eventAnalyticsState.userEmails = Array.isArray(data.users) ? data.users : [];
+    renderEventAnalyticsUsers(eventAnalyticsState.userEmails);
+    if (status) {
+      const checked = data.checked_at ? new Date(data.checked_at).toLocaleTimeString() : 'now';
+      status.textContent = `${fmtEventCount(data.count)} users; checked ${checked}.`;
+    }
+  } catch (error) {
+    if (status) status.textContent = eventAnalyticsState.userEmails.length
+      ? `Using the cached list; refresh failed: ${error.message}`
+      : `Could not load users: ${error.message}`;
+    if (!eventAnalyticsState.userEmails.length) {
+      const select = document.getElementById('ea-user-email');
+      if (select) select.innerHTML = '<option value="">User list unavailable</option>';
+    }
+  } finally {
+    eventAnalyticsState.userEmailsLoading = false;
+  }
 }
 
 function renderEventAnalyticsSummary(data) {
@@ -681,9 +741,12 @@ async function ensureEventAnalyticsIndex() {
 
 function loadEventAnalytics() {
   const container = document.getElementById('event-analytics-container');
-  if (!container || eventAnalyticsState.shellRendered) return;
-  renderEventAnalyticsShell();
-  eventAnalyticsState.shellRendered = true;
+  if (!container) return;
+  if (!eventAnalyticsState.shellRendered) {
+    renderEventAnalyticsShell();
+    eventAnalyticsState.shellRendered = true;
+  }
+  refreshEventAnalyticsUsers();
 }
 
 window.loadEventAnalytics = loadEventAnalytics;
