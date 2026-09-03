@@ -254,6 +254,7 @@ async function submitPdfJob() {
     if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
     if ($('#includeCop90').is(':checked')) formData.append('include_cop90', 'true');
     if ($('#skipLabelCollage').is(':checked')) formData.append('skip_label_collage', 'true');
+    appendThinkingLevelFields(formData);
     appendInferencePaymentFields(formData);
 
     const headers = getAuthHeaders();

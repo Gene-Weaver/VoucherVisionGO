@@ -202,6 +202,13 @@ function getSelectedEngines() {
     return engines;
 }
 
+function appendThinkingLevelFields(formData) {
+    const ocrLevel = document.getElementById('ocrThinkingLevel');
+    const llmLevel = document.getElementById('llmThinkingLevel');
+    formData.append('ocr_thinking_level', ocrLevel ? ocrLevel.value : 'low');
+    formData.append('llm_thinking_level', llmLevel ? llmLevel.value : 'low');
+}
+
 // Test CORS support
 async function testCorsSupport() {
     const corsStatusElement = document.getElementById('corsStatus');
@@ -689,6 +696,7 @@ async function processImage(sourceType = 'file') {
     if ($('#includeWfo').is(':checked')) formData.append('include_wfo', 'true');
     if ($('#includeCop90').is(':checked')) formData.append('include_cop90', 'true');
     if ($('#skipLabelCollage').is(':checked')) formData.append('skip_label_collage', 'true');
+    appendThinkingLevelFields(formData);
     appendInferencePaymentFields(formData);
 
     const headers = getAuthHeaders();

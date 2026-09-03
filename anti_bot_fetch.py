@@ -3,7 +3,6 @@ from __future__ import annotations
 import io
 import os
 import tempfile
-import re
 import time
 import random
 import urllib.parse
@@ -12,6 +11,7 @@ from typing import Iterable, Optional, Tuple, Callable
 import httpx
 from PIL import Image
 from werkzeug.datastructures import FileStorage
+from url_name_parser import resolve_filename_from_response
 
 # ---------------------
 # Browser-like defaults
@@ -44,13 +44,6 @@ def _choose_ua(custom_ua: Optional[str]) -> str:
     if custom_ua:
         return custom_ua
     return random.choice(_DEFAULT_UAS)
-
-def _filename_from_url(url: str) -> str:
-    """Best-effort filename from URL path; fallback to sanitized host-based name."""
-    path = urllib.parse.urlparse(url).path
-    name = os.path.basename(path) or "downloaded"
-    name = re.sub(r"[^\w.\-]+", "_", name)
-    return name
 
 def _fits_pixel_budget(image: Image.Image, max_pixels: int) -> bool:
     w, h = image.size
@@ -201,8 +194,6 @@ def smart_fetch_image_as_filestorage(
     # Redirects are walked manually below, validating every hop. The Client
     # keeps its cookie jar across hops, so portal session cookies survive.
     last_exc = None
-    filename = _filename_from_url(url)
-
     # Context-managed so the connection pool is released on every path,
     # including the terminal re-raise above.
     with httpx.Client(http2=True, headers=headers, cookies=jar,
@@ -226,7 +217,7 @@ def smart_fetch_image_as_filestorage(
                     head_resp = None
 
                 # GET (streamed; the body is read below into a spooled file)
-                resp_cm, resp, _final_url = _open_validated(
+                resp_cm, resp, final_url = _open_validated(
                     client, url, destination_check, max_redirects, logger)
                 if logger:
                     logger.info(f"GET {url} → {resp.status_code}")
@@ -265,6 +256,13 @@ def smart_fetch_image_as_filestorage(
 
                 # Content-type check (be lenient: some servers omit it)
                 ct = resp.headers.get("Content-Type", "")
+                content_disposition = (
+                    resp.headers.get("Content-Disposition")
+                    or (
+                        head_resp.headers.get("Content-Disposition")
+                        if head_resp is not None else None
+                    )
+                )
                 if ct and not _is_image_content_type(ct):
                     # Some portals serve through HTML landing; try to follow image src if present (lightweight heuristic)
                     # Avoid heavy parsing to keep deps light; user can pass direct image endpoints preferably.
@@ -291,6 +289,15 @@ def smart_fetch_image_as_filestorage(
                     # Resize if needed
                     if not _fits_pixel_budget(img, max_pixels):
                         img = _resize_to_max_pixels(img, max_pixels)
+
+                    # Use the response metadata we already received to recover
+                    # repository identifiers hidden behind generic endpoints
+                    # such as native.jpg. No additional request is made.
+                    filename = resolve_filename_from_response(
+                        url,
+                        final_url=final_url,
+                        content_disposition=content_disposition,
+                    )
 
                     # Decide format & filename
                     fmt, out_name = _pick_format_and_filename(filename, img)

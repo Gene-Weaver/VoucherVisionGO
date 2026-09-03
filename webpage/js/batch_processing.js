@@ -160,6 +160,7 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
+            appendThinkingLevelFields(formData);
             appendInferencePaymentFields(formData);
     
             // Remove Content-Type header as it will be set by the browser with form boundary
@@ -630,6 +631,7 @@ async function processBatchImages(files, concurrency, options = {}) {
             if (llm_model) {
                 formData.append('llm_model', llm_model);
             }
+            appendThinkingLevelFields(formData);
             appendInferencePaymentFields(formData);
             
             // Log what we're sending

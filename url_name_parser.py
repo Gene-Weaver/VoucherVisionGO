@@ -1,157 +1,211 @@
-import re
-import requests
 import hashlib
-from urllib.parse import urlparse, unquote, parse_qs
 import os
+import re
+from email.message import Message
+from urllib.parse import parse_qs, unquote, urlparse
+
+import requests
+
+
+GENERIC_WORDS = {
+    "full", "native", "large", "default", "original", "format", "preview",
+    "thumb", "thumbnail", "web", "webview", "imagefullview",
+    "imagedownload", "download",
+}
+VALID_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".tiff"}
+
+
+def _sanitize_filename(filename):
+    """Return a safe basename while retaining useful specimen identifiers."""
+    if not filename:
+        return None
+    filename = unquote(str(filename)).replace("\\", "/")
+    filename = os.path.basename(filename).replace("\x00", "").strip().strip("'\"")
+    filename = re.sub(r"[^A-Za-z0-9._-]+", "_", filename).strip("._")
+    return filename or None
+
+
+def _content_disposition_filename(content_disposition):
+    """Parse both filename= and RFC 5987 filename*= response parameters."""
+    if not content_disposition:
+        return None
+    message = Message()
+    message["Content-Disposition"] = content_disposition
+    return _sanitize_filename(message.get_filename())
+
+
+def _best_match(url, server_filename):
+    """Find the longest continuous substring shared by a URL and filename."""
+    url_text = unquote(url or "")
+    server_base, server_ext = os.path.splitext(server_filename)
+    best_match = ""
+    for i in range(len(server_base)):
+        for j in range(i + 6, len(server_base) + 1):
+            substring = server_base[i:j]
+            if substring in url_text and len(substring) > len(best_match):
+                best_match = substring
+    if not best_match:
+        return None
+    return _sanitize_filename(best_match + (server_ext or ".jpg"))
+
 
 def extract_best_match(url, server_filename, debug=False):
-    """
-    Find the longest continuous substring between URL and server-declared filename.
-    """
-    url_text = unquote(url)
-    server_base = os.path.splitext(server_filename)[0]
-    
+    """Compatibility wrapper for callers that already have a server filename."""
+    server_filename = _sanitize_filename(server_filename) or "downloaded.jpg"
+    match = _best_match(url, server_filename)
     if debug:
-        print(f"    [debug] Server-declared filename for matching: {server_base}")
+        print(f"    [debug] Server-declared filename for matching: {server_filename}")
+        if match:
+            print(f"    [debug] Best substring match: {match}")
+    return match or server_filename
 
-    best_match = ''
-    for i in range(len(server_base)):
-        for j in range(i + 6, len(server_base) + 1):  # window length ≥ 6
-            substr = server_base[i:j]
-            if substr in url_text and len(substr) > len(best_match):
-                best_match = substr
 
-    if best_match:
-        if debug:
-            print(f"    [debug] Best substring match: {best_match}")
-        return best_match + '.jpg'  # assume jpg
+def _obvious_filename(url, debug=False):
+    """Return an explicit, non-generic filename in a URL or nested URL."""
+    parsed = urlparse(unquote(url or ""))
+    fallback_name = _sanitize_filename(os.path.basename(parsed.path))
+    if fallback_name:
+        base, extension = os.path.splitext(fallback_name)
+        if (
+            extension.lower() in VALID_EXTENSIONS
+            and not any(word in base.lower() for word in GENERIC_WORDS)
+            and re.fullmatch(r"[A-Za-z0-9._-]+", base)
+            and re.search(r"\d", base)
+        ):
+            return fallback_name
 
-    return server_filename
-
-def extract_filename_from_url(url, timeout=10, debug=False):
-    """
-    Intelligently extract the real image filename from a URL using both
-    server headers and path-based matching.
-
-    """
-    generic_words = {'full', 'native', 'large', 'default', 'original', 'format', 'preview', 'thumb', 'thumbnail', 'web','webview','imagefullview','imagedownload','download'}
-    valid_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff'}
-
-    parsed = urlparse(unquote(url))
-    path = parsed.path
-    fallback_name = os.path.basename(path)
-
-    # First pass: parts that already have a valid extension
-    # If the jpg is just the last part
-    base, ext_candidate = os.path.splitext(fallback_name)
-    # Reject if any generic word appears inside the part
-    if any(generic in base.lower() for generic in generic_words):
-        pass
-    else:
-        if ext_candidate.lower() in valid_extensions:
-            # Base must have digits and valid characters
-            if re.fullmatch(r'[A-Za-z0-9._-]+', base) and re.search(r'\d', base):
-                return fallback_name
-            
     if parsed.query:
         query_params = parse_qs(parsed.query)
-        
-        # Look for common parameter names that contain the actual image URL
-        url_param_names = ['url', 'src', 'image', 'file', 'path', 'link']
-        
-        for param_name in url_param_names:
-            if param_name in query_params:
-                nested_url = query_params[param_name][0]  # Get first value
+        nested_parameter_names = {"url", "src", "image", "file", "path", "link"}
+        for parameter, values in query_params.items():
+            if parameter.lower() not in nested_parameter_names:
+                continue
+            nested_url = values[0]
+            nested_name = _sanitize_filename(
+                os.path.basename(urlparse(unquote(nested_url)).path)
+            )
+            if not nested_name:
+                continue
+            nested_base, nested_extension = os.path.splitext(nested_name)
+            if (
+                nested_extension.lower() in VALID_EXTENSIONS
+                and not any(word in nested_base.lower() for word in GENERIC_WORDS)
+            ):
                 if debug:
-                    print(f"Found nested URL in '{param_name}' parameter: {nested_url}")
-                
-                # Recursively extract filename from the nested URL
-                nested_parsed = urlparse(unquote(nested_url))
-                nested_filename = os.path.basename(nested_parsed.path)
-                
-                # Check if the nested filename looks valid
-                if nested_filename and any(nested_filename.lower().endswith(ext) for ext in valid_extensions):
-                    # Check if it's not a generic name
-                    name_without_ext = os.path.splitext(nested_filename)[0].lower()
-                    if name_without_ext not in generic_words:
-                        if debug:
-                            print(f"Using filename from nested URL: {nested_filename}")
-                        return nested_filename
+                    print(f"Using filename from nested URL: {nested_name}")
+                return nested_name
+    return None
 
-    # See if the name is in the head (MICH)
+
+def _path_identifier(url):
+    """Find the strongest specimen-like identifier in a URL path."""
+    path_parts = urlparse(unquote(url or "")).path.strip("/").split("/")
+
+    # Prefer an actual image filename, including numeric institutional IDs.
+    for part in reversed(path_parts):
+        candidate = _sanitize_filename(part)
+        if not candidate or any(word in candidate.lower() for word in GENERIC_WORDS):
+            continue
+        base, extension = os.path.splitext(candidate)
+        if (
+            extension.lower() in VALID_EXTENSIONS
+            and re.fullmatch(r"[A-Za-z0-9._-]+", base)
+            and re.search(r"\d", base)
+        ):
+            return candidate
+
+    # An extension-less path component must contain both a letter and a digit;
+    # this prevents IIIF path controls such as /0/ from becoming "0.jpg".
+    for part in reversed(path_parts):
+        # IIIF identifiers are often colon-delimited within one path segment.
+        # Inspect the right-most component first so
+        # herb00ic:1122841:MICH-V-1122841 resolves to MICH-V-1122841.
+        pieces = list(reversed(re.split(r"[:;]", part)))
+        if len(pieces) == 1:
+            pieces = [part]
+        for piece in pieces:
+            candidate = _sanitize_filename(piece)
+            if not candidate or any(word in candidate.lower() for word in GENERIC_WORDS):
+                continue
+            if (
+                re.fullmatch(r"[A-Za-z0-9._-]+", candidate)
+                and re.search(r"[A-Za-z]", candidate)
+                and re.search(r"\d", candidate)
+            ):
+                return candidate + ".jpg"
+    return None
+
+
+def resolve_filename_from_response(
+    url, *, final_url=None, content_disposition=None, debug=False
+):
+    """Resolve a useful image name from already-received response metadata.
+
+    This function performs no network requests. Downloaders should call it with
+    the original URL plus the final URL and Content-Disposition they already
+    received, avoiding a second HEAD request solely to determine the filename.
+    """
+    obvious = _obvious_filename(url, debug=debug)
+    if obvious:
+        return obvious
+
+    server_filename = _content_disposition_filename(content_disposition)
+    if server_filename:
+        # The original URL commonly contains the clean catalog number while a
+        # repository header contains a longer internal filename. Prefer their
+        # longest shared identifier (for example, MICH-V-1122841).
+        for candidate_url in (url, final_url):
+            match = _best_match(candidate_url, server_filename)
+            if match:
+                if debug:
+                    print(f"    [debug] Matched response filename: {match}")
+                return match
+        return server_filename
+
+    if final_url and final_url != url:
+        obvious = _obvious_filename(final_url, debug=debug)
+        if obvious:
+            return obvious
+
+    for candidate_url in (url, final_url):
+        if candidate_url:
+            candidate = _path_identifier(candidate_url)
+            if candidate:
+                if debug:
+                    print(f"    [debug] Fallback valid identifier found: {candidate}")
+                return candidate
+
+    url_hash = hashlib.md5((url or "").encode("utf-8")).hexdigest()[:12]
+    fallback = f"image_{url_hash}.jpg"
+    if debug:
+        print(f"    [debug] No valid fallback candidate, using URL hash: {fallback}")
+    return fallback
+
+
+def extract_filename_from_url(url, timeout=10, debug=False):
+    """Resolve an image filename, using HEAD only for legacy callers.
+
+    Download paths that already possess response metadata should call
+    ``resolve_filename_from_response`` instead.
+    """
+    obvious = _obvious_filename(url, debug=debug)
+    if obvious:
+        return obvious
+
     try:
         response = requests.head(url, allow_redirects=True, timeout=timeout)
         if debug:
             print(f"    [debug] HEAD status code: {response.status_code}")
-            for k, v in response.headers.items():
-                if 'filename' in v or 'filename' in k.lower():
-                    print(f"    [debug] HEAD {k}: {v}")
-
-        if 'content-disposition' in response.headers:
-            disp = response.headers['content-disposition']
-            match = re.search(r'filename="?([^";]+)"?', disp)
-            if match:
-                server_filename = match.group(1)
-                if debug:
-                    print(f"    [debug] Server-declared full filename (raw): {server_filename}")
-                return extract_best_match(url, server_filename, debug=debug)
-    except requests.RequestException as e:
+        return resolve_filename_from_response(
+            url,
+            final_url=str(response.url),
+            content_disposition=response.headers.get("content-disposition"),
+            debug=debug,
+        )
+    except requests.RequestException as exc:
         if debug:
-            print(f"    [debug] HEAD request failed: {e}")
-
-
-    path_parts = path.strip('/').split('/')
-    fallback_candidate = None
-
-
-    for part in reversed(path_parts):
-        part_lower = part.lower()
-        base, ext_candidate = os.path.splitext(part_lower)
-
-        # Reject if any generic word appears inside the part
-        if any(generic in part_lower for generic in generic_words):
-            continue
-
-        if ext_candidate.lower() in valid_extensions:
-            # Base must have digits and valid characters
-            if re.fullmatch(r'[A-Za-z0-9._-]+', base) and re.search(r'\d', base):
-                fallback_candidate = part
-                break
-
-    # Second pass: parts without extension
-    if not fallback_candidate:
-        for part in reversed(path_parts):
-            part_lower = part.lower()
-            base = part_lower  # no splitting
-
-            if any(generic in base for generic in generic_words):
-                continue
-
-            if re.fullmatch(r'[A-Za-z0-9._-]+', base) and re.search(r'\d', base):
-                fallback_candidate = part + '.jpg'
-                break
-
-    if fallback_candidate:
-        fallback_name = fallback_candidate
-        if debug:
-            print(f"    [debug] Fallback valid identifier found: {fallback_candidate}")
-    else:
-        url_hash = hashlib.md5(url.encode('utf-8')).hexdigest()[:12]
-        fallback_name = f"image_{url_hash}.jpg"
-        if debug:
-            print(f"    [debug] No valid fallback candidate, using URL hash: {fallback_name}")
-    # Final cleanup: only allow one dot (the extension separator)
-    if fallback_name.count('.') > 1:
-        base, ext = fallback_name.rsplit('.', 1)
-        base = base.replace('.', '-')  # replace internal periods
-        fallback_name = f"{base}.{ext}"
-        
-    if debug:
-        print(f"    [debug] Fallback basename from path: {fallback_name}")
-
-    return fallback_name
-
-
+            print(f"    [debug] HEAD request failed: {exc}")
+        return resolve_filename_from_response(url, debug=debug)
 
 
 if __name__ == "__main__":
@@ -174,12 +228,12 @@ if __name__ == "__main__":
         "https://id.digitarium.fi/api/C.131915/Preview001.jpg",
     ]
 
-    debug = False 
-    
+    debug = False
+
     for url in urls:
         print(f"URL: {url}")
         try:
             filename = extract_filename_from_url(url, debug=debug)
             print(f"  ➔ Extracted filename: {filename}\n")
-        except Exception as e:
-            print(f"  ➔ Error extracting filename: {e}\n")
+        except Exception as exc:
+            print(f"  ➔ Error extracting filename: {exc}\n")

@@ -57,7 +57,7 @@ from google.oauth2 import id_token as google_id_token
 from google.oauth2 import service_account
 import google.auth
 
-from url_name_parser import extract_filename_from_url
+from url_name_parser import extract_filename_from_url, resolve_filename_from_response
 from impact import estimate_impact
 from anti_bot_fetch import smart_fetch_image_as_filestorage
 from guarded_fetch import (
@@ -508,6 +508,31 @@ def resolve_model_defaults(engine_options, llm_model_name, *,
         llm = DEFAULT_MODEL
 
     return engines, llm
+
+
+ALLOWED_THINKING_LEVELS = ("low", "medium", "high")
+DEFAULT_THINKING_LEVEL = "low"
+
+
+def resolve_thinking_levels(ocr_thinking_level=None, llm_thinking_level=None):
+    """Return validated, normalized OCR and parsing thinking levels."""
+    resolved = []
+    for field_name, raw_value in (
+        ("ocr_thinking_level", ocr_thinking_level),
+        ("llm_thinking_level", llm_thinking_level),
+    ):
+        level = (
+            DEFAULT_THINKING_LEVEL
+            if raw_value is None
+            else str(raw_value).strip().lower()
+        )
+        if level not in ALLOWED_THINKING_LEVELS:
+            allowed = ", ".join(ALLOWED_THINKING_LEVELS)
+            raise ValueError(
+                f"Invalid {field_name} '{raw_value}'. Allowed values: {allowed}."
+            )
+        resolved.append(level)
+    return tuple(resolved)
 
 
 RATE_LIMIT_LABELS = {
@@ -3321,14 +3346,20 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
                             spool.write(chunk)
                     spool.seek(0)
                     content_type = response.headers.get('Content-Type', 'image/jpeg')
+                    content_disposition = response.headers.get('Content-Disposition')
                 finally:
                     response.close()
             except BaseException:
                 spool.close()          # never leave it open on a failed read
                 raise
 
-        # Get filename from URL
-        filename = extract_filename_from_url(image_url)
+        # Reuse the response metadata from this download rather than issuing a
+        # second HEAD request just to determine the filename.
+        filename = resolve_filename_from_response(
+            image_url,
+            final_url=current_url,
+            content_disposition=content_disposition,
+        )
 
         # Open image from the spooled body
         try:
@@ -4405,6 +4436,8 @@ def _build_pdf_job_process_kwargs(job_data: dict) -> dict:
         "include_wfo": bool(job_data.get("include_wfo", True)),
         "include_cop90": bool(job_data.get("include_cop90", True)),
         "llm_model_name": job_data.get("llm_model_name"),
+        "ocr_thinking_level": job_data.get("ocr_thinking_level", DEFAULT_THINKING_LEVEL),
+        "llm_thinking_level": job_data.get("llm_thinking_level", DEFAULT_THINKING_LEVEL),
         "url_source": "",
         "notebook_mode": bool(job_data.get("notebook_mode")),
         "skip_label_collage": bool(job_data.get("skip_label_collage")),
@@ -5135,7 +5168,8 @@ class VoucherVisionProcessor:
         return '.' in filename and filename.rsplit('.', 1)[1].lower() in self.ALLOWED_EXTENSIONS
     
     def perform_ocr(self, file_path, engine_options, ocr_prompt_option, user_api_key=None,
-                    user_vertex_project=None, user_vertex_region=None):
+                    user_vertex_project=None, user_vertex_region=None,
+                    ocr_thinking_level=DEFAULT_THINKING_LEVEL):
         """Perform OCR on the provided image"""
         ocr_packet = {}
         ocr_all = ""
@@ -5162,6 +5196,7 @@ class VoucherVisionProcessor:
                     top_p=0.95,
                     seed=123456,
                     do_resize_img=False,
+                    user_thinking_level=ocr_thinking_level,
                     vertex_project=user_vertex_project,
                     vertex_region=user_vertex_region,
                 )
@@ -5174,7 +5209,8 @@ class VoucherVisionProcessor:
                     temperature=1.0,
                     top_p=0.95,
                     seed=123456,
-                    do_resize_img=False
+                    do_resize_img=False,
+                    user_thinking_level=ocr_thinking_level,
                 )
             else:
                 # Use the shared, pre-warmed server engine
@@ -5188,13 +5224,18 @@ class VoucherVisionProcessor:
                                 temperature=1,
                                 top_p=0.95,
                                 seed=123456,
-                                do_resize_img=False
+                                do_resize_img=False,
+                                user_thinking_level=ocr_thinking_level,
                             )
                 OCR_Engine = self.ocr_engines[provider_model_name]
             
             # Execute OCR (this API call can run concurrently)
             mark_inference_started(user_api_key, user_vertex_project)
-            ocr_result = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
+            ocr_result = OCR_Engine.ocr_gemini(
+                file_path,
+                prompt=ocr_prompt_option,
+                user_thinking_level=ocr_thinking_level,
+            )
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = ocr_result[:8]
             thinking_tokens = _coerce_int(ocr_result[8]) if len(ocr_result) > 8 else 0
             thinking_cost = _coerce_float(ocr_result[9]) if len(ocr_result) > 9 else 0.0
@@ -5219,7 +5260,8 @@ class VoucherVisionProcessor:
     
     def get_thread_local_vv(self, prompt, llm_model_name, user_api_key=None,
                             user_vertex_project=None, user_vertex_region=None,
-                            caller_email=None):
+                            caller_email=None,
+                            llm_thinking_level=DEFAULT_THINKING_LEVEL):
         """Get or create a thread-local VoucherVision instance with the specified prompt"""
         # Resolve the prompt path: built-ins on disk take priority; otherwise
         # the filename is looked up in Firestore and the GCS-stored YAML is
@@ -5244,6 +5286,7 @@ class VoucherVisionProcessor:
             prompt,
             resolved_prompt_path,
             provider_model_name,
+            llm_thinking_level,
         )
         needs_new = (
             not hasattr(self.thread_local, 'vv')
@@ -5267,6 +5310,7 @@ class VoucherVisionProcessor:
                 api_key=user_api_key,  # None = use env, key = use theirs
                 vertex_project=user_vertex_project,
                 vertex_region=user_vertex_region,
+                thinking_level=llm_thinking_level,
             )
             self.thread_local.cache_key = incoming_key
             self._log(f"Created new thread-local VV instance with prompt: {prompt}", "info")
@@ -5274,7 +5318,8 @@ class VoucherVisionProcessor:
         return self.thread_local.vv, self.thread_local.llm_model
     
     def process_voucher_vision(self, ocr_text, prompt, llm_model_name, LLM_name_cost, user_api_key=None,
-                               user_vertex_project=None, user_vertex_region=None, caller_email=None):
+                               user_vertex_project=None, user_vertex_region=None, caller_email=None,
+                               llm_thinking_level=DEFAULT_THINKING_LEVEL):
         """Process the OCR text with VoucherVision using a thread-local instance"""
         # Get thread-local VoucherVision instance with the correct prompt
         vv, llm_model = self.get_thread_local_vv(
@@ -5283,6 +5328,7 @@ class VoucherVisionProcessor:
             user_vertex_project=user_vertex_project,
             user_vertex_region=user_vertex_region,
             caller_email=caller_email,
+            llm_thinking_level=llm_thinking_level,
         )
 
         # Update OCR text for processing
@@ -5477,7 +5523,9 @@ class VoucherVisionProcessor:
                               user_api_key=None,
                               user_vertex_project=None,
                               user_vertex_region=None,
-                              caller_email=None):
+                              caller_email=None,
+                              ocr_thinking_level=DEFAULT_THINKING_LEVEL,
+                              llm_thinking_level=DEFAULT_THINKING_LEVEL):
         """
         Process an image from a request file
         ocr_prompt_option=["verbatim_with_annotations", None]
@@ -5594,7 +5642,8 @@ class VoucherVisionProcessor:
                                                                    ocr_prompt_option,
                                                                    user_api_key=user_api_key,
                                                                    user_vertex_project=user_vertex_project,
-                                                                   user_vertex_region=user_vertex_region)
+                                                                   user_vertex_region=user_vertex_region,
+                                                                   ocr_thinking_level=ocr_thinking_level)
 
                 # If ocr_only is True, skip VoucherVision processing
                 if notebook_mode:
@@ -5688,7 +5737,8 @@ class VoucherVisionProcessor:
                                                                                                        user_api_key=user_api_key,
                                                                                                        user_vertex_project=user_vertex_project,
                                                                                                        user_vertex_region=user_vertex_region,
-                                                                                                       caller_email=caller_email)
+                                                                                                       caller_email=caller_email,
+                                                                                                       llm_thinking_level=llm_thinking_level)
 
                     # WFO taxonomy lookup (local SQLite database)
                     WFO = ""
@@ -6130,6 +6180,16 @@ def process_image():
     include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+    try:
+        ocr_thinking_level, llm_thinking_level = resolve_thinking_levels(
+            request.form.get('ocr_thinking_level'),
+            request.form.get('llm_thinking_level'),
+        )
+    except ValueError as exc:
+        return _error_response(
+            'INVALID_INPUT', str(exc), status=400,
+            details={'allowed_thinking_levels': list(ALLOWED_THINKING_LEVELS)},
+        )
 
     # Apply model defaults BEFORE any quota calculation — omitting `engines`
     # and `llm_model` must not yield an unmetered, server-funded run.
@@ -6192,6 +6252,8 @@ def process_image():
         include_wfo=include_wfo,
         include_cop90=include_cop90,
         llm_model_name=llm_model_name,
+        ocr_thinking_level=ocr_thinking_level,
+        llm_thinking_level=llm_thinking_level,
         url_source="",
         notebook_mode=notebook_mode,
         skip_label_collage=skip_label_collage,
@@ -6392,6 +6454,8 @@ def process_image_by_url():
         include_wfo = data.get('include_wfo', True)
         include_cop90 = data.get('include_cop90', True)
         llm_model_name = data.get('llm_model')
+        raw_ocr_thinking_level = data.get('ocr_thinking_level')
+        raw_llm_thinking_level = data.get('llm_thinking_level')
         payment_auth = get_payment_auth_context(request)
         user_gemini_key = payment_auth["gemini_api_key"]
         user_vertex_project = payment_auth["vertex_project"]
@@ -6411,10 +6475,22 @@ def process_image_by_url():
         include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
         include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
         llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+        raw_ocr_thinking_level = request.form.get('ocr_thinking_level')
+        raw_llm_thinking_level = request.form.get('llm_thinking_level')
         payment_auth = get_payment_auth_context(request)
         user_gemini_key = payment_auth["gemini_api_key"]
         user_vertex_project = payment_auth["vertex_project"]
         user_vertex_region = payment_auth["vertex_region"]
+
+    try:
+        ocr_thinking_level, llm_thinking_level = resolve_thinking_levels(
+            raw_ocr_thinking_level, raw_llm_thinking_level,
+        )
+    except ValueError as exc:
+        return _error_response(
+            'INVALID_INPUT', str(exc), status=400,
+            details={'allowed_thinking_levels': list(ALLOWED_THINKING_LEVELS)},
+        )
 
     # Apply model defaults BEFORE any quota calculation — omitting `engines`
     # and `llm_model` must not yield an unmetered, server-funded run.
@@ -6670,6 +6746,8 @@ def process_image_by_url():
             include_wfo=include_wfo,
             include_cop90=include_cop90,
             llm_model_name=llm_model_name,
+            ocr_thinking_level=ocr_thinking_level,
+            llm_thinking_level=llm_thinking_level,
             url_source=image_url,
             notebook_mode=notebook_mode,
             skip_label_collage=skip_label_collage,
@@ -6769,6 +6847,16 @@ def process_pdf_async():
     include_wfo = request.form.get('include_wfo', 'true').lower() == 'true'
     include_cop90 = request.form.get('include_cop90', 'true').lower() == 'true'
     llm_model_name = request.form.get('llm_model') if 'llm_model' in request.form else None
+    try:
+        ocr_thinking_level, llm_thinking_level = resolve_thinking_levels(
+            request.form.get('ocr_thinking_level'),
+            request.form.get('llm_thinking_level'),
+        )
+    except ValueError as exc:
+        return _error_response(
+            'INVALID_INPUT', str(exc), status=400,
+            details={'allowed_thinking_levels': list(ALLOWED_THINKING_LEVELS)},
+        )
 
     # Apply model defaults BEFORE any quota calculation — omitting `engines`
     # and `llm_model` must not yield an unmetered, server-funded run.
@@ -6872,6 +6960,8 @@ def process_pdf_async():
         "include_wfo": bool(include_wfo),
         "include_cop90": bool(include_cop90),
         "llm_model_name": llm_model_name,
+        "ocr_thinking_level": ocr_thinking_level,
+        "llm_thinking_level": llm_thinking_level,
         "auth_method": payment_auth["auth_method"],
         "user_vertex_project": user_vertex_project,
         "user_vertex_region": user_vertex_region,
@@ -10537,43 +10627,6 @@ def format_prompt_as_text(filename, details):
     lines.append("=" * 80)
     
     return "\n".join(lines)
-
-def format_prompts_as_text_table(prompt_list):
-    """
-    Format a list of prompts as a text table suitable for terminal display
-    
-    Args:
-        prompt_list (list): List of prompt info dictionaries
-        
-    Returns:
-        str: Formatted text table
-    """
-    import textwrap
-    from tabulate import tabulate
-    
-    # Prepare table data
-    table_data = []
-    for i, info in enumerate(prompt_list, 1):
-        # Format the description with proper text wrapping
-        wrapped_description = textwrap.fill(info.get('description', ''), width=50)
-        
-        table_data.append([
-            i,
-            info.get('filename', ''),
-            wrapped_description,
-            info.get('version', 'Unknown'),
-            info.get('author', 'Unknown'),
-            info.get('institution', 'Unknown')
-        ])
-    
-    # Generate table
-    table = tabulate(
-        table_data, 
-        headers=['#', 'Filename', 'Description', 'Version', 'Author', 'Institution'],
-        tablefmt='grid'
-    )
-    
-    return f"Available Prompt Templates:\n\n{table}\n\nTotal: {len(prompt_list)} prompt file(s) found"
 
 def extract_prompt_info(prompt_file):
     """

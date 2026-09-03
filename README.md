@@ -1,6 +1,29 @@
 # This is the server code for VoucherVisionGO, the API version of VoucherVision. 
 This is likely **not** the repo that you want. If you just want to use the API, then please use the VoucherVisionGO-client repo.
 
+## Gemini 3 thinking levels
+
+Gemini 3 Flash and Flash-Lite requests accept independent optional thinking
+levels for OCR and label parsing:
+
+| Stage | Form / JSON field | Allowed values | Default |
+| --- | --- | --- | --- |
+| OCR | `ocr_thinking_level` | `low`, `medium`, `high` | `low` |
+| Parsing | `llm_thinking_level` | `low`, `medium`, `high` | `low` |
+
+Invalid values return HTTP 400. These fields do not change Gemini 2.x, Gemini
+3 Pro, or Gemma behavior. For example:
+
+```bash
+curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
+  -H "X-API-Key: YOUR_VVGO_KEY" \
+  -F "file=@your_image.jpg" \
+  -F "engines=gemini-3.8-flash" \
+  -F "ocr_thinking_level=medium" \
+  -F "llm_model=gemini-3.8-flash" \
+  -F "llm_thinking_level=high"
+```
+
 ## Billing Gemini usage to your own account
 
 By default, Gemini calls are billed to VoucherVisionGO's shared keys and count against

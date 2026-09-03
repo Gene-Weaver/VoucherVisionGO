@@ -26,6 +26,7 @@ from PIL import Image  # noqa: E402
 
 import anti_bot_fetch  # noqa: E402
 from anti_bot_fetch import smart_fetch_image_as_filestorage  # noqa: E402
+from url_name_parser import resolve_filename_from_response  # noqa: E402
 from guarded_fetch import (  # noqa: E402
     BlockedDestination, FetchDeadlineExceeded, InvalidFetchUrl,
     address_is_public, resolve_public_addresses, validate_url_shape,
@@ -202,6 +203,7 @@ def build_route(url, requests_handler, httpx_handler=None):
                                   fromlist=["FileStorage"]).FileStorage,
         "resize_image_to_max_pixels": lambda im, mp: im,
         "extract_filename_from_url": lambda u: "x.jpg",
+        "resolve_filename_from_response": resolve_filename_from_response,
         "get_user_email_from_request": lambda r: "u@x.edu",
         "get_payment_auth_context": lambda r: {"gemini_api_key": None, "vertex_project": None,
                                                "vertex_region": None, "auth_method": "server"},

@@ -34,14 +34,14 @@ http://localhost:8000/index2.html
     <script> window.VVGO_API_BASE = 'https://vouchervision-go-738307415303.us-central1.run.app';</script>
 
     <script src="js/index_ui.js?v=48"></script>
-    <script src="js/vouchervisiongo.js?v=46"></script>
-    <script src="js/batch_processing.js?v=46"></script>
-    <script src="js/pdf_jobs.js?v=46"></script>
+    <script src="js/vouchervisiongo.js?v=47"></script>
+    <script src="js/batch_processing.js?v=47"></script>
+    <script src="js/pdf_jobs.js?v=47"></script>
     <script src="js/api_key_validator.js?v=45"></script>
     <script src="js/prompt_templates.js?v=45"></script>
     <script src="js/changelog_viewer.js?v=45"></script>
 
-    <link rel="stylesheet" href="css/vouchervisiongo.css?v=48">
+    <link rel="stylesheet" href="css/vouchervisiongo.css?v=49">
     <script>
         function addMapboxToHead() {
             if (!document.querySelector('script[src*="mapbox-gl.js"]')) {
@@ -258,6 +258,14 @@ http://localhost:8000/index2.html
                     <!-- OCR Engines -->
                     <div class="settings-card">
                         <h3>OCR Engines</h3>
+                        <div class="thinking-level-control">
+                            <label for="ocrThinkingLevel">OCR thinking level</label>
+                            <select id="ocrThinkingLevel" name="ocr_thinking_level">
+                                <option value="low" selected>Low</option>
+                                <option value="medium" disabled>Medium (API only)</option>
+                                <option value="high" disabled>High (API only)</option>
+                            </select>
+                        </div>
                         <div id="ocrModelOptions" class="compact-group">
                             <div class="checkbox-group">
                                 <label>
@@ -320,6 +328,14 @@ http://localhost:8000/index2.html
                     <!-- LLM Model -->
                     <div class="settings-card">
                         <h3>LLM Model for Parsing Label Text</h3>
+                        <div class="thinking-level-control">
+                            <label for="llmThinkingLevel">LLM thinking level</label>
+                            <select id="llmThinkingLevel" name="llm_thinking_level">
+                                <option value="low" selected>Low</option>
+                                <option value="medium" disabled>Medium (API only)</option>
+                                <option value="high" disabled>High (API only)</option>
+                            </select>
+                        </div>
                         <div id="parsingModelOptions" class="compact-group">
                             <div class="radio-group">
                                 <label>
