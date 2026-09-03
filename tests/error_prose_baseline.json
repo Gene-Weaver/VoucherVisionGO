@@ -1,0 +1,57 @@
+{
+  "_comment": "Every `error` and `message` value in the public processing routes/helpers as of the commit preceding the error-envelope conversion, as {text: count}. `error` and `message` are baselined SEPARATELY and never compared against each other: moving text out of `error` into `message` must fail, not silently satisfy the baseline. literal = plain strings, template = f-string source, expr = bare expressions such as str(e). Whitespace/quote-normalized. A deliberate rewording (e.g. sanitizing provider text) updates this file in the same change.",
+  "error": {
+    "literal": {
+      "Async PDF jobs do not support gemini_api_key yet. Use server billing or a linked Vertex project.": 1,
+      "Collage Engine is not available on the server.": 2,
+      "Empty billing credential": 1,
+      "Failed to load prompt.": 1,
+      "Failed to store PDF for async processing.": 1,
+      "Image could not be retrieved from URL.": 1,
+      "No PDF file provided.": 1,
+      "No file provided": 1,
+      "No file selected": 1,
+      "No image URL provided": 2,
+      "Only PDF uploads are supported for async PDF jobs.": 1,
+      "PDF contains no pages": 1,
+      "Prompt not found or not accessible.": 2,
+      "Rate limit exceeded": 2,
+      "Server is at maximum capacity. Please try again later.": 1,
+      "The uploaded PDF is empty.": 1,
+      "Unable to queue PDF job.": 1,
+      "Unable to read the uploaded PDF.": 1,
+      "Unable to resolve the authenticated user.": 1,
+      "Unrecognized billing parameter": 1
+    },
+    "template": {
+      "An unexpected server error occurred: {str(e)}": 1,
+      "Async PDF jobs support only {sorted(PDF_JOB_ALLOWED_SOURCE_TYPES)} billing modes.": 1,
+      "Error processing image: {str(e)}": 1,
+      "Failed to convert PDF: {str(e)}": 1,
+      "Failed to fetch URL: {str(last_exception)}": 1,
+      "File type not allowed. Supported types: {\", \".join(self.ALLOWED_EXTENSIONS)}": 1,
+      "Image resize failed: {str(e)}": 1,
+      "PDF has {len(page_files)} pages, maximum allowed is {MAX_PDF_PAGES}": 1
+    },
+    "expr": {
+      "_vertex_model_not_found_message( user_vertex_project, user_vertex_region, llm_model_name )": 1,
+      "_vertex_permission_error_message(user_vertex_project)": 1,
+      "binding_error": 3,
+      "err": 3,
+      "project_error": 3,
+      "quota_error": 2,
+      "result.get('error', 'Unknown error')": 1,
+      "str(e)": 2
+    }
+  },
+  "message": {
+    "literal": {},
+    "template": {
+      "The {label} '{raw_name}' is not a parameter VoucherVisionGO \" f\"reads, so this request would have been billed to the shared \" f\"server keys instead of to you. Did you mean '{canonical}'? \" f\"Send it as a form field, a JSON body field, or the header \" f\"'{PAYMENT_AUTH_HEADER_ALIASES[canonical][0]}'.": 1,
+      "The {label} '{raw_name}' was supplied but is empty. \" f\"VoucherVisionGO will not silently fall back to its shared \" f\"server keys when you appear to be supplying your own \" f\"credentials. Send a non-empty {canonical}, or omit the \" f\"parameter entirely to use server billing.": 1
+    },
+    "expr": {
+      "message": 2
+    }
+  }
+}

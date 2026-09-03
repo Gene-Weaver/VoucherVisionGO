@@ -45,7 +45,10 @@ def call_OCR(engine_options, path_img, double_OCR=False):
                                         seed=123456, 
                                         do_resize_img=False)
         
-        response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(path_img, temperature=1, top_k=1, top_p=0)
+        ocr_result = OCR_Engine.ocr_gemini(path_img, temperature=1, top_k=1, top_p=0)
+        response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = ocr_result[:8]
+        thinking_tokens = int(ocr_result[8] or 0) if len(ocr_result) > 8 else 0
+        thinking_cost = float(ocr_result[9] or 0) if len(ocr_result) > 9 else 0.0
         
         # print(response)
         
@@ -57,6 +60,8 @@ def call_OCR(engine_options, path_img, double_OCR=False):
         ocr_packet[ocr_opt]["rates_out"] = rates_out
         ocr_packet[ocr_opt]["tokens_in"] = tokens_in
         ocr_packet[ocr_opt]["tokens_out"] = tokens_out
+        ocr_packet[ocr_opt]["thinking_tokens"] = thinking_tokens
+        ocr_packet[ocr_opt]["thinking_cost"] = thinking_cost
 
         # Update the OCR string
         if double_OCR:

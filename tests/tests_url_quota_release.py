@@ -14,6 +14,9 @@ tree = ast.parse(SRC)
 fn = next(n for n in ast.walk(tree)
           if isinstance(n, ast.FunctionDef) and n.name == "process_image_by_url")
 fn.decorator_list = []   # drop @app.route / @authenticated_route
+# The route now raises/handles TerminalFetchError, so the real class is needed.
+term = next(n for n in ast.walk(tree)
+            if isinstance(n, ast.ClassDef) and n.name == "TerminalFetchError")
 
 STATE = {}
 def reset():
@@ -52,6 +55,11 @@ def fake_resize(*a, **kw):
 
 ns = {
     "jsonify": jsonify, "make_response": make_response, "request": Req(),
+    # Envelope builder: shape is covered by tests_error_envelope.py; here we
+    # only need it to produce a response so the route's control flow runs.
+    "_error_response": lambda code, error, message=None, status=500,
+                              details=None, legacy=None: Resp(
+        {"error": error, "error_code": code}, status),
     "OrderedDict": OrderedDict, "json": __import__("json"), "time": types.SimpleNamespace(sleep=lambda s: None),
     "uuid": __import__("uuid"), "logger": types.SimpleNamespace(**{k: (lambda *a, **kw: None) for k in
         ("info","error","warning","exception","debug")}),
@@ -85,6 +93,37 @@ ns = {
     "record_usage_event": lambda e: None,
     "extract_filename_from_url": lambda u: "img.jpg",
     "resolve_payment_inference": lambda k=None, p=None: "VoucherVisionGO_credits",
+    "current_payment_inference": lambda request_scope=False: "not_processed",
+    "current_request_id": lambda: "rid-test",
+    "classify_fetch_failure": lambda e: ("FETCH_FAILED", 502, "could not fetch"),
+    # Real budget constants and URL guards; the route now validates before
+    # entering the retry loop, so a valid URL must pass these.
+    "URL_FETCH_ROUTE_ATTEMPTS": 1,
+    "URL_FETCH_SMART_ATTEMPTS": 2,
+    "URL_FETCH_CONNECT_TIMEOUT": 10.0,
+    "URL_FETCH_READ_TIMEOUT": 45.0,
+    "validate_image_url": lambda u: None,
+    "check_url_destination": lambda u, budget=None: None,   # SSRF checks covered separately
+    # Guarded-fetch plumbing; behaviour is covered by tests_guarded_fetch.py.
+    "FetchBudget": lambda total: types.SimpleNamespace(
+        check=lambda *a, **k: None, remaining=lambda: total, expired=lambda: False),
+    "URL_FETCH_TOTAL_BUDGET_SECONDS": 120.0,
+    "URL_FETCH_MAX_BYTES": 64 * 1024 * 1024,
+    "URL_FETCH_ATTEMPTS": 2,
+    "BlockedDestination": type("BlockedDestination", (Exception,), {"message": ""}),
+    "InvalidFetchUrl": type("InvalidFetchUrl", (Exception,), {"message": ""}),
+    "AggregateFetchError": type("AggregateFetchError", (Exception,), {}),
+    "FetchDeadlineExceeded": type("FetchDeadlineExceeded", (Exception,), {}),
+    "ResponseTooLarge": type("ResponseTooLarge", (Exception,), {}),
+    # Terminal failures are covered by tests_route_fetch_behavior.py; here the
+    # tuple only has to exist so the release paths run.
+    "TERMINAL_FETCH_FAILURES": (),
+    "classify_fetch_failure": lambda e: ("FETCH_FAILED", 502, "could not fetch"),
+    "URL_FETCH_MAX_BYTES": 1024,
+    "smart_fetch_image_as_filestorage": fake_smart,
+    "APP_USER_AGENT": "test/1.0",
+    "host_is_allowed": lambda u, d: True,
+    "extract_filename_from_url": lambda u: "img.jpg",
     "RESPONSE_HOST_NAME": "VoucherVisionGO",
     "OrderedJsonEncoder": __import__("json").JSONEncoder,
     "app": types.SimpleNamespace(config={"processor": None}),
@@ -94,7 +133,7 @@ real = next(n for n in tree.body if getattr(n, "name", None) == "resolve_model_d
 dm  = next(n for n in tree.body if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "DEFAULT_MODEL")
 am  = next(n for n in tree.body if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "API_TO_COST_MAPPING")
 exec(compile(ast.Module(body=[dm, am, real], type_ignores=[]), "<slice>", "exec"), ns)
-exec(compile(ast.Module(body=[fn], type_ignores=[]), "<slice>", "exec"), ns)
+exec(compile(ast.Module(body=[term, fn], type_ignores=[]), "<slice>", "exec"), ns)
 route = ns["process_image_by_url"]
 
 fails = 0

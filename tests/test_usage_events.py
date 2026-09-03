@@ -34,9 +34,11 @@ class UsageEventHelpersTest(unittest.TestCase):
                     "ocr_text": "do not persist this",
                     "tokens_in": 100,
                     "tokens_out": 50,
+                    "thinking_tokens": 25,
                     "cost_in": 0.01,
                     "cost_out": 0.02,
-                    "total_cost": 0.03,
+                    "thinking_cost": 0.004,
+                    "total_cost": 0.034,
                     "rates_in": 0.1,
                     "rates_out": 0.2,
                 },
@@ -45,16 +47,19 @@ class UsageEventHelpersTest(unittest.TestCase):
                 "model": "gemini-3.1-flash-lite",
                 "input": 25,
                 "output": 75,
+                "thinking_tokens": 20,
                 "cost_in": 0.005,
                 "cost_out": 0.006,
+                "thinking_cost": 0.003,
+                "total_cost": 0.014,
             },
             "impact": {
-                "total_tokens_all": 250,
+                "total_tokens_all": 295,
                 "estimate_watt_hours": 1.5,
                 "estimate_grams_CO2": 2.5,
                 "estimate_milliliters_water": 3.5,
             },
-            "total_request_cost_usd": 0.041,
+            "total_request_cost_usd": 0.048,
             "success": {
                 "image_available": "True",
                 "ocr": "True",
@@ -72,11 +77,39 @@ class UsageEventHelpersTest(unittest.TestCase):
 
         self.assertEqual(event["request_id"], "req-123")
         self.assertEqual(event["url_host"], "example.org")
-        self.assertEqual(event["ocr_tokens_total"], 150)
-        self.assertEqual(event["parsing_tokens_total"], 100)
-        self.assertEqual(event["total_tokens_all"], 250)
+        self.assertEqual(event["ocr_tokens_total"], 175)
+        self.assertEqual(event["ocr_thinking_tokens_total"], 25)
+        self.assertEqual(event["parsing_tokens_total"], 120)
+        self.assertEqual(event["parsing_thinking_tokens"], 20)
+        self.assertEqual(event["total_tokens_all"], 295)
+        self.assertAlmostEqual(event["ocr_thinking_cost_total_usd"], 0.004)
+        self.assertAlmostEqual(event["parsing_thinking_cost_usd"], 0.003)
         self.assertTrue(event["success"])
         self.assertNotIn("ocr_text", event["ocr_info"]["gemini-2.5-flash"])
+
+    def test_legacy_usage_without_thinking_metadata_defaults_to_zero(self):
+        ocr_info, _, ocr_totals = app._extract_ocr_analytics({
+            "legacy-model": {
+                "tokens_in": 10,
+                "tokens_out": 20,
+                "cost_in": 0.01,
+                "cost_out": 0.02,
+            }
+        })
+        parsing_info, parsing_totals = app._extract_parsing_analytics({
+            "model": "legacy-model",
+            "input": 5,
+            "output": 15,
+            "cost_in": 0.005,
+            "cost_out": 0.015,
+        })
+
+        self.assertEqual(ocr_info["legacy-model"]["thinking_tokens"], 0)
+        self.assertEqual(ocr_info["legacy-model"]["thinking_cost"], 0)
+        self.assertEqual(ocr_totals["ocr_tokens_total"], 30)
+        self.assertEqual(parsing_info["thinking_tokens"], 0)
+        self.assertEqual(parsing_info["thinking_cost"], 0)
+        self.assertEqual(parsing_totals["parsing_tokens_total"], 20)
 
     def test_build_usage_event_marks_url_fetch_failure(self):
         analytics_ctx = {

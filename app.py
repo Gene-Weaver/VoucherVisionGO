@@ -12,8 +12,12 @@ import uuid
 import hashlib
 import zipfile
 import warnings
+import ipaddress
+import socket
 from urllib.parse import urlparse
 from urllib.parse import quote
+import tempfile
+from urllib.parse import urljoin
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 warnings.filterwarnings("ignore", message="urllib3.*doesn't match a supported version")
 warnings.filterwarnings("ignore", message="You are using a Python version")
@@ -56,6 +60,11 @@ import google.auth
 from url_name_parser import extract_filename_from_url
 from impact import estimate_impact
 from anti_bot_fetch import smart_fetch_image_as_filestorage
+from guarded_fetch import (
+    ALLOWED_PORTS as SSRF_ALLOWED_PORTS,
+    BlockedDestination, FetchDeadlineExceeded, InvalidFetchUrl,
+    address_is_public, resolve_public_addresses, validate_url_shape,
+)
 
 '''
 ### TO UPDATE FROM MAIN VV REPO
@@ -79,7 +88,6 @@ sys.path.insert(0, component_detector_path)
 
 text_collage_path = os.path.join(project_root, "TextCollage")
 sys.path.insert(0, text_collage_path)
-
 
 def setup_cloud_logging():
     """Setup exactly one logging sink for direct runs or Gunicorn."""
@@ -752,6 +760,10 @@ PAYMENT_AUTH_HEADER_ALIASES = {
 # auth_method values ("server"/"user_vertex"/"user_gemini") stay as they are —
 # they key the analytics rollups — and this maps them to the wording surfaced
 # in API responses as `payment_inference`.
+# Reported when a response is produced without any provider call having begun
+# (a rejected upload, an unreachable URL, a page that failed before Gemini).
+PAYMENT_INFERENCE_NOT_PROCESSED = "not_processed"
+
 PAYMENT_INFERENCE_LABELS = {
     "server": "VoucherVisionGO_credits",
     "user_vertex": "user_supplied_vertex_account",
@@ -780,6 +792,403 @@ def _auth_method_for(gemini_api_key, vertex_project):
 def resolve_payment_inference(user_api_key=None, user_vertex_project=None):
     """User-facing label naming the account that paid for a request."""
     return PAYMENT_INFERENCE_LABELS[_auth_method_for(user_api_key, user_vertex_project)]
+
+
+def mark_inference_started(user_api_key=None, user_vertex_project=None):
+    """Record that an external inference call is about to be made.
+
+    Call this immediately before handing a request to the provider SDK — for
+    OCR or for parsing — not on entry to the enclosing function. Everything
+    between entering perform_ocr and the actual network call can still fail
+    (prompt resolution, image encoding, client construction), and a request
+    that never reached Google must not report that anyone paid for it.
+
+    Consumed by _error_payload() and current_payment_inference(); every public
+    response shape reports a payer only if this ran.
+    """
+    try:
+        label = resolve_payment_inference(user_api_key, user_vertex_project)
+        g.vv_inference_started = True
+        g.vv_payment_inference = label
+        # Sticky for the whole request: a multi-page PDF resets the per-unit
+        # marker between pages, but the request as a whole did reach the
+        # provider. The label is kept too, so request-scope reporting names the
+        # real payer instead of falling back to the server default.
+        g.vv_any_inference_started = True
+        g.vv_request_payment_inference = label
+    except Exception:
+        # No app context (direct calls in tests) — nothing to record.
+        pass
+
+
+def reset_inference_marker():
+    """Clear the per-unit marker so the next unit of work reports its own state.
+
+    Called between PDF pages: `g` is request-scoped, so without this a page
+    that failed before reaching Gemini would inherit the previous page's payer.
+    The request-level `vv_any_inference_started` flag is intentionally kept.
+    """
+    try:
+        g.vv_inference_started = False
+        g.vv_payment_inference = None
+    except Exception:
+        pass
+
+
+def current_payment_inference(*, request_scope=False):
+    """Payer for the current unit of work, for result envelopes.
+
+    Result envelopes carry `payment_inference` as a fixed documented key, so
+    this returns the explicit PAYMENT_INFERENCE_NOT_PROCESSED sentinel rather
+    than omitting the field — it must never claim VoucherVisionGO_credits for
+    work that never reached a provider. (Error bodies, whose key set varies,
+    omit the field entirely instead; see _error_payload.)
+
+    request_scope=True asks "did anything in this request reach the provider",
+    for the PDF wrapper that spans many pages.
+    """
+    flag, label = (
+        ("vv_any_inference_started", "vv_request_payment_inference") if request_scope
+        else ("vv_inference_started", "vv_payment_inference")
+    )
+    try:
+        if getattr(g, flag, False):
+            return getattr(g, label, None) or PAYMENT_INFERENCE_NOT_PROCESSED
+    except Exception:
+        pass
+    return PAYMENT_INFERENCE_NOT_PROCESSED
+
+
+# ── Error envelope ──────────────────────────────────────────────────────
+# Closed vocabulary. `error_code` is the machine-readable discriminator; the
+# `error` string stays whatever a call site emitted before, because every known
+# consumer displays it rather than parsing it (client.py, the webpage, and the
+# admin JS). HTTP status is NOT encoded here — status selection is deliberately
+# left to each call site until the status-correction work lands.
+ERROR_CODES = frozenset({
+    # request shape
+    "NO_FILE", "BAD_FILE_TYPE", "INVALID_INPUT",
+    # identity and access
+    "UNAUTHENTICATED", "NOT_APPROVED", "FORBIDDEN", "PROMPT_NOT_FOUND",
+    # caller-supplied billing credentials
+    "BILLING_PARAM_UNREADABLE", "BILLING_PARAM_EMPTY",
+    "VERTEX_NOT_LINKED", "VERTEX_PERMISSION_DENIED",
+    # quota and capacity
+    "QUOTA_EXHAUSTED", "SERVER_BUSY",
+    # source image retrieval
+    "URL_INVALID", "URL_BLOCKED", "FETCH_FAILED",
+    # the model provider
+    "MODEL_UNAVAILABLE", "UPSTREAM_AUTH_FAILED", "UPSTREAM_QUOTA_EXHAUSTED",
+    "UPSTREAM_UNAVAILABLE", "UPSTREAM_TIMEOUT",
+    # anything else
+    "INTERNAL_ERROR",
+})
+
+# Keys the envelope owns; a `legacy` mapping may never overwrite them.
+_ERROR_RESERVED_KEYS = frozenset({
+    "error", "error_code", "message", "host", "request_id",
+    "payment_inference", "details",
+})
+
+
+def current_request_id():
+    """The correlation ID assigned in begin_request().
+
+    Falls back to a fresh ID rather than None so a caller invoking a route
+    outside the normal request lifecycle (tests, internal task handlers) still
+    gets a usable value.
+    """
+    try:
+        existing = getattr(g, "request_id", None)
+        if existing:
+            return existing
+        g.request_id = str(uuid.uuid4())
+        return g.request_id
+    except Exception:
+        return str(uuid.uuid4())
+
+
+def _error_payload(error_code, error, *, message=None, details=None, legacy=None):
+    """Build an error body as a plain dict.
+
+    Returns a dict, NOT a Flask response: the processing helpers
+    (process_image_request, process_pdf_request, the validators) return
+    `(dict, status)` to their callers, and handing them a Response would break
+    those contracts. Routes want _error_response() instead.
+
+    `legacy` carries fields older clients still read (e.g. the
+    gemini_pro_usage_* pair); they are merged at the top level and can never
+    shadow an envelope key.
+    """
+    if error_code not in ERROR_CODES:
+        # Never fail a request over a bad label — log it and degrade.
+        logger.error("Unknown error_code %r; falling back to INTERNAL_ERROR", error_code)
+        error_code = "INTERNAL_ERROR"
+
+    payload = OrderedDict()
+    payload["error"] = error
+    payload["error_code"] = error_code
+    if message:
+        payload["message"] = message
+    payload["host"] = RESPONSE_HOST_NAME
+
+    try:
+        request_id = getattr(g, "request_id", None)
+    except Exception:
+        request_id = None
+    if request_id:
+        payload["request_id"] = request_id
+
+    # Only claim a payer when an inference call actually began.
+    try:
+        if getattr(g, "vv_inference_started", False):
+            inference = getattr(g, "vv_payment_inference", None)
+            if inference:
+                payload["payment_inference"] = inference
+    except Exception:
+        pass
+
+    if details:
+        payload["details"] = details
+
+    for key, value in (legacy or {}).items():
+        if key in _ERROR_RESERVED_KEYS:
+            logger.warning("Ignoring legacy error field %r: reserved by the envelope", key)
+            continue
+        payload[key] = value
+
+    return payload
+
+
+# ── Source-image fetch classification ───────────────────────────────────
+# Exception type names that mean "the caller's URL is malformed", shared by
+# validate_image_url() and classify_fetch_failure() so the two cannot drift.
+URL_INVALID_EXCEPTIONS = frozenset({
+    "InvalidURL", "UnsupportedProtocol", "LocalProtocolError",
+    "MissingSchema", "InvalidSchema", "URLRequired", "LocationParseError",
+})
+
+
+class TerminalFetchError(Exception):
+    """A fetch failure that must not be retried or fall back to another method."""
+
+    def __init__(self, error_code, error, status, cause=None):
+        super().__init__(error)
+        self.error_code = error_code
+        self.error = error
+        self.status = status
+        self.cause = cause
+
+
+def _exception_chain(exc):
+    """The exception and everything it was raised from, most specific first."""
+    seen, chain = set(), []
+    while exc is not None and id(exc) not in seen:
+        seen.add(id(exc))
+        chain.append(exc)
+        exc = getattr(exc, "__cause__", None) or getattr(exc, "__context__", None)
+    return chain
+
+
+# ── Source-image fetch: URL safety rules ────────────────────────────────
+# The rules live in guarded_fetch so the route and the downloaders cannot
+# drift; these adapters map them onto the HTTP error contract.
+URL_FETCH_MAX_REDIRECTS = 5
+# Spool threshold: images under this stay in memory, larger ones spill to
+# disk. A memory measure only — no maximum response size is enforced.
+SPOOL_MAX_IN_MEMORY_BYTES = 8 * 1024 * 1024
+URL_FETCH_READ_TIMEOUT = 60.0
+
+
+# Fetch failures that are settled: retrying, or trying the other downloader,
+# cannot change the outcome. TerminalFetchError is included because a redirect
+# whose destination fails validation is raised as one, carrying its own status.
+TERMINAL_FETCH_FAILURES = (
+    BlockedDestination, InvalidFetchUrl, FetchDeadlineExceeded, TerminalFetchError,
+)
+
+
+def validate_redirect_target(url):
+    """Validate one redirect destination, raising its own verdict.
+
+    Shared by both downloaders — the primary passes it as `destination_check`
+    and the fallback calls it directly — so there is exactly one definition of
+    a destination this server will follow. Raising the TerminalFetchError
+    itself keeps the specific verdict: a malformed target stays 400 and a DNS
+    timeout stays 504, instead of every rejection becoming a 403.
+    """
+    rejected = check_url_destination(url)
+    if rejected is not None:
+        raise rejected
+    return None
+
+
+def check_url_destination(url):
+    """Safety check for one URL. Returns a TerminalFetchError or None.
+
+    Applied to the caller's URL before any fetch, and to every redirect target
+    by both downloaders. Rejects malformed URLs, non-web ports, embedded
+    credentials, and any host that resolves to a non-public address (loopback,
+    private, link-local, or the cloud metadata endpoint). DNS resolution is
+    bounded by guarded_fetch's own DNS timeout.
+    """
+    try:
+        validate_url_shape(url)
+        resolve_public_addresses(urlparse(url).hostname)
+    except InvalidFetchUrl as e:
+        return TerminalFetchError('URL_INVALID', e.message, 400, cause=e)
+    except BlockedDestination as e:
+        return TerminalFetchError('URL_BLOCKED', e.message, 403, cause=e)
+    except FetchDeadlineExceeded as e:
+        return TerminalFetchError(
+            'UPSTREAM_TIMEOUT',
+            "Timed out resolving the host of the supplied image URL.", 504, cause=e)
+    return None
+
+
+def validate_image_url(url):
+    """Shape-only check, without DNS. Returns a TerminalFetchError or None."""
+    try:
+        validate_url_shape(url)
+    except InvalidFetchUrl as e:
+        return TerminalFetchError('URL_INVALID', e.message, 400, cause=e)
+    except BlockedDestination as e:
+        return TerminalFetchError('URL_BLOCKED', e.message, 403, cause=e)
+    return None
+
+
+def classify_provider_failure(exc, *, user_supplied_credentials=False):
+    """Map a Gemini/Vertex failure to (error_code, status, message).
+
+    Never returns provider text: Google's errors carry project identifiers and
+    unstable provider-internal structure. The raw exception is logged against
+    the request ID instead.
+
+    Whose fault it is decides the status. A credential the caller supplied is
+    the caller's problem (401/403/429); the same failure on our own keys is
+    ours, and a 502 says so honestly rather than blaming the caller.
+    """
+    code = getattr(exc, "code", None) or getattr(exc, "status_code", None)
+    text = str(exc).upper()
+
+    def has(*tokens):
+        return any(t in text for t in tokens)
+
+    if code == 401 or has("UNAUTHENTICATED", "API_KEY_INVALID", "API KEY NOT VALID"):
+        if user_supplied_credentials:
+            return ('UPSTREAM_AUTH_FAILED', 401,
+                    "The Gemini credentials supplied with this request were rejected.")
+        return ('UPSTREAM_UNAVAILABLE', 502,
+                "The transcription service could not authenticate to its model provider.")
+    if code == 403 or has("PERMISSION_DENIED", "PERMISSION DENIED"):
+        if user_supplied_credentials:
+            return ('UPSTREAM_AUTH_FAILED', 403,
+                    "The Gemini credentials supplied with this request are not "
+                    "permitted to use the requested model.")
+        return ('UPSTREAM_UNAVAILABLE', 502,
+                "The transcription service was denied access to its model provider.")
+    if code == 429 or has("RESOURCE_EXHAUSTED", "QUOTA_EXCEEDED", "TOO MANY REQUESTS"):
+        if user_supplied_credentials:
+            return ('UPSTREAM_QUOTA_EXHAUSTED', 429,
+                    "The Gemini account supplied with this request is over its quota.")
+        return ('UPSTREAM_UNAVAILABLE', 503,
+                "The transcription service is temporarily over its model quota.")
+    if code == 404 or has("NOT_FOUND", "NOT FOUND"):
+        return ('MODEL_UNAVAILABLE', 404,
+                "The requested model is not available for this request.")
+    if has("DEADLINE_EXCEEDED", "TIMEOUT", "TIMED OUT"):
+        return ('UPSTREAM_TIMEOUT', 504, "The model provider timed out.")
+    if code in (500, 503) or has("UNAVAILABLE", "INTERNAL ERROR", "OVERLOADED"):
+        return ('UPSTREAM_UNAVAILABLE', 503,
+                "The model provider is temporarily unavailable. Please retry.")
+    return ('INTERNAL_ERROR', 500,
+            "The request could not be completed. Quote the request id when reporting this.")
+
+
+def classify_fetch_failure(exc):
+    """Map a source-image fetch failure to (error_code, http_status, message).
+
+    Walks the cause chain so the most specific reason wins: a RuntimeError
+    raised after retries still reports UPSTREAM_TIMEOUT when the underlying
+    cause was a timeout. Classification happens only once, after every
+    permitted fetch method has failed.
+
+    Never includes provider or library exception text in the returned message —
+    the raw exception is logged against the request ID instead.
+    """
+    if isinstance(exc, TerminalFetchError):
+        return exc.error_code, exc.status, exc.error
+
+    # Typed guard failures are unambiguous; never let a chain heuristic
+    # reinterpret them (a blocked redirect must not become 500 or 502).
+    for e in _exception_chain(exc):
+        if isinstance(e, BlockedDestination):
+            return ('URL_BLOCKED', 403, e.message)
+        if isinstance(e, InvalidFetchUrl):
+            return ('URL_INVALID', 400, e.message)
+        if isinstance(e, FetchDeadlineExceeded):
+            return ('UPSTREAM_TIMEOUT', 504,
+                    "Timed out downloading the image from the supplied URL.")
+
+    names = [type(e).__name__ for e in _exception_chain(exc)]
+
+    # Order matters. smart_fetch wraps everything it catches in a RuntimeError,
+    # so RuntimeError is the *least* specific signal and must be tested last —
+    # otherwise a wrapped UnidentifiedImageError reports 502 instead of 415.
+    #
+    # PermissionError is deliberately absent from this chain scan. Only the
+    # allowlist rejection means URL_BLOCKED, and that arrives as a
+    # TerminalFetchError (handled above). A filesystem PermissionError wrapped
+    # by RuntimeError is a server fault, not a caller-supplied bad host.
+    if any("Timeout" in n for n in names):
+        return ('UPSTREAM_TIMEOUT', 504,
+                "Timed out downloading the image from the supplied URL.")
+    if any(n in URL_INVALID_EXCEPTIONS for n in names):
+        return ('URL_INVALID', 400, "The supplied image URL is not a valid URL.")
+    if any(n in ("UnidentifiedImageError", "DecompressionBombError",
+                 "DecompressionBombWarning", "Image.DecompressionBombError") for n in names):
+        return ('INVALID_INPUT', 415,
+                "The supplied URL did not return a readable image.")
+    if any(n in ("ConnectError", "ReadError", "HTTPStatusError", "ConnectionError",
+                 "RemoteProtocolError", "TooManyRedirects", "ProtocolError",
+                 "RequestException", "HTTPError", "SSLError") for n in names):
+        return ('FETCH_FAILED', 502,
+                "The image could not be retrieved from the supplied URL.")
+    # Least specific: smart_fetch's own wrapper, when nothing inside it matched.
+    if "RuntimeError" in names:
+        return ('FETCH_FAILED', 502,
+                "The image could not be retrieved from the supplied URL.")
+    return ('INTERNAL_ERROR', 500,
+            "An unexpected error occurred while retrieving the image.")
+
+
+def _pdf_page_error(filename, error_code, error, status_code, **kwargs):
+    """A failed PDF page entry, carrying the same envelope as a top-level error.
+
+    Page failures are public API surface — a caller reading `pages[]` sees them
+    directly — so they get error_code / host / request_id / payment_inference
+    like any other error, plus the per-page `filename` and `status_code` that
+    the PDF result shape has always carried.
+    """
+    entry = OrderedDict()
+    entry["filename"] = filename
+    entry.update(_error_payload(error_code, error, **kwargs))
+    entry["status_code"] = status_code
+    return entry
+
+
+def _error_response(error_code, error, *, message=None, status=500,
+                    details=None, legacy=None):
+    """Flask response form of _error_payload, for use directly in routes.
+
+    Deliberately does not touch CORS headers — Flask-CORS is the sole owner of
+    Access-Control-* (see the CORS policy block); a hand-written header here
+    would suppress it for this response.
+    """
+    payload = _error_payload(
+        error_code, error, message=message, details=details, legacy=legacy
+    )
+    return make_response(jsonify(payload), status)
 
 
 # ── Billing-intent detection ────────────────────────────────────────────
@@ -973,31 +1382,35 @@ def detect_unusable_billing_intent(req):
                 # Spelled correctly — only blank/whitespace values are a problem.
                 if _clean_optional_request_value(raw_value) is None:
                     canonical = canonical or norm
-                    return ({
-                        "error": "Empty billing credential",
-                        "message": (
+                    return (_error_payload(
+                        'BILLING_PARAM_EMPTY',
+                        "Empty billing credential",
+                        details={"parameter": canonical},
+                        legacy={"parameter": canonical},
+                        message=(
                             f"The {label} '{raw_name}' was supplied but is empty. "
                             f"VoucherVisionGO will not silently fall back to its shared "
                             f"server keys when you appear to be supplying your own "
                             f"credentials. Send a non-empty {canonical}, or omit the "
                             f"parameter entirely to use server billing."
                         ),
-                        "parameter": canonical,
-                    }, 400)
+                    ), 400)
                 continue
 
             if canonical:
-                return ({
-                    "error": "Unrecognized billing parameter",
-                    "message": (
+                return (_error_payload(
+                    'BILLING_PARAM_UNREADABLE',
+                    "Unrecognized billing parameter",
+                    details={"parameter": canonical},
+                    legacy={"parameter": canonical},
+                    message=(
                         f"The {label} '{raw_name}' is not a parameter VoucherVisionGO "
                         f"reads, so this request would have been billed to the shared "
                         f"server keys instead of to you. Did you mean '{canonical}'? "
                         f"Send it as a form field, a JSON body field, or the header "
                         f"'{PAYMENT_AUTH_HEADER_ALIASES[canonical][0]}'."
                     ),
-                    "parameter": canonical,
-                }, 400)
+                ), 400)
 
     return (None, None)
 
@@ -1011,7 +1424,6 @@ def _billing_intent_error_response(req):
         "Rejected request with unusable billing intent: %s", payload.get("message")
     )
     resp = make_response(jsonify(payload), status)
-    resp.headers.add('Access-Control-Allow-Origin', '*')
     return resp
 
 
@@ -1983,7 +2395,9 @@ def _extract_ocr_analytics(ocr_info_raw) -> tuple[dict, list[str], dict]:
     totals = {
         "ocr_tokens_in_total": 0,
         "ocr_tokens_out_total": 0,
+        "ocr_thinking_tokens_total": 0,
         "ocr_tokens_total": 0,
+        "ocr_thinking_cost_total_usd": 0.0,
         "ocr_cost_total_usd": 0.0,
     }
     if not isinstance(ocr_info_raw, dict):
@@ -1997,23 +2411,31 @@ def _extract_ocr_analytics(ocr_info_raw) -> tuple[dict, list[str], dict]:
         ocr_models.append(model_name)
         tokens_in = _coerce_int(payload.get("tokens_in"))
         tokens_out = _coerce_int(payload.get("tokens_out"))
-        total_tokens = tokens_in + tokens_out
+        thinking_tokens = _coerce_int(payload.get("thinking_tokens"))
+        total_tokens = tokens_in + tokens_out + thinking_tokens
         cost_in = _coerce_float(payload.get("cost_in"))
         cost_out = _coerce_float(payload.get("cost_out"))
-        total_cost = _coerce_float(payload.get("total_cost"), cost_in + cost_out)
+        thinking_cost = _coerce_float(payload.get("thinking_cost"))
+        total_cost = _coerce_float(
+            payload.get("total_cost"), cost_in + cost_out + thinking_cost
+        )
         sanitized[model_name] = {
             "tokens_in": tokens_in,
             "tokens_out": tokens_out,
+            "thinking_tokens": thinking_tokens,
             "total_tokens": total_tokens,
             "cost_in": cost_in,
             "cost_out": cost_out,
+            "thinking_cost": thinking_cost,
             "total_cost": total_cost,
             "rates_in": _coerce_float(payload.get("rates_in")),
             "rates_out": _coerce_float(payload.get("rates_out")),
         }
         totals["ocr_tokens_in_total"] += tokens_in
         totals["ocr_tokens_out_total"] += tokens_out
+        totals["ocr_thinking_tokens_total"] += thinking_tokens
         totals["ocr_tokens_total"] += total_tokens
+        totals["ocr_thinking_cost_total_usd"] += thinking_cost
         totals["ocr_cost_total_usd"] += total_cost
 
     if "error" in ocr_info_raw and "error" not in sanitized:
@@ -2027,24 +2449,32 @@ def _extract_parsing_analytics(parsing_info_raw) -> tuple[dict, dict]:
     model_name = parsing_info_raw.get("model") or ""
     tokens_in = _coerce_int(parsing_info_raw.get("input"))
     tokens_out = _coerce_int(parsing_info_raw.get("output"))
-    total_tokens = tokens_in + tokens_out
+    thinking_tokens = _coerce_int(parsing_info_raw.get("thinking_tokens"))
+    total_tokens = tokens_in + tokens_out + thinking_tokens
     cost_in = _coerce_float(parsing_info_raw.get("cost_in"))
     cost_out = _coerce_float(parsing_info_raw.get("cost_out"))
-    total_cost = cost_in + cost_out
+    thinking_cost = _coerce_float(parsing_info_raw.get("thinking_cost"))
+    total_cost = _coerce_float(
+        parsing_info_raw.get("total_cost"), cost_in + cost_out + thinking_cost
+    )
     sanitized = {
         "model": model_name,
         "input": tokens_in,
         "output": tokens_out,
+        "thinking_tokens": thinking_tokens,
         "total_tokens": total_tokens,
         "cost_in": cost_in,
         "cost_out": cost_out,
+        "thinking_cost": thinking_cost,
         "total_cost": total_cost,
     }
     convenience = {
         "parsing_model": model_name or None,
         "parsing_tokens_in": tokens_in,
         "parsing_tokens_out": tokens_out,
+        "parsing_thinking_tokens": thinking_tokens,
         "parsing_tokens_total": total_tokens,
+        "parsing_thinking_cost_usd": thinking_cost,
         "parsing_cost_total_usd": total_cost,
     }
     return sanitized, convenience
@@ -2138,11 +2568,15 @@ def build_usage_event(
         "parsing_info": parsing_info,
         "ocr_tokens_in_total": ocr_totals["ocr_tokens_in_total"],
         "ocr_tokens_out_total": ocr_totals["ocr_tokens_out_total"],
+        "ocr_thinking_tokens_total": ocr_totals["ocr_thinking_tokens_total"],
         "ocr_tokens_total": ocr_totals["ocr_tokens_total"],
+        "ocr_thinking_cost_total_usd": round(ocr_totals["ocr_thinking_cost_total_usd"], 10),
         "ocr_cost_total_usd": round(ocr_totals["ocr_cost_total_usd"], 10),
         "parsing_tokens_in": parsing_totals["parsing_tokens_in"],
         "parsing_tokens_out": parsing_totals["parsing_tokens_out"],
+        "parsing_thinking_tokens": parsing_totals["parsing_thinking_tokens"],
         "parsing_tokens_total": parsing_totals["parsing_tokens_total"],
+        "parsing_thinking_cost_usd": round(parsing_totals["parsing_thinking_cost_usd"], 10),
         "parsing_cost_total_usd": round(parsing_totals["parsing_cost_total_usd"], 10),
         "total_tokens_all": total_tokens_all,
         "total_request_cost_usd": total_request_cost_usd,
@@ -2823,92 +3257,6 @@ def convert_pdf_to_page_images(pdf_bytes, pdf_filename, dpi=150):
     doc.close()
     return page_files
 
-def process_uploaded_file_with_resize(file, max_pixels=5200000):
-    """
-    Process an uploaded file, resize if necessary, and return a new file-like object.
-    
-    Args:
-        file: Flask uploaded file object
-        max_pixels (int): Maximum number of pixels allowed
-    
-    Returns:
-        FileStorage: New file object with resized image, or original if no resize needed
-    """
-    try:
-        # Open the image
-        image = Image.open(file.stream)
-        original_filename = file.filename
-        
-        # Check if resize is needed
-        width, height = image.size
-        current_pixels = width * height
-
-        is_heic = original_filename and original_filename.lower().endswith(('.heic', '.heif'))
-        if current_pixels <= max_pixels and not is_heic:
-            file.stream.seek(0)
-            return file
-
-        
-        # if current_pixels <= max_pixels:
-        #     # No resize needed, reset stream position and return original
-        #     file.stream.seek(0)
-        #     return file
-        
-        # Resize the image
-        resized_image = resize_image_to_max_pixels(image, max_pixels)
-        
-        # Save resized image to bytes
-        img_byte_array = io.BytesIO()
-        
-        # Determine format - default to JPEG for compatibility
-        image_format = 'JPEG'
-        if original_filename and original_filename.lower().endswith('.png'):
-            image_format = 'PNG'
-        elif original_filename and original_filename.lower().endswith(('.jpg', '.jpeg')):
-            image_format = 'JPEG'
-        
-        # Convert to RGB if necessary for JPEG
-        if image_format == 'JPEG':
-            if resized_image.mode in ('RGBA', 'LA', 'P'):
-                background = Image.new('RGB', resized_image.size, (255, 255, 255))
-                if resized_image.mode == 'P':
-                    resized_image = resized_image.convert('RGBA')
-                background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
-                resized_image = background
-            elif resized_image.mode != 'RGB':
-                resized_image = resized_image.convert('RGB')
-        
-        # Save with high quality
-        save_kwargs = {'format': image_format}
-        if image_format == 'JPEG':
-            save_kwargs['quality'] = 95
-            save_kwargs['optimize'] = True
-        
-        resized_image.save(img_byte_array, **save_kwargs)
-        img_byte_array.seek(0)
-        
-        # Create new FileStorage object
-        from werkzeug.datastructures import FileStorage
-        
-        # Update filename if format changed
-        if image_format == 'JPEG' and original_filename and not original_filename.lower().endswith(('.jpg', '.jpeg')):
-            name_without_ext = os.path.splitext(original_filename)[0]
-            original_filename = f"{name_without_ext}.jpg"
-        
-        resized_file = FileStorage(
-            stream=img_byte_array,
-            filename=original_filename,
-            content_type=f'image/{image_format.lower()}'
-        )
-        
-        return resized_file
-        
-    except Exception as e:
-        logger.error(f"Error processing image for resize: {e}")
-        # If there's an error, return the original file
-        file.stream.seek(0)
-        return file
-    
 def process_url_image_with_resize(image_url, max_pixels=5000000):
     """
     Download and resize an image from URL if necessary.
@@ -2920,38 +3268,96 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
     Returns:
         tuple: (FileStorage object, filename)
     """
-    try:        
-        # Download the image
-        response = requests.get(image_url, stream=True, timeout=60, headers={"User-Agent": APP_USER_AGENT})
-        if response.status_code == 403:
-            logger.error(
-                f"403 Forbidden for {image_url}\n"
-                f"  Response Headers: {dict(response.headers)}\n"
-                f"  Response Body (first 500 chars): {response.text[:500]}\n"
-                f"  Request User-Agent: {response.request.headers.get('User-Agent', 'N/A')}"
-            )
-        response.raise_for_status()
-        
+    try:
+        # Redirects are walked manually and validated hop by hop. The route's
+        # pre-flight check only sees the URL the caller supplied; a public host
+        # can still redirect to a private or metadata address, and `requests`
+        # would follow that without anyone checking.
+        #
+        # A Session, not bare requests.get(): institutional portals commonly
+        # set a cookie on the first redirect and require it on the next hop.
+        # Independent calls would drop it.
+        response = None
+        current_url = image_url
+        with requests.Session() as session:
+            session.headers.update({"User-Agent": APP_USER_AGENT})
+            for _hop in range(URL_FETCH_MAX_REDIRECTS + 1):
+                response = session.get(
+                    current_url, stream=True,
+                    timeout=URL_FETCH_READ_TIMEOUT,
+                    allow_redirects=False)
+                if response.status_code not in (301, 302, 303, 307, 308):
+                    break
+                location = response.headers.get("location")
+                response.close()          # redirect hop: release it now
+                if not location:
+                    break
+                current_url = urljoin(current_url, location)
+                # Same validator the primary downloader uses, so a destination
+                # refused by one path can never be fetched by the other.
+                validate_redirect_target(current_url)
+            else:
+                raise BlockedDestination(
+                    "Too many redirects while fetching the supplied image URL.",
+                    url=image_url)
+
+            if response.status_code == 403:
+                logger.error(
+                    f"403 Forbidden for {image_url}\n"
+                    f"  Response Headers: {dict(response.headers)}\n"
+                    f"  Request User-Agent: {APP_USER_AGENT}"
+                )
+            response.raise_for_status()
+
+            # Stream into a seekable spooled file: small images stay in
+            # memory, large ones spill to disk rather than being buffered
+            # whole. No size limit is imposed.
+            spool = tempfile.SpooledTemporaryFile(
+                max_size=SPOOL_MAX_IN_MEMORY_BYTES, mode="w+b")
+            try:
+                try:
+                    for chunk in response.iter_content(chunk_size=64 * 1024):
+                        if chunk:
+                            spool.write(chunk)
+                    spool.seek(0)
+                    content_type = response.headers.get('Content-Type', 'image/jpeg')
+                finally:
+                    response.close()
+            except BaseException:
+                spool.close()          # never leave it open on a failed read
+                raise
+
         # Get filename from URL
         filename = extract_filename_from_url(image_url)
-        
-        # Open image from response content
-        image = Image.open(io.BytesIO(response.content))
-        
+
+        # Open image from the spooled body
+        try:
+            image = Image.open(spool)
+            image.load()      # force decode now, while the spool is positioned
+        except BaseException:
+            spool.close()     # a corrupt body must not leak the temp file
+            raise
+
         # Check if resize is needed
         width, height = image.size
         current_pixels = width * height
         is_heic = filename and filename.lower().endswith(('.heic', '.heif'))
 
         if current_pixels <= max_pixels and not is_heic:
-            # No resize needed, create FileStorage from original content
+            # No resize needed. Hand the spool itself to the FileStorage rather
+            # than copying it into memory; ownership (and closing) passes to
+            # the caller with the FileStorage.
+            spool.seek(0)
             file_obj = FileStorage(
-                stream=io.BytesIO(response.content),
+                stream=spool,
                 filename=filename,
-                content_type=response.headers.get('Content-Type', 'image/jpeg')
+                content_type=content_type
             )
             return file_obj, filename
         
+        # Re-encoding below, so the spooled original is no longer needed.
+        spool.close()
+
         # Resize the image (returns original if already within pixel limit)
         resized_image = resize_image_to_max_pixels(image, max_pixels)
         
@@ -3002,238 +3408,92 @@ def process_url_image_with_resize(image_url, max_pixels=5000000):
         logger.error(f"Error processing URL image for resize: {e}")
         raise
 
-class SimpleEmailSender:
+def process_uploaded_file_with_resize(file, max_pixels=5200000):
     """
-    A simple class to send emails using Gmail SMTP with credentials from environment variables
+    Process an uploaded file, resize if necessary, and return a new file-like object.
+    
+    Args:
+        file: Flask uploaded file object
+        max_pixels (int): Maximum number of pixels allowed
+    
+    Returns:
+        FileStorage: New file object with resized image, or original if no resize needed
     """
-    def __init__(self):
-        # Setup logger
-        self.logger = logging.getLogger('EmailSender')
+    try:
+        # Open the image
+        image = Image.open(file.stream)
+        original_filename = file.filename
         
-        # Get credentials from environment variables
-        self.smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
-        self.smtp_port = int(os.environ.get('SMTP_PORT', 587))
-        self.from_email = os.environ.get('SMTP_USERNAME')  # Gmail address
-        self.password = os.environ.get('SMTP_PASSWORD')    # Gmail password
-        self.from_name = os.environ.get('FROM_NAME', 'VoucherVision API')
-        
-        # Check if email sending is enabled
-        self.is_enabled = all([
-            self.smtp_server,
-            self.smtp_port,
-            self.from_email,
-            self.password
-        ])
-        
-        if not self.is_enabled:
-            self.logger.warning("Email sending is disabled due to missing configuration")
-            missing = []
-            if not self.smtp_server: missing.append('SMTP_SERVER')
-            if not self.smtp_port: missing.append('SMTP_PORT')
-            if not self.from_email: missing.append('SMTP_USERNAME')
-            if not self.password: missing.append('SMTP_PASSWORD')
-            if missing:
-                self.logger.warning(f"Missing environment variables: {', '.join(missing)}")
-    
-    def send_email(self, to_email, subject, body):
-        """
-        Send a simple email
-        
-        Args:
-            to_email (str): Recipient email address
-            subject (str): Email subject
-            body (str): Email body (HTML or plain text)
-            
-        Returns:
-            bool: True if sent successfully, False otherwise
-        """
-        if not self.is_enabled:
-            self.logger.warning(f"Email not sent to {to_email}: Email sending is disabled")
-            return False
-        
-        try:
-            # Create a multipart message
-            msg = MIMEMultipart()
-            msg['From'] = f"{self.from_name} <{self.from_email}>" if self.from_name else self.from_email
-            msg['To'] = to_email
-            msg['Subject'] = subject
-            
-            # Determine if body is HTML or plain text
-            if body.strip().startswith('<'):
-                # Looks like HTML
-                msg.attach(MIMEText(body, 'html'))
-            else:
-                # Plain text
-                msg.attach(MIMEText(body, 'plain'))
-            
-            # Connect to the SMTP server and send the email
-            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
-                server.starttls()  # Upgrade the connection to secure
-                server.login(self.from_email, self.password)
-                server.send_message(msg)
-            
-            self.logger.info(f"Email sent to {to_email}: {subject}")
-            return True
-            
-        except Exception as e:
-            self.logger.error(f"Failed to send email to {to_email}: {str(e)}")
-            return False
-    
-    def send_approval_notification(self, user_email):
-        """
-        Send application approval notification email
-        
-        Args:
-            user_email (str): The recipient's email address
-            
-        Returns:
-            bool: True if sent successfully, False otherwise
-        """
-        subject = "Your VoucherVision API Application has been Approved"
-        
-        # Create HTML content
-        body = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #4285f4;">Application Approved</h2>
-                    <p>Dear {user_email},</p>
-                    <p>We're pleased to inform you that your application for access to the VoucherVision API has been approved.</p>
-                    <p>You can now log in to your account and access the API through our web interface or via API tokens.</p>
-                    <div style="margin: 30px 0; text-align: center;">
-                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/auth-success" 
-                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                            Access Your Account
-                        </a>
-                    </div>
-                    <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
-                    <p>Thank you for your interest in VoucherVision!</p>
-                    <p>Best regards,<br>The VoucherVision Team</p>
-                </div>
-            </body>
-        </html>
-        """
-        
-        return self.send_email(user_email, subject, body)
-    
-    def send_api_key_permission_notification(self, user_email):
-        """
-        Send API key permission granted notification email
-        
-        Args:
-            user_email (str): The recipient's email address
-            
-        Returns:
-            bool: True if sent successfully, False otherwise
-        """
-        subject = "API Key Access Granted for VoucherVision"
-        
-        # Create HTML content
-        body = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #4285f4;">API Key Access Granted</h2>
-                    <p>Dear {user_email},</p>
-                    <p>We're pleased to inform you that you have been granted permission to create API keys for programmatic access to the VoucherVision API.</p>
-                    <p>API keys allow your applications to authenticate with our API without browser-based authentication, enabling automated workflows and integrations.</p>
-                    <div style="margin: 30px 0; text-align: center;">
-                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/api-key-management" 
-                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                            Manage Your API Keys
-                        </a>
-                    </div>
-                    <p>Please remember to keep your API keys secure and never share them publicly. You can revoke and manage your keys at any time through the API Key Management page.</p>
-                    <p>If you have any questions about using API keys or need technical assistance, please contact us.</p>
-                    <p>Best regards,<br>The VoucherVision Team</p>
-                </div>
-            </body>
-        </html>
-        """
-        
-        return self.send_email(user_email, subject, body)
-    
-    def send_application_submission_notification(self, user_email, organization, purpose):
-        """
-        Send notification to admin about a new application submission
-        
-        Args:
-            user_email (str): The email of the user who submitted the application
-            organization (str): The organization the user belongs to
-            purpose (str): The purpose for API access as described by the user
-            
-        Returns:
-            bool: True if sent successfully, False otherwise
-        """
-        subject = "New VoucherVision API Application Submitted"
-        
-        # Create HTML content
-        body = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #4285f4;">New Application Received</h2>
-                    <p>A new application for VoucherVision API access has been submitted.</p>
-                    
-                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
-                        <h3 style="margin-top: 0; color: #333;">Application Details</h3>
-                        <p><strong>Email:</strong> {user_email}</p>
-                        <p><strong>Organization:</strong> {organization}</p>
-                        <p><strong>Purpose:</strong> {purpose}</p>
-                    </div>
-                    
-                    <div style="margin: 30px 0; text-align: center;">
-                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin" 
-                          style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                            Review Application
-                        </a>
-                    </div>
-                    
-                    <p>Please review this application at your earliest convenience.</p>
-                    <p>Best regards,<br>VoucherVision Notification System</p>
-                </div>
-            </body>
-        </html>
-        """
-        
-        # Send to the same email address configured for sending
-        # This assumes the admin's email is the same as the sender email
-        admin_email = self.from_email
+        # Check if resize is needed
+        width, height = image.size
+        current_pixels = width * height
 
-        return self.send_email(admin_email, subject, body)
+        is_heic = original_filename and original_filename.lower().endswith(('.heic', '.heif'))
+        if current_pixels <= max_pixels and not is_heic:
+            file.stream.seek(0)
+            return file
 
-    def send_admin_usage_alert(self, subject_line, detail_html):
-        """Send a usage-related alert email to the admin.
+        
+        # if current_pixels <= max_pixels:
+        #     # No resize needed, reset stream position and return original
+        #     file.stream.seek(0)
+        #     return file
 
-        Args:
-            subject_line (str): Email subject (prefixed with [VoucherVision])
-            detail_html (str): HTML snippet placed inside the alert card body
-        Returns:
-            bool: True if sent successfully
-        """
-        subject = f"[VoucherVision] {subject_line}"
-        body = f"""
-        <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #e53935;">Usage Alert</h2>
-                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
-                        {detail_html}
-                    </div>
-                    <div style="margin: 30px 0; text-align: center;">
-                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin"
-                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                            Open Admin Dashboard
-                        </a>
-                    </div>
-                    <p>Best regards,<br>VoucherVision Notification System</p>
-                </div>
-            </body>
-        </html>
-        """
-        admin_email = self.from_email
-        return self.send_email(admin_email, subject, body)
+        # Resize the image
+        resized_image = resize_image_to_max_pixels(image, max_pixels)
+        
+        # Save resized image to bytes
+        img_byte_array = io.BytesIO()
+        
+        # Determine format - default to JPEG for compatibility
+        image_format = 'JPEG'
+        if original_filename and original_filename.lower().endswith('.png'):
+            image_format = 'PNG'
+        elif original_filename and original_filename.lower().endswith(('.jpg', '.jpeg')):
+            image_format = 'JPEG'
+        
+        # Convert to RGB if necessary for JPEG
+        if image_format == 'JPEG':
+            if resized_image.mode in ('RGBA', 'LA', 'P'):
+                background = Image.new('RGB', resized_image.size, (255, 255, 255))
+                if resized_image.mode == 'P':
+                    resized_image = resized_image.convert('RGBA')
+                background.paste(resized_image, mask=resized_image.split()[-1] if resized_image.mode == 'RGBA' else None)
+                resized_image = background
+            elif resized_image.mode != 'RGB':
+                resized_image = resized_image.convert('RGB')
+        
+        # Save with high quality
+        save_kwargs = {'format': image_format}
+        if image_format == 'JPEG':
+            save_kwargs['quality'] = 95
+            save_kwargs['optimize'] = True
+        
+        resized_image.save(img_byte_array, **save_kwargs)
+        img_byte_array.seek(0)
+        
+        # Create new FileStorage object
+        from werkzeug.datastructures import FileStorage
+        
+        # Update filename if format changed
+        if image_format == 'JPEG' and original_filename and not original_filename.lower().endswith(('.jpg', '.jpeg')):
+            name_without_ext = os.path.splitext(original_filename)[0]
+            original_filename = f"{name_without_ext}.jpg"
 
+        resized_file = FileStorage(
+            stream=img_byte_array,
+            filename=original_filename,
+            content_type=f'image/{image_format.lower()}'
+        )
+        
+        return resized_file
+        
+    except Exception as e:
+        logger.error(f"Error processing image for resize: {e}")
+        # If there's an error, return the original file
+        file.stream.seek(0)
+        return file
+    
 def create_initial_admin(email):
     """Create the initial admin user"""
     try:
@@ -3604,16 +3864,16 @@ def _preflight_user_prompt(prompt_ref: str | None, caller_email: str | None) -> 
         _resolve_user_prompt_local_path(prompt_ref, caller_email)
         return None, 200
     except PermissionError:
-        return {'error': "Prompt not found or not accessible."}, 403
+        return _error_payload('FORBIDDEN', "Prompt not found or not accessible."), 403
     except FileNotFoundError:
-        return {'error': "Prompt not found or not accessible."}, 404
+        return _error_payload('PROMPT_NOT_FOUND', "Prompt not found or not accessible."), 404
     except Exception as e:
         logger.error(
             "Failed to preflight user prompt %s [category=%s]",
             prompt_ref,
             _user_prompt_error_category(e),
         )
-        return {'error': "Failed to load prompt."}, 500
+        return _error_payload('INTERNAL_ERROR', "Failed to load prompt."), 500
 
 
 def _resolve_prompt_path(prompt_ref: str | None, custom_prompts_dir: str, caller_email: str | None) -> str:
@@ -4459,10 +4719,6 @@ def authenticated_route(f):
         # For OPTIONS requests, only return CORS headers without executing the route function
         if request.method == 'OPTIONS':
             response = make_response()
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-            response.headers.add('Access-Control-Allow-Methods', 'GET,POST')
-            response.headers.add('Access-Control-Max-Age', '3600')
             return response
             
         # For non-OPTIONS requests, proceed with authentication
@@ -4768,7 +5024,11 @@ class VoucherVisionProcessor:
                 OCR_Engine = self.ocr_engines[provider_model_name]
             
             # Execute OCR (this API call can run concurrently)
-            response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
+            mark_inference_started(user_api_key, user_vertex_project)
+            ocr_result = OCR_Engine.ocr_gemini(file_path, prompt=ocr_prompt_option)
+            response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = ocr_result[:8]
+            thinking_tokens = _coerce_int(ocr_result[8]) if len(ocr_result) > 8 else 0
+            thinking_cost = _coerce_float(ocr_result[9]) if len(ocr_result) > 9 else 0.0
             
             ocr_packet[ocr_opt]["ocr_text"] = response
             ocr_packet[ocr_opt]["cost_in"] = cost_in
@@ -4778,11 +5038,13 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt]["rates_out"] = rates_out
             ocr_packet[ocr_opt]["tokens_in"] = tokens_in
             ocr_packet[ocr_opt]["tokens_out"] = tokens_out
+            ocr_packet[ocr_opt]["thinking_tokens"] = thinking_tokens
+            ocr_packet[ocr_opt]["thinking_cost"] = thinking_cost
 
             # ocr_all += f"{ocr_opt} OCR: {response} "
             # ocr_all += f"OCR Version {i}: {response} "
             ocr_all += f"{response} "
-            ocr_tokens_total += self._add_tokens(tokens_in, tokens_out, 0)
+            ocr_tokens_total += self._add_tokens(tokens_in, tokens_out, thinking_tokens)
 
         return ocr_packet, ocr_all, ocr_tokens_total
     
@@ -4858,13 +5120,17 @@ class VoucherVisionProcessor:
         prompt_text = vv.setup_prompt(ocr_text)
 
         # Call the LLM to process the OCR text
-        response_candidate, nt_in, nt_out, _, _, _ = llm_model.call_llm_api_GoogleGemini(
+        mark_inference_started(user_api_key, user_vertex_project)
+        llm_result = llm_model.call_llm_api_GoogleGemini(
             prompt_text, json_report=None, paths=None
         )
+        response_candidate, nt_in, nt_out, _, _, _ = llm_result[:6]
+        thinking_tokens = _coerce_int(llm_result[6]) if len(llm_result) > 6 else 0
         self._log(f"response_candidate\n{response_candidate}", "info")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
+        thinking_cost = rate_out * (thinking_tokens / 1000000)
 
-        return response_candidate, nt_in, nt_out, cost_in, cost_out
+        return response_candidate, nt_in, nt_out, thinking_tokens, cost_in, cost_out, thinking_cost
 
     def process_pdf_request(self, file, **kwargs):
         """
@@ -4881,12 +5147,22 @@ class VoucherVisionProcessor:
             page_files = convert_pdf_to_page_images(pdf_bytes, pdf_filename, dpi=150)
         except Exception as e:
             self._log(f"PDF conversion failed for {pdf_filename}: {e}", "error")
-            return {'error': f'Failed to convert PDF: {str(e)}'}, 400
+            self._log(
+                f"PDF conversion failed for '{pdf_filename}' "
+                f"(request_id={current_request_id()}): {e}", "error")
+            return _error_payload(
+                'INVALID_INPUT',
+                'Failed to convert PDF. The file may be corrupt or password-protected.',
+            ), 400
 
         if not page_files:
-            return {'error': 'PDF contains no pages'}, 400
+            return _error_payload('INVALID_INPUT', 'PDF contains no pages'), 400
         if len(page_files) > MAX_PDF_PAGES:
-            return {'error': f'PDF has {len(page_files)} pages, maximum allowed is {MAX_PDF_PAGES}'}, 400
+            return _error_payload(
+                'INVALID_INPUT',
+                f'PDF has {len(page_files)} pages, maximum allowed is {MAX_PDF_PAGES}',
+                details={'page_count': len(page_files), 'max_pages': MAX_PDF_PAGES},
+            ), 400
 
         self._log(f"PDF '{pdf_filename}' has {len(page_files)} pages, processing each as a separate image", "info")
 
@@ -4918,12 +5194,14 @@ class VoucherVisionProcessor:
 
         page_results = []
         for page_file in page_files:
+            # `g` is request-scoped; without this a page that fails before
+            # reaching Gemini would inherit the previous page's payer.
+            reset_inference_marker()
             if quota_error is not None:
-                page_results.append({
-                    'filename': page_file.filename,
-                    'error': quota_error,
-                    'status_code': 503,
-                })
+                page_results.append(_pdf_page_error(
+                    page_file.filename, 'QUOTA_EXHAUSTED', quota_error, 403,
+                    details={'skipped': True},
+                ))
                 continue
 
             # Resize each page-image just like a normal upload
@@ -4931,11 +5209,10 @@ class VoucherVisionProcessor:
                 page_file = process_uploaded_file_with_resize(page_file, max_pixels=5200000)
             except Exception as e:
                 self._log(f"Resize failed for {page_file.filename}: {e}", "error")
-                page_results.append({
-                    'filename': page_file.filename,
-                    'error': f'Image resize failed: {str(e)}',
-                    'status_code': 500
-                })
+                page_results.append(_pdf_page_error(
+                    page_file.filename, 'INTERNAL_ERROR',
+                    'Failed to prepare this page for processing.', 500,
+                ))
                 continue
 
             allowed, reserved_keys, exhausted, count, limit = (
@@ -4970,11 +5247,10 @@ class VoucherVisionProcessor:
                     f"{bucket_label} requests. Remaining pages were not processed. "
                     f"Contact an administrator to request additional quota."
                 )
-                page_results.append({
-                    'filename': page_file.filename,
-                    'error': quota_error,
-                    'status_code': 503,
-                })
+                page_results.append(_pdf_page_error(
+                    page_file.filename, 'QUOTA_EXHAUSTED', quota_error, 403,
+                    details={'bucket': bucket_label, 'count': count, 'limit': limit},
+                ))
                 continue
 
             result, status_code = self.process_image_request(file=page_file, **kwargs)
@@ -4987,11 +5263,15 @@ class VoucherVisionProcessor:
                 # actually started.
                 if reserved_keys:
                     release_quotas(quota_email, reserved_keys)
-                page_results.append({
-                    'filename': page_file.filename,
-                    'error': result.get('error', 'Unknown error'),
-                    'status_code': status_code
-                })
+                # `result` is already an envelope from process_image_request;
+                # preserve its error_code/details instead of flattening it to
+                # a bare message.
+                entry = OrderedDict()
+                entry["filename"] = page_file.filename
+                entry.update(result if isinstance(result, dict) else {})
+                entry.setdefault("error", "Unknown error")
+                entry["status_code"] = status_code
+                page_results.append(entry)
             else:
                 result['filename'] = page_file.filename
                 page_results.append(result)
@@ -5008,9 +5288,7 @@ class VoucherVisionProcessor:
         return OrderedDict([
             ('source_pdf', pdf_filename),
             ('page_count', len(page_files)),
-            ('payment_inference', resolve_payment_inference(
-                kwargs.get('user_api_key'), kwargs.get('user_vertex_project')
-            )),
+            ('payment_inference', current_payment_inference(request_scope=True)),
             ('host', RESPONSE_HOST_NAME),
             ('pages', page_results),
             ('total_request_cost_usd', pdf_cost_total_usd),
@@ -5038,27 +5316,28 @@ class VoucherVisionProcessor:
         """
         # Check if we can accept this request based on throttling
         if not self.throttler.acquire():
-            return {'error': 'Server is at maximum capacity. Please try again later.'}, 429
+            return _error_payload('SERVER_BUSY', 'Server is at maximum capacity. Please try again later.'), 429
         
         original_temp_path = None
         collage_temp_path = None
-        # Which account funds this request — reported to the caller in every
-        # result envelope below.
-        payment_inference = resolve_payment_inference(user_api_key, user_vertex_project)
         try:
             if notebook_mode:
                 ocr_only = True
 
             # Check if the file is valid
             if file.filename == '':
-                return {'error': 'No file selected'}, 400
+                return _error_payload('NO_FILE', 'No file selected'), 400
             
             if not self.allowed_file(file.filename):
-                return {'error': f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}'}, 400
+                return _error_payload(
+                    'BAD_FILE_TYPE',
+                    f'File type not allowed. Supported types: {", ".join(self.ALLOWED_EXTENSIONS)}',
+                    details={'allowed_extensions': sorted(self.ALLOWED_EXTENSIONS)},
+                ), 415       # Unsupported Media Type, not a malformed request
             
             # --- STAGE 1: COLLAGE ENGINE PRE-PROCESSING ---
             if not self.collage_engine:
-                return {'error': 'Collage Engine is not available on the server.'}, 503
+                return _error_payload('INTERNAL_ERROR', 'Collage Engine is not available on the server.'), 503
             
             # Save uploaded file to a temporary location
             temp_dir = tempfile.mkdtemp()
@@ -5070,7 +5349,7 @@ class VoucherVisionProcessor:
                 base64image_input_resized = base64.b64encode(f_orig.read()).decode('utf-8')
 
             if not self.collage_engine:
-                return {'error': 'Collage Engine is not available on the server.'}, 503
+                return _error_payload('INTERNAL_ERROR', 'Collage Engine is not available on the server.'), 503
 
             collage_resize_method = "gemini"
 
@@ -5159,7 +5438,7 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
-                        ("payment_inference", payment_inference),
+                        ("payment_inference", current_payment_inference()),
                         ("host", RESPONSE_HOST_NAME),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info),
@@ -5172,8 +5451,11 @@ class VoucherVisionProcessor:
                             ("model", ""),
                             ("input", 0),
                             ("output", 0),
+                            ("thinking_tokens", 0),
                             ("cost_in", 0),
                             ("cost_out", 0),
+                            ("thinking_cost", 0),
+                            ("total_cost", 0),
                         ])),
                         ("impact", est_impact),
                         ("collage_info", collage_json_data),
@@ -5198,7 +5480,7 @@ class VoucherVisionProcessor:
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
-                        ("payment_inference", payment_inference),
+                        ("payment_inference", current_payment_inference()),
                         ("host", RESPONSE_HOST_NAME),
                         ("prompt", ocr_prompt_option),
                         ("ocr_info", ocr_info_sanitized),
@@ -5211,8 +5493,11 @@ class VoucherVisionProcessor:
                             ("model", ""),
                             ("input", 0),
                             ("output", 0),
+                            ("thinking_tokens", 0),
                             ("cost_in", 0),
                             ("cost_out", 0),
+                            ("thinking_cost", 0),
+                            ("total_cost", 0),
                         ])),
                         ("impact", est_impact),
                         ("collage_info", collage_json_data),
@@ -5227,7 +5512,7 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, cost_in, cost_out = self.process_voucher_vision(ocr,
+                    vv_results, tokens_in, tokens_out, thinking_tokens, cost_in, cost_out, thinking_cost = self.process_voucher_vision(ocr,
                                                                                                        current_prompt,
                                                                                                        llm_model_name,
                                                                                                        LLM_name_cost,
@@ -5250,15 +5535,15 @@ class VoucherVisionProcessor:
                     ocr_sanitized = sanitize_for_storage(ocr)
                     vv_results_sanitized = self._sanitize_formatted_json(vv_results)   
 
-                    llm_tokens_total = self._add_tokens(tokens_in, tokens_out, ocr_tokens_total)    
-                    self._log(f"Tokens: OCR={ocr_tokens_total}, LLM_in={tokens_in}, LLM_out={tokens_out}, total={llm_tokens_total}", "info")
+                    llm_tokens_total = self._add_tokens(tokens_in, tokens_out, ocr_tokens_total + thinking_tokens)
+                    self._log(f"Tokens: OCR={ocr_tokens_total}, LLM_in={tokens_in}, LLM_out={tokens_out}, LLM_thinking={thinking_tokens}, total={llm_tokens_total}", "info")
 
                     est_impact = estimate_impact(llm_tokens_total)
 
                     results = OrderedDict([
                         ("filename", original_filename),
                         ("url_source", url_source),
-                        ("payment_inference", payment_inference),
+                        ("payment_inference", current_payment_inference()),
                         ("host", RESPONSE_HOST_NAME),
                         ("prompt", current_prompt),
                         ("ocr_info", ocr_info_sanitized),
@@ -5271,8 +5556,11 @@ class VoucherVisionProcessor:
                             ("model", llm_model_name),
                             ("input", tokens_in),
                             ("output", tokens_out),
+                            ("thinking_tokens", thinking_tokens),
                             ("cost_in", cost_in),
                             ("cost_out", cost_out),
+                            ("thinking_cost", thinking_cost),
+                            ("total_cost", cost_in + cost_out + thinking_cost),
                         ])),
                         ("impact", est_impact),
                         ("collage_info", collage_json_data),
@@ -5307,7 +5595,11 @@ class VoucherVisionProcessor:
                         if isinstance(v, dict):
                             ocr_cost_sum += float(v.get("total_cost", 0.0) or 0.0)
                     parsing = results.get("parsing_info") or {}
-                    parsing_cost = float(parsing.get("cost_in", 0.0) or 0.0) + float(parsing.get("cost_out", 0.0) or 0.0)
+                    parsing_cost = (
+                        float(parsing.get("cost_in", 0.0) or 0.0)
+                        + float(parsing.get("cost_out", 0.0) or 0.0)
+                        + float(parsing.get("thinking_cost", 0.0) or 0.0)
+                    )
                     results["total_request_cost_usd"] = ocr_cost_sum + parsing_cost
                 except Exception as cost_err:
                     self._log(f"Could not compute total_request_cost_usd: {cost_err}", "warning")
@@ -5321,14 +5613,28 @@ class VoucherVisionProcessor:
                 import traceback
                 self._log(f"Traceback: {traceback.format_exc()}", "error")
                 if user_vertex_project and _is_vertex_permission_error(e):
-                    return {'error': _vertex_permission_error_message(user_vertex_project)}, 403
+                    return _error_payload(
+                        'VERTEX_PERMISSION_DENIED',
+                        _vertex_permission_error_message(user_vertex_project),
+                        details={'vertex_project': user_vertex_project},
+                    ), 403
                 if user_vertex_project and _is_vertex_model_not_found_error(e):
-                    return {
-                        'error': _vertex_model_not_found_message(
+                    return _error_payload(
+                        'MODEL_UNAVAILABLE',
+                        _vertex_model_not_found_message(
                             user_vertex_project, user_vertex_region, llm_model_name
-                        )
-                    }, 404
-                return {'error': str(e)}, 500
+                        ),
+                        details={'model': llm_model_name, 'vertex_region': user_vertex_region},
+                    ), 404
+                # Provider text is never returned: it carries project ids and
+                # unstable provider-internal structure. The classified reason
+                # goes to the caller, the raw exception to the log.
+                code, status, message = classify_provider_failure(
+                    e, user_supplied_credentials=bool(user_api_key or user_vertex_project))
+                self._log(
+                    f"Processing failed (request_id={current_request_id()}, "
+                    f"code={code}): {e}", "error")
+                return _error_payload(code, message), status
             
             finally:
                 # Clean up the temporary file
@@ -5383,26 +5689,43 @@ def create_multipart_response(json_data, image_bytes):
 
 # Initialize Flask app
 app = Flask(__name__, static_folder='static', static_url_path='/static')
-CORS(app, 
-     origins=["*"],  # Allow all origins, or specify: ["https://leafmachine.org", "http://localhost:8000"]
+# ── CORS: single authoritative policy ───────────────────────────────────
+# Flask-CORS is the ONLY writer of Access-Control-* headers. Do not add them
+# by hand anywhere else: its after_request hook short-circuits the moment a
+# response already carries Access-Control-Allow-Origin
+# (flask_cors/extension.py: "CORS have been already evaluated, skipping"), so
+# a single manual `headers.add(...)` silently disables the real policy for
+# that response — which is how X-Gemini-API-Key ended up rejected by preflight
+# and how supports_credentials stopped taking effect.
+CORS_ALLOWED_HEADERS = [
+    "Content-Type", "Authorization", "X-API-Key", "Accept",
+    "X-Gemini-API-Key", "X-Vertex-Project", "X-Vertex-Region",
+]
+CORS_EXPOSED_HEADERS = ["X-VV-Billing-Mode", "X-Request-ID"]
+
+CORS(app,
+     origins=["*"],  # with supports_credentials, Flask-CORS echoes the request Origin
      methods=["GET", "POST", "OPTIONS", "PUT", "DELETE"],
-     allow_headers=["Content-Type", "Authorization", "X-API-Key", "Accept",
-                    "X-Gemini-API-Key", "X-Vertex-Project", "X-Vertex-Region"],
+     allow_headers=CORS_ALLOWED_HEADERS,
+     expose_headers=CORS_EXPOSED_HEADERS,
      supports_credentials=True,
      send_wildcard=False,
-     vary_header=True
+     vary_header=True,
+     max_age=3600,
 )
 
 @app.after_request
-def _add_billing_mode_header(response):
-    """Echo the resolved billing mode on any route that resolved one."""
+def _add_correlation_headers(response):
+    """Stamp the correlation ID on every response, and the billing mode where one
+    was resolved."""
+    # Exposure to browsers is declared once, via CORS_EXPOSED_HEADERS.
+    request_id = getattr(g, "request_id", None)
+    if request_id:
+        # Every response, not only JSON error bodies.
+        response.headers['X-Request-ID'] = request_id
     mode = getattr(g, "vv_billing_mode", None)
     if mode:
         response.headers['X-VV-Billing-Mode'] = mode
-        existing = response.headers.get('Access-Control-Expose-Headers')
-        response.headers['Access-Control-Expose-Headers'] = (
-            f"{existing}, X-VV-Billing-Mode" if existing else "X-VV-Billing-Mode"
-        )
     return response
 
 
@@ -5413,7 +5736,14 @@ class OrderedJsonEncoder(json.JSONEncoder):
         super(OrderedJsonEncoder, self).__init__(**kwargs)
 
 # Set the encoder immediately after creating the Flask app
-app.json_encoder = OrderedJsonEncoder
+# NOTE: app.json_encoder was removed in Flask 2.3, so assigning it did nothing
+# (proved by /health returning alphabetized keys). Key order in the result
+# envelopes is preserved by the explicit `cls=OrderedJsonEncoder` at each
+# json.dumps call site, which is independent of this setting.
+#
+# jsonify() — which every error body goes through — sorts keys by default, so
+# error envelopes came back alphabetized while success envelopes did not.
+app.json.sort_keys = False
 
 try:
     # Create initial admin if specified
@@ -5573,14 +5903,28 @@ else:
 
 
 @app.before_request
-def handle_preflight():
+def begin_request():
+    """First hook on every request: assign the correlation ID, then short-circuit
+    CORS preflight.
+
+    The request ID is assigned BEFORE the OPTIONS early-return and before
+    authentication, so preflight responses, auth failures and billing
+    rejections all carry an ID. Anything added to this hook must stay below
+    this assignment.
+    """
+    try:
+        g.request_id = str(uuid.uuid4())
+    except Exception:
+        pass
+
     if request.method == "OPTIONS":
-        response = make_response()
-        response.headers.add("Access-Control-Allow-Origin", "*")
-        response.headers.add('Access-Control-Allow-Headers', "Content-Type,Authorization,X-API-Key,Accept")
-        response.headers.add('Access-Control-Allow-Methods', "GET,POST,OPTIONS,PUT,DELETE")
-        response.headers.add('Access-Control-Max-Age', '3600')
-        return response
+        # Short-circuit only. Many routes declare methods=[..., "OPTIONS"],
+        # which disables Flask's automatic OPTIONS handling and would send a
+        # preflight into the view (where /process would 400 on the missing
+        # file). Flask-CORS still decorates this response — after_request runs
+        # on responses returned from before_request — so it must NOT carry any
+        # hand-written CORS header.
+        return make_response("", 204)
 
     # Lazy daily check: scan API key expirations on the first request of each day
     _check_api_key_expirations()
@@ -5601,9 +5945,7 @@ def process_image():
     """API endpoint to process an image with explicit CORS headers and automatic resizing"""
     # Check if file is present in the request
     if 'file' not in request.files:
-        response = make_response(jsonify({'error': 'No file provided'}), 400)
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+        return _error_response('NO_FILE', 'No file provided', status=400)
     
     # Get user email using the new function
     user_email = get_user_email_from_request(request)
@@ -5636,20 +5978,14 @@ def process_image():
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
-        resp = make_response(jsonify({'error': err}), err_status)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INVALID_INPUT', err, status=err_status)
     if user_vertex_project:
         user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
         if project_error:
-            resp = make_response(jsonify({'error': project_error}), 400)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('INVALID_INPUT', project_error, status=400)
         binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
         if binding_error:
-            resp = make_response(jsonify({'error': binding_error}), 403)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('VERTEX_NOT_LINKED', binding_error, status=403)
 
     auth_method = payment_auth["auth_method"]
     logger.info(
@@ -5659,7 +5995,7 @@ def process_image():
         bool(user_vertex_project),
         bool(user_gemini_key),
     )
-    request_id = str(uuid.uuid4())
+    request_id = current_request_id()
     analytics_ctx = build_request_analytics_context(
         request,
         user_email=user_email,
@@ -5677,9 +6013,7 @@ def process_image():
     # Preflight user-generated prompt (clean 4xx if access denied before processing)
     preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
     if preflight_error:
-        resp = make_response(jsonify(preflight_error), preflight_code)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return make_response(jsonify(preflight_error), preflight_code)
 
     # Common kwargs for process_image_request / process_pdf_request
     process_kwargs = dict(
@@ -5747,9 +6081,11 @@ def process_image():
             logger.info(f"Image processed and resized if necessary for user: {user_email}")
         except Exception as e:
             logger.error(f"Error processing image for resize: {e}")
-            response = make_response(jsonify({'error': f'Error processing image: {str(e)}'}), 500)
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
+            logger.exception("Image preparation failed (request_id=%s)", current_request_id())
+        return _error_response(
+            'INVALID_INPUT',
+            'The uploaded image could not be read. It may be corrupt or an unsupported format.',
+            status=400)
 
         # ── Per-model rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
         reserved_keys: list[str] = []
@@ -5787,17 +6123,29 @@ def process_image():
                     # Legacy fields preserved for old clients.
                     pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
                     pro_count, pro_limit = pro_state
-                    resp = make_response(jsonify({
-                        "error": "Rate limit exceeded",
-                        "message": message,
-                        "model": display_model,
-                        "count": ex_count,
-                        "limit": ex_limit,
-                        "gemini_pro_usage_count": pro_count,
-                        "gemini_pro_usage_limit": pro_limit,
-                    }), 503)
-                    resp.headers.add('Access-Control-Allow-Origin', '*')
-                    return resp
+                    return _error_response(
+                        'QUOTA_EXHAUSTED',
+                        "Rate limit exceeded",
+                        message=message,
+                        # 403, not 503: these are lifetime per-user caps, so
+                        # waiting will not reset them. 503 invites a retry that
+                        # can never succeed.
+                        status=403,
+                        details={
+                            "model": display_model,
+                            "count": ex_count,
+                            "limit": ex_limit,
+                        },
+                        # Top-level fields older clients still read. `model`/`count`/`limit`
+                        # stay at the top level too, since they predate `details`.
+                        legacy={
+                            "model": display_model,
+                            "count": ex_count,
+                            "limit": ex_limit,
+                            "gemini_pro_usage_count": pro_count,
+                            "gemini_pro_usage_limit": pro_limit,
+                        },
+                    )
                 reserved_keys = request_keys
 
         results, status_code = app.config['processor'].process_image_request(
@@ -5843,7 +6191,6 @@ def process_image():
     # Always return JSON
     response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
     response.headers['Content-Type'] = 'application/json'
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 
@@ -5851,7 +6198,10 @@ def process_image():
 @authenticated_route
 def process_image_by_url():
     """API endpoint to process an image from a URL with FormData, matching /process behavior and automatic resizing"""
-    max_retries=3
+    # The primary downloader owns transient retries (max_retries=3 below); the
+    # route makes a single pass over primary-then-fallback so the two layers
+    # cannot multiply.
+    max_retries = 1
     # Get user email
     user_email = get_user_email_from_request(request)
 
@@ -5862,9 +6212,7 @@ def process_image_by_url():
     if 'application/json' in content_type:
         data = request.get_json()
         if not data or 'image_url' not in data:
-            response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
+            return _error_response('INVALID_INPUT', 'No image URL provided', status=400)
             
         image_url = data.get('image_url')
         engine_options = data.get('engines')
@@ -5883,9 +6231,7 @@ def process_image_by_url():
     # Handle form data request
     else:
         if 'image_url' not in request.form:
-            response = make_response(jsonify({'error': 'No image URL provided'}), 400)
-            response.headers.add('Access-Control-Allow-Origin', '*')
-            return response
+            return _error_response('INVALID_INPUT', 'No image URL provided', status=400)
 
         image_url = request.form.get('image_url')
         engine_options = request.form.getlist('engines') if 'engines' in request.form else None
@@ -5913,20 +6259,14 @@ def process_image_by_url():
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
-        resp = make_response(jsonify({'error': err}), err_status)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INVALID_INPUT', err, status=err_status)
     if user_vertex_project:
         user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
         if project_error:
-            resp = make_response(jsonify({'error': project_error}), 400)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('INVALID_INPUT', project_error, status=400)
         binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
         if binding_error:
-            resp = make_response(jsonify({'error': binding_error}), 403)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('VERTEX_NOT_LINKED', binding_error, status=403)
 
     auth_method = payment_auth["auth_method"]
     logger.info(
@@ -5936,7 +6276,7 @@ def process_image_by_url():
         bool(user_vertex_project),
         bool(user_gemini_key),
     )
-    request_id = str(uuid.uuid4())
+    request_id = current_request_id()
     analytics_ctx = build_request_analytics_context(
         request,
         user_email=user_email,
@@ -5954,9 +6294,7 @@ def process_image_by_url():
     # Preflight user-generated prompt access before fetching the URL
     preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
     if preflight_error:
-        resp = make_response(jsonify(preflight_error), preflight_code)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return make_response(jsonify(preflight_error), preflight_code)
 
     # ── Per-model rate-limit gate (skip if user is paying via own API key OR Vertex project) ──
     reserved_keys: list[str] = []
@@ -5993,18 +6331,42 @@ def process_image_by_url():
                     display_model = exhausted
                 pro_state = state.get("gemini-3.1-pro-preview") or state.get(exhausted)
                 pro_count, pro_limit = pro_state
-                resp = make_response(jsonify({
-                    "error": "Rate limit exceeded",
-                    "message": message,
-                    "model": display_model,
-                    "count": ex_count,
-                    "limit": ex_limit,
-                    "gemini_pro_usage_count": pro_count,
-                    "gemini_pro_usage_limit": pro_limit,
-                }), 503)
-                resp.headers.add('Access-Control-Allow-Origin', '*')
-                return resp
+                return _error_response(
+                    'QUOTA_EXHAUSTED',
+                    "Rate limit exceeded",
+                    message=message,
+                    # 403, not 503: these are lifetime per-user caps, so
+                    # waiting will not reset them.
+                    status=403,
+                    details={
+                        "model": display_model,
+                        "count": ex_count,
+                        "limit": ex_limit,
+                    },
+                    # Top-level fields older clients still read.
+                    legacy={
+                        "model": display_model,
+                        "count": ex_count,
+                        "limit": ex_limit,
+                        "gemini_pro_usage_count": pro_count,
+                        "gemini_pro_usage_limit": pro_limit,
+                    },
+                )
             reserved_keys = request_keys
+
+    # Terminal before any fetch: a malformed or refused URL must not consume
+    # an attempt. The same check is applied to every redirect hop by both
+    # downloaders, so there is exactly one definition of a safe destination.
+    url_error = check_url_destination(image_url)
+    if url_error is not None:
+        logger.warning("Rejected image URL %s (request_id=%s): %s",
+                       image_url, current_request_id(), url_error.error_code)
+        if reserved_keys:
+            release_quotas(user_email, reserved_keys)
+            reserved_keys = []
+        return _error_response(url_error.error_code, url_error.error,
+                               status=url_error.status,
+                               details={"url_source": image_url})
 
     file_obj, filename = None, None
     last_exception = None
@@ -6012,11 +6374,7 @@ def process_image_by_url():
     for attempt in range(max_retries):
         try:
             logger.info(f"Attempt {attempt + 1}/{max_retries} to fetch URL: {image_url}")
-            # The actual download attempt
-            # file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
             try:
-                allowed = os.environ.get("ALLOWED_IMAGE_DOMAINS", "").split(",") if os.environ.get("ALLOWED_IMAGE_DOMAINS") else None
-                cookie  = os.environ.get("PORTAL_COOKIE")  # optional: e.g., "sessionid=abc123; other=xyz"
                 extra   = {}  # optionally: {"X-Requested-With": "XMLHttpRequest"}
 
                 file_obj, filename_from_url = smart_fetch_image_as_filestorage(
@@ -6027,95 +6385,95 @@ def process_image_by_url():
                     read_timeout=90.0,
                     per_try_base_delay=0.75,
                     per_try_jitter=0.75,
-                    allowed_domains=allowed,
                     user_agent=APP_USER_AGENT,
                     extra_headers=extra,    # if the site expects specific headers
-                    cookie=cookie,          # if you have an approved session
+                    # Validates the initial URL and every redirect hop, and
+                    # returns the specific verdict (400/403/504) rather than a
+                    # single "blocked" answer.
+                    destination_check=validate_redirect_target,
+                    # Terminal verdicts must escape the downloader's retry loop
+                    # instead of being wrapped in RuntimeError and handed to
+                    # the fallback.
+                    terminal_exceptions=TERMINAL_FETCH_FAILURES,
+                    # PORTAL_COOKIE is deliberately not passed: it would be
+                    # sent to whatever caller-supplied host the URL names, and
+                    # to every cross-domain redirect target.
                     logger=logger,
                 )
                 filename = filename_from_url
                 logger.info(f"URL fetched filenam: {filename_from_url}")
-            except:
-                file_obj, filename = process_url_image_with_resize(image_url, max_pixels=5200000)
-
+            except TERMINAL_FETCH_FAILURES:
+                # A refused destination, an exhausted deadline or an oversized
+                # body. Retrying cannot change the outcome and the fallback
+                # would re-attempt what we already refused, so let it out to
+                # the terminal handler below.
+                raise
+            except Exception:
+                file_obj, filename = process_url_image_with_resize(
+                    image_url, max_pixels=5200000)
 
             logger.info(f"URL image fetched successfully for user: {user_email}")
             # If successful, break the loop and proceed
             break
+        except TERMINAL_FETCH_FAILURES as e:
+            # Return now: an oversized body, a spent deadline or a blocked
+            # destination is settled, and the outer loop would otherwise
+            # attempt it three times before reporting the same thing.
+            code, status, message = classify_fetch_failure(e)
+            logger.warning(
+                "Terminal fetch failure for %s (request_id=%s): %s -> %s",
+                image_url, current_request_id(), type(e).__name__, code,
+            )
+            if reserved_keys:
+                release_quotas(user_email, reserved_keys)
+                reserved_keys = []
+            return _error_response(code, message, status=status,
+                                   details={"url_source": image_url})
         except requests.exceptions.RequestException as e:
             last_exception = e
             logger.warning(f"Attempt {attempt + 1} failed for URL '{image_url}'. Reason: {e}")
-
-            # If this was the last attempt, the loop will end, and we'll handle the failure below.
             if attempt < max_retries - 1:
                 wait_time = 2 ** attempt
                 logger.info(f"Waiting for {wait_time} second(s) before retrying...")
                 time.sleep(wait_time)
         except Exception as e:
-            # Catch other unexpected errors during download/resize
-            logger.exception(f"An unexpected error occurred during URL processing on attempt {attempt + 1}: {e}")
-            # No Gemini call was made — give the reserved quota back.
-            if reserved_keys:
-                release_quotas(user_email, reserved_keys)
-                reserved_keys = []
-            return jsonify({'error': f'An unexpected server error occurred: {str(e)}'}), 500
-    
+            last_exception = e
+            logger.exception(
+                "URL fetch attempt %s/%s failed for %s (request_id=%s)",
+                attempt + 1, max_retries, image_url, current_request_id(),
+            )
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+
     # After the loop, check if we ultimately failed
     if file_obj is None and last_exception is not None:
-        logger.error(f"All {max_retries} retries failed for URL '{image_url}'. Final error: {last_exception}")
+        # Every attempt and both permitted fetch methods have failed. Classify
+        # once, keeping the most specific cause in the chain.
+        error_code, status, message = classify_fetch_failure(last_exception)
+        logger.error(
+            "URL fetch failed for %s (request_id=%s) -> %s %s",
+            image_url, current_request_id(), error_code, status,
+            exc_info=last_exception,
+        )
 
-        # The image never downloaded, so no Gemini call was made. Release the
+        # The image never downloaded, so no provider call was made. Release the
         # quota reserved before the download loop — otherwise an unreachable
         # URL permanently burns a slot from the user's lifetime cap.
         if reserved_keys:
             release_quotas(user_email, reserved_keys)
             reserved_keys = []
-        
-        # Construct the desired empty JSON response for the final failure
-        error_response_data = OrderedDict([
-            ("filename", extract_filename_from_url(image_url)),
-            ("url_source", image_url),
-            ("payment_inference", resolve_payment_inference(
-                user_gemini_key, user_vertex_project
-            )),
-            ("host", RESPONSE_HOST_NAME),
-            ("prompt", prompt),
-            ("ocr_info", {"error": f"Failed to fetch URL: {str(last_exception)}"}),
-            ("WFO_info", ""),
-            ("COP90_elevation_m", ""),
-            ("ocr", ""),
-            ("formatted_json", ""),
-            ("parsing_info", OrderedDict([
-                ("model", ""),
-                ("input", 0),
-                ("output", 0),
-                ("cost_in", 0),
-                ("cost_out", 0),
-            ])),
-            ("impact", {}),
-            ("collage_info", {"error": "Image could not be retrieved from URL."}),
-            ("collage_image_format", ""),
-            ("success", {  
-                "image_available": "False",
-                "text_collage": "False",
-                "text_collage_resize": "False",
-                "ocr": "False",
-                "llm": "False",
-            }),
-        ])
-        
-        # Return this structure with a 200 OK status
+
         failure_event = build_usage_event(
             analytics_ctx=analytics_ctx,
-            result=error_response_data,
-            status_code=200,
+            result={"error": message},
+            status_code=status,
             source_type="url",
             filename=extract_filename_from_url(image_url),
             url_source=image_url,
             success=False,
             include_in_rollup=False,
-            error_type="fetch_failure",
-            error_message_safe=str(last_exception),
+            error_type=error_code,
+            error_message_safe=message,
         )
         try:
             record_usage_event(failure_event)
@@ -6124,10 +6482,14 @@ def process_image_by_url():
                 "usage_events write failed route=/process-url request_id=%s; skipped rollup mutation",
                 request_id,
             )
-        response = make_response(json.dumps(error_response_data, cls=OrderedJsonEncoder), 200)
-        response.headers['Content-Type'] = 'application/json'
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        return response
+
+        # Previously this returned HTTP 200 with a success-shaped envelope and
+        # the reason buried in ocr_info/collage_info, so callers checking the
+        # status code recorded a dead URL as a successful transcription.
+        return _error_response(
+            error_code, message, status=status,
+            details={"url_source": image_url},
+        )
 
     try:
         # Process image
@@ -6187,7 +6549,6 @@ def process_image_by_url():
         response = make_response(json.dumps(results, cls=OrderedJsonEncoder), status_code)
         response.headers['Content-Type'] = 'application/json'
 
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
     except Exception as e:
@@ -6195,7 +6556,23 @@ def process_image_by_url():
         # Release the reserved per-model quotas on unhandled exception
         if reserved_keys:
             release_quotas(user_email, reserved_keys)
-        return jsonify({'error': str(e)}), 500
+        code, status, message = classify_provider_failure(
+            e, user_supplied_credentials=bool(user_gemini_key or user_vertex_project))
+        logger.exception(
+            "Processing failed after download (request_id=%s, code=%s)",
+            current_request_id(), code)
+        return _error_response(code, message, status=status)
+
+    finally:
+        # The downloader may hand back a FileStorage wrapping a spooled temp
+        # file. Nothing downstream owns it, so close it here — on the success
+        # path as well as every failure path.
+        try:
+            close = getattr(file_obj, "close", None)
+            if callable(close):
+                close()
+        except Exception:
+            logger.debug("Could not close the fetched image stream", exc_info=True)
     
 
 @app.route('/process-pdf-async', methods=['POST', 'OPTIONS'])
@@ -6203,21 +6580,17 @@ def process_image_by_url():
 def process_pdf_async():
     user_email = _normalize_email_identity(get_user_email_from_request(request))
     if not user_email or user_email == 'unknown':
-        resp = make_response(jsonify({'error': 'Unable to resolve the authenticated user.'}), 401)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('UNAUTHENTICATED', 'Unable to resolve the authenticated user.', status=401)
 
     if 'file' not in request.files:
-        resp = make_response(jsonify({'error': 'No PDF file provided.'}), 400)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('NO_FILE', 'No PDF file provided.', status=400)
 
     file = request.files['file']
     filename = secure_filename(file.filename or "")
     if not filename.lower().endswith('.pdf'):
-        resp = make_response(jsonify({'error': 'Only PDF uploads are supported for async PDF jobs.'}), 400)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('BAD_FILE_TYPE',
+                               'Only PDF uploads are supported for async PDF jobs.',
+                               status=415)
 
     engine_options = request.form.getlist('engines') if 'engines' in request.form else None
     prompt = request.form.get('prompt') if 'prompt' in request.form else None
@@ -6244,59 +6617,46 @@ def process_pdf_async():
 
     err, err_status = _validate_vertex_params(user_gemini_key, user_vertex_project, user_vertex_region)
     if err:
-        resp = make_response(jsonify({'error': err}), err_status)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INVALID_INPUT', err, status=err_status)
 
     if user_gemini_key:
-        resp = make_response(
-            jsonify({'error': 'Async PDF jobs do not support gemini_api_key yet. Use server billing or a linked Vertex project.'}),
-            400,
+        return _error_response(
+            'INVALID_INPUT',
+            'Async PDF jobs do not support gemini_api_key yet. Use server billing or a linked Vertex project.',
+            status=400,
         )
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
 
     if user_vertex_project:
         user_vertex_project, project_error = _validate_vertex_project_id(user_vertex_project)
         if project_error:
-            resp = make_response(jsonify({'error': project_error}), 400)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('INVALID_INPUT', project_error, status=400)
         binding_error = _validate_vertex_project_binding(user_vertex_project, user_email)
         if binding_error:
-            resp = make_response(jsonify({'error': binding_error}), 403)
-            resp.headers.add('Access-Control-Allow-Origin', '*')
-            return resp
+            return _error_response('VERTEX_NOT_LINKED', binding_error, status=403)
 
     if payment_auth["auth_method"] not in PDF_JOB_ALLOWED_SOURCE_TYPES:
-        resp = make_response(
-            jsonify({'error': f"Async PDF jobs support only {sorted(PDF_JOB_ALLOWED_SOURCE_TYPES)} billing modes."}),
-            400,
+        return _error_response(
+            'INVALID_INPUT',
+            f"Async PDF jobs support only {sorted(PDF_JOB_ALLOWED_SOURCE_TYPES)} billing modes.",
+            status=400,
+            details={'allowed_billing_modes': sorted(PDF_JOB_ALLOWED_SOURCE_TYPES)},
         )
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
 
     try:
         pdf_bytes = file.read()
     except Exception as e:
         logger.exception("Unable to read uploaded PDF for async processing")
-        resp = make_response(jsonify({'error': 'Unable to read the uploaded PDF.'}), 400)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INVALID_INPUT', 'Unable to read the uploaded PDF.', status=400)
 
     if not pdf_bytes:
-        resp = make_response(jsonify({'error': 'The uploaded PDF is empty.'}), 400)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INVALID_INPUT', 'The uploaded PDF is empty.', status=400)
 
     # Preflight user-generated prompt access before persisting the job
     preflight_error, preflight_code = _preflight_user_prompt(prompt, user_email)
     if preflight_error:
-        resp = make_response(jsonify(preflight_error), preflight_code)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return make_response(jsonify(preflight_error), preflight_code)
 
-    request_id = str(uuid.uuid4())
+    request_id = current_request_id()
     analytics_ctx = build_request_analytics_context(
         request,
         user_email=user_email,
@@ -6321,9 +6681,7 @@ def process_pdf_async():
         _upload_pdf_job_bytes(original_blob_path, pdf_bytes, content_type="application/pdf")
     except Exception as e:
         logger.exception("Failed to upload PDF job source %s", job_id)
-        resp = make_response(jsonify({'error': 'Failed to store PDF for async processing.'}), 500)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INTERNAL_ERROR', 'Failed to store PDF for async processing.', status=500)
 
     job_payload = {
         "job_id": job_id,
@@ -6373,15 +6731,12 @@ def process_pdf_async():
     except Exception as e:
         logger.exception("Failed to enqueue split task for PDF job %s", job_id)
         _mark_pdf_job_failed(job_id, f"Queue submission failed: {e}", phase="queue_error")
-        resp = make_response(jsonify({'error': 'Unable to queue PDF job.'}), 500)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        return resp
+        return _error_response('INTERNAL_ERROR', 'Unable to queue PDF job.', status=500)
 
     response_payload = _serialize_pdf_job(_get_pdf_job_doc(job_id))
     response_payload["status_url"] = f"{public_base_url}/pdf-jobs/{job_id}" if public_base_url else f"/pdf-jobs/{job_id}"
     resp = make_response(json.dumps(response_payload, cls=OrderedJsonEncoder), 202)
     resp.headers['Content-Type'] = 'application/json'
-    resp.headers.add('Access-Control-Allow-Origin', '*')
     return resp
 
 
@@ -6418,7 +6773,6 @@ def list_pdf_jobs():
     payload = {"jobs": serialized_jobs}
     resp = make_response(json.dumps(payload, cls=OrderedJsonEncoder), 200)
     resp.headers['Content-Type'] = 'application/json'
-    resp.headers.add('Access-Control-Allow-Origin', '*')
     return resp
 
 
@@ -6429,18 +6783,15 @@ def get_pdf_job(job_id):
     job_data = _get_pdf_job_or_404(job_id)
     if not job_data:
         resp = make_response(jsonify({'error': 'PDF job not found.'}), 404)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
     if _is_pdf_job_expired(job_data):
         _purge_expired_pdf_job(job_id)
         resp = make_response(jsonify({'error': 'PDF job has expired.'}), 410)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
     allowed, error_message = _assert_pdf_job_owner_or_admin(job_data, user_email)
     if not allowed:
         resp = make_response(jsonify({'error': error_message}), 403)
-        resp.headers.add('Access-Control-Allow-Origin', '*')
         return resp
 
     pages = [_serialize_pdf_job_page(page) for page in _load_pdf_job_pages(job_id)]
@@ -6454,7 +6805,6 @@ def get_pdf_job(job_id):
     }
     resp = make_response(json.dumps(payload, cls=OrderedJsonEncoder), 200)
     resp.headers['Content-Type'] = 'application/json'
-    resp.headers.add('Access-Control-Allow-Origin', '*')
     return resp
 
 
@@ -6495,7 +6845,6 @@ def download_pdf_job_bundle(job_id):
     response = make_response(bundle_bytes)
     response.headers['Content-Type'] = 'application/zip'
     response.headers['Content-Disposition'] = f'attachment; filename="{download_name}"'
-    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
 
 
@@ -6689,8 +7038,11 @@ def internal_process_pdf_job_page(job_id, page_index):
                 ("model", job_data.get("llm_model_name") or ""),
                 ("input", 0),
                 ("output", 0),
+                ("thinking_tokens", 0),
                 ("cost_in", 0),
                 ("cost_out", 0),
+                ("thinking_cost", 0),
+                ("total_cost", 0),
             ])),
             ("impact", {}),
             ("collage_info", {"error": "Page processing failed."}),
@@ -8630,10 +8982,6 @@ def health_check():
     # Handle OPTIONS preflight request for CORS
     if request.method == 'OPTIONS':
         response = make_response()
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
-        response.headers.add('Access-Control-Max-Age', '3600')
         return response
     
     # Get the active request count from the processor
@@ -8650,9 +8998,6 @@ def health_check():
     })
     
     # Ensure CORS headers are present on the actual response
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
     
     return response, 200
 
@@ -8662,9 +9007,6 @@ def api_costs():
     """Return the api_cost.yaml contents as JSON for the cost calculator."""
     if request.method == 'OPTIONS':
         response = make_response()
-        response.headers.add('Access-Control-Allow-Origin', '*')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
         return response, 200
 
     try:
@@ -8672,7 +9014,6 @@ def api_costs():
         with open(yaml_path, 'r') as f:
             cost_data = yaml.safe_load(f)
         response = make_response(jsonify(cost_data))
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -8699,20 +9040,6 @@ def elevation():
     elev = _elevation_lookup.query(lat, lon)
     return jsonify({"lat": lat, "lon": lon, "elevation_m": elev})
 
-
-@app.after_request
-def after_request(response):
-    """Ensure CORS headers are present on all responses"""
-    # Add CORS headers to all responses (if not already present)
-    if not response.headers.get('Access-Control-Allow-Origin'):
-        response.headers.add('Access-Control-Allow-Origin', '*')
-    
-    # Add other CORS headers for non-preflight responses
-    if request.method != 'OPTIONS':
-        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,X-API-Key,Accept')
-        response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,PUT,DELETE')
-    
-    return response
 
 @app.route('/auth-success', methods=['GET'])
 def auth_success():    

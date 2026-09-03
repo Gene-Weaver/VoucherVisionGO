@@ -2,6 +2,7 @@
 from __future__ import annotations
 import io
 import os
+import tempfile
 import re
 import time
 import random
@@ -108,6 +109,42 @@ def _pick_format_and_filename(filename: str, pil_img: Image.Image) -> Tuple[str,
         return "PNG", (os.path.splitext(filename)[0] + ".png")
     return "JPEG", (os.path.splitext(filename)[0] + ".jpg")
 
+# Bodies are streamed into a spooled temp file: small images stay in memory,
+# large ones spill to disk instead of being buffered whole. This is a memory
+# measure only — there is no size limit.
+SPOOL_MAX_IN_MEMORY_BYTES = 8 * 1024 * 1024
+
+
+def _open_validated(client, url, destination_check, max_redirects, logger=None):
+    """Open a streaming GET on *url*, validating every redirect hop.
+
+    Returns (response_cm, response, final_url). The caller owns the context
+    manager and must exit it, which closes the response and returns the
+    connection to the pool.
+
+    `destination_check` raises on a destination this server will not follow.
+    Its exception propagates unchanged, so the caller's own verdict (400 vs
+    403 vs 504) survives instead of collapsing into one.
+    """
+    current = url
+    for hop in range(max_redirects + 1):
+        cm = client.stream("GET", current)
+        resp = cm.__enter__()
+        if resp.status_code not in (301, 302, 303, 307, 308):
+            return cm, resp, current
+        location = resp.headers.get("location")
+        cm.__exit__(None, None, None)      # redirect hop: release it now
+        if not location:
+            return None, resp, current
+        nxt = str(httpx.URL(current).join(location))
+        if destination_check is not None:
+            destination_check(nxt)          # raises on a refused destination
+        if logger:
+            logger.info(f"redirect {hop + 1}: {current} -> {nxt}")
+        current = nxt
+    raise RuntimeError(f"Too many redirects while fetching {url}")
+
+
 def smart_fetch_image_as_filestorage(
     url: str,
     *,
@@ -117,7 +154,9 @@ def smart_fetch_image_as_filestorage(
     read_timeout: float = 60.0,
     per_try_base_delay: float = 0.6,
     per_try_jitter: float = 0.6,
-    allowed_domains: Optional[Iterable[str]] = None,
+    destination_check: Optional[Callable] = None,
+    terminal_exceptions: Tuple[type, ...] = (),
+    max_redirects: int = 5,
     user_agent: Optional[str] = None,
     extra_headers: Optional[dict] = None,
     cookie: Optional[str] = None,
@@ -128,15 +167,12 @@ def smart_fetch_image_as_filestorage(
     - HTTP/2 client (httpx), follow redirects, cookie jar, per-host pacing
     - Honors 429 Retry-After
     - Rotates/sets UA and Referer, sends realistic Accept headers
-    - Optional allowlist to avoid accidental abuse
     """
     parsed = urllib.parse.urlparse(url)
     host = parsed.netloc
 
-    if allowed_domains:
-        allow = any(host.endswith(ad) for ad in allowed_domains)
-        if not allow:
-            raise PermissionError(f"Host '{host}' is not in allowed_domains")
+    if destination_check is not None:
+        destination_check(url)              # raises on a refused destination
 
     # Compose headers
     headers = dict(_DEFAULT_HEADERS)
@@ -155,115 +191,163 @@ def smart_fetch_image_as_filestorage(
                 k, v = part.split("=", 1)
                 jar.set(k.strip(), v.strip(), domain=host)
 
-    timeouts = httpx.Timeout(connect=connect_timeout, read=read_timeout)
-    client = httpx.Client(http2=True, headers=headers, cookies=jar, follow_redirects=True, timeout=timeouts)
-
+    # httpx.Timeout requires a positional default or all four fields; the
+    # keyword-only form raises ValueError before the retry loop, which is why
+    # this fetcher never ran and every request silently used the caller's
+    # fallback instead.
+    timeouts = httpx.Timeout(read_timeout, connect=connect_timeout)
+    # follow_redirects=False: httpx would otherwise follow a redirect to a
+    # private or link-local address without `destination_check` ever seeing it.
+    # Redirects are walked manually below, validating every hop. The Client
+    # keeps its cookie jar across hops, so portal session cookies survive.
     last_exc = None
     filename = _filename_from_url(url)
 
-    for attempt in range(1, max_retries + 1):
-        try:
-            # Soft pacing per host
-            _pacer.sleep_if_needed(host)
-
-            # HEAD first (helps some portals & gets type/length), but tolerate 405
-            head_resp = None
+    # Context-managed so the connection pool is released on every path,
+    # including the terminal re-raise above.
+    with httpx.Client(http2=True, headers=headers, cookies=jar,
+                      follow_redirects=False, timeout=timeouts) as client:
+        for attempt in range(1, max_retries + 1):
             try:
-                head_resp = client.head(url)
-                if logger:
-                    logger.info(f"HEAD {url} → {head_resp.status_code}")
-                if head_resp.status_code == 429:
-                    _sleep_with_retry_after(head_resp.headers.get("Retry-After"), per_try_base_delay * attempt, per_try_jitter)
-                    continue
-            except Exception:
-                # skip HEAD failures — proceed to GET
+                # Soft pacing per host
+                _pacer.sleep_if_needed(host)
+
+                # HEAD first (helps some portals & gets type/length), but tolerate 405
                 head_resp = None
+                try:
+                    head_resp = client.head(url)
+                    if logger:
+                        logger.info(f"HEAD {url} → {head_resp.status_code}")
+                    if head_resp.status_code == 429:
+                        _sleep_with_retry_after(head_resp.headers.get("Retry-After"), per_try_base_delay * attempt, per_try_jitter)
+                        continue
+                except Exception:
+                    # skip HEAD failures — proceed to GET
+                    head_resp = None
 
-            # GET (stream)
-            resp = client.get(url)
-            if logger:
-                logger.info(f"GET {url} → {resp.status_code}")
+                # GET (streamed; the body is read below into a spooled file)
+                resp_cm, resp, _final_url = _open_validated(
+                    client, url, destination_check, max_redirects, logger)
+                if logger:
+                    logger.info(f"GET {url} → {resp.status_code}")
 
-            if resp.status_code == 429:
-                # Too Many Requests → respect Retry-After
-                _sleep_with_retry_after(resp.headers.get("Retry-After"), per_try_base_delay * attempt, per_try_jitter)
-                continue
+                if resp.status_code == 429:
+                    # Too Many Requests → respect Retry-After
+                    if resp_cm is not None:
+                        resp_cm.__exit__(None, None, None)
+                    _sleep_with_retry_after(resp.headers.get("Retry-After"), per_try_base_delay * attempt, per_try_jitter)
+                    continue
 
-            if 500 <= resp.status_code < 600:
-                # transient server error
+                if 500 <= resp.status_code < 600:
+                    # transient server error
+                    if resp_cm is not None:
+                        resp_cm.__exit__(None, None, None)
+                    _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
+                    continue
+
+                if resp.status_code == 403:
+                    if logger:
+                        # The body is not read here: the response is streamed,
+                        # and reading it would consume the stream.
+                        logger.error(
+                            f"403 Forbidden for {url}\n"
+                            f"  Response Headers: {dict(resp.headers)}\n"
+                            f"  Request User-Agent: {headers.get('User-Agent', 'N/A')}"
+                        )
+                try:
+                    resp.raise_for_status()
+                except Exception:
+                    # Close the streamed response before the retry loop's
+                    # handlers take over, or the connection leaks.
+                    if resp_cm is not None:
+                        resp_cm.__exit__(None, None, None)
+                    raise
+
+                # Content-type check (be lenient: some servers omit it)
+                ct = resp.headers.get("Content-Type", "")
+                if ct and not _is_image_content_type(ct):
+                    # Some portals serve through HTML landing; try to follow image src if present (lightweight heuristic)
+                    # Avoid heavy parsing to keep deps light; user can pass direct image endpoints preferably.
+                    if logger:
+                        logger.warning(f"Non-image Content-Type '{ct}' for {url}")
+                    # still try to open as image — many serve image/* without CT set, or with octet-stream
+                # Stream into a seekable spooled file: small images stay in
+                # memory, large ones spill to disk rather than being buffered
+                # whole. No size limit is imposed.
+                spool = tempfile.SpooledTemporaryFile(
+                    max_size=SPOOL_MAX_IN_MEMORY_BYTES, mode="w+b")
+                try:
+                    try:
+                        for chunk in resp.iter_bytes():
+                            spool.write(chunk)
+                        spool.seek(0)
+                    finally:
+                        if resp_cm is not None:
+                            resp_cm.__exit__(None, None, None)
+                    # PIL open
+                    img = Image.open(spool)
+                    img.load()  # force decode to catch errors early
+
+                    # Resize if needed
+                    if not _fits_pixel_budget(img, max_pixels):
+                        img = _resize_to_max_pixels(img, max_pixels)
+
+                    # Decide format & filename
+                    fmt, out_name = _pick_format_and_filename(filename, img)
+
+                    # Convert for JPEG if needed
+                    if fmt == "JPEG" and img.mode not in ("L", "RGB"):
+                        # flatten alpha on white
+                        bg = Image.new("RGB", img.size, (255, 255, 255))
+                        if img.mode in ("RGBA", "LA"):
+                            alpha = img.split()[-1]
+                            bg.paste(img.convert("RGBA"), mask=alpha)
+                        else:
+                            bg.paste(img.convert("RGB"))
+                        img = bg
+
+                    # Save to bytes
+                    buf = io.BytesIO()
+                    save_kwargs = {"format": fmt}
+                    if fmt == "JPEG":
+                        save_kwargs.update(dict(quality=95, optimize=True))
+                    img.save(buf, **save_kwargs)
+                    buf.seek(0)
+
+                    fs = FileStorage(stream=buf, filename=out_name,
+                                     content_type=f"image/{fmt.lower()}")
+                    return fs, out_name
+                finally:
+                    # Closed on every path, including a failed download or a
+                    # decode error: the image has been re-encoded into `buf`,
+                    # so the spool (and its temp file, if it spilled) is done.
+                    spool.close()
+
+            except terminal_exceptions:
+                # A refused or malformed destination — including one reached by
+                # redirect — is settled. Retrying cannot change it, and wrapping it
+                # in RuntimeError would destroy the caller's 400/403/504 verdict
+                # and send the request on to a fallback that would re-attempt what
+                # we already refused.
+                raise
+
+            except httpx.HTTPStatusError as e:
+                last_exc = e
+                if logger:
+                    logger.warning(f"Attempt {attempt}/{max_retries} status error: {e}")
                 _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
-                continue
 
-            if resp.status_code == 403:
+            except (httpx.ConnectError, httpx.ReadError, httpx.TimeoutException) as e:
+                last_exc = e
                 if logger:
-                    logger.error(
-                        f"403 Forbidden for {url}\n"
-                        f"  Response Headers: {dict(resp.headers)}\n"
-                        f"  Response Body (first 500 chars): {resp.text[:500]}\n"
-                        f"  Request User-Agent: {headers.get('User-Agent', 'N/A')}"
-                    )
-            resp.raise_for_status()
+                    logger.warning(f"Attempt {attempt}/{max_retries} network error: {e}")
+                _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
 
-            # Content-type check (be lenient: some servers omit it)
-            ct = resp.headers.get("Content-Type", "")
-            if ct and not _is_image_content_type(ct):
-                # Some portals serve through HTML landing; try to follow image src if present (lightweight heuristic)
-                # Avoid heavy parsing to keep deps light; user can pass direct image endpoints preferably.
+            except Exception as e:
+                last_exc = e
                 if logger:
-                    logger.warning(f"Non-image Content-Type '{ct}' for {url}")
-                # still try to open as image — many serve image/* without CT set, or with octet-stream
-            raw = resp.content
+                    logger.exception(f"Attempt {attempt}/{max_retries} unexpected error")
+                _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
 
-            # PIL open
-            img = Image.open(io.BytesIO(raw))
-            img.load()  # force decode to catch errors early
-
-            # Resize if needed
-            if not _fits_pixel_budget(img, max_pixels):
-                img = _resize_to_max_pixels(img, max_pixels)
-
-            # Decide format & filename
-            fmt, out_name = _pick_format_and_filename(filename, img)
-
-            # Convert for JPEG if needed
-            if fmt == "JPEG" and img.mode not in ("L", "RGB"):
-                # flatten alpha on white
-                bg = Image.new("RGB", img.size, (255, 255, 255))
-                if img.mode in ("RGBA", "LA"):
-                    alpha = img.split()[-1]
-                    bg.paste(img.convert("RGBA"), mask=alpha)
-                else:
-                    bg.paste(img.convert("RGB"))
-                img = bg
-
-            # Save to bytes
-            buf = io.BytesIO()
-            save_kwargs = {"format": fmt}
-            if fmt == "JPEG":
-                save_kwargs.update(dict(quality=95, optimize=True))
-            img.save(buf, **save_kwargs)
-            buf.seek(0)
-
-            fs = FileStorage(stream=buf, filename=out_name, content_type=f"image/{fmt.lower()}")
-            return fs, out_name
-
-        except httpx.HTTPStatusError as e:
-            last_exc = e
-            if logger:
-                logger.warning(f"Attempt {attempt}/{max_retries} status error: {e}")
-            _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
-
-        except (httpx.ConnectError, httpx.ReadError, httpx.TimeoutException) as e:
-            last_exc = e
-            if logger:
-                logger.warning(f"Attempt {attempt}/{max_retries} network error: {e}")
-            _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
-
-        except Exception as e:
-            last_exc = e
-            if logger:
-                logger.exception(f"Attempt {attempt}/{max_retries} unexpected error")
-            _sleep_with_retry_after(None, per_try_base_delay * attempt, per_try_jitter)
-
-    # All retries exhausted
+    # All retries exhausted (the client is closed by the `with` above)
     raise RuntimeError(f"Failed to fetch image after {max_retries} attempts: {last_exc}")

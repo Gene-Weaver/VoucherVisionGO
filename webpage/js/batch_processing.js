@@ -179,7 +179,11 @@ async function processBatchUrls(urls, concurrency, options = {}) {
             });
     
             if (!response.ok) {
-                throw new Error(`API error: ${response.status} ${response.statusText}`);
+                // describeApiError() surfaces the server's sanitized message,
+                // error_code and request id (defined in vouchervisiongo.js).
+                throw new Error(typeof describeApiError === 'function'
+                    ? await describeApiError(response)
+                    : `API error: ${response.status} ${response.statusText}`);
             }
     
             const data = await response.json();
@@ -640,7 +644,11 @@ async function processBatchImages(files, concurrency, options = {}) {
             });
             
             if (!response.ok) {
-                throw new Error(`API error: ${response.status} ${response.statusText}`);
+                // describeApiError() surfaces the server's sanitized message,
+                // error_code and request id (defined in vouchervisiongo.js).
+                throw new Error(typeof describeApiError === 'function'
+                    ? await describeApiError(response)
+                    : `API error: ${response.status} ${response.statusText}`);
             }
             
             const data = await response.json();

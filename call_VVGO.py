@@ -84,11 +84,14 @@ def call_VVGO():
     llm_model = GoogleGeminiHandler(cfg, logger, model_name, Voucher_Vision.JSON_dict_structure, config_vals_for_permutation=None, exit_early_for_JSON=True)
 
     # output, nt_in, nt_out, None, None, None
-    response_candidate, nt_in, nt_out, WFO_record, GEO_record, usage_report = llm_model.call_llm_api_GoogleGemini(prompt, json_report=None, paths=None)
+    llm_result = llm_model.call_llm_api_GoogleGemini(prompt, json_report=None, paths=None)
+    response_candidate, nt_in, nt_out, WFO_record, GEO_record, usage_report = llm_result[:6]
+    thinking_tokens = int(llm_result[6] or 0) if len(llm_result) > 6 else 0
 
     print(response_candidate)
     print(nt_in)
     print(nt_out)
+    print(thinking_tokens)
 
 
 if __name__ == "__main__":

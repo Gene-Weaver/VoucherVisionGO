@@ -45,6 +45,13 @@ ns = {
     "process_uploaded_file_with_resize": lambda f, max_pixels=None: f,
     "RESPONSE_HOST_NAME": "VoucherVisionGO",
     "resolve_payment_inference": lambda k=None, p=None: "x",
+    # Inference marking is covered by tests_error_envelope.py; here the loop
+    # only needs them to exist so control flow runs.
+    "reset_inference_marker": lambda: None,
+    "current_payment_inference": lambda request_scope=False: "not_processed",
+    "_pdf_page_error": lambda filename, code, error, status_code, **kw: {
+        "filename": filename, "error": error, "error_code": code,
+        "status_code": status_code, **({"details": kw["details"]} if "details" in kw else {})},
 }
 # real resolver, so "both model params omitted" is exercised for PDFs too
 _dm = next(n for n in tree.body if isinstance(n, ast.Assign) and getattr(n.targets[0],"id","")=="DEFAULT_MODEL")
@@ -94,9 +101,10 @@ check("all 3 pages processed", len(STATE["processed"]) == 3)
 
 # 2. Exhaustion stops the run instead of processing for free.
 r, _ = run(5, quota=2)
-errs = [p for p in r["pages"] if p.get("status_code") == 503]
+# 403, not 503: a lifetime cap will not reset with time.
+errs = [p for p in r["pages"] if p.get("status_code") == 403]
 check("cap at 2 -> only 2 pages processed", len(STATE["processed"]) == 2, f"processed={STATE['processed']}")
-check("remaining 3 pages marked 503", len(errs) == 3, f"got {len(errs)}")
+check("remaining 3 pages marked 403", len(errs) == 3, f"got {len(errs)}")
 check("no extra Firestore txn per skipped page", STATE["reserved"] == 2, f"reserved={STATE['reserved']}")
 
 # 3. A failed page returns its slot.
@@ -117,7 +125,7 @@ check("envelope keys intact", all(k in r for k in ("source_pdf","page_count","pa
 # 5b. Pro/Restricted exhaustion during a PDF MUST alert (PDFs skip /process gate).
 r, _ = run(3, quota=1)
 check("non-general bucket exhaustion alerts from PDF path", STATE["alerts"] == 1, f"alerts={STATE['alerts']}")
-msg = next(p["error"] for p in r["pages"] if p.get("status_code") == 503)
+msg = next(p["error"] for p in r["pages"] if p.get("status_code") == 403)
 check("quota message names the category, not the model key",
       "Gemini Pro" in msg and "gemini-2.5-pro" not in msg, msg[:70])
 

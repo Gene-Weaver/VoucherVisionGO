@@ -1,3 +1,36 @@
+
+// Turn a failed API response into a message worth showing. The server returns
+// a structured envelope { error, error_code, message, request_id }; showing
+// only "500 Internal Server Error" throws away the actionable part.
+async function describeApiError(response) {
+    let payload = null;
+    let raw = '';
+    try {
+        raw = await response.text();
+        payload = JSON.parse(raw);
+    } catch (_) { /* not JSON — fall back to the raw body below */ }
+
+    if (payload && (payload.message || payload.error)) {
+        let msg = payload.message || payload.error;
+        if (payload.message && payload.error && payload.error !== payload.message) {
+            msg = payload.error + ' — ' + payload.message;
+        }
+        if (payload.error_code) msg += ' [' + payload.error_code + ']';
+        const rid = payload.request_id || response.headers.get('X-Request-ID');
+        if (rid) msg += ' (request ' + rid + ')';
+        return msg;
+    }
+    // Deliberately NOT including the raw body: it is attacker-influenced
+    // remote content (an upstream proxy's HTML error page, say) and callers
+    // render this string. The full body is logged for debugging instead.
+    // The raw body is deliberately not logged either: it is attacker-influenced
+    // remote content, and browser consoles render and persist it. The server
+    // logs the real cause against X-Request-ID.
+    const rid = response.headers.get('X-Request-ID');
+    return `API error: ${response.status} ${response.statusText}`
+        + (rid ? ' (request ' + rid + ')' : '');
+}
+
 // VoucherVision API Test Scripts
 
 // Animated processing loader
@@ -699,8 +732,7 @@ async function processImage(sourceType = 'file') {
         clearTimeout(timeoutId);
 
         if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`API error: ${response.status} ${response.statusText}`);
+            throw new Error(await describeApiError(response));
         }
 
         const data = await response.json();
@@ -715,10 +747,12 @@ async function processImage(sourceType = 'file') {
         if (error.name === 'AbortError') {
             errorMsg = 'Request timed out. Please try again.';
         }
-        $('#singleResults').html(`
-            <h3 class="error">Error:</h3>
-            <p>${errorMsg}</p>
-        `);
+        // Build with .text() so an error string can never be interpreted as
+        // markup, whatever its origin.
+        $('#singleResults')
+            .empty()
+            .append($('<h3>').addClass('error').text('Error:'))
+            .append($('<p>').text(errorMsg));
     } finally {
         stopLoaderCycle();
         setButtonProcessing(buttonSelector, false);

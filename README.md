@@ -75,6 +75,29 @@ curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process"
 regional endpoints do not carry every model. `vertex_project` and `vertex_region` must
 be sent together — a project without a region is rejected with HTTP 400.
 
+### Which account was billed
+
+Every result envelope carries `payment_inference`, naming the account that
+funded the Gemini calls:
+
+| Value | Meaning |
+| --- | --- |
+| `VoucherVisionGO_credits` | Billed to VoucherVisionGO's shared keys |
+| `user_supplied_gemini_key` | Billed to your own Google AI Studio key |
+| `user_supplied_vertex_account` | Billed to your own Google Cloud project |
+| `not_processed` | No provider call began, so nobody was billed |
+
+`not_processed` appears when a request produced a response without ever
+reaching Gemini — a rejected upload, an unreachable image URL, or a PDF page
+that failed before processing. It is reported **per page** for PDFs, so one
+page can read `not_processed` while another names a real payer. Clients that
+branch exhaustively on this field should handle it.
+
+Error responses omit `payment_inference` rather than reporting
+`not_processed`, because an error body's key set varies by error type.
+
+Every response also carries `X-Request-ID`; quote it when reporting a problem.
+
 ### No silent fallback to server keys
 
 A request that *attempts* to supply its own credentials will never quietly fall through

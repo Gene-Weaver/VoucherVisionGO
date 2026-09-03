@@ -7,7 +7,9 @@ tree = ast.parse(SRC)
 WANT = {"PAYMENT_AUTH_PARAM_ALIASES","PAYMENT_AUTH_HEADER_ALIASES","_BILLING_INTENT_NAMES",
         "_BILLING_INTENT_EXEMPT","_normalize_billing_param_name","_clean_optional_request_value",
         "_lookup_request_value","get_payment_auth_context","detect_unusable_billing_intent",
-        "PAYMENT_INFERENCE_LABELS","RESPONSE_HOST_NAME","_auth_method_for","resolve_payment_inference"}
+        "PAYMENT_INFERENCE_LABELS","RESPONSE_HOST_NAME","_auth_method_for","resolve_payment_inference",
+        # billing-intent rejections now go through the shared error envelope
+        "ERROR_CODES","_ERROR_RESERVED_KEYS","_error_payload"}
 picked = []
 for node in tree.body:
     name = getattr(node, "name", None)
@@ -19,7 +21,10 @@ for node in tree.body:
         WANT.discard(name)
 assert not WANT, f"missing from app.py: {WANT}"
 
-ns = {"re": re, "g": types.SimpleNamespace()}
+ns = {"re": re, "g": types.SimpleNamespace(),
+      "OrderedDict": __import__("collections").OrderedDict,
+      "logger": types.SimpleNamespace(error=lambda *a, **k: None,
+                                      warning=lambda *a, **k: None)}
 exec(compile(ast.Module(body=picked, type_ignores=[]), "<app-slice>", "exec"), ns)
 detect = ns["detect_unusable_billing_intent"]
 resolve = ns["get_payment_auth_context"]
