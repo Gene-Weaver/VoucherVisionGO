@@ -3494,6 +3494,175 @@ def process_uploaded_file_with_resize(file, max_pixels=5200000):
         file.stream.seek(0)
         return file
     
+class SimpleEmailSender:
+    """Send VoucherVision notification emails through the configured SMTP server."""
+
+    def __init__(self):
+        self.logger = logging.getLogger('EmailSender')
+        self.smtp_server = os.environ.get('SMTP_SERVER', 'smtp.gmail.com')
+        self.smtp_port = int(os.environ.get('SMTP_PORT', 587))
+        self.from_email = os.environ.get('SMTP_USERNAME')
+        self.password = os.environ.get('SMTP_PASSWORD')
+        self.from_name = os.environ.get('FROM_NAME', 'VoucherVision API')
+
+        self.is_enabled = all([
+            self.smtp_server,
+            self.smtp_port,
+            self.from_email,
+            self.password,
+        ])
+
+        if not self.is_enabled:
+            self.logger.warning("Email sending is disabled due to missing configuration")
+            missing = []
+            if not self.smtp_server:
+                missing.append('SMTP_SERVER')
+            if not self.smtp_port:
+                missing.append('SMTP_PORT')
+            if not self.from_email:
+                missing.append('SMTP_USERNAME')
+            if not self.password:
+                missing.append('SMTP_PASSWORD')
+            if missing:
+                self.logger.warning(
+                    f"Missing environment variables: {', '.join(missing)}"
+                )
+
+    def send_email(self, to_email, subject, body):
+        """Send an HTML or plain-text email."""
+        if not self.is_enabled:
+            self.logger.warning(
+                f"Email not sent to {to_email}: Email sending is disabled"
+            )
+            return False
+
+        try:
+            msg = MIMEMultipart()
+            msg['From'] = (
+                f"{self.from_name} <{self.from_email}>"
+                if self.from_name else self.from_email
+            )
+            msg['To'] = to_email
+            msg['Subject'] = subject
+
+            if body.strip().startswith('<'):
+                msg.attach(MIMEText(body, 'html'))
+            else:
+                msg.attach(MIMEText(body, 'plain'))
+
+            with smtplib.SMTP(self.smtp_server, self.smtp_port) as server:
+                server.starttls()
+                server.login(self.from_email, self.password)
+                server.send_message(msg)
+
+            self.logger.info(f"Email sent to {to_email}: {subject}")
+            return True
+        except Exception as e:
+            self.logger.error(f"Failed to send email to {to_email}: {str(e)}")
+            return False
+
+    def send_approval_notification(self, user_email):
+        subject = "Your VoucherVision API Application has been Approved"
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #4285f4;">Application Approved</h2>
+                    <p>Dear {user_email},</p>
+                    <p>We're pleased to inform you that your application for access to the VoucherVision API has been approved.</p>
+                    <p>You can now log in to your account and access the API through our web interface or via API tokens.</p>
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/auth-success"
+                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Access Your Account
+                        </a>
+                    </div>
+                    <p>If you have any questions or need assistance, please don't hesitate to contact us.</p>
+                    <p>Thank you for your interest in VoucherVision!</p>
+                    <p>Best regards,<br>The VoucherVision Team</p>
+                </div>
+            </body>
+        </html>
+        """
+        return self.send_email(user_email, subject, body)
+
+    def send_api_key_permission_notification(self, user_email):
+        subject = "API Key Access Granted for VoucherVision"
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #4285f4;">API Key Access Granted</h2>
+                    <p>Dear {user_email},</p>
+                    <p>We're pleased to inform you that you have been granted permission to create API keys for programmatic access to the VoucherVision API.</p>
+                    <p>API keys allow your applications to authenticate with our API without browser-based authentication, enabling automated workflows and integrations.</p>
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/api-key-management"
+                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Manage Your API Keys
+                        </a>
+                    </div>
+                    <p>Please remember to keep your API keys secure and never share them publicly. You can revoke and manage your keys at any time through the API Key Management page.</p>
+                    <p>If you have any questions about using API keys or need technical assistance, please contact us.</p>
+                    <p>Best regards,<br>The VoucherVision Team</p>
+                </div>
+            </body>
+        </html>
+        """
+        return self.send_email(user_email, subject, body)
+
+    def send_application_submission_notification(self, user_email, organization, purpose):
+        subject = "New VoucherVision API Application Submitted"
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #4285f4;">New Application Received</h2>
+                    <p>A new application for VoucherVision API access has been submitted.</p>
+                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                        <h3 style="margin-top: 0; color: #333;">Application Details</h3>
+                        <p><strong>Email:</strong> {user_email}</p>
+                        <p><strong>Organization:</strong> {organization}</p>
+                        <p><strong>Purpose:</strong> {purpose}</p>
+                    </div>
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin"
+                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Review Application
+                        </a>
+                    </div>
+                    <p>Please review this application at your earliest convenience.</p>
+                    <p>Best regards,<br>VoucherVision Notification System</p>
+                </div>
+            </body>
+        </html>
+        """
+        return self.send_email(self.from_email, subject, body)
+
+    def send_admin_usage_alert(self, subject_line, detail_html):
+        subject = f"[VoucherVision] {subject_line}"
+        body = f"""
+        <html>
+            <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 style="color: #e53935;">Usage Alert</h2>
+                    <div style="background-color: #f5f5f5; padding: 15px; border-radius: 4px; margin: 20px 0;">
+                        {detail_html}
+                    </div>
+                    <div style="margin: 30px 0; text-align: center;">
+                        <a href="https://vouchervision-go-738307415303.us-central1.run.app/admin"
+                           style="background-color: #4285f4; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                            Open Admin Dashboard
+                        </a>
+                    </div>
+                    <p>Best regards,<br>VoucherVision Notification System</p>
+                </div>
+            </body>
+        </html>
+        """
+        return self.send_email(self.from_email, subject, body)
+
+
 def create_initial_admin(email):
     """Create the initial admin user"""
     try:
