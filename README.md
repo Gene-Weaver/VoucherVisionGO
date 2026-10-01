@@ -11,8 +11,8 @@ levels for OCR and label parsing:
 | OCR | `ocr_thinking_level` | `low`, `medium`, `high` | `low` |
 | Parsing | `llm_thinking_level` | `low`, `medium`, `high` | `low` |
 
-Invalid values return HTTP 400. These fields do not change Gemini 2.x, Gemini
-3 Pro, or Gemma behavior. For example:
+Invalid values return HTTP 400. The level is applied to every Gemini 3.x and
+Gemma 4 model. Gemini 2.x and other legacy models ignore it. For example:
 
 ```bash
 curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process" \
@@ -23,6 +23,12 @@ curl -X POST "https://vouchervision-go-738307415303.us-central1.run.app/process"
   -F "llm_model=gemini-3.8-flash" \
   -F "llm_thinking_level=high"
 ```
+
+The response reports the level that was actually sent to Gemini as
+`thinking_budget_requested`: once per OCR engine inside `ocr_info`, and once in
+`parsing_info`. It is `"low"`, `"medium"`, or `"high"` for Gemini 3.x and
+Gemma 4 requests, and `""` when no named level was sent (Gemini 2.x, legacy
+models, OCR-only responses, and failed pages).
 
 ## Billing Gemini usage to your own account
 

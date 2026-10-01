@@ -41,10 +41,12 @@ class UsageEventHelpersTest(unittest.TestCase):
                     "total_cost": 0.034,
                     "rates_in": 0.1,
                     "rates_out": 0.2,
+                    "thinking_budget_requested": "",
                 },
             },
             "parsing_info": {
                 "model": "gemini-3.1-flash-lite",
+                "thinking_budget_requested": "high",
                 "input": 25,
                 "output": 75,
                 "thinking_tokens": 20,
@@ -86,6 +88,8 @@ class UsageEventHelpersTest(unittest.TestCase):
         self.assertAlmostEqual(event["parsing_thinking_cost_usd"], 0.003)
         self.assertTrue(event["success"])
         self.assertNotIn("ocr_text", event["ocr_info"]["gemini-2.5-flash"])
+        self.assertEqual(event["ocr_info"]["gemini-2.5-flash"]["thinking_budget_requested"], "")
+        self.assertEqual(event["parsing_info"]["thinking_budget_requested"], "high")
 
     def test_legacy_usage_without_thinking_metadata_defaults_to_zero(self):
         ocr_info, _, ocr_totals = app._extract_ocr_analytics({
@@ -110,6 +114,8 @@ class UsageEventHelpersTest(unittest.TestCase):
         self.assertEqual(parsing_info["thinking_tokens"], 0)
         self.assertEqual(parsing_info["thinking_cost"], 0)
         self.assertEqual(parsing_totals["parsing_tokens_total"], 20)
+        self.assertEqual(ocr_info["legacy-model"]["thinking_budget_requested"], "")
+        self.assertEqual(parsing_info["thinking_budget_requested"], "")
 
     def test_build_usage_event_marks_url_fetch_failure(self):
         analytics_ctx = {

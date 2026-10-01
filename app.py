@@ -2455,6 +2455,7 @@ def _extract_ocr_analytics(ocr_info_raw) -> tuple[dict, list[str], dict]:
             "total_cost": total_cost,
             "rates_in": _coerce_float(payload.get("rates_in")),
             "rates_out": _coerce_float(payload.get("rates_out")),
+            "thinking_budget_requested": str(payload.get("thinking_budget_requested") or ""),
         }
         totals["ocr_tokens_in_total"] += tokens_in
         totals["ocr_tokens_out_total"] += tokens_out
@@ -2484,6 +2485,7 @@ def _extract_parsing_analytics(parsing_info_raw) -> tuple[dict, dict]:
     )
     sanitized = {
         "model": model_name,
+        "thinking_budget_requested": str(parsing_info_raw.get("thinking_budget_requested") or ""),
         "input": tokens_in,
         "output": tokens_out,
         "thinking_tokens": thinking_tokens,
@@ -5239,6 +5241,9 @@ class VoucherVisionProcessor:
             response, cost_in, cost_out, total_cost, rates_in, rates_out, tokens_in, tokens_out = ocr_result[:8]
             thinking_tokens = _coerce_int(ocr_result[8]) if len(ocr_result) > 8 else 0
             thinking_cost = _coerce_float(ocr_result[9]) if len(ocr_result) > 9 else 0.0
+            # Budget name actually sent to Gemini ("low"/"medium"/"high"), or "" when
+            # the model took no named level (Gemini 2.x, non-thinking models).
+            thinking_budget_requested = str(ocr_result[10] or "") if len(ocr_result) > 10 else ""
             
             ocr_packet[ocr_opt]["ocr_text"] = response
             ocr_packet[ocr_opt]["cost_in"] = cost_in
@@ -5250,6 +5255,7 @@ class VoucherVisionProcessor:
             ocr_packet[ocr_opt]["tokens_out"] = tokens_out
             ocr_packet[ocr_opt]["thinking_tokens"] = thinking_tokens
             ocr_packet[ocr_opt]["thinking_cost"] = thinking_cost
+            ocr_packet[ocr_opt]["thinking_budget_requested"] = thinking_budget_requested
 
             # ocr_all += f"{ocr_opt} OCR: {response} "
             # ocr_all += f"OCR Version {i}: {response} "
@@ -5341,11 +5347,12 @@ class VoucherVisionProcessor:
         )
         response_candidate, nt_in, nt_out, _, _, _ = llm_result[:6]
         thinking_tokens = _coerce_int(llm_result[6]) if len(llm_result) > 6 else 0
+        thinking_budget_requested = str(llm_result[7] or "") if len(llm_result) > 7 else ""
         self._log(f"response_candidate\n{response_candidate}", "info")
         cost_in, cost_out, parsing_cost, rate_in, rate_out = calculate_cost(LLM_name_cost, os.path.join(self.dir_home, 'api_cost', 'api_cost.yaml'), nt_in, nt_out)
         thinking_cost = rate_out * (thinking_tokens / 1000000)
 
-        return response_candidate, nt_in, nt_out, thinking_tokens, cost_in, cost_out, thinking_cost
+        return response_candidate, nt_in, nt_out, thinking_tokens, cost_in, cost_out, thinking_cost, thinking_budget_requested
 
     def process_pdf_request(self, file, **kwargs):
         """
@@ -5667,6 +5674,7 @@ class VoucherVisionProcessor:
                         ("formatted_md", ocr),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
+                            ("thinking_budget_requested", ""),
                             ("input", 0),
                             ("output", 0),
                             ("thinking_tokens", 0),
@@ -5709,6 +5717,7 @@ class VoucherVisionProcessor:
                         ("formatted_md", ""),
                         ("parsing_info", OrderedDict([
                             ("model", ""),
+                            ("thinking_budget_requested", ""),
                             ("input", 0),
                             ("output", 0),
                             ("thinking_tokens", 0),
@@ -5730,7 +5739,7 @@ class VoucherVisionProcessor:
                     ])
                 else:
                     # Process with VoucherVision
-                    vv_results, tokens_in, tokens_out, thinking_tokens, cost_in, cost_out, thinking_cost = self.process_voucher_vision(ocr,
+                    vv_results, tokens_in, tokens_out, thinking_tokens, cost_in, cost_out, thinking_cost, thinking_budget_requested = self.process_voucher_vision(ocr,
                                                                                                        current_prompt,
                                                                                                        llm_model_name,
                                                                                                        LLM_name_cost,
@@ -5773,6 +5782,7 @@ class VoucherVisionProcessor:
                         ("formatted_md", ""),
                         ("parsing_info", OrderedDict([
                             ("model", llm_model_name),
+                            ("thinking_budget_requested", thinking_budget_requested),
                             ("input", tokens_in),
                             ("output", tokens_out),
                             ("thinking_tokens", thinking_tokens),
@@ -7295,6 +7305,7 @@ def internal_process_pdf_job_page(job_id, page_index):
             ("formatted_json", ""),
             ("parsing_info", OrderedDict([
                 ("model", job_data.get("llm_model_name") or ""),
+                ("thinking_budget_requested", ""),
                 ("input", 0),
                 ("output", 0),
                 ("thinking_tokens", 0),

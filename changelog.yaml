@@ -1,3 +1,8 @@
+- version: "0.5.2"
+  date: "2026-10-01"
+  changes:
+    - type: "Feature"
+      description: "JSON responses now include thinking_budget_requested in parsing_info and in each ocr_info engine entry. It reports the thinking level (low, medium, high) that was actually sent to Gemini, or an empty string when no named level was sent."
 - version: "0.5.1"
   date: "2026-05-12"
   changes:
