@@ -38,7 +38,8 @@
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" placeholder="Password (at least 6 characters)">
+          <input type="password" id="password" class="form-control" placeholder="Password">
+          <ul id="password-rules" class="password-rules"></ul>
         </div>
         <div class="form-group">
           <label for="confirm-password">Confirm Password</label>
@@ -74,6 +75,7 @@
         appId: "{{ app_id }}"
       };
     </script>
+    <script src="{{ url_for('static', filename='js/password_policy.js') }}"></script>
     <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
   </body>
 </html>

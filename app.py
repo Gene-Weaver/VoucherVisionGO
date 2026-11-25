@@ -9450,6 +9450,29 @@ def login_page():
     )
 
 
+@app.route('/auth/action', methods=['GET'])
+def auth_action_page():
+    """Handler for the links in Firebase Authentication emails (password
+    reset, email verification). Firebase's email templates point here via
+    "customize action URL" in the console. The page uses the same web config
+    as /login and ignores the apiKey Firebase puts in the link."""
+    firebase_config = get_firebase_config()
+
+    response = make_response(render_template(
+        'auth_action.html',
+        api_key=firebase_config["apiKey"],
+        auth_domain=firebase_config["authDomain"],
+        project_id=firebase_config["projectId"],
+        storage_bucket=firebase_config.get("storageBucket", ""),
+        messaging_sender_id=firebase_config.get("messagingSenderId", ""),
+        app_id=firebase_config["appId"]
+    ))
+    # The URL carries a one-time code: do not cache it or leak it as a referrer.
+    response.headers['Cache-Control'] = 'no-store'
+    response.headers['Referrer-Policy'] = 'no-referrer'
+    return response
+
+
 @app.route('/submit-application', methods=['POST'])
 def submit_application():
     """Submit a new user application"""

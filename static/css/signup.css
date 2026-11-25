@@ -152,3 +152,20 @@ body {
   body.dark-mode .toggle-link a {
     color: #66BB6A;
   }
+
+  .password-rules {
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0 0;
+    font-size: 13px;
+    color: #666;
+  }
+  .password-rule.met {
+    color: #28a745;
+  }
+  body.dark-mode .password-rules {
+    color: #aaa;
+  }
+  body.dark-mode .password-rule.met {
+    color: #66BB6A;
+  }

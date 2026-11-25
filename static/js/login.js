@@ -13,6 +13,31 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+const STORED_AUTH_KEYS = ['auth_id_token', 'auth_refresh_token', 'auth_user_email'];
+// Firebase reports these when the saved session can no longer be used, for
+// example after a password reset on this or another device.
+const ENDED_SESSION_CODES = ['auth/user-token-expired', 'auth/invalid-user-token',
+                             'auth/user-disabled', 'auth/user-not-found'];
+
+function showLoginError(message) {
+  const errorElement = document.getElementById('error-message');
+  document.getElementById('success-message').style.display = 'none';
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+}
+
+// Called when the account-status check cannot complete.
+function handleStatusCheckError(error) {
+  console.error('Error checking approval status:', error);
+  if (error && ENDED_SESSION_CODES.indexOf(error.code) !== -1) {
+    STORED_AUTH_KEYS.forEach(function(key) { localStorage.removeItem(key); });
+    firebase.auth().signOut().catch(function() {});
+    showLoginError('Your password was changed or your session ended. Please sign in again.');
+  } else {
+    showLoginError('We could not check your account status. Please try again.');
+  }
+}
+
 // Function to check user approval status
 async function checkApprovalStatus(user) {
   try {
@@ -44,7 +69,7 @@ async function checkApprovalStatus(user) {
           
           // Redirect to success page
           window.location.href = '/auth-success';
-        });
+        }).catch(handleStatusCheckError);
       } else if (data.status === 'pending') {
         // Redirect to pending approval page
         window.location.href = '/pending-approval';
@@ -52,9 +77,11 @@ async function checkApprovalStatus(user) {
         // Redirect to rejected page
         window.location.href = '/application-rejected';
       }
+    } else {
+      handleStatusCheckError(new Error('Status check failed with HTTP ' + response.status));
     }
   } catch (error) {
-    console.error('Error checking approval status:', error);
+    handleStatusCheckError(error);
   }
 }
 
@@ -100,10 +127,13 @@ document.getElementById('login-button').addEventListener('click', function() {
 });
 
 // Forgot password handler
+const RESET_COOLDOWN_MS = 60000;
+let lastResetRequestAt = 0;
+
 document.getElementById('forgot-password').addEventListener('click', function(e) {
   e.preventDefault();
   
-  const email = document.getElementById('email').value;
+  const email = document.getElementById('email').value.trim();
   const errorElement = document.getElementById('error-message');
   const successElement = document.getElementById('success-message');
   
@@ -116,13 +146,28 @@ document.getElementById('forgot-password').addEventListener('click', function(e)
     return;
   }
   
+  // Each new reset email invalidates the earlier ones, so stop rapid repeats.
+  const waitMs = lastResetRequestAt + RESET_COOLDOWN_MS - Date.now();
+  if (waitMs > 0) {
+    errorElement.textContent = 'A reset email was just requested. Please wait ' +
+      Math.ceil(waitMs / 1000) + ' seconds before asking for another.';
+    errorElement.style.display = 'block';
+    return;
+  }
+  lastResetRequestAt = Date.now();
+  
   firebase.auth().sendPasswordResetEmail(email)
     .then(() => {
-      successElement.textContent = 'Password reset email sent. Please check your inbox.';
+      // Firebase does not reveal whether the address has an account.
+      successElement.textContent = 'If an account exists for ' + email +
+        ', a password reset email is on its way. Use the most recent email, and check your spam folder.';
       successElement.style.display = 'block';
     })
     .catch((error) => {
-      errorElement.textContent = error.message;
+      lastResetRequestAt = 0;
+      errorElement.textContent = error.code === 'auth/invalid-email'
+        ? 'That does not look like a valid email address.'
+        : error.message;
       errorElement.style.display = 'block';
     });
 });

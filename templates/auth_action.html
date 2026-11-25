@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The address of this page carries a one-time code: never send it to other sites. -->
+    <meta name="referrer" content="no-referrer">
+    <title>VoucherVision Account</title>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.0.0/firebase-auth-compat.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <style>
+      .panel { display: none; }
+      .panel.active { display: block; }
+      .password-rules { list-style: none; padding-left: 0; margin: 8px 0 0; font-size: 13px; color: #666; }
+      .password-rule.met { color: #28a745; }
+      .account-email { font-weight: 600; word-break: break-all; }
+      .resend { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-container text-center mb-4">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="img-fluid logo">
+      </div>
+
+      <div class="header">
+        <h2>VoucherVision API</h2>
+        <p id="page-subtitle">Checking your link...</p>
+      </div>
+
+      <!-- Shown while the link is being checked -->
+      <div id="panel-loading" class="panel active">
+        <p class="text-center">One moment...</p>
+      </div>
+
+      <!-- Valid reset link: choose a new password -->
+      <div id="panel-reset" class="panel">
+        <p>Choose a new password for <span id="account-email" class="account-email"></span>.</p>
+        <div class="form-group">
+          <label for="new-password">New password</label>
+          <input type="password" id="new-password" class="form-control" autocomplete="new-password">
+          <ul id="password-rules" class="password-rules"></ul>
+        </div>
+        <div class="form-group">
+          <label for="confirm-password">Confirm new password</label>
+          <input type="password" id="confirm-password" class="form-control" autocomplete="new-password">
+        </div>
+        <button id="reset-button" class="btn btn-primary">Set New Password</button>
+        <div id="reset-error" class="error-message"></div>
+      </div>
+
+      <!-- Finished -->
+      <div id="panel-done" class="panel">
+        <div id="done-message" class="success-message" style="display: block;"></div>
+        <div class="toggle-link">
+          <p><a href="/login">Go to Sign In</a></p>
+        </div>
+      </div>
+
+      <!-- The link could not be used -->
+      <div id="panel-failure" class="panel">
+        <div id="failure-message" class="error-message" style="display: block;"></div>
+        <div id="resend" class="resend">
+          <p>Enter your email address and we will send a new reset link.</p>
+          <div class="form-group">
+            <label for="resend-email">Email</label>
+            <input type="email" id="resend-email" class="form-control" placeholder="Email address">
+          </div>
+          <button id="resend-button" class="btn btn-primary">Send Me a New Link</button>
+          <div id="resend-error" class="error-message"></div>
+          <div id="resend-success" class="success-message"></div>
+        </div>
+        <div class="toggle-link">
+          <p><a href="/login">Back to Sign In</a></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Firebase configuration. This page always uses this key and ignores the
+      // apiKey that Firebase puts in the email link.
+      const firebaseConfig = {
+        apiKey: "{{ api_key }}",
+        authDomain: "{{ auth_domain }}",
+        projectId: "{{ project_id }}",
+        storageBucket: "{{ storage_bucket }}",
+        messagingSenderId: "{{ messaging_sender_id }}",
+        appId: "{{ app_id }}"
+      };
+    </script>
+    <script src="{{ url_for('static', filename='js/password_policy.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/auth_action.js') }}"></script>
+  </body>
+</html>

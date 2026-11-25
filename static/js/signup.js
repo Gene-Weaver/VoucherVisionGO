@@ -1,6 +1,16 @@
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Password rules are shared with the reset page (password_policy.js)
+const passwordRulesElement = document.getElementById('password-rules');
+PasswordPolicy.render(passwordRulesElement, '');
+PasswordPolicy.load(firebaseConfig.apiKey).then(function() {
+  PasswordPolicy.render(passwordRulesElement, document.getElementById('password').value);
+});
+document.getElementById('password').addEventListener('input', function(e) {
+  PasswordPolicy.render(passwordRulesElement, e.target.value);
+});
+
 // Set persistence to LOCAL (survives browser restarts)
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
@@ -72,8 +82,9 @@ document.getElementById('signup-button').addEventListener('click', function() {
     return;
   }
   
-  if (password.length < 6) {
-    errorElement.textContent = 'Password must be at least 6 characters';
+  const missing = PasswordPolicy.missing(password);
+  if (missing.length) {
+    errorElement.textContent = 'Password needs ' + missing.join(', ') + '.';
     errorElement.style.display = 'block';
     return;
   }
